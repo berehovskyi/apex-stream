@@ -1,0 +1,846 @@
+/**
+ * @author O. Berehovskyi
+ * @group Iterables
+ * @description A sequence of `SObject` elements supporting aggregate operations.
+ * @see IObjectIterable
+ * @see IIntIterable
+ * @see ILongIterable
+ * @see IDoubleIterable
+ */
+public interface ISObjectIterable extends Iterable<SObject> {
+
+    //<editor-fold desc="Sources">
+    /**
+     * @description Returns a new `ISObjectIterable` from the current
+     * to which another `iterable` is appended.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable append(ISObjectIterable iterable);
+
+    /**
+     * @description Returns a new `ISObjectIterable` from the current
+     * to which another `iterable` is prepended.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable prepend(ISObjectIterable iterable);
+    //</editor-fold>
+
+    //<editor-fold desc="Intermediate Operations">
+    /**
+     * @description Returns a new `ISObjectIterable` with `SObject` elements
+     * that match `predicate`.
+     * <p>Intermediate Operation.</p>
+     * @param predicate the predicate
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable filter(ISObjectPredicate predicate);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with `SObject` elements
+     * that have field's value.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable filter(String fieldName, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with `SObject` elements
+     * that have field's value.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable filter(SObjectField field, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that takes `SObject` elements
+     * while `predicate` returns `true`.
+     * <p>Intermediate Operation.</p>
+     * @param predicate the predicate
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable take(ISObjectPredicate predicate);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that takes `SObject` elements
+     * while `fieldName` equals to `value`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable take(String fieldName, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that takes `SObject` elements
+     * while `field` equals to `value`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable take(SObjectField field, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that drops `SObject` elements
+     * while `predicate` returns `true`.
+     * <p>Intermediate Operation.</p>
+     * @param predicate the predicate
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable drop(ISObjectPredicate predicate);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that drops `SObject` elements
+     * while `fieldName` equals to `value`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable drop(String fieldName, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that drops `SObject` elements
+     * while `field` equals to `value`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable drop(SObjectField field, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` without null elements.
+     * <p>Intermediate Operation.</p>
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable withoutNulls();
+
+    /**
+     * @description Returns a new `ISObjectIterable` with `SObject` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping operator
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable mapTo(ISObjectUnaryOperator mapper);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with `SObject` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field value to be set for new SObject
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable mapTo(String fieldName);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with `SObject` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field value to be set for new SObject
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable mapTo(SObjectField field);
+
+    /**
+     * @description Returns a new `IIntIterable` with `Integer` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function
+     * @return the new `IIntIterable`
+     */
+    IIntIterable mapToInt(ISObjectToIntFunction mapper);
+
+    /**
+     * @description Returns a new `IIntIterable` with `Integer` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @return the new `IIntIterable`
+     */
+    IIntIterable mapToInt(String fieldName);
+
+    /**
+     * @description Returns a new `IIntIterable` with `Integer` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @return the new `IIntIterable`
+     */
+    IIntIterable mapToInt(SObjectField field);
+
+    /**
+     * @description Returns a new `ILongIterable` with `Long` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function
+     * @return the new `ILongIterable`
+     */
+    ILongIterable mapToLong(ISObjectToLongFunction mapper);
+
+    /**
+     * @description Returns a new `ILongIterable` with `Long` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @return the new `ILongIterable`
+     */
+    ILongIterable mapToLong(String fieldName);
+
+    /**
+     * @description Returns a new `ILongIterable` with `Long` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @return the new `ILongIterable`
+     */
+    ILongIterable mapToLong(SObjectField field);
+
+    /**
+     * @description Returns a new `IDoubleIterable` with `Double` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function
+     * @return the new `IDoubleIterable`
+     */
+    IDoubleIterable mapToDouble(ISObjectToDoubleFunction mapper);
+
+    /**
+     * @description Returns a new `IDoubleIterable` with `Double` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @return the new `IDoubleIterable`
+     */
+    IDoubleIterable mapToDouble(String fieldName);
+
+    /**
+     * @description Returns a new `ILongIterable` with `Double` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @return the new `IDoubleIterable`
+     */
+    IDoubleIterable mapToDouble(SObjectField field);
+
+    /**
+     * @description Returns a new `IObjectIterable` with `Object` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable mapToObject(ISObjectFunction mapper);
+
+    /**
+     * @description Returns a new `IObjectIterable` with `Object` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable mapToObject(String fieldName);
+
+    /**
+     * @description Returns a new `IObjectIterable` with `Object` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable mapToObject(SObjectField field);
+
+    /**
+     * @description Returns a new `ISObjectIterable` after performing `consumer` action
+     * on each `SObject` element.
+     * <p>Intermediate Interfering Operation.</p>
+     * @param consumer the action
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable forEach(ISObjectConsumer consumer);
+
+    /**
+     * @description Returns a new `ISObjectIterable` after setting `value` for `fieldName`
+     * on each `SObject` element.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable forEach(String fieldName, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` after setting `value` for `field`
+     * on each `SObject` element.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @param value the value
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable forEach(SObjectField field, Object value);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements.
+     * <p>Intermediate Operation.</p>
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct();
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `classifier` function.
+     * <p>Intermediate Operation.</p>
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct(ISObjectFunction classifier);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct(String fieldName);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct(SObjectField field);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements in ascending order.
+     * <p>Intermediate Operation.</p>
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable sort();
+
+    /**
+     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
+     * considering `order`.
+     * <p>Intermediate Operation.</p>
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable sort(SortOrder order);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
+     * according to `comparator`.
+     * <p>Intermediate Operation.</p>
+     * @param comparator the comparator
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable sort(ISObjectComparator comparator);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable sort(String fieldName);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
+     * taken from `fieldName` values considering `order`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @param order the sort order
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable sort(String fieldName, SortOrder order);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable sort(SObjectField field);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
+     * taken from `field` values considering `order`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @param order the sort order
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable sort(SObjectField field, SortOrder order);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with first `lim` `SObject` elements.
+     * <p>Intermediate Operation.</p>
+     * @param lim the number of elements to limit
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable lim(Integer lim);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that skips first `n` `SObject` elements
+     * and returns remaining elements.
+     * <p>Intermediate Operation.</p>
+     * @param n the number of elements to skip
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable skip(Integer n);
+    //</editor-fold>
+
+    //<editor-fold desc="Terminal Operations">
+    /**
+     * @description Performs a reduction on `SObject` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     * @return the `SObject` result of the reduction
+     */
+    SObject reduce(SObject identity, ISObjectBinaryOperator accumulator);
+
+    /**
+     * @description Performs a reduction on `SObject` elements,
+     * using `identity` value and associative `accumulator` function, and returns
+     * an `OptionalSObject` describing the reduced value.
+     * <p>Terminal Operation.</p>
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     * @return the `OptionalSObject` result of the reduction
+     */
+    OptionalSObject reduce(ISObjectBinaryOperator accumulator);
+
+    /**
+     * @description Performs a mutable reduction operation on `SObject` elements, collecting elements
+     * to a container returned by `supplier` by applying `accumulator` function.
+     * <p>Terminal Operation.</p>
+     * @param supplier the function that returns a mutable result container
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     * @return the `Object` result of the collection
+     */
+    Object collect(ISupplier supplier, IObjectSObjectConsumer accumulator);
+
+    /**
+     * @description Performs a mutable reduction operation on `SObject` elements, collecting elements
+     * to a container using `collector`.
+     * <p>Terminal Operation.</p>
+     * @param collector the collector
+     * @return the `Object` result of the collection
+     */
+    Object collect(ISObjectCollector collector);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the first element
+     * that matches `predicate`.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param predicate the predicate
+     * @return the `OptionalSObject`
+     */
+    OptionalSObject find(ISObjectPredicate predicate);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the first element
+     * which has `value` of `fieldName`.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param fieldName the field
+     * @param value the field value
+     * @return the `OptionalSObject`
+     */
+    OptionalSObject find(String fieldName, Object value);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the first element
+     * which has `value` of `field`.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param field the field
+     * @param value the field value
+     * @return the `OptionalSObject`
+     */
+    OptionalSObject find(SObjectField field, Object value);
+
+    /**
+     * @description Returns whether all `SObject` elements match `predicate`.
+     * If `ISObjectIterable` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param predicate the predicate
+     * @return `true` or `false`
+     */
+    Boolean every(ISObjectPredicate predicate);
+
+    /**
+     * @description Returns whether all `SObject` elements have `field` `value`.
+     * If `ISObjectIterable` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param fieldName the field
+     * @param value the field value
+     * @return `true` or `false`
+     */
+    Boolean every(String fieldName, Object value);
+
+    /**
+     * @description Returns whether all `SObject` elements have `field` `value`.
+     * If `ISObjectIterable` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param field the field
+     * @param value the field value
+     * @return `true` or `false`
+     */
+    Boolean every(SObjectField field, Object value);
+
+    /**
+     * @description Returns whether some `SObject` element matches `predicate`.
+     * If `ISObjectIterable` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param predicate the predicate
+     * @return `true` or `false`
+     */
+    Boolean some(ISObjectPredicate predicate);
+
+    /**
+     * @description Returns whether some `SObject` element has `field` `value`.
+     * If `ISObjectIterable` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param fieldName the field
+     * @param value the field value
+     * @return `true` or `false`
+     */
+    Boolean some(String fieldName, Object value);
+
+    /**
+     * @description Returns whether some `SObject` element has `field` `value`.
+     * If `ISObjectIterable` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param field the field
+     * @param value the field value
+     * @return `true` or `false`
+     */
+    Boolean some(SObjectField field, Object value);
+
+    /**
+     * @description Returns whether no `SObject` elements match `predicate`.
+     * If `ISObjectIterable` is empty then `true` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param predicate the predicate
+     * @return `true` or `false`
+     */
+    Boolean none(ISObjectPredicate predicate);
+
+    /**
+     * @description Returns whether no `SObject` elements have `field` `value`.
+     * If `ISObjectIterable` is empty then `true` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param fieldName the field
+     * @param value the field value
+     * @return `true` or `false`
+     */
+    Boolean none(String fieldName, Object value);
+
+    /**
+     * @description Returns whether no `SObject` elements have `field` `value`.
+     * If `ISObjectIterable` is empty then `true` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     * @param field the field
+     * @param value the field value
+     * @return `true` or `false`
+     */
+    Boolean none(SObjectField field, Object value);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the maximum `SObject` element
+     * according to `comparator`.
+     * <p>Terminal Operation.</p>
+     * @param comparator the comparator
+     * @return the `OptionalSObject` describing the result
+     */
+    OptionalSObject max(ISObjectComparator comparator);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the maximum `SObject` element
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `OptionalSObject` describing the result
+     */
+    OptionalSObject max(String fieldName);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the maximum `SObject` element
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `OptionalSObject` describing the result
+     */
+    OptionalSObject max(SObjectField field);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the minimum `SObject` element
+     * according to `comparator`.
+     * <p>Terminal Operation.</p>
+     * @param comparator the comparator
+     * @return the `OptionalSObject` describing the result
+     */
+    OptionalSObject min(ISObjectComparator comparator);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the minimum `SObject` element
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `OptionalSObject` describing the result
+     */
+    OptionalSObject min(String fieldName);
+
+    /**
+     * @description Returns an `OptionalSObject` describing the minimum `SObject` element
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `OptionalSObject` describing the result
+     */
+    OptionalSObject min(SObjectField field);
+
+    /**
+     * @description Returns the arithmetic sum of values returned by `classifier` function.
+     * <p>Terminal Operation.</p>
+     * @param classifier the classifier function
+     * @return the sum of elements returned by function
+     */
+    Double sum(ISObjectToDoubleFunction classifier);
+
+    /**
+     * @description Returns the arithmetic sum of field values of `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field to sum values
+     * @return the sum of field values
+     */
+    Double sum(String fieldName);
+
+    /**
+     * @description Returns the arithmetic sum of field values of `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param field the field to sum values
+     * @return field sum of field values
+     */
+    Double sum(SObjectField field);
+
+    /**
+     * @description Returns the arithmetic mean of values returned by `classifier` function.
+     * <p>Terminal Operation.</p>
+     * @param classifier the classifier function
+     * @return the arithmetic mean of elements returned by function
+     */
+    OptionalDouble avg(ISObjectToDoubleFunction classifier);
+
+    /**
+     * @description Returns the arithmetic mean of field values of `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field to sum values
+     * @return the arithmetic mean of field values
+     */
+    OptionalDouble avg(String fieldName);
+
+    /**
+     * @description Returns the arithmetic mean of field values of `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param field the field to sum values
+     * @return field arithmetic mean of field values
+     */
+    OptionalDouble avg(SObjectField field);
+
+    /**
+     * @description Returns the count of `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @return the count of `SObject` elements
+     */
+    Integer count();
+
+    /**
+     * @description Returns the count of `SObject` elements is 0.
+     * <p>Terminal Operation.</p>
+     * @return `true` or `false`
+     */
+    Boolean isEmpty();
+
+    /**
+     * @description Accumulates `SObject` elements into a `List<SObject>`.
+     * <p>Terminal Operation.</p>
+     * @return the `List<SObject>` containing the iterable elements
+     */
+    List<SObject> toList();
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @param listType result type
+     * @return the `List<Object>` containing the iterable elements
+     */
+    List<Object> toList(String fieldName, Type listType);
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @param listType result type
+     * @return the `List<Object>` containing the iterable elements
+     */
+    List<Object> toList(SObjectField field, Type listType);
+
+    /**
+     * @description Accumulates `SObject` elements into a `Set<SObject>`.
+     * <p>Terminal Operation.</p>
+     * @return the `Set<SObject>` containing the iterable elements
+     */
+    Set<SObject> toSet();
+
+    /**
+     * @description Accumulates `Id` elements into a `Set<Id>`.
+     * <p>Terminal Operation.</p>
+     * @return the `Set<Id>` containing the iterable elements
+     */
+    Set<Id> toIdSet();
+
+    /**
+     * @description Accumulates `Id` elements into a `Set<Id>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `Set<Id>` containing the iterable elements
+     */
+    Set<Id> toIdSet(String fieldName);
+
+    /**
+     * @description Accumulates `Id` elements into a `Set<Id>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `Set<Id>` containing the iterable elements
+     */
+    Set<Id> toIdSet(SObjectField field);
+
+    /**
+     * @description Accumulates `String` elements into a `Set<String>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `Set<String>` containing the iterable elements
+     */
+    Set<String> toStringSet(String fieldName);
+
+    /**
+     * @description Accumulates `String` elements into a `Set<String>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `Set<String>`containing the iterable elements
+     */
+    Set<String> toStringSet(SObjectField field);
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`.
+     * <p>Terminal Operation.</p>
+     * @return the `Map<Id, SObject>` containing the iterable elements
+     */
+    Map<Id, SObject> toMap();
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @param mapType result type
+     * @return the `Map<Id, SObject>` containing the iterable elements
+     */
+    Map<Id, SObject> toByIdMap(String fieldName, Type mapType);
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @param mapType result type
+     * @return the `Map<Id, SObject>` containing the iterable elements
+     */
+    Map<Id, SObject> toByIdMap(SObjectField field, Type mapType);
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @param mapType result type
+     * @return the `Map<String, SObject>` containing the iterable elements
+     */
+    Map<String, SObject> toByStringMap(String fieldName, Type mapType);
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @param mapType result type
+     * @return the `Map<String, SObject>` containing the iterable elements
+     */
+    Map<String, SObject> toByStringMap(SObjectField field, Type mapType);
+
+    /**
+     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `Map<Id, List<SObject>>` containing the iterable elements
+     */
+    Map<Id, List<SObject>> groupById(String fieldName);
+
+    /**
+     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `Map<Id, List<SObject>>` containing the iterable elements
+     */
+    Map<Id, List<SObject>> groupById(SObjectField field);
+
+    /**
+     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `Map<String, List<SObject>>` containing the iterable elements
+     */
+    Map<String, List<SObject>> groupByString(String fieldName);
+
+    /**
+     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `Map<String, List<SObject>>` containing the iterable elements
+     */
+    Map<String, List<SObject>> groupByString(SObjectField field);
+
+    /**
+     * @description Partition `SObject` elements by `predicate`.
+     * <p>Terminal Operation.</p>
+     * @param predicate the predicate
+     * @return the `Map<Boolean, List<SObject>>` containing the iterable elements
+     */
+    Map<Boolean, List<SObject>> partition(ISObjectPredicate predicate);
+    //</editor-fold>
+
+}

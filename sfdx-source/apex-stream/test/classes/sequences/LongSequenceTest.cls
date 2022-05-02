@@ -1,0 +1,707 @@
+/**
+ * @author O. Berehovskyi
+ * @see LongSequence
+ */
+@IsTest(IsParallel = true)
+private class LongSequenceTest {
+
+    private static List<Long> ints = IterTestUtils.generateLongs();
+
+    /**
+     * @see LongSequence.of
+     * @see LongSequence.ofNullable
+     * @see LongSequence.empty
+     * @see LongSequence.iterator
+     * @see LongSequence.stream
+     */
+    @IsTest
+    private static void of() {
+        // Given
+        ints.add(0, null);
+        ints.add(null);
+        List<Long> input = ints.clone();
+        List<Long> input1;
+        Set<Long> input2;
+        ILongIterable seq = LongSequence.of(input);
+        ILongIterable seq1 = LongSequence.of(new Set<Long>(input));
+        ILongIterable seq2 = LongSequence.ofNullable(input);
+        ILongIterable seq3 = LongSequence.ofNullable(new Set<Long>(input));
+        ILongIterable seq4 = LongSequence.ofNullable(input1);
+        ILongIterable seq5 = LongSequence.ofNullable(input2);
+        ILongIterable stream = ((LongSequence) LongSequence.of(input)).stream();
+        // When
+        List<Long> actual = seq.toList();
+        List<Long> actual1 = seq1.toList();
+        List<Long> actual2 = seq2.toList();
+        List<Long> actual3 = seq3.toList();
+        List<Long> actual4 = seq4.toList();
+        List<Long> actual5 = seq5.toList();
+        // Then
+        List<Long> expected = new List<Long>(new Set<Long>(input));
+        List<Long> expected1 = new List<Long>();
+        Validate.assertEquals(input, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(input, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected1, actual4);
+        Validate.assertEquals(expected1, actual5);
+        Validate.assertEquals(true, seq.iterator().hasNext());
+        Validate.assertEquals(true, seq1.iterator().hasNext());
+        Validate.assertEquals(true, seq2.iterator().hasNext());
+        Validate.assertEquals(true, seq3.iterator().hasNext());
+        Validate.assertEquals(false, seq4.iterator().hasNext());
+        Validate.assertEquals(false, seq5.iterator().hasNext());
+        Validate.assertEquals(false, stream.isEmpty());
+        Validate.assertEquals(ints, input, Label.InputMutatedErrorMessage);
+        Validate.assert(((LongStream) stream).isOperated);
+    }
+
+    /**
+     * @see LongSequence.range
+     */
+    @IsTest
+    private static void range() {
+        // Given
+        Long fromI = 0L;
+        Long fromI1 = -100L;
+        Long fromI2 = 100L;
+        Long toI = 200L;
+        Long toI1 = 100L;
+        Long toI2 = 0L;
+        ILongIterable seq = LongSequence.range(fromI, toI);
+        ILongIterable seq1 = LongSequence.range(fromI1, toI1);
+        ILongIterable seq2 = LongSequence.range(fromI2, toI1);
+        ILongIterable seq3 = LongSequence.range(fromI2, toI2);
+        // When
+        List<Long> actual = seq.toList();
+        List<Long> actual1 = seq1.toList();
+        List<Long> actual2 = seq2.toList();
+        List<Long> actual3 = seq3.toList();
+        // Then
+        Validate.assertEquals(toI - fromI + 1, actual.size());
+        for (Integer i = 0, size = actual.size(); i < size; i++) {
+            Validate.assertEquals(i, actual[i]);
+        }
+        Validate.assertEquals(toI1 - fromI1 + 1, actual1.size());
+        for (Integer i = 0, size = actual1.size(); i < size; i++)  {
+            Validate.assertEquals(i + fromI1, actual1[i]);
+        }
+        Validate.assertEquals(toI1 - fromI2 + 1, actual2.size());
+        for (Integer i = 0, size = actual2.size(); i < size; i++) {
+            Validate.assertEquals(i + fromI2, actual2[i]);
+        }
+        Validate.assertEquals(0, actual3.size());
+    }
+
+    /**
+    * @see LongSequence.concat
+    */
+    @IsTest
+    private static void concat() {
+        // Given
+        List<Long> input1 = new List<Long>{ -5L, 0L, 1L, 3L, 150L };
+        List<Long> input2 = new List<Long>{ 3L, 0L, 8L };
+        List<Long> input3 = new List<Long>{ 9L, 5L, 7L };
+        ILongIterable seq = LongSequence.concat(LongSequence.of(input1), LongSequence.of(input2));
+        ILongIterable seq1 = LongSequence.concat(new List<ILongIterable>{ LongSequence.of(input1), LongSequence.of(input2), LongSequence.of(input3) });
+        // When
+        List<Long> actual = seq.toList();
+        List<Long> actual1 = seq1.toList();
+        // Then
+        List<Long> expected = new List<Long>{ -5L, 0L, 1L, 3L, 150L, 3L, 0L, 8L };
+        List<Long> expected1 = new List<Long>{ -5L, 0L, 1L, 3L, 150L, 3L, 0L, 8L, 9L, 5L, 7L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected1, actual1);
+    }
+
+    /**
+    * @see LongSequence.zip
+    */
+    @IsTest
+    private static void zip() {
+        // Given
+        List<Long> input = new List<Long>{ -5L, 0L, 1L };
+        List<Long> input1 = new List<Long>{ 3L, 0L, 8L };
+        ILongIterable seq = LongSequence.zip(LongSequence.of(input), LongSequence.of(input1), LongBinaryOperator.sum());
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ -2L, 0L, 9L };
+        Validate.assertEquals(expected, actual);
+    }
+
+    /**
+    * @see LongSequence.append
+    * @see LongSequence.prepend
+    */
+    @IsTest
+    private static void appendPrepend() {
+        // Given
+        List<Long> input = new List<Long>{ -5L, 0L, 1L };
+        List<Long> input1 = new List<Long>{ 3L, 0L, 8L };
+        ILongIterable seq = LongSequence.of(input).append(LongSequence.of(input1));
+        ILongIterable seq1 = LongSequence.of(input).prepend(LongSequence.of(input1));
+        // When
+        List<Long> actual = seq.toList();
+        List<Long> actual1 = seq1.toList();
+        // Then
+        List<Long> expected = new List<Long>{ -5L, 0L, 1L, 3L, 0L, 8L };
+        List<Long> expected1 = new List<Long>{ 3L, 0L, 8L, -5L, 0L, 1L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected1, actual1);
+    }
+
+    /**
+    * @see LongSequence.toObjectIterable
+    * @see LongIterable.toIntIterable
+    * @see LongIterable.toDoubleIterable
+    */
+    @IsTest
+    private static void convert() {
+        // Given
+        List<Long> input = new List<Long>{ -5L, 0L, 1L, 3L, 8L, null };
+        IObjectIterable seq = LongSequence.of(input).toObjectIterable();
+        IIntIterable seq1 = LongSequence.of(input).toIntIterable();
+        IDoubleIterable seq2 = LongSequence.of(input).toDoubleIterable();
+        // When
+        List<Object> actual = seq.toList();
+        List<Integer> actual1 = seq1.toList();
+        List<Double> actual2 = seq2.toList();
+        // Then
+        List<Object> expected = new List<Object>{ -5L, 0L, 1L, 3L, 8L, null };
+        List<Integer> expected1 = new List<Integer>{ -5, 0, 1, 3, 8, null };
+        List<Double> expected2 = new List<Double>{ -5, 0, 1, 3, 8, null };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected1, actual1);
+        Validate.assertEquals(expected2, actual2);
+    }
+
+    /**
+    * @see LongSequence.filter
+    */
+    @IsTest
+    private static void filter() {
+        // Given
+        List<Long> input = new List<Long>{ -5L, 0L, 1L, 3L, 8L, null, -6L, 4L, 4L };
+        ILongIterable seq = LongSequence.of(input).filter(LongPredicate.isPositive());
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 1L, 3L, 8L, 4L, 4L };
+        Validate.assertEquals(expected, actual);
+    }
+
+    /**
+    * @see LongSequence.take
+    */
+    @IsTest
+    private static void take() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, null, -6L, 4L, 4L };
+        ILongIterable seq = LongSequence.of(input).take(LongPredicate.isPositive());
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L };
+        Validate.assertEquals(expected, actual);
+    }
+
+    /**
+    * @see LongSequence.drop
+    */
+    @IsTest
+    private static void drop() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, null, -6L, 4L, 4L };
+        ILongIterable seq = LongSequence.of(input).drop(LongPredicate.isPositive());
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ -3L, null, -6L, 4L, 4L };
+        Validate.assertEquals(expected, actual);
+    }
+
+    /**
+    * @see LongIterable.withoutNulls
+    */
+    @IsTest
+    private static void withoutNulls() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, null, -6L, 0L, 4L, null };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone).withoutNulls();
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+    * @see LongSequence.mapTo
+    */
+    @IsTest
+    private static void mapTo() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone).mapTo(LongUnaryOperator.multiply(2));
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 10L, 2L, 6L, 16L, -6L, 8L, -12L, 0L, 8L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+    * @see LongSequence.mapToInt
+    */
+    @IsTest
+    private static void mapToInt() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        IIntIterable seq = LongSequence.of(clone).mapToInt(LongToIntFunction.valueOf());
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Integer> expected = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+    * @see LongSequence.mapToDouble
+    */
+    @IsTest
+    private static void mapToDouble() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        IDoubleIterable seq = LongSequence.of(clone).mapToDouble(LongToDoubleFunction.valueOf());
+        // When
+        List<Double> actual = seq.toList();
+        // Then
+        List<Double> expected = new List<Double>{ 5.0, 1.0, 3.0, 8.0, -3.0, 4.0, -6.0, 0.0, 4.0 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.mapToSObject
+     */
+    @IsTest
+    private static void mapToSObject() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ISObjectIterable seq = LongSequence.of(clone).mapToSObject(new IterTestUtils.CreateAccountFromLongs());
+        // When
+        List<Account> actual = seq.toList();
+        // Then
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        for (Integer i = 0, size = input.size(); i < size; i++ ) {
+            Validate.assertEquals(Math.abs(clone[i]), actual[i].NumberOfEmployees);
+        }
+    }
+
+    /**
+     * @see LongSequence.mapToObject
+     */
+    @IsTest
+    private static void mapToObject() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        IObjectIterable seq = LongSequence.of(clone).mapToObject(LongFunction.toString());
+        // When
+        List<String> actual = (List<String>) seq.toList(List<String>.class);
+        // Then
+        List<String> expected = new List<String>{ '5', '1', '3', '8', '-3', '4', '-6', '0', '4' };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.forEach
+     */
+    @IsTest
+    private static void forEach() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone).forEach(LongConsumer.debug());
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        Validate.assertEquals(clone, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.distinct
+     */
+    @IsTest
+    private static void distinct() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone).distinct();
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.sort
+     */
+    @IsTest
+    private static void sort() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, null, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone).sort();
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        List<Long> expected = new List<Long>{ null, -6L, -3L, 0L, 1L, 3L, 4L, 4L, 5L, 8L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.lim
+     */
+    @IsTest
+    private static void lim() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, null, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone).lim(25);
+        ILongIterable seq1 = LongSequence.of(clone).lim(3);
+        ILongIterable seq2 = LongSequence.of(clone).lim(0);
+        ILongIterable seq3 = LongSequence.of(clone);
+        // When
+        List<Long> actual = seq.toList();
+        List<Long> actual1 = seq1.toList();
+        List<Long> actual2 = seq2.toList();
+        Exception exc1;
+        try {
+            seq3.lim(-2);
+        } catch (IllegalArgumentException exc) {
+            exc1 = exc;
+        }
+        // Then
+        List<Long> expected = new List<Long>{ 5L, 1L, 3L };
+        List<Long> expected1 = new List<Long>();
+        Validate.assertEquals(input, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.skip
+     */
+    @IsTest
+    private static void skip() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, null, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone).skip(5);
+        ILongIterable seq1 = LongSequence.of(clone).skip(0);
+        ILongIterable seq2 = LongSequence.of(clone).skip(25);
+        ILongIterable seq3 = LongSequence.of(clone);
+        // When
+        List<Long> actual = seq.toList();
+        List<Long> actual1 = seq1.toList();
+        List<Long> actual2 = seq2.toList();
+        Exception exc1;
+        try {
+            seq3.skip(-2);
+        } catch (IllegalArgumentException exc) {
+            exc1 = exc;
+        }
+        // Then
+        List<Long> expected = new List<Long>{ 4L, null, -6L, 0L, 4L };
+        List<Long> expected1 = new List<Long>();
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.reduce
+     */
+    @IsTest
+    private static void reduce() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        List<Long> cloneWithNulls = input.clone();
+        cloneWithNulls.add(null);
+        ILongIterable seq = LongSequence.of(clone);
+        ILongIterable seq1 = LongSequence.of(clone);
+        ILongIterable seq2 = LongSequence.of(cloneWithNulls);
+        Long seed = 10;
+        // When
+        Long actual = seq.reduce(seed, LongBinaryOperator.sum());
+        Long actual1 = seq1.reduce(LongBinaryOperator.sum()).get();
+        Exception exc1;
+        try {
+            seq2.reduce(LongBinaryOperator.sum());
+        } catch (Exception exc) {
+            exc1 = exc;
+        }
+        // Then
+        Long expected = 26;
+        Long expected1 = 16;
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected1, actual1);
+        Validate.assertEquals(10, seed, Label.InputMutatedErrorMessage);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.collect
+     */
+    @IsTest
+    private static void collect() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        // When
+        Set<Long> actual = (Set<Long>) seq.collect(Supplier.of(Set<Long>.class), ObjectLongConsumer.of(SetObjectConsumer.addToLongSet()));
+        // Then
+        Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.find
+     */
+    @IsTest
+    private static void find() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        ILongIterable seq1 = LongSequence.of(clone);
+        // When
+        Long actual = seq.find(LongPredicate.isNegative()).get();
+        Long actual1 =seq1.find(LongPredicate.isGreater(50L)).orElse(42L);
+        // Then
+        Validate.assertEquals(-3L, actual);
+        Validate.assertEquals(42L, actual1);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.every
+     */
+    @IsTest
+    private static void every() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        ILongIterable seq1 = LongSequence.of(clone);
+        // When
+        Boolean actual = seq.every(LongPredicate.isOdd());
+        Boolean actual1 = seq1.every(LongPredicate.isPrime());
+        // Then
+        Validate.assertEquals(true, actual);
+        Validate.assertEquals(false, actual1);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.some
+     */
+    @IsTest
+    private static void some() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        ILongIterable seq1 = LongSequence.of(clone);
+        // When
+        Boolean actual = seq.some(LongPredicate.isNegative());
+        Boolean actual1 = seq1.some(LongPredicate.isZero());
+        // Then
+        Validate.assertEquals(true, actual);
+        Validate.assertEquals(false, actual1);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongIterable.none
+     */
+    @IsTest
+    private static void none() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        ILongIterable seq1 = LongSequence.of(clone);
+        // When
+        Boolean actual = seq.none(LongPredicate.isEven());
+        Boolean actual1 = seq1.none(LongPredicate.isNegative());
+        // Then
+        Validate.assertEquals(true, actual);
+        Validate.assertEquals(false, actual1);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongIterable.max
+     */
+    @IsTest
+    private static void max() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        // When
+        Long actual = seq.max().get();
+        // Then
+        Validate.assertEquals(9, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongIterable.min
+     */
+    @IsTest
+    private static void min() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        // When
+        Long actual = seq.min().get();
+        // Then
+        Validate.assertEquals(-3L, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.sum
+     */
+    @IsTest
+    private static void sum() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        // When
+        Long actual = seq.sum();
+        // Then
+        Validate.assertEquals(22L, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.avg
+     */
+    @IsTest
+    private static void avg() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L, 7L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        // When
+        Double actual = seq.avg().get();
+        // Then
+        Validate.assertEquals(3.625, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.count
+     */
+    @IsTest
+    private static void count() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L, 7L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        ILongIterable seq1 = LongSequence.of(new List<Long>());
+        ILongIterable seq2 = LongSequence.empty();
+        // When
+        Long actual = seq.count();
+        Long actual1 = seq1.count();
+        Long actual2 = seq2.count();
+        // Then
+        Validate.assertEquals(8L, actual);
+        Validate.assertEquals(0L, actual1);
+        Validate.assertEquals(0L, actual2);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.isEmpty
+     */
+    @IsTest
+    private static void isEmpty() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L, 7L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        ILongIterable seq1 = LongSequence.of(new List<Long>());
+        ILongIterable seq2 = LongSequence.empty();
+        // When
+        Boolean actual = seq.isEmpty();
+        Boolean actual1 = seq1.isEmpty();
+        Boolean actual2 = seq2.isEmpty();
+        // Then
+        Validate.assertEquals(false, actual);
+        Validate.assertEquals(true, actual1);
+        Validate.assertEquals(true, actual2);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.toList
+     */
+    @IsTest
+    private static void toList() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L, 7L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        // When
+        List<Long> actual = seq.toList();
+        // Then
+        Validate.assertEquals(input, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see LongSequence.toSet
+     */
+    @IsTest
+    private static void toSet() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L, 7L };
+        List<Long> clone = input.clone();
+        ILongIterable seq = LongSequence.of(clone);
+        // When
+        Set<Long> actual = seq.toSet();
+        // Then
+        Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ArgumentNotPositiveErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>The argument should be positive, actual: {0}.</value>
+    </labels>
+    <labels>
+        <fullName>StreamOperatedErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>The stream has already been operated.</value>
+    </labels>
+    <labels>
+        <fullName>DuplicateKeyErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Duplicate key {0} (attempted merging values {1} and {2}).</value>
+    </labels>
+    <labels>
+        <fullName>InputMutatedErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Original input should not be mutated</value>
+    </labels>
+    <labels>
+        <fullName>InputNotMutatedErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Original input should be mutated</value>
+    </labels>
+    <labels>
+        <fullName>TypesMismatchErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Types of comparing objects ({0}, {1}) mismatch or do not support comparison operators.</value>
+    </labels>
+</CustomLabels>

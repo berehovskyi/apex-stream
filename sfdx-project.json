@@ -1,0 +1,10 @@
+{
+  "packageDirectories": [
+    {
+      "path": "sfdx-source/apex-stream",
+      "default": true
+    }
+  ],
+  "name": "apex-stream",
+  "namespace": ""
+}
