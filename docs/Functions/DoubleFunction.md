@@ -16,16 +16,19 @@ Inherits [IDoubleFunction](/docs/Functional-Interfaces/IDoubleFunction.md) funct
 **See** IDoubleIterable.mapToObject
 
 ## Methods
-### `apply(Double d)`
-#### Parameters
+### Function
+##### `apply(Double d)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static format()`
+---
+### Built-Ins
+##### `static format()`
 
 Returns a `DoubleFunction` that returns a string that represents the Double input argument using the locale of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -38,11 +41,11 @@ the `SObjectFunction`
 
 **See** Double.format
 
-### `static toString()`
+##### `static toString()`
 
 Returns a `DoubleFunction` that returns a string that represents the Double input argument.
 
-#### Return
+###### Return
 
 **Type**
 

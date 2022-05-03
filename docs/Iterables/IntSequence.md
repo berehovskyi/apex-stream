@@ -28,11 +28,12 @@ A sequence of `Integer` elements supporting aggregate operations, a primitive sp
 **See** [LongSequence](/docs/Iterables/LongSequence.md)
 
 ## Methods
-### `iterator()`
+### Other
+##### `iterator()`
 
 Returns an internal iterator for the elements of this sequence. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -42,11 +43,13 @@ Iterator<Integer>
 
 the internal `Iterator<Integer>`
 
-### `toObjectIterable()`
+---
+### Conversion Operations
+##### `toObjectIterable()`
 
 Returns an `ObjectSequence` consisting of the elements of this sequence, converted to Object.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -56,16 +59,18 @@ IObjectIterable
 
 the `ObjectSequence`
 
-### `static of(List<Integer> integers)`
+---
+### Sources
+##### `static of(List<Integer> integers)`
 
 Returns a `IntSequence` created from `integers` list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`integers`|the list of Longs|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -75,26 +80,26 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `integers` is null|
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 });
 ```
 
-### `static of(Set<Integer> integers)`
+##### `static of(Set<Integer> integers)`
 
 Returns a `IntSequence` created from `integers` set.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`integers`|the set of Integers|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -104,26 +109,26 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `integers` is null|
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = IntSequence.of(new Set<Integer>{ 0, 5, 1, -10 });
 ```
 
-### `static ofNullable(List<Integer> integers)`
+##### `static ofNullable(List<Integer> integers)`
 
 Returns a `IntSequence` created from `integers` list if non-null, otherwise returns an empty `IntSequence`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`integers`|the list of Integers|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -133,21 +138,21 @@ IIntIterable
 
 the new `IntSequence` if `integers` is non-null, otherwise an empty `IntSequence`
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = IntSequence.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
 ```
 
-### `static ofNullable(Set<Integer> integers)`
+##### `static ofNullable(Set<Integer> integers)`
 
 Returns a `IntSequence` created from `integers` set if non-null, otherwise returns an empty `IntSequence`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`integers`|the set of Integers|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -157,16 +162,16 @@ IIntIterable
 
 the new `IntSequence` if `integers` is non-null, otherwise an empty `IntSequence`
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = IntSequence.ofNullable(new Set<Integer>{ 0, 5, 1, -10 });
 ```
 
-### `static empty()`
+##### `static empty()`
 
 Returns an empty `IntSequence`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -176,17 +181,17 @@ IIntIterable
 
 the empty `IntSequence`
 
-### `static range(Integer fromInt, Integer toInt)`
+##### `static range(Integer fromInt, Integer toInt)`
 
 Returns an ordered `IntSequence` from `fromInt` (inclusive) to `toInt` (inclusive) by an incremental step of 1.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fromInt`|the inclusive initial value|
 |`toInt`|the inclusive upper bound|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -196,27 +201,27 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fromInt` or `toInt` is null|
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeqFrom0To100 = IntSequence.range(0, 100);
 ```
 
-### `static concat(IIntIterable iterable1, IIntIterable iterable2)`
+##### `static concat(IIntIterable iterable1, IIntIterable iterable2)`
 
 Returns eagerly concatenated `IntSequence` whose elements are all the elements of the first `IIntIterable` followed by all the elements of the second `IIntIterable`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable1`|the first `IIntIterable`|
 |`iterable2`|the second `IIntIterable`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -226,26 +231,26 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable1` or `iterable2` is null|
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = IntSequence.concat(seq1, seq2);
 ```
 
-### `static concat(List<IIntIterable> iterables)`
+##### `static concat(List<IIntIterable> iterables)`
 
 Returns eagerly concatenates `List<IIntIterable>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterables`|the list of `IIntIterable`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -255,28 +260,28 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterables` or some of `IIntIterable` in a list is null|
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = IntSequence.concat(seqs);
 ```
 
-### `static zip(IIntIterable iterable1, IIntIterable iterable2, IIntBinaryOperator combiner)`
+##### `static zip(IIntIterable iterable1, IIntIterable iterable2, IIntBinaryOperator combiner)`
 
 Returns a combined `IntSequence` by applying `combiner` function to each element at the same position.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable1`|the first `IIntIterable`|
 |`iterable2`|the second `IIntIterable`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -286,21 +291,21 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `append(IIntIterable iterable)`
+##### `append(IIntIterable iterable)`
 
 Returns new `IntSequence` by appending `iterable` to the current sequence.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable`|the `IIntIterable` to append to the current sequence|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -310,26 +315,26 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable` is null|
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = seq1.append(seq2);
 ```
 
-### `prepend(IIntIterable iterable)`
+##### `prepend(IIntIterable iterable)`
 
 Returns new `IntSequence` by prepending `iterable` to the current sequence.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable`|the `IIntIterable` to prepend to the current sequence|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -339,21 +344,23 @@ IIntIterable
 
 the new `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable` is null|
 
-#### Example
+###### Example
 ```apex
 IIntIterable intSeq = seq1.prepend(seq2);
 ```
 
-### `stream()`
+---
+### Intermediate Operations
+##### `stream()`
 
 Returns new `IntStream` from the current sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -363,21 +370,21 @@ IIntIterable
 
 the new `IntStream`
 
-#### Example
+###### Example
 ```apex
 IIntIterable intStream = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).stream();
 ```
 
-### `override filter(IIntPredicate predicate)`
+##### `override filter(IIntPredicate predicate)`
 
 Returns a `IntSequence` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -387,28 +394,28 @@ IIntIterable
 
 the `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Integer> filtered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .filter(IntPredicate.isGreater(0))
     .toList();
 ```
 
-### `take(IIntPredicate predicate)`
+##### `take(IIntPredicate predicate)`
 
 Returns a `IntSequence` which takes elements while elements match `predicate`. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -418,28 +425,28 @@ IIntIterable
 
 the `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Integer> firstFiltered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .take(IntPredicate.isGreater(0))
     .toList();
 ```
 
-### `drop(IIntPredicate predicate)`
+##### `drop(IIntPredicate predicate)`
 
 Returns a `IntSequence` which drops elements while elements match `predicate`, then takes the rest. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -449,28 +456,28 @@ IIntIterable
 
 the `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Integer> rest = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .drop(IntPredicate.isGreater(0))
     .toList();
 ```
 
-### `mapTo(IIntUnaryOperator mapper)`
+##### `mapTo(IIntUnaryOperator mapper)`
 
 Returns a `IntSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -480,28 +487,28 @@ IIntIterable
 
 the `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<Integer> incrementedInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .mapTo(IntUnaryOperator.add(1))
     .toList();
 ```
 
-### `override mapToLong(IIntToLongFunction mapper)`
+##### `override mapToLong(IIntToLongFunction mapper)`
 
 Returns a `LongSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -511,21 +518,21 @@ ILongIterable
 
 the `LongSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `override mapToDouble(IIntToDoubleFunction mapper)`
+##### `override mapToDouble(IIntToDoubleFunction mapper)`
 
 Returns a `DoubleSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -535,21 +542,21 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `mapToSObject(IIntToSObjectFunction mapper)`
+##### `mapToSObject(IIntToSObjectFunction mapper)`
 
 Returns a `SObjectSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -559,21 +566,21 @@ ISObjectIterable
 
 the `SObjectSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `mapToObject(IIntFunction mapper)`
+##### `mapToObject(IIntFunction mapper)`
 
 Returns a `ObjectSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -583,21 +590,21 @@ IObjectIterable
 
 the `ObjectSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `forEach(IIntConsumer consumer)`
+##### `forEach(IIntConsumer consumer)`
 
 Returns a `IntSequence` after performing `consumer` action on each element. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the non-interfering, stateless action to be performed on each element. Expected to operate via side effects.|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -607,16 +614,16 @@ IIntIterable
 
 this `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-### `distinct()`
+##### `distinct()`
 
 Returns a `IntSequence` with distinct elements. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -626,18 +633,18 @@ IIntIterable
 
 the `IntSequence`
 
-#### Example
+###### Example
 ```apex
 List<Integer> distinct = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .distinct()
     .toList();
 ```
 
-### `sort()`
+##### `sort()`
 
 Returns a `IntSequence` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -647,23 +654,23 @@ IIntIterable
 
 the `IntSequence`
 
-#### Example
+###### Example
 ```apex
 List<Integer> sorted = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .sort()
     .toList();
 ```
 
-### `lim(Integer lim)`
+##### `lim(Integer lim)`
 
 Returns a `IntSequence` with first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`lim`|the number of elements to limit|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -673,29 +680,29 @@ IIntIterable
 
 the `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
 
-#### Example
+###### Example
 ```apex
 List<Integer> first3Ints = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .lim(3)
     .toList();
 ```
 
-### `skip(Integer n)`
+##### `skip(Integer n)`
 
 Returns a new `IntSequence` that skips first `n` elements and returns remaining elements. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`n`|the number of elements to skip|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -705,30 +712,32 @@ IIntIterable
 
 the `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
 
-#### Example
+###### Example
 ```apex
 List<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .skip(1)
     .toList();
 ```
 
-### `reduce(Integer identity, IIntBinaryOperator accumulator)`
+---
+### Terminal Operations
+##### `reduce(Integer identity, IIntBinaryOperator accumulator)`
 
 Performs a reduction on `Integer` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`identity`|the identity value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -738,27 +747,27 @@ Integer
 
 the `Integer` result of the reduction
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperator.sum());
 Integer factorialOfN = IntSequence.range(1, n).reduce(1, IntBinaryOperator.product());
 ```
 
-### `override reduce(IIntBinaryOperator accumulator)`
+##### `override reduce(IIntBinaryOperator accumulator)`
 
 Performs a reduction on `Integer` elements, using `identity` value and associative `accumulator` function, and returns an `OptionalInt` describing the reduced value. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -768,29 +777,29 @@ OptionalInt
 
 the `OptionalInt` result of the reduction
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      .reduce(IntBinaryOperator.sum())
      .get();
 ```
 
-### `collect(ISupplier supplier, IObjectIntConsumer accumulator)`
+##### `collect(ISupplier supplier, IObjectIntConsumer accumulator)`
 
 Performs a mutable reduction operation on elements, collecting elements to a container returned by `supplier` by applying `accumulator` function. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the function that returns a mutable result container|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -800,21 +809,21 @@ Object
 
 the `Object` result of the collection
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` or `accumulator` is null|
 
-### `find(IIntPredicate predicate)`
+##### `find(IIntPredicate predicate)`
 
 Returns an `OptionalInt` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -824,28 +833,28 @@ OptionalInt
 
 the `OptionalInt`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Integer firstEvenInt = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .find(IntPredicate.isEven())
     .get();
 ```
 
-### `every(IIntPredicate predicate)`
+##### `every(IIntPredicate predicate)`
 
 Returns whether all elements match `predicate`. If `IntSequence` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -855,28 +864,28 @@ Boolean
 
 `true` or `false`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Boolean isEveryIntEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .every(IntPredicate.isEven())
     .get();
 ```
 
-### `override some(IIntPredicate predicate)`
+##### `override some(IIntPredicate predicate)`
 
 Returns whether some element matches `predicate`. If `IntSequence` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -886,23 +895,23 @@ Boolean
 
 `true` or `false`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Boolean isSomeLongEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .some(IntPredicate.isEven())
     .get();
 ```
 
-### `sum()`
+##### `sum()`
 
 Returns the sum of elements. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -912,11 +921,11 @@ Integer
 
 the sum of elements
 
-### `avg()`
+##### `avg()`
 
 Returns `OptionalDouble` describing the arithmetic mean of elements of this sequence, or an empty `OptionalDouble` if this sequence is empty. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -926,11 +935,11 @@ OptionalDouble
 
 the arithmetic mean of elements
 
-### `count()`
+##### `count()`
 
 Returns the count of elements. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -940,11 +949,11 @@ Integer
 
 the count of elements
 
-### `isEmpty()`
+##### `isEmpty()`
 
 Returns whether the count of elements is 0. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -954,11 +963,11 @@ Boolean
 
 `true` or `false`
 
-### `toList()`
+##### `toList()`
 
 Accumulates elements into a `List<Integer>`. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -968,18 +977,18 @@ List<Integer>
 
 the `List<Integer>` containing the sequence elements
 
-#### Example
+###### Example
 ```apex
 List<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .lim(1)
     .toList();
 ```
 
-### `toSet()`
+##### `toSet()`
 
 Accumulates elements into a `Set<Integer>`. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -989,7 +998,7 @@ Set<Integer>
 
 the `Set<Integer>` containing the sequence elements
 
-#### Example
+###### Example
 ```apex
 Set<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
     .lim(1)

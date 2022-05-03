@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-A sequence of `Object` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</docs/li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as ObjectStream.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectStream.count() or ObjectStream.collect(ICollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Intermediate operations describe how a stream is processed without performing any action.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/Iterables/IntStream.md), [LongStream](/Iterables/LongStream.md), and [DoubleStream](/Iterables/DoubleStream.md) and [SObjectStream](/Iterables/SObjectStream.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `Object` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as ObjectStream.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectStream.count() or ObjectStream.collect(ICollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Intermediate operations describe how a stream is processed without performing any action.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/Iterables/IntStream.md), [LongStream](/Iterables/LongStream.md), and [DoubleStream](/Iterables/DoubleStream.md) and [SObjectStream](/Iterables/SObjectStream.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 
 **Author** O. Berehovskyi
@@ -36,11 +36,12 @@ A flag defining whether this stream has been linked or consumed.
 
 ---
 ## Methods
-### `iterator()`
+### Other
+##### `iterator()`
 
 Returns an internal iterator for the elements of this stream. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -50,21 +51,23 @@ Iterator<Object>
 
 the internal `Iterator<Object>`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`IllegalArgumentException`|if this stream has been operated (linked or consumed)|
 
-### `static of(Iterator<Object> iterator)`
+---
+### Sources
+##### `static of(Iterator<Object> iterator)`
 
 Returns a `ObjectStream` created from `iterator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterator`|the iterator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -74,28 +77,28 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterator` is null|
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people).iterator());
 IObjectIterable peopleStream = ObjectStream.of(new Set<Person>(people).iterator());
 IObjectIterable peopleStream = ObjectStream.of(otherStream.iterator());
 ```
 
-### `static of(List<Object> objects)`
+##### `static of(List<Object> objects)`
 
 Returns a `ObjectStream` created from `List<Object>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`objects`|the list|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -105,26 +108,26 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `objects` is null|
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people));
 ```
 
-### `static of(Set<Object> objects)`
+##### `static of(Set<Object> objects)`
 
 Returns a `ObjectStream` created from `Set<Object>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`objects`|the set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -134,26 +137,26 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `objects` is null|
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.of(new Set<Object>(people));
 ```
 
-### `static ofNullable(List<Object> objects)`
+##### `static ofNullable(List<Object> objects)`
 
 Returns a `ObjectStream` created from `objects` if non-null, otherwise returns an empty `ObjectStream`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`objects`|the list|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -163,21 +166,21 @@ IObjectIterable
 
 the new `ObjectStream` if `objects` is non-null, otherwise an empty `ObjectStream`
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
 ```
 
-### `static ofNullable(Set<Object> objects)`
+##### `static ofNullable(Set<Object> objects)`
 
 Returns a `ObjectStream` created from `objects` if non-null, otherwise returns an empty `ObjectStream`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`objects`|the set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -187,16 +190,16 @@ IObjectIterable
 
 the new `ObjectStream` if `objects` is non-null, otherwise an empty `ObjectStream`
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.ofNullable(new Set<Object>(people));
 ```
 
-### `static empty()`
+##### `static empty()`
 
 Returns an empty `ObjectStream`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -206,16 +209,16 @@ IObjectIterable
 
 the empty `ObjectStream`
 
-### `static generate(ISupplier supplier)`
+##### `static generate(ISupplier supplier)`
 
 Returns an infinite `ObjectStream` where each element is generated by `supplier`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the supplier of generated elements|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -225,22 +228,22 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` is null|
 
-### `static iterate(Object seed, IUnaryOperator operator)`
+##### `static iterate(Object seed, IUnaryOperator operator)`
 
 Returns an infinite `ObjectStream` produced by iterative application of `operator` to an initial element `seed`, producing a `ObjectStream` consisting of `seed`, `operator(seed)`, `operator(operator(seed))`, etc.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`seed`|the initial element|
 |`operator`|the operator to be applied to the previous element to produce a new element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -250,23 +253,23 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` is null|
 
-### `static iterate(Object seed, IPredicate predicate, IUnaryOperator operator)`
+##### `static iterate(Object seed, IPredicate predicate, IUnaryOperator operator)`
 
 Returns an infinite `ObjectStream` produced by iterative application of `operator` to an initial element `seed`, conditioned on satisfying `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`seed`|the initial element|
 |`predicate`|the predicate to determine when the stream must be terminated|
 |`operator`|the operator to be applied to the previous element to produce a new element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -276,22 +279,22 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` or `supplier` is null|
 
-### `static concat(IObjectIterable iterable1, IObjectIterable iterable2)`
+##### `static concat(IObjectIterable iterable1, IObjectIterable iterable2)`
 
 Returns eagerly concatenated `ObjectStream` whose elements are all the elements of the first `IObjectIterable` followed by all the elements of the second `IObjectIterable`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable1`|the first `SObjectIterable`|
 |`iterable2`|the second `SObjectIterable`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -301,26 +304,26 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable1` or `iterable2` is null|
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.concat(stream1, stream2);
 ```
 
-### `static concat(List<IObjectIterable> iterables)`
+##### `static concat(List<IObjectIterable> iterables)`
 
 Returns eagerly concatenates `List<IObjectIterable>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterables`|the list of `IObjectIterable`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -330,28 +333,28 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterables` or some of `IObjectIterable` in a list is null|
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.concat(streams);
 ```
 
-### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBinaryOperator combiner)`
+##### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBinaryOperator combiner)`
 
 Returns a combined `ObjectStream` by applying `combiner` function to each element at the same position.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable1`|the first `IObjectIterable`|
 |`iterable2`|the second `IObjectIterable`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -361,16 +364,16 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
+##### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
 
 Returns a combined `ObjectStream` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable1`|the first `IObjectIterable`|
@@ -378,7 +381,7 @@ Returns a combined `ObjectStream` by applying `combiner` function to each elemen
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -388,21 +391,21 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2`, `predicate` or `combiner` is null|
 
-### `append(IObjectIterable iterable)`
+##### `append(IObjectIterable iterable)`
 
 Returns new `ObjectStream` by appending `iterable` to the current stream.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable`|the `IObjectIterable` to append to the current stream|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -412,26 +415,26 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable` is null|
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = stream1.append(stream2);
 ```
 
-### `prepend(IObjectIterable iterable)`
+##### `prepend(IObjectIterable iterable)`
 
 Returns new `ObjectStream` by prepending `iterable` to the current stream.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable`|the `IObjectIterable` to prepend to the current stream|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -441,21 +444,23 @@ IObjectIterable
 
 the new `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable` is null|
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleStream = stream1.prepend(stream2);
 ```
 
-### `sequence()`
+---
+### Intermediate Operations
+##### `sequence()`
 
 Returns new `ObjectSequence` from the current stream. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -465,21 +470,21 @@ IObjectIterable
 
 the new `ObjectSequence`
 
-#### Example
+###### Example
 ```apex
 IObjectIterable peopleSeq = ObjectStream.of(people).sequence();
 ```
 
-### `override filter(IPredicate predicate)`
+##### `override filter(IPredicate predicate)`
 
 Returns a `ObjectStream` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -489,28 +494,28 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Person> filtered = (List<Person>) ObjectStream.of(people)
     .filter(predicate)
     .toList();
 ```
 
-### `take(IPredicate predicate)`
+##### `take(IPredicate predicate)`
 
 Returns a `ObjectStream` which takes elements while elements match `predicate`. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -520,28 +525,28 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Person> firstFiltered = (List<Person>) ObjectStream.of(people)
     .take(predicate)
     .toList();
 ```
 
-### `drop(IPredicate predicate)`
+##### `drop(IPredicate predicate)`
 
 Returns a `ObjectStream` which drops elements while elements match `predicate`, then takes the rest. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -551,28 +556,28 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Person> rest = (List<Person>) ObjectStream.of(people)
     .drop(predicate)
     .toList();
 ```
 
-### `mapTo(IFunction mapper)`
+##### `mapTo(IFunction mapper)`
 
 Returns a `ObjectStream` with elements returned by `mapper` function, applied to the elements of this stream. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -582,28 +587,28 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<String> peopleNames = (List<String>) ObjectStream.of(people)
     .mapTo(getName)
     .toList();
 ```
 
-### `mapToInt(IToIntFunction mapper)`
+##### `mapToInt(IToIntFunction mapper)`
 
 Returns a `IntStream` with elements returned by `mapper` function, applied to the elements of this stream. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -613,28 +618,28 @@ IIntIterable
 
 the `IntStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<Integer> peopleAges = ObjectStream.of(people)
     .mapToInt(getAge)
     .toList();
 ```
 
-### `mapToLong(IToLongFunction mapper)`
+##### `mapToLong(IToLongFunction mapper)`
 
 Returns a `LongStream` with elements returned by `mapper` function, applied to the elements of this stream. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -644,28 +649,28 @@ ILongIterable
 
 the `LongStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<Long> peopleIds = ObjectStream.of(people)
     .mapToLong(getId)
     .toList();
 ```
 
-### `mapToDouble(IToDoubleFunction mapper)`
+##### `mapToDouble(IToDoubleFunction mapper)`
 
 Returns a `DoubleStream` with elements returned by `mapper` function, applied to the elements of this stream. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -675,28 +680,28 @@ IDoubleIterable
 
 the `DoubleStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<Double> peopleHeights = ObjectStream.of(people)
     .mapToDouble(getHeight)
     .toList();
 ```
 
-### `mapToSObject(IToSObjectFunction mapper)`
+##### `mapToSObject(IToSObjectFunction mapper)`
 
 Returns a `SObjectStream` with elements returned by `mapper` function, applied to the elements of this stream. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -706,28 +711,28 @@ ISObjectIterable
 
 the `SObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<Contact> contacts = ObjectStream.of(people)
     .mapToSObject(getAsContact)
     .toList();
 ```
 
-### `forEach(IConsumer consumer)`
+##### `forEach(IConsumer consumer)`
 
 Returns a `ObjectStream` after performing `consumer` action on each element. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the non-interfering, stateless action to be performed on each element. Expected to operate via side effects.|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -737,23 +742,23 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-#### Example
+###### Example
 ```apex
 List<Person> editedPeople = (List<Person>) ObjectStream.of(people)
     .forEach(setSomeProperty)
     .toList();
 ```
 
-### `distinct()`
+##### `distinct()`
 
 Returns a `ObjectStream` with distinct elements. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -763,23 +768,23 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Example
+###### Example
 ```apex
 List<Person> distinctPeople = (List<Person>) ObjectStream.of(people)
     .distinct()
     .toList();
 ```
 
-### `distinct(IFunction classifier)`
+##### `distinct(IFunction classifier)`
 
 Returns a `ObjectStream` with distinct elements according to `classifier` function. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the classifier function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -789,23 +794,23 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 List<Person> distinctPeopleByName = (List<Person>) ObjectStream.of(people)
     .distinct(getName)
     .toList();
 ```
 
-### `sort()`
+##### `sort()`
 
 Returns a `ObjectStream` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -815,23 +820,23 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Example
+###### Example
 ```apex
 List<Person> sortedPeople = (List<Person>) ObjectStream.of(people)
     .sort()
     .toList();
 ```
 
-### `override sort(IComparator comparator)`
+##### `override sort(IComparator comparator)`
 
 Returns a `ObjectStream` with sorted elements according to `comparator`. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`comparator`|the non-interfering, stateless comparator to compare stream elements|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -841,28 +846,28 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `comparator` is null|
 
-#### Example
+###### Example
 ```apex
 List<Person> sortedPeopleByName = (List<Person>) ObjectStream.of(people)
     .sort(getName)
     .toList();
 ```
 
-### `lim(Integer lim)`
+##### `lim(Integer lim)`
 
 Returns a `ObjectStream` with first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`lim`|the number of elements to limit|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -872,29 +877,29 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
 
-#### Example
+###### Example
 ```apex
 List<Person> first100People = (List<Person>) ObjectStream.of(people)
     .lim(100)
     .toList();
 ```
 
-### `skip(Integer n)`
+##### `skip(Integer n)`
 
 Returns a new `ObjectStream` that skips first `n` elements and returns remaining elements. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`n`|the number of elements to skip|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -904,30 +909,32 @@ IObjectIterable
 
 the `ObjectStream`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
 
-#### Example
+###### Example
 ```apex
 List<Person> restPeople = (List<Person>) ObjectStream.of(people)
     .skip(100)
     .toList();
 ```
 
-### `reduce(Object identity, IBinaryOperator accumulator)`
+---
+### Terminal Operations
+##### `reduce(Object identity, IBinaryOperator accumulator)`
 
 Performs a reduction on `Object` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`identity`|the identity value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -937,21 +944,21 @@ Object
 
 the `Object` result of the reduction
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-### `override reduce(IBinaryOperator accumulator)`
+##### `override reduce(IBinaryOperator accumulator)`
 
 Performs a reduction on `Object` elements, using `identity` value and associative `accumulator` function, and returns an `Optional` describing the reduced value. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -961,29 +968,29 @@ Optional
 
 the `Optional` result of the reduction
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Person eldestPerson = (Person) ObjectStream.of(people)
     .reduce(maxBy(getAge))
     .get();
 ```
 
-### `collect(ISupplier supplier, IBiConsumer accumulator)`
+##### `collect(ISupplier supplier, IBiConsumer accumulator)`
 
 Performs a mutable reduction operation on elements, collecting elements to a container returned by `supplier` by applying `accumulator` function. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the function that returns a mutable result container|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -993,12 +1000,12 @@ Object
 
 the `Object` result of the collection
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` or `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 List<String> peopleNames = (List<String>) ObjectStream.of(people)
     .collect(
@@ -1007,16 +1014,16 @@ List<String> peopleNames = (List<String>) ObjectStream.of(people)
     );
 ```
 
-### `override collect(ICollector collector)`
+##### `override collect(ICollector collector)`
 
 Performs a mutable reduction operation on elements, collecting elements to a container using `collector`. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`collector`|the collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1026,12 +1033,12 @@ Object
 
 the `Object` result of the collection
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `collector` is null|
 
-#### Example
+###### Example
 ```apex
 // Group people by city
 Map<String, List<Person>> peopleByCity = (Map<String, List<Person>>)
@@ -1047,16 +1054,16 @@ Map<String, Map<String, List<Person>>> peopleByCityByCountry
             ).cast(Map<String, Map<String, List<Person>>>.class));
 ```
 
-### `find(IPredicate predicate)`
+##### `find(IPredicate predicate)`
 
 Returns an `Optional` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1066,28 +1073,28 @@ Optional
 
 the `Optional`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Person firstActivePerson = (Person) ObjectStream.of(people)
     .find(isActive)
     .get();
 ```
 
-### `every(IPredicate predicate)`
+##### `every(IPredicate predicate)`
 
 Returns whether all elements match `predicate`. If `ObjectStream` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1097,26 +1104,26 @@ Boolean
 
 `true` or `false`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Boolean isEveryPersonActive = ObjectStream.of(people).every(isActive);
 ```
 
-### `override some(IPredicate predicate)`
+##### `override some(IPredicate predicate)`
 
 Returns whether some element matches `predicate`. If `ObjectStream` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1126,21 +1133,21 @@ Boolean
 
 `true` or `false`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Boolean isSomePersonActive = ObjectStream.of(people).some(isActive);
 ```
 
-### `count()`
+##### `count()`
 
 Returns the count of elements. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1150,11 +1157,11 @@ Integer
 
 the count of elements
 
-### `isEmpty()`
+##### `isEmpty()`
 
 Returns whether the count of elements is 0. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1164,11 +1171,11 @@ Boolean
 
 `true` or `false`
 
-### `toList()`
+##### `toList()`
 
 Accumulates elements into a `List<Object>`. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1178,18 +1185,18 @@ List<Object>
 
 the `List<Object>` containing the stream elements
 
-#### Example
+###### Example
 ```apex
 List<Person> activePeople = (List<Person>) ObjectStream.of(people)
     .filter(isActive)
     .toList();
 ```
 
-### `toSet()`
+##### `toSet()`
 
 Accumulates elements into a `Set<Object>`. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1199,7 +1206,7 @@ Set<Object>
 
 the `Set<Object>` containing the stream elements
 
-#### Example
+###### Example
 ```apex
 List<Object> activePeople = ObjectStream.of(people)
     .filter(isActive)

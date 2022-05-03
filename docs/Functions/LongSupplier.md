@@ -13,12 +13,15 @@ Inherits [ILongSupplier](/docs/Functional-Interfaces/ILongSupplier.md) functiona
 **Group** Functions
 
 ## Methods
-### `get()`
-### `static increment()`
+### Function
+##### `get()`
+---
+### Built-Ins
+##### `static increment()`
 
 Returns a `LongSupplier` that returns a next Long value that has been incremented by 1 starting at 0L. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -28,15 +31,15 @@ LongSupplier
 
 the `LongSupplier`
 
-### `static increment(Long fromLong, Integer step)`
+##### `static increment(Long fromLong, Integer step)`
 
 Returns a `LongSupplier` that returns a next Long value that has been incremented by `step` starting at `fromLong` inclusively. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -46,16 +49,16 @@ LongSupplier
 
 the `LongSupplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fromLong` or `step` is null|
 
-### `static fibonacci()`
+##### `static fibonacci()`
 
 Returns a `LongSupplier` that returns a next fibonacci Long value starting at 1L. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
 
-#### Return
+###### Return
 
 **Type**
 

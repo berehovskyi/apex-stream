@@ -13,8 +13,9 @@ Inherits [ILongToSObjectFunction](/docs/Functional-Interfaces/ILongToSObjectFunc
 **Group** Functions
 
 ## Methods
-### `apply(Long l)`
-#### Parameters
+### Function
+##### `apply(Long l)`
+###### Parameters
 |Param|Description|
 |---|---|
 

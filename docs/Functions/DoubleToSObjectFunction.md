@@ -13,8 +13,9 @@ Inherits [IDoubleToSObjectFunction](/docs/Functional-Interfaces/IDoubleToSObject
 **Group** Functions
 
 ## Methods
-### `apply(Double d)`
-#### Parameters
+### Function
+##### `apply(Double d)`
+###### Parameters
 |Param|Description|
 |---|---|
 

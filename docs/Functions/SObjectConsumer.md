@@ -16,21 +16,24 @@ Inherits [ISObjectConsumer](/docs/Functional-Interfaces/ISObjectConsumer.md) fun
 **See** ISObjectIterable.forEach
 
 ## Methods
-### `accept(SObject sObj)`
-#### Parameters
+### Function
+##### `accept(SObject sObj)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `andThen(ISObjectConsumer after)`
+---
+### Default Methods
+##### `andThen(ISObjectConsumer after)`
 
 Returns a composed `SObjectConsumer` that executes `this` operation first, then the `after` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -40,21 +43,23 @@ SObjectConsumer
 
 the composed `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-### `static compose(List<ISObjectConsumer> consumers)`
+---
+### Static Methods
+##### `static compose(List<ISObjectConsumer> consumers)`
 
 Returns a composed `SObjectConsumer` that sequentially executes the operations in the same order as the order of the consumers input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumers`|the operations to sequentially perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,22 +69,24 @@ SObjectConsumer
 
 the composed `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|
 
-### `static debug(LoggingLevel loggingLevel, String message)`
+---
+### Built-Ins
+##### `static debug(LoggingLevel loggingLevel, String message)`
 
 Returns a `SObjectConsumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -89,21 +96,21 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` or `message` is null|
 
-### `static debug(LoggingLevel loggingLevel)`
+##### `static debug(LoggingLevel loggingLevel)`
 
 Returns a `SObjectConsumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -113,21 +120,21 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` is null|
 
-### `static debug(String message)`
+##### `static debug(String message)`
 
 Returns a `SObjectConsumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -137,16 +144,16 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `message` is null|
 
-### `static debug()`
+##### `static debug()`
 
 Returns a `SObjectConsumer` that debugs an input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -156,17 +163,17 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-### `static debugPretty(LoggingLevel loggingLevel, String message)`
+##### `static debugPretty(LoggingLevel loggingLevel, String message)`
 
 Returns a `SObjectConsumer` that debugs an input argument using the pretty-print format.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -176,21 +183,21 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` or `message` is null|
 
-### `static debugPretty(LoggingLevel loggingLevel)`
+##### `static debugPretty(LoggingLevel loggingLevel)`
 
 Returns a `SObjectConsumer` that debugs an input argument using the pretty-print format.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -200,21 +207,21 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` is null|
 
-### `static debugPretty(String message)`
+##### `static debugPretty(String message)`
 
 Returns a `SObjectConsumer` that debugs an input argument using the pretty-print format.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -224,16 +231,16 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `message` is null|
 
-### `static debugPretty()`
+##### `static debugPretty()`
 
 Returns a `SObjectConsumer` that debugs an input argument using the pretty-print format.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -243,17 +250,17 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-### `static set(String fieldName, ISObjectFunction mapper)`
+##### `static set(String fieldName, ISObjectFunction mapper)`
 
 Returns a `SObjectConsumer` that sets the value returned by the `mapper` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field name to set a value|
 |`mapper`|applied to the input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -263,7 +270,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank or `mapper` is null|
@@ -273,24 +280,24 @@ the `SObjectConsumer`
 
 **See** SObject.put
 
-#### Example
+###### Example
 ```apex
 SObjectConsumer.set('NumberOfEmployees', someSObjectFunction);
 SObjectConsumer.set('Parent.NumberOfEmployees', someSObjectFunction);
 SObjectConsumer.set('Parent?.NumberOfEmployees', someSObjectFunction);
 ```
 
-### `static set(SObjectField field, ISObjectFunction mapper)`
+##### `static set(SObjectField field, ISObjectFunction mapper)`
 
 Returns a `SObjectConsumer` that sets the value returned by the `mapper` for the specified `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -300,7 +307,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank or `mapper` is null|
@@ -309,22 +316,22 @@ the `SObjectConsumer`
 
 **See** SObject.put
 
-#### Example
+###### Example
 ```apex
 SObjectConsumer.set(Account.NumberOfEmployees, someSObjectFunction);
 ```
 
-### `static set(String fieldName, Object value)`
+##### `static set(String fieldName, Object value)`
 
 Returns a `SObjectConsumer` that sets the `value` for the specified `fieldName`. Cross-reference fields and safe navigation are supported. SObjectConsumer.set(&apos;NumberOfEmployees&apos;, 100); SObjectConsumer.set(&apos;Parent.NumberOfEmployees&apos;, 100); SObjectConsumer.set(&apos;Parent?.NumberOfEmployees&apos;, (Object) null);
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field name to set a value|
 |`value`|the value to set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -334,7 +341,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -344,17 +351,17 @@ the `SObjectConsumer`
 
 **See** SObject.put
 
-### `static set(SObjectField field, Object value)`
+##### `static set(SObjectField field, Object value)`
 
 Returns a `SObjectConsumer` that sets the `value` for the specified `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to set a value|
 |`value`|the value to set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -364,7 +371,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -373,23 +380,23 @@ the `SObjectConsumer`
 
 **See** SObject.put
 
-#### Example
+###### Example
 ```apex
 SObjectConsumer.set(Account.NumberOfEmployees, 100);
 SObjectConsumer.set(Account.NumberOfEmployees, (Object) null);
 ```
 
-### `static setSObject(String fieldName, ISObjectUnaryOperator operator)`
+##### `static setSObject(String fieldName, ISObjectUnaryOperator operator)`
 
 Returns a `SObjectConsumer` that sets SObject the value returned by the `operator` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field name to set a value|
 |`operator`|applied to the input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -399,7 +406,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank or `operator` is null|
@@ -409,7 +416,7 @@ the `SObjectConsumer`
 
 **See** SObject.putSObject
 
-#### Example
+###### Example
 ```apex
 SObjectConsumer.setSObject('Parent', someSObjectUnaryOperator);
 SObjectConsumer.setSObject('Parent.Parent', someSObjectUnaryOperator);
@@ -417,17 +424,17 @@ SObjectConsumer.setSObject('Parent?.Parent', someSObjectUnaryOperator);
 </pre>
 ```
 
-### `static setSObject(SObjectField field, ISObjectUnaryOperator operator)`
+##### `static setSObject(SObjectField field, ISObjectUnaryOperator operator)`
 
 Returns a `SObjectConsumer` that sets SObject the value returned by the `operator` for the specified `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to set a value|
 |`operator`|applied to the input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -437,7 +444,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank or `operator` is null|
@@ -445,22 +452,22 @@ the `SObjectConsumer`
 
 **See** SObject.putSObject
 
-#### Example
+###### Example
 ```apex
 SObjectBiConsumer.setSObject(Account.ParentId, someSObjectUnaryOperator);
 ```
 
-### `static setSObject(String fieldName, SObject parent)`
+##### `static setSObject(String fieldName, SObject parent)`
 
 Returns a `SObjectConsumer` that sets SObject the `parent` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field name to set a value|
 |`parent`|the value to set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -470,7 +477,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -480,24 +487,24 @@ the `SObjectConsumer`
 
 **See** SObject.putSObject
 
-#### Example
+###### Example
 ```apex
 SObjectConsumer.setSObject('Parent', someAccount);
 SObjectConsumer.setSObject('Parent.Parent', someAccount);
 SObjectConsumer.setSObject('Parent?.Parent', (SObject) null);
 ```
 
-### `static setSObject(SObjectField field, SObject parent)`
+##### `static setSObject(SObjectField field, SObject parent)`
 
 Returns a `SObjectConsumer` that sets SObject the `parent` for the specified `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to set a value|
 |`parent`|the value to set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -507,7 +514,7 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `fieldName` is blank|
@@ -515,7 +522,7 @@ the `SObjectConsumer`
 
 **See** SObject.putSObject
 
-#### Example
+###### Example
 ```apex
 SObjectConsumer.setSObject(Account.ParentId, someAccount);
 SObjectConsumer.setSObject(Account.ParentId, (SObject) null);

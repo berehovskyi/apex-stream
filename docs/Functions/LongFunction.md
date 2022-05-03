@@ -16,16 +16,19 @@ Inherits [ILongFunction](/docs/Functional-Interfaces/ILongFunction.md) functiona
 **See** ILongIterable.mapToObject
 
 ## Methods
-### `apply(Long l)`
-#### Parameters
+### Function
+##### `apply(Long l)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static toString()`
+---
+### Built-Ins
+##### `static toString()`
 
 Returns a `LongFunction` that returns a string that represents the Long input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -38,11 +41,11 @@ the `SObjectFunction`
 
 **See** String.valueOf
 
-### `static toObject()`
+##### `static toObject()`
 
 Returns a `LongFunction` that returns the Long input argument as object.
 
-#### Return
+###### Return
 
 **Type**
 

@@ -25,16 +25,19 @@ Inherits [IBinaryOperator](/docs/Functional-Interfaces/IBinaryOperator.md) funct
 **See** [Collector](/docs/Collectors/Collector.md)
 
 ## Methods
-### `apply(Object o1, Object o2)`
-#### Parameters
+### Function
+##### `apply(Object o1, Object o2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static left()`
+---
+### Static Methods
+##### `static left()`
 
 Returns a `SObjectBinaryOperator` that return the first input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -44,11 +47,11 @@ BinaryOperator
 
 the `SObjectBinaryOperator`
 
-### `static right()`
+##### `static right()`
 
 Returns a `SObjectBinaryOperator` that return the second input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -58,16 +61,16 @@ BinaryOperator
 
 the `SObjectBinaryOperator`
 
-### `static minBy(IComparator comparator)`
+##### `static minBy(IComparator comparator)`
 
 Returns a `SObjectBinaryOperator` that returns a lesser input argument according to the `comparator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`comparator`|the comparator to compare arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -77,21 +80,21 @@ BinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `comparator` is null|
 
-### `static maxBy(IComparator comparator)`
+##### `static maxBy(IComparator comparator)`
 
 Returns a `SObjectBinaryOperator` that returns a greater input argument according to the `comparator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`comparator`|the comparator to compare arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -101,21 +104,21 @@ BinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `comparator` is null|
 
-### `static upcast(IIntBinaryOperator operator)`
+##### `static upcast(IIntBinaryOperator operator)`
 
 Returns a composed `BinaryOperator` of the `IIntBinaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|the binary operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -125,21 +128,21 @@ BinaryOperator
 
 the `BinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-### `static upcast(ILongBinaryOperator operator)`
+##### `static upcast(ILongBinaryOperator operator)`
 
 Returns a composed `BinaryOperator` of the `ILongBinaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|the binary operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -149,21 +152,21 @@ BinaryOperator
 
 the `BinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-### `static upcast(IDoubleBinaryOperator operator)`
+##### `static upcast(IDoubleBinaryOperator operator)`
 
 Returns a composed `BinaryOperator` of the `IDoubleBinaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|the binary operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -173,21 +176,21 @@ BinaryOperator
 
 the `BinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-### `static upcast(ISObjectBinaryOperator operator)`
+##### `static upcast(ISObjectBinaryOperator operator)`
 
 Returns a composed `BinaryOperator` of the `ISObjectBinaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|the binary operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -197,7 +200,7 @@ BinaryOperator
 
 the `BinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|

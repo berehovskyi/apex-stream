@@ -13,21 +13,24 @@ Inherits [IObjectLongConsumer](/docs/Functional-Interfaces/IObjectLongConsumer.m
 **Group** Functions
 
 ## Methods
-### `accept(Object o, Long l)`
-#### Parameters
+### Function
+##### `accept(Object o, Long l)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static of(IBiConsumer consumer)`
+---
+### Static Methods
+##### `static of(IBiConsumer consumer)`
 
 Returns a composed `ObjectLongConsumer` of the `IBiConsumer`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the binary consumer|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,7 +40,7 @@ ObjectLongConsumer
 
 the composed `ObjectLongConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|

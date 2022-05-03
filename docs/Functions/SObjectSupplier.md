@@ -13,17 +13,20 @@ Inherits [ISObjectSupplier](/docs/Functional-Interfaces/ISObjectSupplier.md) fun
 **Group** Functions
 
 ## Methods
-### `get()`
-### `static of(SObjectType sObjectType)`
+### Function
+##### `get()`
+---
+### Static Methods
+##### `static of(SObjectType sObjectType)`
 
 Returns a `SObjectSupplier` that returns a new `SObject` instance of the given `sObjectType`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`sObjectType`|SObjectType of the new instance to create|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -33,7 +36,7 @@ SObjectSupplier
 
 the `SObjectSupplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `sObjectType` is null|

@@ -13,16 +13,17 @@ Extends `Function` functions and provides `TimeFunction` common class level impl
 **Group** Functions
 
 ## Methods
-### `static addHours(Integer hours)`
+### Date Functions
+##### `static addHours(Integer hours)`
 
 Returns a `Function` that adds `hours` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`hours`|the number of additional hours|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `hours` is null|
@@ -40,16 +41,16 @@ the `Function`
 
 **See** Time.addHours
 
-### `static addMilliseconds(Integer milliseconds)`
+##### `static addMilliseconds(Integer milliseconds)`
 
 Returns a `Function` that adds `milliseconds` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`milliseconds`|the number of additional milliseconds|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -59,7 +60,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `milliseconds` is null|
@@ -67,16 +68,16 @@ the `Function`
 
 **See** Time.addMilliseconds
 
-### `static addMinutes(Integer minutes)`
+##### `static addMinutes(Integer minutes)`
 
 Returns a `Function` that adds `minutes` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`minutes`|the number of additional minutes|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -86,7 +87,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `minutes` is null|
@@ -94,16 +95,16 @@ the `Function`
 
 **See** Time.addMinutes
 
-### `static addSeconds(Integer seconds)`
+##### `static addSeconds(Integer seconds)`
 
 Returns a `Function` that adds `seconds` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`seconds`|the number of additional seconds|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -113,7 +114,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `seconds` is null|

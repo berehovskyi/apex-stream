@@ -13,16 +13,17 @@ Extends `Function` functions and provides `DateFunction` common class level impl
 **Group** Functions
 
 ## Methods
-### `static addDays(Integer days)`
+### Date Functions
+##### `static addDays(Integer days)`
 
 Returns a `Function` that adds `days` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`days`|the number of additional days|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `days` is null|
@@ -40,16 +41,16 @@ the `Function`
 
 **See** Date.addDays
 
-### `static addMonths(Integer months)`
+##### `static addMonths(Integer months)`
 
 Returns a `Function` that adds `months` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`months`|the number of additional months|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -59,7 +60,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `months` is null|
@@ -67,16 +68,16 @@ the `Function`
 
 **See** Date.addMonths
 
-### `static addYears(Integer years)`
+##### `static addYears(Integer years)`
 
 Returns a `Function` that adds `years` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`years`|the number of additional years|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -86,7 +87,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `years` is null|
@@ -94,11 +95,11 @@ the `Function`
 
 **See** Date.addYears
 
-### `static format()`
+##### `static format()`
 
 Returns a `Function` that returns the date as a string using the locale of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -111,11 +112,11 @@ the `Function`
 
 **See** Date.format
 
-### `static toStartOfMonth()`
+##### `static toStartOfMonth()`
 
 Returns a `Function` that returns the first day of the month for an input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -128,11 +129,11 @@ the `Function`
 
 **See** Date.toStartOfMonth
 
-### `static toStartOfWeek()`
+##### `static toStartOfWeek()`
 
 Returns a `Function` that returns the first day of the week for an input argument.
 
-#### Return
+###### Return
 
 **Type**
 

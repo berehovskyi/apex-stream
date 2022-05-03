@@ -19,21 +19,24 @@ Inherits [ISObjectBiPredicate](/docs/Functional-Interfaces/ISObjectBiPredicate.m
 **See** SObjectSequence.zip
 
 ## Methods
-### `test(SObject sObj1, SObject sObj2)`
-#### Parameters
+### Function
+##### `test(SObject sObj1, SObject sObj2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `orElse(ISObjectBiPredicate other)`
+---
+### Default Methods
+##### `orElse(ISObjectBiPredicate other)`
 
 Returns a composed `SObjectBiPredicate` that applies short-circuiting logical `OR` operator to `this` `ISObjectBiPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `ISObjectBiPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -43,26 +46,26 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someSObjectBiPredicate1.orElse(someSObjectBiPredicate2);
 ```
 
-### `andAlso(ISObjectBiPredicate other)`
+##### `andAlso(ISObjectBiPredicate other)`
 
 Returns a composed `SObjectBiPredicate` that applies short-circuiting logical `AND` operator to `this` `ISObjectPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `ISObjectBiPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -72,21 +75,21 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someSObjectBiPredicate1.andAlso(someSObjectBiPredicate2);
 ```
 
-### `negate()`
+##### `negate()`
 
 Returns a `SObjectBiPredicate` that applies logical `NOT` operator to `this` `ISObjectBiPredicate`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -96,21 +99,23 @@ SObjectBiPredicate
 
 the negated `SObjectBiPredicate`
 
-#### Example
+###### Example
 ```apex
 someSObjectBiPredicate.negate();
 ```
 
-### `static some(List<ISObjectBiPredicate> predicates)`
+---
+### Static Methods
+##### `static some(List<ISObjectBiPredicate> predicates)`
 
 Returns a composed `SObjectBiPredicate` that applies sequentially short-circuiting logical `OR` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`ISObjectBiPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -120,27 +125,27 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.some(someSObjectBiPredicates);
 ```
 
-### `static some(ISObjectBiPredicate predicate1, ISObjectBiPredicate predicate2)`
+##### `static some(ISObjectBiPredicate predicate1, ISObjectBiPredicate predicate2)`
 
 Returns a composed `SObjectBiPredicate` that applies short-circuiting logical `OR` operator to `predicate1` `ISObjectBiPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `ISObjectBiPredicate`|
 |`predicate2`|the second `ISObjectBiPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -150,26 +155,26 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.some(someSObjectBiPredicate1, someSObjectBiPredicate2);
 ```
 
-### `static every(List<ISObjectBiPredicate> predicates)`
+##### `static every(List<ISObjectBiPredicate> predicates)`
 
 Returns a composed `SObjectBiPredicate` that applies sequentially short-circuiting logical `AND` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`ISObjectBiPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -179,27 +184,27 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.every(someSObjectBiPredicates);
 ```
 
-### `static every(ISObjectBiPredicate predicate1, ISObjectBiPredicate predicate2)`
+##### `static every(ISObjectBiPredicate predicate1, ISObjectBiPredicate predicate2)`
 
 Returns a composed `SObjectBiPredicate` that applies short-circuiting logical `AND` operator to `predicate1` `ISObjectBiPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `ISObjectBiPredicate`|
 |`predicate2`|the second `ISObjectBiPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -209,26 +214,26 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 SObjectPredicate.every(someSObjectPredicate1, someSObjectPredicate2);
 ```
 
-### `static negate(ISObjectBiPredicate predicate)`
+##### `static negate(ISObjectBiPredicate predicate)`
 
 Returns a `SObjectBiPredicate` that applies logical `NOT` operator to `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the `ISObjectBiPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -238,22 +243,22 @@ SObjectBiPredicate
 
 the negated `SObjectBiPredicate`
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.negate(someSObjectBiPredicate);
 ```
 
-### `static somePredicate(ISObjectPredicate left, ISObjectPredicate right)`
+##### `static somePredicate(ISObjectPredicate left, ISObjectPredicate right)`
 
 Returns a composed `SObjectBiPredicate` that applies short-circuiting logical `OR` operator to `predicate1` `ISObjectPredicate` and `predicate2` in that order applied to the first and the second input arguments respectively.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the predicate applied to the first input argument|
 |`right`|the predicate applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -263,27 +268,27 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.somePredicate(someSObjectPredicate1, someSObjectPredicate2);
 ```
 
-### `static everyPredicate(ISObjectPredicate left, ISObjectPredicate right)`
+##### `static everyPredicate(ISObjectPredicate left, ISObjectPredicate right)`
 
 Returns a composed `SObjectBiPredicate` that applies short-circuiting logical `AND` operator to `predicate1` `ISObjectPredicate` and `predicate2` in that order applied to the first and the second input arguments respectively.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the predicate applied to the first input argument|
 |`right`|the predicate applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -293,26 +298,26 @@ SObjectBiPredicate
 
 the composed `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.everyPredicate(someSObjectPredicate1, someSObjectPredicate2);
 ```
 
-### `static always(Boolean value)`
+##### `static always(Boolean value)`
 
 Returns a `SObjectBiPredicate` that always evaluates to the Boolean `value` (`true` or `false`).
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the evaluated value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -322,21 +327,23 @@ SObjectBiPredicate
 
 predicate the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `value` is null|
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.always(true);
 ```
 
-### `static isCompared(ISObjectFunction left, ISObjectFunction right, IComparator comparator, Integer result)`
+---
+### Built-Ins
+##### `static isCompared(ISObjectFunction left, ISObjectFunction right, IComparator comparator, Integer result)`
 
 Returns a `SObjectBiPredicate` that tests if the result of comparing the values returned by the applied `left` and `right` functions applied to the first and the second input arguments respectively by the `comparator` is equal to the expected `result`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the first input argument the result of which is passed to the `comparator` as the first argument|
@@ -344,7 +351,7 @@ Returns a `SObjectBiPredicate` that tests if the result of comparing the values 
 |`comparator`|the function that compares two arguments|
 |`result`|the expected result of comparison (1, -1, or 0)|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -354,12 +361,12 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left`, or `right`, or `comparator`, or `result` is null|
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isCompared(
     SObjectFunction.get('NumberOfEmployees'),
@@ -369,17 +376,17 @@ SObjectBiPredicate.isCompared(
 );
 ```
 
-### `static isGreater(ISObjectFunction left, ISObjectFunction right)`
+##### `static isGreater(ISObjectFunction left, ISObjectFunction right)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `left` function applied to the first input argument is greater than the result returned by the `right` function applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the first input argument, whose application result is considered as the left argument of comparison|
 |`right`|the function applied to the second input argument, whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -389,7 +396,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -397,7 +404,7 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreater(
     SObjectFunction.get('NumberOfEmployees'),
@@ -409,16 +416,16 @@ SObjectBiPredicate.isGreater(
 );
 ```
 
-### `static isGreater(ISObjectFunction function)`
+##### `static isGreater(ISObjectFunction function)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `function` function applied to the first input argument is greater than the result returned by the same `function` applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function applied to the first and the second input arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -428,7 +435,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `function` is null|
@@ -436,21 +443,21 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreater(SObjectFunction.get('NumberOfEmployees'));
 ```
 
-### `static isGreater(String fieldName)`
+##### `static isGreater(String fieldName)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is greater than the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -460,7 +467,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -470,22 +477,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreater('NumberOfEmployees');
 SObjectBiPredicate.isGreater('Parent?.NumberOfEmployees');
 ```
 
-### `static isGreater(SObjectField field)`
+##### `static isGreater(SObjectField field)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is greater than the `field` of the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|of the first and the second input arguments the value of which are considered as comparison arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -495,7 +502,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -503,22 +510,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreater(Account.NumberOfEmployees);
 ```
 
-### `static isGreaterOrEqual(ISObjectFunction left, ISObjectFunction right)`
+##### `static isGreaterOrEqual(ISObjectFunction left, ISObjectFunction right)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `left` function applied to the first input argument is greater than or equal to the result returned by the `right` function applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the first input argument, whose application result is considered as the left argument of comparison|
 |`right`|the function applied to the second input argument, whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -528,7 +535,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -536,7 +543,7 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreaterOrEqual(
     SObjectFunction.get('NumberOfEmployees'),
@@ -548,16 +555,16 @@ SObjectBiPredicate.isGreaterOrEqual(
 );
 ```
 
-### `static isGreaterOrEqual(ISObjectFunction function)`
+##### `static isGreaterOrEqual(ISObjectFunction function)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `function` function applied to the first input argument is greater than or equal to the result returned by the same `function` applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function applied to the first and the second input arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -567,7 +574,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `function` is null|
@@ -575,21 +582,21 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreaterOrEqual(SObjectFunction.get('NumberOfEmployees'));
 ```
 
-### `static isGreaterOrEqual(String fieldName)`
+##### `static isGreaterOrEqual(String fieldName)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is greater than or equal to the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -599,7 +606,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -609,22 +616,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreaterOrEqual('NumberOfEmployees');
 SObjectBiPredicate.isGreaterOrEqual('Parent?.NumberOfEmployees');
 ```
 
-### `static isGreaterOrEqual(SObjectField field)`
+##### `static isGreaterOrEqual(SObjectField field)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is greater than or equal to the `field` of the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|of the first and the second input arguments the value of which are considered as comparison arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -634,7 +641,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -642,22 +649,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isGreaterOrEqual(Account.NumberOfEmployees);
 ```
 
-### `static isLess(ISObjectFunction left, ISObjectFunction right)`
+##### `static isLess(ISObjectFunction left, ISObjectFunction right)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `left` function applied to the first input argument is less than the result returned by the `right` function applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the first input argument, whose application result is considered as the left argument of comparison|
 |`right`|the function applied to the second input argument, whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -667,7 +674,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -675,7 +682,7 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLess(
     SObjectFunction.get('NumberOfEmployees'),
@@ -687,16 +694,16 @@ SObjectBiPredicate.isLess(
 );
 ```
 
-### `static isLess(ISObjectFunction function)`
+##### `static isLess(ISObjectFunction function)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `function` function applied to the first input argument is less than the result returned by the same `function` applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function applied to the first and the second input arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -706,7 +713,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `function` is null|
@@ -714,21 +721,21 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLess(SObjectFunction.get('NumberOfEmployees'));
 ```
 
-### `static isLess(String fieldName)`
+##### `static isLess(String fieldName)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is less than the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -738,7 +745,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -748,22 +755,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLess('NumberOfEmployees');
 SObjectBiPredicate.isLess('Parent?.NumberOfEmployees');
 ```
 
-### `static isLess(SObjectField field)`
+##### `static isLess(SObjectField field)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is less than the `field` of the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|of the first and the second input arguments the value of which are considered as comparison arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -773,7 +780,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -781,22 +788,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLess(Account.NumberOfEmployees);
 ```
 
-### `static isLessOrEqual(ISObjectFunction left, ISObjectFunction right)`
+##### `static isLessOrEqual(ISObjectFunction left, ISObjectFunction right)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `left` function applied to the first input argument is less than or equal to the result returned by the `right` function applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the first input argument, whose application result is considered as the left argument of comparison|
 |`right`|the function applied to the second input argument, whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -806,7 +813,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -814,7 +821,7 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLessOrEqual(
     SObjectFunction.get('NumberOfEmployees'),
@@ -826,16 +833,16 @@ SObjectBiPredicate.isLessOrEqual(
 );
 ```
 
-### `static isLessOrEqual(ISObjectFunction function)`
+##### `static isLessOrEqual(ISObjectFunction function)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `function` function applied to the first input argument is less than or equal to the result returned by the same `function` applied to the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function applied to the first and the second input arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -845,7 +852,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `function` is null|
@@ -853,21 +860,21 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLessOrEqual(SObjectFunction.get('NumberOfEmployees'));
 ```
 
-### `static isLessOrEqual(String fieldName)`
+##### `static isLessOrEqual(String fieldName)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is less than or equal to the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -877,7 +884,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -887,22 +894,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLessOrEqual('NumberOfEmployees');
 SObjectBiPredicate.isLessOrEqual('Parent?.NumberOfEmployees');
 ```
 
-### `static isLessOrEqual(SObjectField field)`
+##### `static isLessOrEqual(SObjectField field)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is less than or equal to the `field` of the second input argument. <p><strong>Note: </strong></p> <p>Unlike the standard `&amp;lt;=` &quot;less than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|of the first and the second input arguments the value of which are considered as comparison arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -912,7 +919,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -920,22 +927,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.isLessOrEqual(Account.NumberOfEmployees);
 ```
 
-### `static areEqual(ISObjectFunction left, ISObjectFunction right)`
+##### `static areEqual(ISObjectFunction left, ISObjectFunction right)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `left` function applied to the first input argument is equal to the result returned by the `right` function applied to the second input argument, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the first input argument, whose application result is considered as the left argument of comparison|
 |`right`|the function applied to the second input argument, whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -945,7 +952,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -953,7 +960,7 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areEqual(
 SObjectFunction.get('NumberOfEmployees'),
@@ -965,16 +972,16 @@ SObjectBiPredicate.areEqual(
 );
 ```
 
-### `static areEqual(ISObjectFunction function)`
+##### `static areEqual(ISObjectFunction function)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `function` function applied to the first input argument is equal to the result returned by the same `function` applied to the second input argument, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function applied to the first and the second input arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -984,7 +991,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `function` is null|
@@ -992,21 +999,21 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areEqual(SObjectFunction.get('NumberOfEmployees'));
 ```
 
-### `static areEqual(String fieldName)`
+##### `static areEqual(String fieldName)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is equal to the `fieldName` of the second input argument, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1016,7 +1023,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -1026,22 +1033,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areEqual('NumberOfEmployees');
 SObjectBiPredicate.areEqual('Parent?.NumberOfEmployees');
 ```
 
-### `static areEqual(SObjectField field)`
+##### `static areEqual(SObjectField field)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is equal to the `field` of the second input argument, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|of the first and the second input arguments the value of which are considered as comparison arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1051,7 +1058,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -1059,16 +1066,16 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areEqual(Account.NumberOfEmployees);
 ```
 
-### `static areEqual()`
+##### `static areEqual()`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the first input argument is equal to the second input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1081,22 +1088,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areEqual();
 ```
 
-### `static areNotEqual(ISObjectFunction left, ISObjectFunction right)`
+##### `static areNotEqual(ISObjectFunction left, ISObjectFunction right)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `left` function applied to the first input argument is not equal to the result returned by the `right` function applied to the second input argument, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the first input argument, whose application result is considered as the left argument of comparison|
 |`right`|the function applied to the second input argument, whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1106,7 +1113,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -1114,7 +1121,7 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areNotEqual(
     SObjectFunction.get('NumberOfEmployees'),
@@ -1126,16 +1133,16 @@ SObjectBiPredicate.areNotEqual(
 );
 ```
 
-### `static areNotEqual(ISObjectFunction function)`
+##### `static areNotEqual(ISObjectFunction function)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the result returned by the `function` function applied to the first input argument is not equal to the result returned by the same `function` applied to the second input argument, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function applied to the first and the second input arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1145,7 +1152,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `function` is null|
@@ -1153,21 +1160,21 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areNotEqual(SObjectFunction.get('NumberOfEmployees'));
 ```
 
-### `static areNotEqual(String fieldName)`
+##### `static areNotEqual(String fieldName)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is not equal to the `fieldName` of the second input argument, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1177,7 +1184,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -1187,22 +1194,22 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areNotEqual('NumberOfEmployees');
 SObjectBiPredicate.areNotEqual('Parent?.NumberOfEmployees');
 ```
 
-### `static areNotEqual(SObjectField field)`
+##### `static areNotEqual(SObjectField field)`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is not equal to the `field` of the second input argument, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|of the first and the second input arguments the value of which are considered as comparison arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1212,7 +1219,7 @@ SObjectBiPredicate
 
 the `SObjectBiPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -1220,16 +1227,16 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areNotEqual(Account.NumberOfEmployees);
 ```
 
-### `static areNotEqual()`
+##### `static areNotEqual()`
 
 Returns a `SObjectBiPredicate` that tests the input sobjects if the value of the first input argument is not equal to the second input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1242,7 +1249,7 @@ the `SObjectBiPredicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 SObjectBiPredicate.areNotEqual();
 ```

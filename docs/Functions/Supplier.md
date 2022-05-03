@@ -19,17 +19,20 @@ Inherits [ISupplier](/docs/Functional-Interfaces/ISupplier.md) functional interf
 **See** [SObjectCollector](/docs/Collectors/SObjectCollector.md)
 
 ## Methods
-### `get()`
-### `static of(Type t)`
+### Function
+##### `get()`
+---
+### Static Methods
+##### `static of(Type t)`
 
 Returns a `Supplier` that returns a new instance of the given type.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`t`|Type of the new instance to create|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -39,7 +42,7 @@ Supplier
 
 the `Supplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `t` is null|
@@ -47,16 +50,16 @@ the `Supplier`
 
 **See** Type.newInstance
 
-### `static upcast(IIntSupplier supplier)`
+##### `static upcast(IIntSupplier supplier)`
 
 Returns a composed `Supplier` of the `IIntSupplier`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the int supplier|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -66,21 +69,21 @@ Supplier
 
 the composed `Supplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-### `static upcast(ILongSupplier supplier)`
+##### `static upcast(ILongSupplier supplier)`
 
 Returns a composed `Supplier` of the `ILongSupplier`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the Long supplier|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -90,21 +93,21 @@ Supplier
 
 the composed `Supplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-### `static upcast(IDoubleSupplier supplier)`
+##### `static upcast(IDoubleSupplier supplier)`
 
 Returns a composed `Supplier` of the `IDoubleSupplier`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the Double supplier|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -114,21 +117,21 @@ Supplier
 
 the composed `Supplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-### `static upcast(ISObjectSupplier supplier)`
+##### `static upcast(ISObjectSupplier supplier)`
 
 Returns a composed `Supplier` of the `ISObjectSupplier`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the SObject supplier|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -138,16 +141,18 @@ Supplier
 
 the composed `Supplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-### `static joiningString()`
+---
+### Built-Ins
+##### `static joiningString()`
 
 Returns a `Supplier` that returns a list container to track joining string.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -163,11 +168,11 @@ the `Supplier`
 
 **See** SObjectCollector.joining
 
-### `static averagingInt()`
+##### `static averagingInt()`
 
 Returns a `Supplier` that returns a list container to track int averaging.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -183,11 +188,11 @@ the `Supplier`
 
 **See** SObjectCollector.averagingInt
 
-### `static averagingLong()`
+##### `static averagingLong()`
 
 Returns a `Supplier` that returns a list container to track Long averaging.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -203,11 +208,11 @@ the `Supplier`
 
 **See** SObjectCollector.averagingLong
 
-### `static averagingDouble()`
+##### `static averagingDouble()`
 
 Returns a `Supplier` that returns a list container to track Double averaging.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -223,11 +228,11 @@ the `Supplier`
 
 **See** SObjectCollector.averagingDouble
 
-### `static summingInt()`
+##### `static summingInt()`
 
 Returns a `Supplier` that returns a list container to track int summing.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -243,11 +248,11 @@ the `Supplier`
 
 **See** SObjectCollector.summingInt
 
-### `static summingLong()`
+##### `static summingLong()`
 
 Returns a `Supplier` that returns a list container to track Long summing.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -263,11 +268,11 @@ the `Supplier`
 
 **See** SObjectCollector.summingLong
 
-### `static summingDouble()`
+##### `static summingDouble()`
 
 Returns a `Supplier` that returns a list container to track Double summing.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -283,15 +288,15 @@ the `Supplier`
 
 **See** SObjectCollector.summingDouble
 
-### `static box(Object identity)`
+##### `static box(Object identity)`
 
 Returns a `Supplier` that returns a list container to track `identity` mutation.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -304,15 +309,15 @@ the `Supplier`
 
 **See** Collector.reducing
 
-### `static sObjectBox(SObject identity)`
+##### `static sObjectBox(SObject identity)`
 
 Returns a `Supplier` that returns a list container to track `identity` mutation.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 

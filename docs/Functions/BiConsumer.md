@@ -27,21 +27,24 @@ Downstream collector.
 
 ---
 ## Methods
-### `accept(Object o1, Object o2)`
-#### Parameters
+### Function
+##### `accept(Object o1, Object o2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `andThen(IBiConsumer after)`
+---
+### Default Methods
+##### `andThen(IBiConsumer after)`
 
 Returns a composed `BiConsumer` that executes `this` operation first, then the `after` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -51,22 +54,24 @@ BiConsumer
 
 the composed `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-### `static filtering(IPredicate predicate, IBiConsumer accumulator)`
+---
+### Composed BiConsumers
+##### `static filtering(IPredicate predicate, IBiConsumer accumulator)`
 
 Returns a composed `BiConsumer` that executes `accumulator` operation, if the second input argument satisfies the predicate.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate applied to the second input argument|
 |`accumulator`|the operation to perform after filtering|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -76,22 +81,22 @@ BiConsumer
 
 the composed `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` or `accumulator` is null|
 
-### `static mapping(IFunction mapper, IBiConsumer accumulator)`
+##### `static mapping(IFunction mapper, IBiConsumer accumulator)`
 
 Returns a composed `BiConsumer` that applies `accumulator` operation to the result returned by the mapper.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the operator applied to the second input argument|
 |`accumulator`|the operation to perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -101,7 +106,7 @@ BiConsumer
 
 the composed `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `accumulator` is null|

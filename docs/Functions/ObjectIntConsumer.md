@@ -13,21 +13,24 @@ Inherits [IObjectIntConsumer](/docs/Functional-Interfaces/IObjectIntConsumer.md)
 **Group** Functions
 
 ## Methods
-### `accept(Object o, Integer l)`
-#### Parameters
+### Function
+##### `accept(Object o, Integer l)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static of(IBiConsumer consumer)`
+---
+### Static Methods
+##### `static of(IBiConsumer consumer)`
 
 Returns a composed `ObjectIntConsumer` of the `IBiConsumer`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the binary consumer|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,7 +40,7 @@ ObjectIntConsumer
 
 the composed `ObjectIntConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|

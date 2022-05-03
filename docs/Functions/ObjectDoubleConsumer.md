@@ -13,21 +13,24 @@ Inherits [IObjectDoubleConsumer](/docs/Functional-Interfaces/IObjectDoubleConsum
 **Group** Functions
 
 ## Methods
-### `accept(Object o, Double d)`
-#### Parameters
+### Function
+##### `accept(Object o, Double d)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static of(IBiConsumer consumer)`
+---
+### Static Methods
+##### `static of(IBiConsumer consumer)`
 
 Returns a composed `ObjectDoubleConsumer` of the `IBiConsumer`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the binary consumer|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,7 +40,7 @@ ObjectDoubleConsumer
 
 the composed `ObjectDoubleConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|

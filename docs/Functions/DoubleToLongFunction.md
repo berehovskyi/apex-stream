@@ -13,16 +13,19 @@ Inherits [IDoubleToLongFunction](/docs/Functional-Interfaces/IDoubleToLongFuncti
 **Group** Functions
 
 ## Methods
-### `apply(Double d)`
-#### Parameters
+### Function
+##### `apply(Double d)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static longValue()`
+---
+### Built-Ins
+##### `static longValue()`
 
 Returns a `IDoubleToLongFunction` that returns the Long value of the Double input argument by casting it to an Long.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -35,11 +38,11 @@ the `IDoubleToLongFunction`
 
 **See** Double.longValue
 
-### `static roundToLong()`
+##### `static roundToLong()`
 
 Returns a `IDoubleToLongFunction` that returns the closest Long to the Double input argument.
 
-#### Return
+###### Return
 
 **Type**
 

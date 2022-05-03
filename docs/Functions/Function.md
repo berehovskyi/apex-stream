@@ -16,21 +16,24 @@ Inherits [IFunction](/docs/Functional-Interfaces/IFunction.md) functional interf
 **See** IObjectIterable.mapTo
 
 ## Methods
-### `apply(Object o)`
-#### Parameters
+### Function
+##### `apply(Object o)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `andThen(IFunction after)`
+---
+### Default Methods
+##### `andThen(IFunction after)`
 
 Returns a composed `Function` that executes `this` operation first, then the `after` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -40,21 +43,21 @@ Function
 
 the composed `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-### `compose(IFunction before)`
+##### `compose(IFunction before)`
 
 Returns a composed `Function` that executes `before` operation first, then the `this` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`before`|the operation to perform before this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,21 +67,23 @@ Function
 
 the composed `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `before` is null|
 
-### `static compose(List<IFunction> functions)`
+---
+### Static Methods
+##### `static compose(List<IFunction> functions)`
 
 Returns a composed `Function` that sequentially executes the operations in the same order as the order of the consumers input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`functions`|the functions to sequentially perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -88,16 +93,16 @@ Function
 
 the composed `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operators` is null or some element is null|
 
-### `static identity()`
+##### `static identity()`
 
 Returns a `Function` that always returns the input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -107,16 +112,16 @@ Function
 
 the `Function`
 
-### `static constant(Object value)`
+##### `static constant(Object value)`
 
 Returns a `Function` that always returns the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -126,16 +131,16 @@ Function
 
 the `Function`
 
-### `static forPredicate(IPredicate predicate)`
+##### `static forPredicate(IPredicate predicate)`
 
 Returns a composed `Function` of the `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -145,21 +150,21 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-### `static upcast(ISObjectFunction function)`
+##### `static upcast(ISObjectFunction function)`
 
 Returns a composed `Function` of the `ISObjectFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -169,7 +174,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `function` is null|

@@ -13,18 +13,19 @@ Provides common class level implementations, and related utilities for `Map<T, O
 **Group** Functions
 
 ## Methods
-### `static putToObjectByBoolMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+### Put to Map<?, ?> BiConsumers
+##### `static putToObjectByBoolMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Boolean, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -34,7 +35,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -44,18 +45,18 @@ the `BiConsumer`
 
 **See** Collector.toByBoolMap
 
-### `static putToObjectByIdMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByIdMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Id, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -65,7 +66,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -75,18 +76,18 @@ the `BiConsumer`
 
 **See** Collector.toByIdMap
 
-### `static putToObjectByStringMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByStringMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<String, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -96,7 +97,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -106,18 +107,18 @@ the `BiConsumer`
 
 **See** Collector.toByStringMap
 
-### `static putToObjectByBlobMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByBlobMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Blob, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -127,7 +128,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -137,18 +138,18 @@ the `BiConsumer`
 
 **See** Collector.toByBlobMap
 
-### `static putToObjectByDateMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByDateMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Date, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -158,7 +159,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -168,18 +169,18 @@ the `BiConsumer`
 
 **See** Collector.toByDateMap
 
-### `static putToObjectByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Datetime, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -189,7 +190,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -199,18 +200,18 @@ the `BiConsumer`
 
 **See** Collector.toByDatetimeMap
 
-### `static putToObjectByTimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByTimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Datetime, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -220,7 +221,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -230,18 +231,18 @@ the `BiConsumer`
 
 **See** Collector.toByDatetimeMap
 
-### `static putToObjectByIntMap(IToIntFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByIntMap(IToIntFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Integer, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -251,7 +252,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -261,18 +262,18 @@ the `BiConsumer`
 
 **See** Collector.toByIntMap
 
-### `static putToObjectByLongMap(IToLongFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByLongMap(IToLongFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Long, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -282,7 +283,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -292,18 +293,18 @@ the `BiConsumer`
 
 **See** Collector.toByLongMap
 
-### `static putToObjectByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Double, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -313,7 +314,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -323,18 +324,18 @@ the `BiConsumer`
 
 **See** Collector.toByDoubleMap
 
-### `static putToObjectByObjectMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
+##### `static putToObjectByObjectMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Object, Object>` and puts an entry returned by the `keyMapper` and `valueMapper`. If a key is already contained in the `Map` results are merged using the provided `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the mapping function producing keys|
 |`valueMapper`|the mapping function producing values|
 |`merger`|the merge function to resolve possible key collisions|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -344,7 +345,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `keyMapper` or the `valueMapper` is null|
@@ -354,17 +355,17 @@ the `BiConsumer`
 
 **See** Collector.toMap
 
-### `static putToObjectsByBoolMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByBoolMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Boolean, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -374,7 +375,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -383,17 +384,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByBool
 
-### `static putToObjectsByIdMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByIdMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Id, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -403,7 +404,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -412,17 +413,17 @@ the `BiConsumer`
 
 **See** Collector.groupingById
 
-### `static putToObjectsByStringMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByStringMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<String, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -432,7 +433,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -441,17 +442,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByString
 
-### `static putToObjectsByBlobMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByBlobMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Blob, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -461,7 +462,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -470,17 +471,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByBlob
 
-### `static putToObjectsByDateMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByDateMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Date, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -490,7 +491,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -499,17 +500,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByDate
 
-### `static putToObjectsByDatetimeMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByDatetimeMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Datetime, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -519,7 +520,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -528,17 +529,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByDatetime
 
-### `static putToObjectsByTimeMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByTimeMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Time, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -548,7 +549,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -557,17 +558,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByTime
 
-### `static putToObjectsByIntMap(ICollector downstream, IToIntFunction classifier)`
+##### `static putToObjectsByIntMap(ICollector downstream, IToIntFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Integer, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -577,7 +578,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -586,17 +587,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByInt
 
-### `static putToObjectsByLongMap(ICollector downstream, IToLongFunction classifier)`
+##### `static putToObjectsByLongMap(ICollector downstream, IToLongFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Long, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -606,7 +607,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -615,17 +616,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByLong
 
-### `static putToObjectsByDoubleMap(ICollector downstream, IToDoubleFunction classifier)`
+##### `static putToObjectsByDoubleMap(ICollector downstream, IToDoubleFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Double, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -635,7 +636,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|
@@ -644,17 +645,17 @@ the `BiConsumer`
 
 **See** Collector.groupingByDouble
 
-### `static putToObjectsByObjectMap(ICollector downstream, IFunction classifier)`
+##### `static putToObjectsByObjectMap(ICollector downstream, IFunction classifier)`
 
 Returns a `BiConsumer` that casts the first input argument to `Map<Object, Object>` and groups input arguments according to a classification function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`downstream`|the collector implementing the downstream reduction|
 |`classifier`|the classifier function mapping input elements to keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -664,7 +665,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `downstream` or the `classifier` is null|

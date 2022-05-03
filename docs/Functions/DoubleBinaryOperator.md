@@ -25,16 +25,19 @@ Inherits [IDoubleBinaryOperator](/docs/Functional-Interfaces/IDoubleBinaryOperat
 **See** [Collector](/docs/Collectors/Collector.md)
 
 ## Methods
-### `apply(Double d1, Double d2)`
-#### Parameters
+### Function
+##### `apply(Double d1, Double d2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static max()`
+---
+### Built-Ins
+##### `static max()`
 
 Returns a `IntBinaryOperator` that return a greater Integer input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -44,7 +47,7 @@ DoubleBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|
@@ -52,11 +55,11 @@ the `IntBinaryOperator`
 
 **See** Math.max
 
-### `static min()`
+##### `static min()`
 
 Returns a `IntBinaryOperator` that return a lesser Integer input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -66,7 +69,7 @@ DoubleBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|
@@ -74,11 +77,11 @@ the `IntBinaryOperator`
 
 **See** Math.min
 
-### `static product()`
+##### `static product()`
 
 Returns a `IntBinaryOperator` that return a product of two Integer input arguments.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -88,16 +91,16 @@ DoubleBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|
 
-### `static sum()`
+##### `static sum()`
 
 Returns a `IntBinaryOperator` that return a <strong>naive</strong> sum of two Integer input arguments. Please use compensated summation whenever it is possible. <p><strong>Note: </strong></p> <p>Using `IDoubleIterable.sum()` is preferable over `IDoubleIterable.reduce(0, DoubleBinaryOperator.sum())`.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -107,7 +110,7 @@ DoubleBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|
@@ -115,11 +118,11 @@ the `IntBinaryOperator`
 
 **See** IDoubleIterable.sum
 
-### `static euclideanDistance()`
+##### `static euclideanDistance()`
 
 Returns a `IntBinaryOperator` that return a the square root of the sum of the squares of the Integer input arguments.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -129,7 +132,7 @@ DoubleBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|

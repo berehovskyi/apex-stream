@@ -13,16 +13,17 @@ Extends `Predicate` functions and provides `StringPredicate` common class level 
 **Group** Functions
 
 ## Methods
-### `static contains(String substring)`
+### String Predicates
+##### `static contains(String substring)`
 
 Returns a `Predicate` that tests the input string if it contains the `substring`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`substring`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `substring` is null|
@@ -40,16 +41,16 @@ the `Predicate`
 
 **See** String.contains
 
-### `static containsAny(String substring)`
+##### `static containsAny(String substring)`
 
 Returns a `Predicate` that tests the input string if it contains any `substring`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`substring`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -59,7 +60,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `substring` is null|
@@ -67,16 +68,16 @@ the `Predicate`
 
 **See** String.containsAny
 
-### `static containsIgnoreCase(String substring)`
+##### `static containsIgnoreCase(String substring)`
 
 Returns a `Predicate` that tests the input string if it contains the `substring` ignoring case.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`substring`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -86,7 +87,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `substring` is null|
@@ -94,16 +95,16 @@ the `Predicate`
 
 **See** String.containsIgnoreCase
 
-### `static containsNone(String substring)`
+##### `static containsNone(String substring)`
 
 Returns a `Predicate` that tests the input string if it does not contain any of the characters in the `substring`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`substring`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -113,7 +114,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `substring` is null|
@@ -121,16 +122,16 @@ the `Predicate`
 
 **See** String.containsNone
 
-### `static containsOnly(String substring)`
+##### `static containsOnly(String substring)`
 
 Returns a `Predicate` that tests the input string if it contains characters only from the `substring`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`substring`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -140,7 +141,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `substring` is null|
@@ -148,11 +149,11 @@ the `Predicate`
 
 **See** String.containsOnly
 
-### `static containsWhitespace()`
+##### `static containsWhitespace()`
 
 Returns a `Predicate` that tests the input string if it contains any white space.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -165,16 +166,16 @@ the `Predicate`
 
 **See** String.containsWhitespace
 
-### `static endsWith(String suffix)`
+##### `static endsWith(String suffix)`
 
 Returns a `Predicate` that tests the input string if it ends with the `suffix`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`suffix`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -184,7 +185,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `suffix` is null|
@@ -192,16 +193,16 @@ the `Predicate`
 
 **See** String.endsWith
 
-### `static endsWithIgnoreCase(String suffix)`
+##### `static endsWithIgnoreCase(String suffix)`
 
 Returns a `Predicate` that tests the input string if it ends with the `suffix` ignoring case.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`suffix`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -211,7 +212,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `suffix` is null|
@@ -219,16 +220,16 @@ the `Predicate`
 
 **See** String.endsWithIgnoreCase
 
-### `static equalsIgnoreCase(String that)`
+##### `static equalsIgnoreCase(String that)`
 
 Returns a `Predicate` that tests the input string if it equals to the `that` ignoring case.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`that`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -238,7 +239,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `that` is null|
@@ -246,11 +247,11 @@ the `Predicate`
 
 **See** String.equalsIgnoreCase
 
-### `static isAllLowerCase()`
+##### `static isAllLowerCase()`
 
 Returns a `Predicate` that tests the input string if all characters are lowercase.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -263,11 +264,11 @@ the `Predicate`
 
 **See** String.isAllLowerCase
 
-### `static isAllUpperCase()`
+##### `static isAllUpperCase()`
 
 Returns a `Predicate` that tests the input string if all characters are uppercase.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -280,11 +281,11 @@ the `Predicate`
 
 **See** String.IsAllUpperCase
 
-### `static isAlpha()`
+##### `static isAlpha()`
 
 Returns a `Predicate` that tests the input string if all characters are Unicode letters only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -297,11 +298,11 @@ the `Predicate`
 
 **See** String.isAlpha
 
-### `static isAlphaSpace()`
+##### `static isAlphaSpace()`
 
 Returns a `Predicate` that tests the input string if all characters are Unicode letters or spaces only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -314,11 +315,11 @@ the `Predicate`
 
 **See** String.isAlphaSpace
 
-### `static isAlphaNumeric()`
+##### `static isAlphaNumeric()`
 
 Returns a `Predicate` that tests the input string if all characters are Unicode letters or numbers only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -331,11 +332,11 @@ the `Predicate`
 
 **See** String.isAlphaNumeric
 
-### `static isAlphaNumericSpace()`
+##### `static isAlphaNumericSpace()`
 
 Returns a `Predicate` that tests the input string if all characters are Unicode letters, spaces or numbers only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -348,11 +349,11 @@ the `Predicate`
 
 **See** String.isAlphaNumericSpace
 
-### `static isAsciiPrintable()`
+##### `static isAsciiPrintable()`
 
 Returns a `Predicate` that tests the input string if all characters are ASCII printable only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -365,11 +366,11 @@ the `Predicate`
 
 **See** String.isAsciiPrintable
 
-### `static isBlank()`
+##### `static isBlank()`
 
 Returns a `Predicate` that tests the input string if it is white space, empty (&apos;&apos;), or null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -382,11 +383,11 @@ the `Predicate`
 
 **See** String.isBlank
 
-### `static isEmpty()`
+##### `static isEmpty()`
 
 Returns a `Predicate` that tests the input string if it is empty (&apos;&apos;), or null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -399,15 +400,15 @@ the `Predicate`
 
 **See** String.isEmpty
 
-### `static isLike(String likeString)`
+##### `static isLike(String likeString)`
 
 Returns a `Predicate` that tests the input string if it is like the `likeString`. Supports `%` and `_` wildcards and is case-insensitive.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -417,16 +418,16 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `likeString` is null|
 
-### `static isNotBlank()`
+##### `static isNotBlank()`
 
 Returns a `Predicate` that tests the input string if it is not white space, empty (&apos;&apos;), or null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -439,11 +440,11 @@ the `Predicate`
 
 **See** String.isNotBlank
 
-### `static isNotEmpty()`
+##### `static isNotEmpty()`
 
 Returns a `Predicate` that tests the input string if it is not empty (&apos;&apos;), or null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -456,11 +457,11 @@ the `Predicate`
 
 **See** String.isNotEmpty
 
-### `static isNumeric()`
+##### `static isNumeric()`
 
 Returns a `Predicate` that tests the input string if all characters are numbers only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -473,11 +474,11 @@ the `Predicate`
 
 **See** String.isNumeric
 
-### `static isNumericSpace()`
+##### `static isNumericSpace()`
 
 Returns a `Predicate` that tests the input string if all characters are spaces or numbers only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -490,11 +491,11 @@ the `Predicate`
 
 **See** String.isNumericSpace
 
-### `static isWhitespace()`
+##### `static isWhitespace()`
 
 Returns a `Predicate` that tests the input string if all characters are spaces only.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -507,16 +508,16 @@ the `Predicate`
 
 **See** String.isWhitespace
 
-### `static startsWith(String prefix)`
+##### `static startsWith(String prefix)`
 
 Returns a `Predicate` that tests the input string if it starts with the `prefix`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`prefix`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -526,7 +527,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `prefix` is null|
@@ -534,16 +535,16 @@ the `Predicate`
 
 **See** String.startsWith
 
-### `static startsWithIgnoreCase(String prefix)`
+##### `static startsWithIgnoreCase(String prefix)`
 
 Returns a `Predicate` that tests the input string if it starts with the `prefix` ignoring case.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`prefix`|string|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -553,7 +554,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `prefix` is null|

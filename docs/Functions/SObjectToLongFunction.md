@@ -13,21 +13,24 @@ Inherits [ISObjectToLongFunction](/docs/Functional-Interfaces/ISObjectToLongFunc
 **Group** Functions
 
 ## Methods
-### `apply(SObject sObj)`
-#### Parameters
+### Function
+##### `apply(SObject sObj)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static downcast(ISObjectFunction mapper)`
+---
+### Static Methods
+##### `static downcast(ISObjectFunction mapper)`
 
 Returns a composed `SObjectToLongFunction` of the `ISObjectFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,21 +40,23 @@ SObjectToLongFunction
 
 the `SObjectToLongFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static get(String fieldName)`
+---
+### Built-Ins
+##### `static get(String fieldName)`
 
 Returns a `SObjectToLongFunction` that gets a value for the specified `fieldName` as Long. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field to get a Long value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -61,7 +66,7 @@ SObjectToLongFunction
 
 the `SObjectToLongFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -71,23 +76,23 @@ the `SObjectToLongFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectToLongFunction.get('NumberOfEmployees');
 SObjectToLongFunction.get('Parent.NumberOfEmployees');
 SObjectToLongFunction.get('Parent?.NumberOfEmployees');
 ```
 
-### `static get(SObjectField field)`
+##### `static get(SObjectField field)`
 
 Returns a `SObjectToLongFunction` that gets a value for the specified `field` as Long.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to get a value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -97,7 +102,7 @@ SObjectToLongFunction
 
 the `SObjectToLongFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -105,7 +110,7 @@ the `SObjectToLongFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectToLongFunction.get(Account.NumberOfEmployees);
 ```

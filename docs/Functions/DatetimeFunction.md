@@ -13,16 +13,17 @@ Extends `Function` functions and provides `DatetimeFunction` common class level 
 **Group** Functions
 
 ## Methods
-### `static addDays(Integer days)`
+### Date Functions
+##### `static addDays(Integer days)`
 
 Returns a `Function` that adds `days` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`days`|the number of additional days|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `days` is null|
@@ -40,16 +41,16 @@ the `Function`
 
 **See** Datetime.addDays
 
-### `static addHours(Integer hours)`
+##### `static addHours(Integer hours)`
 
 Returns a `Function` that adds `hours` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`hours`|the number of additional hours|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -59,7 +60,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `hours` is null|
@@ -67,16 +68,16 @@ the `Function`
 
 **See** Datetime.addHours
 
-### `static addMinutes(Integer minutes)`
+##### `static addMinutes(Integer minutes)`
 
 Returns a `Function` that adds `minutes` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`minutes`|the number of additional minutes|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -86,7 +87,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `minutes` is null|
@@ -94,16 +95,16 @@ the `Function`
 
 **See** Datetime.addMinutes
 
-### `static addMonths(Integer months)`
+##### `static addMonths(Integer months)`
 
 Returns a `Function` that adds `months` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`months`|the number of additional months|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -113,7 +114,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `months` is null|
@@ -121,16 +122,16 @@ the `Function`
 
 **See** Datetime.addMonths
 
-### `static addSeconds(Integer seconds)`
+##### `static addSeconds(Integer seconds)`
 
 Returns a `Function` that adds `seconds` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`seconds`|the number of additional seconds|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -140,7 +141,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `seconds` is null|
@@ -148,16 +149,16 @@ the `Function`
 
 **See** Datetime.addSeconds
 
-### `static addYears(Integer years)`
+##### `static addYears(Integer years)`
 
 Returns a `Function` that adds `years` to an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`years`|the number of additional years|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -167,7 +168,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `years` is null|
@@ -175,11 +176,11 @@ the `Function`
 
 **See** Datetime.addYears
 
-### `static getDate()`
+##### `static getDate()`
 
 Returns a `Function` that returns the date component of a datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -192,11 +193,11 @@ the `Function`
 
 **See** Datetime.date
 
-### `static dateGmt()`
+##### `static dateGmt()`
 
 Returns a `Function` that returns the date component of a datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -209,11 +210,11 @@ the `Function`
 
 **See** Datetime.dateGmt
 
-### `static format()`
+##### `static format()`
 
 Returns a `Function` that returns the datetime as a string using the locale of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -226,16 +227,16 @@ the `Function`
 
 **See** Datetime.format
 
-### `static format(String dateformat)`
+##### `static format(String dateformat)`
 
 Returns a `Function` that returns the datetime for the local time zone as a string using the supplied Java simple `dateformat`. If the time zone cannot be determined, GMT is used.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`dateformat`|the date format|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -245,7 +246,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `dateformat` is null|
@@ -253,17 +254,17 @@ the `Function`
 
 **See** Datetime.format
 
-### `static format(String dateformat, String timezone)`
+##### `static format(String dateformat, String timezone)`
 
 Returns a `Function` that returns the datetime for the specified time zone as a string using the supplied Java simple `dateformat`. If the time zone cannot be determined, GMT is used.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`dateformat`|the date format|
 |`timezone`|the time zone|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -273,7 +274,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `dateformat` or `timezone` is null|
@@ -281,16 +282,16 @@ the `Function`
 
 **See** Datetime.format
 
-### `static formatGmt(String dateformat)`
+##### `static formatGmt(String dateformat)`
 
 Returns a `Function` that returns the datetime as a string using the supplied Java simple `dateformat` and the GMT time zone.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`dateformat`|the date format|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -300,7 +301,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `dateformat` is null|
@@ -308,12 +309,12 @@ the `Function`
 
 **See** Datetime.formatGmt
 
-### `static formatLong()`
-### `static getTime()`
+##### `static formatLong()`
+##### `static getTime()`
 
 Returns a `Function` that returns the time component of a datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -326,11 +327,11 @@ the `Function`
 
 **See** Datetime.time
 
-### `static timeGmt()`
+##### `static timeGmt()`
 
 Returns a `Function` that returns the time component of a datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -343,11 +344,11 @@ the `Function`
 
 **See** Datetime.timeGmt
 
-### `static stringValueOfGmt()`
+##### `static stringValueOfGmt()`
 
 Returns a `Function` that returns the string that represents the specified datetime in the standard “yyyy-MM-dd HH:mm:ss” format for the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 

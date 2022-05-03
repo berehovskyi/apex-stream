@@ -13,11 +13,12 @@ Provides common class level implementations, and related utilities for `StringBi
 **Group** Functions
 
 ## Methods
-### `static concat()`
+### Built-Ins
+##### `static concat()`
 
 Returns a `SObjectBinaryOperator` that concatenates string input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -27,15 +28,15 @@ BinaryOperator
 
 the `SObjectBinaryOperator`
 
-### `static concat(String delimiter)`
+##### `static concat(String delimiter)`
 
 Returns a `SObjectBinaryOperator` that concatenates string input argument using the `delimiter`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 

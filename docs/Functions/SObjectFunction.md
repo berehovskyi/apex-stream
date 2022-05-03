@@ -16,16 +16,19 @@ Inherits [ISObjectFunction](/docs/Functional-Interfaces/ISObjectFunction.md) fun
 **See** ISObjectIterable.mapToObject
 
 ## Methods
-### `apply(SObject sObj)`
-#### Parameters
+### Function
+##### `apply(SObject sObj)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static identity()`
+---
+### Static Methods
+##### `static identity()`
 
 Returns a `SObjectFunction` that always returns the input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -35,16 +38,16 @@ SObjectFunction
 
 the `SObjectFunction`
 
-### `static constant(Object value)`
+##### `static constant(Object value)`
 
 Returns a `SObjectFunction` that always returns the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -54,16 +57,16 @@ SObjectFunction
 
 the `SObjectFunction`
 
-### `static forPredicate(ISObjectPredicate predicate)`
+##### `static forPredicate(ISObjectPredicate predicate)`
 
 Returns a composed `SObjectFunction` of the `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -73,21 +76,21 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-### `static forOperator(ISObjectUnaryOperator operator)`
+##### `static forOperator(ISObjectUnaryOperator operator)`
 
 Returns a composed `SObjectFunction` of the `operator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|the operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -97,21 +100,21 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-### `static forSupplier(ISupplier supplier)`
+##### `static forSupplier(ISupplier supplier)`
 
 Returns a composed `SObjectFunction` of the `supplier`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the supplier|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -121,21 +124,23 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` is null|
 
-### `static get(String fieldName)`
+---
+### Built-Ins
+##### `static get(String fieldName)`
 
 Returns a `SObjectFunction` that gets a value for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field to get a value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -145,7 +150,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -155,23 +160,23 @@ the `SObjectFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectFunction.get('Name');
 SObjectFunction.get('Parent.Name');
 SObjectFunction.get('Parent?.Name');
 ```
 
-### `static get(SObjectField field)`
+##### `static get(SObjectField field)`
 
 Returns a `SObjectFunction` that gets a value for the specified `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to get a value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -181,7 +186,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -189,16 +194,16 @@ the `SObjectFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectFunction.get(Account.Name);
 ```
 
-### `static getPopulatedFieldsAsMap()`
+##### `static getPopulatedFieldsAsMap()`
 
 Returns a `SObjectFunction` that returns a map of populated field names and their corresponding values for an input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -211,11 +216,11 @@ the `SObjectFunction`
 
 **See** SObject.getPopulatedFieldsAsMap
 
-### `static getQuickActionName()`
+##### `static getQuickActionName()`
 
 Returns a `SObjectFunction` that returns the name of a quick action associated with an input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -228,16 +233,16 @@ the `SObjectFunction`
 
 **See** SObject.getQuickActionName
 
-### `static getSObjects(String fieldName)`
+##### `static getSObjects(String fieldName)`
 
 Returns a `SObjectFunction` that gets children sobjects for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field to get a value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -247,7 +252,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -257,23 +262,23 @@ the `SObjectFunction`
 
 **See** SObject.getSObjects
 
-#### Example
+###### Example
 ```apex
 SObjectFunction.get('Contacts');
 SObjectFunction.get('Parent.Contacts');
 SObjectFunction.get('Parent?.Contacts');
 ```
 
-### `static getSObjects(SObjectField field)`
+##### `static getSObjects(SObjectField field)`
 
 Returns a `SObjectFunction` that gets children sobjects for the specified `field`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to get a value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -283,7 +288,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -293,16 +298,16 @@ the `SObjectFunction`
 
 **See** SObject.getSObjects
 
-#### Example
+###### Example
 ```apex
 SObjectFunction.get(Contact.AccountId);
 ```
 
-### `static getSObjectType()`
+##### `static getSObjectType()`
 
 Returns a `SObjectFunction` that returns the `SObjectType` of an input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -315,17 +320,17 @@ the `SObjectFunction`
 
 **See** SObject.getQuickActionName
 
-### `static put(String fieldName, ISObjectFunction mapper)`
+##### `static put(String fieldName, ISObjectFunction mapper)`
 
 Returns a `SObjectFunction` that sets the value returned by the `mapper` for the specified `fieldName` and returns the previous value for the field. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field name to set a value|
 |`mapper`|applied to the input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -335,7 +340,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank or the `mapper` is null|
@@ -345,24 +350,24 @@ the `SObjectFunction`
 
 **See** SObject.put
 
-#### Example
+###### Example
 ```apex
 SObjectFunction.put('NumberOfEmployees', someSObjectFunction);
 SObjectFunction.put('Parent.NumberOfEmployees', someSObjectFunction);
 SObjectFunction.put('Parent?.NumberOfEmployees', someSObjectFunction);
 ```
 
-### `static put(SObjectField field, ISObjectFunction mapper)`
+##### `static put(SObjectField field, ISObjectFunction mapper)`
 
 Returns a `SObjectFunction` that sets the value returned by the `mapper` for the specified `field` and returns the previous value for the field.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field name to set a value|
 |`mapper`|applied to the input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -372,7 +377,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` or `mapper` is null|
@@ -380,23 +385,23 @@ the `SObjectFunction`
 
 **See** SObject.put
 
-#### Example
+###### Example
 ```apex
 SObjectConsumer.put(Account.NumberOfEmployees, someSObjectFunction);
 SObjectConsumer.put(Account.NumberOfEmployees, SObjectFunction.constant(100));
 ```
 
-### `static put(String fieldName, Object value)`
+##### `static put(String fieldName, Object value)`
 
 Returns a `SObjectFunction` that sets the `value` for the specified `fieldName` and returns the previous value for the field. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field name to set a value|
 |`value`|the value to set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -406,7 +411,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -416,24 +421,24 @@ the `SObjectFunction`
 
 **See** SObject.put
 
-#### Example
+###### Example
 ```apex
 SObjectFunction.put('NumberOfEmployees', 100);
 SObjectFunction.put('Parent.NumberOfEmployees', 100);
 SObjectFunction.put('Parent?.NumberOfEmployees', (Object) null);
 ```
 
-### `static put(SObjectField field, Object value)`
+##### `static put(SObjectField field, Object value)`
 
 Returns a `SObjectFunction` that sets the `value` for the specified `field` and returns the previous value for the field.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field name to set a value|
 |`value`|the value to set|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -443,7 +448,7 @@ SObjectFunction
 
 the `SObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -453,7 +458,7 @@ the `SObjectFunction`
 
 **See** SObject.put
 
-#### Example
+###### Example
 ```apex
 SObjectFunction.put(Account.NumberOfEmployees, 100);
 SObjectFunction.put(Account.NumberOfEmployees, (Object) null);

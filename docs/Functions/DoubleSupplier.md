@@ -13,12 +13,15 @@ Inherits [IDoubleSupplier](/docs/Functional-Interfaces/IDoubleSupplier.md) funct
 **Group** Functions
 
 ## Methods
-### `get()`
-### `static random()`
+### Function
+##### `get()`
+---
+### Built-Ins
+##### `static random()`
 
 Returns a `DoubleSupplier` that returns a next random Double value.
 
-#### Return
+###### Return
 
 **Type**
 

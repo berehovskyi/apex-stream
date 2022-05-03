@@ -13,21 +13,24 @@ Inherits [IToIntFunction](/docs/Functional-Interfaces/IToIntFunction.md) functio
 **Group** Functions
 
 ## Methods
-### `apply(Object o)`
-#### Parameters
+### Function
+##### `apply(Object o)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static downcast(ISObjectFunction mapper)`
+---
+### Static Methods
+##### `static downcast(ISObjectFunction mapper)`
 
 Returns a composed `ToDoubleFunction` of the `ISObjectFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,21 +40,21 @@ ToIntFunction
 
 the `ToIntFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static downcast(IFunction mapper)`
+##### `static downcast(IFunction mapper)`
 
 Returns a composed `ToDoubleFunction` of the `IFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -61,16 +64,18 @@ ToIntFunction
 
 the `ToIntFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static asInt()`
+---
+### Object To Int Functions
+##### `static asInt()`
 
 Returns a `ToIntFunction` that returns the Integer value of the Object input argument by casting it to an Integer.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -80,11 +85,11 @@ ToIntFunction
 
 the `ToIntFunction`
 
-### `static valueOf()`
+##### `static valueOf()`
 
 Returns a `ToIntFunction` that returns the Integer value of the Object input argument.
 
-#### Return
+###### Return
 
 **Type**
 

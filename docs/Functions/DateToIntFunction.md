@@ -13,11 +13,12 @@ Extends `ToIntFunction` functions and provides `DateToIntFunction` common class 
 **Group** Functions
 
 ## Methods
-### `static day()`
+### Date To Int Functions
+##### `static day()`
 
 Returns a `ToIntFunction` that returns the day-of-month component of the Date input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -30,11 +31,11 @@ the `ToIntFunction`
 
 **See** Date.day
 
-### `static dayOfYear()`
+##### `static dayOfYear()`
 
 Returns a `ToIntFunction` that returns the day-of-year component of the Date input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -47,16 +48,16 @@ the `ToIntFunction`
 
 **See** Date.day
 
-### `static daysBetween(Date other)`
+##### `static daysBetween(Date other)`
 
 Returns a `ToIntFunction` that returns the number of days between the Date input argument and the `other` Date.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the Date to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -66,7 +67,7 @@ ToIntFunction
 
 the `ToIntFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
@@ -74,11 +75,11 @@ the `ToIntFunction`
 
 **See** Date.daysBetween
 
-### `static month()`
+##### `static month()`
 
 Returns a `ToIntFunction` that returns the month component of the Date input argument in the local time zone of the context user (1 = Jan).
 
-#### Return
+###### Return
 
 **Type**
 
@@ -91,16 +92,16 @@ the `ToIntFunction`
 
 **See** Date.month
 
-### `static monthsBetween(Date other)`
+##### `static monthsBetween(Date other)`
 
 Returns a `ToIntFunction` that returns the number of months between the Date input argument and the `other` Date, ignoring the difference in days.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the Date to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -110,7 +111,7 @@ ToIntFunction
 
 the `ToIntFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
@@ -118,11 +119,11 @@ the `ToIntFunction`
 
 **See** Date.monthsBetween
 
-### `static year()`
+##### `static year()`
 
 Returns a `ToIntFunction` that returns the year component of the Date input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 

@@ -19,11 +19,12 @@ Provides common class level implementations, and related utilities for `Set<T> -
 **See** [Collector](/docs/Collectors/Collector.md)
 
 ## Methods
-### `static addToSet()`
+### Add To Set<?> BiConsumers
+##### `static addToSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Object>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -33,7 +34,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -41,11 +42,11 @@ the `BiConsumer`
 
 **See** Collector.toSet
 
-### `static addToBoolSet()`
+##### `static addToBoolSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Boolean>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -55,7 +56,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -63,11 +64,11 @@ the `BiConsumer`
 
 **See** Collector.toBoolSet
 
-### `static addToIdSet()`
+##### `static addToIdSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Id>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -77,7 +78,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -85,11 +86,11 @@ the `BiConsumer`
 
 **See** Collector.toIdSet
 
-### `static addToStringSet()`
+##### `static addToStringSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<String>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -99,7 +100,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -107,11 +108,11 @@ the `BiConsumer`
 
 **See** Collector.toStringSet
 
-### `static addToBlobSet()`
+##### `static addToBlobSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Blob>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -121,7 +122,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -129,11 +130,11 @@ the `BiConsumer`
 
 **See** Collector.toBlobSet
 
-### `static addToDateSet()`
+##### `static addToDateSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Date>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -143,7 +144,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -151,11 +152,11 @@ the `BiConsumer`
 
 **See** Collector.toDateSet
 
-### `static addToDatetimeSet()`
+##### `static addToDatetimeSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Datetime>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -165,7 +166,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -173,11 +174,11 @@ the `BiConsumer`
 
 **See** Collector.toDatetimeSet
 
-### `static addToTimeSet()`
+##### `static addToTimeSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Time>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -187,7 +188,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -195,11 +196,11 @@ the `BiConsumer`
 
 **See** Collector.toTimeSet
 
-### `static addToIntSet()`
+##### `static addToIntSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Integer>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -209,7 +210,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -217,11 +218,11 @@ the `BiConsumer`
 
 **See** Collector.toIntSet
 
-### `static addToLongSet()`
+##### `static addToLongSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Long>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -231,7 +232,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -239,11 +240,11 @@ the `BiConsumer`
 
 **See** Collector.toLongSet
 
-### `static addToDoubleSet()`
+##### `static addToDoubleSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Double>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -253,7 +254,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -261,11 +262,11 @@ the `BiConsumer`
 
 **See** Collector.toDoubleSet
 
-### `static addToSObjectSet()`
+##### `static addToSObjectSet()`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<SObject>` and adds the second input argument to it.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -275,7 +276,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|

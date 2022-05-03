@@ -13,16 +13,19 @@ Inherits [IIntToLongFunction](/docs/Functional-Interfaces/IIntToLongFunction.md)
 **Group** Functions
 
 ## Methods
-### `apply(Integer i)`
-#### Parameters
+### Function
+##### `apply(Integer i)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static asLong()`
+---
+### Built-Ins
+##### `static asLong()`
 
 Returns a `IIntToLongFunction` that returns the Long value of the Integer input argument by casting it to an Long.
 
-#### Return
+###### Return
 
 **Type**
 

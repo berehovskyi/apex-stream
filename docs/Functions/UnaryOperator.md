@@ -16,21 +16,24 @@ Inherits [IUnaryOperator](/docs/Functional-Interfaces/IUnaryOperator.md) functio
 **See** IObjectIterable.mapTo
 
 ## Methods
-### `apply(Object o)`
-#### Parameters
+### Function
+##### `apply(Object o)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `andThen(IUnaryOperator after)`
+---
+### Default Methods
+##### `andThen(IUnaryOperator after)`
 
 Returns a composed `UnaryOperator` that executes `this` operation first, then the `after` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -40,21 +43,21 @@ UnaryOperator
 
 the composed `UnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-### `compose(IUnaryOperator before)`
+##### `compose(IUnaryOperator before)`
 
 Returns a composed `UnaryOperator` that executes `before` operation first, then the `this` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`before`|the operation to perform before this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,21 +67,23 @@ UnaryOperator
 
 the composed `UnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `before` is null|
 
-### `static compose(List<IUnaryOperator> operators)`
+---
+### Static Methods
+##### `static compose(List<IUnaryOperator> operators)`
 
 Returns a composed `UnaryOperator` that sequentially executes the operations in the same order as the order of the consumers input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operators`|the operations to sequentially perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -88,16 +93,16 @@ UnaryOperator
 
 the composed `UnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operators` is null or some element is null|
 
-### `static identity()`
+##### `static identity()`
 
 Returns a `UnaryOperator` that always returns the input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -107,16 +112,16 @@ UnaryOperator
 
 the `UnaryOperator`
 
-### `static constant(Object value)`
+##### `static constant(Object value)`
 
 Returns a `UnaryOperator` that always returns the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -126,16 +131,16 @@ UnaryOperator
 
 the `UnaryOperator`
 
-### `static upcast(IIntUnaryOperator operator)`
+##### `static upcast(IIntUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `IIntUnaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|applied to the input argument casted to `Integer`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -145,21 +150,21 @@ UnaryOperator
 
 the `UnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-### `static upcast(ILongUnaryOperator operator)`
+##### `static upcast(ILongUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `ILongUnaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|applied to the input argument casted to `Long`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -169,21 +174,21 @@ UnaryOperator
 
 the `UnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-### `static upcast(IDoubleUnaryOperator operator)`
+##### `static upcast(IDoubleUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `IDoubleUnaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|applied to the input argument casted to `Double`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -193,21 +198,21 @@ UnaryOperator
 
 the `UnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-### `static upcast(ISObjectUnaryOperator operator)`
+##### `static upcast(ISObjectUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `ISObjectUnaryOperator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operator`|applied to the input argument casted to `SObject`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -217,7 +222,7 @@ UnaryOperator
 
 the `UnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operator` is null|

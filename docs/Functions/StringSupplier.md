@@ -13,11 +13,12 @@ Provides common class level implementations, and related utilities for `StringSu
 **Group** Functions
 
 ## Methods
-### `static uuid()`
+### Built-Ins
+##### `static uuid()`
 
 Returns a `Supplier` that returns the next uuid.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -27,7 +28,7 @@ Supplier
 
 the `Supplier`
 
-#### Example
+###### Example
 ```apex
 ISupplier uuid = StringSupplier.uuid();
 uuid.get(); // '563581af-5560-a1fd-2291-2b03582bf000'

@@ -25,16 +25,19 @@ Inherits [IIntBinaryOperator](/docs/Functional-Interfaces/IIntBinaryOperator.md)
 **See** [Collector](/docs/Collectors/Collector.md)
 
 ## Methods
-### `apply(Integer i1, Integer i2)`
-#### Parameters
+### Function
+##### `apply(Integer i1, Integer i2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static max()`
+---
+### Built-Ins
+##### `static max()`
 
 Returns a `IntBinaryOperator` that return a greater Integer input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -44,7 +47,7 @@ IntBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|
@@ -52,11 +55,11 @@ the `IntBinaryOperator`
 
 **See** Math.max
 
-### `static min()`
+##### `static min()`
 
 Returns a `IntBinaryOperator` that return a lesser Integer input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -66,7 +69,7 @@ IntBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|
@@ -74,11 +77,11 @@ the `IntBinaryOperator`
 
 **See** Math.min
 
-### `static product()`
+##### `static product()`
 
 Returns a `IntBinaryOperator` that return a product of two Integer input arguments.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -88,16 +91,16 @@ IntBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|
 
-### `static sum()`
+##### `static sum()`
 
 Returns a `IntBinaryOperator` that return a sum of two Integer input arguments.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -107,7 +110,7 @@ IntBinaryOperator
 
 the `IntBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Integer input argument is null|

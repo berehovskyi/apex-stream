@@ -28,21 +28,24 @@ Inherits [IComparator](/docs/Functional-Interfaces/IComparator.md) functional in
 **See** BinaryOperator.maxBy
 
 ## Methods
-### `compare(Object o1, Object o2)`
-#### Parameters
+### Function
+##### `compare(Object o1, Object o2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `thenComparing(IComparator other)`
+---
+### Default Methods
+##### `thenComparing(IComparator other)`
 
 Returns a composed `Comparator` of `this` and the `other` comparator. If `this` considers two elements equal, the `other` determines the final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the comparator to compare keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -52,22 +55,22 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `thenComparing(IFunction keyExtractor, IComparator keyComparator)`
+##### `thenComparing(IFunction keyExtractor, IComparator keyComparator)`
 
 Returns a composed `Comparator` of `this` and then comparing on the key extracted by the `keyExtractor` function to be compared with the given `keyComparator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the key to compare|
 |`keyComparator`|the comparator to compare keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -77,21 +80,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `thenComparing(IFunction keyExtractor)`
+##### `thenComparing(IFunction keyExtractor)`
 
 Returns a composed `Comparator` of `this` and then comparing on the key extracted by the `keyExtractor` function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -101,21 +104,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `thenComparingInt(IToIntFunction keyExtractor)`
+##### `thenComparingInt(IToIntFunction keyExtractor)`
 
 Returns a composed `Comparator` of `this` and then comparing on the key extracted by the `keyExtractor` function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the Integer key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -125,21 +128,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `thenComparingLong(IToLongFunction keyExtractor)`
+##### `thenComparingLong(IToLongFunction keyExtractor)`
 
 Returns a composed `Comparator` of `this` and then comparing on the key extracted by the `keyExtractor` function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the Long key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -149,21 +152,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `thenComparingDouble(IToDoubleFunction keyExtractor)`
+##### `thenComparingDouble(IToDoubleFunction keyExtractor)`
 
 Returns a composed `Comparator` of `this` and then comparing on the key extracted by the `keyExtractor` function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the Double key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -173,21 +176,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `thenComparingSObject(IToSObjectFunction keyExtractor)`
+##### `thenComparingSObject(IToSObjectFunction keyExtractor)`
 
 Returns a composed `Comparator` of `this` and then comparing on the key extracted by the `keyExtractor` function.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the SObject key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -197,21 +200,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `order(SortOrder order)`
+##### `order(SortOrder order)`
 
 Returns a `Comparator` that imposes either `default` or `reversed` ordering depending on the `order`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`order`|the sort order|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -221,7 +224,7 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `order` is null|
@@ -229,11 +232,11 @@ the `Comparator`
 
 **See** [SortOrder](/docs/Enums/SortOrder.md)
 
-### `nullsFirst()`
+##### `nullsFirst()`
 
 Returns a null-safe `Comparator` of `this` comparator that considers null to be less than non-null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -243,11 +246,11 @@ Comparator
 
 the `Comparator`
 
-### `nullsLast()`
+##### `nullsLast()`
 
 Returns a null-safe `Comparator` of `this` comparator that considers null to be greater than non-null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -257,11 +260,11 @@ Comparator
 
 the `Comparator`
 
-### `reversed()`
+##### `reversed()`
 
 Returns a comparator that imposes the reverse ordering of `this` comparator.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -271,17 +274,19 @@ Comparator
 
 the `Comparator`
 
-### `static comparing(IFunction keyExtractor, IComparator keyComparator)`
+---
+### Static Methods
+##### `static comparing(IFunction keyExtractor, IComparator keyComparator)`
 
 Returns a `Comparator` that compares extracted by the `keyExtractor` keys using the `keyComparator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the key to compare|
 |`keyComparator`|the comparator to compare keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -291,21 +296,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` or `keyComparator` is null|
 
-### `static comparing(IFunction keyExtractor)`
+##### `static comparing(IFunction keyExtractor)`
 
 Returns a `Comparator` that compares extracted by the `keyExtractor` keys.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -315,21 +320,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` is null|
 
-### `static comparingInt(IToIntFunction keyExtractor)`
+##### `static comparingInt(IToIntFunction keyExtractor)`
 
 Returns a `Comparator` that compares extracted by the `keyExtractor` keys.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the Integer key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -339,21 +344,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` is null|
 
-### `static comparingLong(IToLongFunction keyExtractor)`
+##### `static comparingLong(IToLongFunction keyExtractor)`
 
 Returns a `Comparator` that compares extracted by the `keyExtractor` keys.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the Long key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -363,21 +368,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` is null|
 
-### `static comparingDouble(IToDoubleFunction keyExtractor)`
+##### `static comparingDouble(IToDoubleFunction keyExtractor)`
 
 Returns a `Comparator` that compares extracted by the `keyExtractor` keys.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the Double key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -387,21 +392,21 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` is null|
 
-### `static comparingSObject(IToSObjectFunction keyExtractor)`
+##### `static comparingSObject(IToSObjectFunction keyExtractor)`
 
 Returns a `Comparator` that compares extracted by the `keyExtractor` keys.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyExtractor`|the function to extract the SObject key to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -411,16 +416,16 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyExtractor` is null|
 
-### `static defaultOrder()`
+##### `static defaultOrder()`
 
 Returns a comparator that imposes the default ordering.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -430,11 +435,11 @@ Comparator
 
 the `Comparator`
 
-### `static reverseOrder()`
+##### `static reverseOrder()`
 
 Returns a comparator that imposes the reverse ordering.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -444,15 +449,15 @@ Comparator
 
 the `Comparator`
 
-### `static nullsFirst(Comparator comparator)`
+##### `static nullsFirst(Comparator comparator)`
 
 Returns a null-safe `Comparator` of the `comparator` that considers null to be less than non-null.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -462,20 +467,20 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `comparator` is null|
 
-### `static nullsLast(Comparator comparator)`
+##### `static nullsLast(Comparator comparator)`
 
 Returns a null-safe `Comparator` of the `comparator` that considers null to be greater than non-null.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -485,35 +490,37 @@ Comparator
 
 the `Comparator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `comparator` is null|
 
-### `static bools()`
-### `static ids()`
-### `static strings()`
-### `static blobs()`
-### `static dates()`
-### `static datetimes()`
-### `static times()`
-### `static ints()`
-### `static longs()`
-### `static doubles()`
-### `static sObjects()`
-### `static comparables()`
-### `static compareNullables(Object o1, Object o2, Boolean isNullGreater)`
+##### `static bools()`
+##### `static ids()`
+##### `static strings()`
+##### `static blobs()`
+##### `static dates()`
+##### `static datetimes()`
+##### `static times()`
+##### `static ints()`
+##### `static longs()`
+##### `static doubles()`
+##### `static sObjects()`
+##### `static comparables()`
+---
+### Compare Methods
+##### `static compareNullables(Object o1, Object o2, Boolean isNullGreater)`
 
 Compares the two nullable objects considering that at least one of them is null.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`o1`|the first boolean to compare|
 |`o2`|the second boolean to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -523,17 +530,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullables(Object o1, Object o2)`
+##### `static compareNullables(Object o1, Object o2)`
 
 Compares the two nullable objects considering that at least one of them is null. Considers a non-null value as always greater than a null value.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`o1`|the first boolean to compare|
 |`o2`|the second boolean to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -543,17 +550,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareBools(Boolean o1, Boolean o2)`
+##### `static compareBools(Boolean o1, Boolean o2)`
 
 Compares the two non-null booleans considering `true` is greater than `false`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`o1`|the first boolean to compare|
 |`o2`|the second boolean to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -563,17 +570,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareIds(Id id1, Id id2)`
+##### `static compareIds(Id id1, Id id2)`
 
 Compares the two non-null strings. <p><strong>Note: </strong></p> <p>Id comparison is case-sensitive and does not distinguish between 15-character and 18-character formats</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`id1`|the first id to compare|
 |`id2`|the second id to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -583,17 +590,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareStrings(String str1, String str2)`
+##### `static compareStrings(String str1, String str2)`
 
 Compares the two non-null strings. <p><strong>Note: </strong></p> <p>String comparison is case-insensitive.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`str1`|the first string to compare|
 |`str2`|the second string to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -603,17 +610,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareBlobs(Blob b1, Blob b2)`
+##### `static compareBlobs(Blob b1, Blob b2)`
 
 Compares the two non-null blobs.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`b1`|the first blob to compare|
 |`b2`|the second blob to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -623,17 +630,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareDates(Date d1, Date d2)`
+##### `static compareDates(Date d1, Date d2)`
 
 Compares the two non-null dates.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`d1`|the first date to compare|
 |`d2`|the second date to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -643,17 +650,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareDatetimes(Datetime dt1, Datetime dt2)`
+##### `static compareDatetimes(Datetime dt1, Datetime dt2)`
 
 Compares the two non-null datetimes.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`dt1`|the first datetime to compare|
 |`dt2`|the second datetime to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -663,17 +670,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareTimes(Time t1, Time t2)`
+##### `static compareTimes(Time t1, Time t2)`
 
 Compares the two non-null times.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`t1`|the first time to compare|
 |`t2`|the second time to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -683,17 +690,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareInts(Integer i1, Integer i2)`
+##### `static compareInts(Integer i1, Integer i2)`
 
 Compares the two non-null integers.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i1`|the first Integer to compare|
 |`i2`|the second Integer to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -703,17 +710,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareLongs(Long l1, Long l2)`
+##### `static compareLongs(Long l1, Long l2)`
 
 Compares the two non-null longs.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`l1`|the first Long to compare|
 |`l2`|the second Long to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -723,17 +730,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareDoubles(Double d1, Double d2)`
+##### `static compareDoubles(Double d1, Double d2)`
 
 Compares the two non-null Doubles.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`d1`|the first Double to compare|
 |`d2`|the second Double to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -743,17 +750,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareSObjects(SObject sObj1, SObject sObj2)`
+##### `static compareSObjects(SObject sObj1, SObject sObj2)`
 
 Compares the two non-null sobjects.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`sObj1`|the first SObject to compare|
 |`sObj2`|the second SObject to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -763,17 +770,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareComparables(Comparable x, Comparable y)`
+##### `static compareComparables(Comparable x, Comparable y)`
 
 Compares the two non-null comparables.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`x`|the first SObject to compare|
 |`y`|the second SObject to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -783,17 +790,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareUntyped(Object value1, Object value2)`
+##### `static compareUntyped(Object value1, Object value2)`
 
 Compares the two non-null objects identifying its types first. Supports all primitive types and comparable type.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value1`|the first object to compare|
 |`value2`|the second object to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -803,23 +810,23 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`TypeException`|if types of comparing objects mismatch or if the type is user-defined type and is not comparable.|
 
-### `static compareNullSafeBools(Boolean b1, Boolean b2, Boolean isNullGreater)`
+##### `static compareNullSafeBools(Boolean b1, Boolean b2, Boolean isNullGreater)`
 
 Compares the two nullable Booleans.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`b1`|the first Boolean to compare|
 |`b2`|the second Boolean to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -829,17 +836,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeBools(Boolean b1, Boolean b2)`
+##### `static compareNullSafeBools(Boolean b1, Boolean b2)`
 
 Compares the two nullable Booleans.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`b1`|the first Boolean to compare|
 |`b2`|the second Boolean to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -849,18 +856,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeIds(Id id1, Id id2, Boolean isNullGreater)`
+##### `static compareNullSafeIds(Id id1, Id id2, Boolean isNullGreater)`
 
 Compares the two nullable Ids.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`id1`|the first Id to compare|
 |`id2`|the second Id to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -870,17 +877,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeIds(Id id1, Id id2)`
+##### `static compareNullSafeIds(Id id1, Id id2)`
 
 Compares the two nullable Ids.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`id1`|the first Id to compare|
 |`id2`|the second Id to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -890,18 +897,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeStrings(String str1, String str2, Boolean isNullGreater)`
+##### `static compareNullSafeStrings(String str1, String str2, Boolean isNullGreater)`
 
 Compares the two nullable Strings.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`str1`|the first String to compare|
 |`str2`|the second String to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -911,17 +918,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeStrings(String str1, String str2)`
+##### `static compareNullSafeStrings(String str1, String str2)`
 
 Compares the two nullable Strings.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`str1`|the first String to compare|
 |`str2`|the second String to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -931,18 +938,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeBlobs(Blob b1, Blob b2, Boolean isNullGreater)`
+##### `static compareNullSafeBlobs(Blob b1, Blob b2, Boolean isNullGreater)`
 
 Compares the two nullable Blobs.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`b1`|the first Blob to compare|
 |`b2`|the second Blob to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -952,17 +959,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeBlobs(Blob b1, Blob b2)`
+##### `static compareNullSafeBlobs(Blob b1, Blob b2)`
 
 Compares the two nullable Blobs.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`b1`|the first Blob to compare|
 |`b2`|the second Blob to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -972,18 +979,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeDates(Date d1, Date d2, Boolean isNullGreater)`
+##### `static compareNullSafeDates(Date d1, Date d2, Boolean isNullGreater)`
 
 Compares the two nullable Dates.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`d1`|the first Date to compare|
 |`d2`|the second Date to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -993,17 +1000,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeDates(Date d1, Date d2)`
+##### `static compareNullSafeDates(Date d1, Date d2)`
 
 Compares the two nullable Dates.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`d1`|the first Date to compare|
 |`d2`|the second Date to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1013,18 +1020,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeDatetimes(Datetime dt1, Datetime dt2, Boolean isNullGreater)`
+##### `static compareNullSafeDatetimes(Datetime dt1, Datetime dt2, Boolean isNullGreater)`
 
 Compares the two nullable Datetimes.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`dt1`|the first Datetime to compare|
 |`dt2`|the second Datetime to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1034,17 +1041,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeDatetimes(Datetime dt1, Datetime dt2)`
+##### `static compareNullSafeDatetimes(Datetime dt1, Datetime dt2)`
 
 Compares the two nullable Datetimes.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`dt1`|the first Datetime to compare|
 |`dt2`|the second Datetime to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1054,18 +1061,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeTimes(Time t1, Time t2, Boolean isNullGreater)`
+##### `static compareNullSafeTimes(Time t1, Time t2, Boolean isNullGreater)`
 
 Compares the two nullable Times.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`t1`|the first Time to compare|
 |`t2`|the second Time to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1075,17 +1082,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeTimes(Time t1, Time t2)`
+##### `static compareNullSafeTimes(Time t1, Time t2)`
 
 Compares the two nullable Times.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`t1`|the first Time to compare|
 |`t2`|the second Time to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1095,18 +1102,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeInts(Integer i1, Integer i2, Boolean isNullGreater)`
+##### `static compareNullSafeInts(Integer i1, Integer i2, Boolean isNullGreater)`
 
 Compares the two nullable integers.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i1`|the first Integer to compare|
 |`i2`|the second Integer to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1116,17 +1123,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeInts(Integer i1, Integer i2)`
+##### `static compareNullSafeInts(Integer i1, Integer i2)`
 
 Compares the two nullable integers.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i1`|the first Integer to compare|
 |`i2`|the second Integer to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1136,18 +1143,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeLongs(Long l1, Long l2, Boolean isNullGreater)`
+##### `static compareNullSafeLongs(Long l1, Long l2, Boolean isNullGreater)`
 
 Compares the two nullable Longs.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`l1`|the first Long to compare|
 |`l2`|the second Long to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1157,17 +1164,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeLongs(Long l1, Long l2)`
+##### `static compareNullSafeLongs(Long l1, Long l2)`
 
 Compares the two nullable Longs.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`l1`|the first Long to compare|
 |`l2`|the second Long to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1177,18 +1184,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeDoubles(Double d1, Double d2, Boolean isNullGreater)`
+##### `static compareNullSafeDoubles(Double d1, Double d2, Boolean isNullGreater)`
 
 Compares the two nullable Doubles.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`d1`|the first Double to compare|
 |`d2`|the second Double to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1198,17 +1205,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeDoubles(Double d1, Double d2)`
+##### `static compareNullSafeDoubles(Double d1, Double d2)`
 
 Compares the two nullable Doubles.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`d1`|the first Double to compare|
 |`d2`|the second Double to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1218,18 +1225,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeSObjects(SObject sObj1, SObject sObj2, Boolean isNullGreater)`
+##### `static compareNullSafeSObjects(SObject sObj1, SObject sObj2, Boolean isNullGreater)`
 
 Compares the two nullable SObjects.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`sObj1`|the first SObject to compare|
 |`sObj2`|the second SObject to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1239,17 +1246,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeSObjects(SObject sObj1, SObject sObj2)`
+##### `static compareNullSafeSObjects(SObject sObj1, SObject sObj2)`
 
 Compares the two nullable SObjects.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`sObj1`|the first SObject to compare|
 |`sObj2`|the second SObject to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1259,18 +1266,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeComparables(Comparable x, Comparable y, Boolean isNullGreater)`
+##### `static compareNullSafeComparables(Comparable x, Comparable y, Boolean isNullGreater)`
 
 Compares the two nullable Comparables.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`x`|the first Comparable to compare|
 |`y`|the second Comparable to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1280,17 +1287,17 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeComparables(Comparable x, Comparable y)`
+##### `static compareNullSafeComparables(Comparable x, Comparable y)`
 
 Compares the two nullable Comparables.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`x`|the first Comparable to compare|
 |`y`|the second Comparable to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1300,18 +1307,18 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-### `static compareNullSafeUntyped(Object value1, Object value2, Boolean isNullGreater)`
+##### `static compareNullSafeUntyped(Object value1, Object value2, Boolean isNullGreater)`
 
 Compares the two non-null Objects identifying its types first. Supports all primitive types as well as comparable type.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value1`|the first object to compare|
 |`value2`|the second object to compare|
 |`isNullGreater`|the boolean determines if null value is greater than any other value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1321,22 +1328,22 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`TypeException`|if types of comparing objects mismatch or if the type is user-defined type and is not comparable.|
 
-### `static compareNullSafeUntyped(Object value1, Object value2)`
+##### `static compareNullSafeUntyped(Object value1, Object value2)`
 
 Compares the two non-null Objects identifying its types first. Supports all primitive types as well as comparable type. Considers a non-null value as always greater than a null value.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value1`|the first object to compare|
 |`value2`|the second object to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1346,7 +1353,7 @@ Integer
 
 `-1` if the first input arguments is less than the second one, `0` if they&apos;re equal, and `1` otherwise
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`TypeException`|if types of comparing objects mismatch or if the type is user-defined type and is not comparable.|

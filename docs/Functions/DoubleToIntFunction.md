@@ -13,16 +13,19 @@ Inherits [IDoubleToIntFunction](/docs/Functional-Interfaces/IDoubleToIntFunction
 **Group** Functions
 
 ## Methods
-### `apply(Double d)`
-#### Parameters
+### Function
+##### `apply(Double d)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static intValue()`
+---
+### Built-Ins
+##### `static intValue()`
 
 Returns a `DoubleToIntFunction` that returns the Integer value of the Double input argument by casting it to an Integer.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -35,11 +38,11 @@ the `DoubleToIntFunction`
 
 **See** Double.intValue
 
-### `static round()`
+##### `static round()`
 
 Returns a `DoubleToIntFunction` that returns the closest Integer to the Double input argument. If the result is less than -2,147,483,648 or greater than 2,147,483,647, Apex generates an error.
 
-#### Return
+###### Return
 
 **Type**
 

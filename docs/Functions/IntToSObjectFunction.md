@@ -13,8 +13,9 @@ Inherits [IIntToSObjectFunction](/docs/Functional-Interfaces/IIntToSObjectFuncti
 **Group** Functions
 
 ## Methods
-### `apply(Integer i)`
-#### Parameters
+### Function
+##### `apply(Integer i)`
+###### Parameters
 |Param|Description|
 |---|---|
 

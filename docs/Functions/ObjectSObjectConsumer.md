@@ -27,22 +27,25 @@ Downstream collector.
 
 ---
 ## Methods
-### `accept(Object container, SObject sObj)`
-#### Parameters
+### Function
+##### `accept(Object container, SObject sObj)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static filtering(ISObjectPredicate predicate, IObjectSObjectConsumer accumulator)`
+---
+### Composed BiConsumers
+##### `static filtering(ISObjectPredicate predicate, IObjectSObjectConsumer accumulator)`
 
 Returns a composed `ObjectSObjectConsumer` that executes `accumulator` operation, if the second input argument satisfies the predicate.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate applied to the second input argument|
 |`accumulator`|the operation to perform after filtering|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -52,22 +55,22 @@ ObjectSObjectConsumer
 
 the composed `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` or `accumulator` is null|
 
-### `static mapping(ISObjectFunction mapper, IBiConsumer accumulator)`
+##### `static mapping(ISObjectFunction mapper, IBiConsumer accumulator)`
 
 Returns a composed `ObjectSObjectConsumer` that applies `accumulator` operation to the result returned by the mapper.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the operator applied to the second input argument|
 |`accumulator`|the operation to perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -77,7 +80,7 @@ ObjectSObjectConsumer
 
 the composed `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `accumulator` is null|

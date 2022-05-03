@@ -13,21 +13,24 @@ Inherits [ISObjectToIntFunction](/docs/Functional-Interfaces/ISObjectToIntFuncti
 **Group** Functions
 
 ## Methods
-### `apply(SObject sObj)`
-#### Parameters
+### Function
+##### `apply(SObject sObj)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static downcast(ISObjectFunction mapper)`
+---
+### Static Methods
+##### `static downcast(ISObjectFunction mapper)`
 
 Returns a composed `SObjectToIntFunction` of the `ISObjectFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,21 +40,23 @@ SObjectToIntFunction
 
 the `SObjectToIntFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static get(String fieldName)`
+---
+### Built-Ins
+##### `static get(String fieldName)`
 
 Returns a `SObjectToIntFunction` that gets a value for the specified `fieldName` as Integer. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field to get a Integer value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -61,7 +66,7 @@ SObjectToIntFunction
 
 the `SObjectToIntFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -71,23 +76,23 @@ the `SObjectToIntFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectToIntFunction.get('NumberOfEmployees');
 SObjectToIntFunction.get('Parent.NumberOfEmployees');
 SObjectToIntFunction.get('Parent?.NumberOfEmployees');
 ```
 
-### `static get(SObjectField field)`
+##### `static get(SObjectField field)`
 
 Returns a `SObjectToIntFunction` that gets a value for the specified `field` as Integer.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to get a value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -97,7 +102,7 @@ SObjectToIntFunction
 
 the `SObjectToIntFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -105,7 +110,7 @@ the `SObjectToIntFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectToIntFunction.get(Account.NumberOfEmployees);
 ```

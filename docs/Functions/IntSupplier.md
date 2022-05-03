@@ -13,12 +13,15 @@ Inherits [IntSupplier](/docs/Functions/IntSupplier.md) functional interface and 
 **Group** Functions
 
 ## Methods
-### `get()`
-### `static increment()`
+### Function
+##### `get()`
+---
+### Built-Ins
+##### `static increment()`
 
 Returns a `IntSupplier` that returns a next Integer value that has been incremented by 1 starting at 0. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -28,15 +31,15 @@ IntSupplier
 
 the `IntSupplier`
 
-### `static increment(Integer fromInt, Integer step)`
+##### `static increment(Integer fromInt, Integer step)`
 
 Returns a `IntSupplier` that returns a next Integer value that has been incremented by `step` starting at `fromInt` inclusively. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -46,16 +49,16 @@ IntSupplier
 
 the `IntSupplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fromInt` or `step` is null|
 
-### `static fibonacci()`
+##### `static fibonacci()`
 
 Returns a `IntSupplier` that returns a next fibonacci Integer value starting at 1. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
 
-#### Return
+###### Return
 
 **Type**
 

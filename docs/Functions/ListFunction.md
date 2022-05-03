@@ -13,16 +13,17 @@ Extends `Function` functions and provides `ListFunction` common class level impl
 **Group** Functions
 
 ## Methods
-### `static get(Integer index)`
+### List Functions
+##### `static get(Integer index)`
 
 Returns a `Function` that returns the list element stored at the specified index.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`index`|the index|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `index` is null|

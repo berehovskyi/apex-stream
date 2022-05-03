@@ -13,21 +13,24 @@ Inherits [IToDoubleFunction](/docs/Functional-Interfaces/IToDoubleFunction.md) f
 **Group** Functions
 
 ## Methods
-### `apply(Object o)`
-#### Parameters
+### Function
+##### `apply(Object o)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static downcast(ISObjectFunction mapper)`
+---
+### Static Methods
+##### `static downcast(ISObjectFunction mapper)`
 
 Returns a composed `ToDoubleFunction` of the `ISObjectFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,21 +40,21 @@ ToDoubleFunction
 
 the `ToDoubleFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static downcast(IFunction mapper)`
+##### `static downcast(IFunction mapper)`
 
 Returns a composed `ToDoubleFunction` of the `IFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -61,16 +64,18 @@ ToDoubleFunction
 
 the `ToDoubleFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static asDouble()`
+---
+### Built-Ins
+##### `static asDouble()`
 
 Returns a `ToDoubleFunction` that returns the Double value of the Object input argument by casting it to an Double.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -80,11 +85,11 @@ ToDoubleFunction
 
 the `ToDoubleFunction`
 
-### `static valueOf()`
+##### `static valueOf()`
 
 Returns a `ToDoubleFunction` that returns the Double value of the Object input argument.
 
-#### Return
+###### Return
 
 **Type**
 

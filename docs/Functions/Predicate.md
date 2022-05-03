@@ -34,21 +34,24 @@ Inherits [IPredicate](/docs/Functional-Interfaces/IPredicate.md) functional inte
 **See** IObjectIterable.none
 
 ## Methods
-### `test(Object o)`
-#### Parameters
+### Function
+##### `test(Object o)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `orElse(IPredicate other)`
+---
+### Default Methods
+##### `orElse(IPredicate other)`
 
 Returns a composed `Predicate` that applies short-circuiting logical OR} operator to `this` `IPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `Predicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -58,26 +61,26 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 somePredicate1.orElse(somePredicate2);
 ```
 
-### `andAlso(IPredicate other)`
+##### `andAlso(IPredicate other)`
 
 Returns a composed `Predicate` that applies short-circuiting logical AND} operator to `this` `IPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `Predicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -87,21 +90,21 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 somePredicate1.andAlso(somePredicate2);
 ```
 
-### `negate()`
+##### `negate()`
 
 Returns a `Predicate` that applies logical `NOT` operator to `this` `IPredicate`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -111,21 +114,23 @@ Predicate
 
 the negated `Predicate`
 
-#### Example
+###### Example
 ```apex
 somePredicate1.negate();
 ```
 
-### `static some(List<IPredicate> predicates)`
+---
+### Static Methods
+##### `static some(List<IPredicate> predicates)`
 
 Returns a composed `Predicate` that applies sequentially short-circuiting logical `OR` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IPredicates`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -135,27 +140,27 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.some(somePredicates);
 ```
 
-### `static some(IPredicate predicate1, IPredicate predicate2)`
+##### `static some(IPredicate predicate1, IPredicate predicate2)`
 
 Returns a composed `Predicate` that applies short-circuiting logical OR} operator to `predicate1` `IPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `IPredicate`|
 |`predicate2`|the second `IPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -165,26 +170,26 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.some(somePredicate1, somePredicate2);
 ```
 
-### `static every(List<IPredicate> predicates)`
+##### `static every(List<IPredicate> predicates)`
 
 Returns a composed `Predicate` that applies sequentially short-circuiting logical `AND` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IPredicates`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -194,27 +199,27 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.every(somePredicates);
 ```
 
-### `static every(IPredicate predicate1, IPredicate predicate2)`
+##### `static every(IPredicate predicate1, IPredicate predicate2)`
 
 Returns a composed `Predicate` that applies short-circuiting logical AND} operator to `predicate1` `IPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `IPredicate`|
 |`predicate2`|the second `IPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -224,26 +229,26 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.every(somePredicate1, somePredicate2);
 ```
 
-### `static negate(IPredicate predicate)`
+##### `static negate(IPredicate predicate)`
 
 Returns a `Predicate` that applies logical `NOT` operator to `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the `IPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -253,21 +258,21 @@ Predicate
 
 the negated `Predicate`
 
-#### Example
+###### Example
 ```apex
 Predicate.negate(somePredicate);
 ```
 
-### `static always(Boolean value)`
+##### `static always(Boolean value)`
 
 Returns a `Predicate` that always evaluates to the Boolean `value` (`true` or `false`).
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the evaluated value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -277,27 +282,27 @@ Predicate
 
 predicate the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `value` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.always(true);
 ```
 
-### `static compose(IFunction mapper, IPredicate predicate)`
+##### `static compose(IFunction mapper, IPredicate predicate)`
 
 Returns a composed `Predicate` of the `IFunction` and the `IPredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the input argument|
 |`predicate`|the predicate to the result returned by the `mapper`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -307,27 +312,27 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.compose(someFunction, somePredicate);
 ```
 
-### `static compose(IToIntFunction mapper, IIntPredicate predicate)`
+##### `static compose(IToIntFunction mapper, IIntPredicate predicate)`
 
 Returns a composed `Predicate` of the `IToIntFunction` and the `IIntPredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the input argument|
 |`predicate`|the predicate to the result returned by the `mapper`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -337,27 +342,27 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.compose(someToIntFunction, someIntPredicate);
 ```
 
-### `static compose(IToLongFunction mapper, ILongPredicate predicate)`
+##### `static compose(IToLongFunction mapper, ILongPredicate predicate)`
 
 Returns a composed `Predicate` of the `IToLongFunction` and the `ILongPredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the input argument|
 |`predicate`|the predicate to the result returned by the `mapper`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -367,27 +372,27 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.compose(someToLongFunction, someLongPredicate);
 ```
 
-### `static compose(IToDoubleFunction mapper, IDoublePredicate predicate)`
+##### `static compose(IToDoubleFunction mapper, IDoublePredicate predicate)`
 
 Returns a composed `Predicate` of the `IToDoubleFunction` and the `IDoublePredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the input argument|
 |`predicate`|the predicate to the result returned by the `mapper`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -397,27 +402,27 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.compose(someToDoubleFunction, someDoublePredicate);
 ```
 
-### `static compose(IToSObjectFunction mapper, ISObjectPredicate predicate)`
+##### `static compose(IToSObjectFunction mapper, ISObjectPredicate predicate)`
 
 Returns a composed `Predicate` of the `IToSObjectFunction` and the `ISObjectPredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the input argument|
 |`predicate`|the predicate to the result returned by the `mapper`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -427,26 +432,26 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.compose(someToSObjectFunction, someSObjectPredicate);
 ```
 
-### `static upcast(IIntPredicate predicate)`
+##### `static upcast(IIntPredicate predicate)`
 
 Returns a composed `Predicate` of the `IIntPredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -456,26 +461,26 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.upcast(someIntPredicate);
 ```
 
-### `static upcast(ILongPredicate predicate)`
+##### `static upcast(ILongPredicate predicate)`
 
 Returns a composed `Predicate` of the `ILongPredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -485,26 +490,26 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.upcast(someLongPredicate);
 ```
 
-### `static upcast(IDoublePredicate predicate)`
+##### `static upcast(IDoublePredicate predicate)`
 
 Returns a composed `Predicate` of the `IDoublePredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -514,26 +519,26 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.upcast(someDoublePredicate);
 ```
 
-### `static upcast(ISObjectPredicate predicate)`
+##### `static upcast(ISObjectPredicate predicate)`
 
 Returns a composed `Predicate` of the `ISObjectPredicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -543,21 +548,23 @@ Predicate
 
 the composed `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.upcast(someSObjectPredicate);
 ```
 
-### `static isCompared(IFunction left, IFunction right, IComparator comparator, Integer result)`
+---
+### Built-Ins
+##### `static isCompared(IFunction left, IFunction right, IComparator comparator, Integer result)`
 
 Returns a `Predicate` that tests if the result of comparing the values returned by the applied `left` and `right` functions by the `comparator` is equal to the expected `result`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function applied to the input argument the result of which is passed to the `comparator` as the first argument|
@@ -565,7 +572,7 @@ Returns a `Predicate` that tests if the result of comparing the values returned 
 |`comparator`|the function that compares two arguments|
 |`result`|the expected result of comparison (1, -1, or 0)|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -575,12 +582,12 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `left`, or the `right`, or `comparator`, or `result` is null|
 
-#### Example
+###### Example
 ```apex
 Predicate.isCompared(
     func1,
@@ -590,17 +597,17 @@ Predicate.isCompared(
 );
 ```
 
-### `static isGreater(IFunction left, IFunction right)`
+##### `static isGreater(IFunction left, IFunction right)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `left` function is greater than the result returned by the `right` function. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function whose application result is considered as the left argument of comparison|
 |`right`|the function whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -610,7 +617,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `left`, or the `right` is null|
@@ -618,22 +625,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isGreater(func1, func2);
 Predicate.isGreater(func1, Function.constant(100));
 ```
 
-### `static isGreater(Object value)`
+##### `static isGreater(Object value)`
 
 Returns a `Predicate` that tests the input object if it is greater than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -646,22 +653,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isGreater(100);
 ```
 
-### `static isGreaterOrEqual(IFunction left, IFunction right)`
+##### `static isGreaterOrEqual(IFunction left, IFunction right)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `left` function is greater than or equal to the result returned by the `right` function. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` &quot;greater than or equal to &quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function whose application result is considered as the left argument of comparison|
 |`right`|the function whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -671,7 +678,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `left`, or the `right` is null|
@@ -679,22 +686,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isGreaterOrEqual(func1, func2);
 Predicate.isGreaterOrEqual(func1, Function.constant(100));
 ```
 
-### `static isGreaterOrEqual(Object value)`
+##### `static isGreaterOrEqual(Object value)`
 
 Returns a `Predicate` that tests the input object if it is greater than or equal to the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -707,22 +714,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isGreaterOrEqual(100);
 ```
 
-### `static isLess(IFunction left, IFunction right)`
+##### `static isLess(IFunction left, IFunction right)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `left` function is less than the result returned by the `right` function. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function whose application result is considered as the left argument of comparison|
 |`right`|the function whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -732,7 +739,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `left`, or the `right` is null|
@@ -740,22 +747,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isLess(func1, func2);
 Predicate.isLess(func1, Function.constant(100));
 ```
 
-### `static isLess(Object value)`
+##### `static isLess(Object value)`
 
 Returns a `Predicate` that tests the input object if it is less than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -768,22 +775,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isLess(100);
 ```
 
-### `static isLessOrEqual(IFunction left, IFunction right)`
+##### `static isLessOrEqual(IFunction left, IFunction right)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `left` function is less than or equal to the result returned by the `right` function. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function whose application result is considered as the left argument of comparison|
 |`right`|the function whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -793,7 +800,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `left`, or the `right` is null|
@@ -801,22 +808,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isLessOrEqual(func1, func2);
 Predicate.isLessOrEqual(func1, Function.constant(100));
 ```
 
-### `static isLessOrEqual(Object value)`
+##### `static isLessOrEqual(Object value)`
 
 Returns a `Predicate` that tests the input object if it is less than or equal to the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value. User-defined types must implement the `Comparable` interface.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -829,22 +836,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isLess(100);
 ```
 
-### `static isEqual(IFunction left, IFunction right)`
+##### `static isEqual(IFunction left, IFunction right)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `left` function is equal to the result returned by the `right` function, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function whose application result is considered as the left argument of comparison|
 |`right`|the function whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -854,7 +861,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `left`, or the `right` is null|
@@ -862,22 +869,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isEqual(func1, func2);
 Predicate.isEqual(func1, Function.constant(100));
 ```
 
-### `static isEqual(Object value)`
+##### `static isEqual(Object value)`
 
 Returns a `Predicate` that tests the input object if it is equal to the `value`, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -890,22 +897,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isEqual(100);
 ```
 
-### `static isNotEqual(IFunction left, IFunction right)`
+##### `static isNotEqual(IFunction left, IFunction right)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `left` function is not equal to the result returned by the `right` function, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`left`|the function whose application result is considered as the left argument of comparison|
 |`right`|the function whose application result is considered as the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -915,7 +922,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `left`, or the `right` is null|
@@ -923,22 +930,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isNotEqual(func1, func2);
 Predicate.isNotEqual(func1, Function.constant(100));
 ```
 
-### `static isNotEqual(Object value)`
+##### `static isNotEqual(Object value)`
 
 Returns a `Predicate` that tests the input object if it is not equal to the `value`, comparing object value equality not reference equality.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -951,22 +958,22 @@ the `Predicate`
 
 **See** Comparator.compareNullSafeUntyped
 
-#### Example
+###### Example
 ```apex
 Predicate.isEqual(100);
 ```
 
-### `static isIn(IFunction function, List<Object> container)`
+##### `static isIn(IFunction function, List<Object> container)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `function` is contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function whose application result is tested|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -976,7 +983,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `function`, or the `container` is null|
@@ -984,21 +991,21 @@ the `Predicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 Predicate.isIn(func, container);
 ```
 
-### `static isIn(List<Object> container)`
+##### `static isIn(List<Object> container)`
 
 Returns a `Predicate` that tests the input object if it is contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1008,7 +1015,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -1016,22 +1023,22 @@ the `Predicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 Predicate.isIn(container);
 ```
 
-### `static isNotIn(IFunction function, List<Object> container)`
+##### `static isNotIn(IFunction function, List<Object> container)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `function` is not contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`function`|the function whose application result is tested|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1041,7 +1048,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `function`, or the `container` is null|
@@ -1049,21 +1056,21 @@ the `Predicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 Predicate.isNotIn(func, container);
 ```
 
-### `static isNotIn(List<Object> container)`
+##### `static isNotIn(List<Object> container)`
 
 Returns a `Predicate` that tests the input object if it is not contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1073,7 +1080,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -1081,16 +1088,16 @@ the `Predicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 Predicate.isNotIn(container);
 ```
 
-### `static isNull()`
+##### `static isNull()`
 
 Returns a `Predicate` that tests the input object if it is null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1100,16 +1107,16 @@ Predicate
 
 the `Predicate`
 
-#### Example
+###### Example
 ```apex
 Predicate.isNull();
 ```
 
-### `static isNotNull()`
+##### `static isNotNull()`
 
 Returns a `Predicate` that tests the input object if it is not null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1119,16 +1126,16 @@ Predicate
 
 the `Predicate`
 
-#### Example
+###### Example
 ```apex
 Predicate.isNotNull();
 ```
 
-### `static isInstanceOfBool()`
+##### `static isInstanceOfBool()`
 
 Returns a `Predicate` that tests the input object if it is of Boolean} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1138,11 +1145,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfId()`
+##### `static isInstanceOfId()`
 
 Returns a `Predicate` that tests the input object if it is of Id} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1152,11 +1159,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfString()`
+##### `static isInstanceOfString()`
 
 Returns a `Predicate` that tests the input object if it is of String} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1166,11 +1173,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfBlob()`
+##### `static isInstanceOfBlob()`
 
 Returns a `Predicate` that tests the input object if it is of Blob} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1180,11 +1187,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfDate()`
+##### `static isInstanceOfDate()`
 
 Returns a `Predicate` that tests the input object if it is of Date} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1194,11 +1201,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfDatetime()`
+##### `static isInstanceOfDatetime()`
 
 Returns a `Predicate` that tests the input object if it is of Datetime} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1208,11 +1215,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfTime()`
+##### `static isInstanceOfTime()`
 
 Returns a `Predicate` that tests the input object if it is of Time} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1222,11 +1229,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfInt()`
+##### `static isInstanceOfInt()`
 
 Returns a `Predicate` that tests the input object if it is of Integer} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1236,11 +1243,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfLong()`
+##### `static isInstanceOfLong()`
 
 Returns a `Predicate` that tests the input object if it is of Long} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1250,11 +1257,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfDouble()`
+##### `static isInstanceOfDouble()`
 
 Returns a `Predicate` that tests the input object if it is of Double} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1264,11 +1271,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfSObject()`
+##### `static isInstanceOfSObject()`
 
 Returns a `Predicate` that tests the input object if it is of SObject} type.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1278,11 +1285,11 @@ Predicate
 
 the `Predicate`
 
-### `static isInstanceOfComparable()`
+##### `static isInstanceOfComparable()`
 
 Returns a `Predicate` that tests the input object if it is of Comparable} type.
 
-#### Return
+###### Return
 
 **Type**
 

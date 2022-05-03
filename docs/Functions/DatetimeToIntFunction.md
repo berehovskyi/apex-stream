@@ -13,11 +13,12 @@ Extends `ToIntFunction` functions and provides `DatetimeToIntFunction` common cl
 **Group** Functions
 
 ## Methods
-### `static day()`
+### Datetime To Int Functions
+##### `static day()`
 
 Returns a `ToIntFunction` that returns the day-of-month component of the Datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -30,11 +31,11 @@ the `ToIntFunction`
 
 **See** Datetime.day
 
-### `static dayGmt()`
+##### `static dayGmt()`
 
 Returns a `ToIntFunction` that returns the day-of-month component of the Datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -47,11 +48,11 @@ the `ToIntFunction`
 
 **See** Datetime.dayGmt
 
-### `static dayOfYear()`
+##### `static dayOfYear()`
 
 Returns a `ToIntFunction` that returns the day-of-year component of the Datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,11 +65,11 @@ the `ToIntFunction`
 
 **See** Datetime.dayOfYear
 
-### `static dayOfYearGmt()`
+##### `static dayOfYearGmt()`
 
 Returns a `ToIntFunction` that returns the day-of-year component of the Datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -81,11 +82,11 @@ the `ToIntFunction`
 
 **See** Datetime.dayOfYearGmt
 
-### `static hour()`
+##### `static hour()`
 
 Returns a `ToIntFunction` that returns the hour component of the Datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -98,11 +99,11 @@ the `ToIntFunction`
 
 **See** Datetime.hour
 
-### `static hourGmt()`
+##### `static hourGmt()`
 
 Returns a `ToIntFunction` that returns the hour component of the Datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -115,11 +116,11 @@ the `ToIntFunction`
 
 **See** Datetime.hourGmt
 
-### `static millisecond()`
+##### `static millisecond()`
 
 Returns a `ToIntFunction` that returns the millisecond component of the Datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -132,11 +133,11 @@ the `ToIntFunction`
 
 **See** Datetime.millisecond
 
-### `static millisecondGmt()`
+##### `static millisecondGmt()`
 
 Returns a `ToIntFunction` that returns the millisecond component of the Datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -149,11 +150,11 @@ the `ToIntFunction`
 
 **See** Datetime.millisecondGmt
 
-### `static minute()`
+##### `static minute()`
 
 Returns a `ToIntFunction` that returns the minute component of the Datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -166,11 +167,11 @@ the `ToIntFunction`
 
 **See** Datetime.minute
 
-### `static minuteGmt()`
+##### `static minuteGmt()`
 
 Returns a `ToIntFunction` that returns the minute component of the Datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -183,11 +184,11 @@ the `ToIntFunction`
 
 **See** Datetime.minuteGmt
 
-### `static month()`
+##### `static month()`
 
 Returns a `ToIntFunction` that returns the month component of the Datetime input argument in the local time zone of the context user (1 = Jan).
 
-#### Return
+###### Return
 
 **Type**
 
@@ -200,11 +201,11 @@ the `ToIntFunction`
 
 **See** Datetime.month
 
-### `static monthGmt()`
+##### `static monthGmt()`
 
 Returns a `ToIntFunction` that returns the month component of the Datetime input argument in the GMT time zone (1 = Jan).
 
-#### Return
+###### Return
 
 **Type**
 
@@ -217,11 +218,11 @@ the `ToIntFunction`
 
 **See** Datetime.monthGmt
 
-### `static second()`
+##### `static second()`
 
 Returns a `ToIntFunction` that returns the second component of the Datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -234,11 +235,11 @@ the `ToIntFunction`
 
 **See** Datetime.second
 
-### `static secondGmt()`
+##### `static secondGmt()`
 
 Returns a `ToIntFunction` that returns the second component of the Datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -251,11 +252,11 @@ the `ToIntFunction`
 
 **See** Datetime.secondGmt
 
-### `static year()`
+##### `static year()`
 
 Returns a `ToIntFunction` that returns the year component of the Datetime input argument in the local time zone of the context user.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -268,11 +269,11 @@ the `ToIntFunction`
 
 **See** Datetime.year
 
-### `static yearGmt()`
+##### `static yearGmt()`
 
 Returns a `ToIntFunction` that returns the year component of the Datetime input argument in the GMT time zone.
 
-#### Return
+###### Return
 
 **Type**
 

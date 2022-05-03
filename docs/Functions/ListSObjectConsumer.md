@@ -19,16 +19,17 @@ Provides common class level implementations, and related utilities for `List<T> 
 **See** [SObjectCollector](/docs/Collectors/SObjectCollector.md)
 
 ## Methods
-### `static addToList(ISObjectFunction mapper)`
+### Add to List<Object> ObjectSObjectConsumer
+##### `static addToList(ISObjectFunction mapper)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Object>` and adds to this `List` the result returned by the `mapper` applied to the second input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -38,7 +39,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -47,18 +48,20 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.toList
 
-### `static joining(ISObjectFunction mapper, String delimiter, String prefix)`
+---
+### List-String ObjectSObjectConsumer
+##### `static joining(ISObjectFunction mapper, String delimiter, String prefix)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<String>`, gets the first element and appends to it the second argument as `String` using the `delimiter`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 |`delimiter`|the `String` to be used between each element|
 |`prefix`|the `String` to be used at the beginning of the joined result|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -68,7 +71,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper`, `delimiter`, or the `prefix` is null|
@@ -77,16 +80,18 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.joining
 
-### `static averagingInt(ISObjectToIntFunction mapper)`
+---
+### List-Integer ObjectSObjectConsumer
+##### `static averagingInt(ISObjectToIntFunction mapper)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Integer>`, which is used as a container to track the number of elements and the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -96,7 +101,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -105,16 +110,16 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.averagingInt
 
-### `static summingInt(ISObjectToIntFunction mapper)`
+##### `static summingInt(ISObjectToIntFunction mapper)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Integer>`, which is used as a container to track the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -124,7 +129,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -133,16 +138,18 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.summingInt
 
-### `static averagingLong(ISObjectToLongFunction mapper)`
+---
+### List-Long ObjectSObjectConsumer
+##### `static averagingLong(ISObjectToLongFunction mapper)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Long>`, which is used as a container to track the number of elements and the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -152,7 +159,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -161,16 +168,16 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.averagingLong
 
-### `static summingLong(ISObjectToLongFunction mapper)`
+##### `static summingLong(ISObjectToLongFunction mapper)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Long>`, which is used as a container to track the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -180,7 +187,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -189,16 +196,18 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.summingLong
 
-### `static averagingDouble(ISObjectToDoubleFunction mapper)`
+---
+### List-Double ObjectSObjectConsumer
+##### `static averagingDouble(ISObjectToDoubleFunction mapper)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Double>`, which is used as a container to track the number of elements and the total sum using `Kahan Summation`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -208,7 +217,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -217,16 +226,16 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.averagingDouble
 
-### `static summingDouble(ISObjectToDoubleFunction mapper)`
+##### `static summingDouble(ISObjectToDoubleFunction mapper)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Double>`, which is used as a container to track the total sum using `Kahan Summation`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -236,7 +245,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -245,16 +254,18 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.summingDouble
 
-### `static reducing(ISObjectBinaryOperator accumulator)`
+---
+### List-SObject ObjectSObjectConsumer
+##### `static reducing(ISObjectBinaryOperator accumulator)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Object>`, gets the first element and reduces its value using `accumulator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the `ISObjectBinaryOperator` to be used between each element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -264,7 +275,7 @@ ObjectSObjectConsumer
 
 the `ObjectSObjectConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `accumulator` is null|
@@ -273,16 +284,16 @@ the `ObjectSObjectConsumer`
 
 **See** SObjectCollector.reducing
 
-### `static reducingOptional(ISObjectBinaryOperator accumulator)`
+##### `static reducingOptional(ISObjectBinaryOperator accumulator)`
 
 Returns a `ObjectSObjectConsumer` that casts the first input argument to `List<Object>`, if it is empty puts the first element as the second input argument. Otherwise, gets the first element and reduces its value using `accumulator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the `ObjectSObjectConsumer` to be used between each element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -292,7 +303,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `accumulator` is null|

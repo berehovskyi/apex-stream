@@ -25,16 +25,19 @@ Inherits [ISObjectBinaryOperator](/docs/Functional-Interfaces/ISObjectBinaryOper
 **See** [SObjectCollector](/docs/Collectors/SObjectCollector.md)
 
 ## Methods
-### `apply(SObject sObj1, SObject sObj2)`
-#### Parameters
+### Function
+##### `apply(SObject sObj1, SObject sObj2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static left()`
+---
+### Static Methods
+##### `static left()`
 
 Returns a `SObjectBinaryOperator` that return the first input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -44,11 +47,11 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-### `static right()`
+##### `static right()`
 
 Returns a `SObjectBinaryOperator` that return the second input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -58,16 +61,16 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-### `static minBy(ISObjectComparator comparator)`
+##### `static minBy(ISObjectComparator comparator)`
 
 Returns a `SObjectBinaryOperator` that returns a lesser input argument according to the `comparator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`comparator`|the comparator to compare arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -77,21 +80,21 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `comparator` is null|
 
-### `static minBy(String fieldName)`
+##### `static minBy(String fieldName)`
 
 Returns a `SObjectBinaryOperator` that returns a lesser input argument according to the `fieldName`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -101,21 +104,21 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-### `static minBy(SObjectField field)`
+##### `static minBy(SObjectField field)`
 
 Returns a `SObjectBinaryOperator` that returns a lesser input argument according to the `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -125,21 +128,21 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-### `static maxBy(ISObjectComparator comparator)`
+##### `static maxBy(ISObjectComparator comparator)`
 
 Returns a `SObjectBinaryOperator` that returns a greater input argument according to the `comparator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`comparator`|the comparator to compare arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -149,21 +152,21 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `comparator` is null|
 
-### `static maxBy(String fieldName)`
+##### `static maxBy(String fieldName)`
 
 Returns a `SObjectBinaryOperator` that returns a greater input argument according to the `fieldName`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -173,21 +176,21 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-### `static maxBy(SObjectField field)`
+##### `static maxBy(SObjectField field)`
 
 Returns a `SObjectBinaryOperator` that returns a greater input argument according to the `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -197,22 +200,22 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-### `static combine(ISObjectBiConsumer consumer, ISObjectBinaryOperator merger)`
+##### `static combine(ISObjectBiConsumer consumer, ISObjectBinaryOperator merger)`
 
 Returns a combined `SObjectBinaryOperator` of the `consumer` and the `merger`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the binary consumer|
 |`merger`|the binary operator that merges the input arguments after its consumption|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -222,21 +225,21 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` or `merger` is null|
 
-### `static forBiConsumer(ISObjectBiConsumer consumer)`
+##### `static forBiConsumer(ISObjectBiConsumer consumer)`
 
 Returns a combined `SObjectBinaryOperator` of the `consumer` and the `right` binary operator.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the binary consumer|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -246,7 +249,7 @@ SObjectBinaryOperator
 
 the `SObjectBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|

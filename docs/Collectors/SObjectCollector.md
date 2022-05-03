@@ -13,20 +13,23 @@ Inherits [ISObjectCollector](/docs/Collectors/ISObjectCollector.md) interface an
 **Group** Collectors
 
 ## Methods
-### `supplier()`
-### `accumulator()`
-### `finisher()`
-### `static of(ISupplier supplier, IObjectSObjectConsumer accumulator)`
+### Functions
+##### `supplier()`
+##### `accumulator()`
+##### `finisher()`
+---
+### Static Methods
+##### `static of(ISupplier supplier, IObjectSObjectConsumer accumulator)`
 
 Returns a `SObjectCollector` by the given `supplier` and `accumulator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the supplier function for the `SObjectCollector`|
 |`accumulator`|the accumulator function for the `SObjectCollector`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -36,23 +39,23 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` or `accumulator` is null|
 
-### `static of(ISupplier supplier, IObjectSObjectConsumer accumulator, IFunction finisher)`
+##### `static of(ISupplier supplier, IObjectSObjectConsumer accumulator, IFunction finisher)`
 
 Returns a `SObjectCollector` by the given `supplier`, `accumulator`, and `finisher`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the supplier function for the `SObjectCollector`|
 |`accumulator`|the accumulator function for the `SObjectCollector`|
 |`finisher`|the final transformation function for the `SObjectCollector`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -62,21 +65,21 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` or `accumulator` is null|
 
-### `cast(Type t)`
+##### `cast(Type t)`
 
 Returns a `SObjectCollector` that recursively reconstructs collector&apos;s suppliers and returns a new `SObjectCollector` according to a given container type. <p>Supports casting list type for methods:</p> <ul>     <li>#toList(ISObjectFunction)</li>     <li>#toList(String)</li>     <li>#toList(SObjectField)</li> </ul> <p>Supports casting map value type (but not map key type) for methods:</p> <ul>     <li>#toBy<T>map(ISObjectFunction)</li>     <li>#toBy<T>map(String)</li>     <li>#toBy<T>map(SObjectField)</li>     <li>#groupingBy<T>(ISObjectFunction)</li>     <li>#groupingBy<T>(String)</li>     <li>#groupingBy<T>(SObjectField)</li>     <li>#partitioningBy(ISObjectPredicate)</li>     <li>#partitioningBy(ISObjectPredicate, ISObjectCollector)</li> </ul>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`t`|the Type to cast the result container to|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -86,22 +89,24 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `t` is null|
 |`TypeException`|if invalid `t` is provided|
 
-#### Example
+###### Example
 ```apex
 SObjectCollector.toList('Name').cast(List<String>.class);
 ```
 
-### `static toList()`
+---
+### List<?> Collectors
+##### `static toList()`
 
 Returns a `SObjectCollector` that accumulates SObject input arguments into a new `List<SObject>`. <p>The result container can be casted to a specific `SObjectType`.</p> <p>ISObjectIterable.collect(SObjectCollector.toList()) can be replaced with ISObjectIterable.toList()</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -111,23 +116,23 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Example
+###### Example
 ```apex
 // Accumulates SObjects into a List
 List<SObject> sObjs = (List<SObject>) Stream.of(sObjects).collect(SObjectCollector.toList());
 List<Account> accs = (List<Account>) Stream.of(accounts).collect(SObjectCollector.toList());
 ```
 
-### `static toList(ISObjectFunction mapper)`
+##### `static toList(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the values returned by `mapper` into a new `List<Object>`. <p>The result container can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -137,12 +142,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a List
 List<Object> accountNames = (List<Object>) Stream.of(accounts)
@@ -151,16 +156,16 @@ List<String> accountNames = (List<String>) Stream.of(accounts)
     .collect(SObjectCollector.toList(SObjectFunction.get('Name')).cast(List<String>.class));
 ```
 
-### `static toList(String fieldName)`
+##### `static toList(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the values of `fieldName` into a new `List<Object>`. Cross-reference fields and safe navigation are supported. <p>The result container can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -170,12 +175,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a List
 List<Object> accountNames = (List<Object>) Stream.of(accounts)
@@ -184,16 +189,16 @@ List<String> parentAccountNames = (List<String>) Stream.of(accounts)
     .collect(SObjectCollector.toList('Parent?.Name')).cast(List<String>.class));
 ```
 
-### `static toList(SObjectField field)`
+##### `static toList(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the values of `field` into a new `List<Object>`. <p>The result container can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -203,12 +208,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 List<Object> accountNames = (List<Object>) Stream.of(accounts)
@@ -217,11 +222,13 @@ List<String> accountNames = (List<String>) Stream.of(accounts)
     .collect(SObjectCollector.toList(Account.Name)).cast(List<String>.class));
 ```
 
-### `static toSet()`
+---
+### Set<?> Collectors
+##### `static toSet()`
 
 Returns a `SObjectCollector` that accumulates SObject input arguments into a new `Set<SObject>`. <p>The result container <strong>cannot</strong> be casted to a specific `SObjectType`.</p> <p>ISObjectIterable.collect(SObjectCollector.toSet()) can be replaced with ISObjectIterable.toSet()</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -231,22 +238,22 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Example
+###### Example
 ```apex
 // Accumulates SObjects into a List
 Set<SObject> sObjs = (Set<SObject>) Stream.of(sObjects).collect(SObjectCollector.toSet());
 ```
 
-### `static toBoolSet(ISObjectFunction mapper)`
+##### `static toBoolSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Boolean values returned by `mapper` into a new `Set<Boolean>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -256,28 +263,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Boolean> doNotCalls = (Set<Boolean>) Stream.of(contacts)
     .collect(SObjectCollector.toBoolSet(SObjectFunction.get('DoNotCall')));
 ```
 
-### `static toBoolSet(String fieldName)`
+##### `static toBoolSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Boolean values of `fieldName` into a new `Set<Boolean>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -287,12 +294,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Boolean> doNotCalls = (Set<Boolean>) Stream.of(contacts)
@@ -301,16 +308,16 @@ Set<Boolean> parentDoNotCalls = (Set<Boolean>) Stream.of(contacts)
     .collect(SObjectCollector.toBoolSet('Parent?.DoNotCall'));
 ```
 
-### `static toBoolSet(SObjectField field)`
+##### `static toBoolSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Boolean values of `field` into a new `Set<Boolean>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -320,28 +327,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 List<Boolean> accountNames = (List<Boolean>) Stream.of(contacts)
     .collect(SObjectCollector.toBoolSet(Contact.DoNotCall));
 ```
 
-### `static toIdSet(ISObjectFunction mapper)`
+##### `static toIdSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Id values returned by `mapper` into a new `Set<Id>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -351,28 +358,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Id> ids = (Set<Id>) Stream.of(accounts)
     .collect(SObjectCollector.toIdSet(SObjectFunction.get('Id')));
 ```
 
-### `static toIdSet(String fieldName)`
+##### `static toIdSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Boolean values of `fieldName` into a new `Set<Boolean>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -382,12 +389,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Id> ids = (Set<Id>) Stream.of(accounts)
@@ -396,16 +403,16 @@ Set<Id> parentOwnerIds = (Set<Id>) Stream.of(accounts)
     .collect(SObjectCollector.toIdSet('Parent?.OwnerId'));
 ```
 
-### `static toIdSet(SObjectField field)`
+##### `static toIdSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Id values of `field` into a new `Set<Id>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -415,28 +422,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Id> ids = (Set<Id>) Stream.of(accounts)
     .collect(SObjectCollector.toIdSet(Account.Id)));
 ```
 
-### `static toStringSet(ISObjectFunction mapper)`
+##### `static toStringSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the String values returned by `mapper` into a new `Set<String>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -446,28 +453,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<String> names = (Set<String>) Stream.of(accounts)
     .collect(SObjectCollector.toStringSet(SObjectFunction.get('Name')));
 ```
 
-### `static toStringSet(String fieldName)`
+##### `static toStringSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the String values of `fieldName` into a new `Set<String>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -477,12 +484,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<String> names = (Set<String>) Stream.of(accounts)
@@ -491,16 +498,16 @@ Set<String> parentNames = (Set<String>) Stream.of(accounts)
     .collect(SObjectCollector.toStringSet('Parent?.Name'));
 ```
 
-### `static toStringSet(SObjectField field)`
+##### `static toStringSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the String values of `field` into a new `Set<String>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -510,28 +517,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<String> names = (Set<String>) Stream.of(accounts)
     .collect(SObjectCollector.toStringSet(Account.Name)));
 ```
 
-### `static toBlobSet(ISObjectFunction mapper)`
+##### `static toBlobSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Blob values returned by `mapper` into a new `Set<Blob>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -541,28 +548,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
     .collect(SObjectCollector.toBlobSet(SObjectFunction.get('Body')));
 ```
 
-### `static toBlobSet(String fieldName)`
+##### `static toBlobSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Blob values of `fieldName` into a new `Set<Blob>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -572,12 +579,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
@@ -586,16 +593,16 @@ Set<Blob> parentBodies = (Set<Blob>) Stream.of(attachments)
     .collect(SObjectCollector.toBlobSet('Parent?.Body'));
 ```
 
-### `static toBlobSet(SObjectField field)`
+##### `static toBlobSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Blob values of `field` into a new `Set<Blob>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -605,28 +612,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
     .collect(SObjectCollector.toBlobSet(Attachment.Body)));
 ```
 
-### `static toDateSet(ISObjectFunction mapper)`
+##### `static toDateSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Date values returned by `mapper` into a new `Set<Date>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -636,28 +643,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
     .collect(SObjectCollector.toDateSet(SObjectFunction.get('Birthdate')));
 ```
 
-### `static toDateSet(String fieldName)`
+##### `static toDateSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Date values of `fieldName` into a new `Set<Date>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -667,12 +674,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
@@ -681,16 +688,16 @@ Set<Date> parentBirthdates = (Set<Date>) Stream.of(contacts)
     .collect(SObjectCollector.toDateSet('Parent?.Birthdate'));
 ```
 
-### `static toDateSet(SObjectField field)`
+##### `static toDateSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Date values of `field` into a new `Set<Date>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -700,28 +707,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
     .collect(SObjectCollector.toDateSet(Contact.Birthdate)));
 ```
 
-### `static toDatetimeSet(ISObjectFunction mapper)`
+##### `static toDatetimeSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Datetime values returned by `mapper` into a new `Set<Datetime>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -731,28 +738,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
     .collect(SObjectCollector.toDatetimeSet(SObjectFunction.get('ActivityDateTime')));
 ```
 
-### `static toDatetimeSet(String fieldName)`
+##### `static toDatetimeSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Datetime values of `fieldName` into a new `Set<Datetime>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -762,12 +769,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
@@ -776,16 +783,16 @@ Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
     .collect(SObjectCollector.toDatetimeSet('Parent?.ActivityDateTime'));
 ```
 
-### `static toDatetimeSet(SObjectField field)`
+##### `static toDatetimeSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Datetime values of `field` into a new `Set<Datetime>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -795,28 +802,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
     .collect(SObjectCollector.toDatetimeSet(Event.ActivityDateTime)));
 ```
 
-### `static toTimeSet(ISObjectFunction mapper)`
+##### `static toTimeSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Time values returned by `mapper` into a new `Set<Time>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -826,28 +833,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Time> startTimes = (Set<Time>) Stream.of(slots)
     .collect(SObjectCollector.toTimeSet(SObjectFunction.get('StartTime')));
 ```
 
-### `static toTimeSet(String fieldName)`
+##### `static toTimeSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Time values of `fieldName` into a new `Set<Time>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -857,12 +864,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Time> startTimes = (Set<Time>) Stream.of(slots)
@@ -871,16 +878,16 @@ Set<Time> parentStartTimes = (Set<Time>) Stream.of(slots)
     .collect(SObjectCollector.toTimeSet('Parent?.StartTime'));
 ```
 
-### `static toTimeSet(SObjectField field)`
+##### `static toTimeSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Time values of `field` into a new `Set<Time>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -890,28 +897,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Time> startTimes = (Set<Time>) Stream.of(slots)
     .collect(SObjectCollector.toTimeSet(TimeSlot.StartTime)));
 ```
 
-### `static toIntSet(ISObjectToIntFunction mapper)`
+##### `static toIntSet(ISObjectToIntFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Integer values returned by `mapper` into a new `Set<Integer>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -921,28 +928,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
     .collect(SObjectCollector.toIntSet(SObjectToIntFunction.get('NumberOfEmployees')));
 ```
 
-### `static toIntSet(String fieldName)`
+##### `static toIntSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Integer values of `fieldName` into a new `Set<Integer>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -952,12 +959,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
@@ -966,16 +973,16 @@ Set<Integer> parentNumberOfEmployees = (Set<Integer>) Stream.of(accounts)
     .collect(SObjectCollector.toIntSet('Parent?.NumberOfEmployees'));
 ```
 
-### `static toIntSet(SObjectField field)`
+##### `static toIntSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Integer values of `field` into a new `Set<Integer>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -985,28 +992,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
     .collect(SObjectCollector.toIntSet(Account.NumberOfEmployees)));
 ```
 
-### `static toLongSet(ISObjectToLongFunction mapper)`
+##### `static toLongSet(ISObjectToLongFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Long values returned by `mapper` into a new `Set<Long>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1016,28 +1023,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
     .collect(SObjectCollector.toLongSet(SObjectToLongFunction.get('NumberOfEmployees')));
 ```
 
-### `static toLongSet(String fieldName)`
+##### `static toLongSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Long values of `fieldName` into a new `Set<Long>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1047,12 +1054,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
@@ -1061,16 +1068,16 @@ Set<Long> parentNumberOfEmployees = (Set<Long>) Stream.of(accounts)
     .collect(SObjectCollector.toLongSet('Parent?.NumberOfEmployees'));
 ```
 
-### `static toLongSet(SObjectField field)`
+##### `static toLongSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Long values of `field` into a new `Set<Long>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1080,28 +1087,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
     .collect(SObjectCollector.toLongSet(Account.NumberOfEmployees)));
 ```
 
-### `static toDoubleSet(ISObjectToDoubleFunction mapper)`
+##### `static toDoubleSet(ISObjectToDoubleFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Double values returned by `mapper` into a new `Set<Double>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1111,28 +1118,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
     .collect(SObjectCollector.toDoubleSet(SObjectToDoubleFunction.get('BillingLatitude')));
 ```
 
-### `static toDoubleSet(String fieldName)`
+##### `static toDoubleSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Double values of `fieldName` into a new `Set<Double>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1142,12 +1149,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
@@ -1156,16 +1163,16 @@ Set<Double> parentBillingLatitudes = (Set<Double>) Stream.of(accounts)
     .collect(SObjectCollector.toDoubleSet('Parent?.BillingLatitude'));
 ```
 
-### `static toDoubleSet(SObjectField field)`
+##### `static toDoubleSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Double values of `field` into a new `Set<Double>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1175,28 +1182,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
     .collect(SObjectCollector.toDoubleSet(Account.BillingLatitude)));
 ```
 
-### `static toSet(ISObjectFunction mapper)`
+##### `static toSet(ISObjectFunction mapper)`
 
 Returns a `SObjectCollector` that accumulates the Object values returned by `mapper` into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function that returns values to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1206,28 +1213,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values returned by mapper into a Set
 Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
     .collect(SObjectCollector.toSet(SObjectFunction.get('Birthdate')));
 ```
 
-### `static toSet(String fieldName)`
+##### `static toSet(String fieldName)`
 
 Returns a `SObjectCollector` that accumulates the Object values of `fieldName` into a new `Set<Double>`. Cross-reference fields and safe navigation are supported. <p>The result container <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1237,12 +1244,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of fieldName into a Set
 Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
@@ -1251,16 +1258,16 @@ Set<Object> parentBirthdates = (Set<Object>) Stream.of(contacts)
     .collect(SObjectCollector.toSet('Parent?.Birthdate'));
 ```
 
-### `static toSet(SObjectField field)`
+##### `static toSet(SObjectField field)`
 
 Returns a `SObjectCollector` that accumulates the Object values of `field` into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1270,23 +1277,25 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Accumulates values of field into a List
 Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
     .collect(SObjectCollector.toSet(Contact.Birthdate)));
 ```
 
-### `static toMap()`
+---
+### Map<Id, SObject> Collectors
+##### `static toMap()`
 
 Returns a `SObjectCollector` that accumulates the SObject values into a `Map<Id, SObject>` <p>The result container value type can be casted to a specific `SObjectType` using SObjectCollector.cast.</p> <p>ISObjectIterable.collect(SObjectCollector.toMap()) can be replaced with ISObjectIterable.toMap()</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1299,7 +1308,7 @@ the `SObjectCollector`
 
 **See** SObjectCollector.toByIdMap
 
-#### Example
+###### Example
 ```apex
 // Accumulates SObjects into a List
 Map<Id, SObject> sObjs = (Map<Id, SObject>) Stream.of(sObjects)
@@ -1308,17 +1317,16 @@ Map<Id, Account> accs = (Map<Id, Account>) Stream.of(accounts)
     .collect(SObjectCollector.toMap().cast(Map<Id, Account));
 ```
 
-### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+##### `static toByIdMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
-|`keyMapper`|the function that returns keys|
-|`valueMapper`|the function that returns values|
+|`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1328,13 +1336,155 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `keyFieldName` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+###### Example
+```apex
+// Maps values by keys provided by field
+Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
+    .collect(SObjectCollector.toByIdMap('AccountId'));
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
+    .collect(SObjectCollector.toByIdMap('AccountId').cast(Map<Id, Contact>.class));
+```
+
+##### `static toByIdMap(SObjectField keyField)`
+
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`keyField`|the field value to accumulate as key|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `keyField` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+###### Example
+```apex
+// Maps values by keys provided by field
+Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
+    .collect(SObjectCollector.toByIdMap(Contact.AccountId));
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
+    .collect(SObjectCollector.toByIdMap(Contact.AccountId).cast(Map<Id, Contact>.class));
+```
+
+##### `static toByIdMap(ISObjectFunction keyMapper)`
+
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`keyMapper`|the field value to accumulate as key|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `keyMapper` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+###### Example
+```apex
+// Maps values by keys provided by mapping function
+Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
+    .collect(SObjectCollector.toByIdMap(SObjectFunction.get('AccountId')));
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
+    .collect(SObjectCollector.toByIdMap(SObjectFunction.get('AccountId')).cast(Map<Id, Contact>.class));
+```
+
+##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`keyMapper`|the function that returns keys|
+|`valueMapper`|the function that returns values|
+|`merger`|the merge function to resolve collisions between values associated with the same key|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `keyMapper` or `valueMapper` is null|
+
+###### Example
+```apex
+// Maps values by keys provided by mapping functions
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
+    .collect(SObjectCollector.toByIdMap(
+        SObjectFunction.get('AccountId'),
+        SObjectUnaryOperator.identity(),
+        BinaryOperator.right()
+    ).cast(Map<Id, Contact>.class));
+```
+
+---
+### Map<Boolean, Object> Collectors
+##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`keyMapper`|the function that returns keys|
+|`valueMapper`|the function that returns values|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Boolean, Object> contactByDoNotCall = (Map<Boolean, Object>) Stream.of(contacts)
@@ -1354,18 +1504,18 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
     ).cast(Map<Boolean, String>.class));
 ```
 
-### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1375,12 +1525,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(contacts)
@@ -1391,11 +1541,11 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
     ).cast(Map<Boolean, String>.class));
 ```
 
-### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -1403,7 +1553,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Obje
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Boolean, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1413,12 +1563,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(contacts)
@@ -1430,17 +1580,17 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
     ));
 ```
 
-### `static toByBoolMap(String keyFieldName, String valueFieldName)`
+##### `static toByBoolMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1450,30 +1600,30 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(contacts)
     .collect(SObjectCollector.toByBoolMap('DoNotCall', 'LastName').cast(Map<Boolean, String>.class));
 ```
 
-### `static toByBoolMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByBoolMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1483,13 +1633,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(contacts)
@@ -1499,16 +1649,18 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
    ).cast(Map<Boolean, String>.class));
 ```
 
-### `static toByBoolMap(String keyFieldName)`
+---
+### Map<Boolean, SObject> Collectors
+##### `static toByBoolMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1518,13 +1670,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Boolean, SObject> contactByDoNotCall = (Map<Boolean, SObject>) Stream.of(contacts)
@@ -1533,16 +1685,16 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
     .collect(SObjectCollector.toByBoolMap('DoNotCall').cast(Map<Boolean, Contact>.class));
 ```
 
-### `static toByBoolMap(SObjectField keyField)`
+##### `static toByBoolMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1552,13 +1704,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Boolean, SObject> contactByDoNotCall = (Map<Boolean, SObject>) Stream.of(contacts)
@@ -1567,16 +1719,16 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
     .collect(SObjectCollector.toByBoolMap(Contact.DoNotCall).cast(Map<Boolean, Contact>.class));
 ```
 
-### `static toByBoolMap(ISObjectFunction keyMapper)`
+##### `static toByBoolMap(ISObjectFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1586,13 +1738,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping function
 Map<Boolean, SObject> contactByDoNotCall = (Map<Boolean, SObject>) Stream.of(contacts)
@@ -1605,18 +1757,18 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
     ).cast(Map<Boolean, Contact>.class));
 ```
 
-### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1626,12 +1778,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(contacts)
@@ -1642,17 +1794,19 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
     ).cast(Map<Boolean, Contact>.class));
 ```
 
-### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Id, Object> Collectors
+##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1662,13 +1816,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Id, Object> contactByAccountId = (Map<Id, Object>) Stream.of(contacts)
@@ -1688,18 +1842,18 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
     ).cast(Map<Id, String>.class));
 ```
 
-### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1709,12 +1863,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
@@ -1725,11 +1879,11 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
     ).cast(Map<Id, String>.class));
 ```
 
-### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -1737,7 +1891,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` 
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Id, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1747,12 +1901,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
@@ -1764,17 +1918,17 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
     ));
 ```
 
-### `static toByIdMap(String keyFieldName, String valueFieldName)`
+##### `static toByIdMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1784,13 +1938,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
@@ -1800,17 +1954,17 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
     ).cast(Map<Id, String>.class));
 ```
 
-### `static toByIdMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByIdMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1820,13 +1974,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
@@ -1836,156 +1990,19 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
     ).cast(Map<Id, String>.class));
 ```
 
-### `static toByIdMap(String keyFieldName)`
-
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`keyFieldName`|the field value to accumulate as key|
-
-#### Return
-
-**Type**
-
-SObjectCollector
-
-**Description**
-
-the `SObjectCollector`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `keyFieldName` is null|
-|`IllegalStateException`|if mapped keys contain duplicates|
-
-#### Example
-```apex
-// Maps values by keys provided by field
-Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
-    .collect(SObjectCollector.toByIdMap('AccountId'));
-Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
-    .collect(SObjectCollector.toByIdMap('AccountId').cast(Map<Id, Contact>.class));
-```
-
-### `static toByIdMap(SObjectField keyField)`
-
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`keyField`|the field value to accumulate as key|
-
-#### Return
-
-**Type**
-
-SObjectCollector
-
-**Description**
-
-the `SObjectCollector`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `keyField` is null|
-|`IllegalStateException`|if mapped keys contain duplicates|
-
-#### Example
-```apex
-// Maps values by keys provided by field
-Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
-    .collect(SObjectCollector.toByIdMap(Contact.AccountId));
-Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
-    .collect(SObjectCollector.toByIdMap(Contact.AccountId).cast(Map<Id, Contact>.class));
-```
-
-### `static toByIdMap(ISObjectFunction keyMapper)`
-
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`keyMapper`|the field value to accumulate as key|
-
-#### Return
-
-**Type**
-
-SObjectCollector
-
-**Description**
-
-the `SObjectCollector`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `keyMapper` is null|
-|`IllegalStateException`|if mapped keys contain duplicates|
-
-#### Example
-```apex
-// Maps values by keys provided by mapping function
-Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
-    .collect(SObjectCollector.toByIdMap(SObjectFunction.get('AccountId')));
-Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
-    .collect(SObjectCollector.toByIdMap(SObjectFunction.get('AccountId')).cast(Map<Id, Contact>.class));
-```
-
-### `static toByIdMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
-
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`keyMapper`|the function that returns keys|
-|`valueMapper`|the function that returns values|
-|`merger`|the merge function to resolve collisions between values associated with the same key|
-
-#### Return
-
-**Type**
-
-SObjectCollector
-
-**Description**
-
-the `SObjectCollector`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `keyMapper` or `valueMapper` is null|
-
-#### Example
-```apex
-// Maps values by keys provided by mapping functions
-Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
-    .collect(SObjectCollector.toByIdMap(
-        SObjectFunction.get('AccountId'),
-        SObjectUnaryOperator.identity(),
-        BinaryOperator.right()
-    ).cast(Map<Id, Contact>.class));
-```
-
-### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<String, Object> Collectors
+##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -1995,13 +2012,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<String, Object> contactByFirstName = (Map<String, Object>) Stream.of(contacts)
@@ -2021,18 +2038,18 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
     ).cast(Map<String, String>.class));
 ```
 
-### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2042,12 +2059,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contacts)
@@ -2058,11 +2075,11 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
     ).cast(Map<String, String>.class));
 ```
 
-### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -2070,7 +2087,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<String, Objec
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<String, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2080,12 +2097,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contacts)
@@ -2097,17 +2114,17 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
     ));
 ```
 
-### `static toByStringMap(String keyFieldName, String valueFieldName)`
+##### `static toByStringMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2117,13 +2134,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contacts)
@@ -2133,17 +2150,17 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
     ).cast(Map<String, String>.class));
 ```
 
-### `static toByStringMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByStringMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2153,13 +2170,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contacts)
@@ -2169,16 +2186,18 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
     ).cast(Map<String, String>.class));
 ```
 
-### `static toByStringMap(String keyFieldName)`
+---
+### Map<String, SObject> Collectors
+##### `static toByStringMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2188,13 +2207,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<String, SObject> contactByFirstName = (Map<String, SObject>) Stream.of(contacts)
@@ -2203,16 +2222,16 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
     .collect(SObjectCollector.toByStringMap('FirstName').cast(Map<String, Contact>.class));
 ```
 
-### `static toByStringMap(SObjectField keyField)`
+##### `static toByStringMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2222,13 +2241,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<String, SObject> contactByFirstName = (Map<String, SObject>) Stream.of(contacts)
@@ -2237,16 +2256,16 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
     .collect(SObjectCollector.toByStringMap(Contact.FirstName).cast(Map<String, Contact>.class));
 ```
 
-### `static toByStringMap(ISObjectFunction keyMapper)`
+##### `static toByStringMap(ISObjectFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2256,13 +2275,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping function
 Map<String, SObject> contactByFirstName = (Map<String, SObject>) Stream.of(contacts)
@@ -2275,18 +2294,18 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
     ).cast(Map<String, Contact>.class));
 ```
 
-### `static toByStringMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<String, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2296,12 +2315,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(contacts)
@@ -2312,17 +2331,19 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
     ).cast(Map<String, Contact>.class));
 ```
 
-### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Blob, Object> Collectors
+##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2332,13 +2353,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Blob, Object> attachmentByBody = (Map<Blob, Object>) Stream.of(attachments)
@@ -2358,18 +2379,18 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
     ).cast(Map<Blob, String>.class));
 ```
 
-### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2379,12 +2400,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
@@ -2395,11 +2416,11 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
     ).cast(Map<Blob, String>.class));
 ```
 
-### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -2407,7 +2428,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Blob, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2417,12 +2438,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
@@ -2434,17 +2455,17 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
     ));
 ```
 
-### `static toByBlobMap(String keyFieldName, String valueFieldName)`
+##### `static toByBlobMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2454,13 +2475,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
@@ -2470,17 +2491,17 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
     ).cast(Map<Blob, String>.class));
 ```
 
-### `static toByBlobMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByBlobMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2490,13 +2511,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
@@ -2506,16 +2527,18 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
     ).cast(Map<Blob, String>.class));
 ```
 
-### `static toByBlobMap(String keyFieldName)`
+---
+### Map<Blob, SObject> Collectors
+##### `static toByBlobMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2525,13 +2548,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Blob, SObject> attachmentByBody = (Map<Blob, SObject>) Stream.of(attachments)
@@ -2540,16 +2563,16 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
     .collect(SObjectCollector.toByBlobMap('Body').cast(Map<Blob, Attachment>.class));
 ```
 
-### `static toByBlobMap(SObjectField keyField)`
+##### `static toByBlobMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2559,13 +2582,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Blob, SObject> attachmentByBody = (Map<Blob, SObject>) Stream.of(attachments)
@@ -2574,16 +2597,16 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
     .collect(SObjectCollector.toByBlobMap(Attachment.Body).cast(Map<Blob, Attachment>.class));
 ```
 
-### `static toByBlobMap(ISObjectFunction keyMapper)`
+##### `static toByBlobMap(ISObjectFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2593,13 +2616,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping function
 Map<Blob, SObject> attachmentByBody = (Map<Blob, SObject>) Stream.of(attachments)
@@ -2612,18 +2635,18 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
     ).cast(Map<Blob, Attachment>.class));
 ```
 
-### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2633,12 +2656,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attachments)
@@ -2649,17 +2672,19 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
     ).cast(Map<Blob, Attachment>.class));
 ```
 
-### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Date, Object> Collectors
+##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2669,13 +2694,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Date, Object> contactByBirthdate = (Map<Date, Object>) Stream.of(contacts)
@@ -2695,18 +2720,18 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
     ).cast(Map<Date, String>.class));
 ```
 
-### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2716,12 +2741,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
@@ -2732,11 +2757,11 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
     ).cast(Map<Date, String>.class));
 ```
 
-### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -2744,7 +2769,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Date, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2754,12 +2779,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
@@ -2771,17 +2796,17 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
     ));
 ```
 
-### `static toByDateMap(String keyFieldName, String valueFieldName)`
+##### `static toByDateMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2791,13 +2816,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
@@ -2807,17 +2832,17 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
     ).cast(Map<Date, String>.class));
 ```
 
-### `static toByDateMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByDateMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2827,13 +2852,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
@@ -2843,16 +2868,18 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
     ).cast(Map<Date, String>.class));
 ```
 
-### `static toByDateMap(String keyFieldName)`
+---
+### Map<Date, SObject> Collectors
+##### `static toByDateMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2862,13 +2889,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Date, SObject> contactByBirthdate = (Map<Date, SObject>) Stream.of(contacts)
@@ -2877,16 +2904,16 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
     .collect(SObjectCollector.toByDateMap('Birthdate').cast(Map<Date, Contact>.class));
 ```
 
-### `static toByDateMap(SObjectField keyField)`
+##### `static toByDateMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2896,13 +2923,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Date, SObject> contactByBirthdate = (Map<Date, SObject>) Stream.of(contacts)
@@ -2911,16 +2938,16 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
     .collect(SObjectCollector.toByDateMap(Contact.Birthdate).cast(Map<Date, Contact>.class));
 ```
 
-### `static toByDateMap(ISObjectFunction keyMapper)`
+##### `static toByDateMap(ISObjectFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2930,13 +2957,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping function
 Map<Date, SObject> contactByBirthdate = (Map<Date, SObject>) Stream.of(contacts)
@@ -2949,18 +2976,18 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
     ).cast(Map<Date, Contact>.class));
 ```
 
-### `static toByDateMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Date, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -2970,12 +2997,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
@@ -2986,17 +3013,19 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
     ).cast(Map<Date, Contact>.class));
 ```
 
-### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Datetime, Object> Collectors
+##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3006,13 +3035,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Datetime, Object> eventByActivityDateTime = (Map<Datetime, Object>) Stream.of(events)
@@ -3032,18 +3061,18 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
     ).cast(Map<Datetime, String>.class));
 ```
 
-### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3053,12 +3082,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) Stream.of(events)
@@ -3069,11 +3098,11 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
     ).cast(Map<Datetime, String>.class));
 ```
 
-### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -3081,7 +3110,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Obj
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Datetime, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3091,12 +3120,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) Stream.of(events)
@@ -3108,17 +3137,17 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
     ));
 ```
 
-### `static toByDatetimeMap(String keyFieldName, String valueFieldName)`
+##### `static toByDatetimeMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3128,13 +3157,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) Stream.of(events)
@@ -3144,17 +3173,17 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
     ).cast(Map<Datetime, String>.class));
 ```
 
-### `static toByDatetimeMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByDatetimeMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3164,13 +3193,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) Stream.of(events)
@@ -3180,16 +3209,18 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
     ).cast(Map<Datetime, String>.class));
 ```
 
-### `static toByDatetimeMap(String keyFieldName)`
+---
+### Map<Datetime, SObject> Collectors
+##### `static toByDatetimeMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3199,13 +3230,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Datetime, SObject> eventByActivityDateTime = (Map<Datetime, SObject>) Stream.of(events)
@@ -3214,16 +3245,16 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
     .collect(SObjectCollector.toByDatetimeMap('ActivityDateTime').cast(Map<Datetime, Event>.class));
 ```
 
-### `static toByDatetimeMap(SObjectField keyField)`
+##### `static toByDatetimeMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3233,13 +3264,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Datetime, SObject> eventByActivityDateTime = (Map<Datetime, SObject>) Stream.of(events)
@@ -3248,16 +3279,16 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
     .collect(SObjectCollector.toByDatetimeMap(Event.ActivityDateTime).cast(Map<Datetime, Event>.class));
 ```
 
-### `static toByDatetimeMap(ISObjectFunction keyMapper)`
+##### `static toByDatetimeMap(ISObjectFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3267,13 +3298,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping function
 Map<Datetime, SObject> eventByActivityDateTime = (Map<Datetime, SObject>) Stream.of(events)
@@ -3286,18 +3317,18 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
     ).cast(Map<Datetime, Event>.class));
 ```
 
-### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3307,12 +3338,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(events)
@@ -3323,17 +3354,19 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
     ).cast(Map<Datetime, Event>.class));
 ```
 
-### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Time, Object> Collectors
+##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3343,13 +3376,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Time, Object> timeSlotByStartTime = (Map<Time, Object>) Stream.of(slots)
@@ -3369,18 +3402,18 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
     ).cast(Map<Time, Time>.class));
 ```
 
-### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3390,12 +3423,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
@@ -3406,11 +3439,11 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
     ).cast(Map<Time, Time>.class));
 ```
 
-### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -3418,7 +3451,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Time, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3428,12 +3461,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
@@ -3445,17 +3478,17 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
     ));
 ```
 
-### `static toByTimeMap(String keyFieldName, String valueFieldName)`
+##### `static toByTimeMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3465,13 +3498,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
@@ -3481,17 +3514,17 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
     ).cast(Map<Time, Time>.class));
 ```
 
-### `static toByTimeMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByTimeMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3501,13 +3534,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
@@ -3517,16 +3550,18 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
     ).cast(Map<Time, Time>.class));
 ```
 
-### `static toByTimeMap(String keyFieldName)`
+---
+### Map<Time, SObject> Collectors
+##### `static toByTimeMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3536,13 +3571,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Time, SObject> timeSlotByStartTime = (Map<Time, SObject>) Stream.of(slots)
@@ -3551,16 +3586,16 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
     .collect(SObjectCollector.toByTimeMap('StartTime').cast(Map<Time, TimeSlot>.class));
 ```
 
-### `static toByTimeMap(SObjectField keyField)`
+##### `static toByTimeMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3570,13 +3605,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Time, SObject> timeSlotByStartTime = (Map<Time, SObject>) Stream.of(slots)
@@ -3585,16 +3620,16 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
     .collect(SObjectCollector.toByTimeMap(TimeSlot.StartTime).cast(Map<Time, TimeSlot>.class));
 ```
 
-### `static toByTimeMap(ISObjectFunction keyMapper)`
+##### `static toByTimeMap(ISObjectFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3604,13 +3639,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping function
 Map<Time, SObject> timeSlotByStartTime = (Map<Time, SObject>) Stream.of(slots)
@@ -3623,18 +3658,18 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
     ).cast(Map<Time, TimeSlot>.class));
 ```
 
-### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Time, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3644,12 +3679,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
@@ -3660,17 +3695,19 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
     ).cast(Map<Time, TimeSlot>.class));
 ```
 
-### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Integer, Object> Collectors
+##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3680,13 +3717,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Integer, Object> accountByNumberOfEmployees = (Map<Integer, Object>) Stream.of(accounts)
@@ -3706,18 +3743,18 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
     ).cast(Map<Integer, String>.class));
 ```
 
-### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3727,12 +3764,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(accounts)
@@ -3743,11 +3780,11 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
     ).cast(Map<Integer, String>.class));
 ```
 
-### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -3755,7 +3792,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Obje
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Integer, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3765,12 +3802,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(accounts)
@@ -3782,17 +3819,17 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
     ));
 ```
 
-### `static toByIntMap(String keyFieldName, String valueFieldName)`
+##### `static toByIntMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3802,13 +3839,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(accounts)
@@ -3818,17 +3855,17 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
     ).cast(Map<Integer, String>.class));
 ```
 
-### `static toByIntMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByIntMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3838,13 +3875,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(accounts)
@@ -3854,16 +3891,18 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
     ).cast(Map<Integer, String>.class));
 ```
 
-### `static toByIntMap(String keyFieldName)`
+---
+### Map<Integer, SObject> Collectors
+##### `static toByIntMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3873,13 +3912,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Integer, SObject> accountByNumberOfEmployees = (Map<Integer, SObject>) Stream.of(accounts)
@@ -3888,16 +3927,16 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
     .collect(SObjectCollector.toByIntMap('NumberOfEmployees').cast(Map<Integer, Account>.class));
 ```
 
-### `static toByIntMap(SObjectField keyField)`
+##### `static toByIntMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3907,13 +3946,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Integer, SObject> accountByNumberOfEmployees = (Map<Integer, SObject>) Stream.of(accounts)
@@ -3922,16 +3961,16 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
     .collect(SObjectCollector.toByIntMap(Account.NumberOfEmployees).cast(Map<Integer, Account>.class));
 ```
 
-### `static toByIntMap(ISObjectToIntFunction keyMapper)`
+##### `static toByIntMap(ISObjectToIntFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3941,13 +3980,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Integer, SObject> accountByNumberOfEmployees = (Map<Integer, SObject>) Stream.of(accounts)
@@ -3960,18 +3999,18 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
     ).cast(Map<Integer, Account>.class));
 ```
 
-### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -3981,12 +4020,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Stream.of(accounts)
@@ -3997,17 +4036,19 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
     ).cast(Map<Integer, Account>.class));
 ```
 
-### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Long, Object> Collectors
+##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4017,13 +4058,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Long, Object> accountByNumberOfEmployees = (Map<Long, Object>) Stream.of(accounts)
@@ -4043,18 +4084,18 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
     ).cast(Map<Long, String>.class));
 ```
 
-### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4064,12 +4105,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accounts)
@@ -4080,11 +4121,11 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
     ).cast(Map<Long, String>.class));
 ```
 
-### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -4092,7 +4133,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Long, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4102,12 +4143,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accounts)
@@ -4119,17 +4160,17 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
     ));
 ```
 
-### `static toByLongMap(String keyFieldName, String valueFieldName)`
+##### `static toByLongMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4139,13 +4180,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accounts)
@@ -4155,17 +4196,17 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
     ).cast(Map<Long, String>.class));
 ```
 
-### `static toByLongMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByLongMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4175,13 +4216,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accounts)
@@ -4191,16 +4232,18 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
     ).cast(Map<Long, String>.class));
 ```
 
-### `static toByLongMap(String keyFieldName)`
+---
+### Map<Long, SObject> Collectors
+##### `static toByLongMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4210,13 +4253,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Long, SObject> accountByNumberOfEmployees = (Map<Long, SObject>) Stream.of(accounts)
@@ -4225,16 +4268,16 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
     .collect(SObjectCollector.toByLongMap('NumberOfEmployees').cast(Map<Long, Account>.class));
 ```
 
-### `static toByLongMap(SObjectField keyField)`
+##### `static toByLongMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4244,13 +4287,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Long, SObject> accountByNumberOfEmployees = (Map<Long, SObject>) Stream.of(accounts)
@@ -4259,16 +4302,16 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
     .collect(SObjectCollector.toByLongMap(Account.NumberOfEmployees).cast(Map<Long, Account>.class));
 ```
 
-### `static toByLongMap(ISObjectToLongFunction keyMapper)`
+##### `static toByLongMap(ISObjectToLongFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4278,13 +4321,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Long, SObject> accountByNumberOfEmployees = (Map<Long, SObject>) Stream.of(accounts)
@@ -4297,18 +4340,18 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
     ).cast(Map<Long, Account>.class));
 ```
 
-### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4318,12 +4361,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(accounts)
@@ -4334,17 +4377,19 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
     ).cast(Map<Long, Account>.class));
 ```
 
-### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Double, Object> Collectors
+##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4354,13 +4399,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Double, Object> accountByBillingLatitude = (Map<Double, Object>) Stream.of(accounts)
@@ -4380,18 +4425,18 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
     ).cast(Map<Double, String>.class));
 ```
 
-### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4401,12 +4446,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(accounts)
@@ -4417,11 +4462,11 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
     ).cast(Map<Double, String>.class));
 ```
 
-### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -4429,7 +4474,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Objec
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Double, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4439,12 +4484,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(accounts)
@@ -4456,17 +4501,17 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
     ));
 ```
 
-### `static toByDoubleMap(String keyFieldName, String valueFieldName)`
+##### `static toByDoubleMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4476,13 +4521,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(accounts)
@@ -4492,17 +4537,17 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
     ).cast(Map<Double, String>.class));
 ```
 
-### `static toByDoubleMap(SObjectField keyField, SObjectField valueField)`
+##### `static toByDoubleMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4512,13 +4557,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(accounts)
@@ -4528,16 +4573,18 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
     ).cast(Map<Double, String>.class));
 ```
 
-### `static toByDoubleMap(String keyFieldName)`
+---
+### Map<Double, SObject> Collectors
+##### `static toByDoubleMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4547,13 +4594,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Double, SObject> accountByBillingLatitude = (Map<Double, SObject>) Stream.of(accounts)
@@ -4562,16 +4609,16 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
     .collect(SObjectCollector.toByDoubleMap('BillingLatitude').cast(Map<Double, Account>.class));
 ```
 
-### `static toByDoubleMap(SObjectField keyField)`
+##### `static toByDoubleMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4581,13 +4628,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Double, SObject> accountByBillingLatitude = (Map<Double, SObject>) Stream.of(accounts)
@@ -4596,16 +4643,16 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
     .collect(SObjectCollector.toByDoubleMap(Account.BillingLatitude).cast(Map<Double, Account>.class));
 ```
 
-### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper)`
+##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4615,13 +4662,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Double, SObject> accountByBillingLatitude = (Map<Double, SObject>) Stream.of(accounts)
@@ -4634,18 +4681,18 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
     ).cast(Map<Double, Account>.class));
 ```
 
-### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4655,12 +4702,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of(accounts)
@@ -4671,17 +4718,19 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
     ).cast(Map<Double, Account>.class));
 ```
 
-### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
+---
+### Map<Object, Object> Collectors
+##### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4691,13 +4740,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Object, Object> contactByBirthdate = (Map<Object, Object>) Stream.of(contacts)
@@ -4717,18 +4766,18 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
     ).cast(Map<Object, String>.class));
 ```
 
-### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
+##### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4738,12 +4787,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contacts)
@@ -4754,11 +4803,11 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
     ).cast(Map<Object, String>.class));
 ```
 
-### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
+##### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
@@ -4766,7 +4815,7 @@ Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Objec
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Object, ?>` into which the results will be inserted|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4776,12 +4825,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper`, or `mapSupplier` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contacts)
@@ -4793,17 +4842,17 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
     ));
 ```
 
-### `static toMap(String keyFieldName, String valueFieldName)`
+##### `static toMap(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4813,13 +4862,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contacts)
@@ -4829,17 +4878,17 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
     ).cast(Map<Object, String>.class));
 ```
 
-### `static toMap(SObjectField keyField, SObjectField valueField)`
+##### `static toMap(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4849,13 +4898,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by fields
 Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contacts)
@@ -4865,16 +4914,18 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
     ).cast(Map<Object, String>.class));
 ```
 
-### `static toMap(String keyFieldName)`
+---
+### Map<Object, SObject> Collectors
+##### `static toMap(String keyFieldName)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4884,13 +4935,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Object, SObject> contactByBirthdate = (Map<Object, SObject>) Stream.of(contacts)
@@ -4899,16 +4950,16 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
     .collect(SObjectCollector.toMap('Birthdate').cast(Map<Double, Contact>.class));
 ```
 
-### `static toMap(SObjectField keyField)`
+##### `static toMap(SObjectField keyField)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4918,13 +4969,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by field
 Map<Object, SObject> contactByBirthdate = (Map<Object, SObject>) Stream.of(contacts)
@@ -4933,16 +4984,16 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
     .collect(SObjectCollector.toMap(Contact.Birthdate).cast(Map<Object, Contact>.class));
 ```
 
-### `static toMap(ISObjectFunction keyMapper)`
+##### `static toMap(ISObjectFunction keyMapper)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4952,13 +5003,13 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping function
 Map<Object, SObject> contactByBirthdate = (Map<Object, SObject>) Stream.of(contacts)
@@ -4971,18 +5022,18 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
     ).cast(Map<Object, Contact>.class));
 ```
 
-### `static toMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
+##### `static toMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
 Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyMapper`|the function that returns keys|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -4992,12 +5043,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
-#### Example
+###### Example
 ```apex
 // Maps values by keys provided by mapping functions
 Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(contacts)
@@ -5008,16 +5059,18 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
     ).cast(Map<Object, Contact>.class));
 ```
 
-### `static groupingByBool(ISObjectFunction classifier)`
+---
+### Map<Boolean, ?> Collectors
+##### `static groupingByBool(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5027,12 +5080,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Boolean, List<Object>> contactsByDoNotCall = (Map<Boolean, List<Object>>)
@@ -5047,17 +5100,17 @@ Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
         ).cast(Map<Boolean, List<Contact>>.class));
 ```
 
-### `static groupingByBool(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByBool(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5067,12 +5120,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Boolean, Object> contactsByDoNotCall = (Map<Boolean, Object>)
@@ -5089,18 +5142,18 @@ Map<Boolean, Set<SObject>> contactsByDoNotCall = (Map<Boolean, Set<SObject>>)
         ).cast(Map<Boolean, Set<SObject>>.class));
 ```
 
-### `static groupingByBool(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByBool(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Boolean, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5110,12 +5163,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Boolean, Set<SObject>> contactsByDoNotCall = (Map<Boolean, Set<SObject>>)
@@ -5127,17 +5180,17 @@ Map<Boolean, Set<SObject>> contactsByDoNotCall = (Map<Boolean, Set<SObject>>)
         ));
 ```
 
-### `static groupingByBool(String keyFieldName, String valueFieldName)`
+##### `static groupingByBool(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5147,12 +5200,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
@@ -5163,17 +5216,17 @@ Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
         ).cast(Map<Boolean, List<String>>.class));
 ```
 
-### `static groupingByBool(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByBool(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5183,12 +5236,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
@@ -5199,16 +5252,16 @@ Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
         ).cast(Map<Boolean, List<String>>.class));
 ```
 
-### `static groupingByBool(String fieldName)`
+##### `static groupingByBool(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5218,12 +5271,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
@@ -5231,16 +5284,16 @@ Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
         .collect(SObjectCollector.groupingByBool('DoNotCall'));
 ```
 
-### `static groupingByBool(SObjectField field)`
+##### `static groupingByBool(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5250,12 +5303,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
@@ -5263,16 +5316,18 @@ Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
         .collect(SObjectCollector.groupingByBool(Contact.DoNotCall));
 ```
 
-### `static groupingById(ISObjectFunction classifier)`
+---
+### Map<Id, ?> Collectors
+##### `static groupingById(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5282,12 +5337,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Id, List<Object>> contactsByAccountId = (Map<Id, List<Object>>)
@@ -5302,17 +5357,17 @@ Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
         ).cast(Map<Id, List<Contact>>.class));
 ```
 
-### `static groupingById(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingById(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5322,12 +5377,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Id, Object> contactsByAccountId = (Map<Id, Object>)
@@ -5344,18 +5399,18 @@ Map<Id, Set<SObject>> contactsByAccountId = (Map<Id, Set<SObject>>)
         ).cast(Map<Id, Set<SObject>>.class));
 ```
 
-### `static groupingById(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingById(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Id, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5365,12 +5420,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Id, Set<SObject>> contactsByAccountId = (Map<Id, Set<SObject>>)
@@ -5382,17 +5437,17 @@ Map<Id, Set<SObject>> contactsByAccountId = (Map<Id, Set<SObject>>)
         ));
 ```
 
-### `static groupingById(String keyFieldName, String valueFieldName)`
+##### `static groupingById(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5402,12 +5457,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
@@ -5418,17 +5473,17 @@ Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
         ).cast(Map<Id, List<String>>.class));
 ```
 
-### `static groupingById(SObjectField keyField, SObjectField valueField)`
+##### `static groupingById(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5438,12 +5493,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
@@ -5454,16 +5509,16 @@ Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
         ).cast(Map<Id, List<String>>.class));
 ```
 
-### `static groupingById(String fieldName)`
+##### `static groupingById(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5473,12 +5528,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
@@ -5486,16 +5541,16 @@ Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
         .collect(SObjectCollector.groupingById('AccountId'));
 ```
 
-### `static groupingById(SObjectField field)`
+##### `static groupingById(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5505,12 +5560,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<String, List<Contact>> contactsByAccountId = (Map<String, List<Contact>>)
@@ -5518,16 +5573,18 @@ Map<String, List<Contact>> contactsByAccountId = (Map<String, List<Contact>>)
         .collect(SObjectCollector.groupingById(Contact.AccountId));
 ```
 
-### `static groupingByString(ISObjectFunction classifier)`
+---
+### Map<String, ?> Collectors
+##### `static groupingByString(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<String, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5537,12 +5594,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<String, List<Object>> contactsByOtherCity = (Map<String, List<Object>>)
@@ -5557,17 +5614,17 @@ Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
         ).cast(Map<String, List<Contact>>.class));
 ```
 
-### `static groupingByString(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByString(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5577,12 +5634,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<String, Object> contactsByOtherCity = (Map<String, Object>)
@@ -5599,18 +5656,18 @@ Map<String, Set<SObject>> contactsByOtherCity = (Map<String, Set<SObject>>)
         ).cast(Map<String, Set<SObject>>.class));
 ```
 
-### `static groupingByString(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByString(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<String, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5620,12 +5677,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<String, Set<SObject>> contactsByOtherCity = (Map<String, Set<SObject>>)
@@ -5637,17 +5694,17 @@ Map<String, Set<SObject>> contactsByOtherCity = (Map<String, Set<SObject>>)
         ));
 ```
 
-### `static groupingByString(String keyFieldName, String valueFieldName)`
+##### `static groupingByString(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5657,12 +5714,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
@@ -5673,17 +5730,17 @@ Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
         ).cast(Map<String, List<String>>.class));
 ```
 
-### `static groupingByString(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByString(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5693,12 +5750,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
@@ -5709,16 +5766,16 @@ Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
         ).cast(Map<String, List<String>>.class));
 ```
 
-### `static groupingByString(String fieldName)`
+##### `static groupingByString(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5728,12 +5785,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
@@ -5741,16 +5798,16 @@ Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
         .collect(SObjectCollector.groupingByString('OtherCity'));
 ```
 
-### `static groupingByString(SObjectField field)`
+##### `static groupingByString(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5760,12 +5817,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
@@ -5773,16 +5830,18 @@ Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
         .collect(SObjectCollector.groupingByString(Contact.OtherCity));
 ```
 
-### `static groupingByBlob(ISObjectFunction classifier)`
+---
+### Map<Blob, ?> Collectors
+##### `static groupingByBlob(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5792,12 +5851,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Blob, List<Object>> attachmentsByOtherCity = (Map<Blob, List<Object>>)
@@ -5812,17 +5871,17 @@ Map<Blob, List<Attachment>> attachmentsByOtherCity = (Map<Blob, List<Attachment>
         ).cast(Map<Blob, List<Attachment>>.class));
 ```
 
-### `static groupingByBlob(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByBlob(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5832,12 +5891,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Blob, Object> attachmentsByOtherCity = (Map<Blob, Object>)
@@ -5854,18 +5913,18 @@ Map<Blob, Set<SObject>> attachmentsByOtherCity = (Map<Blob, Set<SObject>>)
         ).cast(Map<Blob, Set<SObject>>.class));
 ```
 
-### `static groupingByBlob(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByBlob(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Blob, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5875,12 +5934,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Blob, Set<SObject>> attachmentsByOtherCity = (Map<Blob, Set<SObject>>)
@@ -5892,17 +5951,17 @@ Map<Blob, Set<SObject>> attachmentsByOtherCity = (Map<Blob, Set<SObject>>)
         ));
 ```
 
-### `static groupingByBlob(String keyFieldName, String valueFieldName)`
+##### `static groupingByBlob(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5912,12 +5971,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
@@ -5928,17 +5987,17 @@ Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
         ).cast(Map<Blob, List<String>>.class));
 ```
 
-### `static groupingByBlob(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByBlob(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5948,12 +6007,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
@@ -5964,16 +6023,16 @@ Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
         ).cast(Map<Blob, List<String>>.class));
 ```
 
-### `static groupingByBlob(String fieldName)`
+##### `static groupingByBlob(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -5983,12 +6042,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Blob, List<Attachment>> attachmentsByBody = (Map<Blob, List<Attachment>>)
@@ -5996,16 +6055,16 @@ Map<Blob, List<Attachment>> attachmentsByBody = (Map<Blob, List<Attachment>>)
         .collect(SObjectCollector.groupingByBlob('Body'));
 ```
 
-### `static groupingByBlob(SObjectField field)`
+##### `static groupingByBlob(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6015,12 +6074,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Blob, List<Attachment>> attachmentsByBody = (Map<Blob, List<Attachment>>)
@@ -6028,16 +6087,18 @@ Map<Blob, List<Attachment>> attachmentsByBody = (Map<Blob, List<Attachment>>)
         .collect(SObjectCollector.groupingByBlob(Attachment.Body));
 ```
 
-### `static groupingByDate(ISObjectFunction classifier)`
+---
+### Map<Date, ?> Collectors
+##### `static groupingByDate(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6047,12 +6108,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Date, List<Object>> contactsByBirthdate = (Map<Date, List<Object>>)
@@ -6067,17 +6128,17 @@ Map<Date, List<Contact>> contactsByBirthdate = (Map<Date, List<Contact>>)
         ).cast(Map<Date, List<Contact>>.class));
 ```
 
-### `static groupingByDate(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByDate(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6087,12 +6148,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Date, Object> contactsByBirthdate = (Map<Date, Object>)
@@ -6109,18 +6170,18 @@ Map<Date, Set<SObject>> contactsByBirthdate = (Map<Date, Set<SObject>>)
         ).cast(Map<Date, Set<SObject>>.class));
 ```
 
-### `static groupingByDate(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByDate(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Date, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6130,12 +6191,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Date, Set<SObject>> contactsByBirthdate = (Map<Date,Set<SObject>>)
@@ -6147,17 +6208,17 @@ Map<Date, Set<SObject>> contactsByBirthdate = (Map<Date,Set<SObject>>)
         ));
 ```
 
-### `static groupingByDate(String keyFieldName, String valueFieldName)`
+##### `static groupingByDate(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6167,12 +6228,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
@@ -6183,17 +6244,17 @@ Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
         ).cast(Map<Date, List<String>>.class));
 ```
 
-### `static groupingByDate(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByDate(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6203,12 +6264,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
@@ -6219,16 +6280,16 @@ Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
         ).cast(Map<Date, List<String>>.class));
 ```
 
-### `static groupingByDate(String fieldName)`
+##### `static groupingByDate(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6238,12 +6299,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Date, List<Contact>> contactsByBody = (Map<Date, List<Contact>>)
@@ -6251,16 +6312,16 @@ Map<Date, List<Contact>> contactsByBody = (Map<Date, List<Contact>>)
         .collect(SObjectCollector.groupingByDate('Birthdate'));
 ```
 
-### `static groupingByDate(SObjectField field)`
+##### `static groupingByDate(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6270,12 +6331,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Date, List<Contact>> contactsByBody = (Map<Date, List<Contact>>)
@@ -6283,16 +6344,18 @@ Map<Date, List<Contact>> contactsByBody = (Map<Date, List<Contact>>)
         .collect(SObjectCollector.groupingByDate(Contact.Birthdate));
 ```
 
-### `static groupingByDatetime(ISObjectFunction classifier)`
+---
+### Map<Datetime, ?> Collectors
+##### `static groupingByDatetime(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6302,12 +6365,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Datetime, List<Object>> eventsByActivityDateTime = (Map<Datetime, List<Object>>)
@@ -6322,17 +6385,17 @@ Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>
         ).cast(Map<Datetime, List<Event>>.class));
 ```
 
-### `static groupingByDatetime(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByDatetime(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6342,12 +6405,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Datetime, Object> eventsByActivityDateTime = (Map<Datetime, Object>)
@@ -6364,18 +6427,18 @@ Map<Datetime, Set<SObject>> eventsByActivityDateTime = (Map<Datetime, Set<SObjec
         ).cast(Map<Datetime, Set<SObject>>.class));
 ```
 
-### `static groupingByDatetime(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByDatetime(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Datetime, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6385,12 +6448,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Datetime, Set<SObject>> eventsByActivityDateTime = (Map<Datetime, Set<SObject>>)
@@ -6402,17 +6465,17 @@ Map<Datetime, Set<SObject>> eventsByActivityDateTime = (Map<Datetime, Set<SObjec
         ));
 ```
 
-### `static groupingByDatetime(String keyFieldName, String valueFieldName)`
+##### `static groupingByDatetime(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6422,12 +6485,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List<String>>)
@@ -6438,17 +6501,17 @@ Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List
         ).cast(Map<Datetime, List<String>>.class));
 ```
 
-### `static groupingByDatetime(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByDatetime(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6458,12 +6521,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List<String>>)
@@ -6474,16 +6537,16 @@ Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List
         ).cast(Map<Datetime, List<String>>.class));
 ```
 
-### `static groupingByDatetime(String fieldName)`
+##### `static groupingByDatetime(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6493,12 +6556,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>>)
@@ -6506,16 +6569,16 @@ Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>
         .collect(SObjectCollector.groupingByDatetime('ActivityDateTime'));
 ```
 
-### `static groupingByDatetime(SObjectField field)`
+##### `static groupingByDatetime(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6525,12 +6588,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>>)
@@ -6538,16 +6601,18 @@ Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>
         .collect(SObjectCollector.groupingByDatetime(Event.ActivityDateTime));
 ```
 
-### `static groupingByTime(ISObjectFunction classifier)`
+---
+### Map<Time, ?> Collectors
+##### `static groupingByTime(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6557,12 +6622,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Time, List<Object>> slotsByStartTime = (Map<Time, List<Object>>)
@@ -6577,17 +6642,17 @@ Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
         ).cast(Map<Time, List<TimeSlot>>.class));
 ```
 
-### `static groupingByTime(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByTime(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6597,12 +6662,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Time, Object> slotsByStartTime = (Map<Time, Object>)
@@ -6619,18 +6684,18 @@ Map<Time, Set<SObject>> slotsByStartTime = (Map<Time, Set<SObject>>)
         ).cast(Map<Time, Set<SObject>>.class));
 ```
 
-### `static groupingByTime(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByTime(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Time, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6640,12 +6705,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Time, Set<SObject>> slotsByStartTime = (Map<Time, Set<SObject>>)
@@ -6657,17 +6722,17 @@ Map<Time, Set<SObject>> slotsByStartTime = (Map<Time, Set<SObject>>)
         ));
 ```
 
-### `static groupingByTime(String keyFieldName, String valueFieldName)`
+##### `static groupingByTime(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6677,12 +6742,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Time, List<String>> namesByStartTime = (Map<Time, List<String>>)
@@ -6693,17 +6758,17 @@ Map<Time, List<String>> namesByStartTime = (Map<Time, List<String>>)
         ).cast(Map<Time, List<String>>.class));
 ```
 
-### `static groupingByTime(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByTime(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6713,12 +6778,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Time, List<String>> descriptionsByActivityDateTime = (Map<Time, List<String>>)
@@ -6729,16 +6794,16 @@ Map<Time, List<String>> descriptionsByActivityDateTime = (Map<Time, List<String>
         ).cast(Map<Time, List<String>>.class));
 ```
 
-### `static groupingByTime(String fieldName)`
+##### `static groupingByTime(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6748,12 +6813,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
@@ -6761,16 +6826,16 @@ Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
         .collect(SObjectCollector.groupingByTime('StartTime'));
 ```
 
-### `static groupingByTime(SObjectField field)`
+##### `static groupingByTime(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6780,12 +6845,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
@@ -6793,16 +6858,18 @@ Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
         .collect(SObjectCollector.groupingByTime(TimeSlot.StartTime));
 ```
 
-### `static groupingByInt(ISObjectToIntFunction classifier)`
+---
+### Map<Integer, ?> Collectors
+##### `static groupingByInt(ISObjectToIntFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6812,12 +6879,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Integer, List<Object>> accountsByNumberOfEmployees = (Map<Integer, List<Object>>)
@@ -6832,17 +6899,17 @@ Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Acc
         ).cast(Map<Integer, List<Account>>.class));
 ```
 
-### `static groupingByInt(ISObjectToIntFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByInt(ISObjectToIntFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6852,12 +6919,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Integer, Object> accountsByNumberOfEmployees = (Map<Integer, Object>)
@@ -6874,18 +6941,18 @@ Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObje
         ).cast(Map<Integer, Set<SObject>>.class));
 ```
 
-### `static groupingByInt(ISObjectToIntFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByInt(ISObjectToIntFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Integer, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6895,12 +6962,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObject>>)
@@ -6912,17 +6979,17 @@ Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObje
         ));
 ```
 
-### `static groupingByInt(String keyFieldName, String valueFieldName)`
+##### `static groupingByInt(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6932,12 +6999,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>>)
@@ -6948,17 +7015,17 @@ Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>
         ).cast(Map<Integer, List<String>>.class));
 ```
 
-### `static groupingByInt(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByInt(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -6968,12 +7035,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>>)
@@ -6984,16 +7051,16 @@ Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>
         ).cast(Map<Integer, List<String>>.class));
 ```
 
-### `static groupingByInt(String fieldName)`
+##### `static groupingByInt(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7003,12 +7070,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Account>>)
@@ -7016,16 +7083,16 @@ Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Acc
         .collect(SObjectCollector.groupingByInt('NumberOfEmployees'));
 ```
 
-### `static groupingByInt(SObjectField field)`
+##### `static groupingByInt(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7035,12 +7102,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Account>>)
@@ -7048,16 +7115,18 @@ Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Acc
         .collect(SObjectCollector.groupingByInt(Account.NumberOfEmployees));
 ```
 
-### `static groupingByLong(ISObjectToLongFunction classifier)`
+---
+### Map<Long, ?> Collectors
+##### `static groupingByLong(ISObjectToLongFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7067,12 +7136,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Long, List<Object>> accountsByNumberOfEmployees = (Map<Long, List<Object>>)
@@ -7087,17 +7156,17 @@ Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>
         ).cast(Map<Long, List<Account>>.class));
 ```
 
-### `static groupingByLong(ISObjectToLongFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByLong(ISObjectToLongFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7107,12 +7176,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Long, Object> accountsByNumberOfEmployees = (Map<Long, Object>)
@@ -7129,18 +7198,18 @@ Map<Long, Set<SObject>> accountsByNumberOfEmployees = (Map<Long, Set<SObject>>)
         ).cast(Map<Long, Set<SObject>>.class));
 ```
 
-### `static groupingByLong(ISObjectToLongFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByLong(ISObjectToLongFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Long, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7150,12 +7219,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Long, Set<SObject>> accountsByNumberOfEmployees = (Map<Long, Set<SObject>>)
@@ -7167,17 +7236,17 @@ Map<Long, Set<SObject>> accountsByNumberOfEmployees = (Map<Long, Set<SObject>>)
         ));
 ```
 
-### `static groupingByLong(String keyFieldName, String valueFieldName)`
+##### `static groupingByLong(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7187,12 +7256,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
@@ -7203,17 +7272,17 @@ Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
         ).cast(Map<Long, List<String>>.class));
 ```
 
-### `static groupingByLong(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByLong(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7223,12 +7292,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
@@ -7239,16 +7308,16 @@ Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
         ).cast(Map<Long, List<String>>.class));
 ```
 
-### `static groupingByLong(String fieldName)`
+##### `static groupingByLong(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7258,12 +7327,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>)
@@ -7271,16 +7340,16 @@ Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>
         .collect(SObjectCollector.groupingByLong('NumberOfEmployees'));
 ```
 
-### `static groupingByLong(SObjectField field)`
+##### `static groupingByLong(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7290,12 +7359,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>)
@@ -7303,16 +7372,18 @@ Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>
         .collect(SObjectCollector.groupingByLong(Account.NumberOfEmployees));
 ```
 
-### `static groupingByDouble(ISObjectToDoubleFunction classifier)`
+---
+### Map<Double, ?> Collectors
+##### `static groupingByDouble(ISObjectToDoubleFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7322,12 +7393,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Double, List<Object>> accountsByBillingLatitude = (Map<Double, List<Object>>)
@@ -7342,17 +7413,17 @@ Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account
         ).cast(Map<Double, List<Account>>.class));
 ```
 
-### `static groupingByDouble(ISObjectToDoubleFunction classifier, ISObjectCollector downstream)`
+##### `static groupingByDouble(ISObjectToDoubleFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7362,12 +7433,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Double, Object> accountsByBillingLatitude = (Map<Double, Object>)
@@ -7384,18 +7455,18 @@ Map<Double, Set<SObject>> accountsByBillingLatitude = (Map<Double, Set<SObject>>
         ).cast(Map<Double, Set<SObject>>.class));
 ```
 
-### `static groupingByDouble(ISObjectToDoubleFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingByDouble(ISObjectToDoubleFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Double, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7405,12 +7476,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Double, Set<SObject>> accountsByBillingLatitude = (Map<Double, Set<SObject>>)
@@ -7422,17 +7493,17 @@ Map<Double, Set<SObject>> accountsByBillingLatitude = (Map<Double, Set<SObject>>
         ));
 ```
 
-### `static groupingByDouble(String keyFieldName, String valueFieldName)`
+##### `static groupingByDouble(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7442,12 +7513,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
@@ -7458,17 +7529,17 @@ Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
         ).cast(Map<Double, List<String>>.class));
 ```
 
-### `static groupingByDouble(SObjectField keyField, SObjectField valueField)`
+##### `static groupingByDouble(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7478,12 +7549,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
@@ -7494,16 +7565,18 @@ Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
         ).cast(Map<Double, List<String>>.class));
 ```
 
-### `static groupingByDouble(String fieldName)`
+---
+### Map<Object, ?> Collectors
+##### `static groupingByDouble(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7513,12 +7586,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account>>)
@@ -7526,16 +7599,16 @@ Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account
         .collect(SObjectCollector.groupingByDouble('BillingLatitude'));
 ```
 
-### `static groupingByDouble(SObjectField field)`
+##### `static groupingByDouble(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7545,12 +7618,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account>>)
@@ -7558,16 +7631,16 @@ Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account
         .collect(SObjectCollector.groupingByDouble(Account.BillingLatitude));
 ```
 
-### `static groupingBy(ISObjectFunction classifier)`
+##### `static groupingBy(ISObjectFunction classifier)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7577,12 +7650,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Object, List<Object>> contactsByBirthdate = (Map<Object, List<Object>>)
@@ -7597,17 +7670,17 @@ Map<Object, List<Contact>> contactsByBirthdate = (Map<Object, List<Contact>>)
         ).cast(Map<Object, List<Contact>>.class));
 ```
 
-### `static groupingBy(ISObjectFunction classifier, ISObjectCollector downstream)`
+##### `static groupingBy(ISObjectFunction classifier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7617,12 +7690,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Object, Object> contactsByBirthdate = (Map<Object, Object>)
@@ -7639,18 +7712,18 @@ Map<Object, Set<SObject>> contactsByBirthdate = (Map<Object, Set<SObject>>)
         ).cast(Map<Object, Set<SObject>>.class));
 ```
 
-### `static groupingBy(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
+##### `static groupingBy(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Object, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7660,12 +7733,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Object, Set<SObject>> contactsByBirthdate = (Map<Object,Set<SObject>>)
@@ -7677,17 +7750,17 @@ Map<Object, Set<SObject>> contactsByBirthdate = (Map<Object,Set<SObject>>)
         ));
 ```
 
-### `static groupingBy(String keyFieldName, String valueFieldName)`
+##### `static groupingBy(String keyFieldName, String valueFieldName)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyFieldName`|the field value to accumulate as key|
 |`valueFieldName`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7697,12 +7770,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyFieldName` or `valueFieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by function
 Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
@@ -7713,17 +7786,17 @@ Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
         ).cast(Map<Object, List<String>>.class));
 ```
 
-### `static groupingBy(SObjectField keyField, SObjectField valueField)`
+##### `static groupingBy(SObjectField keyField, SObjectField valueField)`
 
 Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`keyField`|the field value to accumulate as key|
 |`valueField`|the field value to accumulate as values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7733,12 +7806,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyField` or `valueField` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
@@ -7749,16 +7822,16 @@ Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
         ).cast(Map<Object, List<String>>.class));
 ```
 
-### `static groupingBy(String fieldName)`
+##### `static groupingBy(String fieldName)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported. <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7768,12 +7841,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
@@ -7781,16 +7854,16 @@ Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
         .collect(SObjectCollector.groupingBy('Birthdate'));
 ```
 
-### `static groupingBy(SObjectField field)`
+##### `static groupingBy(SObjectField field)`
 
 Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`. <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate as key|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7800,12 +7873,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Group values by keys provided by field
 Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
@@ -7813,16 +7886,18 @@ Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
         .collect(SObjectCollector.groupingBy(Contact.Birthdate));
 ```
 
-### `static partitioningBy(ISObjectPredicate predicate)`
+---
+### Partitioning By Collectors
+##### `static partitioningBy(ISObjectPredicate predicate)`
 
 Returns a `SObjectCollector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate that classifies input arguments (true or false)|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7832,12 +7907,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Map<Boolean, Object> accountsPartitionedByHavingMoreThan100Employees = (Map<Boolean, Object>)
     Stream.of(accounts)
@@ -7851,17 +7926,17 @@ Map<Boolean, List<Account>> accountsPartitionedByHavingMoreThan100Employees = (M
         ).cast(Map<Boolean, List<Account>>.class));
 ```
 
-### `static partitioningBy(ISObjectPredicate predicate, ISObjectCollector downstream)`
+##### `static partitioningBy(ISObjectPredicate predicate, ISObjectCollector downstream)`
 
 Returns a `SObjectCollector` that partitions the SObject input arguments according to `predicate`, reduces the values in each partition according to `downstream` Collector, and organizes them into a `Map<Boolean, Object>` whose values are the result of the downstream reduction. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate that classifies input arguments (true or false)|
 |`downstream`|the downstream reduction collector|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7871,12 +7946,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 Map<Boolean, Set<String>> accountNamesPartitionedByHavingMoreThan100Employees =
     (Map<Boolean, Set<String>>) Stream.of(accounts)
@@ -7886,17 +7961,17 @@ Map<Boolean, Set<String>> accountNamesPartitionedByHavingMoreThan100Employees =
         ).cast(Map<Boolean, Set<Account>>.class));
 ```
 
-### `static partitioningBy(String fieldName, Object value)`
+##### `static partitioningBy(String fieldName, Object value)`
 
 Returns a `SObjectCollector` that partitions the SObject input arguments according to whether `fieldName` is equal to `value` and organizes them into a `Map<Boolean, List<SObject>>`. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to test|
 |`value`|the expected value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7906,29 +7981,29 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees =
     (Map<Boolean, List<Account>>) Stream.of(contacts)
         .collect(SObjectCollector.partitioningBy('OtherCountry', 'UK'));
 ```
 
-### `static partitioningBy(SObjectField field, Object value)`
+##### `static partitioningBy(SObjectField field, Object value)`
 
 Returns a `SObjectCollector` that partitions the SObject input arguments according to whether `field` is equal to `value` and organizes them into a `Map<Boolean, List<SObject>>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to test|
 |`value`|the expected value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7938,28 +8013,30 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees =
     (Map<Boolean, List<Account>>) Stream.of(contacts)
         .collect(SObjectCollector.partitioningBy(Contact.OtherCountry, 'UK'));
 ```
 
-### `static joining(String fieldName)`
+---
+### Joining
+##### `static joining(String fieldName)`
 
 Returns a `SObjectCollector` that concatenates `fieldName` String values of the SObject input arguments. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to concatenate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7969,26 +8046,26 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 String lastNames = (String) Stream.of(contacts).collect(SObjectCollector.joining('LastName'));
 ```
 
-### `static joining(SObjectField field)`
+##### `static joining(SObjectField field)`
 
 Returns a `SObjectCollector` that concatenates `fieldName` String values of the SObject input arguments.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to concatenate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -7998,27 +8075,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 String lastNames = (String) Stream.of(contacts).collect(SObjectCollector.joining(Contact.LastName));
 ```
 
-### `static joining(String fieldName, String delimiter)`
+##### `static joining(String fieldName, String delimiter)`
 
 Returns a `SObjectCollector` that concatenates `fieldName` String values of the SObject input arguments, separated by the `delimiter`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to concatenate|
 |`delimiter`|the delimiter between each element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8028,28 +8105,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank or `delimiter` is null|
 
-#### Example
+###### Example
 ```apex
 String lastNames = (String) Stream.of(contacts)
      .collect(SObjectCollector.joining('LastName', '; '));
 ```
 
-### `static joining(SObjectField field, String delimiter)`
+##### `static joining(SObjectField field, String delimiter)`
 
 Returns a `SObjectCollector` that concatenates `field` String values of the SObject input arguments, separated by the `delimiter`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to concatenate|
 |`delimiter`|the delimiter between each element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8059,22 +8136,22 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` or `delimiter` is null|
 
-#### Example
+###### Example
 ```apex
 String lastNames = (String) Stream.of(contacts)
     .collect(SObjectCollector.joining(Contact.LastName, '; '));
 ```
 
-### `static joining(String fieldName, String delimiter, String prefix, String suffix)`
+##### `static joining(String fieldName, String delimiter, String prefix, String suffix)`
 
 Returns a `SObjectCollector` that concatenates `fieldName` String values of the SObject input arguments, separated by the `delimiter` with `prefix` and `suffix`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to concatenate|
@@ -8082,7 +8159,7 @@ Returns a `SObjectCollector` that concatenates `fieldName` String values of the 
 |`prefix`|the prefix|
 |`suffix`|the suffix|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8092,22 +8169,22 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank or `delimiter`, `prefix` or `suffix` is null|
 
-#### Example
+###### Example
 ```apex
 String lastNames = (String) Stream.of(contacts)
      .collect(SObjectCollector.joining('LastName', '; ', 'prefix', 'suffix'));
 ```
 
-### `static joining(SObjectField field, String delimiter, String prefix, String suffix)`
+##### `static joining(SObjectField field, String delimiter, String prefix, String suffix)`
 
 Returns a `SObjectCollector` that concatenates `field` String values of the SObject input arguments, separated by the `delimiter` with `prefix` and `suffix`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to concatenate|
@@ -8115,7 +8192,7 @@ Returns a `SObjectCollector` that concatenates `field` String values of the SObj
 |`prefix`|the prefix|
 |`suffix`|the suffix|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8125,27 +8202,29 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field`, `delimiter`, `prefix` or `suffix` is null|
 
-#### Example
+###### Example
 ```apex
 String lastNames = (String) Stream.of(contacts)
      .collect(SObjectCollector.joining(Contact.LastName, '; ', 'prefix', 'suffix'));
 ```
 
-### `static averagingInt(ISObjectToIntFunction mapper)`
+---
+### Int Collectors
+##### `static averagingInt(ISObjectToIntFunction mapper)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Integer value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8155,27 +8234,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 Double averageNumberOfEmployees = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingInt(SObjectToIntFunction.get('NumberOfEmployees')));
 ```
 
-### `static averagingInt(String fieldName)`
+##### `static averagingInt(String fieldName)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of `fieldName` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8185,27 +8264,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 Double averageNumberOfEmployees = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingInt('NumberOfEmployees'));
 ```
 
-### `static averagingInt(SObjectField field)`
+##### `static averagingInt(SObjectField field)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of `field` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8215,22 +8294,22 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Double averageNumberOfEmployees = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingInt(Account.NumberOfEmployees));
 ```
 
-### `static counting()`
+##### `static counting()`
 
 Returns a `SObjectCollector` that counts the number of input elements. If no elements are present, the result is 0.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8240,22 +8319,22 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Example
+###### Example
 ```apex
 Double averageNumberOfEmployees = (Double) Stream.of(accounts)
     .collect(SObjectCollector.counting());
 ```
 
-### `static summingInt(ISObjectToIntFunction mapper)`
+##### `static summingInt(ISObjectToIntFunction mapper)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Integer value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8265,27 +8344,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 Integer sumOfNumberOfEmployees = (Integer) Stream.of(accounts)
     .collect(SObjectCollector.summingInt(SObjectToIntFunction.get('NumberOfEmployees')));
 ```
 
-### `static summingInt(String fieldName)`
+##### `static summingInt(String fieldName)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of `fieldName` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8295,27 +8374,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 Integer sumOfNumberOfEmployees = (Integer) Stream.of(accounts)
     .collect(SObjectCollector.summingInt('NumberOfEmployees'));
 ```
 
-### `static summingInt(SObjectField field)`
+##### `static summingInt(SObjectField field)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of `field` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8325,27 +8404,29 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Integer sumOfNumberOfEmployees = (Integer) Stream.of(accounts)
     .collect(SObjectCollector.summingInt(Account.NumberOfEmployees));
 ```
 
-### `static averagingLong(ISObjectToLongFunction mapper)`
+---
+### Long Collectors
+##### `static averagingLong(ISObjectToLongFunction mapper)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Long value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8355,27 +8436,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 Double averageNumberOfEmployees = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingLong(SObjectToLongFunction.get('NumberOfEmployees')));
 ```
 
-### `static averagingLong(String fieldName)`
+##### `static averagingLong(String fieldName)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of `fieldName` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8385,27 +8466,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 Double averageNumberOfEmployees = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingLong('NumberOfEmployees'));
 ```
 
-### `static averagingLong(SObjectField field)`
+##### `static averagingLong(SObjectField field)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of `field` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8415,27 +8496,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Double averageNumberOfEmployees = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingLong(Account.NumberOfEmployees));
 ```
 
-### `static summingLong(ISObjectToLongFunction mapper)`
+##### `static summingLong(ISObjectToLongFunction mapper)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Long value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8445,27 +8526,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 Long sumOfNumberOfEmployees = (Long) Stream.of(accounts)
     .collect(SObjectCollector.summingLong(SObjectToLongFunction.get('NumberOfEmployees')));
 ```
 
-### `static summingLong(String fieldName)`
+##### `static summingLong(String fieldName)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of `fieldName` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8475,27 +8556,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 Long sumOfNumberOfEmployees = (Long) Stream.of(accounts)
     .collect(SObjectCollector.summingLong('NumberOfEmployees'));
 ```
 
-### `static summingLong(SObjectField field)`
+##### `static summingLong(SObjectField field)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of `field` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8505,27 +8586,29 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Long sumOfNumberOfEmployees = (Long) Stream.of(accounts)
     .collect(SObjectCollector.summingLong(Account.NumberOfEmployees));
 ```
 
-### `static averagingDouble(ISObjectToDoubleFunction mapper)`
+---
+### Double Collectors
+##### `static averagingDouble(ISObjectToDoubleFunction mapper)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Double value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8535,27 +8618,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 Double averageBillingLatitude = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingLong(SObjectToDoubleFunction.get('BillingLatitude')));
 ```
 
-### `static averagingDouble(String fieldName)`
+##### `static averagingDouble(String fieldName)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of `fieldName` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8565,27 +8648,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
 
-#### Example
+###### Example
 ```apex
 Double averageBillingLatitude = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingDouble('BillingLatitude'));
 ```
 
-### `static averagingDouble(SObjectField field)`
+##### `static averagingDouble(SObjectField field)`
 
 Returns a `SObjectCollector` that returns the arithmetic mean of `field` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to average|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8595,27 +8678,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Double averageBillingLatitude = (Double) Stream.of(accounts)
     .collect(SObjectCollector.averagingDouble(Account.BillingLatitude));
 ```
 
-### `static summingDouble(ISObjectToDoubleFunction mapper)`
+##### `static summingDouble(ISObjectToDoubleFunction mapper)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Long value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8625,27 +8708,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 Long sumOfBillingLatitude = (Long) Stream.of(accounts)
     .collect(SObjectCollector.summingDouble(SObjectToDoubleFunction.get('BillingLatitude')));
 ```
 
-### `static summingDouble(String fieldName)`
+##### `static summingDouble(String fieldName)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of `fieldName` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to sum|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8655,27 +8738,27 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is null|
 
-#### Example
+###### Example
 ```apex
 Double sumOfBillingLatitude = (Double) Stream.of(accounts)
     .collect(SObjectCollector.summingDouble('BillingLatitude'));
 ```
 
-### `static summingDouble(SObjectField field)`
+##### `static summingDouble(SObjectField field)`
 
 Returns a `SObjectCollector` that returns the arithmetic sum of `field` values. If no elements are present, the result is 0.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to BillingLatitude|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8685,27 +8768,29 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Double sumOfBillingLatitude = (Double) Stream.of(accounts)
     .collect(SObjectCollector.summingDouble(Account.NumberOfEmployees));
 ```
 
-### `static filtering(ISObjectPredicate predicate)`
+---
+### Intermediate Collectors
+##### `static filtering(ISObjectPredicate predicate)`
 
 Adapts a `SObjectCollector` to one accepting elements by applying `predicate` to each input element and only accumulating if it returns true.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate to test input arguments|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8715,12 +8800,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 // Get accounts with more than 100 employees
 List<Account> accountsHavingMoreThan100Employees = (List<Account>) Stream.of(accounts)
@@ -8735,17 +8820,17 @@ Map<String, List<Account>> accountNamesHavingMoreThan100EmployeesByType =
        ).cast(Map<String, List<Account>>.class));
 ```
 
-### `static filtering(ISObjectPredicate predicate, ISObjectCollector downstream)`
+##### `static filtering(ISObjectPredicate predicate, ISObjectCollector downstream)`
 
 Adapts a `SObjectCollector` to one accepting elements by applying `predicate` to each input element and only accumulating if it returns true.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate to test input arguments|
 |`downstream`|the collector that accumulates only matched values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8755,12 +8840,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 // Get accounts with more than 100 employees
 List<String> accountNamesHavingMoreThan100Employees = (List<Account>) Stream.of(accounts)
@@ -8781,17 +8866,17 @@ Map<String, List<String>> accountNamesHavingMoreThan100EmployeesByType =
      ));
 ```
 
-### `static filtering(String fieldName, Object value)`
+##### `static filtering(String fieldName, Object value)`
 
 Adapts a `SObjectCollector` to one accepting elements by testing of `fieldName` is equal to `value` to each input element and only accumulating if it is true.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to test input arguments|
 |`value`|the expected value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8801,12 +8886,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is null|
 
-#### Example
+###### Example
 ```apex
 // Get accounts with hot Rating
 List<Account> accountsHavingMoreThan100Employees = (List<Account>) Stream.of(accounts)
@@ -8821,17 +8906,17 @@ Map<String, List<Account>> accountNamesHavingMoreThan100EmployeesByType =
        ).cast(Map<String, List<Account>>.class));
 ```
 
-### `static filtering(SObjectField field, Object value)`
+##### `static filtering(SObjectField field, Object value)`
 
 Adapts a `SObjectCollector` to one accepting elements by testing of `field` is equal to `value` to each input element and only accumulating if it is true.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to test input arguments|
 |`value`|the expected value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8841,12 +8926,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 // Get accounts with hot Rating
 List<Account> accountsHavingMoreThan100Employees = (List<Account>) Stream.of(accounts)
@@ -8861,16 +8946,16 @@ Map<String, List<Account>> accountNamesHavingMoreThan100EmployeesByType =
        ).cast(Map<String, List<Account>>.class));
 ```
 
-### `static mapping(ISObjectFunction mapper)`
+##### `static mapping(ISObjectFunction mapper)`
 
 Adapts a `SObjectCollector` to one accepting elements by applying `mapper` function to each input element before accumulation.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function to return the value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8880,29 +8965,29 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<String> accountNames = (List<String>)
     Stream.of(accounts)
         .collect(SObjectCollector.mapping(SObjectFunction.get('Name')).cast(List<String>.class));
 ```
 
-### `static mapping(ISObjectFunction mapper, ICollector downstream)`
+##### `static mapping(ISObjectFunction mapper, ICollector downstream)`
 
 Adapts a `SObjectCollector` to one accepting elements by applying `mapper` function to each input element before accumulation.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function to return the value to accumulate|
 |`downstream`|the collector which accepts mapped values|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8912,12 +8997,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `downstream` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Set<String>> namesByType = (Map<String Set<String>>)
     Stream.of(accounts)
@@ -8930,16 +9015,16 @@ Map<String, Set<String>> namesByType = (Map<String Set<String>>)
         ).cast(Map<String Set<String>>.class));
 ```
 
-### `static mapping(String fieldName)`
+##### `static mapping(String fieldName)`
 
 Adapts a `SObjectCollector` to one accepting `fieldName` values to each input element before accumulation.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8949,28 +9034,28 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is null|
 
-#### Example
+###### Example
 ```apex
 List<String> accountNames = (List<String>)
     Stream.of(accounts)
         .collect(SObjectCollector.mapping('Name').cast(List<String>.class));
 ```
 
-### `static mapping(SObjectField field)`
+##### `static mapping(SObjectField field)`
 
 Adapts a `SObjectCollector` to one accepting `field` values to each input element before accumulation.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to accumulate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -8980,29 +9065,29 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 List<String> accountNames = (List<String>)
     Stream.of(accounts)
         .collect(SObjectCollector.mapping(Account.Name).cast(List<String>.class));
 ```
 
-### `static reducing(SObject identity, ISObjectBinaryOperator accumulator)`
+##### `static reducing(SObject identity, ISObjectBinaryOperator accumulator)`
 
 Returns a `SObjectCollector` which performs a reduction of its input elements under `accumulator` using `identity`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`identity`|the identity value for the reduction|
 |`accumulator`|the input arguments reducer|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9012,12 +9097,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Account accountWithSummedNumberOfEmployees = (Account) Stream.of(accounts)
     .collect(SObjectCollector.reducing(
@@ -9026,16 +9111,18 @@ Account accountWithSummedNumberOfEmployees = (Account) Stream.of(accounts)
      ));
 ```
 
-### `static reducing(ISObjectBinaryOperator accumulator)`
+---
+### Optional Collectors
+##### `static reducing(ISObjectBinaryOperator accumulator)`
 
 Returns a `SObjectCollector` which performs a reduction of its input elements under `accumulator`. The result is described as an `OptionalSObject`. <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the input arguments reducer|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9045,12 +9132,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
@@ -9064,16 +9151,16 @@ Account customerWithMaxNumberOfEmployees = (Account)
     accountOptionalWithMaxNumberOfEmployeesPerType.get('Customer').get();
 ```
 
-### `static maximizing(ISObjectComparator comparator)`
+##### `static maximizing(ISObjectComparator comparator)`
 
 Returns a `SObjectCollector` which produces the maximal element according to `comparator`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`comparator`|the comparator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9083,12 +9170,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
@@ -9102,16 +9189,16 @@ Account customerWithMaxNumberOfEmployees = (Account)
     ((OptionalSObject) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
 ```
 
-### `static maximizing(String fieldName)`
+##### `static maximizing(String fieldName)`
 
 Returns a `SObjectCollector` which produces the maximal element according to `fieldName`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9121,12 +9208,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
@@ -9138,16 +9225,16 @@ Account customerWithMaxNumberOfEmployees = (Account)
     ((OptionalSObject) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
 ```
 
-### `static maximizing(SObjectField field)`
+##### `static maximizing(SObjectField field)`
 
 Returns a `SObjectCollector` which produces the maximal element according to `field`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9157,12 +9244,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
@@ -9174,16 +9261,16 @@ Account customerWithMaxNumberOfEmployees = (Account)
     ((OptionalSObject) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
 ```
 
-### `static minimizing(ISObjectComparator comparator)`
+##### `static minimizing(ISObjectComparator comparator)`
 
 Returns a `SObjectCollector` which produces the minimal element according to `comparator`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`comparator`|the comparator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9193,12 +9280,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
@@ -9212,16 +9299,16 @@ Account customerWithMinNumberOfEmployees = (Account)
     accountOptionalWithMinNumberOfEmployeesPerType.get('Customer').get();
 ```
 
-### `static minimizing(String fieldName)`
+##### `static minimizing(String fieldName)`
 
 Returns a `SObjectCollector` which produces the minimal element according to `fieldName`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9231,12 +9318,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
@@ -9248,16 +9335,16 @@ Account customerWithMinNumberOfEmployees = (Account)
     ((OptionalSObject) accountOptionalWithMinNumberOfEmployeesPerType).get('Customer').get();
 ```
 
-### `static minimizing(SObjectField field)`
+##### `static minimizing(SObjectField field)`
 
 Returns a `SObjectCollector` which produces the maximal element according to `field`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field value to compare|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -9267,12 +9354,12 @@ SObjectCollector
 
 the `SObjectCollector`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
 
-#### Example
+###### Example
 ```apex
 Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)

@@ -13,11 +13,12 @@ Extends `ToLongFunction` functions and provides `DatetimeToLongFunction` common 
 **Group** Functions
 
 ## Methods
-### `static getTime()`
+### Built-Ins
+##### `static getTime()`
 
 Returns a `ToLongFunction` that returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by the DateTime input argument.
 
-#### Return
+###### Return
 
 **Type**
 

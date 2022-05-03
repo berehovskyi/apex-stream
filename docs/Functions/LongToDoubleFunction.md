@@ -13,16 +13,19 @@ Inherits [ILongToDoubleFunction](/docs/Functional-Interfaces/ILongToDoubleFuncti
 **Group** Functions
 
 ## Methods
-### `apply(Long l)`
-#### Parameters
+### Function
+##### `apply(Long l)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static valueOf()`
+---
+### Built-Ins
+##### `static valueOf()`
 
 Returns a `LongToDoubleFunction` that returns the Double value of the Long input argument.
 
-#### Return
+###### Return
 
 **Type**
 

@@ -13,16 +13,17 @@ Extends `Predicate` functions and provides `DatePredicate` common class level im
 **Group** Functions
 
 ## Methods
-### `static isSameDay(Date dateToCompare)`
+### Date Predicates
+##### `static isSameDay(Date dateToCompare)`
 
 Returns a `Predicate` that tests the input date if it is the same as the specified `dateToCompare` in the local time zone of the context user.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`dateToCompare`|date|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `dateToCompare` is null|
@@ -40,11 +41,11 @@ the `Predicate`
 
 **See** Date.isSameDay
 
-### `static isLeapYear()`
+##### `static isLeapYear()`
 
 Returns a `Predicate` that tests the input date if it is the year is the leap year.
 
-#### Return
+###### Return
 
 **Type**
 

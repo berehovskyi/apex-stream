@@ -16,16 +16,19 @@ Inherits [IIntFunction](/docs/Functional-Interfaces/IIntFunction.md) functional 
 **See** IIntIterable.mapToObject
 
 ## Methods
-### `apply(Integer i)`
-#### Parameters
+### Function
+##### `apply(Integer i)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static toString()`
+---
+### Built-Ins
+##### `static toString()`
 
 Returns a `IntFunction` that returns a string that represents the Integer input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -38,11 +41,11 @@ the `SObjectFunction`
 
 **See** String.valueOf
 
-### `static toObject()`
+##### `static toObject()`
 
 Returns a `IntFunction` that returns the Integer input argument as object.
 
-#### Return
+###### Return
 
 **Type**
 

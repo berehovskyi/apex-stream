@@ -19,15 +19,16 @@ Provides common class level implementations, and related utilities for `Set<T> -
 **See** [SObjectCollector](/docs/Collectors/SObjectCollector.md)
 
 ## Methods
-### `static addToBoolSet(ISObjectFunction mapper)`
+### Add To Set<?> BiConsumers
+##### `static addToBoolSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Boolean>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,7 +38,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -46,15 +47,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toBoolSet
 
-### `static addToIdSet(ISObjectFunction mapper)`
+##### `static addToIdSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Id>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,7 +65,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -73,15 +74,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toIdSet
 
-### `static addToStringSet(ISObjectFunction mapper)`
+##### `static addToStringSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<String>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -91,7 +92,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -100,15 +101,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toStringSet
 
-### `static addToBlobSet(ISObjectFunction mapper)`
+##### `static addToBlobSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Blob>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -118,7 +119,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -127,15 +128,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toBlobSet
 
-### `static addToDateSet(ISObjectFunction mapper)`
+##### `static addToDateSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Date>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -145,7 +146,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -154,15 +155,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toDateSet
 
-### `static addToDatetimeSet(ISObjectFunction mapper)`
+##### `static addToDatetimeSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Datetime>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -172,7 +173,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -181,15 +182,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toDatetimeSet
 
-### `static addToTimeSet(ISObjectFunction mapper)`
+##### `static addToTimeSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Time>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -199,7 +200,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -208,15 +209,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toTimeSet
 
-### `static addToIntSet(ISObjectToIntFunction mapper)`
+##### `static addToIntSet(ISObjectToIntFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Integer>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -226,7 +227,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -235,15 +236,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toIntSet
 
-### `static addToLongSet(ISObjectToLongFunction mapper)`
+##### `static addToLongSet(ISObjectToLongFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Long>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -253,7 +254,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -262,15 +263,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toLongSet
 
-### `static addToDoubleSet(ISObjectToDoubleFunction mapper)`
+##### `static addToDoubleSet(ISObjectToDoubleFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Double>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -280,7 +281,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -289,15 +290,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toDoubleSet
 
-### `static addToSObjectSet(ISObjectUnaryOperator mapper)`
+##### `static addToSObjectSet(ISObjectUnaryOperator mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<SObject>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -307,7 +308,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -316,15 +317,15 @@ the `BiConsumer`
 
 **See** SObjectCollector.toSet
 
-### `static addToObjectSet(ISObjectFunction mapper)`
+##### `static addToObjectSet(ISObjectFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Object>` and adds to it the result of applying the `mapper` function to the second input argument
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -334,7 +335,7 @@ ObjectSObjectConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|

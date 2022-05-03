@@ -13,16 +13,17 @@ Provides common class level implementations, and related utilities for `IdSuppli
 **Group** Functions
 
 ## Methods
-### `static of(SObjectType sObjectType)`
+### Static Methods
+##### `static of(SObjectType sObjectType)`
 
 Returns a `Supplier` that returns the next `Id` value for the given `sObjectType`. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`sObjectType`|SObjectType of the new id to create|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Supplier
 
 the `Supplier`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `sObjectType` is null|
@@ -40,7 +41,7 @@ the `Supplier`
 
 **See** SObjectType.newSObject
 
-#### Example
+###### Example
 ```apex
 ISupplier idSupp = IdSupplier.of(Account.SObjectType);
 idSupp.get(); // '000000000000000AAA'

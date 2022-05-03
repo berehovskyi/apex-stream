@@ -28,11 +28,12 @@ A sequence of `Double` elements supporting aggregate operations, a primitive spe
 **See** [LongSequence](/docs/Iterables/LongSequence.md)
 
 ## Methods
-### `iterator()`
+### Other
+##### `iterator()`
 
 Returns an internal iterator for the elements of this sequence. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -42,11 +43,13 @@ Iterator<Double>
 
 the internal `Iterator<Long>`
 
-### `toObjectIterable()`
+---
+### Conversion Operations
+##### `toObjectIterable()`
 
 Returns an `ObjectSequence` consisting of the elements of this sequence, converted to Object.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -56,16 +59,18 @@ IObjectIterable
 
 the `ObjectSequence`
 
-### `static of(List<Double> doubles)`
+---
+### Sources
+##### `static of(List<Double> doubles)`
 
 Returns a `DoubleSequence` created from `doubles` list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`doubles`|the list of Doubles|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -75,26 +80,26 @@ IDoubleIterable
 
 the new `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `doubles` is null|
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleSeq = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI });
 ```
 
-### `static of(Set<Double> doubles)`
+##### `static of(Set<Double> doubles)`
 
 Returns a `DoubleSequence` created from `doubles` set.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`doubles`|the set of Doubles|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -104,26 +109,26 @@ IDoubleIterable
 
 the new `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `doubles` is null|
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleSeq = DoubleSequence.of(new Set<Double>{ 0.1, 5, 1.5, Math.PI });
 ```
 
-### `static ofNullable(List<Double> doubles)`
+##### `static ofNullable(List<Double> doubles)`
 
 Returns a `DoubleSequence` created from `doubles` list if non-null, otherwise returns an empty `DoubleSequence`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`doubles`|the list of Doubles|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -133,21 +138,21 @@ IDoubleIterable
 
 the new `DoubleSequence` if `doubles` is non-null, otherwise an empty `DoubleSequence`
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0, 5L, 1L, -10 });
 ```
 
-### `static ofNullable(Set<Double> doubles)`
+##### `static ofNullable(Set<Double> doubles)`
 
 Returns a `DoubleSequence` created from `doubles` set if non-null, otherwise returns an empty `DoubleSequence`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`doubles`|the set of Doubles|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -157,16 +162,16 @@ IDoubleIterable
 
 the new `DoubleSequence` if `doubles` is non-null, otherwise an empty `DoubleSequence`
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0, 5L, 1L, -10 });
 ```
 
-### `static empty()`
+##### `static empty()`
 
 Returns an empty `DoubleSequence`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -176,17 +181,17 @@ IDoubleIterable
 
 the empty `DoubleSequence`
 
-### `static concat(IDoubleIterable iterable1, IDoubleIterable iterable2)`
+##### `static concat(IDoubleIterable iterable1, IDoubleIterable iterable2)`
 
 Returns eagerly concatenated `DoubleSequence` whose elements are all the elements of the first `IDoubleIterable` followed by all the elements of the second `IDoubleIterable`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable1`|the first `IDoubleIterable`|
 |`iterable2`|the second `IDoubleIterable`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -196,26 +201,26 @@ IDoubleIterable
 
 the new `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable1` or `iterable2` is null|
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleSeq = LongSequence.concat(seq1, seq2);
 ```
 
-### `static concat(List<IDoubleIterable> iterables)`
+##### `static concat(List<IDoubleIterable> iterables)`
 
 Returns eagerly concatenates `List<IDoubleIterable>`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterables`|the list of `IDoubleIterable`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -225,28 +230,28 @@ IDoubleIterable
 
 the new `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterables` or some of `IDoubleIterable` in a list is null|
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleSeq = DoubleSequence.concat(seqs);
 ```
 
-### `static zip(IDoubleIterable iterable1, IDoubleIterable iterable2, IDoubleBinaryOperator combiner)`
+##### `static zip(IDoubleIterable iterable1, IDoubleIterable iterable2, IDoubleBinaryOperator combiner)`
 
 Returns a combined `DoubleSequence` by applying `combiner` function to each element at the same position.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable1`|the first `IDoubleIterable`|
 |`iterable2`|the second `IDoubleIterable`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -256,21 +261,21 @@ IDoubleIterable
 
 the new `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `append(IDoubleIterable iterable)`
+##### `append(IDoubleIterable iterable)`
 
 Returns new `DoubleSequence` by appending `iterable` to the current sequence.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable`|the `IDoubleIterable` to append to the current sequence|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -280,26 +285,26 @@ IDoubleIterable
 
 the new `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable` is null|
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleSeq = seq1.append(seq2);
 ```
 
-### `prepend(IDoubleIterable iterable)`
+##### `prepend(IDoubleIterable iterable)`
 
 Returns new `DoubleSequence` by prepending `iterable` to the current sequence.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`iterable`|the `IDoubleIterable` to prepend to the current sequence|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -309,21 +314,23 @@ IDoubleIterable
 
 the new `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `iterable` is null|
 
-#### Example
+###### Example
 ```apex
 DoubleIterable doubleSeq = seq1.prepend(seq2);
 ```
 
-### `stream()`
+---
+### Intermediate Operations
+##### `stream()`
 
 Returns new `DoubleStream` from the current sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -333,21 +340,21 @@ IDoubleIterable
 
 the new `DoubleStream`
 
-#### Example
+###### Example
 ```apex
 IDoubleIterable doubleStream = DoubleSequence.of(new Set<Double>{ 0, 5L, 1L, -10 }).stream();
 ```
 
-### `override filter(IDoublePredicate predicate)`
+##### `override filter(IDoublePredicate predicate)`
 
 Returns a `DoubleSequence` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -357,28 +364,28 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Double> filtered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .filter(DoublePredicate.isGreater(0))
     .toList();
 ```
 
-### `take(IDoublePredicate predicate)`
+##### `take(IDoublePredicate predicate)`
 
 Returns a `DoubleSequence` which takes elements while elements match `predicate`. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -388,28 +395,28 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .take(DoublePredicate.isGreater(0))
     .toList();
 ```
 
-### `drop(IDoublePredicate predicate)`
+##### `drop(IDoublePredicate predicate)`
 
 Returns a `DoubleSequence` which drops elements while elements match `predicate`, then takes the rest. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the non-interfering, stateless predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -419,28 +426,28 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 List<Double> rest = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .drop(DoublePredicate.isGreater(0))
     .toList();
 ```
 
-### `mapTo(IDoubleUnaryOperator mapper)`
+##### `mapTo(IDoubleUnaryOperator mapper)`
 
 Returns a `DoubleSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -450,28 +457,28 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-#### Example
+###### Example
 ```apex
 List<Double> incrementedDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .mapTo(DoubleUnaryOperator.add(1.5))
     .toList();
 ```
 
-### `mapToInt(IDoubleToIntFunction mapper)`
+##### `mapToInt(IDoubleToIntFunction mapper)`
 
 Returns a `IntSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -481,21 +488,21 @@ IIntIterable
 
 the `IntSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `mapToLong(IDoubleToLongFunction mapper)`
+##### `mapToLong(IDoubleToLongFunction mapper)`
 
 Returns a `LongSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -505,21 +512,21 @@ ILongIterable
 
 the `LongSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `mapToSObject(IDoubleToSObjectFunction mapper)`
+##### `mapToSObject(IDoubleToSObjectFunction mapper)`
 
 Returns a `SObjectSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -529,21 +536,21 @@ ISObjectIterable
 
 the `SObjectSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `mapToObject(IDoubleFunction mapper)`
+##### `mapToObject(IDoubleFunction mapper)`
 
 Returns a `ObjectSequence` with elements returned by `mapper` function, applied to the elements of this sequence. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the non-interfering, stateless operator|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -553,21 +560,21 @@ IObjectIterable
 
 the `ObjectSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `forEach(IDoubleConsumer consumer)`
+##### `forEach(IDoubleConsumer consumer)`
 
 Returns a `DoubleSequence` after performing `consumer` action on each element. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumer`|the non-interfering, stateless action to be performed on each element. Expected to operate via side effects.|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -577,16 +584,16 @@ IDoubleIterable
 
 this `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-### `distinct()`
+##### `distinct()`
 
 Returns a `DoubleSequence` with distinct elements. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -596,18 +603,18 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Example
+###### Example
 ```apex
 List<Double> distinct = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .distinct()
     .toList();
 ```
 
-### `sort()`
+##### `sort()`
 
 Returns a `DoubleSequence` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -617,23 +624,23 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Example
+###### Example
 ```apex
 List<Double> sorted = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .sort()
     .toList();
 ```
 
-### `lim(Integer lim)`
+##### `lim(Integer lim)`
 
 Returns a `DoubleSequence` with first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`lim`|the number of elements to limit|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -643,29 +650,29 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
 
-#### Example
+###### Example
 ```apex
 List<Double> first3Doubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .lim(3)
     .toList();
 ```
 
-### `skip(Integer n)`
+##### `skip(Integer n)`
 
 Returns a new `DoubleSequence` that skips first `n` elements and returns remaining elements. <p>Stateful Intermediate Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`n`|the number of elements to skip|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -675,30 +682,32 @@ IDoubleIterable
 
 the `DoubleSequence`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
 
-#### Example
+###### Example
 ```apex
 List<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .skip(1)
     .toList();
 ```
 
-### `reduce(Double identity, IDoubleBinaryOperator accumulator)`
+---
+### Terminal Operations
+##### `reduce(Double identity, IDoubleBinaryOperator accumulator)`
 
 Performs a reduction on `Double` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`identity`|the identity value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -708,26 +717,26 @@ Double
 
 the `Double` result of the reduction
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).reduce(0.0, DoubleBinaryOperator.sum());
 ```
 
-### `override reduce(IDoubleBinaryOperator accumulator)`
+##### `override reduce(IDoubleBinaryOperator accumulator)`
 
 Performs a reduction on `Double` elements, using `identity` value and associative `accumulator` function, and returns an `OptionalDouble` describing the reduced value. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -737,29 +746,29 @@ OptionalDouble
 
 the `OptionalDouble` result of the reduction
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
-#### Example
+###### Example
 ```apex
 Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      .reduce(DoubleBinaryOperator.sum())
      .get();
 ```
 
-### `override collect(ISupplier supplier, IObjectDoubleConsumer accumulator)`
+##### `override collect(ISupplier supplier, IObjectDoubleConsumer accumulator)`
 
 Performs a mutable reduction operation on elements, collecting elements to a container returned by `supplier` by applying `accumulator` function. <p>Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`supplier`|the function that returns a mutable result container|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -769,21 +778,21 @@ Object
 
 the `Object` result of the collection
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `supplier` or `accumulator` is null|
 
-### `find(IDoublePredicate predicate)`
+##### `find(IDoublePredicate predicate)`
 
 Returns an `OptionalDouble` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -793,28 +802,28 @@ OptionalDouble
 
 the `OptionalDouble`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Double firstGreaterDouble = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .find(DoublePredicate.isGreater(1.5))
     .get();
 ```
 
-### `every(IDoublePredicate predicate)`
+##### `every(IDoublePredicate predicate)`
 
 Returns whether all elements match `predicate`. If `DoubleSequence` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -824,28 +833,28 @@ Boolean
 
 `true` or `false`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Boolean isEveryDoubleGreater = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .every(DoublePredicate.isGreater(1.5))
     .get();
 ```
 
-### `override some(IDoublePredicate predicate)`
+##### `override some(IDoublePredicate predicate)`
 
 Returns whether some element matches `predicate`. If `DoubleSequence` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -855,23 +864,23 @@ Boolean
 
 `true` or `false`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-#### Example
+###### Example
 ```apex
 Boolean isSomeDoubleGreater = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .some(DoublePredicate.isGreater(1.5))
     .get();
 ```
 
-### `count()`
+##### `count()`
 
 Returns the count of elements. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -881,11 +890,11 @@ Integer
 
 the count of elements
 
-### `isEmpty()`
+##### `isEmpty()`
 
 Returns whether the count of elements is 0. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -895,11 +904,11 @@ Boolean
 
 `true` or `false`
 
-### `toList()`
+##### `toList()`
 
 Accumulates elements into a `List<Double>`. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -909,18 +918,18 @@ List<Double>
 
 the `List<Double>` containing the sequence elements
 
-#### Example
+###### Example
 ```apex
 List<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .skip(1)
     .toList();
 ```
 
-### `toSet()`
+##### `toSet()`
 
 Accumulates elements into a `Set<Double>`. <p>Terminal Operation.</p>
 
-#### Return
+###### Return
 
 **Type**
 
@@ -930,7 +939,7 @@ Set<Double>
 
 the `Set<Double>` containing the sequence elements
 
-#### Example
+###### Example
 ```apex
 Set<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .skip(1)

@@ -1,6 +1,6 @@
 # Apex Stream Framework
 
-![](https://img.shields.io/github/v/release/berehovskyi/apex-stream) ![](https://img.shields.io/badge/build-passing-brightgreen.svg) ![](https://img.shields.io/badge/coverage-99%25-brightgreen.svg)
+![](https://img.shields.io/github/v/release/berehovskyi/apex-stream?include_prereleases) ![](https://img.shields.io/badge/build-passing-brightgreen.svg) ![](https://img.shields.io/badge/coverage-99%25-brightgreen.svg)
 
 Apex Stream is a framework for processing sequences of elements taking advantage of the functional programming paradigm.
 
@@ -43,8 +43,11 @@ Create and relate `contacts` to parent `accounts` and set `Descripton` field:
 ```apex
 List<Contact> contacts = Stream.of(accounts)
         .mapTo(
-                SObjectUnaryOperator.newSObject(Contact.SObjectType, Contact.AccountId, SObjectFunction.get(Account.Id))
-                    .andThen(SObjectUnaryOperator.set(Contact.Description, 'Some Description'))
+                SObjectUnaryOperator.newSObject(
+                        Contact.SObjectType,
+                        Contact.AccountId,
+                        SObjectFunction.get(Account.Id)
+                ).andThen(SObjectUnaryOperator.set(Contact.Description, 'Some Description'))
         )
         .toList();
 ```
@@ -55,7 +58,7 @@ Map<String, List<Account>> accountsByRating = Stream.of(accounts)
         .sort('AnnualRevenue', SortOrder.DESCENDING)
         .groupByString('Rating');
 ```
-Group `LastName` field values by `OtherCity`:
+Group `LastName` field values by `OtherCountry`:
 ```apex
 Map<String, List<String>> lastNamesByOtherCountry = (Map<String, List<String>>) Stream.of(contacts)
         .collect(
@@ -98,5 +101,5 @@ Find more examples [here](/sfdx-source/apex-stream/test/classes).
 [Full Apex Stream Framework Documentation](/docs/README.md).
 
 ## User Guide
-If you want to know more take a look at the [User Guide](/wiki/) for brief introduction to the Apex Stream Framework.
+If you want to know more take a look at the [User Guide](https://github.com/berehovskyi/apex-stream/wiki) for brief introduction to the Apex Stream Framework.
 

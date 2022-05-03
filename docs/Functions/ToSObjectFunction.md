@@ -13,21 +13,24 @@ Inherits [IToSObjectFunction](/docs/Functional-Interfaces/IToSObjectFunction.md)
 **Group** Functions
 
 ## Methods
-### `apply(Object o)`
-#### Parameters
+### Function
+##### `apply(Object o)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static downcast(IFunction mapper)`
+---
+### Static Methods
+##### `static downcast(IFunction mapper)`
 
 Returns a composed `ToSObjectFunction` of the `IFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,10 +40,12 @@ ToSObjectFunction
 
 the `ToSObjectFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static asSObject()`
+---
+### Built-Ins
+##### `static asSObject()`
 ---

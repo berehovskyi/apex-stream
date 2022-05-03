@@ -19,16 +19,17 @@ Extends `Function` functions and provides `CollectorFunction` used specifically 
 **See** [SObjectCollector](/docs/Collectors/SObjectCollector.md)
 
 ## Methods
-### `static append(String suffix)`
+### Finishers
+##### `static append(String suffix)`
 
 Returns a `Function` that appends the `suffix` the the boxed string.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`suffix`|the string to append|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -38,7 +39,7 @@ Function
 
 the `Function`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `index` is null|
@@ -49,11 +50,11 @@ the `Function`
 
 **See** SObjectCollector.joining
 
-### `static averagingInt()`
+##### `static averagingInt()`
 
 Returns a `Function` that returns the final result of Integer averaging.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -69,11 +70,11 @@ the `Function`
 
 **See** SObjectCollector.averagingInt
 
-### `static averagingLong()`
+##### `static averagingLong()`
 
 Returns a `Function` that returns the final result of Long averaging.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -89,11 +90,11 @@ the `Function`
 
 **See** SObjectCollector.averagingLong
 
-### `static averagingDouble()`
+##### `static averagingDouble()`
 
 Returns a `Function` that returns the final result of Double averaging.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -109,11 +110,11 @@ the `Function`
 
 **See** SObjectCollector.averagingDouble
 
-### `static summingDouble()`
+##### `static summingDouble()`
 
 Returns a `Function` that returns the final result of Double summation.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -129,16 +130,16 @@ the `Function`
 
 **See** SObjectCollector.summingDouble
 
-### `static groupByBool(IFunction finisher)`
+##### `static groupByBool(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by booleans final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -154,16 +155,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByBool
 
-### `static groupById(IFunction finisher)`
+##### `static groupById(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by ids final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -179,16 +180,16 @@ the `Function`
 
 **See** SObjectCollector.groupingById
 
-### `static groupByString(IFunction finisher)`
+##### `static groupByString(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by strings final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -204,16 +205,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByString
 
-### `static groupByBlob(IFunction finisher)`
+##### `static groupByBlob(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by blobs final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -229,16 +230,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByBlob
 
-### `static groupByDate(IFunction finisher)`
+##### `static groupByDate(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by dates final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -254,16 +255,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByDate
 
-### `static groupByDatetime(IFunction finisher)`
+##### `static groupByDatetime(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by datetimes final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -279,16 +280,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByDatetime
 
-### `static groupByTime(IFunction finisher)`
+##### `static groupByTime(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by times final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -304,16 +305,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByTime
 
-### `static groupByInt(IFunction finisher)`
+##### `static groupByInt(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by integers final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -329,16 +330,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByInt
 
-### `static groupByLong(IFunction finisher)`
+##### `static groupByLong(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by longs final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -354,16 +355,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByLong
 
-### `static groupByDouble(IFunction finisher)`
+##### `static groupByDouble(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by Doubles final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -379,16 +380,16 @@ the `Function`
 
 **See** SObjectCollector.groupingByDouble
 
-### `static groupByObject(IFunction finisher)`
+##### `static groupByObject(IFunction finisher)`
 
 Returns a `Function` that applies the `finisher` to every map value and returns the grouping by objects final result.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`finisher`|the function applied to every map value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -404,11 +405,11 @@ the `Function`
 
 **See** SObjectCollector.groupingBy
 
-### `static reducingOptionalSObject()`
+##### `static reducingOptionalSObject()`
 
 Returns a `Function` that returns the final result of SObject reducing as `SObjectOptional`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -421,11 +422,11 @@ the `Function`
 
 **See** SObjectCollector.reducing
 
-### `static reducingOptional()`
+##### `static reducingOptional()`
 
 Returns a `Function` that returns the final result of object reducing as `Optional`.
 
-#### Return
+###### Return
 
 **Type**
 

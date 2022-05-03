@@ -16,21 +16,24 @@ Inherits [IConsumer](/docs/Functional-Interfaces/IConsumer.md) functional interf
 **See** IObjectIterable.forEach
 
 ## Methods
-### `accept(Object o)`
-#### Parameters
+### Function
+##### `accept(Object o)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `andThen(IConsumer after)`
+---
+### Default Methods
+##### `andThen(IConsumer after)`
 
 Returns a composed `Consumer` that executes `this` operation first, then the `after` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -40,21 +43,23 @@ Consumer
 
 the composed `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-### `static compose(List<IConsumer> consumers)`
+---
+### Static Methods
+##### `static compose(List<IConsumer> consumers)`
 
 Returns a composed `Consumer` that sequentially executes the operations in the same order as the order of the consumers input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumers`|the operations to sequentially perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,22 +69,24 @@ Consumer
 
 the composed `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|
 
-### `static debug(LoggingLevel loggingLevel, String message)`
+---
+### Built-Ins
+##### `static debug(LoggingLevel loggingLevel, String message)`
 
 Returns a `Consumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -89,21 +96,21 @@ Consumer
 
 the `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` or `message` is null|
 
-### `static debug(LoggingLevel loggingLevel)`
+##### `static debug(LoggingLevel loggingLevel)`
 
 Returns a `Consumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -113,21 +120,21 @@ Consumer
 
 the `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` is null|
 
-### `static debug(String message)`
+##### `static debug(String message)`
 
 Returns a `Consumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -137,16 +144,16 @@ Consumer
 
 the `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `message` is null|
 
-### `static debug()`
+##### `static debug()`
 
 Returns a `Consumer` that debugs an input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -156,17 +163,17 @@ Consumer
 
 the `Consumer`
 
-### `static debugPretty(LoggingLevel loggingLevel, String message)`
+##### `static debugPretty(LoggingLevel loggingLevel, String message)`
 
 Returns a `Consumer` that debugs an input argument using the pretty-print format.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -176,21 +183,21 @@ Consumer
 
 the `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` or `message` is null|
 
-### `static debugPretty(LoggingLevel loggingLevel)`
+##### `static debugPretty(LoggingLevel loggingLevel)`
 
 Returns a `Consumer` that debugs an input argument using the pretty-print format.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -200,21 +207,21 @@ Consumer
 
 the `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` is null|
 
-### `static debugPretty(String message)`
+##### `static debugPretty(String message)`
 
 Returns a `Consumer` that debugs an input argument using the pretty-print format.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -224,16 +231,16 @@ Consumer
 
 the `Consumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `message` is null|
 
-### `static debugPretty()`
+##### `static debugPretty()`
 
 Returns a `Consumer` that debugs an input argument using the pretty-print format.
 
-#### Return
+###### Return
 
 **Type**
 

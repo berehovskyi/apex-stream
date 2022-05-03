@@ -34,21 +34,24 @@ Inherits [IIntPredicate](/docs/Functional-Interfaces/IIntPredicate.md) functiona
 **See** IIntIterable.none
 
 ## Methods
-### `test(Integer i)`
-#### Parameters
+### Function
+##### `test(Integer i)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `orElse(IIntPredicate other)`
+---
+### Default Methods
+##### `orElse(IIntPredicate other)`
 
 Returns a composed `IntPredicate` that applies short-circuiting logical `OR` operator to `this` `IIntPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `IIntPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -58,26 +61,26 @@ IntPredicate
 
 the composed `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someIntPredicate1.orElse(someIntPredicate2);
 ```
 
-### `andAlso(IIntPredicate other)`
+##### `andAlso(IIntPredicate other)`
 
 Returns a composed `IntPredicate` that applies short-circuiting logical `AND` operator to `this` `IIntPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `IIntPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -87,21 +90,21 @@ IntPredicate
 
 the composed `IIntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someIntPredicate1.andAlso(someIntPredicate2);
 ```
 
-### `negate()`
+##### `negate()`
 
 Returns a `IntPredicate` that applies logical `NOT` operator to `this` `IIntPredicate`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -111,21 +114,23 @@ IntPredicate
 
 the negated `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 someIntPredicate.negate();
 ```
 
-### `static some(List<IIntPredicate> predicates)`
+---
+### Static Methods
+##### `static some(List<IIntPredicate> predicates)`
 
 Returns a composed `IntPredicate` that applies sequentially short-circuiting logical `OR` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IIntPredicates`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -135,27 +140,27 @@ IntPredicate
 
 the composed `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.some(someIntPredicates);
 ```
 
-### `static some(IIntPredicate predicate1, IIntPredicate predicate2)`
+##### `static some(IIntPredicate predicate1, IIntPredicate predicate2)`
 
 Returns a composed `IntPredicate` that applies short-circuiting logical `OR` operator to `predicate1` `IIntPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `IIntPredicate`|
 |`predicate2`|the second `IIntPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -165,26 +170,26 @@ IntPredicate
 
 the composed `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.some(someIntPredicate1, someIntPredicate2);
 ```
 
-### `static every(List<IIntPredicate> predicates)`
+##### `static every(List<IIntPredicate> predicates)`
 
 Returns a composed `IntPredicate` that applies sequentially short-circuiting logical `AND` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IIntPredicates`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -194,27 +199,27 @@ IntPredicate
 
 the composed `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.every(someIntPredicates);
 ```
 
-### `static every(IIntPredicate predicate1, IIntPredicate predicate2)`
+##### `static every(IIntPredicate predicate1, IIntPredicate predicate2)`
 
 Returns a composed `IntPredicate` that applies short-circuiting logical `AND` operator to `predicate1` `IIntPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `IIntPredicate`|
 |`predicate2`|the second `IIntPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -224,26 +229,26 @@ IntPredicate
 
 the composed `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.every(someIntPredicate1, someIntPredicate2);
 ```
 
-### `static negate(IIntPredicate predicate)`
+##### `static negate(IIntPredicate predicate)`
 
 Returns a `IntPredicate` that applies logical `NOT` operator to `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the `IIntPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -253,21 +258,21 @@ IntPredicate
 
 the negated `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.negate(someIntPredicate);
 ```
 
-### `static always(Boolean value)`
+##### `static always(Boolean value)`
 
 Returns a `IntPredicate` that always evaluates to the Boolean `value` (`true` or `false`).
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the evaluated value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -277,26 +282,28 @@ IntPredicate
 
 predicate the `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `value` is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.always(true);
 ```
 
-### `static isGreater(Integer value)`
+---
+### Built-Ins
+##### `static isGreater(Integer value)`
 
 Returns a `IntPredicate` that tests the input Integer if it is greater than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -309,21 +316,21 @@ the `IntPredicate`
 
 **See** Comparator.compareNullSafeInts
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isGreater(100);
 ```
 
-### `static isGreaterOrEqual(Integer value)`
+##### `static isGreaterOrEqual(Integer value)`
 
 Returns a `IntPredicate` that tests the input Integer if it is greater than or equal to the `value`. <p><strong>Note: </strong></p> <<p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -336,21 +343,21 @@ the `IntPredicate`
 
 **See** Comparator.compareNullSafeInts
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isGreaterOrEqual(100);
 ```
 
-### `static isLess(Integer value)`
+##### `static isLess(Integer value)`
 
 Returns a `IntPredicate` that tests the input Integer if it is less than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -363,21 +370,21 @@ the `IntPredicate`
 
 **See** Comparator.compareNullSafeInts
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isLess(100);
 ```
 
-### `static isLessOrEqual(Integer value)`
+##### `static isLessOrEqual(Integer value)`
 
 Returns a `IntPredicate` that tests the input Integer if it is less than or equal to the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -390,21 +397,21 @@ the `IntPredicate`
 
 **See** Comparator.compareNullSafeInts
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isLessOrEqual(100);
 ```
 
-### `static isEqual(Integer value)`
+##### `static isEqual(Integer value)`
 
 Returns a `IntPredicate` that tests the input Integer if it is equal to the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -417,21 +424,21 @@ the `IntPredicate`
 
 **See** Comparator.compareNullSafeInts
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isEqual(100);
 ```
 
-### `static isNotEqual(Integer value)`
+##### `static isNotEqual(Integer value)`
 
 Returns a `IntPredicate` that tests the input Integer if it is not equal to the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -444,21 +451,21 @@ the `IntPredicate`
 
 **See** Comparator.compareNullSafeInts
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isNotEqual(100);
 ```
 
-### `static isIn(List<Integer> container)`
+##### `static isIn(List<Integer> container)`
 
 Returns a `IntPredicate` that tests the input Integer if it is contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -468,7 +475,7 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -476,21 +483,21 @@ the `IntPredicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isIn(container);
 ```
 
-### `static isNotIn(List<Integer> container)`
+##### `static isNotIn(List<Integer> container)`
 
 Returns a `IntPredicate` that tests the input Integer if it is not contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -500,7 +507,7 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -508,16 +515,16 @@ the `IntPredicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isNotIn(container);
 ```
 
-### `static isNull()`
+##### `static isNull()`
 
 Returns a `IntPredicate` that tests the input Integer if it is null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -527,16 +534,16 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isNull();
 ```
 
-### `static isNotNull()`
+##### `static isNotNull()`
 
 Returns a `IntPredicate` that tests the input Integer if it is not null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -546,16 +553,16 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isNotNull();
 ```
 
-### `static isEven()`
+##### `static isEven()`
 
 Returns a `IntPredicate` that tests the input Integer if it is even.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -565,20 +572,20 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isEven();
 ```
 
-### `static isFactorOf(Integer i)`
+##### `static isFactorOf(Integer i)`
 
 Returns a `IntPredicate` that tests the input Integer if it is a factor of `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -588,21 +595,21 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `i` is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isFactorOf(5);
 ```
 
-### `static isNegative()`
+##### `static isNegative()`
 
 Returns a `IntPredicate` that tests the input Integer if it is negative.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -612,16 +619,16 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isNegative();
 ```
 
-### `static isNegativeOrZero()`
+##### `static isNegativeOrZero()`
 
 Returns a `IntPredicate` that tests the input Integer if it is negative or zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -631,16 +638,16 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isNegativeOrZero();
 ```
 
-### `static isOdd()`
+##### `static isOdd()`
 
 Returns a `IntPredicate` that tests the input Integer if it is odd.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -650,16 +657,16 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isEven();
 ```
 
-### `static isPositive()`
+##### `static isPositive()`
 
 Returns a `IntPredicate` that tests the input Integer if it is positive.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -669,16 +676,16 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isPositive();
 ```
 
-### `static isPositiveOrZero()`
+##### `static isPositiveOrZero()`
 
 Returns a `IntPredicate` that tests the input Integer if it is positive or zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -688,16 +695,16 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isPositiveOrZero();
 ```
 
-### `static isPrime()`
+##### `static isPrime()`
 
 Returns a `IntPredicate` that tests the input Integer if it is prime.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -707,21 +714,21 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the input argument is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isPrime();
 ```
 
-### `static isZero()`
+##### `static isZero()`
 
 Returns a `IntPredicate` that tests the input Integer if it is zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -731,20 +738,20 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Example
+###### Example
 ```apex
 IntPredicate.isZero();
 ```
 
-### `static hasDivisor(Integer divisor)`
+##### `static hasDivisor(Integer divisor)`
 
 Returns a `IntPredicate` that tests the input Integer has the `divisor`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -754,12 +761,12 @@ IntPredicate
 
 the `IntPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `divisor` is null|
 
-#### Example
+###### Example
 ```apex
 IntPredicate.hasDivisor(10);
 ```

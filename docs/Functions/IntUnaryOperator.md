@@ -16,21 +16,24 @@ Inherits [IIntUnaryOperator](/docs/Functional-Interfaces/IIntUnaryOperator.md) f
 **See** IIntIterable.mapTo
 
 ## Methods
-### `apply(Integer operand)`
-#### Parameters
+### Function
+##### `apply(Integer operand)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `andThen(IIntUnaryOperator after)`
+---
+### Default Methods
+##### `andThen(IIntUnaryOperator after)`
 
 Returns a composed `IntUnaryOperator` that executes `this` operation first, then the `after` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -40,21 +43,21 @@ IntUnaryOperator
 
 the composed `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-### `compose(IIntUnaryOperator before)`
+##### `compose(IIntUnaryOperator before)`
 
 Returns a composed `IntUnaryOperator` that executes `before` operation first, then the `this` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`before`|the operation to perform before this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,21 +67,23 @@ IntUnaryOperator
 
 the composed `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `before` is null|
 
-### `static compose(List<IIntUnaryOperator> operators)`
+---
+### Static Methods
+##### `static compose(List<IIntUnaryOperator> operators)`
 
 Returns a composed `IntUnaryOperator` that sequentially executes the operations in the same order as the order of the consumers input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`operators`|the operations to sequentially perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -88,16 +93,16 @@ IntUnaryOperator
 
 the composed `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operators` is null or some element is null|
 
-### `static identity()`
+##### `static identity()`
 
 Returns a `IntUnaryOperator` that always returns the input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -107,16 +112,16 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-### `static constant(Integer value)`
+##### `static constant(Integer value)`
 
 Returns a `IntUnaryOperator` that always returns the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -126,11 +131,13 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-### `static abs()`
+---
+### Built-Ins
+##### `static abs()`
 
 Returns a `IntUnaryOperator` that returns the absolute value of the input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -143,16 +150,16 @@ the `IntUnaryOperator`
 
 **See** Math.abs
 
-### `static add(Integer i)`
+##### `static add(Integer i)`
 
 Returns a `IntUnaryOperator` that returns the sum of the input argument and the `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -162,16 +169,16 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `i` is null|
 
-### `static decrement()`
+##### `static decrement()`
 
 Returns a `IntUnaryOperator` that returns the input argument decremented by 1.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -181,16 +188,16 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-### `static divide(Integer i)`
+##### `static divide(Integer i)`
 
 Returns a `IntUnaryOperator` that returns the division of the input argument and the `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -200,17 +207,17 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `i` is null|
 |`IllegalArgumentException`|if `i` is 0|
 
-### `static increment()`
+##### `static increment()`
 
 Returns a `IntUnaryOperator` that returns the input argument incremented by 1.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -220,16 +227,16 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-### `static max(Integer i)`
+##### `static max(Integer i)`
 
 Returns a `IntUnaryOperator` that returns a larger value between the input argument and the `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -239,7 +246,7 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `i` is null|
@@ -247,16 +254,16 @@ the `IntUnaryOperator`
 
 **See** Math.max
 
-### `static min(Integer i)`
+##### `static min(Integer i)`
 
 Returns a `IntUnaryOperator` that returns a smaller value between the input argument and the `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -266,7 +273,7 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `i` is null|
@@ -274,16 +281,16 @@ the `IntUnaryOperator`
 
 **See** Math.min
 
-### `static mod(Integer i)`
+##### `static mod(Integer i)`
 
 Returns a `IntUnaryOperator` that returns a remainder of the input argument divided by the `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -293,7 +300,7 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `i` is null|
@@ -302,16 +309,16 @@ the `IntUnaryOperator`
 
 **See** Math.mod
 
-### `static multiply(Integer i)`
+##### `static multiply(Integer i)`
 
 Returns a `IntUnaryOperator` that returns the multiplication of the of the input argument and the `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -321,21 +328,21 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `i` is null|
 
-### `static subtract(Integer i)`
+##### `static subtract(Integer i)`
 
 Returns a `IntUnaryOperator` that returns the subtraction of the input argument and the `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`i`|the int value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -345,7 +352,7 @@ IntUnaryOperator
 
 the `IntUnaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `i` is null|

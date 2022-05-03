@@ -13,11 +13,12 @@ Extends `ToLongFunction` functions and provides `StringToLongFunction` common cl
 **Group** Functions
 
 ## Methods
-### `static valueOf()`
+### Built-Ins
+##### `static valueOf()`
 
 Returns a `ToLongFunction` that returns the Long value of the String input argument.
 
-#### Return
+###### Return
 
 **Type**
 

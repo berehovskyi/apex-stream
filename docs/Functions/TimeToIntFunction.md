@@ -13,11 +13,12 @@ Extends `ToIntFunction` functions and provides `TimeToIntFunction` common class 
 **Group** Functions
 
 ## Methods
-### `static hour()`
+### Time To Int Functions
+##### `static hour()`
 
 Returns a `ToIntFunction` that returns the hour component of the Time input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -30,11 +31,11 @@ the `ToIntFunction`
 
 **See** Time.hour
 
-### `static millisecond()`
+##### `static millisecond()`
 
 Returns a `ToIntFunction` that returns the millisecond component of the Time input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -47,11 +48,11 @@ the `ToIntFunction`
 
 **See** Time.millisecond
 
-### `static minute()`
+##### `static minute()`
 
 Returns a `ToIntFunction` that returns the minute component of the Time input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,11 +65,11 @@ the `ToIntFunction`
 
 **See** Time.minute
 
-### `static second()`
+##### `static second()`
 
 Returns a `ToIntFunction` that returns the second component of the Time input argument.
 
-#### Return
+###### Return
 
 **Type**
 

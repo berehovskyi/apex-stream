@@ -13,16 +13,19 @@ Inherits [IIntToDoubleFunction](/docs/Functional-Interfaces/IIntToDoubleFunction
 **Group** Functions
 
 ## Methods
-### `apply(Integer i)`
-#### Parameters
+### Function
+##### `apply(Integer i)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static valueOf()`
+---
+### Built-Ins
+##### `static valueOf()`
 
 Returns a `IIntToDoubleFunction` that returns the Double value of the Integer input argument.
 
-#### Return
+###### Return
 
 **Type**
 

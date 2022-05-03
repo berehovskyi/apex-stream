@@ -25,16 +25,19 @@ Inherits [ILongBinaryOperator](/docs/Functional-Interfaces/ILongBinaryOperator.m
 **See** [Collector](/docs/Collectors/Collector.md)
 
 ## Methods
-### `apply(Long l1, Long l2)`
-#### Parameters
+### Function
+##### `apply(Long l1, Long l2)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static max()`
+---
+### Built-Ins
+##### `static max()`
 
 Returns a `LongBinaryOperator` that return a greater Long input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -44,7 +47,7 @@ LongBinaryOperator
 
 the `LongBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Long input argument is null|
@@ -52,11 +55,11 @@ the `LongBinaryOperator`
 
 **See** Math.max
 
-### `static min()`
+##### `static min()`
 
 Returns a `LongBinaryOperator` that return a lesser Long input argument.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -66,7 +69,7 @@ LongBinaryOperator
 
 the `LongBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Long input argument is null|
@@ -74,11 +77,11 @@ the `LongBinaryOperator`
 
 **See** Math.min
 
-### `static product()`
+##### `static product()`
 
 Returns a `LongBinaryOperator` that return a product of two Long input arguments.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -88,16 +91,16 @@ LongBinaryOperator
 
 the `LongBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Long input argument is null|
 
-### `static sum()`
+##### `static sum()`
 
 Returns a `LongBinaryOperator` that return a sum of two Long input arguments.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -107,7 +110,7 @@ LongBinaryOperator
 
 the `LongBinaryOperator`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if one of the Long input argument is null|

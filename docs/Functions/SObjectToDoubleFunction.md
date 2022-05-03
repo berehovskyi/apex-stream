@@ -13,21 +13,24 @@ Inherits [ISObjectToDoubleFunction](/docs/Functional-Interfaces/ISObjectToDouble
 **Group** Functions
 
 ## Methods
-### `apply(SObject sObj)`
-#### Parameters
+### Function
+##### `apply(SObject sObj)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `static downcast(ISObjectFunction mapper)`
+---
+### Static Methods
+##### `static downcast(ISObjectFunction mapper)`
 
 Returns a composed `SObjectToDoubleFunction` of the `ISObjectFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -37,21 +40,21 @@ SObjectToDoubleFunction
 
 the `SObjectToDoubleFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static downcast(IFunction mapper)`
+##### `static downcast(IFunction mapper)`
 
 Returns a composed `SObjectToDoubleFunction` of the `IFunction`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -61,21 +64,23 @@ SObjectToDoubleFunction
 
 the `SObjectToDoubleFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-### `static get(String fieldName)`
+---
+### Built-Ins
+##### `static get(String fieldName)`
 
 Returns a `SObjectToDoubleFunction` that gets a value for the specified `fieldName` as Double. Cross-reference fields and safe navigation are supported.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`fieldName`|the field to get a Double value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -85,7 +90,7 @@ SObjectToDoubleFunction
 
 the `SObjectToDoubleFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `fieldName` is blank|
@@ -95,23 +100,23 @@ the `SObjectToDoubleFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectToDoubleFunction.get('BillingLatitude');
 SObjectToDoubleFunction.get('Parent.BillingLatitude');
 SObjectToDoubleFunction.get('Parent?.BillingLatitude');
 ```
 
-### `static get(SObjectField field)`
+##### `static get(SObjectField field)`
 
 Returns a `SObjectToDoubleFunction` that gets a value for the specified `field` as Double.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`field`|the field to get a value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -121,7 +126,7 @@ SObjectToDoubleFunction
 
 the `SObjectToDoubleFunction`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` is null|
@@ -129,7 +134,7 @@ the `SObjectToDoubleFunction`
 
 **See** SObject.get
 
-#### Example
+###### Example
 ```apex
 SObjectToDoubleFunction.get(Account.BillingLatitude);
 ```

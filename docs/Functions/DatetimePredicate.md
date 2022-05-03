@@ -13,16 +13,17 @@ Extends `Predicate` functions and provides `DatetimePredicate` common class leve
 **Group** Functions
 
 ## Methods
-### `static isSameDay(Datetime datetimeToCompare)`
+### Datetime Predicates
+##### `static isSameDay(Datetime datetimeToCompare)`
 
 Returns a `Predicate` that tests the input datetime if it is the same as the specified `datetimeToCompare` in the local time zone of the context user.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`datetimeToCompare`|datetime|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -32,7 +33,7 @@ Predicate
 
 the `Predicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `dateToCompare` is null|

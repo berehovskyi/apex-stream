@@ -16,21 +16,24 @@ Inherits [ILongConsumer](/docs/Functional-Interfaces/ILongConsumer.md) functiona
 **See** ILongIterable.forEach
 
 ## Methods
-### `accept(Long l)`
-#### Parameters
+### Function
+##### `accept(Long l)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `andThen(ILongConsumer after)`
+---
+### Default Methods
+##### `andThen(ILongConsumer after)`
 
 Returns a composed `LongConsumer` that executes `this` operation first, then the `after` operation in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -40,21 +43,23 @@ LongConsumer
 
 the composed `LongConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-### `static compose(List<ILongConsumer> consumers)`
+---
+### Static Methods
+##### `static compose(List<ILongConsumer> consumers)`
 
 Returns a composed `LongConsumer` that sequentially executes the operations in the same order as the order of the consumers input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`consumers`|the operations to sequentially perform|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -64,22 +69,24 @@ LongConsumer
 
 the composed `LongConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|
 
-### `static debug(LoggingLevel loggingLevel, String message)`
+---
+### Built-Ins
+##### `static debug(LoggingLevel loggingLevel, String message)`
 
 Returns a `LongConsumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -89,21 +96,21 @@ LongConsumer
 
 the `LongConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` or `message` is null|
 
-### `static debug(LoggingLevel loggingLevel)`
+##### `static debug(LoggingLevel loggingLevel)`
 
 Returns a `LongConsumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`loggingLevel`|the logging level|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -113,21 +120,21 @@ LongConsumer
 
 the `LongConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `loggingLevel` is null|
 
-### `static debug(String message)`
+##### `static debug(String message)`
 
 Returns a `LongConsumer` that debugs an input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`message`|the message|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -137,16 +144,16 @@ LongConsumer
 
 the `LongConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `message` is null|
 
-### `static debug()`
+##### `static debug()`
 
 Returns a `LongConsumer` that debugs an input argument.
 
-#### Return
+###### Return
 
 **Type**
 

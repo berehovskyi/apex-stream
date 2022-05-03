@@ -34,21 +34,24 @@ Inherits [ILongPredicate](/docs/Functional-Interfaces/ILongPredicate.md) functio
 **See** ILongIterable.none
 
 ## Methods
-### `test(Long l)`
-#### Parameters
+### Function
+##### `test(Long l)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `orElse(ILongPredicate other)`
+---
+### Default Methods
+##### `orElse(ILongPredicate other)`
 
 Returns a composed `LongPredicate` that applies short-circuiting logical `OR` operator to `this` `ILongPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `ILongPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -58,26 +61,26 @@ LongPredicate
 
 the composed `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someLongPredicate1.orElse(someLongPredicate2);
 ```
 
-### `andAlso(ILongPredicate other)`
+##### `andAlso(ILongPredicate other)`
 
 Returns a composed `LongPredicate` that applies short-circuiting logical `AND` operator to `this` `ILongPredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `ILongPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -87,21 +90,21 @@ LongPredicate
 
 the composed `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someLongPredicate1.andAlso(someLongPredicate2);
 ```
 
-### `negate()`
+##### `negate()`
 
 Returns a `LongPredicate` that applies logical `NOT` operator to `this` `ILongPredicate`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -111,21 +114,23 @@ LongPredicate
 
 the negated `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 someLongPredicate.negate();
 ```
 
-### `static some(List<ILongPredicate> predicates)`
+---
+### Static Methods
+##### `static some(List<ILongPredicate> predicates)`
 
 Returns a composed `LongPredicate` that applies sequentially short-circuiting logical `OR` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`ILongPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -135,27 +140,27 @@ LongPredicate
 
 the composed `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.some(someLongPredicates);
 ```
 
-### `static some(ILongPredicate predicate1, ILongPredicate predicate2)`
+##### `static some(ILongPredicate predicate1, ILongPredicate predicate2)`
 
 Returns a composed `LongPredicate` that applies short-circuiting logical `OR` operator to `predicate1` `ILongPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `ILongPredicate`|
 |`predicate2`|the second `ILongPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -165,26 +170,26 @@ LongPredicate
 
 the composed `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.some(someLongPredicate1, someLongPredicate2);
 ```
 
-### `static every(List<ILongPredicate> predicates)`
+##### `static every(List<ILongPredicate> predicates)`
 
 Returns a composed `LongPredicate` that applies sequentially short-circuiting logical `AND` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`ILongPredicates`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -194,27 +199,27 @@ LongPredicate
 
 the composed `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.every(someLongPredicates);
 ```
 
-### `static every(ILongPredicate predicate1, ILongPredicate predicate2)`
+##### `static every(ILongPredicate predicate1, ILongPredicate predicate2)`
 
 Returns a composed `LongPredicate` that applies short-circuiting logical `AND` operator to `predicate1` `ILongPredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `ILongPredicate`|
 |`predicate2`|the second `ILongPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -224,26 +229,26 @@ LongPredicate
 
 the composed `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.every(someLongPredicate1, someLongPredicate2);
 ```
 
-### `static negate(ILongPredicate predicate)`
+##### `static negate(ILongPredicate predicate)`
 
 Returns a `LongPredicate` that applies logical `NOT` operator to `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the `ILongPredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -253,21 +258,21 @@ LongPredicate
 
 the negated `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.negate(someLongPredicate);
 ```
 
-### `static always(Boolean value)`
+##### `static always(Boolean value)`
 
 Returns a `LongPredicate` that always evaluates to the Boolean `value` (`true` or `false`).
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the evaluated value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -277,26 +282,28 @@ LongPredicate
 
 predicate the `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `value` is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.always(true);
 ```
 
-### `static isGreater(Long value)`
+---
+### Built-Ins
+##### `static isGreater(Long value)`
 
 Returns a `LongPredicate` that tests the input Long if it is greater than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -309,21 +316,21 @@ the `LongPredicate`
 
 **See** Comparator.compareNullSafeLongs
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isGreater(100);
 ```
 
-### `static isGreaterOrEqual(Long value)`
+##### `static isGreaterOrEqual(Long value)`
 
 Returns a `LongPredicate` that tests the input Long if it is greater than or equal to the `value`. <p><strong>Note: </strong></p> <<p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -336,21 +343,21 @@ the `LongPredicate`
 
 **See** Comparator.compareNullSafeLongs
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isGreaterOrEqual(100);
 ```
 
-### `static isLess(Long value)`
+##### `static isLess(Long value)`
 
 Returns a `LongPredicate` that tests the input Long if it is less than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -363,21 +370,21 @@ the `LongPredicate`
 
 **See** Comparator.compareNullSafeLongs
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isLess(100);
 ```
 
-### `static isLessOrEqual(Long value)`
+##### `static isLessOrEqual(Long value)`
 
 Returns a `LongPredicate` that tests the input Long if it is less than or equal to the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -390,21 +397,21 @@ the `LongPredicate`
 
 **See** Comparator.compareNullSafeLongs
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isLessOrEqual(100);
 ```
 
-### `static isEqual(Long value)`
+##### `static isEqual(Long value)`
 
 Returns a `LongPredicate` that tests the input Long if it is equal to the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -417,21 +424,21 @@ the `LongPredicate`
 
 **See** Comparator.compareNullSafeLongs
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isEqual(100);
 ```
 
-### `static isNotEqual(Long value)`
+##### `static isNotEqual(Long value)`
 
 Returns a `LongPredicate` that tests the input Long if it is not equal to the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -444,21 +451,21 @@ the `LongPredicate`
 
 **See** Comparator.compareNullSafeLongs
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isNotEqual(100);
 ```
 
-### `static isIn(List<Long> container)`
+##### `static isIn(List<Long> container)`
 
 Returns a `LongPredicate` that tests the input Long if it is contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -468,7 +475,7 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -476,21 +483,21 @@ the `LongPredicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isIn(container);
 ```
 
-### `static isNotIn(List<Long> container)`
+##### `static isNotIn(List<Long> container)`
 
 Returns a `LongPredicate` that tests the input Long if it is not contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -500,7 +507,7 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -508,16 +515,16 @@ the `LongPredicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isNotIn(container);
 ```
 
-### `static isNull()`
+##### `static isNull()`
 
 Returns a `LongPredicate` that tests the input Long if it is null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -527,16 +534,16 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isNull();
 ```
 
-### `static isNotNull()`
+##### `static isNotNull()`
 
 Returns a `LongPredicate` that tests the input Long if it is not null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -546,16 +553,16 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isNotNull();
 ```
 
-### `static isEven()`
+##### `static isEven()`
 
 Returns a `LongPredicate` that tests the input Long if it is even.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -565,20 +572,20 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isEven();
 ```
 
-### `static isFactorOf(Long i)`
+##### `static isFactorOf(Long i)`
 
 Returns a `LongPredicate` that tests the input Long if it is a factor of `i`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -588,21 +595,21 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `i` is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isFactorOf(5);
 ```
 
-### `static isNegative()`
+##### `static isNegative()`
 
 Returns a `LongPredicate` that tests the input Long if it is negative.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -612,16 +619,16 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isNegative();
 ```
 
-### `static isNegativeOrZero()`
+##### `static isNegativeOrZero()`
 
 Returns a `LongPredicate` that tests the input Long if it is negative or zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -631,16 +638,16 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isNegativeOrZero();
 ```
 
-### `static isOdd()`
+##### `static isOdd()`
 
 Returns a `LongPredicate` that tests the input Long if it is odd.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -650,16 +657,16 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isEven();
 ```
 
-### `static isPositive()`
+##### `static isPositive()`
 
 Returns a `LongPredicate` that tests the input Long if it is positive.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -669,16 +676,16 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isPositive();
 ```
 
-### `static isPositiveOrZero()`
+##### `static isPositiveOrZero()`
 
 Returns a `LongPredicate` that tests the input Long if it is positive or zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -688,16 +695,16 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isPositiveOrZero();
 ```
 
-### `static isPrime()`
+##### `static isPrime()`
 
 Returns a `LongPredicate` that tests the input Long if it is prime.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -707,21 +714,21 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the input argument is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isPrime();
 ```
 
-### `static isZero()`
+##### `static isZero()`
 
 Returns a `LongPredicate` that tests the input Long if it is zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -731,20 +738,20 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Example
+###### Example
 ```apex
 LongPredicate.isZero();
 ```
 
-### `static hasDivisor(Long divisor)`
+##### `static hasDivisor(Long divisor)`
 
 Returns a `LongPredicate` that tests the input Long has the `divisor`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -754,12 +761,12 @@ LongPredicate
 
 the `LongPredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `divisor` is null|
 
-#### Example
+###### Example
 ```apex
 LongPredicate.hasDivisor(10);
 ```

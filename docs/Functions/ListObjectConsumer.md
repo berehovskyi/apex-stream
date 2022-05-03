@@ -19,11 +19,12 @@ Provides common class level implementations, and related utilities for `List<T> 
 **See** [Collector](/docs/Collectors/Collector.md)
 
 ## Methods
-### `static addToList()`
+### Add To List<Object>
+##### `static addToList()`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Object>` and adds the second input argument to this `List`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -33,7 +34,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
@@ -41,16 +42,16 @@ the `BiConsumer`
 
 **See** Collector.toList
 
-### `static addToList(IFunction mapper)`
+##### `static addToList(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List` and adds to this `List<Object>` the result returned by the `mapper` applied to the second input argument.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -60,7 +61,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -69,17 +70,19 @@ the `BiConsumer`
 
 **See** Collector.toList
 
-### `static joining(String delimiter, String prefix)`
+---
+### List-String BiConsumers
+##### `static joining(String delimiter, String prefix)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<String>`, gets the first element and appends to it the second argument as `String` using the `delimiter`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`delimiter`|the `String` to be used between each element|
 |`prefix`|the `String` to be used at the beginning of the joined result|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -89,7 +92,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `delimiter` or the `prefix` is null|
@@ -98,16 +101,18 @@ the `BiConsumer`
 
 **See** Collector.joining
 
-### `static averagingInt(IToIntFunction mapper)`
+---
+### List-Integer BiConsumers
+##### `static averagingInt(IToIntFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Integer>`, which is used as a container to track the number of elements and the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -117,7 +122,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -126,16 +131,16 @@ the `BiConsumer`
 
 **See** Collector.averagingInt
 
-### `static summingInt(IToIntFunction mapper)`
+##### `static summingInt(IToIntFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Integer>`, which is used as a container to track the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -145,7 +150,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -154,16 +159,18 @@ the `BiConsumer`
 
 **See** Collector.summingInt
 
-### `static averagingLong(IToLongFunction mapper)`
+---
+### List-Long BiConsumers
+##### `static averagingLong(IToLongFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Long>`, which is used as a container to track the number of elements and the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -173,7 +180,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -182,16 +189,16 @@ the `BiConsumer`
 
 **See** Collector.averagingLong
 
-### `static summingLong(IToLongFunction mapper)`
+##### `static summingLong(IToLongFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Long>`, which is used as a container to track the total sum.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -201,7 +208,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -210,16 +217,18 @@ the `BiConsumer`
 
 **See** Collector.summingLong
 
-### `static averagingDouble(IToDoubleFunction mapper)`
+---
+### List-Double BiConsumers
+##### `static averagingDouble(IToDoubleFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Double>`, which is used as a container to track the number of elements and the total sum using `Kahan Summation`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -229,7 +238,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -238,16 +247,16 @@ the `BiConsumer`
 
 **See** Collector.averagingDouble
 
-### `static summingDouble(IToDoubleFunction mapper)`
+##### `static summingDouble(IToDoubleFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Double>`, which is used as a container to track the total sum using `Kahan Summation`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -257,7 +266,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `mapper` is null|
@@ -266,16 +275,18 @@ the `BiConsumer`
 
 **See** Collector.summingDouble
 
-### `static reducing(IBinaryOperator accumulator)`
+---
+### List-Object BiConsumers
+##### `static reducing(IBinaryOperator accumulator)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Object>`, gets the first element and reduces its value using `accumulator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the `IBinaryOperator` to be used between each element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -285,7 +296,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `accumulator` is null|
@@ -294,17 +305,17 @@ the `BiConsumer`
 
 **See** Collector.reducing
 
-### `static reducing(IBinaryOperator accumulator, IFunction mapper)`
+##### `static reducing(IBinaryOperator accumulator, IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Object>`, gets the first element and reduces its value using `accumulator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the `IBinaryOperator` to be used between each element|
 |`mapper`|the `IFunction` applied to the second input argument|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -314,7 +325,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `accumulator` or the `mapper` is null|
@@ -323,16 +334,16 @@ the `BiConsumer`
 
 **See** Collector.reducing
 
-### `static reducingOptional(IBinaryOperator accumulator)`
+##### `static reducingOptional(IBinaryOperator accumulator)`
 
 Returns a `BiConsumer` that casts the first input argument to `List<Object>`, if it is empty puts the first element as the second input argument. Otherwise, gets the first element and reduces its value using `accumulator`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`accumulator`|the `IBinaryOperator` to be used between each element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -342,7 +353,7 @@ BiConsumer
 
 the `BiConsumer`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `accumulator` is null|

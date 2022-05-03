@@ -34,21 +34,24 @@ Inherits [IDoublePredicate](/docs/Functional-Interfaces/IDoublePredicate.md) fun
 **See** IDoubleIterable.none
 
 ## Methods
-### `test(Double d)`
-#### Parameters
+### Function
+##### `test(Double d)`
+###### Parameters
 |Param|Description|
 |---|---|
 
-### `orElse(IDoublePredicate other)`
+---
+### Default Methods
+##### `orElse(IDoublePredicate other)`
 
 Returns a composed `DoublePredicate` that applies short-circuiting logical `OR` operator to `this` `IDoublePredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `IDoublePredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -58,26 +61,26 @@ DoublePredicate
 
 the composed `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someDoublePredicate1.orElse(someDoublePredicate2);
 ```
 
-### `andAlso(IDoublePredicate other)`
+##### `andAlso(IDoublePredicate other)`
 
 Returns a composed `DoublePredicate` that applies short-circuiting logical `AND` operator to `this` `IDoublePredicate` and `other` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`other`|the other `IDoublePredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -87,21 +90,21 @@ DoublePredicate
 
 the composed `IDoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
 
-#### Example
+###### Example
 ```apex
 someDoublePredicate1.andAlso(someDoublePredicate2);
 ```
 
-### `negate()`
+##### `negate()`
 
 Returns a `DoublePredicate` that applies logical `NOT` operator to `this` `IDoublePredicate`.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -111,21 +114,23 @@ DoublePredicate
 
 the negated `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 someDoublePredicate.negate();
 ```
 
-### `static some(List<IDoublePredicate> predicates)`
+---
+### Static Methods
+##### `static some(List<IDoublePredicate> predicates)`
 
 Returns a composed `DoublePredicate` that applies sequentially short-circuiting logical `OR` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IDoublePredicates`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -135,27 +140,27 @@ DoublePredicate
 
 the composed `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.some(someDoublePredicates);
 ```
 
-### `static some(IDoublePredicate predicate1, IDoublePredicate predicate2)`
+##### `static some(IDoublePredicate predicate1, IDoublePredicate predicate2)`
 
 Returns a composed `DoublePredicate` that applies short-circuiting logical `OR` operator to `predicate1` `IDoublePredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `IDoublePredicate`|
 |`predicate2`|the second `IDoublePredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -165,26 +170,26 @@ DoublePredicate
 
 the composed `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.some(someDoublePredicate1, someDoublePredicate2);
 ```
 
-### `static every(List<IDoublePredicate> predicates)`
+##### `static every(List<IDoublePredicate> predicates)`
 
 Returns a composed `DoublePredicate` that applies sequentially short-circuiting logical `AND` operator to `predicates` in the same order as the order of the input list.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IDoublePredicates`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -194,27 +199,27 @@ DoublePredicate
 
 the composed `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.every(someDoublePredicates);
 ```
 
-### `static every(IDoublePredicate predicate1, IDoublePredicate predicate2)`
+##### `static every(IDoublePredicate predicate1, IDoublePredicate predicate2)`
 
 Returns a composed `DoublePredicate` that applies short-circuiting logical `AND` operator to `predicate1` `IDoublePredicate` and `predicate2` in that order.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate1`|the first `IDoublePredicate`|
 |`predicate2`|the second `IDoublePredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -224,26 +229,26 @@ DoublePredicate
 
 the composed `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate1` or `predicate2` is null|
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.every(someDoublePredicate1, someDoublePredicate2);
 ```
 
-### `static negate(IDoublePredicate predicate)`
+##### `static negate(IDoublePredicate predicate)`
 
 Returns a `DoublePredicate` that applies logical `NOT` operator to `predicate`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`predicate`|the `IDoublePredicate`|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -253,21 +258,21 @@ DoublePredicate
 
 the negated `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.negate(someDoublePredicate);
 ```
 
-### `static always(Boolean value)`
+##### `static always(Boolean value)`
 
 Returns a `DoublePredicate` that always evaluates to the Boolean `value` (`true` or `false`).
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the evaluated value|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -277,26 +282,28 @@ DoublePredicate
 
 predicate the `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `value` is null|
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.always(true);
 ```
 
-### `static isGreater(Double value)`
+---
+### Built-Ins
+##### `static isGreater(Double value)`
 
 Returns a `DoublePredicate` that tests the input Double if it is greater than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `>` &quot;greater than&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -309,21 +316,21 @@ the `DoublePredicate`
 
 **See** Comparator.compareNullSafeDoubles
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isGreater(100);
 ```
 
-### `static isGreaterOrEqual(Double value)`
+##### `static isGreaterOrEqual(Double value)`
 
 Returns a `DoublePredicate` that tests the input Double if it is greater than or equal to the `value`. <p><strong>Note: </strong></p> <<p>Unlike the standard `>=` &quot;greater than or equal to&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -336,21 +343,21 @@ the `DoublePredicate`
 
 **See** Comparator.compareNullSafeDoubles
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isGreaterOrEqual(100);
 ```
 
-### `static isLess(Double value)`
+##### `static isLess(Double value)`
 
 Returns a `DoublePredicate` that tests the input Double if it is less than the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<` &quot;less than&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -363,21 +370,21 @@ the `DoublePredicate`
 
 **See** Comparator.compareNullSafeDoubles
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isLess(100);
 ```
 
-### `static isLessOrEqual(Double value)`
+##### `static isLessOrEqual(Double value)`
 
 Returns a `DoublePredicate` that tests the input Double if it is less than or equal to the `value`. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` &quot;less than or equal to&quot; operator, the predicate function considers a non-null value as always greater than a null value.</p>
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -390,21 +397,21 @@ the `DoublePredicate`
 
 **See** Comparator.compareNullSafeDoubles
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isLessOrEqual(100);
 ```
 
-### `static isEqual(Double value)`
+##### `static isEqual(Double value)`
 
 Returns a `DoublePredicate` that tests the input Double if it is equal to the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -417,21 +424,21 @@ the `DoublePredicate`
 
 **See** Comparator.compareNullSafeDoubles
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isEqual(100);
 ```
 
-### `static isNotEqual(Double value)`
+##### `static isNotEqual(Double value)`
 
 Returns a `DoublePredicate` that tests the input Double if it is not equal to the `value`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`value`|the right argument of comparison|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -444,21 +451,21 @@ the `DoublePredicate`
 
 **See** Comparator.compareNullSafeDoubles
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isNotEqual(100);
 ```
 
-### `static isIn(List<Double> container)`
+##### `static isIn(List<Double> container)`
 
 Returns a `DoublePredicate` that tests the input Double if it is contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -468,7 +475,7 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -476,21 +483,21 @@ the `DoublePredicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isIn(container);
 ```
 
-### `static isNotIn(List<Double> container)`
+##### `static isNotIn(List<Double> container)`
 
 Returns a `DoublePredicate` that tests the input Double if it is not contained in the `container`.
 
-#### Parameters
+###### Parameters
 |Param|Description|
 |---|---|
 |`container`|the list that checks for the presence of an element|
 
-#### Return
+###### Return
 
 **Type**
 
@@ -500,7 +507,7 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the `container` is null|
@@ -508,16 +515,16 @@ the `DoublePredicate`
 
 **See** List.contains
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isNotIn(container);
 ```
 
-### `static isNull()`
+##### `static isNull()`
 
 Returns a `DoublePredicate` that tests the input Double if it is null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -527,16 +534,16 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isNull();
 ```
 
-### `static isNotNull()`
+##### `static isNotNull()`
 
 Returns a `DoublePredicate` that tests the input Double if it is not null.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -546,16 +553,16 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isNotNull();
 ```
 
-### `static isNegative()`
+##### `static isNegative()`
 
 Returns a `DoublePredicate` that tests the input Double if it is negative.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -565,16 +572,16 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isNegative();
 ```
 
-### `static isNegativeOrZero()`
+##### `static isNegativeOrZero()`
 
 Returns a `DoublePredicate` that tests the input Double if it is negative or zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -584,16 +591,16 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isNegativeOrZero();
 ```
 
-### `static isPositive()`
+##### `static isPositive()`
 
 Returns a `DoublePredicate` that tests the input Double if it is positive.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -603,16 +610,16 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isPositive();
 ```
 
-### `static isPositiveOrZero()`
+##### `static isPositiveOrZero()`
 
 Returns a `DoublePredicate` that tests the input Double if it is positive or zero.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -622,16 +629,16 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isPositiveOrZero();
 ```
 
-### `static isZero()`
+##### `static isZero()`
 
 Returns a `DoublePredicate` that tests the input Double if it is prime.
 
-#### Return
+###### Return
 
 **Type**
 
@@ -641,12 +648,12 @@ DoublePredicate
 
 the `DoublePredicate`
 
-#### Throws
+###### Throws
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the input argument is null|
 
-#### Example
+###### Example
 ```apex
 DoublePredicate.isPrime();
 ```
