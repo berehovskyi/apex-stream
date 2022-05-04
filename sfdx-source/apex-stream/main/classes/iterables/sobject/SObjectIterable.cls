@@ -789,6 +789,264 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
     public virtual OptionalDouble avg(final SObjectField field) {
         return avg(SObjectToDoubleFunction.get(field));
     }
+
+    public abstract List<Object> toList(final ISObjectFunction mapper, final Type listType);
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * List<String> accountNames = (List<String>) accountsIterable
+     *     .toList('Name', List<String>.class);
+     * @param fieldName the field
+     * @param listType result type
+     * @return the `List<Object>` containing the collected elements, which can be casted to `listType`
+     * @throws NullPointerException if `fieldName` is blank or `listType` is null
+     */
+    public virtual List<Object> toList(final String fieldName, final Type listType) {
+        return toList(SObjectFunction.get(fieldName), listType);
+    }
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * List<String> accountNames = (List<String>) accountsIterable
+     *     .toList(Account.Name, List<String>.class);
+     * @param field the field
+     * @param listType result type
+     * @return the `List<Object>` containing the collected elements, which can be casted to `listType`
+     * @throws NullPointerException if `field` or `listType` is null
+     */
+    public virtual List<Object> toList(final SObjectField field, final Type listType) {
+        return toList(SObjectFunction.get(field), listType);
+    }
+
+    public abstract Set<Id> toIdSet(final ISObjectFunction mapper);
+
+    /**
+     * @description Accumulates `Id` elements into a `Set<Id>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Set<Id> accountIds = contactsIterable.toIdSet('AccountId');
+     * @param fieldName the field
+     * @return the `Set<Id>` containing the collected elements field values
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public virtual Set<Id> toIdSet(final String fieldName) {
+        return toIdSet(SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Accumulates `Id` elements into a `Set<Id>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Set<Id> accountIds = contactsIterable.toIdSet(Contact.AccountId);
+     * @param field the field
+     * @return the `Set<Id>` containing the collected elements field values
+     * @throws NullPointerException if `field` is null
+     */
+    public virtual Set<Id> toIdSet(final SObjectField field) {
+        return toIdSet(SObjectFunction.get(field));
+    }
+
+    public abstract Set<String> toStringSet(final ISObjectFunction mapper);
+
+    /**
+     * @description Accumulates `String` elements into a `Set<String>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Set<String> accountNames = accountsIterable.toStringSet('Name');
+     * @param fieldName the field
+     * @return the `Set<String>` containing the collected elements field values
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public virtual Set<String> toStringSet(final String fieldName) {
+        return toStringSet(SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Accumulates `String` elements into a `Set<String>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Set<String> accountNames = accountsIterable.toStringSet(Account.Name);
+     * @param field the field
+     * @return the `Set<String>`containing the collected elements field values
+     * @throws NullPointerException if `field` is null
+     */
+    public virtual Set<String> toStringSet(final SObjectField field) {
+        return toStringSet(SObjectFunction.get(field));
+    }
+
+    public abstract Map<Id, SObject> toByIdMap(final ISObjectFunction keyMapper, final Type mapType);
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) contactsIterable
+     *     .toByIdMap('AccountId', Map<Id, Contact>.class);
+     * @param fieldName the field
+     * @param mapType result type
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
+     * @throws IllegalStateException if mapped keys contain duplicates
+     */
+    public virtual Map<Id, SObject> toByIdMap(final String fieldName, final Type mapType) {
+        return toByIdMap(SObjectFunction.get(fieldName), mapType);
+    }
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) contactsIterable
+     *     .toByIdMap(Contact.AccountId, Map<Id, Contact>.class);
+     * @param field the field
+     * @param mapType result type
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
+     * @throws IllegalStateException if mapped keys contain duplicates
+     */
+    public virtual Map<Id, SObject> toByIdMap(final SObjectField field, final Type mapType) {
+        return toByIdMap(SObjectFunction.get(field), mapType);
+    }
+
+    public abstract Map<String, SObject> toByStringMap(final ISObjectFunction keyMapper, final Type mapType);
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<String, Account> accountByName = (Map<String, Account>) accountsIterable
+     *     .toByStringMap('Name', Map<String, Account>.class);
+     * @param fieldName the field
+     * @param mapType result type
+     * @return the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
+     * @throws IllegalStateException if mapped keys contain duplicates
+     */
+    public virtual Map<String, SObject> toByStringMap(final String fieldName, final Type mapType) {
+        return toByStringMap(SObjectFunction.get(fieldName), mapType);
+    }
+
+    /**
+     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<String, Account> accountByName = (Map<String, Account>) accountsIterable
+     *     .toByStringMap(Account.Name, Map<String, Account>.class);
+     * @param field the field
+     * @param mapType result type
+     * @return the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @throws NullPointerException if `field` or `mapType` is null
+     * @throws IllegalStateException if mapped keys contain duplicates
+     */
+    public virtual Map<String, SObject> toByStringMap(final SObjectField field, final Type mapType) {
+        return toByStringMap(SObjectFunction.get(field), mapType);
+    }
+
+    public abstract Map<Id, List<SObject>> groupById(final ISObjectFunction keyMapper);
+
+    /**
+     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<Id, List<Contact>> contactsByAccountId = contactsIterable.groupById('AccountId');
+     * @param fieldName the field
+     * @return the `Map<Id, List<SObject>>` containing the iterable elements
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public virtual Map<Id, List<SObject>> groupById(final String fieldName) {
+        return groupById(SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<Id, List<Contact>> contactsByAccountId = contactsIterable.groupById(Contact.AccountId);
+     * @param field the field
+     * @return the `Map<Id, List<SObject>>` containing the iterable elements
+     * @throws NullPointerException if `field` is null
+     */
+    public virtual Map<Id, List<SObject>> groupById(final SObjectField field) {
+        return groupById(SObjectFunction.get(field));
+    }
+
+    public abstract Map<String, List<SObject>> groupByString(final ISObjectFunction keyMapper);
+
+    /**
+     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
+     * whose keys are `fieldName` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<String, List<Account>> accountsByRating = accountsIterable.groupByString('Rating');
+     * @param fieldName the field
+     * @return the `Map<String, List<SObject>>` containing the iterable elements
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public virtual Map<String, List<SObject>> groupByString(final String fieldName) {
+        return groupByString(SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
+     * whose keys are `field` values and values are `SObject` elements.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<String, List<Account>> accountsByRating = accountsIterable.groupByString(Account.Rating);
+     * @param field the field
+     * @return the `Map<String, List<SObject>>` containing the iterable elements
+     * @throws NullPointerException if `field` is null
+     */
+    public virtual Map<String, List<SObject>> groupByString(final SObjectField field) {
+        return groupByString(SObjectFunction.get(field));
+    }
+
+    public abstract Map<Boolean, List<SObject>> partition(final ISObjectPredicate predicate);
+
+    /**
+     * @description Partition `SObject` elements by `fieldName` having `value`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
+     *     = accountsIterable.partition('Rating', 'Hot');
+     * @param fieldName the field
+     * @param value the satisfying value
+     * @return the `Map<Boolean, List<SObject>>` containing the iterable elements
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public virtual Map<Boolean, List<SObject>> partition(final String fieldName, final Object value) {
+        return partition(SObjectPredicate.isEqual(fieldName, value));
+    }
+
+    /**
+     * @description Partition `SObject` elements by `field` having `value`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
+     *     = accountsIterable.partition(Account.Rating, 'Hot');
+     * @param field the field
+     * @param value the satisfying value
+     * @return the `Map<Boolean, List<SObject>>` containing the iterable elements
+     * @throws NullPointerException if `field` is null
+     */
+    public virtual Map<Boolean, List<SObject>> partition(final SObjectField field, final Object value) {
+        return partition(SObjectPredicate.isEqual(field, value));
+    }
     //</editor-fold>
 
 }

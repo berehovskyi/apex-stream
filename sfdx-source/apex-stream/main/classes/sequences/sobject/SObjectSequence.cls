@@ -786,36 +786,18 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Accumulates `Object` elements into a `List<Object>`
-     * according to `fieldName`.
+     * @description Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`.
      * <p>Terminal Operation.</p>
      * @example
      * List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
-     *     .toList('Name', List<String>.class);
-     * @param fieldName the field
-     * @param listType result type
-     * @return the `List<Object>` containing the sequence elements
-     * @throws NullPointerException if `fieldName` is blank or `listType` is null
-     */
-    public virtual List<Object> toList(final String fieldName, final Type listType) {
-        return Lists.toList(sObjects, fieldName, listType);
-    }
-
-    /**
-     * @description Accumulates `Object` elements into a `List<Object>`
-     * according to `field`.
-     * <p>Terminal Operation.</p>
-     * @example
-     * List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
-     *     .toList(Account.Name, List<String>.class);
-     * @param field the field
+     *     .toList(SObjectFunction.get('Name'), List<String>.class);
+     * @param mapper the mapping function
      * @param listType result type
      * @return the `List<Object>` containing the sequence elements
      * @throws NullPointerException if `field` or `listType` is null
      */
-    public virtual List<Object> toList(final SObjectField field, final Type listType) {
-        Validate.notNull(field);
-        return Lists.toList(sObjects, String.valueOf(field), listType);
+    public virtual override List<Object> toList(final ISObjectFunction mapper, final Type listType) {
+        return Lists.toList(sObjects, mapper, listType);
     }
 
     /**
@@ -843,61 +825,29 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Accumulates `Id` elements into a `Set<Id>`
-     * according to `fieldName`.
+     * @description Accumulates `Id` elements returned by `mapper` into a `Set<Id>`.
      * <p>Terminal Operation.</p>
      * @example
-     * Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet('AccountId');
-     * @param fieldName the field
-     * @return the `Set<Id>` containing the sequence element field values
-     * @throws NullPointerException if `fieldName` is blank
+     * Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('AccountId'));
+     * @param mapper the mapping function
+     * @return the `Set<Id>` containing the sequence elements field values
+     * @throws NullPointerException if `mapper` is null
      */
-    public virtual Set<Id> toIdSet(final String fieldName) {
-        return Lists.toIdSet(sObjects, fieldName);
+    public virtual override Set<Id> toIdSet(final ISObjectFunction mapper) {
+        return Lists.toIdSet(sObjects, mapper);
     }
 
     /**
-     * @description Accumulates `Id` elements into a `Set<Id>`
-     * according to `field`.
+     * @description Accumulates `String` elements returned by `mapper` into a `Set<String>`.
      * <p>Terminal Operation.</p>
      * @example
-     * Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(Contact.AccountId);
-     * @param field the field
-     * @return the `Set<Id>` containing the sequence element field values
-     * @throws NullPointerException if `field` is null
+     * Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(SObjectFunction.get('Name'));
+     * @param mapper the mapping function
+     * @return the `Set<String>`containing the sequence elements field values
+     * @throws NullPointerException if `mapper` is null
      */
-    public virtual Set<Id> toIdSet(final SObjectField field) {
-        Validate.notNull(field);
-        return Lists.toIdSet(sObjects, String.valueOf(field));
-    }
-
-    /**
-     * @description Accumulates `String` elements into a `Set<String>`
-     * according to `fieldName`.
-     * <p>Terminal Operation.</p>
-     * @example
-     * Set<String> accountNames = SObjectSequence.of(accounts).toStringSet('Name');
-     * @param fieldName the field
-     * @return the `Set<String>` containing the sequence element field values
-     * @throws NullPointerException if `fieldName` is blank
-     */
-    public virtual Set<String> toStringSet(final String fieldName) {
-        return Lists.toStringSet(sObjects, fieldName);
-    }
-
-    /**
-     * @description Accumulates `String` elements into a `Set<String>`
-     * according to `field`.
-     * <p>Terminal Operation.</p>
-     * @example
-     * Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(Account.Name);
-     * @param field the field
-     * @return the `Set<String>`containing the sequence element field values
-     * @throws NullPointerException if `field` is null
-     */
-    public virtual Set<String> toStringSet(final SObjectField field) {
-        Validate.notNull(field);
-        return Lists.toStringSet(sObjects, String.valueOf(field));
+    public virtual override Set<String> toStringSet(final ISObjectFunction mapper) {
+        return Lists.toStringSet(sObjects, mapper);
     }
 
     /**
@@ -914,131 +864,67 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
+     * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectSequence.of(contacts)
-     *     .toByIdMap('AccountId', Map<Id, Contact>.class);
-     * @param fieldName the field
+     *     .toByIdMap(SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+     * @param keyMapper the mapping function producing keys
      * @param mapType result type
      * @return the `Map<Id, SObject>` containing the sequence elements
-     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `mapType` is null
+     * @throws IllegalStateException if mapped keys contain duplicates, which can be casted to `mapType`
      */
-    public virtual Map<Id, SObject> toByIdMap(final String fieldName, final Type mapType) {
-        return Lists.toByIdMap(sObjects, fieldName, mapType);
+    public virtual override Map<Id, SObject> toByIdMap(final ISObjectFunction keyMapper, final Type mapType) {
+        return Lists.toByIdMap(sObjects, keyMapper, mapType);
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * <p>Terminal Operation.</p>
-     * @example
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectSequence.of(contacts)
-     *     .toByIdMap(Contact.AccountId, Map<Id, Contact>.class);
-     * @param field the field
-     * @param mapType result type
-     * @return the `Map<Id, SObject>` containing the sequence elements
-     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public virtual Map<Id, SObject> toByIdMap(final SObjectField field, final Type mapType) {
-        Validate.notNull(field);
-        return Lists.toByIdMap(sObjects, String.valueOf(field), mapType);
-    }
-
-    /**
-     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
+     * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      * @example
      * Map<String, Account> accountByName = (Map<String, Account>) SObjectSequence.of(accounts)
-     *     .toByStringMap('Name', Map<String, Account>.class);
-     * @param fieldName the field
+     *     .toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+     * @param keyMapper the mapping function producing keys
      * @param mapType result type
      * @return the `Map<String, SObject>` containing the sequence elements
-     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `mapType` is null
+     * @throws IllegalStateException if mapped keys contain duplicates, which can be casted to `mapType`
      */
-    public virtual Map<String, SObject> toByStringMap(final String fieldName, final Type mapType) {
-        return Lists.toByStringMap(sObjects, fieldName, mapType);
-    }
-
-    /**
-     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * <p>Terminal Operation.</p>
-     * @example
-     * Map<String, Account> accountByName = (Map<String, Account>) SObjectSequence.of(accounts)
-     *     .toByStringMap(Account.Name, Map<String, Account>.class);
-     * @param field the field
-     * @param mapType result type
-     * @return the `Map<String, SObject>` containing the sequence elements
-     * @throws NullPointerException if `field` or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public virtual Map<String, SObject> toByStringMap(final SObjectField field, final Type mapType) {
-        Validate.notNull(field);
-        return Lists.toByStringMap(sObjects, String.valueOf(field), mapType);
+    public virtual override Map<String, SObject> toByStringMap(final ISObjectFunction keyMapper, final Type mapType) {
+        return Lists.toByStringMap(sObjects, keyMapper, mapType);
     }
 
     /**
      * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      * @example
-     * Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts).groupById('AccountId');
-     * @param fieldName the field
-     * @return the `Map<Id, List<SObject>>` containing the sequence elements
-     * @throws NullPointerException if `fieldName` is blank
-     */
-    public virtual Map<Id, List<SObject>> groupById(final String fieldName) {
-        return Lists.groupById(sObjects, fieldName);
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * <p>Terminal Operation.</p>
-     * @example
-     * Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts).groupById(Contact.AccountId);
-     * @param field the field
+     * Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts)
+     *     .groupById(SObjectFunction.get('AccountId'));
+     * @param keyMapper the mapping function producing keys
      * @return the `Map<Id, List<SObject>>` containing the sequence elements
      * @throws NullPointerException if `field` is null
      */
-    public virtual Map<Id, List<SObject>> groupById(final SObjectField field) {
-        Validate.notNull(field);
-        return Lists.groupById(sObjects, String.valueOf(field));
+    public virtual override Map<Id, List<SObject>> groupById(final ISObjectFunction keyMapper) {
+        return Lists.groupById(sObjects, keyMapper);
     }
 
     /**
      * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      * @example
-     * Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts).groupByString('Rating');
-     * @param fieldName the field
+     * Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts)
+     *     .groupByString(SObjectFunction.get('Rating'));
+     * @param keyMapper the mapping function producing keys
      * @return the `Map<String, List<SObject>>` containing the sequence elements
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws NullPointerException if `keyMapper` is null
      */
-    public virtual Map<String, List<SObject>> groupByString(final String fieldName) {
-        return Lists.groupByString(sObjects, fieldName);
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * <p>Terminal Operation.</p>
-     * @example
-     * Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts).groupByString(Account.Rating);
-     * @param field the field
-     * @return the `Map<String, List<SObject>>` containing the sequence elements
-     * @throws NullPointerException if `field` is null
-     */
-    public virtual Map<String, List<SObject>> groupByString(final SObjectField field) {
-        Validate.notNull(field);
-        return Lists.groupByString(sObjects, String.valueOf(field));
+    public virtual override Map<String, List<SObject>> groupByString(final ISObjectFunction keyMapper) {
+        return Lists.groupByString(sObjects, keyMapper);
     }
 
     /**
@@ -1051,7 +937,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @return the `Map<Boolean, List<SObject>>` containing the sequence elements
      * @throws NullPointerException if `predicate` is null
      */
-    public virtual Map<Boolean, List<SObject>> partition(final ISObjectPredicate predicate) {
+    public virtual override Map<Boolean, List<SObject>> partition(final ISObjectPredicate predicate) {
         return Lists.partition(sObjects, predicate);
     }
 

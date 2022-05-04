@@ -990,10 +990,12 @@ private class SObjectSequenceTest {
         ISObjectIterable accSeq = SObjectSequence.of(clone);
         ISObjectIterable accSeq1 = SObjectSequence.of(clone).withoutNulls();
         ISObjectIterable accSeq2 = SObjectSequence.of(clone).withoutNulls();
+        ISObjectIterable accSeq3 = SObjectSequence.of(clone).withoutNulls();
         // When
         List<Account> actual = accSeq.toList();
-        List<Integer> actual1 = (List<Integer>) accSeq1.toList('NumberOfEmployees', List<Integer>.class);
-        List<Integer> actual2 = (List<Integer>) accSeq2.toList(Account.NumberOfEmployees, List<Integer>.class);
+        List<Integer> actual1 = (List<Integer>) accSeq1.toList(SObjectFunction.get('NumberOfEmployees'), List<Integer>.class);
+        List<Integer> actual2 = (List<Integer>) accSeq2.toList('NumberOfEmployees', List<Integer>.class);
+        List<Integer> actual3 = (List<Integer>) accSeq3.toList(Account.NumberOfEmployees, List<Integer>.class);
         // Then
         List<Integer> expected = (List<Integer>) SObjectSequence.of(clone)
                 .withoutNulls()
@@ -1001,6 +1003,7 @@ private class SObjectSequenceTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 
@@ -1026,13 +1029,17 @@ private class SObjectSequenceTest {
         ISObjectIterable accSeq3 = SObjectSequence.of(clone).withoutNulls();
         ISObjectIterable accSeq4 = SObjectSequence.of(clone).withoutNulls();
         ISObjectIterable accSeq5 = SObjectSequence.of(clone).withoutNulls();
+        ISObjectIterable accSeq6 = SObjectSequence.of(clone).withoutNulls();
+        ISObjectIterable accSeq7 = SObjectSequence.of(clone).withoutNulls();
         // When
         Set<SObject> actual = accSeq.toSet();
         Set<Id> actual1 = accSeq1.toIdSet();
-        Set<Id> actual2 = accSeq2.toIdSet('Id');
-        Set<Id> actual3 = accSeq3.toIdSet(Account.Id);
-        Set<String> actual4 = accSeq4.toStringSet('Name');
-        Set<String> actual5 = accSeq5.toStringSet(Account.Name);
+        Set<Id> actual2 = accSeq2.toIdSet(SObjectFunction.get('Id'));
+        Set<Id> actual3 = accSeq3.toIdSet('Id');
+        Set<Id> actual4 = accSeq4.toIdSet(Account.Id);
+        Set<String> actual5 = accSeq5.toStringSet(SObjectFunction.get('Name'));
+        Set<String> actual6 = accSeq6.toStringSet('Name');
+        Set<String> actual7 = accSeq7.toStringSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectSequence.of(clone)
@@ -1045,8 +1052,10 @@ private class SObjectSequenceTest {
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
         Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected1, actual4);
         Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected2, actual6);
+        Validate.assertEquals(expected2, actual7);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 
@@ -1071,12 +1080,16 @@ private class SObjectSequenceTest {
         ISObjectIterable accSeq2 = SObjectSequence.of(clone);
         ISObjectIterable accSeq3 = SObjectSequence.of(clone);
         ISObjectIterable accSeq4 = SObjectSequence.of(clone);
+        ISObjectIterable accSeq5 = SObjectSequence.of(clone);
+        ISObjectIterable accSeq6 = SObjectSequence.of(clone);
         // When
         Map<Id, SObject> actual = accSeq.toMap();
-        Map<Id, Account> actual1 = (Map<Id, Account>) accSeq1.toByIdMap('Id', Map<Id, Account>.class);
-        Map<Id, Account> actual2 = (Map<Id, Account>) accSeq2.toByIdMap(Account.Id, Map<Id, Account>.class);
-        Map<String, Account> actual3 = (Map<String, Account>) accSeq3.toByStringMap('Name', Map<String, Account>.class);
-        Map<String, Account> actual4 = (Map<String, Account>) accSeq4.toByStringMap(Account.Name, Map<String, Account>.class);
+        Map<Id, Account> actual1 = (Map<Id, Account>) accSeq1.toByIdMap(SObjectFunction.get('Id'), Map<Id, Account>.class);
+        Map<Id, Account> actual2 = (Map<Id, Account>) accSeq2.toByIdMap('Id', Map<Id, Account>.class);
+        Map<Id, Account> actual3 = (Map<Id, Account>) accSeq3.toByIdMap(Account.Id, Map<Id, Account>.class);
+        Map<String, Account> actual4 = (Map<String, Account>) accSeq4.toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+        Map<String, Account> actual5 = (Map<String, Account>) accSeq5.toByStringMap('Name', Map<String, Account>.class);
+        Map<String, Account> actual6 = (Map<String, Account>) accSeq6.toByStringMap(Account.Name, Map<String, Account>.class);
         // Then
         Map<Id, Account> expected = new Map<Id, Account>(input);
         Map<Id, Account> expected1 = (Map<Id, Account>) SObjectSequence.of(clone)
@@ -1086,8 +1099,10 @@ private class SObjectSequenceTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected2, actual3);
+        Validate.assertEquals(expected1, actual3);
         Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected2, actual6);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 
@@ -1112,20 +1127,26 @@ private class SObjectSequenceTest {
         ISObjectIterable accSeq1 = SObjectSequence.of(clone);
         ISObjectIterable accSeq2 = SObjectSequence.of(clone);
         ISObjectIterable accSeq3 = SObjectSequence.of(clone);
+        ISObjectIterable accSeq4 = SObjectSequence.of(clone);
+        ISObjectIterable accSeq5 = SObjectSequence.of(clone);
         // When
-        Map<Id, List<Account>> actual = accSeq.groupById('ParentId');
-        Map<Id, List<Account>> actual1 = accSeq1.groupById(Account.ParentId);
-        Map<String, List<Account>> actual2 = accSeq2.groupByString('Rating');
-        Map<String, List<Account>> actual3 = accSeq3.groupByString(Account.Rating);
+        Map<Id, List<Account>> actual = accSeq.groupById(SObjectFunction.get('ParentId'));
+        Map<Id, List<Account>> actual2 = accSeq1.groupById('ParentId');
+        Map<Id, List<Account>> actual3 = accSeq2.groupById(Account.ParentId);
+        Map<String, List<Account>> actual4 = accSeq3.groupByString(SObjectFunction.get('Rating'));
+        Map<String, List<Account>> actual5 = accSeq4.groupByString('Rating');
+        Map<String, List<Account>> actual6 = accSeq5.groupByString(Account.Rating);
         // Then
         Map<Id, List<Account>> expected = (Map<Id, List<Account>>) SObjectStream.of(clone)
                 .collect(SObjectCollector.groupingById(Account.ParentId).cast(Map<Id, List<Account>>.class));
         Map<String, List<Account>> expected1 = (Map<String, List<Account>>) SObjectStream.of(clone)
                 .collect(SObjectCollector.groupingByString(Account.Rating).cast(Map<String, List<Account>>.class));
         Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected1, actual4);
+        Validate.assertEquals(expected1, actual5);
+        Validate.assertEquals(expected1, actual6);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 
@@ -1145,12 +1166,22 @@ private class SObjectSequenceTest {
         List<Account> clone = input.deepClone(true);
         ISObjectPredicate predicate = SObjectPredicate.isGreater(Account.NumberOfEmployees, 150);
         ISObjectIterable accSeq = SObjectSequence.of(clone);
+        ISObjectIterable accSeq1 = SObjectSequence.of(clone);
+        ISObjectIterable accSeq2 = SObjectSequence.of(clone);
         // When
         Map<Boolean, List<Account>> actual = accSeq.partition(predicate);
+        Map<Boolean, List<Account>> actual1 = accSeq1.partition('NumberOfEmployees', 100);
+        Map<Boolean, List<Account>> actual2 = accSeq2.partition(Account.NumberOfEmployees, 100);
         // Then
         Map<Boolean, List<Account>> expected = (Map<Boolean, List<Account>>) SObjectSequence.of(clone)
                 .collect(SObjectCollector.partitioningBy(predicate).cast(Map<Boolean, List<Account>>.class));
+        Map<Boolean, List<Account>> expected1 = new Map<Boolean, List<Account>>{
+                true => new List<Account>{ acc1 },
+                false => new List<Account>{ acc, acc2, acc3, acc4 }
+        };
         Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected1, actual1);
+        Validate.assertEquals(expected1, actual2);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 

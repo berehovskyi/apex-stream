@@ -277,9 +277,41 @@ the `Set<Double>`
 |---|---|
 |`NullPointerException`|if `iterator` is null|
 
+### `static toList(Iterator<SObject> iterator, ISObjectFunction mapper, Type listType)`
+
+Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`mapper`|the mapping function|
+|`listType`|the result type|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` which can be casted into `listType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator`, `mapper` or `listType` is null|
+
+#### Example
+```apex
+List<String> accNames = (List<String>)
+    Iterators.toList(accIterator, SObjectFunction.get('Name'), List<String>.class);
+```
+
 ### `static toList(Iterator<SObject> iterator, String fieldName, Type listType)`
 
-Accumulates `fieldName` values into a `List` of specific `listType`.
+Accumulates `fieldName` values into a `List<?>` of specific `listType`.
 
 #### Parameters
 |Param|Description|
@@ -301,11 +333,72 @@ the `List<Object>` which can be casted into `listType`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` or `listType` is null, and `fieldName` is blank|
+|`NullPointerException`|if `sObjects` or `iterator` is null, or `fieldName` is blank|
 
 #### Example
 ```apex
 List<String> accNames = (List<String>) Iterators.toList(accIterator, 'Name', List<String>.class);
+```
+
+### `static toList(Iterator<SObject> iterator, SObjectField field, Type listType)`
+
+Accumulates `field` values into a `List<?>` of specific `listType`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field|
+|`listType`|the type of list|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` which can be casted into `listType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator`, `field` or `listType` is null|
+
+#### Example
+```apex
+List<String> accNames = (List<String>) Iterators.toList(accIterator, Account.Name, List<String>.class);
+```
+
+### `static toIdSet(Iterator<SObject> iterator, ISObjectFunction mapper)`
+
+Accumulates values returned by `mapper` into a `Set<Id>`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+Set<Id>
+
+**Description**
+
+the `Set<Id>`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `mapper` is null|
+
+#### Example
+```apex
+Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunction.get('ParentId'));
 ```
 
 ### `static toIdSet(Iterator<SObject> iterator, String fieldName)`
@@ -331,11 +424,71 @@ the `Set<Id>`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null, and `fieldName` is blank|
+|`NullPointerException`|if `iterator` is null or `fieldName` is blank|
 
 #### Example
 ```apex
 Set<Id> parentIds = Iterators.toIdSet(accIterator, 'ParentId');
+```
+
+### `static toIdSet(Iterator<SObject> iterator, SObjectField field)`
+
+Accumulates `field` values into a `Set<Id>`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Set<Id>
+
+**Description**
+
+the `Set<Id>`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `field` is null|
+
+#### Example
+```apex
+Set<Id> parentIds = Iterators.toIdSet(accIterator, Account.ParentId);
+```
+
+### `static toStringSet(Iterator<SObject> iterator, ISObjectFunction mapper)`
+
+Accumulates values returned by `mapper` into a `Set<String>`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+Set<String>
+
+**Description**
+
+the `Set<String>`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `mapper` is null|
+
+#### Example
+```apex
+Set<String> names = Iterators.toStringSet(accIterator, SObjectFunction.get('Name'));
 ```
 
 ### `static toStringSet(Iterator<SObject> iterator, String fieldName)`
@@ -356,21 +509,84 @@ Set<String>
 
 **Description**
 
-the `Set<String>`
+the `Set<Id>`
 
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null, and `fieldName` is blank|
+|`NullPointerException`|if `iterator` is null or `fieldName` is blank|
 
 #### Example
 ```apex
 Set<String> names = Iterators.toStringSet(accIterator, 'Name');
 ```
 
+### `static toStringSet(Iterator<SObject> iterator, SObjectField field)`
+
+Accumulates `field` values into a `Set<String>`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Set<String>
+
+**Description**
+
+the `Set<Id>`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `field` is null|
+
+#### Example
+```apex
+Set<String> names = Iterators.toStringSet(accIterator, Account.Name);
+```
+
+### `static toByIdMap(Iterator<SObject> iterator, ISObjectFunction keyMapper, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType` whose keys are produced by `keyMapper` and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`keyMapper`|the mapping function producing keys|
+|`mapType`|the type of map|
+
+#### Return
+
+**Type**
+
+Map<Id,SObject>
+
+**Description**
+
+the `Map<Id, SObject>` which can be casted into `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator`, `keyMapper` or `listType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
+    .toByIdMap(contIterator, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+```
+
 ### `static toByIdMap(Iterator<SObject> iterator, String fieldName, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<Id, SObject>` whose keys are `fieldName` values and values are `SObject` elements.
+Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType` whose keys are `fieldName` values and values are `SObject` elements.
 
 #### Parameters
 |Param|Description|
@@ -392,18 +608,84 @@ the `Map<Id, SObject>` which can be casted into `mapType`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` or `listType` is null, and `fieldName` is blank|
+|`NullPointerException`|if `iterator` or `listType` is null, or `fieldName` is blank|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
 #### Example
 ```apex
 Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
-    .toByIdMap(conIterator, 'AccountId', Map<Id, Contact>.class);
+    .toByIdMap(contIterator, 'AccountId', Map<Id, Contact>.class);
+```
+
+### `static toByIdMap(Iterator<SObject> iterator, SObjectField field, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType` whose keys are `field` values and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field|
+|`mapType`|the type of map|
+
+#### Return
+
+**Type**
+
+Map<Id,SObject>
+
+**Description**
+
+the `Map<Id, SObject>` which can be casted into `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator`, `field` or `listType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
+    .toByIdMap(contIterator, Contact.AccountId, Map<Id, Contact>.class);
+```
+
+### `static toByStringMap(Iterator<SObject> iterator, ISObjectFunction keyMapper, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType` whose keys are produced by `keyMapper` and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`keyMapper`|the mapping function producing keys|
+|`mapType`|the type of map|
+
+#### Return
+
+**Type**
+
+Map<String,SObject>
+
+**Description**
+
+the `Map<String, SObject>` which can be casted into `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator`, `keyMapper` or `listType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<String, Account> accountByName = (Map<String, Account>) Iterators
+    .toByIdMap(accIterator, SObjectFunction.get('Name'), Map<String, Account>.class);
 ```
 
 ### `static toByStringMap(Iterator<SObject> iterator, String fieldName, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<String, SObject>` whose keys are `fieldName` values and values are `SObject` elements.
+Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType` whose keys are `fieldName` values and values are `SObject` elements.
 
 #### Parameters
 |Param|Description|
@@ -425,13 +707,76 @@ the `Map<String, SObject>` which can be casted into `mapType`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` or `listType` is null, and `fieldName` is blank|
+|`NullPointerException`|if `iterator` or `listType` is null, or `fieldName` is blank|
 |`IllegalStateException`|if mapped keys contain duplicates|
 
 #### Example
 ```apex
 Map<String, Account> accountByName = (Map<String, Account>) Iterators
     .toByIdMap(accIterator, 'Name', Map<String, Account>.class);
+```
+
+### `static toByStringMap(Iterator<SObject> iterator, SObjectField field, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType` whose keys are `field` values and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field|
+|`mapType`|the type of map|
+
+#### Return
+
+**Type**
+
+Map<String,SObject>
+
+**Description**
+
+the `Map<Id, SObject>` which can be casted into `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator`, `field` or `listType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<String, Account> accountByName = (Map<String, Account>) Iterators
+    .toByIdMap(accIterator, Account.Name, Map<String, Account>.class);
+```
+
+### `static groupById(Iterator<SObject> iterator, ISObjectFunction keyMapper)`
+
+Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are values returned by `keyMapper` and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`keyMapper`|the mapping function producing keys|
+
+#### Return
+
+**Type**
+
+Map<Id,List<SObject>>
+
+**Description**
+
+the `Map<Id, List<SObject>>` containing the elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `keyMapper` is blank|
+
+#### Example
+```apex
+Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, SObjectFunction.get('AccountId'));
 ```
 
 ### `static groupById(Iterator<SObject> iterator, String fieldName)`
@@ -441,7 +786,7 @@ Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are `fieldN
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterator`|the iterator|
+|`iterator`|the list|
 |`fieldName`|the field|
 
 #### Return
@@ -457,11 +802,72 @@ the `Map<Id, List<SObject>>` containing the elements
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null, and `fieldName` is blank|
+|`NullPointerException`|if `iterator` is null, or `fieldName` is blank|
 
 #### Example
 ```apex
 Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, 'AccountId');
+```
+
+### `static groupById(Iterator<SObject> iterator, SObjectField field)`
+
+Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are `field` values and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Map<Id,List<SObject>>
+
+**Description**
+
+the `Map<Id, List<SObject>>` containing the elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `field` is null|
+
+#### Example
+```apex
+Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, Contact.AccountId);
+```
+
+### `static groupByString(Iterator<SObject> iterator, ISObjectFunction keyMapper)`
+
+Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are values returned by `keyMapper` and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`keyMapper`|the mapping function producing keys|
+
+#### Return
+
+**Type**
+
+Map<String,List<SObject>>
+
+**Description**
+
+the `Map<Id, List<SObject>>` containing the elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `keyMapper` is null|
+
+#### Example
+```apex
+Map<String, List<Account>> accountsByRating = Iterators
+    .groupByString(accIterator, SObjectFunction.get('Rating'));
 ```
 
 ### `static groupByString(Iterator<SObject> iterator, String fieldName)`
@@ -482,16 +888,46 @@ Map<String,List<SObject>>
 
 **Description**
 
-the `Map<Id, List<SObject>>` containing the elements
+the `Map<String, List<SObject>>` containing the elements
 
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null, and `fieldName` is blank|
+|`NullPointerException`|if `sObjects` is null, or `fieldName` is blank|
 
 #### Example
 ```apex
-Map<String, List<Account>> accountsByRating = Iterators.groupByString(conIterator, 'Rating');
+Map<String, List<Account>> accountsByRating = Iterators.groupByString(accIterator, 'Rating');
+```
+
+### `static groupByString(Iterator<SObject> iterator, SObjectField field)`
+
+Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are `field` values and values are `SObject` elements.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Map<String,List<SObject>>
+
+**Description**
+
+the `Map<String, List<SObject>>` containing the elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `field` is null|
+
+#### Example
+```apex
+Map<String, List<Account>> accountsByRating = Iterators.groupByString(accIterator, Account.Rating);
 ```
 
 ### `static partition(Iterator<SObject> iterator, ISObjectPredicate predicate)`
@@ -517,12 +953,76 @@ the `Map<Boolean, List<SObject>>` containing the elements
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `predicate` is null|
+|`NullPointerException`|if `iterator` or `predicate` is null|
 
 #### Example
 ```apex
 Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
     = Iterators.partition(accIterator, SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+```
+
+### `static partition(Iterator<SObject> iterator, String fieldName, Object value)`
+
+Partition `SObject` elements by `fieldName` having `value`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`fieldName`|the field|
+|`value`|the satisfying value|
+
+#### Return
+
+**Type**
+
+Map<Boolean,List<SObject>>
+
+**Description**
+
+the `Map<Boolean, List<SObject>>` containing the partitioned elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `sObjects` is null or `fieldName` is blank|
+
+#### Example
+```apex
+Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
+    = Iterators.partition(accIterator, 'Rating', 'Hot');
+```
+
+### `static partition(Iterator<SObject> iterator, SObjectField field, Object value)`
+
+Partition `SObject` elements by `field` having `value`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`field`|the field name|
+|`value`|the satisfying value|
+
+#### Return
+
+**Type**
+
+Map<Boolean,List<SObject>>
+
+**Description**
+
+the `Map<Boolean, List<SObject>>` containing the partitioned elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `sObjects` or `field` is null|
+
+#### Example
+```apex
+Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
+    = Iterators.partition(accIterator, Account.Rating, 'Hot');
 ```
 
 ---

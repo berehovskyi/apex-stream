@@ -1102,45 +1102,14 @@ List<Account> accountsWithHotRating = SObjectSequence.of(accounts)
     .toList();
 ```
 
-##### `toList(String fieldName, Type listType)`
+##### `override toList(ISObjectFunction mapper, Type listType)`
 
-Accumulates `Object` elements into a `List<Object>` according to `fieldName`. <p>Terminal Operation.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`fieldName`|the field|
-|`listType`|result type|
-
-###### Return
-
-**Type**
-
-List<Object>
-
-**Description**
-
-the `List<Object>` containing the sequence elements
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `fieldName` is blank or `listType` is null|
-
-###### Example
-```apex
-List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
-    .toList('Name', List<String>.class);
-```
-
-##### `toList(SObjectField field, Type listType)`
-
-Accumulates `Object` elements into a `List<Object>` according to `field`. <p>Terminal Operation.</p>
+Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`. <p>Terminal Operation.</p>
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`field`|the field|
+|`mapper`|the mapping function|
 |`listType`|result type|
 
 ###### Return
@@ -1161,7 +1130,7 @@ the `List<Object>` containing the sequence elements
 ###### Example
 ```apex
 List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
-    .toList(Account.Name, List<String>.class);
+    .toList(SObjectFunction.get('Name'), List<String>.class);
 ```
 
 ##### `toSet()`
@@ -1204,14 +1173,14 @@ the `Set<Id>` containing the sequence element field values
 Set<Id> accountIds = SObjectSequence.of(accounts).toIdSet();
 ```
 
-##### `toIdSet(String fieldName)`
+##### `override toIdSet(ISObjectFunction mapper)`
 
-Accumulates `Id` elements into a `Set<Id>` according to `fieldName`. <p>Terminal Operation.</p>
+Accumulates `Id` elements returned by `mapper` into a `Set<Id>`. <p>Terminal Operation.</p>
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`fieldName`|the field|
+|`mapper`|the mapping function|
 
 ###### Return
 
@@ -1221,55 +1190,26 @@ Set<Id>
 
 **Description**
 
-the `Set<Id>` containing the sequence element field values
+the `Set<Id>` containing the sequence elements field values
 
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
-Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet('AccountId');
+Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('AccountId'));
 ```
 
-##### `toIdSet(SObjectField field)`
+##### `override toStringSet(ISObjectFunction mapper)`
 
-Accumulates `Id` elements into a `Set<Id>` according to `field`. <p>Terminal Operation.</p>
+Accumulates `String` elements returned by `mapper` into a `Set<String>`. <p>Terminal Operation.</p>
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`field`|the field|
-
-###### Return
-
-**Type**
-
-Set<Id>
-
-**Description**
-
-the `Set<Id>` containing the sequence element field values
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `field` is null|
-
-###### Example
-```apex
-Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(Contact.AccountId);
-```
-
-##### `toStringSet(String fieldName)`
-
-Accumulates `String` elements into a `Set<String>` according to `fieldName`. <p>Terminal Operation.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`fieldName`|the field|
+|`mapper`|the mapping function|
 
 ###### Return
 
@@ -1279,45 +1219,16 @@ Set<String>
 
 **Description**
 
-the `Set<String>` containing the sequence element field values
+the `Set<String>`containing the sequence elements field values
 
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
-Set<String> accountNames = SObjectSequence.of(accounts).toStringSet('Name');
-```
-
-##### `toStringSet(SObjectField field)`
-
-Accumulates `String` elements into a `Set<String>` according to `field`. <p>Terminal Operation.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`field`|the field|
-
-###### Return
-
-**Type**
-
-Set<String>
-
-**Description**
-
-the `Set<String>`containing the sequence element field values
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `field` is null|
-
-###### Example
-```apex
-Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(Account.Name);
+Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(SObjectFunction.get('Name'));
 ```
 
 ##### `toMap()`
@@ -1341,14 +1252,14 @@ Map<Id, SObject> accountsWithHotRating = SObjectSequence.of(accounts)
     .toMap();
 ```
 
-##### `toByIdMap(String fieldName, Type mapType)`
+##### `override toByIdMap(ISObjectFunction keyMapper, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<Id, SObject>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType` whose keys are produced by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`fieldName`|the field|
+|`keyMapper`|the mapping function producing keys|
 |`mapType`|result type|
 
 ###### Return
@@ -1364,55 +1275,23 @@ the `Map<Id, SObject>` containing the sequence elements
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `keyMapper` or `mapType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates, which can be casted to `mapType`|
 
 ###### Example
 ```apex
 Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectSequence.of(contacts)
-    .toByIdMap('AccountId', Map<Id, Contact>.class);
+    .toByIdMap(SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
 ```
 
-##### `toByIdMap(SObjectField field, Type mapType)`
+##### `override toByStringMap(ISObjectFunction keyMapper, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<Id, SObject>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType` whose keys are produced by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`field`|the field|
-|`mapType`|result type|
-
-###### Return
-
-**Type**
-
-Map<Id,SObject>
-
-**Description**
-
-the `Map<Id, SObject>` containing the sequence elements
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
-|`IllegalStateException`|if mapped keys contain duplicates|
-
-###### Example
-```apex
-Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectSequence.of(contacts)
-    .toByIdMap(Contact.AccountId, Map<Id, Contact>.class);
-```
-
-##### `toByStringMap(String fieldName, Type mapType)`
-
-Accumulates `SObject` elements into a `Map<String, SObject>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`fieldName`|the field|
+|`keyMapper`|the mapping function producing keys|
 |`mapType`|result type|
 
 ###### Return
@@ -1428,84 +1307,23 @@ the `Map<String, SObject>` containing the sequence elements
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `keyMapper` or `mapType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates, which can be casted to `mapType`|
 
 ###### Example
 ```apex
 Map<String, Account> accountByName = (Map<String, Account>) SObjectSequence.of(accounts)
-    .toByStringMap('Name', Map<String, Account>.class);
+    .toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
 ```
 
-##### `toByStringMap(SObjectField field, Type mapType)`
+##### `override groupById(ISObjectFunction keyMapper)`
 
-Accumulates `SObject` elements into a `Map<String, SObject>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are values returned by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`field`|the field|
-|`mapType`|result type|
-
-###### Return
-
-**Type**
-
-Map<String,SObject>
-
-**Description**
-
-the `Map<String, SObject>` containing the sequence elements
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `field` or `mapType` is null|
-|`IllegalStateException`|if mapped keys contain duplicates|
-
-###### Example
-```apex
-Map<String, Account> accountByName = (Map<String, Account>) SObjectSequence.of(accounts)
-    .toByStringMap(Account.Name, Map<String, Account>.class);
-```
-
-##### `groupById(String fieldName)`
-
-Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`fieldName`|the field|
-
-###### Return
-
-**Type**
-
-Map<Id,List<SObject>>
-
-**Description**
-
-the `Map<Id, List<SObject>>` containing the sequence elements
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `fieldName` is blank|
-
-###### Example
-```apex
-Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts).groupById('AccountId');
-```
-
-##### `groupById(SObjectField field)`
-
-Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`field`|the field|
+|`keyMapper`|the mapping function producing keys|
 
 ###### Return
 
@@ -1524,17 +1342,18 @@ the `Map<Id, List<SObject>>` containing the sequence elements
 
 ###### Example
 ```apex
-Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts).groupById(Contact.AccountId);
+Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts)
+    .groupById(SObjectFunction.get('AccountId'));
 ```
 
-##### `groupByString(String fieldName)`
+##### `override groupByString(ISObjectFunction keyMapper)`
 
-Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are values returned by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`fieldName`|the field|
+|`keyMapper`|the mapping function producing keys|
 
 ###### Return
 
@@ -1549,43 +1368,15 @@ the `Map<String, List<SObject>>` containing the sequence elements
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
 ```apex
-Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts).groupByString('Rating');
+Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts)
+    .groupByString(SObjectFunction.get('Rating'));
 ```
 
-##### `groupByString(SObjectField field)`
-
-Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`field`|the field|
-
-###### Return
-
-**Type**
-
-Map<String,List<SObject>>
-
-**Description**
-
-the `Map<String, List<SObject>>` containing the sequence elements
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `field` is null|
-
-###### Example
-```apex
-Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts).groupByString(Account.Rating);
-```
-
-##### `partition(ISObjectPredicate predicate)`
+##### `override partition(ISObjectPredicate predicate)`
 
 Partition `SObject` elements by `predicate`. <p>Terminal Operation.</p>
 

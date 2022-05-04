@@ -1190,10 +1190,12 @@ private class SObjectStreamTest {
         ISObjectIterable accStream = SObjectStream.of(clone);
         ISObjectIterable accStream1 = SObjectStream.of(clone).withoutNulls();
         ISObjectIterable accStream2 = SObjectStream.of(clone).withoutNulls();
+        ISObjectIterable accStream3 = SObjectStream.of(clone).withoutNulls();
         // When
         List<Account> actual = accStream.toList();
-        List<Integer> actual1 = (List<Integer>) accStream1.toList('NumberOfEmployees', List<Integer>.class);
-        List<Integer> actual2 = (List<Integer>) accStream2.toList(Account.NumberOfEmployees, List<Integer>.class);
+        List<Integer> actual1 = (List<Integer>) accStream1.toList(SObjectFunction.get('NumberOfEmployees'), List<Integer>.class);
+        List<Integer> actual2 = (List<Integer>) accStream2.toList('NumberOfEmployees', List<Integer>.class);
+        List<Integer> actual3 = (List<Integer>) accStream3.toList(Account.NumberOfEmployees, List<Integer>.class);
         // Then
         List<Integer> expected = (List<Integer>) SObjectStream.of(clone)
                 .withoutNulls()
@@ -1201,10 +1203,12 @@ private class SObjectStreamTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((SObjectStream) accStream).isOperated);
         Validate.assert(((SObjectStream) accStream1).isOperated);
         Validate.assert(((SObjectStream) accStream2).isOperated);
+        Validate.assert(((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -1229,13 +1233,17 @@ private class SObjectStreamTest {
         ISObjectIterable accStream3 = SObjectStream.of(clone).withoutNulls();
         ISObjectIterable accStream4 = SObjectStream.of(clone).withoutNulls();
         ISObjectIterable accStream5 = SObjectStream.of(clone).withoutNulls();
+        ISObjectIterable accStream6 = SObjectStream.of(clone).withoutNulls();
+        ISObjectIterable accStream7 = SObjectStream.of(clone).withoutNulls();
         // When
         Set<SObject> actual = accStream.toSet();
         Set<Id> actual1 = accStream1.toIdSet();
-        Set<Id> actual2 = accStream2.toIdSet('Id');
-        Set<Id> actual3 = accStream3.toIdSet(Account.Id);
-        Set<String> actual4 = accStream4.toStringSet('Name');
-        Set<String> actual5 = accStream5.toStringSet(Account.Name);
+        Set<Id> actual2 = accStream2.toIdSet(SObjectFunction.get('Id'));
+        Set<Id> actual3 = accStream3.toIdSet('Id');
+        Set<Id> actual4 = accStream4.toIdSet(Account.Id);
+        Set<String> actual5 = accStream5.toStringSet(SObjectFunction.get('Name'));
+        Set<String> actual6 = accStream6.toStringSet('Name');
+        Set<String> actual7 = accStream7.toStringSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectStream.of(clone)
@@ -1248,8 +1256,10 @@ private class SObjectStreamTest {
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
         Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected1, actual4);
         Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected2, actual6);
+        Validate.assertEquals(expected2, actual7);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((SObjectStream) accStream).isOperated);
         Validate.assert(((SObjectStream) accStream1).isOperated);
@@ -1257,6 +1267,8 @@ private class SObjectStreamTest {
         Validate.assert(((SObjectStream) accStream3).isOperated);
         Validate.assert(((SObjectStream) accStream4).isOperated);
         Validate.assert(((SObjectStream) accStream5).isOperated);
+        Validate.assert(((SObjectStream) accStream6).isOperated);
+        Validate.assert(((SObjectStream) accStream7).isOperated);
     }
 
     /**
@@ -1280,12 +1292,16 @@ private class SObjectStreamTest {
         ISObjectIterable accStream2 = SObjectStream.of(clone);
         ISObjectIterable accStream3 = SObjectStream.of(clone);
         ISObjectIterable accStream4 = SObjectStream.of(clone);
+        ISObjectIterable accStream5 = SObjectStream.of(clone);
+        ISObjectIterable accStream6 = SObjectStream.of(clone);
         // When
         Map<Id, SObject> actual = accStream.toMap();
-        Map<Id, Account> actual1 = (Map<Id, Account>) accStream1.toByIdMap('Id', Map<Id, Account>.class);
-        Map<Id, Account> actual2 = (Map<Id, Account>) accStream2.toByIdMap(Account.Id, Map<Id, Account>.class);
-        Map<String, Account> actual3 = (Map<String, Account>) accStream3.toByStringMap('Name', Map<String, Account>.class);
-        Map<String, Account> actual4 = (Map<String, Account>) accStream4.toByStringMap(Account.Name, Map<String, Account>.class);
+        Map<Id, Account> actual1 = (Map<Id, Account>) accStream1.toByIdMap(SObjectFunction.get('Id'), Map<Id, Account>.class);
+        Map<Id, Account> actual2 = (Map<Id, Account>) accStream2.toByIdMap('Id', Map<Id, Account>.class);
+        Map<Id, Account> actual3 = (Map<Id, Account>) accStream3.toByIdMap(Account.Id, Map<Id, Account>.class);
+        Map<String, Account> actual4 = (Map<String, Account>) accStream4.toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+        Map<String, Account> actual5 = (Map<String, Account>) accStream5.toByStringMap('Name', Map<String, Account>.class);
+        Map<String, Account> actual6 = (Map<String, Account>) accStream6.toByStringMap(Account.Name, Map<String, Account>.class);
         // Then
         Map<Id, Account> expected = new Map<Id, Account>(input);
         Map<Id, Account> expected1 = (Map<Id, Account>) SObjectStream.of(clone)
@@ -1295,14 +1311,18 @@ private class SObjectStreamTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected2, actual3);
+        Validate.assertEquals(expected1, actual3);
         Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected2, actual6);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((SObjectStream) accStream).isOperated);
         Validate.assert(((SObjectStream) accStream1).isOperated);
         Validate.assert(((SObjectStream) accStream2).isOperated);
         Validate.assert(((SObjectStream) accStream3).isOperated);
         Validate.assert(((SObjectStream) accStream4).isOperated);
+        Validate.assert(((SObjectStream) accStream5).isOperated);
+        Validate.assert(((SObjectStream) accStream6).isOperated);
     }
 
     /**
@@ -1326,25 +1346,33 @@ private class SObjectStreamTest {
         ISObjectIterable accStream1 = SObjectStream.of(clone);
         ISObjectIterable accStream2 = SObjectStream.of(clone);
         ISObjectIterable accStream3 = SObjectStream.of(clone);
+        ISObjectIterable accStream4 = SObjectStream.of(clone);
+        ISObjectIterable accStream5 = SObjectStream.of(clone);
         // When
-        Map<Id, List<Account>> actual = accStream.groupById('ParentId');
-        Map<Id, List<Account>> actual1 = accStream1.groupById(Account.ParentId);
-        Map<String, List<Account>> actual2 = accStream2.groupByString('Rating');
-        Map<String, List<Account>> actual3 = accStream3.groupByString(Account.Rating);
+        Map<Id, List<Account>> actual = accStream.groupById(SObjectFunction.get('ParentId'));
+        Map<Id, List<Account>> actual2 = accStream1.groupById('ParentId');
+        Map<Id, List<Account>> actual3 = accStream2.groupById(Account.ParentId);
+        Map<String, List<Account>> actual4 = accStream3.groupByString(SObjectFunction.get('Rating'));
+        Map<String, List<Account>> actual5 = accStream4.groupByString('Rating');
+        Map<String, List<Account>> actual6 = accStream5.groupByString(Account.Rating);
         // Then
         Map<Id, List<Account>> expected = (Map<Id, List<Account>>) SObjectStream.of(clone)
                 .collect(SObjectCollector.groupingById(Account.ParentId).cast(Map<Id, List<Account>>.class));
         Map<String, List<Account>> expected1 = (Map<String, List<Account>>) SObjectStream.of(clone)
                 .collect(SObjectCollector.groupingByString(Account.Rating).cast(Map<String, List<Account>>.class));
         Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected1, actual4);
+        Validate.assertEquals(expected1, actual5);
+        Validate.assertEquals(expected1, actual6);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((SObjectStream) accStream).isOperated);
         Validate.assert(((SObjectStream) accStream1).isOperated);
         Validate.assert(((SObjectStream) accStream2).isOperated);
         Validate.assert(((SObjectStream) accStream3).isOperated);
+        Validate.assert(((SObjectStream) accStream4).isOperated);
+        Validate.assert(((SObjectStream) accStream5).isOperated);
     }
 
     /**
@@ -1363,14 +1391,26 @@ private class SObjectStreamTest {
         List<Account> clone = input.deepClone(true);
         ISObjectPredicate predicate = SObjectPredicate.isGreater(Account.NumberOfEmployees, 150);
         ISObjectIterable accStream = SObjectStream.of(clone);
+        ISObjectIterable accStream1 = SObjectStream.of(clone);
+        ISObjectIterable accStream2 = SObjectStream.of(clone);
         // When
         Map<Boolean, List<Account>> actual = accStream.partition(predicate);
+        Map<Boolean, List<Account>> actual1 = accStream1.partition('NumberOfEmployees', 100);
+        Map<Boolean, List<Account>> actual2 = accStream2.partition(Account.NumberOfEmployees, 100);
         // Then
         Map<Boolean, List<Account>> expected = (Map<Boolean, List<Account>>) SObjectStream.of(clone)
                 .collect(SObjectCollector.partitioningBy(predicate).cast(Map<Boolean, List<Account>>.class));
+        Map<Boolean, List<Account>> expected1 = new Map<Boolean, List<Account>>{
+                true => new List<Account>{ acc1 },
+                false => new List<Account>{ acc, acc2, acc3, acc4 }
+        };
         Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected1, actual1);
+        Validate.assertEquals(expected1, actual2);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((SObjectStream) accStream).isOperated);
+        Validate.assert(((SObjectStream) accStream1).isOperated);
+        Validate.assert(((SObjectStream) accStream2).isOperated);
     }
 
 }

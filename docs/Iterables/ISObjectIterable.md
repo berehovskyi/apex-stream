@@ -25,63 +25,6 @@ A sequence of `SObject` elements supporting aggregate operations.
 **See** [IDoubleIterable](/docs/Iterables/IDoubleIterable.md)
 
 ## Methods
-### `append(ISObjectIterable iterable)`
-
-Returns a new `ISObjectIterable` from the current to which another `iterable` is appended. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`iterable`|the other iterable|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `prepend(ISObjectIterable iterable)`
-
-Returns a new `ISObjectIterable` from the current to which another `iterable` is prepended. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`iterable`|the other iterable|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `filter(ISObjectPredicate predicate)`
-
-Returns a new `ISObjectIterable` with `SObject` elements that match `predicate`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
 ### `filter(String fieldName, Object value)`
 
 Returns a new `ISObjectIterable` with `SObject` elements that have field&apos;s value. <p>Intermediate Operation.</p>
@@ -111,25 +54,6 @@ Returns a new `ISObjectIterable` with `SObject` elements that have field&apos;s 
 |---|---|
 |`field`|the field|
 |`value`|the value|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `take(ISObjectPredicate predicate)`
-
-Returns a new `ISObjectIterable` that takes `SObject` elements while `predicate` returns `true`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate|
 
 #### Return
 
@@ -181,25 +105,6 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
-### `drop(ISObjectPredicate predicate)`
-
-Returns a new `ISObjectIterable` that drops `SObject` elements while `predicate` returns `true`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
 ### `drop(String fieldName, Object value)`
 
 Returns a new `ISObjectIterable` that drops `SObject` elements while `fieldName` equals to `value`. <p>Intermediate Operation.</p>
@@ -229,39 +134,6 @@ Returns a new `ISObjectIterable` that drops `SObject` elements while `field` equ
 |---|---|
 |`field`|the field|
 |`value`|the value|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `withoutNulls()`
-
-Returns a new `ISObjectIterable` without null elements. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `mapTo(ISObjectUnaryOperator mapper)`
-
-Returns a new `ISObjectIterable` with `SObject` elements returned by `mapper`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the mapping operator|
 
 #### Return
 
@@ -311,25 +183,6 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
-### `mapToInt(ISObjectToIntFunction mapper)`
-
-Returns a new `IIntIterable` with `Integer` elements returned by `mapper`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the mapping function|
-
-#### Return
-
-**Type**
-
-IIntIterable
-
-**Description**
-
-the new `IIntIterable`
-
 ### `mapToInt(String fieldName)`
 
 Returns a new `IIntIterable` with `Integer` elements according to `fieldName`. <p>Intermediate Operation.</p>
@@ -367,25 +220,6 @@ IIntIterable
 **Description**
 
 the new `IIntIterable`
-
-### `mapToLong(ISObjectToLongFunction mapper)`
-
-Returns a new `ILongIterable` with `Long` elements returned by `mapper`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the mapping function|
-
-#### Return
-
-**Type**
-
-ILongIterable
-
-**Description**
-
-the new `ILongIterable`
 
 ### `mapToLong(String fieldName)`
 
@@ -425,25 +259,6 @@ ILongIterable
 
 the new `ILongIterable`
 
-### `mapToDouble(ISObjectToDoubleFunction mapper)`
-
-Returns a new `IDoubleIterable` with `Double` elements returned by `mapper`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the mapping function|
-
-#### Return
-
-**Type**
-
-IDoubleIterable
-
-**Description**
-
-the new `IDoubleIterable`
-
 ### `mapToDouble(String fieldName)`
 
 Returns a new `IDoubleIterable` with `Double` elements according to `fieldName`. <p>Intermediate Operation.</p>
@@ -481,25 +296,6 @@ IDoubleIterable
 **Description**
 
 the new `IDoubleIterable`
-
-### `mapToObject(ISObjectFunction mapper)`
-
-Returns a new `IObjectIterable` with `Object` elements returned by `mapper`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the mapping function|
-
-#### Return
-
-**Type**
-
-IObjectIterable
-
-**Description**
-
-the new `IObjectIterable`
 
 ### `mapToObject(String fieldName)`
 
@@ -539,25 +335,6 @@ IObjectIterable
 
 the new `IObjectIterable`
 
-### `forEach(ISObjectConsumer consumer)`
-
-Returns a new `ISObjectIterable` after performing `consumer` action on each `SObject` element. <p>Intermediate Interfering Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`consumer`|the action|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
 ### `forEach(String fieldName, Object value)`
 
 Returns a new `ISObjectIterable` after setting `value` for `fieldName` on each `SObject` element. <p>Intermediate Operation.</p>
@@ -587,39 +364,6 @@ Returns a new `ISObjectIterable` after setting `value` for `field` on each `SObj
 |---|---|
 |`field`|the field|
 |`value`|the value|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `distinct()`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `distinct(ISObjectFunction classifier)`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements according to `classifier` function. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`classifier`|the classifier function|
 
 #### Return
 
@@ -669,20 +413,6 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
-### `sort()`
-
-Returns a new `ISObjectIterable` with sorted `SObject` elements in ascending order. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
 ### `sort(SortOrder order)`
 
 Returns a new `ISObjectIterable` with sorted `SObject` elements considering `order`. <p>Intermediate Operation.</p>
@@ -690,25 +420,6 @@ Returns a new `ISObjectIterable` with sorted `SObject` elements considering `ord
 #### Parameters
 |Param|Description|
 |---|---|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `sort(ISObjectComparator comparator)`
-
-Returns a new `ISObjectIterable` with sorted `SObject` elements according to `comparator`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`comparator`|the comparator|
 
 #### Return
 
@@ -836,103 +547,6 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
-### `reduce(SObject identity, ISObjectBinaryOperator accumulator)`
-
-Performs a reduction on `SObject` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`identity`|the identity value for `accumulator`|
-|`accumulator`|the associative, non-interfering, stateless accumulation function|
-
-#### Return
-
-**Type**
-
-SObject
-
-**Description**
-
-the `SObject` result of the reduction
-
-### `reduce(ISObjectBinaryOperator accumulator)`
-
-Performs a reduction on `SObject` elements, using `identity` value and associative `accumulator` function, and returns an `OptionalSObject` describing the reduced value. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`accumulator`|the associative, non-interfering, stateless accumulation function|
-
-#### Return
-
-**Type**
-
-OptionalSObject
-
-**Description**
-
-the `OptionalSObject` result of the reduction
-
-### `collect(ISupplier supplier, IObjectSObjectConsumer accumulator)`
-
-Performs a mutable reduction operation on `SObject` elements, collecting elements to a container returned by `supplier` by applying `accumulator` function. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`supplier`|the function that returns a mutable result container|
-|`accumulator`|the associative, non-interfering, stateless accumulation function|
-
-#### Return
-
-**Type**
-
-Object
-
-**Description**
-
-the `Object` result of the collection
-
-### `collect(ISObjectCollector collector)`
-
-Performs a mutable reduction operation on `SObject` elements, collecting elements to a container using `collector`. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`collector`|the collector|
-
-#### Return
-
-**Type**
-
-Object
-
-**Description**
-
-the `Object` result of the collection
-
-### `find(ISObjectPredicate predicate)`
-
-Returns an `OptionalSObject` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate|
-
-#### Return
-
-**Type**
-
-OptionalSObject
-
-**Description**
-
-the `OptionalSObject`
-
 ### `find(String fieldName, Object value)`
 
 Returns an `OptionalSObject` describing the first element which has `value` of `fieldName`. <p>Short-circuiting Terminal Operation.</p>
@@ -973,25 +587,6 @@ OptionalSObject
 
 the `OptionalSObject`
 
-### `every(ISObjectPredicate predicate)`
-
-Returns whether all `SObject` elements match `predicate`. If `ISObjectIterable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate|
-
-#### Return
-
-**Type**
-
-Boolean
-
-**Description**
-
-`true` or `false`
-
 ### `every(String fieldName, Object value)`
 
 Returns whether all `SObject` elements have `field` `value`. If `ISObjectIterable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
@@ -1021,25 +616,6 @@ Returns whether all `SObject` elements have `field` `value`. If `ISObjectIterabl
 |---|---|
 |`field`|the field|
 |`value`|the field value|
-
-#### Return
-
-**Type**
-
-Boolean
-
-**Description**
-
-`true` or `false`
-
-### `some(ISObjectPredicate predicate)`
-
-Returns whether some `SObject` element matches `predicate`. If `ISObjectIterable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate|
 
 #### Return
 
@@ -1091,25 +667,6 @@ Boolean
 
 `true` or `false`
 
-### `none(ISObjectPredicate predicate)`
-
-Returns whether no `SObject` elements match `predicate`. If `ISObjectIterable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate|
-
-#### Return
-
-**Type**
-
-Boolean
-
-**Description**
-
-`true` or `false`
-
 ### `none(String fieldName, Object value)`
 
 Returns whether no `SObject` elements have `field` `value`. If `ISObjectIterable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
@@ -1150,25 +707,6 @@ Boolean
 
 `true` or `false`
 
-### `max(ISObjectComparator comparator)`
-
-Returns an `OptionalSObject` describing the maximum `SObject` element according to `comparator`. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`comparator`|the comparator|
-
-#### Return
-
-**Type**
-
-OptionalSObject
-
-**Description**
-
-the `OptionalSObject` describing the result
-
 ### `max(String fieldName)`
 
 Returns an `OptionalSObject` describing the maximum `SObject` element according to `fieldName`. <p>Terminal Operation.</p>
@@ -1196,25 +734,6 @@ Returns an `OptionalSObject` describing the maximum `SObject` element according 
 |Param|Description|
 |---|---|
 |`field`|the field|
-
-#### Return
-
-**Type**
-
-OptionalSObject
-
-**Description**
-
-the `OptionalSObject` describing the result
-
-### `min(ISObjectComparator comparator)`
-
-Returns an `OptionalSObject` describing the minimum `SObject` element according to `comparator`. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`comparator`|the comparator|
 
 #### Return
 
@@ -1264,25 +783,6 @@ OptionalSObject
 
 the `OptionalSObject` describing the result
 
-### `sum(ISObjectToDoubleFunction classifier)`
-
-Returns the arithmetic sum of values returned by `classifier` function. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`classifier`|the classifier function|
-
-#### Return
-
-**Type**
-
-Double
-
-**Description**
-
-the sum of elements returned by function
-
 ### `sum(String fieldName)`
 
 Returns the arithmetic sum of field values of `SObject` elements. <p>Terminal Operation.</p>
@@ -1320,25 +820,6 @@ Double
 **Description**
 
 field sum of field values
-
-### `avg(ISObjectToDoubleFunction classifier)`
-
-Returns the arithmetic mean of values returned by `classifier` function. <p>Terminal Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`classifier`|the classifier function|
-
-#### Return
-
-**Type**
-
-OptionalDouble
-
-**Description**
-
-the arithmetic mean of elements returned by function
 
 ### `avg(String fieldName)`
 
@@ -1378,51 +859,29 @@ OptionalDouble
 
 field arithmetic mean of field values
 
-### `count()`
+### `toList(ISObjectFunction mapper, Type listType)`
 
-Returns the count of `SObject` elements. <p>Terminal Operation.</p>
+Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`. <p>Terminal Operation.</p>
 
-#### Return
-
-**Type**
-
-Integer
-
-**Description**
-
-the count of `SObject` elements
-
-### `isEmpty()`
-
-Returns the count of `SObject` elements is 0. <p>Terminal Operation.</p>
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+|`listType`|result type|
 
 #### Return
 
 **Type**
 
-Boolean
+List<Object>
 
 **Description**
 
-`true` or `false`
-
-### `toList()`
-
-Accumulates `SObject` elements into a `List<SObject>`. <p>Terminal Operation.</p>
-
-#### Return
-
-**Type**
-
-List<SObject>
-
-**Description**
-
-the `List<SObject>` containing the iterable elements
+the `List<Object>` containing the collected elements, which can be casted to `listType`
 
 ### `toList(String fieldName, Type listType)`
 
-Accumulates `Object` elements into a `List<Object>` according to `fieldName`. <p>Terminal Operation.</p>
+Accumulates `Object` elements into a `List<?>` of specific `listType` according to `fieldName`. <p>Terminal Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -1438,11 +897,11 @@ List<Object>
 
 **Description**
 
-the `List<Object>` containing the iterable elements
+the `List<Object>` containing the collected elements, which can be casted to `listType`
 
 ### `toList(SObjectField field, Type listType)`
 
-Accumulates `Object` elements into a `List<Object>` according to `field`. <p>Terminal Operation.</p>
+Accumulates `Object` elements into a `List<?>` of specific `listType` according to `field`. <p>Terminal Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -1458,7 +917,7 @@ List<Object>
 
 **Description**
 
-the `List<Object>` containing the iterable elements
+the `List<Object>` containing the collected elements, which can be casted to `listType`
 
 ### `toSet()`
 
@@ -1472,7 +931,7 @@ Set<SObject>
 
 **Description**
 
-the `Set<SObject>` containing the iterable elements
+the `Set<SObject>` containing the collected elements
 
 ### `toIdSet()`
 
@@ -1486,7 +945,26 @@ Set<Id>
 
 **Description**
 
-the `Set<Id>` containing the iterable elements
+the `Set<Id>` containing the collected elements
+
+### `toIdSet(ISObjectFunction mapper)`
+
+Accumulates `Id` elements returned by `mapper` into a `Set<Id>`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+Set<Id>
+
+**Description**
+
+the `Set<Id>` containing the collected elements
 
 ### `toIdSet(String fieldName)`
 
@@ -1505,7 +983,7 @@ Set<Id>
 
 **Description**
 
-the `Set<Id>` containing the iterable elements
+the `Set<Id>` containing the collected elements
 
 ### `toIdSet(SObjectField field)`
 
@@ -1524,7 +1002,26 @@ Set<Id>
 
 **Description**
 
-the `Set<Id>` containing the iterable elements
+the `Set<Id>` containing the collected elements
+
+### `toStringSet(ISObjectFunction mapper)`
+
+Accumulates `String` elements returned by `mapper` into a `Set<String>`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+Set<String>
+
+**Description**
+
+the `Set<String>` containing the collected elements
 
 ### `toStringSet(String fieldName)`
 
@@ -1543,7 +1040,7 @@ Set<String>
 
 **Description**
 
-the `Set<String>` containing the iterable elements
+the `Set<String>` containing the collected elements
 
 ### `toStringSet(SObjectField field)`
 
@@ -1562,7 +1059,7 @@ Set<String>
 
 **Description**
 
-the `Set<String>`containing the iterable elements
+the `Set<String>`containing the collected elements
 
 ### `toMap()`
 
@@ -1578,9 +1075,29 @@ Map<Id,SObject>
 
 the `Map<Id, SObject>` containing the iterable elements
 
+### `toByIdMap(ISObjectFunction keyMapper, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType` whose keys are produced by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`keyMapper`|the mapping function producing keys|
+|`mapType`|result type|
+
+#### Return
+
+**Type**
+
+Map<Id,SObject>
+
+**Description**
+
+the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+
 ### `toByIdMap(String fieldName, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<Id, SObject>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -1596,11 +1113,11 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` containing the iterable elements
+the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
 
 ### `toByIdMap(SObjectField field, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<Id, SObject>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -1616,11 +1133,31 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` containing the iterable elements
+the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+
+### `toByStringMap(ISObjectFunction keyMapper, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType` whose keys are produced by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`keyMapper`|the mapping function producing keys|
+|`mapType`|result type|
+
+#### Return
+
+**Type**
+
+Map<String,SObject>
+
+**Description**
+
+the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
 
 ### `toByStringMap(String fieldName, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<String, SObject>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -1636,11 +1173,11 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` containing the iterable elements
+the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
 
 ### `toByStringMap(SObjectField field, Type mapType)`
 
-Accumulates `SObject` elements into a `Map<String, SObject>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -1656,7 +1193,26 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` containing the iterable elements
+the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+
+### `groupById(ISObjectFunction keyMapper)`
+
+Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are values returned by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`keyMapper`|the mapping function producing keys|
+
+#### Return
+
+**Type**
+
+Map<Id,List<SObject>>
+
+**Description**
+
+the `Map<Id, List<SObject>>` containing the iterable elements
 
 ### `groupById(String fieldName)`
 
@@ -1675,7 +1231,7 @@ Map<Id,List<SObject>>
 
 **Description**
 
-the `Map<Id, List<SObject>>` containing the iterable elements
+the `Map<Id, List<SObject>>` containing the collected elements
 
 ### `groupById(SObjectField field)`
 
@@ -1694,7 +1250,26 @@ Map<Id,List<SObject>>
 
 **Description**
 
-the `Map<Id, List<SObject>>` containing the iterable elements
+the `Map<Id, List<SObject>>` containing the grouped elements
+
+### `groupByString(ISObjectFunction keyMapper)`
+
+Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are values returned by `keyMapper` and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`keyMapper`|the mapping function producing keys|
+
+#### Return
+
+**Type**
+
+Map<String,List<SObject>>
+
+**Description**
+
+the `Map<String, List<SObject>>` containing the grouped elements
 
 ### `groupByString(String fieldName)`
 
@@ -1713,7 +1288,7 @@ Map<String,List<SObject>>
 
 **Description**
 
-the `Map<String, List<SObject>>` containing the iterable elements
+the `Map<String, List<SObject>>` containing the grouped elements
 
 ### `groupByString(SObjectField field)`
 
@@ -1732,7 +1307,7 @@ Map<String,List<SObject>>
 
 **Description**
 
-the `Map<String, List<SObject>>` containing the iterable elements
+the `Map<String, List<SObject>>` containing the grouped elements
 
 ### `partition(ISObjectPredicate predicate)`
 
@@ -1751,6 +1326,46 @@ Map<Boolean,List<SObject>>
 
 **Description**
 
-the `Map<Boolean, List<SObject>>` containing the iterable elements
+the `Map<Boolean, List<SObject>>` containing the partitioned elements
+
+### `partition(String fieldName, Object value)`
+
+Partition `SObject` elements by `fieldName` having `value`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+|`value`|the satisfying value|
+
+#### Return
+
+**Type**
+
+Map<Boolean,List<SObject>>
+
+**Description**
+
+the `Map<Boolean, List<SObject>>` containing the partitioned elements
+
+### `partition(SObjectField field, Object value)`
+
+Partition `SObject` elements by `field` having `value`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+|`value`|the satisfying value|
+
+#### Return
+
+**Type**
+
+Map<Boolean,List<SObject>>
+
+**Description**
+
+the `Map<Boolean, List<SObject>>` containing the partitioned elements
 
 ---

@@ -1527,4 +1527,528 @@ Double avgAnnualRevenue = accountsIterable
     .get();
 ```
 
+### `toList(ISObjectFunction mapper, Type listType)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `toList(String fieldName, Type listType)`
+
+Accumulates `Object` elements into a `List<Object>` according to `fieldName`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+|`listType`|result type|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements, which can be casted to `listType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank or `listType` is null|
+
+#### Example
+```apex
+List<String> accountNames = (List<String>) accountsIterable
+    .toList('Name', List<String>.class);
+```
+
+### `toList(SObjectField field, Type listType)`
+
+Accumulates `Object` elements into a `List<Object>` according to `field`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+|`listType`|result type|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements, which can be casted to `listType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` or `listType` is null|
+
+#### Example
+```apex
+List<String> accountNames = (List<String>) accountsIterable
+    .toList(Account.Name, List<String>.class);
+```
+
+### `toIdSet(ISObjectFunction mapper)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `toIdSet(String fieldName)`
+
+Accumulates `Id` elements into a `Set<Id>` according to `fieldName`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+Set<Id>
+
+**Description**
+
+the `Set<Id>` containing the collected elements field values
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+#### Example
+```apex
+Set<Id> accountIds = contactsIterable.toIdSet('AccountId');
+```
+
+### `toIdSet(SObjectField field)`
+
+Accumulates `Id` elements into a `Set<Id>` according to `field`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Set<Id>
+
+**Description**
+
+the `Set<Id>` containing the collected elements field values
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+#### Example
+```apex
+Set<Id> accountIds = contactsIterable.toIdSet(Contact.AccountId);
+```
+
+### `toStringSet(ISObjectFunction mapper)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `toStringSet(String fieldName)`
+
+Accumulates `String` elements into a `Set<String>` according to `fieldName`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+Set<String>
+
+**Description**
+
+the `Set<String>` containing the collected elements field values
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+#### Example
+```apex
+Set<String> accountNames = accountsIterable.toStringSet('Name');
+```
+
+### `toStringSet(SObjectField field)`
+
+Accumulates `String` elements into a `Set<String>` according to `field`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Set<String>
+
+**Description**
+
+the `Set<String>`containing the collected elements field values
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+#### Example
+```apex
+Set<String> accountNames = accountsIterable.toStringSet(Account.Name);
+```
+
+### `toByIdMap(ISObjectFunction keyMapper, Type mapType)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `toByIdMap(String fieldName, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<Id, SObject>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+|`mapType`|result type|
+
+#### Return
+
+**Type**
+
+Map<Id,SObject>
+
+**Description**
+
+the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) contactsIterable
+    .toByIdMap('AccountId', Map<Id, Contact>.class);
+```
+
+### `toByIdMap(SObjectField field, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<Id, SObject>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+|`mapType`|result type|
+
+#### Return
+
+**Type**
+
+Map<Id,SObject>
+
+**Description**
+
+the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) contactsIterable
+    .toByIdMap(Contact.AccountId, Map<Id, Contact>.class);
+```
+
+### `toByStringMap(ISObjectFunction keyMapper, Type mapType)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `toByStringMap(String fieldName, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<String, SObject>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+|`mapType`|result type|
+
+#### Return
+
+**Type**
+
+Map<String,SObject>
+
+**Description**
+
+the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<String, Account> accountByName = (Map<String, Account>) accountsIterable
+    .toByStringMap('Name', Map<String, Account>.class);
+```
+
+### `toByStringMap(SObjectField field, Type mapType)`
+
+Accumulates `SObject` elements into a `Map<String, SObject>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+|`mapType`|result type|
+
+#### Return
+
+**Type**
+
+Map<String,SObject>
+
+**Description**
+
+the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` or `mapType` is null|
+|`IllegalStateException`|if mapped keys contain duplicates|
+
+#### Example
+```apex
+Map<String, Account> accountByName = (Map<String, Account>) accountsIterable
+    .toByStringMap(Account.Name, Map<String, Account>.class);
+```
+
+### `groupById(ISObjectFunction keyMapper)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `groupById(String fieldName)`
+
+Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+Map<Id,List<SObject>>
+
+**Description**
+
+the `Map<Id, List<SObject>>` containing the iterable elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+#### Example
+```apex
+Map<Id, List<Contact>> contactsByAccountId = contactsIterable.groupById('AccountId');
+```
+
+### `groupById(SObjectField field)`
+
+Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Map<Id,List<SObject>>
+
+**Description**
+
+the `Map<Id, List<SObject>>` containing the iterable elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+#### Example
+```apex
+Map<Id, List<Contact>> contactsByAccountId = contactsIterable.groupById(Contact.AccountId);
+```
+
+### `groupByString(ISObjectFunction keyMapper)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `groupByString(String fieldName)`
+
+Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are `fieldName` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+Map<String,List<SObject>>
+
+**Description**
+
+the `Map<String, List<SObject>>` containing the iterable elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+#### Example
+```apex
+Map<String, List<Account>> accountsByRating = accountsIterable.groupByString('Rating');
+```
+
+### `groupByString(SObjectField field)`
+
+Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are `field` values and values are `SObject` elements. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Map<String,List<SObject>>
+
+**Description**
+
+the `Map<String, List<SObject>>` containing the iterable elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+#### Example
+```apex
+Map<String, List<Account>> accountsByRating = accountsIterable.groupByString(Account.Rating);
+```
+
+### `partition(ISObjectPredicate predicate)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `partition(String fieldName, Object value)`
+
+Partition `SObject` elements by `fieldName` having `value`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+|`value`|the satisfying value|
+
+#### Return
+
+**Type**
+
+Map<Boolean,List<SObject>>
+
+**Description**
+
+the `Map<Boolean, List<SObject>>` containing the iterable elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+#### Example
+```apex
+Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
+    = accountsIterable.partition('Rating', 'Hot');
+```
+
+### `partition(SObjectField field, Object value)`
+
+Partition `SObject` elements by `field` having `value`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+|`value`|the satisfying value|
+
+#### Return
+
+**Type**
+
+Map<Boolean,List<SObject>>
+
+**Description**
+
+the `Map<Boolean, List<SObject>>` containing the iterable elements
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+#### Example
+```apex
+Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
+    = accountsIterable.partition(Account.Rating, 'Hot');
+```
+
 ---
