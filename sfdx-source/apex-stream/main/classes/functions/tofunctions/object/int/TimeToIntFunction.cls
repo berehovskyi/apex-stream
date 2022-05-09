@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Extends `ToIntFunction` functions and provides `TimeToIntFunction`
  * common class level implementations, and related utilities.
  */

@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `List<T> - Object` two-arity consumers. Typically is used by collectors.
  * @see IBiConsumer

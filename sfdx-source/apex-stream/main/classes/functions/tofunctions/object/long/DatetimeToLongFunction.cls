@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Extends `ToLongFunction` functions and provides `DatetimeToLongFunction`
  * common class level implementations, and related utilities.
  */

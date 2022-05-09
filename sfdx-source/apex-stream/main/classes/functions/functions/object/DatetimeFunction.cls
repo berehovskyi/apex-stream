@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `DatetimeFunction`
  * common class level implementations, and related utilities.
  */

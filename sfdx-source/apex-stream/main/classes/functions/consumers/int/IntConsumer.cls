@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Inherits {@link IIntConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
  * @see IIntIterable.forEach

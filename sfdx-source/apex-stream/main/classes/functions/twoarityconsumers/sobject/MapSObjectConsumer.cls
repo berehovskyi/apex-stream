@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `Map<T, Object> - SObject` two-arity consumers. Typically is used by collectors.
  */

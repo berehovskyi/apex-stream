@@ -1,7 +1,7 @@
 /**
  * @author O. Berehovskyi
  * @group Functional Interfaces
- * @description A functions that takes two arguments of `Double` type and returns an `Double`
+ * @description A function that takes two arguments of `Double` type and returns an `Double`
  * value.
  */
 public interface IDoubleBinaryOperator {

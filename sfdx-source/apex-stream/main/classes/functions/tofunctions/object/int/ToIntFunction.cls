@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Inherits {@link IToIntFunction} functional interface and provides
  * common class level implementations, and related utilities.
  */

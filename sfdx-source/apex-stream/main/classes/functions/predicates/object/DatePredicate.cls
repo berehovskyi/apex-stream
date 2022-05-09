@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Extends `Predicate` functions and provides `DatePredicate`
  * common class level implementations, and related utilities.
  */

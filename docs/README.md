@@ -1,327 +1,327 @@
 # Classes
 ## Functions
 
-### [BiConsumer](/docs/Functions/BiConsumer.md)
+### [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
 
 Inherits [IBiConsumer](/docs/Functional-Interfaces/IBiConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [BiPredicate](/docs/Functions/BiPredicate.md)
+### [BiPredicate](/docs/Functional-Abstract-Classes/BiPredicate.md)
 
 Inherits [IBiPredicate](/docs/Functional-Interfaces/IBiPredicate.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [BinaryOperator](/docs/Functions/BinaryOperator.md)
+### [BinaryOperator](/docs/Functional-Abstract-Classes/BinaryOperator.md)
 
 Inherits [IBinaryOperator](/docs/Functional-Interfaces/IBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [CollectorFunction](/docs/Functions/CollectorFunction.md)
+### [CollectorFunction](/docs/Functional-Abstract-Classes/CollectorFunction.md)
 
 Extends `Function` functions and provides `CollectorFunction` used specifically by `Collector` and `SObjectCollector`.
 
-### [Comparator](/docs/Functions/Comparator.md)
+### [Comparator](/docs/Functional-Abstract-Classes/Comparator.md)
 
 Inherits [IComparator](/docs/Functional-Interfaces/IComparator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [Consumer](/docs/Functions/Consumer.md)
+### [Consumer](/docs/Functional-Abstract-Classes/Consumer.md)
 
 Inherits [IConsumer](/docs/Functional-Interfaces/IConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [DateFunction](/docs/Functions/DateFunction.md)
+### [DateFunction](/docs/Functional-Abstract-Classes/DateFunction.md)
 
 Extends `Function` functions and provides `DateFunction` common class level implementations, and related utilities.
 
-### [DatePredicate](/docs/Functions/DatePredicate.md)
+### [DatePredicate](/docs/Functional-Abstract-Classes/DatePredicate.md)
 
 Extends `Predicate` functions and provides `DatePredicate` common class level implementations, and related utilities.
 
-### [DateToIntFunction](/docs/Functions/DateToIntFunction.md)
+### [DateToIntFunction](/docs/Functional-Abstract-Classes/DateToIntFunction.md)
 
 Extends `ToIntFunction` functions and provides `DateToIntFunction` common class level implementations, and related utilities.
 
-### [DatetimeFunction](/docs/Functions/DatetimeFunction.md)
+### [DatetimeFunction](/docs/Functional-Abstract-Classes/DatetimeFunction.md)
 
 Extends `Function` functions and provides `DatetimeFunction` common class level implementations, and related utilities.
 
-### [DatetimePredicate](/docs/Functions/DatetimePredicate.md)
+### [DatetimePredicate](/docs/Functional-Abstract-Classes/DatetimePredicate.md)
 
 Extends `Predicate` functions and provides `DatetimePredicate` common class level implementations, and related utilities.
 
-### [DatetimeToIntFunction](/docs/Functions/DatetimeToIntFunction.md)
+### [DatetimeToIntFunction](/docs/Functional-Abstract-Classes/DatetimeToIntFunction.md)
 
 Extends `ToIntFunction` functions and provides `DatetimeToIntFunction` common class level implementations, and related utilities.
 
-### [DatetimeToLongFunction](/docs/Functions/DatetimeToLongFunction.md)
+### [DatetimeToLongFunction](/docs/Functional-Abstract-Classes/DatetimeToLongFunction.md)
 
 Extends `ToLongFunction` functions and provides `DatetimeToLongFunction` common class level implementations, and related utilities.
 
-### [DoubleBinaryOperator](/docs/Functions/DoubleBinaryOperator.md)
+### [DoubleBinaryOperator](/docs/Functional-Abstract-Classes/DoubleBinaryOperator.md)
 
 Inherits [IDoubleBinaryOperator](/docs/Functional-Interfaces/IDoubleBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [DoubleConsumer](/docs/Functions/DoubleConsumer.md)
+### [DoubleConsumer](/docs/Functional-Abstract-Classes/DoubleConsumer.md)
 
 Inherits [IDoubleConsumer](/docs/Functional-Interfaces/IDoubleConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [DoubleFunction](/docs/Functions/DoubleFunction.md)
+### [DoubleFunction](/docs/Functional-Abstract-Classes/DoubleFunction.md)
 
 Inherits [IDoubleFunction](/docs/Functional-Interfaces/IDoubleFunction.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [DoublePredicate](/docs/Functions/DoublePredicate.md)
+### [DoublePredicate](/docs/Functional-Abstract-Classes/DoublePredicate.md)
 
 Inherits [IDoublePredicate](/docs/Functional-Interfaces/IDoublePredicate.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [DoubleSupplier](/docs/Functions/DoubleSupplier.md)
+### [DoubleSupplier](/docs/Functional-Abstract-Classes/DoubleSupplier.md)
 
 Inherits [IDoubleSupplier](/docs/Functional-Interfaces/IDoubleSupplier.md) functional interface and provides common class level implementations, and related utilities.
 
-### [DoubleToIntFunction](/docs/Functions/DoubleToIntFunction.md)
+### [DoubleToIntFunction](/docs/Functional-Abstract-Classes/DoubleToIntFunction.md)
 
 Inherits [IDoubleToIntFunction](/docs/Functional-Interfaces/IDoubleToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [DoubleToLongFunction](/docs/Functions/DoubleToLongFunction.md)
+### [DoubleToLongFunction](/docs/Functional-Abstract-Classes/DoubleToLongFunction.md)
 
 Inherits [IDoubleToLongFunction](/docs/Functional-Interfaces/IDoubleToLongFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [DoubleToSObjectFunction](/docs/Functions/DoubleToSObjectFunction.md)
+### [DoubleToSObjectFunction](/docs/Functional-Abstract-Classes/DoubleToSObjectFunction.md)
 
 Inherits [IDoubleToSObjectFunction](/docs/Functional-Interfaces/IDoubleToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [DoubleUnaryOperator](/docs/Functions/DoubleUnaryOperator.md)
+### [DoubleUnaryOperator](/docs/Functional-Abstract-Classes/DoubleUnaryOperator.md)
 
 Inherits [IDoubleUnaryOperator](/docs/Functional-Interfaces/IDoubleUnaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [Function](/docs/Functions/Function.md)
+### [Function](/docs/Functional-Abstract-Classes/Function.md)
 
 Inherits [IFunction](/docs/Functional-Interfaces/IFunction.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [IdSupplier](/docs/Functions/IdSupplier.md)
+### [IdSupplier](/docs/Functional-Abstract-Classes/IdSupplier.md)
 
 Provides common class level implementations, and related utilities for `IdSuppliers`.
 
-### [IntBinaryOperator](/docs/Functions/IntBinaryOperator.md)
+### [IntBinaryOperator](/docs/Functional-Abstract-Classes/IntBinaryOperator.md)
 
 Inherits [IIntBinaryOperator](/docs/Functional-Interfaces/IIntBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [IntConsumer](/docs/Functions/IntConsumer.md)
+### [IntConsumer](/docs/Functional-Abstract-Classes/IntConsumer.md)
 
 Inherits [IIntConsumer](/docs/Functional-Interfaces/IIntConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [IntFunction](/docs/Functions/IntFunction.md)
+### [IntFunction](/docs/Functional-Abstract-Classes/IntFunction.md)
 
 Inherits [IIntFunction](/docs/Functional-Interfaces/IIntFunction.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [IntPredicate](/docs/Functions/IntPredicate.md)
+### [IntPredicate](/docs/Functional-Abstract-Classes/IntPredicate.md)
 
 Inherits [IIntPredicate](/docs/Functional-Interfaces/IIntPredicate.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [IntSupplier](/docs/Functions/IntSupplier.md)
+### [IntSupplier](/docs/Functional-Abstract-Classes/IntSupplier.md)
 
-Inherits [IntSupplier](/docs/Functions/IntSupplier.md) functional interface and provides common class level implementations, and related utilities.
+Inherits [IntSupplier](/docs/Functional-Abstract-Classes/IntSupplier.md) functional interface and provides common class level implementations, and related utilities.
 
-### [IntToDoubleFunction](/docs/Functions/IntToDoubleFunction.md)
+### [IntToDoubleFunction](/docs/Functional-Abstract-Classes/IntToDoubleFunction.md)
 
 Inherits [IIntToDoubleFunction](/docs/Functional-Interfaces/IIntToDoubleFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [IntToLongFunction](/docs/Functions/IntToLongFunction.md)
+### [IntToLongFunction](/docs/Functional-Abstract-Classes/IntToLongFunction.md)
 
 Inherits [IIntToLongFunction](/docs/Functional-Interfaces/IIntToLongFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [IntToSObjectFunction](/docs/Functions/IntToSObjectFunction.md)
+### [IntToSObjectFunction](/docs/Functional-Abstract-Classes/IntToSObjectFunction.md)
 
 Inherits [IIntToSObjectFunction](/docs/Functional-Interfaces/IIntToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [IntUnaryOperator](/docs/Functions/IntUnaryOperator.md)
+### [IntUnaryOperator](/docs/Functional-Abstract-Classes/IntUnaryOperator.md)
 
 Inherits [IIntUnaryOperator](/docs/Functional-Interfaces/IIntUnaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [ListDoubleConsumer](/docs/Functions/ListDoubleConsumer.md)
+### [ListDoubleConsumer](/docs/Functional-Abstract-Classes/ListDoubleConsumer.md)
 
 Provides common class level implementations, and related utilities for `List<Double> - Double` two-arity consumers. Typically is used by collectors.
 
-### [ListFunction](/docs/Functions/ListFunction.md)
+### [ListFunction](/docs/Functional-Abstract-Classes/ListFunction.md)
 
 Extends `Function` functions and provides `ListFunction` common class level implementations, and related utilities.
 
-### [ListObjectConsumer](/docs/Functions/ListObjectConsumer.md)
+### [ListObjectConsumer](/docs/Functional-Abstract-Classes/ListObjectConsumer.md)
 
 Provides common class level implementations, and related utilities for `List<T> - Object` two-arity consumers. Typically is used by collectors.
 
-### [ListSObjectConsumer](/docs/Functions/ListSObjectConsumer.md)
+### [ListSObjectConsumer](/docs/Functional-Abstract-Classes/ListSObjectConsumer.md)
 
 Provides common class level implementations, and related utilities for `List<T> - SObject` two-arity consumers. Typically is used by collectors.
 
-### [LongBinaryOperator](/docs/Functions/LongBinaryOperator.md)
+### [LongBinaryOperator](/docs/Functional-Abstract-Classes/LongBinaryOperator.md)
 
 Inherits [ILongBinaryOperator](/docs/Functional-Interfaces/ILongBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [LongConsumer](/docs/Functions/LongConsumer.md)
+### [LongConsumer](/docs/Functional-Abstract-Classes/LongConsumer.md)
 
 Inherits [ILongConsumer](/docs/Functional-Interfaces/ILongConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [LongFunction](/docs/Functions/LongFunction.md)
+### [LongFunction](/docs/Functional-Abstract-Classes/LongFunction.md)
 
 Inherits [ILongFunction](/docs/Functional-Interfaces/ILongFunction.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [LongPredicate](/docs/Functions/LongPredicate.md)
+### [LongPredicate](/docs/Functional-Abstract-Classes/LongPredicate.md)
 
 Inherits [ILongPredicate](/docs/Functional-Interfaces/ILongPredicate.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [LongSupplier](/docs/Functions/LongSupplier.md)
+### [LongSupplier](/docs/Functional-Abstract-Classes/LongSupplier.md)
 
 Inherits [ILongSupplier](/docs/Functional-Interfaces/ILongSupplier.md) functional interface and provides common class level implementations, and related utilities.
 
-### [LongToDoubleFunction](/docs/Functions/LongToDoubleFunction.md)
+### [LongToDoubleFunction](/docs/Functional-Abstract-Classes/LongToDoubleFunction.md)
 
 Inherits [ILongToDoubleFunction](/docs/Functional-Interfaces/ILongToDoubleFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [LongToIntFunction](/docs/Functions/LongToIntFunction.md)
+### [LongToIntFunction](/docs/Functional-Abstract-Classes/LongToIntFunction.md)
 
 Inherits [ILongToIntFunction](/docs/Functional-Interfaces/ILongToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [LongToSObjectFunction](/docs/Functions/LongToSObjectFunction.md)
+### [LongToSObjectFunction](/docs/Functional-Abstract-Classes/LongToSObjectFunction.md)
 
 Inherits [ILongToSObjectFunction](/docs/Functional-Interfaces/ILongToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [LongUnaryOperator](/docs/Functions/LongUnaryOperator.md)
+### [LongUnaryOperator](/docs/Functional-Abstract-Classes/LongUnaryOperator.md)
 
 Inherits [ILongUnaryOperator](/docs/Functional-Interfaces/ILongUnaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [MapObjectConsumer](/docs/Functions/MapObjectConsumer.md)
+### [MapObjectConsumer](/docs/Functional-Abstract-Classes/MapObjectConsumer.md)
 
 Provides common class level implementations, and related utilities for `Map<T, Object> - T` two-arity consumers. Typically is used by collectors.
 
-### [MapSObjectConsumer](/docs/Functions/MapSObjectConsumer.md)
+### [MapSObjectConsumer](/docs/Functional-Abstract-Classes/MapSObjectConsumer.md)
 
 Provides common class level implementations, and related utilities for `Map<T, Object> - SObject` two-arity consumers. Typically is used by collectors.
 
-### [ObjectDoubleConsumer](/docs/Functions/ObjectDoubleConsumer.md)
+### [ObjectDoubleConsumer](/docs/Functional-Abstract-Classes/ObjectDoubleConsumer.md)
 
 Inherits [IObjectDoubleConsumer](/docs/Functional-Interfaces/IObjectDoubleConsumer.md) functional interface and provides common class level implementations, and related utilities.
 
-### [ObjectIntConsumer](/docs/Functions/ObjectIntConsumer.md)
+### [ObjectIntConsumer](/docs/Functional-Abstract-Classes/ObjectIntConsumer.md)
 
 Inherits [IObjectIntConsumer](/docs/Functional-Interfaces/IObjectIntConsumer.md) functional interface and provides common class level implementations, and related utilities.
 
-### [ObjectLongConsumer](/docs/Functions/ObjectLongConsumer.md)
+### [ObjectLongConsumer](/docs/Functional-Abstract-Classes/ObjectLongConsumer.md)
 
 Inherits [IObjectLongConsumer](/docs/Functional-Interfaces/IObjectLongConsumer.md) functional interface and provides common class level implementations, and related utilities.
 
-### [ObjectSObjectConsumer](/docs/Functions/ObjectSObjectConsumer.md)
+### [ObjectSObjectConsumer](/docs/Functional-Abstract-Classes/ObjectSObjectConsumer.md)
 
 Inherits [IObjectSObjectConsumer](/docs/Functional-Interfaces/IObjectSObjectConsumer.md) functional interface and provides common class level implementations, and related utilities.
 
-### [Predicate](/docs/Functions/Predicate.md)
+### [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
 
 Inherits [IPredicate](/docs/Functional-Interfaces/IPredicate.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectBiConsumer](/docs/Functions/SObjectBiConsumer.md)
+### [SObjectBiConsumer](/docs/Functional-Abstract-Classes/SObjectBiConsumer.md)
 
 Inherits [ISObjectBiConsumer](/docs/Functional-Interfaces/ISObjectBiConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectBiPredicate](/docs/Functions/SObjectBiPredicate.md)
+### [SObjectBiPredicate](/docs/Functional-Abstract-Classes/SObjectBiPredicate.md)
 
 Inherits [ISObjectBiPredicate](/docs/Functional-Interfaces/ISObjectBiPredicate.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectBinaryOperator](/docs/Functions/SObjectBinaryOperator.md)
+### [SObjectBinaryOperator](/docs/Functional-Abstract-Classes/SObjectBinaryOperator.md)
 
 Inherits [ISObjectBinaryOperator](/docs/Functional-Interfaces/ISObjectBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectComparator](/docs/Functions/SObjectComparator.md)
+### [SObjectComparator](/docs/Functional-Abstract-Classes/SObjectComparator.md)
 
 Inherits [ISObjectComparator](/docs/Functional-Interfaces/ISObjectComparator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectConsumer](/docs/Functions/SObjectConsumer.md)
+### [SObjectConsumer](/docs/Functional-Abstract-Classes/SObjectConsumer.md)
 
 Inherits [ISObjectConsumer](/docs/Functional-Interfaces/ISObjectConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectFunction](/docs/Functions/SObjectFunction.md)
+### [SObjectFunction](/docs/Functional-Abstract-Classes/SObjectFunction.md)
 
 Inherits [ISObjectFunction](/docs/Functional-Interfaces/ISObjectFunction.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectPredicate](/docs/Functions/SObjectPredicate.md)
+### [SObjectPredicate](/docs/Functional-Abstract-Classes/SObjectPredicate.md)
 
 Inherits [ISObjectPredicate](/docs/Functional-Interfaces/ISObjectPredicate.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SObjectSupplier](/docs/Functions/SObjectSupplier.md)
+### [SObjectSupplier](/docs/Functional-Abstract-Classes/SObjectSupplier.md)
 
 Inherits [ISObjectSupplier](/docs/Functional-Interfaces/ISObjectSupplier.md) functional interface and provides common class level implementations, and related utilities.
 
-### [SObjectToDoubleFunction](/docs/Functions/SObjectToDoubleFunction.md)
+### [SObjectToDoubleFunction](/docs/Functional-Abstract-Classes/SObjectToDoubleFunction.md)
 
 Inherits [ISObjectToDoubleFunction](/docs/Functional-Interfaces/ISObjectToDoubleFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [SObjectToIntFunction](/docs/Functions/SObjectToIntFunction.md)
+### [SObjectToIntFunction](/docs/Functional-Abstract-Classes/SObjectToIntFunction.md)
 
 Inherits [ISObjectToIntFunction](/docs/Functional-Interfaces/ISObjectToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [SObjectToLongFunction](/docs/Functions/SObjectToLongFunction.md)
+### [SObjectToLongFunction](/docs/Functional-Abstract-Classes/SObjectToLongFunction.md)
 
 Inherits [ISObjectToLongFunction](/docs/Functional-Interfaces/ISObjectToLongFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [SObjectUnaryOperator](/docs/Functions/SObjectUnaryOperator.md)
+### [SObjectUnaryOperator](/docs/Functional-Abstract-Classes/SObjectUnaryOperator.md)
 
 Inherits [ISObjectUnaryOperator](/docs/Functional-Interfaces/ISObjectUnaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 
-### [SetObjectConsumer](/docs/Functions/SetObjectConsumer.md)
+### [SetObjectConsumer](/docs/Functional-Abstract-Classes/SetObjectConsumer.md)
 
 Provides common class level implementations, and related utilities for `Set<T> - T` two-arity consumers. Typically is used by collectors.
 
-### [SetSObjectConsumer](/docs/Functions/SetSObjectConsumer.md)
+### [SetSObjectConsumer](/docs/Functional-Abstract-Classes/SetSObjectConsumer.md)
 
 Provides common class level implementations, and related utilities for `Set<T> - T` two-arity consumers. Typically is used by collectors.
 
-### [StringBinaryOperator](/docs/Functions/StringBinaryOperator.md)
+### [StringBinaryOperator](/docs/Functional-Abstract-Classes/StringBinaryOperator.md)
 
 Provides common class level implementations, and related utilities for `StringBinaryOperators`.
 
-### [StringFunction](/docs/Functions/StringFunction.md)
+### [StringFunction](/docs/Functional-Abstract-Classes/StringFunction.md)
 
 Extends `Function` functions and provides `StringFunction` common class level implementations, and related utilities.
 
-### [StringPredicate](/docs/Functions/StringPredicate.md)
+### [StringPredicate](/docs/Functional-Abstract-Classes/StringPredicate.md)
 
 Extends `Predicate` functions and provides `StringPredicate` common class level implementations, and related utilities.
 
-### [StringSupplier](/docs/Functions/StringSupplier.md)
+### [StringSupplier](/docs/Functional-Abstract-Classes/StringSupplier.md)
 
 Provides common class level implementations, and related utilities for `StringSuppliers`.
 
-### [StringToIntFunction](/docs/Functions/StringToIntFunction.md)
+### [StringToIntFunction](/docs/Functional-Abstract-Classes/StringToIntFunction.md)
 
 Extends `ToIntFunction` functions and provides `StringToIntFunction` common class level implementations, and related utilities.
 
-### [StringToLongFunction](/docs/Functions/StringToLongFunction.md)
+### [StringToLongFunction](/docs/Functional-Abstract-Classes/StringToLongFunction.md)
 
 Extends `ToLongFunction` functions and provides `StringToLongFunction` common class level implementations, and related utilities.
 
-### [Supplier](/docs/Functions/Supplier.md)
+### [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
 
 Inherits [ISupplier](/docs/Functional-Interfaces/ISupplier.md) functional interface and provides common class level implementations, and related utilities.
 
-### [TimeFunction](/docs/Functions/TimeFunction.md)
+### [TimeFunction](/docs/Functional-Abstract-Classes/TimeFunction.md)
 
 Extends `Function` functions and provides `TimeFunction` common class level implementations, and related utilities.
 
-### [TimeToIntFunction](/docs/Functions/TimeToIntFunction.md)
+### [TimeToIntFunction](/docs/Functional-Abstract-Classes/TimeToIntFunction.md)
 
 Extends `ToIntFunction` functions and provides `TimeToIntFunction` common class level implementations, and related utilities.
 
-### [ToDoubleFunction](/docs/Functions/ToDoubleFunction.md)
+### [ToDoubleFunction](/docs/Functional-Abstract-Classes/ToDoubleFunction.md)
 
 Inherits [IToDoubleFunction](/docs/Functional-Interfaces/IToDoubleFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [ToIntFunction](/docs/Functions/ToIntFunction.md)
+### [ToIntFunction](/docs/Functional-Abstract-Classes/ToIntFunction.md)
 
 Inherits [IToIntFunction](/docs/Functional-Interfaces/IToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [ToLongFunction](/docs/Functions/ToLongFunction.md)
+### [ToLongFunction](/docs/Functional-Abstract-Classes/ToLongFunction.md)
 
 Inherits [IToLongFunction](/docs/Functional-Interfaces/IToLongFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [ToSObjectFunction](/docs/Functions/ToSObjectFunction.md)
+### [ToSObjectFunction](/docs/Functional-Abstract-Classes/ToSObjectFunction.md)
 
 Inherits [IToSObjectFunction](/docs/Functional-Interfaces/IToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
 
-### [UnaryOperator](/docs/Functions/UnaryOperator.md)
+### [UnaryOperator](/docs/Functional-Abstract-Classes/UnaryOperator.md)
 
 Inherits [IUnaryOperator](/docs/Functional-Interfaces/IUnaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
 ## Collectors

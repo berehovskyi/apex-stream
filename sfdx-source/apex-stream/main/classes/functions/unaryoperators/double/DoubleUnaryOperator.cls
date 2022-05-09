@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Inherits {@link IDoubleUnaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
  * @see IDoubleIterable.mapTo

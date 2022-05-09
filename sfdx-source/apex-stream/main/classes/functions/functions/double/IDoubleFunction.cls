@@ -11,4 +11,5 @@ public interface IDoubleFunction {
      * @return the result
      */
     Object apply(Double d);
+    
 }

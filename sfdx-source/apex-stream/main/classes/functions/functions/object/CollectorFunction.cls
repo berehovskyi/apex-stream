@@ -1,6 +1,6 @@
 /**
  * @author O. Berehovskyi
- * @group Functions
+ * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `CollectorFunction`
  * used specifically by `Collector` and `SObjectCollector`.
  * @see Collector
