@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-A sequence of `Object` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as ObjectStream.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectStream.count() or ObjectStream.collect(ICollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Intermediate operations describe how a stream is processed without performing any action.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/Iterables/IntStream.md), [LongStream](/Iterables/LongStream.md), and [DoubleStream](/Iterables/DoubleStream.md) and [SObjectStream](/Iterables/SObjectStream.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `Object` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as ObjectStream.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectStream.count() or ObjectStream.collect(ICollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/docs/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Intermediate operations describe how a stream is processed without performing any action.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/docs/Iterables/IntStream.md), [LongStream](/docs/Iterables/LongStream.md), and [DoubleStream](/docs/Iterables/DoubleStream.md) and [SObjectStream](/docs/Iterables/SObjectStream.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 
 **Author** O. Berehovskyi
@@ -284,15 +284,15 @@ the new `ObjectStream`
 |---|---|
 |`NullPointerException`|if `supplier` or `supplier` is null|
 
-##### `static concat(IObjectIterable iterable1, IObjectIterable iterable2)`
+##### `static concat(Iterable<Object> iterable1, Iterable<Object> iterable2)`
 
-Returns eagerly concatenated `ObjectStream` whose elements are all the elements of the first `IObjectIterable` followed by all the elements of the second `IObjectIterable`.
+Returns lazily concatenated `ObjectStream` whose elements are all the elements of the first `Iterable<Object>` followed by all the elements of the second `Iterable<Object>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `SObjectIterable`|
-|`iterable2`|the second `SObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 
 ###### Return
 
@@ -314,14 +314,14 @@ the new `ObjectStream`
 IObjectIterable peopleStream = ObjectStream.concat(stream1, stream2);
 ```
 
-##### `static concat(List<IObjectIterable> iterables)`
+##### `static concat(List<Iterable<Object>> iterables)`
 
-Returns eagerly concatenates `List<IObjectIterable>`.
+Returns lazily concatenated `List<Iterable<Object>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IObjectIterable`|
+|`iterables`|the list of `Iterable<Object>`|
 
 ###### Return
 
@@ -336,22 +336,22 @@ the new `ObjectStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.concat(streams);
 ```
 
-##### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBinaryOperator combiner)`
+##### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBinaryOperator combiner)`
 
 Returns a combined `ObjectStream` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -369,15 +369,15 @@ the new `ObjectStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
+##### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
 
 Returns a combined `ObjectStream` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -396,14 +396,14 @@ the new `ObjectStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2`, `predicate` or `combiner` is null|
 
-##### `append(IObjectIterable iterable)`
+##### `append(Iterable<Object> iterable)`
 
 Returns new `ObjectStream` by appending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IObjectIterable` to append to the current stream|
+|`iterable`|the `Iterable<Object>` to append to the current stream|
 
 ###### Return
 
@@ -425,14 +425,14 @@ the new `ObjectStream`
 IObjectIterable peopleStream = stream1.append(stream2);
 ```
 
-##### `prepend(IObjectIterable iterable)`
+##### `prepend(Iterable<Object> iterable)`
 
 Returns new `ObjectStream` by prepending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IObjectIterable` to prepend to the current stream|
+|`iterable`|the `Iterable<Object>` to prepend to the current stream|
 
 ###### Return
 

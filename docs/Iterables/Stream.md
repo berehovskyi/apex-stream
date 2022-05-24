@@ -970,7 +970,7 @@ the new `DoubleStream`
 
 ### `static concat(IObjectIterable iterable1, IObjectIterable iterable2)`
 
-Returns eagerly concatenated `ObjectStream` whose elements are all the elements of the first `IObjectIterable` followed by all the elements of the second `IObjectIterable`.
+Returns lazily concatenated `ObjectStream` whose elements are all the elements of the first `IObjectIterable` followed by all the elements of the second `IObjectIterable`.
 
 #### Parameters
 |Param|Description|
@@ -998,15 +998,15 @@ the new `ObjectStream`
 IObjectIterable peopleStream = Stream.concat(stream1, stream2);
 ```
 
-### `static concat(ISObjectIterable iterable1, ISObjectIterable iterable2)`
+### `static concat(Iterable<SObject> iterable1, Iterable<SObject> iterable2)`
 
-Returns eagerly concatenated `SObjectStream` whose elements are all the elements of the first `ISObjectIterable` followed by all the elements of the second `ISObjectIterable`.
+Returns lazily concatenated `SObjectStream` whose elements are all the elements of the first `Iterable<SObject>` followed by all the elements of the second `Iterable<SObject>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 
 #### Return
 
@@ -1030,7 +1030,7 @@ ISObjectIterable accStream = Stream.concat(stream1, stream2);
 
 ### `static concat(IIntIterable iterable1, IIntIterable iterable2)`
 
-Returns eagerly concatenated `IntStream` whose elements are all the elements of the first `IIntIterable` followed by all the elements of the second `IIntIterable`.
+Returns lazily concatenated `IntStream` whose elements are all the elements of the first `IIntIterable` followed by all the elements of the second `IIntIterable`.
 
 #### Parameters
 |Param|Description|
@@ -1060,7 +1060,7 @@ IIntIterable intStream = Stream.concat(stream1, stream2);
 
 ### `static concat(ILongIterable iterable1, ILongIterable iterable2)`
 
-Returns eagerly concatenated `LongStream` whose elements are all the elements of the first `ILongIterable` followed by all the elements of the second `ILongIterable`.
+Returns lazily concatenated `LongStream` whose elements are all the elements of the first `ILongIterable` followed by all the elements of the second `ILongIterable`.
 
 #### Parameters
 |Param|Description|
@@ -1090,7 +1090,7 @@ ILongIterable longStream = Stream.concat(stream1, stream2);
 
 ### `static concat(IDoubleIterable iterable1, IDoubleIterable iterable2)`
 
-Returns eagerly concatenated `DoubleStream` whose elements are all the elements of the first `IDoubleIterable` followed by all the elements of the second `IDoubleIterable`.
+Returns lazily concatenated `DoubleStream` whose elements are all the elements of the first `IDoubleIterable` followed by all the elements of the second `IDoubleIterable`.
 
 #### Parameters
 |Param|Description|
@@ -1118,14 +1118,14 @@ the new `DoubleStream`
 IDoubleIterable doubleStream = Stream.concat(stream1, stream2);
 ```
 
-### `static concat(List<IObjectIterable> iterables)`
+### `static concat(List<Iterable<Object>> iterables)`
 
-Returns eagerly concatenates `List<IObjectIterable>`.
+Returns lazily concatenated `List<Iterable<Object>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IObjectIterable`|
+|`iterables`|the list of `Iterable<Object>`|
 
 #### Return
 
@@ -1140,21 +1140,21 @@ the new `ObjectStream`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 IObjectIterable peopleStream = Stream.concat(streams);
 ```
 
-### `static concat(List<ISObjectIterable> iterables)`
+### `static concat(List<Iterable<SObject>> iterables)`
 
-Returns eagerly concatenates `List<ISObjectIterable>`.
+Returns lazily concatenated `List<Iterable<SObject>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ISObjectIterable`|
+|`iterables`|the list of `Iterable<SObject>`|
 
 #### Return
 
@@ -1169,21 +1169,21 @@ the new `SObjectStream`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ISObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 ISObjectIterable accStream = Stream.concat(streams);
 ```
 
-### `static concat(List<IIntIterable> iterables)`
+### `static concat(List<Iterable<Integer>> iterables)`
 
-Returns eagerly concatenates `List<IIntIterable>`.
+Returns lazily concatenated `List<Iterable<Integer>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IIntIterable`|
+|`iterables`|the list of `Iterable<Integer>`|
 
 #### Return
 
@@ -1198,21 +1198,21 @@ the new `IntStream`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ILongIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 IIntIterable intStream = Stream.concat(streams);
 ```
 
-### `static concat(List<ILongIterable> iterables)`
+### `static concat(List<Iterable<Long>> iterables)`
 
-Returns eagerly concatenates `List<ILongIterable>`.
+Returns lazily concatenated `List<Iterable<Long>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ILongIterable`|
+|`iterables`|the list of `Iterable<Long>`|
 
 #### Return
 
@@ -1227,21 +1227,21 @@ the new `LongStream`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ILongIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 ILongIterable longStream = Stream.concat(streams);
 ```
 
-### `static concat(List<IDoubleIterable> iterables)`
+### `static concat(List<Iterable<Double>> iterables)`
 
-Returns eagerly concatenates `List<IDoubleIterable>`.
+Returns lazily concatenated `List<Iterable<Double>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IDoubleIterable`|
+|`iterables`|the list of `Iterable<Double>`|
 
 #### Return
 
@@ -1256,22 +1256,22 @@ the new `DoubleStream`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IDoubleIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 IDoubleIterable doubleStream = Stream.concat(streams);
 ```
 
-### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBinaryOperator combiner)`
+### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBinaryOperator combiner)`
 
 Returns a combined `ObjectStream` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -1289,15 +1289,15 @@ the new `ObjectStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
+### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
 
 Returns a combined `ObjectStream` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -1316,15 +1316,15 @@ the new `ObjectStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2`, `predicate` or `combiner` is null|
 
-### `static zip(IIntIterable iterable1, IIntIterable iterable2, IIntBinaryOperator combiner)`
+### `static zip(Iterable<Integer> iterable1, Iterable<Integer> iterable2, IIntBinaryOperator combiner)`
 
 Returns a combined `IntStream` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IIntIterable`|
-|`iterable2`|the second `IIntIterable`|
+|`iterable1`|the first `Iterable<Integer>`|
+|`iterable2`|the second `Iterable<Integer>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -1342,15 +1342,15 @@ the new `IntStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(ILongIterable iterable1, ILongIterable iterable2, ILongBinaryOperator combiner)`
+### `static zip(Iterable<Long> iterable1, Iterable<Long> iterable2, ILongBinaryOperator combiner)`
 
 Returns a combined `LongStream` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ILongIterable`|
-|`iterable2`|the second `ILongIterable`|
+|`iterable1`|the first `Iterable<Long>`|
+|`iterable2`|the second `Iterable<Long>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -1368,15 +1368,15 @@ the new `LongStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(IDoubleIterable iterable1, IDoubleIterable iterable2, IDoubleBinaryOperator combiner)`
+### `static zip(Iterable<Double> iterable1, Iterable<Double> iterable2, IDoubleBinaryOperator combiner)`
 
 Returns a combined `DoubleStream` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IDoubleIterable`|
-|`iterable2`|the second `IDoubleIterable`|
+|`iterable1`|the first `Iterable<Double>`|
+|`iterable2`|the second `Iterable<Double>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -1394,15 +1394,15 @@ the new `DoubleStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBinaryOperator combiner)`
+### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectStream` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -1423,21 +1423,26 @@ the new `SObjectStream`
 #### Example
 ```apex
 ISObjectIterable accountsWithMinAnnualRevenueStream = Stream.zip(
+    Trigger.old,
+    Trigger.new,
+    SObjectBinaryOperator.minBy(Account.AnnualRevenue)
+);
+ISObjectIterable accountsWithMinAnnualRevenueStream = Stream.zip(
     Stream.of(Trigger.old),
     Stream.of(Trigger.new),
     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
 );
 ```
 
-### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
+### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectStream` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -1458,6 +1463,12 @@ the new `SObjectStream`
 
 #### Example
 ```apex
+ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
+    Trigger.old,
+    Trigger.new,
+    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBinaryOperator.right()
+);
 ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
     Stream.of(Trigger.old),
     Stream.of(Trigger.new),

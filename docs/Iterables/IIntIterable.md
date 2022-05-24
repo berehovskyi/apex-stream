@@ -25,7 +25,7 @@ A sequence of `Integer` elements supporting aggregate operations.
 **See** [IDoubleIterable](/docs/Iterables/IDoubleIterable.md)
 
 ## Methods
-### `append(IIntIterable iterable)`
+### `append(Iterable<Integer> iterable)`
 
 Returns a new `IIntIterable` from the current to which another `iterable` is appended. <p>Intermediate Operation.</p>
 
@@ -44,7 +44,7 @@ IIntIterable
 
 the new `IIntIterable`
 
-### `prepend(IIntIterable iterable)`
+### `prepend(Iterable<Integer> iterable)`
 
 Returns a new `IIntIterable` from the current to which another `iterable` is prepended. <p>Intermediate Operation.</p>
 

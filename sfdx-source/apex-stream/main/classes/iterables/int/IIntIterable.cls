@@ -17,7 +17,7 @@ public interface IIntIterable extends Iterable<Integer> {
      * @param iterable the other iterable
      * @return the new `IIntIterable`
      */
-    IIntIterable append(IIntIterable iterable);
+    IIntIterable append(Iterable<Integer> iterable);
 
     /**
      * @description Returns a new `IIntIterable` from the current
@@ -26,7 +26,7 @@ public interface IIntIterable extends Iterable<Integer> {
      * @param iterable the other iterable
      * @return the new `IIntIterable`
      */
-    IIntIterable prepend(IIntIterable iterable);
+    IIntIterable prepend(Iterable<Integer> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Conversion Operations">

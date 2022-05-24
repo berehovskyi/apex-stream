@@ -27,7 +27,7 @@
  */
 public virtual inherited sharing class DoubleStream extends DoubleIterable implements IDoubleIterable {
 
-    private final Iterator<Double> iterator;
+    private final transient Iterator<Double> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
@@ -176,34 +176,34 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     }
 
     /**
-     * @description Returns eagerly concatenated `DoubleStream` whose elements are all the
-     * elements of the first `IDoubleIterable` followed by all the elements of the
-     * second `IDoubleIterable`.
+     * @description Returns lazily concatenated `DoubleStream` whose elements are all the
+     * elements of the first `Iterable<Double>` followed by all the elements of the
+     * second `Iterable<Double>`.
      * @example
      * IDoubleIterable doubleStream = DoubleStream.concat(stream1, stream2);
-     * @param iterable1 the first `IDoubleIterable`
-     * @param iterable2 the second `IDoubleIterable`
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
      * @return the new `DoubleStream`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static IDoubleIterable concat(final IDoubleIterable iterable1, final IDoubleIterable iterable2) {
-        return concat(new List<IDoubleIterable>{ iterable1, iterable2 });
+    public static IDoubleIterable concat(final Iterable<Double> iterable1, final Iterable<Double> iterable2) {
+        return concat(new List<Iterable<Double>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IDoubleIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Double>>`.
      * @example
      * IDoubleIterable doubleStream = DoubleStream.concat(streams);
-     * @param iterables the list of `IDoubleIterable`
+     * @param iterables the list of `Iterable<Double>`
      * @return the new `DoubleStream`
-     * @throws NullPointerException if `iterables` or some of `IDoubleIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IDoubleIterable concat(final List<IDoubleIterable> iterables) {
+    public static IDoubleIterable concat(final List<Iterable<Double>> iterables) {
         Validate.noNullElements(iterables);
         final List<Iterator<Double>> iterators = new List<Iterator<Double>>();
-        final Iterator<IDoubleIterable> iterator = iterables.iterator();
+        final Iterator<Iterable<Double>> iterator = iterables.iterator();
         while (iterator.hasNext()) {
-            final IDoubleIterable iterable = iterator.next();
+            final Iterable<Double> iterable = iterator.next();
             iterators.add(iterable.iterator());
         }
         return new DoubleStream(new DoubleConcatIterator(iterators));
@@ -212,15 +212,15 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a combined `DoubleStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IDoubleIterable`
-     * @param iterable2 the second `IDoubleIterable`
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `DoubleStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IDoubleIterable zip(
-            final IDoubleIterable iterable1,
-            final IDoubleIterable iterable2,
+            final Iterable<Double> iterable1,
+            final Iterable<Double> iterable2,
             final IDoubleBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
@@ -234,11 +234,11 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * to the current stream.
      * @example
      * IDoubleIterable doubleStream = stream1.append(stream2);
-     * @param iterable the `IDoubleIterable` to append to the current stream
+     * @param iterable the `Iterable<Double>` to append to the current stream
      * @return the new `DoubleStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IDoubleIterable append(final IDoubleIterable iterable) {
+    public virtual IDoubleIterable append(final Iterable<Double> iterable) {
         return concat(this, iterable);
     }
 
@@ -247,11 +247,11 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * to the current stream.
      * @example
      * IDoubleIterable doubleStream = stream1.prepend(stream2);
-     * @param iterable the `IDoubleIterable` to prepend to the current stream
+     * @param iterable the `Iterable<Double>` to prepend to the current stream
      * @return the new `DoubleStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IDoubleIterable prepend(final IDoubleIterable iterable) {
+    public virtual IDoubleIterable prepend(final Iterable<Double> iterable) {
         return concat(iterable, this);
     }
     // @end-group

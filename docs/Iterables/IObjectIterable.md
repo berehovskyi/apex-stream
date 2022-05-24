@@ -25,7 +25,7 @@ A sequence of `SObject` elements supporting aggregate operations.
 **See** [IDoubleIterable](/docs/Iterables/IDoubleIterable.md)
 
 ## Methods
-### `append(IObjectIterable iterable)`
+### `append(Iterable<Object> iterable)`
 
 Returns a new `IObjectIterable` from the current to which another `iterable` is appended. <p>Intermediate Operation.</p>
 
@@ -44,7 +44,7 @@ IObjectIterable
 
 the new `IObjectIterable`
 
-### `prepend(IObjectIterable iterable)`
+### `prepend(Iterable<Object> iterable)`
 
 Returns a new `IObjectIterable` from the current to which another `iterable` is prepended. <p>Intermediate Operation.</p>
 

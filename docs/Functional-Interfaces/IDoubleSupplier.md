@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-A function that takes no arguments and returns an `Double` value.
+A function that takes no arguments and returns a `Double` value.
 
 
 **Author** O. Berehovskyi

@@ -211,15 +211,15 @@ the new `IntSequence`
 IIntIterable intSeqFrom0To100 = IntSequence.range(0, 100);
 ```
 
-##### `static concat(IIntIterable iterable1, IIntIterable iterable2)`
+##### `static concat(Iterable<Integer> iterable1, Iterable<Integer> iterable2)`
 
-Returns eagerly concatenated `IntSequence` whose elements are all the elements of the first `IIntIterable` followed by all the elements of the second `IIntIterable`.
+Returns eagerly concatenated `IntSequence` whose elements are all the elements of the first `Iterable<Integer>` followed by all the elements of the second `Iterable<Integer>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IIntIterable`|
-|`iterable2`|the second `IIntIterable`|
+|`iterable1`|the first `Iterable<Integer>`|
+|`iterable2`|the second `Iterable<Integer>`|
 
 ###### Return
 
@@ -241,14 +241,14 @@ the new `IntSequence`
 IIntIterable intSeq = IntSequence.concat(seq1, seq2);
 ```
 
-##### `static concat(List<IIntIterable> iterables)`
+##### `static concat(List<Iterable<Integer>> iterables)`
 
-Returns eagerly concatenates `List<IIntIterable>`.
+Returns eagerly concatenates `List<Iterable<Integer>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IIntIterable`|
+|`iterables`|the list of `Iterable<Integer>`|
 
 ###### Return
 
@@ -263,22 +263,22 @@ the new `IntSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IIntIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 IIntIterable intSeq = IntSequence.concat(seqs);
 ```
 
-##### `static zip(IIntIterable iterable1, IIntIterable iterable2, IIntBinaryOperator combiner)`
+##### `static zip(Iterable<Integer> iterable1, Iterable<Integer> iterable2, IIntBinaryOperator combiner)`
 
 Returns a combined `IntSequence` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IIntIterable`|
-|`iterable2`|the second `IIntIterable`|
+|`iterable1`|the first `Iterable<Integer>`|
+|`iterable2`|the second `Iterable<Integer>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -296,14 +296,14 @@ the new `IntSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(IIntIterable iterable)`
+##### `append(Iterable<Integer> iterable)`
 
 Returns new `IntSequence` by appending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IIntIterable` to append to the current sequence|
+|`iterable`|the `Iterable<Integer>` to append to the current sequence|
 
 ###### Return
 
@@ -325,14 +325,14 @@ the new `IntSequence`
 IIntIterable intSeq = seq1.append(seq2);
 ```
 
-##### `prepend(IIntIterable iterable)`
+##### `prepend(Iterable<Integer> iterable)`
 
 Returns new `IntSequence` by prepending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IIntIterable` to prepend to the current sequence|
+|`iterable`|the `Iterable<Integer>` to prepend to the current sequence|
 
 ###### Return
 

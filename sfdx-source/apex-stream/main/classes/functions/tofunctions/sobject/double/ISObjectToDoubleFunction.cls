@@ -1,7 +1,7 @@
 /**
  * @author O. Berehovskyi
  * @group Functional Interfaces
- * @description An entity that takes one argument of `SObject` type and returns an `Double`
+ * @description An entity that takes one argument of `SObject` type and returns a `Double`
  * value.
  */
 public interface ISObjectToDoubleFunction {

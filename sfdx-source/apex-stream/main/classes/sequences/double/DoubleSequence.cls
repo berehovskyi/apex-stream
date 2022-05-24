@@ -123,32 +123,32 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
 
     /**
      * @description Returns eagerly concatenated `DoubleSequence` whose elements are all the
-     * elements of the first `IDoubleIterable` followed by all the elements of the
-     * second `IDoubleIterable`.
+     * elements of the first `Iterable<Double>` followed by all the elements of the
+     * second `Iterable<Double>`.
      * @example
      * IDoubleIterable doubleSeq = LongSequence.concat(seq1, seq2);
-     * @param iterable1 the first `IDoubleIterable`
-     * @param iterable2 the second `IDoubleIterable`
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
      * @return the new `DoubleSequence`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static IDoubleIterable concat(final IDoubleIterable iterable1, final IDoubleIterable iterable2) {
-        return concat(new List<IDoubleIterable>{ iterable1, iterable2 });
+    public static IDoubleIterable concat(final Iterable<Double> iterable1, final Iterable<Double> iterable2) {
+        return concat(new List<Iterable<Double>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IDoubleIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Double>>`.
      * @example
      * IDoubleIterable doubleSeq = DoubleSequence.concat(seqs);
-     * @param iterables the list of `IDoubleIterable`
+     * @param iterables the list of `Iterable<Double>`
      * @return the new `DoubleSequence`
-     * @throws NullPointerException if `iterables` or some of `IDoubleIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IDoubleIterable concat(final List<IDoubleIterable> iterables) {
+    public static IDoubleIterable concat(final List<Iterable<Double>> iterables) {
         Validate.noNullElements(iterables);
         final List<Double> doubles = new List<Double>();
         for (Integer i = 0, size = iterables.size(); i < size; i++) {
-            doubles.addAll(iterables[i].toList());
+            doubles.addAll(Iterators.toDoubleList(iterables[i].iterator()));
         }
         return new DoubleSequence(doubles);
     }
@@ -156,23 +156,23 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
     /**
      * @description Returns a combined `DoubleSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IDoubleIterable`
-     * @param iterable2 the second `IDoubleIterable`
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `DoubleSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IDoubleIterable zip(
-            final IDoubleIterable iterable1,
-            final IDoubleIterable iterable2,
+            final Iterable<Double> iterable1,
+            final Iterable<Double> iterable2,
             final IDoubleBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
         Validate.notNull(iterable2);
         Validate.notNull(combiner);
         final List<Double> results = new List<Double>();
-        final List<Double> left = iterable1.toList();
-        final List<Double> right = iterable2.toList();
+        final List<Double> left = Iterators.toDoubleList(iterable1.iterator());
+        final List<Double> right = Iterators.toDoubleList(iterable2.iterator());
         for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
             results.add(combiner.apply(left[i], right[i]));
         }
@@ -184,11 +184,11 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
      * to the current sequence.
      * @example
      * IDoubleIterable doubleSeq = seq1.append(seq2);
-     * @param iterable the `IDoubleIterable` to append to the current sequence
+     * @param iterable the `Iterable<Double>` to append to the current sequence
      * @return the new `DoubleSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IDoubleIterable append(final IDoubleIterable iterable) {
+    public virtual IDoubleIterable append(final Iterable<Double> iterable) {
         return concat(this, iterable);
     }
 
@@ -197,11 +197,11 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
      * to the current sequence.
      * @example
      * DoubleIterable doubleSeq = seq1.prepend(seq2);
-     * @param iterable the `IDoubleIterable` to prepend to the current sequence
+     * @param iterable the `Iterable<Double>` to prepend to the current sequence
      * @return the new `DoubleSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IDoubleIterable prepend(final IDoubleIterable iterable) {
+    public virtual IDoubleIterable prepend(final Iterable<Double> iterable) {
         return concat(iterable, this);
     }
     // @end-group

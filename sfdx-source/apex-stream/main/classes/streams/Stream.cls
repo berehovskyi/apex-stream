@@ -451,7 +451,7 @@ public virtual inherited sharing class Stream {
             final IIntPredicate predicate,
             final IIntUnaryOperator operator
     ) {
-        return IntStream.iterate(seed, operator);
+        return IntStream.iterate(seed, predicate, operator);
     }
 
     /**
@@ -469,7 +469,7 @@ public virtual inherited sharing class Stream {
             final ILongPredicate predicate,
             final ILongUnaryOperator operator
     ) {
-        return LongStream.iterate(seed, operator);
+        return LongStream.iterate(seed, predicate, operator);
     }
 
     /**
@@ -487,11 +487,11 @@ public virtual inherited sharing class Stream {
             final IDoublePredicate predicate,
             final IDoubleUnaryOperator operator
     ) {
-        return DoubleStream.iterate(seed, operator);
+        return DoubleStream.iterate(seed, predicate, operator);
     }
 
     /**
-     * @description Returns eagerly concatenated `ObjectStream` whose elements are all the
+     * @description Returns lazily concatenated `ObjectStream` whose elements are all the
      * elements of the first `IObjectIterable` followed by all the elements of the
      * second `IObjectIterable`.
      * @example
@@ -506,22 +506,22 @@ public virtual inherited sharing class Stream {
     }
 
     /**
-     * @description Returns eagerly concatenated `SObjectStream` whose elements are all the
-     * elements of the first `ISObjectIterable` followed by all the elements of the
-     * second `ISObjectIterable`.
+     * @description Returns lazily concatenated `SObjectStream` whose elements are all the
+     * elements of the first `Iterable<SObject>` followed by all the elements of the
+     * second `Iterable<SObject>`.
      * @example
      * ISObjectIterable accStream = Stream.concat(stream1, stream2);
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ISObjectIterable concat(final ISObjectIterable iterable1, final ISObjectIterable iterable2) {
+    public static ISObjectIterable concat(final Iterable<SObject> iterable1, final Iterable<SObject> iterable2) {
         return SObjectStream.concat(iterable1, iterable2);
     }
 
     /**
-     * @description Returns eagerly concatenated `IntStream` whose elements are all the
+     * @description Returns lazily concatenated `IntStream` whose elements are all the
      * elements of the first `IIntIterable` followed by all the elements of the
      * second `IIntIterable`.
      * @example
@@ -536,7 +536,7 @@ public virtual inherited sharing class Stream {
     }
 
     /**
-     * @description Returns eagerly concatenated `LongStream` whose elements are all the
+     * @description Returns lazily concatenated `LongStream` whose elements are all the
      * elements of the first `ILongIterable` followed by all the elements of the
      * second `ILongIterable`.
      * @example
@@ -551,7 +551,7 @@ public virtual inherited sharing class Stream {
     }
 
     /**
-     * @description Returns eagerly concatenated `DoubleStream` whose elements are all the
+     * @description Returns lazily concatenated `DoubleStream` whose elements are all the
      * elements of the first `IDoubleIterable` followed by all the elements of the
      * second `IDoubleIterable`.
      * @example
@@ -566,77 +566,77 @@ public virtual inherited sharing class Stream {
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IObjectIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Object>>`.
      * @example
      * IObjectIterable peopleStream = Stream.concat(streams);
-     * @param iterables the list of `IObjectIterable`
+     * @param iterables the list of `Iterable<Object>`
      * @return the new `ObjectStream`
-     * @throws NullPointerException if `iterables` or some of `IObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IObjectIterable concat(final List<IObjectIterable> iterables) {
+    public static IObjectIterable concat(final List<Iterable<Object>> iterables) {
         return ObjectStream.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ISObjectIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<SObject>>`.
      * @example
      * ISObjectIterable accStream = Stream.concat(streams);
-     * @param iterables the list of `ISObjectIterable`
+     * @param iterables the list of `Iterable<SObject>`
      * @return the new `SObjectStream`
-     * @throws NullPointerException if `iterables` or some of `ISObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ISObjectIterable concat(final List<ISObjectIterable> iterables) {
+    public static ISObjectIterable concat(final List<Iterable<SObject>> iterables) {
         return SObjectStream.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IIntIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Integer>>`.
      * @example
      * IIntIterable intStream = Stream.concat(streams);
-     * @param iterables the list of `IIntIterable`
+     * @param iterables the list of `Iterable<Integer>`
      * @return the new `IntStream`
-     * @throws NullPointerException if `iterables` or some of `ILongIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IIntIterable concat(final List<IIntIterable> iterables) {
+    public static IIntIterable concat(final List<Iterable<Integer>> iterables) {
         return IntStream.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ILongIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Long>>`.
      * @example
      * ILongIterable longStream = Stream.concat(streams);
-     * @param iterables the list of `ILongIterable`
+     * @param iterables the list of `Iterable<Long>`
      * @return the new `LongStream`
-     * @throws NullPointerException if `iterables` or some of `ILongIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ILongIterable concat(final List<ILongIterable> iterables) {
+    public static ILongIterable concat(final List<Iterable<Long>> iterables) {
         return LongStream.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IDoubleIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Double>>`.
      * @example
      * IDoubleIterable doubleStream = Stream.concat(streams);
-     * @param iterables the list of `IDoubleIterable`
+     * @param iterables the list of `Iterable<Double>`
      * @return the new `DoubleStream`
-     * @throws NullPointerException if `iterables` or some of `IDoubleIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IDoubleIterable concat(final List<IDoubleIterable> iterables) {
+    public static IDoubleIterable concat(final List<Iterable<Double>> iterables) {
         return DoubleStream.concat(iterables);
     }
 
     /**
      * @description Returns a combined `ObjectStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBinaryOperator combiner
     ) {
         return ObjectStream.zip(iterable1, iterable2, combiner);
@@ -645,8 +645,8 @@ public virtual inherited sharing class Stream {
     /**
      * @description Returns a combined `ObjectStream` by applying `combiner` function
      * to each element at the same position, conditioned on satisfying `predicate`.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectStream`
@@ -654,8 +654,8 @@ public virtual inherited sharing class Stream {
      * `predicate` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBiPredicate predicate,
             final IBinaryOperator combiner
     ) {
@@ -665,15 +665,15 @@ public virtual inherited sharing class Stream {
     /**
      * @description Returns a combined `IntStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IIntIterable`
-     * @param iterable2 the second `IIntIterable`
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `IntStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IIntIterable zip(
-            final IIntIterable iterable1,
-            final IIntIterable iterable2,
+            final Iterable<Integer> iterable1,
+            final Iterable<Integer> iterable2,
             final IIntBinaryOperator combiner
     ) {
         return IntStream.zip(iterable1, iterable2, combiner);
@@ -682,15 +682,15 @@ public virtual inherited sharing class Stream {
     /**
      * @description Returns a combined `LongStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `ILongIterable`
-     * @param iterable2 the second `ILongIterable`
+     * @param iterable1 the first `Iterable<Long>`
+     * @param iterable2 the second `Iterable<Long>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `LongStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ILongIterable zip(
-            final ILongIterable iterable1,
-            final ILongIterable iterable2,
+            final Iterable<Long> iterable1,
+            final Iterable<Long> iterable2,
             final ILongBinaryOperator combiner
     ) {
         return LongStream.zip(iterable1, iterable2, combiner);
@@ -699,15 +699,15 @@ public virtual inherited sharing class Stream {
     /**
      * @description Returns a combined `DoubleStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IDoubleIterable`
-     * @param iterable2 the second `IDoubleIterable`
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `DoubleStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IDoubleIterable zip(
-            final IDoubleIterable iterable1,
-            final IDoubleIterable iterable2,
+            final Iterable<Double> iterable1,
+            final Iterable<Double> iterable2,
             final IDoubleBinaryOperator combiner
     ) {
         return DoubleStream.zip(iterable1, iterable2, combiner);
@@ -718,19 +718,24 @@ public virtual inherited sharing class Stream {
      * to each element at the same position.
      * @example
      * ISObjectIterable accountsWithMinAnnualRevenueStream = Stream.zip(
+     *     Trigger.old,
+     *     Trigger.new,
+     *     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
+     * );
+     * ISObjectIterable accountsWithMinAnnualRevenueStream = Stream.zip(
      *     Stream.of(Trigger.old),
      *     Stream.of(Trigger.new),
      *     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBinaryOperator combiner
     ) {
         return SObjectStream.zip(iterable1, iterable2, combiner);
@@ -741,13 +746,19 @@ public virtual inherited sharing class Stream {
      * to each element at the same position, conditioned on satisfying `predicate`.
      * @example
      * ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
+     *     Trigger.old,
+     *     Trigger.new,
+     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBinaryOperator.right()
+     * );
+     * ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
      *     Stream.of(Trigger.old),
      *     Stream.of(Trigger.new),
      *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectStream`
@@ -755,8 +766,8 @@ public virtual inherited sharing class Stream {
      * `predicate` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBiPredicate predicate,
             final ISObjectBinaryOperator combiner
     ) {

@@ -18,7 +18,7 @@
  */
 public virtual inherited sharing class LongStream extends LongIterable implements ILongIterable {
 
-    private final Iterator<Long> iterator;
+    private final transient Iterator<Long> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
@@ -183,34 +183,34 @@ public virtual inherited sharing class LongStream extends LongIterable implement
     }
 
     /**
-     * @description Returns eagerly concatenated `LongStream` whose elements are all the
-     * elements of the first `ILongIterable` followed by all the elements of the
-     * second `ILongIterable`.
+     * @description Returns lazily concatenated `LongStream` whose elements are all the
+     * elements of the first `Iterable<Long>` followed by all the elements of the
+     * second `Iterable<Long>`.
      * @example
      * ILongIterable longStream = LongStream.concat(stream1, stream2);
-     * @param iterable1 the first `ILongIterable`
-     * @param iterable2 the second `ILongIterable`
+     * @param iterable1 the first `Iterable<Long>`
+     * @param iterable2 the second `Iterable<Long>`
      * @return the new `LongStream`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ILongIterable concat(final ILongIterable iterable1, final ILongIterable iterable2) {
-        return concat(new List<ILongIterable>{ iterable1, iterable2 });
+    public static ILongIterable concat(final Iterable<Long> iterable1, final Iterable<Long> iterable2) {
+        return concat(new List<Iterable<Long>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ILongIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Long>>`.
      * @example
      * ILongIterable longStream = LongStream.concat(streams);
-     * @param iterables the list of `ILongIterable`
+     * @param iterables the list of `Iterable<Long>`
      * @return the new `LongStream`
-     * @throws NullPointerException if `iterables` or some of `ILongIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ILongIterable concat(final List<ILongIterable> iterables) {
+    public static ILongIterable concat(final List<Iterable<Long>> iterables) {
         Validate.noNullElements(iterables);
         final List<Iterator<Long>> iterators = new List<Iterator<Long>>();
-        final Iterator<ILongIterable> iterator = iterables.iterator();
+        final Iterator<Iterable<Long>> iterator = iterables.iterator();
         while (iterator.hasNext()) {
-            final ILongIterable iterable = iterator.next();
+            final Iterable<Long> iterable = iterator.next();
             iterators.add(iterable.iterator());
         }
         return new LongStream(new LongConcatIterator(iterators));
@@ -219,15 +219,15 @@ public virtual inherited sharing class LongStream extends LongIterable implement
     /**
      * @description Returns a combined `LongStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `ILongIterable`
-     * @param iterable2 the second `ILongIterable`
+     * @param iterable1 the first `Iterable<Long>`
+     * @param iterable2 the second `Iterable<Long>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `LongStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ILongIterable zip(
-            final ILongIterable iterable1,
-            final ILongIterable iterable2,
+            final Iterable<Long> iterable1,
+            final Iterable<Long> iterable2,
             final ILongBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
@@ -241,11 +241,11 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      * to the current stream.
      * @example
      * ILongIterable longStream = stream1.append(stream2);
-     * @param iterable the `ILongIterable` to append to the current stream
+     * @param iterable the `Iterable<Long>` to append to the current stream
      * @return the new `LongStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ILongIterable append(final ILongIterable iterable) {
+    public virtual ILongIterable append(final Iterable<Long> iterable) {
         return concat(this, iterable);
     }
 
@@ -254,11 +254,11 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      * to the current stream.
      * @example
      * ILongIterable longStream = stream1.prepend(stream2);
-     * @param iterable the `ILongIterable` to prepend to the current stream
+     * @param iterable the `Iterable<Long>` to prepend to the current stream
      * @return the new `LongStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ILongIterable prepend(final ILongIterable iterable) {
+    public virtual ILongIterable prepend(final Iterable<Long> iterable) {
         return concat(iterable, this);
     }
     // @end-group

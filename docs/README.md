@@ -1,5 +1,5 @@
 # Classes
-## Functions
+## Functional Abstract Classes
 
 ### [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
 
@@ -341,7 +341,6 @@ A mutable reduction operation that accumulates input arguments into a mutable re
 ### [SObjectCollector](/docs/Collectors/SObjectCollector.md)
 
 Inherits [ISObjectCollector](/docs/Collectors/ISObjectCollector.md) interface and provides default methods, common class level implementations, and related utilities.
-
 ## Iterables
 
 ### [DoubleIterable](/docs/Iterables/DoubleIterable.md)
@@ -410,11 +409,11 @@ Provides a skeletal implementation of [IObjectIterable](/docs/Iterables/IObjectI
 
 ### [ObjectSequence](/docs/Iterables/ObjectSequence.md)
 
-A sequence of `Object` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as ObjectSequence.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectSequence.count() or ObjectSequence.collect(ICollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/Iterables/IntSequence.md), [LongSequence](/Iterables/LongSequence.md), and [DoubleSequence](/Iterables/DoubleSequence.md) and [SObjectSequence](/Iterables/SObjectSequence.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `Object` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as ObjectSequence.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectSequence.count() or ObjectSequence.collect(ICollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/docs/Iterables/IntSequence.md), [LongSequence](/docs/Iterables/LongSequence.md), and [DoubleSequence](/docs/Iterables/DoubleSequence.md) and [SObjectSequence](/docs/Iterables/SObjectSequence.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 ### [ObjectStream](/docs/Iterables/ObjectStream.md)
 
-A sequence of `Object` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as ObjectStream.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectStream.count() or ObjectStream.collect(ICollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Intermediate operations describe how a stream is processed without performing any action.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/Iterables/IntStream.md), [LongStream](/Iterables/LongStream.md), and [DoubleStream](/Iterables/DoubleStream.md) and [SObjectStream](/Iterables/SObjectStream.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `Object` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as ObjectStream.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectStream.count() or ObjectStream.collect(ICollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/docs/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Intermediate operations describe how a stream is processed without performing any action.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/docs/Iterables/IntStream.md), [LongStream](/docs/Iterables/LongStream.md), and [DoubleStream](/docs/Iterables/DoubleStream.md) and [SObjectStream](/docs/Iterables/SObjectStream.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 ### [SObjectIterable](/docs/Iterables/SObjectIterable.md)
 
@@ -422,11 +421,11 @@ Provides a skeletal implementation of [ISObjectIterable](/docs/Iterables/ISObjec
 
 ### [SObjectSequence](/docs/Iterables/SObjectSequence.md)
 
-A sequence of `SObject` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as SObjectSequence.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectSequence.count() or SObjectSequence.collect(ISObjectCollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/Iterables/IntSequence.md), [LongSequence](/Iterables/LongSequence.md), and [DoubleSequence](/Iterables/DoubleSequence.md) and [ObjectSequence](/Iterables/ObjectSequence.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `SObject` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as SObjectSequence.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectSequence.count() or SObjectSequence.collect(ISObjectCollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/docs/Iterables/IntSequence.md), [LongSequence](/docs/Iterables/LongSequence.md), and [DoubleSequence](/docs/Iterables/DoubleSequence.md) and [ObjectSequence](/docs/Iterables/ObjectSequence.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 ### [SObjectStream](/docs/Iterables/SObjectStream.md)
 
-A sequence of `SObject` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as SObjectStream.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectStream.count() or SObjectStream.collect(ISObjectCollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/Iterables/IntStream.md), [LongStream](/Iterables/LongStream.md), and [DoubleStream](/Iterables/DoubleStream.md) and [ObjectStream](/Iterables/ObjectStream.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `SObject` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as SObjectStream.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectStream.count() or SObjectStream.collect(ISObjectCollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/docs/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/docs/Iterables/IntStream.md), [LongStream](/docs/Iterables/LongStream.md), and [DoubleStream](/docs/Iterables/DoubleStream.md) and [ObjectStream](/docs/Iterables/ObjectStream.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 ### [Sequence](/docs/Iterables/Sequence.md)
 
@@ -463,7 +462,7 @@ A function that takes one argument of `Object` type and returns no value.
 
 ### [IDoubleBinaryOperator](/docs/Functional-Interfaces/IDoubleBinaryOperator.md)
 
-A functions that takes two arguments of `Double` type and returns an `Double` value.
+A function that takes two arguments of `Double` type and returns a `Double` value.
 
 ### [IDoubleConsumer](/docs/Functional-Interfaces/IDoubleConsumer.md)
 
@@ -479,7 +478,7 @@ A function that takes one argument of `Double` type and returns a Boolean value 
 
 ### [IDoubleSupplier](/docs/Functional-Interfaces/IDoubleSupplier.md)
 
-A function that takes no arguments and returns an `Double` value.
+A function that takes no arguments and returns a `Double` value.
 
 ### [IDoubleToIntFunction](/docs/Functional-Interfaces/IDoubleToIntFunction.md)
 
@@ -523,7 +522,7 @@ A function that takes no arguments and returns an `Integer` value.
 
 ### [IIntToDoubleFunction](/docs/Functional-Interfaces/IIntToDoubleFunction.md)
 
-An entity that takes one argument of `Integer` type and returns an `Double` value.
+An entity that takes one argument of `Integer` type and returns a `Double` value.
 
 ### [IIntToLongFunction](/docs/Functional-Interfaces/IIntToLongFunction.md)
 
@@ -559,7 +558,7 @@ A function that takes no arguments and returns an `Long` value.
 
 ### [ILongToDoubleFunction](/docs/Functional-Interfaces/ILongToDoubleFunction.md)
 
-An entity that takes one argument of `Long` type and returns an `Double` value.
+An entity that takes one argument of `Long` type and returns a `Double` value.
 
 ### [ILongToIntFunction](/docs/Functional-Interfaces/ILongToIntFunction.md)
 
@@ -635,7 +634,7 @@ A function that takes no arguments and returns an `SObject` value.
 
 ### [ISObjectToDoubleFunction](/docs/Functional-Interfaces/ISObjectToDoubleFunction.md)
 
-An entity that takes one argument of `SObject` type and returns an `Double` value.
+An entity that takes one argument of `SObject` type and returns a `Double` value.
 
 ### [ISObjectToIntFunction](/docs/Functional-Interfaces/ISObjectToIntFunction.md)
 
@@ -655,7 +654,7 @@ A function that takes no arguments and returns an `Object` value.
 
 ### [IToDoubleFunction](/docs/Functional-Interfaces/IToDoubleFunction.md)
 
-An entity that takes one argument of `Object` type and returns an `Double` value.
+An entity that takes one argument of `Object` type and returns a `Double` value.
 
 ### [IToIntFunction](/docs/Functional-Interfaces/IToIntFunction.md)
 

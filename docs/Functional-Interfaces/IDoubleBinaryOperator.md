@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-A functions that takes two arguments of `Double` type and returns an `Double` value.
+A function that takes two arguments of `Double` type and returns a `Double` value.
 
 
 **Author** O. Berehovskyi

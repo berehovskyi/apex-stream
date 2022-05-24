@@ -211,15 +211,15 @@ the new `LongSequence`
 ILongIterable longSeqFrom0To100 = LongSequence.range(0, 100);
 ```
 
-##### `static concat(ILongIterable iterable1, ILongIterable iterable2)`
+##### `static concat(Iterable<Long> iterable1, Iterable<Long> iterable2)`
 
-Returns eagerly concatenated `LongSequence` whose elements are all the elements of the first `ILongIterable` followed by all the elements of the second `ILongIterable`.
+Returns eagerly concatenated `LongSequence` whose elements are all the elements of the first `Iterable<Long>` followed by all the elements of the second `Iterable<Long>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ILongIterable`|
-|`iterable2`|the second `ILongIterable`|
+|`iterable1`|the first `Iterable<Long>`|
+|`iterable2`|the second `Iterable<Long>`|
 
 ###### Return
 
@@ -241,14 +241,14 @@ the new `LongSequence`
 ILongIterable longSeq = LongSequence.concat(seq1, seq2);
 ```
 
-##### `static concat(List<ILongIterable> iterables)`
+##### `static concat(List<Iterable<Long>> iterables)`
 
-Returns eagerly concatenates `List<ILongIterable>`.
+Returns eagerly concatenates `List<Iterable<Long>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ILongIterable`|
+|`iterables`|the list of `Iterable<Long>`|
 
 ###### Return
 
@@ -263,22 +263,22 @@ the new `LongSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ILongIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 ILongIterable longSeq = LongStream.concat(seqs);
 ```
 
-##### `static zip(ILongIterable iterable1, ILongIterable iterable2, ILongBinaryOperator combiner)`
+##### `static zip(Iterable<Long> iterable1, Iterable<Long> iterable2, ILongBinaryOperator combiner)`
 
 Returns a combined `LongSequence` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ILongIterable`|
-|`iterable2`|the second `ILongIterable`|
+|`iterable1`|the first `Iterable<Long>`|
+|`iterable2`|the second `Iterable<Long>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -296,14 +296,14 @@ the new `LongSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(ILongIterable iterable)`
+##### `append(Iterable<Long> iterable)`
 
 Returns new `LongSequence` by appending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ILongIterable` to append to the current sequence|
+|`iterable`|the `Iterable<Long>` to append to the current sequence|
 
 ###### Return
 
@@ -325,14 +325,14 @@ the new `LongSequence`
 ILongIterable longSeq = seq1.append(seq2);
 ```
 
-##### `prepend(ILongIterable iterable)`
+##### `prepend(Iterable<Long> iterable)`
 
 Returns new `LongSequence` by prepending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ILongIterable` to prepend to the current sequence|
+|`iterable`|the `Iterable<Long>` to prepend to the current sequence|
 
 ###### Return
 

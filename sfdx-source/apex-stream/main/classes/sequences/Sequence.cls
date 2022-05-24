@@ -278,16 +278,16 @@ public virtual inherited sharing class Sequence {
 
     /**
      * @description Returns eagerly concatenated `SObjectSequence` whose elements are all the
-     * elements of the first `ISObjectIterable` followed by all the elements of the
-     * second `ISObjectIterable`.
+     * elements of the first `Iterable<SObject>` followed by all the elements of the
+     * second `Iterable<SObject>`.
      * @example
      * ISObjectIterable accSeq = Sequence.concat(stream1, stream2);
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ISObjectIterable concat(final ISObjectIterable iterable1, final ISObjectIterable iterable2) {
+    public static ISObjectIterable concat(final Iterable<SObject> iterable1, final Iterable<SObject> iterable2) {
         return SObjectSequence.concat(iterable1, iterable2);
     }
 
@@ -337,77 +337,77 @@ public virtual inherited sharing class Sequence {
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IObjectIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Object>>`.
      * @example
      * IObjectIterable peopleSeq = Sequence.concat(streams);
-     * @param iterables the list of `IObjectIterable`
+     * @param iterables the list of `Iterable<Object>`
      * @return the new `ObjectSequence`
-     * @throws NullPointerException if `iterables` or some of `IObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IObjectIterable concat(final List<IObjectIterable> iterables) {
+    public static IObjectIterable concat(final List<Iterable<Object>> iterables) {
         return ObjectSequence.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ISObjectIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<SObject>>`.
      * @example
      * ISObjectIterable accSeq = Sequence.concat(streams);
-     * @param iterables the list of `ISObjectIterable`
+     * @param iterables the list of `Iterable<SObject>`
      * @return the new `SObjectSequence`
-     * @throws NullPointerException if `iterables` or some of `ISObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ISObjectIterable concat(final List<ISObjectIterable> iterables) {
+    public static ISObjectIterable concat(final List<Iterable<SObject>> iterables) {
         return SObjectSequence.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IIntIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Integer>>`.
      * @example
      * IIntIterable intSeq = Sequence.concat(streams);
-     * @param iterables the list of `IIntIterable`
+     * @param iterables the list of `Iterable<Integer>`
      * @return the new `IntSequence`
-     * @throws NullPointerException if `iterables` or some of `ILongIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IIntIterable concat(final List<IIntIterable> iterables) {
+    public static IIntIterable concat(final List<Iterable<Integer>> iterables) {
         return IntSequence.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ILongIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Long>>`.
      * @example
      * ILongIterable longSeq = Sequence.concat(streams);
-     * @param iterables the list of `ILongIterable`
+     * @param iterables the list of `Iterable<Long>`
      * @return the new `LongSequence`
-     * @throws NullPointerException if `iterables` or some of `ILongIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ILongIterable concat(final List<ILongIterable> iterables) {
+    public static ILongIterable concat(final List<Iterable<Long>> iterables) {
         return LongSequence.concat(iterables);
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IDoubleIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Double>>`.
      * @example
      * IDoubleIterable doubleSeq = Sequence.concat(streams);
-     * @param iterables the list of `IDoubleIterable`
+     * @param iterables the list of `Iterable<Double>`
      * @return the new `DoubleSequence`
-     * @throws NullPointerException if `iterables` or some of `IDoubleIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IDoubleIterable concat(final List<IDoubleIterable> iterables) {
+    public static IDoubleIterable concat(final List<Iterable<Double>> iterables) {
         return DoubleSequence.concat(iterables);
     }
 
     /**
      * @description Returns a combined `ObjectSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBinaryOperator combiner
     ) {
         return ObjectSequence.zip(iterable1, iterable2, combiner);
@@ -417,20 +417,25 @@ public virtual inherited sharing class Sequence {
      * @description Returns a combined `SObjectSequence` by applying `combiner` function
      * to each element at the same position.
      * @example
-     * ISObjectIterable accountsWithMinAnnualRevenueStream = Sequence.zip(
+     * ISObjectIterable accountsWithMinAnnualRevenueSeq = Sequence.zip(
+     *     Trigger.old,
+     *     Trigger.new,
+     *     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
+     * );
+     * ISObjectIterable accountsWithMinAnnualRevenueSeq = Sequence.zip(
      *     Sequence.of(Trigger.old),
      *     Sequence.of(Trigger.new),
      *     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBinaryOperator combiner
     ) {
         return SObjectSequence.zip(iterable1, iterable2, combiner);
@@ -439,15 +444,15 @@ public virtual inherited sharing class Sequence {
     /**
      * @description Returns a combined `IntSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IIntIterable`
-     * @param iterable2 the second `IIntIterable`
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `IntSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IIntIterable zip(
-            final IIntIterable iterable1,
-            final IIntIterable iterable2,
+            final Iterable<Integer> iterable1,
+            final Iterable<Integer> iterable2,
             final IIntBinaryOperator combiner
     ) {
         return IntSequence.zip(iterable1, iterable2, combiner);
@@ -456,15 +461,15 @@ public virtual inherited sharing class Sequence {
     /**
      * @description Returns a combined `LongSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `ILongIterable`
-     * @param iterable2 the second `ILongIterable`
+     * @param iterable1 the first `Iterable<Long>`
+     * @param iterable2 the second `Iterable<Long>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `LongSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ILongIterable zip(
-            final ILongIterable iterable1,
-            final ILongIterable iterable2,
+            final Iterable<Long> iterable1,
+            final Iterable<Long> iterable2,
             final ILongBinaryOperator combiner
     ) {
         return LongSequence.zip(iterable1, iterable2, combiner);
@@ -473,15 +478,15 @@ public virtual inherited sharing class Sequence {
     /**
      * @description Returns a combined `DoubleSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IDoubleIterable`
-     * @param iterable2 the second `IDoubleIterable`
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `DoubleSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IDoubleIterable zip(
-            final IDoubleIterable iterable1,
-            final IDoubleIterable iterable2,
+            final Iterable<Double> iterable1,
+            final Iterable<Double> iterable2,
             final IDoubleBinaryOperator combiner
     ) {
         return DoubleSequence.zip(iterable1, iterable2, combiner);
@@ -490,8 +495,8 @@ public virtual inherited sharing class Sequence {
     /**
      * @description Returns a combined `ObjectSequence` by applying `combiner` function
      * to each element at the same position, conditioned on satisfying `predicate`.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectSequence`
@@ -499,8 +504,8 @@ public virtual inherited sharing class Sequence {
      * `predicate` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBiPredicate predicate,
             final IBinaryOperator combiner
     ) {
@@ -512,13 +517,19 @@ public virtual inherited sharing class Sequence {
      * to each element at the same position, conditioned on satisfying `predicate`.
      * @example
      * ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
+     *     Trigger.old,
+     *     Trigger.new,
+     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBinaryOperator.right()
+     * );
+     * ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
      *     Sequence.of(Trigger.old),
      *     Sequence.of(Trigger.new),
      *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectStream`
@@ -526,8 +537,8 @@ public virtual inherited sharing class Sequence {
      * `predicate` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBiPredicate predicate,
             final ISObjectBinaryOperator combiner
     ) {

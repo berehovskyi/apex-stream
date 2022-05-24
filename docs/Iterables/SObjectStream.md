@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-A sequence of `SObject` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as SObjectStream.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectStream.count() or SObjectStream.collect(ISObjectCollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/Iterables/IntStream.md), [LongStream](/Iterables/LongStream.md), and [DoubleStream](/Iterables/DoubleStream.md) and [ObjectStream](/Iterables/ObjectStream.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `SObject` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as SObjectStream.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectStream.count() or SObjectStream.collect(ISObjectCollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/docs/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/docs/Iterables/IntStream.md), [LongStream](/docs/Iterables/LongStream.md), and [DoubleStream](/docs/Iterables/DoubleStream.md) and [ObjectStream](/docs/Iterables/ObjectStream.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 
 **Author** O. Berehovskyi
@@ -120,6 +120,7 @@ the new `SObjectStream`
 ```apex
 ISObjectIterable accStream = SObjectStream.of(new List<Account>(accounts));
 ISObjectIterable accStream = SObjectStream.of((Iterable<Account>) new Set<Account>(accounts));
+ISObjectIterable accStream = SObjectStream.of(stream1);
 ```
 
 ##### `static ofNullable(Iterable<SObject> iterable)`
@@ -145,6 +146,7 @@ the new `SObjectStream` if `iterable` is non-null, otherwise an empty `SObjectSt
 ```apex
 ISObjectIterable accStream = SObjectStream.ofNullable(new List<Account>(accounts));
 ISObjectIterable accStream = SObjectStream.ofNullable((Iterable<Account>) new Set<Account>(accounts));
+ISObjectIterable accStream = SObjectStream.ofNullable(stream1);
 ```
 
 ##### `static empty()`
@@ -241,15 +243,15 @@ the new `SObjectStream`
 |---|---|
 |`NullPointerException`|if `supplier` or `supplier` is null|
 
-##### `static concat(ISObjectIterable iterable1, ISObjectIterable iterable2)`
+##### `static concat(Iterable<SObject> iterable1, Iterable<SObject> iterable2)`
 
-Returns eagerly concatenated `SObjectStream` whose elements are all the elements of the first `ISObjectIterable` followed by all the elements of the second `ISObjectIterable`.
+Returns lazily concatenated `SObjectStream` whose elements are all the elements of the first `Iterable<SObject>` followed by all the elements of the second `Iterable<SObject>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 
 ###### Return
 
@@ -269,16 +271,17 @@ the new `SObjectStream`
 ###### Example
 ```apex
 ISObjectIterable accStream = SObjectStream.concat(stream1, stream2);
+ISObjectIterable accStream = SObjectStream.concat(accounts1, accounts2);
 ```
 
-##### `static concat(List<ISObjectIterable> iterables)`
+##### `static concat(List<Iterable<SObject>> iterables)`
 
-Returns eagerly concatenates `List<ISObjectIterable>`.
+Returns lazily concatenated `List<Iterable<SObject>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ISObjectIterable`|
+|`iterables`|the list of `Iterable<SObject>`|
 
 ###### Return
 
@@ -293,22 +296,22 @@ the new `SObjectStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ISObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 ISObjectIterable accStream = SObjectStream.concat(streams);
 ```
 
-##### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBinaryOperator combiner)`
+##### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectStream` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -329,21 +332,21 @@ the new `SObjectStream`
 ###### Example
 ```apex
 ISObjectIterable accountsWithMinAnnualRevenueStream = SObjectStream.zip(
-    SObjectStream.of(Trigger.old),
-    SObjectStream.of(Trigger.new),
+    Trigger.old,
+    Trigger.new,
     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
 );
 ```
 
-##### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
+##### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectStream` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -365,21 +368,21 @@ the new `SObjectStream`
 ###### Example
 ```apex
 ISObjectIterable newAccountsWithChangedAnnualRevenueStream = SObjectStream.zip(
-    SObjectStream.of(Trigger.old),
-    SObjectStream.of(Trigger.new),
+    Trigger.old,
+    Trigger.new,
     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ```
 
-##### `append(ISObjectIterable iterable)`
+##### `append(Iterable<SObject> iterable)`
 
 Returns new `SObjectStream` by appending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ISObjectIterable` to append to the current stream|
+|`iterable`|the `Iterable<SObject>` to append to the current stream|
 
 ###### Return
 
@@ -401,14 +404,14 @@ the new `SObjectStream`
 ISObjectIterable accStream = stream1.append(stream2);
 ```
 
-##### `prepend(ISObjectIterable iterable)`
+##### `prepend(Iterable<SObject> iterable)`
 
 Returns new `SObjectStream` by prepending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ISObjectIterable` to prepend to the current stream|
+|`iterable`|the `Iterable<SObject>` to prepend to the current stream|
 
 ###### Return
 

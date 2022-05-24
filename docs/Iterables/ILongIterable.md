@@ -25,7 +25,7 @@ A sequence of `Long` elements supporting aggregate operations.
 **See** [IDoubleIterable](/docs/Iterables/IDoubleIterable.md)
 
 ## Methods
-### `append(ILongIterable iterable)`
+### `append(Iterable<Long> iterable)`
 
 Returns a new `ILongIterable` from the current to which another `iterable` is appended. <p>Intermediate Operation.</p>
 
@@ -44,7 +44,7 @@ ILongIterable
 
 the new `ILongIterable`
 
-### `prepend(ILongIterable iterable)`
+### `prepend(Iterable<Long> iterable)`
 
 Returns a new `ILongIterable` from the current to which another `iterable` is prepended. <p>Intermediate Operation.</p>
 

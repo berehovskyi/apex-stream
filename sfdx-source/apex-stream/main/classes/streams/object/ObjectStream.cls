@@ -47,7 +47,7 @@
  */
 public virtual inherited sharing class ObjectStream extends ObjectIterable implements IObjectIterable {
 
-    private final Iterator<Object> iterator;
+    private final transient Iterator<Object> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
@@ -206,34 +206,34 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
     }
 
     /**
-     * @description Returns eagerly concatenated `ObjectStream` whose elements are all the
-     * elements of the first `IObjectIterable` followed by all the elements of the
-     * second `IObjectIterable`.
+     * @description Returns lazily concatenated `ObjectStream` whose elements are all the
+     * elements of the first `Iterable<Object>` followed by all the elements of the
+     * second `Iterable<Object>`.
      * @example
      * IObjectIterable peopleStream = ObjectStream.concat(stream1, stream2);
-     * @param iterable1 the first `SObjectIterable`
-     * @param iterable2 the second `SObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @return the new `ObjectStream`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static IObjectIterable concat(final IObjectIterable iterable1, final IObjectIterable iterable2) {
-        return concat(new List<IObjectIterable>{ iterable1, iterable2 });
+    public static IObjectIterable concat(final Iterable<Object> iterable1, final Iterable<Object> iterable2) {
+        return concat(new List<Iterable<Object>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IObjectIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Object>>`.
      * @example
      * IObjectIterable peopleStream = ObjectStream.concat(streams);
-     * @param iterables the list of `IObjectIterable`
+     * @param iterables the list of `Iterable<Object>`
      * @return the new `ObjectStream`
-     * @throws NullPointerException if `iterables` or some of `IObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IObjectIterable concat(final List<IObjectIterable> iterables) {
+    public static IObjectIterable concat(final List<Iterable<Object>> iterables) {
         Validate.noNullElements(iterables);
         final List<Iterator<Object>> iterators = new List<Iterator<Object>>();
-        final Iterator<IObjectIterable> iterator = iterables.iterator();
+        final Iterator<Iterable<Object>> iterator = iterables.iterator();
         while (iterator.hasNext()) {
-            final IObjectIterable iterable = iterator.next();
+            final Iterable<Object> iterable = iterator.next();
             iterators.add(iterable.iterator());
         }
         return new ObjectStream(new ObjectConcatIterator(iterators));
@@ -242,15 +242,15 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
     /**
      * @description Returns a combined `ObjectStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
@@ -262,8 +262,8 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
     /**
      * @description Returns a combined `ObjectStream` by applying `combiner` function
      * to each element at the same position, conditioned on satisfying `predicate`.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectStream`
@@ -271,8 +271,8 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * `predicate` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBiPredicate predicate,
             final IBinaryOperator combiner
     ) {
@@ -292,11 +292,11 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * to the current stream.
      * @example
      * IObjectIterable peopleStream = stream1.append(stream2);
-     * @param iterable the `IObjectIterable` to append to the current stream
+     * @param iterable the `Iterable<Object>` to append to the current stream
      * @return the new `ObjectStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IObjectIterable append(final IObjectIterable iterable) {
+    public virtual IObjectIterable append(final Iterable<Object> iterable) {
         return concat(this, iterable);
     }
 
@@ -305,11 +305,11 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * to the current stream.
      * @example
      * IObjectIterable peopleStream = stream1.prepend(stream2);
-     * @param iterable the `IObjectIterable` to prepend to the current stream
+     * @param iterable the `Iterable<Object>` to prepend to the current stream
      * @return the new `ObjectStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IObjectIterable prepend(final IObjectIterable iterable) {
+    public virtual IObjectIterable prepend(final Iterable<Object> iterable) {
         return concat(iterable, this);
     }
     // @end-group

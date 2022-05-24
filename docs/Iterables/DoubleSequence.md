@@ -181,15 +181,15 @@ IDoubleIterable
 
 the empty `DoubleSequence`
 
-##### `static concat(IDoubleIterable iterable1, IDoubleIterable iterable2)`
+##### `static concat(Iterable<Double> iterable1, Iterable<Double> iterable2)`
 
-Returns eagerly concatenated `DoubleSequence` whose elements are all the elements of the first `IDoubleIterable` followed by all the elements of the second `IDoubleIterable`.
+Returns eagerly concatenated `DoubleSequence` whose elements are all the elements of the first `Iterable<Double>` followed by all the elements of the second `Iterable<Double>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IDoubleIterable`|
-|`iterable2`|the second `IDoubleIterable`|
+|`iterable1`|the first `Iterable<Double>`|
+|`iterable2`|the second `Iterable<Double>`|
 
 ###### Return
 
@@ -211,14 +211,14 @@ the new `DoubleSequence`
 IDoubleIterable doubleSeq = LongSequence.concat(seq1, seq2);
 ```
 
-##### `static concat(List<IDoubleIterable> iterables)`
+##### `static concat(List<Iterable<Double>> iterables)`
 
-Returns eagerly concatenates `List<IDoubleIterable>`.
+Returns eagerly concatenates `List<Iterable<Double>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IDoubleIterable`|
+|`iterables`|the list of `Iterable<Double>`|
 
 ###### Return
 
@@ -233,22 +233,22 @@ the new `DoubleSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IDoubleIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 IDoubleIterable doubleSeq = DoubleSequence.concat(seqs);
 ```
 
-##### `static zip(IDoubleIterable iterable1, IDoubleIterable iterable2, IDoubleBinaryOperator combiner)`
+##### `static zip(Iterable<Double> iterable1, Iterable<Double> iterable2, IDoubleBinaryOperator combiner)`
 
 Returns a combined `DoubleSequence` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IDoubleIterable`|
-|`iterable2`|the second `IDoubleIterable`|
+|`iterable1`|the first `Iterable<Double>`|
+|`iterable2`|the second `Iterable<Double>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -266,14 +266,14 @@ the new `DoubleSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(IDoubleIterable iterable)`
+##### `append(Iterable<Double> iterable)`
 
 Returns new `DoubleSequence` by appending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IDoubleIterable` to append to the current sequence|
+|`iterable`|the `Iterable<Double>` to append to the current sequence|
 
 ###### Return
 
@@ -295,14 +295,14 @@ the new `DoubleSequence`
 IDoubleIterable doubleSeq = seq1.append(seq2);
 ```
 
-##### `prepend(IDoubleIterable iterable)`
+##### `prepend(Iterable<Double> iterable)`
 
 Returns new `DoubleSequence` by prepending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IDoubleIterable` to prepend to the current sequence|
+|`iterable`|the `Iterable<Double>` to prepend to the current sequence|
 
 ###### Return
 

@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-A sequence of `SObject` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as SObjectSequence.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectSequence.count() or SObjectSequence.collect(ISObjectCollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/Iterables/IntSequence.md), [LongSequence](/Iterables/LongSequence.md), and [DoubleSequence](/Iterables/DoubleSequence.md) and [ObjectSequence](/Iterables/ObjectSequence.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `SObject` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as SObjectSequence.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectSequence.count() or SObjectSequence.collect(ISObjectCollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/docs/Iterables/IntSequence.md), [LongSequence](/docs/Iterables/LongSequence.md), and [DoubleSequence](/docs/Iterables/DoubleSequence.md) and [ObjectSequence](/docs/Iterables/ObjectSequence.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 
 **Author** O. Berehovskyi.
@@ -165,15 +165,15 @@ ISObjectIterable
 
 the empty `SObjectSequence`
 
-##### `static concat(ISObjectIterable iterable1, ISObjectIterable iterable2)`
+##### `static concat(Iterable<SObject> iterable1, Iterable<SObject> iterable2)`
 
-Returns eagerly concatenated `SObjectSequence` whose elements are all the elements of the first `ISObjectIterable` followed by all the elements of the second `ISObjectIterable`.
+Returns eagerly concatenated `SObjectSequence` whose elements are all the elements of the first `Iterable<SObject>` followed by all the elements of the second `Iterable<SObject>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 
 ###### Return
 
@@ -195,14 +195,14 @@ the new `SObjectSequence`
 ISObjectIterable accSeq = SObjectSequence.concat(seq1, seq2);
 ```
 
-##### `static concat(List<ISObjectIterable> iterables)`
+##### `static concat(List<Iterable<SObject>> iterables)`
 
-Returns eagerly concatenates `List<ISObjectIterable>`.
+Returns eagerly concatenates `List<Iterable<SObject>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ISObjectIterable`|
+|`iterables`|the list of `Iterable<SObject>`|
 
 ###### Return
 
@@ -217,22 +217,22 @@ the new `SObjectSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ISObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 ISObjectIterable accSeq = SObjectSequence.concat(sequences);
 ```
 
-##### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBinaryOperator combiner)`
+##### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectSequence` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -253,21 +253,21 @@ the new `SObjectSequence`
 ###### Example
 ```apex
 ISObjectIterable accountsWithMinAnnualRevenueSeq = SObjectSequence.zip(
-    SObjectSequence.of(Trigger.old),
-    SObjectSequence.of(Trigger.new),
+    Trigger.old,
+    Trigger.new,
     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
 );
 ```
 
-##### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
+##### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectSequence` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -289,21 +289,21 @@ the new `SObjectSequence`
 ###### Example
 ```apex
 ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = SObjectSequence.zip(
-    SObjectSequence.of(Trigger.old),
-    SObjectSequence.of(Trigger.new),
+    Trigger.old,
+    Trigger.new,
     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ```
 
-##### `append(ISObjectIterable iterable)`
+##### `append(Iterable<SObject> iterable)`
 
 Returns new `SObjectSequence` by appending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ISObjectIterable` to append to the current sequence|
+|`iterable`|the `Iterable<SObject>` to append to the current sequence|
 
 ###### Return
 
@@ -325,14 +325,14 @@ the new `SObjectSequence`
 ISObjectIterable accSeq = seq.append(seq1);
 ```
 
-##### `prepend(ISObjectIterable iterable)`
+##### `prepend(Iterable<SObject> iterable)`
 
 Returns new `SObjectSequence` by prepending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ISObjectIterable` to prepend to the current sequence|
+|`iterable`|the `Iterable<SObject>` to prepend to the current sequence|
 
 ###### Return
 

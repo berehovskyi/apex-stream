@@ -17,7 +17,7 @@ public interface IDoubleIterable extends Iterable<Double> {
      * @param iterable the other iterable
      * @return the new `IDoubleIterable`
      */
-    IDoubleIterable append(IDoubleIterable iterable);
+    IDoubleIterable append(Iterable<Double> iterable);
 
     /**
      * @description Returns a new `IDoubleIterable` from the current
@@ -26,7 +26,7 @@ public interface IDoubleIterable extends Iterable<Double> {
      * @param iterable the other iterable
      * @return the new `IDoubleIterable`
      */
-    IDoubleIterable prepend(IDoubleIterable iterable);
+    IDoubleIterable prepend(Iterable<Double> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Conversion Operations">

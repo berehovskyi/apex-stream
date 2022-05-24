@@ -135,32 +135,32 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
 
     /**
      * @description Returns eagerly concatenated `IntSequence` whose elements are all the
-     * elements of the first `IIntIterable` followed by all the elements of the
-     * second `IIntIterable`.
+     * elements of the first `Iterable<Integer>` followed by all the elements of the
+     * second `Iterable<Integer>`.
      * @example
      * IIntIterable intSeq = IntSequence.concat(seq1, seq2);
-     * @param iterable1 the first `IIntIterable`
-     * @param iterable2 the second `IIntIterable`
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
      * @return the new `IntSequence`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static IIntIterable concat(final IIntIterable iterable1, final IIntIterable iterable2) {
-        return concat(new List<IIntIterable>{ iterable1, iterable2 });
+    public static IIntIterable concat(final Iterable<Integer> iterable1, final Iterable<Integer> iterable2) {
+        return concat(new List<Iterable<Integer>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IIntIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Integer>>`.
      * @example
      * IIntIterable intSeq = IntSequence.concat(seqs);
-     * @param iterables the list of `IIntIterable`
+     * @param iterables the list of `Iterable<Integer>`
      * @return the new `IntSequence`
-     * @throws NullPointerException if `iterables` or some of `IIntIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IIntIterable concat(final List<IIntIterable> iterables) {
+    public static IIntIterable concat(final List<Iterable<Integer>> iterables) {
         Validate.noNullElements(iterables);
         final List<Integer> integers = new List<Integer>();
         for (Integer i = 0, size = iterables.size(); i < size; i++) {
-            integers.addAll(iterables[i].toList());
+            integers.addAll(Iterators.toIntList(iterables[i].iterator()));
         }
         return new IntSequence(integers);
     }
@@ -168,23 +168,23 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a combined `IntSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IIntIterable`
-     * @param iterable2 the second `IIntIterable`
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `IntSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IIntIterable zip(
-            final IIntIterable iterable1,
-            final IIntIterable iterable2,
+            final Iterable<Integer> iterable1,
+            final Iterable<Integer> iterable2,
             final IIntBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
         Validate.notNull(iterable2);
         Validate.notNull(combiner);
         final List<Integer> results = new List<Integer>();
-        final List<Integer> left = iterable1.toList();
-        final List<Integer> right = iterable2.toList();
+        final List<Integer> left = Iterators.toIntList(iterable1.iterator());
+        final List<Integer> right = Iterators.toIntList(iterable2.iterator());
         for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
             results.add(combiner.apply(left[i], right[i]));
         }
@@ -196,11 +196,11 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * to the current sequence.
      * @example
      * IIntIterable intSeq = seq1.append(seq2);
-     * @param iterable the `IIntIterable` to append to the current sequence
+     * @param iterable the `Iterable<Integer>` to append to the current sequence
      * @return the new `IntSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IIntIterable append(final IIntIterable iterable) {
+    public virtual IIntIterable append(final Iterable<Integer> iterable) {
         return concat(this, iterable);
     }
 
@@ -209,11 +209,11 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * to the current sequence.
      * @example
      * IIntIterable intSeq = seq1.prepend(seq2);
-     * @param iterable the `IIntIterable` to prepend to the current sequence
+     * @param iterable the `Iterable<Integer>` to prepend to the current sequence
      * @return the new `IntSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IIntIterable prepend(final IIntIterable iterable) {
+    public virtual IIntIterable prepend(final Iterable<Integer> iterable) {
         return concat(iterable, this);
     }
     // @end-group

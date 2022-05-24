@@ -1,7 +1,7 @@
 /**
  * @author O. Berehovskyi
  * @group Functional Interfaces
- * @description A function that takes no arguments and returns an `Double` value.
+ * @description A function that takes no arguments and returns a `Double` value.
  */
 public interface IDoubleSupplier {
 

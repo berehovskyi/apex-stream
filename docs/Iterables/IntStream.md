@@ -288,15 +288,15 @@ the new `IntStream`
 |---|---|
 |`NullPointerException`|if `supplier` or `supplier` is null|
 
-##### `static concat(IIntIterable iterable1, IIntIterable iterable2)`
+##### `static concat(Iterable<Integer> iterable1, Iterable<Integer> iterable2)`
 
-Returns eagerly concatenated `IntStream` whose elements are all the elements of the first `IIntIterable` followed by all the elements of the second `IIntIterable`.
+Returns lazily concatenated `IntStream` whose elements are all the elements of the first `Iterable<Integer>` followed by all the elements of the second `Iterable<Integer>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IIntIterable`|
-|`iterable2`|the second `IIntIterable`|
+|`iterable1`|the first `Iterable<Integer>`|
+|`iterable2`|the second `Iterable<Integer>`|
 
 ###### Return
 
@@ -318,14 +318,14 @@ the new `IntStream`
 IIntIterable intStream = IntStream.concat(stream1, stream2);
 ```
 
-##### `static concat(List<IIntIterable> iterables)`
+##### `static concat(List<Iterable<Integer>> iterables)`
 
-Returns eagerly concatenates `List<IIntIterable>`.
+Returns lazily concatenated `List<Iterable<Integer>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IIntIterable`|
+|`iterables`|the list of `Iterable<Integer>`|
 
 ###### Return
 
@@ -340,22 +340,22 @@ the new `IntStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IIntIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 IIntIterable intStream = IntStream.concat(streams);
 ```
 
-##### `static zip(IIntIterable iterable1, IIntIterable iterable2, IIntBinaryOperator combiner)`
+##### `static zip(Iterable<Integer> iterable1, Iterable<Integer> iterable2, IIntBinaryOperator combiner)`
 
 Returns a combined `IntStream` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IIntIterable`|
-|`iterable2`|the second `IIntIterable`|
+|`iterable1`|the first `Iterable<Integer>`|
+|`iterable2`|the second `Iterable<Integer>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -373,14 +373,14 @@ the new `IntStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(IIntIterable iterable)`
+##### `append(Iterable<Integer> iterable)`
 
 Returns new `IntStream` by appending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IIntIterable` to append to the current stream|
+|`iterable`|the `Iterable<Integer>` to append to the current stream|
 
 ###### Return
 
@@ -402,14 +402,14 @@ the new `IntStream`
 IIntIterable intStream = stream1.append(stream2);
 ```
 
-##### `prepend(IIntIterable iterable)`
+##### `prepend(Iterable<Integer> iterable)`
 
 Returns new `IntStream` by prepending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IIntIterable` to prepend to the current stream|
+|`iterable`|the `Iterable<Integer>` to prepend to the current stream|
 
 ###### Return
 

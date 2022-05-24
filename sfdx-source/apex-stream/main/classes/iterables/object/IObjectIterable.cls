@@ -17,7 +17,7 @@ public interface IObjectIterable extends Iterable<Object> {
      * @param iterable the other iterable
      * @return the new `IObjectIterable`
      */
-    IObjectIterable append(IObjectIterable iterable);
+    IObjectIterable append(Iterable<Object> iterable);
 
     /**
      * @description Returns a new `IObjectIterable` from the current
@@ -26,7 +26,7 @@ public interface IObjectIterable extends Iterable<Object> {
      * @param iterable the other iterable
      * @return the new `IObjectIterable`
      */
-    IObjectIterable prepend(IObjectIterable iterable);
+    IObjectIterable prepend(Iterable<Object> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Intermediate Operations">

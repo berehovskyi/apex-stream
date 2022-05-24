@@ -93,7 +93,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      * otherwise returns an empty `ObjectSequence`.
      * @example
      * IObjectIterable peopleSeq = ObjectSequence.ofNullable(new List<Person>(people));
-     * IObjectIterable emptypeopleSeq = ObjectSequence.ofNullable(null);
+     * IObjectIterable emptyPeopleSeq = ObjectSequence.ofNullable(null);
      * @param objects the list of Objects
      * @return the new `ObjectSequence` if `objects` is non-null,
      * otherwise an empty `ObjectSequence`
@@ -128,32 +128,32 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
 
     /**
      * @description Returns eagerly concatenated `ObjectSequence` whose elements are all the
-     * elements of the first `IObjectIterable` followed by all the elements of the
-     * second `IObjectIterable`.
+     * elements of the first `Iterable<Object>` followed by all the elements of the
+     * second `Iterable<Object>`.
      * @example
      * IObjectIterable peopleSeq = ObjectSequence.concat(seq1, seq2);
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @return the new `ObjectSequence`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static IObjectIterable concat(final IObjectIterable iterable1, final IObjectIterable iterable2) {
-        return concat(new List<IObjectIterable>{ iterable1, iterable2 });
+    public static IObjectIterable concat(final Iterable<Object> iterable1, final Iterable<Object> iterable2) {
+        return concat(new List<Iterable<Object>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IObjectIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Object>>`.
      * @example
      * IObjectIterable peopleSeq = ObjectSequence.concat(sequences);
-     * @param iterables the list of `IObjectIterable`
+     * @param iterables the list of `Iterable<Object>`
      * @return the new `ObjectSequence`
-     * @throws NullPointerException if `iterables` or some of `IObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IObjectIterable concat(final List<IObjectIterable> iterables) {
+    public static IObjectIterable concat(final List<Iterable<Object>> iterables) {
         Validate.noNullElements(iterables);
         final List<Object> objects = new List<Object>();
         for (Integer i = 0, size = iterables.size(); i < size; i++) {
-            objects.addAll(iterables[i].toList());
+            objects.addAll(Iterators.toObjectList(iterables[i].iterator()));
         }
         return new ObjectSequence(objects);
     }
@@ -161,23 +161,23 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
     /**
      * @description Returns a combined `ObjectSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
         Validate.notNull(iterable2);
         Validate.notNull(combiner);
         final List<Object> results = new List<Object>();
-        final List<Object> left = iterable1.toList();
-        final List<Object> right = iterable2.toList();
+        final List<Object> left = Iterators.toObjectList(iterable1.iterator());
+        final List<Object> right = Iterators.toObjectList(iterable2.iterator());
         for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
             results.add(combiner.apply(left[i], right[i]));
         }
@@ -187,8 +187,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
     /**
      * @description Returns a combined `ObjectSequence` by applying `combiner` function
      * to each element at the same position, conditioned on satisfying `predicate`.
-     * @param iterable1 the first `IObjectIterable`
-     * @param iterable2 the second `IObjectIterable`
+     * @param iterable1 the first `Iterable<Object>`
+     * @param iterable2 the second `Iterable<Object>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `ObjectSequence`
@@ -196,8 +196,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      * `predicate` or `combiner` is null
      */
     public static IObjectIterable zip(
-            final IObjectIterable iterable1,
-            final IObjectIterable iterable2,
+            final Iterable<Object> iterable1,
+            final Iterable<Object> iterable2,
             final IBiPredicate predicate,
             final IBinaryOperator combiner
     ) {
@@ -206,8 +206,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
         Validate.notNull(predicate);
         Validate.notNull(combiner);
         final List<Object> results = new List<Object>();
-        final List<Object> left = iterable1.toList();
-        final List<Object> right = iterable2.toList();
+        final List<Object> left = Iterators.toObjectList(iterable1.iterator());
+        final List<Object> right = Iterators.toObjectList(iterable2.iterator());
         for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
             if (predicate.test(left[i], right[i])) {
                 results.add(combiner.apply(left[i], right[i]));
@@ -221,11 +221,11 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      * to the current sequence.
      * @example
      * IObjectIterable peopleSeq = seq1.append(seq2);
-     * @param iterable the `IObjectIterable` to append to the current sequence
+     * @param iterable the `Iterable<Object>` to append to the current sequence
      * @return the new `ObjectSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IObjectIterable append(final IObjectIterable iterable) {
+    public virtual IObjectIterable append(final Iterable<Object> iterable) {
         return concat(this, iterable);
     }
 
@@ -234,11 +234,11 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      * to the current sequence.
      * @example
      * IObjectIterable peopleSeq = seq1.prepend(seq2);
-     * @param iterable the `IObjectIterable` to prepend to the current sequence
+     * @param iterable the `Iterable<Object>` to prepend to the current sequence
      * @return the new `ObjectSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IObjectIterable prepend(final IObjectIterable iterable) {
+    public virtual IObjectIterable prepend(final Iterable<Object> iterable) {
         return concat(iterable, this);
     }
     // @end-group

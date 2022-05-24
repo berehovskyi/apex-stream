@@ -588,15 +588,15 @@ the new `ObjectSequence`
 IObjectIterable peopleSeq = Sequence.concat(stream1, stream2);
 ```
 
-### `static concat(ISObjectIterable iterable1, ISObjectIterable iterable2)`
+### `static concat(Iterable<SObject> iterable1, Iterable<SObject> iterable2)`
 
-Returns eagerly concatenated `SObjectSequence` whose elements are all the elements of the first `ISObjectIterable` followed by all the elements of the second `ISObjectIterable`.
+Returns eagerly concatenated `SObjectSequence` whose elements are all the elements of the first `Iterable<SObject>` followed by all the elements of the second `Iterable<SObject>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 
 #### Return
 
@@ -708,14 +708,14 @@ the new `DoubleSequence`
 IDoubleIterable doubleSeq = Sequence.concat(stream1, stream2);
 ```
 
-### `static concat(List<IObjectIterable> iterables)`
+### `static concat(List<Iterable<Object>> iterables)`
 
-Returns eagerly concatenates `List<IObjectIterable>`.
+Returns eagerly concatenates `List<Iterable<Object>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IObjectIterable`|
+|`iterables`|the list of `Iterable<Object>`|
 
 #### Return
 
@@ -730,21 +730,21 @@ the new `ObjectSequence`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 IObjectIterable peopleSeq = Sequence.concat(streams);
 ```
 
-### `static concat(List<ISObjectIterable> iterables)`
+### `static concat(List<Iterable<SObject>> iterables)`
 
-Returns eagerly concatenates `List<ISObjectIterable>`.
+Returns eagerly concatenates `List<Iterable<SObject>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ISObjectIterable`|
+|`iterables`|the list of `Iterable<SObject>`|
 
 #### Return
 
@@ -759,21 +759,21 @@ the new `SObjectSequence`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ISObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 ISObjectIterable accSeq = Sequence.concat(streams);
 ```
 
-### `static concat(List<IIntIterable> iterables)`
+### `static concat(List<Iterable<Integer>> iterables)`
 
-Returns eagerly concatenates `List<IIntIterable>`.
+Returns eagerly concatenates `List<Iterable<Integer>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IIntIterable`|
+|`iterables`|the list of `Iterable<Integer>`|
 
 #### Return
 
@@ -788,21 +788,21 @@ the new `IntSequence`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ILongIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 IIntIterable intSeq = Sequence.concat(streams);
 ```
 
-### `static concat(List<ILongIterable> iterables)`
+### `static concat(List<Iterable<Long>> iterables)`
 
-Returns eagerly concatenates `List<ILongIterable>`.
+Returns eagerly concatenates `List<Iterable<Long>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ILongIterable`|
+|`iterables`|the list of `Iterable<Long>`|
 
 #### Return
 
@@ -817,21 +817,21 @@ the new `LongSequence`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ILongIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 ILongIterable longSeq = Sequence.concat(streams);
 ```
 
-### `static concat(List<IDoubleIterable> iterables)`
+### `static concat(List<Iterable<Double>> iterables)`
 
-Returns eagerly concatenates `List<IDoubleIterable>`.
+Returns eagerly concatenates `List<Iterable<Double>>`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IDoubleIterable`|
+|`iterables`|the list of `Iterable<Double>`|
 
 #### Return
 
@@ -846,22 +846,22 @@ the new `DoubleSequence`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IDoubleIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 #### Example
 ```apex
 IDoubleIterable doubleSeq = Sequence.concat(streams);
 ```
 
-### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBinaryOperator combiner)`
+### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBinaryOperator combiner)`
 
 Returns a combined `ObjectSequence` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -879,15 +879,15 @@ the new `ObjectSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBinaryOperator combiner)`
+### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectSequence` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -907,22 +907,27 @@ the new `SObjectSequence`
 
 #### Example
 ```apex
-ISObjectIterable accountsWithMinAnnualRevenueStream = Sequence.zip(
+ISObjectIterable accountsWithMinAnnualRevenueSeq = Sequence.zip(
+    Trigger.old,
+    Trigger.new,
+    SObjectBinaryOperator.minBy(Account.AnnualRevenue)
+);
+ISObjectIterable accountsWithMinAnnualRevenueSeq = Sequence.zip(
     Sequence.of(Trigger.old),
     Sequence.of(Trigger.new),
     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
 );
 ```
 
-### `static zip(IIntIterable iterable1, IIntIterable iterable2, IIntBinaryOperator combiner)`
+### `static zip(Iterable<Integer> iterable1, Iterable<Integer> iterable2, IIntBinaryOperator combiner)`
 
 Returns a combined `IntSequence` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IIntIterable`|
-|`iterable2`|the second `IIntIterable`|
+|`iterable1`|the first `Iterable<Integer>`|
+|`iterable2`|the second `Iterable<Integer>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -940,15 +945,15 @@ the new `IntSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(ILongIterable iterable1, ILongIterable iterable2, ILongBinaryOperator combiner)`
+### `static zip(Iterable<Long> iterable1, Iterable<Long> iterable2, ILongBinaryOperator combiner)`
 
 Returns a combined `LongSequence` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ILongIterable`|
-|`iterable2`|the second `ILongIterable`|
+|`iterable1`|the first `Iterable<Long>`|
+|`iterable2`|the second `Iterable<Long>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -966,15 +971,15 @@ the new `LongSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(IDoubleIterable iterable1, IDoubleIterable iterable2, IDoubleBinaryOperator combiner)`
+### `static zip(Iterable<Double> iterable1, Iterable<Double> iterable2, IDoubleBinaryOperator combiner)`
 
 Returns a combined `DoubleSequence` by applying `combiner` function to each element at the same position.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IDoubleIterable`|
-|`iterable2`|the second `IDoubleIterable`|
+|`iterable1`|the first `Iterable<Double>`|
+|`iterable2`|the second `Iterable<Double>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 #### Return
@@ -992,15 +997,15 @@ the new `DoubleSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
+### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
 
 Returns a combined `ObjectSequence` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -1019,15 +1024,15 @@ the new `ObjectSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2`, `predicate` or `combiner` is null|
 
-### `static zip(ISObjectIterable iterable1, ISObjectIterable iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
+### `static zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, ISObjectBiPredicate predicate, ISObjectBinaryOperator combiner)`
 
 Returns a combined `SObjectStream` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ISObjectIterable`|
-|`iterable2`|the second `ISObjectIterable`|
+|`iterable1`|the first `Iterable<SObject>`|
+|`iterable2`|the second `Iterable<SObject>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -1048,6 +1053,12 @@ the new `SObjectStream`
 
 #### Example
 ```apex
+ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
+    Trigger.old,
+    Trigger.new,
+    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBinaryOperator.right()
+);
 ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
     Sequence.of(Trigger.old),
     Sequence.of(Trigger.new),

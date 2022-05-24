@@ -17,7 +17,7 @@ public interface ILongIterable extends Iterable<Long> {
      * @param iterable the other iterable
      * @return the new `ILongIterable`
      */
-    ILongIterable append(ILongIterable iterable);
+    ILongIterable append(Iterable<Long> iterable);
 
     /**
      * @description Returns a new `ILongIterable` from the current
@@ -26,7 +26,7 @@ public interface ILongIterable extends Iterable<Long> {
      * @param iterable the other iterable
      * @return the new `ILongIterable`
      */
-    ILongIterable prepend(ILongIterable iterable);
+    ILongIterable prepend(Iterable<Long> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Conversion Operations">

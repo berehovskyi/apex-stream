@@ -135,32 +135,32 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
 
     /**
      * @description Returns eagerly concatenated `LongSequence` whose elements are all the
-     * elements of the first `ILongIterable` followed by all the elements of the
-     * second `ILongIterable`.
+     * elements of the first `Iterable<Long>` followed by all the elements of the
+     * second `Iterable<Long>`.
      * @example
      * ILongIterable longSeq = LongSequence.concat(seq1, seq2);
-     * @param iterable1 the first `ILongIterable`
-     * @param iterable2 the second `ILongIterable`
+     * @param iterable1 the first `Iterable<Long>`
+     * @param iterable2 the second `Iterable<Long>`
      * @return the new `LongSequence`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ILongIterable concat(final ILongIterable iterable1, final ILongIterable iterable2) {
-        return concat(new List<ILongIterable>{ iterable1, iterable2 });
+    public static ILongIterable concat(final Iterable<Long> iterable1, final Iterable<Long> iterable2) {
+        return concat(new List<Iterable<Long>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ILongIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<Long>>`.
      * @example
      * ILongIterable longSeq = LongStream.concat(seqs);
-     * @param iterables the list of `ILongIterable`
+     * @param iterables the list of `Iterable<Long>`
      * @return the new `LongSequence`
-     * @throws NullPointerException if `iterables` or some of `ILongIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ILongIterable concat(final List<ILongIterable> iterables) {
+    public static ILongIterable concat(final List<Iterable<Long>> iterables) {
         Validate.noNullElements(iterables);
         final List<Long> longs = new List<Long>();
         for (Integer i = 0, size = iterables.size(); i < size; i++) {
-            longs.addAll(iterables[i].toList());
+            longs.addAll(Iterators.toLongList(iterables[i].iterator()));
         }
         return new LongSequence(longs);
     }
@@ -168,23 +168,23 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a combined `LongSequence` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `ILongIterable`
-     * @param iterable2 the second `ILongIterable`
+     * @param iterable1 the first `Iterable<Long>`
+     * @param iterable2 the second `Iterable<Long>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `LongSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ILongIterable zip(
-            final ILongIterable iterable1,
-            final ILongIterable iterable2,
+            final Iterable<Long> iterable1,
+            final Iterable<Long> iterable2,
             final ILongBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
         Validate.notNull(iterable2);
         Validate.notNull(combiner);
         final List<Long> results = new List<Long>();
-        final List<Long> left = iterable1.toList();
-        final List<Long> right = iterable2.toList();
+        final List<Long> left = Iterators.toLongList(iterable1.iterator());
+        final List<Long> right = Iterators.toLongList(iterable2.iterator());
         for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
             results.add(combiner.apply(left[i], right[i]));
         }
@@ -196,11 +196,11 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * to the current sequence.
      * @example
      * ILongIterable longSeq = seq1.append(seq2);
-     * @param iterable the `ILongIterable` to append to the current sequence
+     * @param iterable the `Iterable<Long>` to append to the current sequence
      * @return the new `LongSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ILongIterable append(final ILongIterable iterable) {
+    public virtual ILongIterable append(final Iterable<Long> iterable) {
         return concat(this, iterable);
     }
 
@@ -209,11 +209,11 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * to the current sequence.
      * @example
      * ILongIterable longSeq = seq1.prepend(seq2);
-     * @param iterable the `ILongIterable` to prepend to the current sequence
+     * @param iterable the `Iterable<Long>` to prepend to the current sequence
      * @return the new `LongSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ILongIterable prepend(final ILongIterable iterable) {
+    public virtual ILongIterable prepend(final Iterable<Long> iterable) {
         return concat(iterable, this);
     }
     // @end-group

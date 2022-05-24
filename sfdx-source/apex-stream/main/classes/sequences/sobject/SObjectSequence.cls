@@ -126,34 +126,34 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
 
     /**
      * @description Returns eagerly concatenated `SObjectSequence` whose elements are all the
-     * elements of the first `ISObjectIterable` followed by all the elements of the
-     * second `ISObjectIterable`.
+     * elements of the first `Iterable<SObject>` followed by all the elements of the
+     * second `Iterable<SObject>`.
      * @example
      * ISObjectIterable accSeq = SObjectSequence.concat(seq1, seq2);
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ISObjectIterable concat(final ISObjectIterable iterable1, final ISObjectIterable iterable2) {
+    public static ISObjectIterable concat(final Iterable<SObject> iterable1, final Iterable<SObject> iterable2) {
         Validate.notNull(iterable1);
         Validate.notNull(iterable2);
-        return concat(new List<ISObjectIterable>{ iterable1, iterable2 });
+        return concat(new List<Iterable<SObject>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ISObjectIterable>`.
+     * @description Returns eagerly concatenates `List<Iterable<SObject>>`.
      * @example
      * ISObjectIterable accSeq = SObjectSequence.concat(sequences);
-     * @param iterables the list of `ISObjectIterable`
+     * @param iterables the list of `Iterable<SObject>`
      * @return the new `SObjectSequence`
-     * @throws NullPointerException if `iterables` or some of `ISObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ISObjectIterable concat(final List<ISObjectIterable> iterables) {
+    public static ISObjectIterable concat(final List<Iterable<SObject>> iterables) {
         Validate.noNullElements(iterables);
         final List<SObject> results = new List<SObject>();
         for (Integer i = 0, size = iterables.size(); i < size; i++) {
-            results.addAll(iterables[i].toList());
+            results.addAll(Iterators.toSObjectList(iterables[i].iterator()));
         }
         return new SObjectSequence(results);
     }
@@ -163,27 +163,27 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * to each element at the same position.
      * @example
      * ISObjectIterable accountsWithMinAnnualRevenueSeq = SObjectSequence.zip(
-     *     SObjectSequence.of(Trigger.old),
-     *     SObjectSequence.of(Trigger.new),
+     *     Trigger.old,
+     *     Trigger.new,
      *     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
         Validate.notNull(iterable2);
         Validate.notNull(combiner);
         final List<SObject> results = new List<SObject>();
-        final List<SObject> left = iterable1.toList();
-        final List<SObject> right = iterable2.toList();
+        final List<SObject> left = Iterators.toSObjectList(iterable1.iterator());
+        final List<SObject> right = Iterators.toSObjectList(iterable2.iterator());
         for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
             results.add(combiner.apply(left[i], right[i]));
         }
@@ -195,13 +195,13 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * to each element at the same position, conditioned on satisfying `predicate`.
      * @example
      * ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = SObjectSequence.zip(
-     *     SObjectSequence.of(Trigger.old),
-     *     SObjectSequence.of(Trigger.new),
+     *     Trigger.old,
+     *     Trigger.new,
      *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectSequence`
@@ -209,8 +209,8 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * `predicate` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBiPredicate predicate,
             final ISObjectBinaryOperator combiner
     ) {
@@ -219,8 +219,8 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
         Validate.notNull(predicate);
         Validate.notNull(combiner);
         final List<SObject> results = new List<SObject>();
-        final List<SObject> left = iterable1.toList();
-        final List<SObject> right = iterable2.toList();
+        final List<SObject> left = Iterators.toSObjectList(iterable1.iterator());
+        final List<SObject> right = Iterators.toSObjectList(iterable2.iterator());
         for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
             if (predicate.test(left[i], right[i])) {
                 results.add(combiner.apply(left[i], right[i]));
@@ -234,11 +234,11 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * to the current sequence.
      * @example
      * ISObjectIterable accSeq = seq.append(seq1);
-     * @param iterable the `ISObjectIterable` to append to the current sequence
+     * @param iterable the `Iterable<SObject>` to append to the current sequence
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ISObjectIterable append(final ISObjectIterable iterable) {
+    public virtual ISObjectIterable append(final Iterable<SObject> iterable) {
         return concat(this, iterable);
     }
 
@@ -247,11 +247,11 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * to the current sequence.
      * @example
      * ISObjectIterable accSeq = seq.prepend(seq2);
-     * @param iterable the `ISObjectIterable` to prepend to the current sequence
+     * @param iterable the `Iterable<SObject>` to prepend to the current sequence
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ISObjectIterable prepend(final ISObjectIterable iterable) {
+    public virtual ISObjectIterable prepend(final Iterable<SObject> iterable) {
         return concat(iterable, this);
     }
     // @end-group

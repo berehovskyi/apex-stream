@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-An entity that takes one argument of `Object` type and returns an `Double` value.
+An entity that takes one argument of `Object` type and returns a `Double` value.
 
 
 **Author** O. Berehovskyi

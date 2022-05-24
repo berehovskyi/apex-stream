@@ -46,7 +46,7 @@
  */
 public virtual inherited sharing class SObjectStream extends SObjectIterable implements ISObjectIterable {
 
-    private final Iterator<SObject> iterator;
+    private final transient Iterator<SObject> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
@@ -103,6 +103,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * @example
      * ISObjectIterable accStream = SObjectStream.of(new List<Account>(accounts));
      * ISObjectIterable accStream = SObjectStream.of((Iterable<Account>) new Set<Account>(accounts));
+     * ISObjectIterable accStream = SObjectStream.of(stream1);
      * @param iterable the iterable
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable` is null
@@ -118,6 +119,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * @example
      * ISObjectIterable accStream = SObjectStream.ofNullable(new List<Account>(accounts));
      * ISObjectIterable accStream = SObjectStream.ofNullable((Iterable<Account>) new Set<Account>(accounts));
+     * ISObjectIterable accStream = SObjectStream.ofNullable(stream1);
      * @param iterable the iterable
      * @return the new `SObjectStream` if `iterable` is non-null,
      * otherwise an empty `SObjectStream`
@@ -185,34 +187,35 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
     }
 
     /**
-     * @description Returns eagerly concatenated `SObjectStream` whose elements are all the
-     * elements of the first `ISObjectIterable` followed by all the elements of the
-     * second `ISObjectIterable`.
+     * @description Returns lazily concatenated `SObjectStream` whose elements are all the
+     * elements of the first `Iterable<SObject>` followed by all the elements of the
+     * second `Iterable<SObject>`.
      * @example
      * ISObjectIterable accStream = SObjectStream.concat(stream1, stream2);
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * ISObjectIterable accStream = SObjectStream.concat(accounts1, accounts2);
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ISObjectIterable concat(final ISObjectIterable iterable1, final ISObjectIterable iterable2) {
-        return concat(new List<ISObjectIterable>{ iterable1, iterable2 });
+    public static ISObjectIterable concat(final Iterable<SObject> iterable1, final Iterable<SObject> iterable2) {
+        return concat(new List<Iterable<SObject>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<ISObjectIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<SObject>>`.
      * @example
      * ISObjectIterable accStream = SObjectStream.concat(streams);
-     * @param iterables the list of `ISObjectIterable`
+     * @param iterables the list of `Iterable<SObject>`
      * @return the new `SObjectStream`
-     * @throws NullPointerException if `iterables` or some of `ISObjectIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static ISObjectIterable concat(final List<ISObjectIterable> iterables) {
+    public static ISObjectIterable concat(final List<Iterable<SObject>> iterables) {
         Validate.noNullElements(iterables);
         final List<Iterator<SObject>> iterators = new List<Iterator<SObject>>();
-        final Iterator<ISObjectIterable> iterator = iterables.iterator();
+        final Iterator<Iterable<SObject>> iterator = iterables.iterator();
         while (iterator.hasNext()) {
-            final ISObjectIterable iterable = iterator.next();
+            final Iterable<SObject> iterable = iterator.next();
             iterators.add(iterable.iterator());
         }
         return new SObjectStream(new SObjectConcatIterator(iterators));
@@ -223,19 +226,19 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * to each element at the same position.
      * @example
      * ISObjectIterable accountsWithMinAnnualRevenueStream = SObjectStream.zip(
-     *     SObjectStream.of(Trigger.old),
-     *     SObjectStream.of(Trigger.new),
+     *     Trigger.old,
+     *     Trigger.new,
      *     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
@@ -249,13 +252,13 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * to each element at the same position, conditioned on satisfying `predicate`.
      * @example
      * ISObjectIterable newAccountsWithChangedAnnualRevenueStream = SObjectStream.zip(
-     *     SObjectStream.of(Trigger.old),
-     *     SObjectStream.of(Trigger.new),
+     *     Trigger.old,
+     *     Trigger.new,
      *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
-     * @param iterable1 the first `ISObjectIterable`
-     * @param iterable2 the second `ISObjectIterable`
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `SObjectStream`
@@ -263,8 +266,8 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * `predicate` or `combiner` is null
      */
     public static ISObjectIterable zip(
-            final ISObjectIterable iterable1,
-            final ISObjectIterable iterable2,
+            final Iterable<SObject> iterable1,
+            final Iterable<SObject> iterable2,
             final ISObjectBiPredicate predicate,
             final ISObjectBinaryOperator combiner
     ) {
@@ -285,11 +288,11 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * to the current stream.
      * @example
      * ISObjectIterable accStream = stream1.append(stream2);
-     * @param iterable the `ISObjectIterable` to append to the current stream
+     * @param iterable the `Iterable<SObject>` to append to the current stream
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ISObjectIterable append(final ISObjectIterable iterable) {
+    public virtual ISObjectIterable append(final Iterable<SObject> iterable) {
         return concat(this, iterable);
     }
 
@@ -298,11 +301,11 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * to the current stream.
      * @example
      * ISObjectIterable accStream = stream1.prepend(stream2);
-     * @param iterable the `ISObjectIterable` to prepend to the current stream
+     * @param iterable the `Iterable<SObject>` to prepend to the current stream
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ISObjectIterable prepend(final ISObjectIterable iterable) {
+    public virtual ISObjectIterable prepend(final Iterable<SObject> iterable) {
         return concat(iterable, this);
     }
     // @end-group

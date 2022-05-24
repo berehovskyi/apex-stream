@@ -14,7 +14,7 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      * @param iterable the other iterable
      * @return the new `ISObjectIterable`
      */
-    ISObjectIterable append(ISObjectIterable iterable);
+    ISObjectIterable append(Iterable<SObject> iterable);
 
     /**
      * @description Returns a new `ISObjectIterable` from the current
@@ -23,7 +23,7 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      * @param iterable the other iterable
      * @return the new `ISObjectIterable`
      */
-    ISObjectIterable prepend(ISObjectIterable iterable);
+    ISObjectIterable prepend(Iterable<SObject> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Intermediate Operations">

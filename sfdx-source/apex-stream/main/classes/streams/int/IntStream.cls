@@ -18,7 +18,7 @@
  */
 public virtual inherited sharing class IntStream extends IntIterable implements IIntIterable {
 
-    private final Iterator<Integer> iterator;
+    private final transient Iterator<Integer> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
@@ -183,34 +183,34 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     }
 
     /**
-     * @description Returns eagerly concatenated `IntStream` whose elements are all the
-     * elements of the first `IIntIterable` followed by all the elements of the
-     * second `IIntIterable`.
+     * @description Returns lazily concatenated `IntStream` whose elements are all the
+     * elements of the first `Iterable<Integer>` followed by all the elements of the
+     * second `Iterable<Integer>`.
      * @example
      * IIntIterable intStream = IntStream.concat(stream1, stream2);
-     * @param iterable1 the first `IIntIterable`
-     * @param iterable2 the second `IIntIterable`
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
      * @return the new `IntStream`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static IIntIterable concat(final IIntIterable iterable1, final IIntIterable iterable2) {
-        return concat(new List<IIntIterable>{ iterable1, iterable2 });
+    public static IIntIterable concat(final Iterable<Integer> iterable1, final Iterable<Integer> iterable2) {
+        return concat(new List<Iterable<Integer>>{ iterable1, iterable2 });
     }
 
     /**
-     * @description Returns eagerly concatenates `List<IIntIterable>`.
+     * @description Returns lazily concatenated `List<Iterable<Integer>>`.
      * @example
      * IIntIterable intStream = IntStream.concat(streams);
-     * @param iterables the list of `IIntIterable`
+     * @param iterables the list of `Iterable<Integer>`
      * @return the new `IntStream`
-     * @throws NullPointerException if `iterables` or some of `IIntIterable` in a list is null
+     * @throws NullPointerException if `iterables` or some element in a list is null
      */
-    public static IIntIterable concat(final List<IIntIterable> iterables) {
+    public static IIntIterable concat(final List<Iterable<Integer>> iterables) {
         Validate.noNullElements(iterables);
         final List<Iterator<Integer>> iterators = new List<Iterator<Integer>>();
-        final Iterator<IIntIterable> iterator = iterables.iterator();
+        final Iterator<Iterable<Integer>> iterator = iterables.iterator();
         while (iterator.hasNext()) {
-            final IIntIterable iterable = iterator.next();
+            final Iterable<Integer> iterable = iterator.next();
             iterators.add(iterable.iterator());
         }
         return new IntStream(new IntConcatIterator(iterators));
@@ -219,15 +219,15 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a combined `IntStream` by applying `combiner` function
      * to each element at the same position.
-     * @param iterable1 the first `IIntIterable`
-     * @param iterable2 the second `IIntIterable`
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
      * @param combiner the binary operator to be applied to each element at the same position
      * @return the new `IntStream`
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IIntIterable zip(
-            final IIntIterable iterable1,
-            final IIntIterable iterable2,
+            final Iterable<Integer> iterable1,
+            final Iterable<Integer> iterable2,
             final IIntBinaryOperator combiner
     ) {
         Validate.notNull(iterable1);
@@ -241,11 +241,11 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * to the current stream.
      * @example
      * IIntIterable intStream = stream1.append(stream2);
-     * @param iterable the `IIntIterable` to append to the current stream
+     * @param iterable the `Iterable<Integer>` to append to the current stream
      * @return the new `IntStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IIntIterable append(final IIntIterable iterable) {
+    public virtual IIntIterable append(final Iterable<Integer> iterable) {
         return concat(this, iterable);
     }
 
@@ -254,11 +254,11 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * to the current stream.
      * @example
      * IIntIterable intStream = stream1.prepend(stream2);
-     * @param iterable the `IIntIterable` to prepend to the current stream
+     * @param iterable the `Iterable<Integer>` to prepend to the current stream
      * @return the new `IntStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IIntIterable prepend(final IIntIterable iterable) {
+    public virtual IIntIterable prepend(final Iterable<Integer> iterable) {
         return concat(iterable, this);
     }
     // @end-group

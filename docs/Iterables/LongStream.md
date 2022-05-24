@@ -288,15 +288,15 @@ the new `LongStream`
 |---|---|
 |`NullPointerException`|if `supplier` or `supplier` is null|
 
-##### `static concat(ILongIterable iterable1, ILongIterable iterable2)`
+##### `static concat(Iterable<Long> iterable1, Iterable<Long> iterable2)`
 
-Returns eagerly concatenated `LongStream` whose elements are all the elements of the first `ILongIterable` followed by all the elements of the second `ILongIterable`.
+Returns lazily concatenated `LongStream` whose elements are all the elements of the first `Iterable<Long>` followed by all the elements of the second `Iterable<Long>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ILongIterable`|
-|`iterable2`|the second `ILongIterable`|
+|`iterable1`|the first `Iterable<Long>`|
+|`iterable2`|the second `Iterable<Long>`|
 
 ###### Return
 
@@ -318,14 +318,14 @@ the new `LongStream`
 ILongIterable longStream = LongStream.concat(stream1, stream2);
 ```
 
-##### `static concat(List<ILongIterable> iterables)`
+##### `static concat(List<Iterable<Long>> iterables)`
 
-Returns eagerly concatenates `List<ILongIterable>`.
+Returns lazily concatenated `List<Iterable<Long>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `ILongIterable`|
+|`iterables`|the list of `Iterable<Long>`|
 
 ###### Return
 
@@ -340,22 +340,22 @@ the new `LongStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `ILongIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 ILongIterable longStream = LongStream.concat(streams);
 ```
 
-##### `static zip(ILongIterable iterable1, ILongIterable iterable2, ILongBinaryOperator combiner)`
+##### `static zip(Iterable<Long> iterable1, Iterable<Long> iterable2, ILongBinaryOperator combiner)`
 
 Returns a combined `LongStream` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `ILongIterable`|
-|`iterable2`|the second `ILongIterable`|
+|`iterable1`|the first `Iterable<Long>`|
+|`iterable2`|the second `Iterable<Long>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -373,14 +373,14 @@ the new `LongStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(ILongIterable iterable)`
+##### `append(Iterable<Long> iterable)`
 
 Returns new `LongStream` by appending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ILongIterable` to append to the current stream|
+|`iterable`|the `Iterable<Long>` to append to the current stream|
 
 ###### Return
 
@@ -402,14 +402,14 @@ the new `LongStream`
 ILongIterable longStream = stream1.append(stream2);
 ```
 
-##### `prepend(ILongIterable iterable)`
+##### `prepend(Iterable<Long> iterable)`
 
 Returns new `LongStream` by prepending `iterable` to the current stream.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `ILongIterable` to prepend to the current stream|
+|`iterable`|the `Iterable<Long>` to prepend to the current stream|
 
 ###### Return
 

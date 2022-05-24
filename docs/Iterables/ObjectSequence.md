@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-A sequence of `Object` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as ObjectSequence.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectSequence.count() or ObjectSequence.collect(ICollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/Iterables/IntSequence.md), [LongSequence](/Iterables/LongSequence.md), and [DoubleSequence](/Iterables/DoubleSequence.md) and [SObjectSequence](/Iterables/SObjectSequence.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
+A sequence of `Object` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as ObjectSequence.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectSequence.count() or ObjectSequence.collect(ICollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/docs/Iterables/IntSequence.md), [LongSequence](/docs/Iterables/LongSequence.md), and [DoubleSequence](/docs/Iterables/DoubleSequence.md) and [SObjectSequence](/docs/Iterables/SObjectSequence.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
 
 
 **Author** O. Berehovskyi
@@ -125,7 +125,7 @@ the new `ObjectSequence` if `objects` is non-null, otherwise an empty `ObjectSeq
 ###### Example
 ```apex
 IObjectIterable peopleSeq = ObjectSequence.ofNullable(new List<Person>(people));
-IObjectIterable emptypeopleSeq = ObjectSequence.ofNullable(null);
+IObjectIterable emptyPeopleSeq = ObjectSequence.ofNullable(null);
 ```
 
 ##### `static ofNullable(Set<Object> objects)`
@@ -167,15 +167,15 @@ IObjectIterable
 
 the empty `ObjectSequence`
 
-##### `static concat(IObjectIterable iterable1, IObjectIterable iterable2)`
+##### `static concat(Iterable<Object> iterable1, Iterable<Object> iterable2)`
 
-Returns eagerly concatenated `ObjectSequence` whose elements are all the elements of the first `IObjectIterable` followed by all the elements of the second `IObjectIterable`.
+Returns eagerly concatenated `ObjectSequence` whose elements are all the elements of the first `Iterable<Object>` followed by all the elements of the second `Iterable<Object>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 
 ###### Return
 
@@ -197,14 +197,14 @@ the new `ObjectSequence`
 IObjectIterable peopleSeq = ObjectSequence.concat(seq1, seq2);
 ```
 
-##### `static concat(List<IObjectIterable> iterables)`
+##### `static concat(List<Iterable<Object>> iterables)`
 
-Returns eagerly concatenates `List<IObjectIterable>`.
+Returns eagerly concatenates `List<Iterable<Object>>`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterables`|the list of `IObjectIterable`|
+|`iterables`|the list of `Iterable<Object>`|
 
 ###### Return
 
@@ -219,22 +219,22 @@ the new `ObjectSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterables` or some of `IObjectIterable` in a list is null|
+|`NullPointerException`|if `iterables` or some element in a list is null|
 
 ###### Example
 ```apex
 IObjectIterable peopleSeq = ObjectSequence.concat(sequences);
 ```
 
-##### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBinaryOperator combiner)`
+##### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBinaryOperator combiner)`
 
 Returns a combined `ObjectSequence` by applying `combiner` function to each element at the same position.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
 ###### Return
@@ -252,15 +252,15 @@ the new `ObjectSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `static zip(IObjectIterable iterable1, IObjectIterable iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
+##### `static zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBinaryOperator combiner)`
 
 Returns a combined `ObjectSequence` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `IObjectIterable`|
-|`iterable2`|the second `IObjectIterable`|
+|`iterable1`|the first `Iterable<Object>`|
+|`iterable2`|the second `Iterable<Object>`|
 |`predicate`|the binary predicate|
 |`combiner`|the binary operator to be applied to each element at the same position|
 
@@ -279,14 +279,14 @@ the new `ObjectSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2`, `predicate` or `combiner` is null|
 
-##### `append(IObjectIterable iterable)`
+##### `append(Iterable<Object> iterable)`
 
 Returns new `ObjectSequence` by appending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IObjectIterable` to append to the current sequence|
+|`iterable`|the `Iterable<Object>` to append to the current sequence|
 
 ###### Return
 
@@ -308,14 +308,14 @@ the new `ObjectSequence`
 IObjectIterable peopleSeq = seq1.append(seq2);
 ```
 
-##### `prepend(IObjectIterable iterable)`
+##### `prepend(Iterable<Object> iterable)`
 
 Returns new `ObjectSequence` by prepending `iterable` to the current sequence.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`iterable`|the `IObjectIterable` to prepend to the current sequence|
+|`iterable`|the `Iterable<Object>` to prepend to the current sequence|
 
 ###### Return
 

@@ -16,7 +16,7 @@ A sequence of `SObject` elements core supporting aggregate operations.
 **See** [ISObjectIterable](/docs/Iterables/ISObjectIterable.md)
 
 ## Methods
-### `append(ISObjectIterable iterable)`
+### `append(Iterable<SObject> iterable)`
 
 Returns a new `ISObjectIterable` from the current to which another `iterable` is appended. <p>Intermediate Operation.</p>
 
@@ -35,7 +35,7 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
-### `prepend(ISObjectIterable iterable)`
+### `prepend(Iterable<SObject> iterable)`
 
 Returns a new `ISObjectIterable` from the current to which another `iterable` is prepended. <p>Intermediate Operation.</p>
 
