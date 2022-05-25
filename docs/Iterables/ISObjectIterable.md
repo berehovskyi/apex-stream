@@ -859,6 +859,63 @@ OptionalDouble
 
 field arithmetic mean of field values
 
+### `toList(ISObjectFunction mapper)`
+
+Accumulates elements returned by `mapper` into a `List<Object>`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements
+
+### `toList(String fieldName)`
+
+Accumulates `Object` elements into a `List<Object>` according to `fieldName`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements
+
+### `toList(SObjectField field)`
+
+Accumulates `Object` elements into a `List<Object>` according to `field`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements
+
 ### `toList(ISObjectFunction mapper, Type listType)`
 
 Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`. <p>Terminal Operation.</p>

@@ -27,6 +27,30 @@ public interface IObjectIterable extends Iterable<Object> {
      * @return the new `IObjectIterable`
      */
     IObjectIterable prepend(Iterable<Object> iterable);
+
+    /**
+     * @description Returns a new `IObjectIterable` as a set union 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable union(Iterable<Object> iterable);
+
+    /**
+     * @description Returns a new `IObjectIterable` as a set intersection 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable intersect(Iterable<Object> iterable);
+
+    /**
+     * @description Returns a new `IObjectIterable` as a set difference 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable except(Iterable<Object> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Intermediate Operations">

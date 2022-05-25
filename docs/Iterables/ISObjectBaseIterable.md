@@ -54,6 +54,63 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
+### `union(Iterable<SObject> iterable)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `intersect(Iterable<SObject> iterable)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `except(Iterable<SObject> iterable)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
 ### `filter(ISObjectPredicate predicate)`
 
 Returns a new `ISObjectIterable` with `SObject` elements that match `predicate`. <p>Intermediate Operation.</p>

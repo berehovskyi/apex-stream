@@ -249,13 +249,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
      * @description Returns a `DoublePredicate` that tests the input Double if it is contained in
      * the `container`.
      * @example
-     * DoublePredicate.isIn(container);
-     * @param container the list that checks for the presence of an element
+     * DoublePredicate.isIn(new List<Double>{ 1.5, 5.1, Math.PI });
+     * DoublePredicate.isIn((Iterable<Double>) new Set<Double>{ 1.5, 5.1, Math.PI });
+     * DoublePredicate.isIn(doubleStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `DoublePredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static DoublePredicate isIn(final List<Double> container) {
+    public static DoublePredicate isIn(final Iterable<Double> container) {
         return new IsIn(container);
     }
 
@@ -263,13 +265,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
      * @description Returns a `DoublePredicate` that tests the input Double if it is not contained in
      * the `container`.
      * @example
-     * DoublePredicate.isNotIn(container);
-     * @param container the list that checks for the presence of an element
+     * DoublePredicate.isNotIn(new List<Double>{ 1.5, 5.1, Math.PI });
+     * DoublePredicate.isNotIn((Iterable<Double>) new Set<Double>{ 1.5, 5.1, Math.PI });
+     * DoublePredicate.isNotIn(doubleStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `DoublePredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static DoublePredicate isNotIn(final List<Double> container) {
+    public static DoublePredicate isNotIn(final Iterable<Double> container) {
         return isIn(container).negate();
     }
     //</editor-fold>
@@ -399,8 +403,8 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     }
 
     private class IsIn extends DoublePredicate {
-        private final List<Double> doubles;
-        public IsIn(List<Double> doubles) { this.doubles = doubles; }
+        private final Set<Double> doubles;
+        public IsIn(Iterable<Double> doubles) { this.doubles = Iterators.toDoubleSet(doubles.iterator()); }
         public override Boolean test(Double d) { return doubles.contains(d); }
     }
     // @end-group

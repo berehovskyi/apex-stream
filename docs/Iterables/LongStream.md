@@ -373,7 +373,7 @@ the new `LongStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(Iterable<Long> iterable)`
+##### `override append(Iterable<Long> iterable)`
 
 Returns new `LongStream` by appending `iterable` to the current stream.
 
@@ -696,7 +696,7 @@ the `LongStream`
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `LongStream` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

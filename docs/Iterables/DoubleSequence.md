@@ -266,7 +266,7 @@ the new `DoubleSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(Iterable<Double> iterable)`
+##### `override append(Iterable<Double> iterable)`
 
 Returns new `DoubleSequence` by appending `iterable` to the current sequence.
 
@@ -589,7 +589,7 @@ this `DoubleSequence`
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `DoubleSequence` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

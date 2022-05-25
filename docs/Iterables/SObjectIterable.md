@@ -13,6 +13,90 @@ Provides a skeletal implementation of [ISObjectIterable](/docs/Iterables/ISObjec
 **Group** Iterables
 
 ## Methods
+### `append(Iterable<SObject> iterable)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `union(Iterable<SObject> iterable)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> union = accountsIterable1.union(accounts2).toList();
+// [acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc0]
+```
+
+### `intersect(Iterable<SObject> iterable)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> intersection = accountsIterable1.intersect(accounts2).toList(); // [acc3, acc9]
+```
+
+### `except(Iterable<SObject> iterable)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> diff = accountsIterable1.except(accounts2).toList(); // [acc5, acc7]
+```
+
 ### `filter(ISObjectPredicate predicate)`
 #### Parameters
 |Param|Description|
@@ -858,6 +942,7 @@ List<Account> sortedAccountsByNameDesc = accountsIterable
     .toList();
 ```
 
+### `distinct()`
 ### `reduce(ISObjectBinaryOperator accumulator)`
 #### Parameters
 |Param|Description|
@@ -1525,6 +1610,79 @@ field arithmetic mean of field values
 Double avgAnnualRevenue = accountsIterable
     .avg(Account.AnnualRevenue)
     .get();
+```
+
+### `toList(ISObjectFunction mapper)`
+
+Accumulates elements returned by `mapper` into a `List<Object>`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements
+
+#### Example
+```apex
+List<Object> accountNames = accountsIterable.toList(SObjectFunction.get('Name'));
+```
+
+### `toList(String fieldName)`
+
+Accumulates `Object` elements into a `List<Object>` according to `fieldName`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements
+
+#### Example
+```apex
+List<Object> accountNames = accountsIterable.toList('Name');
+<p>Terminal Operation.</p>
+```
+
+### `toList(SObjectField field)`
+
+Accumulates `Object` elements into a `List<Object>` according to `field`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+List<Object>
+
+**Description**
+
+the `List<Object>` containing the collected elements
+
+#### Example
+```apex
+List<Object> accountNames = accountsIterable.toList(Account.Name);
 ```
 
 ### `toList(ISObjectFunction mapper, Type listType)`

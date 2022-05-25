@@ -238,7 +238,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @return the new `DoubleStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IDoubleIterable append(final Iterable<Double> iterable) {
+    public virtual override IDoubleIterable append(final Iterable<Double> iterable) {
         return concat(this, iterable);
     }
 
@@ -410,7 +410,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *     .toList();
      * @return the `DoubleStream`
      */
-    public virtual IDoubleIterable distinct() {
+    public virtual override IDoubleIterable distinct() {
         return new DoubleStream(new DoubleDistinctIterator(iterator()));
     }
 

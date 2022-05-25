@@ -113,6 +113,41 @@ private class DoubleSequenceTest {
     }
 
     /**
+     * @see IDoubleIterable.union
+     * @see IDoubleIterable.intersect
+     * @see IDoubleIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Double> input = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+        List<Double> input1 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+        IDoubleIterable seq = DoubleSequence.of(input).union(input1);
+        IDoubleIterable seq1 = DoubleSequence.of(input).union(DoubleSequence.of(input1));
+        IDoubleIterable seq2 = DoubleSequence.of(input).intersect(input1);
+        IDoubleIterable seq3 = DoubleSequence.of(input).intersect(DoubleSequence.of(input1));
+        IDoubleIterable seq4 = DoubleSequence.of(input).except(input1);
+        IDoubleIterable seq5 = DoubleSequence.of(input).except(DoubleSequence.of(input1));
+        // When
+        List<Double> actual = seq.toList();
+        List<Double> actual1 = seq1.toList();
+        List<Double> actual2 = seq2.toList();
+        List<Double> actual3 = seq3.toList();
+        List<Double> actual4 = seq4.toList();
+        List<Double> actual5 = seq5.toList();
+        // Then
+        List<Double> expected = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 8.0, 6.0, 4.0, 1.0, 0.0 };
+        List<Double> expected1 = new List<Double>{ 3.0, 9.0 };
+        List<Double> expected2 = new List<Double>{ 5.0, 7.0 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+    }
+
+    /**
     * @see DoubleSequence.toObjectIterable
     */
     @IsTest

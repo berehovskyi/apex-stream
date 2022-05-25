@@ -238,7 +238,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ISObjectIterable append(final Iterable<SObject> iterable) {
+    public virtual override ISObjectIterable append(final Iterable<SObject> iterable) {
         return concat(this, iterable);
     }
 
@@ -478,7 +478,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *     .toList();
      * @return the `SObjectSequence`
      */
-    public virtual ISObjectIterable distinct() {
+    public virtual override ISObjectIterable distinct() {
         final List<SObject> results = new List<SObject>();
         for (Integer i = 0, size = sObjects.size(); i < size; i++) {
             if (!results.contains(sObjects[i])) {

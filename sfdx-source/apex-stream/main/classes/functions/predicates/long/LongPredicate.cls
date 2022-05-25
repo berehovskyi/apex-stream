@@ -249,13 +249,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
      * @description Returns a `LongPredicate` that tests the input Long if it is contained in
      * the `container`.
      * @example
-     * LongPredicate.isIn(container);
-     * @param container the list that checks for the presence of an element
+     * LongPredicate.isIn(new List<Long>{ 1, 5, -7 });
+     * LongPredicate.isIn((Iterable<Long>) new Set<Long>{ 1, 5, -7 });
+     * LongPredicate.isIn(longStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `LongPredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static LongPredicate isIn(final List<Long> container) {
+    public static LongPredicate isIn(final Iterable<Long> container) {
         Validate.notNull(container);
         return new IsIn(container);
     }
@@ -264,13 +266,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
      * @description Returns a `LongPredicate` that tests the input Long if it is not contained in
      * the `container`.
      * @example
-     * LongPredicate.isNotIn(container);
-     * @param container the list that checks for the presence of an element
+     * LongPredicate.isNotIn(new List<Long>{ 1, 5, -7 });
+     * LongPredicate.isNotIn((Iterable<Long>) new Set<Long>{ 1, 5, -7 });
+     * LongPredicate.isNotIn(longStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `LongPredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static LongPredicate isNotIn(final List<Long> container) {
+    public static LongPredicate isNotIn(final Iterable<Long> container) {
         return isIn(container).negate();
     }
     //</editor-fold>
@@ -453,8 +457,8 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     }
 
     private class IsIn extends LongPredicate {
-        private final List<Long> longs;
-        public IsIn(List<Long> longs) { this.longs = longs; }
+        private final Set<Long> longs;
+        public IsIn(Iterable<Long> longs) { this.longs = Iterators.toLongSet(longs.iterator()); }
         public override Boolean test(Long l) { return longs.contains(l); }
     }
 

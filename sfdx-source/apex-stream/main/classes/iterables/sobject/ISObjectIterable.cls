@@ -412,6 +412,32 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
     OptionalDouble avg(SObjectField field);
 
     /**
+     * @description Accumulates elements returned by `mapper` into a `List<Object>`.
+     * <p>Terminal Operation.</p>
+     * @param mapper the mapping function
+     * @return the `List<Object>` containing the collected elements
+     */
+    List<Object> toList(ISObjectFunction mapper);
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>` 
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `List<Object>` containing the collected elements
+     */
+    List<Object> toList(String fieldName);
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>` 
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `List<Object>` containing the collected elements
+     */
+    List<Object> toList(SObjectField field);
+
+    /**
      * @description Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`.
      * <p>Terminal Operation.</p>
      * @param mapper the mapping function

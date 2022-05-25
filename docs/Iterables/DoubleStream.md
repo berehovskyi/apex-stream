@@ -343,7 +343,7 @@ the new `DoubleStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(Iterable<Double> iterable)`
+##### `override append(Iterable<Double> iterable)`
 
 Returns new `DoubleStream` by appending `iterable` to the current stream.
 
@@ -666,7 +666,7 @@ the `DoubleStream`
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `DoubleStream` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

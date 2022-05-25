@@ -1909,7 +1909,7 @@ the `SObjectPredicate`
 SObjectPredicate.isLike(Account.Name, '%a_e');
 ```
 
-##### `static isIn(ISObjectFunction function, List<Object> container)`
+##### `static isIn(ISObjectFunction function, Iterable<Object> container)`
 
 Returns a `SObjectPredicate` that tests the input SObject if the result returned by the `function` is contained in the `container`.
 
@@ -1917,7 +1917,7 @@ Returns a `SObjectPredicate` that tests the input SObject if the result returned
 |Param|Description|
 |---|---|
 |`function`|the function whose application result is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -1939,10 +1939,12 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isIn(SObjectFunction.get('Name'), listOfNames);
+SObjectPredicate.isIn(SObjectFunction.get('Name'), new List<Object>{ 'John', 'Jim' });
+SObjectPredicate.isIn(SObjectFunction.get('Name'), (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicate.isIn(SObjectFunction.get('Name'), nameStream);
 ```
 
-##### `static isIn(String fieldName, List<Object> container)`
+##### `static isIn(String fieldName, Iterable<Object> container)`
 
 Returns a `SObjectPredicate` that tests the input SObject if the the value of the `fieldName` is contained in the `container`. Cross-reference fields and safe navigation are supported.
 
@@ -1950,7 +1952,7 @@ Returns a `SObjectPredicate` that tests the input SObject if the the value of th
 |Param|Description|
 |---|---|
 |`fieldName`|the value of which is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -1974,11 +1976,12 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isIn('Name', listOfNames);
-SObjectPredicate.isIn('Parent?.Name', listOfNames);
+SObjectPredicate.isIn('Name', new List<Object>{ 'John', 'Jim' });
+SObjectPredicate.isIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicate.isIn('Parent.Name', nameStream);
 ```
 
-##### `static isIn(SObjectField field, List<Object> container)`
+##### `static isIn(SObjectField field, Iterable<Object> container)`
 
 Returns a `SObjectPredicate` that tests the input SObject if the the value of the `field` is contained in the `container`.
 
@@ -1986,7 +1989,7 @@ Returns a `SObjectPredicate` that tests the input SObject if the the value of th
 |Param|Description|
 |---|---|
 |`field`|the value of which is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -2008,18 +2011,19 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isIn('Name', listOfNames);
-SObjectPredicate.isIn('Parent?.Name', listOfNames);
+SObjectPredicate.isIn(Account.Name, new List<Object>{ 'John', 'Jim' });
+SObjectPredicate.isIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicate.isIn(Account.Name, nameStream);
 ```
 
-##### `static isIn(List<SObject> container)`
+##### `static isIn(Iterable<SObject> container)`
 
 Returns a `SObjectPredicate` that tests the input sobject is contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -2041,10 +2045,12 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isNotIn(listOfNames);
+SObjectPredicate.isIn(accounts);
+SObjectPredicate.isIn(accStream);
+SObjectPredicate.isIn((Iterable<Account>) accountSet);
 ```
 
-##### `static isNotIn(ISObjectFunction function, List<Object> container)`
+##### `static isNotIn(ISObjectFunction function, Iterable<Object> container)`
 
 Returns a `SObjectPredicate` that tests the input SObject if the result returned by the `function` is not contained in the `container`.
 
@@ -2052,7 +2058,7 @@ Returns a `SObjectPredicate` that tests the input SObject if the result returned
 |Param|Description|
 |---|---|
 |`function`|the function whose application result is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -2074,10 +2080,12 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isNotIn(SObjectFunction.get('Name'), listOfNames);
+SObjectPredicate.isNotIn(SObjectFunction.get('Name'), new List<Object>{ 'John', 'Jim' });
+SObjectPredicate.isNotIn(SObjectFunction.get('Name'), (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicate.isNotIn(SObjectFunction.get('Name'), nameStream);
 ```
 
-##### `static isNotIn(String fieldName, List<Object> container)`
+##### `static isNotIn(String fieldName, Iterable<Object> container)`
 
 Returns a `SObjectPredicate` that tests the input SObject if the the value of the `fieldName` is not contained in the `container`. Cross-reference fields and safe navigation are supported.
 
@@ -2085,7 +2093,7 @@ Returns a `SObjectPredicate` that tests the input SObject if the the value of th
 |Param|Description|
 |---|---|
 |`fieldName`|the value of which is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -2109,11 +2117,12 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isNotIn('Name', listOfNames);
-SObjectPredicate.isNotIn('Parent?.Name', listOfNames);
+SObjectPredicate.isNotIn('Name', new List<Object>{ 'John', 'Jim' });
+SObjectPredicate.isNotIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicate.isNotIn('Parent.Name', nameStream);
 ```
 
-##### `static isNotIn(SObjectField field, List<Object> container)`
+##### `static isNotIn(SObjectField field, Iterable<Object> container)`
 
 Returns a `SObjectPredicate` that tests the input SObject if the the value of the `field` is not contained in the `container`.
 
@@ -2121,7 +2130,7 @@ Returns a `SObjectPredicate` that tests the input SObject if the the value of th
 |Param|Description|
 |---|---|
 |`field`|the value of which is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -2143,18 +2152,19 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isNotIn('Name', listOfNames);
-SObjectPredicate.isNotIn('Parent?.Name', listOfNames);
+SObjectPredicate.isNotIn(Account.Name, new List<Object>{ 'John', 'Jim' });
+SObjectPredicate.isNotIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicate.isNotIn(Account.Name, nameStream);
 ```
 
-##### `static isNotIn(List<SObject> container)`
+##### `static isNotIn(Iterable<SObject> container)`
 
 Returns a `SObjectPredicate` that tests the input SObject if it is not contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -2176,7 +2186,9 @@ the `SObjectPredicate`
 
 ###### Example
 ```apex
-SObjectPredicate.isNotIn(listOfNames);
+SObjectPredicate.isNotIn(accounts);
+SObjectPredicate.isNotIn(accStream);
+SObjectPredicate.isNotIn((Iterable<Account>) accountSet);
 ```
 
 ##### `static isNull()`

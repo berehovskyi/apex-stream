@@ -225,7 +225,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      * @return the new `ObjectSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IObjectIterable append(final Iterable<Object> iterable) {
+    public virtual override IObjectIterable append(final Iterable<Object> iterable) {
         return concat(this, iterable);
     }
 
@@ -465,7 +465,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      *     .toList();
      * @return the `ObjectSequence`
      */
-    public virtual IObjectIterable distinct() {
+    public virtual override IObjectIterable distinct() {
         final List<Object> results = new List<Object>();
         for (Integer i = 0, size = objects.size(); i < size; i++) {
             if (!results.contains(objects[i])) {

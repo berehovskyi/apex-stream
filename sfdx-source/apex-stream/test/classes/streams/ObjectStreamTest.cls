@@ -210,6 +210,47 @@ private class ObjectStreamTest {
     }
 
     /**
+     * @see ObjectIterable.union
+     * @see ObjectIterable.intersect
+     * @see ObjectIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Object> input = new List<Object>{ 5, 3, 9, 7, 5, 9, 3, 7 };
+        List<Object> input1 = new List<Object>{ 8, 3, 6, 4, 4, 9, 1, 0 };
+        IObjectIterable stream = ObjectStream.of(input).union(input1);
+        IObjectIterable stream1 = ObjectStream.of(input).union(ObjectStream.of(input1));
+        IObjectIterable stream2 = ObjectStream.of(input).intersect(input1);
+        IObjectIterable stream3 = ObjectStream.of(input).intersect(ObjectStream.of(input1));
+        IObjectIterable stream4 = ObjectStream.of(input).except(input1);
+        IObjectIterable stream5 = ObjectStream.of(input).except(ObjectStream.of(input1));
+        // When
+        List<Object> actual = stream.toList();
+        List<Object> actual1 = stream1.toList();
+        List<Object> actual2 = stream2.toList();
+        List<Object> actual3 = stream3.toList();
+        List<Object> actual4 = stream4.toList();
+        List<Object> actual5 = stream5.toList();
+        // Then
+        List<Object> expected = new List<Object>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
+        List<Object> expected1 = new List<Object>{ 3, 9 };
+        List<Object> expected2 = new List<Object>{ 5, 7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+        Validate.assert(((ObjectStream) stream).isOperated);
+        Validate.assert(((ObjectStream) stream1).isOperated);
+        Validate.assert(((ObjectStream) stream2).isOperated);
+        Validate.assert(((ObjectStream) stream3).isOperated);
+        Validate.assert(((ObjectStream) stream4).isOperated);
+        Validate.assert(((ObjectStream) stream5).isOperated);
+    }
+
+    /**
     * @see ObjectStream.filter
     */
     @IsTest

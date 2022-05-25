@@ -200,7 +200,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @return the new `IntSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IIntIterable append(final Iterable<Integer> iterable) {
+    public virtual override IIntIterable append(final Iterable<Integer> iterable) {
         return concat(this, iterable);
     }
 
@@ -420,7 +420,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *     .toList();
      * @return the `IntSequence`
      */
-    public virtual IIntIterable distinct() {
+    public virtual override IIntIterable distinct() {
         final List<Integer> results = new List<Integer>();
         for (Integer i = 0, size = integers.size(); i < size; i++) {
             if (!results.contains(integers[i])) {

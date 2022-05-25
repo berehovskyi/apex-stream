@@ -63,6 +63,63 @@ IIntIterable
 
 the new `IIntIterable`
 
+### `union(Iterable<Integer> iterable)`
+
+Returns a new `IIntIterable` as a set union of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IIntIterable`
+
+### `intersect(Iterable<Integer> iterable)`
+
+Returns a new `IIntIterable` as a set intersection of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IIntIterable`
+
+### `except(Iterable<Integer> iterable)`
+
+Returns a new `IIntIterable` as a set difference of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IIntIterable`
+
 ### `toObjectIterable()`
 
 Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>

@@ -161,6 +161,47 @@ private class DoubleStreamTest {
     }
 
     /**
+     * @see IDoubleIterable.union
+     * @see IDoubleIterable.intersect
+     * @see IDoubleIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Double> input = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+        List<Double> input1 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+        IDoubleIterable stream = DoubleStream.of(input).union(input1);
+        IDoubleIterable stream1 = DoubleStream.of(input).union(DoubleStream.of(input1));
+        IDoubleIterable stream2 = DoubleStream.of(input).intersect(input1);
+        IDoubleIterable stream3 = DoubleStream.of(input).intersect(DoubleStream.of(input1));
+        IDoubleIterable stream4 = DoubleStream.of(input).except(input1);
+        IDoubleIterable stream5 = DoubleStream.of(input).except(DoubleStream.of(input1));
+        // When
+        List<Double> actual = stream.toList();
+        List<Double> actual1 = stream1.toList();
+        List<Double> actual2 = stream2.toList();
+        List<Double> actual3 = stream3.toList();
+        List<Double> actual4 = stream4.toList();
+        List<Double> actual5 = stream5.toList();
+        // Then
+        List<Double> expected = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 8.0, 6.0, 4.0, 1.0, 0.0 };
+        List<Double> expected1 = new List<Double>{ 3.0, 9.0 };
+        List<Double> expected2 = new List<Double>{ 5.0, 7.0 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+        Validate.assert(((DoubleStream) stream).isOperated);
+        Validate.assert(((DoubleStream) stream1).isOperated);
+        Validate.assert(((DoubleStream) stream2).isOperated);
+        Validate.assert(((DoubleStream) stream3).isOperated);
+        Validate.assert(((DoubleStream) stream4).isOperated);
+        Validate.assert(((DoubleStream) stream5).isOperated);
+    }
+
+    /**
     * @see DoubleStream.toObjectIterable
     */
     @IsTest

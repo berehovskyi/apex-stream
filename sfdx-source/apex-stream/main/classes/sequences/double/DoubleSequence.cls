@@ -188,7 +188,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
      * @return the new `DoubleSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IDoubleIterable append(final Iterable<Double> iterable) {
+    public virtual override IDoubleIterable append(final Iterable<Double> iterable) {
         return concat(this, iterable);
     }
 
@@ -408,7 +408,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
      *     .toList();
      * @return the `DoubleSequence`
      */
-    public virtual IDoubleIterable distinct() {
+    public virtual override IDoubleIterable distinct() {
         final List<Double> results = new List<Double>();
         for (Integer i = 0, size = doubles.size(); i < size; i++) {
             if (!results.contains(doubles[i])) {

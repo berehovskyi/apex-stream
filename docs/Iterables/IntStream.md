@@ -373,7 +373,7 @@ the new `IntStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(Iterable<Integer> iterable)`
+##### `override append(Iterable<Integer> iterable)`
 
 Returns new `IntStream` by appending `iterable` to the current stream.
 
@@ -696,7 +696,7 @@ the `IntStream`
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `IntStream` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

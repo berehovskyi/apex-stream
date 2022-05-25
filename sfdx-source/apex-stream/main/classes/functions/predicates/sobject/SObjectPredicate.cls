@@ -1159,14 +1159,16 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @description Returns a `SObjectPredicate` that tests the input SObject if the result returned by
      * the `function` is contained in the `container`.
      * @example
-     * SObjectPredicate.isIn(SObjectFunction.get('Name'), listOfNames);
+     * SObjectPredicate.isIn(SObjectFunction.get('Name'), new List<Object>{ 'John', 'Jim' });
+     * SObjectPredicate.isIn(SObjectFunction.get('Name'), (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicate.isIn(SObjectFunction.get('Name'), nameStream);
      * @param function the function whose application result is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `function`, or the `container` is null
      * @see List.contains
      */
-    public static SObjectPredicate isIn(final ISObjectFunction function, final List<Object> container) {
+    public static SObjectPredicate isIn(final ISObjectFunction function, final Iterable<Object> container) {
         Validate.notNull(function);
         Validate.notNull(container);
         return new IsIn(function, container);
@@ -1177,10 +1179,11 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * the `fieldName` is contained in the `container`. Cross-reference fields and safe
      * navigation are supported.
      * @example
-     * SObjectPredicate.isIn('Name', listOfNames);
-     * SObjectPredicate.isIn('Parent?.Name', listOfNames);
+     * SObjectPredicate.isIn('Name', new List<Object>{ 'John', 'Jim' });
+     * SObjectPredicate.isIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicate.isIn('Parent.Name', nameStream);
      * @param fieldName the value of which is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `fieldName` is blank, or the `container` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
@@ -1188,7 +1191,7 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @throws SObjectException if provided invalid `fieldName`
      * @see List.contains
      */
-    public static SObjectPredicate isIn(final String fieldName, final List<Object> container) {
+    public static SObjectPredicate isIn(final String fieldName, final Iterable<Object> container) {
         return isIn(SObjectFunction.get(fieldName), container);
     }
 
@@ -1196,15 +1199,16 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @description Returns a `SObjectPredicate` that tests the input SObject if the the value of
      * the `field` is contained in the `container`.
      * @example
-     * SObjectPredicate.isIn('Name', listOfNames);
-     * SObjectPredicate.isIn('Parent?.Name', listOfNames);
+     * SObjectPredicate.isIn(Account.Name, new List<Object>{ 'John', 'Jim' });
+     * SObjectPredicate.isIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicate.isIn(Account.Name, nameStream);
      * @param field the value of which is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `field`, or the `container` is null
      * @see List.contains
      */
-    public static SObjectPredicate isIn(final SObjectField field, final List<Object> container) {
+    public static SObjectPredicate isIn(final SObjectField field, final Iterable<Object> container) {
         return isIn(SObjectFunction.get(field), container);
     }
 
@@ -1212,14 +1216,16 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @description Returns a `SObjectPredicate` that tests the input sobject
      * is contained in the `container`.
      * @example
-     * SObjectPredicate.isNotIn(listOfNames);
-     * @param container the list that checks for the presence of an element
+     * SObjectPredicate.isIn(accounts);
+     * SObjectPredicate.isIn(accStream);
+     * SObjectPredicate.isIn((Iterable<Account>) accountSet);
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static SObjectPredicate isIn(final List<SObject> container) {
-        return isIn(SObjectFunction.identity(), container);
+    public static SObjectPredicate isIn(final Iterable<SObject> container) {
+        return isIn(SObjectFunction.identity(), (Iterable<Object>) container);
     }
     //</editor-fold>
 
@@ -1228,14 +1234,16 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @description Returns a `SObjectPredicate` that tests the input SObject if the result returned by
      * the `function` is not contained in the `container`.
      * @example
-     * SObjectPredicate.isNotIn(SObjectFunction.get('Name'), listOfNames);
+     * SObjectPredicate.isNotIn(SObjectFunction.get('Name'), new List<Object>{ 'John', 'Jim' });
+     * SObjectPredicate.isNotIn(SObjectFunction.get('Name'), (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicate.isNotIn(SObjectFunction.get('Name'), nameStream);
      * @param function the function whose application result is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `function`, or the `container` is null
      * @see List.contains
      */
-    public static SObjectPredicate isNotIn(final ISObjectFunction function, final List<Object> container) {
+    public static SObjectPredicate isNotIn(final ISObjectFunction function, final Iterable<Object> container) {
         return isIn(function, container).negate();
     }
 
@@ -1244,10 +1252,11 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * the `fieldName` is not contained in the `container`. Cross-reference fields and safe
      * navigation are supported.
      * @example
-     * SObjectPredicate.isNotIn('Name', listOfNames);
-     * SObjectPredicate.isNotIn('Parent?.Name', listOfNames);
+     * SObjectPredicate.isNotIn('Name', new List<Object>{ 'John', 'Jim' });
+     * SObjectPredicate.isNotIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicate.isNotIn('Parent.Name', nameStream);
      * @param fieldName the value of which is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `fieldName` is blank, or the `container` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
@@ -1255,7 +1264,7 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @throws SObjectException if provided invalid `fieldName`
      * @see List.contains
      */
-    public static SObjectPredicate isNotIn(final String fieldName, final List<Object> container) {
+    public static SObjectPredicate isNotIn(final String fieldName, final Iterable<Object> container) {
         return isIn(fieldName, container).negate();
     }
 
@@ -1263,15 +1272,16 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @description Returns a `SObjectPredicate` that tests the input SObject if the the value of
      * the `field` is not contained in the `container`.
      * @example
-     * SObjectPredicate.isNotIn('Name', listOfNames);
-     * SObjectPredicate.isNotIn('Parent?.Name', listOfNames);
+     * SObjectPredicate.isNotIn(Account.Name, new List<Object>{ 'John', 'Jim' });
+     * SObjectPredicate.isNotIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicate.isNotIn(Account.Name, nameStream);
      * @param field the value of which is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `field`, or the `container` is null
      * @see List.contains
      */
-    public static SObjectPredicate isNotIn(final SObjectField field, final List<Object> container) {
+    public static SObjectPredicate isNotIn(final SObjectField field, final Iterable<Object> container) {
         return isIn(field, container).negate();
     }
 
@@ -1279,13 +1289,15 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
      * @description Returns a `SObjectPredicate` that tests the input SObject if it is not contained
      * in the `container`.
      * @example
-     * SObjectPredicate.isNotIn(listOfNames);
-     * @param container the list that checks for the presence of an element
+     * SObjectPredicate.isNotIn(accounts);
+     * SObjectPredicate.isNotIn(accStream);
+     * SObjectPredicate.isNotIn((Iterable<Account>) accountSet);
+     * @param container the iterable that checks for the presence of an element
      * @return the `SObjectPredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static SObjectPredicate isNotIn(final List<SObject> container) {
+    public static SObjectPredicate isNotIn(final Iterable<SObject> container) {
         return isIn(container).negate();
     }
     //</editor-fold>
@@ -1634,14 +1646,12 @@ public abstract inherited sharing class SObjectPredicate implements ISObjectPred
 
     private class IsIn extends SObjectPredicate {
         private final ISObjectFunction function;
-        private final Object container;
-        private IsIn(ISObjectFunction function, Object container) {
+        private final Set<Object> container;
+        private IsIn(ISObjectFunction function, Iterable<Object> container) {
             this.function = function;
-            this.container = container;
+            this.container = Iterators.toObjectSet(container.iterator());
         }
-        public override Boolean test(SObject sObj) {
-            return ((List<Object>) container).contains(function.apply(sObj));
-        }
+        public override Boolean test(SObject sObj) { return container.contains(function.apply(sObj)); }
     }
 
     private class HasErrors extends SObjectPredicate {

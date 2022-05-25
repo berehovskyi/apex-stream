@@ -243,32 +243,6 @@ public virtual inherited sharing class Iterators {
     }
 
     /**
-     * @description Accumulates `fieldName` values into a `Set<Id>`.
-     * @example 
-     * Set<Id> parentIds = Iterators.toIdSet(accIterator, 'ParentId');
-     * @param iterator the iterator
-     * @param fieldName the field name
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `iterator` is null or `fieldName` is blank
-     */
-    public static Set<Id> toIdSet(final Iterator<SObject> iterator, final String fieldName) {
-        return toIdSet(iterator, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Accumulates `field` values into a `Set<Id>`.
-     * @example 
-     * Set<Id> parentIds = Iterators.toIdSet(accIterator, Account.ParentId);
-     * @param iterator the iterator
-     * @param field the field
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `iterator` or `field` is null
-     */
-    public static Set<Id> toIdSet(final Iterator<SObject> iterator, final SObjectField field) {
-        return toIdSet(iterator, SObjectFunction.get(field));
-    }
-
-    /**
      * @description Accumulates values returned by `mapper` into a `Set<String>`.
      * @example 
      * Set<String> names = Iterators.toStringSet(accIterator, SObjectFunction.get('Name'));
@@ -285,32 +259,6 @@ public virtual inherited sharing class Iterators {
             strings.add((String) mapper.apply(iterator.next()));
         }
         return strings;
-    }
-
-    /**
-     * @description Accumulates `fieldName` values into a `Set<String>`.
-     * @example 
-     * Set<String> names = Iterators.toStringSet(accIterator, 'Name');
-     * @param iterator the iterator
-     * @param fieldName the field name
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `iterator` is null or `fieldName` is blank
-     */
-    public static Set<String> toStringSet(final Iterator<SObject> iterator, final String fieldName) {
-        return toStringSet(iterator, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Accumulates `field` values into a `Set<String>`.
-     * @example 
-     * Set<String> names = Iterators.toStringSet(accIterator, Account.Name);
-     * @param iterator the iterator
-     * @param field the field
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `iterator` or `field` is null
-     */
-    public static Set<String> toStringSet(final Iterator<SObject> iterator, final SObjectField field) {
-        return toStringSet(iterator, SObjectFunction.get(field));
     }
 
     /**
@@ -349,48 +297,6 @@ public virtual inherited sharing class Iterators {
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example 
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
-     *     .toByIdMap(contIterator, 'AccountId', Map<Id, Contact>.class);
-     * @param iterator the iterator
-     * @param fieldName the field name
-     * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `iterator` or `listType` is null, or `fieldName` is blank
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<Id, SObject> toByIdMap(
-            final Iterator<SObject> iterator,
-            final String fieldName,
-            final Type mapType
-    ) {
-        return toByIdMap(iterator, SObjectFunction.get(fieldName), mapType);
-    }
-
-    /**
-     * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example 
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
-     *     .toByIdMap(contIterator, Contact.AccountId, Map<Id, Contact>.class);
-     * @param iterator the iterator
-     * @param field the field
-     * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `iterator`, `field` or `listType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<Id, SObject> toByIdMap(
-            final Iterator<SObject> iterator,
-            final SObjectField field,
-            final Type mapType
-    ) {
-        return toByIdMap(iterator, SObjectFunction.get(field), mapType);
-    }
-
-    /**
      * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * @example 
@@ -426,48 +332,6 @@ public virtual inherited sharing class Iterators {
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example 
-     * Map<String, Account> accountByName = (Map<String, Account>) Iterators
-     *     .toByIdMap(accIterator, 'Name', Map<String, Account>.class);
-     * @param iterator the iterator
-     * @param fieldName the field name
-     * @param mapType the type of map
-     * @return the `Map<String, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `iterator` or `listType` is null, or `fieldName` is blank
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<String, SObject> toByStringMap(
-            final Iterator<SObject> iterator,
-            final String fieldName,
-            final Type mapType
-    ) {
-        return toByStringMap(iterator, SObjectFunction.get(fieldName), mapType);
-    }
-
-    /**
-     * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example 
-     * Map<String, Account> accountByName = (Map<String, Account>) Iterators
-     *     .toByIdMap(accIterator, Account.Name, Map<String, Account>.class);
-     * @param iterator the iterator
-     * @param field the field
-     * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `iterator`, `field` or `listType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<String, SObject> toByStringMap(
-            final Iterator<SObject> iterator,
-            final SObjectField field,
-            final Type mapType
-    ) {
-        return toByStringMap(iterator, SObjectFunction.get(field), mapType);
-    }
-
-    /**
      * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * @example
@@ -492,34 +356,6 @@ public virtual inherited sharing class Iterators {
             container.add(sObj);
         }
         return m;
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example
-     * Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, 'AccountId');
-     * @param iterator the list
-     * @param fieldName the field
-     * @return the `Map<Id, List<SObject>>` containing the elements
-     * @throws NullPointerException if `iterator` is null, or `fieldName` is blank
-     */
-    public static Map<Id, List<SObject>> groupById(final Iterator<SObject> iterator, final String fieldName) {
-        return groupById(iterator, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example
-     * Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, Contact.AccountId);
-     * @param iterator the iterator
-     * @param field the field
-     * @return the `Map<Id, List<SObject>>` containing the elements
-     * @throws NullPointerException if `iterator` or `field` is null
-     */
-    public static Map<Id, List<SObject>> groupById(final Iterator<SObject> iterator, final SObjectField field) {
-        return groupById(iterator, SObjectFunction.get(field));
     }
 
     /**
@@ -554,34 +390,6 @@ public virtual inherited sharing class Iterators {
     }
 
     /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example
-     * Map<String, List<Account>> accountsByRating = Iterators.groupByString(accIterator, 'Rating');
-     * @param iterator the iterator
-     * @param fieldName the field
-     * @return the `Map<String, List<SObject>>` containing the elements
-     * @throws NullPointerException if `sObjects` is null, or `fieldName` is blank
-     */
-    public static Map<String, List<SObject>> groupByString(Iterator<SObject> iterator, final String fieldName) {
-        return groupByString(iterator, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example
-     * Map<String, List<Account>> accountsByRating = Iterators.groupByString(accIterator, Account.Rating);
-     * @param iterator the iterator
-     * @param field the field
-     * @return the `Map<String, List<SObject>>` containing the elements
-     * @throws NullPointerException if `iterator` or `field` is null
-     */
-    public static Map<String, List<SObject>> groupByString(Iterator<SObject> iterator, final SObjectField field) {
-        return groupByString(iterator, SObjectFunction.get(field));
-    }
-
-    /**
      * @description Partitions `SObject` elements by `predicate`.
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
@@ -606,44 +414,6 @@ public virtual inherited sharing class Iterators {
             m.get(predicate.test(sObj)).add(sObj);
         }
         return m;
-    }
-
-    /**
-     * @description Partition `SObject` elements by `fieldName` having `value`.
-     * @example
-     * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = Iterators.partition(accIterator, 'Rating', 'Hot');
-     * @param iterator the iterator
-     * @param fieldName the field
-     * @param value the satisfying value
-     * @return the `Map<Boolean, List<SObject>>` containing the partitioned elements
-     * @throws NullPointerException if `sObjects` is null or `fieldName` is blank
-     */
-    public static Map<Boolean, List<SObject>> partition(
-            final Iterator<SObject> iterator,
-            final String fieldName,
-            final Object value
-    ) {
-        return partition(iterator, SObjectPredicate.isEqual(fieldName, value));
-    }
-
-    /**
-     * @description Partition `SObject` elements by `field` having `value`.
-     * @example
-     * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = Iterators.partition(accIterator, Account.Rating, 'Hot');
-     * @param iterator the iterator
-     * @param field the field name
-     * @param value the satisfying value
-     * @return the `Map<Boolean, List<SObject>>` containing the partitioned elements
-     * @throws NullPointerException if `sObjects` or `field` is null
-     */
-    public static Map<Boolean, List<SObject>> partition(
-            final Iterator<SObject> iterator,
-            final SObjectField field,
-            final Object value
-    ) {
-        return partition(iterator, SObjectPredicate.isEqual(field, value));
     }
 
 }

@@ -375,7 +375,7 @@ ISObjectIterable newAccountsWithChangedAnnualRevenueStream = SObjectStream.zip(
 );
 ```
 
-##### `append(Iterable<SObject> iterable)`
+##### `override append(Iterable<SObject> iterable)`
 
 Returns new `SObjectStream` by appending `iterable` to the current stream.
 
@@ -733,7 +733,7 @@ List<Account> accountsWithResetAnnualRevenue = SObjectStream.of(accounts)
     .toList();
 ```
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `SObjectStream` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

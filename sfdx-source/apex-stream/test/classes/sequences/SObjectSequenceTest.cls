@@ -147,6 +147,51 @@ private class SObjectSequenceTest {
     }
 
     /**
+     * @see SObjectIterable.union
+     * @see SObjectIterable.intersect
+     * @see SObjectIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc');
+        Account acc1 = new Account(Name = 'Test Acc1');
+        Account acc2 = new Account(Name = 'Test Acc2');
+        Account acc3 = new Account(Name = 'Test Acc3');
+        Account acc4 = new Account(Name = 'Test Acc4');
+        Account acc5 = new Account(Name = 'Test Acc5');
+        Account acc6 = new Account(Name = 'Test Acc6');
+        Account acc7 = new Account(Name = 'Test Acc7');
+        Account acc8 = new Account(Name = 'Test Acc8');
+        Account acc9 = new Account(Name = 'Test Acc9');
+        List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectIterable seq = SObjectSequence.of(input).union(input1);
+        ISObjectIterable seq1 = SObjectSequence.of(input).union(SObjectSequence.of(input1));
+        ISObjectIterable seq2 = SObjectSequence.of(input).intersect(input1);
+        ISObjectIterable seq3 = SObjectSequence.of(input).intersect(SObjectSequence.of(input1));
+        ISObjectIterable seq4 = SObjectSequence.of(input).except(input1);
+        ISObjectIterable seq5 = SObjectSequence.of(input).except(SObjectSequence.of(input1));
+        // When
+        List<Account> actual = seq.toList();
+        List<Account> actual1 = seq1.toList();
+        List<Account> actual2 = seq2.toList();
+        List<Account> actual3 = seq3.toList();
+        List<Account> actual4 = seq4.toList();
+        List<Account> actual5 = seq5.toList();
+        // Then
+        List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc };
+        List<Account> expected1 = new List<Account>{ acc3, acc9 };
+        List<Account> expected2 = new List<Account>{ acc5, acc7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+    }
+
+    /**
      * @see SObjectSequence.filter
      */
     @IsTest
@@ -676,8 +721,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectSequence.collect
-    */
+     * @see SObjectSequence.collect
+     */
     @IsTest
     private static void collect() {
         // Given
@@ -704,8 +749,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectSequence.find
-    */
+     * @see SObjectSequence.find
+     */
     @IsTest
     private static void find() {
         // Given
@@ -735,8 +780,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectSequence.every
-    */
+     * @see SObjectSequence.every
+     */
     @IsTest
     private static void every() {
         // Given
@@ -766,8 +811,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectSequence.some
-    */
+     * @see SObjectSequence.some
+     */
     @IsTest
     private static void some() {
         // Given
@@ -797,8 +842,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectIterable.max
-    */
+     * @see SObjectIterable.max
+     */
     @IsTest
     private static void max() {
         // Given
@@ -827,8 +872,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectIterable.min
-    */
+     * @see SObjectIterable.min
+     */
     @IsTest
     private static void min() {
         // Given
@@ -857,8 +902,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectIterable.sum
-    */
+     * @see SObjectIterable.sum
+     */
     @IsTest
     private static void sum() {
         // Given
@@ -889,8 +934,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectIterable.avg
-    */
+     * @see SObjectIterable.avg
+     */
     @IsTest
     private static void avg() {
         // Given
@@ -921,8 +966,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectSequence.count
-    */
+     * @see SObjectSequence.count
+     */
     @IsTest
     private static void count() {
         // Given
@@ -948,8 +993,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectSequence.isEmpty
-    */
+     * @see SObjectSequence.isEmpty
+     */
     @IsTest
     private static void isEmpty() {
         // Given
@@ -975,8 +1020,8 @@ private class SObjectSequenceTest {
     }
 
     /**
-    * @see SObjectSequence.toList
-    */
+     * @see SObjectSequence.toList
+     */
     @IsTest
     private static void toList() {
         // Given

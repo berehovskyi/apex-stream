@@ -63,6 +63,63 @@ ILongIterable
 
 the new `ILongIterable`
 
+### `union(Iterable<Long> iterable)`
+
+Returns a new `ILongIterable` as a set union of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `ILongIterable`
+
+### `intersect(Iterable<Long> iterable)`
+
+Returns a new `ILongIterable` as a set intersection of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `ILongIterable`
+
+### `except(Iterable<Long> iterable)`
+
+Returns a new `ILongIterable` as a set difference of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `ILongIterable`
+
 ### `toObjectIterable()`
 
 Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>

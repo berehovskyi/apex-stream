@@ -456,14 +456,14 @@ the `IntPredicate`
 IntPredicate.isNotEqual(100);
 ```
 
-##### `static isIn(List<Integer> container)`
+##### `static isIn(Iterable<Integer> container)`
 
 Returns a `IntPredicate` that tests the input Integer if it is contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -485,17 +485,19 @@ the `IntPredicate`
 
 ###### Example
 ```apex
-IntPredicate.isIn(container);
+IntPredicate.isIn(new List<Integer>{ 1, 5, -7 });
+IntPredicate.isIn((Iterable<Integer>) new Set<Integer>{ 1, 5, -7 });
+IntPredicate.isIn(intStream);
 ```
 
-##### `static isNotIn(List<Integer> container)`
+##### `static isNotIn(Iterable<Integer> container)`
 
 Returns a `IntPredicate` that tests the input Integer if it is not contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -517,7 +519,9 @@ the `IntPredicate`
 
 ###### Example
 ```apex
-IntPredicate.isNotIn(container);
+IntPredicate.isNotIn(new List<Integer>{ 1, 5, -7 });
+IntPredicate.isNotIn((Iterable<Integer>) new Set<Integer>{ 1, 5, -7 });
+IntPredicate.isNotIn(intStream);
 ```
 
 ##### `static isNull()`

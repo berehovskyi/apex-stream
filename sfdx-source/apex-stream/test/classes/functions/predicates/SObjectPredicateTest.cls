@@ -460,7 +460,7 @@ private class SObjectPredicateTest {
         // Given
         SObjectField accTypeField = IterTestUtils.CONSTS.Account.Type;
         String typeNameFieldName = 'Type';
-        List<String> types = new List<String>{ 'Customer', 'Competitor' };
+        List<Object> types = new List<String>{ 'Customer', 'Competitor' };
         // When
         ISObjectFunction getTypeFunction = SObjectFunction.get(accTypeField);
         ISObjectPredicate typeInPredicate = SObjectPredicate.isIn(getTypeFunction, types);
@@ -484,7 +484,7 @@ private class SObjectPredicateTest {
         // Given
         SObjectField accTypeField = IterTestUtils.CONSTS.Account.Type;
         String typeNameFieldName = 'Type';
-        List<String> types = new List<String>{ 'Customer', 'Competitor' };
+        List<Object> types = new List<String>{ 'Customer', 'Competitor' };
         // When
         ISObjectFunction getTypeFunction = SObjectFunction.get(accTypeField);
         ISObjectPredicate typeNotInPredicate = SObjectPredicate.isNotIn(getTypeFunction, types);

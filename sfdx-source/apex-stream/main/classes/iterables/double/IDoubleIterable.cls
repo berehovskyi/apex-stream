@@ -27,6 +27,30 @@ public interface IDoubleIterable extends Iterable<Double> {
      * @return the new `IDoubleIterable`
      */
     IDoubleIterable prepend(Iterable<Double> iterable);
+
+    /**
+     * @description Returns a new `IDoubleIterable` as a set union 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IDoubleIterable`
+     */
+    IDoubleIterable union(Iterable<Double> iterable);
+
+    /**
+     * @description Returns a new `IDoubleIterable` as a set intersection 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IDoubleIterable`
+     */
+    IDoubleIterable intersect(Iterable<Double> iterable);
+
+    /**
+     * @description Returns a new `IDoubleIterable` as a set difference 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IDoubleIterable`
+     */
+    IDoubleIterable except(Iterable<Double> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Conversion Operations">

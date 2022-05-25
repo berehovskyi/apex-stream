@@ -396,7 +396,7 @@ the new `ObjectStream`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2`, `predicate` or `combiner` is null|
 
-##### `append(Iterable<Object> iterable)`
+##### `override append(Iterable<Object> iterable)`
 
 Returns new `ObjectStream` by appending `iterable` to the current stream.
 
@@ -754,7 +754,7 @@ List<Person> editedPeople = (List<Person>) ObjectStream.of(people)
     .toList();
 ```
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `ObjectStream` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

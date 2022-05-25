@@ -150,7 +150,42 @@ private class LongSequenceTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected1, actual1);
     }
-
+    
+    /**
+     * @see LongIterable.union
+     * @see LongIterable.intersect
+     * @see LongIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+        List<Long> input1 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+        ILongIterable seq = LongSequence.of(input).union(input1);
+        ILongIterable seq1 = LongSequence.of(input).union(LongSequence.of(input1));
+        ILongIterable seq2 = LongSequence.of(input).intersect(input1);
+        ILongIterable seq3 = LongSequence.of(input).intersect(LongSequence.of(input1));
+        ILongIterable seq4 = LongSequence.of(input).except(input1);
+        ILongIterable seq5 = LongSequence.of(input).except(LongSequence.of(input1));
+        // When
+        List<Long> actual = seq.toList();
+        List<Long> actual1 = seq1.toList();
+        List<Long> actual2 = seq2.toList();
+        List<Long> actual3 = seq3.toList();
+        List<Long> actual4 = seq4.toList();
+        List<Long> actual5 = seq5.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 5L, 3L, 9L, 7L, 8L, 6L, 4L, 1L, 0L };
+        List<Long> expected1 = new List<Long>{ 3L, 9L };
+        List<Long> expected2 = new List<Long>{ 5L, 7L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+    }
+    
     /**
     * @see LongSequence.toObjectIterable
     * @see LongIterable.toIntIterable

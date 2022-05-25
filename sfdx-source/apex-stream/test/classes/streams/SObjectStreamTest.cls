@@ -233,6 +233,57 @@ private class SObjectStreamTest {
     }
 
     /**
+     * @see SObjectIterable.union
+     * @see SObjectIterable.intersect
+     * @see SObjectIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc');
+        Account acc1 = new Account(Name = 'Test Acc1');
+        Account acc2 = new Account(Name = 'Test Acc2');
+        Account acc3 = new Account(Name = 'Test Acc3');
+        Account acc4 = new Account(Name = 'Test Acc4');
+        Account acc5 = new Account(Name = 'Test Acc5');
+        Account acc6 = new Account(Name = 'Test Acc6');
+        Account acc7 = new Account(Name = 'Test Acc7');
+        Account acc8 = new Account(Name = 'Test Acc8');
+        Account acc9 = new Account(Name = 'Test Acc9');
+        List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectIterable stream = SObjectStream.of(input).union(input1);
+        ISObjectIterable stream1 = SObjectStream.of(input).union(SObjectStream.of(input1));
+        ISObjectIterable stream2 = SObjectStream.of(input).intersect(input1);
+        ISObjectIterable stream3 = SObjectStream.of(input).intersect(SObjectStream.of(input1));
+        ISObjectIterable stream4 = SObjectStream.of(input).except(input1);
+        ISObjectIterable stream5 = SObjectStream.of(input).except(SObjectStream.of(input1));
+        // When
+        List<Account> actual = stream.toList();
+        List<Account> actual1 = stream1.toList();
+        List<Account> actual2 = stream2.toList();
+        List<Account> actual3 = stream3.toList();
+        List<Account> actual4 = stream4.toList();
+        List<Account> actual5 = stream5.toList();
+        // Then
+        List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc };
+        List<Account> expected1 = new List<Account>{ acc3, acc9 };
+        List<Account> expected2 = new List<Account>{ acc5, acc7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+        Validate.assert(((SObjectStream) stream).isOperated);
+        Validate.assert(((SObjectStream) stream1).isOperated);
+        Validate.assert(((SObjectStream) stream2).isOperated);
+        Validate.assert(((SObjectStream) stream3).isOperated);
+        Validate.assert(((SObjectStream) stream4).isOperated);
+        Validate.assert(((SObjectStream) stream5).isOperated);
+    }
+
+    /**
      * @see SObjectStream.filter
      */
     @IsTest

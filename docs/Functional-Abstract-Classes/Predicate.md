@@ -963,7 +963,7 @@ the `Predicate`
 Predicate.isEqual(100);
 ```
 
-##### `static isIn(IFunction function, List<Object> container)`
+##### `static isIn(IFunction function, Iterable<Object> container)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `function` is contained in the `container`.
 
@@ -971,7 +971,7 @@ Returns a `Predicate` that tests the input object if the result returned by the 
 |Param|Description|
 |---|---|
 |`function`|the function whose application result is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -993,17 +993,19 @@ the `Predicate`
 
 ###### Example
 ```apex
-Predicate.isIn(func, container);
+Predicate.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
+Predicate.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+Predicate.isIn(getNameFunc, nameStream);
 ```
 
-##### `static isIn(List<Object> container)`
+##### `static isIn(Iterable<Object> container)`
 
 Returns a `Predicate` that tests the input object if it is contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -1025,10 +1027,12 @@ the `Predicate`
 
 ###### Example
 ```apex
-Predicate.isIn(container);
+Predicate.isIn(new List<Object>{ 'John', 'Jim' });
+Predicate.isIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+Predicate.isIn(nameStream);
 ```
 
-##### `static isNotIn(IFunction function, List<Object> container)`
+##### `static isNotIn(IFunction function, Iterable<Object> container)`
 
 Returns a `Predicate` that tests the input object if the result returned by the `function` is not contained in the `container`.
 
@@ -1036,7 +1040,7 @@ Returns a `Predicate` that tests the input object if the result returned by the 
 |Param|Description|
 |---|---|
 |`function`|the function whose application result is tested|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -1058,17 +1062,19 @@ the `Predicate`
 
 ###### Example
 ```apex
-Predicate.isNotIn(func, container);
+Predicate.isNotIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
+Predicate.isNotIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+Predicate.isNotIn(getNameFunc, nameStream);
 ```
 
-##### `static isNotIn(List<Object> container)`
+##### `static isNotIn(Iterable<Object> container)`
 
 Returns a `Predicate` that tests the input object if it is not contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -1090,7 +1096,9 @@ the `Predicate`
 
 ###### Example
 ```apex
-Predicate.isNotIn(container);
+Predicate.isNotIn(new List<Object>{ 'John', 'Jim' });
+Predicate.isNotIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+Predicate.isNotIn(nameStream);
 ```
 
 ##### `static isNull()`

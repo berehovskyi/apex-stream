@@ -5,6 +5,53 @@
  */
 public abstract inherited sharing class SObjectIterable implements ISObjectIterable {
 
+    //<editor-fold desc="Sources">
+    public abstract ISObjectIterable append(final Iterable<SObject> iterable);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables.
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> union = accountsIterable1.union(accounts2).toList();
+     * // [acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc0]
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable union(final Iterable<SObject> iterable) {
+        return append(iterable).distinct();
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables.
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> intersection = accountsIterable1.intersect(accounts2).toList(); // [acc3, acc9]
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable intersect(final Iterable<SObject> iterable) {
+        return distinct().filter(SObjectPredicate.isIn(iterable));
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables.
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> diff = accountsIterable1.except(accounts2).toList(); // [acc5, acc7]
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable except(final Iterable<SObject> iterable) {
+        return distinct().filter(SObjectPredicate.isIn(iterable).negate());
+    }
+    //</editor-fold>
+
     //<editor-fold desc="Intermediate Operations">
     public abstract ISObjectIterable filter(final ISObjectPredicate predicate);
 
@@ -127,7 +174,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @return the new `ISObjectIterable`
      */
     public virtual ISObjectIterable withoutNulls() {
-        return filter(SObjectPredicate.isNotNull());
+        return filter(SObjectPredicate.isNull().negate());
     }
 
     public abstract ISObjectIterable mapTo(final ISObjectUnaryOperator mapper);
@@ -451,6 +498,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
     public virtual ISObjectIterable sort(final SObjectField field, final SortOrder order) {
         return sort(SObjectComparator.comparing(field).order(order));
     }
+
+    public abstract ISObjectIterable distinct();
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">
@@ -788,6 +837,44 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      */
     public virtual OptionalDouble avg(final SObjectField field) {
         return avg(SObjectToDoubleFunction.get(field));
+    }
+
+    /**
+     * @description Accumulates elements returned by `mapper` into a `List<Object>`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * List<Object> accountNames = accountsIterable.toList(SObjectFunction.get('Name'));
+     * @param mapper the mapping function
+     * @return the `List<Object>` containing the collected elements
+     */
+    public virtual List<Object> toList(final ISObjectFunction mapper) {
+        return toList(mapper, List<Object>.class);
+    }
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>` 
+     * according to `fieldName`.
+     * @example
+     * List<Object> accountNames = accountsIterable.toList('Name');
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `List<Object>` containing the collected elements
+     */
+    public virtual List<Object> toList(final String fieldName) {
+        return toList(fieldName, List<Object>.class);
+    }
+
+    /**
+     * @description Accumulates `Object` elements into a `List<Object>` 
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * List<Object> accountNames = accountsIterable.toList(Account.Name);
+     * @param field the field
+     * @return the `List<Object>` containing the collected elements
+     */
+    public virtual List<Object> toList(final SObjectField field) {
+        return toList(field, List<Object>.class);
     }
 
     public abstract List<Object> toList(final ISObjectFunction mapper, final Type listType);

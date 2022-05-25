@@ -296,7 +296,7 @@ ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = SObjectSequence.zip(
 );
 ```
 
-##### `append(Iterable<SObject> iterable)`
+##### `override append(Iterable<SObject> iterable)`
 
 Returns new `SObjectSequence` by appending `iterable` to the current sequence.
 
@@ -654,7 +654,7 @@ List<Account> accountsWithResetAnnualRevenue = SObjectSequence.of(accounts)
     .toList();
 ```
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `SObjectSequence` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

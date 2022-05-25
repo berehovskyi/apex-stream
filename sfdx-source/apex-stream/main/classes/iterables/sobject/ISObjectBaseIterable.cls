@@ -24,6 +24,30 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable prepend(Iterable<SObject> iterable);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable union(Iterable<SObject> iterable);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable intersect(Iterable<SObject> iterable);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable except(Iterable<SObject> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Intermediate Operations">
@@ -37,12 +61,12 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
     ISObjectIterable filter(ISObjectPredicate predicate);
 
     /**
- * @description Returns a new `ISObjectIterable` that takes `SObject` elements
- * while `predicate` returns `true`.
- * <p>Intermediate Operation.</p>
- * @param predicate the predicate
- * @return the new `ISObjectIterable`
- */
+     * @description Returns a new `ISObjectIterable` that takes `SObject` elements
+     * while `predicate` returns `true`.
+     * <p>Intermediate Operation.</p>
+     * @param predicate the predicate
+     * @return the new `ISObjectIterable`
+     */
     ISObjectIterable take(ISObjectPredicate predicate);
 
     /**
@@ -125,10 +149,10 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
     ISObjectIterable distinct(ISObjectFunction classifier);
 
     /**
- * @description Returns a new `ISObjectIterable` with distinct `SObject` elements.
- * <p>Intermediate Operation.</p>
- * @return the new `ISObjectIterable`
- */
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements.
+     * <p>Intermediate Operation.</p>
+     * @return the new `ISObjectIterable`
+     */
     ISObjectIterable distinct();
 
     /**

@@ -245,7 +245,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      * @return the new `LongStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ILongIterable append(final Iterable<Long> iterable) {
+    public virtual override ILongIterable append(final Iterable<Long> iterable) {
         return concat(this, iterable);
     }
 
@@ -417,7 +417,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *     .toList();
      * @return the `LongStream`
      */
-    public virtual ILongIterable distinct() {
+    public virtual override ILongIterable distinct() {
         return new LongStream(new LongDistinctIterator(iterator()));
     }
 

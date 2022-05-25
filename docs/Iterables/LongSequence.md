@@ -296,7 +296,7 @@ the new `LongSequence`
 |---|---|
 |`NullPointerException`|if `iterable1`, `iterable2` or `combiner` is null|
 
-##### `append(Iterable<Long> iterable)`
+##### `override append(Iterable<Long> iterable)`
 
 Returns new `LongSequence` by appending `iterable` to the current sequence.
 
@@ -619,7 +619,7 @@ this `LongSequence`
 |---|---|
 |`NullPointerException`|if `consumer` is null|
 
-##### `distinct()`
+##### `override distinct()`
 
 Returns a `LongSequence` with distinct elements. <p>Stateful Intermediate Operation.</p>
 

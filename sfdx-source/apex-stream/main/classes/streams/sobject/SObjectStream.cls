@@ -292,7 +292,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ISObjectIterable append(final Iterable<SObject> iterable) {
+    public virtual override ISObjectIterable append(final Iterable<SObject> iterable) {
         return concat(this, iterable);
     }
 
@@ -484,7 +484,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *     .toList();
      * @return the `SObjectStream`
      */
-    public virtual ISObjectIterable distinct() {
+    public virtual override ISObjectIterable distinct() {
         return new SObjectStream(new SObjectDistinctIterator(iterator()));
     }
 

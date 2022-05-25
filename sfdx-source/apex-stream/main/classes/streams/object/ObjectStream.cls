@@ -296,7 +296,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * @return the new `ObjectStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IObjectIterable append(final Iterable<Object> iterable) {
+    public virtual override IObjectIterable append(final Iterable<Object> iterable) {
         return concat(this, iterable);
     }
 
@@ -488,7 +488,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      *     .toList();
      * @return the `ObjectStream`
      */
-    public virtual IObjectIterable distinct() {
+    public virtual override IObjectIterable distinct() {
         return new ObjectStream(new ObjectDistinctIterator(iterator()));
     }
 

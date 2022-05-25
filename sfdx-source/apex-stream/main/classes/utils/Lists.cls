@@ -65,34 +65,6 @@ public virtual inherited sharing class Lists {
     }
 
     /**
-     * @description Accumulates `fieldName` values into a `List<?>` of specific `listType`.
-     * @example 
-     * List<String> accNames = (List<String>) Lists.toList(accounts, 'Name', List<String>.class);
-     * @param sObjects the list
-     * @param fieldName the field name
-     * @param listType the type of list
-     * @return the `List<Object>` which can be casted into `listType`
-     * @throws NullPointerException if `sObjects` or `listType` is null, or `fieldName` is blank
-     */
-    public static List<Object> toList(final List<SObject> sObjects, final String fieldName, final Type listType) {
-        return toList(sObjects, SObjectFunction.get(fieldName), listType);
-    }
-
-    /**
-     * @description Accumulates `field` values into a `List<?>` of specific `listType`.
-     * @example 
-     * List<String> accNames = (List<String>) Lists.toList(accounts, Account.Name, List<String>.class);
-     * @param sObjects the list
-     * @param field the field
-     * @param listType the type of list
-     * @return the `List<Object>` which can be casted into `listType`
-     * @throws NullPointerException if `sObjects`, `field` or `listType` is null
-     */
-    public static List<Object> toList(final List<SObject> sObjects, final SObjectField field, final Type listType) {
-        return toList(sObjects, SObjectFunction.get(field), listType);
-    }
-
-    /**
      * @description Accumulates values returned by `mapper` into a `Set<Id>`.
      * @example 
      * Set<Id> parentIds = Lists.toIdSet(accounts, SObjectFunction.get('ParentId'));
@@ -112,32 +84,6 @@ public virtual inherited sharing class Lists {
     }
 
     /**
-     * @description Accumulates `fieldName` values into a `Set<Id>`.
-     * @example 
-     * Set<Id> parentIds = Lists.toIdSet(accounts, 'ParentId');
-     * @param sObjects the list
-     * @param fieldName the field name
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `sObjects` is null or `fieldName` is blank
-     */
-    public static Set<Id> toIdSet(final List<SObject> sObjects, final String fieldName) {
-        return toIdSet(sObjects, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Accumulates `field` values into a `Set<Id>`.
-     * @example 
-     * Set<Id> parentIds = Lists.toIdSet(accounts, Account.ParentId);
-     * @param sObjects the list
-     * @param field the field
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `sObjects` or `field` is null
-     */
-    public static Set<Id> toIdSet(final List<SObject> sObjects, final SObjectField field) {
-        return toIdSet(sObjects, SObjectFunction.get(field));
-    }
-
-    /**
      * @description Accumulates values returned by `mapper` into a `Set<String>`.
      * @example 
      * Set<String> names = Lists.toStringSet(accounts, SObjectFunction.get('Name'));
@@ -154,32 +100,6 @@ public virtual inherited sharing class Lists {
             strings.add((String) mapper.apply(sObjects[i]));
         }
         return strings;
-    }
-
-    /**
-     * @description Accumulates `fieldName` values into a `Set<String>`.
-     * @example 
-     * Set<String> names = Lists.toStringSet(accounts, 'Name');
-     * @param sObjects the list
-     * @param fieldName the field name
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `sObjects` is null or `fieldName` is blank
-     */
-    public static Set<String> toStringSet(final List<SObject> sObjects, final String fieldName) {
-        return toStringSet(sObjects, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Accumulates `field` values into a `Set<String>`.
-     * @example 
-     * Set<String> names = Lists.toStringSet(accounts, Account.Name);
-     * @param sObjects the list
-     * @param field the field
-     * @return the `Set<Id>`
-     * @throws NullPointerException if `sObjects` or `field` is null
-     */
-    public static Set<String> toStringSet(final List<SObject> sObjects, final SObjectField field) {
-        return toStringSet(sObjects, SObjectFunction.get(field));
     }
 
     /**
@@ -218,48 +138,6 @@ public virtual inherited sharing class Lists {
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example 
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Lists
-     *     .toByIdMap(contacts, 'AccountId', Map<Id, Contact>.class);
-     * @param sObjects the list
-     * @param fieldName the field name
-     * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `sObjects` or `listType` is null, or `fieldName` is blank
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<Id, SObject> toByIdMap(
-            final List<SObject> sObjects,
-            final String fieldName,
-            final Type mapType
-    ) {
-        return toByIdMap(sObjects, SObjectFunction.get(fieldName), mapType);
-    }
-
-    /**
-     * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example 
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Lists
-     *     .toByIdMap(contacts, Contact.AccountId, Map<Id, Contact>.class);
-     * @param sObjects the list
-     * @param field the field
-     * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `sObjects`, `field` or `listType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<Id, SObject> toByIdMap(
-            final List<SObject> sObjects,
-            final SObjectField field,
-            final Type mapType
-    ) {
-        return toByIdMap(sObjects, SObjectFunction.get(field), mapType);
-    }
-
-    /**
      * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * @example 
@@ -295,48 +173,6 @@ public virtual inherited sharing class Lists {
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example 
-     * Map<String, Account> accountByName = (Map<String, Account>) Lists
-     *     .toByIdMap(accounts, 'Name', Map<String, Account>.class);
-     * @param sObjects the list
-     * @param fieldName the field name
-     * @param mapType the type of map
-     * @return the `Map<String, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `sObjects` or `listType` is null, or `fieldName` is blank
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<String, SObject> toByStringMap(
-            final List<SObject> sObjects,
-            final String fieldName,
-            final Type mapType
-    ) {
-        return toByStringMap(sObjects, SObjectFunction.get(fieldName), mapType);
-    }
-
-    /**
-     * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example 
-     * Map<String, Account> accountByName = (Map<String, Account>) Lists
-     *     .toByIdMap(accounts, Account.Name, Map<String, Account>.class);
-     * @param sObjects the list
-     * @param field the field
-     * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
-     * @throws NullPointerException if `sObjects`, `field` or `listType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
-     */
-    public static Map<String, SObject> toByStringMap(
-            final List<SObject> sObjects,
-            final SObjectField field,
-            final Type mapType
-    ) {
-        return toByStringMap(sObjects, SObjectFunction.get(field), mapType);
-    }
-
-    /**
      * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * @example
@@ -361,34 +197,6 @@ public virtual inherited sharing class Lists {
             container.add(sObj);
         }
         return m;
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example
-     * Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, 'AccountId');
-     * @param sObjects the list
-     * @param fieldName the field
-     * @return the `Map<Id, List<SObject>>` containing the elements
-     * @throws NullPointerException if `sObjects` is null, or `fieldName` is blank
-     */
-    public static Map<Id, List<SObject>> groupById(final List<SObject> sObjects, final String fieldName) {
-        return groupById(sObjects, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example
-     * Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, Contact.AccountId);
-     * @param sObjects the list
-     * @param field the field
-     * @return the `Map<Id, List<SObject>>` containing the elements
-     * @throws NullPointerException if `sObjects` or `field` is null
-     */
-    public static Map<Id, List<SObject>> groupById(final List<SObject> sObjects, final SObjectField field) {
-        return groupById(sObjects, SObjectFunction.get(field));
     }
 
     /**
@@ -422,34 +230,6 @@ public virtual inherited sharing class Lists {
     }
 
     /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
-     * @example
-     * Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, 'Rating');
-     * @param sObjects the list
-     * @param fieldName the field
-     * @return the `Map<String, List<SObject>>` containing the elements
-     * @throws NullPointerException if `sObjects` is null, or `fieldName` is blank
-     */
-    public static Map<String, List<SObject>> groupByString(final List<SObject> sObjects, final String fieldName) {
-        return groupByString(sObjects, SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
-     * whose keys are `field` values and values are `SObject` elements.
-     * @example
-     * Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, Account.Rating);
-     * @param sObjects the list
-     * @param field the field
-     * @return the `Map<String, List<SObject>>` containing the elements
-     * @throws NullPointerException if `sObjects` or `field` is null
-     */
-    public static Map<String, List<SObject>> groupByString(final List<SObject> sObjects, final SObjectField field) {
-        return groupByString(sObjects, SObjectFunction.get(field));
-    }
-
-    /**
      * @description Partitions `SObject` elements by `predicate`.
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
@@ -474,44 +254,6 @@ public virtual inherited sharing class Lists {
             m.get(predicate.test(sObj)).add(sObj);
         }
         return m;
-    }
-
-    /**
-     * @description Partition `SObject` elements by `fieldName` having `value`.
-     * @example
-     * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = Lists.partition(accounts, 'Rating', 'Hot');
-     * @param sObjects the list
-     * @param fieldName the field
-     * @param value the satisfying value
-     * @return the `Map<Boolean, List<SObject>>` containing the partitioned elements
-     * @throws NullPointerException if `sObjects` is null or `fieldName` is blank
-     */
-    public static Map<Boolean, List<SObject>> partition(
-            final List<SObject> sObjects,
-            final String fieldName,
-            final Object value
-    ) {
-        return partition(sObjects, SObjectPredicate.isEqual(fieldName, value));
-    }
-
-    /**
-     * @description Partition `SObject` elements by `field` having `value`.
-     * @example
-     * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = Lists.partition(accounts, Account.Rating, 'Hot');
-     * @param sObjects the list
-     * @param field the field name
-     * @param value the satisfying value
-     * @return the `Map<Boolean, List<SObject>>` containing the partitioned elements
-     * @throws NullPointerException if `sObjects` or `field` is null
-     */
-    public static Map<Boolean, List<SObject>> partition(
-            final List<SObject> sObjects,
-            final SObjectField field,
-            final Object value
-    ) {
-        return partition(sObjects, SObjectPredicate.isEqual(field, value));
     }
 
     private static List<SObjectComparable> wrap(final List<SObject> sObjects, final ISObjectComparator comparator) {

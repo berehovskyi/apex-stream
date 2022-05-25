@@ -456,14 +456,14 @@ the `LongPredicate`
 LongPredicate.isNotEqual(100);
 ```
 
-##### `static isIn(List<Long> container)`
+##### `static isIn(Iterable<Long> container)`
 
 Returns a `LongPredicate` that tests the input Long if it is contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -485,17 +485,19 @@ the `LongPredicate`
 
 ###### Example
 ```apex
-LongPredicate.isIn(container);
+LongPredicate.isIn(new List<Long>{ 1, 5, -7 });
+LongPredicate.isIn((Iterable<Long>) new Set<Long>{ 1, 5, -7 });
+LongPredicate.isIn(longStream);
 ```
 
-##### `static isNotIn(List<Long> container)`
+##### `static isNotIn(Iterable<Long> container)`
 
 Returns a `LongPredicate` that tests the input Long if it is not contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -517,7 +519,9 @@ the `LongPredicate`
 
 ###### Example
 ```apex
-LongPredicate.isNotIn(container);
+LongPredicate.isNotIn(new List<Long>{ 1, 5, -7 });
+LongPredicate.isNotIn((Iterable<Long>) new Set<Long>{ 1, 5, -7 });
+LongPredicate.isNotIn(longStream);
 ```
 
 ##### `static isNull()`

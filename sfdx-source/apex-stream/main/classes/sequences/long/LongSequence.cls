@@ -200,7 +200,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @return the new `LongSequence`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual ILongIterable append(final Iterable<Long> iterable) {
+    public virtual override ILongIterable append(final Iterable<Long> iterable) {
         return concat(this, iterable);
     }
 
@@ -420,7 +420,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *     .toList();
      * @return the `LongSequence`
      */
-    public virtual ILongIterable distinct() {
+    public virtual override ILongIterable distinct() {
         final List<Long> results = new List<Long>();
         for (Integer i = 0, size = longs.size(); i < size; i++) {
             if (!results.contains(longs[i])) {

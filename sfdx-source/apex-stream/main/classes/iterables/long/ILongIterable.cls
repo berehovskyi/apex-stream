@@ -27,6 +27,30 @@ public interface ILongIterable extends Iterable<Long> {
      * @return the new `ILongIterable`
      */
     ILongIterable prepend(Iterable<Long> iterable);
+
+    /**
+     * @description Returns a new `ILongIterable` as a set union 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `ILongIterable`
+     */
+    ILongIterable union(Iterable<Long> iterable);
+
+    /**
+     * @description Returns a new `ILongIterable` as a set intersection 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `ILongIterable`
+     */
+    ILongIterable intersect(Iterable<Long> iterable);
+
+    /**
+     * @description Returns a new `ILongIterable` as a set difference 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `ILongIterable`
+     */
+    ILongIterable except(Iterable<Long> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Conversion Operations">

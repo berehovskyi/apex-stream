@@ -150,6 +150,41 @@ private class IntSequenceTest {
     }
 
     /**
+     * @see IntIterable.union
+     * @see IntIterable.intersect
+     * @see IntIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Integer> input = new List<Integer>{ 5, 3, 9, 7, 5, 9, 3, 7 };
+        List<Integer> input1 = new List<Integer>{ 8, 3, 6, 4, 4, 9, 1, 0 };
+        IIntIterable seq = IntSequence.of(input).union(input1);
+        IIntIterable seq1 = IntSequence.of(input).union(IntSequence.of(input1));
+        IIntIterable seq2 = IntSequence.of(input).intersect(input1);
+        IIntIterable seq3 = IntSequence.of(input).intersect(IntSequence.of(input1));
+        IIntIterable seq4 = IntSequence.of(input).except(input1);
+        IIntIterable seq5 = IntSequence.of(input).except(IntSequence.of(input1));
+        // When
+        List<Integer> actual = seq.toList();
+        List<Integer> actual1 = seq1.toList();
+        List<Integer> actual2 = seq2.toList();
+        List<Integer> actual3 = seq3.toList();
+        List<Integer> actual4 = seq4.toList();
+        List<Integer> actual5 = seq5.toList();
+        // Then
+        List<Integer> expected = new List<Integer>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
+        List<Integer> expected1 = new List<Integer>{ 3, 9 };
+        List<Integer> expected2 = new List<Integer>{ 5, 7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+    }
+
+    /**
     * @see IntSequence.toObjectIterable
     * @see IntIterable.toLongIterable
     * @see IntIterable.toDoubleIterable

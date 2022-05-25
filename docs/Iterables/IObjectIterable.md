@@ -63,6 +63,63 @@ IObjectIterable
 
 the new `IObjectIterable`
 
+### `union(Iterable<Object> iterable)`
+
+Returns a new `IObjectIterable` as a set union of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
+### `intersect(Iterable<Object> iterable)`
+
+Returns a new `IObjectIterable` as a set intersection of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
+### `except(Iterable<Object> iterable)`
+
+Returns a new `IObjectIterable` as a set difference of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
 ### `filter(IPredicate predicate)`
 
 Returns a new `IObjectIterable` with `Object` elements that match `predicate`. <p>Intermediate Operation.</p>

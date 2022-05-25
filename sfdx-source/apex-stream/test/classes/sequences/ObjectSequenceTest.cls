@@ -134,6 +134,41 @@ private class ObjectSequenceTest {
     }
 
     /**
+     * @see ObjectIterable.union
+     * @see ObjectIterable.intersect
+     * @see ObjectIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Object> input = new List<Object>{ 5, 3, 9, 7, 5, 9, 3, 7 };
+        List<Object> input1 = new List<Object>{ 8, 3, 6, 4, 4, 9, 1, 0 };
+        IObjectIterable seq = ObjectSequence.of(input).union(input1);
+        IObjectIterable seq1 = ObjectSequence.of(input).union(ObjectSequence.of(input1));
+        IObjectIterable seq2 = ObjectSequence.of(input).intersect(input1);
+        IObjectIterable seq3 = ObjectSequence.of(input).intersect(ObjectSequence.of(input1));
+        IObjectIterable seq4 = ObjectSequence.of(input).except(input1);
+        IObjectIterable seq5 = ObjectSequence.of(input).except(ObjectSequence.of(input1));
+        // When
+        List<Object> actual = seq.toList();
+        List<Object> actual1 = seq1.toList();
+        List<Object> actual2 = seq2.toList();
+        List<Object> actual3 = seq3.toList();
+        List<Object> actual4 = seq4.toList();
+        List<Object> actual5 = seq5.toList();
+        // Then
+        List<Object> expected = new List<Object>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
+        List<Object> expected1 = new List<Object>{ 3, 9 };
+        List<Object> expected2 = new List<Object>{ 5, 7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+    }
+
+    /**
     * @see ObjectSequence.filter
     */
     @IsTest

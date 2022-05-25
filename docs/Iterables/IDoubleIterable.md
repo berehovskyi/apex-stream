@@ -63,6 +63,63 @@ IDoubleIterable
 
 the new `IDoubleIterable`
 
+### `union(Iterable<Double> iterable)`
+
+Returns a new `IDoubleIterable` as a set union of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `IDoubleIterable`
+
+### `intersect(Iterable<Double> iterable)`
+
+Returns a new `IDoubleIterable` as a set intersection of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `IDoubleIterable`
+
+### `except(Iterable<Double> iterable)`
+
+Returns a new `IDoubleIterable` as a set difference of the current and another iterables.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `IDoubleIterable`
+
 ### `toObjectIterable()`
 
 Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>

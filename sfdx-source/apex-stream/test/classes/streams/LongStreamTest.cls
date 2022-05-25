@@ -222,6 +222,47 @@ public class LongStreamTest {
     }
 
     /**
+     * @see ILongIterable.union
+     * @see ILongIterable.intersect
+     * @see ILongIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+        List<Long> input1 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+        ILongIterable stream = LongStream.of(input).union(input1);
+        ILongIterable stream1 = LongStream.of(input).union(LongStream.of(input1));
+        ILongIterable stream2 = LongStream.of(input).intersect(input1);
+        ILongIterable stream3 = LongStream.of(input).intersect(LongStream.of(input1));
+        ILongIterable stream4 = LongStream.of(input).except(input1);
+        ILongIterable stream5 = LongStream.of(input).except(LongStream.of(input1));
+        // When
+        List<Long> actual = stream.toList();
+        List<Long> actual1 = stream1.toList();
+        List<Long> actual2 = stream2.toList();
+        List<Long> actual3 = stream3.toList();
+        List<Long> actual4 = stream4.toList();
+        List<Long> actual5 = stream5.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 5L, 3L, 9L, 7L, 8L, 6L, 4L, 1L, 0L };
+        List<Long> expected1 = new List<Long>{ 3L, 9L };
+        List<Long> expected2 = new List<Long>{ 5L, 7L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+        Validate.assert(((LongStream) stream).isOperated);
+        Validate.assert(((LongStream) stream1).isOperated);
+        Validate.assert(((LongStream) stream2).isOperated);
+        Validate.assert(((LongStream) stream3).isOperated);
+        Validate.assert(((LongStream) stream4).isOperated);
+        Validate.assert(((LongStream) stream5).isOperated);
+    }
+
+    /**
     * @see LongStream.toObjectIterable
     * @see LongIterable.toIntIterable
     * @see LongIterable.toDoubleIterable

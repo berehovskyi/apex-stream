@@ -159,8 +159,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.concat
-    */
+     * @see IntStream.concat
+     */
     @IsTest
     private static void concat() {
         // Given
@@ -182,8 +182,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.zip
-    */
+     * @see IntStream.zip
+     */
     @IsTest
     private static void zip() {
         // Given
@@ -199,9 +199,9 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.append
-    * @see IntStream.prepend
-    */
+     * @see IntStream.append
+     * @see IntStream.prepend
+     */
     @IsTest
     private static void appendPrepend() {
         // Given
@@ -222,10 +222,51 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.toObjectIterable
-    * @see IntIterable.toLongIterable
-    * @see IntIterable.toDoubleIterable
-    */
+     * @see IntIterable.union
+     * @see IntIterable.intersect
+     * @see IntIterable.except
+     */
+    @IsTest
+    private static void setOperations() {
+        // Given
+        List<Integer> input = new List<Integer>{ 5, 3, 9, 7, 5, 9, 3, 7 };
+        List<Integer> input1 = new List<Integer>{ 8, 3, 6, 4, 4, 9, 1, 0 };
+        IIntIterable stream = IntStream.of(input).union(input1);
+        IIntIterable stream1 = IntStream.of(input).union(IntStream.of(input1));
+        IIntIterable stream2 = IntStream.of(input).intersect(input1);
+        IIntIterable stream3 = IntStream.of(input).intersect(IntStream.of(input1));
+        IIntIterable stream4 = IntStream.of(input).except(input1);
+        IIntIterable stream5 = IntStream.of(input).except(IntStream.of(input1));
+        // When
+        List<Integer> actual = stream.toList();
+        List<Integer> actual1 = stream1.toList();
+        List<Integer> actual2 = stream2.toList();
+        List<Integer> actual3 = stream3.toList();
+        List<Integer> actual4 = stream4.toList();
+        List<Integer> actual5 = stream5.toList();
+        // Then
+        List<Integer> expected = new List<Integer>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
+        List<Integer> expected1 = new List<Integer>{ 3, 9 };
+        List<Integer> expected2 = new List<Integer>{ 5, 7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected1, actual3);
+        Validate.assertEquals(expected2, actual4);
+        Validate.assertEquals(expected2, actual5);
+        Validate.assert(((IntStream) stream).isOperated);
+        Validate.assert(((IntStream) stream1).isOperated);
+        Validate.assert(((IntStream) stream2).isOperated);
+        Validate.assert(((IntStream) stream3).isOperated);
+        Validate.assert(((IntStream) stream4).isOperated);
+        Validate.assert(((IntStream) stream5).isOperated);
+    }
+
+    /**
+     * @see IntStream.toObjectIterable
+     * @see IntIterable.toLongIterable
+     * @see IntIterable.toDoubleIterable
+     */
     @IsTest
     private static void convert() {
         // Given
@@ -250,8 +291,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.filter
-    */
+     * @see IntStream.filter
+     */
     @IsTest
     private static void filter() {
         // Given
@@ -266,8 +307,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.take
-    */
+     * @see IntStream.take
+     */
     @IsTest
     private static void take() {
         // Given
@@ -282,8 +323,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.drop
-    */
+     * @see IntStream.drop
+     */
     @IsTest
     private static void drop() {
         // Given
@@ -298,8 +339,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntIterable.withoutNulls
-    */
+     * @see IntIterable.withoutNulls
+     */
     @IsTest
     private static void withoutNulls() {
         // Given
@@ -316,8 +357,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.mapTo
-    */
+     * @see IntStream.mapTo
+     */
     @IsTest
     private static void mapTo() {
         // Given
@@ -334,8 +375,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.mapToLong
-    */
+     * @see IntStream.mapToLong
+     */
     @IsTest
     private static void mapToLong() {
         // Given
@@ -352,8 +393,8 @@ private class IntStreamTest {
     }
 
     /**
-    * @see IntStream.mapToDouble
-    */
+     * @see IntStream.mapToDouble
+     */
     @IsTest
     private static void mapToDouble() {
         // Given

@@ -537,14 +537,16 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a `Predicate` that tests the input object if the result returned by
      * the `function` is contained in the `container`.
      * @example
-     * Predicate.isIn(func, container);
+     * Predicate.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
+     * Predicate.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * Predicate.isIn(getNameFunc, nameStream);
      * @param function the function whose application result is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `Predicate`
      * @throws NullPointerException if the `function`, or the `container` is null
      * @see List.contains
      */
-    public static Predicate isIn(final IFunction function, final List<Object> container) {
+    public static Predicate isIn(final IFunction function, final Iterable<Object> container) {
         Validate.notNull(function);
         Validate.notNull(container);
         return new IsIn(function, container);
@@ -554,13 +556,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a `Predicate` that tests the input object if it is contained in
      * the `container`.
      * @example
-     * Predicate.isIn(container);
-     * @param container the list that checks for the presence of an element
+     * Predicate.isIn(new List<Object>{ 'John', 'Jim' });
+     * Predicate.isIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * Predicate.isIn(nameStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `Predicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static Predicate isIn(final List<Object> container) {
+    public static Predicate isIn(final Iterable<Object> container) {
         return isIn(Function.identity(), container);
     }
 
@@ -568,14 +572,16 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a `Predicate` that tests the input object if the result returned by
      * the `function` is not contained in the `container`.
      * @example
-     * Predicate.isNotIn(func, container);
+     * Predicate.isNotIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
+     * Predicate.isNotIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * Predicate.isNotIn(getNameFunc, nameStream);
      * @param function the function whose application result is tested
-     * @param container the list that checks for the presence of an element
+     * @param container the iterable that checks for the presence of an element
      * @return the `Predicate`
      * @throws NullPointerException if the `function`, or the `container` is null
      * @see List.contains
      */
-    public static Predicate isNotIn(final IFunction function, final List<Object> container) {
+    public static Predicate isNotIn(final IFunction function, final Iterable<Object> container) {
         return isIn(function, container).negate();
     }
 
@@ -583,13 +589,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a `Predicate` that tests the input object if it is not contained in
      * the `container`.
      * @example
-     * Predicate.isNotIn(container);
-     * @param container the list that checks for the presence of an element
+     * Predicate.isNotIn(new List<Object>{ 'John', 'Jim' });
+     * Predicate.isNotIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * Predicate.isNotIn(nameStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `Predicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static Predicate isNotIn(final List<Object> container) {
+    public static Predicate isNotIn(final Iterable<Object> container) {
         return isIn(container).negate();
     }
     //</editor-fold>
@@ -862,14 +870,12 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     private class IsIn extends Predicate {
         private final IFunction function;
-        private final Object container;
-        private IsIn(IFunction function, Object container) {
+        private final Set<Object> container;
+        private IsIn(IFunction function, Iterable<Object> container) {
             this.function = function;
-            this.container = container;
+            this.container = Iterators.toObjectSet(container.iterator());
         }
-        public override Boolean test(Object o) {
-            return ((List<Object>) container).contains(function.apply(o));
-        }
+        public override Boolean test(Object o) { return container.contains(function.apply(o)); }
     }
 
     private class IsInstanceOfBoolean extends Predicate {

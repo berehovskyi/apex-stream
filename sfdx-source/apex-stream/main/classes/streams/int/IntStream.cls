@@ -245,7 +245,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @return the new `IntStream`
      * @throws NullPointerException if `iterable` is null
      */
-    public virtual IIntIterable append(final Iterable<Integer> iterable) {
+    public virtual override IIntIterable append(final Iterable<Integer> iterable) {
         return concat(this, iterable);
     }
 
@@ -417,7 +417,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *     .toList();
      * @return the `IntStream`
      */
-    public virtual IIntIterable distinct() {
+    public virtual override IIntIterable distinct() {
         return new IntStream(new IntDistinctIterator(iterator()));
     }
 

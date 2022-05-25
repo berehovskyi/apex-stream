@@ -456,14 +456,14 @@ the `DoublePredicate`
 DoublePredicate.isNotEqual(100);
 ```
 
-##### `static isIn(List<Double> container)`
+##### `static isIn(Iterable<Double> container)`
 
 Returns a `DoublePredicate` that tests the input Double if it is contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -485,17 +485,19 @@ the `DoublePredicate`
 
 ###### Example
 ```apex
-DoublePredicate.isIn(container);
+DoublePredicate.isIn(new List<Double>{ 1.5, 5.1, Math.PI });
+DoublePredicate.isIn((Iterable<Double>) new Set<Double>{ 1.5, 5.1, Math.PI });
+DoublePredicate.isIn(doubleStream);
 ```
 
-##### `static isNotIn(List<Double> container)`
+##### `static isNotIn(Iterable<Double> container)`
 
 Returns a `DoublePredicate` that tests the input Double if it is not contained in the `container`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
-|`container`|the list that checks for the presence of an element|
+|`container`|the iterable that checks for the presence of an element|
 
 ###### Return
 
@@ -517,7 +519,9 @@ the `DoublePredicate`
 
 ###### Example
 ```apex
-DoublePredicate.isNotIn(container);
+DoublePredicate.isNotIn(new List<Double>{ 1.5, 5.1, Math.PI });
+DoublePredicate.isNotIn((Iterable<Double>) new Set<Double>{ 1.5, 5.1, Math.PI });
+DoublePredicate.isNotIn(doubleStream);
 ```
 
 ##### `static isNull()`

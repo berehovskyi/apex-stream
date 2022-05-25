@@ -249,13 +249,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
      * @description Returns a `IntPredicate` that tests the input Integer if it is contained in
      * the `container`.
      * @example
-     * IntPredicate.isIn(container);
-     * @param container the list that checks for the presence of an element
+     * IntPredicate.isIn(new List<Integer>{ 1, 5, -7 });
+     * IntPredicate.isIn((Iterable<Integer>) new Set<Integer>{ 1, 5, -7 });
+     * IntPredicate.isIn(intStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `IntPredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static IntPredicate isIn(final List<Integer> container) {
+    public static IntPredicate isIn(final Iterable<Integer> container) {
         Validate.notNull(container);
         return new IsIn(container);
     }
@@ -264,13 +266,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
      * @description Returns a `IntPredicate` that tests the input Integer if it is not contained in
      * the `container`.
      * @example
-     * IntPredicate.isNotIn(container);
-     * @param container the list that checks for the presence of an element
+     * IntPredicate.isNotIn(new List<Integer>{ 1, 5, -7 });
+     * IntPredicate.isNotIn((Iterable<Integer>) new Set<Integer>{ 1, 5, -7 });
+     * IntPredicate.isNotIn(intStream);
+     * @param container the iterable that checks for the presence of an element
      * @return the `IntPredicate`
      * @throws NullPointerException if the `container` is null
      * @see List.contains
      */
-    public static IntPredicate isNotIn(final List<Integer> container) {
+    public static IntPredicate isNotIn(final Iterable<Integer> container) {
         return isIn(container).negate();
     }
     //</editor-fold>
@@ -455,8 +459,8 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     }
 
     private class IsIn extends IntPredicate {
-        private final List<Integer> integers;
-        public IsIn(List<Integer> integers) { this.integers = integers; }
+        private final Set<Integer> integers;
+        public IsIn(Iterable<Integer> integers) { this.integers = Iterators.toIntSet(integers.iterator()); }
         public override Boolean test(Integer i) { return integers.contains(i); }
     }
 
