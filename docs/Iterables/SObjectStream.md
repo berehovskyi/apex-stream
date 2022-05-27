@@ -702,6 +702,133 @@ List<Object> birthdates = SObjectStream.of(contacts)
     .toList();
 ```
 
+##### `override flatMapTo(ISObjectFunction mapper)`
+
+Returns a new `SObjectStream` with `SObject` elements as a result of replacing each element of this stream with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<SObject>`|
+
+###### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `SObjectStream`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+###### Example
+```apex
+List<Contact> contacts = SObjectStream.of(accounts)
+    .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+    .toList();
+```
+
+##### `flatMapToInt(ISObjectFunction mapper)`
+
+Returns a new `IntStream` with `Integer` elements as a result of replacing each element of this stream with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Integer>`|
+
+###### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IntStream`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+##### `flatMapToLong(ISObjectFunction mapper)`
+
+Returns a new `LongStream` with `Long` elements as a result of replacing each element of this stream with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Long>`|
+
+###### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `LongStream`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+##### `flatMapToDouble(ISObjectFunction mapper)`
+
+Returns a new `DoubleStream` with `Double` elements as a result of replacing each element of this stream with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Double>`|
+
+###### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `DoubleStream`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+##### `flatMapToObject(ISObjectFunction mapper)`
+
+Returns a new `ObjectStream` with `Object` elements as a result of replacing each element of this stream with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Object>`|
+
+###### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `ObjectStream`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
 ##### `override forEach(ISObjectConsumer consumer)`
 
 Returns a `SObjectStream` after performing `consumer` action on each element. <p>Stateless Intermediate Operation.</p>

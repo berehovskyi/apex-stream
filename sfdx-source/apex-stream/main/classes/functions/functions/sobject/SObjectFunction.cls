@@ -130,9 +130,9 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
      * @description Returns a `SObjectFunction` that gets children sobjects for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
      * @example
-     * SObjectFunction.get('Contacts');
-     * SObjectFunction.get('Parent.Contacts');
-     * SObjectFunction.get('Parent?.Contacts');
+     * SObjectFunction.getSObjects('Contacts');
+     * SObjectFunction.getSObjects('Parent.Contacts');
+     * SObjectFunction.getSObjects('Parent?.Contacts');
      * @param fieldName the field to get a value
      * @return the `SObjectFunction`
      * @throws NullPointerException if `fieldName` is blank
@@ -154,7 +154,7 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
      * @description Returns a `SObjectFunction` that gets children sobjects for
      * the specified `field`. Cross-reference fields and safe navigation are supported.
      * @example
-     * SObjectFunction.get(Contact.AccountId);
+     * SObjectFunction.getSObjects(Contact.AccountId);
      * @param field the field to get a value
      * @return the `SObjectFunction`
      * @throws NullPointerException if `field` is null
@@ -166,8 +166,8 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     public static SObjectFunction getSObjects(final SObjectField field) {
         // Since UnexpectedException is thrown if SObject doesn't have
         // related sObjects returned using SObjectField navigation such as
-        // acc.getSObject(Contact.AccountId)
-        return getSObjects(Schemas.findRelationshipName(field));
+        // acc.getSObjects(Contact.AccountId)
+        return getSObjects(Schemas.findChildRelationshipName(field));
     }
 
     /**

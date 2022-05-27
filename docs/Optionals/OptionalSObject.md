@@ -165,9 +165,9 @@ the nullable `OptionalSObject` or an empty `OptionalSObject`
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-### `mapTo(ISObjectUnaryOperator mapper)`
+### `mapTo(ISObjectFunction mapper)`
 
-Returns an `OptionalSObject` describing result of applying `mapper` function to the value if the value is present, otherwise returns an empty `OptionalSObject`.
+Returns an `Optional` describing result of applying `mapper` function to the value if the value is present, otherwise returns an empty `Optional`.
 
 #### Parameters
 |Param|Description|
@@ -178,11 +178,35 @@ Returns an `OptionalSObject` describing result of applying `mapper` function to 
 
 **Type**
 
-OptionalSObject
+Optional
 
 **Description**
 
-the nullable `OptionalSObject` or an empty `OptionalSObject`
+the nullable `Optional` or an empty `Optional`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+### `flatMapTo(ISObjectFunction mapper)`
+
+Returns an `Optional` the result of applying the `mapper` function to the value if the value is present, otherwise returns an empty `Optional`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the function that returns an `Optional`|
+
+#### Return
+
+**Type**
+
+Optional
+
+**Description**
+
+the nullable `Optional` or an empty `Optional`
 
 #### Throws
 |Exception|Description|

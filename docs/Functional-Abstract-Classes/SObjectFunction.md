@@ -264,9 +264,9 @@ the `SObjectFunction`
 
 ###### Example
 ```apex
-SObjectFunction.get('Contacts');
-SObjectFunction.get('Parent.Contacts');
-SObjectFunction.get('Parent?.Contacts');
+SObjectFunction.getSObjects('Contacts');
+SObjectFunction.getSObjects('Parent.Contacts');
+SObjectFunction.getSObjects('Parent?.Contacts');
 ```
 
 ##### `static getSObjects(SObjectField field)`
@@ -300,7 +300,7 @@ the `SObjectFunction`
 
 ###### Example
 ```apex
-SObjectFunction.get(Contact.AccountId);
+SObjectFunction.getSObjects(Contact.AccountId);
 ```
 
 ##### `static getSObjectType()`

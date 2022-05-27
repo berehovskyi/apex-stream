@@ -450,6 +450,115 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
+     * @description Returns a new `SObjectSequence` with `SObject` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateful Intermediate Operation.</p>
+     * @example
+     * List<Contact> contacts = SObjectSequence.of(accounts)
+     *     .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+     *     .toList();
+     * @param mapper the mapping function which must produce `Iterable<SObject>`
+     * @return the new `SObjectSequence`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override ISObjectIterable flatMapTo(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        final List<SObject> results = new List<SObject>();
+        for (Integer i = 0, size = sObjects.size(); i < size; i++) {
+            final Iterable<SObject> result = (Iterable<SObject>) mapper.apply(sObjects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toSObjectList(result.iterator()));
+            }
+        }
+        return new SObjectSequence(results);
+    }
+
+    /**
+     * @description Returns a new `IntSequence` with `Integer` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateful Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Integer>`
+     * @return the new `IntSequence`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual IIntIterable flatMapToInt(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Integer> results = new List<Integer>();
+        for (Integer i = 0, size = sObjects.size(); i < size; i++) {
+            final Iterable<Integer> result = (Iterable<Integer>) mapper.apply(sObjects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toIntList(result.iterator()));
+            }
+        }
+        return IntSequence.of(results);
+    }
+
+    /**
+     * @description Returns a new `LongSequence` with `Long` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateful Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     * @return the new `LongSequence`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual ILongIterable flatMapToLong(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Long> results = new List<Long>();
+        for (Integer i = 0, size = sObjects.size(); i < size; i++) {
+            final Iterable<Long> result = (Iterable<Long>) mapper.apply(sObjects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toLongList(result.iterator()));
+            }
+        }
+        return LongSequence.of(results);
+    }
+
+    /**
+     * @description Returns a new `DoubleSequence` with `Double` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateful Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Double>`
+     * @return the new `DoubleSequence`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual IDoubleIterable flatMapToDouble(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Double> results = new List<Double>();
+        for (Integer i = 0, size = sObjects.size(); i < size; i++) {
+            final Iterable<Double> result = (Iterable<Double>) mapper.apply(sObjects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toDoubleList(result.iterator()));
+            }
+        }
+        return DoubleSequence.of(results);
+    }
+
+    /**
+     * @description Returns a new `ObjectSequence` with `Object` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateful Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Object>`
+     * @return the new `ObjectSequence`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual IObjectIterable flatMapToObject(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Object> results = new List<Object>();
+        for (Integer i = 0, size = sObjects.size(); i < size; i++) {
+            final Iterable<Object> result = (Iterable<Object>) mapper.apply(sObjects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toObjectList(result.iterator()));
+            }
+        }
+        return ObjectSequence.of(results);
+    }
+    
+    /**
      * @description Returns a `SObjectSequence` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
      * @example

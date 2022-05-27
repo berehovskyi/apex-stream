@@ -277,6 +277,101 @@ IObjectIterable
 
 the new `IObjectIterable`
 
+### `flatMapTo(ISObjectFunction mapper)`
+
+Returns a new `ISObjectIterable` with `SObject` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<SObject>`|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `flatMapToInt(ISObjectFunction mapper)`
+
+Returns a new `IIntIterable` with `Integer` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Integer>`|
+
+#### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IIntIterable`
+
+### `flatMapToLong(ISObjectFunction mapper)`
+
+Returns a new `ILongIterable` with `Long` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Long>`|
+
+#### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `ILongIterable`
+
+### `flatMapToDouble(ISObjectFunction mapper)`
+
+Returns a new `IDoubleIterable` with `Double` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Double>`|
+
+#### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `IDoubleIterable`
+
+### `flatMapToObject(ISObjectFunction mapper)`
+
+Returns a new `IObjectIterable` with `Object` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Object>`|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
 ### `forEach(ISObjectConsumer consumer)`
 
 Returns a new `ISObjectIterable` after performing `consumer` action on each `SObject` element. <p>Intermediate Interfering Operation.</p>

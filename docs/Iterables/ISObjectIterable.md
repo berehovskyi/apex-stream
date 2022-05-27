@@ -152,7 +152,7 @@ Returns a new `ISObjectIterable` with `SObject` elements according to `fieldName
 #### Parameters
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to be set for new SObject|
+|`fieldName`|the parent reference field|
 
 #### Return
 
@@ -171,7 +171,7 @@ Returns a new `ISObjectIterable` with `SObject` elements according to `field`. <
 #### Parameters
 |Param|Description|
 |---|---|
-|`field`|the field value to be set for new SObject|
+|`field`|the parent reference field|
 
 #### Return
 
@@ -334,6 +334,44 @@ IObjectIterable
 **Description**
 
 the new `IObjectIterable`
+
+### `flatMapTo(String fieldName)`
+
+Returns a new `IObjectIterable` with `SObject` elements as a result of replacing each element with the contents of a mapped iterable according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the child relationship field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `flatMapTo(SObjectField field)`
+
+Returns a new `IObjectIterable` with `SObject` elements as a result of replacing each element with the contents of a mapped iterable according to `childRelationshipField`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the child relationship field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
 
 ### `forEach(String fieldName, Object value)`
 

@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi>
+ * @author O. Berehovskyi
  */
 public class ObjectDropIterator extends ObjectBaseIterator {
 

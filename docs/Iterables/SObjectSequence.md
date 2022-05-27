@@ -623,6 +623,133 @@ List<Object> birthdates = SObjectSequence.of(contacts)
     .toList();
 ```
 
+##### `override flatMapTo(ISObjectFunction mapper)`
+
+Returns a new `SObjectSequence` with `SObject` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateful Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<SObject>`|
+
+###### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `SObjectSequence`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+###### Example
+```apex
+List<Contact> contacts = SObjectSequence.of(accounts)
+    .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+    .toList();
+```
+
+##### `flatMapToInt(ISObjectFunction mapper)`
+
+Returns a new `IntSequence` with `Integer` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateful Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Integer>`|
+
+###### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IntSequence`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+##### `flatMapToLong(ISObjectFunction mapper)`
+
+Returns a new `LongSequence` with `Long` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateful Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Long>`|
+
+###### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `LongSequence`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+##### `flatMapToDouble(ISObjectFunction mapper)`
+
+Returns a new `DoubleSequence` with `Double` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateful Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Double>`|
+
+###### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `DoubleSequence`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+##### `flatMapToObject(ISObjectFunction mapper)`
+
+Returns a new `ObjectSequence` with `Object` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateful Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Object>`|
+
+###### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `ObjectSequence`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
 ##### `override forEach(ISObjectConsumer consumer)`
 
 Returns a `SObjectSequence` after performing `consumer` action on each element. <p>Stateful Intermediate Operation.</p>

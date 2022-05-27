@@ -23,7 +23,11 @@ private class SObjectBinaryOperatorTest {
         ISObjectBinaryOperator left = SObjectBinaryOperator.left();
         ISObjectBinaryOperator right = SObjectBinaryOperator.right();
         ISObjectBinaryOperator minBy = SObjectBinaryOperator.minBy(comparator);
+        ISObjectBinaryOperator minBy1 = SObjectBinaryOperator.minBy(IterTestUtils.CONSTS.Account.NumberOfEmployees);
+        ISObjectBinaryOperator minBy2 = SObjectBinaryOperator.minBy(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES);
         ISObjectBinaryOperator maxBy = SObjectBinaryOperator.maxBy(comparator);
+        ISObjectBinaryOperator maxBy1 = SObjectBinaryOperator.maxBy(IterTestUtils.CONSTS.Account.NumberOfEmployees);
+        ISObjectBinaryOperator maxBy2 = SObjectBinaryOperator.maxBy(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES);
         ISObjectBinaryOperator ofBiConsumer = SObjectBinaryOperator.forBiConsumer(consumer);
         ISObjectBinaryOperator ofBiConsumerMergingToLeft = SObjectBinaryOperator.combine(consumer, SObjectBinaryOperator.left());
         // Then
@@ -33,7 +37,11 @@ private class SObjectBinaryOperatorTest {
             Validate.assertEquals(target, right.apply(acc, target));
             SObject target1 = new Account(NumberOfEmployees = 100);
             SObject actual = minBy.apply(acc, target1);
-            SObject actual1 = maxBy.apply(acc, target1);
+            SObject actual1 = minBy1.apply(acc, target1);
+            SObject actual2 = minBy2.apply(acc, target1);
+            SObject actual3 = maxBy.apply(acc, target1);
+            SObject actual4 = maxBy1.apply(acc, target1);
+            SObject actual5 = maxBy2.apply(acc, target1);
             SObject expected = acc.NumberOfEmployees == null
                     ? acc
                     : acc.NumberOfEmployees >= (Integer) target1.get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) ? target1 : acc;
@@ -41,17 +49,21 @@ private class SObjectBinaryOperatorTest {
                     ? target1
                     : acc.NumberOfEmployees <= (Integer) target1.get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) ? target1 : acc;
             Validate.assertEquals(expected, actual);
-            Validate.assertEquals(expected1, actual1);
+            Validate.assertEquals(expected, actual1);
+            Validate.assertEquals(expected, actual2);
+            Validate.assertEquals(expected1, actual3);
+            Validate.assertEquals(expected1, actual4);
+            Validate.assertEquals(expected1, actual5);
 
             SObject expected2 = new Contact(Department = acc.Type, AccountId = acc.Id);
             SObject target2 = new Contact();
             SObject src = IterTestUtils.deepClone(acc);
-            SObject actual2 = ofBiConsumer.apply(src, target2);
-            Validate.assertEquals(expected2, actual2);
+            SObject actual6 = ofBiConsumer.apply(src, target2);
+            Validate.assertEquals(expected2, actual6);
             SObject target3 = new Contact();
             SObject src1 = IterTestUtils.deepClone(acc);
-            SObject actual3 = ofBiConsumerMergingToLeft.apply(src1, target3);
-            Validate.assertEquals(src1, actual3);
+            SObject actual7 = ofBiConsumerMergingToLeft.apply(src1, target3);
+            Validate.assertEquals(src1, actual7);
         }
     }
 }

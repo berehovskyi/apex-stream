@@ -192,38 +192,6 @@ public virtual inherited sharing class Iterators {
     }
 
     /**
-     * @description Accumulates `fieldName` values into a `List<?>` of specific `listType`.
-     * @example 
-     * List<String> accNames = (List<String>) Iterators.toList(accIterator, 'Name', List<String>.class);
-     * @param iterator the iterator
-     * @param fieldName the field name
-     * @param listType the type of list
-     * @return the `List<Object>` which can be casted into `listType`
-     * @throws NullPointerException if `sObjects` or `iterator` is null, or `fieldName` is blank
-     */
-    public static List<Object> toList(final Iterator<SObject> iterator, final String fieldName, final Type listType) {
-        return toList(iterator, SObjectFunction.get(fieldName), listType);
-    }
-
-    /**
-     * @description Accumulates `field` values into a `List<?>` of specific `listType`.
-     * @example 
-     * List<String> accNames = (List<String>) Iterators.toList(accIterator, Account.Name, List<String>.class);
-     * @param iterator the iterator
-     * @param field the field
-     * @param listType the type of list
-     * @return the `List<Object>` which can be casted into `listType`
-     * @throws NullPointerException if `iterator`, `field` or `listType` is null
-     */
-    public static List<Object> toList(
-            final Iterator<SObject> iterator,
-            final SObjectField field,
-            final Type listType
-    ) {
-        return toList(iterator, SObjectFunction.get(field), listType);
-    }
-
-    /**
      * @description Accumulates values returned by `mapper` into a `Set<Id>`.
      * @example 
      * Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunction.get('ParentId'));

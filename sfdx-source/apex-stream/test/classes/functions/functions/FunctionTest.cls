@@ -62,6 +62,7 @@ private class FunctionTest {
         Object constant = 42;
         Integer maxWidth = 5;
         Integer val = 4;
+        Account acc = new Account();
         // When
         IFunction identity = Function.identity();
         IFunction get42 = Function.constant(constant);
@@ -69,6 +70,7 @@ private class FunctionTest {
         IFunction isGreaterThan4Int = Function.forPredicate(Predicate.upcast(IntPredicate.isGreater(val)));
         IFunction isGreaterThan4Long = Function.forPredicate(Predicate.upcast(LongPredicate.isGreater(val)));
         IFunction isGreaterThan4Double = Function.forPredicate(Predicate.upcast(DoublePredicate.isGreater(val)));
+        IFunction isEmptyAcc = Function.forPredicate(Predicate.upcast(SObjectPredicate.isEqual(acc)));
         Function capitalize = StringFunction.capitalize();
         Function abbreviate5 = StringFunction.abbreviate(maxWidth);
         IFunction capitalizeAndAbbreviate = capitalize.andThen(abbreviate5);
@@ -92,6 +94,7 @@ private class FunctionTest {
         for (Double d : doubleInput) {
             Validate.assertEquals(d > 4, isGreaterThan4Double.apply(d));
         }
+        Validate.assert((Boolean) isEmptyAcc.apply(new Account()));
     }
 
     /**

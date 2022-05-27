@@ -1913,6 +1913,56 @@ private class StreamSObjectCollectorTest {
     }
 
     /**
+     * @see SObjectCollector.flatMapping
+     */
+    @IsTest
+    static void flatMapping() {
+        // Given
+        List<Account> accounts = IterTestUtils.generateAccounts();
+        ISObjectFunction mapper = SObjectFunction.getSObjects(IterTestUtils.CONSTS.CONTACTS);
+        ISObjectFunction keyMapper = SObjectFunction.get(IterTestUtils.CONSTS.Account.Type);
+        // When
+        List<Object> actual = (List<Object>) Stream.of(accounts).collect(SObjectCollector.flatMapping(mapper));
+        List<Contact> actual1 = (List<Contact>) Stream.of(accounts).collect(SObjectCollector.flatMapping(mapper).cast(List<Contact>.class));
+        List<Contact> actual2 = (List<Contact>) Stream.of(accounts).collect(SObjectCollector.flatMapping(IterTestUtils.CONSTS.CONTACTS).cast(List<Contact>.class));
+        List<Contact> actual3 = (List<Contact>) Stream.of(accounts).collect(SObjectCollector.flatMapping(IterTestUtils.CONSTS.Contact.AccountId).cast(List<Contact>.class));
+        Set<SObject> actual4 = (Set<SObject>) Stream.of(accounts).collect(SObjectCollector.flatMapping(mapper, Collector.toSObjectSet()));
+        Map<String, List<Contact>> actual5 = (Map<String, List<Contact>>) Stream.of(accounts)
+                .collect(SObjectCollector.groupingByString(keyMapper, SObjectCollector.flatMapping(mapper)).cast(Map<String, List<Contact>>.class));
+        // Then
+        List<SObject> expected = new List<SObject>();
+        for (Account acc : accounts) {
+            List<SObject> children = acc.getSObjects(IterTestUtils.CONSTS.CONTACTS);
+            if (children != null) {
+                expected.addAll(children);
+            }
+        }
+        Validate.assertEquals(ObjectStream.of(expected).toList(), actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Set<SObject> expected1 = new Set<SObject>(expected);
+        Validate.assertEquals(expected1, actual4);
+        Map<String, List<Contact>> expected2 = new Map<String, List<Contact>>{
+                IterTestUtils.CONSTS.CUSTOMER => new List<Contact>{
+                        accounts[0].Contacts[0],
+                        accounts[1].Contacts[0],
+                        accounts[2].Contacts[0]
+                },
+                IterTestUtils.CONSTS.PARTNER => new List<Contact>{
+                        accounts[3].Contacts[0],
+                        accounts[5].Contacts[0],
+                        accounts[5].Contacts[1]
+                },
+                IterTestUtils.CONSTS.COMPETITOR => new List<Contact>(),
+                null => new List<Contact>{
+                        accounts[4].Contacts[0]
+                }
+        };
+        Validate.assertEquals(expected2, actual5);
+    }
+
+    /**
      * @see SObjectCollector.reducing
      */
     @IsTest

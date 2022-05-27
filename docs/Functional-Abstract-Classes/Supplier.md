@@ -50,6 +50,30 @@ the `Supplier`
 
 **See** Type.newInstance
 
+##### `static constant(Object o)`
+
+Returns a stateful `Supplier` that returns a reference of the `o` object.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`o`|the Object|
+
+###### Return
+
+**Type**
+
+Supplier
+
+**Description**
+
+the `Supplier`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `o` is null|
+
 ##### `static upcast(IIntSupplier supplier)`
 
 Returns a composed `Supplier` of the `IIntSupplier`.

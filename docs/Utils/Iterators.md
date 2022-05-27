@@ -309,68 +309,6 @@ List<String> accNames = (List<String>)
     Iterators.toList(accIterator, SObjectFunction.get('Name'), List<String>.class);
 ```
 
-### `static toList(Iterator<SObject> iterator, String fieldName, Type listType)`
-
-Accumulates `fieldName` values into a `List<?>` of specific `listType`.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`iterator`|the iterator|
-|`fieldName`|the field name|
-|`listType`|the type of list|
-
-#### Return
-
-**Type**
-
-List<Object>
-
-**Description**
-
-the `List<Object>` which can be casted into `listType`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `sObjects` or `iterator` is null, or `fieldName` is blank|
-
-#### Example
-```apex
-List<String> accNames = (List<String>) Iterators.toList(accIterator, 'Name', List<String>.class);
-```
-
-### `static toList(Iterator<SObject> iterator, SObjectField field, Type listType)`
-
-Accumulates `field` values into a `List<?>` of specific `listType`.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`iterator`|the iterator|
-|`field`|the field|
-|`listType`|the type of list|
-
-#### Return
-
-**Type**
-
-List<Object>
-
-**Description**
-
-the `List<Object>` which can be casted into `listType`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `iterator`, `field` or `listType` is null|
-
-#### Example
-```apex
-List<String> accNames = (List<String>) Iterators.toList(accIterator, Account.Name, List<String>.class);
-```
-
 ### `static toIdSet(Iterator<SObject> iterator, ISObjectFunction mapper)`
 
 Accumulates values returned by `mapper` into a `Set<Id>`.

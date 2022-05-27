@@ -59,8 +59,58 @@ the composed `BiConsumer`
 |---|---|
 |`NullPointerException`|if `after` is null|
 
+##### `compose(IBiConsumer before)`
+
+Returns a composed `BiConsumer` that executes `before` operation first, then the `this` operation in that order.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`before`|the operation to perform before this operation|
+
+###### Return
+
+**Type**
+
+BiConsumer
+
+**Description**
+
+the composed `BiConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `before` is null|
+
 ---
-### Composed BiConsumers
+### Static Methods
+##### `static compose(List<IBiConsumer> consumers)`
+
+Returns a composed `BiConsumer` that sequentially executes the operations in the same order as the order of the consumers input list.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`consumers`|the operations to sequentially perform|
+
+###### Return
+
+**Type**
+
+BiConsumer
+
+**Description**
+
+the composed `BiConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `consumers` is null or some element is null|
+
+---
+### Built-Ins
 ##### `static filtering(IPredicate predicate, IBiConsumer accumulator)`
 
 Returns a composed `BiConsumer` that executes `accumulator` operation, if the second input argument satisfies the predicate.
@@ -94,6 +144,31 @@ Returns a composed `BiConsumer` that applies `accumulator` operation to the resu
 |Param|Description|
 |---|---|
 |`mapper`|the operator applied to the second input argument|
+|`accumulator`|the operation to perform|
+
+###### Return
+
+**Type**
+
+BiConsumer
+
+**Description**
+
+the composed `BiConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` or `accumulator` is null|
+
+##### `static flatMapping(IFunction mapper, IBiConsumer accumulator)`
+
+Returns a composed `BiConsumer` that applies `accumulator` operation to the `Iterable<Object>` elements produced by the `mapper`.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the operator applied to the second input argument which must produce `Iterable<Object>`|
 |`accumulator`|the operation to perform|
 
 ###### Return

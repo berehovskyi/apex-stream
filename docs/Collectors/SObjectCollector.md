@@ -8741,7 +8741,7 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `fieldName` is blank|
 
 ###### Example
 ```apex
@@ -8889,7 +8889,7 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `fieldName` is blank|
 
 ###### Example
 ```apex
@@ -9004,15 +9004,15 @@ the `SObjectCollector`
 
 ###### Example
 ```apex
-Map<String, Set<String>> namesByType = (Map<String Set<String>>)
+Map<String, Set<String>> namesByType = (Map<String, Set<String>>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get('Type'),
+            SObjectFunction.get('Type'),
             SObjectCollector.mapping(
                 SObjectFunction.get('Name'),
                 Collector.toStringSet()
             )
-        ).cast(Map<String Set<String>>.class));
+        ).cast(Map<String, Set<String>>.class));
 ```
 
 ##### `static mapping(String fieldName)`
@@ -9037,7 +9037,7 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `fieldName` is blank|
 
 ###### Example
 ```apex
@@ -9077,6 +9077,158 @@ List<String> accountNames = (List<String>)
         .collect(SObjectCollector.mapping(Account.Name).cast(List<String>.class));
 ```
 
+##### `static flatMapping(ISObjectFunction mapper)`
+
+Adapts a `SObjectCollector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable created by applying the specified `mapper` function to each element before accumulation.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the function which must produce `Iterable<SObject>`|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` or `downstream` is null|
+
+###### Example
+```apex
+List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+    .collect(
+        SObjectCollector.flatMapping(SObjectFunction.getSObjects('Contacts'))
+    ).cast(List<Contact>.class));
+Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+    Stream.of(accounts)
+        .collect(SObjectCollector.groupingByString(
+            SObjectFunction.get('Type'),
+            SObjectCollector.flatMapping(SObjectFunction.getSObjects('Contacts'))
+        ).cast(Map<String, List<Contact>>.class));
+```
+
+##### `static flatMapping(ISObjectFunction mapper, ICollector downstream)`
+
+Adapts a `SObjectCollector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable created by applying the specified `mapper` function to each element before accumulation.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the function which must produce `Iterable<SObject>`|
+|`downstream`|the collector which accepts mapped values|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` or `downstream` is null|
+
+###### Example
+```apex
+Set<SObject> contacts = (Set<SObject>) Stream.of(accounts)
+    .collect(SObjectCollector.flatMapping(
+        SObjectFunction.getSObjects('Contacts'),
+        Collector.toSObjectSet()
+    ));
+Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+    Stream.of(accounts)
+        .collect(SObjectCollector.groupingByString(
+            SObjectFunction.get('Type'),
+            SObjectCollector.flatMapping(
+                SObjectFunction.getSObjects('Contacts'),
+                Collector.toSObjectList()
+        ).cast(Map<String, List<Contact>>.class));
+```
+
+##### `static flatMapping(String fieldName)`
+
+Adapts a `SObjectCollector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable according to child relationship `fieldName` before accumulation.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the child relationship field|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+###### Example
+```apex
+List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+    .collect(SObjectCollector.flatMapping('Contacts')).cast(List<Contact>.class));
+Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+    Stream.of(accounts)
+        .collect(SObjectCollector.groupingByString(
+            SObjectFunction.get('Type'),
+            SObjectCollector.flatMapping('Contacts')
+        ).cast(Map<String, List<Contact>>.class));
+```
+
+##### `static flatMapping(SObjectField field)`
+
+Adapts a `SObjectCollector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable according to child relationship `field` before accumulation.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`field`|the child relationship field|
+
+###### Return
+
+**Type**
+
+SObjectCollector
+
+**Description**
+
+the `SObjectCollector`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+###### Example
+```apex
+List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+    .collect(SObjectCollector.flatMapping(Contact.AccountId)).cast(List<Contact>.class));
+Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+    Stream.of(accounts)
+        .collect(SObjectCollector.groupingByString(
+            SObjectFunction.get('Type'),
+            SObjectCollector.flatMapping(Contact.AccountId)
+        ).cast(Map<String, List<Contact>>.class));
+```
+
 ##### `static reducing(SObject identity, ISObjectBinaryOperator accumulator)`
 
 Returns a `SObjectCollector` which performs a reduction of its input elements under `accumulator` using `identity`.
@@ -9108,7 +9260,7 @@ Account accountWithSummedNumberOfEmployees = (Account) Stream.of(accounts)
     .collect(SObjectCollector.reducing(
         new Account(NumberOfEmployees = 0),
         sumIntFieldReducer
-     ));
+    ));
 ```
 
 ---
@@ -9142,7 +9294,7 @@ the `SObjectCollector`
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get('Type'),
+            SObjectFunction.get('Type'),
             SObjectCollector.reducing(
                 SObjectBinaryOperator.maxBy('NumberOfEmployees')
             )
@@ -9180,7 +9332,7 @@ the `SObjectCollector`
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get('Type'),
+            SObjectFunction.get('Type'),
             SObjectCollector.maximizing(
                 SObjectComparator.comparingInt('NumberOfEmployees')
             )
@@ -9211,14 +9363,14 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `fieldName` is blank|
 
 ###### Example
 ```apex
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get('Type'),
+            SObjectFunction.get('Type'),
             SObjectCollector.maximizing('NumberOfEmployees')
         ));
 Account customerWithMaxNumberOfEmployees = (Account)
@@ -9254,7 +9406,7 @@ the `SObjectCollector`
 Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get(Account.Type),
+            SObjectFunction.get(Account.Type),
             SObjectCollector.maximizing(Account.NumberOfEmployees)
         ));
 Account customerWithMaxNumberOfEmployees = (Account)
@@ -9290,7 +9442,7 @@ the `SObjectCollector`
 Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get('Type'),
+            SObjectFunction.get('Type'),
             SObjectCollector.minimizing(
                 SObjectComparator.comparingInt('NumberOfEmployees')
             )
@@ -9321,14 +9473,14 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `fieldName` is blank|
 
 ###### Example
 ```apex
 Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get('Type'),
+            SObjectFunction.get('Type'),
             SObjectCollector.maximizing('NumberOfEmployees')
         ));
 Account customerWithMinNumberOfEmployees = (Account)
@@ -9364,7 +9516,7 @@ the `SObjectCollector`
 Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
     Stream.of(accounts)
         .collect(SObjectCollector.groupingByString(
-            ISObjectFunction.get(Account.Type),
+            SObjectFunction.get(Account.Type),
             SObjectCollector.maximizing(Account.NumberOfEmployees)
         ));
 Account customerWithMinNumberOfEmployees = (Account)

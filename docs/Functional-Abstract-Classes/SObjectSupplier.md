@@ -44,4 +44,28 @@ the `SObjectSupplier`
 
 **See** SObjectType.newSObject
 
+##### `static constant(SObject sObj)`
+
+Returns a stateful `Supplier` that returns a reference of the `sObj` SObject.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`sObj`|the SObject|
+
+###### Return
+
+**Type**
+
+SObjectSupplier
+
+**Description**
+
+the `SObjectSupplier`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `sObj` is null|
+
 ---

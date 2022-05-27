@@ -416,6 +416,142 @@ private class ObjectStreamTest {
     }
 
     /**
+     * @see ObjectStream.flatMapTo
+     */
+    @IsTest
+    private static void flatMapTo() {
+        // Given
+        List<List<String>> input = new List<List<String>>{
+                new List<String>{},
+                null,
+                new List<String>{ 'foo' },
+                new List<String>{ 'bar', 'baz' }
+        };
+        List<List<String>> clone = new List<List<String>>{
+                new List<String>{},
+                null,
+                new List<String>{ 'foo' },
+                new List<String>{ 'bar', 'baz' }
+        };
+        IObjectIterable objStream = ObjectStream.of(clone).flatMapTo(Function.identity());
+        // When
+        List<String> actual = (List<String>) objStream.toList(List<String>.class);
+        // Then
+        List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see ObjectStream.flatMapToInt
+     */
+    @IsTest
+    private static void flatMapToInt() {
+        // Given
+        List<List<Integer>> input = new List<List<Integer>>{
+                new List<Integer>{},
+                null,
+                new List<Integer>{ 1 },
+                new List<Integer>{ 0, 2 }
+        };
+        List<List<Integer>> clone = new List<List<Integer>>{
+                new List<Integer>{},
+                null,
+                new List<Integer>{ 1 },
+                new List<Integer>{ 0, 2 }
+        };
+        IIntIterable intStream = ObjectStream.of(clone).flatMapToInt(Function.identity());
+        // When
+        List<Integer> actual = (List<Integer>) intStream.toList();
+        // Then
+        List<Integer> expected = new List<Integer>{ 1, 0, 2 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see ObjectStream.flatMapToLong
+     */
+    @IsTest
+    private static void flatMapToLong() {
+        // Given
+        List<List<Long>> input = new List<List<Long>>{
+                new List<Long>{},
+                null,
+                new List<Long>{ 1L },
+                new List<Long>{ 0L, 2L }
+        };
+        List<List<Long>> clone = new List<List<Long>>{
+                new List<Long>{},
+                null,
+                new List<Long>{ 1L },
+                new List<Long>{ 0L, 2L }
+        };
+        ILongIterable longStream = ObjectStream.of(clone).flatMapToLong(Function.identity());
+        // When
+        List<Long> actual = (List<Long>) longStream.toList();
+        // Then
+        List<Long> expected = new List<Long>{ 1L, 0L, 2L };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see ObjectStream.flatMapToDouble
+     */
+    @IsTest
+    private static void flatMapToDouble() {
+        // Given
+        List<List<Double>> input = new List<List<Double>>{
+                new List<Double>{},
+                null,
+                new List<Double>{ 1.1 },
+                new List<Double>{ 0, Math.PI }
+        };
+        List<List<Double>> clone = new List<List<Double>>{
+                new List<Double>{},
+                null,
+                new List<Double>{ 1.1 },
+                new List<Double>{ 0, Math.PI }
+        };
+        IDoubleIterable doubleStream = ObjectStream.of(clone).flatMapToDouble(Function.identity());
+        // When
+        List<Double> actual = (List<Double>) doubleStream.toList();
+        // Then
+        List<Double> expected = new List<Double>{ 1.1, 0, Math.PI };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
+     * @see ObjectStream.flatMapToSObject
+     */
+    @IsTest
+    private static void flatMapToSObject() {
+        // Given
+        List<Account> accounts = IterTestUtils.generateAccounts1();
+        List<List<Account>> input = new List<List<Account>>{
+                new List<Account>{},
+                null,
+                new List<Account>{ accounts[1] },
+                new List<Account>{ accounts[0], accounts[2] }
+        };
+        List<List<Account>> clone = new List<List<Account>>{
+                new List<Account>{},
+                null,
+                new List<Account>{ accounts[1] },
+                new List<Account>{ accounts[0], accounts[2] }
+        };
+        ISObjectIterable doubleStream = ObjectStream.of(clone).flatMapToSObject(Function.identity());
+        // When
+        List<Account> actual = (List<Account>) doubleStream.toList();
+        // Then
+        List<Account> expected = new List<Account>{ accounts[1], accounts[0], accounts[2] };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+    }
+
+    /**
     * @see ObjectStream.forEach
     */
     @IsTest

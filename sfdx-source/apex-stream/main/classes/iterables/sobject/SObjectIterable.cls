@@ -187,7 +187,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * List<Account> accounts = contactsIterable
      *     .mapTo('Account')
      *     .toList();
-     * @param fieldName the field value to be set for new SObject
+     * @param fieldName the parent reference field
      * @return the new `ISObjectIterable`
      * @throws NullPointerException if `fieldName` is blank
      */
@@ -203,7 +203,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * List<Account> accounts = contactsIterable
      *     .mapTo(Contact.AccountId)
      *     .toList();
-     * @param field the field value to be set for new SObject
+     * @param field the parent reference field
      * @return the new `ISObjectIterable`
      * @throws NullPointerException if `field` is null
      */
@@ -345,6 +345,40 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      */
     public virtual IObjectIterable mapToObject(final SObjectField field) {
         return mapToObject(SObjectFunction.get(field));
+    }
+
+    public abstract ISObjectIterable flatMapTo(final ISObjectFunction mapper);
+
+    /**
+     * @description Returns a new `IObjectIterable` with `SObject` elements as a result of 
+     * replacing each element with the contents of a mapped iterable 
+     * according to child relationship `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @example
+     * List<Contact> contacts = accountsIterable
+     *     .flatMapTo('Contacts')
+     *     .toList();
+     * @param fieldName the child relationship field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable flatMapTo(final String fieldName) {
+        return flatMapTo(SObjectFunction.getSObjects(fieldName));
+    }
+
+    /**
+     * @description Returns a new `IObjectIterable` with `SObject` elements as a result of 
+     * replacing each element with the contents of a mapped iterable 
+     * according to child relationship `field`.
+     * <p>Intermediate Operation.</p>
+     * @example
+     * List<Contact> contacts = accountsIterable
+     *     .flatMapTo(Contact.AccountId)
+     *     .toList();
+     * @param field the child relationship field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable flatMapTo(final SObjectField field) {
+        return flatMapTo(SObjectFunction.getSObjects(field));
     }
 
     public abstract ISObjectIterable forEach(final ISObjectConsumer consumer);

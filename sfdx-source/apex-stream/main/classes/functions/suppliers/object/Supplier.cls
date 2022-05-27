@@ -29,6 +29,17 @@ public abstract inherited sharing class Supplier implements ISupplier {
     }
 
     /**
+     * @description Returns a stateful `Supplier` that returns a reference of the `o` object.
+     * @param o the Object
+     * @return the `Supplier`
+     * @throws NullPointerException if `o` is null
+     */
+    public static Supplier constant(final Object o) {
+        Validate.notNull(o);
+        return new Constant(o);
+    }
+    
+    /**
      * @description Returns a composed `Supplier` of the `IIntSupplier`.
      * @param supplier the int supplier
      * @return the composed `Supplier`
@@ -238,6 +249,12 @@ public abstract inherited sharing class Supplier implements ISupplier {
         private final SObject identity;
         public SObjectBoxSupplier(SObject identity) { this.identity = identity; }
         public override Object get() { return new List<SObject>{ identity }; }
+    }
+    
+    private class Constant extends Supplier {
+        private final Object identity;
+        public Constant(Object identity) { this.identity = identity; }
+        public override Object get() { return identity; }
     }
     // @end-group
     //</editor-fold>

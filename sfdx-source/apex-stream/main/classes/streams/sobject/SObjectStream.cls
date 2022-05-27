@@ -459,6 +459,80 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
     }
 
     /**
+     * @description Returns a new `SObjectStream` with `SObject` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Contact> contacts = SObjectStream.of(accounts)
+     *     .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+     *     .toList();
+     * @param mapper the mapping function which must produce `Iterable<SObject>`
+     * @return the new `SObjectStream`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override ISObjectIterable flatMapTo(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        return new SObjectStream(new SObjectFlatMapIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `IntStream` with `Integer` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Integer>`
+     * @return the new `IntStream`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual IIntIterable flatMapToInt(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        return IntStream.of(new SObjectFlatMapToIntIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `LongStream` with `Long` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     * @return the new `LongStream`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual ILongIterable flatMapToLong(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        return LongStream.of(new SObjectFlatMapToLongIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `DoubleStream` with `Double` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Double>`
+     * @return the new `DoubleStream`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual IDoubleIterable flatMapToDouble(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        return DoubleStream.of(new SObjectFlatMapToDoubleIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `ObjectStream` with `Object` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Object>`
+     * @return the new `ObjectStream`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual IObjectIterable flatMapToObject(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        return ObjectStream.of(new SObjectFlatMapToObjectIterator(iterator(), mapper));
+    }
+
+    /**
      * @description Returns a `SObjectStream` after performing `consumer` action on each element.
      * <p>Stateless Intermediate Operation.</p>
      * @example

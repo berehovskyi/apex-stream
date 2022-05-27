@@ -5,7 +5,7 @@
  * common class level implementations, and related utilities.
  * @see SObjectStream.zip
  * @see SObjectSequence.zip
- * @see ISObjectIterable.reduce
+ * @see ISObjectBaseIterable.reduce
  * @see SObjectCollector
  */
 public abstract inherited sharing class SObjectBinaryOperator implements ISObjectBinaryOperator {

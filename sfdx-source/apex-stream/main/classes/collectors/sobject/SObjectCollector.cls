@@ -6280,7 +6280,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      *     .collect(SObjectCollector.summingDouble('BillingLatitude'));
      * @param fieldName the field value to sum
      * @return the `SObjectCollector`
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `fieldName` is blank
      */
     public static SObjectCollector summingDouble(final String fieldName) {
         return summingDouble(SObjectToDoubleFunction.get(fieldName));
@@ -6380,7 +6380,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @param fieldName the field value to test input arguments
      * @param value the expected value
      * @return the `SObjectCollector`
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `fieldName` is blank
      */
     public static SObjectCollector filtering(final String fieldName, final Object value) {
         return filtering(SObjectPredicate.isEqual(fieldName, value));
@@ -6429,15 +6429,15 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Adapts a `SObjectCollector` to one accepting elements by
      * applying `mapper` function to each input element before accumulation.
      * @example
-     * Map<String, Set<String>> namesByType = (Map<String Set<String>>)
+     * Map<String, Set<String>> namesByType = (Map<String, Set<String>>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get('Type'),
+     *             SObjectFunction.get('Type'),
      *             SObjectCollector.mapping(
      *                 SObjectFunction.get('Name'),
      *                 Collector.toStringSet()
      *             )
-     *         ).cast(Map<String Set<String>>.class));
+     *         ).cast(Map<String, Set<String>>.class));
      * @param mapper the function to return the value to accumulate
      * @param downstream the collector which accepts mapped values
      * @return the `SObjectCollector`
@@ -6460,7 +6460,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      *         .collect(SObjectCollector.mapping('Name').cast(List<String>.class));
      * @param fieldName the field value to accumulate
      * @return the `SObjectCollector`
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `fieldName` is blank
      */
     public static SObjectCollector mapping(final String fieldName) {
         return mapping(SObjectFunction.get(fieldName));
@@ -6482,6 +6482,106 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     }
 
     /**
+     * @description Adapts a `SObjectCollector` to one accepting elements as a result of 
+     * replacing each input element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element before accumulation.
+     * @example
+     * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+     *     .collect(
+     *         SObjectCollector.flatMapping(SObjectFunction.getSObjects('Contacts'))
+     *     ).cast(List<Contact>.class));
+     * 
+     * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+     *     Stream.of(accounts)
+     *         .collect(SObjectCollector.groupingByString(
+     *             SObjectFunction.get('Type'),
+     *             SObjectCollector.flatMapping(SObjectFunction.getSObjects('Contacts'))
+     *         ).cast(Map<String, List<Contact>>.class));
+     * @param mapper the function which must produce `Iterable<SObject>`
+     * @return the `SObjectCollector`
+     * @throws NullPointerException if `mapper` or `downstream` is null
+     */
+    public static SObjectCollector flatMapping(final ISObjectFunction mapper) {
+        return flatMapping(mapper, Collector.toList());
+    }
+
+    /**
+     * @description Adapts a `SObjectCollector` to one accepting elements as a result of 
+     * replacing each input element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element before accumulation.
+     * @example
+     * Set<SObject> contacts = (Set<SObject>) Stream.of(accounts)
+     *     .collect(SObjectCollector.flatMapping(
+     *         SObjectFunction.getSObjects('Contacts'),
+     *         Collector.toSObjectSet()
+     *     ));
+     *     
+     * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+     *     Stream.of(accounts)
+     *         .collect(SObjectCollector.groupingByString(
+     *             SObjectFunction.get('Type'),
+     *             SObjectCollector.flatMapping(
+     *                 SObjectFunction.getSObjects('Contacts'),
+     *                 Collector.toSObjectList()
+     *         ).cast(Map<String, List<Contact>>.class));
+     * @param mapper the function which must produce `Iterable<SObject>`
+     * @param downstream the collector which accepts mapped values
+     * @return the `SObjectCollector`
+     * @throws NullPointerException if `mapper` or `downstream` is null
+     */
+    public static SObjectCollector flatMapping(final ISObjectFunction mapper, final ICollector downstream) {
+        return SObjectCollector.of(
+                downstream.supplier(),
+                ListSObjectConsumer.flatMapping(mapper, downstream.accumulator()),
+                downstream.finisher()
+        );
+    }
+
+    /**
+     * @description Adapts a `SObjectCollector` to one accepting elements as a result of 
+     * replacing each input element with the contents of a mapped iterable according to 
+     * child relationship `fieldName` before accumulation.
+     * @example
+     * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+     *     .collect(SObjectCollector.flatMapping('Contacts')).cast(List<Contact>.class));
+     * 
+     * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+     *     Stream.of(accounts)
+     *         .collect(SObjectCollector.groupingByString(
+     *             SObjectFunction.get('Type'),
+     *             SObjectCollector.flatMapping('Contacts')
+     *         ).cast(Map<String, List<Contact>>.class));
+     * @param fieldName the child relationship field
+     * @return the `SObjectCollector`
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public static SObjectCollector flatMapping(final String fieldName) {
+        return flatMapping(SObjectFunction.getSObjects(fieldName));
+    }
+
+    /**
+     * @description Adapts a `SObjectCollector` to one accepting elements as a result of 
+     * replacing each input element with the contents of a mapped iterable according to 
+     * child relationship `field` before accumulation.
+     * @example
+     * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+     *     .collect(SObjectCollector.flatMapping(Contact.AccountId)).cast(List<Contact>.class));
+     * 
+     * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
+     *     Stream.of(accounts)
+     *         .collect(SObjectCollector.groupingByString(
+     *             SObjectFunction.get('Type'),
+     *             SObjectCollector.flatMapping(Contact.AccountId)
+     *         ).cast(Map<String, List<Contact>>.class));
+     * @param field the child relationship field
+     * @return the `SObjectCollector`
+     * @throws NullPointerException if `field` is null
+     */
+    public static SObjectCollector flatMapping(final SObjectField field) {
+        return flatMapping(SObjectFunction.getSObjects(field));
+    }
+
+    /**
      * @description Returns a `SObjectCollector` which performs a reduction of its input elements
      * under `accumulator` using `identity`.
      * @example
@@ -6489,7 +6589,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      *     .collect(SObjectCollector.reducing(
      *         new Account(NumberOfEmployees = 0),
      *         sumIntFieldReducer
-     *      ));
+     *     ));
      * @param identity the identity value for the reduction
      * @param accumulator the input arguments reducer
      * @return the `SObjectCollector`
@@ -6515,7 +6615,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get('Type'),
+     *             SObjectFunction.get('Type'),
      *             SObjectCollector.reducing(
      *                 SObjectBinaryOperator.maxBy('NumberOfEmployees')
      *             )
@@ -6542,7 +6642,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get('Type'),
+     *             SObjectFunction.get('Type'),
      *             SObjectCollector.maximizing(
      *                 SObjectComparator.comparingInt('NumberOfEmployees')
      *             )
@@ -6565,14 +6665,14 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get('Type'),
+     *             SObjectFunction.get('Type'),
      *             SObjectCollector.maximizing('NumberOfEmployees')
      *         ));
      * Account customerWithMaxNumberOfEmployees = (Account)
      *     ((OptionalSObject) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
      * @param fieldName the field value to compare
      * @return the `SObjectCollector`
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `fieldName` is blank
      */
     public static SObjectCollector maximizing(final String fieldName) {
         return maximizing(SObjectComparator.comparing(fieldName));
@@ -6586,7 +6686,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get(Account.Type),
+     *             SObjectFunction.get(Account.Type),
      *             SObjectCollector.maximizing(Account.NumberOfEmployees)
      *         ));
      * Account customerWithMaxNumberOfEmployees = (Account)
@@ -6607,7 +6707,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get('Type'),
+     *             SObjectFunction.get('Type'),
      *             SObjectCollector.minimizing(
      *                 SObjectComparator.comparingInt('NumberOfEmployees')
      *             )
@@ -6630,14 +6730,14 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get('Type'),
+     *             SObjectFunction.get('Type'),
      *             SObjectCollector.maximizing('NumberOfEmployees')
      *         ));
      * Account customerWithMinNumberOfEmployees = (Account)
      *     ((OptionalSObject) accountOptionalWithMinNumberOfEmployeesPerType).get('Customer').get();
      * @param fieldName the field value to compare
      * @return the `SObjectCollector`
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `fieldName` is blank
      */
     public static SObjectCollector minimizing(final String fieldName) {
         return minimizing(SObjectComparator.comparing(fieldName));
@@ -6651,7 +6751,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollector.groupingByString(
-     *             ISObjectFunction.get(Account.Type),
+     *             SObjectFunction.get(Account.Type),
      *             SObjectCollector.maximizing(Account.NumberOfEmployees)
      *         ));
      * Account customerWithMinNumberOfEmployees = (Account)

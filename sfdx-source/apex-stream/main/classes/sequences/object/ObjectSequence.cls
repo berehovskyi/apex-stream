@@ -437,6 +437,147 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
     }
 
     /**
+     * @description Returns a new `ObjectSequence` with `Object` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Property> flattenedProperties = (List<Property>) ObjectSequence.of(people)
+     *     .flatMapTo(getListProperty)
+     *     .toList(List<Property>.class);
+     *     
+     * List<List<String>> containedStrings; // [ ['foo'], null, [], ['baz', 'bar'], [null] ]
+     * List<String> flattenedStrings = (List<String>) ObjectSequence.of(containedStrings)
+     *     .flatMapTo(Function.identity())
+     *     .toList(List<String>.class); // ['foo', 'baz', 'bar', null]
+     * @param mapper the mapping function which must produce `Iterable<Object>`
+     * @return the new `ObjectSequence`
+     */
+    public virtual IObjectIterable flatMapTo(final IFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Object> results = new List<Object>();
+        for (Integer i = 0, size = objects.size(); i < size; i++) {
+            final Iterable<Object> result = (Iterable<Object>) mapper.apply(objects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toObjectList(result.iterator()));
+            }
+        }
+        return new ObjectSequence(results);
+    }
+
+    /**
+     * @description Returns a new `IntSequence` with `Integer` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Integer> flattenedProperties = (List<Integer>) ObjectSequence.of(people)
+     *     .flatMapToInt(getIntListProperty)
+     *     .toList();
+     *     
+     * List<List<Integer>> containedInts; // [ [1], null, [], [0, 10], [null] ]
+     * List<Integer> flattenedInts = ObjectSequence.of(containedInts)
+     *     .flatMapToInt(Function.identity())
+     *     .toList(); // [1, 0, 10, null]
+     * @param mapper the mapping function which must produce `Iterable<Integer>`
+     * @return the new `IntSequence`
+     */
+    public virtual IIntIterable flatMapToInt(final IFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Integer> results = new List<Integer>();
+        for (Integer i = 0, size = objects.size(); i < size; i++) {
+            final Iterable<Integer> result = (Iterable<Integer>) mapper.apply(objects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toIntList(result.iterator()));
+            }
+        }
+        return IntSequence.of(results);
+    }
+
+    /**
+     * @description Returns a new `LongSequence` with `Long` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Long> flattenedProperties = (List<Long>) ObjectSequence.of(people)
+     *     .flatMapToLong(getLongListProperty)
+     *     .toList();
+     *     
+     * List<List<Long>> containedLongs; // [ [1L], null, [], [0L, 10L], [null] ]
+     * List<Long> flattenedLongs = ObjectSequence.of(containedLongs)
+     *     .flatMapToLong(Function.identity())
+     *     .toList(); // [1L, 0L, 10L, null]
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     * @return the new `LongSequence`
+     */
+    public virtual ILongIterable flatMapToLong(final IFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Long> results = new List<Long>();
+        for (Integer i = 0, size = objects.size(); i < size; i++) {
+            final Iterable<Long> result = (Iterable<Long>) mapper.apply(objects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toLongList(result.iterator()));
+            }
+        }
+        return LongSequence.of(results);
+    }
+
+    /**
+     * @description Returns a new `DoubleSequence` with `Double` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Double> flattenedProperties = (List<Double>) ObjectSequence.of(people)
+     *     .flatMapToDouble(getDoubleListProperty)
+     *     .toList();
+     *     
+     * List<List<Double>> containedDoubles; // [ [1.0], null, [], [0.5, Math.PI], [null] ]
+     * List<Double> flattenedDoubles = ObjectSequence.of(containedDoubles)
+     *     .flatMapToDouble(Function.identity())
+     *     .toList(); // [1.0, 0.5, Math.PI, null]
+     * @param mapper the mapping function which must produce `Iterable<Double>`
+     * @return the new `DoubleSequence`
+     */
+    public virtual IDoubleIterable flatMapToDouble(final IFunction mapper) {
+        Validate.notNull(mapper);
+        final List<Double> results = new List<Double>();
+        for (Integer i = 0, size = objects.size(); i < size; i++) {
+            final Iterable<Double> result = (Iterable<Double>) mapper.apply(objects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toDoubleList(result.iterator()));
+            }
+        }
+        return DoubleSequence.of(results);
+    }
+
+    /**
+     * @description Returns a new `SObjectSequence` with `SObject` elements as a result of 
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<List<Account>> containedAccounts; // [ [acc1], null, [], [acc2, acc3], [null] ]
+     * List<Account> flattenedAccounts = ObjectSequence.of(containedDoubles)
+     *     .flatMapToSObject(Function.identity())
+     *     .toList(); // [acc1, acc2, acc3, null]
+     * @param mapper the mapping function which must produce `Iterable<SObject>`
+     * @return the new `SObjectSequence`
+     */
+    public virtual ISObjectIterable flatMapToSObject(final IFunction mapper) {
+        Validate.notNull(mapper);
+        final List<SObject> results = new List<SObject>();
+        for (Integer i = 0, size = objects.size(); i < size; i++) {
+            final Iterable<SObject> result = (Iterable<SObject>) mapper.apply(objects[i]);
+            if (result != null) {
+                results.addAll(Iterators.toSObjectList(result.iterator()));
+            }
+        }
+        return SObjectSequence.of(results);
+    }
+
+    /**
      * @description Returns a `SObjectSequence` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
      * @example

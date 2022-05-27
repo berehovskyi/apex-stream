@@ -110,16 +110,29 @@ public virtual inherited sharing class OptionalSObject {
     }
 
     /**
-     * @description Returns an `OptionalSObject` describing result of applying
+     * @description Returns an `Optional` describing result of applying
      * `mapper` function to the value if the value is present,
-     * otherwise returns an empty `OptionalSObject`.
+     * otherwise returns an empty `Optional`.
      * @param mapper the operator
-     * @return the nullable `OptionalSObject` or an empty `OptionalSObject`
+     * @return the nullable `Optional` or an empty `Optional`
      * @throws NullPointerException if `mapper` is null
      */
-    public virtual OptionalSObject mapTo(final ISObjectUnaryOperator mapper) {
+    public virtual Optional mapTo(final ISObjectFunction mapper) {
         Validate.notNull(mapper);
-        return isEmpty() ? this : OptionalSObject.ofNullable(mapper.apply(value));
+        return isEmpty() ? Optional.empty() : Optional.ofNullable(mapper.apply(value));
+    }
+
+    /**
+     * @description Returns an `Optional` the result of applying the
+     * `mapper` function to the value if the value is present,
+     * otherwise returns an empty `Optional`.
+     * @param mapper the function that returns an `Optional`
+     * @return the nullable `Optional` or an empty `Optional`
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual Optional flatMapTo(final ISObjectFunction mapper) {
+        Validate.notNull(mapper);
+        return isEmpty() ? Optional.empty() : (Optional) mapper.apply(value);
     }
 
     /**

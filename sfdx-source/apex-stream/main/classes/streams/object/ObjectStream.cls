@@ -463,6 +463,112 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
     }
 
     /**
+     * @description Returns a new `ObjectStream` with `Object` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Property> flattenedProperties = (List<Property>) ObjectStream.of(people)
+     *     .flatMapTo(getListProperty)
+     *     .toList(List<Property>.class);
+     *     
+     * List<List<String>> containedStrings; // [ ['foo'], null, [], ['baz', 'bar'], [null] ]
+     * List<String> flattenedStrings = (List<String>) ObjectStream.of(containedStrings)
+     *     .flatMapTo(Function.identity())
+     *     .toList(List<String>.class); // ['foo', 'baz', 'bar', null]
+     * @param mapper the mapping function which must produce `Iterable<Object>`
+     * @return the new `ObjectStream`
+     */
+    public virtual IObjectIterable flatMapTo(final IFunction mapper) {
+        Validate.notNull(mapper);
+        return new ObjectStream(new ObjectFlatMapIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `IntStream` with `Integer` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Integer> flattenedProperties = (List<Integer>) ObjectStream.of(people)
+     *     .flatMapToInt(getIntListProperty)
+     *     .toList();
+     *     
+     * List<List<Integer>> containedInts; // [ [1], null, [], [0, 10], [null] ]
+     * List<Integer> flattenedInts = ObjectStream.of(containedInts)
+     *     .flatMapToInt(Function.identity())
+     *     .toList(); // [1, 0, 10, null]
+     * @param mapper the mapping function which must produce `Iterable<Integer>`
+     * @return the new `IntStream`
+     */
+    public virtual IIntIterable flatMapToInt(final IFunction mapper) {
+        Validate.notNull(mapper);
+        return IntStream.of(new ObjectFlatMapToIntIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `LongStream` with `Long` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Long> flattenedProperties = (List<Long>) ObjectStream.of(people)
+     *     .flatMapToLong(getLongListProperty)
+     *     .toList();
+     *     
+     * List<List<Long>> containedLongs; // [ [1L], null, [], [0L, 10L], [null] ]
+     * List<Long> flattenedLongs = ObjectStream.of(containedLongs)
+     *     .flatMapToLong(Function.identity())
+     *     .toList(); // [1L, 0L, 10L, null]
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     * @return the new `LongStream`
+     */
+    public virtual ILongIterable flatMapToLong(final IFunction mapper) {
+        Validate.notNull(mapper);
+        return LongStream.of(new ObjectFlatMapToLongIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `DoubleStream` with `Double` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<Double> flattenedProperties = (List<Double>) ObjectStream.of(people)
+     *     .flatMapToDouble(getDoubleListProperty)
+     *     .toList();
+     *     
+     * List<List<Double>> containedDoubles; // [ [1.0], null, [], [0.5, Math.PI], [null] ]
+     * List<Double> flattenedDoubles = ObjectStream.of(containedDoubles)
+     *     .flatMapToDouble(Function.identity())
+     *     .toList(); // [1.0, 0.5, Math.PI, null]
+     * @param mapper the mapping function which must produce `Iterable<Double>`
+     * @return the new `DoubleStream`
+     */
+    public virtual IDoubleIterable flatMapToDouble(final IFunction mapper) {
+        Validate.notNull(mapper);
+        return DoubleStream.of(new ObjectFlatMapToDoubleIterator(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `SObjectStream` with `SObject` elements as a result of 
+     * replacing each element of this stream with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Stateless Intermediate Operation.</p>
+     * @example
+     * List<List<Account>> containedAccounts; // [ [acc1], null, [], [acc2, acc3], [null] ]
+     * List<Account> flattenedAccounts = ObjectStream.of(containedDoubles)
+     *     .flatMapToSObject(Function.identity())
+     *     .toList(); // [acc1, acc2, acc3, null]
+     * @param mapper the mapping function which must produce `Iterable<SObject>`
+     * @return the new `SObjectStream`
+     */
+    public virtual ISObjectIterable flatMapToSObject(final IFunction mapper) {
+        Validate.notNull(mapper);
+        return SObjectStream.of(new ObjectFlatMapToSObjectIterator(iterator(), mapper));
+    }
+
+    /**
      * @description Returns a `ObjectStream` after performing `consumer` action on each element.
      * <p>Stateless Intermediate Operation.</p>
      * @example

@@ -15,6 +15,8 @@ private class OptionalTest {
      * @see Optional.ifPresent
      * @see Optional.ifPresentOrElse
      * @see Optional.filter
+     * @see Optional.mapTo
+     * @see Optional.flatMapTo
      * @see Optional.orGet
      * @see Optional.orElse
      * @see Optional.orElseGet
@@ -38,6 +40,7 @@ private class OptionalTest {
         IFunction identity = Function.identity();
         ISupplier newAccountSupplier = Supplier.of(Account.class);
         ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
+        IFunction getOptional = Function.constant(Optional.of(richard));
         // When
         Validate.assertEquals(luke, optObject.get());
         Validate.assertEquals(true, optObject.isPresent());
@@ -53,6 +56,8 @@ private class OptionalTest {
         Validate.assertEquals(optNull, optNull.filter(isNameChanged));
         Validate.assertEquals(optObject, optObject.mapTo(identity));
         Validate.assertEquals(Optional.empty(), optNull.mapTo(identity));
+        Validate.assertEquals(Optional.of(richard), optObject.flatMapTo(getOptional));
+        Validate.assertEquals(Optional.empty(), optNull.flatMapTo(getOptional));
         Validate.assertEquals(optObject, optObject.orGet(newAccountSupplier));
         Validate.assertEquals(Optional.of(Type.forName('Account').newInstance()), optNull.orGet(newAccountSupplier));
         Validate.assertEquals(optObject.get(), optObject.orElse(richard));

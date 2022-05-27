@@ -606,6 +606,153 @@ List<Contact> contacts = ObjectSequence.of(people)
     .toList();
 ```
 
+##### `flatMapTo(IFunction mapper)`
+
+Returns a new `ObjectSequence` with `Object` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Object>`|
+
+###### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `ObjectSequence`
+
+###### Example
+```apex
+List<Property> flattenedProperties = (List<Property>) ObjectSequence.of(people)
+    .flatMapTo(getListProperty)
+    .toList(List<Property>.class);
+List<List<String>> containedStrings; // [ ['foo'], null, [], ['baz', 'bar'], [null] ]
+List<String> flattenedStrings = (List<String>) ObjectSequence.of(containedStrings)
+    .flatMapTo(Function.identity())
+    .toList(List<String>.class); // ['foo', 'baz', 'bar', null]
+```
+
+##### `flatMapToInt(IFunction mapper)`
+
+Returns a new `IntSequence` with `Integer` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Integer>`|
+
+###### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IntSequence`
+
+###### Example
+```apex
+List<Integer> flattenedProperties = (List<Integer>) ObjectSequence.of(people)
+    .flatMapToInt(getIntListProperty)
+    .toList();
+List<List<Integer>> containedInts; // [ [1], null, [], [0, 10], [null] ]
+List<Integer> flattenedInts = ObjectSequence.of(containedInts)
+    .flatMapToInt(Function.identity())
+    .toList(); // [1, 0, 10, null]
+```
+
+##### `flatMapToLong(IFunction mapper)`
+
+Returns a new `LongSequence` with `Long` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Long>`|
+
+###### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `LongSequence`
+
+###### Example
+```apex
+List<Long> flattenedProperties = (List<Long>) ObjectSequence.of(people)
+    .flatMapToLong(getLongListProperty)
+    .toList();
+List<List<Long>> containedLongs; // [ [1L], null, [], [0L, 10L], [null] ]
+List<Long> flattenedLongs = ObjectSequence.of(containedLongs)
+    .flatMapToLong(Function.identity())
+    .toList(); // [1L, 0L, 10L, null]
+```
+
+##### `flatMapToDouble(IFunction mapper)`
+
+Returns a new `DoubleSequence` with `Double` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<Double>`|
+
+###### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `DoubleSequence`
+
+###### Example
+```apex
+List<Double> flattenedProperties = (List<Double>) ObjectSequence.of(people)
+    .flatMapToDouble(getDoubleListProperty)
+    .toList();
+List<List<Double>> containedDoubles; // [ [1.0], null, [], [0.5, Math.PI], [null] ]
+List<Double> flattenedDoubles = ObjectSequence.of(containedDoubles)
+    .flatMapToDouble(Function.identity())
+    .toList(); // [1.0, 0.5, Math.PI, null]
+```
+
+##### `flatMapToSObject(IFunction mapper)`
+
+Returns a new `SObjectSequence` with `SObject` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function which must produce `Iterable<SObject>`|
+
+###### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `SObjectSequence`
+
+###### Example
+```apex
+List<List<Account>> containedAccounts; // [ [acc1], null, [], [acc2, acc3], [null] ]
+List<Account> flattenedAccounts = ObjectSequence.of(containedDoubles)
+    .flatMapToSObject(Function.identity())
+    .toList(); // [acc1, acc2, acc3, null]
+```
+
 ##### `forEach(IConsumer consumer)`
 
 Returns a `SObjectSequence` after performing `consumer` action on each element. <p>Stateful Intermediate Operation.</p>

@@ -13,9 +13,9 @@ Schema related utilities.
 **Group** Utils
 
 ## Methods
-### `static findRelationshipName(SObjectField field)`
+### `static findChildRelationshipName(SObjectField field)`
 
-Returns the name of the relationship for the `SObjectField`.
+Returns the name of the child relationship for the `SObjectField`.
 
 #### Parameters
 |Param|Description|
@@ -30,11 +30,11 @@ String
 
 **Description**
 
-the name of the relationship if found or null otherwise
+the name of the child relationship if found or null otherwise
 
 #### Example
 ```apex
-Schemas.findRelationshipName(Contact.AccountId); // 'Contacts'
+Schemas.find relationshipName(Contact.AccountId); // 'Contacts'
 ```
 
 ---

@@ -1107,6 +1107,25 @@ private class StreamCollectorTest {
     }
 
     /**
+     * @see Collector.flatMapping
+     */
+    @IsTest
+    static void flatMapping() {
+        // Given
+        List<List<String>> input = new List<List<String>>{
+                new List<String>{},
+                null,
+                new List<String>{ 'foo' },
+                new List<String>{ 'bar', 'baz' }
+        };
+        // When
+        List<String> actual = (List<String>) ObjectStream.of(input).collect(Collector.flatMapping(Function.identity()).cast(List<String>.class));
+        // Then
+        List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
+        Validate.assertEquals(expected, actual);
+    }
+
+    /**
      * @see Collector.reducing
      */
     @IsTest

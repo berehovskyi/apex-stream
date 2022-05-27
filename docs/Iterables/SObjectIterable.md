@@ -333,7 +333,7 @@ Returns a new `ISObjectIterable` with `SObject` elements according to `fieldName
 #### Parameters
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to be set for new SObject|
+|`fieldName`|the parent reference field|
 
 #### Return
 
@@ -364,7 +364,7 @@ Returns a new `ISObjectIterable` with `SObject` elements according to `field`. <
 #### Parameters
 |Param|Description|
 |---|---|
-|`field`|the field value to be set for new SObject|
+|`field`|the parent reference field|
 
 #### Return
 
@@ -653,6 +653,63 @@ the new `IObjectIterable`
 ```apex
 List<Object> birthdates = contactsIterable
     .mapToObject(Contact.Birthdate)
+    .toList();
+```
+
+### `flatMapTo(ISObjectFunction mapper)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `flatMapTo(String fieldName)`
+
+Returns a new `IObjectIterable` with `SObject` elements as a result of replacing each element with the contents of a mapped iterable according to child relationship `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the child relationship field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Contact> contacts = accountsIterable
+    .flatMapTo('Contacts')
+    .toList();
+```
+
+### `flatMapTo(SObjectField field)`
+
+Returns a new `IObjectIterable` with `SObject` elements as a result of replacing each element with the contents of a mapped iterable according to child relationship `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the child relationship field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Contact> contacts = accountsIterable
+    .flatMapTo(Contact.AccountId)
     .toList();
 ```
 

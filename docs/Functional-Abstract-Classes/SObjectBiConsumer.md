@@ -48,6 +48,30 @@ the composed `SObjectBiConsumer`
 |---|---|
 |`NullPointerException`|if `after` is null|
 
+##### `compose(ISObjectBiConsumer before)`
+
+Returns a composed `SObjectBiConsumer` that executes `before` operation first, then the `this` operation in that order.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`before`|the operation to perform before this operation|
+
+###### Return
+
+**Type**
+
+SObjectBiConsumer
+
+**Description**
+
+the composed `SObjectBiConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `before` is null|
+
 ---
 ### Static Methods
 ##### `static compose(List<ISObjectBiConsumer> consumers)`

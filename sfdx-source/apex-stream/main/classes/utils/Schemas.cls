@@ -6,13 +6,13 @@
 public virtual inherited sharing class Schemas {
 
     /**
-     * @description Returns the name of the relationship for the `SObjectField`.
+     * @description Returns the name of the child relationship for the `SObjectField`.
      * @param field the SObjectField
      * @example
-     * Schemas.findRelationshipName(Contact.AccountId); // 'Contacts'
-     * @return the name of the relationship if found or null otherwise
+     * Schemas.find relationshipName(Contact.AccountId); // 'Contacts'
+     * @return the name of the child relationship if found or null otherwise
      */
-    public static String findRelationshipName(final SObjectField field) {
+    public static String findChildRelationshipName(final SObjectField field) {
         final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
         if (referenceTo.isEmpty()) { return null; }
         for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {

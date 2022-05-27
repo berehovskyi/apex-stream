@@ -62,12 +62,37 @@ the composed `ObjectSObjectConsumer`
 
 ##### `static mapping(ISObjectFunction mapper, IBiConsumer accumulator)`
 
-Returns a composed `ObjectSObjectConsumer` that applies `accumulator` operation to the result returned by the mapper.
+Returns a composed `ObjectSObjectConsumer` that applies `accumulator` operation to the result returned by the `mapper`.
 
 ###### Parameters
 |Param|Description|
 |---|---|
 |`mapper`|the operator applied to the second input argument|
+|`accumulator`|the operation to perform|
+
+###### Return
+
+**Type**
+
+ObjectSObjectConsumer
+
+**Description**
+
+the composed `ObjectSObjectConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` or `accumulator` is null|
+
+##### `static flatMapping(ISObjectFunction mapper, IBiConsumer accumulator)`
+
+Returns a composed `ObjectSObjectConsumer` that applies `accumulator` operation to the `Iterable<SObject>` elements produced by the `mapper`.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the operator applied to the second input argument which must produce `Iterable<SObject>`|
 |`accumulator`|the operation to perform|
 
 ###### Return

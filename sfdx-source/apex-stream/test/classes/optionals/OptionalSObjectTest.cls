@@ -15,6 +15,8 @@ private class OptionalSObjectTest {
      * @see OptionalSObject.ifPresent
      * @see OptionalSObject.ifPresentOrElse
      * @see OptionalSObject.filter
+     * @see OptionalSObject.mapTo
+     * @see OptionalSObject.flatMapTo
      * @see OptionalSObject.orGet
      * @see OptionalSObject.orElse
      * @see OptionalSObject.orElseGet
@@ -35,8 +37,9 @@ private class OptionalSObjectTest {
         ISObjectConsumer setNewNameConsumer = SObjectConsumer.set(fieldName, newName);
         ISObjectConsumer setNewNameConsumer1 = SObjectConsumer.set(fieldName, newName1);
         ISObjectPredicate isNameChanged = SObjectPredicate.isNotEqual(fieldName, initialName);
-        ISObjectUnaryOperator getParent = SObjectUnaryOperator.getSObject('Parent');
+        ISObjectFunction getName = SObjectFunction.get('Name');
         ISObjectSupplier newAccountSupplier = SObjectSupplier.of(Account.SObjectType);
+        ISObjectFunction getAcc1Optional = SObjectFunction.constant(Optional.of(acc1));
         ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
         // When
         Validate.assertEquals(acc, optSObject.get());
@@ -51,8 +54,10 @@ private class OptionalSObjectTest {
         optNull.ifPresentOrElse(setNewNameConsumer1, new IterTestUtils.DoNothingRunnable());
         Validate.assertEquals(optSObject, optSObject.filter(isNameChanged));
         Validate.assertEquals(optNull, optNull.filter(isNameChanged));
-        Validate.assertEquals(OptionalSObject.empty(), optSObject.mapTo(getParent));
-        Validate.assertEquals(OptionalSObject.empty(), optNull.mapTo(getParent));
+        Validate.assertEquals(Optional.of(acc.Name), optSObject.mapTo(getName));
+        Validate.assertEquals(Optional.empty(), optNull.mapTo(getName));
+        Validate.assertEquals(Optional.of(acc1), optSObject.flatMapTo(getAcc1Optional));
+        Validate.assertEquals(Optional.empty(), optNull.flatMapTo(getAcc1Optional));
         Validate.assertEquals(optSObject, optSObject.orGet(newAccountSupplier));
         Validate.assertEquals(OptionalSObject.of(Account.SObjectType.newSObject()), optNull.orGet(newAccountSupplier));
         Validate.assertEquals(optSObject.get(), optSObject.orElse(acc1));

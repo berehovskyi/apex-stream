@@ -26,6 +26,17 @@ public abstract inherited sharing class SObjectSupplier implements ISObjectSuppl
         Validate.notNull(sObjectType);
         return new OfType(sObjectType);
     }
+
+    /**
+     * @description Returns a stateful `Supplier` that returns a reference of the `sObj` SObject.
+     * @param sObj the SObject
+     * @return the `SObjectSupplier`
+     * @throws NullPointerException if `sObj` is null
+     */
+    public static SObjectSupplier constant(final SObject sObj) {
+        Validate.notNull(sObj);
+        return new Constant(sObj);
+    }
     // @end-group
     //</editor-fold>
 
@@ -35,6 +46,12 @@ public abstract inherited sharing class SObjectSupplier implements ISObjectSuppl
         private final SObjectType t;
         private OfType(SObjectType t) { this.t = t; }
         public override SObject get() { return t.newSObject(); }
+    }
+
+    private class Constant extends SObjectSupplier {
+        private final SObject identity;
+        public Constant(SObject identity) { this.identity = identity; }
+        public override SObject get() { return identity; }
     }
     // @end-group
     //</editor-fold>

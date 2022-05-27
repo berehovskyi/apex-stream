@@ -610,7 +610,7 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
             this.mapper = mapper;
         }
         private SetSObjectsByFieldName(SObjectField field, ISObjectFunction mapper) {
-            this(Schemas.findRelationshipName(field), mapper);
+            this(Schemas.findChildRelationshipName(field), mapper);
         }
         public override SObject apply(SObject sObj) {
             final Map<String, Object> rawRecord = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(sObj));

@@ -103,15 +103,18 @@ private class SObjectFunctionTest {
         String fieldName = 'Name';
         SObjectField field = Contact.Name;
         String accountNameSafe = 'Account?.Name';
+        String accountName = 'Account.Name';
         // When
         ISObjectFunction getName = SObjectFunction.get(field);
         ISObjectFunction getName1 = SObjectFunction.get(fieldName);
         ISObjectFunction getParentNameSafe = SObjectFunction.get(accountNameSafe);
+        ISObjectFunction getParentName = SObjectFunction.get(accountName);
         // Then
         for (Contact con : input) {
             Validate.assertEquals(con.get(fieldName), getName.apply(con));
             Validate.assertEquals(con.get(field), getName1.apply(con));
             Validate.assertEquals(con.getSObject('Account')?.get('Name'), getParentNameSafe.apply(con));
+            Validate.assertEquals(con.getSObject('Account').get('Name'), getParentName.apply(con));
         }
     }
 
@@ -124,15 +127,18 @@ private class SObjectFunctionTest {
         String fieldName = 'Assets';
         SObjectField field = Asset.ContactId;
         String accountContactsSafe = 'Account?.Contacts';
+        String accountContacts = 'Account.Contacts';
         // When
         ISObjectFunction getSObjects = SObjectFunction.getSObjects(field);
         ISObjectFunction getSObjects1 = SObjectFunction.getSObjects(fieldName);
         ISObjectFunction getParentSObjectsSafe = SObjectFunction.getSObjects(accountContactsSafe);
+        ISObjectFunction getParentSObjects = SObjectFunction.getSObjects(accountContacts);
         // Then
         for (Contact con : input) {
             Validate.assertEquals(con.getSObjects(fieldName), getSObjects.apply(con));
             Validate.assertEquals(con.getSObjects(field), getSObjects1.apply(con));
             Validate.assertEquals(con.getSObject('Account')?.getSObjects('Contacts'), getParentSObjectsSafe.apply(con));
+            Validate.assertEquals(con.getSObject('Account').getSObjects('Contacts'), getParentSObjects.apply(con));
         }
     }
 
@@ -145,17 +151,23 @@ private class SObjectFunctionTest {
         Object constant = 'Value';
         String fieldName = 'LastName';
         SObjectField field = Contact.LastName;
+        String accountName = 'Account.Name';
+        String accountNameSafe = 'Account?.Name';
         // When
         ISObjectFunction putName = SObjectFunction.put(field, constant);
         ISObjectFunction putName1 = SObjectFunction.put(fieldName, constant);
         ISObjectFunction putName2 = SObjectFunction.put(field, SObjectFunction.constant(constant));
         ISObjectFunction putName3 = SObjectFunction.put(fieldName, SObjectFunction.constant(constant));
+        ISObjectFunction putName4 = SObjectFunction.put(accountName, SObjectFunction.constant(constant));
+        ISObjectFunction putName5 = SObjectFunction.put(accountNameSafe, SObjectFunction.constant(constant));
         // Then
         for (Contact con : input) {
             Validate.assertEquals(IterTestUtils.deepClone(con).put(field, constant), putName.apply(IterTestUtils.deepClone(con)));
             Validate.assertEquals(IterTestUtils.deepClone(con).put(fieldName, constant), putName1.apply(IterTestUtils.deepClone(con)));
             Validate.assertEquals(IterTestUtils.deepClone(con).put(field, constant), putName2.apply(IterTestUtils.deepClone(con)));
             Validate.assertEquals(IterTestUtils.deepClone(con).put(fieldName, constant), putName3.apply(IterTestUtils.deepClone(con)));
+            Validate.assertEquals(IterTestUtils.deepClone(con).getSObject('Account').put('Name', constant), putName4.apply(IterTestUtils.deepClone(con)));
+            Validate.assertEquals(IterTestUtils.deepClone(con).getSObject('Account')?.put('Name', constant), putName5.apply(IterTestUtils.deepClone(con)));
         }
     }
 

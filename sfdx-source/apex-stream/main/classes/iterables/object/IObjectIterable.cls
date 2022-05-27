@@ -134,6 +134,56 @@ public interface IObjectIterable extends Iterable<Object> {
     ISObjectIterable mapToSObject(IToSObjectFunction mapper);
 
     /**
+     * @description Returns a new `IObjectIterable` with `Object` elements as a result of 
+     * replacing each element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Object>`
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable flatMapTo(IFunction mapper);
+
+    /**
+     * @description Returns a new `IIntIterable` with `Integer` elements as a result of 
+     * replacing each element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Integer>`
+     * @return the new `IIntIterable`
+     */
+    IIntIterable flatMapToInt(IFunction mapper);
+
+    /**
+     * @description Returns a new `ILongIterable` with `Long` elements as a result of 
+     * replacing each element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     * @return the new `ILongIterable`
+     */
+    ILongIterable flatMapToLong(IFunction mapper);
+
+    /**
+     * @description Returns a new `IDoubleIterable` with `Double` elements as a result of 
+     * replacing each element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<Double>`
+     * @return the new `IDoubleIterable`
+     */
+    IDoubleIterable flatMapToDouble(IFunction mapper);
+
+    /**
+     * @description Returns a new `IObjectIterable` with `SObject` elements as a result of 
+     * replacing each element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     * @param mapper the mapping function which must produce `Iterable<SObject>`
+     * @return the new `IObjectIterable`
+     */
+    ISObjectIterable flatMapToSObject(IFunction mapper);
+
+    /**
      * @description Returns a new `IObjectIterable` after performing `consumer` action
      * on each `SObject` element.
      * <p>Intermediate Interfering Operation.</p>

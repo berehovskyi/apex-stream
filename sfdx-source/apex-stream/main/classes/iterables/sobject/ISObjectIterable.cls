@@ -74,7 +74,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * @description Returns a new `ISObjectIterable` with `SObject` elements
      * according to `fieldName`.
      * <p>Intermediate Operation.</p>
-     * @param fieldName the field value to be set for new SObject
+     * @param fieldName the parent reference field
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable mapTo(String fieldName);
@@ -83,7 +83,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * @description Returns a new `ISObjectIterable` with `SObject` elements
      * according to `field`.
      * <p>Intermediate Operation.</p>
-     * @param field the field value to be set for new SObject
+     * @param field the parent reference field
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable mapTo(SObjectField field);
@@ -159,6 +159,26 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * @return the new `IObjectIterable`
      */
     IObjectIterable mapToObject(SObjectField field);
+
+    /**
+     * @description Returns a new `IObjectIterable` with `SObject` elements as a result of 
+     * replacing each element with the contents of a mapped iterable 
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the child relationship field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable flatMapTo(String fieldName);
+
+    /**
+     * @description Returns a new `IObjectIterable` with `SObject` elements as a result of 
+     * replacing each element with the contents of a mapped iterable 
+     * according to `childRelationshipField`.
+     * <p>Intermediate Operation.</p>
+     * @param field the child relationship field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable flatMapTo(SObjectField field);
 
     /**
      * @description Returns a new `ISObjectIterable` after setting `value` for `fieldName`

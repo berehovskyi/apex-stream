@@ -19,7 +19,8 @@ private class SObjectBiConsumerTest {
         SObjectBiConsumer setDescFromDepartment = SObjectBiConsumer.set(IterTestUtils.CONSTS.Contact.Description, SObjectFunction.get(IterTestUtils.CONSTS.Contact.Department));
         SObjectBiConsumer setDoNotCall = SObjectBiConsumer.set(IterTestUtils.CONSTS.DO_NOT_CALL, constant);
         ISObjectBiConsumer consumer = setDescFromDepartment.andThen(setDoNotCall);
-        ISObjectBiConsumer consumer1 = SObjectBiConsumer.compose(new List<ISObjectBiConsumer>{ setDescFromDepartment, setDoNotCall });
+        ISObjectBiConsumer consumer1 = setDoNotCall.compose(setDescFromDepartment);
+        ISObjectBiConsumer consumer2 = SObjectBiConsumer.compose(new List<ISObjectBiConsumer>{ setDescFromDepartment, setDoNotCall });
         // Then
         for (Contact con : input) {
             Contact expected = new Contact(Description = con.Department, DoNotCall = true);
@@ -31,6 +32,10 @@ private class SObjectBiConsumerTest {
             SObject target1 = new Contact();
             consumer1.accept(src1, target1);
             Validate.assertEquals(expected, target1);
+            SObject src2 = IterTestUtils.deepClone(con);
+            SObject target2 = new Contact();
+            consumer2.accept(src2, target2);
+            Validate.assertEquals(expected, target2);
         }
     }
 
@@ -116,7 +121,8 @@ private class SObjectBiConsumerTest {
         ISObjectBiConsumer setParentConsumer1 = SObjectBiConsumer.setSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME, constant);
         ISObjectBiConsumer setParentConsumerByOperator = SObjectBiConsumer.setSObject(IterTestUtils.CONSTS.Contact.AccountId, new IterTestUtils.TestAccountOperator());
         ISObjectBiConsumer setParentConsumerByOperator1 = SObjectBiConsumer.setSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME, new IterTestUtils.TestAccountOperator());
-        ISObjectBiConsumer setGrandParentConsumer = SObjectBiConsumer.setSObject('Account?.Parent', constant);
+        ISObjectBiConsumer setGrandParentConsumerSafe = SObjectBiConsumer.setSObject('Account?.Parent', constant);
+        ISObjectBiConsumer setGrandParentConsumer = SObjectBiConsumer.setSObject('Account.Parent', constant);
         // Then
         IterTestUtils.TestAccountOperator testAccountOperator = new IterTestUtils.TestAccountOperator();
         for (Contact con : input) {
@@ -147,8 +153,18 @@ private class SObjectBiConsumerTest {
             expected2.getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME)?.putSObject(IterTestUtils.CONSTS.PARENT, constant);
             SObject src4 = IterTestUtils.deepClone(con);
             SObject target4 = new Contact();
-            setGrandParentConsumer.accept(src4, target4);
+            setGrandParentConsumerSafe.accept(src4, target4);
             Validate.assertEquals(expected2, target4);
+            
+            SObject src5 = IterTestUtils.deepClone(con);
+            SObject target5 = new Contact();
+            String expectedException = 'System.NullPointerException';
+            try {
+                setGrandParentConsumer.accept(src5, target5);
+                Validate.assertEquals(expected2, target5);
+            } catch (Exception exc) {
+                Validate.assertEquals(expectedException, exc.getTypeName());
+            }
         }
     }
 

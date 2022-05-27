@@ -2860,6 +2860,62 @@ public abstract inherited sharing class Collector implements ICollector {
     }
 
     /**
+     * @description Adapts a `Collector` to one accepting elements as a result of 
+     * replacing each input element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element before accumulation.
+     * @example
+     * List<String> flattenedStringProperties = (List<String>) Stream.of(people)
+     *     .collect(
+     *         Collector.flatMapping(getStringListProperty)
+     *     ).cast(List<String>.class));
+     * 
+     * Map<String, List<String>> flattenedStringPropertiesByOtherStringProperty
+     *     = (Map<String, List<String>>) Stream.of(people)
+     *         .collect(Collector.groupingByString(
+     *             getOtherStringProperty,
+     *             Collector.flatMapping(getStringListProperty)
+     *         ).cast(Map<String, List<String>>.class));
+     * @param mapper the function which must produce `Iterable<Object>`
+     * @return the `Collector`
+     * @throws NullPointerException if `mapper` or `downstream` is null
+     */
+    public static Collector flatMapping(final IFunction mapper) {
+        return flatMapping(mapper, Collector.toList());
+    }
+
+    /**
+     * @description Adapts a `Collector` to one accepting elements as a result of 
+     * replacing each input element with the contents of a mapped iterable created by applying 
+     * the specified `mapper` function to each element before accumulation.
+     * @example
+     * Set<String> contacts = (Set<String>) Stream.of(people)
+     *     .collect(Collector.flatMapping(
+     *         getStringListProperty,
+     *         Collector.toStringSet()
+     *     ));
+     *     
+     * Map<String, Set<String>> flattenedStringPropertiesByOtherStringProperty
+     *    = (Map<String, Set<String>>) Stream.of(people)
+     *         .collect(Collector.groupingByString(
+     *             getOtherStringProperty,
+     *             Collector.flatMapping(
+     *                 getStringListProperty,
+     *                 Collector.toStringSet()
+     *         ).cast(Map<String, Set<String>>.class));
+     * @param mapper the function which must produce `Iterable<Object>`
+     * @param downstream the collector which accepts mapped values
+     * @return the `Collector`
+     * @throws NullPointerException if `mapper` or `downstream` is null
+     */
+    public static Collector flatMapping(final IFunction mapper, final ICollector downstream) {
+        return Collector.of(
+                downstream.supplier(),
+                BiConsumer.flatMapping(mapper, downstream.accumulator()),
+                downstream.finisher()
+        );
+    }
+
+    /**
      * @description Returns a `Collector` which performs a reduction of its input elements
      * under `accumulator` using `identity`.
      * @example

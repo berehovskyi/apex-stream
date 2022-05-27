@@ -215,20 +215,80 @@ public class IterTestUtils {
             return new Person('new' + person.getName(), person.getAge() + 1, person.getSomeDate().addYears(1), person.getAutoId(), person.isActive());
         }
     }
+    public class SetNameFromRight extends BiConsumer {
+        public override void accept(Object o1, Object o2) {
+            Person person1 = (Person) o1;
+            Person person2 = (Person) o2;
+            person1.setName(person2.getName());
+        }
+    }
+    public class SetAgeFromLeft extends BiConsumer {
+        public override void accept(Object o1, Object o2) {
+            Person person1 = (Person) o1;
+            Person person2 = (Person) o2;
+            person2.setAge(person1.getAge());
+        }
+    }
     public class DoNothingRunnable implements IRunnable {
         public void run() {}
+    }
+    public class GetFieldsLength implements ISObjectFunction {
+        private final ISObjectFunction iterableMapper;
+        private final ISObjectFunction valueMapper;
+        public GetFieldsLength(String relationshipFieldName, String fieldName) {
+            iterableMapper = SObjectFunction.getSObjects(relationshipFieldName);
+            valueMapper = SObjectFunction.get(fieldName);
+        }
+        public Object apply(SObject sObj) {
+            List<SObject> children = (List<SObject>) iterableMapper.apply(sObj);
+            List<Integer> results = new List<Integer>();
+            if (children != null) {
+                for (SObject child : children) {
+                    results.add(((String) valueMapper.apply(child)).length());
+                }
+            }
+            return results;
+        }
+    }
+    public class GetDoublePair implements ISObjectFunction {
+        private final ISObjectToDoubleFunction mapper1;
+        private final ISObjectToDoubleFunction mapper2;
+        public GetDoublePair(String fieldName1, String fieldName2) {
+            mapper1 = SObjectToDoubleFunction.get(fieldName1);
+            mapper2 = SObjectToDoubleFunction.get(fieldName2);
+        }
+        public Object apply(SObject sObj) {
+            return new List<Double>{ mapper1.apply(sObj), mapper2.apply(sObj) };
+        }
+    }
+    public class GetPair implements ISObjectFunction {
+        private final ISObjectFunction mapper1;
+        private final ISObjectFunction mapper2;
+        public GetPair(String fieldName1, String fieldName2) {
+            mapper1 = SObjectFunction.get(fieldName1);
+            mapper2 = SObjectFunction.get(fieldName2);
+        }
+        public Object apply(SObject sObj) {
+            return new List<Object>{ mapper1.apply(sObj), mapper2.apply(sObj) };
+        }
     }
     public static SObject setSObjects(SObject parent, SObjectField childRelField, List<SObject> children) {
         return SObjectUnaryOperator.setSObjects(childRelField, children).apply(parent);
     }
     public static SObject deepClone(SObject sObj) {
-        return sObj.clone(true, true, true);
+        return sObj.clone(true, true, true, true);
+    }
+    public static List<SObject> deepClone(List<SObject> sObjs) {
+        return sObjs.deepClone(true, true, true);
     }
     public static List<Object> deepClone(List<Object> objects) {
         return (List<Object>) JSON.deserializeUntyped(JSON.serialize(objects, false));
     }
     public static List<Object> deepClone(List<Object> objects, Type t) {
         return (List<Object>) JSON.deserialize(JSON.serialize(objects, false), t);
+    }
+    public static Object deepClone(Object objects, Type t) {
+        return JSON.deserialize(JSON.serialize(objects, false), t);
     }
     public static List<Boolean> generateBools() {
         return new List<Boolean>{ true, false, true, null };
@@ -346,24 +406,20 @@ public class IterTestUtils {
         Id conId3 = IterTestUtils.generateId(Contact.SObjectType);
         Id conId4 = IterTestUtils.generateId(Contact.SObjectType);
         Id conId5 = IterTestUtils.generateId(Contact.SObjectType);
+        Id conId6 = IterTestUtils.generateId(Contact.SObjectType);
         Contact con = new Contact(Id = conId0, AccountId = accId0, LastName = 'Test Name', Department = 'Finance');
         Contact con1 = new Contact(Id = conId1, AccountId = accId1, LastName = 'Test Name1', Department = 'Finance');
         Contact con2 = new Contact(Id = conId2, AccountId = accId2, LastName = 'Test Name2', Department = 'Finance');
         Contact con3 = new Contact(Id = conId3, AccountId = accId3, LastName = 'Test Name3', Department = 'HR');
         Contact con4 = new Contact(Id = conId4, AccountId = accId4, LastName = 'Test Name4', Department = 'HR');
         Contact con5 = new Contact(Id = conId5, AccountId = accId5, LastName = 'Test Name5', Department = 'Finance');
-        con.putSObject('Account', acc);
-        con1.putSObject('Account', acc1);
-        con2.putSObject('Account', acc2);
-        con3.putSObject('Account', acc3);
-        con4.putSObject('Account', acc4);
-        con5.putSObject('Account', acc5);
+        Contact con6 = new Contact(Id = conId6, AccountId = accId5, LastName = 'Test Name5', Department = 'Finance');
         acc = (Account) IterTestUtils.setSObjects(acc, Contact.AccountId, new List<Contact>{ con });
         acc1 = (Account) IterTestUtils.setSObjects(acc1, Contact.AccountId, new List<Contact>{ con1 });
         acc2 = (Account) IterTestUtils.setSObjects(acc2, Contact.AccountId, new List<Contact>{ con2 });
         acc3 = (Account) IterTestUtils.setSObjects(acc3, Contact.AccountId, new List<Contact>{ con3 });
         acc4 = (Account) IterTestUtils.setSObjects(acc4, Contact.AccountId, new List<Contact>{ con4 });
-        acc5 = (Account) IterTestUtils.setSObjects(acc5, Contact.AccountId, new List<Contact>{ con5 });
+        acc5 = (Account) IterTestUtils.setSObjects(acc5, Contact.AccountId, new List<Contact>{ con5, con6 });
         return new List<Account>{ acc, acc1, acc2, acc3, acc4, acc5, acc6, acc7, acc8 };
     }
     public static List<Contact> generateContacts() {
@@ -541,6 +597,7 @@ public class IterTestUtils {
         public final String START_TIME = 'StartTime';
         public final String NUMBER_OF_EMPLOYEES = 'NumberOfEmployees';
         public final String BILLING_LATITUDE = 'BillingLatitude';
+        public final String BILLING_LONGITUDE = 'BillingLongitude';
         public final String ACCOUNT_ID = 'AccountId';
         public final String FIRST_NAME = 'FirstName';
         public final String DESCRIPTION = 'Description';
@@ -572,6 +629,7 @@ public class IterTestUtils {
         public final String COMPETITOR = 'Competitor';
         public final String ANNUAL_REVENUE = 'AnnualRevenue';
         public final String ACC = 'Account';
+        public final String CONTACTS = 'Contacts';
     }
     private abstract class SObjectTypeConstants {
         public final SObjectType SOBJECT_TYPE;

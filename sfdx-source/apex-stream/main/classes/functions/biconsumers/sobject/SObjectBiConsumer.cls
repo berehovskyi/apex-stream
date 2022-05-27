@@ -25,6 +25,17 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
     public virtual SObjectBiConsumer andThen(final ISObjectBiConsumer after) {
         return compose(new List<ISObjectBiConsumer>{ this, after });
     }
+
+    /**
+     * @description Returns a composed `SObjectBiConsumer` that executes `before` operation
+     * first, then the `this` operation in that order.
+     * @param before the operation to perform before this operation
+     * @return the composed `SObjectBiConsumer`
+     * @throws NullPointerException if `before` is null
+     */
+    public virtual SObjectBiConsumer compose(final ISObjectBiConsumer before) {
+        return compose(new List<ISObjectBiConsumer>{ before, this });
+    }
     // @end-group
     //</editor-fold>
 

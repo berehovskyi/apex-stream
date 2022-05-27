@@ -19,7 +19,7 @@ Inherits [ISObjectBinaryOperator](/docs/Functional-Interfaces/ISObjectBinaryOper
 **See** SObjectSequence.zip
 
 
-**See** ISObjectIterable.reduce
+**See** ISObjectBaseIterable.reduce
 
 
 **See** [SObjectCollector](/docs/Collectors/SObjectCollector.md)
