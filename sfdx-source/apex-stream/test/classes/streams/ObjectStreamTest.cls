@@ -221,10 +221,13 @@ private class ObjectStreamTest {
         List<Object> input1 = new List<Object>{ 8, 3, 6, 4, 4, 9, 1, 0 };
         IObjectIterable stream = ObjectStream.of(input).union(input1);
         IObjectIterable stream1 = ObjectStream.of(input).union(ObjectStream.of(input1));
-        IObjectIterable stream2 = ObjectStream.of(input).intersect(input1);
-        IObjectIterable stream3 = ObjectStream.of(input).intersect(ObjectStream.of(input1));
-        IObjectIterable stream4 = ObjectStream.of(input).except(input1);
-        IObjectIterable stream5 = ObjectStream.of(input).except(ObjectStream.of(input1));
+        IObjectIterable stream2 = ObjectStream.of(input).union(input1, Function.identity());
+        IObjectIterable stream3 = ObjectStream.of(input).intersect(input1);
+        IObjectIterable stream4 = ObjectStream.of(input).intersect(ObjectStream.of(input1));
+        IObjectIterable stream5 = ObjectStream.of(input).intersect(input1, Function.identity());
+        IObjectIterable stream6 = ObjectStream.of(input).except(input1);
+        IObjectIterable stream7 = ObjectStream.of(input).except(ObjectStream.of(input1));
+        IObjectIterable stream8 = ObjectStream.of(input).except(input1, Function.identity());
         // When
         List<Object> actual = stream.toList();
         List<Object> actual1 = stream1.toList();
@@ -232,22 +235,31 @@ private class ObjectStreamTest {
         List<Object> actual3 = stream3.toList();
         List<Object> actual4 = stream4.toList();
         List<Object> actual5 = stream5.toList();
+        List<Object> actual6 = stream6.toList();
+        List<Object> actual7 = stream7.toList();
+        List<Object> actual8 = stream8.toList();
         // Then
         List<Object> expected = new List<Object>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
         List<Object> expected1 = new List<Object>{ 3, 9 };
         List<Object> expected2 = new List<Object>{ 5, 7 };
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected, actual2);
         Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected1, actual4);
+        Validate.assertEquals(expected1, actual5);
+        Validate.assertEquals(expected2, actual6);
+        Validate.assertEquals(expected2, actual7);
+        Validate.assertEquals(expected2, actual8);
         Validate.assert(((ObjectStream) stream).isOperated);
         Validate.assert(((ObjectStream) stream1).isOperated);
         Validate.assert(((ObjectStream) stream2).isOperated);
         Validate.assert(((ObjectStream) stream3).isOperated);
         Validate.assert(((ObjectStream) stream4).isOperated);
         Validate.assert(((ObjectStream) stream5).isOperated);
+        Validate.assert(((ObjectStream) stream6).isOperated);
+        Validate.assert(((ObjectStream) stream7).isOperated);
+        Validate.assert(((ObjectStream) stream8).isOperated);
     }
 
     /**

@@ -82,6 +82,26 @@ IObjectIterable
 
 the new `IObjectIterable`
 
+### `union(Iterable<Object> iterable, IFunction classifier)`
+
+Returns a new `IObjectIterable` as a set union of the current and another iterables according to `classifier`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
 ### `intersect(Iterable<Object> iterable)`
 
 Returns a new `IObjectIterable` as a set intersection of the current and another iterables.
@@ -101,6 +121,26 @@ IObjectIterable
 
 the new `IObjectIterable`
 
+### `intersect(Iterable<Object> iterable, IFunction classifier)`
+
+Returns a new `IObjectIterable` as a set intersection of the current and another iterables according to `classifier`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
 ### `except(Iterable<Object> iterable)`
 
 Returns a new `IObjectIterable` as a set difference of the current and another iterables.
@@ -109,6 +149,59 @@ Returns a new `IObjectIterable` as a set difference of the current and another i
 |Param|Description|
 |---|---|
 |`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
+### `except(Iterable<Object> iterable, IFunction classifier)`
+
+Returns a new `IObjectIterable` as a set difference of the current and another iterables according to `classifier`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
+### `distinct()`
+
+Returns a new `IObjectIterable` with distinct `Object` elements. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
+### `distinct(IFunction classifier)`
+
+Returns a new `IObjectIterable` with distinct `Object` elements according to `classifier` function. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`classifier`|the classifier function|
 
 #### Return
 
@@ -389,39 +482,6 @@ Returns a new `IObjectIterable` after performing `consumer` action on each `SObj
 |Param|Description|
 |---|---|
 |`consumer`|the action|
-
-#### Return
-
-**Type**
-
-IObjectIterable
-
-**Description**
-
-the new `IObjectIterable`
-
-### `distinct()`
-
-Returns a new `IObjectIterable` with distinct `Object` elements. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-IObjectIterable
-
-**Description**
-
-the new `IObjectIterable`
-
-### `distinct(IFunction classifier)`
-
-Returns a new `IObjectIterable` with distinct `Object` elements according to `classifier` function. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`classifier`|the classifier function|
 
 #### Return
 

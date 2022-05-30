@@ -7,7 +7,9 @@ public abstract inherited sharing class DoubleIterable implements IDoubleIterabl
 
     //<editor-fold desc="Sources">
     public abstract IDoubleIterable append(final Iterable<Double> iterable);
+    //</editor-fold>
 
+    //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `IDoubleIterable` as a set union 
      * of the current and another iterables.
@@ -50,16 +52,14 @@ public abstract inherited sharing class DoubleIterable implements IDoubleIterabl
     public virtual IDoubleIterable except(final Iterable<Double> iterable) {
         return distinct().filter(DoublePredicate.isIn(iterable).negate());
     }
-    //</editor-fold>
 
-    //<editor-fold desc="Intermediate Operations">
+    public abstract IDoubleIterable distinct();
+    
     public abstract IDoubleIterable filter(IDoublePredicate predicate);
 
     public virtual IDoubleIterable withoutNulls() {
         return filter(DoublePredicate.isNotNull());
     }
-
-    public abstract IDoubleIterable distinct();
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">

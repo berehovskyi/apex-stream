@@ -92,7 +92,7 @@ List<Object>
 
 **Description**
 
-the `List<Object>` which can be casted into `listType`
+the `List<Object>` which can be cast into `listType`
 
 #### Throws
 |Exception|Description|
@@ -102,6 +102,36 @@ the `List<Object>` which can be casted into `listType`
 #### Example
 ```apex
 List<String> accNames = (List<String>) Lists.toList(accounts, SObjectFunction.get('Name'), List<String>.class);
+```
+
+### `static toObjectSet(List<SObject> sObjects, ISObjectFunction mapper)`
+
+Accumulates values returned by `mapper` into a `Set<Object>`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`sObjects`|the list|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `sObjects` or `mapper` is null|
+
+#### Example
+```apex
+Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunction.get('CreatedDate'));
 ```
 
 ### `static toIdSet(List<SObject> sObjects, ISObjectFunction mapper)`
@@ -183,7 +213,7 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` which can be casted into `mapType`
+the `Map<Id, SObject>` which can be cast into `mapType`
 
 #### Throws
 |Exception|Description|
@@ -216,7 +246,7 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` which can be casted into `mapType`
+the `Map<String, SObject>` which can be cast into `mapType`
 
 #### Throws
 |Exception|Description|

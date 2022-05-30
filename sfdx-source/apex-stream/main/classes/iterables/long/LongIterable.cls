@@ -7,7 +7,19 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
 
     //<editor-fold desc="Sources">
     public abstract ILongIterable append(final Iterable<Long> iterable);
+    //</editor-fold>
 
+    //<editor-fold desc="Conversion Operations">
+    public virtual IIntIterable toIntIterable() {
+        return mapToInt(LongToIntFunction.valueOf());
+    }
+
+    public virtual IDoubleIterable toDoubleIterable() {
+        return mapToDouble(LongToDoubleFunction.valueOf());
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `ILongIterable` as a set union 
      * of the current and another iterables.
@@ -49,19 +61,9 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
     public virtual ILongIterable except(final Iterable<Long> iterable) {
         return distinct().filter(LongPredicate.isIn(iterable).negate());
     }
-    //</editor-fold>
 
-    //<editor-fold desc="Conversion Operations">
-    public virtual IIntIterable toIntIterable() {
-        return mapToInt(LongToIntFunction.valueOf());
-    }
-
-    public virtual IDoubleIterable toDoubleIterable() {
-        return mapToDouble(LongToDoubleFunction.valueOf());
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="Intermediate Operations">
+    public abstract ILongIterable distinct();
+    
     public abstract ILongIterable filter(final ILongPredicate predicate);
 
     public virtual ILongIterable withoutNulls() {
@@ -71,8 +73,6 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
     public abstract IIntIterable mapToInt(final ILongToIntFunction mapper);
 
     public abstract IDoubleIterable mapToDouble(final ILongToDoubleFunction mapper);
-
-    public abstract ILongIterable distinct();
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">

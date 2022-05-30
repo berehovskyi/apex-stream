@@ -998,15 +998,15 @@ the new `ObjectStream`
 IObjectIterable peopleStream = Stream.concat(stream1, stream2);
 ```
 
-### `static concat(Iterable<SObject> iterable1, Iterable<SObject> iterable2)`
+### `static concat(ISObjectIterable iterable1, ISObjectIterable iterable2)`
 
-Returns lazily concatenated `SObjectStream` whose elements are all the elements of the first `Iterable<SObject>` followed by all the elements of the second `Iterable<SObject>`.
+Returns lazily concatenated `SObjectStream` whose elements are all the elements of the first `ISObjectIterable` followed by all the elements of the second `ISObjectIterable`.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`iterable1`|the first `Iterable<SObject>`|
-|`iterable2`|the second `Iterable<SObject>`|
+|`iterable1`|the first `ISObjectIterable`|
+|`iterable2`|the second `ISObjectIterable`|
 
 #### Return
 

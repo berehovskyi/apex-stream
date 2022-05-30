@@ -63,6 +63,48 @@ ILongIterable
 
 the new `ILongIterable`
 
+### `toObjectIterable()`
+
+Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
+### `toIntIterable()`
+
+Returns a new `IIntIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+IIntIterable
+
+**Description**
+
+the new `IIntIterable`
+
+### `toDoubleIterable()`
+
+Returns a new `IDoubleIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `IDoubleIterable`
+
 ### `union(Iterable<Long> iterable)`
 
 Returns a new `ILongIterable` as a set union of the current and another iterables.
@@ -120,47 +162,19 @@ ILongIterable
 
 the new `ILongIterable`
 
-### `toObjectIterable()`
+### `distinct()`
 
-Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-IObjectIterable
-
-**Description**
-
-the new `IObjectIterable`
-
-### `toIntIterable()`
-
-Returns a new `IIntIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+Returns a new `ILongIterable` with distinct `Long` elements. <p>Intermediate Operation.</p>
 
 #### Return
 
 **Type**
 
-IIntIterable
+ILongIterable
 
 **Description**
 
-the new `IIntIterable`
-
-### `toDoubleIterable()`
-
-Returns a new `IDoubleIterable` from the current `iterable`. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-IDoubleIterable
-
-**Description**
-
-the new `IDoubleIterable`
+the new `ILongIterable`
 
 ### `filter(ILongPredicate predicate)`
 
@@ -336,20 +350,6 @@ Returns a new `ILongIterable` after performing `consumer` action on each `Long` 
 |Param|Description|
 |---|---|
 |`consumer`|the action|
-
-#### Return
-
-**Type**
-
-ILongIterable
-
-**Description**
-
-the new `ILongIterable`
-
-### `distinct()`
-
-Returns a new `ILongIterable` with distinct `Long` elements. <p>Intermediate Operation.</p>
 
 #### Return
 

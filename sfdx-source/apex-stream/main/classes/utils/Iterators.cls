@@ -173,7 +173,7 @@ public virtual inherited sharing class Iterators {
      * @param iterator the iterator
      * @param mapper the mapping function
      * @param listType the result type
-     * @return the `List<Object>` which can be casted into `listType`
+     * @return the `List<Object>` which can be cast into `listType`
      * @throws NullPointerException if `iterator`, `mapper` or `listType` is null
      */
     public static List<Object> toList(
@@ -185,6 +185,42 @@ public virtual inherited sharing class Iterators {
         Validate.notNull(mapper);
         Validate.notNull(listType);
         final List<Object> results = (List<Object>) listType.newInstance();
+        while (iterator.hasNext()) {
+            results.add(mapper.apply(iterator.next()));
+        }
+        return results;
+    }
+
+    /**
+     * @description Accumulates values returned by `mapper` into a `Set<Object>`.
+     * @example 
+     * Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunction.get('CreatedDate'));
+     * @param iterator the iterator
+     * @param mapper the mapping function
+     * @return the `Set<Object>`
+     * @throws NullPointerException if `iterator` or `mapper` is null
+     */
+    public static Set<Object> toObjectSet(final Iterator<SObject> iterator, final ISObjectFunction mapper) {
+        Validate.notNull(iterator);
+        Validate.notNull(mapper);
+        final Set<Object> results = new Set<Object>();
+        while (iterator.hasNext()) {
+            results.add(mapper.apply(iterator.next()));
+        }
+        return results;
+    }
+
+    /**
+     * @description Accumulates values returned by `mapper` into a `Set<Object>`.
+     * @param iterator the iterator
+     * @param mapper the mapping function
+     * @return the `Set<Object>`
+     * @throws NullPointerException if `iterator` or `mapper` is null
+     */
+    public static Set<Object> toObjectSet(final Iterator<Object> iterator, final IFunction mapper) {
+        Validate.notNull(iterator);
+        Validate.notNull(mapper);
+        final Set<Object> results = new Set<Object>();
         while (iterator.hasNext()) {
             results.add(mapper.apply(iterator.next()));
         }
@@ -238,7 +274,7 @@ public virtual inherited sharing class Iterators {
      * @param iterator the iterator
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
+     * @return the `Map<Id, SObject>` which can be cast into `mapType`
      * @throws NullPointerException if `iterator`, `keyMapper` or `listType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */
@@ -273,7 +309,7 @@ public virtual inherited sharing class Iterators {
      * @param iterator the iterator
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
-     * @return the `Map<String, SObject>` which can be casted into `mapType`
+     * @return the `Map<String, SObject>` which can be cast into `mapType`
      * @throws NullPointerException if `iterator`, `keyMapper` or `listType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */

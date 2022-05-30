@@ -24,7 +24,9 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable prepend(Iterable<SObject> iterable);
+    //</editor-fold>
 
+    //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `ISObjectIterable` as a set union 
      * of the current and another iterables.
@@ -32,6 +34,15 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable union(Iterable<SObject> iterable);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables according to `classifier` function.
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable union(Iterable<SObject> iterable, ISObjectFunction classifier);
 
     /**
      * @description Returns a new `ISObjectIterable` as a set intersection 
@@ -42,15 +53,47 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
     ISObjectIterable intersect(Iterable<SObject> iterable);
 
     /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables according to `classifier` function.
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable intersect(Iterable<SObject> iterable, ISObjectFunction classifier);
+
+    /**
      * @description Returns a new `ISObjectIterable` as a set difference 
      * of the current and another iterables.
      * @param iterable the other iterable
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable except(Iterable<SObject> iterable);
-    //</editor-fold>
 
-    //<editor-fold desc="Intermediate Operations">
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables according to `classifier` function.
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable except(Iterable<SObject> iterable, ISObjectFunction classifier);
+    
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements.
+     * <p>Intermediate Operation.</p>
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct();
+    
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `classifier` function.
+     * <p>Intermediate Operation.</p>
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct(ISObjectFunction classifier);
+    
     /**
      * @description Returns a new `ISObjectIterable` with `SObject` elements
      * that match `predicate`.
@@ -190,22 +233,6 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
     ISObjectIterable forEach(ISObjectConsumer consumer);
 
     /**
-     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
-     * according to `classifier` function.
-     * <p>Intermediate Operation.</p>
-     * @param classifier the classifier function
-     * @return the new `ISObjectIterable`
-     */
-    ISObjectIterable distinct(ISObjectFunction classifier);
-
-    /**
-     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements.
-     * <p>Intermediate Operation.</p>
-     * @return the new `ISObjectIterable`
-     */
-    ISObjectIterable distinct();
-
-    /**
      * @description Returns a new `ISObjectIterable` with sorted `SObject` elements in ascending order.
      * <p>Intermediate Operation.</p>
      * @return the new `ISObjectIterable`
@@ -220,6 +247,23 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable sort(ISObjectComparator comparator);
+    
+    /**
+     * @description Returns a new `ISObjectIterable` with first `lim` `SObject` elements.
+     * <p>Intermediate Operation.</p>
+     * @param lim the number of elements to limit
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable lim(Integer lim);
+
+    /**
+     * @description Returns a new `ISObjectIterable` that skips first `n` `SObject` elements
+     * and returns remaining elements.
+     * <p>Intermediate Operation.</p>
+     * @param n the number of elements to skip
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable skip(Integer n);
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">
@@ -352,6 +396,13 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      * @return the `List<SObject>` containing the iterable elements
      */
     List<SObject> toList();
+
+    /**
+     * @description Accumulates `SObject` elements into a `Set<SObject>`.
+     * <p>Terminal Operation.</p>
+     * @return the `Set<SObject>` containing the iterable elements
+     */
+    Set<SObject> toSet();
     //</editor-fold>
     
 }

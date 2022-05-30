@@ -7,7 +7,9 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
 
     //<editor-fold desc="Sources">
     public abstract IObjectIterable append(final Iterable<Object> iterable);
+    //</editor-fold>
 
+    //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `IObjectIterable` as a set union 
      * of the current and another iterables.
@@ -21,6 +23,21 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
      */
     public virtual IObjectIterable union(final Iterable<Object> iterable) {
         return append(iterable).distinct();
+    }
+
+    /**
+     * @description Returns a new `IObjectIterable` as a set union 
+     * of the current and another iterables according to `classifier`.
+     * @example 
+     * List<Object> objects1 = new List<Object>{ obj5, obj3, obj9, obj7, obj5, obj9, obj3, obj7 };
+     * List<Object> objects2 = new List<Object>{ obj8, obj3, obj6, obj4, obj4, obj9, obj1, obj0 };
+     * List<Object> unionByClassifier = objectsIterable1.union(objects2, classifier);
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `IObjectIterable`
+     */
+    public virtual IObjectIterable union(final Iterable<Object> iterable, final IFunction classifier) {
+        return append(iterable).distinct(classifier);
     }
 
     /**
@@ -38,6 +55,23 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
     }
 
     /**
+     * @description Returns a new `IObjectIterable` as a set intersection 
+     * of the current and another iterables according to `classifier`.
+     * @example 
+     * List<Object> objects1 = new List<Object>{ obj5, obj3, obj9, obj7, obj5, obj9, obj3, obj7 };
+     * List<Object> objects2 = new List<Object>{ obj8, obj3, obj6, obj4, obj4, obj9, obj1, obj0 };
+     * List<Object> intersectionByClassifier = objectsIterable1.intersect(objects2, classifier);
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `IObjectIterable`
+     */
+    public virtual IObjectIterable intersect(final Iterable<Object> iterable, final IFunction classifier) {
+        return distinct(classifier).filter(Predicate.isIn(
+                classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier))
+        );
+    }
+
+    /**
      * @description Returns a new `IObjectIterable` as a set difference 
      * of the current and another iterables.
      * @example 
@@ -50,9 +84,28 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
     public virtual IObjectIterable except(final Iterable<Object> iterable) {
         return distinct().filter(Predicate.isIn(iterable).negate());
     }
-    //</editor-fold>
 
-    //<editor-fold desc="Intermediate Operations">
+    /**
+     * @description Returns a new `IObjectIterable` as a set difference 
+     * of the current and another iterables according to `classifier`.
+     * @example 
+     * List<Object> objects1 = new List<Object>{ obj5, obj3, obj9, obj7, obj5, obj9, obj3, obj7 };
+     * List<Object> objects2 = new List<Object>{ obj8, obj3, obj6, obj4, obj4, obj9, obj1, obj0 };
+     * List<Object> diffByClassifier = objectsIterable1.except(objects2, classifier);
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `IObjectIterable`
+     */
+    public virtual IObjectIterable except(final Iterable<Object> iterable, final IFunction classifier) {
+        return distinct(classifier).filter(Predicate.isIn(
+                classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier)
+        ).negate());
+    }
+    
+    public abstract IObjectIterable distinct();
+
+    public abstract IObjectIterable distinct(final IFunction classifier);
+    
     public abstract IObjectIterable filter(final IPredicate predicate);
 
     public virtual IObjectIterable withoutNulls() {
@@ -64,8 +117,6 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
     public virtual IObjectIterable sort(final SortOrder order) {
         return sort(Comparator.defaultOrder().order(order));
     }
-
-    public abstract IObjectIterable distinct();
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">

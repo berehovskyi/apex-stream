@@ -7,10 +7,13 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
 
     //<editor-fold desc="Sources">
     public abstract ISObjectIterable append(final Iterable<SObject> iterable);
+    //</editor-fold>
 
+    //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `ISObjectIterable` as a set union 
      * of the current and another iterables.
+     * <p>Intermediate Operation.</p>
      * @example 
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
@@ -24,8 +27,57 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
     }
 
     /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables according to `classifier` function.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> unionByClassifier = accountsIterable1.union(accounts2, classifier);
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable union(final Iterable<SObject> iterable, final ISObjectFunction classifier) {
+        return append(iterable).distinct(classifier);
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> unionByName = accountsIterable1.union(accounts2, 'Name');
+     * @param iterable the other iterable
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable union(final Iterable<SObject> iterable, final String fieldName) {
+        return union(iterable, SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> unionByName = accountsIterable1.union(accounts2, Account.Name);
+     * @param iterable the other iterable
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable union(final Iterable<SObject> iterable, final SObjectField field) {
+        return union(iterable, SObjectFunction.get(field));
+    }
+
+    /**
      * @description Returns a new `ISObjectIterable` as a set intersection 
      * of the current and another iterables.
+     * <p>Intermediate Operation.</p>
      * @example 
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
@@ -38,8 +90,59 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
     }
 
     /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables according to `classifier` function.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> intersectionByClassifier = accountsIterable1.intersect(accounts2, classifier);
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable intersect(final Iterable<SObject> iterable, final ISObjectFunction classifier) {
+        return distinct(classifier).filter(SObjectPredicate.isIn(
+                classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier)
+        ));
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> intersectionByName = accountsIterable1.intersect(accounts2, 'Name');
+     * @param iterable the other iterable
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable intersect(final Iterable<SObject> iterable, final String fieldName) {
+        return intersect(iterable, SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> intersectionByName = accountsIterable1.intersect(accounts2, Account.Name);
+     * @param iterable the other iterable
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable intersect(final Iterable<SObject> iterable, final SObjectField field) {
+        return intersect(iterable, SObjectFunction.get(field));
+    }
+
+    /**
      * @description Returns a new `ISObjectIterable` as a set difference 
      * of the current and another iterables.
+     * <p>Intermediate Operation.</p>
      * @example 
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
@@ -50,9 +153,93 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
     public virtual ISObjectIterable except(final Iterable<SObject> iterable) {
         return distinct().filter(SObjectPredicate.isIn(iterable).negate());
     }
-    //</editor-fold>
 
-    //<editor-fold desc="Intermediate Operations">
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables according to `classifier` function.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> diffByClassifier = accountsIterable1.except(accounts2, classifier);
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable except(final Iterable<SObject> iterable, final ISObjectFunction classifier) {
+        return distinct(classifier).filter(SObjectPredicate.isIn(
+                classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier)
+        ).negate());
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> diffByName = accountsIterable1.except(accounts2, 'Name');
+     * @param iterable the other iterable
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable except(final Iterable<SObject> iterable, final String fieldName) {
+        return except(iterable, SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @example 
+     * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+     * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+     * List<Account> diffByName = accountsIterable1.except(accounts2, Account.Name);
+     * @param iterable the other iterable
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    public virtual ISObjectIterable except(final Iterable<SObject> iterable, final SObjectField field) {
+        return except(iterable, SObjectFunction.get(field));
+    }
+
+    public abstract ISObjectIterable distinct();
+
+    public abstract ISObjectIterable distinct(final ISObjectFunction classifier);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @example
+     * List<Account> distinctAccountsByName = accountsIterable
+     *     .distinct('Name')
+     *     .toList();
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public virtual ISObjectIterable distinct(final String fieldName) {
+        return distinct(SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @example
+     * List<Account> distinctAccountsByName = accountsIterable
+     *     .distinct(Account.Name)
+     *     .toList();
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     * @throws NullPointerException if `field` is null
+     */
+    public virtual ISObjectIterable distinct(final SObjectField field) {
+        return distinct(SObjectFunction.get(field));
+    }
+    
     public abstract ISObjectIterable filter(final ISObjectPredicate predicate);
 
     /**
@@ -417,40 +604,6 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
         return forEach(SObjectConsumer.set(field, value));
     }
 
-    public abstract ISObjectIterable distinct(final ISObjectFunction classifier);
-
-    /**
-     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
-     * according to `fieldName`.
-     * <p>Intermediate Operation.</p>
-     * @example
-     * List<Account> distinctAccountsByName = accountsIterable
-     *     .distinct('Name')
-     *     .toList();
-     * @param fieldName the field
-     * @return the new `ISObjectIterable`
-     * @throws NullPointerException if `fieldName` is blank
-     */
-    public virtual ISObjectIterable distinct(final String fieldName) {
-        return distinct(SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
-     * according to `field`.
-     * <p>Intermediate Operation.</p>
-     * @example
-     * List<Account> distinctAccountsByName = accountsIterable
-     *     .distinct(Account.Name)
-     *     .toList();
-     * @param field the field
-     * @return the new `ISObjectIterable`
-     * @throws NullPointerException if `field` is null
-     */
-    public virtual ISObjectIterable distinct(final SObjectField field) {
-        return distinct(SObjectFunction.get(field));
-    }
-
     public abstract ISObjectIterable sort(final ISObjectComparator comparator);
 
     /**
@@ -532,8 +685,6 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
     public virtual ISObjectIterable sort(final SObjectField field, final SortOrder order) {
         return sort(SObjectComparator.comparing(field).order(order));
     }
-
-    public abstract ISObjectIterable distinct();
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">
@@ -922,7 +1073,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList('Name', List<String>.class);
      * @param fieldName the field
      * @param listType result type
-     * @return the `List<Object>` containing the collected elements, which can be casted to `listType`
+     * @return the `List<Object>` containing the collected elements, which can be cast to `listType`
      * @throws NullPointerException if `fieldName` is blank or `listType` is null
      */
     public virtual List<Object> toList(final String fieldName, final Type listType) {
@@ -938,11 +1089,41 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList(Account.Name, List<String>.class);
      * @param field the field
      * @param listType result type
-     * @return the `List<Object>` containing the collected elements, which can be casted to `listType`
+     * @return the `List<Object>` containing the collected elements, which can be cast to `listType`
      * @throws NullPointerException if `field` or `listType` is null
      */
     public virtual List<Object> toList(final SObjectField field, final Type listType) {
         return toList(SObjectFunction.get(field), listType);
+    }
+
+    public abstract Set<Object> toSet(final ISObjectFunction mapper);
+
+    /**
+     * @description Accumulates `Object` elements into a `Set<Object>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Set<Object> createdDates = contactsIterable.toSet('CreatedDate');
+     * @param fieldName the field
+     * @return the `Set<Object>` containing the collected elements field values
+     * @throws NullPointerException if `fieldName` is blank
+     */
+    public virtual Set<Object> toSet(final String fieldName) {
+        return toSet(SObjectFunction.get(fieldName));
+    }
+
+    /**
+     * @description Accumulates `Object` elements into a `Set<Object>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Set<Object> createdDates = contactsIterable.toSet(Contact.CreatedDate);
+     * @param field the field
+     * @return the `Set<Object>` containing the collected elements field values
+     * @throws NullPointerException if `field` is null
+     */
+    public virtual Set<Object> toSet(final SObjectField field) {
+        return toSet(SObjectFunction.get(field));
     }
 
     public abstract Set<Id> toIdSet(final ISObjectFunction mapper);
@@ -1016,7 +1197,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByIdMap('AccountId', Map<Id, Contact>.class);
      * @param fieldName the field
      * @param mapType result type
-     * @return the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
      * @throws NullPointerException if `fieldName` is blank or `mapType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */
@@ -1033,7 +1214,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByIdMap(Contact.AccountId, Map<Id, Contact>.class);
      * @param field the field
      * @param mapType result type
-     * @return the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
      * @throws NullPointerException if `fieldName` is blank or `mapType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */
@@ -1052,7 +1233,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByStringMap('Name', Map<String, Account>.class);
      * @param fieldName the field
      * @param mapType result type
-     * @return the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
      * @throws NullPointerException if `fieldName` is blank or `mapType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */
@@ -1069,7 +1250,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByStringMap(Account.Name, Map<String, Account>.class);
      * @param field the field
      * @param mapType result type
-     * @return the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
      * @throws NullPointerException if `field` or `mapType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */

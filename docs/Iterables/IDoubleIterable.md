@@ -63,6 +63,20 @@ IDoubleIterable
 
 the new `IDoubleIterable`
 
+### `toObjectIterable()`
+
+Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
 ### `union(Iterable<Double> iterable)`
 
 Returns a new `IDoubleIterable` as a set union of the current and another iterables.
@@ -120,19 +134,19 @@ IDoubleIterable
 
 the new `IDoubleIterable`
 
-### `toObjectIterable()`
+### `distinct()`
 
-Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+Returns a new `IDoubleIterable` with distinct `Double` elements. <p>Intermediate Operation.</p>
 
 #### Return
 
 **Type**
 
-IObjectIterable
+IDoubleIterable
 
 **Description**
 
-the new `IObjectIterable`
+the new `IDoubleIterable`
 
 ### `filter(IDoublePredicate predicate)`
 
@@ -308,20 +322,6 @@ Returns a new `IDoubleIterable` after performing `consumer` action on each `Doub
 |Param|Description|
 |---|---|
 |`consumer`|the action|
-
-#### Return
-
-**Type**
-
-IDoubleIterable
-
-**Description**
-
-the new `IDoubleIterable`
-
-### `distinct()`
-
-Returns a new `IDoubleIterable` with distinct `Double` elements. <p>Intermediate Operation.</p>
 
 #### Return
 

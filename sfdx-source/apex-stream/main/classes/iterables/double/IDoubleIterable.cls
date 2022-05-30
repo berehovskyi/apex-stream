@@ -27,7 +27,18 @@ public interface IDoubleIterable extends Iterable<Double> {
      * @return the new `IDoubleIterable`
      */
     IDoubleIterable prepend(Iterable<Double> iterable);
+    //</editor-fold>
 
+    //<editor-fold desc="Conversion Operations">
+    /**
+     * @description Returns a new `IObjectIterable` from the current `iterable`.
+     * <p>Intermediate Operation.</p>
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable toObjectIterable();
+    //</editor-fold>
+
+    //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `IDoubleIterable` as a set union 
      * of the current and another iterables.
@@ -51,18 +62,14 @@ public interface IDoubleIterable extends Iterable<Double> {
      * @return the new `IDoubleIterable`
      */
     IDoubleIterable except(Iterable<Double> iterable);
-    //</editor-fold>
-
-    //<editor-fold desc="Conversion Operations">
+    
     /**
-     * @description Returns a new `IObjectIterable` from the current `iterable`.
+     * @description Returns a new `IDoubleIterable` with distinct `Double` elements.
      * <p>Intermediate Operation.</p>
-     * @return the new `IObjectIterable`
+     * @return the new `IDoubleIterable`
      */
-    IObjectIterable toObjectIterable();
-    //</editor-fold>
-
-    //<editor-fold desc="Intermediate Operations">
+    IDoubleIterable distinct();
+    
     /**
      * @description Returns a new `IDoubleIterable` with `Double` elements
      * that match `predicate`.
@@ -150,13 +157,6 @@ public interface IDoubleIterable extends Iterable<Double> {
      * @return the new `IDoubleIterable`
      */
     IDoubleIterable forEach(IDoubleConsumer consumer);
-
-    /**
-     * @description Returns a new `IDoubleIterable` with distinct `Double` elements.
-     * <p>Intermediate Operation.</p>
-     * @return the new `IDoubleIterable`
-     */
-    IDoubleIterable distinct();
 
     /**
      * @description Returns a new `IDoubleIterable` with sorted `Double` elements.

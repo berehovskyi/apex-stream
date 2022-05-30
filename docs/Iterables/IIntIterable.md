@@ -63,6 +63,48 @@ IIntIterable
 
 the new `IIntIterable`
 
+### `toObjectIterable()`
+
+Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `IObjectIterable`
+
+### `toLongIterable()`
+
+Returns a new `ILongIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+ILongIterable
+
+**Description**
+
+the new `ILongIterable`
+
+### `toDoubleIterable()`
+
+Returns a new `IDoubleIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+IDoubleIterable
+
+**Description**
+
+the new `IDoubleIterable`
+
 ### `union(Iterable<Integer> iterable)`
 
 Returns a new `IIntIterable` as a set union of the current and another iterables.
@@ -120,47 +162,19 @@ IIntIterable
 
 the new `IIntIterable`
 
-### `toObjectIterable()`
+### `distinct()`
 
-Returns a new `IObjectIterable` from the current `iterable`. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-IObjectIterable
-
-**Description**
-
-the new `IObjectIterable`
-
-### `toLongIterable()`
-
-Returns a new `ILongIterable` from the current `iterable`. <p>Intermediate Operation.</p>
+Returns a new `IIntIterable` with distinct `Integer` elements. <p>Intermediate Operation.</p>
 
 #### Return
 
 **Type**
 
-ILongIterable
+IIntIterable
 
 **Description**
 
-the new `ILongIterable`
-
-### `toDoubleIterable()`
-
-Returns a new `IDoubleIterable` from the current `iterable`. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-IDoubleIterable
-
-**Description**
-
-the new `IDoubleIterable`
+the new `IIntIterable`
 
 ### `filter(IIntPredicate predicate)`
 
@@ -336,20 +350,6 @@ Returns a new `IIntIterable` after performing `consumer` action on each `Long` e
 |Param|Description|
 |---|---|
 |`consumer`|the action|
-
-#### Return
-
-**Type**
-
-IIntIterable
-
-**Description**
-
-the new `IIntIterable`
-
-### `distinct()`
-
-Returns a new `IIntIterable` with distinct `Integer` elements. <p>Intermediate Operation.</p>
 
 #### Return
 

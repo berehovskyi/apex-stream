@@ -104,7 +104,7 @@ SObjectCollector.toList('Name').cast(List<String>.class);
 ### List<?> Collectors
 ##### `static toList()`
 
-Returns a `SObjectCollector` that accumulates SObject input arguments into a new `List<SObject>`. <p>The result container can be casted to a specific `SObjectType`.</p> <p>ISObjectIterable.collect(SObjectCollector.toList()) can be replaced with ISObjectIterable.toList()</p>
+Returns a `SObjectCollector` that accumulates SObject input arguments into a new `List<SObject>`. <p>The result container can be cast to a specific `SObjectType`.</p> <p>ISObjectIterable.collect(SObjectCollector.toList()) can be replaced with ISObjectIterable.toList()</p>
 
 ###### Return
 
@@ -125,7 +125,7 @@ List<Account> accs = (List<Account>) Stream.of(accounts).collect(SObjectCollecto
 
 ##### `static toList(ISObjectFunction mapper)`
 
-Returns a `SObjectCollector` that accumulates the values returned by `mapper` into a new `List<Object>`. <p>The result container can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates the values returned by `mapper` into a new `List<Object>`. <p>The result container can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -158,7 +158,7 @@ List<String> accountNames = (List<String>) Stream.of(accounts)
 
 ##### `static toList(String fieldName)`
 
-Returns a `SObjectCollector` that accumulates the values of `fieldName` into a new `List<Object>`. Cross-reference fields and safe navigation are supported. <p>The result container can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates the values of `fieldName` into a new `List<Object>`. Cross-reference fields and safe navigation are supported. <p>The result container can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -191,7 +191,7 @@ List<String> parentAccountNames = (List<String>) Stream.of(accounts)
 
 ##### `static toList(SObjectField field)`
 
-Returns a `SObjectCollector` that accumulates the values of `field` into a new `List<Object>`. <p>The result container can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates the values of `field` into a new `List<Object>`. <p>The result container can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -226,7 +226,7 @@ List<String> accountNames = (List<String>) Stream.of(accounts)
 ### Set<?> Collectors
 ##### `static toSet()`
 
-Returns a `SObjectCollector` that accumulates SObject input arguments into a new `Set<SObject>`. <p>The result container <strong>cannot</strong> be casted to a specific `SObjectType`.</p> <p>ISObjectIterable.collect(SObjectCollector.toSet()) can be replaced with ISObjectIterable.toSet()</p>
+Returns a `SObjectCollector` that accumulates SObject input arguments into a new `Set<SObject>`. <p>The result container <strong>cannot</strong> be cast to a specific `SObjectType`.</p> <p>ISObjectIterable.collect(SObjectCollector.toSet()) can be replaced with ISObjectIterable.toSet()</p>
 
 ###### Return
 
@@ -1196,7 +1196,7 @@ Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
 
 ##### `static toSet(ISObjectFunction mapper)`
 
-Returns a `SObjectCollector` that accumulates the Object values returned by `mapper` into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
+Returns a `SObjectCollector` that accumulates the Object values returned by `mapper` into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1227,7 +1227,7 @@ Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
 
 ##### `static toSet(String fieldName)`
 
-Returns a `SObjectCollector` that accumulates the Object values of `fieldName` into a new `Set<Double>`. Cross-reference fields and safe navigation are supported. <p>The result container <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
+Returns a `SObjectCollector` that accumulates the Object values of `fieldName` into a new `Set<Double>`. Cross-reference fields and safe navigation are supported. <p>The result container <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1260,7 +1260,7 @@ Set<Object> parentBirthdates = (Set<Object>) Stream.of(contacts)
 
 ##### `static toSet(SObjectField field)`
 
-Returns a `SObjectCollector` that accumulates the Object values of `field` into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
+Returns a `SObjectCollector` that accumulates the Object values of `field` into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as SObjectCollector.toIdSet, SObjectCollector.toStringSet, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1293,7 +1293,7 @@ Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
 ### Map<Id, SObject> Collectors
 ##### `static toMap()`
 
-Returns a `SObjectCollector` that accumulates the SObject values into a `Map<Id, SObject>` <p>The result container value type can be casted to a specific `SObjectType` using SObjectCollector.cast.</p> <p>ISObjectIterable.collect(SObjectCollector.toMap()) can be replaced with ISObjectIterable.toMap()</p>
+Returns a `SObjectCollector` that accumulates the SObject values into a `Map<Id, SObject>` <p>The result container value type can be cast to a specific `SObjectType` using SObjectCollector.cast.</p> <p>ISObjectIterable.collect(SObjectCollector.toMap()) can be replaced with ISObjectIterable.toMap()</p>
 
 ###### Return
 
@@ -1319,7 +1319,7 @@ Map<Id, Account> accs = (Map<Id, Account>) Stream.of(accounts)
 
 ##### `static toByIdMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1353,7 +1353,7 @@ Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
 
 ##### `static toByIdMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1387,7 +1387,7 @@ Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
 
 ##### `static toByIdMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1421,7 +1421,7 @@ Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
 
 ##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1460,7 +1460,7 @@ Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
 ### Map<Boolean, Object> Collectors
 ##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1506,7 +1506,7 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
 
 ##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1543,7 +1543,7 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
 
 ##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1582,7 +1582,7 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
 
 ##### `static toByBoolMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1615,7 +1615,7 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
 
 ##### `static toByBoolMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1653,7 +1653,7 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
 ### Map<Boolean, SObject> Collectors
 ##### `static toByBoolMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1687,7 +1687,7 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
 
 ##### `static toByBoolMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1721,7 +1721,7 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
 
 ##### `static toByBoolMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1759,7 +1759,7 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
 
 ##### `static toByBoolMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Boolean, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1798,7 +1798,7 @@ Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(con
 ### Map<Id, Object> Collectors
 ##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1844,7 +1844,7 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
 
 ##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1881,7 +1881,7 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
 
 ##### `static toByIdMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1920,7 +1920,7 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
 
 ##### `static toByIdMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1956,7 +1956,7 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
 
 ##### `static toByIdMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Id, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1994,7 +1994,7 @@ Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
 ### Map<String, Object> Collectors
 ##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2040,7 +2040,7 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
 
 ##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2077,7 +2077,7 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
 
 ##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2116,7 +2116,7 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
 
 ##### `static toByStringMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2152,7 +2152,7 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
 
 ##### `static toByStringMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2190,7 +2190,7 @@ Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contac
 ### Map<String, SObject> Collectors
 ##### `static toByStringMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2224,7 +2224,7 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
 
 ##### `static toByStringMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2258,7 +2258,7 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
 
 ##### `static toByStringMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2296,7 +2296,7 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
 
 ##### `static toByStringMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<String, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<String, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2335,7 +2335,7 @@ Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(conta
 ### Map<Blob, Object> Collectors
 ##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2381,7 +2381,7 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
 
 ##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2418,7 +2418,7 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
 
 ##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2457,7 +2457,7 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
 
 ##### `static toByBlobMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2493,7 +2493,7 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
 
 ##### `static toByBlobMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2531,7 +2531,7 @@ Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
 ### Map<Blob, SObject> Collectors
 ##### `static toByBlobMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2565,7 +2565,7 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
 
 ##### `static toByBlobMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2599,7 +2599,7 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
 
 ##### `static toByBlobMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2637,7 +2637,7 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
 
 ##### `static toByBlobMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Blob, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2676,7 +2676,7 @@ Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attac
 ### Map<Date, Object> Collectors
 ##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2722,7 +2722,7 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
 
 ##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2759,7 +2759,7 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
 
 ##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2798,7 +2798,7 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
 
 ##### `static toByDateMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2834,7 +2834,7 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
 
 ##### `static toByDateMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2872,7 +2872,7 @@ Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
 ### Map<Date, SObject> Collectors
 ##### `static toByDateMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2906,7 +2906,7 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
 
 ##### `static toByDateMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2940,7 +2940,7 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
 
 ##### `static toByDateMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2978,7 +2978,7 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
 
 ##### `static toByDateMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Date, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Date, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3017,7 +3017,7 @@ Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
 ### Map<Datetime, Object> Collectors
 ##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3063,7 +3063,7 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
 
 ##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3100,7 +3100,7 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
 
 ##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3139,7 +3139,7 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
 
 ##### `static toByDatetimeMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3175,7 +3175,7 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
 
 ##### `static toByDatetimeMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3213,7 +3213,7 @@ Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) St
 ### Map<Datetime, SObject> Collectors
 ##### `static toByDatetimeMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3247,7 +3247,7 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
 
 ##### `static toByDatetimeMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3281,7 +3281,7 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
 
 ##### `static toByDatetimeMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3319,7 +3319,7 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
 
 ##### `static toByDatetimeMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3358,7 +3358,7 @@ Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(
 ### Map<Time, Object> Collectors
 ##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3404,7 +3404,7 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
 
 ##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3441,7 +3441,7 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
 
 ##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3480,7 +3480,7 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
 
 ##### `static toByTimeMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3516,7 +3516,7 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
 
 ##### `static toByTimeMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3554,7 +3554,7 @@ Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
 ### Map<Time, SObject> Collectors
 ##### `static toByTimeMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3588,7 +3588,7 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
 
 ##### `static toByTimeMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3622,7 +3622,7 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
 
 ##### `static toByTimeMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3660,7 +3660,7 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
 
 ##### `static toByTimeMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Time, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Time, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3699,7 +3699,7 @@ Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
 ### Map<Integer, Object> Collectors
 ##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3745,7 +3745,7 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
 
 ##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3782,7 +3782,7 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
 
 ##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3821,7 +3821,7 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
 
 ##### `static toByIntMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3857,7 +3857,7 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
 
 ##### `static toByIntMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3895,7 +3895,7 @@ Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(
 ### Map<Integer, SObject> Collectors
 ##### `static toByIntMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3929,7 +3929,7 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
 
 ##### `static toByIntMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, Object>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3963,7 +3963,7 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
 
 ##### `static toByIntMap(ISObjectToIntFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4001,7 +4001,7 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
 
 ##### `static toByIntMap(ISObjectToIntFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Integer, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4040,7 +4040,7 @@ Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Strea
 ### Map<Long, Object> Collectors
 ##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4086,7 +4086,7 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
 
 ##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4123,7 +4123,7 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
 
 ##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4162,7 +4162,7 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
 
 ##### `static toByLongMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4198,7 +4198,7 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
 
 ##### `static toByLongMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4236,7 +4236,7 @@ Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accoun
 ### Map<Long, SObject> Collectors
 ##### `static toByLongMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4270,7 +4270,7 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
 
 ##### `static toByLongMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4304,7 +4304,7 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
 
 ##### `static toByLongMap(ISObjectToLongFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4342,7 +4342,7 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
 
 ##### `static toByLongMap(ISObjectToLongFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Long, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4381,7 +4381,7 @@ Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(a
 ### Map<Double, Object> Collectors
 ##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4427,7 +4427,7 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
 
 ##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4464,7 +4464,7 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
 
 ##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4503,7 +4503,7 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
 
 ##### `static toByDoubleMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4539,7 +4539,7 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
 
 ##### `static toByDoubleMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4577,7 +4577,7 @@ Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(acco
 ### Map<Double, SObject> Collectors
 ##### `static toByDoubleMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4611,7 +4611,7 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
 
 ##### `static toByDoubleMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4645,7 +4645,7 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
 
 ##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toByLongMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4683,7 +4683,7 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
 
 ##### `static toByDoubleMap(ISObjectToDoubleFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Double, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4722,7 +4722,7 @@ Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of
 ### Map<Object, Object> Collectors
 ##### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4768,7 +4768,7 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
 
 ##### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4805,7 +4805,7 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
 
 ##### `static toMap(ISObjectFunction keyMapper, ISObjectFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4844,7 +4844,7 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
 
 ##### `static toMap(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are values of `keyFieldName` and `valueFieldName` of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4880,7 +4880,7 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
 
 ##### `static toMap(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, Object>` whose keys and values are values of `keyField` and `valueField` of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4918,7 +4918,7 @@ Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contac
 ### Map<Object, SObject> Collectors
 ##### `static toMap(String keyFieldName)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values of `keyFieldName` and values are values of the SObject input arguments. Cross-reference fields and safe navigation are supported. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4952,7 +4952,7 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
 
 ##### `static toMap(SObjectField keyField)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values of `keyField` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4986,7 +4986,7 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
 
 ##### `static toMap(ISObjectFunction keyMapper)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys are values returned by `keyMapper` and values are values of the SObject input arguments. If the mapped keys might have duplicates, use SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5024,7 +5024,7 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
 
 ##### `static toMap(ISObjectFunction keyMapper, ISObjectUnaryOperator valueMapper, ISObjectBinaryOperator merger)`
 
-Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
+Returns a `SObjectCollector` that accumulates elements into a `Map<Object, SObject>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as SObjectCollector.toByIdMap, SObjectCollector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5063,7 +5063,7 @@ Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(conta
 ### Map<Boolean, ?> Collectors
 ##### `static groupingByBool(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5102,7 +5102,7 @@ Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
 
 ##### `static groupingByBool(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5144,7 +5144,7 @@ Map<Boolean, Set<SObject>> contactsByDoNotCall = (Map<Boolean, Set<SObject>>)
 
 ##### `static groupingByBool(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5182,7 +5182,7 @@ Map<Boolean, Set<SObject>> contactsByDoNotCall = (Map<Boolean, Set<SObject>>)
 
 ##### `static groupingByBool(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5218,7 +5218,7 @@ Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
 
 ##### `static groupingByBool(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5320,7 +5320,7 @@ Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
 ### Map<Id, ?> Collectors
 ##### `static groupingById(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5359,7 +5359,7 @@ Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
 
 ##### `static groupingById(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5401,7 +5401,7 @@ Map<Id, Set<SObject>> contactsByAccountId = (Map<Id, Set<SObject>>)
 
 ##### `static groupingById(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5439,7 +5439,7 @@ Map<Id, Set<SObject>> contactsByAccountId = (Map<Id, Set<SObject>>)
 
 ##### `static groupingById(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5475,7 +5475,7 @@ Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
 
 ##### `static groupingById(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5577,7 +5577,7 @@ Map<String, List<Contact>> contactsByAccountId = (Map<String, List<Contact>>)
 ### Map<String, ?> Collectors
 ##### `static groupingByString(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<String, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<String, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5616,7 +5616,7 @@ Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
 
 ##### `static groupingByString(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5658,7 +5658,7 @@ Map<String, Set<SObject>> contactsByOtherCity = (Map<String, Set<SObject>>)
 
 ##### `static groupingByString(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5696,7 +5696,7 @@ Map<String, Set<SObject>> contactsByOtherCity = (Map<String, Set<SObject>>)
 
 ##### `static groupingByString(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5732,7 +5732,7 @@ Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
 
 ##### `static groupingByString(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5834,7 +5834,7 @@ Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
 ### Map<Blob, ?> Collectors
 ##### `static groupingByBlob(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5873,7 +5873,7 @@ Map<Blob, List<Attachment>> attachmentsByOtherCity = (Map<Blob, List<Attachment>
 
 ##### `static groupingByBlob(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5915,7 +5915,7 @@ Map<Blob, Set<SObject>> attachmentsByOtherCity = (Map<Blob, Set<SObject>>)
 
 ##### `static groupingByBlob(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5953,7 +5953,7 @@ Map<Blob, Set<SObject>> attachmentsByOtherCity = (Map<Blob, Set<SObject>>)
 
 ##### `static groupingByBlob(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -5989,7 +5989,7 @@ Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
 
 ##### `static groupingByBlob(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6091,7 +6091,7 @@ Map<Blob, List<Attachment>> attachmentsByBody = (Map<Blob, List<Attachment>>)
 ### Map<Date, ?> Collectors
 ##### `static groupingByDate(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6130,7 +6130,7 @@ Map<Date, List<Contact>> contactsByBirthdate = (Map<Date, List<Contact>>)
 
 ##### `static groupingByDate(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6172,7 +6172,7 @@ Map<Date, Set<SObject>> contactsByBirthdate = (Map<Date, Set<SObject>>)
 
 ##### `static groupingByDate(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6210,7 +6210,7 @@ Map<Date, Set<SObject>> contactsByBirthdate = (Map<Date,Set<SObject>>)
 
 ##### `static groupingByDate(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6246,7 +6246,7 @@ Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
 
 ##### `static groupingByDate(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6348,7 +6348,7 @@ Map<Date, List<Contact>> contactsByBody = (Map<Date, List<Contact>>)
 ### Map<Datetime, ?> Collectors
 ##### `static groupingByDatetime(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6387,7 +6387,7 @@ Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>
 
 ##### `static groupingByDatetime(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6429,7 +6429,7 @@ Map<Datetime, Set<SObject>> eventsByActivityDateTime = (Map<Datetime, Set<SObjec
 
 ##### `static groupingByDatetime(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6467,7 +6467,7 @@ Map<Datetime, Set<SObject>> eventsByActivityDateTime = (Map<Datetime, Set<SObjec
 
 ##### `static groupingByDatetime(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6503,7 +6503,7 @@ Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List
 
 ##### `static groupingByDatetime(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6605,7 +6605,7 @@ Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>
 ### Map<Time, ?> Collectors
 ##### `static groupingByTime(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6644,7 +6644,7 @@ Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
 
 ##### `static groupingByTime(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6686,7 +6686,7 @@ Map<Time, Set<SObject>> slotsByStartTime = (Map<Time, Set<SObject>>)
 
 ##### `static groupingByTime(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6724,7 +6724,7 @@ Map<Time, Set<SObject>> slotsByStartTime = (Map<Time, Set<SObject>>)
 
 ##### `static groupingByTime(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6760,7 +6760,7 @@ Map<Time, List<String>> namesByStartTime = (Map<Time, List<String>>)
 
 ##### `static groupingByTime(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6862,7 +6862,7 @@ Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
 ### Map<Integer, ?> Collectors
 ##### `static groupingByInt(ISObjectToIntFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6901,7 +6901,7 @@ Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Acc
 
 ##### `static groupingByInt(ISObjectToIntFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6943,7 +6943,7 @@ Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObje
 
 ##### `static groupingByInt(ISObjectToIntFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -6981,7 +6981,7 @@ Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObje
 
 ##### `static groupingByInt(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7017,7 +7017,7 @@ Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>
 
 ##### `static groupingByInt(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7119,7 +7119,7 @@ Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Acc
 ### Map<Long, ?> Collectors
 ##### `static groupingByLong(ISObjectToLongFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7158,7 +7158,7 @@ Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>
 
 ##### `static groupingByLong(ISObjectToLongFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7200,7 +7200,7 @@ Map<Long, Set<SObject>> accountsByNumberOfEmployees = (Map<Long, Set<SObject>>)
 
 ##### `static groupingByLong(ISObjectToLongFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7238,7 +7238,7 @@ Map<Long, Set<SObject>> accountsByNumberOfEmployees = (Map<Long, Set<SObject>>)
 
 ##### `static groupingByLong(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7274,7 +7274,7 @@ Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
 
 ##### `static groupingByLong(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7376,7 +7376,7 @@ Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>
 ### Map<Double, ?> Collectors
 ##### `static groupingByDouble(ISObjectToDoubleFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7415,7 +7415,7 @@ Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account
 
 ##### `static groupingByDouble(ISObjectToDoubleFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7457,7 +7457,7 @@ Map<Double, Set<SObject>> accountsByBillingLatitude = (Map<Double, Set<SObject>>
 
 ##### `static groupingByDouble(ISObjectToDoubleFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7495,7 +7495,7 @@ Map<Double, Set<SObject>> accountsByBillingLatitude = (Map<Double, Set<SObject>>
 
 ##### `static groupingByDouble(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7531,7 +7531,7 @@ Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
 
 ##### `static groupingByDouble(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7633,7 +7633,7 @@ Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account
 
 ##### `static groupingBy(ISObjectFunction classifier)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7672,7 +7672,7 @@ Map<Object, List<Contact>> contactsByBirthdate = (Map<Object, List<Contact>>)
 
 ##### `static groupingBy(ISObjectFunction classifier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7714,7 +7714,7 @@ Map<Object, Set<SObject>> contactsByBirthdate = (Map<Object, Set<SObject>>)
 
 ##### `static groupingBy(ISObjectFunction classifier, ISupplier mapSupplier, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
+Returns a `SObjectCollector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` SObjectCollector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7752,7 +7752,7 @@ Map<Object, Set<SObject>> contactsByBirthdate = (Map<Object,Set<SObject>>)
 
 ##### `static groupingBy(String keyFieldName, String valueFieldName)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyFieldName` and `valueFieldName`. Cross-reference fields and safe navigation are supported. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7788,7 +7788,7 @@ Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
 
 ##### `static groupingBy(SObjectField keyField, SObjectField valueField)`
 
-Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
+Returns a `SObjectCollector` that performs grouping operation according to `keyField` and `valueField`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7824,7 +7824,7 @@ Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
 
 ##### `static groupingBy(String fieldName)`
 
-Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported. <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
+Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7856,7 +7856,7 @@ Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
 
 ##### `static groupingBy(SObjectField field)`
 
-Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`. <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
+Returns a `SObjectCollector` that performs grouping of SObject input arguments according to `field`. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as SObjectCollector.groupingById, SObjectCollector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7890,7 +7890,7 @@ Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
 ### Partitioning By Collectors
 ##### `static partitioningBy(ISObjectPredicate predicate)`
 
-Returns a `SObjectCollector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -7928,7 +7928,7 @@ Map<Boolean, List<Account>> accountsPartitionedByHavingMoreThan100Employees = (M
 
 ##### `static partitioningBy(ISObjectPredicate predicate, ISObjectCollector downstream)`
 
-Returns a `SObjectCollector` that partitions the SObject input arguments according to `predicate`, reduces the values in each partition according to `downstream` Collector, and organizes them into a `Map<Boolean, Object>` whose values are the result of the downstream reduction. <p>The result container values type can be casted to a specific type using SObjectCollector.cast.</p>
+Returns a `SObjectCollector` that partitions the SObject input arguments according to `predicate`, reduces the values in each partition according to `downstream` Collector, and organizes them into a `Map<Boolean, Object>` whose values are the result of the downstream reduction. <p>The result container values type can be cast to a specific type using SObjectCollector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -9267,7 +9267,7 @@ Account accountWithSummedNumberOfEmployees = (Account) Stream.of(accounts)
 ### Optional Collectors
 ##### `static reducing(ISObjectBinaryOperator accumulator)`
 
-Returns a `SObjectCollector` which performs a reduction of its input elements under `accumulator`. The result is described as an `OptionalSObject`. <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+Returns a `SObjectCollector` which performs a reduction of its input elements under `accumulator`. The result is described as an `OptionalSObject`. <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -9305,7 +9305,7 @@ Account customerWithMaxNumberOfEmployees = (Account)
 
 ##### `static maximizing(ISObjectComparator comparator)`
 
-Returns a `SObjectCollector` which produces the maximal element according to `comparator`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+Returns a `SObjectCollector` which produces the maximal element according to `comparator`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -9343,7 +9343,7 @@ Account customerWithMaxNumberOfEmployees = (Account)
 
 ##### `static maximizing(String fieldName)`
 
-Returns a `SObjectCollector` which produces the maximal element according to `fieldName`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+Returns a `SObjectCollector` which produces the maximal element according to `fieldName`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -9379,7 +9379,7 @@ Account customerWithMaxNumberOfEmployees = (Account)
 
 ##### `static maximizing(SObjectField field)`
 
-Returns a `SObjectCollector` which produces the maximal element according to `field`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+Returns a `SObjectCollector` which produces the maximal element according to `field`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -9415,7 +9415,7 @@ Account customerWithMaxNumberOfEmployees = (Account)
 
 ##### `static minimizing(ISObjectComparator comparator)`
 
-Returns a `SObjectCollector` which produces the minimal element according to `comparator`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+Returns a `SObjectCollector` which produces the minimal element according to `comparator`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -9453,7 +9453,7 @@ Account customerWithMinNumberOfEmployees = (Account)
 
 ##### `static minimizing(String fieldName)`
 
-Returns a `SObjectCollector` which produces the minimal element according to `fieldName`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+Returns a `SObjectCollector` which produces the minimal element according to `fieldName`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -9489,7 +9489,7 @@ Account customerWithMinNumberOfEmployees = (Account)
 
 ##### `static minimizing(SObjectField field)`
 
-Returns a `SObjectCollector` which produces the maximal element according to `field`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+Returns a `SObjectCollector` which produces the maximal element according to `field`, described as an `OptionalSObject` . <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
 
 ###### Parameters
 |Param|Description|

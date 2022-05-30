@@ -72,7 +72,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `IIntUnaryOperator`.
-     * @param operator applied to the input argument casted to `Integer`
+     * @param operator applied to the input argument cast to `Integer`
      * @return the `UnaryOperator`
      * @throws NullPointerException if `operator` is null
      */
@@ -83,7 +83,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `ILongUnaryOperator`.
-     * @param operator applied to the input argument casted to `Long`
+     * @param operator applied to the input argument cast to `Long`
      * @return the `UnaryOperator`
      * @throws NullPointerException if `operator` is null
      */
@@ -94,7 +94,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `IDoubleUnaryOperator`.
-     * @param operator applied to the input argument casted to `Double`
+     * @param operator applied to the input argument cast to `Double`
      * @return the `UnaryOperator`
      * @throws NullPointerException if `operator` is null
      */
@@ -105,7 +105,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `ISObjectUnaryOperator`.
-     * @param operator applied to the input argument casted to `SObject`
+     * @param operator applied to the input argument cast to `SObject`
      * @return the `UnaryOperator`
      * @throws NullPointerException if `operator` is null
      */

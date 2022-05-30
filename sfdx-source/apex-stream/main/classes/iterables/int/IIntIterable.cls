@@ -27,30 +27,6 @@ public interface IIntIterable extends Iterable<Integer> {
      * @return the new `IIntIterable`
      */
     IIntIterable prepend(Iterable<Integer> iterable);
-
-    /**
-     * @description Returns a new `IIntIterable` as a set union 
-     * of the current and another iterables.
-     * @param iterable the other iterable
-     * @return the new `IIntIterable`
-     */
-    IIntIterable union(Iterable<Integer> iterable);
-
-    /**
-     * @description Returns a new `IIntIterable` as a set intersection 
-     * of the current and another iterables.
-     * @param iterable the other iterable
-     * @return the new `IIntIterable`
-     */
-    IIntIterable intersect(Iterable<Integer> iterable);
-
-    /**
-     * @description Returns a new `IIntIterable` as a set difference 
-     * of the current and another iterables.
-     * @param iterable the other iterable
-     * @return the new `IIntIterable`
-     */
-    IIntIterable except(Iterable<Integer> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Conversion Operations">
@@ -77,6 +53,37 @@ public interface IIntIterable extends Iterable<Integer> {
     //</editor-fold>
 
     //<editor-fold desc="Intermediate Operations">
+    /**
+     * @description Returns a new `IIntIterable` as a set union 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IIntIterable`
+     */
+    IIntIterable union(Iterable<Integer> iterable);
+
+    /**
+     * @description Returns a new `IIntIterable` as a set intersection 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IIntIterable`
+     */
+    IIntIterable intersect(Iterable<Integer> iterable);
+
+    /**
+     * @description Returns a new `IIntIterable` as a set difference 
+     * of the current and another iterables.
+     * @param iterable the other iterable
+     * @return the new `IIntIterable`
+     */
+    IIntIterable except(Iterable<Integer> iterable);
+
+    /**
+     * @description Returns a new `IIntIterable` with distinct `Integer` elements.
+     * <p>Intermediate Operation.</p>
+     * @return the new `IIntIterable`
+     */
+    IIntIterable distinct();
+    
     /**
      * @description Returns a new `IIntIterable` with `Integer` elements
      * that match `predicate`.
@@ -164,13 +171,6 @@ public interface IIntIterable extends Iterable<Integer> {
      * @return the new `IIntIterable`
      */
     IIntIterable forEach(IIntConsumer consumer);
-
-    /**
-     * @description Returns a new `IIntIterable` with distinct `Integer` elements.
-     * <p>Intermediate Operation.</p>
-     * @return the new `IIntIterable`
-     */
-    IIntIterable distinct();
 
     /**
      * @description Returns a new `IIntIterable` with sorted `Integer` elements.

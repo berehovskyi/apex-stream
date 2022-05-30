@@ -278,16 +278,16 @@ public virtual inherited sharing class Sequence {
 
     /**
      * @description Returns eagerly concatenated `SObjectSequence` whose elements are all the
-     * elements of the first `Iterable<SObject>` followed by all the elements of the
-     * second `Iterable<SObject>`.
+     * elements of the first `ISObjectIterable` followed by all the elements of the
+     * second `ISObjectIterable`.
      * @example
      * ISObjectIterable accSeq = Sequence.concat(stream1, stream2);
-     * @param iterable1 the first `Iterable<SObject>`
-     * @param iterable2 the second `Iterable<SObject>`
+     * @param iterable1 the first `ISObjectIterable`
+     * @param iterable2 the second `ISObjectIterable`
      * @return the new `SObjectSequence`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ISObjectIterable concat(final Iterable<SObject> iterable1, final Iterable<SObject> iterable2) {
+    public static ISObjectIterable concat(final ISObjectIterable iterable1, final ISObjectIterable iterable2) {
         return SObjectSequence.concat(iterable1, iterable2);
     }
 

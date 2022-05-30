@@ -137,6 +137,67 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
 
     //<editor-fold desc="SObject Consumers">
     /**
+     * @description Returns a `SObjectConsumer` that adds error to `fieldName`.
+     * @example
+     * SObjectConsumer.addError('NumberOfEmployees', 'Error message');
+     * @param fieldName the field name to add an error
+     * @param message the error message
+     * @return the `SObjectConsumer`
+     * @throws NullPointerException if `fieldName` is blank or `message` is null
+     * @throws SObjectException if provided invalid `fieldName`
+     * @see SObject.addError
+     */
+    public static SObjectConsumer addError(final String fieldName, final String message) {
+        Validate.notNull(fieldName);
+        Validate.notNull(message);
+        return new AddFieldNameError(fieldName, message);
+    }
+
+    /**
+     * @description Returns a `SObjectConsumer` that adds error to `field`.
+     * @example
+     * SObjectConsumer.addError(Account.NumberOfEmployees, 'Error message');
+     * @param field the field to add an error
+     * @param message the error message
+     * @return the `SObjectConsumer`
+     * @throws NullPointerException if `fieldName` is blank or `message` is null
+     * @see SObject.addError
+     */
+    public static SObjectConsumer addError(final SObjectField field, final String message) {
+        Validate.notNull(field);
+        Validate.notNull(message);
+        return new AddFieldError(field, message);
+    }
+
+    /**
+     * @description Returns a `SObjectConsumer` that adds error to an input argument.
+     * @example
+     * SObjectConsumer.addError('Error message');
+     * @param message the error message
+     * @return the `SObjectConsumer`
+     * @throws NullPointerException if `mapper` is nuyll
+     * @see SObject.addError
+     */
+    public static SObjectConsumer addError(final String message) {
+        Validate.notNull(message);
+        return new AddErrorMessage(message);
+    }
+
+    /**
+     * @description Returns a `SObjectConsumer` that adds error to an input argument.
+     * @example
+     * SObjectConsumer.addError(new IllegalArgumentException('Error message'));
+     * @param exc the exception to attach
+     * @return the `SObjectConsumer`
+     * @throws NullPointerException if `exc` is null
+     * @see SObject.addError
+     */
+    public static SObjectConsumer addError(final Exception exc) {
+        Validate.notNull(exc);
+        return new AddErrorExc(exc);
+    }
+    
+    /**
      * @description Returns a `SObjectConsumer` that sets the value returned by
      * the `mapper` for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
@@ -326,6 +387,35 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
         private final LoggingLevel level;
         private DebugPretty(LoggingLevel level, String message){ this.level = level; this.message = message; }
         public override void accept(SObject sObj) { System.debug(level, message + JSON.serializePretty(sObj)); }
+    }
+
+    private class AddFieldNameError extends SObjectConsumer {
+        private final String fieldName;
+        private final String message;
+        private AddFieldNameError(String fieldName, String message) {
+            this.fieldName = fieldName;
+            this.message = message;
+        }
+        public override void accept(SObject sObj) { sObj.addError(fieldName, message); }
+    }
+
+    private class AddFieldError extends SObjectConsumer {
+        private final SObjectField field;
+        private final String message;
+        private AddFieldError(SObjectField field, String message) { this.field = field; this.message = message; }
+        public override void accept(SObject sObj) { sObj.addError(field, message); }
+    }
+    
+    private class AddErrorMessage extends SObjectConsumer {
+        private final String message;
+        private AddErrorMessage(String message) { this.message = message; }
+        public override void accept(SObject sObj) { sObj.addError(message); }
+    }
+
+    private class AddErrorExc extends SObjectConsumer {
+        private final Exception exc;
+        private AddErrorExc(Exception exc) { this.exc = exc; }
+        public override void accept(SObject sObj) { sObj.addError(exc); }
     }
 
     private abstract class SObjectPathConsumer extends SObjectConsumer {

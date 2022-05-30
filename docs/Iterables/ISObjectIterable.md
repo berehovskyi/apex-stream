@@ -25,6 +25,164 @@ A sequence of `SObject` elements supporting aggregate operations.
 **See** [IDoubleIterable](/docs/Iterables/IDoubleIterable.md)
 
 ## Methods
+### `union(Iterable<SObject> iterable, String fieldName)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `union(Iterable<SObject> iterable, SObjectField field)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `intersect(Iterable<SObject> iterable, String fieldName)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `intersect(Iterable<SObject> iterable, SObjectField field)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `except(Iterable<SObject> iterable, String fieldName)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `except(Iterable<SObject> iterable, SObjectField field)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `distinct(String fieldName)`
+
+Returns a new `ISObjectIterable` with distinct `SObject` elements according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `distinct(SObjectField field)`
+
+Returns a new `ISObjectIterable` with distinct `SObject` elements according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
 ### `filter(String fieldName, Object value)`
 
 Returns a new `ISObjectIterable` with `SObject` elements that have field&apos;s value. <p>Intermediate Operation.</p>
@@ -413,44 +571,6 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
-### `distinct(String fieldName)`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements according to `fieldName`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`fieldName`|the field|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `distinct(SObjectField field)`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements according to `field`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`field`|the field|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
 ### `sort(SortOrder order)`
 
 Returns a new `ISObjectIterable` with sorted `SObject` elements considering `order`. <p>Intermediate Operation.</p>
@@ -536,44 +656,6 @@ Returns a new `ISObjectIterable` with sorted `SObject` elements taken from `fiel
 |---|---|
 |`field`|the field|
 |`order`|the sort order|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `lim(Integer lim)`
-
-Returns a new `ISObjectIterable` with first `lim` `SObject` elements. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`lim`|the number of elements to limit|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `skip(Integer n)`
-
-Returns a new `ISObjectIterable` that skips first `n` `SObject` elements and returns remaining elements. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`n`|the number of elements to skip|
 
 #### Return
 
@@ -972,7 +1054,7 @@ List<Object>
 
 **Description**
 
-the `List<Object>` containing the collected elements, which can be casted to `listType`
+the `List<Object>` containing the collected elements, which can be cast to `listType`
 
 ### `toList(String fieldName, Type listType)`
 
@@ -992,7 +1074,7 @@ List<Object>
 
 **Description**
 
-the `List<Object>` containing the collected elements, which can be casted to `listType`
+the `List<Object>` containing the collected elements, which can be cast to `listType`
 
 ### `toList(SObjectField field, Type listType)`
 
@@ -1012,21 +1094,64 @@ List<Object>
 
 **Description**
 
-the `List<Object>` containing the collected elements, which can be casted to `listType`
+the `List<Object>` containing the collected elements, which can be cast to `listType`
 
-### `toSet()`
+### `toSet(ISObjectFunction mapper)`
 
-Accumulates `SObject` elements into a `Set<SObject>`. <p>Terminal Operation.</p>
+Accumulates `Object` elements returned by `mapper` into a `Set<Object>`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
 #### Return
 
 **Type**
 
-Set<SObject>
+Set<Object>
 
 **Description**
 
-the `Set<SObject>` containing the collected elements
+the `Set<Object>` containing the collected elements
+
+### `toSet(String fieldName)`
+
+Accumulates `Object` elements into a `Set<Object>` according to `fieldName`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>` containing the collected elements
+
+### `toSet(SObjectField field)`
+
+Accumulates `Object` elements into a `Set<Object>` according to `field`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>` containing the collected elements
 
 ### `toIdSet()`
 
@@ -1188,7 +1313,7 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
 
 ### `toByIdMap(String fieldName, Type mapType)`
 
@@ -1208,7 +1333,7 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
 
 ### `toByIdMap(SObjectField field, Type mapType)`
 
@@ -1228,7 +1353,7 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
 
 ### `toByStringMap(ISObjectFunction keyMapper, Type mapType)`
 
@@ -1248,7 +1373,7 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
 
 ### `toByStringMap(String fieldName, Type mapType)`
 
@@ -1268,7 +1393,7 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
 
 ### `toByStringMap(SObjectField field, Type mapType)`
 
@@ -1288,7 +1413,7 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
 
 ### `groupById(ISObjectFunction keyMapper)`
 

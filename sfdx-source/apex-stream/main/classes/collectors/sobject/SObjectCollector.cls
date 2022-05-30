@@ -102,7 +102,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that accumulates SObject input arguments
      * into a new `List<SObject>`.
-     * <p>The result container can be casted to a specific `SObjectType`.</p>
+     * <p>The result container can be cast to a specific `SObjectType`.</p>
      * <p>{@link ISObjectIterable.collect(SObjectCollector.toList())} can be replaced with
      * {@link ISObjectIterable.toList()}</p>
      * @example
@@ -121,7 +121,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that accumulates the values returned by `mapper`
      * into a new `List<Object>`.
-     * <p>The result container can be casted to a specific type using {@link SObjectCollector.cast}.</p>
+     * <p>The result container can be cast to a specific type using {@link SObjectCollector.cast}.</p>
      * @example
      * // Accumulates values returned by mapper into a List
      * List<Object> accountNames = (List<Object>) Stream.of(accounts)
@@ -140,7 +140,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates the values of `fieldName`
      * into a new `List<Object>`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container can be casted to a specific type using {@link SObjectCollector.cast}.</p>
+     * <p>The result container can be cast to a specific type using {@link SObjectCollector.cast}.</p>
      * @example
      * // Accumulates values of fieldName into a List
      * List<Object> accountNames = (List<Object>) Stream.of(accounts)
@@ -158,7 +158,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that accumulates the values of `field`
      * into a new `List<Object>`.
-     * <p>The result container can be casted to a specific type using {@link SObjectCollector.cast}.</p>
+     * <p>The result container can be cast to a specific type using {@link SObjectCollector.cast}.</p>
      * @example
      * // Accumulates values of field into a List
      * List<Object> accountNames = (List<Object>) Stream.of(accounts)
@@ -180,7 +180,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that accumulates SObject input arguments
      * into a new `Set<SObject>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `SObjectType`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `SObjectType`.</p>
      * <p>{@link ISObjectIterable.collect(SObjectCollector.toSet())} can be replaced with
      * {@link ISObjectIterable.toSet()}</p>
      * @example
@@ -678,7 +678,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that accumulates the Object values
      * returned by `mapper` into a new `Set<Object>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Set()` collectors
      * such as {@link SObjectCollector.toIdSet}, {@link SObjectCollector.toStringSet}, etc.</p>
      * @example
@@ -697,7 +697,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates the Object values of `fieldName`
      * into a new `Set<Double>`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Set()` collectors
      * such as {@link SObjectCollector.toIdSet}, {@link SObjectCollector.toStringSet}, etc.</p>
      * @example
@@ -717,7 +717,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that accumulates the Object values of `field`
      * into a new `Set<Object>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Set()` collectors
      * such as {@link SObjectCollector.toIdSet}, {@link SObjectCollector.toStringSet}, etc.</p>
      * @example
@@ -741,7 +741,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that accumulates the SObject values
      * into a `Map<Id, SObject>`
-     * <p>The result container value type can be casted to a specific `SObjectType`
+     * <p>The result container value type can be cast to a specific `SObjectType`
      * using {@link SObjectCollector.cast}.</p>
      * <p>{@link ISObjectIterable.collect(SObjectCollector.toMap())} can be replaced with
      * {@link ISObjectIterable.toMap()}</p>
@@ -768,7 +768,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -801,7 +801,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Boolean, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -829,7 +829,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Boolean, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -867,7 +867,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -889,7 +889,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -919,7 +919,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -942,7 +942,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -965,7 +965,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -990,7 +990,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Boolean, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1027,7 +1027,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1060,7 +1060,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Id, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1088,7 +1088,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Id, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1123,7 +1123,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1148,7 +1148,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1178,7 +1178,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1201,7 +1201,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1224,7 +1224,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -1245,7 +1245,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Id, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1282,7 +1282,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1318,7 +1318,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<String, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1346,7 +1346,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<String, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1384,7 +1384,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1409,7 +1409,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1439,7 +1439,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1462,7 +1462,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1485,7 +1485,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -1510,7 +1510,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<String, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1547,7 +1547,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1580,7 +1580,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Blob, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1608,7 +1608,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Blob, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1646,7 +1646,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1675,7 +1675,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1705,7 +1705,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1728,7 +1728,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1751,7 +1751,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -1776,7 +1776,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Blob, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1813,7 +1813,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1846,7 +1846,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Date, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1874,7 +1874,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Date, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1912,7 +1912,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1937,7 +1937,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -1967,7 +1967,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1990,7 +1990,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2013,7 +2013,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -2038,7 +2038,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Date, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2075,7 +2075,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2111,7 +2111,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Datetime, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2139,7 +2139,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Datetime, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2177,7 +2177,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -2202,7 +2202,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -2232,7 +2232,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2255,7 +2255,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2278,7 +2278,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -2303,7 +2303,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Datetime, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2340,7 +2340,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2373,7 +2373,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Time, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2401,7 +2401,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Time, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2439,7 +2439,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -2464,7 +2464,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -2494,7 +2494,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2517,7 +2517,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2540,7 +2540,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -2565,7 +2565,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Time, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2602,7 +2602,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2638,7 +2638,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Integer, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2666,7 +2666,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Integer, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2704,7 +2704,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -2729,7 +2729,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -2759,7 +2759,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2782,7 +2782,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2805,7 +2805,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -2830,7 +2830,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Integer, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2867,7 +2867,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2903,7 +2903,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Long, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2931,7 +2931,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Long, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -2969,7 +2969,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -2994,7 +2994,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -3024,7 +3024,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -3047,7 +3047,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -3070,7 +3070,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByLongMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -3095,7 +3095,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Long, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -3132,7 +3132,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -3168,7 +3168,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Double, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -3196,7 +3196,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Double, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -3234,7 +3234,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -3263,7 +3263,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by fields
@@ -3297,7 +3297,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -3320,7 +3320,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -3343,7 +3343,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toByLongMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -3368,7 +3368,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Double, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -3405,9 +3405,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3441,9 +3441,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Object, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3472,9 +3472,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Object, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3513,9 +3513,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
      * use {@link SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3541,9 +3541,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3574,9 +3574,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3600,9 +3600,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3626,9 +3626,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
      * {@link SObjectCollector.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3654,9 +3654,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that accumulates elements
      * into a `Map<Object, SObject>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the SObject input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link SObjectCollector.toByIdMap}, {@link SObjectCollector.toByStringMap}, etc.</p>
      * @example
@@ -3695,7 +3695,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -3721,7 +3721,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -3754,7 +3754,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -3788,7 +3788,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -3810,7 +3810,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -3881,7 +3881,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -3907,7 +3907,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -3940,7 +3940,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -3974,7 +3974,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -3996,7 +3996,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -4067,7 +4067,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<String, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4093,7 +4093,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4126,7 +4126,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4160,7 +4160,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -4182,7 +4182,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -4252,7 +4252,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4278,7 +4278,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4311,7 +4311,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4345,7 +4345,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4367,7 +4367,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -4438,7 +4438,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4464,7 +4464,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4497,7 +4497,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4531,7 +4531,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4553,7 +4553,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -4624,7 +4624,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4650,7 +4650,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4683,7 +4683,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4717,7 +4717,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4739,7 +4739,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -4810,7 +4810,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4836,7 +4836,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4869,7 +4869,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4903,7 +4903,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -4925,7 +4925,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -4996,7 +4996,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5022,7 +5022,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5055,7 +5055,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5089,7 +5089,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5111,7 +5111,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -5182,7 +5182,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5208,7 +5208,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5241,7 +5241,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5275,7 +5275,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5297,7 +5297,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -5368,7 +5368,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5394,7 +5394,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5427,7 +5427,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5461,7 +5461,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -5486,7 +5486,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * // Group values by keys provided by field
@@ -5557,9 +5557,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollector.groupingById}, {@link SObjectCollector.groupingByString}, etc.</p>
      * @example
@@ -5586,9 +5586,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollector.groupingById}, {@link SObjectCollector.groupingByString}, etc.</p>
      * @example
@@ -5622,9 +5622,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` SObjectCollector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollector.groupingById}, {@link SObjectCollector.groupingByString}, etc.</p>
      * @example
@@ -5659,9 +5659,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyFieldName` and `valueFieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollector.groupingById}, {@link SObjectCollector.groupingByString}, etc.</p>
      * @example
@@ -5684,9 +5684,9 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping operation
      * according to `keyField` and `valueField`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollector.groupingById}, {@link SObjectCollector.groupingByString}, etc.</p>
      * @example
@@ -5714,7 +5714,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that performs grouping of SObject input arguments
      * according to `fieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollector.groupingById}, {@link SObjectCollector.groupingByString}, etc.</p>
      * @example
@@ -5737,7 +5737,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that performs grouping of SObject input arguments
      * according to `field`.
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollector.groupingById}, {@link SObjectCollector.groupingByString}, etc.</p>
      * @example
@@ -5766,7 +5766,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` that partitions the SObject input arguments
      * according to `predicate` and organizes them into a `Map<Boolean, Object>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * Map<Boolean, Object> accountsPartitionedByHavingMoreThan100Employees = (Map<Boolean, Object>)
@@ -5791,7 +5791,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
      * @description Returns a `SObjectCollector` that partitions the SObject input arguments
      * according to `predicate`, reduces the values in each partition according to `downstream` Collector,
      * and organizes them into a `Map<Boolean, Object>` whose values are the result of the downstream reduction.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link SObjectCollector.cast}.</p>
      * @example
      * Map<Boolean, Set<String>> accountNamesPartitionedByHavingMoreThan100Employees =
@@ -6610,7 +6610,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` which performs a reduction of its input elements
      * under `accumulator`. The result is described as an `OptionalSObject`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
@@ -6637,7 +6637,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` which produces the maximal element
      * according to `comparator`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
@@ -6660,7 +6660,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` which produces the maximal element
      * according to `fieldName`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
@@ -6681,7 +6681,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` which produces the maximal element
      * according to `field`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
@@ -6702,7 +6702,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` which produces the minimal element
      * according to `comparator`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
      * @example
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
@@ -6725,7 +6725,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` which produces the minimal element
      * according to `fieldName`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
      * @example
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)
@@ -6746,7 +6746,7 @@ public abstract inherited sharing class SObjectCollector implements ISObjectColl
     /**
      * @description Returns a `SObjectCollector` which produces the maximal element
      * according to `field`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be casted to a specific `OptionalSObject`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
      * @example
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
      *     Stream.of(accounts)

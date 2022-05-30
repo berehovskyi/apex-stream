@@ -106,7 +106,7 @@ Collector.toList(getNameFunction).cast(List<String>.class);
 ### List<?> Collectors
 ##### `static toList()`
 
-Returns a `Collector` that accumulates SObject input arguments into a new `List<Object>`. <p>The result container can be casted to a specific `Type`.</p> <p>IObjectIterable.collect(Collector.toList()) can be replaced with IObjectIterable.toList()</p>
+Returns a `Collector` that accumulates SObject input arguments into a new `List<Object>`. <p>The result container can be cast to a specific `Type`.</p> <p>IObjectIterable.collect(Collector.toList()) can be replaced with IObjectIterable.toList()</p>
 
 ###### Return
 
@@ -129,7 +129,7 @@ List<String> strs = (List<String>) Stream.of(strings)
 
 ##### `static toList(IFunction mapper)`
 
-Returns a `Collector` that accumulates the values returned by `mapper` into a new `List<Object>`. <p>The result container can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates the values returned by `mapper` into a new `List<Object>`. <p>The result container can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -164,7 +164,7 @@ List<String> names = (List<String>) Stream.of(people)
 ### Set<?> Collectors
 ##### `static toSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p> <p>IObjectIterable.collect(Collector.toSet()) can be replaced with IObjectIterable.toSet()</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p> <p>IObjectIterable.collect(Collector.toSet()) can be replaced with IObjectIterable.toSet()</p>
 
 ###### Return
 
@@ -184,7 +184,7 @@ Set<Object> ppl = (Set<Object>) Stream.of(people).collect(Collector.toSet());
 
 ##### `static toBoolSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Boolean>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Boolean>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -204,7 +204,7 @@ Set<Boolean> bools = (Set<Boolean>) Stream.of(booleans).collect(Collector.toBool
 
 ##### `static toIdSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Id>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Id>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -224,7 +224,7 @@ Set<Boolean> ids = (Set<Boolean>) Stream.of(ids).collect(Collector.toIdSet());
 
 ##### `static toStringSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<String>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<String>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -244,7 +244,7 @@ Set<String> strs = (Set<String>) Stream.of(strings).collect(Collector.toStringSe
 
 ##### `static toBlobSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Blob>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Blob>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -264,7 +264,7 @@ Set<Blob> blbs = (Set<Blob>) Stream.of(blobs).collect(Collector.toBlobSet());
 
 ##### `static toDateSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Date>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Date>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -284,7 +284,7 @@ Set<Date> dts = (Set<Date>) Stream.of(dates).collect(Collector.toDateSet());
 
 ##### `static toDatetimeSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Datetime>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Datetime>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -304,7 +304,7 @@ Set<Datetime> dts = (Set<Datetime>) Stream.of(datetimes).collect(Collector.toDat
 
 ##### `static toTimeSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Time>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Time>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -324,7 +324,7 @@ Set<Time> tms = (Set<Time>) Stream.of(times).collect(Collector.toTimeSet());
 
 ##### `static toIntSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Integer>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Integer>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -344,7 +344,7 @@ Set<Integer> ints = (Set<Integer>) Stream.of(integers).collect(Collector.toIntSe
 
 ##### `static toLongSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Long>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Long>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -364,7 +364,7 @@ Set<Long> ls = (Set<Long>) Stream.of(longs).collect(Collector.toLongSet());
 
 ##### `static toDoubleSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<Double>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<Double>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -384,7 +384,7 @@ Set<Double> ds = (Set<Double>) Stream.of(doubles).collect(Collector.toDoubleSet(
 
 ##### `static toSObjectSet()`
 
-Returns a `Collector` that accumulates input arguments into a new `Set<SObject>`. <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+Returns a `Collector` that accumulates input arguments into a new `Set<SObject>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
 ###### Return
 
@@ -406,7 +406,7 @@ Set<SObject> sObjects = (Set<SObject>) Stream.of(accounts).collect(Collector.toS
 ### Map<Boolean, Object> Collectors
 ##### `static toByBoolMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -440,7 +440,7 @@ Map<Boolean, Comparable> personByBoolProperty = (Map<Boolean, Comparable>) Strea
 
 ##### `static toByBoolMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -475,7 +475,7 @@ Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Strea
 
 ##### `static toByBoolMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -518,7 +518,7 @@ Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Strea
 
 ##### `static toByBoolMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -559,7 +559,7 @@ Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Strea
 ### Map<Id, Object> Collectors
 ##### `static toByIdMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByIdMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByIdMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -593,7 +593,7 @@ Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) Stream.of(people)
 
 ##### `static toByIdMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByIdMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByIdMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -628,7 +628,7 @@ Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
 
 ##### `static toByIdMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -671,7 +671,7 @@ Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
 
 ##### `static toByIdMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -712,7 +712,7 @@ Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
 ### Map<String, Object> Collectors
 ##### `static toByStringMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByStringMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByStringMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -746,7 +746,7 @@ Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) Strea
 
 ##### `static toByStringMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByStringMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByStringMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -780,7 +780,7 @@ Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Strea
 
 ##### `static toByStringMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -823,7 +823,7 @@ Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Strea
 
 ##### `static toByStringMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -864,7 +864,7 @@ Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Strea
 ### Map<Blob, Object> Collectors
 ##### `static toByBlobMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -898,7 +898,7 @@ Map<Blob, Comparable> personByBlobProperty = (Map<Blob, Comparable>) Stream.of(p
 
 ##### `static toByBlobMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -933,7 +933,7 @@ Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(p
 
 ##### `static toByBlobMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -976,7 +976,7 @@ Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(p
 
 ##### `static toByBlobMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1017,7 +1017,7 @@ Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(p
 ### Map<Date, Object> Collectors
 ##### `static toByDateMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByDateMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByDateMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1051,7 +1051,7 @@ Map<Date, Comparable> personByDateProperty = (Map<Date, Comparable>) Stream.of(p
 
 ##### `static toByDateMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByDateMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByDateMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1086,7 +1086,7 @@ Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(p
 
 ##### `static toByDateMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1129,7 +1129,7 @@ Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(p
 
 ##### `static toByDateMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1170,7 +1170,7 @@ Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(p
 ### Map<Datetime, Object> Collectors
 ##### `static toByDatetimeMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1204,7 +1204,7 @@ Map<Datetime, Comparable> personByDatetimeProperty = (Map<Datetime, Comparable>)
 
 ##### `static toByDatetimeMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1239,7 +1239,7 @@ Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>)
 
 ##### `static toByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1282,7 +1282,7 @@ Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>)
 
 ##### `static toByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1323,7 +1323,7 @@ Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>)
 ### Map<Time, Object> Collectors
 ##### `static toByTimeMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1357,7 +1357,7 @@ Map<Time, Comparable> personByTimeProperty = (Map<Time, Comparable>) Stream.of(p
 
 ##### `static toByTimeMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1392,7 +1392,7 @@ Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(p
 
 ##### `static toByTimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1435,7 +1435,7 @@ Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(p
 
 ##### `static toByTimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1476,7 +1476,7 @@ Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(p
 ### Map<Integer, Object> Collectors
 ##### `static toByIntMap(IToIntFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1510,7 +1510,7 @@ Map<Integer, Comparable> personByIntProperty = (Map<Integer, Comparable>) Stream
 
 ##### `static toByIntMap(IToIntFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1545,7 +1545,7 @@ Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream
 
 ##### `static toByIntMap(IToIntFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1588,7 +1588,7 @@ Map<Integer, String> stringPropertyByTimeProperty = (Map<Integer, String>) Strea
 
 ##### `static toByIntMap(IToIntFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1629,7 +1629,7 @@ Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream
 ### Map<Long, Object> Collectors
 ##### `static toByLongMap(IToLongFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1663,7 +1663,7 @@ Map<Long, Comparable> personByLongProperty = (Map<Long, Comparable>) Stream.of(p
 
 ##### `static toByLongMap(IToLongFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1698,7 +1698,7 @@ Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(p
 
 ##### `static toByLongMap(IToLongFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1741,7 +1741,7 @@ Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(p
 
 ##### `static toByLongMap(IToLongFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1782,7 +1782,7 @@ Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(p
 ### Map<Double, Object> Collectors
 ##### `static toByDoubleMap(IToDoubleFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1816,7 +1816,7 @@ Map<Double, Comparable> personByDoubleProperty = (Map<Double, Comparable>) Strea
 
 ##### `static toByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1851,7 +1851,7 @@ Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Strea
 
 ##### `static toByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1894,7 +1894,7 @@ Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Strea
 
 ##### `static toByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1935,7 +1935,7 @@ Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Strea
 ### Map<Object, Object> Collectors
 ##### `static toMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be casted to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collector.toByIdMap, Collector.toByStringMap, etc.</p>
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collector.toMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collector.toByIdMap, Collector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -1969,7 +1969,7 @@ Map<Object, Comparable> personByTimeProperty = (Map<Object, Comparable>) Stream.
 
 ##### `static toMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collector.toByIdMap, Collector.toByStringMap, etc.</p>
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collector.toMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collector.toByIdMap, Collector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2004,7 +2004,7 @@ Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.
 
 ##### `static toMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collector.toByIdMap, Collector.toByStringMap, etc.</p>
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collector.toByIdMap, Collector.toByStringMap, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2047,7 +2047,7 @@ Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.
 
 ##### `static toMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2088,7 +2088,7 @@ Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.
 ### Map<Boolean, ?> Collectors
 ##### `static groupingByBool(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2121,7 +2121,7 @@ Map<Boolean, List<Comparable>> personsByBoolProperty = (Map<Boolean, List<Compar
 
 ##### `static groupingByBool(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2161,7 +2161,7 @@ Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) St
 
 ##### `static groupingByBool(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2200,7 +2200,7 @@ Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) St
 ### Grouping By Map<Id, ?> Collectors
 ##### `static groupingById(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2233,7 +2233,7 @@ Map<Id, List<Comparable>> personsByIdProperty = (Map<Id, List<Comparable>>) Stre
 
 ##### `static groupingById(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2273,7 +2273,7 @@ Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) Stream.of(peop
 
 ##### `static groupingById(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2312,7 +2312,7 @@ Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) Stream.of(peop
 ### Grouping By Map<String, ?> Collectors
 ##### `static groupingByString(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<String, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<String, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2345,7 +2345,7 @@ Map<String, List<Comparable>> personsByStringProperty = (Map<String, List<Compar
 
 ##### `static groupingByString(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2385,7 +2385,7 @@ Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) St
 
 ##### `static groupingByString(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2424,7 +2424,7 @@ Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) St
 ### Grouping By Map<Blob, ?> Collectors
 ##### `static groupingByBlob(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2457,7 +2457,7 @@ Map<Blob, List<Comparable>> personsByBlobProperty = (Map<Blob, List<Comparable>>
 
 ##### `static groupingByBlob(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2497,7 +2497,7 @@ Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) Stream.o
 
 ##### `static groupingByBlob(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2536,7 +2536,7 @@ Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) Stream.o
 ### Grouping By Map<Date, ?> Collectors
 ##### `static groupingByDate(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2569,7 +2569,7 @@ Map<Date, List<Comparable>> personsByDateProperty = (Map<Date, List<Comparable>>
 
 ##### `static groupingByDate(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2609,7 +2609,7 @@ Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) Stream.o
 
 ##### `static groupingByDate(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2648,7 +2648,7 @@ Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) Stream.o
 ### Grouping By Map<Datetime, ?> Collectors
 ##### `static groupingByDatetime(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2681,7 +2681,7 @@ Map<Datetime, List<Comparable>> personsByDatetimeProperty = (Map<Datetime, List<
 
 ##### `static groupingByDatetime(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2721,7 +2721,7 @@ Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object
 
 ##### `static groupingByDatetime(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2760,7 +2760,7 @@ Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object
 ### Grouping By Map<Time, ?> Collectors
 ##### `static groupingByTime(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2793,7 +2793,7 @@ Map<Time, List<Comparable>> personsByTimeProperty = (Map<Time, List<Comparable>>
 
 ##### `static groupingByTime(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2833,7 +2833,7 @@ Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) Stream.o
 
 ##### `static groupingByTime(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2872,7 +2872,7 @@ Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) Stream.o
 ### Grouping By Map<Integer, ?> Collectors
 ##### `static groupingByInt(IToIntFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2905,7 +2905,7 @@ Map<Integer, List<Comparable>> personsByIntProperty = (Map<Integer, List<Compara
 
 ##### `static groupingByInt(IToIntFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2945,7 +2945,7 @@ Map<Integer, Set<Object>> personsByTimeProperty = (Map<Integer, Set<Object>>) St
 
 ##### `static groupingByInt(IToIntFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -2984,7 +2984,7 @@ Map<Integer, Set<Object>> personsByIntProperty = (Map<Integer, Set<Object>>) Str
 ### Grouping By Map<Long, ?> Collectors
 ##### `static groupingByLong(IToLongFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3017,7 +3017,7 @@ Map<Long, List<Comparable>> personsByLongProperty = (Map<Long, List<Comparable>>
 
 ##### `static groupingByLong(IToLongFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3057,7 +3057,7 @@ Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) Stream.o
 
 ##### `static groupingByLong(IToLongFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3096,7 +3096,7 @@ Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) Stream.o
 ### Grouping By Map<Double, ?> Collectors
 ##### `static groupingByDouble(IToDoubleFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3129,7 +3129,7 @@ Map<Double, List<Comparable>> personsByDoubleProperty = (Map<Double, List<Compar
 
 ##### `static groupingByDouble(IToDoubleFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3169,7 +3169,7 @@ Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) St
 
 ##### `static groupingByDouble(IToDoubleFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3206,7 +3206,7 @@ Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) St
 
 ##### `static groupingBy(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as Collector.groupingById, Collector.groupingByString, etc.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as Collector.groupingById, Collector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3239,7 +3239,7 @@ Map<Object, List<Comparable>> personsByTimeProperty = (Map<Object, List<Comparab
 
 ##### `static groupingBy(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be casted to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as Collector.groupingById, Collector.groupingByString, etc.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as Collector.groupingById, Collector.groupingByString, etc.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3279,7 +3279,7 @@ Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) Stre
 
 ##### `static groupingBy(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3318,7 +3318,7 @@ Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) Stre
 ### Partitioning By Collectors
 ##### `static partitioningBy(IPredicate predicate)`
 
-Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3352,7 +3352,7 @@ Map<Boolean, List<Comparable>> personsPartitionedByPredicate = (Map<Boolean, Lis
 
 ##### `static partitioningBy(IPredicate predicate, ICollector downstream)`
 
-Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be casted to a specific type using Collector.cast.</p>
+Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
 
 ###### Parameters
 |Param|Description|
@@ -3971,7 +3971,7 @@ Person personWithSummedIntProperties = (Person) Stream.of(people)
 ### Optional Collectors
 ##### `static reducing(IBinaryOperator accumulator)`
 
-Returns a `Collector` which performs a reduction of its input elements under `accumulator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be casted to a specific `Optional`.</p>
+Returns a `Collector` which performs a reduction of its input elements under `accumulator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4007,7 +4007,7 @@ Person personWithMaxIntProperty = (Person)
 
 ##### `static maximizing(IComparator comparator)`
 
-Returns a `Collector` which produces the maximal element according to `comparator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be casted to a specific `Optional`.</p>
+Returns a `Collector` which produces the maximal element according to `comparator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
 
 ###### Parameters
 |Param|Description|
@@ -4043,7 +4043,7 @@ Person personWithMaxIntProperty = (Person)
 
 ##### `static minimizing(IComparator comparator)`
 
-Returns a `Collector` which produces the minimal element according to `comparator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be casted to a specific `Optional`.</p>
+Returns a `Collector` which produces the minimal element according to `comparator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
 
 ###### Parameters
 |Param|Description|

@@ -628,7 +628,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      * @return the `ObjectSequence`
      * @throws NullPointerException if `classifier` is null
      */
-    public virtual IObjectIterable distinct(final IFunction classifier) {
+    public virtual override IObjectIterable distinct(final IFunction classifier) {
         Validate.notNull(classifier);
         final List<Object> results = new List<Object>();
         final Set<Object> classifierResults = new Set<Object>();

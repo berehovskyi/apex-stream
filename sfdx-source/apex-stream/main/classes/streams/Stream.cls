@@ -507,16 +507,16 @@ public virtual inherited sharing class Stream {
 
     /**
      * @description Returns lazily concatenated `SObjectStream` whose elements are all the
-     * elements of the first `Iterable<SObject>` followed by all the elements of the
-     * second `Iterable<SObject>`.
+     * elements of the first `ISObjectIterable` followed by all the elements of the
+     * second `ISObjectIterable`.
      * @example
      * ISObjectIterable accStream = Stream.concat(stream1, stream2);
-     * @param iterable1 the first `Iterable<SObject>`
-     * @param iterable2 the second `Iterable<SObject>`
+     * @param iterable1 the first `ISObjectIterable`
+     * @param iterable2 the second `ISObjectIterable`
      * @return the new `SObjectStream`
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      */
-    public static ISObjectIterable concat(final Iterable<SObject> iterable1, final Iterable<SObject> iterable2) {
+    public static ISObjectIterable concat(final ISObjectIterable iterable1, final ISObjectIterable iterable2) {
         return SObjectStream.concat(iterable1, iterable2);
     }
 

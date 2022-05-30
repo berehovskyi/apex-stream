@@ -121,6 +121,42 @@ private class SObjectConsumerTest {
     }
 
     /**
+     * @see SObjectConsumer.addError
+     */
+    @IsTest
+    static void addError() {
+        // Given
+        String errorMessage = 'ErrorMsg';
+        Exception exc = new IllegalArgumentException();
+        String fieldName = IterTestUtils.CONSTS.DEPARTMENT;
+        SObjectField field = IterTestUtils.CONSTS.Contact.Department;
+        // When
+        ISObjectConsumer addErrorMessage = SObjectConsumer.addError(errorMessage);
+        ISObjectConsumer addFieldNameError = SObjectConsumer.addError(fieldName, errorMessage);
+        ISObjectConsumer addFieldError = SObjectConsumer.addError(field, errorMessage);
+        ISObjectConsumer addErrorException = SObjectConsumer.addError(exc);
+        // Then
+        for (Contact con : input) {
+            SObject clone = IterTestUtils.deepClone(con);
+            SObject clone1 = IterTestUtils.deepClone(con);
+            SObject clone2 = IterTestUtils.deepClone(con);
+            SObject clone3 = IterTestUtils.deepClone(con);
+            addErrorMessage.accept(clone);
+            addFieldNameError.accept(clone1);
+            addFieldError.accept(clone2);
+            addErrorException.accept(clone3);
+            Validate.assertEquals(errorMessage, clone.getErrors()[0].getMessage());
+            Validate.assertEquals(errorMessage, clone1.getErrors()[0].getMessage());
+            Validate.assertEquals(errorMessage, clone2.getErrors()[0].getMessage());
+            try {
+                clone3.getErrors();
+            } catch (Exception e) {
+                Validate.assertEquals(exc, e);
+            }
+        }
+    }
+
+    /**
      * @see SObjectConsumer.set
      */
     @IsTest

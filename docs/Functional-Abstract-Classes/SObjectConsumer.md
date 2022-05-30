@@ -250,6 +250,137 @@ SObjectConsumer
 
 the `SObjectConsumer`
 
+##### `static addError(String fieldName, String message)`
+
+Returns a `SObjectConsumer` that adds error to `fieldName`.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field name to add an error|
+|`message`|the error message|
+
+###### Return
+
+**Type**
+
+SObjectConsumer
+
+**Description**
+
+the `SObjectConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank or `message` is null|
+|`SObjectException`|if provided invalid `fieldName`|
+
+
+**See** SObject.addError
+
+###### Example
+```apex
+SObjectConsumer.addError('NumberOfEmployees', 'Error message');
+```
+
+##### `static addError(SObjectField field, String message)`
+
+Returns a `SObjectConsumer` that adds error to `field`.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field to add an error|
+|`message`|the error message|
+
+###### Return
+
+**Type**
+
+SObjectConsumer
+
+**Description**
+
+the `SObjectConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank or `message` is null|
+
+
+**See** SObject.addError
+
+###### Example
+```apex
+SObjectConsumer.addError(Account.NumberOfEmployees, 'Error message');
+```
+
+##### `static addError(String message)`
+
+Returns a `SObjectConsumer` that adds error to an input argument.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`message`|the error message|
+
+###### Return
+
+**Type**
+
+SObjectConsumer
+
+**Description**
+
+the `SObjectConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is nuyll|
+
+
+**See** SObject.addError
+
+###### Example
+```apex
+SObjectConsumer.addError('Error message');
+```
+
+##### `static addError(Exception exc)`
+
+Returns a `SObjectConsumer` that adds error to an input argument.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`exc`|the exception to attach|
+
+###### Return
+
+**Type**
+
+SObjectConsumer
+
+**Description**
+
+the `SObjectConsumer`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `exc` is null|
+
+
+**See** SObject.addError
+
+###### Example
+```apex
+SObjectConsumer.addError(new IllegalArgumentException('Error message'));
+```
+
 ##### `static set(String fieldName, ISObjectFunction mapper)`
 
 Returns a `SObjectConsumer` that sets the value returned by the `mapper` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.

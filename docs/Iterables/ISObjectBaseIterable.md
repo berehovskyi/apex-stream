@@ -73,6 +73,26 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
+### `union(Iterable<SObject> iterable, ISObjectFunction classifier)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables according to `classifier` function.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
 ### `intersect(Iterable<SObject> iterable)`
 
 Returns a new `ISObjectIterable` as a set intersection of the current and another iterables.
@@ -92,6 +112,26 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
+### `intersect(Iterable<SObject> iterable, ISObjectFunction classifier)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables according to `classifier` function.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
 ### `except(Iterable<SObject> iterable)`
 
 Returns a new `ISObjectIterable` as a set difference of the current and another iterables.
@@ -100,6 +140,59 @@ Returns a new `ISObjectIterable` as a set difference of the current and another 
 |Param|Description|
 |---|---|
 |`iterable`|the other iterable|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `except(Iterable<SObject> iterable, ISObjectFunction classifier)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables according to `classifier` function.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `distinct()`
+
+Returns a new `ISObjectIterable` with distinct `SObject` elements. <p>Intermediate Operation.</p>
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `distinct(ISObjectFunction classifier)`
+
+Returns a new `ISObjectIterable` with distinct `SObject` elements according to `classifier` function. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`classifier`|the classifier function|
 
 #### Return
 
@@ -391,39 +484,6 @@ ISObjectIterable
 
 the new `ISObjectIterable`
 
-### `distinct(ISObjectFunction classifier)`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements according to `classifier` function. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`classifier`|the classifier function|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-### `distinct()`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements. <p>Intermediate Operation.</p>
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
 ### `sort()`
 
 Returns a new `ISObjectIterable` with sorted `SObject` elements in ascending order. <p>Intermediate Operation.</p>
@@ -446,6 +506,44 @@ Returns a new `ISObjectIterable` with sorted `SObject` elements according to `co
 |Param|Description|
 |---|---|
 |`comparator`|the comparator|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `lim(Integer lim)`
+
+Returns a new `ISObjectIterable` with first `lim` `SObject` elements. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`lim`|the number of elements to limit|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+### `skip(Integer n)`
+
+Returns a new `ISObjectIterable` that skips first `n` `SObject` elements and returns remaining elements. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`n`|the number of elements to skip|
 
 #### Return
 
@@ -728,5 +826,19 @@ List<SObject>
 **Description**
 
 the `List<SObject>` containing the iterable elements
+
+### `toSet()`
+
+Accumulates `SObject` elements into a `Set<SObject>`. <p>Terminal Operation.</p>
+
+#### Return
+
+**Type**
+
+Set<SObject>
+
+**Description**
+
+the `Set<SObject>` containing the iterable elements
 
 ---

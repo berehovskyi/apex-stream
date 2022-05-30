@@ -89,6 +89,35 @@ IObjectIterable peopleStream = ObjectStream.of(new Set<Person>(people).iterator(
 IObjectIterable peopleStream = ObjectStream.of(otherStream.iterator());
 ```
 
+##### `static of(Iterable<Object> iterable)`
+
+Returns a `ObjectStream` created from `Iterable<Object>`.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the iterable|
+
+###### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `ObjectStream`
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `objects` is null|
+
+###### Example
+```apex
+IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people));
+```
+
 ##### `static of(List<Object> objects)`
 
 Returns a `ObjectStream` created from `List<Object>`.
@@ -145,6 +174,30 @@ the new `ObjectStream`
 ###### Example
 ```apex
 IObjectIterable peopleStream = ObjectStream.of(new Set<Object>(people));
+```
+
+##### `static ofNullable(Iterable<Object> iterable)`
+
+Returns a `ObjectStream` created from `Iterable<Object>` if non-null, otherwise returns an empty `ObjectStream`.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the iterable|
+
+###### Return
+
+**Type**
+
+IObjectIterable
+
+**Description**
+
+the new `ObjectStream` if `iterable` is non-null, otherwise an empty `ObjectStream`
+
+###### Example
+```apex
+IObjectIterable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
 ```
 
 ##### `static ofNullable(List<Object> objects)`
@@ -922,7 +975,7 @@ List<Person> distinctPeople = (List<Person>) ObjectStream.of(people)
     .toList();
 ```
 
-##### `distinct(IFunction classifier)`
+##### `override distinct(IFunction classifier)`
 
 Returns a `ObjectStream` with distinct elements according to `classifier` function. <p>Stateful Intermediate Operation.</p>
 

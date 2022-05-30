@@ -145,10 +145,13 @@ private class ObjectSequenceTest {
         List<Object> input1 = new List<Object>{ 8, 3, 6, 4, 4, 9, 1, 0 };
         IObjectIterable seq = ObjectSequence.of(input).union(input1);
         IObjectIterable seq1 = ObjectSequence.of(input).union(ObjectSequence.of(input1));
-        IObjectIterable seq2 = ObjectSequence.of(input).intersect(input1);
-        IObjectIterable seq3 = ObjectSequence.of(input).intersect(ObjectSequence.of(input1));
-        IObjectIterable seq4 = ObjectSequence.of(input).except(input1);
-        IObjectIterable seq5 = ObjectSequence.of(input).except(ObjectSequence.of(input1));
+        IObjectIterable seq2 = ObjectSequence.of(input).union(input1, Function.identity());
+        IObjectIterable seq3 = ObjectSequence.of(input).intersect(input1);
+        IObjectIterable seq4 = ObjectSequence.of(input).intersect(ObjectSequence.of(input1));
+        IObjectIterable seq5 = ObjectSequence.of(input).intersect(input1, Function.identity());
+        IObjectIterable seq6 = ObjectSequence.of(input).except(input1);
+        IObjectIterable seq7 = ObjectSequence.of(input).except(ObjectSequence.of(input1));
+        IObjectIterable seq8 = ObjectSequence.of(input).except(input1, Function.identity());
         // When
         List<Object> actual = seq.toList();
         List<Object> actual1 = seq1.toList();
@@ -156,16 +159,22 @@ private class ObjectSequenceTest {
         List<Object> actual3 = seq3.toList();
         List<Object> actual4 = seq4.toList();
         List<Object> actual5 = seq5.toList();
+        List<Object> actual6 = seq6.toList();
+        List<Object> actual7 = seq7.toList();
+        List<Object> actual8 = seq8.toList();
         // Then
         List<Object> expected = new List<Object>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
         List<Object> expected1 = new List<Object>{ 3, 9 };
         List<Object> expected2 = new List<Object>{ 5, 7 };
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Validate.assertEquals(expected, actual2);
         Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected1, actual4);
+        Validate.assertEquals(expected1, actual5);
+        Validate.assertEquals(expected2, actual6);
+        Validate.assertEquals(expected2, actual7);
+        Validate.assertEquals(expected2, actual8);
     }
 
     /**

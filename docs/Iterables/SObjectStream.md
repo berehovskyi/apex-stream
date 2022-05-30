@@ -1360,6 +1360,35 @@ Set<SObject> accountsWithHotRating = SObjectStream.of(accounts)
     .toSet();
 ```
 
+##### `override toSet(ISObjectFunction mapper)`
+
+Accumulates `Object` elements returned by `mapper` into a `Set<Object>`. <p>Terminal Operation.</p>
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>`containing the stream elements field values
+
+###### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+###### Example
+```apex
+Set<Object> createdDates = SObjectStream.of(accounts).toSet(SObjectFunction.get('CreatedDate'));
+```
+
 ##### `toIdSet()`
 
 Accumulates `Id` elements into a `Set<Id>`. <p>Terminal Operation.</p>
@@ -1482,7 +1511,7 @@ the `Map<Id, SObject>` containing the stream elements
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `mapType` is null|
-|`IllegalStateException`|if mapped keys contain duplicates, which can be casted to `mapType`|
+|`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `mapType`|
 
 ###### Example
 ```apex
@@ -1514,7 +1543,7 @@ the `Map<String, SObject>` containing the stream elements
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `mapType` is null|
-|`IllegalStateException`|if mapped keys contain duplicates, which can be casted to `mapType`|
+|`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `mapType`|
 
 ###### Example
 ```apex

@@ -11,6 +11,84 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
 
     //<editor-fold desc="Intermediate Operations">
     /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable union(Iterable<SObject> iterable, String fieldName);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set union 
+     * of the current and another iterables according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable union(Iterable<SObject> iterable, SObjectField field);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable intersect(Iterable<SObject> iterable, String fieldName);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set intersection 
+     * of the current and another iterables according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable intersect(Iterable<SObject> iterable, SObjectField field);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable except(Iterable<SObject> iterable, String fieldName);
+
+    /**
+     * @description Returns a new `ISObjectIterable` as a set difference 
+     * of the current and another iterables according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param iterable the other iterable
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable except(Iterable<SObject> iterable, SObjectField field);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `fieldName`.
+     * <p>Intermediate Operation.</p>
+     * @param fieldName the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct(String fieldName);
+
+    /**
+     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
+     * according to `field`.
+     * <p>Intermediate Operation.</p>
+     * @param field the field
+     * @return the new `ISObjectIterable`
+     */
+    ISObjectIterable distinct(SObjectField field);
+    
+    /**
      * @description Returns a new `ISObjectIterable` with `SObject` elements
      * that have field's value.
      * <p>Intermediate Operation.</p>
@@ -201,24 +279,6 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
     ISObjectIterable forEach(SObjectField field, Object value);
 
     /**
-     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
-     * according to `fieldName`.
-     * <p>Intermediate Operation.</p>
-     * @param fieldName the field
-     * @return the new `ISObjectIterable`
-     */
-    ISObjectIterable distinct(String fieldName);
-
-    /**
-     * @description Returns a new `ISObjectIterable` with distinct `SObject` elements
-     * according to `field`.
-     * <p>Intermediate Operation.</p>
-     * @param field the field
-     * @return the new `ISObjectIterable`
-     */
-    ISObjectIterable distinct(SObjectField field);
-
-    /**
      * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
      * considering `order`.
      * <p>Intermediate Operation.</p>
@@ -263,23 +323,6 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * @return the new `ISObjectIterable`
      */
     ISObjectIterable sort(SObjectField field, SortOrder order);
-
-    /**
-     * @description Returns a new `ISObjectIterable` with first `lim` `SObject` elements.
-     * <p>Intermediate Operation.</p>
-     * @param lim the number of elements to limit
-     * @return the new `ISObjectIterable`
-     */
-    ISObjectIterable lim(Integer lim);
-
-    /**
-     * @description Returns a new `ISObjectIterable` that skips first `n` `SObject` elements
-     * and returns remaining elements.
-     * <p>Intermediate Operation.</p>
-     * @param n the number of elements to skip
-     * @return the new `ISObjectIterable`
-     */
-    ISObjectIterable skip(Integer n);
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">
@@ -462,7 +505,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param mapper the mapping function
      * @param listType result type
-     * @return the `List<Object>` containing the collected elements, which can be casted to `listType`
+     * @return the `List<Object>` containing the collected elements, which can be cast to `listType`
      */
     List<Object> toList(ISObjectFunction mapper, Type listType);
 
@@ -472,7 +515,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param fieldName the field
      * @param listType result type
-     * @return the `List<Object>` containing the collected elements, which can be casted to `listType`
+     * @return the `List<Object>` containing the collected elements, which can be cast to `listType`
      */
     List<Object> toList(String fieldName, Type listType);
 
@@ -482,16 +525,35 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param field the field
      * @param listType result type
-     * @return the `List<Object>` containing the collected elements, which can be casted to `listType`
+     * @return the `List<Object>` containing the collected elements, which can be cast to `listType`
      */
     List<Object> toList(SObjectField field, Type listType);
 
     /**
-     * @description Accumulates `SObject` elements into a `Set<SObject>`.
+     * @description Accumulates `Object` elements returned by `mapper` into a `Set<Object>`.
      * <p>Terminal Operation.</p>
-     * @return the `Set<SObject>` containing the collected elements
+     * @param mapper the mapping function
+     * @return the `Set<Object>` containing the collected elements
      */
-    Set<SObject> toSet();
+    Set<Object> toSet(ISObjectFunction mapper);
+
+    /**
+     * @description Accumulates `Object` elements into a `Set<Object>`
+     * according to `fieldName`.
+     * <p>Terminal Operation.</p>
+     * @param fieldName the field
+     * @return the `Set<Object>` containing the collected elements
+     */
+    Set<Object> toSet(String fieldName);
+
+    /**
+     * @description Accumulates `Object` elements into a `Set<Object>`
+     * according to `field`.
+     * <p>Terminal Operation.</p>
+     * @param field the field
+     * @return the `Set<Object>` containing the collected elements
+     */
+    Set<Object> toSet(SObjectField field);
 
     /**
      * @description Accumulates `Id` elements into a `Set<Id>`.
@@ -565,7 +627,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param keyMapper the mapping function producing keys
      * @param mapType result type
-     * @return the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
      */
     Map<Id, SObject> toByIdMap(ISObjectFunction keyMapper, Type mapType);
 
@@ -575,7 +637,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param fieldName the field
      * @param mapType result type
-     * @return the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
      */
     Map<Id, SObject> toByIdMap(String fieldName, Type mapType);
 
@@ -585,7 +647,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param field the field
      * @param mapType result type
-     * @return the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
      */
     Map<Id, SObject> toByIdMap(SObjectField field, Type mapType);
 
@@ -595,7 +657,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param keyMapper the mapping function producing keys
      * @param mapType result type
-     * @return the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
      */
     Map<String, SObject> toByStringMap(ISObjectFunction keyMapper, Type mapType);
 
@@ -605,7 +667,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param fieldName the field
      * @param mapType result type
-     * @return the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
      */
     Map<String, SObject> toByStringMap(String fieldName, Type mapType);
 
@@ -615,7 +677,7 @@ public interface ISObjectIterable extends ISObjectBaseIterable {
      * <p>Terminal Operation.</p>
      * @param field the field
      * @param mapType result type
-     * @return the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+     * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
      */
     Map<String, SObject> toByStringMap(SObjectField field, Type mapType);
 

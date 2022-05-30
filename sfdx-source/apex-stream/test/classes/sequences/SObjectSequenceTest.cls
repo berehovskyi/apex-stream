@@ -147,12 +147,10 @@ private class SObjectSequenceTest {
     }
 
     /**
-     * @see SObjectIterable.union
-     * @see SObjectIterable.intersect
-     * @see SObjectIterable.except
-     */
+ * @see SObjectIterable.union
+ */
     @IsTest
-    private static void setOperations() {
+    private static void union() {
         // Given
         Account acc = new Account(Name = 'Test Acc');
         Account acc1 = new Account(Name = 'Test Acc1');
@@ -166,29 +164,109 @@ private class SObjectSequenceTest {
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
         List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        String fieldName = IterTestUtils.CONSTS.NAME;
+        SObjectField field = IterTestUtils.CONSTS.Account.Name;
         ISObjectIterable seq = SObjectSequence.of(input).union(input1);
         ISObjectIterable seq1 = SObjectSequence.of(input).union(SObjectSequence.of(input1));
-        ISObjectIterable seq2 = SObjectSequence.of(input).intersect(input1);
-        ISObjectIterable seq3 = SObjectSequence.of(input).intersect(SObjectSequence.of(input1));
-        ISObjectIterable seq4 = SObjectSequence.of(input).except(input1);
-        ISObjectIterable seq5 = SObjectSequence.of(input).except(SObjectSequence.of(input1));
+        ISObjectIterable seq2 = SObjectSequence.of(input).union(input1, getName);
+        ISObjectIterable seq3 = SObjectSequence.of(input).union(input1, fieldName);
+        ISObjectIterable seq4 = SObjectSequence.of(input).union(input1, field);
         // When
         List<Account> actual = seq.toList();
         List<Account> actual1 = seq1.toList();
         List<Account> actual2 = seq2.toList();
         List<Account> actual3 = seq3.toList();
         List<Account> actual4 = seq4.toList();
-        List<Account> actual5 = seq5.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc };
-        List<Account> expected1 = new List<Account>{ acc3, acc9 };
-        List<Account> expected2 = new List<Account>{ acc5, acc7 };
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected, actual4);
+    }
+
+    /**
+     * @see SObjectIterable.intersect
+     */
+    @IsTest
+    private static void intersect() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc');
+        Account acc1 = new Account(Name = 'Test Acc1');
+        Account acc2 = new Account(Name = 'Test Acc2');
+        Account acc3 = new Account(Name = 'Test Acc3');
+        Account acc4 = new Account(Name = 'Test Acc4');
+        Account acc5 = new Account(Name = 'Test Acc5');
+        Account acc6 = new Account(Name = 'Test Acc6');
+        Account acc7 = new Account(Name = 'Test Acc7');
+        Account acc8 = new Account(Name = 'Test Acc8');
+        Account acc9 = new Account(Name = 'Test Acc9');
+        List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        String fieldName = IterTestUtils.CONSTS.NAME;
+        SObjectField field = IterTestUtils.CONSTS.Account.Name;
+        ISObjectIterable seq = SObjectSequence.of(input).intersect(input1);
+        ISObjectIterable seq1 = SObjectSequence.of(input).intersect(SObjectSequence.of(input1));
+        ISObjectIterable seq2 = SObjectSequence.of(input).intersect(input1, getName);
+        ISObjectIterable seq3 = SObjectSequence.of(input).intersect(input1, fieldName);
+        ISObjectIterable seq4 = SObjectSequence.of(input).intersect(input1, field);
+        // When
+        List<Account> actual = seq.toList();
+        List<Account> actual1 = seq1.toList();
+        List<Account> actual2 = seq2.toList();
+        List<Account> actual3 = seq3.toList();
+        List<Account> actual4 = seq4.toList();
+        // Then
+        List<Account> expected = new List<Account>{ acc3, acc9 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected, actual4);
+    }
+
+    /**
+     * @see SObjectIterable.except
+     */
+    @IsTest
+    private static void except() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc');
+        Account acc1 = new Account(Name = 'Test Acc1');
+        Account acc2 = new Account(Name = 'Test Acc2');
+        Account acc3 = new Account(Name = 'Test Acc3');
+        Account acc4 = new Account(Name = 'Test Acc4');
+        Account acc5 = new Account(Name = 'Test Acc5');
+        Account acc6 = new Account(Name = 'Test Acc6');
+        Account acc7 = new Account(Name = 'Test Acc7');
+        Account acc8 = new Account(Name = 'Test Acc8');
+        Account acc9 = new Account(Name = 'Test Acc9');
+        List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        String fieldName = IterTestUtils.CONSTS.NAME;
+        SObjectField field = IterTestUtils.CONSTS.Account.Name;
+        ISObjectIterable seq = SObjectSequence.of(input).except(input1);
+        ISObjectIterable seq1 = SObjectSequence.of(input).except(SObjectSequence.of(input1));
+        ISObjectIterable seq2 = SObjectSequence.of(input).except(input1, getName);
+        ISObjectIterable seq3 = SObjectSequence.of(input).except(input1, fieldName);
+        ISObjectIterable seq4 = SObjectSequence.of(input).except(input1, field);
+        // When
+        List<Account> actual = seq.toList();
+        List<Account> actual1 = seq1.toList();
+        List<Account> actual2 = seq2.toList();
+        List<Account> actual3 = seq3.toList();
+        List<Account> actual4 = seq4.toList();
+        // Then
+        List<Account> expected = new List<Account>{ acc5, acc7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected, actual4);
     }
 
     /**
@@ -1229,6 +1307,9 @@ private class SObjectSequenceTest {
         ISObjectIterable accSeq5 = SObjectSequence.of(clone).withoutNulls();
         ISObjectIterable accSeq6 = SObjectSequence.of(clone).withoutNulls();
         ISObjectIterable accSeq7 = SObjectSequence.of(clone).withoutNulls();
+        ISObjectIterable accSeq8 = SObjectSequence.of(clone).withoutNulls();
+        ISObjectIterable accSeq9 = SObjectSequence.of(clone).withoutNulls();
+        ISObjectIterable accSeq10 = SObjectSequence.of(clone).withoutNulls();
         // When
         Set<SObject> actual = accSeq.toSet();
         Set<Id> actual1 = accSeq1.toIdSet();
@@ -1238,6 +1319,9 @@ private class SObjectSequenceTest {
         Set<String> actual5 = accSeq5.toStringSet(SObjectFunction.get('Name'));
         Set<String> actual6 = accSeq6.toStringSet('Name');
         Set<String> actual7 = accSeq7.toStringSet(Account.Name);
+        Set<Object> actual8 = accSeq8.toSet(SObjectFunction.get('Name'));
+        Set<Object> actual9 = accSeq9.toSet('Name');
+        Set<Object> actual10 = accSeq10.toSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectSequence.of(clone)
@@ -1246,6 +1330,9 @@ private class SObjectSequenceTest {
         Set<String> expected2 = (Set<String>) SObjectSequence.of(clone)
                 .withoutNulls()
                 .collect(SObjectCollector.toStringSet(Account.Name));
+        Set<Object> expected3 = (Set<Object>) SObjectSequence.of(clone)
+                .withoutNulls()
+                .collect(SObjectCollector.toSet(Account.Name));
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
@@ -1254,6 +1341,9 @@ private class SObjectSequenceTest {
         Validate.assertEquals(expected2, actual5);
         Validate.assertEquals(expected2, actual6);
         Validate.assertEquals(expected2, actual7);
+        Validate.assertEquals(expected3, actual8);
+        Validate.assertEquals(expected3, actual9);
+        Validate.assertEquals(expected3, actual10);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 

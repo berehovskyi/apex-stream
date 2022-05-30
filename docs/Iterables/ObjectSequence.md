@@ -805,7 +805,7 @@ List<Person> distinctPeople = (List<Person>) ObjectSequence.of(people)
     .toList();
 ```
 
-##### `distinct(IFunction classifier)`
+##### `override distinct(IFunction classifier)`
 
 Returns a `ObjectSequence` with distinct elements according to `classifier` function. <p>Stateful Intermediate Operation.</p>
 

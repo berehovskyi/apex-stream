@@ -96,7 +96,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates SObject input arguments
      * into a new `List<Object>`.
-     * <p>The result container can be casted to a specific `Type`.</p>
+     * <p>The result container can be cast to a specific `Type`.</p>
      * <p>{@link IObjectIterable.collect(Collector.toList())} can be replaced with
      * {@link IObjectIterable.toList()}</p>
      * @example
@@ -114,7 +114,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates the values returned by `mapper`
      * into a new `List<Object>`.
-     * <p>The result container can be casted to a specific type using {@link Collector.cast}.</p>
+     * <p>The result container can be cast to a specific type using {@link Collector.cast}.</p>
      * @example
      * // Accumulates values returned by mapper into a List
      * List<Object> names = (List<Object>) Stream.of(people)
@@ -136,7 +136,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Object>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * <p>{@link IObjectIterable.collect(Collector.toSet())} can be replaced with
      * {@link IObjectIterable.toSet()}</p>
      * @example
@@ -151,7 +151,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Boolean>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Boolean> bools = (Set<Boolean>) Stream.of(booleans).collect(Collector.toBoolSet());
@@ -164,7 +164,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Id>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Boolean> ids = (Set<Boolean>) Stream.of(ids).collect(Collector.toIdSet());
@@ -177,7 +177,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<String>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<String> strs = (Set<String>) Stream.of(strings).collect(Collector.toStringSet());
@@ -190,7 +190,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Blob>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Blob> blbs = (Set<Blob>) Stream.of(blobs).collect(Collector.toBlobSet());
@@ -203,7 +203,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Date>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Date> dts = (Set<Date>) Stream.of(dates).collect(Collector.toDateSet());
@@ -216,7 +216,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Datetime>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Datetime> dts = (Set<Datetime>) Stream.of(datetimes).collect(Collector.toDatetimeSet());
@@ -229,7 +229,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Time>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Time> tms = (Set<Time>) Stream.of(times).collect(Collector.toTimeSet());
@@ -242,7 +242,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Integer>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Integer> ints = (Set<Integer>) Stream.of(integers).collect(Collector.toIntSet());
@@ -255,7 +255,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Long>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Long> ls = (Set<Long>) Stream.of(longs).collect(Collector.toLongSet());
@@ -268,7 +268,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Double>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<Double> ds = (Set<Double>) Stream.of(doubles).collect(Collector.toDoubleSet());
@@ -281,7 +281,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<SObject>`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Type`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * @example
      * // Accumulates input arguments into a List
      * Set<SObject> sObjects = (Set<SObject>) Stream.of(accounts).collect(Collector.toSObjectSet());
@@ -303,7 +303,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping function
@@ -326,7 +326,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -348,7 +348,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Boolean, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -382,7 +382,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Boolean, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -423,7 +423,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByIdMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -446,7 +446,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByIdMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -468,7 +468,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Id, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -502,7 +502,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Id, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -543,7 +543,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByStringMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -566,7 +566,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByStringMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -587,7 +587,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<String, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -621,7 +621,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<String, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -662,7 +662,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -685,7 +685,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -707,7 +707,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Blob, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -741,7 +741,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Blob, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -782,7 +782,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByDateMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -805,7 +805,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByDateMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -827,7 +827,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Date, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -861,7 +861,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Date, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -899,7 +899,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -922,7 +922,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -944,7 +944,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Datetime, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -978,7 +978,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Datetime, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1016,7 +1016,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1039,7 +1039,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1061,7 +1061,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Time, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1095,7 +1095,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Time, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1133,7 +1133,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1156,7 +1156,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1178,7 +1178,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Integer, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1212,7 +1212,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Integer, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1250,7 +1250,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1273,7 +1273,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1295,7 +1295,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Long, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1329,7 +1329,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Long, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1367,7 +1367,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by field
@@ -1390,7 +1390,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1412,7 +1412,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Double, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1446,7 +1446,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Double, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1484,9 +1484,9 @@ public abstract inherited sharing class Collector implements ICollector {
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link Collector.toByIdMap}, {@link Collector.toByStringMap}, etc.</p>
      * @example
@@ -1510,7 +1510,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
      * use {@link Collector.toMap(IFunction, IFunction, IBinaryOperator)} instead.
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link Collector.toByIdMap}, {@link Collector.toByStringMap}, etc.</p>
      * @example
@@ -1533,7 +1533,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Object, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link Collector.toByIdMap}, {@link Collector.toByStringMap}, etc.</p>
      * @example
@@ -1568,7 +1568,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates elements
      * into a `Map<Object, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Maps values by keys provided by mapping functions
@@ -1607,7 +1607,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1627,7 +1627,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1655,7 +1655,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1691,7 +1691,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1711,7 +1711,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1739,7 +1739,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1775,7 +1775,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<String, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1795,7 +1795,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1823,7 +1823,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1859,7 +1859,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1879,7 +1879,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1907,7 +1907,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1943,7 +1943,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1963,7 +1963,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -1991,7 +1991,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2027,7 +2027,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2047,7 +2047,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2075,7 +2075,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2111,7 +2111,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2131,7 +2131,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2159,7 +2159,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2195,7 +2195,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2215,7 +2215,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2243,7 +2243,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2279,7 +2279,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2299,7 +2299,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2327,7 +2327,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2363,7 +2363,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2383,7 +2383,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2411,7 +2411,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2447,9 +2447,9 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link Collector.groupingById}, {@link Collector.groupingByString}, etc.</p>
      * @example
@@ -2470,9 +2470,9 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that performs grouping operation
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
-     * <p>The result container keys however <strong>cannot</strong> be casted to a specific type.</p>
+     * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link Collector.groupingById}, {@link Collector.groupingByString}, etc.</p>
      * @example
@@ -2501,7 +2501,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier` and then performing a reduction operation on the values
      * associated with a given key using the specified `downstream` Collector.
      * The Map container is created by `mapSupplier`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * // Group values by keys provided by function
@@ -2539,7 +2539,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that partitions the SObject input arguments
      * according to `predicate` and organizes them into a `Map<Boolean, Object>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * Map<Boolean, Object> personsPartitionedByPredicate = (Map<Boolean, Object>)
@@ -2559,7 +2559,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that partitions the SObject input arguments
      * according to `predicate` and organizes them into a `Map<Boolean, Object>`.
-     * <p>The result container values type can be casted to a specific type
+     * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * @example
      * Map<Boolean, Set<String>> personNamesPartitionedByPredicate = (Map<Boolean, Set<String>>)
@@ -2964,7 +2964,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` which performs a reduction of its input elements
      * under `accumulator`. The result is described as an `Optional`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Optional`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
      * @example
      * Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
      *     Stream.of(people)
@@ -2989,7 +2989,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` which produces the maximal element
      * according to `comparator`. The result is described as an `Optional`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Optional`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
      * @example
      * Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
      *     Stream.of(people)
@@ -3010,7 +3010,7 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` which produces the minimal element
      * according to `comparator`. The result is described as an `Optional`.
-     * <p>The result container <strong>cannot</strong> be casted to a specific `Optional`.</p>
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
      * @example
      * Map<String, Object> optionalPersonWithMinIntPropertyByStringProperty = (Map<String, Object>)
      *     Stream.of(people)

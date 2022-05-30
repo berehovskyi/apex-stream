@@ -27,7 +27,9 @@ public interface IObjectIterable extends Iterable<Object> {
      * @return the new `IObjectIterable`
      */
     IObjectIterable prepend(Iterable<Object> iterable);
+    //</editor-fold>
 
+    //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `IObjectIterable` as a set union 
      * of the current and another iterables.
@@ -35,6 +37,15 @@ public interface IObjectIterable extends Iterable<Object> {
      * @return the new `IObjectIterable`
      */
     IObjectIterable union(Iterable<Object> iterable);
+
+    /**
+     * @description Returns a new `IObjectIterable` as a set union 
+     * of the current and another iterables according to `classifier`.
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable union(Iterable<Object> iterable, IFunction classifier);
 
     /**
      * @description Returns a new `IObjectIterable` as a set intersection 
@@ -45,15 +56,47 @@ public interface IObjectIterable extends Iterable<Object> {
     IObjectIterable intersect(Iterable<Object> iterable);
 
     /**
+     * @description Returns a new `IObjectIterable` as a set intersection 
+     * of the current and another iterables according to `classifier`.
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable intersect(Iterable<Object> iterable, IFunction classifier);
+
+    /**
      * @description Returns a new `IObjectIterable` as a set difference 
      * of the current and another iterables.
      * @param iterable the other iterable
      * @return the new `IObjectIterable`
      */
     IObjectIterable except(Iterable<Object> iterable);
-    //</editor-fold>
 
-    //<editor-fold desc="Intermediate Operations">
+    /**
+     * @description Returns a new `IObjectIterable` as a set difference 
+     * of the current and another iterables according to `classifier`.
+     * @param iterable the other iterable
+     * @param classifier the classifier function
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable except(Iterable<Object> iterable, IFunction classifier);
+    
+    /**
+     * @description Returns a new `IObjectIterable` with distinct `Object` elements.
+     * <p>Intermediate Operation.</p>
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable distinct();
+
+    /**
+     * @description Returns a new `IObjectIterable` with distinct `Object` elements
+     * according to `classifier` function.
+     * <p>Intermediate Operation.</p>
+     * @param classifier the classifier function
+     * @return the new `IObjectIterable`
+     */
+    IObjectIterable distinct(IFunction classifier);
+    
     /**
      * @description Returns a new `IObjectIterable` with `Object` elements
      * that match `predicate`.
@@ -191,22 +234,6 @@ public interface IObjectIterable extends Iterable<Object> {
      * @return the new `IObjectIterable`
      */
     IObjectIterable forEach(IConsumer consumer);
-
-    /**
-     * @description Returns a new `IObjectIterable` with distinct `Object` elements.
-     * <p>Intermediate Operation.</p>
-     * @return the new `IObjectIterable`
-     */
-    IObjectIterable distinct();
-
-    /**
-     * @description Returns a new `IObjectIterable` with distinct `Object` elements
-     * according to `classifier` function.
-     * <p>Intermediate Operation.</p>
-     * @param classifier the classifier function
-     * @return the new `IObjectIterable`
-     */
-    IObjectIterable distinct(IFunction classifier);
 
     /**
      * @description Returns a new `IObjectIterable` with sorted `Object` elements.

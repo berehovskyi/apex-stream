@@ -18,6 +18,8 @@ Provides a skeletal implementation of [ILongIterable](/docs/Iterables/ILongItera
 |Param|Description|
 |---|---|
 
+### `toIntIterable()`
+### `toDoubleIterable()`
 ### `union(Iterable<Long> iterable)`
 
 Returns a new `ILongIterable` as a set union of the current and another iterables.
@@ -96,8 +98,7 @@ List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
 List<Long> diff = longsIterable1.except(longs2).toList(); // [5L, 7L]
 ```
 
-### `toIntIterable()`
-### `toDoubleIterable()`
+### `distinct()`
 ### `filter(ILongPredicate predicate)`
 #### Parameters
 |Param|Description|
@@ -114,7 +115,6 @@ List<Long> diff = longsIterable1.except(longs2).toList(); // [5L, 7L]
 |Param|Description|
 |---|---|
 
-### `distinct()`
 ### `reduce(ILongBinaryOperator operator)`
 #### Parameters
 |Param|Description|

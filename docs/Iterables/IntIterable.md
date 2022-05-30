@@ -18,6 +18,8 @@ Provides a skeletal implementation of [IIntIterable](/docs/Iterables/IIntIterabl
 |Param|Description|
 |---|---|
 
+### `toLongIterable()`
+### `toDoubleIterable()`
 ### `union(Iterable<Integer> iterable)`
 
 Returns a new `IIntIterable` as a set union of the current and another iterables.
@@ -96,8 +98,7 @@ List<Integer> ints2 = new List<Integer>{ 8, 3, 6, 4, 4, 9, 1, 0 };
 List<Integer> diff = intsIterable1.except(ints2).toList(); // [5, 7]
 ```
 
-### `toLongIterable()`
-### `toDoubleIterable()`
+### `distinct()`
 ### `filter(IIntPredicate predicate)`
 #### Parameters
 |Param|Description|
@@ -114,7 +115,6 @@ List<Integer> diff = intsIterable1.except(ints2).toList(); // [5, 7]
 |Param|Description|
 |---|---|
 
-### `distinct()`
 ### `reduce(IIntBinaryOperator operator)`
 #### Parameters
 |Param|Description|

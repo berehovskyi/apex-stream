@@ -923,6 +923,19 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
+     * @description Accumulates `Object` elements returned by `mapper` into a `Set<Object>`.
+     * <p>Terminal Operation.</p>
+     * @example
+     * Set<Object> createdDates = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('CreatedDate'));
+     * @param mapper the mapping function
+     * @return the `Set<Object>` containing the sequence elements field values
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override Set<Object> toSet(final ISObjectFunction mapper) {
+        return Lists.toObjectSet(sObjects, mapper);
+    }
+
+    /**
      * @description Accumulates `Id` elements into a `Set<Id>`.
      * <p>Terminal Operation.</p>
      * @example
@@ -983,7 +996,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @param mapType result type
      * @return the `Map<Id, SObject>` containing the sequence elements
      * @throws NullPointerException if `keyMapper` or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be casted to `mapType`
+     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
      */
     public virtual override Map<Id, SObject> toByIdMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Lists.toByIdMap(sObjects, keyMapper, mapType);
@@ -1000,7 +1013,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @param mapType result type
      * @return the `Map<String, SObject>` containing the sequence elements
      * @throws NullPointerException if `keyMapper` or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be casted to `mapType`
+     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
      */
     public virtual override Map<String, SObject> toByStringMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Lists.toByStringMap(sObjects, keyMapper, mapType);

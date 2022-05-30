@@ -296,7 +296,7 @@ List<Object>
 
 **Description**
 
-the `List<Object>` which can be casted into `listType`
+the `List<Object>` which can be cast into `listType`
 
 #### Throws
 |Exception|Description|
@@ -308,6 +308,61 @@ the `List<Object>` which can be casted into `listType`
 List<String> accNames = (List<String>)
     Iterators.toList(accIterator, SObjectFunction.get('Name'), List<String>.class);
 ```
+
+### `static toObjectSet(Iterator<SObject> iterator, ISObjectFunction mapper)`
+
+Accumulates values returned by `mapper` into a `Set<Object>`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `mapper` is null|
+
+#### Example
+```apex
+Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunction.get('CreatedDate'));
+```
+
+### `static toObjectSet(Iterator<Object> iterator, IFunction mapper)`
+
+Accumulates values returned by `mapper` into a `Set<Object>`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterator`|the iterator|
+|`mapper`|the mapping function|
+
+#### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterator` or `mapper` is null|
 
 ### `static toIdSet(Iterator<SObject> iterator, ISObjectFunction mapper)`
 
@@ -388,7 +443,7 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` which can be casted into `mapType`
+the `Map<Id, SObject>` which can be cast into `mapType`
 
 #### Throws
 |Exception|Description|
@@ -421,7 +476,7 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` which can be casted into `mapType`
+the `Map<String, SObject>` which can be cast into `mapType`
 
 #### Throws
 |Exception|Description|

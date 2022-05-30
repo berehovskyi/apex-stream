@@ -97,13 +97,13 @@ List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0
 List<Double> diff = doublesIterable1.except(doubles2).toList(); // [5.0, 7.0]
 ```
 
+### `distinct()`
 ### `filter(IDoublePredicate predicate)`
 #### Parameters
 |Param|Description|
 |---|---|
 
 ### `withoutNulls()`
-### `distinct()`
 ### `reduce(IDoubleBinaryOperator operator)`
 #### Parameters
 |Param|Description|

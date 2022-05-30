@@ -138,7 +138,7 @@ Returns a composed `UnaryOperator` of the `IIntUnaryOperator`.
 ###### Parameters
 |Param|Description|
 |---|---|
-|`operator`|applied to the input argument casted to `Integer`|
+|`operator`|applied to the input argument cast to `Integer`|
 
 ###### Return
 
@@ -162,7 +162,7 @@ Returns a composed `UnaryOperator` of the `ILongUnaryOperator`.
 ###### Parameters
 |Param|Description|
 |---|---|
-|`operator`|applied to the input argument casted to `Long`|
+|`operator`|applied to the input argument cast to `Long`|
 
 ###### Return
 
@@ -186,7 +186,7 @@ Returns a composed `UnaryOperator` of the `IDoubleUnaryOperator`.
 ###### Parameters
 |Param|Description|
 |---|---|
-|`operator`|applied to the input argument casted to `Double`|
+|`operator`|applied to the input argument cast to `Double`|
 
 ###### Return
 
@@ -210,7 +210,7 @@ Returns a composed `UnaryOperator` of the `ISObjectUnaryOperator`.
 ###### Parameters
 |Param|Description|
 |---|---|
-|`operator`|applied to the input argument casted to `SObject`|
+|`operator`|applied to the input argument cast to `SObject`|
 
 ###### Return
 

@@ -97,6 +97,19 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
     }
 
     /**
+     * @description Returns a `ObjectStream` created from `Iterable<Object>`.
+     * @example
+     * IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people));
+     * @param iterable the iterable
+     * @return the new `ObjectStream`
+     * @throws NullPointerException if `objects` is null
+     */
+    public static IObjectIterable of(final Iterable<Object> iterable) {
+        Validate.notNull(iterable);
+        return new ObjectStream(iterable.iterator());
+    }
+
+    /**
      * @description Returns a `ObjectStream` created from `List<Object>`.
      * @example
      * IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people));
@@ -105,8 +118,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * @throws NullPointerException if `objects` is null
      */
     public static IObjectIterable of(final List<Object> objects) {
-        Validate.notNull(objects);
-        return new ObjectStream(objects.iterator());
+        return of((Iterable<Object>) objects);
     }
 
     /**
@@ -118,8 +130,21 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * @throws NullPointerException if `objects` is null
      */
     public static IObjectIterable of(final Set<Object> objects) {
-        Validate.notNull(objects);
-        return new ObjectStream(objects.iterator());
+        return of((Iterable<Object>) objects);
+    }
+
+    /**
+     * @description Returns a `ObjectStream` created from `Iterable<Object>` if non-null,
+     * otherwise returns an empty `ObjectStream`.
+     * @example
+     * IObjectIterable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
+     * @param iterable the iterable
+     * @return the new `ObjectStream` if `iterable` is non-null,
+     * otherwise an empty `ObjectStream`
+     */
+    public static IObjectIterable ofNullable(final Iterable<Object> iterable) {
+        if (iterable == null) { return empty(); }
+        return new ObjectStream(iterable.iterator());
     }
 
     /**
@@ -132,8 +157,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * otherwise an empty `ObjectStream`
      */
     public static IObjectIterable ofNullable(final List<Object> objects) {
-        if (objects == null) { return empty(); }
-        return new ObjectStream(objects.iterator());
+        return ofNullable((Iterable<Object>) objects);
     }
 
     /**
@@ -146,8 +170,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * otherwise an empty `ObjectStream`
      */
     public static IObjectIterable ofNullable(final Set<Object> objects) {
-        if (objects == null) { return empty(); }
-        return new ObjectStream(objects.iterator());
+        return ofNullable((Iterable<Object>) objects);
     }
 
     /**
@@ -610,7 +633,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * @return the `ObjectStream`
      * @throws NullPointerException if `classifier` is null
      */
-    public virtual IObjectIterable distinct(final IFunction classifier) {
+    public virtual override IObjectIterable distinct(final IFunction classifier) {
         Validate.notNull(classifier);
         return new ObjectStream(new ObjectDistinctIterator(iterator(), classifier));
     }

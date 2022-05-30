@@ -234,11 +234,9 @@ private class SObjectStreamTest {
 
     /**
      * @see SObjectIterable.union
-     * @see SObjectIterable.intersect
-     * @see SObjectIterable.except
      */
     @IsTest
-    private static void setOperations() {
+    private static void union() {
         // Given
         Account acc = new Account(Name = 'Test Acc');
         Account acc1 = new Account(Name = 'Test Acc1');
@@ -252,35 +250,124 @@ private class SObjectStreamTest {
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
         List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        String fieldName = IterTestUtils.CONSTS.NAME;
+        SObjectField field = IterTestUtils.CONSTS.Account.Name;
         ISObjectIterable stream = SObjectStream.of(input).union(input1);
         ISObjectIterable stream1 = SObjectStream.of(input).union(SObjectStream.of(input1));
-        ISObjectIterable stream2 = SObjectStream.of(input).intersect(input1);
-        ISObjectIterable stream3 = SObjectStream.of(input).intersect(SObjectStream.of(input1));
-        ISObjectIterable stream4 = SObjectStream.of(input).except(input1);
-        ISObjectIterable stream5 = SObjectStream.of(input).except(SObjectStream.of(input1));
+        ISObjectIterable stream2 = SObjectStream.of(input).union(input1, getName);
+        ISObjectIterable stream3 = SObjectStream.of(input).union(input1, fieldName);
+        ISObjectIterable stream4 = SObjectStream.of(input).union(input1, field);
         // When
         List<Account> actual = stream.toList();
         List<Account> actual1 = stream1.toList();
         List<Account> actual2 = stream2.toList();
         List<Account> actual3 = stream3.toList();
         List<Account> actual4 = stream4.toList();
-        List<Account> actual5 = stream5.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc };
-        List<Account> expected1 = new List<Account>{ acc3, acc9 };
-        List<Account> expected2 = new List<Account>{ acc5, acc7 };
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected, actual4);
         Validate.assert(((SObjectStream) stream).isOperated);
         Validate.assert(((SObjectStream) stream1).isOperated);
         Validate.assert(((SObjectStream) stream2).isOperated);
         Validate.assert(((SObjectStream) stream3).isOperated);
         Validate.assert(((SObjectStream) stream4).isOperated);
-        Validate.assert(((SObjectStream) stream5).isOperated);
+    }
+
+    /**
+     * @see SObjectIterable.intersect
+     */
+    @IsTest
+    private static void intersect() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc');
+        Account acc1 = new Account(Name = 'Test Acc1');
+        Account acc2 = new Account(Name = 'Test Acc2');
+        Account acc3 = new Account(Name = 'Test Acc3');
+        Account acc4 = new Account(Name = 'Test Acc4');
+        Account acc5 = new Account(Name = 'Test Acc5');
+        Account acc6 = new Account(Name = 'Test Acc6');
+        Account acc7 = new Account(Name = 'Test Acc7');
+        Account acc8 = new Account(Name = 'Test Acc8');
+        Account acc9 = new Account(Name = 'Test Acc9');
+        List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        String fieldName = IterTestUtils.CONSTS.NAME;
+        SObjectField field = IterTestUtils.CONSTS.Account.Name;
+        ISObjectIterable stream = SObjectStream.of(input).intersect(input1);
+        ISObjectIterable stream1 = SObjectStream.of(input).intersect(SObjectStream.of(input1));
+        ISObjectIterable stream2 = SObjectStream.of(input).intersect(input1, getName);
+        ISObjectIterable stream3 = SObjectStream.of(input).intersect(input1, fieldName);
+        ISObjectIterable stream4 = SObjectStream.of(input).intersect(input1, field);
+        // When
+        List<Account> actual = stream.toList();
+        List<Account> actual1 = stream1.toList();
+        List<Account> actual2 = stream2.toList();
+        List<Account> actual3 = stream3.toList();
+        List<Account> actual4 = stream4.toList();
+        // Then
+        List<Account> expected = new List<Account>{ acc3, acc9 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected, actual4);
+        Validate.assert(((SObjectStream) stream).isOperated);
+        Validate.assert(((SObjectStream) stream1).isOperated);
+        Validate.assert(((SObjectStream) stream2).isOperated);
+        Validate.assert(((SObjectStream) stream3).isOperated);
+        Validate.assert(((SObjectStream) stream4).isOperated);
+    }
+
+    /**
+     * @see SObjectIterable.except
+     */
+    @IsTest
+    private static void except() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc');
+        Account acc1 = new Account(Name = 'Test Acc1');
+        Account acc2 = new Account(Name = 'Test Acc2');
+        Account acc3 = new Account(Name = 'Test Acc3');
+        Account acc4 = new Account(Name = 'Test Acc4');
+        Account acc5 = new Account(Name = 'Test Acc5');
+        Account acc6 = new Account(Name = 'Test Acc6');
+        Account acc7 = new Account(Name = 'Test Acc7');
+        Account acc8 = new Account(Name = 'Test Acc8');
+        Account acc9 = new Account(Name = 'Test Acc9');
+        List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
+        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        String fieldName = IterTestUtils.CONSTS.NAME;
+        SObjectField field = IterTestUtils.CONSTS.Account.Name;
+        ISObjectIterable stream = SObjectStream.of(input).except(input1);
+        ISObjectIterable stream1 = SObjectStream.of(input).except(SObjectStream.of(input1));
+        ISObjectIterable stream2 = SObjectStream.of(input).except(input1, getName);
+        ISObjectIterable stream3 = SObjectStream.of(input).except(input1, fieldName);
+        ISObjectIterable stream4 = SObjectStream.of(input).except(input1, field);
+        // When
+        List<Account> actual = stream.toList();
+        List<Account> actual1 = stream1.toList();
+        List<Account> actual2 = stream2.toList();
+        List<Account> actual3 = stream3.toList();
+        List<Account> actual4 = stream4.toList();
+        // Then
+        List<Account> expected = new List<Account>{ acc5, acc7 };
+        Validate.assertEquals(expected, actual);
+        Validate.assertEquals(expected, actual1);
+        Validate.assertEquals(expected, actual2);
+        Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(expected, actual4);
+        Validate.assert(((SObjectStream) stream).isOperated);
+        Validate.assert(((SObjectStream) stream1).isOperated);
+        Validate.assert(((SObjectStream) stream2).isOperated);
+        Validate.assert(((SObjectStream) stream3).isOperated);
+        Validate.assert(((SObjectStream) stream4).isOperated);
     }
 
     /**
@@ -1449,6 +1536,9 @@ private class SObjectStreamTest {
         ISObjectIterable accStream5 = SObjectStream.of(clone).withoutNulls();
         ISObjectIterable accStream6 = SObjectStream.of(clone).withoutNulls();
         ISObjectIterable accStream7 = SObjectStream.of(clone).withoutNulls();
+        ISObjectIterable accStream8 = SObjectStream.of(clone).withoutNulls();
+        ISObjectIterable accStream9 = SObjectStream.of(clone).withoutNulls();
+        ISObjectIterable accStream10 = SObjectStream.of(clone).withoutNulls();
         // When
         Set<SObject> actual = accStream.toSet();
         Set<Id> actual1 = accStream1.toIdSet();
@@ -1458,6 +1548,9 @@ private class SObjectStreamTest {
         Set<String> actual5 = accStream5.toStringSet(SObjectFunction.get('Name'));
         Set<String> actual6 = accStream6.toStringSet('Name');
         Set<String> actual7 = accStream7.toStringSet(Account.Name);
+        Set<Object> actual8 = accStream8.toSet(SObjectFunction.get('Name'));
+        Set<Object> actual9 = accStream9.toSet('Name');
+        Set<Object> actual10 = accStream10.toSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectStream.of(clone)
@@ -1466,6 +1559,9 @@ private class SObjectStreamTest {
         Set<String> expected2 = (Set<String>) SObjectStream.of(clone)
                 .withoutNulls()
                 .collect(SObjectCollector.toStringSet(Account.Name));
+        Set<Object> expected3 = (Set<Object>) SObjectStream.of(clone)
+                .withoutNulls()
+                .collect(SObjectCollector.toSet(Account.Name));
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
@@ -1474,6 +1570,9 @@ private class SObjectStreamTest {
         Validate.assertEquals(expected2, actual5);
         Validate.assertEquals(expected2, actual6);
         Validate.assertEquals(expected2, actual7);
+        Validate.assertEquals(expected3, actual8);
+        Validate.assertEquals(expected3, actual9);
+        Validate.assertEquals(expected3, actual10);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((SObjectStream) accStream).isOperated);
         Validate.assert(((SObjectStream) accStream1).isOperated);
@@ -1483,6 +1582,9 @@ private class SObjectStreamTest {
         Validate.assert(((SObjectStream) accStream5).isOperated);
         Validate.assert(((SObjectStream) accStream6).isOperated);
         Validate.assert(((SObjectStream) accStream7).isOperated);
+        Validate.assert(((SObjectStream) accStream8).isOperated);
+        Validate.assert(((SObjectStream) accStream9).isOperated);
+        Validate.assert(((SObjectStream) accStream10).isOperated);
     }
 
     /**

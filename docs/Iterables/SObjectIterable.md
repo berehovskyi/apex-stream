@@ -20,7 +20,7 @@ Provides a skeletal implementation of [ISObjectIterable](/docs/Iterables/ISObjec
 
 ### `union(Iterable<SObject> iterable)`
 
-Returns a new `ISObjectIterable` as a set union of the current and another iterables.
+Returns a new `ISObjectIterable` as a set union of the current and another iterables. <p>Intermediate Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -45,9 +45,90 @@ List<Account> union = accountsIterable1.union(accounts2).toList();
 // [acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc0]
 ```
 
+### `union(Iterable<SObject> iterable, ISObjectFunction classifier)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables according to `classifier` function. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> unionByClassifier = accountsIterable1.union(accounts2, classifier);
+```
+
+### `union(Iterable<SObject> iterable, String fieldName)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> unionByName = accountsIterable1.union(accounts2, 'Name');
+```
+
+### `union(Iterable<SObject> iterable, SObjectField field)`
+
+Returns a new `ISObjectIterable` as a set union of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> unionByName = accountsIterable1.union(accounts2, Account.Name);
+```
+
 ### `intersect(Iterable<SObject> iterable)`
 
-Returns a new `ISObjectIterable` as a set intersection of the current and another iterables.
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables. <p>Intermediate Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -71,9 +152,90 @@ List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9,
 List<Account> intersection = accountsIterable1.intersect(accounts2).toList(); // [acc3, acc9]
 ```
 
+### `intersect(Iterable<SObject> iterable, ISObjectFunction classifier)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables according to `classifier` function. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> intersectionByClassifier = accountsIterable1.intersect(accounts2, classifier);
+```
+
+### `intersect(Iterable<SObject> iterable, String fieldName)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> intersectionByName = accountsIterable1.intersect(accounts2, 'Name');
+```
+
+### `intersect(Iterable<SObject> iterable, SObjectField field)`
+
+Returns a new `ISObjectIterable` as a set intersection of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> intersectionByName = accountsIterable1.intersect(accounts2, Account.Name);
+```
+
 ### `except(Iterable<SObject> iterable)`
 
-Returns a new `ISObjectIterable` as a set difference of the current and another iterables.
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables. <p>Intermediate Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -95,6 +257,155 @@ the new `ISObjectIterable`
 List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
 List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
 List<Account> diff = accountsIterable1.except(accounts2).toList(); // [acc5, acc7]
+```
+
+### `except(Iterable<SObject> iterable, ISObjectFunction classifier)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables according to `classifier` function. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`classifier`|the classifier function|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> diffByClassifier = accountsIterable1.except(accounts2, classifier);
+```
+
+### `except(Iterable<SObject> iterable, String fieldName)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> diffByName = accountsIterable1.except(accounts2, 'Name');
+```
+
+### `except(Iterable<SObject> iterable, SObjectField field)`
+
+Returns a new `ISObjectIterable` as a set difference of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Example
+```apex
+List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
+List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
+List<Account> diffByName = accountsIterable1.except(accounts2, Account.Name);
+```
+
+### `distinct()`
+### `distinct(ISObjectFunction classifier)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `distinct(String fieldName)`
+
+Returns a new `ISObjectIterable` with distinct `SObject` elements according to `fieldName`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+#### Example
+```apex
+List<Account> distinctAccountsByName = accountsIterable
+    .distinct('Name')
+    .toList();
+```
+
+### `distinct(SObjectField field)`
+
+Returns a new `ISObjectIterable` with distinct `SObject` elements according to `field`. <p>Intermediate Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+ISObjectIterable
+
+**Description**
+
+the new `ISObjectIterable`
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+#### Example
+```apex
+List<Account> distinctAccountsByName = accountsIterable
+    .distinct(Account.Name)
+    .toList();
 ```
 
 ### `filter(ISObjectPredicate predicate)`
@@ -782,73 +1093,6 @@ List<Account> accountsWithResetAnnualRevenue = accountsIterable
     .toList();
 ```
 
-### `distinct(ISObjectFunction classifier)`
-#### Parameters
-|Param|Description|
-|---|---|
-
-### `distinct(String fieldName)`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements according to `fieldName`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`fieldName`|the field|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `fieldName` is blank|
-
-#### Example
-```apex
-List<Account> distinctAccountsByName = accountsIterable
-    .distinct('Name')
-    .toList();
-```
-
-### `distinct(SObjectField field)`
-
-Returns a new `ISObjectIterable` with distinct `SObject` elements according to `field`. <p>Intermediate Operation.</p>
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`field`|the field|
-
-#### Return
-
-**Type**
-
-ISObjectIterable
-
-**Description**
-
-the new `ISObjectIterable`
-
-#### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `field` is null|
-
-#### Example
-```apex
-List<Account> distinctAccountsByName = accountsIterable
-    .distinct(Account.Name)
-    .toList();
-```
-
 ### `sort(ISObjectComparator comparator)`
 #### Parameters
 |Param|Description|
@@ -999,7 +1243,6 @@ List<Account> sortedAccountsByNameDesc = accountsIterable
     .toList();
 ```
 
-### `distinct()`
 ### `reduce(ISObjectBinaryOperator accumulator)`
 #### Parameters
 |Param|Description|
@@ -1765,7 +2008,7 @@ List<Object>
 
 **Description**
 
-the `List<Object>` containing the collected elements, which can be casted to `listType`
+the `List<Object>` containing the collected elements, which can be cast to `listType`
 
 #### Throws
 |Exception|Description|
@@ -1796,7 +2039,7 @@ List<Object>
 
 **Description**
 
-the `List<Object>` containing the collected elements, which can be casted to `listType`
+the `List<Object>` containing the collected elements, which can be cast to `listType`
 
 #### Throws
 |Exception|Description|
@@ -1807,6 +2050,69 @@ the `List<Object>` containing the collected elements, which can be casted to `li
 ```apex
 List<String> accountNames = (List<String>) accountsIterable
     .toList(Account.Name, List<String>.class);
+```
+
+### `toSet(ISObjectFunction mapper)`
+#### Parameters
+|Param|Description|
+|---|---|
+
+### `toSet(String fieldName)`
+
+Accumulates `Object` elements into a `Set<Object>` according to `fieldName`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`fieldName`|the field|
+
+#### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>` containing the collected elements field values
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `fieldName` is blank|
+
+#### Example
+```apex
+Set<Object> createdDates = contactsIterable.toSet('CreatedDate');
+```
+
+### `toSet(SObjectField field)`
+
+Accumulates `Object` elements into a `Set<Object>` according to `field`. <p>Terminal Operation.</p>
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`field`|the field|
+
+#### Return
+
+**Type**
+
+Set<Object>
+
+**Description**
+
+the `Set<Object>` containing the collected elements field values
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+#### Example
+```apex
+Set<Object> createdDates = contactsIterable.toSet(Contact.CreatedDate);
 ```
 
 ### `toIdSet(ISObjectFunction mapper)`
@@ -1958,7 +2264,7 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
 
 #### Throws
 |Exception|Description|
@@ -1990,7 +2296,7 @@ Map<Id,SObject>
 
 **Description**
 
-the `Map<Id, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
 
 #### Throws
 |Exception|Description|
@@ -2027,7 +2333,7 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
 
 #### Throws
 |Exception|Description|
@@ -2059,7 +2365,7 @@ Map<String,SObject>
 
 **Description**
 
-the `Map<String, SObject>` containing the collected elements, which can be casted to `mapType`
+the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
 
 #### Throws
 |Exception|Description|

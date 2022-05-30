@@ -46,7 +46,7 @@ public virtual inherited sharing class Lists {
      * @param sObjects the list
      * @param mapper the mapping function
      * @param listType the result type
-     * @return the `List<Object>` which can be casted into `listType`
+     * @return the `List<Object>` which can be cast into `listType`
      * @throws NullPointerException if `sObjects`, `mapper` or `listType` is null
      */
     public static List<Object> toList(
@@ -58,6 +58,25 @@ public virtual inherited sharing class Lists {
         Validate.notNull(mapper);
         Validate.notNull(listType);
         final List<Object> results = (List<Object>) listType.newInstance();
+        for (Integer i = 0, size = sObjects.size(); i < size; i++) {
+            results.add(mapper.apply(sObjects[i]));
+        }
+        return results;
+    }
+
+    /**
+     * @description Accumulates values returned by `mapper` into a `Set<Object>`.
+     * @example 
+     * Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunction.get('CreatedDate'));
+     * @param sObjects the list
+     * @param mapper the mapping function
+     * @return the `Set<Object>`
+     * @throws NullPointerException if `sObjects` or `mapper` is null
+     */
+    public static Set<Object> toObjectSet(final List<SObject> sObjects, final ISObjectFunction mapper) {
+        Validate.notNull(sObjects);
+        Validate.notNull(mapper);
+        final Set<Object> results = new Set<Object>();
         for (Integer i = 0, size = sObjects.size(); i < size; i++) {
             results.add(mapper.apply(sObjects[i]));
         }
@@ -111,7 +130,7 @@ public virtual inherited sharing class Lists {
      * @param sObjects the list
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
-     * @return the `Map<Id, SObject>` which can be casted into `mapType`
+     * @return the `Map<Id, SObject>` which can be cast into `mapType`
      * @throws NullPointerException if `sObjects`, `keyMapper` or `listType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */
@@ -146,7 +165,7 @@ public virtual inherited sharing class Lists {
      * @param sObjects the list
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
-     * @return the `Map<String, SObject>` which can be casted into `mapType`
+     * @return the `Map<String, SObject>` which can be cast into `mapType`
      * @throws NullPointerException if `sObjects`, `keyMapper` or `listType` is null
      * @throws IllegalStateException if mapped keys contain duplicates
      */
