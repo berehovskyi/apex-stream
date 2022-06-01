@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IDoubleToLongFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DoubleToLongFunction implements IDoubleToLongFunction {
 
@@ -17,7 +19,9 @@ public abstract inherited sharing class DoubleToLongFunction implements IDoubleT
     /**
      * @description Returns a `IDoubleToLongFunction` that returns the Long value
      * of the Double input argument by casting it to an Long.
+     *
      * @return the `IDoubleToLongFunction`
+     *
      * @see Double.longValue
      */
     public static DoubleToLongFunction longValue() {
@@ -27,7 +31,9 @@ public abstract inherited sharing class DoubleToLongFunction implements IDoubleT
     /**
      * @description Returns a `IDoubleToLongFunction` that returns the closest Long
      * to the Double input argument.
+     *
      * @return the `IDoubleToLongFunction`
+     *
      * @see Math.roundToLong
      */
     public static DoubleToLongFunction roundToLong() {

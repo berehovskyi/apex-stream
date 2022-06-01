@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectToLongFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectToLongFunction implements ISObjectToLongFunction {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class SObjectToLongFunction implements ISObjec
     // @start-group Static Methods
     /**
      * @description Returns a composed `SObjectToLongFunction` of the `ISObjectFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `SObjectToLongFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static SObjectToLongFunction downcast(final ISObjectFunction mapper) {
@@ -32,17 +37,22 @@ public abstract inherited sharing class SObjectToLongFunction implements ISObjec
     /**
      * @description Returns a `SObjectToLongFunction` that gets a value for
      * the specified `fieldName` as Long. Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectToLongFunction.get('NumberOfEmployees');
-     * SObjectToLongFunction.get('Parent.NumberOfEmployees');
-     * SObjectToLongFunction.get('Parent?.NumberOfEmployees');
+     *
      * @param fieldName the field to get a Long value
+     *
      * @return the `SObjectToLongFunction`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.get
+     *
+     * @example
+     * SObjectToLongFunction.get('NumberOfEmployees');
+     * SObjectToLongFunction.get('Parent.NumberOfEmployees');
+     * SObjectToLongFunction.get('Parent?.NumberOfEmployees');
      */
     public static SObjectToLongFunction get(final String fieldName) {
         return downcast(SObjectFunction.get(fieldName));
@@ -51,12 +61,17 @@ public abstract inherited sharing class SObjectToLongFunction implements ISObjec
     /**
      * @description Returns a `SObjectToLongFunction` that gets a value for
      * the specified `field` as Long.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `SObjectToLongFunction`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see SObject.get
+     *
      * @example
      * SObjectToLongFunction.get(Account.NumberOfEmployees);
-     * @param field the field to get a value
-     * @return the `SObjectToLongFunction`
-     * @throws NullPointerException if `field` is null
-     * @see SObject.get
      */
     public static SObjectToLongFunction get(final SObjectField field) {
         return downcast(SObjectFunction.get(field));

@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IIntUnaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IIntIterable.mapTo
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOperator {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a composed `IntUnaryOperator` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `IntUnaryOperator`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual IntUnaryOperator andThen(final IIntUnaryOperator after) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a composed `IntUnaryOperator` that executes `before` operation
      * first, then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `IntUnaryOperator`
+     *
      * @throws NullPointerException if `before` is null
      */
     public virtual IntUnaryOperator compose(final IIntUnaryOperator before) {
@@ -44,8 +53,11 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a composed `IntUnaryOperator` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param operators the operations to sequentially perform
+     *
      * @return the composed `IntUnaryOperator`
+     *
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static IntUnaryOperator compose(final List<IIntUnaryOperator> operators) {
@@ -55,6 +67,7 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
 
     /**
      * @description Returns a `IntUnaryOperator` that always returns the input argument.
+     *
      * @return the `IntUnaryOperator`
      */
     public static IntUnaryOperator identity() {
@@ -63,7 +76,9 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
 
     /**
      * @description Returns a `IntUnaryOperator` that always returns the `value`.
+     *
      * @param value the int value
+     *
      * @return the `IntUnaryOperator`
      */
     public static IntUnaryOperator constant(final Integer value) {
@@ -77,7 +92,9 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns the absolute value
      * of the input argument.
+     *
      * @return the `IntUnaryOperator`
+     *
      * @see Math.abs
      */
     public static IntUnaryOperator abs() {
@@ -87,8 +104,11 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns the sum of the input argument
      * and the `i`.
+     *
      * @param i the int value
+     *
      * @return the `IntUnaryOperator`
+     *
      * @throws NullPointerException if `i` is null
      */
     public static IntUnaryOperator add(final Integer i) {
@@ -99,6 +119,7 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns the input argument
      * decremented by 1.
+     *
      * @return the `IntUnaryOperator`
      */
     public static IntUnaryOperator decrement() {
@@ -108,10 +129,13 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns the division of the input argument
      * and the `i`.
+     *
      * @param i the int value
+     *
      * @return the `IntUnaryOperator`
-     * @throws NullPointerException if `i` is null
+     *
      * @throws IllegalArgumentException if `i` is 0
+     * @throws NullPointerException if `i` is null
      */
     public static IntUnaryOperator divide(final Integer i) {
         Validate.notNull(i);
@@ -122,6 +146,7 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns the input argument
      * incremented by 1.
+     *
      * @return the `IntUnaryOperator`
      */
     public static IntUnaryOperator increment() {
@@ -131,9 +156,13 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns a larger value between the input argument
      * and the `i`.
+     *
      * @param i the int value
+     *
      * @return the `IntUnaryOperator`
+     *
      * @throws NullPointerException if `i` is null
+     *
      * @see Math.max
      */
     public static IntUnaryOperator max(final Integer i) {
@@ -144,9 +173,13 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns a smaller value between the input argument
      * and the `i`.
+     *
      * @param i the int value
+     *
      * @return the `IntUnaryOperator`
+     *
      * @throws NullPointerException if `i` is null
+     *
      * @see Math.min
      */
     public static IntUnaryOperator min(final Integer i) {
@@ -157,10 +190,14 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns a remainder of the input argument
      * divided by the `i`.
+     *
      * @param i the int value
+     *
      * @return the `IntUnaryOperator`
-     * @throws NullPointerException if `i` is null
+     *
      * @throws IllegalArgumentException if `i` is 0
+     * @throws NullPointerException if `i` is null
+     *
      * @see Math.mod
      */
     public static IntUnaryOperator mod(final Integer i) {
@@ -172,8 +209,11 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns the multiplication
      * of the of the input argument and the `i`.
+     *
      * @param i the int value
+     *
      * @return the `IntUnaryOperator`
+     *
      * @throws NullPointerException if `i` is null
      */
     public static IntUnaryOperator multiply(final Integer i) {
@@ -184,8 +224,11 @@ public abstract inherited sharing class IntUnaryOperator implements IIntUnaryOpe
     /**
      * @description Returns a `IntUnaryOperator` that returns the subtraction of the input argument
      * and the `i`.
+     *
      * @param i the int value
+     *
      * @return the `IntUnaryOperator`
+     *
      * @throws NullPointerException if `i` is null
      */
     public static IntUnaryOperator subtract(final Integer i) {

@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `StringBinaryOperators`.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class StringBinaryOperator extends BinaryOperator {
 
@@ -10,6 +12,7 @@ public abstract inherited sharing class StringBinaryOperator extends BinaryOpera
     // @start-group Built-Ins
     /**
      * @description Returns a `SObjectBinaryOperator` that concatenates string input argument.
+     *
      * @return the `SObjectBinaryOperator`
      */
     public static BinaryOperator concat() {
@@ -19,6 +22,9 @@ public abstract inherited sharing class StringBinaryOperator extends BinaryOpera
     /**
      * @description Returns a `SObjectBinaryOperator` that concatenates string input argument
      * using the `delimiter`.
+     *
+     * @param delimiter delimiter to be used between each element
+     *
      * @return the `SObjectBinaryOperator`
      */
     public static BinaryOperator concat(final String delimiter) {

@@ -1,12 +1,15 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IDoubleBinaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see DoubleStream.zip
  * @see DoubleSequence.zip
  * @see IDoubleIterable.reduce
  * @see Collector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DoubleBinaryOperator implements IDoubleBinaryOperator {
 
@@ -20,9 +23,10 @@ public abstract inherited sharing class DoubleBinaryOperator implements IDoubleB
     // @start-group Built-Ins
     /**
      * @description Returns a `IntBinaryOperator` that return a greater Integer input argument.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
-     * @see Math.max
      */
     public static DoubleBinaryOperator max() {
         return new Max();
@@ -30,9 +34,10 @@ public abstract inherited sharing class DoubleBinaryOperator implements IDoubleB
 
     /**
      * @description Returns a `IntBinaryOperator` that return a lesser Integer input argument.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
-     * @see Math.min
      */
     public static DoubleBinaryOperator min() {
         return new Min();
@@ -40,7 +45,9 @@ public abstract inherited sharing class DoubleBinaryOperator implements IDoubleB
 
     /**
      * @description Returns a `IntBinaryOperator` that return a product of two Integer input arguments.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
      */
     public static DoubleBinaryOperator product() {
@@ -53,8 +60,11 @@ public abstract inherited sharing class DoubleBinaryOperator implements IDoubleB
      * <p><strong>Note: </strong></p>
      * <p>Using `IDoubleIterable.sum()` is preferable over
      * `IDoubleIterable.reduce(0, DoubleBinaryOperator.sum())`.</p>
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
+     *
      * @see IDoubleIterable.sum
      */
     public static DoubleBinaryOperator sum() {
@@ -64,7 +74,9 @@ public abstract inherited sharing class DoubleBinaryOperator implements IDoubleB
     /**
      * @description Returns a `IntBinaryOperator` that return a the square root of the sum
      * of the squares of the Integer input arguments.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
      */
     public static DoubleBinaryOperator euclideanDistance() {
@@ -76,11 +88,15 @@ public abstract inherited sharing class DoubleBinaryOperator implements IDoubleB
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Max extends DoubleBinaryOperator {
-        public override Double apply(Double d1, Double d2) { return Math.max(d1, d2); }
+        public override Double apply(Double d1, Double d2) {
+            return Comparator.compareNullSafeDoubles(d1, d2) == 1 ? d1 : d2;
+        }
     }
 
     private class Min extends DoubleBinaryOperator {
-        public override Double apply(Double d1, Double d2) { return Math.min(d1, d2); }
+        public override Double apply(Double d1, Double d2) { 
+            return Comparator.compareNullSafeDoubles(d1, d2) != 1 ? d1 : d2;
+        }
     }
 
     private class Product extends DoubleBinaryOperator {

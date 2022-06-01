@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectIterate implements Iterator<Object> {
+public inherited sharing class ObjectIterate implements Iterator<Object> {
 
     private final IUnaryOperator operator;
     private Object next;

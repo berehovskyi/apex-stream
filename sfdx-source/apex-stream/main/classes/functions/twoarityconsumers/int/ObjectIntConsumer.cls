@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IObjectIntConsumer} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ObjectIntConsumer implements IObjectIntConsumer {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class ObjectIntConsumer implements IObjectIntC
     // @start-group Static Methods
     /**
      * @description Returns a composed `ObjectIntConsumer` of the `IBiConsumer`.
+     *
      * @param consumer the binary consumer
+     *
      * @return the composed `ObjectIntConsumer`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static ObjectIntConsumer of(final IBiConsumer consumer) {

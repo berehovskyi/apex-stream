@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IUnaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IObjectIterable.mapTo
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class UnaryOperator implements IUnaryOperator {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
     /**
      * @description Returns a composed `UnaryOperator` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `UnaryOperator`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual UnaryOperator andThen(final IUnaryOperator after) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
     /**
      * @description Returns a composed `UnaryOperator` that executes `before` operation
      * first, then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `UnaryOperator`
+     *
      * @throws NullPointerException if `before` is null
      */
     public virtual UnaryOperator compose(final IUnaryOperator before) {
@@ -44,8 +53,11 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
     /**
      * @description Returns a composed `UnaryOperator` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param operators the operations to sequentially perform
+     *
      * @return the composed `UnaryOperator`
+     *
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static UnaryOperator compose(final List<IUnaryOperator> operators) {
@@ -55,6 +67,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a `UnaryOperator` that always returns the input argument.
+     *
      * @return the `UnaryOperator`
      */
     public static UnaryOperator identity() {
@@ -63,7 +76,9 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a `UnaryOperator` that always returns the `value`.
+     *
      * @param value the value
+     *
      * @return the `UnaryOperator`
      */
     public static UnaryOperator constant(final Object value) {
@@ -72,8 +87,11 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `IIntUnaryOperator`.
+     *
      * @param operator applied to the input argument cast to `Integer`
+     *
      * @return the `UnaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static UnaryOperator upcast(final IIntUnaryOperator operator) {
@@ -83,8 +101,11 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `ILongUnaryOperator`.
+     *
      * @param operator applied to the input argument cast to `Long`
+     *
      * @return the `UnaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static UnaryOperator upcast(final ILongUnaryOperator operator) {
@@ -94,8 +115,11 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `IDoubleUnaryOperator`.
+     *
      * @param operator applied to the input argument cast to `Double`
+     *
      * @return the `UnaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static UnaryOperator upcast(final IDoubleUnaryOperator operator) {
@@ -105,8 +129,11 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
 
     /**
      * @description Returns a composed `UnaryOperator` of the `ISObjectUnaryOperator`.
+     *
      * @param operator applied to the input argument cast to `SObject`
+     *
      * @return the `UnaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static UnaryOperator upcast(final ISObjectUnaryOperator operator) {

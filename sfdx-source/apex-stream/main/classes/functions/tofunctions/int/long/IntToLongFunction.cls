@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IIntToLongFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntToLongFunction implements IIntToLongFunction {
 
@@ -17,6 +19,7 @@ public abstract inherited sharing class IntToLongFunction implements IIntToLongF
     /**
      * @description Returns a `IIntToLongFunction` that returns the Long value
      * of the Integer input argument by casting it to an Long.
+     *
      * @return the `IIntToLongFunction`
      */
     public static IntToLongFunction asLong() {

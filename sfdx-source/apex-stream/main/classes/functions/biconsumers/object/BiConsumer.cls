@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IBiConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IBiConsumer
  * @see Collector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class BiConsumer implements IBiConsumer {
 
@@ -24,8 +27,11 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     /**
      * @description Returns a composed `BiConsumer` that executes `this` operation first,
      * then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `BiConsumer`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual BiConsumer andThen(final IBiConsumer after) {
@@ -35,8 +41,11 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     /**
      * @description Returns a composed `BiConsumer` that executes `before` operation first,
      * then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `BiConsumer`
+     *
      * @throws NullPointerException if `before` is null
      */
     public virtual BiConsumer compose(final IBiConsumer before) {
@@ -50,8 +59,11 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     /**
      * @description Returns a composed `BiConsumer` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param consumers the operations to sequentially perform
+     *
      * @return the composed `BiConsumer`
+     *
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static BiConsumer compose(final List<IBiConsumer> consumers) {
@@ -66,9 +78,12 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     /**
      * @description Returns a composed `BiConsumer` that executes `accumulator` operation,
      * if the second input argument satisfies the predicate.
+     *
      * @param predicate the predicate applied to the second input argument
      * @param accumulator the operation to perform after filtering
+     *
      * @return the composed `BiConsumer`
+     *
      * @throws NullPointerException if `predicate` or `accumulator` is null
      */
     public static BiConsumer filtering(final IPredicate predicate, final IBiConsumer accumulator) {
@@ -80,9 +95,12 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     /**
      * @description Returns a composed `BiConsumer` that applies `accumulator` operation to
      * the result returned by the mapper.
+     *
      * @param mapper the operator applied to the second input argument
      * @param accumulator the operation to perform
+     *
      * @return the composed `BiConsumer`
+     *
      * @throws NullPointerException if `mapper` or `accumulator` is null
      */
     public static BiConsumer mapping(final IFunction mapper, final IBiConsumer accumulator) {
@@ -94,9 +112,12 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     /**
      * @description Returns a composed `BiConsumer` that applies `accumulator`
      * operation to the `Iterable<Object>` elements produced by the `mapper`.
+     *
      * @param mapper the operator applied to the second input argument which must produce `Iterable<Object>`
      * @param accumulator the operation to perform
+     *
      * @return the composed `BiConsumer`
+     *
      * @throws NullPointerException if `mapper` or `accumulator` is null
      */
     public static BiConsumer flatMapping(final IFunction mapper, final IBiConsumer accumulator) {
@@ -138,9 +159,7 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
             this.mapper = mapper;
             this.accumulator = accumulator;
         }
-        public override void accept(Object container, Object o) {
-            accumulator.accept(container, mapper.apply(o));
-        }
+        public override void accept(Object container, Object o) { accumulator.accept(container, mapper.apply(o)); }
     }
 
     private class FlatMapping extends BiConsumer {

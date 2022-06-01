@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IObjectIterable.forEach
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Consumer implements IConsumer {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class Consumer implements IConsumer {
     /**
      * @description Returns a composed `Consumer` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `Consumer`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual Consumer andThen(final IConsumer after) {
@@ -33,8 +39,11 @@ public abstract inherited sharing class Consumer implements IConsumer {
     /**
      * @description Returns a composed `Consumer` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param consumers the operations to sequentially perform
+     *
      * @return the composed `Consumer`
+     *
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static Consumer compose(final List<IConsumer> consumers) {
@@ -48,9 +57,12 @@ public abstract inherited sharing class Consumer implements IConsumer {
     // @start-group Built-Ins
     /**
      * @description Returns a `Consumer` that debugs an input argument.
+     *
      * @param loggingLevel the logging level
      * @param message the message
+     *
      * @return the `Consumer`
+     *
      * @throws NullPointerException if `loggingLevel` or `message` is null
      */
     public static Consumer debug(final LoggingLevel loggingLevel, final String message) {
@@ -61,26 +73,7 @@ public abstract inherited sharing class Consumer implements IConsumer {
 
     /**
      * @description Returns a `Consumer` that debugs an input argument.
-     * @param loggingLevel the logging level
-     * @return the `Consumer`
-     * @throws NullPointerException if `loggingLevel` is null
-     */
-    public static Consumer debug(final LoggingLevel loggingLevel) {
-        return debug(loggingLevel, '');
-    }
-
-    /**
-     * @description Returns a `Consumer` that debugs an input argument.
-     * @param message the message
-     * @return the `Consumer`
-     * @throws NullPointerException if `message` is null
-     */
-    public static Consumer debug(final String message) {
-        return debug(LoggingLevel.INFO, message);
-    }
-
-    /**
-     * @description Returns a `Consumer` that debugs an input argument.
+     *
      * @return the `Consumer`
      */
     public static Consumer debug() {
@@ -90,9 +83,12 @@ public abstract inherited sharing class Consumer implements IConsumer {
     /**
      * @description Returns a `Consumer` that debugs an input argument
      * using the pretty-print format.
+     *
      * @param loggingLevel the logging level
      * @param message the message
+     *
      * @return the `Consumer`
+     *
      * @throws NullPointerException if `loggingLevel` or `message` is null
      */
     public static Consumer debugPretty(final LoggingLevel loggingLevel, final String message) {
@@ -104,28 +100,7 @@ public abstract inherited sharing class Consumer implements IConsumer {
     /**
      * @description Returns a `Consumer` that debugs an input argument
      * using the pretty-print format.
-     * @param loggingLevel the logging level
-     * @return the `Consumer`
-     * @throws NullPointerException if `loggingLevel` is null
-     */
-    public static Consumer debugPretty(final LoggingLevel loggingLevel) {
-        return debugPretty(loggingLevel, '');
-    }
-
-    /**
-     * @description Returns a `Consumer` that debugs an input argument
-     * using the pretty-print format.
-     * @param message the message
-     * @return the `Consumer`
-     * @throws NullPointerException if `message` is null
-     */
-    public static Consumer debugPretty(final String message) {
-        return debugPretty(LoggingLevel.INFO, message);
-    }
-
-    /**
-     * @description Returns a `Consumer` that debugs an input argument
-     * using the pretty-print format.
+     *
      * @return the `Consumer`
      */
     public static Consumer debugPretty() {

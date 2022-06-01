@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  */
-public class ObjectFlatMapIterator extends ObjectBaseIterator {
+public inherited sharing class ObjectFlatMapIterator extends ObjectBaseIterator {
 
     private final Iterator<Object> iterator;
     private final IFunction mapper;

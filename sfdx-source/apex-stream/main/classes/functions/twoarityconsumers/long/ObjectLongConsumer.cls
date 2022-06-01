@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IObjectLongConsumer} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ObjectLongConsumer implements IObjectLongConsumer {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class ObjectLongConsumer implements IObjectLon
     // @start-group Static Methods
     /**
      * @description Returns a composed `ObjectLongConsumer` of the `IBiConsumer`.
+     *
      * @param consumer the binary consumer
+     *
      * @return the composed `ObjectLongConsumer`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static ObjectLongConsumer of(final IBiConsumer consumer) {

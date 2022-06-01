@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IObjectDoubleConsumer} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ObjectDoubleConsumer implements IObjectDoubleConsumer {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class ObjectDoubleConsumer implements IObjectD
     // @start-group Static Methods
     /**
      * @description Returns a composed `ObjectDoubleConsumer` of the `IBiConsumer`.
+     *
      * @param consumer the binary consumer
+     *
      * @return the composed `ObjectDoubleConsumer`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static ObjectDoubleConsumer of(final IBiConsumer consumer) {

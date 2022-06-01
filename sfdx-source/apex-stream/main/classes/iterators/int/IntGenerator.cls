@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntGenerator implements Iterator<Integer> {
+public inherited sharing class IntGenerator implements Iterator<Integer> {
 
     private final IIntSupplier supplier;
 

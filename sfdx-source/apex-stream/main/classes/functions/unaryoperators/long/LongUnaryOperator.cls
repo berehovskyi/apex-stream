@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ILongUnaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ILongIterable.mapTo
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class LongUnaryOperator implements ILongUnaryOperator {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a composed `LongUnaryOperator` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `LongUnaryOperator`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual LongUnaryOperator andThen(final ILongUnaryOperator after) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a composed `LongUnaryOperator` that executes `before` operation
      * first, then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `LongUnaryOperator`
+     *
      * @throws NullPointerException if `before` is null
      */
     public virtual LongUnaryOperator compose(final ILongUnaryOperator before) {
@@ -44,8 +53,11 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a composed `LongUnaryOperator` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param operators the operations to sequentially perform
+     *
      * @return the composed `LongUnaryOperator`
+     *
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static LongUnaryOperator compose(final List<ILongUnaryOperator> operators) {
@@ -55,6 +67,7 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
 
     /**
      * @description Returns a `LongUnaryOperator` that always returns the input argument.
+     *
      * @return the `LongUnaryOperator`
      */
     public static LongUnaryOperator identity() {
@@ -63,7 +76,9 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
 
     /**
      * @description Returns a `LongUnaryOperator` that always returns the `value`.
+     *
      * @param value the Long value
+     *
      * @return the `LongUnaryOperator`
      */
     public static LongUnaryOperator constant(final Long value) {
@@ -77,7 +92,9 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns the absolute value
      * of the input argument.
+     *
      * @return the `LongUnaryOperator`
+     *
      * @see Math.abs
      */
     public static LongUnaryOperator abs() {
@@ -87,8 +104,11 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns the sum of the input argument
      * and the `l`.
+     *
      * @param l the Long value
+     *
      * @return the `LongUnaryOperator`
+     *
      * @throws NullPointerException if `l` is null
      */
     public static LongUnaryOperator add(final Long l) {
@@ -99,6 +119,7 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns the input argument
      * decremented by 1.
+     *
      * @return the `LongUnaryOperator`
      */
     public static LongUnaryOperator decrement() {
@@ -108,10 +129,13 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns the division of the input argument
      * and the `l`.
+     *
      * @param l the Long value
+     *
      * @return the `LongUnaryOperator`
-     * @throws NullPointerException if `l` is null
+     *
      * @throws IllegalArgumentException if `l` is 0
+     * @throws NullPointerException if `l` is null
      */
     public static LongUnaryOperator divide(final Long l) {
         Validate.notNull(l);
@@ -122,6 +146,7 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns the input argument
      * incremented by 1.
+     *
      * @return the `LongUnaryOperator`
      */
     public static LongUnaryOperator increment() {
@@ -131,9 +156,13 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns a larger value between the input argument
      * and the `l`.
+     *
      * @param l the Long value
+     *
      * @return the `LongUnaryOperator`
+     *
      * @throws NullPointerException if `l` is null
+     *
      * @see Math.max
      */
     public static LongUnaryOperator max(final Long l) {
@@ -143,9 +172,13 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns a smaller value between the input argument
      * and the `l`.
+     *
      * @param l the Long value
+     *
      * @return the `LongUnaryOperator`
+     *
      * @throws NullPointerException if `l` is null
+     *
      * @see Math.min
      */
     public static LongUnaryOperator min(final Long l) {
@@ -155,10 +188,14 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns a remainder of the input argument
      * divided by the `l`.
+     *
      * @param l the Long value
+     *
      * @return the `LongUnaryOperator`
-     * @throws NullPointerException if `l` is null
+     *
      * @throws IllegalArgumentException if `l` is 0
+     * @throws NullPointerException if `l` is null
+     *
      * @see Math.mod
      */
     public static LongUnaryOperator mod(final Long l) {
@@ -170,8 +207,11 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns the multiplication
      * of the of the input argument and the `l`.
+     *
      * @param l the Long value
+     *
      * @return the `LongUnaryOperator`
+     *
      * @throws NullPointerException if `l` is null
      */
     public static LongUnaryOperator multiply(final Long l) {
@@ -182,8 +222,11 @@ public abstract inherited sharing class LongUnaryOperator implements ILongUnaryO
     /**
      * @description Returns a `LongUnaryOperator` that returns the subtraction of the input argument
      * and the `l`.
+     *
      * @param l the Long value
+     *
      * @return the `LongUnaryOperator`
+     *
      * @throws NullPointerException if `l` is null
      */
     public static LongUnaryOperator subtract(final Long l) {

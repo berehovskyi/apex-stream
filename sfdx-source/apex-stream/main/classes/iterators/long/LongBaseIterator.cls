@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public abstract class LongBaseIterator implements Iterator<Long> {
+public abstract inherited sharing class LongBaseIterator implements Iterator<Long> {
 
     protected Long next;
     protected Boolean hasNext = false, isInit = false;

@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectDropIterator extends SObjectBaseIterator {
+public inherited sharing class SObjectDropIterator extends SObjectBaseIterator {
 
     private final Iterator<SObject> iterator;
     private final ISObjectPredicate predicate;

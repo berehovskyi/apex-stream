@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ILongToDoubleFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class LongToDoubleFunction implements ILongToDoubleFunction {
 
@@ -17,7 +19,9 @@ public abstract inherited sharing class LongToDoubleFunction implements ILongToD
     /**
      * @description Returns a `LongToDoubleFunction` that returns the Double value
      * of the Long input argument.
+     *
      * @return the `LongToDoubleFunction`
+     *
      * @see Double.valueOf
      */
     public static LongToDoubleFunction valueOf() {

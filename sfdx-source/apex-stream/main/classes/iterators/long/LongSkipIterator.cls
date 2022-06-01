@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongSkipIterator implements Iterator<Long> {
+public inherited sharing class LongSkipIterator implements Iterator<Long> {
 
     private final Iterator<Long> iterator;
     private final Integer n;

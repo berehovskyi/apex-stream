@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongGenerator implements Iterator<Long> {
+public inherited sharing class LongGenerator implements Iterator<Long> {
 
     private final ILongSupplier supplier;
 

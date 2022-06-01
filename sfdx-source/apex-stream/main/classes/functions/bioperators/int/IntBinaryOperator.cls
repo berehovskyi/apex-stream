@@ -1,12 +1,15 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IIntBinaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IntStream.zip
  * @see IntSequence.zip
  * @see IIntIterable.reduce
  * @see Collector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntBinaryOperator implements IIntBinaryOperator {
 
@@ -20,9 +23,10 @@ public abstract inherited sharing class IntBinaryOperator implements IIntBinaryO
     // @start-group Built-Ins
     /**
      * @description Returns a `IntBinaryOperator` that return a greater Integer input argument.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
-     * @see Math.max
      */
     public static IntBinaryOperator max() {
         return new Max();
@@ -30,9 +34,10 @@ public abstract inherited sharing class IntBinaryOperator implements IIntBinaryO
 
     /**
      * @description Returns a `IntBinaryOperator` that return a lesser Integer input argument.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
-     * @see Math.min
      */
     public static IntBinaryOperator min() {
         return new Min();
@@ -40,7 +45,9 @@ public abstract inherited sharing class IntBinaryOperator implements IIntBinaryO
 
     /**
      * @description Returns a `IntBinaryOperator` that return a product of two Integer input arguments.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
      */
     public static IntBinaryOperator product() {
@@ -49,7 +56,9 @@ public abstract inherited sharing class IntBinaryOperator implements IIntBinaryO
 
     /**
      * @description Returns a `IntBinaryOperator` that return a sum of two Integer input arguments.
+     *
      * @return the `IntBinaryOperator`
+     *
      * @throws NullPointerException if one of the Integer input argument is null
      */
     public static IntBinaryOperator sum() {
@@ -61,11 +70,11 @@ public abstract inherited sharing class IntBinaryOperator implements IIntBinaryO
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Max extends IntBinaryOperator {
-        public override Integer apply(Integer i1, Integer i2) { return Math.max(i1, i2); }
+        public override Integer apply(Integer i1, Integer i2) { return Comparator.compareNullSafeInts(i1, i2) == 1 ? i1 : i2; }
     }
 
     private class Min extends IntBinaryOperator {
-        public override Integer apply(Integer i1, Integer i2) { return Math.min(i1, i2); }
+        public override Integer apply(Integer i1, Integer i2) { return Comparator.compareNullSafeInts(i1, i2) != 1 ? i1 : i2; }
     }
 
     private class Product extends IntBinaryOperator {

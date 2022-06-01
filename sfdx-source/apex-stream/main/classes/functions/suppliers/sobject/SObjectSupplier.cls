@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectSupplier} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectSupplier implements ISObjectSupplier {
 
@@ -17,9 +19,13 @@ public abstract inherited sharing class SObjectSupplier implements ISObjectSuppl
     /**
      * @description Returns a `SObjectSupplier` that returns a new `SObject` instance
      * of the given `sObjectType`.
+     *
      * @param sObjectType SObjectType of the new instance to create
+     *
      * @return the `SObjectSupplier`
+     *
      * @throws NullPointerException if `sObjectType` is null
+     *
      * @see SObjectType.newSObject
      */
     public static SObjectSupplier of(final SObjectType sObjectType) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class SObjectSupplier implements ISObjectSuppl
 
     /**
      * @description Returns a stateful `Supplier` that returns a reference of the `sObj` SObject.
+     *
      * @param sObj the SObject
+     *
      * @return the `SObjectSupplier`
+     *
      * @throws NullPointerException if `sObj` is null
      */
     public static SObjectSupplier constant(final SObject sObj) {

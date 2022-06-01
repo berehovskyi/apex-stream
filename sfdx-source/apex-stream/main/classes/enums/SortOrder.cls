@@ -1,7 +1,9 @@
 /**
- * @author O. Berehovskyi
- * @group Enums
  * @description SortOrder
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Enums
  */
 public enum SortOrder {
     ASCENDING,

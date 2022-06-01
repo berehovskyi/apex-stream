@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntDropIterator extends IntBaseIterator {
+public inherited sharing class IntDropIterator extends IntBaseIterator {
 
     private final Iterator<Integer> iterator;
     private final IIntPredicate predicate;

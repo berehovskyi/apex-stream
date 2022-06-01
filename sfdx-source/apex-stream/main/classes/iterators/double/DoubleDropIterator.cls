@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleDropIterator extends DoubleBaseIterator {
+public inherited sharing class DoubleDropIterator extends DoubleBaseIterator {
 
     private final Iterator<Double> iterator;
     private final IDoublePredicate predicate;

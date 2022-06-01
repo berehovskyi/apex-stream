@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntSkipIterator implements Iterator<Integer> {
+public inherited sharing class IntSkipIterator implements Iterator<Integer> {
 
     private final Iterator<Integer> iterator;
     private final Integer n;

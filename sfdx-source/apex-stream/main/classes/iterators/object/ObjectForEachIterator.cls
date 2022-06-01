@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectForEachIterator implements Iterator<Object> {
+public inherited sharing class ObjectForEachIterator implements Iterator<Object> {
 
     private final Iterator<Object> iterator;
     private final IConsumer consumer;

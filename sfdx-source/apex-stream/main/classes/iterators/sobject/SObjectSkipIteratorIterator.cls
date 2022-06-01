@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectSkipIteratorIterator implements Iterator<SObject> {
+public inherited sharing class SObjectSkipIteratorIterator implements Iterator<SObject> {
 
     private final Iterator<SObject> iterator;
     private final Integer n;

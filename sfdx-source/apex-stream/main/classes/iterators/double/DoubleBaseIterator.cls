@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public abstract class DoubleBaseIterator implements Iterator<Double> {
+public abstract inherited sharing class DoubleBaseIterator implements Iterator<Double> {
 
     protected Double next;
     protected Boolean hasNext = false, isInit = false;

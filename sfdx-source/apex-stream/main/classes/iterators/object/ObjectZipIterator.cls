@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectZipIterator implements Iterator<Object> {
+public inherited sharing class ObjectZipIterator implements Iterator<Object> {
 
     private final Iterator<Object> iterator1;
     private final Iterator<Object> iterator2;

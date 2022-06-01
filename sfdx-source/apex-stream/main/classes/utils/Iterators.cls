@@ -1,14 +1,19 @@
 /**
- * @author O. Berehovskyi
- * @group Utils
  * @description Contains static utility methods that operate Iterators.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Utils
  */
 public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `List<SObject>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `List<SObject>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static List<SObject> toSObjectList(final Iterator<SObject> iterator) {
@@ -22,8 +27,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `Set<SObject>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `Set<SObject>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static Set<SObject> toSObjectSet(final Iterator<SObject> iterator) {
@@ -37,8 +45,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `Map<Id, SObject>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `Map<Id, SObject>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static Map<Id, SObject> toSObjectMap(final Iterator<SObject> iterator) {
@@ -47,8 +58,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `List<Object>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `List<Object>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static List<Object> toObjectList(final Iterator<Object> iterator) {
@@ -62,8 +76,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `Set<Object>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `Set<Object>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static Set<Object> toObjectSet(final Iterator<Object> iterator) {
@@ -77,8 +94,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `List<Integer>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `List<Integer>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static List<Integer> toIntList(final Iterator<Integer> iterator) {
@@ -92,8 +112,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `Set<Integer>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `Set<Integer>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static Set<Integer> toIntSet(final Iterator<Integer> iterator) {
@@ -107,8 +130,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `List<Long>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `List<Long>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static List<Long> toLongList(final Iterator<Long> iterator) {
@@ -122,8 +148,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `Set<Long>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `Set<Long>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static Set<Long> toLongSet(final Iterator<Long> iterator) {
@@ -137,8 +166,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `List<Double>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `List<Double>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static List<Double> toDoubleList(final Iterator<Double> iterator) {
@@ -152,8 +184,11 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Returns a `Set<Double>` created from `iterator`.
+     *
      * @param iterator the iterator
+     *
      * @return the `Set<Double>`
+     *
      * @throws NullPointerException if `iterator` is null
      */
     public static Set<Double> toDoubleSet(final Iterator<Double> iterator) {
@@ -167,14 +202,18 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`.
-     * @example 
-     * List<String> accNames = (List<String>) 
-     *     Iterators.toList(accIterator, SObjectFunction.get('Name'), List<String>.class);
+     *
      * @param iterator the iterator
      * @param mapper the mapping function
      * @param listType the result type
+     *
      * @return the `List<Object>` which can be cast into `listType`
+     *
      * @throws NullPointerException if `iterator`, `mapper` or `listType` is null
+     *
+     * @example
+     * List<String> accNames = (List<String>)
+     *     Iterators.toList(accIterator, SObjectFunction.get('Name'), List<String>.class);
      */
     public static List<Object> toList(
             final Iterator<SObject> iterator,
@@ -193,12 +232,16 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Accumulates values returned by `mapper` into a `Set<Object>`.
-     * @example 
-     * Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunction.get('CreatedDate'));
+     *
      * @param iterator the iterator
      * @param mapper the mapping function
+     *
      * @return the `Set<Object>`
+     *
      * @throws NullPointerException if `iterator` or `mapper` is null
+     *
+     * @example
+     * Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunction.get('CreatedDate'));
      */
     public static Set<Object> toObjectSet(final Iterator<SObject> iterator, final ISObjectFunction mapper) {
         Validate.notNull(iterator);
@@ -212,9 +255,12 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Accumulates values returned by `mapper` into a `Set<Object>`.
+     *
      * @param iterator the iterator
      * @param mapper the mapping function
+     *
      * @return the `Set<Object>`
+     *
      * @throws NullPointerException if `iterator` or `mapper` is null
      */
     public static Set<Object> toObjectSet(final Iterator<Object> iterator, final IFunction mapper) {
@@ -229,12 +275,16 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Accumulates values returned by `mapper` into a `Set<Id>`.
-     * @example 
-     * Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunction.get('ParentId'));
+     *
      * @param iterator the iterator
      * @param mapper the mapping function
+     *
      * @return the `Set<Id>`
+     *
      * @throws NullPointerException if `iterator` or `mapper` is null
+     *
+     * @example
+     * Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunction.get('ParentId'));
      */
     public static Set<Id> toIdSet(final Iterator<SObject> iterator, final ISObjectFunction mapper) {
         Validate.notNull(iterator);
@@ -248,12 +298,16 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Accumulates values returned by `mapper` into a `Set<String>`.
-     * @example 
-     * Set<String> names = Iterators.toStringSet(accIterator, SObjectFunction.get('Name'));
+     *
      * @param iterator the iterator
      * @param mapper the mapping function
+     *
      * @return the `Set<String>`
+     *
      * @throws NullPointerException if `iterator` or `mapper` is null
+     *
+     * @example
+     * Set<String> names = Iterators.toStringSet(accIterator, SObjectFunction.get('Name'));
      */
     public static Set<String> toStringSet(final Iterator<SObject> iterator, final ISObjectFunction mapper) {
         Validate.notNull(iterator);
@@ -268,15 +322,19 @@ public virtual inherited sharing class Iterators {
     /**
      * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
-     * @example 
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
-     *     .toByIdMap(contIterator, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+     *
      * @param iterator the iterator
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
+     *
      * @return the `Map<Id, SObject>` which can be cast into `mapType`
-     * @throws NullPointerException if `iterator`, `keyMapper` or `listType` is null
+     *
      * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `iterator`, `keyMapper` or `listType` is null
+     *
+     * @example
+     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
+     *     .toByIdMap(contIterator, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
      */
     public static Map<Id, SObject> toByIdMap(
             final Iterator<SObject> iterator,
@@ -303,15 +361,19 @@ public virtual inherited sharing class Iterators {
     /**
      * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
-     * @example 
-     * Map<String, Account> accountByName = (Map<String, Account>) Iterators
-     *     .toByIdMap(accIterator, SObjectFunction.get('Name'), Map<String, Account>.class);
+     *
      * @param iterator the iterator
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
+     *
      * @return the `Map<String, SObject>` which can be cast into `mapType`
-     * @throws NullPointerException if `iterator`, `keyMapper` or `listType` is null
+     *
      * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `iterator`, `keyMapper` or `listType` is null
+     *
+     * @example
+     * Map<String, Account> accountByName = (Map<String, Account>) Iterators
+     *     .toByIdMap(accIterator, SObjectFunction.get('Name'), Map<String, Account>.class);
      */
     public static Map<String, SObject> toByStringMap(
             final Iterator<SObject> iterator,
@@ -338,14 +400,21 @@ public virtual inherited sharing class Iterators {
     /**
      * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
-     * @example
-     * Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, SObjectFunction.get('AccountId'));
+     *
      * @param iterator the iterator
      * @param keyMapper the mapping function producing keys
+     *
      * @return the `Map<Id, List<SObject>>` containing the elements
+     *
      * @throws NullPointerException if `iterator` or `keyMapper` is blank
+     *
+     * @example 
+     * Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, SObjectFunction.get('AccountId'));
      */
-    public static Map<Id, List<SObject>> groupById(final Iterator<SObject> iterator, final ISObjectFunction keyMapper) {
+    public static Map<Id, List<SObject>> groupById(
+            final Iterator<SObject> iterator,
+            final ISObjectFunction keyMapper
+    ) {
         Validate.notNull(iterator);
         Validate.notNull(keyMapper);
         final Map<Id, List<SObject>> m = new Map<Id, List<SObject>>();
@@ -365,13 +434,17 @@ public virtual inherited sharing class Iterators {
     /**
      * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
+     *
+     * @param iterator the iterator
+     * @param keyMapper the mapping function producing keys
+     *
+     * @return the `Map<Id, List<SObject>>` containing the elements
+     *
+     * @throws NullPointerException if `iterator` or `keyMapper` is null
+     *
      * @example
      * Map<String, List<Account>> accountsByRating = Iterators
      *     .groupByString(accIterator, SObjectFunction.get('Rating'));
-     * @param iterator the iterator
-     * @param keyMapper the mapping function producing keys
-     * @return the `Map<Id, List<SObject>>` containing the elements
-     * @throws NullPointerException if `iterator` or `keyMapper` is null
      */
     public static Map<String, List<SObject>> groupByString(
             final Iterator<SObject> iterator,
@@ -395,13 +468,17 @@ public virtual inherited sharing class Iterators {
 
     /**
      * @description Partitions `SObject` elements by `predicate`.
+     *
+     * @param iterator the iterator
+     * @param predicate the predicate
+     *
+     * @return the `Map<Boolean, List<SObject>>` containing the elements
+     *
+     * @throws NullPointerException if `iterator` or `predicate` is null
+     *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
      *     = Iterators.partition(accIterator, SObjectPredicate.isEqual(Account.Rating, 'Hot'));
-     * @param iterator the iterator
-     * @param predicate the predicate
-     * @return the `Map<Boolean, List<SObject>>` containing the elements
-     * @throws NullPointerException if `iterator` or `predicate` is null
      */
     public static Map<Boolean, List<SObject>> partition(
             final Iterator<SObject> iterator,

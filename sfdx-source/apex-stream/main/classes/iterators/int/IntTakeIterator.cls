@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntTakeIterator implements Iterator<Integer> {
+public inherited sharing class IntTakeIterator implements Iterator<Integer> {
 
     private final Iterator<Integer> iterator;
     private final IIntPredicate predicate;

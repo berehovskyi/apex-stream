@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongToObjectMapIterator implements Iterator<Object> {
+public inherited sharing class LongToObjectMapIterator implements Iterator<Object> {
 
     private final Iterator<Long> iterator;
     private final ILongFunction mapper;

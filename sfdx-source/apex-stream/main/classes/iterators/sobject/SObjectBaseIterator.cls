@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public abstract class SObjectBaseIterator implements Iterator<SObject> {
+public abstract inherited sharing class SObjectBaseIterator implements Iterator<SObject> {
 
     protected SObject next;
     protected Boolean hasNext = false, isInit = false;

@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleTakeIterator implements Iterator<Double> {
+public inherited sharing class DoubleTakeIterator implements Iterator<Double> {
 
     private final Iterator<Double> iterator;
     private final IDoublePredicate predicate;

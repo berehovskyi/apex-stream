@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  */
-public class SObjectFlatMapToIntIterator extends IntBaseIterator {
+public inherited sharing class SObjectFlatMapToIntIterator extends IntBaseIterator {
 
     private final Iterator<SObject> iterator;
     private final ISObjectFunction mapper;

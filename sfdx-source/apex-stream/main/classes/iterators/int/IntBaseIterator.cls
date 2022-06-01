@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public abstract class IntBaseIterator implements Iterator<Integer> {
+public abstract inherited sharing class IntBaseIterator implements Iterator<Integer> {
 
     protected Integer next;
     protected Boolean hasNext = false, isInit = false;

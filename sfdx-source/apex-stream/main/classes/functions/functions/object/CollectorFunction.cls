@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `CollectorFunction`
  * used specifically by `Collector` and `SObjectCollector`.
+ *
  * @see Collector
  * @see SObjectCollector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class CollectorFunction extends Function {
 
@@ -13,9 +16,13 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that appends the `suffix` the
      * the boxed string.
+     *
      * @param suffix the string to append
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `index` is null
+     *
      * @see Collector.joining
      * @see SObjectCollector.joining
      */
@@ -25,7 +32,9 @@ public abstract inherited sharing class CollectorFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns the final result of Integer averaging.
+     *
      * @return the `Function`
+     *
      * @see Collector.averagingInt
      * @see SObjectCollector.averagingInt
      */
@@ -35,7 +44,9 @@ public abstract inherited sharing class CollectorFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns the final result of Long averaging.
+     *
      * @return the `Function`
+     *
      * @see Collector.averagingLong
      * @see SObjectCollector.averagingLong
      */
@@ -45,7 +56,9 @@ public abstract inherited sharing class CollectorFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns the final result of Double averaging.
+     *
      * @return the `Function`
+     *
      * @see Collector.averagingDouble
      * @see SObjectCollector.averagingDouble
      */
@@ -55,7 +68,9 @@ public abstract inherited sharing class CollectorFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns the final result of Double summation.
+     *
      * @return the `Function`
+     *
      * @see Collector.summingDouble
      * @see SObjectCollector.summingDouble
      */
@@ -66,8 +81,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by booleans final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByBool
      * @see SObjectCollector.groupingByBool
      */
@@ -78,8 +96,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by ids final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingById
      * @see SObjectCollector.groupingById
      */
@@ -90,8 +111,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by strings final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByString
      * @see SObjectCollector.groupingByString
      */
@@ -102,8 +126,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by blobs final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByBlob
      * @see SObjectCollector.groupingByBlob
      */
@@ -114,8 +141,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by dates final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByDate
      * @see SObjectCollector.groupingByDate
      */
@@ -126,8 +156,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by datetimes final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByDatetime
      * @see SObjectCollector.groupingByDatetime
      */
@@ -138,8 +171,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by times final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByTime
      * @see SObjectCollector.groupingByTime
      */
@@ -150,8 +186,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by integers final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByInt
      * @see SObjectCollector.groupingByInt
      */
@@ -162,8 +201,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by longs final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByLong
      * @see SObjectCollector.groupingByLong
      */
@@ -174,8 +216,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by Doubles final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingByDouble
      * @see SObjectCollector.groupingByDouble
      */
@@ -186,8 +231,11 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
      * and returns the grouping by objects final result.
+     *
      * @param finisher the function applied to every map value
+     *
      * @return the `Function`
+     *
      * @see Collector.groupingBy
      * @see SObjectCollector.groupingBy
      */
@@ -198,7 +246,9 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that returns the final result of SObject reducing
      * as `SObjectOptional`.
+     *
      * @return the `Function`
+     *
      * @see SObjectCollector.reducing
      */
     public static Function reducingOptionalSObject() {
@@ -208,7 +258,9 @@ public abstract inherited sharing class CollectorFunction extends Function {
     /**
      * @description Returns a `Function` that returns the final result of object reducing
      * as `Optional`.
+     *
      * @return the `Function`
+     *
      * @see Collector.reducing
      */
     public static Function reducingOptional() {

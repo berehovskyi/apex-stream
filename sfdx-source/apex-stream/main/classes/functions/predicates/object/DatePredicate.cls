@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Predicate` functions and provides `DatePredicate`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DatePredicate extends Predicate {
 
@@ -11,9 +13,13 @@ public abstract inherited sharing class DatePredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input date if it is the same
      * as the specified `dateToCompare` in the local time zone of the context user.
+     *
      * @param dateToCompare date
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `dateToCompare` is null
+     *
      * @see Date.isSameDay
      */
     public static Predicate isSameDay(final Date dateToCompare) {
@@ -24,7 +30,9 @@ public abstract inherited sharing class DatePredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input date if it is the year
      * is the leap year.
+     *
      * @return the `Predicate`
+     *
      * @see Date.isLeapYear
      */
     public static Predicate isLeapYear() {

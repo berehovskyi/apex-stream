@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongZipIterator implements Iterator<Long> {
+public inherited sharing class LongZipIterator implements Iterator<Long> {
 
     private final Iterator<Long> iterator1;
     private final Iterator<Long> iterator2;

@@ -48,4 +48,20 @@
         <shortDescription>Error message.</shortDescription>
         <value>Types of comparing objects ({0}, {1}) mismatch or do not support comparison operators.</value>
     </labels>
+    <labels>
+        <fullName>NoValuePresentErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>No value present.</value>
+    </labels>
+    <labels>
+        <fullName>NotReferenceFieldErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>{0} is not a lookup or master-detail field.</value>
+    </labels>
 </CustomLabels>

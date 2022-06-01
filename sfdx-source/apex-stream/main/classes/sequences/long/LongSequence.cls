@@ -1,8 +1,17 @@
 /**
- * @author O. Berehovskyi
- * @group Iterables
  * @description A sequence of `Long` elements supporting aggregate operations,
  * a primitive specialization of {@link ObjectSequence}.
+ *
+ * @see LongStream
+ * @see SObjectSequence
+ * @see ObjectSequence
+ * @see DoubleSequence
+ * @see IntSequence
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Iterables
+ *
  * @example
  * Long sumAnnualRevenueOfUniquePeopleFromLondon
  *     = ObjectSequence.of(people)
@@ -10,11 +19,6 @@
  *         .distinct()
  *         .mapToLong(getAnnualRevenueToLongFunction)
  *         .sum();
- * @see LongStream
- * @see SObjectSequence
- * @see ObjectSequence
- * @see DoubleSequence
- * @see IntSequence
  */
 public virtual inherited sharing class LongSequence extends LongIterable implements ILongIterable {
 
@@ -24,13 +28,14 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
         this(new List<Long>());
     }
 
-    protected LongSequence(final List<Long> longs){
+    protected LongSequence(final List<Long> longs) {
         this.longs = longs;
     }
 
     /**
      * @description Returns an internal iterator for the elements of this sequence.
      * <p>Terminal Operation.</p>
+     *
      * @return the internal `Iterator<Long>`
      */
     public Iterator<Long> iterator() {
@@ -41,6 +46,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     // @start-group Conversion Operations
     /**
      * @description Returns an `ObjectSequence` consisting of the elements of this sequence, converted to Object.
+     *
      * @return the `ObjectSequence`
      */
     public virtual IObjectIterable toObjectIterable() {
@@ -53,11 +59,15 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     // @start-group Sources
     /**
      * @description Returns a `LongSequence` created from `longs` list.
+     *
+     * @param longs the list of Longs
+     *
+     * @return the new `LongSequence`
+     *
+     * @throws NullPointerException if `longs` is null
+     *
      * @example
      * ILongIterable longSeq = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 });
-     * @param longs the list of Longs
-     * @return the new `LongSequence`
-     * @throws NullPointerException if `longs` is null
      */
     public static ILongIterable of(final List<Long> longs) {
         Validate.notNull(longs);
@@ -66,11 +76,15 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
 
     /**
      * @description Returns a `LongSequence` created from `longs` set.
+     *
+     * @param longs the set of Longs
+     *
+     * @return the new `LongSequence`
+     *
+     * @throws NullPointerException if `longs` is null
+     *
      * @example
      * ILongIterable longSeq = LongSequence.of(new Set<Long>{ 0, 5L, 1L, -10 });
-     * @param longs the set of Longs
-     * @return the new `LongSequence`
-     * @throws NullPointerException if `longs` is null
      */
     public static ILongIterable of(final Set<Long> longs) {
         Validate.notNull(longs);
@@ -80,11 +94,14 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` created from `longs` list if non-null,
      * otherwise returns an empty `LongSequence`.
-     * @example
-     * ILongIterable longSeq = LongSequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+     *
      * @param longs the list of Longs
+     *
      * @return the new `LongSequence` if `longs` is non-null,
      * otherwise an empty `LongSequence`
+     *
+     * @example
+     * ILongIterable longSeq = LongSequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
      */
     public static ILongIterable ofNullable(final List<Long> longs) {
         if (longs == null) { return empty(); }
@@ -94,11 +111,14 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` created from `longs` set if non-null,
      * otherwise returns an empty `LongSequence`.
-     * @example
-     * ILongIterable longSeq = LongSequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+     *
      * @param longs the set of Longs
+     *
      * @return the new `LongSequence` if `longs` is non-null,
      * otherwise an empty `LongSequence`
+     *
+     * @example
+     * ILongIterable longSeq = LongSequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static ILongIterable ofNullable(final Set<Long> longs) {
         if (longs == null) { return empty(); }
@@ -107,6 +127,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
 
     /**
      * @description Returns an empty `LongSequence`.
+     *
      * @return the empty `LongSequence`
      */
     public static ILongIterable empty() {
@@ -114,14 +135,18 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     }
 
     /**
-     * @description Returns an ordered `LongSequence` 
+     * @description Returns an ordered `LongSequence`
      * from `fromLong` (inclusive) to `toLong` (inclusive) by an incremental step of 1.
-     * @example
-     * ILongIterable longSeqFrom0To100 = LongSequence.range(0, 100);
+     *
      * @param fromLong the inclusive initial value
      * @param toLong the inclusive upper bound
+     *
      * @return the new `LongSequence`
+     *
      * @throws NullPointerException if `fromLong` or `toLong` is null
+     *
+     * @example
+     * ILongIterable longSeqFrom0To100 = LongSequence.range(0, 100);
      */
     public static ILongIterable range(final Long fromLong, final Long toLong) {
         Validate.notNull(fromLong);
@@ -137,12 +162,16 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns eagerly concatenated `LongSequence` whose elements are all the
      * elements of the first `Iterable<Long>` followed by all the elements of the
      * second `Iterable<Long>`.
-     * @example
-     * ILongIterable longSeq = LongSequence.concat(seq1, seq2);
+     *
      * @param iterable1 the first `Iterable<Long>`
      * @param iterable2 the second `Iterable<Long>`
+     *
      * @return the new `LongSequence`
+     *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
+     *
+     * @example
+     * ILongIterable longSeq = LongSequence.concat(seq1, seq2);
      */
     public static ILongIterable concat(final Iterable<Long> iterable1, final Iterable<Long> iterable2) {
         return concat(new List<Iterable<Long>>{ iterable1, iterable2 });
@@ -150,11 +179,15 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
 
     /**
      * @description Returns eagerly concatenates `List<Iterable<Long>>`.
+     *
+     * @param iterables the list of `Iterable<Long>`
+     *
+     * @return the new `LongSequence`
+     *
+     * @throws NullPointerException if `iterables` or some element in a list is null
+     *
      * @example
      * ILongIterable longSeq = LongStream.concat(seqs);
-     * @param iterables the list of `Iterable<Long>`
-     * @return the new `LongSequence`
-     * @throws NullPointerException if `iterables` or some element in a list is null
      */
     public static ILongIterable concat(final List<Iterable<Long>> iterables) {
         Validate.noNullElements(iterables);
@@ -168,10 +201,13 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a combined `LongSequence` by applying `combiner` function
      * to each element at the same position.
+     *
      * @param iterable1 the first `Iterable<Long>`
      * @param iterable2 the second `Iterable<Long>`
      * @param combiner the binary operator to be applied to each element at the same position
+     *
      * @return the new `LongSequence`
+     *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ILongIterable zip(
@@ -194,11 +230,15 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns new `LongSequence` by appending `iterable`
      * to the current sequence.
+     *
+     * @param iterable the `Iterable<Long>` to append to the current sequence
+     *
+     * @return the new `LongSequence`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * ILongIterable longSeq = seq1.append(seq2);
-     * @param iterable the `Iterable<Long>` to append to the current sequence
-     * @return the new `LongSequence`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual override ILongIterable append(final Iterable<Long> iterable) {
         return concat(this, iterable);
@@ -207,11 +247,15 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns new `LongSequence` by prepending `iterable`
      * to the current sequence.
+     *
+     * @param iterable the `Iterable<Long>` to prepend to the current sequence
+     *
+     * @return the new `LongSequence`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * ILongIterable longSeq = seq1.prepend(seq2);
-     * @param iterable the `Iterable<Long>` to prepend to the current sequence
-     * @return the new `LongSequence`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual ILongIterable prepend(final Iterable<Long> iterable) {
         return concat(iterable, this);
@@ -224,9 +268,11 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns new `LongStream` from the current sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the new `LongStream`
+     *
      * @example
      * ILongIterable longStream = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).stream();
-     * @return the new `LongStream`
      */
     public virtual ILongIterable stream() {
         return LongStream.of(iterator());
@@ -235,13 +281,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `LongSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Long> filtered = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .filter(LongPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `LongSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override ILongIterable filter(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -258,13 +308,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `LongSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .take(LongPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `LongSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual ILongIterable take(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -284,13 +338,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns a `LongSequence` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `LongSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Long> rest = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .drop(LongPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `LongSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual ILongIterable drop(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -310,13 +368,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns a `LongSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `LongSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Long> incrementedLongs = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .mapTo(LongUnaryOperator.add(1L))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `LongSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual ILongIterable mapTo(final ILongUnaryOperator mapper) {
         Validate.notNull(mapper);
@@ -331,8 +393,11 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns a `IntSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `IntSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual override IIntIterable mapToInt(final ILongToIntFunction mapper) {
@@ -348,8 +413,11 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns a `DoubleSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `DoubleSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual override IDoubleIterable mapToDouble(final ILongToDoubleFunction mapper) {
@@ -365,8 +433,11 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns a `SObjectSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `SObjectSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual ISObjectIterable mapToSObject(final ILongToSObjectFunction mapper) {
@@ -382,8 +453,11 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns a `ObjectSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `ObjectSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IObjectIterable mapToObject(final ILongFunction mapper) {
@@ -398,9 +472,12 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
+     *
      * @return this `LongSequence`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public virtual ILongIterable forEach(final ILongConsumer consumer) {
@@ -414,11 +491,13 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `LongSequence`
+     *
      * @example
      * List<Long> distinct = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .distinct()
      *     .toList();
-     * @return the `LongSequence`
      */
     public virtual override ILongIterable distinct() {
         final List<Long> results = new List<Long>();
@@ -433,11 +512,13 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `LongSequence`
+     *
      * @example
      * List<Long> sorted = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .sort()
      *     .toList();
-     * @return the `LongSequence`
      */
     public virtual ILongIterable sort() {
         final List<Long> clone = longs.clone();
@@ -448,14 +529,18 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns a `LongSequence` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param lim the number of elements to limit
+     *
+     * @return the `LongSequence`
+     *
+     * @throws IllegalStateException if `lim` is less than 0
+     * @throws NullPointerException if `lim` is null
+     *
      * @example
      * List<Long> first3Longs = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .lim(3)
      *     .toList();
-     * @param lim the number of elements to limit
-     * @return the `LongSequence`
-     * @throws NullPointerException if `lim` is null
-     * @throws IllegalStateException if `lim` is less than 0
      */
     public virtual ILongIterable lim(final Integer lim) {
         Validate.notNull(lim);
@@ -473,14 +558,18 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns a new `LongSequence` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param n the number of elements to skip
+     *
+     * @return the `LongSequence`
+     *
+     * @throws IllegalStateException if `n` is less than 0
+     * @throws NullPointerException if `n` is null
+     *
      * @example
      * List<Long> restLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .skip(1)
      *     .toList();
-     * @param n the number of elements to skip
-     * @return the `LongSequence`
-     * @throws NullPointerException if `n` is null
-     * @throws IllegalStateException if `n` is less than 0
      */
     public virtual ILongIterable skip(final Integer n) {
         Validate.notNull(n);
@@ -504,13 +593,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Performs a reduction on `Long` elements,
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Long` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperator.sum());
      * Long factorialOfN = LongSequence.range(1, n).reduce(1, LongBinaryOperator.product());
-     * @param identity the identity value for `accumulator`
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `Long` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual Long reduce(final Long identity, final ILongBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -526,13 +619,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * using `identity` value and associative `accumulator` function, and returns
      * an `OptionalLong` describing the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `OptionalLong` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *      .reduce(LongBinaryOperator.sum())
      *      .get();
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `OptionalLong` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual override OptionalLong reduce(final ILongBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -547,9 +644,12 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Performs a mutable reduction operation on elements, collecting elements
      * to a container returned by `supplier` by applying `accumulator` function.
      * <p>Terminal Operation.</p>
+     *
      * @param supplier the function that returns a mutable result container
      * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
      * @return the `Object` result of the collection
+     *
      * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public virtual Object collect(final ISupplier supplier, final IObjectLongConsumer accumulator) {
@@ -566,13 +666,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns an `OptionalLong` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `OptionalLong`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Long firstEvenLong = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .find(LongPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return the `OptionalLong`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual OptionalLong find(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -589,13 +693,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns whether all elements match `predicate`.
      * If `LongSequence` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isEveryLongEven = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .every(LongPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual Boolean every(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -606,13 +714,17 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @description Returns whether some element matches `predicate`.
      * If `LongSequence` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isSomeLongEven = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .some(LongPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override Boolean some(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -622,6 +734,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns the sum of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the sum of elements
      */
     public virtual Long sum() {
@@ -634,9 +747,10 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     }
 
     /**
-     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this sequence, 
+     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this sequence,
      * or an empty `OptionalDouble` if this sequence is empty.
      * <p>Terminal Operation.</p>
+     *
      * @return the arithmetic mean of elements
      */
     public virtual OptionalDouble avg() {
@@ -651,6 +765,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns the count of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the count of elements
      */
     public virtual Integer count() {
@@ -660,6 +775,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Returns whether the count of elements is 0.
      * <p>Terminal Operation.</p>
+     *
      * @return `true` or `false`
      */
     public virtual Boolean isEmpty() {
@@ -669,11 +785,13 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Accumulates elements into a `List<Long>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `List<Long>` containing the sequence elements
+     *
      * @example
      * List<Long> restLongs = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
      *     .lim(1)
      *     .toList();
-     * @return the `List<Long>` containing the sequence elements
      */
     public virtual List<Long> toList() {
         return longs;
@@ -682,11 +800,13 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
     /**
      * @description Accumulates elements into a `Set<Long>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<Long>` containing the sequence elements
+     *
      * @example
      * List<Long> restLongs = LongSequence.of(new Set<Long>{ 0, 5L, 1L, -10 })
      *     .lim(1)
      *     .toList();
-     * @return the `Set<Long>` containing the sequence elements
      */
     public virtual Set<Long> toSet() {
         return new Set<Long>(longs);

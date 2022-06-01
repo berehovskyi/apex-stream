@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectSkipIterator implements Iterator<Object> {
+public inherited sharing class ObjectSkipIterator implements Iterator<Object> {
 
     private final Iterator<Object> iterator;
     private final Integer n;

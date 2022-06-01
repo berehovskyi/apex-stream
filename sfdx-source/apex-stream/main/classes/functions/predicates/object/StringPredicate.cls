@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Predicate` functions and provides `StringPredicate`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class StringPredicate extends Predicate {
 
@@ -11,9 +13,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it contains
      * the `substring`.
+     *
      * @param substring string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `substring` is null
+     *
      * @see String.contains
      */
     public static Predicate contains(final String substring) {
@@ -24,9 +30,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it contains any
      * `substring`.
+     *
      * @param substring string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `substring` is null
+     *
      * @see String.containsAny
      */
     public static Predicate containsAny(final String substring) {
@@ -37,9 +47,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it contains
      * the `substring` ignoring case.
+     *
      * @param substring string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `substring` is null
+     *
      * @see String.containsIgnoreCase
      */
     public static Predicate containsIgnoreCase(final String substring) {
@@ -50,9 +64,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it does not
      * contain any of the characters in the `substring`.
+     *
      * @param substring string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `substring` is null
+     *
      * @see String.containsNone
      */
     public static Predicate containsNone(final String substring) {
@@ -63,9 +81,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it contains
      * characters only from the `substring`.
+     *
      * @param substring string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `substring` is null
+     *
      * @see String.containsOnly
      */
     public static Predicate containsOnly(final String substring) {
@@ -76,7 +98,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it contains
      * any white space.
+     *
      * @return the `Predicate`
+     *
      * @see String.containsWhitespace
      */
     public static Predicate containsWhitespace() {
@@ -86,9 +110,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it ends with the
      * `suffix`.
+     *
      * @param suffix string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `suffix` is null
+     *
      * @see String.endsWith
      */
     public static Predicate endsWith(final String suffix) {
@@ -99,9 +127,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it ends with the
      * `suffix` ignoring case.
+     *
      * @param suffix string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `suffix` is null
+     *
      * @see String.endsWithIgnoreCase
      */
     public static Predicate endsWithIgnoreCase(final String suffix) {
@@ -112,9 +144,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it equals to the
      * `that` ignoring case.
+     *
      * @param that string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `that` is null
+     *
      * @see String.equalsIgnoreCase
      */
     public static Predicate equalsIgnoreCase(final String that) {
@@ -125,7 +161,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are lowercase.
+     *
      * @return the `Predicate`
+     *
      * @see String.isAllLowerCase
      */
     public static Predicate isAllLowerCase() {
@@ -135,7 +173,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are uppercase.
+     *
      * @return the `Predicate`
+     *
      * @see String.IsAllUpperCase
      */
     public static Predicate isAllUpperCase() {
@@ -145,7 +185,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are Unicode letters only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isAlpha
      */
     public static Predicate isAlpha() {
@@ -155,7 +197,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are Unicode letters or spaces only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isAlphaSpace
      */
     public static Predicate isAlphaSpace() {
@@ -165,7 +209,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are Unicode letters or numbers only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isAlphaNumeric
      */
     public static Predicate isAlphaNumeric() {
@@ -175,7 +221,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are Unicode letters, spaces or numbers only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isAlphaNumericSpace
      */
     public static Predicate isAlphaNumericSpace() {
@@ -185,7 +233,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are ASCII printable only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isAsciiPrintable
      */
     public static Predicate isAsciiPrintable() {
@@ -195,7 +245,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it is
      * white space, empty (''), or null.
+     *
      * @return the `Predicate`
+     *
      * @see String.isBlank
      */
     public static Predicate isBlank() {
@@ -205,7 +257,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it is
      * empty (''), or null.
+     *
      * @return the `Predicate`
+     *
      * @see String.isEmpty
      */
     public static Predicate isEmpty() {
@@ -216,7 +270,11 @@ public abstract inherited sharing class StringPredicate extends Predicate {
      * @description Returns a `Predicate` that tests the input string if it is
      * like the `likeString`. Supports `%` and
      * `_` wildcards and is case-insensitive.
+     *
+     * @param likeString 
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `likeString` is null
      */
     public static Predicate isLike(final String likeString) {
@@ -227,7 +285,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it is not
      * white space, empty (''), or null.
+     *
      * @return the `Predicate`
+     *
      * @see String.isNotBlank
      */
     public static Predicate isNotBlank() {
@@ -237,7 +297,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it is not
      * empty (''), or null.
+     *
      * @return the `Predicate`
+     *
      * @see String.isNotEmpty
      */
     public static Predicate isNotEmpty() {
@@ -247,7 +309,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are numbers only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isNumeric
      */
     public static Predicate isNumeric() {
@@ -257,7 +321,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are spaces or numbers only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isNumericSpace
      */
     public static Predicate isNumericSpace() {
@@ -267,7 +333,9 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if all characters
      * are spaces only.
+     *
      * @return the `Predicate`
+     *
      * @see String.isWhitespace
      */
     public static Predicate isWhitespace() {
@@ -277,9 +345,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it starts with the
      * `prefix`.
+     *
      * @param prefix string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `prefix` is null
+     *
      * @see String.startsWith
      */
     public static Predicate startsWith(final String prefix) {
@@ -290,9 +362,13 @@ public abstract inherited sharing class StringPredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input string if it starts with the
      * `prefix` ignoring case.
+     *
      * @param prefix string
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `prefix` is null
+     *
      * @see String.startsWithIgnoreCase
      */
     public static Predicate startsWithIgnoreCase(final String prefix) {

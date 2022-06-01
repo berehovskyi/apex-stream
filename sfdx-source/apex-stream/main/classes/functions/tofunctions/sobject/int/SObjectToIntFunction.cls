@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectToIntFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectToIntFunction implements ISObjectToIntFunction {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class SObjectToIntFunction implements ISObject
     // @start-group Static Methods
     /**
      * @description Returns a composed `SObjectToIntFunction` of the `ISObjectFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `SObjectToIntFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static SObjectToIntFunction downcast(final ISObjectFunction mapper) {
@@ -32,17 +37,22 @@ public abstract inherited sharing class SObjectToIntFunction implements ISObject
     /**
      * @description Returns a `SObjectToIntFunction` that gets a value for
      * the specified `fieldName` as Integer. Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectToIntFunction.get('NumberOfEmployees');
-     * SObjectToIntFunction.get('Parent.NumberOfEmployees');
-     * SObjectToIntFunction.get('Parent?.NumberOfEmployees');
+     *
      * @param fieldName the field to get a Integer value
+     *
      * @return the `SObjectToIntFunction`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.get
+     *
+     * @example
+     * SObjectToIntFunction.get('NumberOfEmployees');
+     * SObjectToIntFunction.get('Parent.NumberOfEmployees');
+     * SObjectToIntFunction.get('Parent?.NumberOfEmployees');
      */
     public static SObjectToIntFunction get(final String fieldName) {
         return downcast(SObjectFunction.get(fieldName));
@@ -51,12 +61,17 @@ public abstract inherited sharing class SObjectToIntFunction implements ISObject
     /**
      * @description Returns a `SObjectToIntFunction` that gets a value for
      * the specified `field` as Integer.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `SObjectToIntFunction`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see SObject.get
+     *
      * @example
      * SObjectToIntFunction.get(Account.NumberOfEmployees);
-     * @param field the field to get a value
-     * @return the `SObjectToIntFunction`
-     * @throws NullPointerException if `field` is null
-     * @see SObject.get
      */
     public static SObjectToIntFunction get(final SObjectField field) {
         return downcast(SObjectFunction.get(field));

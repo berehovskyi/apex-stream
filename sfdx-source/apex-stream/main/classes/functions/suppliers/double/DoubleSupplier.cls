@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IDoubleSupplier} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DoubleSupplier implements IDoubleSupplier {
 
@@ -16,7 +18,9 @@ public abstract inherited sharing class DoubleSupplier implements IDoubleSupplie
     // @start-group Built-Ins
     /**
      * @description Returns a `DoubleSupplier` that returns a next random Double value.
+     *
      * @return the `DoubleSupplier`
+     *
      * @see Math.random
      */
     public static DoubleSupplier random() {

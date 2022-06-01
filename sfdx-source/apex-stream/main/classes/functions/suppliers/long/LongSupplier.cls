@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ILongSupplier} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class LongSupplier implements ILongSupplier {
 
@@ -19,6 +21,7 @@ public abstract inherited sharing class LongSupplier implements ILongSupplier {
      * incremented by 1 starting at 0L.
      * <p><strong>Note: </strong></p>
      * <p>This is a stateful function.</p>
+     *
      * @return the `LongSupplier`
      */
     public static LongSupplier increment() {
@@ -30,7 +33,12 @@ public abstract inherited sharing class LongSupplier implements ILongSupplier {
      * incremented by `step` starting at `fromLong` inclusively.
      * <p><strong>Note: </strong></p>
      * <p>This is a stateful function.</p>
+     *
+     * @param fromLong the starting value
+     * @param step the incremental step
+     *
      * @return the `LongSupplier`
+     *
      * @throws NullPointerException if `fromLong` or `step` is null
      */
     public static LongSupplier increment(final Long fromLong, final Integer step) {
@@ -44,6 +52,7 @@ public abstract inherited sharing class LongSupplier implements ILongSupplier {
      * starting at 1L.
      * <p><strong>Note: </strong></p>
      * <p>This is a stateful function.</p>
+     *
      * @return the `LongSupplier`
      */
     public static LongSupplier fibonacci() {

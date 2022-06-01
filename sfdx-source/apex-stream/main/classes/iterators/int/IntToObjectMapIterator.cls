@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntToObjectMapIterator implements Iterator<Object> {
+public inherited sharing class IntToObjectMapIterator implements Iterator<Object> {
 
     private final Iterator<Integer> iterator;
     private final IIntFunction mapper;

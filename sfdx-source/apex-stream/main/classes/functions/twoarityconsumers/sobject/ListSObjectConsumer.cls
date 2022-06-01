@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `List<T> - SObject` two-arity consumers. Typically is used by collectors.
+ *
  * @see IObjectSObjectConsumer
  * @see SObjectCollector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjectConsumer {
 
@@ -14,10 +17,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Object>` and adds to this `List` the result returned by the `mapper`
      * applied to the second input argument.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.toList
      */
     public static ObjectSObjectConsumer addToList(final ISObjectFunction mapper) {
@@ -33,12 +40,16 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<String>`, gets the first element and appends to it the second argument as
      * `String` using the `delimiter`.
+     *
      * @param mapper the function applied to the second input argument
      * @param delimiter the `String` to be used between each element
      * @param prefix the `String` to be used at the beginning of the joined result
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper`, `delimiter`, or the `prefix` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.joining
      */
     public static ObjectSObjectConsumer joining(
@@ -59,10 +70,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Integer>`, which is used as a container to track the number of elements and the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.averagingInt
      */
     public static ObjectSObjectConsumer averagingInt(final ISObjectToIntFunction mapper) {
@@ -73,10 +88,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Integer>`, which is used as a container to track the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.summingInt
      */
     public static ObjectSObjectConsumer summingInt(final ISObjectToIntFunction mapper) {
@@ -91,10 +110,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Long>`, which is used as a container to track the number of elements and the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.averagingLong
      */
     public static ObjectSObjectConsumer averagingLong(final ISObjectToLongFunction mapper) {
@@ -105,10 +128,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Long>`, which is used as a container to track the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.summingLong
      */
     public static ObjectSObjectConsumer summingLong(final ISObjectToLongFunction mapper) {
@@ -124,10 +151,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Double>`, which is used as a container to track the number of elements
      * and the total sum using `Kahan Summation`.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.averagingDouble
      */
     public static ObjectSObjectConsumer averagingDouble(final ISObjectToDoubleFunction mapper) {
@@ -139,10 +170,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Double>`, which is used as a container to track the total sum using
      * `Kahan Summation`.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see SObjectCollector.summingDouble
      */
     public static ObjectSObjectConsumer summingDouble(final ISObjectToDoubleFunction mapper) {
@@ -157,10 +192,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Object>`, gets the first element and reduces its value using `accumulator`.
+     *
      * @param accumulator the `ISObjectBinaryOperator` to be used between each element
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `accumulator` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.reducing
      */
     public static ObjectSObjectConsumer reducing(final ISObjectBinaryOperator accumulator) {
@@ -172,10 +211,14 @@ public abstract inherited sharing class ListSObjectConsumer extends ObjectSObjec
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `List<Object>`, if it is empty puts the first element as the second input argument.
      * Otherwise, gets the first element and reduces its value using `accumulator`.
+     *
      * @param accumulator the `ObjectSObjectConsumer` to be used between each element
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `accumulator` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.reducing
      */
     public static ObjectSObjectConsumer reducingOptional(final ISObjectBinaryOperator accumulator) {

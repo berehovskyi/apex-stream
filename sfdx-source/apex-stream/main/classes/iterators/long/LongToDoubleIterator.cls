@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongToDoubleIterator implements Iterator<Double> {
+public inherited sharing class LongToDoubleIterator implements Iterator<Double> {
 
     private final Iterator<Long> iterator;
     private final ILongToDoubleFunction mapper;

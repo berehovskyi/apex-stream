@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongIterate implements Iterator<Long> {
+public inherited sharing class LongIterate implements Iterator<Long> {
 
     private final ILongUnaryOperator operator;
     private Long next;

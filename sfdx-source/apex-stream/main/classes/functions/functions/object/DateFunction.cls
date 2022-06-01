@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `DateFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DateFunction extends Function {
 
@@ -10,9 +12,13 @@ public abstract inherited sharing class DateFunction extends Function {
     // @start-group Date Functions
     /**
      * @description Returns a `Function` that adds `days` to an input argument.
+     *
      * @param days the number of additional days
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `days` is null
+     *
      * @see Date.addDays
      */
     public static Function addDays(final Integer days) {
@@ -22,9 +28,13 @@ public abstract inherited sharing class DateFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `months` to an input argument.
+     *
      * @param months the number of additional months
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `months` is null
+     *
      * @see Date.addMonths
      */
     public static Function addMonths(final Integer months) {
@@ -34,9 +44,13 @@ public abstract inherited sharing class DateFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `years` to an input argument.
+     *
      * @param years the number of additional years
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `years` is null
+     *
      * @see Date.addYears
      */
     public static Function addYears(final Integer years) {
@@ -47,7 +61,9 @@ public abstract inherited sharing class DateFunction extends Function {
     /**
      * @description Returns a `Function` that returns the date as a string
      * using the locale of the context user.
+     *
      * @return the `Function`
+     *
      * @see Date.format
      */
     public static Function format() {
@@ -56,7 +72,9 @@ public abstract inherited sharing class DateFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns the first day of the month for an input argument.
+     *
      * @return the `Function`
+     *
      * @see Date.toStartOfMonth
      */
     public static Function toStartOfMonth() {
@@ -65,7 +83,9 @@ public abstract inherited sharing class DateFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns the first day of the week for an input argument.
+     *
      * @return the `Function`
+     *
      * @see Date.toStartOfWeek
      */
     public static Function toStartOfWeek() {

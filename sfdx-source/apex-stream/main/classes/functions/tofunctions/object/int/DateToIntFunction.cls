@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `ToIntFunction` functions and provides `DateToIntFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DateToIntFunction extends ToIntFunction {
 
@@ -11,7 +13,9 @@ public abstract inherited sharing class DateToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the day-of-month component
      * of the Date input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Date.day
      */
     public static ToIntFunction day() {
@@ -21,7 +25,9 @@ public abstract inherited sharing class DateToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the day-of-year component
      * of the Date input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Date.day
      */
     public static ToIntFunction dayOfYear() {
@@ -31,9 +37,13 @@ public abstract inherited sharing class DateToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the number of days between
      * the Date input argument and the `other` Date.
+     *
      * @param other the Date to compare
+     *
      * @return the `ToIntFunction`
+     *
      * @throws NullPointerException if `other` is null
+     *
      * @see Date.daysBetween
      */
     public static ToIntFunction daysBetween(final Date other) {
@@ -44,7 +54,9 @@ public abstract inherited sharing class DateToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the month component
      * of the Date input argument in the local time zone of the context user (1 = Jan).
+     *
      * @return the `ToIntFunction`
+     *
      * @see Date.month
      */
     public static ToIntFunction month() {
@@ -54,9 +66,13 @@ public abstract inherited sharing class DateToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the number of months between
      * the Date input argument and the `other` Date, ignoring the difference in days.
+     *
      * @param other the Date to compare
+     *
      * @return the `ToIntFunction`
+     *
      * @throws NullPointerException if `other` is null
+     *
      * @see Date.monthsBetween
      */
     public static ToIntFunction monthsBetween(final Date other) {
@@ -67,7 +83,9 @@ public abstract inherited sharing class DateToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the year component
      * of the Date input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Date.year
      */
     public static ToIntFunction year() {

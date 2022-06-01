@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IIntFunction} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IIntIterable.mapToObject
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntFunction implements IIntFunction {
 
@@ -17,7 +20,9 @@ public abstract inherited sharing class IntFunction implements IIntFunction {
     // @start-group Built-Ins
     /**
      * @description Returns a `IntFunction` that returns a string that represents the Integer input argument.
+     *
      * @return the `SObjectFunction`
+     *
      * @see String.valueOf
      */
     public static IntFunction toString() {
@@ -26,6 +31,7 @@ public abstract inherited sharing class IntFunction implements IIntFunction {
 
     /**
      * @description Returns a `IntFunction` that returns the Integer input argument as object.
+     *
      * @return the `SObjectFunction`
      */
     public static IntFunction toObject() {

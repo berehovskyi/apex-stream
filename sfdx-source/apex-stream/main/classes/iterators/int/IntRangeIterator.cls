@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntRangeIterator implements Iterator<Integer> {
+public inherited sharing class IntRangeIterator implements Iterator<Integer> {
 
     private final Integer endInclusive;
     private Integer current;

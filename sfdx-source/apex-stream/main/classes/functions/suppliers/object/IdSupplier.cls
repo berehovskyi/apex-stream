@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `IdSuppliers`.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IdSupplier extends Supplier {
 
@@ -13,14 +15,19 @@ public abstract inherited sharing class IdSupplier extends Supplier {
      * for the given `sObjectType`.
      * <p><strong>Note: </strong></p>
      * <p>This is a stateful function.</p>
+     *
+     * @param sObjectType SObjectType of the new id to create
+     *
+     * @return the `Supplier`
+     *
+     * @throws NullPointerException if `sObjectType` is null
+     *
+     * @see SObjectType.newSObject
+     *
      * @example
      * ISupplier idSupp = IdSupplier.of(Account.SObjectType);
      * idSupp.get(); // '000000000000000AAA'
      * idSupp.get(); // '000000000000001AAA'
-     * @param sObjectType SObjectType of the new id to create
-     * @return the `Supplier`
-     * @throws NullPointerException if `sObjectType` is null
-     * @see SObjectType.newSObject
      */
     public static Supplier of(final SObjectType sObjectType) {
         Validate.notNull(sObjectType);

@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectDistinctIterator extends ObjectBaseIterator {
+public inherited sharing class ObjectDistinctIterator extends ObjectBaseIterator {
 
     private final Iterator<Object> iterator;
     private final IFunction classifier;

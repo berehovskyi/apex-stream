@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see DoubleUnaryOperator
  */
 @IsTest(IsParallel = true)

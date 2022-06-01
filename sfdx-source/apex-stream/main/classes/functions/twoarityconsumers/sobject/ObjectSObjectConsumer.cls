@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IObjectSObjectConsumer} functional interface and provides
  * common class level implementations, and related utilities.
+ *
  * @see IObjectSObjectConsumer
  * @see SObjectCollector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ObjectSObjectConsumer implements IObjectSObjectConsumer {
 
@@ -24,9 +27,12 @@ public abstract inherited sharing class ObjectSObjectConsumer implements IObject
     /**
      * @description Returns a composed `ObjectSObjectConsumer` that executes `accumulator`
      * operation, if the second input argument satisfies the predicate.
+     *
      * @param predicate the predicate applied to the second input argument
      * @param accumulator the operation to perform after filtering
+     *
      * @return the composed `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if `predicate` or `accumulator` is null
      */
     public static ObjectSObjectConsumer filtering(
@@ -41,9 +47,12 @@ public abstract inherited sharing class ObjectSObjectConsumer implements IObject
     /**
      * @description Returns a composed `ObjectSObjectConsumer` that applies `accumulator`
      * operation to the result returned by the `mapper`.
+     *
      * @param mapper the operator applied to the second input argument
      * @param accumulator the operation to perform
+     *
      * @return the composed `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if `mapper` or `accumulator` is null
      */
     public static ObjectSObjectConsumer mapping(final ISObjectFunction mapper, final IBiConsumer accumulator) {
@@ -55,9 +64,12 @@ public abstract inherited sharing class ObjectSObjectConsumer implements IObject
     /**
      * @description Returns a composed `ObjectSObjectConsumer` that applies `accumulator`
      * operation to the `Iterable<SObject>` elements produced by the `mapper`.
+     *
      * @param mapper the operator applied to the second input argument which must produce `Iterable<SObject>`
      * @param accumulator the operation to perform
+     *
      * @return the composed `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if `mapper` or `accumulator` is null
      */
     public static ObjectSObjectConsumer flatMapping(final ISObjectFunction mapper, final IBiConsumer accumulator) {

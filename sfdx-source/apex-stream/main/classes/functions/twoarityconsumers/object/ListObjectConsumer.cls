@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `List<T> - Object` two-arity consumers. Typically is used by collectors.
+ *
  * @see IBiConsumer
  * @see Collector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
 
@@ -13,8 +16,11 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to `List<Object>`
      * and adds the second input argument to this `List`.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toList
      */
     public static BiConsumer addToList() {
@@ -25,10 +31,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
      * @description Returns a `BiConsumer` that casts the first input argument to `List`
      * and adds to this `List<Object>` the result returned by the `mapper` applied to the second
      * input argument.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.toList
      */
     public static BiConsumer addToList(final IFunction mapper) {
@@ -44,11 +54,15 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<String>`, gets the first element and appends to it the second argument as
      * `String` using the `delimiter`.
+     *
      * @param delimiter the `String` to be used between each element
      * @param prefix the `String` to be used at the beginning of the joined result
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `delimiter` or the `prefix` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.joining
      */
     public static BiConsumer joining(final String delimiter, final String prefix) {
@@ -65,10 +79,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Integer>`, which is used as a container to track the number of elements
      * and the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.averagingInt
      */
     public static BiConsumer averagingInt(final IToIntFunction mapper) {
@@ -79,10 +97,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Integer>`, which is used as a container to track the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.summingInt
      */
     public static BiConsumer summingInt(final IToIntFunction mapper) {
@@ -97,10 +119,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Long>`, which is used as a container to track the number of elements and the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.averagingLong
      */
     public static BiConsumer averagingLong(final IToLongFunction mapper) {
@@ -111,10 +137,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Long>`, which is used as a container to track the total sum.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.summingLong
      */
     public static BiConsumer summingLong(final IToLongFunction mapper) {
@@ -130,10 +160,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Double>`, which is used as a container to track the number of elements
      * and the total sum using `Kahan Summation`.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.averagingDouble
      */
     public static BiConsumer averagingDouble(final IToDoubleFunction mapper) {
@@ -145,10 +179,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Double>`, which is used as a container to track the total sum using
      * `Kahan Summation`.
+     *
      * @param mapper the function applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.summingDouble
      */
     public static BiConsumer summingDouble(final IToDoubleFunction mapper) {
@@ -163,10 +201,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Object>`, gets the first element and reduces its value using `accumulator`.
+     *
      * @param accumulator the `IBinaryOperator` to be used between each element
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `accumulator` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.reducing
      */
     public static BiConsumer reducing(final IBinaryOperator accumulator) {
@@ -177,11 +219,15 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Object>`, gets the first element and reduces its value using `accumulator`.
+     *
      * @param accumulator the `IBinaryOperator` to be used between each element
      * @param mapper the `IFunction` applied to the second input argument
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `accumulator` or the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.reducing
      */
     public static BiConsumer reducing(final IBinaryOperator accumulator, final IFunction mapper) {
@@ -194,10 +240,14 @@ public abstract inherited sharing class ListObjectConsumer extends BiConsumer {
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `List<Object>`, if it is empty puts the first element as the second input argument.
      * Otherwise, gets the first element and reduces its value using `accumulator`.
+     *
      * @param accumulator the `IBinaryOperator` to be used between each element
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `accumulator` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.reducing
      */
     public static BiConsumer reducingOptional(final IBinaryOperator accumulator) {

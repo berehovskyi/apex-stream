@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `Set<T> - T` two-arity consumers. Typically is used by collectors.
+ *
  * @see IObjectSObjectConsumer
  * @see SObjectCollector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SetSObjectConsumer extends ObjectSObjectConsumer {
 
@@ -14,9 +17,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Boolean>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toBoolSet
      */
     public static ObjectSObjectConsumer addToBoolSet(final ISObjectFunction mapper) {
@@ -28,9 +36,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Id>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toIdSet
      */
     public static ObjectSObjectConsumer addToIdSet(final ISObjectFunction mapper) {
@@ -42,9 +55,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<String>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toStringSet
      */
     public static ObjectSObjectConsumer addToStringSet(final ISObjectFunction mapper) {
@@ -56,9 +74,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Blob>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toBlobSet
      */
     public static ObjectSObjectConsumer addToBlobSet(final ISObjectFunction mapper) {
@@ -70,9 +93,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Date>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toDateSet
      */
     public static ObjectSObjectConsumer addToDateSet(final ISObjectFunction mapper) {
@@ -84,9 +112,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Datetime>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toDatetimeSet
      */
     public static ObjectSObjectConsumer addToDatetimeSet(final ISObjectFunction mapper) {
@@ -98,9 +131,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Time>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toTimeSet
      */
     public static ObjectSObjectConsumer addToTimeSet(final ISObjectFunction mapper) {
@@ -112,9 +150,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Integer>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toIntSet
      */
     public static ObjectSObjectConsumer addToIntSet(final ISObjectToIntFunction mapper) {
@@ -126,9 +169,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Long>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toLongSet
      */
     public static ObjectSObjectConsumer addToLongSet(final ISObjectToLongFunction mapper) {
@@ -140,9 +188,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Double>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toDoubleSet
      */
     public static ObjectSObjectConsumer addToDoubleSet(final ISObjectToDoubleFunction mapper) {
@@ -154,9 +207,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<SObject>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toSet
      */
     public static ObjectSObjectConsumer addToSObjectSet(final ISObjectUnaryOperator mapper) {
@@ -167,9 +225,14 @@ public abstract inherited sharing class SetSObjectConsumer extends ObjectSObject
      * @description Returns a `BiConsumer` that casts the first input argument to the
      * `Set<Object>` and adds to it the result of applying the `mapper` function
      * to the second input argument
+     *
+     * @param mapper the mapping function
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `mapper` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.toSet
      */
     public static ObjectSObjectConsumer addToObjectSet(final ISObjectFunction mapper) {

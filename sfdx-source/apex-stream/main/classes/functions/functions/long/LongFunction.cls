@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ILongFunction} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ILongIterable.mapToObject
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class LongFunction implements ILongFunction {
 
@@ -17,7 +20,9 @@ public abstract inherited sharing class LongFunction implements ILongFunction {
     // @start-group Built-Ins
     /**
      * @description Returns a `LongFunction` that returns a string that represents the Long input argument.
+     *
      * @return the `SObjectFunction`
+     *
      * @see String.valueOf
      */
     public static LongFunction toString() {
@@ -26,6 +31,7 @@ public abstract inherited sharing class LongFunction implements ILongFunction {
 
     /**
      * @description Returns a `LongFunction` that returns the Long input argument as object.
+     *
      * @return the `SObjectFunction`
      */
     public static LongFunction toObject() {

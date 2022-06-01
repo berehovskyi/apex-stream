@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ILongConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ILongIterable.forEach
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class LongConsumer implements ILongConsumer {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class LongConsumer implements ILongConsumer {
     /**
      * @description Returns a composed `LongConsumer` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `LongConsumer`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual LongConsumer andThen(final ILongConsumer after) {
@@ -33,8 +39,11 @@ public abstract inherited sharing class LongConsumer implements ILongConsumer {
     /**
      * @description Returns a composed `LongConsumer` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param consumers the operations to sequentially perform
+     *
      * @return the composed `LongConsumer`
+     *
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static LongConsumer compose(final List<ILongConsumer> consumers) {
@@ -48,9 +57,12 @@ public abstract inherited sharing class LongConsumer implements ILongConsumer {
     // @start-group Built-Ins
     /**
      * @description Returns a `LongConsumer` that debugs an input argument.
+     *
      * @param loggingLevel the logging level
      * @param message the message
+     *
      * @return the `LongConsumer`
+     *
      * @throws NullPointerException if `loggingLevel` or `message` is null
      */
     public static LongConsumer debug(final LoggingLevel loggingLevel, final String message) {
@@ -61,26 +73,7 @@ public abstract inherited sharing class LongConsumer implements ILongConsumer {
 
     /**
      * @description Returns a `LongConsumer` that debugs an input argument.
-     * @param loggingLevel the logging level
-     * @return the `LongConsumer`
-     * @throws NullPointerException if `loggingLevel` is null
-     */
-    public static LongConsumer debug(final LoggingLevel loggingLevel) {
-        return debug(loggingLevel, '');
-    }
-
-    /**
-     * @description Returns a `LongConsumer` that debugs an input argument.
-     * @param message the message
-     * @return the `LongConsumer`
-     * @throws NullPointerException if `message` is null
-     */
-    public static LongConsumer debug(final String message) {
-        return debug(LoggingLevel.INFO, message);
-    }
-
-    /**
-     * @description Returns a `LongConsumer` that debugs an input argument.
+     *
      * @return the `LongConsumer`
      */
     public static LongConsumer debug() {

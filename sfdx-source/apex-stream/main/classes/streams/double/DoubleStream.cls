@@ -1,10 +1,19 @@
 /**
- * @author O. Berehovskyi
- * @group Iterables
  * @description A sequence of `Double` elements supporting aggregate operations,
  * a primitive specialization of {@link ObjectStream}.
- * <p><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method</a></p>
+ *
+ * @see DoubleSequence
+ * @see SObjectStream
+ * @see ObjectStream
+ * @see IntStream
+ * @see LongStream
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Iterables
+ *
  * @example
+ * <p><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method</a></p>
  * // Approximating the value of π using Monte Carlo method and streams
  * Integer s = 200000;
  * IDoubleIterable x = DoubleStream.generate(DoubleSupplier.random());
@@ -19,11 +28,6 @@
  * // The ratio of the inside-count and the total-sample-count is an estimate of the ratio
  * // of the two areas, π / 4. Multiply the result by 4 to estimate π.
  * Double approxPi = 4 * n / (Double) s;
- * @see DoubleSequence
- * @see SObjectStream
- * @see ObjectStream
- * @see IntStream
- * @see LongStream
  */
 public virtual inherited sharing class DoubleStream extends DoubleIterable implements IDoubleIterable {
 
@@ -47,7 +51,9 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns an internal iterator for the elements of this stream.
      * <p>Terminal Operation.</p>
+     *
      * @return the internal `Iterator<Double>`
+     *
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public Iterator<Double> iterator() {
@@ -63,6 +69,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     // @start-group Conversion Operations
     /**
      * @description Returns an `ObjectStream` consisting of the elements of this stream, converted to Object.
+     *
      * @return the `ObjectStream`
      */
     public virtual IObjectIterable toObjectIterable() {
@@ -75,13 +82,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     // @start-group Sources
     /**
      * @description Returns a `DoubleStream` created from `iterator`.
+     *
+     * @param iterator the iterator
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterator` is null
+     *
      * @example
      * IDoubleIterable doubleStream = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }.iterator());
      * IDoubleIterable doubleStream = DoubleStream.of(new Set<Double>{ 0.1, 5, 1.5, Math.PI }.iterator());
      * IDoubleIterable doubleStream = DoubleStream.of(otherStream.iterator());
-     * @param iterator the iterator
-     * @return the new `DoubleStream`
-     * @throws NullPointerException if `iterator` is null
      */
     public static IDoubleIterable of(final Iterator<Double> iterator) {
         Validate.notNull(iterator);
@@ -90,12 +101,16 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
 
     /**
      * @description Returns a `DoubleStream` created from `doubles`.
+     *
+     * @param doubles the iterable
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `doubles` is null
+     *
      * @example
      * IDoubleIterable doubleStream = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI });
      * IDoubleIterable doubleStream = DoubleStream.of((Iterable<Double>) new Set<Double>{ 0.1, 5, 1.5, Math.PI });
-     * @param doubles the iterable
-     * @return the new `DoubleStream`
-     * @throws NullPointerException if `doubles` is null
      */
     public static IDoubleIterable of(final Iterable<Double> doubles) {
         Validate.notNull(doubles);
@@ -105,11 +120,14 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a `DoubleStream` created from `doubles` if non-null,
      * otherwise returns an empty `DoubleStream`.
-     * @example
-     * IDoubleIterable doubleStream = DoubleStream.ofNullable(new List<Double>{ 0.1, 5, 1.5, Math.PI });
+     *
      * @param doubles the iterable
+     *
      * @return the new `DoubleStream` if `doubles` is non-null,
      * otherwise an empty `DoubleStream`
+     *
+     * @example
+     * IDoubleIterable doubleStream = DoubleStream.ofNullable(new List<Double>{ 0.1, 5, 1.5, Math.PI });
      */
     public static IDoubleIterable ofNullable(final Iterable<Double> doubles) {
         if (doubles == null) { return empty(); }
@@ -118,6 +136,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
 
     /**
      * @description Returns an empty `DoubleStream`.
+     *
      * @return the empty `DoubleStream`
      */
     public static IDoubleIterable empty() {
@@ -127,11 +146,15 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns an infinite `DoubleStream` where each element is
      * generated by `supplier`.
-     * @example 
-     * IDoubleIterable randomStream = DoubleStream.generate(DoubleSupplier.random());
+     *
      * @param supplier the supplier of generated elements
+     *
      * @return the new `DoubleStream`
+     *
      * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IDoubleIterable randomStream = DoubleStream.generate(DoubleSupplier.random());
      */
     public static IDoubleIterable generate(final IDoubleSupplier supplier) {
         Validate.notNull(supplier);
@@ -143,12 +166,16 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * application of `operator` to an initial element `seed`,
      * producing a `DoubleStream` consisting of `seed`, `operator(seed)`,
      * `operator(operator(seed))`, etc.
-     * @example 
-     * IDoubleIterable doubleIncrementalStream = DoubleStream.iterate(0, DoubleUnaryOperator.add(1));
+     *
      * @param seed the initial element
      * @param operator the operator to be applied to the previous element to produce a new element
+     *
      * @return the new `DoubleStream`
+     *
      * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IDoubleIterable doubleIncrementalStream = DoubleStream.iterate(0, DoubleUnaryOperator.add(1));
      */
     public static IDoubleIterable iterate(final Double seed, final IDoubleUnaryOperator operator) {
         Validate.notNull(operator);
@@ -159,10 +186,13 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns an infinite `DoubleStream` produced by iterative
      * application of `operator` to an initial element `seed`,
      * conditioned on satisfying `predicate`.
+     *
      * @param seed the initial element
      * @param predicate the predicate to determine when the stream must be terminated
      * @param operator the operator to be applied to the previous element to produce a new element
+     *
      * @return the new `DoubleStream`
+     *
      * @throws NullPointerException if `supplier` or `supplier` is null
      */
     public static IDoubleIterable iterate(
@@ -179,12 +209,16 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns lazily concatenated `DoubleStream` whose elements are all the
      * elements of the first `Iterable<Double>` followed by all the elements of the
      * second `Iterable<Double>`.
-     * @example
-     * IDoubleIterable doubleStream = DoubleStream.concat(stream1, stream2);
+     *
      * @param iterable1 the first `Iterable<Double>`
      * @param iterable2 the second `Iterable<Double>`
+     *
      * @return the new `DoubleStream`
+     *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
+     *
+     * @example
+     * IDoubleIterable doubleStream = DoubleStream.concat(stream1, stream2);
      */
     public static IDoubleIterable concat(final Iterable<Double> iterable1, final Iterable<Double> iterable2) {
         return concat(new List<Iterable<Double>>{ iterable1, iterable2 });
@@ -192,11 +226,15 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
 
     /**
      * @description Returns lazily concatenated `List<Iterable<Double>>`.
+     *
+     * @param iterables the list of `Iterable<Double>`
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterables` or some element in a list is null
+     *
      * @example
      * IDoubleIterable doubleStream = DoubleStream.concat(streams);
-     * @param iterables the list of `Iterable<Double>`
-     * @return the new `DoubleStream`
-     * @throws NullPointerException if `iterables` or some element in a list is null
      */
     public static IDoubleIterable concat(final List<Iterable<Double>> iterables) {
         Validate.noNullElements(iterables);
@@ -212,10 +250,13 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a combined `DoubleStream` by applying `combiner` function
      * to each element at the same position.
+     *
      * @param iterable1 the first `Iterable<Double>`
      * @param iterable2 the second `Iterable<Double>`
      * @param combiner the binary operator to be applied to each element at the same position
+     *
      * @return the new `DoubleStream`
+     *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IDoubleIterable zip(
@@ -232,11 +273,15 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns new `DoubleStream` by appending `iterable`
      * to the current stream.
+     *
+     * @param iterable the `Iterable<Double>` to append to the current stream
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * IDoubleIterable doubleStream = stream1.append(stream2);
-     * @param iterable the `Iterable<Double>` to append to the current stream
-     * @return the new `DoubleStream`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual override IDoubleIterable append(final Iterable<Double> iterable) {
         return concat(this, iterable);
@@ -245,11 +290,15 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns new `DoubleStream` by prepending `iterable`
      * to the current stream.
+     *
+     * @param iterable the `Iterable<Double>` to prepend to the current stream
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * IDoubleIterable doubleStream = stream1.prepend(stream2);
-     * @param iterable the `Iterable<Double>` to prepend to the current stream
-     * @return the new `DoubleStream`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual IDoubleIterable prepend(final Iterable<Double> iterable) {
         return concat(iterable, this);
@@ -262,9 +311,11 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns new `DoubleSequence` from the current stream.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the new `DoubleSequence`
+     *
      * @example
      * IDoubleIterable doubleSeq = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).sequence();
-     * @return the new `DoubleSequence`
      */
     public virtual IDoubleIterable sequence() {
         return DoubleSequence.of(Iterators.toDoubleList(iterator()));
@@ -273,13 +324,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a `DoubleStream` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Double> filtered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .filter(DoublePredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `DoubleStream`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override IDoubleIterable filter(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -289,13 +344,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a `DoubleStream` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Double> firstFiltered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .take(DoublePredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `DoubleStream`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual IDoubleIterable take(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -306,13 +365,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns a `DoubleStream` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Double> rest = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .drop(DoublePredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `DoubleStream`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual IDoubleIterable drop(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -323,13 +386,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns a `DoubleStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Double> incrementedDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .mapTo(DoubleUnaryOperator.add(1.5))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `DoubleStream`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual IDoubleIterable mapTo(final IDoubleUnaryOperator mapper) {
         Validate.notNull(mapper);
@@ -340,8 +407,11 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns a `IntStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `IntStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IIntIterable mapToInt(final IDoubleToIntFunction mapper) {
@@ -353,8 +423,11 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns a `LongStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `LongStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual ILongIterable mapToLong(final IDoubleToLongFunction mapper) {
@@ -366,8 +439,11 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns a `SObjectStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `SObjectStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual ISObjectIterable mapToSObject(final IDoubleToSObjectFunction mapper) {
@@ -379,8 +455,11 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns a `ObjectStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `ObjectStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IObjectIterable mapToObject(final IDoubleFunction mapper) {
@@ -391,9 +470,12 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a `DoubleStream` after performing `consumer` action on each element.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
+     *
      * @return the `DoubleStream`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public virtual IDoubleIterable forEach(final IDoubleConsumer consumer) {
@@ -404,11 +486,13 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a `DoubleStream` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `DoubleStream`
+     *
      * @example
      * List<Double> distinct = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .distinct()
      *     .toList();
-     * @return the `DoubleStream`
      */
     public virtual override IDoubleIterable distinct() {
         return new DoubleStream(new DoubleDistinctIterator(iterator()));
@@ -417,11 +501,13 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a `DoubleStream` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `DoubleStream`
+     *
      * @example
      * List<Double> sorted = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .sort()
      *     .toList();
-     * @return the `DoubleStream`
      */
     public virtual IDoubleIterable sort() {
         final List<Double> doubles = Iterators.toDoubleList(iterator());
@@ -432,14 +518,18 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns a `DoubleStream` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param lim the number of elements to limit
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws IllegalStateException if `lim` is less than 0
+     * @throws NullPointerException if `lim` is null
+     *
      * @example
      * List<Double> first3Doubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .lim(3)
      *     .toList();
-     * @param lim the number of elements to limit
-     * @return the `DoubleStream`
-     * @throws NullPointerException if `lim` is null
-     * @throws IllegalStateException if `lim` is less than 0
      */
     public virtual IDoubleIterable lim(final Integer lim) {
         Validate.notNull(lim);
@@ -452,14 +542,18 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns a new `DoubleStream` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param n the number of elements to skip
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws IllegalStateException if `n` is less than 0
+     * @throws NullPointerException if `n` is null
+     *
      * @example
      * List<Double> restDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .skip(1)
      *     .toList();
-     * @param n the number of elements to skip
-     * @return the `DoubleStream`
-     * @throws NullPointerException if `n` is null
-     * @throws IllegalStateException if `n` is less than 0
      */
     public virtual IDoubleIterable skip(final Integer n) {
         Validate.notNull(n);
@@ -476,12 +570,16 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Performs a reduction on `Double` elements,
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
-     * @example
-     * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).reduce(0.0, DoubleBinaryOperator.sum());
+     *
      * @param identity the identity value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
      * @return the `Double` result of the reduction
+     *
      * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).reduce(0.0, DoubleBinaryOperator.sum());
      */
     public virtual Double reduce(final Double identity, final IDoubleBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -498,13 +596,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * using `identity` value and associative `accumulator` function, and returns
      * an `OptionalDouble` describing the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `OptionalDouble` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *      .reduce(DoubleBinaryOperator.sum())
      *      .get();
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `OptionalDouble` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual override OptionalDouble reduce(final IDoubleBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -527,9 +629,12 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Performs a mutable reduction operation on elements, collecting elements
      * to a container returned by `supplier` by applying `accumulator` function.
      * <p>Terminal Operation.</p>
+     *
      * @param supplier the function that returns a mutable result container
      * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
      * @return the `Object` result of the collection
+     *
      * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public virtual override Object collect(final ISupplier supplier, final IObjectDoubleConsumer accumulator) {
@@ -547,13 +652,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns an `OptionalDouble` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `OptionalDouble`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Double firstGreaterDouble = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .find(DoublePredicate.isGreater(1.5))
      *     .get();
-     * @param predicate the predicate
-     * @return the `OptionalDouble`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual OptionalDouble find(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -573,13 +682,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns whether all elements match `predicate`.
      * If `DoubleStream` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isEveryDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .every(DoublePredicate.isGreater(1.5))
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual Boolean every(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -590,13 +703,17 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @description Returns whether some element matches `predicate`.
      * If `DoubleStream` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
-     *  Boolean isSomeDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     * Boolean isSomeDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .some(DoublePredicate.isGreater(1.5))
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override Boolean some(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -606,6 +723,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns the count of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the count of elements
      */
     public virtual Integer count() {
@@ -621,6 +739,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Returns whether the count of elements is 0.
      * <p>Terminal Operation.</p>
+     *
      * @return `true` or `false`
      */
     public virtual Boolean isEmpty() {
@@ -630,11 +749,13 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Accumulates elements into a `List<Double>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `List<Double>` containing the stream elements
+     *
      * @example
      * List<Double> restDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .skip(1)
      *     .toList();
-     * @return the `List<Double>` containing the stream elements
      */
     public virtual List<Double> toList() {
         return Iterators.toDoubleList(iterator());
@@ -643,11 +764,13 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
     /**
      * @description Accumulates elements into a `Set<Double>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<Double>` containing the stream elements
+     *
      * @example
      * Set<Double> restDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .skip(1)
      *     .toSett();
-     * @return the `Set<Double>` containing the stream elements
      */
     public virtual Set<Double> toSet() {
         return Iterators.toDoubleSet(iterator());

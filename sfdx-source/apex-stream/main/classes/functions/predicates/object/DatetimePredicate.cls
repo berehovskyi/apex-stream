@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Predicate` functions and provides `DatetimePredicate`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DatetimePredicate extends Predicate {
 
@@ -11,9 +13,13 @@ public abstract inherited sharing class DatetimePredicate extends Predicate {
     /**
      * @description Returns a `Predicate` that tests the input datetime if it is the same
      * as the specified `datetimeToCompare` in the local time zone of the context user.
+     *
      * @param datetimeToCompare datetime
+     *
      * @return the `Predicate`
+     *
      * @throws NullPointerException if the `dateToCompare` is null
+     *
      * @see Datetime.isSameDay
      */
     public static Predicate isSameDay(final Datetime datetimeToCompare) {

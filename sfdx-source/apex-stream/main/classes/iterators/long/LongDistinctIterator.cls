@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongDistinctIterator extends LongBaseIterator {
+public inherited sharing class LongDistinctIterator extends LongBaseIterator {
 
     private final Iterator<Long> iterator;
     private final ILongUnaryOperator classifier;

@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongDropIterator extends LongBaseIterator {
+public inherited sharing class LongDropIterator extends LongBaseIterator {
 
     private final Iterator<Long> iterator;
     private final ILongPredicate predicate;

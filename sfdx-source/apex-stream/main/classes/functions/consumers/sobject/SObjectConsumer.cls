@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ISObjectIterable.forEach
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectConsumer implements ISObjectConsumer {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     /**
      * @description Returns a composed `SObjectConsumer` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `SObjectConsumer`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual SObjectConsumer andThen(final ISObjectConsumer after) {
@@ -33,8 +39,11 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     /**
      * @description Returns a composed `SObjectConsumer` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param consumers the operations to sequentially perform
+     *
      * @return the composed `SObjectConsumer`
+     *
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static SObjectConsumer compose(final List<ISObjectConsumer> consumers) {
@@ -50,9 +59,12 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     //<editor-fold desc="Debug Consumers">
     /**
      * @description Returns a `SObjectConsumer` that debugs an input argument.
+     *
      * @param loggingLevel the logging level
      * @param message the message
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `loggingLevel` or `message` is null
      */
     public static SObjectConsumer debug(final LoggingLevel loggingLevel, final String message) {
@@ -63,26 +75,7 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
 
     /**
      * @description Returns a `SObjectConsumer` that debugs an input argument.
-     * @param loggingLevel the logging level
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `loggingLevel` is null
-     */
-    public static SObjectConsumer debug(final LoggingLevel loggingLevel) {
-        return debug(loggingLevel, '');
-    }
-
-    /**
-     * @description Returns a `SObjectConsumer` that debugs an input argument.
-     * @param message the message
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `message` is null
-     */
-    public static SObjectConsumer debug(final String message) {
-        return debug(LoggingLevel.INFO, message);
-    }
-
-    /**
-     * @description Returns a `SObjectConsumer` that debugs an input argument.
+     *
      * @return the `SObjectConsumer`
      */
     public static SObjectConsumer debug() {
@@ -92,9 +85,12 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     /**
      * @description Returns a `SObjectConsumer` that debugs an input argument
      * using the pretty-print format.
+     *
      * @param loggingLevel the logging level
      * @param message the message
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `loggingLevel` or `message` is null
      */
     public static SObjectConsumer debugPretty(final LoggingLevel loggingLevel, final String message) {
@@ -106,28 +102,7 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     /**
      * @description Returns a `SObjectConsumer` that debugs an input argument
      * using the pretty-print format.
-     * @param loggingLevel the logging level
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `loggingLevel` is null
-     */
-    public static SObjectConsumer debugPretty(final LoggingLevel loggingLevel) {
-        return debugPretty(loggingLevel, '');
-    }
-
-    /**
-     * @description Returns a `SObjectConsumer` that debugs an input argument
-     * using the pretty-print format.
-     * @param message the message
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `message` is null
-     */
-    public static SObjectConsumer debugPretty(final String message) {
-        return debugPretty(LoggingLevel.INFO, message);
-    }
-
-    /**
-     * @description Returns a `SObjectConsumer` that debugs an input argument
-     * using the pretty-print format.
+     *
      * @return the `SObjectConsumer`
      */
     public static SObjectConsumer debugPretty() {
@@ -138,14 +113,19 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     //<editor-fold desc="SObject Consumers">
     /**
      * @description Returns a `SObjectConsumer` that adds error to `fieldName`.
-     * @example
-     * SObjectConsumer.addError('NumberOfEmployees', 'Error message');
+     *
      * @param fieldName the field name to add an error
      * @param message the error message
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `message` is null
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.addError
+     *
+     * @example
+     * SObjectConsumer.addError('NumberOfEmployees', 'Error message');
      */
     public static SObjectConsumer addError(final String fieldName, final String message) {
         Validate.notNull(fieldName);
@@ -155,13 +135,18 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
 
     /**
      * @description Returns a `SObjectConsumer` that adds error to `field`.
-     * @example
-     * SObjectConsumer.addError(Account.NumberOfEmployees, 'Error message');
+     *
      * @param field the field to add an error
      * @param message the error message
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `message` is null
+     *
      * @see SObject.addError
+     *
+     * @example
+     * SObjectConsumer.addError(Account.NumberOfEmployees, 'Error message');
      */
     public static SObjectConsumer addError(final SObjectField field, final String message) {
         Validate.notNull(field);
@@ -171,12 +156,17 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
 
     /**
      * @description Returns a `SObjectConsumer` that adds error to an input argument.
+     *
+     * @param message the error message
+     *
+     * @return the `SObjectConsumer`
+     *
+     * @throws NullPointerException if `mapper` is nuyll
+     *
+     * @see SObject.addError
+     *
      * @example
      * SObjectConsumer.addError('Error message');
-     * @param message the error message
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `mapper` is nuyll
-     * @see SObject.addError
      */
     public static SObjectConsumer addError(final String message) {
         Validate.notNull(message);
@@ -185,54 +175,69 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
 
     /**
      * @description Returns a `SObjectConsumer` that adds error to an input argument.
+     *
+     * @param exc the exception to attach
+     *
+     * @return the `SObjectConsumer`
+     *
+     * @throws NullPointerException if `exc` is null
+     *
+     * @see SObject.addError
+     *
      * @example
      * SObjectConsumer.addError(new IllegalArgumentException('Error message'));
-     * @param exc the exception to attach
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `exc` is null
-     * @see SObject.addError
      */
     public static SObjectConsumer addError(final Exception exc) {
         Validate.notNull(exc);
         return new AddErrorExc(exc);
     }
-    
+
     /**
      * @description Returns a `SObjectConsumer` that sets the value returned by
      * the `mapper` for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectConsumer.set('NumberOfEmployees', someSObjectFunction);
-     * SObjectConsumer.set('Parent.NumberOfEmployees', someSObjectFunction);
-     * SObjectConsumer.set('Parent?.NumberOfEmployees', someSObjectFunction);
+     *
      * @param fieldName the field name to set a value
      * @param mapper applied to the input argument
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.put
+     *
+     * @example
+     * SObjectConsumer.set('NumberOfEmployees', someSObjectFunction);
+     * SObjectConsumer.set('Parent.NumberOfEmployees', someSObjectFunction);
+     * SObjectConsumer.set('Parent?.NumberOfEmployees', someSObjectFunction);
      */
     public static SObjectConsumer set(final String fieldName, final ISObjectFunction mapper) {
         Validate.notBlank(fieldName);
         Validate.notNull(mapper);
-        if (!fieldName.contains('.')) { return new SetFieldName(fieldName, mapper); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) { return new SetFieldPathSafe(fieldName, mapper); }
+        if (!Schemas.isXRef(fieldName)) { return new SetFieldName(fieldName, mapper); }
+        if (Schemas.isSaveNav(fieldName)) { return new SetFieldPathSafe(fieldName, mapper); }
         return new SetFieldPath(fieldName, mapper);
     }
 
     /**
      * @description Returns a `SObjectConsumer` that sets the value returned by
      * the `mapper` for the specified `field`.
-     * @example
-     * SObjectConsumer.set(Account.NumberOfEmployees, someSObjectFunction);
+     *
      * @param field the field to set a value
      * @param mapper applied to the input argument
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `mapper` is null
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.put
+     *
+     * @example
+     * SObjectConsumer.set(Account.NumberOfEmployees, someSObjectFunction);
      */
     public static SObjectConsumer set(final SObjectField field, final ISObjectFunction mapper) {
         Validate.notNull(field);
@@ -244,17 +249,23 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
      * @description Returns a `SObjectConsumer` that sets the `value`
      * for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * SObjectConsumer.set('NumberOfEmployees', 100);
-     * SObjectConsumer.set('Parent.NumberOfEmployees', 100);
-     * SObjectConsumer.set('Parent?.NumberOfEmployees', (Object) null);
+     *
      * @param fieldName the field name to set a value
      * @param value the value to set
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.put
+     * 
+     * @example 
+     * SObjectConsumer.set('NumberOfEmployees', 100);
+     * SObjectConsumer.set('Parent.NumberOfEmployees', 100);
+     * SObjectConsumer.set('Parent?.NumberOfEmployees', (Object) null);
      */
     public static SObjectConsumer set(final String fieldName, final Object value) {
         return set(fieldName, SObjectFunction.constant(value));
@@ -263,15 +274,20 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     /**
      * @description Returns a `SObjectConsumer` that sets the `value`
      * for the specified `field`.
+     *
+     * @param field the field to set a value
+     * @param value the value to set
+     *
+     * @return the `SObjectConsumer`
+     *
+     * @throws NullPointerException if `fieldName` is blank
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
      * @example
      * SObjectConsumer.set(Account.NumberOfEmployees, 100);
      * SObjectConsumer.set(Account.NumberOfEmployees, (Object) null);
-     * @param field the field to set a value
-     * @param value the value to set
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `fieldName` is blank
-     * @throws SObjectException if provided invalid `fieldName`
-     * @see SObject.put
      */
     public static SObjectConsumer set(final SObjectField field, final Object value) {
         return set(field, SObjectFunction.constant(value));
@@ -281,40 +297,48 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
      * @description Returns a `SObjectConsumer` that sets SObject the value returned by
      * the `operator` for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field name to set a value
+     * @param operator applied to the input argument
+     *
+     * @return the `SObjectConsumer`
+     *
+     * @throws NullPointerException if `fieldName` is blank or `operator` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.putSObject
+     *
      * @example
      * SObjectConsumer.setSObject('Parent', someSObjectUnaryOperator);
      * SObjectConsumer.setSObject('Parent.Parent', someSObjectUnaryOperator);
      * SObjectConsumer.setSObject('Parent?.Parent', someSObjectUnaryOperator);
      * </pre>
-     * @param fieldName the field name to set a value
-     * @param operator applied to the input argument
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if `fieldName` is blank or `operator` is null
-     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
-     * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
-     * @see SObject.putSObject
      */
     public static SObjectConsumer setSObject(final String fieldName, final ISObjectUnaryOperator operator) {
         Validate.notBlank(fieldName);
         Validate.notNull(operator);
-        if (!fieldName.contains('.')) { return new SetSObjectFieldName(fieldName, operator); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) {
-            return new SetSObjectFieldPathSafe(fieldName, operator);
-        }
+        if (!Schemas.isXRef(fieldName)) { return new SetSObjectFieldName(fieldName, operator); }
+        if (Schemas.isSaveNav(fieldName)) { return new SetSObjectFieldPathSafe(fieldName, operator); }
         return new SetSObjectFieldPath(fieldName, operator);
     }
 
     /**
      * @description Returns a `SObjectConsumer` that sets SObject the value returned by
      * the `operator` for the specified `field`.
-     * @example
-     * SObjectBiConsumer.setSObject(Account.ParentId, someSObjectUnaryOperator);
+     *
      * @param field the field to set a value
      * @param operator applied to the input argument
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `operator` is null
+     *
      * @see SObject.putSObject
+     *
+     * @example
+     * SObjectBiConsumer.setSObject(Account.ParentId, someSObjectUnaryOperator);
      */
     public static SObjectConsumer setSObject(final SObjectField field, final ISObjectUnaryOperator operator) {
         Validate.notNull(field);
@@ -326,18 +350,23 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
      * @description Returns a `SObjectConsumer` that sets SObject the `parent`
      * for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectConsumer.setSObject('Parent', someAccount);
-     * SObjectConsumer.setSObject('Parent.Parent', someAccount);
-     * SObjectConsumer.setSObject('Parent?.Parent', (SObject) null);
+     *
      * @param fieldName the field name to set a value
      * @param parent the value to set
+     *
      * @return the `SObjectConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.putSObject
+     *
+     * @example
+     * SObjectConsumer.setSObject('Parent', someAccount);
+     * SObjectConsumer.setSObject('Parent.Parent', someAccount);
+     * SObjectConsumer.setSObject('Parent?.Parent', (SObject) null);
      */
     public static SObjectConsumer setSObject(final String fieldName, final SObject parent) {
         return setSObject(fieldName, SObjectUnaryOperator.constant(parent));
@@ -346,14 +375,19 @@ public abstract inherited sharing class SObjectConsumer implements ISObjectConsu
     /**
      * @description Returns a `SObjectConsumer` that sets SObject the `parent`
      * for the specified `field`.
+     *
+     * @param field the field to set a value
+     * @param parent the value to set
+     *
+     * @return the `SObjectConsumer`
+     *
+     * @throws NullPointerException if the `fieldName` is blank
+     *
+     * @see SObject.putSObject
+     *
      * @example
      * SObjectConsumer.setSObject(Account.ParentId, someAccount);
      * SObjectConsumer.setSObject(Account.ParentId, (SObject) null);
-     * @param field the field to set a value
-     * @param parent the value to set
-     * @return the `SObjectConsumer`
-     * @throws NullPointerException if the `fieldName` is blank
-     * @see SObject.putSObject
      */
     public static SObjectConsumer setSObject(final SObjectField field, final SObject parent) {
         return setSObject(field, SObjectUnaryOperator.constant(parent));

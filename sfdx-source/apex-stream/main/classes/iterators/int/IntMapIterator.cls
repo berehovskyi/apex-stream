@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntMapIterator implements Iterator<Integer> {
+public inherited sharing class IntMapIterator implements Iterator<Integer> {
 
     private final Iterator<Integer> iterator;
     private final IIntUnaryOperator mapper;

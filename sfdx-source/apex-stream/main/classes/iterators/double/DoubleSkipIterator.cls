@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleSkipIterator implements Iterator<Double> {
+public inherited sharing class DoubleSkipIterator implements Iterator<Double> {
 
     private final Iterator<Double> iterator;
     private final Integer n;

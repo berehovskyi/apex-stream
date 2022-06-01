@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  */
-public class SObjectFlatMapToLongIterator extends LongBaseIterator {
+public inherited sharing class SObjectFlatMapToLongIterator extends LongBaseIterator {
 
     private final Iterator<SObject> iterator;
     private final ISObjectFunction mapper;

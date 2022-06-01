@@ -1,6 +1,4 @@
 /**
- * @author O. Berehovskyi.
- * @group Iterables
  * @description A sequence of `SObject` elements supporting aggregate operations.
  * Sequence operations are composed of sequence chain. A sequence chain consists of:
  * <ul>
@@ -26,6 +24,17 @@
  * and {@link DoubleSequence} and {@link ObjectSequence} for Object references.</p>
  * <p>Sequences and streams equally ensure the fulfillment of the set goals,
  * but are implemented in different ways.</p>
+ *
+ * @see SObjectStream
+ * @see ObjectSequence
+ * @see IntSequence
+ * @see LongSequence
+ * @see DoubleSequence
+ *
+ * @author Oleh Berehovskyi.
+ *
+ * @group Iterables
+ *
  * @example
  * Double annualRevenueSumOfUniqueHotRankedAccounts
  *     = SObjectSequence.of(accounts)
@@ -33,11 +42,6 @@
  *         .distinct()
  *         .mapToDouble(Account.AnnualRevenue)
  *         .sum();
- * @see SObjectStream
- * @see ObjectSequence
- * @see IntSequence
- * @see LongSequence
- * @see DoubleSequence
  */
 public virtual inherited sharing class SObjectSequence extends SObjectIterable implements ISObjectIterable {
 
@@ -54,6 +58,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns an internal iterator for the elements of this sequence.
      * <p>Terminal Operation.</p>
+     *
      * @return the internal `Iterator<SObject>`
      */
     public Iterator<SObject> iterator() {
@@ -64,11 +69,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     // @start-group Sources
     /**
      * @description Returns a `SObjectSequence` created from `sObjects` list.
+     *
+     * @param sObjects the list of SObjects
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `sObjects` is null
+     *
      * @example
      * ISObjectIterable accSeq = SObjectSequence.of(new List<Account>(accounts));
-     * @param sObjects the list of SObjects
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `sObjects` is null
      */
     public static ISObjectIterable of(final List<SObject> sObjects) {
         Validate.notNull(sObjects);
@@ -77,11 +86,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
 
     /**
      * @description Returns a `SObjectSequence` created from `sObjects` set.
+     *
+     * @param sObjects the set of SObjects
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `sObjects` is null
+     *
      * @example
      * ISObjectIterable sObjSeq = SObjectSequence.of(new Set<SObject>(sObjects));
-     * @param sObjects the set of SObjects
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `sObjects` is null
      */
     public static ISObjectIterable of(final Set<SObject> sObjects) {
         Validate.notNull(sObjects);
@@ -91,11 +104,14 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` created from `sObjects` list if non-null,
      * otherwise returns an empty `SObjectSequence`.
-     * @example
-     * ISObjectIterable accSeq = SObjectSequence.ofNullable(new List<Account>(accounts));
+     *
      * @param sObjects the list of SObjects
+     *
      * @return the new `SObjectSequence` if `sObjects` is non-null,
      * otherwise an empty `SObjectSequence`
+     *
+     * @example
+     * ISObjectIterable accSeq = SObjectSequence.ofNullable(new List<Account>(accounts));
      */
     public static ISObjectIterable ofNullable(final List<SObject> sObjects) {
         if (sObjects == null) { return empty(); }
@@ -105,11 +121,14 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` created from `sObjects` set if non-null,
      * otherwise returns an empty `SObjectSequence`.
-     * @example
-     * ISObjectIterable accSeq = SObjectSequence.ofNullable(new Set<SObject>(sObjects));
+     *
      * @param sObjects the set of SObjects
+     *
      * @return the new `SObjectSequence` if `sObjects` is non-null,
      * otherwise an empty `SObjectSequence`
+     *
+     * @example
+     * ISObjectIterable accSeq = SObjectSequence.ofNullable(new Set<SObject>(sObjects));
      */
     public static ISObjectIterable ofNullable(final Set<SObject> sObjects) {
         if (sObjects == null) { return empty(); }
@@ -118,6 +137,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
 
     /**
      * @description Returns an empty `SObjectSequence`.
+     *
      * @return the empty `SObjectSequence`
      */
     public static ISObjectIterable empty() {
@@ -128,12 +148,16 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns eagerly concatenated `SObjectSequence` whose elements are all the
      * elements of the first `Iterable<SObject>` followed by all the elements of the
      * second `Iterable<SObject>`.
-     * @example
-     * ISObjectIterable accSeq = SObjectSequence.concat(seq1, seq2);
+     *
      * @param iterable1 the first `Iterable<SObject>`
      * @param iterable2 the second `Iterable<SObject>`
+     *
      * @return the new `SObjectSequence`
+     *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
+     *
+     * @example
+     * ISObjectIterable accSeq = SObjectSequence.concat(seq1, seq2);
      */
     public static ISObjectIterable concat(final Iterable<SObject> iterable1, final Iterable<SObject> iterable2) {
         Validate.notNull(iterable1);
@@ -143,11 +167,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
 
     /**
      * @description Returns eagerly concatenates `List<Iterable<SObject>>`.
+     *
+     * @param iterables the list of `Iterable<SObject>`
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `iterables` or some element in a list is null
+     *
      * @example
      * ISObjectIterable accSeq = SObjectSequence.concat(sequences);
-     * @param iterables the list of `Iterable<SObject>`
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `iterables` or some element in a list is null
      */
     public static ISObjectIterable concat(final List<Iterable<SObject>> iterables) {
         Validate.noNullElements(iterables);
@@ -161,17 +189,21 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a combined `SObjectSequence` by applying `combiner` function
      * to each element at the same position.
+     *
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
+     * @param combiner the binary operator to be applied to each element at the same position
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     *
      * @example
      * ISObjectIterable accountsWithMinAnnualRevenueSeq = SObjectSequence.zip(
      *     Trigger.old,
      *     Trigger.new,
      *     SObjectBinaryOperator.minBy(Account.AnnualRevenue)
      * );
-     * @param iterable1 the first `Iterable<SObject>`
-     * @param iterable2 the second `Iterable<SObject>`
-     * @param combiner the binary operator to be applied to each element at the same position
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static ISObjectIterable zip(
             final Iterable<SObject> iterable1,
@@ -193,6 +225,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a combined `SObjectSequence` by applying `combiner` function
      * to each element at the same position, conditioned on satisfying `predicate`.
+     *
+     * @param iterable1 the first `Iterable<SObject>`
+     * @param iterable2 the second `Iterable<SObject>`
+     * @param predicate the binary predicate
+     * @param combiner the binary operator to be applied to each element at the same position
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `iterable1`, `iterable2`,
+     * `predicate` or `combiner` is null
+     *
      * @example
      * ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = SObjectSequence.zip(
      *     Trigger.old,
@@ -200,13 +243,6 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
-     * @param iterable1 the first `Iterable<SObject>`
-     * @param iterable2 the second `Iterable<SObject>`
-     * @param predicate the binary predicate
-     * @param combiner the binary operator to be applied to each element at the same position
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `iterable1`, `iterable2`,
-     * `predicate` or `combiner` is null
      */
     public static ISObjectIterable zip(
             final Iterable<SObject> iterable1,
@@ -232,11 +268,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns new `SObjectSequence` by appending `iterable`
      * to the current sequence.
+     *
+     * @param iterable the `Iterable<SObject>` to append to the current sequence
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * ISObjectIterable accSeq = seq.append(seq1);
-     * @param iterable the `Iterable<SObject>` to append to the current sequence
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual override ISObjectIterable append(final Iterable<SObject> iterable) {
         return concat(this, iterable);
@@ -245,11 +285,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns new `SObjectSequence` by prepending `iterable`
      * to the current sequence.
+     *
+     * @param iterable the `Iterable<SObject>` to prepend to the current sequence
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * ISObjectIterable accSeq = seq.prepend(seq2);
-     * @param iterable the `Iterable<SObject>` to prepend to the current sequence
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual ISObjectIterable prepend(final Iterable<SObject> iterable) {
         return concat(iterable, this);
@@ -262,9 +306,11 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns new `SObjectStream` from the current sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the new `SObjectStream`
+     *
      * @example
      * ISObjectIterable accStream = SObjectSequence.of(accounts).stream();
-     * @return the new `SObjectStream`
      */
     public virtual ISObjectIterable stream() {
         return SObjectStream.of(iterator());
@@ -273,13 +319,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Account> accountsWithHotRating = SObjectSequence.of(accounts)
      *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override ISObjectIterable filter(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -296,13 +346,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Account> firstAccountsWithHotRating = SObjectSequence.of(accounts)
      *     .take(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override ISObjectIterable take(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -322,13 +376,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a `SObjectSequence` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Account> restAccounts = SObjectSequence.of(accounts)
      *     .drop(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override ISObjectIterable drop(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -348,13 +406,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a `SObjectSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Account> accounts = SObjectSequence.of(contacts)
      *     .mapTo(SObjectUnaryOperator.getSObject(Contact.AccountId))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override ISObjectIterable mapTo(final ISObjectUnaryOperator mapper) {
         Validate.notNull(mapper);
@@ -369,13 +431,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a `IntSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `IntSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Integer> numberOfEmployees = SObjectSequence.of(accounts)
      *     .mapToInt(SObjectToIntFunction.get(Account.NumberOfEmployees))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `IntSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override IIntIterable mapToInt(final ISObjectToIntFunction mapper) {
         Validate.notNull(mapper);
@@ -390,13 +456,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a `LongSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `LongSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Long> numberOfEmployees = SObjectSequence.of(accounts)
      *     .mapToLong(SObjectToLongFunction.get(Account.NumberOfEmployees))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `LongSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override ILongIterable mapToLong(final ISObjectToLongFunction mapper) {
         Validate.notNull(mapper);
@@ -411,13 +481,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a `DoubleSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `DoubleSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Double> annualRevenues = SObjectSequence.of(accounts)
      *     .mapToDouble(SObjectToDoubleFunction.get(Account.AnnualRevenue))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `DoubleSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override IDoubleIterable mapToDouble(final ISObjectToDoubleFunction mapper) {
         Validate.notNull(mapper);
@@ -432,13 +506,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a `ObjectSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `ObjectSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Object> birthdates = SObjectSequence.of(contacts)
      *     .mapToObject(SObjectToDoubleFunction.get(Contact.Birthdate))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `ObjectSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override IObjectIterable mapToObject(final ISObjectFunction mapper) {
         Validate.notNull(mapper);
@@ -450,17 +528,21 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Returns a new `SObjectSequence` with `SObject` elements as a result of 
-     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * @description Returns a new `SObjectSequence` with `SObject` elements as a result of
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function which must produce `Iterable<SObject>`
+     *
+     * @return the new `SObjectSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Contact> contacts = SObjectSequence.of(accounts)
      *     .flatMapTo(SObjectFunction.getSObjects('Contacts'))
      *     .toList();
-     * @param mapper the mapping function which must produce `Iterable<SObject>`
-     * @return the new `SObjectSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override ISObjectIterable flatMapTo(final ISObjectFunction mapper) {
         Validate.notNull(mapper);
@@ -475,12 +557,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Returns a new `IntSequence` with `Integer` elements as a result of 
-     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * @description Returns a new `IntSequence` with `Integer` elements as a result of
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the mapping function which must produce `Iterable<Integer>`
+     *
      * @return the new `IntSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IIntIterable flatMapToInt(final ISObjectFunction mapper) {
@@ -496,12 +581,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Returns a new `LongSequence` with `Long` elements as a result of 
-     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * @description Returns a new `LongSequence` with `Long` elements as a result of
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the mapping function which must produce `Iterable<Long>`
+     *
      * @return the new `LongSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual ILongIterable flatMapToLong(final ISObjectFunction mapper) {
@@ -517,12 +605,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Returns a new `DoubleSequence` with `Double` elements as a result of 
-     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * @description Returns a new `DoubleSequence` with `Double` elements as a result of
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the mapping function which must produce `Iterable<Double>`
+     *
      * @return the new `DoubleSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IDoubleIterable flatMapToDouble(final ISObjectFunction mapper) {
@@ -538,12 +629,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     }
 
     /**
-     * @description Returns a new `ObjectSequence` with `Object` elements as a result of 
-     * replacing each element of this sequence with the contents of a mapped iterable created by applying 
+     * @description Returns a new `ObjectSequence` with `Object` elements as a result of
+     * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the mapping function which must produce `Iterable<Object>`
+     *
      * @return the new `ObjectSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IObjectIterable flatMapToObject(final ISObjectFunction mapper) {
@@ -557,18 +651,22 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
         }
         return ObjectSequence.of(results);
     }
-    
+
     /**
      * @description Returns a `SObjectSequence` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param consumer the non-interfering, stateless action to be performed on each element.
+     * Expected to operate via side effects.
+     *
+     * @return this `SObjectSequence`
+     *
+     * @throws NullPointerException if `consumer` is null
+     *
      * @example
      * List<Account> accountsWithResetAnnualRevenue = SObjectSequence.of(accounts)
      *     .forEach(SObjectConsumer.set(Account.AnnualRevenue, 0))
      *     .toList();
-     * @param consumer the non-interfering, stateless action to be performed on each element.
-     * Expected to operate via side effects.
-     * @return this `SObjectSequence`
-     * @throws NullPointerException if `consumer` is null
      */
     public virtual override ISObjectIterable forEach(final ISObjectConsumer consumer) {
         Validate.notNull(consumer);
@@ -581,11 +679,13 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `SObjectSequence`
+     *
      * @example
      * List<Account> distinctAccounts = SObjectSequence.of(accounts)
      *     .distinct()
      *     .toList();
-     * @return the `SObjectSequence`
      */
     public virtual override ISObjectIterable distinct() {
         final List<SObject> results = new List<SObject>();
@@ -601,13 +701,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a `SObjectSequence` with distinct elements
      * according to `classifier` function.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param classifier the classifier function
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * List<Account> distinctAccountsByName = SObjectSequence.of(accounts)
      *     .distinct(SObjectFunction.get(Account.Name))
      *     .toList();
-     * @param classifier the classifier function
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `classifier` is null
      */
     public virtual override ISObjectIterable distinct(final ISObjectFunction classifier) {
         Validate.notNull(classifier);
@@ -624,11 +728,13 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `SObjectSequence`
+     *
      * @example
      * List<Account> sortedAccounts = SObjectSequence.of(accounts)
      *     .sort()
      *     .toList();
-     * @return the `SObjectSequence`
      */
     public virtual ISObjectIterable sort() {
         final List<SObject> clone = sObjects.clone();
@@ -639,13 +745,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` with sorted elements according to `comparator`.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param comparator the non-interfering, stateless comparator to compare sequence elements
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws NullPointerException if `comparator` is null
+     *
      * @example
      * List<Account> sortedAccountsByName = SObjectSequence.of(accounts)
      *     .sort(SObjectComparator.comparing(Account.Name))
      *     .toList();
-     * @param comparator the non-interfering, stateless comparator to compare sequence elements
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `comparator` is null
      */
     public virtual override ISObjectIterable sort(final ISObjectComparator comparator) {
         return new SObjectSequence(Lists.sort(sObjects, comparator));
@@ -654,14 +764,18 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns a `SObjectSequence` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param lim the number of elements to limit
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws IllegalStateException if `lim` is less than 0
+     * @throws NullPointerException if `lim` is null
+     *
      * @example
      * List<Account> first100Accounts = SObjectSequence.of(accounts)
      *     .lim(100)
      *     .toList();
-     * @param lim the number of elements to limit
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `lim` is null
-     * @throws IllegalStateException if `lim` is less than 0
      */
     public virtual ISObjectIterable lim(final Integer lim) {
         Validate.notNull(lim);
@@ -679,14 +793,18 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns a new `SObjectSequence` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param n the number of elements to skip
+     *
+     * @return the `SObjectSequence`
+     *
+     * @throws IllegalStateException if `n` is less than 0
+     * @throws NullPointerException if `n` is null
+     *
      * @example
      * List<Account> restAccounts = SObjectSequence.of(accounts)
      *     .skip(100)
      *     .toList();
-     * @param n the number of elements to skip
-     * @return the `SObjectSequence`
-     * @throws NullPointerException if `n` is null
-     * @throws IllegalStateException if `n` is less than 0
      */
     public virtual ISObjectIterable skip(final Integer n) {
         Validate.notNull(n);
@@ -710,13 +828,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Performs a reduction on `SObject` elements,
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `SObject` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Account accountWithMaxNumberOfEmployees = SObjectSequence.of(accounts)
      *     .reduce(seedAcc, SObjectBinaryOperator.maxBy(Account.NumberOfEmployees));
-     * @param identity the identity value for `accumulator`
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `SObject` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual SObject reduce(final SObject identity, final ISObjectBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -732,13 +854,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * using `identity` value and associative `accumulator` function, and returns
      * an `OptionalSObject` describing the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `OptionalSObject` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Account accountWithMaxNumberOfEmployees = SObjectSequence.of(accounts)
      *     .reduce(SObjectBinaryOperator.maxBy(Account.NumberOfEmployees))
      *     .get();
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `OptionalSObject` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual override OptionalSObject reduce(final ISObjectBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -753,16 +879,20 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Performs a mutable reduction operation on elements, collecting elements
      * to a container returned by `supplier` by applying `accumulator` function.
      * <p>Terminal Operation.</p>
+     *
+     * @param supplier the function that returns a mutable result container
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Object` result of the collection
+     *
+     * @throws NullPointerException if `supplier` or `accumulator` is null
+     *
      * @example
      * List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
      *     .collect(
      *         Supplier.of(List<String>.class),
      *         ListSObjectConsumer.addToList(SObjectFunction.get(Account.Name))
      *     );
-     * @param supplier the function that returns a mutable result container
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `Object` result of the collection
-     * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public virtual Object collect(final ISupplier supplier, final IObjectSObjectConsumer accumulator) {
         Validate.notNull(supplier);
@@ -778,11 +908,19 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Performs a mutable reduction operation on elements, collecting elements
      * to a container using `collector`.
      * <p>Terminal Operation.</p>
+     *
+     * @param collector the collector
+     *
+     * @return the `Object` result of the collection
+     *
+     * @throws NullPointerException if `collector` is null
+     *
      * @example
      * // Group contacts by AccountId
      * Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
      *     SObjectSequence.of(contacts)
      *         .collect(SObjectCollector.groupingById(Contact.AccountId));
+     *         
      * // Group contacts by Department and by Account.Rating, cascading two collectors
      * Map<String, Map<String, List<Contact>>> contactsByAccountRatingByDepartment
      *     = (Map<String, Map<String, List<Contact>>>)
@@ -793,9 +931,6 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *                     SObjectFunction.get('Account?.Rating')
      *                 )
      *             ).cast(Map<String, Map<String, List<Contact>>>.class));
-     * @param collector the collector
-     * @return the `Object` result of the collection
-     * @throws NullPointerException if `collector` is null
      */
     public virtual Object collect(final ISObjectCollector collector) {
         Validate.notNull(collector);
@@ -812,13 +947,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns an `OptionalSObject` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `OptionalSObject`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Account firstAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
      *     .find(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100))
      *     .get();
-     * @param predicate the predicate
-     * @return the `OptionalSObject`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override OptionalSObject find(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -835,12 +974,16 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns whether all elements match `predicate`.
      * If `SObjectSequence` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isEveryAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
      *     .every(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override Boolean every(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -851,12 +994,16 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Returns whether some element matches `predicate`.
      * If `SObjectSequence` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isSomeAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
      *     .some(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override Boolean some(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -866,6 +1013,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns the count of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the count of elements
      */
     public virtual Integer count() {
@@ -875,6 +1023,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Returns whether the count of elements is 0.
      * <p>Terminal Operation.</p>
+     *
      * @return `true` or `false`
      */
     public virtual Boolean isEmpty() {
@@ -884,11 +1033,13 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates elements into a `List<SObject>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `List<SObject>` containing the sequence elements
+     *
      * @example
      * List<Account> accountsWithHotRating = SObjectSequence.of(accounts)
      *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
      *     .toList();
-     * @return the `List<SObject>` containing the sequence elements
      */
     public virtual List<SObject> toList() {
         return sObjects;
@@ -897,13 +1048,17 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`.
      * <p>Terminal Operation.</p>
+     *
+     * @param mapper the mapping function
+     * @param listType result type
+     *
+     * @return the `List<Object>` containing the sequence elements
+     *
+     * @throws NullPointerException if `field` or `listType` is null
+     *
      * @example
      * List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
      *     .toList(SObjectFunction.get('Name'), List<String>.class);
-     * @param mapper the mapping function
-     * @param listType result type
-     * @return the `List<Object>` containing the sequence elements
-     * @throws NullPointerException if `field` or `listType` is null
      */
     public virtual override List<Object> toList(final ISObjectFunction mapper, final Type listType) {
         return Lists.toList(sObjects, mapper, listType);
@@ -912,11 +1067,13 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates elements into a `Set<SObject>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<SObject>` containing the sequence elements
+     *
      * @example
      * Set<SObject> accountsWithHotRating = SObjectSequence.of(accounts)
      *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
      *     .toSet();
-     * @return the `Set<SObject>` containing the sequence elements
      */
     public virtual Set<SObject> toSet() {
         return new Set<SObject>(sObjects);
@@ -925,11 +1082,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates `Object` elements returned by `mapper` into a `Set<Object>`.
      * <p>Terminal Operation.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Set<Object>` containing the sequence elements field values
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Set<Object> createdDates = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('CreatedDate'));
-     * @param mapper the mapping function
-     * @return the `Set<Object>` containing the sequence elements field values
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override Set<Object> toSet(final ISObjectFunction mapper) {
         return Lists.toObjectSet(sObjects, mapper);
@@ -938,9 +1099,11 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates `Id` elements into a `Set<Id>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<Id>` containing the sequence element field values
+     *
      * @example
      * Set<Id> accountIds = SObjectSequence.of(accounts).toIdSet();
-     * @return the `Set<Id>` containing the sequence element field values
      */
     public Set<Id> toIdSet() {
         return toIdSet('Id');
@@ -949,11 +1112,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates `Id` elements returned by `mapper` into a `Set<Id>`.
      * <p>Terminal Operation.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Set<Id>` containing the sequence elements field values
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('AccountId'));
-     * @param mapper the mapping function
-     * @return the `Set<Id>` containing the sequence elements field values
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override Set<Id> toIdSet(final ISObjectFunction mapper) {
         return Lists.toIdSet(sObjects, mapper);
@@ -962,11 +1129,15 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates `String` elements returned by `mapper` into a `Set<String>`.
      * <p>Terminal Operation.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Set<String>`containing the sequence elements field values
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(SObjectFunction.get('Name'));
-     * @param mapper the mapping function
-     * @return the `Set<String>`containing the sequence elements field values
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual override Set<String> toStringSet(final ISObjectFunction mapper) {
         return Lists.toStringSet(sObjects, mapper);
@@ -975,11 +1146,13 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Accumulates elements into a `Map<Id, SObject>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `Map<Id, SObject>` containing the sequence elements
+     *
      * @example
      * Map<Id, SObject> accountsWithHotRating = SObjectSequence.of(accounts)
      *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
      *     .toMap();
-     * @return the `Map<Id, SObject>` containing the sequence elements
      */
     public virtual Map<Id, SObject> toMap() {
         return new Map<Id, SObject>(sObjects);
@@ -989,14 +1162,18 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
+     *
+     * @param keyMapper the mapping function producing keys
+     * @param mapType result type
+     *
+     * @return the `Map<Id, SObject>` containing the sequence elements
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
+     * @throws NullPointerException if `keyMapper` or `mapType` is null
+     *
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectSequence.of(contacts)
      *     .toByIdMap(SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
-     * @param keyMapper the mapping function producing keys
-     * @param mapType result type
-     * @return the `Map<Id, SObject>` containing the sequence elements
-     * @throws NullPointerException if `keyMapper` or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
      */
     public virtual override Map<Id, SObject> toByIdMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Lists.toByIdMap(sObjects, keyMapper, mapType);
@@ -1006,14 +1183,18 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
+     *
+     * @param keyMapper the mapping function producing keys
+     * @param mapType result type
+     *
+     * @return the `Map<String, SObject>` containing the sequence elements
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
+     * @throws NullPointerException if `keyMapper` or `mapType` is null
+     *
      * @example
      * Map<String, Account> accountByName = (Map<String, Account>) SObjectSequence.of(accounts)
      *     .toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
-     * @param keyMapper the mapping function producing keys
-     * @param mapType result type
-     * @return the `Map<String, SObject>` containing the sequence elements
-     * @throws NullPointerException if `keyMapper` or `mapType` is null
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
      */
     public virtual override Map<String, SObject> toByStringMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Lists.toByStringMap(sObjects, keyMapper, mapType);
@@ -1023,12 +1204,16 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
+     *
+     * @param keyMapper the mapping function producing keys
+     *
+     * @return the `Map<Id, List<SObject>>` containing the sequence elements
+     *
+     * @throws NullPointerException if `field` is null
+     *
      * @example
      * Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts)
      *     .groupById(SObjectFunction.get('AccountId'));
-     * @param keyMapper the mapping function producing keys
-     * @return the `Map<Id, List<SObject>>` containing the sequence elements
-     * @throws NullPointerException if `field` is null
      */
     public virtual override Map<Id, List<SObject>> groupById(final ISObjectFunction keyMapper) {
         return Lists.groupById(sObjects, keyMapper);
@@ -1038,12 +1223,16 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
+     *
+     * @param keyMapper the mapping function producing keys
+     *
+     * @return the `Map<String, List<SObject>>` containing the sequence elements
+     *
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts)
      *     .groupByString(SObjectFunction.get('Rating'));
-     * @param keyMapper the mapping function producing keys
-     * @return the `Map<String, List<SObject>>` containing the sequence elements
-     * @throws NullPointerException if `keyMapper` is null
      */
     public virtual override Map<String, List<SObject>> groupByString(final ISObjectFunction keyMapper) {
         return Lists.groupByString(sObjects, keyMapper);
@@ -1052,12 +1241,16 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
     /**
      * @description Partition `SObject` elements by `predicate`.
      * <p>Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `Map<Boolean, List<SObject>>` containing the sequence elements
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
      *     = SObjectSequence.of(accounts).partition(SObjectPredicate.isEqual(Account.Rating, 'Hot'));
-     * @param predicate the predicate
-     * @return the `Map<Boolean, List<SObject>>` containing the sequence elements
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override Map<Boolean, List<SObject>> partition(final ISObjectPredicate predicate) {
         return Lists.partition(sObjects, predicate);

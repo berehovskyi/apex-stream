@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public virtual class DoubleFilterIterator implements Iterator<Double> {
+public virtual inherited sharing class DoubleFilterIterator implements Iterator<Double> {
 
     protected final Iterator<Double> iterator;
     private final IDoublePredicate predicate;

@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectTakeIterator implements Iterator<Object> {
+public inherited sharing class ObjectTakeIterator implements Iterator<Object> {
 
     private final Iterator<Object> iterator;
     private final IPredicate predicate;

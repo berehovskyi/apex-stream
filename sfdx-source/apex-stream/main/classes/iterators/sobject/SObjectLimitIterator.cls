@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectLimitIterator implements Iterator<SObject> {
+public inherited sharing class SObjectLimitIterator implements Iterator<SObject> {
 
     private final Iterator<SObject> iterator;
     private final Integer lim;

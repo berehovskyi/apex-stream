@@ -1,8 +1,7 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IDoublePredicate} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IDoubleIterable.filter
  * @see IDoubleIterable.take
  * @see IDoubleIterable.drop
@@ -10,6 +9,10 @@
  * @see IDoubleIterable.some
  * @see IDoubleIterable.every
  * @see IDoubleIterable.none
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DoublePredicate implements IDoublePredicate {
 
@@ -25,36 +28,46 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
      * @description Returns a composed `DoublePredicate` that applies short-circuiting logical
      * `OR` operator to `this` `IDoublePredicate` and `other`
      * in that order.
+     *
+     * @param other the other `IDoublePredicate`
+     *
+     * @return the composed `DoublePredicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * someDoublePredicate1.orElse(someDoublePredicate2);
-     * @param other the other `IDoublePredicate`
-     * @return the composed `DoublePredicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual DoublePredicate orElse(final IDoublePredicate other) {
-        return some(this, other);
+        return some(new List<IDoublePredicate>{ this, other });
     }
 
     /**
      * @description Returns a composed `DoublePredicate` that applies short-circuiting logical
      * `AND` operator to `this` `IDoublePredicate` and `other`
      * in that order.
+     *
+     * @param other the other `IDoublePredicate`
+     *
+     * @return the composed `IDoublePredicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * someDoublePredicate1.andAlso(someDoublePredicate2);
-     * @param other the other `IDoublePredicate`
-     * @return the composed `IDoublePredicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual DoublePredicate andAlso(final IDoublePredicate other) {
-        return every(this, other);
+        return every(new List<IDoublePredicate>{ this, other });
     }
 
     /**
      * @description Returns a `DoublePredicate` that applies logical `NOT` operator
      * to `this` `IDoublePredicate`.
+     *
+     * @return the negated `DoublePredicate`
+     *
      * @example
      * someDoublePredicate.negate();
-     * @return the negated `DoublePredicate`
      */
     public virtual DoublePredicate negate() {
         return negate(this);
@@ -67,11 +80,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     /**
      * @description Returns a composed `DoublePredicate` that applies sequentially short-circuiting
      * logical `OR` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`IDoublePredicates`
+     *
+     * @return the composed `DoublePredicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * DoublePredicate.some(someDoublePredicates);
-     * @param predicates the list of`IDoublePredicates`
-     * @return the composed `DoublePredicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static DoublePredicate some(final List<IDoublePredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -79,28 +96,17 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     }
 
     /**
-     * @description Returns a composed `DoublePredicate` that applies short-circuiting logical
-     * `OR` operator to `predicate1` `IDoublePredicate` and `predicate2`
-     * in that order.
-     * @example
-     * DoublePredicate.some(someDoublePredicate1, someDoublePredicate2);
-     * @param predicate1 the first `IDoublePredicate`
-     * @param predicate2 the second `IDoublePredicate`
-     * @return the composed `DoublePredicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static DoublePredicate some(final IDoublePredicate predicate1, final IDoublePredicate predicate2) {
-        return some(new List<IDoublePredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a composed `DoublePredicate` that applies sequentially short-circuiting
      * logical `AND` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`IDoublePredicates`
+     *
+     * @return the composed `DoublePredicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * DoublePredicate.every(someDoublePredicates);
-     * @param predicates the list of`IDoublePredicates`
-     * @return the composed `DoublePredicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static DoublePredicate every(final List<IDoublePredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -108,27 +114,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     }
 
     /**
-     * @description Returns a composed `DoublePredicate` that applies short-circuiting logical
-     * `AND` operator to `predicate1` `IDoublePredicate` and `predicate2`
-     * in that order.
-     * @example
-     * DoublePredicate.every(someDoublePredicate1, someDoublePredicate2);
-     * @param predicate1 the first `IDoublePredicate`
-     * @param predicate2 the second `IDoublePredicate`
-     * @return the composed `DoublePredicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static DoublePredicate every(final IDoublePredicate predicate1, final IDoublePredicate predicate2) {
-        return every(new List<IDoublePredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a `DoublePredicate` that applies logical `NOT` operator
      * to `predicate`.
+     *
+     * @param predicate the `IDoublePredicate`
+     *
+     * @return the negated `DoublePredicate`
+     *
      * @example
      * DoublePredicate.negate(someDoublePredicate);
-     * @param predicate the `IDoublePredicate`
-     * @return the negated `DoublePredicate`
      */
     public static DoublePredicate negate(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -138,11 +132,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     /**
      * @description Returns a `DoublePredicate` that always evaluates to the Boolean `value`
      * (`true` or `false`).
+     *
+     * @param value the evaluated value
+     *
+     * @return predicate the `DoublePredicate`
+     *
+     * @throws NullPointerException if `value` is null
+     *
      * @example
      * DoublePredicate.always(true);
-     * @param value the evaluated value
-     * @return predicate the `DoublePredicate`
-     * @throws NullPointerException if `value` is null
      */
     public static DoublePredicate always(final Boolean value) {
         Validate.notNull(value);
@@ -161,11 +159,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>` "greater than" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `DoublePredicate`
+     *
+     * @see Comparator.compareNullSafeDoubles
+     *
      * @example
      * DoublePredicate.isGreater(100);
-     * @param value the right argument of comparison
-     * @return the `DoublePredicate`
-     * @see Comparator.compareNullSafeDoubles
      */
     public static DoublePredicate isGreater(final Double value) {
         return new ComparePredicate(value, 1);
@@ -177,11 +179,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
      * <p><strong>Note: </strong></p>
      * <<p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `DoublePredicate`
+     *
+     * @see Comparator.compareNullSafeDoubles
+     *
      * @example
      * DoublePredicate.isGreaterOrEqual(100);
-     * @param value the right argument of comparison
-     * @return the `DoublePredicate`
-     * @see Comparator.compareNullSafeDoubles
      */
     public static DoublePredicate isGreaterOrEqual(final Double value) {
         return isGreater(value).orElse(isEqual(value));
@@ -193,11 +199,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<` "less than" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `DoublePredicate`
+     *
+     * @see Comparator.compareNullSafeDoubles
+     *
      * @example
      * DoublePredicate.isLess(100);
-     * @param value the right argument of comparison
-     * @return the `DoublePredicate`
-     * @see Comparator.compareNullSafeDoubles
      */
     public static DoublePredicate isLess(final Double value) {
         return new ComparePredicate(value, -1);
@@ -209,11 +219,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `DoublePredicate`
+     *
+     * @see Comparator.compareNullSafeDoubles
+     *
      * @example
      * DoublePredicate.isLessOrEqual(100);
-     * @param value the right argument of comparison
-     * @return the `DoublePredicate`
-     * @see Comparator.compareNullSafeDoubles
      */
     public static DoublePredicate isLessOrEqual(final Double value) {
         return isLess(value).orElse(isEqual(value));
@@ -222,11 +236,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is equal to
      * the `value`.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `DoublePredicate`
+     *
+     * @see Comparator.compareNullSafeDoubles
+     *
      * @example
      * DoublePredicate.isEqual(100);
-     * @param value the right argument of comparison
-     * @return the `DoublePredicate`
-     * @see Comparator.compareNullSafeDoubles
      */
     public static DoublePredicate isEqual(final Double value) {
         return new ComparePredicate(value, 0);
@@ -235,11 +253,15 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is not equal to
      * the `value`.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `DoublePredicate`
+     *
+     * @see Comparator.compareNullSafeDoubles
+     *
      * @example
      * DoublePredicate.isNotEqual(100);
-     * @param value the right argument of comparison
-     * @return the `DoublePredicate`
-     * @see Comparator.compareNullSafeDoubles
      */
     public static DoublePredicate isNotEqual(final Double value) {
         return isEqual(value).negate();
@@ -248,14 +270,19 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `DoublePredicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * DoublePredicate.isIn(new List<Double>{ 1.5, 5.1, Math.PI });
      * DoublePredicate.isIn((Iterable<Double>) new Set<Double>{ 1.5, 5.1, Math.PI });
      * DoublePredicate.isIn(doubleStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `DoublePredicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static DoublePredicate isIn(final Iterable<Double> container) {
         return new IsIn(container);
@@ -264,14 +291,19 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is not contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `DoublePredicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * DoublePredicate.isNotIn(new List<Double>{ 1.5, 5.1, Math.PI });
      * DoublePredicate.isNotIn((Iterable<Double>) new Set<Double>{ 1.5, 5.1, Math.PI });
      * DoublePredicate.isNotIn(doubleStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `DoublePredicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static DoublePredicate isNotIn(final Iterable<Double> container) {
         return isIn(container).negate();
@@ -281,9 +313,11 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
     //<editor-fold desc="Double Predicates">
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is null.
+     *
+     * @return the `DoublePredicate`
+     *
      * @example
      * DoublePredicate.isNull();
-     * @return the `DoublePredicate`
      */
     public static DoublePredicate isNull() {
         return isEqual(null);
@@ -291,9 +325,11 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
 
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is not null.
+     *
+     * @return the `DoublePredicate`
+     *
      * @example
      * DoublePredicate.isNotNull();
-     * @return the `DoublePredicate`
      */
     public static DoublePredicate isNotNull() {
         return isEqual(null).negate();
@@ -301,9 +337,11 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
 
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is negative.
+     *
+     * @return the `DoublePredicate`
+     *
      * @example
      * DoublePredicate.isNegative();
-     * @return the `DoublePredicate`
      */
     public static DoublePredicate isNegative() {
         return isLess(0);
@@ -311,9 +349,11 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
 
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is negative or zero.
+     *
+     * @return the `DoublePredicate`
+     *
      * @example
      * DoublePredicate.isNegativeOrZero();
-     * @return the `DoublePredicate`
      */
     public static DoublePredicate isNegativeOrZero() {
         return isLessOrEqual(0);
@@ -321,9 +361,11 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
 
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is positive.
+     *
+     * @return the `DoublePredicate`
+     *
      * @example
      * DoublePredicate.isPositive();
-     * @return the `DoublePredicate`
      */
     public static DoublePredicate isPositive() {
         return isGreater(0);
@@ -331,9 +373,11 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
 
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is positive or zero.
+     *
+     * @return the `DoublePredicate`
+     *
      * @example
      * DoublePredicate.isPositiveOrZero();
-     * @return the `DoublePredicate`
      */
     public static DoublePredicate isPositiveOrZero() {
         return isGreaterOrEqual(0);
@@ -341,10 +385,13 @@ public abstract inherited sharing class DoublePredicate implements IDoublePredic
 
     /**
      * @description Returns a `DoublePredicate` that tests the input Double if it is prime.
+     *
+     * @return the `DoublePredicate`
+     *
+     * @throws NullPointerException if the input argument is null
+     *
      * @example
      * DoublePredicate.isPrime();
-     * @return the `DoublePredicate`
-     * @throws NullPointerException if the input argument is null
      */
     public static DoublePredicate isZero() {
         return isEqual(0);

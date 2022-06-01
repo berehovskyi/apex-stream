@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleDistinctIterator extends DoubleBaseIterator {
+public inherited sharing class DoubleDistinctIterator extends DoubleBaseIterator {
 
     private final Iterator<Double> iterator;
     private final IDoubleUnaryOperator classifier;

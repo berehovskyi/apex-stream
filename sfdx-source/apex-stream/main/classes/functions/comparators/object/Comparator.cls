@@ -1,13 +1,16 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IComparator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IObjectIterable.sort
  * @see IObjectIterable.min
  * @see IObjectIterable.max
  * @see BinaryOperator.minBy
  * @see BinaryOperator.maxBy
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Comparator implements IComparator {
 
@@ -23,8 +26,11 @@ public abstract inherited sharing class Comparator implements IComparator {
      * @description Returns a composed `Comparator` of `this` and the `other`
      * comparator. If `this` considers two elements equal, the `other` determines
      * the final result.
+     *
      * @param other the comparator to compare keys
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual Comparator thenComparing(final IComparator other) {
@@ -36,9 +42,12 @@ public abstract inherited sharing class Comparator implements IComparator {
      * @description Returns a composed `Comparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function to be compared with the given
      * `keyComparator`.
+     *
      * @param keyExtractor the function to extract the key to compare
      * @param keyComparator the comparator to compare keys
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual Comparator thenComparing(final IFunction keyExtractor, final IComparator keyComparator) {
@@ -48,8 +57,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a composed `Comparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual Comparator thenComparing(final IFunction keyExtractor) {
@@ -59,8 +71,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a composed `Comparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the Integer key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual Comparator thenComparingInt(final IToIntFunction keyExtractor) {
@@ -70,8 +85,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a composed `Comparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the Long key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual Comparator thenComparingLong(final IToLongFunction keyExtractor) {
@@ -81,8 +99,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a composed `Comparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the Double key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual Comparator thenComparingDouble(final IToDoubleFunction keyExtractor) {
@@ -92,8 +113,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a composed `Comparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the SObject key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual Comparator thenComparingSObject(final IToSObjectFunction keyExtractor) {
@@ -103,9 +127,13 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a `Comparator` that imposes either `default` or
      * `reversed` ordering depending on the `order`.
+     *
      * @param order the sort order
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `order` is null
+     *
      * @see SortOrder
      */
     public virtual Comparator order(final SortOrder order) {
@@ -116,6 +144,7 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a null-safe `Comparator` of `this` comparator
      * that considers null to be less than non-null.
+     *
      * @return the `Comparator`
      */
     public virtual Comparator nullsFirst() {
@@ -125,6 +154,7 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a null-safe `Comparator` of `this` comparator
      * that considers null to be greater than non-null.
+     *
      * @return the `Comparator`
      */
     public virtual Comparator nullsLast() {
@@ -133,6 +163,7 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Returns a comparator that imposes the reverse ordering of `this` comparator.
+     *
      * @return the `Comparator`
      */
     public virtual Comparator reversed() {
@@ -148,9 +179,12 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a `Comparator` that compares extracted by
      * the `keyExtractor` keys using the `keyComparator`.
+     *
      * @param keyExtractor the function to extract the key to compare
      * @param keyComparator the comparator to compare keys
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public static Comparator comparing(final IFunction keyExtractor, final IComparator keyComparator) {
@@ -162,8 +196,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a `Comparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static Comparator comparing(final IFunction keyExtractor) {
@@ -173,8 +210,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a `Comparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the Integer key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static Comparator comparingInt(final IToIntFunction keyExtractor) {
@@ -185,8 +225,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a `Comparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the Long key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static Comparator comparingLong(final IToLongFunction keyExtractor) {
@@ -197,8 +240,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a `Comparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the Double key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static Comparator comparingDouble(final IToDoubleFunction keyExtractor) {
@@ -209,8 +255,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a `Comparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the SObject key to compare
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static Comparator comparingSObject(final IToSObjectFunction keyExtractor) {
@@ -222,6 +271,7 @@ public abstract inherited sharing class Comparator implements IComparator {
     //<editor-fold desc="Ordering">
     /**
      * @description Returns a comparator that imposes the default ordering.
+     *
      * @return the `Comparator`
      */
     public static Comparator defaultOrder() {
@@ -230,6 +280,7 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Returns a comparator that imposes the reverse ordering.
+     *
      * @return the `Comparator`
      */
     public static Comparator reverseOrder() {
@@ -239,7 +290,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a null-safe `Comparator` of the `comparator`
      * that considers null to be less than non-null.
+     *
+     * @param comparator 
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static Comparator nullsFirst(final Comparator comparator) {
@@ -249,7 +304,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Returns a null-safe `Comparator` of the `comparator`
      * that considers null to be greater than non-null.
+     *
+     * @param comparator 
+     *
      * @return the `Comparator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static Comparator nullsLast(final Comparator comparator) {
@@ -314,9 +373,11 @@ public abstract inherited sharing class Comparator implements IComparator {
     // @start-group Compare Methods
     /**
      * @description Compares the two nullable objects considering that at least one of them is null.
+     *
      * @param o1 the first boolean to compare
      * @param o2 the second boolean to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -327,8 +388,10 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Compares the two nullable objects considering that at least one of them is null.
      * Considers a non-null value as always greater than a null value.
+     *
      * @param o1 the first boolean to compare
      * @param o2 the second boolean to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -339,8 +402,10 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Compares the two non-null booleans considering `true` is greater than
      * `false`.
+     *
      * @param o1 the first boolean to compare
      * @param o2 the second boolean to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -352,8 +417,10 @@ public abstract inherited sharing class Comparator implements IComparator {
      * @description Compares the two non-null strings.
      * <p><strong>Note: </strong></p>
      * <p>Id comparison is case-sensitive and does not distinguish between 15-character and 18-character formats</p>
+     *
      * @param id1 the first id to compare
      * @param id2 the second id to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -365,8 +432,10 @@ public abstract inherited sharing class Comparator implements IComparator {
      * @description Compares the two non-null strings.
      * <p><strong>Note: </strong></p>
      * <p>String comparison is case-insensitive.</p>
+     *
      * @param str1 the first string to compare
      * @param str2 the second string to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -376,8 +445,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null blobs.
+     *
      * @param b1 the first blob to compare
      * @param b2 the second blob to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -388,8 +459,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null dates.
+     *
      * @param d1 the first date to compare
      * @param d2 the second date to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -399,8 +472,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null datetimes.
+     *
      * @param dt1 the first datetime to compare
      * @param dt2 the second datetime to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -410,8 +485,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null times.
+     *
      * @param t1 the first time to compare
      * @param t2 the second time to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -421,8 +498,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null integers.
+     *
      * @param i1 the first Integer to compare
      * @param i2 the second Integer to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -432,8 +511,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null longs.
+     *
      * @param l1 the first Long to compare
      * @param l2 the second Long to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -443,8 +524,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null Doubles.
+     *
      * @param d1 the first Double to compare
      * @param d2 the second Double to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -454,8 +537,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null sobjects.
+     *
      * @param sObj1 the first SObject to compare
      * @param sObj2 the second SObject to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -465,8 +550,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two non-null comparables.
+     *
      * @param x the first SObject to compare
      * @param y the second SObject to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -477,10 +564,13 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Compares the two non-null objects identifying its types first.
      * Supports all primitive types and comparable type.
+     *
      * @param value1 the first object to compare
      * @param value2 the second object to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
+     *
      * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
      * and is not comparable.
      */
@@ -534,9 +624,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Booleans.
+     *
      * @param b1 the first Boolean to compare
      * @param b2 the second Boolean to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -547,8 +639,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Booleans.
+     *
      * @param b1 the first Boolean to compare
      * @param b2 the second Boolean to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -558,9 +652,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Ids.
+     *
      * @param id1 the first Id to compare
      * @param id2 the second Id to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -571,8 +667,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Ids.
+     *
      * @param id1 the first Id to compare
      * @param id2 the second Id to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -582,9 +680,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Strings.
+     *
      * @param str1 the first String to compare
      * @param str2 the second String to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -595,8 +695,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Strings.
+     *
      * @param str1 the first String to compare
      * @param str2 the second String to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -606,9 +708,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Blobs.
+     *
      * @param b1 the first Blob to compare
      * @param b2 the second Blob to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -619,8 +723,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Blobs.
+     *
      * @param b1 the first Blob to compare
      * @param b2 the second Blob to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -630,9 +736,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Dates.
+     *
      * @param d1 the first Date to compare
      * @param d2 the second Date to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -643,8 +751,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Dates.
+     *
      * @param d1 the first Date to compare
      * @param d2 the second Date to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -654,9 +764,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Datetimes.
+     *
      * @param dt1 the first Datetime to compare
      * @param dt2 the second Datetime to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -667,8 +779,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Datetimes.
+     *
      * @param dt1 the first Datetime to compare
      * @param dt2 the second Datetime to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -678,9 +792,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Times.
+     *
      * @param t1 the first Time to compare
      * @param t2 the second Time to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -691,8 +807,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Times.
+     *
      * @param t1 the first Time to compare
      * @param t2 the second Time to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -702,9 +820,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable integers.
+     *
      * @param i1 the first Integer to compare
      * @param i2 the second Integer to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -715,8 +835,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable integers.
+     *
      * @param i1 the first Integer to compare
      * @param i2 the second Integer to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -726,9 +848,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Longs.
+     *
      * @param l1 the first Long to compare
      * @param l2 the second Long to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -739,8 +863,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Longs.
+     *
      * @param l1 the first Long to compare
      * @param l2 the second Long to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -750,9 +876,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Doubles.
+     *
      * @param d1 the first Double to compare
      * @param d2 the second Double to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -763,8 +891,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Doubles.
+     *
      * @param d1 the first Double to compare
      * @param d2 the second Double to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -774,9 +904,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable SObjects.
+     *
      * @param sObj1 the first SObject to compare
      * @param sObj2 the second SObject to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -787,8 +919,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable SObjects.
+     *
      * @param sObj1 the first SObject to compare
      * @param sObj2 the second SObject to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -798,9 +932,11 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Comparables.
+     *
      * @param x the first Comparable to compare
      * @param y the second Comparable to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -811,8 +947,10 @@ public abstract inherited sharing class Comparator implements IComparator {
 
     /**
      * @description Compares the two nullable Comparables.
+     *
      * @param x the first Comparable to compare
      * @param y the second Comparable to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
@@ -823,11 +961,14 @@ public abstract inherited sharing class Comparator implements IComparator {
     /**
      * @description Compares the two non-null Objects identifying its types first.
      * Supports all primitive types as well as comparable type.
+     *
      * @param value1 the first object to compare
      * @param value2 the second object to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
+     *
      * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
      * and is not comparable.
      */
@@ -840,10 +981,13 @@ public abstract inherited sharing class Comparator implements IComparator {
      * @description Compares the two non-null Objects identifying its types first.
      * Supports all primitive types as well as comparable type.
      * Considers a non-null value as always greater than a null value.
+     *
      * @param value1 the first object to compare
      * @param value2 the second object to compare
+     *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
+     *
      * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
      * and is not comparable.
      */
@@ -981,9 +1125,7 @@ public abstract inherited sharing class Comparator implements IComparator {
             this.comp = comparator;
         }
         public override Integer compare(Object o1, Object o2) {
-            if (o1 == null || o2 == null) {
-                return Comparator.compareNullables(o1, o2, !nullsFirst);
-            }
+            if (o1 == null || o2 == null) { return Comparator.compareNullables(o1, o2, !nullsFirst); }
             return comp.compare(o1, o2);
         }
         public override Comparator thenComparing(IComparator other) {

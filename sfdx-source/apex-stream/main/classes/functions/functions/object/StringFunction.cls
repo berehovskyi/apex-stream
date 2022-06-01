@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `StringFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class StringFunction extends Function {
 
@@ -12,9 +14,13 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that abbreviates the string input argument,
      * of the specified `maxWidth` and with ellipses appended if the current String is longer
      * than the specified `maxWidth`; otherwise, returns the original String without ellipses.
+     *
      * @param maxWidth the length
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `maxWidth` is null
+     *
      * @see String.abbreviate
      */
     public static Function abbreviate(final Integer maxWidth) {
@@ -27,10 +33,14 @@ public abstract inherited sharing class StringFunction extends Function {
      * starting at the specified character `offset` and of the specified `maxWidth`.
      * The returned String has ellipses appended at the start and the end if characters
      * have been removed at these locations.
+     *
      * @param maxWidth the length
      * @param offset the offset
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `maxWidth` or `offset` is null
+     *
      * @see String.abbreviate
      */
     public static Function abbreviate(final Integer maxWidth, final Integer offset) {
@@ -41,8 +51,11 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that appends `suffix` to the string input argument.
+     *
      * @param suffix the string to append
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `suffix` is null
      */
     public static Function append(final String suffix) {
@@ -53,7 +66,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument with
      * the first letter changed to title case.
+     *
      * @return the `Function`
+     *
      * @see String.capitalize
      */
     public static Function capitalize() {
@@ -65,9 +80,13 @@ public abstract inherited sharing class StringFunction extends Function {
      * of the specified `size` padded with spaces on the left and right,
      * so that it appears in the center. If the specified size is smaller than the current String size,
      * the entire String is returned without added spaces.
+     *
      * @param size the size
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `size` is null
+     *
      * @see String.center
      */
     public static Function center(final Integer size) {
@@ -80,10 +99,14 @@ public abstract inherited sharing class StringFunction extends Function {
      * of the specified `size` padded with the specified `padStr` on the left and right,
      * so that it appears in the center. If the specified size is smaller than the current String size,
      * the entire String is returned without padding.
+     *
      * @param size the size
      * @param padStr the padding string
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `size` or `padStr` is null
+     *
      * @see String.center
      */
     public static Function center(final Integer size, final String padStr) {
@@ -95,7 +118,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a version of the string input argument
      * with all white space characters removed.
+     *
      * @return the `Function`
+     *
      * @see String.deleteWhitespace
      */
     public static Function deleteWhitespace() {
@@ -105,9 +130,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the difference between
      * the string input argument and the specified `str`.
+     *
      * @param str the string to compare
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `str` is null
+     *
      * @see String.difference
      */
     public static Function difference(final String str) {
@@ -118,7 +147,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a String for a CSV
      * column enclosed in Double quotes, if required.
+     *
      * @return the `Function`
+     *
      * @see String.escapeCsv
      */
     public static Function escapeCsv() {
@@ -128,7 +159,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that escapes the characters in the string input argument
      * using EcmaScript String rules.
+     *
      * @return the `Function`
+     *
      * @see String.escapeEcmaScript
      */
     public static Function escapeEcmaScript() {
@@ -138,7 +171,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that escapes the characters in the string input argument
      * using HTML 3.0 entities.
+     *
      * @return the `Function`
+     *
      * @see String.escapeHtml3
      */
     public static Function escapeHtml3() {
@@ -148,7 +183,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that escapes the characters in the string input argument
      * using HTML 3.0 entities.
+     *
      * @return the `Function`
+     *
      * @see String.escapeHtml4
      */
     public static Function escapeHtml4() {
@@ -159,7 +196,9 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that escapes the characters in the string input argument
      * using using Java String rules. Characters escaped include quotes and control characters,
      * such as tab, backslash, and carriage return characters.
+     *
      * @return the `Function`
+     *
      * @see String.escapeJava
      */
     public static Function escapeJava() {
@@ -169,7 +208,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that return a String with the escape character (\)
      * added before any single quotation marks in the string input argument.
+     *
      * @return the `Function`
+     *
      * @see String.escapeSingleQuotes
      */
     public static Function escapeSingleQuotes() {
@@ -179,7 +220,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a String whose Unicode characters
      * are escaped to a Unicode escape sequence.
+     *
      * @return the `Function`
+     *
      * @see String.escapeUnicode
      */
     public static Function escapeUnicode() {
@@ -189,7 +232,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that escapes the characters in the string input argument
      * using XML entities.
+     *
      * @return the `Function`
+     *
      * @see String.escapeXml
      */
     public static Function escapeXml() {
@@ -199,9 +244,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that treats the string input argument as a pattern and
      * returns a string using the `arguments` for substitution and formatting.
+     *
      * @param arguments the objects for substitution
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `arguments` is null
+     *
      * @see String.format
      */
     public static Function format(final List<Object> arguments) {
@@ -212,7 +261,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns an array of character values
      * that represent the characters in the string input argument.
+     *
      * @return the `Function`
+     *
      * @see String.getChars
      */
     public static Function getChars() {
@@ -222,9 +273,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the leftmost characters of
      * the string input argument of the specified `length`.
+     *
      * @param length the length
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `length` is null
+     *
      * @see String.left
      */
     public static Function left(final Integer length) {
@@ -235,9 +290,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument
      * padded with spaces on the left and of the specified `length`.
+     *
      * @param length the length
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `length` is null
+     *
      * @see String.leftPad
      */
     public static Function leftPad(final Integer length) {
@@ -248,10 +307,14 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument
      * padded with `padStr` on the left and of the specified `length`.
+     *
      * @param length the length
      * @param padStr the padding string
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `length` or `padStr` is null
+     *
      * @see String.leftPad
      */
     public static Function leftPad(final Integer length, final String padStr) {
@@ -264,10 +327,14 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that returns a new String that begins
      * with the character at the specified zero-based `startIndex` with the number
      * of characters specified by `length`.
+     *
      * @param startIndex the start index
      * @param length the length
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `startIndex` or `length` is null
+     *
      * @see String.mid
      */
     public static Function mid(final Integer startIndex, final Integer length) {
@@ -279,7 +346,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument
      * with leading, trailing, and repeating white space characters removed.
+     *
      * @return the `Function`
+     *
      * @see String.normalizeSpace
      */
     public static Function normalizeSpace() {
@@ -288,8 +357,11 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that prepends `prefix` to the string input argument.
+     *
      * @param prefix the string to prepend
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `prefix` is null
      */
     public static Function prepend(final String prefix) {
@@ -300,9 +372,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that removes all occurrences of the specified
      * `substring` and returns the String result.
+     *
      * @param substring the string to remove
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `substring` is null
+     *
      * @see String.remove
      */
     public static Function remove(final String substring) {
@@ -313,9 +389,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that removes the specified
      * `substring` only if it occurs at the end of the String.
+     *
      * @param substring the string to remove
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `substring` is null
+     *
      * @see String.removeEnd
      */
     public static Function removeEnd(final String substring) {
@@ -326,9 +406,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that removes the specified
      * `substring` only if it occurs at the end of the String using a case-insensitive match.
+     *
      * @param substring the string to remove
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `substring` is null
+     *
      * @see String.removeEndIgnoreCase
      */
     public static Function removeEndIgnoreCase(final String substring) {
@@ -339,9 +423,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that removes the specified
      * `substring` only if it occurs at the beginning of the String.
+     *
      * @param substring the string to remove
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `substring` is null
+     *
      * @see String.removeStart
      */
     public static Function removeStart(final String substring) {
@@ -352,9 +440,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that removes the specified
      * `substring` only if it occurs at the beginning of the String using a case-insensitive match.
+     *
      * @param substring the string to remove
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `substring` is null
+     *
      * @see String.removeStartIgnoreCase
      */
     public static Function removeStartIgnoreCase(final String substring) {
@@ -365,9 +457,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument
      * repeated the specified number of times.
+     *
      * @param numTimes the number of times to repeat
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `numTimes` is null
+     *
      * @see String.repeat
      */
     public static Function repeat(final Integer numTimes) {
@@ -379,10 +475,14 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that returns the string input argument
      * repeated the specified `numTimes` using the specified `separator`
      * to separate the repeated Strings.
+     *
      * @param separator the separator
      * @param numTimes the number of times to repeat
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `separator` or `numTimes` is null
+     *
      * @see String.repeat
      */
     public static Function repeat(final String separator, final Integer numTimes) {
@@ -395,10 +495,14 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that replaces each substring of the string input argument
      * that matches the literal `target` sequence with the specified
      * literal `replacement` sequence.
+     *
      * @param target the target
      * @param replacement the replacement sequence
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `target` or `replacement` is null
+     *
      * @see String.replace
      */
     public static Function replace(final String target, final String replacement) {
@@ -410,10 +514,14 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that replaces each substring of the string input argument
      * that matches the regular expression `regExp` with the `replacement` sequence.
+     *
      * @param regExp the regular expression
      * @param replacement the replacement sequence
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `regExp` or `replacement` is null
+     *
      * @see String.replaceAll
      */
     public static Function replaceAll(final String regExp, final String replacement) {
@@ -425,10 +533,14 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that replaces the first substring of the string input argument
      * that matches the regular expression `regExp` with the `replacement` sequence.
+     *
      * @param regExp the regular expression
      * @param replacement the replacement sequence
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `regExp` or `replacement` is null
+     *
      * @see String.replaceAll
      */
     public static Function replaceFirst(final String regExp, final String replacement) {
@@ -439,7 +551,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns a String with all the characters reversed.
+     *
      * @return the `Function`
+     *
      * @see String.reverse
      */
     public static Function reverse() {
@@ -449,9 +563,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the rightmost characters of
      * the string input argument of the specified `length`.
+     *
      * @param length the length
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `length` is null
+     *
      * @see String.right
      */
     public static Function right(final Integer length) {
@@ -462,9 +580,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument
      * padded with spaces on the right and of the specified `length`.
+     *
      * @param length the length
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `length` is null
+     *
      * @see String.rightPad
      */
     public static Function rightPad(final Integer length) {
@@ -475,10 +597,14 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument
      * padded with `padStr` on the right and of the specified `length`.
+     *
      * @param length the length
      * @param padStr the padding string
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `length` or `padStr` is null
+     *
      * @see String.rightPad
      */
     public static Function rightPad(final Integer length, final String padStr) {
@@ -491,9 +617,13 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that returns a list that contains each substring
      * of the string input argument that is terminated by either the regular expression `regExp`
      * or the end.
+     *
      * @param regExp the regular expression
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `regExp` is null
+     *
      * @see String.split
      */
     public static Function split(final String regExp) {
@@ -505,10 +635,14 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that returns a list that contains each substring
      * of the string input argument that is terminated by either the regular expression `regExp`
      * or `lim`.
+     *
      * @param regExp the regular expression
      * @param lim the limit
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `regExp` or `lim` is null
+     *
      * @see String.split
      */
     public static Function split(final String regExp, final Integer lim) {
@@ -521,7 +655,9 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that splits the string input argument
      * by character type and returns a list of contiguous character groups of the same type
      * as complete tokens.
+     *
      * @return the `Function`
+     *
      * @see String.splitByCharacterType
      */
     public static Function splitByCharacterType() {
@@ -534,7 +670,9 @@ public abstract inherited sharing class StringFunction extends Function {
      * as complete tokens, with the following exception: the uppercase character, if any,
      * immediately preceding a lowercase character token belongs to the following character
      * token rather than to the preceding.
+     *
      * @return the `Function`
+     *
      * @see String.splitByCharacterTypeCamelCase
      */
     public static Function splitByCharacterTypeCamelCase() {
@@ -543,7 +681,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that removes HTML markup and returns plain text.
+     *
      * @return the `Function`
+     *
      * @see String.stripHtmlTags
      */
     public static Function stripHtmlTags() {
@@ -553,10 +693,14 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a new String that begins with
      * the character at the specified zero-based `startIndex` and extends to the end
-      * of the string input argument.
+     * of the string input argument.
+     *
      * @param startIndex the start index
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `startIndex` is null
+     *
      * @see String.substring
      */
     public static Function substring(final Integer startIndex) {
@@ -568,10 +712,14 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that returns a new String that begins with
      * the character at the specified zero-based `startIndex` and extends to the character
      * at `endIndex` - 1.
+     *
      * @param startIndex the start index
      * @param endIndex the end index
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `startIndex` or `endIndex` is null
+     *
      * @see String.substring
      */
     public static Function substring(final Integer startIndex, final Integer endIndex) {
@@ -583,9 +731,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the substring that occurs
      * after the first occurrence of the specified `separator`.
+     *
      * @param separator the separator
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `separator` is null
+     *
      * @see String.substringAfter
      */
     public static Function substringAfter(final String separator) {
@@ -596,9 +748,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the substring that occurs
      * after the last occurrence of the specified `separator`.
+     *
      * @param separator the separator
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `separator` is null
+     *
      * @see String.substringAfterLast
      */
     public static Function substringAfterLast(final String separator) {
@@ -609,9 +765,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the substring that occurs
      * before the first occurrence of the specified `separator`.
+     *
      * @param separator the separator
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `separator` is null
+     *
      * @see String.substringBefore
      */
     public static Function substringBefore(final String separator) {
@@ -622,9 +782,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the substring that occurs
      * before the last occurrence of the specified `separator`.
+     *
      * @param separator the separator
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `separator` is null
+     *
      * @see String.substringBeforeLast
      */
     public static Function substringBeforeLast(final String separator) {
@@ -635,9 +799,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the substring that occurs between
      * two instances of the specified `tag` String.
+     *
      * @param tag the tag
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `tag` is null
+     *
      * @see String.substringBetween
      */
     public static Function substringBetween(final String tag) {
@@ -648,10 +816,14 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the substring that occurs between
      * the two specified Strings.
+     *
      * @param open the start string
      * @param close the end string
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `open` or `close` is null
+     *
      * @see String.substringBetween
      */
     public static Function substringBetween(final String open, final String close) {
@@ -663,7 +835,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that swaps the case of all characters and returns
      * the resulting String by using the default (English US) locale.
+     *
      * @return the `Function`
+     *
      * @see String.swapCase
      */
     public static Function swapCase() {
@@ -673,7 +847,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that converts all of the characters in the string input argument
      * to lowercase using the rules of the default (English US) locale.
+     *
      * @return the `Function`
+     *
      * @see String.toLowerCase
      */
     public static Function toLowerCase() {
@@ -683,8 +859,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that converts all of the characters in the string input argument
      * to lowercase using the rules of the specified `locale`.
+     *
+     * @param locale 
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `locale` is null
+     *
      * @see String.toLowerCase
      */
     public static Function toLowerCase(final String locale) {
@@ -695,7 +876,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that converts all of the characters in the string input argument
      * to uppercase using the rules of the default (English US) locale.
+     *
      * @return the `Function`
+     *
      * @see String.toUpperCase
      */
     public static Function toUpperCase() {
@@ -705,8 +888,13 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that converts all of the characters in the string input argument
      * to uppercase using the rules of the specified `locale`.
+     *
+     * @param locale 
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `locale` is null
+     *
      * @see String.toUpperCase
      */
     public static Function toUpperCase(final String locale) {
@@ -717,7 +905,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a copy of the string that no longer contains
      * any leading or trailing white space characters.
+     *
      * @return the `Function`
+     *
      * @see String.trim
      */
     public static Function trim() {
@@ -727,7 +917,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string input argument
      * with the first letter in lowercase.
+     *
      * @return the `Function`
+     *
      * @see String.uncapitalize
      */
     public static Function uncapitalize() {
@@ -736,7 +928,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns a String representing an unescaped CSV column.
+     *
      * @return the `Function`
+     *
      * @see String.unescapeCsv
      */
     public static Function unescapeCsv() {
@@ -745,7 +939,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that unescapes any EcmaScript literals found in the String.
+     *
      * @return the `Function`
+     *
      * @see String.unescapeEcmaScript
      */
     public static Function unescapeEcmaScript() {
@@ -755,7 +951,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that unescapes the characters in the string input argument
      * using HTML 3.0 entities.
+     *
      * @return the `Function`
+     *
      * @see String.unescapeHtml3
      */
     public static Function unescapeHtml3() {
@@ -765,7 +963,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that unescapes the characters in the string input argument
      * using HTML 4.0 entities.
+     *
      * @return the `Function`
+     *
      * @see String.unescapeHtml4
      */
     public static Function unescapeHtml4() {
@@ -776,7 +976,9 @@ public abstract inherited sharing class StringFunction extends Function {
      * @description Returns a `Function` that returns a String whose Java literals are unescaped.
      * Literals unescaped include escape sequences for quotes (\\") and control characters,
      * such as tab (\\t), and carriage return (\\n).
+     *
      * @return the `Function`
+     *
      * @see String.unescapeJava
      */
     public static Function unescapeJava() {
@@ -786,7 +988,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a String whose escaped
      * Unicode characters are unescaped.
+     *
      * @return the `Function`
+     *
      * @see String.unescapeUnicode
      */
     public static Function unescapeUnicode() {
@@ -795,7 +999,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that unescapes the characters in a String using XML entities.
+     *
      * @return the `Function`
+     *
      * @see String.unescapeXml
      */
     public static Function unescapeXml() {
@@ -804,7 +1010,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns a string representation of the string input argument.
+     *
      * @return the `Function`
+     *
      * @see String.valueOf
      */
     public static Function valueOf() {
@@ -813,7 +1021,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns a date representation of the string input argument.
+     *
      * @return the `Function`
+     *
      * @see Date.valueOf
      */
     public static Function dateValueOf() {
@@ -822,7 +1032,9 @@ public abstract inherited sharing class StringFunction extends Function {
 
     /**
      * @description Returns a `Function` that returns a datetime representation of the string input argument.
+     *
      * @return the `Function`
+     *
      * @see Datetime.valueOf
      */
     public static Function datetimeValueOf() {
@@ -832,7 +1044,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a datetime representation of the string input argument
      * in GMT format 'yyyy-MM-dd HH:mm:ss' in the local time zone.
+     *
      * @return the `Function`
+     *
      * @see Datetime.valueOfGmt
      */
     public static Function datetimeValueOfGmt() {
@@ -842,7 +1056,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a Date from the string input argument
      * in the local time zone and in the format of the user locale.
+     *
      * @return the `Function`
+     *
      * @see Date.parse
      */
     public static Function parseDate() {
@@ -852,7 +1068,9 @@ public abstract inherited sharing class StringFunction extends Function {
     /**
      * @description Returns a `Function` that returns a Datetime from the string input argument
      * in the local time zone and in the format of the user locale.
+     *
      * @return the `Function`
+     *
      * @see Datetime.parse
      */
     public static Function parseDatetime() {

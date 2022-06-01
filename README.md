@@ -167,7 +167,7 @@ IIntIterable zippedStream = Stream.zip(ints1, ints2, IntBinaryOperator.sum());
 zippedStream.toList(); // [13, 6, 15, 11, 9, 18, 4, 7]
 ```
 
-For reference streams `zip` operation has a variation that additionally takes and `BiPredicate` argument
+For reference streams `zip` operation has a variation that additionally takes an `BiPredicate` argument
 to filter elements before zipping.
 
 Get all `Account` records from `Trigger.new` list on update if `Rating` field has changed:

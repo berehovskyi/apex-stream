@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `ToLongFunction` functions and provides `DatetimeToLongFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DatetimeToLongFunction extends ToLongFunction {
 
@@ -11,7 +13,9 @@ public abstract inherited sharing class DatetimeToLongFunction extends ToLongFun
     /**
      * @description Returns a `ToLongFunction` that returns the number of milliseconds
      * since January 1, 1970, 00:00:00 GMT represented by the DateTime input argument.
+     *
      * @return the `ToLongFunction`
+     *
      * @see Datetime.getTime
      */
     public static ToLongFunction getTime() {

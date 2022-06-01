@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IToIntFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ToIntFunction implements IToIntFunction {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class ToIntFunction implements IToIntFunction 
     // @start-group Static Methods
     /**
      * @description Returns a composed `ToDoubleFunction` of the `ISObjectFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `ToIntFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static ToIntFunction downcast(final ISObjectFunction mapper) {
@@ -27,8 +32,11 @@ public abstract inherited sharing class ToIntFunction implements IToIntFunction 
 
     /**
      * @description Returns a composed `ToDoubleFunction` of the `IFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `ToIntFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static ToIntFunction downcast(final IFunction mapper) {
@@ -43,6 +51,7 @@ public abstract inherited sharing class ToIntFunction implements IToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the Integer value
      * of the Object input argument by casting it to an Integer.
+     *
      * @return the `ToIntFunction`
      */
     public static ToIntFunction asInt() {
@@ -52,7 +61,9 @@ public abstract inherited sharing class ToIntFunction implements IToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the Integer value
      * of the Object input argument.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Integer.valueOf
      */
     public static ToIntFunction valueOf() {

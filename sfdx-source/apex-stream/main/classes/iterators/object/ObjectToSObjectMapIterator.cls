@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectToSObjectMapIterator implements Iterator<SObject> {
+public inherited sharing class ObjectToSObjectMapIterator implements Iterator<SObject> {
 
     private final Iterator<Object> iterator;
     private final IToSObjectFunction mapper;

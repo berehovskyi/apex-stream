@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `ToIntFunction` functions and provides `TimeToIntFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class TimeToIntFunction extends ToIntFunction {
 
@@ -11,7 +13,9 @@ public abstract inherited sharing class TimeToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the hour component
      * of the Time input argument.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Time.hour
      */
     public static ToIntFunction hour() {
@@ -21,7 +25,9 @@ public abstract inherited sharing class TimeToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the millisecond component
      * of the Time input argument.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Time.millisecond
      */
     public static ToIntFunction millisecond() {
@@ -31,7 +37,9 @@ public abstract inherited sharing class TimeToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the minute component
      * of the Time input argument.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Time.minute
      */
     public static ToIntFunction minute() {
@@ -41,7 +49,9 @@ public abstract inherited sharing class TimeToIntFunction extends ToIntFunction 
     /**
      * @description Returns a `ToIntFunction` that returns the second component
      * of the Time input argument.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Time.second
      */
     public static ToIntFunction second() {

@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IDoubleFunction} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IDoubleIterable.mapToObject
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DoubleFunction implements IDoubleFunction {
 
@@ -18,7 +21,9 @@ public abstract inherited sharing class DoubleFunction implements IDoubleFunctio
     /**
      * @description Returns a `DoubleFunction` that returns a string that represents
      * the Double input argument using the locale of the context user.
+     *
      * @return the `SObjectFunction`
+     *
      * @see Double.format
      */
     public static DoubleFunction format() {
@@ -28,7 +33,9 @@ public abstract inherited sharing class DoubleFunction implements IDoubleFunctio
     /**
      * @description Returns a `DoubleFunction` that returns a string that represents
      * the Double input argument.
+     *
      * @return the `SObjectFunction`
+     *
      * @see String.valueOf
      */
     public static DoubleFunction toString() {

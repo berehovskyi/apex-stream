@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `Set<T> - T` two-arity consumers. Typically is used by collectors.
+ *
  * @see IBiConsumer
  * @see Collector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
 
@@ -13,8 +16,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Object>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toSet
      */
     public static BiConsumer addToSet() {
@@ -24,8 +30,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Boolean>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toBoolSet
      */
     public static BiConsumer addToBoolSet() {
@@ -35,8 +44,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Id>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toIdSet
      */
     public static BiConsumer addToIdSet() {
@@ -46,8 +58,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<String>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toStringSet
      */
     public static BiConsumer addToStringSet() {
@@ -57,8 +72,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Blob>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toBlobSet
      */
     public static BiConsumer addToBlobSet() {
@@ -68,8 +86,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Date>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toDateSet
      */
     public static BiConsumer addToDateSet() {
@@ -79,8 +100,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Datetime>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toDatetimeSet
      */
     public static BiConsumer addToDatetimeSet() {
@@ -90,8 +114,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Time>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toTimeSet
      */
     public static BiConsumer addToTimeSet() {
@@ -101,8 +128,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Integer>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toIntSet
      */
     public static BiConsumer addToIntSet() {
@@ -112,8 +142,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Long>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toLongSet
      */
     public static BiConsumer addToLongSet() {
@@ -123,8 +156,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Double>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toDoubleSet
      */
     public static BiConsumer addToDoubleSet() {
@@ -134,8 +170,11 @@ public abstract inherited sharing class SetObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<SObject>` and adds the second input argument to it.
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.toSObjectSet
      */
     public static BiConsumer addToSObjectSet() {

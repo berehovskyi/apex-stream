@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see SObjectStream
  */
 @IsTest(IsParallel = true)

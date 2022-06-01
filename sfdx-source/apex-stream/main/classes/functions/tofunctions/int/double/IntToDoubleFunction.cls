@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IIntToDoubleFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntToDoubleFunction implements IIntToDoubleFunction {
 
@@ -17,7 +19,9 @@ public abstract inherited sharing class IntToDoubleFunction implements IIntToDou
     /**
      * @description Returns a `IIntToDoubleFunction` that returns the Double value
      * of the Integer input argument.
+     *
      * @return the `IIntToDoubleFunction`
+     *
      * @see Double.valueOf
      */
     public static IntToDoubleFunction valueOf() {

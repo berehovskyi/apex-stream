@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleGenerator implements Iterator<Double> {
+public inherited sharing class DoubleGenerator implements Iterator<Double> {
 
     private final IDoubleSupplier supplier;
 

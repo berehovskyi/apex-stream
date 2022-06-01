@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectBiConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ISObjectBinaryOperator
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiConsumer {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
     /**
      * @description Returns a composed `SObjectBiConsumer` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual SObjectBiConsumer andThen(final ISObjectBiConsumer after) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
     /**
      * @description Returns a composed `SObjectBiConsumer` that executes `before` operation
      * first, then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `before` is null
      */
     public virtual SObjectBiConsumer compose(final ISObjectBiConsumer before) {
@@ -44,8 +53,11 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
     /**
      * @description Returns a composed `SObjectBiConsumer` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param consumers the operations to sequentially perform
+     *
      * @return the composed `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static SObjectBiConsumer compose(final List<ISObjectBiConsumer> consumers) {
@@ -62,24 +74,29 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
      * for the second `SObject` input argument a result returned by the `mapper` applied
      * to the first `SObject` input argument. Cross-reference fields and safe navigation are
      * supported.
-     * @example
-     * SObjectBiConsumer.set('NumberOfEmployees', someSObjectFunction);
-     * SObjectBiConsumer.set('Parent.NumberOfEmployees', someSObjectFunction);
-     * SObjectBiConsumer.set('Parent?.NumberOfEmployees', someSObjectFunction);
+     *
      * @param fieldName the target field name of the second `SObject` input argument
      * @param mapper the function applied to the first `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.set('NumberOfEmployees', someSObjectFunction);
+     * SObjectBiConsumer.set('Parent.NumberOfEmployees', someSObjectFunction);
+     * SObjectBiConsumer.set('Parent?.NumberOfEmployees', someSObjectFunction);
      */
     public static SObjectBiConsumer set(final String fieldName, final ISObjectFunction mapper) {
         Validate.notNull(fieldName);
         Validate.notNull(mapper);
-        if (!fieldName.contains('.')) { return new SetFieldName(fieldName, mapper); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) { return new SetFieldPathSafe(fieldName, mapper); }
+        if (!Schemas.isXRef(fieldName)) { return new SetFieldName(fieldName, mapper); }
+        if (Schemas.isSaveNav(fieldName)) { return new SetFieldPathSafe(fieldName, mapper); }
         return new SetFieldPath(fieldName, mapper);
     }
 
@@ -87,13 +104,18 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
      * @description Returns a `SObjectBiConsumer` that sets for the specified field
      * for the second `SObject` input argument a result returned by the `mapper` applied
      * to the first `SObject` input argument.
-     * @example
-     * SObjectBiConsumer.set(Account.NumberOfEmployees, someSObjectFunction);
+     *
      * @param field the target `SObjectField` of the second `SObject` input argument
      * @param mapper the function applied to the first `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `field` or `mapper` is null
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.set(Account.NumberOfEmployees, someSObjectFunction);
      */
     public static SObjectBiConsumer set(final SObjectField field, final ISObjectFunction mapper) {
         Validate.notNull(field);
@@ -105,18 +127,23 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
      * @description Returns a `SObjectBiConsumer` that sets the `value` for
      * the specified field for the second `SObject` input argument. Cross-reference fields and safe
      * navigation are supported.
-     * @example
-     * SObjectBiConsumer.set('NumberOfEmployees', 100);
-     * SObjectBiConsumer.set('Parent.NumberOfEmployees', 100);
-     * SObjectBiConsumer.set('Parent?.NumberOfEmployees', 100);
+     *
      * @param fieldName the target field name of the second `SObject` input argument
      * @param value the value to set for the second `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.set('NumberOfEmployees', 100);
+     * SObjectBiConsumer.set('Parent.NumberOfEmployees', 100);
+     * SObjectBiConsumer.set('Parent?.NumberOfEmployees', 100);
      */
     public static SObjectBiConsumer set(final String fieldName, final Object value) {
         return set(fieldName, SObjectFunction.constant(value));
@@ -125,13 +152,18 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
     /**
      * @description Returns a `SObjectBiConsumer` that sets the `value` for
      * the specified field for the second `SObject` input argument.
-     * @example
-     * SObjectBiConsumer.set(Account.NumberOfEmployees, 100);
+     *
      * @param field the target `SObjectField` of the second `SObject` input argument
      * @param value the value to set for the second `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `field` or `mapper` is null
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.set(Account.NumberOfEmployees, 100);
      */
     public static SObjectBiConsumer set(final SObjectField field, final Object value) {
         return set(field, SObjectFunction.constant(value));
@@ -142,24 +174,29 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
      * for the second `SObject` input argument a result returned by the `mapper` applied
      * to the first `SObject` input argument. Cross-reference fields and safe navigation are
      * supported.
-     * @example
-     * SObjectBiConsumer.setSObject('Parent', someSObjectUnaryOperator);
-     * SObjectBiConsumer.setSObject('Parent.Parent', someSObjectUnaryOperator);
-     * SObjectBiConsumer.setSObject('Parent?.Parent', someSObjectUnaryOperator);
+     *
      * @param fieldName the target field name of the second `SObject` input argument
      * @param operator the operator applied to the first `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `operator` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.setSObject('Parent', someSObjectUnaryOperator);
+     * SObjectBiConsumer.setSObject('Parent.Parent', someSObjectUnaryOperator);
+     * SObjectBiConsumer.setSObject('Parent?.Parent', someSObjectUnaryOperator);
      */
     public static SObjectBiConsumer setSObject(final String fieldName, final ISObjectUnaryOperator operator) {
         Validate.notNull(fieldName);
         Validate.notNull(operator);
-        if (!fieldName.contains('.')) { return new SetSObjectByFieldName(fieldName, operator); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) { return new SetSObjectByPathSafe(fieldName, operator); }
+        if (!Schemas.isXRef(fieldName)) { return new SetSObjectByFieldName(fieldName, operator); }
+        if (Schemas.isSaveNav(fieldName)) { return new SetSObjectByPathSafe(fieldName, operator); }
         return new SetSObjectByPath(fieldName, operator);
     }
 
@@ -167,13 +204,18 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
      * @description Returns a `SObjectBiConsumer` that sets `SObject` for the specified field
      * for the second `SObject` input argument a result returned by the `mapper` applied
      * to the first `SObject` input argument.
-     * @example
-     * SObjectBiConsumer.setSObject(Account.ParentId, someSObjectUnaryOperator);
+     *
      * @param field the target `SObjectField` of the second `SObject` input argument
      * @param operator the operator applied to the first `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `field` or `operator` is null
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.setSObject(Account.ParentId, someSObjectUnaryOperator);
      */
     public static SObjectBiConsumer setSObject(final SObjectField field, final ISObjectUnaryOperator operator) {
         Validate.notNull(field);
@@ -185,18 +227,23 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
      * @description Returns a `SObjectBiConsumer` that sets `SObject`
      * the `value` for the specified field for the second `SObject` input argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectBiConsumer.setSObject('Parent', someAccount);
-     * SObjectBiConsumer.setSObject('Parent.Parent', someAccount);
-     * SObjectBiConsumer.setSObject('Parent?.Parent', someAccount);
+     *
      * @param fieldName the target field name of the second `SObject` input argument
      * @param value the value to set for the second `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `fieldName` is blank or `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.setSObject('Parent', someAccount);
+     * SObjectBiConsumer.setSObject('Parent.Parent', someAccount);
+     * SObjectBiConsumer.setSObject('Parent?.Parent', someAccount);
      */
     public static SObjectBiConsumer setSObject(final String fieldName, final SObject value) {
         return setSObject(fieldName, SObjectUnaryOperator.constant(value));
@@ -205,13 +252,18 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
     /**
      * @description Returns a `SObjectBiConsumer` that sets `SObject`
      * the `value` for the specified field for the second `SObject` input argument.
-     * @example
-     * SObjectBiConsumer.setSObject(Account.ParentId, someAccount);
+     *
      * @param field the target `SObjectField` of the second `SObject` input argument
      * @param value the value to set for the second `SObject` input argument
+     *
      * @return the `SObjectBiConsumer`
+     *
      * @throws NullPointerException if `field` or `mapper` is null
+     *
      * @see SObjectBinaryOperator.forBiConsumer
+     *
+     * @example
+     * SObjectBiConsumer.setSObject(Account.ParentId, someAccount);
      */
     public static SObjectBiConsumer setSObject(final SObjectField field, final SObject value) {
         return setSObject(field, SObjectUnaryOperator.constant(value));
@@ -247,9 +299,7 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
-        public override void accept(SObject src, SObject target) {
-            target.put(fieldName, mapper.apply(src));
-        }
+        public override void accept(SObject src, SObject target) { target.put(fieldName, mapper.apply(src)); }
     }
 
     private class SetFieldPath extends SObjectByPathBiConsumer {
@@ -281,9 +331,7 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
             this.field = field;
             this.mapper = mapper;
         }
-        public override void accept(SObject src, SObject target) {
-            target.put(field, mapper.apply(src));
-        }
+        public override void accept(SObject src, SObject target) { target.put(field, mapper.apply(src)); }
     }
 
     private class SetSObjectByFieldName extends SObjectBiConsumer {
@@ -293,9 +341,7 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
             this.fieldName = fieldName;
             this.operator = operator;
         }
-        public override void accept(SObject src, SObject target) {
-            target.putSObject(fieldName, operator.apply(src));
-        }
+        public override void accept(SObject src, SObject target) { target.putSObject(fieldName, operator.apply(src)); }
     }
 
     private class SetSObjectByPath extends SObjectByPathBiConsumer {
@@ -327,9 +373,7 @@ public abstract inherited sharing class SObjectBiConsumer implements ISObjectBiC
             this.field = field;
             this.operator = operator;
         }
-        public override void accept(SObject src, SObject target) {
-            target.putSObject(field, operator.apply(src));
-        }
+        public override void accept(SObject src, SObject target) { target.putSObject(field, operator.apply(src)); }
     }
     // @end-group
     //</editor-fold>

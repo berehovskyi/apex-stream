@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `StringSuppliers`.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class StringSupplier extends Supplier {
 
@@ -10,11 +12,13 @@ public abstract inherited sharing class StringSupplier extends Supplier {
     // @start-group Built-Ins
     /**
      * @description Returns a `Supplier` that returns the next uuid.
+     *
+     * @return the `Supplier`
+     *
      * @example
      * ISupplier uuid = StringSupplier.uuid();
      * uuid.get(); // '563581af-5560-a1fd-2291-2b03582bf000'
      * uuid.get(); // '57b0a848-68e6-2eb8-96ce-2ec0691f51b8'
-     * @return the `Supplier`
      */
     public static Supplier uuid() {
         return new UUID();

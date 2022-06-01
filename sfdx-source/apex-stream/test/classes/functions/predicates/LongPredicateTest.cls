@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see LongPredicate
  */
 @IsTest(IsParallel = true)
@@ -55,9 +55,7 @@ private class LongPredicateTest {
         // Then
         for (Long l : input) {
             Validate.assertEquals(l > 0 || Math.mod(l, 2) == 0, LongPredicate.some(new List<ILongPredicate>{ positivePredicate, evenPredicate }).test(l));
-            Validate.assertEquals(l > 0 || Math.mod(l, 2) == 0, LongPredicate.some(positivePredicate, evenPredicate).test(l));
             Validate.assertEquals(l > 0 && Math.mod(l, 2) == 0, LongPredicate.every(new List<ILongPredicate>{ positivePredicate, evenPredicate }).test(l));
-            Validate.assertEquals(l > 0 && Math.mod(l, 2) == 0, LongPredicate.every(positivePredicate, evenPredicate).test(l));
             Validate.assertEquals(!(l > 0), LongPredicate.negate(positivePredicate).test(l));
         }
     }

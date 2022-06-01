@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see DoublePredicate
  */
 @IsTest(IsParallel = true)
@@ -56,16 +56,12 @@ private class DoublePredicateTest {
         DoublePredicate positivePredicate = DoublePredicate.isPositive();
         DoublePredicate le13Predicate = DoublePredicate.isLessOrEqual(value);
         IDoublePredicate positiveOrLessPredicate = DoublePredicate.some(new List<IDoublePredicate>{ positivePredicate, le13Predicate });
-        IDoublePredicate positiveOrLessPredicate1 = DoublePredicate.some(positivePredicate, le13Predicate);
         IDoublePredicate positiveAndLessPredicate = DoublePredicate.every(new List<IDoublePredicate>{ positivePredicate, le13Predicate });
-        IDoublePredicate positiveAndLessPredicate1 = DoublePredicate.every(positivePredicate, le13Predicate);
         IDoublePredicate notPositivePredicate = DoublePredicate.negate(positivePredicate);
         // Then
         for (Double d : input) {
             Validate.assertEquals(d > 0 || d < value, positiveOrLessPredicate.test(d));
-            Validate.assertEquals(d > 0 || d < value, positiveOrLessPredicate1.test(d));
             Validate.assertEquals(d > 0 && d < value, positiveAndLessPredicate.test(d));
-            Validate.assertEquals(d > 0 && d < value, positiveAndLessPredicate1.test(d));
             Validate.assertEquals(!(d > 0), notPositivePredicate.test(d));
 
         }

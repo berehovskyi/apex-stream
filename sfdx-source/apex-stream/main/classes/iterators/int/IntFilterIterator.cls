@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public virtual class IntFilterIterator implements Iterator<Integer> {
+public virtual inherited sharing class IntFilterIterator implements Iterator<Integer> {
 
     protected final Iterator<Integer> iterator;
     private final IIntPredicate predicate;

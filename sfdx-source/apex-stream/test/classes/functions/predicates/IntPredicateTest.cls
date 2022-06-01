@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see IntPredicate
  */
 @IsTest(IsParallel = true)
@@ -55,9 +55,7 @@ private class IntPredicateTest {
         // Then
         for (Integer i : input) {
             Validate.assertEquals(i > 0 || Math.mod(i, 2) == 0, IntPredicate.some(new List<IIntPredicate>{ positivePredicate, evenPredicate }).test(i));
-            Validate.assertEquals(i > 0 || Math.mod(i, 2) == 0, IntPredicate.some(positivePredicate, evenPredicate).test(i));
             Validate.assertEquals(i > 0 && Math.mod(i, 2) == 0, IntPredicate.every(new List<IIntPredicate>{ positivePredicate, evenPredicate }).test(i));
-            Validate.assertEquals(i > 0 && Math.mod(i, 2) == 0, IntPredicate.every(positivePredicate, evenPredicate).test(i));
             Validate.assertEquals(!(i > 0), IntPredicate.negate(positivePredicate).test(i));
         }
     }

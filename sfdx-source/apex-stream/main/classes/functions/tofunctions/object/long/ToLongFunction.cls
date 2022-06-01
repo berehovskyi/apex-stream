@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IToLongFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ToLongFunction implements IToLongFunction {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class ToLongFunction implements IToLongFunctio
     // @start-group Static Methods
     /**
      * @description Returns a composed `ToLongFunction` of the `ISObjectFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `ToLongFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static ToLongFunction downcast(final ISObjectFunction mapper) {
@@ -27,8 +32,11 @@ public abstract inherited sharing class ToLongFunction implements IToLongFunctio
 
     /**
      * @description Returns a composed `ToLongFunction` of the `IFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `ToLongFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static ToLongFunction downcast(final IFunction mapper) {
@@ -43,6 +51,7 @@ public abstract inherited sharing class ToLongFunction implements IToLongFunctio
     /**
      * @description Returns a `ToLongFunction` that returns the Long value
      * of the Object input argument by casting it to an Long.
+     *
      * @return the `ToLongFunction`
      */
     public static ToLongFunction asLong() {

@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see SObjectBiConsumer
  */
 @IsTest(IsParallel = true)

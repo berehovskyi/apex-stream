@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see IntConsumer
  */
 @IsTest(IsParallel = true)
@@ -36,14 +36,12 @@ private class IntConsumerTest {
         String message = 'message ';
         // When
         IIntConsumer debugConsumer = IntConsumer.debug();
-        IIntConsumer debugConsumer1 = IntConsumer.debug(LoggingLevel.DEBUG);
-        IIntConsumer debugConsumer2 = IntConsumer.debug(message);
+        IIntConsumer debugConsumer1 = IntConsumer.debug(LoggingLevel.DEBUG, message);
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             List<Integer> clone = input.clone();
             debugConsumer.accept(clone[i]);
             debugConsumer1.accept(clone[i]);
-            debugConsumer2.accept(clone[i]);
             Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
         }
     }

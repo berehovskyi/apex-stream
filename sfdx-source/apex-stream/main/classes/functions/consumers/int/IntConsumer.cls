@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IIntConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IIntIterable.forEach
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntConsumer implements IIntConsumer {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class IntConsumer implements IIntConsumer {
     /**
      * @description Returns a composed `IntConsumer` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `IntConsumer`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual IntConsumer andThen(final IIntConsumer after) {
@@ -33,8 +39,11 @@ public abstract inherited sharing class IntConsumer implements IIntConsumer {
     /**
      * @description Returns a composed `IntConsumer` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param consumers the operations to sequentially perform
+     *
      * @return the composed `IntConsumer`
+     *
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static IntConsumer compose(final List<IIntConsumer> consumers) {
@@ -48,9 +57,12 @@ public abstract inherited sharing class IntConsumer implements IIntConsumer {
     // @start-group Built-Ins
     /**
      * @description Returns a `IntConsumer` that debugs an input argument.
+     *
      * @param loggingLevel the logging level
      * @param message the message
+     *
      * @return the `IntConsumer`
+     *
      * @throws NullPointerException if `loggingLevel` or `message` is null
      */
     public static IntConsumer debug(final LoggingLevel loggingLevel, final String message) {
@@ -61,26 +73,7 @@ public abstract inherited sharing class IntConsumer implements IIntConsumer {
 
     /**
      * @description Returns a `IntConsumer` that debugs an input argument.
-     * @param loggingLevel the logging level
-     * @return the `IntConsumer`
-     * @throws NullPointerException if `loggingLevel` is null
-     */
-    public static IntConsumer debug(final LoggingLevel loggingLevel) {
-        return debug(loggingLevel, '');
-    }
-
-    /**
-     * @description Returns a `IntConsumer` that debugs an input argument.
-     * @param message the message
-     * @return the `IntConsumer`
-     * @throws NullPointerException if `message` is null
-     */
-    public static IntConsumer debug(final String message) {
-        return debug(LoggingLevel.INFO, message);
-    }
-
-    /**
-     * @description Returns a `IntConsumer` that debugs an input argument.
+     *
      * @return the `IntConsumer`
      */
     public static IntConsumer debug() {

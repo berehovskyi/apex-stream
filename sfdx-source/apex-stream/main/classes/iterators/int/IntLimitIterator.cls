@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntLimitIterator implements Iterator<Integer> {
+public inherited sharing class IntLimitIterator implements Iterator<Integer> {
 
     private final Iterator<Integer> iterator;
     private final Integer lim;

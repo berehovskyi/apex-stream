@@ -1,8 +1,17 @@
 /**
- * @author O. Berehovskyi
- * @group Iterables
  * @description A sequence of `Integer` elements supporting aggregate operations,
  * a primitive specialization of {@link ObjectSequence}.
+ *
+ * @see IntStream
+ * @see SObjectSequence
+ * @see ObjectSequence
+ * @see DoubleSequence
+ * @see LongSequence
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Iterables
+ *
  * @example
  * Integer sumAnnualRevenueOfUniquePeopleFromLondon
  *     = ObjectSequence.of(people)
@@ -10,11 +19,6 @@
  *         .distinct()
  *         .mapToInt(getAnnualRevenueToIntFunction)
  *         .sum();
- * @see IntStream
- * @see SObjectSequence
- * @see ObjectSequence
- * @see DoubleSequence
- * @see LongSequence
  */
 public virtual inherited sharing class IntSequence extends IntIterable implements IIntIterable {
 
@@ -31,6 +35,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns an internal iterator for the elements of this sequence.
      * <p>Terminal Operation.</p>
+     *
      * @return the internal `Iterator<Integer>`
      */
     public Iterator<Integer> iterator() {
@@ -41,6 +46,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     // @start-group Conversion Operations
     /**
      * @description Returns an `ObjectSequence` consisting of the elements of this sequence, converted to Object.
+     *
      * @return the `ObjectSequence`
      */
     public virtual IObjectIterable toObjectIterable() {
@@ -53,11 +59,15 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     // @start-group Sources
     /**
      * @description Returns a `IntSequence` created from `integers` list.
+     *
+     * @param integers the list of Longs
+     *
+     * @return the new `IntSequence`
+     *
+     * @throws NullPointerException if `integers` is null
+     *
      * @example
      * IIntIterable intSeq = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 });
-     * @param integers the list of Longs
-     * @return the new `IntSequence`
-     * @throws NullPointerException if `integers` is null
      */
     public static IIntIterable of(final List<Integer> integers) {
         Validate.notNull(integers);
@@ -66,11 +76,15 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
 
     /**
      * @description Returns a `IntSequence` created from `integers` set.
+     *
+     * @param integers the set of Integers
+     *
+     * @return the new `IntSequence`
+     *
+     * @throws NullPointerException if `integers` is null
+     *
      * @example
      * IIntIterable intSeq = IntSequence.of(new Set<Integer>{ 0, 5, 1, -10 });
-     * @param integers the set of Integers
-     * @return the new `IntSequence`
-     * @throws NullPointerException if `integers` is null
      */
     public static IIntIterable of(final Set<Integer> integers) {
         Validate.notNull(integers);
@@ -80,11 +94,14 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` created from `integers` list if non-null,
      * otherwise returns an empty `IntSequence`.
-     * @example
-     * IIntIterable intSeq = IntSequence.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
+     *
      * @param integers the list of Integers
+     *
      * @return the new `IntSequence` if `integers` is non-null,
      * otherwise an empty `IntSequence`
+     *
+     * @example
+     * IIntIterable intSeq = IntSequence.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
      */
     public static IIntIterable ofNullable(final List<Integer> integers) {
         if (integers == null) { return empty(); }
@@ -94,11 +111,14 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` created from `integers` set if non-null,
      * otherwise returns an empty `IntSequence`.
-     * @example
-     * IIntIterable intSeq = IntSequence.ofNullable(new Set<Integer>{ 0, 5, 1, -10 });
+     *
      * @param integers the set of Integers
+     *
      * @return the new `IntSequence` if `integers` is non-null,
      * otherwise an empty `IntSequence`
+     *
+     * @example
+     * IIntIterable intSeq = IntSequence.ofNullable(new Set<Integer>{ 0, 5, 1, -10 });
      */
     public static IIntIterable ofNullable(final Set<Integer> integers) {
         if (integers == null) { return empty(); }
@@ -107,6 +127,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
 
     /**
      * @description Returns an empty `IntSequence`.
+     *
      * @return the empty `IntSequence`
      */
     public static IIntIterable empty() {
@@ -114,14 +135,18 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     }
 
     /**
-     * @description Returns an ordered `IntSequence` 
+     * @description Returns an ordered `IntSequence`
      * from `fromInt` (inclusive) to `toInt` (inclusive) by an incremental step of 1.
-     * @example
-     * IIntIterable intSeqFrom0To100 = IntSequence.range(0, 100);
+     *
      * @param fromInt the inclusive initial value
      * @param toInt the inclusive upper bound
+     *
      * @return the new `IntSequence`
+     *
      * @throws NullPointerException if `fromInt` or `toInt` is null
+     *
+     * @example
+     * IIntIterable intSeqFrom0To100 = IntSequence.range(0, 100);
      */
     public static IIntIterable range(final Integer fromInt, final Integer toInt) {
         Validate.notNull(fromInt);
@@ -137,12 +162,16 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns eagerly concatenated `IntSequence` whose elements are all the
      * elements of the first `Iterable<Integer>` followed by all the elements of the
      * second `Iterable<Integer>`.
-     * @example
-     * IIntIterable intSeq = IntSequence.concat(seq1, seq2);
+     *
      * @param iterable1 the first `Iterable<Integer>`
      * @param iterable2 the second `Iterable<Integer>`
+     *
      * @return the new `IntSequence`
+     *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
+     *
+     * @example
+     * IIntIterable intSeq = IntSequence.concat(seq1, seq2);
      */
     public static IIntIterable concat(final Iterable<Integer> iterable1, final Iterable<Integer> iterable2) {
         return concat(new List<Iterable<Integer>>{ iterable1, iterable2 });
@@ -150,11 +179,15 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
 
     /**
      * @description Returns eagerly concatenates `List<Iterable<Integer>>`.
+     *
+     * @param iterables the list of `Iterable<Integer>`
+     *
+     * @return the new `IntSequence`
+     *
+     * @throws NullPointerException if `iterables` or some element in a list is null
+     *
      * @example
      * IIntIterable intSeq = IntSequence.concat(seqs);
-     * @param iterables the list of `Iterable<Integer>`
-     * @return the new `IntSequence`
-     * @throws NullPointerException if `iterables` or some element in a list is null
      */
     public static IIntIterable concat(final List<Iterable<Integer>> iterables) {
         Validate.noNullElements(iterables);
@@ -168,10 +201,13 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a combined `IntSequence` by applying `combiner` function
      * to each element at the same position.
+     *
      * @param iterable1 the first `Iterable<Integer>`
      * @param iterable2 the second `Iterable<Integer>`
      * @param combiner the binary operator to be applied to each element at the same position
+     *
      * @return the new `IntSequence`
+     *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IIntIterable zip(
@@ -194,11 +230,15 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns new `IntSequence` by appending `iterable`
      * to the current sequence.
+     *
+     * @param iterable the `Iterable<Integer>` to append to the current sequence
+     *
+     * @return the new `IntSequence`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * IIntIterable intSeq = seq1.append(seq2);
-     * @param iterable the `Iterable<Integer>` to append to the current sequence
-     * @return the new `IntSequence`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual override IIntIterable append(final Iterable<Integer> iterable) {
         return concat(this, iterable);
@@ -207,11 +247,15 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns new `IntSequence` by prepending `iterable`
      * to the current sequence.
+     *
+     * @param iterable the `Iterable<Integer>` to prepend to the current sequence
+     *
+     * @return the new `IntSequence`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * IIntIterable intSeq = seq1.prepend(seq2);
-     * @param iterable the `Iterable<Integer>` to prepend to the current sequence
-     * @return the new `IntSequence`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual IIntIterable prepend(final Iterable<Integer> iterable) {
         return concat(iterable, this);
@@ -224,9 +268,11 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns new `IntStream` from the current sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the new `IntStream`
+     *
      * @example
      * IIntIterable intStream = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).stream();
-     * @return the new `IntStream`
      */
     public virtual IIntIterable stream() {
         return IntStream.of(iterator());
@@ -235,13 +281,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Integer> filtered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .filter(IntPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `IntSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override IIntIterable filter(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -258,13 +308,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Integer> firstFiltered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .take(IntPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `IntSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual IIntIterable take(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -284,13 +338,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns a `IntSequence` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntSequence`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Integer> rest = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .drop(IntPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `IntSequence`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual IIntIterable drop(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -310,13 +368,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns a `IntSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `IntSequence`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Integer> incrementedInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .mapTo(IntUnaryOperator.add(1))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `IntSequence`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual IIntIterable mapTo(final IIntUnaryOperator mapper) {
         Validate.notNull(mapper);
@@ -331,8 +393,11 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns a `LongSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `LongSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual override ILongIterable mapToLong(final IIntToLongFunction mapper) {
@@ -348,8 +413,11 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns a `DoubleSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `DoubleSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual override IDoubleIterable mapToDouble(final IIntToDoubleFunction mapper) {
@@ -365,8 +433,11 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns a `SObjectSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `SObjectSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual ISObjectIterable mapToSObject(final IIntToSObjectFunction mapper) {
@@ -382,8 +453,11 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns a `ObjectSequence` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `ObjectSequence`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IObjectIterable mapToObject(final IIntFunction mapper) {
@@ -398,9 +472,12 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
+     *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
+     *
      * @return this `IntSequence`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public virtual IIntIterable forEach(final IIntConsumer consumer) {
@@ -414,11 +491,13 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `IntSequence`
+     *
      * @example
      * List<Integer> distinct = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .distinct()
      *     .toList();
-     * @return the `IntSequence`
      */
     public virtual override IIntIterable distinct() {
         final List<Integer> results = new List<Integer>();
@@ -433,11 +512,13 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `IntSequence`
+     *
      * @example
      * List<Integer> sorted = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .sort()
      *     .toList();
-     * @return the `IntSequence`
      */
     public virtual IIntIterable sort() {
         final List<Integer> clone = integers.clone();
@@ -448,14 +529,18 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns a `IntSequence` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param lim the number of elements to limit
+     *
+     * @return the `IntSequence`
+     *
+     * @throws IllegalStateException if `lim` is less than 0
+     * @throws NullPointerException if `lim` is null
+     *
      * @example
      * List<Integer> first3Ints = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .lim(3)
      *     .toList();
-     * @param lim the number of elements to limit
-     * @return the `IntSequence`
-     * @throws NullPointerException if `lim` is null
-     * @throws IllegalStateException if `lim` is less than 0
      */
     public virtual IIntIterable lim(final Integer lim) {
         Validate.notNull(lim);
@@ -473,14 +558,18 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns a new `IntSequence` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param n the number of elements to skip
+     *
+     * @return the `IntSequence`
+     *
+     * @throws IllegalStateException if `n` is less than 0
+     * @throws NullPointerException if `n` is null
+     *
      * @example
      * List<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .skip(1)
      *     .toList();
-     * @param n the number of elements to skip
-     * @return the `IntSequence`
-     * @throws NullPointerException if `n` is null
-     * @throws IllegalStateException if `n` is less than 0
      */
     public virtual IIntIterable skip(final Integer n) {
         Validate.notNull(n);
@@ -504,13 +593,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Performs a reduction on `Integer` elements,
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Integer` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperator.sum());
      * Integer factorialOfN = IntSequence.range(1, n).reduce(1, IntBinaryOperator.product());
-     * @param identity the identity value for `accumulator`
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `Integer` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual Integer reduce(final Integer identity, final IIntBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -526,13 +619,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * using `identity` value and associative `accumulator` function, and returns
      * an `OptionalInt` describing the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `OptionalInt` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *      .reduce(IntBinaryOperator.sum())
      *      .get();
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `OptionalInt` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public override OptionalInt reduce(final IIntBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -547,9 +644,12 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Performs a mutable reduction operation on elements, collecting elements
      * to a container returned by `supplier` by applying `accumulator` function.
      * <p>Terminal Operation.</p>
+     *
      * @param supplier the function that returns a mutable result container
      * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
      * @return the `Object` result of the collection
+     *
      * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public virtual Object collect(final ISupplier supplier, final IObjectIntConsumer accumulator) {
@@ -566,13 +666,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns an `OptionalInt` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `OptionalInt`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Integer firstEvenInt = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .find(IntPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return the `OptionalInt`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual OptionalInt find(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -589,13 +693,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns whether all elements match `predicate`.
      * If `IntSequence` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isEveryIntEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .every(IntPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual Boolean every(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -606,13 +714,17 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @description Returns whether some element matches `predicate`.
      * If `IntSequence` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isSomeLongEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .some(IntPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public override Boolean some(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -622,6 +734,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns the sum of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the sum of elements
      */
     public virtual Integer sum() {
@@ -634,9 +747,10 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     }
 
     /**
-     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this sequence, 
+     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this sequence,
      * or an empty `OptionalDouble` if this sequence is empty.
      * <p>Terminal Operation.</p>
+     *
      * @return the arithmetic mean of elements
      */
     public virtual OptionalDouble avg() {
@@ -651,6 +765,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns the count of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the count of elements
      */
     public virtual Integer count() {
@@ -660,6 +775,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Returns whether the count of elements is 0.
      * <p>Terminal Operation.</p>
+     *
      * @return `true` or `false`
      */
     public virtual Boolean isEmpty() {
@@ -669,11 +785,13 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Accumulates elements into a `List<Integer>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `List<Integer>` containing the sequence elements
+     *
      * @example
      * List<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .lim(1)
      *     .toList();
-     * @return the `List<Integer>` containing the sequence elements
      */
     public virtual List<Integer> toList() {
         return integers;
@@ -682,11 +800,13 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
     /**
      * @description Accumulates elements into a `Set<Integer>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<Integer>` containing the sequence elements
+     *
      * @example
      * Set<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .lim(1)
      *     .toSet();
-     * @return the `Set<Integer>` containing the sequence elements
      */
     public virtual Set<Integer> toSet() {
         return new Set<Integer>(integers);

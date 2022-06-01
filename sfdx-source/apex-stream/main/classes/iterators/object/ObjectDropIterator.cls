@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  */
-public class ObjectDropIterator extends ObjectBaseIterator {
+public inherited sharing class ObjectDropIterator extends ObjectBaseIterator {
 
     private final Iterator<Object> iterator;
     private final IPredicate predicate;

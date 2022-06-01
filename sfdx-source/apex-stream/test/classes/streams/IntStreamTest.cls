@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see IntStream
  */
 @IsTest(IsParallel = true)

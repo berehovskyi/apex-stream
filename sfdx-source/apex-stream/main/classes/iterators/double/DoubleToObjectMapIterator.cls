@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleToObjectMapIterator implements Iterator<Object> {
+public inherited sharing class DoubleToObjectMapIterator implements Iterator<Object> {
 
     private final Iterator<Double> iterator;
     private final IDoubleFunction mapper;

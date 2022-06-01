@@ -1,10 +1,13 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISupplier} functional interface and provides
  * common class level implementations, and related utilities.
+ *
  * @see Collector
  * @see SObjectCollector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Supplier implements ISupplier {
 
@@ -18,9 +21,13 @@ public abstract inherited sharing class Supplier implements ISupplier {
     // @start-group Static Methods
     /**
      * @description Returns a `Supplier` that returns a new instance of the given type.
+     *
      * @param t Type of the new instance to create
+     *
      * @return the `Supplier`
+     *
      * @throws NullPointerException if `t` is null
+     *
      * @see Type.newInstance
      */
     public static Supplier of(final Type t) {
@@ -30,19 +37,25 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a stateful `Supplier` that returns a reference of the `o` object.
+     *
      * @param o the Object
+     *
      * @return the `Supplier`
+     *
      * @throws NullPointerException if `o` is null
      */
     public static Supplier constant(final Object o) {
         Validate.notNull(o);
         return new Constant(o);
     }
-    
+
     /**
      * @description Returns a composed `Supplier` of the `IIntSupplier`.
+     *
      * @param supplier the int supplier
+     *
      * @return the composed `Supplier`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static Supplier upcast(final IIntSupplier supplier) {
@@ -52,8 +65,11 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a composed `Supplier` of the `ILongSupplier`.
+     *
      * @param supplier the Long supplier
+     *
      * @return the composed `Supplier`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static Supplier upcast(final ILongSupplier supplier) {
@@ -63,8 +79,11 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a composed `Supplier` of the `IDoubleSupplier`.
+     *
      * @param supplier the Double supplier
+     *
      * @return the composed `Supplier`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static Supplier upcast(final IDoubleSupplier supplier) {
@@ -74,8 +93,11 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a composed `Supplier` of the `ISObjectSupplier`.
+     *
      * @param supplier the SObject supplier
+     *
      * @return the composed `Supplier`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static Supplier upcast(final ISObjectSupplier supplier) {
@@ -89,7 +111,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
     // @start-group Built-Ins
     /**
      * @description Returns a `Supplier` that returns a list container to track joining string.
+     *
      * @return the `Supplier`
+     *
      * @see Collector.joining
      * @see SObjectCollector.joining
      */
@@ -99,7 +123,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a `Supplier` that returns a list container to track int averaging.
+     *
      * @return the `Supplier`
+     *
      * @see Collector.averagingInt
      * @see SObjectCollector.averagingInt
      */
@@ -109,7 +135,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a `Supplier` that returns a list container to track Long averaging.
+     *
      * @return the `Supplier`
+     *
      * @see Collector.averagingLong
      * @see SObjectCollector.averagingLong
      */
@@ -119,7 +147,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a `Supplier` that returns a list container to track Double averaging.
+     *
      * @return the `Supplier`
+     *
      * @see Collector.averagingDouble
      * @see SObjectCollector.averagingDouble
      */
@@ -129,7 +159,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a `Supplier` that returns a list container to track int summing.
+     *
      * @return the `Supplier`
+     *
      * @see Collector.summingInt
      * @see SObjectCollector.summingInt
      */
@@ -139,7 +171,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a `Supplier` that returns a list container to track Long summing.
+     *
      * @return the `Supplier`
+     *
      * @see Collector.summingLong
      * @see SObjectCollector.summingLong
      */
@@ -149,7 +183,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
 
     /**
      * @description Returns a `Supplier` that returns a list container to track Double summing.
+     *
      * @return the `Supplier`
+     *
      * @see Collector.summingDouble
      * @see SObjectCollector.summingDouble
      */
@@ -160,7 +196,11 @@ public abstract inherited sharing class Supplier implements ISupplier {
     /**
      * @description Returns a `Supplier` that returns a list container to track `identity`
      * mutation.
+     *
+     * @param identity 
+     *
      * @return the `Supplier`
+     *
      * @see Collector.reducing
      */
     public static Supplier box(final Object identity) {
@@ -170,7 +210,11 @@ public abstract inherited sharing class Supplier implements ISupplier {
     /**
      * @description Returns a `Supplier` that returns a list container to track `identity`
      * mutation.
+     *
+     * @param identity 
+     *
      * @return the `Supplier`
+     *
      * @see SObjectCollector.reducing
      */
     public static Supplier sObjectBox(final SObject identity) {
@@ -250,7 +294,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
         public SObjectBoxSupplier(SObject identity) { this.identity = identity; }
         public override Object get() { return new List<SObject>{ identity }; }
     }
-    
+
     private class Constant extends Supplier {
         private final Object identity;
         public Constant(Object identity) { this.identity = identity; }

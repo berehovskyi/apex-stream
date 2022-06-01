@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongForEachIterator implements Iterator<Long> {
+public inherited sharing class LongForEachIterator implements Iterator<Long> {
 
     private final Iterator<Long> iterator;
     private final ILongConsumer consumer;

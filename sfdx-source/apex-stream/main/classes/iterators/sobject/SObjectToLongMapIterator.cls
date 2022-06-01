@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectToLongMapIterator implements Iterator<Long> {
+public inherited sharing class SObjectToLongMapIterator implements Iterator<Long> {
 
     private final Iterator<SObject> iterator;
     private final ISObjectToLongFunction mapper;

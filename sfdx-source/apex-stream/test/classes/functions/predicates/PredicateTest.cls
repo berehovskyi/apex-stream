@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see Predicate
  */
 @IsTest(IsParallel = true)
@@ -100,7 +100,6 @@ private class PredicateTest {
         // Then
         for (IterTestUtils.Person person : input) {
             Validate.assertEquals(person.getAge() >= value || person.isActive(), Predicate.some(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
-            Validate.assertEquals(person.getAge() >= value || person.isActive(), Predicate.some(adultPredicate, activePredicate).test(person));
         }
     }
 
@@ -119,7 +118,6 @@ private class PredicateTest {
         // Then
         for (IterTestUtils.Person person : input) {
             Validate.assertEquals(person.getAge() >= value && person.isActive(), Predicate.every(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
-            Validate.assertEquals(person.getAge() >= value && person.isActive(), Predicate.every(adultPredicate, activePredicate).test(person));
         }
     }
 

@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntDistinctIterator extends IntBaseIterator {
+public inherited sharing class IntDistinctIterator extends IntBaseIterator {
 
     private final Iterator<Integer> iterator;
     private final IIntUnaryOperator classifier;

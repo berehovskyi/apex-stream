@@ -1,8 +1,7 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ILongPredicate} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ILongIterable.filter
  * @see ILongIterable.take
  * @see ILongIterable.drop
@@ -10,6 +9,10 @@
  * @see ILongIterable.some
  * @see ILongIterable.every
  * @see ILongIterable.none
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class LongPredicate implements ILongPredicate {
 
@@ -25,36 +28,46 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
      * @description Returns a composed `LongPredicate` that applies short-circuiting logical
      * `OR` operator to `this` `ILongPredicate` and `other`
      * in that order.
+     *
+     * @param other the other `ILongPredicate`
+     *
+     * @return the composed `LongPredicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * someLongPredicate1.orElse(someLongPredicate2);
-     * @param other the other `ILongPredicate`
-     * @return the composed `LongPredicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual LongPredicate orElse(final ILongPredicate other) {
-        return some(this, other);
+        return some(new List<ILongPredicate>{ this, other });
     }
 
     /**
      * @description Returns a composed `LongPredicate` that applies short-circuiting logical
      * `AND` operator to `this` `ILongPredicate` and `other`
      * in that order.
+     *
+     * @param other the other `ILongPredicate`
+     *
+     * @return the composed `LongPredicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * someLongPredicate1.andAlso(someLongPredicate2);
-     * @param other the other `ILongPredicate`
-     * @return the composed `LongPredicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual LongPredicate andAlso(final ILongPredicate other) {
-        return every(this, other);
+        return every(new List<ILongPredicate>{ this, other });
     }
 
     /**
      * @description Returns a `LongPredicate` that applies logical `NOT` operator
      * to `this` `ILongPredicate`.
+     *
+     * @return the negated `LongPredicate`
+     *
      * @example
      * someLongPredicate.negate();
-     * @return the negated `LongPredicate`
      */
     public virtual LongPredicate negate() {
         return negate(this);
@@ -67,11 +80,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     /**
      * @description Returns a composed `LongPredicate` that applies sequentially short-circuiting
      * logical `OR` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`ILongPredicate`
+     *
+     * @return the composed `LongPredicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * LongPredicate.some(someLongPredicates);
-     * @param predicates the list of`ILongPredicate`
-     * @return the composed `LongPredicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static LongPredicate some(final List<ILongPredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -79,28 +96,17 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     }
 
     /**
-     * @description Returns a composed `LongPredicate` that applies short-circuiting logical
-     * `OR` operator to `predicate1` `ILongPredicate` and `predicate2`
-     * in that order.
-     * @example
-     * LongPredicate.some(someLongPredicate1, someLongPredicate2);
-     * @param predicate1 the first `ILongPredicate`
-     * @param predicate2 the second `ILongPredicate`
-     * @return the composed `LongPredicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static LongPredicate some(final ILongPredicate predicate1, final ILongPredicate predicate2) {
-        return some(new List<ILongPredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a composed `LongPredicate` that applies sequentially short-circuiting
      * logical `AND` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`ILongPredicates`
+     *
+     * @return the composed `LongPredicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * LongPredicate.every(someLongPredicates);
-     * @param predicates the list of`ILongPredicates`
-     * @return the composed `LongPredicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static LongPredicate every(final List<ILongPredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -108,27 +114,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     }
 
     /**
-     * @description Returns a composed `LongPredicate` that applies short-circuiting logical
-     * `AND` operator to `predicate1` `ILongPredicate` and `predicate2`
-     * in that order.
-     * @example
-     * LongPredicate.every(someLongPredicate1, someLongPredicate2);
-     * @param predicate1 the first `ILongPredicate`
-     * @param predicate2 the second `ILongPredicate`
-     * @return the composed `LongPredicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static LongPredicate every(final ILongPredicate predicate1, final ILongPredicate predicate2) {
-        return every(new List<ILongPredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a `LongPredicate` that applies logical `NOT` operator
      * to `predicate`.
+     *
+     * @param predicate the `ILongPredicate`
+     *
+     * @return the negated `LongPredicate`
+     *
      * @example
      * LongPredicate.negate(someLongPredicate);
-     * @param predicate the `ILongPredicate`
-     * @return the negated `LongPredicate`
      */
     public static LongPredicate negate(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -138,11 +132,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     /**
      * @description Returns a `LongPredicate` that always evaluates to the Boolean `value`
      * (`true` or `false`).
+     *
+     * @param value the evaluated value
+     *
+     * @return predicate the `LongPredicate`
+     *
+     * @throws NullPointerException if `value` is null
+     *
      * @example
      * LongPredicate.always(true);
-     * @param value the evaluated value
-     * @return predicate the `LongPredicate`
-     * @throws NullPointerException if `value` is null
      */
     public static LongPredicate always(final Boolean value) {
         Validate.notNull(value);
@@ -161,11 +159,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>` "greater than" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `LongPredicate`
+     *
+     * @see Comparator.compareNullSafeLongs
+     *
      * @example
      * LongPredicate.isGreater(100);
-     * @param value the right argument of comparison
-     * @return the `LongPredicate`
-     * @see Comparator.compareNullSafeLongs
      */
     public static LongPredicate isGreater(final Long value) {
         return new ComparePredicate(value, 1);
@@ -177,11 +179,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
      * <p><strong>Note: </strong></p>
      * <<p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `LongPredicate`
+     *
+     * @see Comparator.compareNullSafeLongs
+     *
      * @example
      * LongPredicate.isGreaterOrEqual(100);
-     * @param value the right argument of comparison
-     * @return the `LongPredicate`
-     * @see Comparator.compareNullSafeLongs
      */
     public static LongPredicate isGreaterOrEqual(final Long value) {
         return isGreater(value).orElse(isEqual(value));
@@ -193,11 +199,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<` "less than" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `LongPredicate`
+     *
+     * @see Comparator.compareNullSafeLongs
+     *
      * @example
      * LongPredicate.isLess(100);
-     * @param value the right argument of comparison
-     * @return the `LongPredicate`
-     * @see Comparator.compareNullSafeLongs
      */
     public static LongPredicate isLess(final Long value) {
         return new ComparePredicate(value, -1);
@@ -209,11 +219,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `LongPredicate`
+     *
+     * @see Comparator.compareNullSafeLongs
+     *
      * @example
      * LongPredicate.isLessOrEqual(100);
-     * @param value the right argument of comparison
-     * @return the `LongPredicate`
-     * @see Comparator.compareNullSafeLongs
      */
     public static LongPredicate isLessOrEqual(final Long value) {
         return isLess(value).orElse(isEqual(value));
@@ -222,11 +236,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is equal to
      * the `value`.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `LongPredicate`
+     *
+     * @see Comparator.compareNullSafeLongs
+     *
      * @example
      * LongPredicate.isEqual(100);
-     * @param value the right argument of comparison
-     * @return the `LongPredicate`
-     * @see Comparator.compareNullSafeLongs
      */
     public static LongPredicate isEqual(final Long value) {
         return new ComparePredicate(value, 0);
@@ -235,11 +253,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is not equal to
      * the `value`.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `LongPredicate`
+     *
+     * @see Comparator.compareNullSafeLongs
+     *
      * @example
      * LongPredicate.isNotEqual(100);
-     * @param value the right argument of comparison
-     * @return the `LongPredicate`
-     * @see Comparator.compareNullSafeLongs
      */
     public static LongPredicate isNotEqual(final Long value) {
         return isEqual(value).negate();
@@ -248,14 +270,19 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `LongPredicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * LongPredicate.isIn(new List<Long>{ 1, 5, -7 });
      * LongPredicate.isIn((Iterable<Long>) new Set<Long>{ 1, 5, -7 });
      * LongPredicate.isIn(longStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `LongPredicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static LongPredicate isIn(final Iterable<Long> container) {
         Validate.notNull(container);
@@ -265,14 +292,19 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is not contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `LongPredicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * LongPredicate.isNotIn(new List<Long>{ 1, 5, -7 });
      * LongPredicate.isNotIn((Iterable<Long>) new Set<Long>{ 1, 5, -7 });
      * LongPredicate.isNotIn(longStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `LongPredicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static LongPredicate isNotIn(final Iterable<Long> container) {
         return isIn(container).negate();
@@ -282,9 +314,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     //<editor-fold desc="Long Predicates">
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is null.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isNull();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isNull() {
         return isEqual(null);
@@ -292,9 +326,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is not null.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isNotNull();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isNotNull() {
         return isEqual(null).negate();
@@ -302,9 +338,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is even.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isEven();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isEven() {
         return new IsEven();
@@ -313,10 +351,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is a factor of
      * `i`.
+     *
+     * @param i 
+     *
+     * @return the `LongPredicate`
+     *
+     * @throws NullPointerException if the `i` is null
+     *
      * @example
      * LongPredicate.isFactorOf(5);
-     * @return the `LongPredicate`
-     * @throws NullPointerException if the `i` is null
      */
     public static LongPredicate isFactorOf(final Long i) {
         return new IsFactor(i);
@@ -324,9 +367,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is negative.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isNegative();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isNegative() {
         return isLess(0);
@@ -334,9 +379,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is negative or zero.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isNegativeOrZero();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isNegativeOrZero() {
         return isLessOrEqual(0);
@@ -344,9 +391,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is odd.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isEven();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isOdd() {
         return new IsOdd();
@@ -354,9 +403,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is positive.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isPositive();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isPositive() {
         return isGreater(0);
@@ -364,9 +415,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is positive or zero.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isPositiveOrZero();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isPositiveOrZero() {
         return isGreaterOrEqual(0);
@@ -374,10 +427,13 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is prime.
+     *
+     * @return the `LongPredicate`
+     *
+     * @throws NullPointerException if the input argument is null
+     *
      * @example
      * LongPredicate.isPrime();
-     * @return the `LongPredicate`
-     * @throws NullPointerException if the input argument is null
      */
     public static LongPredicate isPrime() {
         return new IsPrime();
@@ -385,9 +441,11 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long if it is zero.
+     *
+     * @return the `LongPredicate`
+     *
      * @example
      * LongPredicate.isZero();
-     * @return the `LongPredicate`
      */
     public static LongPredicate isZero() {
         return isEqual(0);
@@ -395,10 +453,15 @@ public abstract inherited sharing class LongPredicate implements ILongPredicate 
 
     /**
      * @description Returns a `LongPredicate` that tests the input Long has the `divisor`.
+     *
+     * @param divisor 
+     *
+     * @return the `LongPredicate`
+     *
+     * @throws NullPointerException if the `divisor` is null
+     *
      * @example
      * LongPredicate.hasDivisor(10);
-     * @return the `LongPredicate`
-     * @throws NullPointerException if the `divisor` is null
      */
     public static LongPredicate hasDivisor(final Long divisor) {
         return new HasDivisor(divisor);

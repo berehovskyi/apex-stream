@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see SObjectConsumer
  */
 @IsTest(IsParallel = true)
@@ -102,11 +102,9 @@ private class SObjectConsumerTest {
         String message = 'message ';
         // When
         ISObjectConsumer debugConsumer = SObjectConsumer.debug();
+        ISObjectConsumer debugConsumer1 = SObjectConsumer.debug(LoggingLevel.DEBUG, message);
         ISObjectConsumer debugPrettyConsumer = SObjectConsumer.debugPretty();
-        ISObjectConsumer debugConsumer1 = SObjectConsumer.debug(LoggingLevel.DEBUG);
-        ISObjectConsumer debugPrettyConsumer1 = SObjectConsumer.debugPretty(LoggingLevel.DEBUG);
-        ISObjectConsumer debugConsumer2 = SObjectConsumer.debug(message);
-        ISObjectConsumer debugPrettyConsumer2 = SObjectConsumer.debugPretty(message);
+        ISObjectConsumer debugPrettyConsumer1 = SObjectConsumer.debugPretty(LoggingLevel.DEBUG, message);
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             List<Contact> clone = input.clone();
@@ -114,8 +112,6 @@ private class SObjectConsumerTest {
             debugPrettyConsumer.accept(clone[i]);
             debugConsumer1.accept(clone[i]);
             debugPrettyConsumer1.accept(clone[i]);
-            debugConsumer2.accept(clone[i]);
-            debugPrettyConsumer2.accept(clone[i]);
             Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
         }
     }

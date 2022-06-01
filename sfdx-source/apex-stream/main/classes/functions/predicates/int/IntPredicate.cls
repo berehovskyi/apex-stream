@@ -1,8 +1,7 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IIntPredicate} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IIntIterable.filter
  * @see IIntIterable.take
  * @see IIntIterable.drop
@@ -10,6 +9,10 @@
  * @see IIntIterable.some
  * @see IIntIterable.every
  * @see IIntIterable.none
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
@@ -25,36 +28,46 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
      * @description Returns a composed `IntPredicate` that applies short-circuiting logical
      * `OR` operator to `this` `IIntPredicate` and `other`
      * in that order.
+     *
+     * @param other the other `IIntPredicate`
+     *
+     * @return the composed `IntPredicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * someIntPredicate1.orElse(someIntPredicate2);
-     * @param other the other `IIntPredicate`
-     * @return the composed `IntPredicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual IntPredicate orElse(final IIntPredicate other) {
-        return some(this, other);
+        return some(new List<IIntPredicate>{ this, other });
     }
 
     /**
      * @description Returns a composed `IntPredicate` that applies short-circuiting logical
      * `AND` operator to `this` `IIntPredicate` and `other`
      * in that order.
+     *
+     * @param other the other `IIntPredicate`
+     *
+     * @return the composed `IIntPredicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * someIntPredicate1.andAlso(someIntPredicate2);
-     * @param other the other `IIntPredicate`
-     * @return the composed `IIntPredicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual IntPredicate andAlso(final IIntPredicate other) {
-        return every(this, other);
+        return every(new List<IIntPredicate>{ this, other });
     }
 
     /**
      * @description Returns a `IntPredicate` that applies logical `NOT` operator
      * to `this` `IIntPredicate`.
+     *
+     * @return the negated `IntPredicate`
+     *
      * @example
      * someIntPredicate.negate();
-     * @return the negated `IntPredicate`
      */
     public virtual IntPredicate negate() {
         return negate(this);
@@ -67,11 +80,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     /**
      * @description Returns a composed `IntPredicate` that applies sequentially short-circuiting
      * logical `OR` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`IIntPredicates`
+     *
+     * @return the composed `IntPredicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * IntPredicate.some(someIntPredicates);
-     * @param predicates the list of`IIntPredicates`
-     * @return the composed `IntPredicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static IntPredicate some(final List<IIntPredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -79,28 +96,17 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     }
 
     /**
-     * @description Returns a composed `IntPredicate` that applies short-circuiting logical
-     * `OR` operator to `predicate1` `IIntPredicate` and `predicate2`
-     * in that order.
-     * @example
-     * IntPredicate.some(someIntPredicate1, someIntPredicate2);
-     * @param predicate1 the first `IIntPredicate`
-     * @param predicate2 the second `IIntPredicate`
-     * @return the composed `IntPredicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static IntPredicate some(final IIntPredicate predicate1, final IIntPredicate predicate2) {
-        return some(new List<IIntPredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a composed `IntPredicate` that applies sequentially short-circuiting
      * logical `AND` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`IIntPredicates`
+     *
+     * @return the composed `IntPredicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * IntPredicate.every(someIntPredicates);
-     * @param predicates the list of`IIntPredicates`
-     * @return the composed `IntPredicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static IntPredicate every(final List<IIntPredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -108,27 +114,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     }
 
     /**
-     * @description Returns a composed `IntPredicate` that applies short-circuiting logical
-     * `AND` operator to `predicate1` `IIntPredicate` and `predicate2`
-     * in that order.
-     * @example
-     * IntPredicate.every(someIntPredicate1, someIntPredicate2);
-     * @param predicate1 the first `IIntPredicate`
-     * @param predicate2 the second `IIntPredicate`
-     * @return the composed `IntPredicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static IntPredicate every(final IIntPredicate predicate1, final IIntPredicate predicate2) {
-        return every(new List<IIntPredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a `IntPredicate` that applies logical `NOT` operator
      * to `predicate`.
+     *
+     * @param predicate the `IIntPredicate`
+     *
+     * @return the negated `IntPredicate`
+     *
      * @example
      * IntPredicate.negate(someIntPredicate);
-     * @param predicate the `IIntPredicate`
-     * @return the negated `IntPredicate`
      */
     public static IntPredicate negate(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -138,11 +132,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     /**
      * @description Returns a `IntPredicate` that always evaluates to the Boolean `value`
      * (`true` or `false`).
+     *
+     * @param value the evaluated value
+     *
+     * @return predicate the `IntPredicate`
+     *
+     * @throws NullPointerException if `value` is null
+     *
      * @example
      * IntPredicate.always(true);
-     * @param value the evaluated value
-     * @return predicate the `IntPredicate`
-     * @throws NullPointerException if `value` is null
      */
     public static IntPredicate always(final Boolean value) {
         Validate.notNull(value);
@@ -161,11 +159,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>` "greater than" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `IntPredicate`
+     *
+     * @see Comparator.compareNullSafeInts
+     *
      * @example
      * IntPredicate.isGreater(100);
-     * @param value the right argument of comparison
-     * @return the `IntPredicate`
-     * @see Comparator.compareNullSafeInts
      */
     public static IntPredicate isGreater(final Integer value) {
         return new ComparePredicate(value, 1);
@@ -177,11 +179,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
      * <p><strong>Note: </strong></p>
      * <<p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `IntPredicate`
+     *
+     * @see Comparator.compareNullSafeInts
+     *
      * @example
      * IntPredicate.isGreaterOrEqual(100);
-     * @param value the right argument of comparison
-     * @return the `IntPredicate`
-     * @see Comparator.compareNullSafeInts
      */
     public static IntPredicate isGreaterOrEqual(final Integer value) {
         return isGreater(value).orElse(isEqual(value));
@@ -193,11 +199,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<` "less than" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `IntPredicate`
+     *
+     * @see Comparator.compareNullSafeInts
+     *
      * @example
      * IntPredicate.isLess(100);
-     * @param value the right argument of comparison
-     * @return the `IntPredicate`
-     * @see Comparator.compareNullSafeInts
      */
     public static IntPredicate isLess(final Integer value) {
         return new ComparePredicate(value, -1);
@@ -209,11 +219,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function
      * considers a non-null value as always greater than a null value.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `IntPredicate`
+     *
+     * @see Comparator.compareNullSafeInts
+     *
      * @example
      * IntPredicate.isLessOrEqual(100);
-     * @param value the right argument of comparison
-     * @return the `IntPredicate`
-     * @see Comparator.compareNullSafeInts
      */
     public static IntPredicate isLessOrEqual(final Integer value) {
         return isLess(value).orElse(isEqual(value));
@@ -222,11 +236,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is equal to
      * the `value`.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `IntPredicate`
+     *
+     * @see Comparator.compareNullSafeInts
+     *
      * @example
      * IntPredicate.isEqual(100);
-     * @param value the right argument of comparison
-     * @return the `IntPredicate`
-     * @see Comparator.compareNullSafeInts
      */
     public static IntPredicate isEqual(final Integer value) {
         return new ComparePredicate(value, 0);
@@ -235,11 +253,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is not equal to
      * the `value`.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `IntPredicate`
+     *
+     * @see Comparator.compareNullSafeInts
+     *
      * @example
      * IntPredicate.isNotEqual(100);
-     * @param value the right argument of comparison
-     * @return the `IntPredicate`
-     * @see Comparator.compareNullSafeInts
      */
     public static IntPredicate isNotEqual(final Integer value) {
         return isEqual(value).negate();
@@ -248,14 +270,19 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `IntPredicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * IntPredicate.isIn(new List<Integer>{ 1, 5, -7 });
      * IntPredicate.isIn((Iterable<Integer>) new Set<Integer>{ 1, 5, -7 });
      * IntPredicate.isIn(intStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `IntPredicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static IntPredicate isIn(final Iterable<Integer> container) {
         Validate.notNull(container);
@@ -265,14 +292,19 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is not contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `IntPredicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * IntPredicate.isNotIn(new List<Integer>{ 1, 5, -7 });
      * IntPredicate.isNotIn((Iterable<Integer>) new Set<Integer>{ 1, 5, -7 });
      * IntPredicate.isNotIn(intStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `IntPredicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static IntPredicate isNotIn(final Iterable<Integer> container) {
         return isIn(container).negate();
@@ -282,9 +314,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     //<editor-fold desc="Integer Predicates">
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is null.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isNull();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isNull() {
         return isEqual(null);
@@ -292,9 +326,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is not null.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isNotNull();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isNotNull() {
         return isEqual(null).negate();
@@ -302,9 +338,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is even.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isEven();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isEven() {
         return new IsEven();
@@ -313,21 +351,28 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is a factor of
      * `i`.
+     *
+     * @param i the tested value
+     *
+     * @return the `IntPredicate`
+     *
+     * @throws NullPointerException if the `i` is null
+     *
      * @example
      * IntPredicate.isFactorOf(5);
-     * @return the `IntPredicate`
-     * @throws NullPointerException if the `i` is null
      */
-    public static IntPredicate isFactorOf(Integer i) {
+    public static IntPredicate isFactorOf(final Integer i) {
         Validate.notNull(i);
         return new IsFactor(i);
     }
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is negative.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isNegative();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isNegative() {
         return isLess(0);
@@ -335,9 +380,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is negative or zero.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isNegativeOrZero();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isNegativeOrZero() {
         return isLessOrEqual(0);
@@ -345,9 +392,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is odd.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isEven();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isOdd() {
         return new IsOdd();
@@ -355,9 +404,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is positive.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isPositive();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isPositive() {
         return isGreater(0);
@@ -365,9 +416,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is positive or zero.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isPositiveOrZero();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isPositiveOrZero() {
         return isGreaterOrEqual(0);
@@ -375,10 +428,13 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is prime.
+     *
+     * @return the `IntPredicate`
+     *
+     * @throws NullPointerException if the input argument is null
+     *
      * @example
      * IntPredicate.isPrime();
-     * @return the `IntPredicate`
-     * @throws NullPointerException if the input argument is null
      */
     public static IntPredicate isPrime() {
         return new IsPrime();
@@ -386,9 +442,11 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer if it is zero.
+     *
+     * @return the `IntPredicate`
+     *
      * @example
      * IntPredicate.isZero();
-     * @return the `IntPredicate`
      */
     public static IntPredicate isZero() {
         return isEqual(0);
@@ -396,10 +454,15 @@ public abstract inherited sharing class IntPredicate implements IIntPredicate {
 
     /**
      * @description Returns a `IntPredicate` that tests the input Integer has the `divisor`.
+     *
+     * @param divisor the tested value
+     *
+     * @return the `IntPredicate`
+     *
+     * @throws NullPointerException if the `divisor` is null
+     *
      * @example
      * IntPredicate.hasDivisor(10);
-     * @return the `IntPredicate`
-     * @throws NullPointerException if the `divisor` is null
      */
     public static IntPredicate hasDivisor(final Integer divisor) {
         Validate.notNull(divisor);

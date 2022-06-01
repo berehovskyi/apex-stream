@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntToDoubleMapIterator implements Iterator<Double> {
+public inherited sharing class IntToDoubleMapIterator implements Iterator<Double> {
 
     private final Iterator<Integer> iterator;
     private final IIntToDoubleFunction mapper;

@@ -1,12 +1,15 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectBinaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see SObjectStream.zip
  * @see SObjectSequence.zip
  * @see ISObjectBaseIterable.reduce
  * @see SObjectCollector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectBinaryOperator implements ISObjectBinaryOperator {
 
@@ -20,6 +23,7 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     // @start-group Static Methods
     /**
      * @description Returns a `SObjectBinaryOperator` that return the first input argument.
+     *
      * @return the `SObjectBinaryOperator`
      */
     public static SObjectBinaryOperator left() {
@@ -28,6 +32,7 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
 
     /**
      * @description Returns a `SObjectBinaryOperator` that return the second input argument.
+     *
      * @return the `SObjectBinaryOperator`
      */
     public static SObjectBinaryOperator right() {
@@ -37,8 +42,11 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a lesser input argument according to
      * the `comparator`.
+     *
      * @param comparator the comparator to compare arguments
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static SObjectBinaryOperator minBy(final ISObjectComparator comparator) {
@@ -49,8 +57,11 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a lesser input argument according to
      * the `fieldName`.
+     *
      * @param fieldName the field value to compare
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `fieldName` is blank
      */
     public static SObjectBinaryOperator minBy(final String fieldName) {
@@ -60,8 +71,11 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a lesser input argument according to
      * the `field`.
+     *
      * @param field the field value to compare
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `field` is null
      */
     public static SObjectBinaryOperator minBy(final SObjectField field) {
@@ -71,8 +85,11 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a greater input argument according to
      * the `comparator`.
+     *
      * @param comparator the comparator to compare arguments
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static SObjectBinaryOperator maxBy(final ISObjectComparator comparator) {
@@ -83,8 +100,11 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a greater input argument according to
      * the `fieldName`.
+     *
      * @param fieldName the field value to compare
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `fieldName` is blank
      */
     public static SObjectBinaryOperator maxBy(final String fieldName) {
@@ -94,8 +114,11 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a greater input argument according to
      * the `field`.
+     *
      * @param field the field value to compare
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `field` is null
      */
     public static SObjectBinaryOperator maxBy(final SObjectField field) {
@@ -105,9 +128,12 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a combined `SObjectBinaryOperator` of the `consumer`
      * and the `merger`.
+     *
      * @param consumer the binary consumer
      * @param merger the binary operator that merges the input arguments after its consumption
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `consumer` or `merger` is null
      */
     public static SObjectBinaryOperator combine(
@@ -122,8 +148,11 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
     /**
      * @description Returns a combined `SObjectBinaryOperator` of the `consumer`
      * and the `right` binary operator.
+     *
      * @param consumer the binary consumer
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static SObjectBinaryOperator forBiConsumer(final ISObjectBiConsumer consumer) {

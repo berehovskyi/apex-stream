@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectUnaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ISObjectIterable.mapTo
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectUnaryOperator implements ISObjectUnaryOperator {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a composed `SObjectUnaryOperator` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual SObjectUnaryOperator andThen(final ISObjectUnaryOperator after) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a composed `SObjectUnaryOperator` that executes `before` operation
      * first, then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if before is null
      */
     public virtual SObjectUnaryOperator compose(final ISObjectUnaryOperator before) {
@@ -44,8 +53,11 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a composed `SObjectUnaryOperator` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param operators the operations to sequentially perform
+     *
      * @return the composed `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static SObjectUnaryOperator compose(final List<ISObjectUnaryOperator> operators) {
@@ -55,6 +67,7 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
 
     /**
      * @description Returns a `SObjectUnaryOperator` that always returns the input argument.
+     *
      * @return the `SObjectUnaryOperator`
      */
     public static SObjectUnaryOperator identity() {
@@ -63,6 +76,9 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
 
     /**
      * @description Returns a `SObjectUnaryOperator` that always returns the `value`.
+     *
+     * @param value the const value
+     *
      * @return the `SObjectUnaryOperator`
      */
     public static SObjectUnaryOperator constant(final SObject value) {
@@ -71,8 +87,11 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
 
     /**
      * @description Returns a composed `SObjectUnaryOperator` of the `consumer`.
+     *
      * @param consumer the consumer
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public static SObjectUnaryOperator forConsumer(final ISObjectConsumer consumer) {
@@ -82,8 +101,11 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
 
     /**
      * @description Returns a composed `SObjectUnaryOperator` of the `supplier`.
+     *
      * @param supplier the supplier
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `supplier` is null
      */
     public static SObjectUnaryOperator forSupplier(final ISObjectSupplier supplier) {
@@ -94,10 +116,13 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a combined `SObjectUnaryOperator` of the `operator`
      * and the `merger`.
+     *
      * @param operator the operator
      * @param merger the binary operator that merges the input argument and a value returned by
      * the `operator`.
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `operator` or `merger` is null
      */
     public static SObjectUnaryOperator combine(
@@ -116,17 +141,22 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a `SObjectUnaryOperator` that gets sobject
      * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.getSObject('Parent');
-     * SObjectUnaryOperator.getSObject('Parent.Parent');
-     * SObjectUnaryOperator.getSObject('Parent?.Parent');
+     *
      * @param fieldName the field to get a value
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.getSObject
+     *
+     * @example
+     * SObjectUnaryOperator.getSObject('Parent');
+     * SObjectUnaryOperator.getSObject('Parent.Parent');
+     * SObjectUnaryOperator.getSObject('Parent?.Parent');
      */
     public static SObjectUnaryOperator getSObject(final String fieldName) {
         Validate.notBlank(fieldName);
@@ -137,12 +167,17 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a `SObjectUnaryOperator` that gets sobject
      * for the specified `field`.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `SObjectUnaryOperator`
+     *
+     * @throws NullPointerException if the `field` is null
+     *
+     * @see SObject.getSObject
+     *
      * @example
      * SObjectUnaryOperator.getSObject(Account.ParentId);
-     * @param field the field to get a value
-     * @return the `SObjectUnaryOperator`
-     * @throws NullPointerException if the `field` is null
-     * @see SObject.getSObject
      */
     public static SObjectUnaryOperator getSObject(final SObjectField field) {
         Validate.notNull(field);
@@ -153,18 +188,23 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a `SObjectUnaryOperator` that sets the value returned by
      * the `mapper` for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.set('NumberOfEmployees', someSObjectFunction);
-     * SObjectUnaryOperator.set('Parent.NumberOfEmployees', someSObjectFunction);
-     * SObjectUnaryOperator.set('Parent?.NumberOfEmployees', someSObjectFunction);
+     *
      * @param fieldName the field name to set a value
      * @param mapper applied to the input argument
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `fieldName` is blank or the `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectConsumer.set
+     *
+     * @example
+     * SObjectUnaryOperator.set('NumberOfEmployees', someSObjectFunction);
+     * SObjectUnaryOperator.set('Parent.NumberOfEmployees', someSObjectFunction);
+     * SObjectUnaryOperator.set('Parent?.NumberOfEmployees', someSObjectFunction);
      */
     public static SObjectUnaryOperator set(final String fieldName, final ISObjectFunction mapper) {
         return forConsumer(SObjectConsumer.set(fieldName, mapper));
@@ -173,14 +213,19 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a `SObjectUnaryOperator` that sets the value returned by
      * the `mapper` for the specified `field` and returns a mutated argument.
+     *
+     * @param field the field name to set a value
+     * @param mapper applied to the input argument
+     *
+     * @return the `SObjectUnaryOperator`
+     *
+     * @throws NullPointerException if the `field` or the `mapper` is null
+     *
+     * @see SObjectConsumer.set
+     *
      * @example
      * SObjectUnaryOperator.set(Account.NumberOfEmployees, someSObjectFunction);
      * SObjectUnaryOperator.set(Account.NumberOfEmployees, SObjectFunction.constant(100));
-     * @param field the field name to set a value
-     * @param mapper applied to the input argument
-     * @return the `SObjectUnaryOperator`
-     * @throws NullPointerException if the `field` or the `mapper` is null
-     * @see SObjectConsumer.set
      */
     public static SObjectUnaryOperator set(final SObjectField field, final ISObjectFunction mapper) {
         return forConsumer(SObjectConsumer.set(field, mapper));
@@ -190,18 +235,23 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a `SObjectUnaryOperator` that sets the `value`
      * for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.set('NumberOfEmployees', 100);
-     * SObjectUnaryOperator.set('Parent.NumberOfEmployees', 100);
-     * SObjectUnaryOperator.set('Parent?.NumberOfEmployees', (Object) null);
+     *
      * @param fieldName the field name to set a value
      * @param value the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectConsumer.set
+     *
+     * @example
+     * SObjectUnaryOperator.set('NumberOfEmployees', 100);
+     * SObjectUnaryOperator.set('Parent.NumberOfEmployees', 100);
+     * SObjectUnaryOperator.set('Parent?.NumberOfEmployees', (Object) null);
      */
     public static SObjectUnaryOperator set(final String fieldName, final Object value) {
         return set(fieldName, SObjectFunction.constant(value));
@@ -210,17 +260,22 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a `SObjectUnaryOperator` that sets the `value`
      * for the specified `field` and returns a mutated argument.
-     * @example
-     * SObjectUnaryOperator.set(Account.NumberOfEmployees, 100);
-     * SObjectUnaryOperator.set(Account.NumberOfEmployees, (Object) null);
+     *
      * @param field the field name to set a value
      * @param value the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectConsumer.set
+     *
+     * @example
+     * SObjectUnaryOperator.set(Account.NumberOfEmployees, 100);
+     * SObjectUnaryOperator.set(Account.NumberOfEmployees, (Object) null);
      */
     public static SObjectUnaryOperator set(final SObjectField field, final Object value) {
         return set(field, SObjectFunction.constant(value));
@@ -230,18 +285,23 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a `SObjectUnaryOperator` that sets SObject the value returned by
      * the `operator` for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.setSObject('Parent', someSObjectUnaryOperator);
-     * SObjectUnaryOperator.setSObject('Parent.Parent', someSObjectUnaryOperator);
-     * SObjectUnaryOperator.setSObject('Parent?.Parent', someSObjectUnaryOperator);
+     *
      * @param fieldName the field name to set a value
      * @param operator applied to the input argument
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `fieldName` is blank or the `operator` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectConsumer.setSObject
+     *
+     * @example
+     * SObjectUnaryOperator.setSObject('Parent', someSObjectUnaryOperator);
+     * SObjectUnaryOperator.setSObject('Parent.Parent', someSObjectUnaryOperator);
+     * SObjectUnaryOperator.setSObject('Parent?.Parent', someSObjectUnaryOperator);
      */
     public static SObjectUnaryOperator setSObject(final String fieldName, final ISObjectUnaryOperator operator) {
         return forConsumer(SObjectConsumer.setSObject(fieldName, operator));
@@ -251,13 +311,18 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a `SObjectUnaryOperator` that sets SObject the value returned by
      * the `operator` for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.setSObject(Account.ParentId, someSObjectUnaryOperator);
+     *
      * @param field the field name to set a value
      * @param operator applied to the input argument
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `field` or the `operator` is null
+     *
      * @see SObjectConsumer.setSObject
+     *
+     * @example
+     * SObjectUnaryOperator.setSObject(Account.ParentId, someSObjectUnaryOperator);
      */
     public static SObjectUnaryOperator setSObject(final SObjectField field, final ISObjectUnaryOperator operator) {
         return forConsumer(SObjectConsumer.setSObject(field, operator));
@@ -267,18 +332,23 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a `SObjectUnaryOperator` that sets SObject the `parent`
      * for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.setSObject('Parent', someAccount);
-     * SObjectUnaryOperator.setSObject('Parent.Parent', someAccount);
-     * SObjectUnaryOperator.setSObject('Parent?.Parent', (SObject) null);
+     *
      * @param fieldName the field name to set a value
      * @param parent the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectConsumer.setSObject
+     *
+     * @example
+     * SObjectUnaryOperator.setSObject('Parent', someAccount);
+     * SObjectUnaryOperator.setSObject('Parent.Parent', someAccount);
+     * SObjectUnaryOperator.setSObject('Parent?.Parent', (SObject) null);
      */
     public static SObjectUnaryOperator setSObject(final String fieldName, final SObject parent) {
         return setSObject(fieldName, SObjectUnaryOperator.constant(parent));
@@ -288,17 +358,22 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a `SObjectUnaryOperator` that sets SObject the `parent`
      * for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.setSObject(Account.ParentId, someAccount);
-     * SObjectUnaryOperator.setSObject(Account.ParentId, (SObject) null);
+     *
      * @param field the field name to set a value
      * @param parent the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectConsumer.setSObject
+     *
+     * @example
+     * SObjectUnaryOperator.setSObject(Account.ParentId, someAccount);
+     * SObjectUnaryOperator.setSObject(Account.ParentId, (SObject) null);
      */
     public static SObjectUnaryOperator setSObject(final SObjectField field, final SObject parent) {
         return setSObject(field, SObjectUnaryOperator.constant(parent));
@@ -310,17 +385,21 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>This operator uses serialization / deserialization to set related children sobjects.</p>
-     * @example
-     * SObjectUnaryOperator.setSObjects('Contacts', someSObjectFunction);
-     * SObjectUnaryOperator.setSObjects('Parent.Contacts', someSObjectFunction);
-     * SObjectUnaryOperator.setSObjects('Parent?.Contacts', someSObjectFunction);
+     *
      * @param fieldName the field name to set a value
      * @param mapper applied to the input argument
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `fieldName` is blank or the `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @example
+     * SObjectUnaryOperator.setSObjects('Contacts', someSObjectFunction);
+     * SObjectUnaryOperator.setSObjects('Parent.Contacts', someSObjectFunction);
+     * SObjectUnaryOperator.setSObjects('Parent?.Contacts', someSObjectFunction);
      */
     public static SObjectUnaryOperator setSObjects(final String fieldName, final ISObjectFunction mapper) {
         Validate.notBlank(fieldName);
@@ -333,12 +412,16 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * the `mapper` for the specified `field` and returns a mutated argument.
      * <p><strong>Note: </strong></p>
      * <p>This operator uses serialization / deserialization to set related children sobjects.</p>
-     * @example
-     * SObjectUnaryOperator.setSObjects(Contact.AccountId, someSObjectFunction);
+     *
      * @param field the field name to set a value
      * @param mapper applied to the input argument
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `field` or the `mapper` is null
+     *
+     * @example
+     * SObjectUnaryOperator.setSObjects(Contact.AccountId, someSObjectFunction);
      */
     public static SObjectUnaryOperator setSObjects(final SObjectField field, final ISObjectFunction mapper) {
         Validate.notNull(field);
@@ -352,17 +435,21 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>This operator uses serialization / deserialization to set related children sobjects.</p>
-     * @example
-     * SObjectUnaryOperator.setSObjects('Contacts', someSObjectFunction);
-     * SObjectUnaryOperator.setSObjects('Parent.Contacts', someSObjectFunction);
-     * SObjectUnaryOperator.setSObjects('Parent?.Contacts', someSObjectFunction);
+     *
      * @param fieldName the field name to set a value
      * @param children the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @example
+     * SObjectUnaryOperator.setSObjects('Contacts', someSObjectFunction);
+     * SObjectUnaryOperator.setSObjects('Parent.Contacts', someSObjectFunction);
+     * SObjectUnaryOperator.setSObjects('Parent?.Contacts', someSObjectFunction);
      */
     public static SObjectUnaryOperator setSObjects(final String fieldName, final List<SObject> children) {
         return setSObjects(fieldName, SObjectFunction.constant(children));
@@ -374,16 +461,20 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>This operator uses serialization / deserialization to set related children sobjects.</p>
-     * @example
-     * SObjectUnaryOperator.setSObjects(Contact.AccountId, childrenContacts);
-     * SObjectUnaryOperator.setSObjects(Contact.AccountId, (List&lt;SObject>) null);
+     *
      * @param field the field name to set a value
      * @param children the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if the `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @example
+     * SObjectUnaryOperator.setSObjects(Contact.AccountId, childrenContacts);
+     * SObjectUnaryOperator.setSObjects(Contact.AccountId, (List&lt;SObject>) null);
      */
     public static SObjectUnaryOperator setSObjects(final SObjectField field, final List<SObject> children) {
         return setSObjects(field, SObjectFunction.constant(children));
@@ -392,12 +483,17 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
     /**
      * @description Returns a `SObjectUnaryOperator` that returns a new sobject
      * of the given `sObjectType`.
+     *
+     * @param sObjectType the SObjectType of a new SObject to be returned
+     *
+     * @return the `SObjectUnaryOperator`
+     *
+     * @throws NullPointerException if `sObjectType` is null
+     *
+     * @see SObjectSupplier.of
+     *
      * @example
      * SObjectUnaryOperator.newSObject(Account.SObjectType);
-     * @param sObjectType the SObjectType of a new SObject to be returned
-     * @return the `SObjectUnaryOperator`
-     * @throws NullPointerException if `sObjectType` is null
-     * @see SObjectSupplier.of
      */
     public static SObjectUnaryOperator newSObject(final SObjectType sObjectType) {
         return forSupplier(SObjectSupplier.of(sObjectType));
@@ -407,10 +503,14 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a combined `SObjectUnaryOperator` of the
      * {@link SObjectUnaryOperator.newSObject} and the `merger`.
      * Is typically used to create a new SObject based on an input argument.
+     *
      * @param sObjectType the SObjectType of a new SObject to be returned
      * @param merger the binary operator that merges input arguments
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `sObjectType` or `merger` is null
+     *
      * @see SObjectCollector.mapping
      */
     public static SObjectUnaryOperator newSObject(final SObjectType sObjectType, final ISObjectBinaryOperator merger) {
@@ -422,21 +522,26 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * {@link SObjectUnaryOperator.newSObject} and the {@link SObjectBiConsumer.set}.
      * Is typically used to create a new SObject based on an input argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.newSObject(Account.SObjectType, 'Id', SObjectFunction.get('AccountId'));
-     * SObjectUnaryOperator.newSObject(Account.SObjectType, 'Id', SObjectFunction.get('Account.ParentId'));
+     *
      * @param sObjectType the SObjectType of a new SObject to be returned
      * @param fieldName target field name of a first input argument
      * @param mapper the function applied to a second input argument
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `sObjectType` or `fieldName`,
      * `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObjectUnaryOperator.newSObject
      * @see SObjectBiConsumer.set
      * @see SObjectCollector.mapping
+     *
+     * @example
+     * SObjectUnaryOperator.newSObject(Account.SObjectType, 'Id', SObjectFunction.get('AccountId'));
+     * SObjectUnaryOperator.newSObject(Account.SObjectType, 'Id', SObjectFunction.get('Account.ParentId'));
      */
     public static SObjectUnaryOperator newSObject(
             final SObjectType sObjectType,
@@ -451,17 +556,22 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * {@link SObjectUnaryOperator.newSObject} and the {@link SObjectBiConsumer.set}.
      * Is typically used to create a new SObject based on an input argument.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.newSObject(Account.SObjectType, Account.Id, SObjectFunction.get('AccountId'));
+     *
      * @param sObjectType the SObjectType of a new SObject to be returned
      * @param field target field of a first input argument
      * @param mapper the function applied to a second input argument
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `sObjectType` or `field`,
      * `mapper` is null
+     *
      * @see SObjectUnaryOperator.newSObject
      * @see SObjectBiConsumer.set
      * @see SObjectCollector.mapping
+     *
+     * @example
+     * SObjectUnaryOperator.newSObject(Account.SObjectType, Account.Id, SObjectFunction.get('AccountId'));
      */
     public static SObjectUnaryOperator newSObject(
             final SObjectType sObjectType,
@@ -476,16 +586,20 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * {@link SObjectUnaryOperator.newSObject} and the {@link SObjectBiConsumer.set}.
      * Is typically used to create a new SObject and set the `value` for the `fieldName`.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectUnaryOperator.newSObject(Account.SObjectType, 'Id', someAccId);
+     *
      * @param sObjectType the SObjectType of a new SObject to be returned
      * @param fieldName target field name of a first input argument
      * @param value the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `sObjectType` or `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @example
+     * SObjectUnaryOperator.newSObject(Account.SObjectType, 'Id', someAccId);
      */
     public static SObjectUnaryOperator newSObject(
             final SObjectType sObjectType,
@@ -499,13 +613,17 @@ public abstract inherited sharing class SObjectUnaryOperator implements ISObject
      * @description Returns a combined `SObjectUnaryOperator` of the
      * {@link SObjectUnaryOperator.newSObject} and the {@link SObjectBiConsumer.set}.
      * Is typically used to create a new SObject and set the `value` for the `field`.
-     * @example
-     * SObjectUnaryOperator.newSObject(Account.SObjectType, Account.Id, someAccId);
+     *
      * @param sObjectType the SObjectType of a new SObject to be returned
      * @param field the target field
      * @param value the value to set
+     *
      * @return the `SObjectUnaryOperator`
+     *
      * @throws NullPointerException if `sObjectType` or `fieldName` is null
+     *
+     * @example
+     * SObjectUnaryOperator.newSObject(Account.SObjectType, Account.Id, someAccId);
      */
     public static SObjectUnaryOperator newSObject(
             final SObjectType sObjectType,

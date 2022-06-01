@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongRangeIterator implements Iterator<Long> {
+public inherited sharing class LongRangeIterator implements Iterator<Long> {
 
     private final Long endInclusive;
     private Long current;

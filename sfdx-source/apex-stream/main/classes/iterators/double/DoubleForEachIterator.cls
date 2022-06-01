@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleForEachIterator implements Iterator<Double> {
+public inherited sharing class DoubleForEachIterator implements Iterator<Double> {
 
     private final Iterator<Double> iterator;
     private final IDoubleConsumer consumer;

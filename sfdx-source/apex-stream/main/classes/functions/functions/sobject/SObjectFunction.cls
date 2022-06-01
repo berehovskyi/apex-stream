@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectFunction} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ISObjectIterable.mapToObject
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectFunction implements ISObjectFunction {
 
@@ -17,6 +20,7 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     // @start-group Static Methods
     /**
      * @description Returns a `SObjectFunction` that always returns the input argument.
+     *
      * @return the `SObjectFunction`
      */
     public static SObjectFunction identity() {
@@ -25,7 +29,9 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
 
     /**
      * @description Returns a `SObjectFunction` that always returns the `value`.
+     *
      * @param value the value
+     *
      * @return the `SObjectFunction`
      */
     public static SObjectFunction constant(final Object value) {
@@ -34,8 +40,11 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
 
     /**
      * @description Returns a composed `SObjectFunction` of the `predicate`.
+     *
      * @param predicate the predicate
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `predicate` is null
      */
     public static SObjectFunction forPredicate(final ISObjectPredicate predicate) {
@@ -45,8 +54,11 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
 
     /**
      * @description Returns a composed `SObjectFunction` of the `operator`.
+     *
      * @param operator the operator
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static SObjectFunction forOperator(final ISObjectUnaryOperator operator) {
@@ -56,8 +68,11 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
 
     /**
      * @description Returns a composed `SObjectFunction` of the `supplier`.
+     *
      * @param supplier the supplier
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `supplier` is null
      */
     public static SObjectFunction forSupplier(final ISupplier supplier) {
@@ -72,34 +87,44 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     /**
      * @description Returns a `SObjectFunction` that gets a value for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectFunction.get('Name');
-     * SObjectFunction.get('Parent.Name');
-     * SObjectFunction.get('Parent?.Name');
+     *
      * @param fieldName the field to get a value
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.get
+     *
+     * @example
+     * SObjectFunction.get('Name');
+     * SObjectFunction.get('Parent.Name');
+     * SObjectFunction.get('Parent?.Name');
      */
     public static SObjectFunction get(final String fieldName) {
         Validate.notBlank(fieldName);
-        if (!fieldName.contains('.')) { return new GetFieldName(fieldName); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) { return new GetFieldPathSafe(fieldName); }
+        if (!Schemas.isXRef(fieldName)) { return new GetFieldName(fieldName); }
+        if (Schemas.isSaveNav(fieldName)) { return new GetFieldPathSafe(fieldName); }
         return new GetFieldPath(fieldName);
     }
 
     /**
      * @description Returns a `SObjectFunction` that gets a value for
      * the specified `field`.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `SObjectFunction`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see SObject.get
+     *
      * @example
      * SObjectFunction.get(Account.Name);
-     * @param field the field to get a value
-     * @return the `SObjectFunction`
-     * @throws NullPointerException if `field` is null
-     * @see SObject.get
      */
     public static SObjectFunction get(final SObjectField field) {
         Validate.notNull(field);
@@ -109,7 +134,9 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     /**
      * @description Returns a `SObjectFunction` that returns
      * a map of populated field names and their corresponding values for an input argument.
+     *
      * @return the `SObjectFunction`
+     *
      * @see SObject.getPopulatedFieldsAsMap
      */
     public static SObjectFunction getPopulatedFieldsAsMap() {
@@ -119,7 +146,9 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     /**
      * @description Returns a `SObjectFunction` that returns
      * the name of a quick action associated with an input argument.
+     *
      * @return the `SObjectFunction`
+     *
      * @see SObject.getQuickActionName
      */
     public static SObjectFunction getQuickActionName() {
@@ -129,39 +158,47 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     /**
      * @description Returns a `SObjectFunction` that gets children sobjects for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectFunction.getSObjects('Contacts');
-     * SObjectFunction.getSObjects('Parent.Contacts');
-     * SObjectFunction.getSObjects('Parent?.Contacts');
+     *
      * @param fieldName the field to get a value
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.getSObjects
+     *
+     * @example
+     * SObjectFunction.getSObjects('Contacts');
+     * SObjectFunction.getSObjects('Parent.Contacts');
+     * SObjectFunction.getSObjects('Parent?.Contacts');
      */
     public static SObjectFunction getSObjects(final String fieldName) {
         Validate.notBlank(fieldName);
-        if (!fieldName.contains('.')) { return new GetSObjectsFieldName(fieldName); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) {
-            return new GetSObjectsFieldPathSafe(fieldName);
-        }
+        if (!Schemas.isXRef(fieldName)) { return new GetSObjectsFieldName(fieldName); }
+        if (Schemas.isSaveNav(fieldName)) { return new GetSObjectsFieldPathSafe(fieldName); }
         return new GetSObjectsFieldPath(fieldName);
     }
 
     /**
      * @description Returns a `SObjectFunction` that gets children sobjects for
      * the specified `field`. Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectFunction.getSObjects(Contact.AccountId);
+     *
      * @param field the field to get a value
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.getSObjects
+     *
+     * @example
+     * SObjectFunction.getSObjects(Contact.AccountId);
      */
     public static SObjectFunction getSObjects(final SObjectField field) {
         // Since UnexpectedException is thrown if SObject doesn't have
@@ -173,7 +210,9 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     /**
      * @description Returns a `SObjectFunction` that returns
      * the `SObjectType` of an input argument.
+     *
      * @return the `SObjectFunction`
+     *
      * @see SObject.getQuickActionName
      */
     public static SObjectFunction getSObjectType() {
@@ -184,38 +223,48 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
      * @description Returns a `SObjectFunction` that sets the value returned by
      * the `mapper` for the specified `fieldName` and returns the previous value for the field.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectFunction.put('NumberOfEmployees', someSObjectFunction);
-     * SObjectFunction.put('Parent.NumberOfEmployees', someSObjectFunction);
-     * SObjectFunction.put('Parent?.NumberOfEmployees', someSObjectFunction);
+     *
      * @param fieldName the field name to set a value
      * @param mapper applied to the input argument
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `fieldName` is blank or the `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.put
+     *
+     * @example
+     * SObjectFunction.put('NumberOfEmployees', someSObjectFunction);
+     * SObjectFunction.put('Parent.NumberOfEmployees', someSObjectFunction);
+     * SObjectFunction.put('Parent?.NumberOfEmployees', someSObjectFunction);
      */
     public static SObjectFunction put(final String fieldName, final ISObjectFunction mapper) {
         Validate.notBlank(fieldName);
         Validate.notNull(mapper);
-        if (!fieldName.contains('.')) { return new PutFieldName(fieldName, mapper); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) { return new PutFieldPathSafe(fieldName, mapper); }
+        if (!Schemas.isXRef(fieldName)) { return new PutFieldName(fieldName, mapper); }
+        if (Schemas.isSaveNav(fieldName)) { return new PutFieldPathSafe(fieldName, mapper); }
         return new PutFieldPath(fieldName, mapper);
     }
 
     /**
      * @description Returns a `SObjectFunction` that sets the value returned by
      * the `mapper` for the specified `field` and returns the previous value for the field.
+     *
+     * @param field the field name to set a value
+     * @param mapper applied to the input argument
+     *
+     * @return the `SObjectFunction`
+     *
+     * @throws NullPointerException if `field` or `mapper` is null
+     *
+     * @see SObject.put
+     *
      * @example
      * SObjectConsumer.put(Account.NumberOfEmployees, someSObjectFunction);
      * SObjectConsumer.put(Account.NumberOfEmployees, SObjectFunction.constant(100));
-     * @param field the field name to set a value
-     * @param mapper applied to the input argument
-     * @return the `SObjectFunction`
-     * @throws NullPointerException if `field` or `mapper` is null
-     * @see SObject.put
      */
     public static SObjectFunction put(final SObjectField field, final ISObjectFunction mapper) {
         Validate.notNull(field);
@@ -227,18 +276,23 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
      * @description Returns a `SObjectFunction` that sets the `value`
      * for the specified `fieldName` and returns the previous value for the field.
      * Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectFunction.put('NumberOfEmployees', 100);
-     * SObjectFunction.put('Parent.NumberOfEmployees', 100);
-     * SObjectFunction.put('Parent?.NumberOfEmployees', (Object) null);
+     *
      * @param fieldName the field name to set a value
      * @param value the value to set
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.put
+     *
+     * @example
+     * SObjectFunction.put('NumberOfEmployees', 100);
+     * SObjectFunction.put('Parent.NumberOfEmployees', 100);
+     * SObjectFunction.put('Parent?.NumberOfEmployees', (Object) null);
      */
     public static SObjectFunction put(final String fieldName, final Object value) {
         return put(fieldName, SObjectFunction.constant(value));
@@ -247,17 +301,22 @@ public abstract inherited sharing class SObjectFunction implements ISObjectFunct
     /**
      * @description Returns a `SObjectFunction` that sets the `value`
      * for the specified `field` and returns the previous value for the field.
-     * @example
-     * SObjectFunction.put(Account.NumberOfEmployees, 100);
-     * SObjectFunction.put(Account.NumberOfEmployees, (Object) null);
+     *
      * @param field the field name to set a value
      * @param value the value to set
+     *
      * @return the `SObjectFunction`
+     *
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.put
+     *
+     * @example
+     * SObjectFunction.put(Account.NumberOfEmployees, 100);
+     * SObjectFunction.put(Account.NumberOfEmployees, (Object) null);
      */
     public static SObjectFunction put(final SObjectField field, final Object value) {
         return put(field, SObjectFunction.constant(value));

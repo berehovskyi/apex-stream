@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `Map<T, Object> - T` two-arity consumers. Typically is used by collectors.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
 
@@ -13,13 +15,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Boolean, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByBoolMap
      */
     public static BiConsumer putToObjectByBoolMap(
@@ -37,13 +43,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Id, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByIdMap
      */
     public static BiConsumer putToObjectByIdMap(
@@ -61,13 +71,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<String, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByStringMap
      */
     public static BiConsumer putToObjectByStringMap(
@@ -85,13 +99,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Blob, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByBlobMap
      */
     public static BiConsumer putToObjectByBlobMap(
@@ -109,13 +127,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Date, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByDateMap
      */
     public static BiConsumer putToObjectByDateMap(
@@ -133,13 +155,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Datetime, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByDatetimeMap
      */
     public static BiConsumer putToObjectByDatetimeMap(
@@ -157,13 +183,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Datetime, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByDatetimeMap
      */
     public static BiConsumer putToObjectByTimeMap(
@@ -181,13 +211,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Integer, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByIntMap
      */
     public static BiConsumer putToObjectByIntMap(
@@ -205,13 +239,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Long, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByLongMap
      */
     public static BiConsumer putToObjectByLongMap(
@@ -229,13 +267,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Double, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toByDoubleMap
      */
     public static BiConsumer putToObjectByDoubleMap(
@@ -253,13 +295,17 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
      * `Map<Object, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `BiConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see Collector.toMap
      */
     public static BiConsumer putToObjectByObjectMap(
@@ -279,11 +325,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Boolean, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByBool
      */
     public static BiConsumer putToObjectsByBoolMap(final ICollector downstream, final IFunction classifier) {
@@ -295,11 +345,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Id, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingById
      */
     public static BiConsumer putToObjectsByIdMap(final ICollector downstream, final IFunction classifier) {
@@ -311,11 +365,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<String, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByString
      */
     public static BiConsumer putToObjectsByStringMap(final ICollector downstream, final IFunction classifier) {
@@ -327,11 +385,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Blob, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByBlob
      */
     public static BiConsumer putToObjectsByBlobMap(final ICollector downstream, final IFunction classifier) {
@@ -343,11 +405,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Date, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByDate
      */
     public static BiConsumer putToObjectsByDateMap(final ICollector downstream, final IFunction classifier) {
@@ -359,11 +425,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Datetime, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByDatetime
      */
     public static BiConsumer putToObjectsByDatetimeMap(final ICollector downstream, final IFunction classifier) {
@@ -375,11 +445,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Time, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByTime
      */
     public static BiConsumer putToObjectsByTimeMap(final ICollector downstream, final IFunction classifier) {
@@ -391,11 +465,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Integer, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByInt
      */
     public static BiConsumer putToObjectsByIntMap(final ICollector downstream, final IToIntFunction classifier) {
@@ -407,11 +485,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Long, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByLong
      */
     public static BiConsumer putToObjectsByLongMap(final ICollector downstream, final IToLongFunction classifier) {
@@ -423,11 +505,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Double, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingByDouble
      */
     public static BiConsumer putToObjectsByDoubleMap(final ICollector downstream, final IToDoubleFunction classifier) {
@@ -439,11 +525,15 @@ public abstract inherited sharing class MapObjectConsumer extends BiConsumer {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Object, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `BiConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see Collector.groupingBy
      */
     public static BiConsumer putToObjectsByObjectMap(final ICollector downstream, final IFunction classifier) {

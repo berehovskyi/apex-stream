@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectConcatIterator extends SObjectBaseIterator {
+public inherited sharing class SObjectConcatIterator extends SObjectBaseIterator {
 
     private final List<Iterator<SObject>> iterators;
     private final Integer count;

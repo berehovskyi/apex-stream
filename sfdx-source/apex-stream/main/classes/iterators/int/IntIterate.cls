@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntIterate implements Iterator<Integer> {
+public inherited sharing class IntIterate implements Iterator<Integer> {
 
     private final IIntUnaryOperator operator;
     private Integer next;

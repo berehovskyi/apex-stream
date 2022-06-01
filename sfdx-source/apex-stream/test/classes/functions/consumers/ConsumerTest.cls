@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see Consumer
  */
 @IsTest(IsParallel = true)
@@ -40,10 +40,8 @@ public with sharing class ConsumerTest {
         // When
         Consumer debugConsumer = Consumer.debug();
         Consumer debugPrettyConsumer = Consumer.debugPretty();
-        Consumer debugConsumer1 = Consumer.debug(LoggingLevel.DEBUG);
-        Consumer debugPrettyConsumer1 = Consumer.debugPretty(LoggingLevel.DEBUG);
-        Consumer debugConsumer2 = Consumer.debug(message);
-        Consumer debugPrettyConsumer2 = Consumer.debugPretty(message);
+        Consumer debugConsumer1 = Consumer.debug(LoggingLevel.DEBUG, message);
+        Consumer debugPrettyConsumer1 = Consumer.debugPretty(LoggingLevel.DEBUG, message);
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             List<String> clone = input.clone();
@@ -51,8 +49,6 @@ public with sharing class ConsumerTest {
             debugPrettyConsumer.accept(clone[i]);
             debugConsumer1.accept(clone[i]);
             debugPrettyConsumer1.accept(clone[i]);
-            debugConsumer2.accept(clone[i]);
-            debugPrettyConsumer2.accept(clone[i]);
             Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
         }
     }

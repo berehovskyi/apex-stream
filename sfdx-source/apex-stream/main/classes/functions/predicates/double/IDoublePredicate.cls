@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Interfaces
  * @description A function that takes one argument of `Double` type and returns a Boolean value
  * (`true` or `false`).
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Interfaces
  */
 public interface IDoublePredicate {
 
@@ -14,7 +16,9 @@ public interface IDoublePredicate {
      *     <li>Does not cause any side effects.</li>
      *     <li>Does not return `null`.</li>
      * </ul>
+     *
      * @param d the input argument of `Double` type
+     *
      * @return `true` if the input satisfies the predicate, `false` otherwise
      */
     Boolean test(Double d);

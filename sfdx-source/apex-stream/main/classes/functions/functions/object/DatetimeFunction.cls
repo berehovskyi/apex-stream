@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `DatetimeFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DatetimeFunction extends Function {
 
@@ -10,9 +12,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     // @start-group Date Functions
     /**
      * @description Returns a `Function` that adds `days` to an input argument.
+     *
      * @param days the number of additional days
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `days` is null
+     *
      * @see Datetime.addDays
      */
     public static Function addDays(final Integer days) {
@@ -22,9 +28,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `hours` to an input argument.
+     *
      * @param hours the number of additional hours
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `hours` is null
+     *
      * @see Datetime.addHours
      */
     public static Function addHours(final Integer hours) {
@@ -34,9 +44,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `minutes` to an input argument.
+     *
      * @param minutes the number of additional minutes
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `minutes` is null
+     *
      * @see Datetime.addMinutes
      */
     public static Function addMinutes(final Integer minutes) {
@@ -46,9 +60,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `months` to an input argument.
+     *
      * @param months the number of additional months
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `months` is null
+     *
      * @see Datetime.addMonths
      */
     public static Function addMonths(final Integer months) {
@@ -58,9 +76,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `seconds` to an input argument.
+     *
      * @param seconds the number of additional seconds
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `seconds` is null
+     *
      * @see Datetime.addSeconds
      */
     public static Function addSeconds(final Integer seconds) {
@@ -70,9 +92,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `years` to an input argument.
+     *
      * @param years the number of additional years
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `years` is null
+     *
      * @see Datetime.addYears
      */
     public static Function addYears(final Integer years) {
@@ -83,7 +109,9 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the date component of a datetime
      * input argument in the local time zone of the context user.
+     *
      * @return the `Function`
+     *
      * @see Datetime.date
      */
     public static Function getDate() {
@@ -93,7 +121,9 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the date component of a datetime
      * input argument in the GMT time zone.
+     *
      * @return the `Function`
+     *
      * @see Datetime.dateGmt
      */
     public static Function dateGmt() {
@@ -103,7 +133,9 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the datetime as a string
      * using the locale of the context user.
+     *
      * @return the `Function`
+     *
      * @see Datetime.format
      */
     public static Function format() {
@@ -113,9 +145,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the datetime for the local time zone as a string
      * using the supplied Java simple `dateformat`. If the time zone cannot be determined, GMT is used.
+     *
      * @param dateformat the date format
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `dateformat` is null
+     *
      * @see Datetime.format
      */
     public static Function format(final String dateformat) {
@@ -126,10 +162,14 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the datetime for the specified time zone as a string
      * using the supplied Java simple `dateformat`. If the time zone cannot be determined, GMT is used.
+     *
      * @param dateformat the date format
      * @param timezone the time zone
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `dateformat` or `timezone` is null
+     *
      * @see Datetime.format
      */
     public static Function format(final String dateformat, final String timezone) {
@@ -141,9 +181,13 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the datetime as a string
      * using the supplied Java simple `dateformat` and the GMT time zone.
+     *
      * @param dateformat the date format
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `dateformat` is null
+     *
      * @see Datetime.formatGmt
      */
     public static Function formatGmt(final String dateformat) {
@@ -158,7 +202,9 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the time component of a datetime
      * input argument in the local time zone of the context user.
+     *
      * @return the `Function`
+     *
      * @see Datetime.time
      */
     public static Function getTime() {
@@ -168,7 +214,9 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the time component of a datetime
      * input argument in the GMT time zone.
+     *
      * @return the `Function`
+     *
      * @see Datetime.timeGmt
      */
     public static Function timeGmt() {
@@ -178,7 +226,9 @@ public abstract inherited sharing class DatetimeFunction extends Function {
     /**
      * @description Returns a `Function` that returns the string that represents
      * the specified datetime in the standard “yyyy-MM-dd HH:mm:ss” format for the GMT time zone.
+     *
      * @return the `Function`
+     *
      * @see String.valueOfGmt
      */
     public static Function stringValueOfGmt() {

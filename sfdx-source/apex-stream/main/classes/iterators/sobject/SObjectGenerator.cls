@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectGenerator implements Iterator<SObject> {
+public inherited sharing class SObjectGenerator implements Iterator<SObject> {
 
     private final ISObjectSupplier supplier;
 

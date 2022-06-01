@@ -1,18 +1,24 @@
 /**
- * @author O. Berehovskyi
- * @group Utils
  * @description Contains static utility methods that operate Lists.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Utils
  */
 public virtual inherited sharing class Lists {
 
     /**
      * @description Returns a sorted `List<SObject>` with sorted elements according to `comparator`.
-     * @example 
-     * List<Account> sortedAccountsByName = Lists.sort(accounts, SObjectComparator.comparing(Account.Name));
+     *
      * @param sObjects the elements to sort
      * @param comparator the comparator to compare elements
+     *
      * @return the sorted `List<SObject>`
+     *
      * @throws NullPointerException if `sObjects` or `comparator` is null
+     *
+     * @example
+     * List<Account> sortedAccountsByName = Lists.sort(accounts, SObjectComparator.comparing(Account.Name));
      */
     public static List<SObject> sort(final List<SObject> sObjects, final ISObjectComparator comparator) {
         Validate.notNull(sObjects);
@@ -24,12 +30,16 @@ public virtual inherited sharing class Lists {
 
     /**
      * @description Returns a sorted `List<Object>` with sorted elements according to `comparator`.
-     * @example 
-     * List<Person> sortedPeopleByName = (List<Person>) Lists.sort(people, Comparator.comparing(getName));
+     *
      * @param objects the elements to sort
      * @param comparator the comparator to compare elements
+     *
      * @return the sorted `List<Object>`
+     *
      * @throws NullPointerException if `objects` or `comparator` is null
+     *
+     * @example
+     * List<Person> sortedPeopleByName = (List<Person>) Lists.sort(people, Comparator.comparing(getName));
      */
     public static List<Object> sort(final List<Object> objects, final IComparator comparator) {
         Validate.notNull(objects);
@@ -41,13 +51,17 @@ public virtual inherited sharing class Lists {
 
     /**
      * @description Accumulates elements returned by `mapper` into a `List<?>` of specific `listType`.
-     * @example 
-     * List<String> accNames = (List<String>) Lists.toList(accounts, SObjectFunction.get('Name'), List<String>.class);
+     *
      * @param sObjects the list
      * @param mapper the mapping function
      * @param listType the result type
+     *
      * @return the `List<Object>` which can be cast into `listType`
+     *
      * @throws NullPointerException if `sObjects`, `mapper` or `listType` is null
+     *
+     * @example 
+     * List<String> accNames = (List<String>) Lists.toList(accounts, SObjectFunction.get('Name'), List<String>.class);
      */
     public static List<Object> toList(
             final List<SObject> sObjects,
@@ -66,12 +80,16 @@ public virtual inherited sharing class Lists {
 
     /**
      * @description Accumulates values returned by `mapper` into a `Set<Object>`.
-     * @example 
-     * Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunction.get('CreatedDate'));
+     *
      * @param sObjects the list
      * @param mapper the mapping function
+     *
      * @return the `Set<Object>`
+     *
      * @throws NullPointerException if `sObjects` or `mapper` is null
+     *
+     * @example
+     * Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunction.get('CreatedDate'));
      */
     public static Set<Object> toObjectSet(final List<SObject> sObjects, final ISObjectFunction mapper) {
         Validate.notNull(sObjects);
@@ -85,12 +103,16 @@ public virtual inherited sharing class Lists {
 
     /**
      * @description Accumulates values returned by `mapper` into a `Set<Id>`.
-     * @example 
-     * Set<Id> parentIds = Lists.toIdSet(accounts, SObjectFunction.get('ParentId'));
+     *
      * @param sObjects the list
      * @param mapper the mapping function
+     *
      * @return the `Set<Id>`
+     *
      * @throws NullPointerException if `sObjects` or `mapper` is null
+     *
+     * @example
+     * Set<Id> parentIds = Lists.toIdSet(accounts, SObjectFunction.get('ParentId'));
      */
     public static Set<Id> toIdSet(final List<SObject> sObjects, final ISObjectFunction mapper) {
         Validate.notNull(sObjects);
@@ -104,12 +126,16 @@ public virtual inherited sharing class Lists {
 
     /**
      * @description Accumulates values returned by `mapper` into a `Set<String>`.
-     * @example 
-     * Set<String> names = Lists.toStringSet(accounts, SObjectFunction.get('Name'));
+     *
      * @param sObjects the list
      * @param mapper the mapping function
+     *
      * @return the `Set<String>`
+     *
      * @throws NullPointerException if `sObjects` or `mapper` is null
+     *
+     * @example
+     * Set<String> names = Lists.toStringSet(accounts, SObjectFunction.get('Name'));
      */
     public static Set<String> toStringSet(final List<SObject> sObjects, final ISObjectFunction mapper) {
         Validate.notNull(sObjects);
@@ -124,15 +150,19 @@ public virtual inherited sharing class Lists {
     /**
      * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
-     * @example 
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Lists
-     *     .toByIdMap(contacts, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+     *
      * @param sObjects the list
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
+     *
      * @return the `Map<Id, SObject>` which can be cast into `mapType`
-     * @throws NullPointerException if `sObjects`, `keyMapper` or `listType` is null
+     *
      * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `sObjects`, `keyMapper` or `listType` is null
+     *
+     * @example
+     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Lists
+     *     .toByIdMap(contacts, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
      */
     public static Map<Id, SObject> toByIdMap(
             final List<SObject> sObjects,
@@ -159,15 +189,19 @@ public virtual inherited sharing class Lists {
     /**
      * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `mapType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
-     * @example 
-     * Map<String, Account> accountByName = (Map<String, Account>) Lists
-     *     .toByIdMap(accounts, SObjectFunction.get('Name'), Map<String, Account>.class);
+     *
      * @param sObjects the list
      * @param keyMapper the mapping function producing keys
      * @param mapType the type of map
+     *
      * @return the `Map<String, SObject>` which can be cast into `mapType`
-     * @throws NullPointerException if `sObjects`, `keyMapper` or `listType` is null
+     *
      * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `sObjects`, `keyMapper` or `listType` is null
+     *
+     * @example
+     * Map<String, Account> accountByName = (Map<String, Account>) Lists
+     *     .toByIdMap(accounts, SObjectFunction.get('Name'), Map<String, Account>.class);
      */
     public static Map<String, SObject> toByStringMap(
             final List<SObject> sObjects,
@@ -194,12 +228,16 @@ public virtual inherited sharing class Lists {
     /**
      * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
-     * @example
-     * Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, SObjectFunction.get('AccountId'));
+     *
      * @param sObjects the list
      * @param keyMapper the mapping function producing keys
+     *
      * @return the `Map<Id, List<SObject>>` containing the elements
+     *
      * @throws NullPointerException if `sObjects` or `keyMapper` is blank
+     *
+     * @example
+     * Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, SObjectFunction.get('AccountId'));
      */
     public static Map<Id, List<SObject>> groupById(final List<SObject> sObjects, final ISObjectFunction keyMapper) {
         Validate.notNull(sObjects);
@@ -221,12 +259,16 @@ public virtual inherited sharing class Lists {
     /**
      * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
-     * @example
-     * Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, SObjectFunction.get('Rating'));
+     *
      * @param sObjects the list
      * @param keyMapper the mapping function producing keys
+     *
      * @return the `Map<Id, List<SObject>>` containing the elements
+     *
      * @throws NullPointerException if `sObjects` or `keyMapper` is null
+     *
+     * @example 
+     * Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, SObjectFunction.get('Rating'));
      */
     public static Map<String, List<SObject>> groupByString(
             final List<SObject> sObjects,
@@ -250,13 +292,17 @@ public virtual inherited sharing class Lists {
 
     /**
      * @description Partitions `SObject` elements by `predicate`.
+     *
+     * @param sObjects the list
+     * @param predicate the predicate
+     *
+     * @return the `Map<Boolean, List<SObject>>` containing the elements
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
      *     = Lists.partition(accounts, SObjectPredicate.isEqual(Account.Rating, 'Hot'));
-     * @param sObjects the list
-     * @param predicate the predicate
-     * @return the `Map<Boolean, List<SObject>>` containing the elements
-     * @throws NullPointerException if `predicate` is null
      */
     public static Map<Boolean, List<SObject>> partition(
             final List<SObject> sObjects,

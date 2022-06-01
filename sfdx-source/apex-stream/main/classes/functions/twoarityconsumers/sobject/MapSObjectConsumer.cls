@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `Map<T, Object> - SObject` two-arity consumers. Typically is used by collectors.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class MapSObjectConsumer extends ObjectSObjectConsumer {
 
@@ -13,13 +15,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Boolean, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumers`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByBoolMap
      */
     public static ObjectSObjectConsumer putToObjectByBoolMap(
@@ -37,13 +43,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Boolean, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumers`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByBoolMap
      */
     public static ObjectSObjectConsumer putToSObjectByBoolMap(
@@ -61,13 +71,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Id, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByIdMap
      */
     public static ObjectSObjectConsumer putToObjectByIdMap(
@@ -85,13 +99,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Id, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByIdMap
      */
     public static ObjectSObjectConsumer putToSObjectByIdMap(
@@ -109,13 +127,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<String, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByStringMap
      */
     public static ObjectSObjectConsumer putToObjectByStringMap(
@@ -133,13 +155,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<String, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByStringMap
      */
     public static ObjectSObjectConsumer putToSObjectByStringMap(
@@ -157,13 +183,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Blob, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByBlobMap
      */
     public static ObjectSObjectConsumer putToObjectByBlobMap(
@@ -181,13 +211,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Blob, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByBlobMap
      */
     public static ObjectSObjectConsumer putToSObjectByBlobMap(
@@ -205,13 +239,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Date, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByDateMap
      */
     public static ObjectSObjectConsumer putToObjectByDateMap(
@@ -229,13 +267,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Date, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByDateMap
      */
     public static ObjectSObjectConsumer putToSObjectByDateMap(
@@ -253,13 +295,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Datetime, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByDatetimeMap
      */
     public static ObjectSObjectConsumer putToObjectByDatetimeMap(
@@ -277,13 +323,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Datetime, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByDatetimeMap
      */
     public static ObjectSObjectConsumer putToSObjectByDatetimeMap(
@@ -301,13 +351,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Time, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByTimeMap
      */
     public static ObjectSObjectConsumer putToObjectByTimeMap(
@@ -325,13 +379,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Time, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByTimeMap
      */
     public static ObjectSObjectConsumer putToSObjectByTimeMap(
@@ -349,13 +407,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Integer, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByIntMap
      */
     public static ObjectSObjectConsumer putToObjectByIntMap(
@@ -373,13 +435,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Integer, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByIntMap
      */
     public static ObjectSObjectConsumer putToSObjectByIntMap(
@@ -397,13 +463,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Long, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByLongMap
      */
     public static ObjectSObjectConsumer putToObjectByLongMap(
@@ -421,13 +491,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Long, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByLongMap
      */
     public static ObjectSObjectConsumer putToSObjectByLongMap(
@@ -445,13 +519,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Double, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByDoubleMap
      */
     public static ObjectSObjectConsumer putToObjectByDoubleMap(
@@ -469,13 +547,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Double, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toByDoubleMap
      */
     public static ObjectSObjectConsumer putToSObjectByDoubleMap(
@@ -493,13 +575,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Object, Object>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toMap
      */
     public static ObjectSObjectConsumer putToObjectByObjectMap(
@@ -517,13 +603,17 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
      * `Map<Object, SObject>` and puts an entry returned by the `keyMapper`
      * and `valueMapper`. If a key is already contained in the `Map` results
      * are merged using the provided `merger`.
+     *
      * @param keyMapper the mapping function producing keys
      * @param valueMapper the mapping function producing values
      * @param merger the merge function to resolve possible key collisions
+     *
      * @return the `ObjectSObjectConsumer`
+     *
+     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
+     *
      * @see SObjectCollector.toMap
      */
     public static ObjectSObjectConsumer putToSObjectByObjectMap(
@@ -543,11 +633,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Boolean, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByBool
      */
     public static ObjectSObjectConsumer putToObjectsByBoolMap(
@@ -562,11 +656,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Id, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingById
      */
     public static ObjectSObjectConsumer putToObjectsByIdMap(
@@ -581,11 +679,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<String, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByString
      */
     public static ObjectSObjectConsumer putToObjectsByStringMap(
@@ -600,11 +702,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Blob, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByBlob
      */
     public static ObjectSObjectConsumer putToObjectsByBlobMap(
@@ -619,11 +725,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Date, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByDate
      */
     public static ObjectSObjectConsumer putToObjectsByDateMap(
@@ -638,11 +748,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Datetime, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByDatetime
      */
     public static ObjectSObjectConsumer putToObjectsByDatetimeMap(
@@ -657,11 +771,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Time, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByTime
      */
     public static ObjectSObjectConsumer putToObjectsByTimeMap(
@@ -676,11 +794,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Integer, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByInt
      */
     public static ObjectSObjectConsumer putToObjectsByIntMap(
@@ -695,11 +817,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Long, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByLong
      */
     public static ObjectSObjectConsumer putToObjectsByLongMap(
@@ -714,11 +840,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Double, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingByDouble
      */
     public static ObjectSObjectConsumer putToObjectsByDoubleMap(
@@ -733,11 +863,15 @@ public abstract inherited sharing class MapSObjectConsumer extends ObjectSObject
     /**
      * @description Returns a `ObjectSObjectConsumer` that casts the first input argument to
      * `Map<Object, Object>` and groups input arguments according to a classification function.
+     *
      * @param downstream the collector implementing the downstream reduction
      * @param classifier the classifier function mapping input elements to keys
+     *
      * @return the `ObjectSObjectConsumer`
+     *
      * @throws NullPointerException if the `downstream` or the `classifier` is null
      * @throws NullPointerException if the first input argument is null
+     *
      * @see SObjectCollector.groupingBy
      */
     public static ObjectSObjectConsumer putToObjectsByObjectMap(

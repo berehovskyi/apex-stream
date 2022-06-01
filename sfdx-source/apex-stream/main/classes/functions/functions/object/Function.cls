@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IFunction} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IObjectIterable.mapTo
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Function implements IFunction {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class Function implements IFunction {
     /**
      * @description Returns a composed `Function` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `Function`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual Function andThen(final IFunction after) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class Function implements IFunction {
     /**
      * @description Returns a composed `Function` that executes `before` operation
      * first, then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `Function`
+     *
      * @throws NullPointerException if `before` is null
      */
     public virtual Function compose(final IFunction before) {
@@ -44,8 +53,11 @@ public abstract inherited sharing class Function implements IFunction {
     /**
      * @description Returns a composed `Function` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param functions the functions to sequentially perform
+     *
      * @return the composed `Function`
+     *
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static Function compose(final List<IFunction> functions) {
@@ -55,6 +67,7 @@ public abstract inherited sharing class Function implements IFunction {
 
     /**
      * @description Returns a `Function` that always returns the input argument.
+     *
      * @return the `Function`
      */
     public static Function identity() {
@@ -63,7 +76,9 @@ public abstract inherited sharing class Function implements IFunction {
 
     /**
      * @description Returns a `Function` that always returns the `value`.
+     *
      * @param value the value
+     *
      * @return the `Function`
      */
     public static Function constant(final Object value) {
@@ -72,8 +87,11 @@ public abstract inherited sharing class Function implements IFunction {
 
     /**
      * @description Returns a composed `Function` of the `predicate`.
+     *
      * @param predicate the predicate
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `predicate` is null
      */
     public static Function forPredicate(final IPredicate predicate) {
@@ -83,8 +101,11 @@ public abstract inherited sharing class Function implements IFunction {
 
     /**
      * @description Returns a composed `Function` of the `ISObjectFunction`.
+     *
      * @param function the function
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `function` is null
      */
     public static Function upcast(final ISObjectFunction function) {
@@ -101,7 +122,7 @@ public abstract inherited sharing class Function implements IFunction {
     }
 
     private class Compose extends Function {
-        private final  List<IFunction> functions;
+        private final List<IFunction> functions;
         private Compose(List<IFunction> functions) { this.functions = functions; }
         public override Object apply(Object o) {
             Object result = o;

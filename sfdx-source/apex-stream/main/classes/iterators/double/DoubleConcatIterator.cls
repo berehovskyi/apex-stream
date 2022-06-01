@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleConcatIterator extends DoubleBaseIterator {
+public inherited sharing class DoubleConcatIterator extends DoubleBaseIterator {
 
     private final List<Iterator<Double>> iterators;
     private final Integer count;

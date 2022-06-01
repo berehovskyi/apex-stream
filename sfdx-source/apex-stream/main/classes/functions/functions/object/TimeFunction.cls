@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `TimeFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class TimeFunction extends Function {
 
@@ -10,9 +12,13 @@ public abstract inherited sharing class TimeFunction extends Function {
     // @start-group Date Functions
     /**
      * @description Returns a `Function` that adds `hours` to an input argument.
+     *
      * @param hours the number of additional hours
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `hours` is null
+     *
      * @see Time.addHours
      */
     public static Function addHours(final Integer hours) {
@@ -22,9 +28,13 @@ public abstract inherited sharing class TimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `milliseconds` to an input argument.
+     *
      * @param milliseconds the number of additional milliseconds
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `milliseconds` is null
+     *
      * @see Time.addMilliseconds
      */
     public static Function addMilliseconds(final Integer milliseconds) {
@@ -34,9 +44,13 @@ public abstract inherited sharing class TimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `minutes` to an input argument.
+     *
      * @param minutes the number of additional minutes
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `minutes` is null
+     *
      * @see Time.addMinutes
      */
     public static Function addMinutes(final Integer minutes) {
@@ -46,9 +60,13 @@ public abstract inherited sharing class TimeFunction extends Function {
 
     /**
      * @description Returns a `Function` that adds `seconds` to an input argument.
+     *
      * @param seconds the number of additional seconds
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `seconds` is null
+     *
      * @see Time.addMinutes
      */
     public static Function addSeconds(final Integer seconds) {

@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IToDoubleFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ToDoubleFunction implements IToDoubleFunction {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class ToDoubleFunction implements IToDoubleFun
     // @start-group Static Methods
     /**
      * @description Returns a composed `ToDoubleFunction` of the `ISObjectFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `ToDoubleFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static ToDoubleFunction downcast(final ISObjectFunction mapper) {
@@ -27,8 +32,11 @@ public abstract inherited sharing class ToDoubleFunction implements IToDoubleFun
 
     /**
      * @description Returns a composed `ToDoubleFunction` of the `IFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `ToDoubleFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static ToDoubleFunction downcast(final IFunction mapper) {
@@ -43,6 +51,7 @@ public abstract inherited sharing class ToDoubleFunction implements IToDoubleFun
     /**
      * @description Returns a `ToDoubleFunction` that returns the Double value
      * of the Object input argument by casting it to an Double.
+     *
      * @return the `ToDoubleFunction`
      */
     public static ToDoubleFunction asDouble() {
@@ -52,7 +61,9 @@ public abstract inherited sharing class ToDoubleFunction implements IToDoubleFun
     /**
      * @description Returns a `ToDoubleFunction` that returns the Double value
      * of the Object input argument.
+     *
      * @return the `ToDoubleFunction`
+     *
      * @see Double.valueOf
      */
     public static ToDoubleFunction valueOf() {

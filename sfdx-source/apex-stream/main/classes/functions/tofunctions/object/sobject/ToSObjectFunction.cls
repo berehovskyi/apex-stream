@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IToSObjectFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ToSObjectFunction implements IToSObjectFunction {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class ToSObjectFunction implements IToSObjectF
     // @start-group Static Methods
     /**
      * @description Returns a composed `ToSObjectFunction` of the `IFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `ToSObjectFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static ToSObjectFunction downcast(final IFunction mapper) {

@@ -1,7 +1,9 @@
 /**
- * @author O. Berehovskyi
- * @group Optionals
  * @description A container which may or may not contain a non-null `Long` value.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Optionals
  */
 public virtual inherited sharing class OptionalLong {
 
@@ -14,8 +16,11 @@ public virtual inherited sharing class OptionalLong {
 
     /**
      * @description Returns an instance of `OptionalLong`.
+     *
      * @param value the value to describe
+     *
      * @return the `OptionalLong`
+     *
      * @throws NullPointerException if `value` is null
      */
     public static OptionalLong of(final Long value) {
@@ -26,7 +31,9 @@ public virtual inherited sharing class OptionalLong {
     /**
      * @description Returns an instance of `OptionalLong` if non-null,
      * otherwise returns an empty `OptionalLong`.
+     *
      * @param value the value to describe
+     *
      * @return the `OptionalLong`
      */
     public static OptionalLong ofNullable(final Long value) {
@@ -35,6 +42,7 @@ public virtual inherited sharing class OptionalLong {
 
     /**
      * @description Returns an empty instance of `OptionalLong`.
+     *
      * @return the empty `OptionalLong`
      */
     public static OptionalLong empty() {
@@ -44,7 +52,9 @@ public virtual inherited sharing class OptionalLong {
     /**
      * @description Returns `value` if a value is present,
      * otherwise throws `NoSuchElementException`.
+     *
      * @return the non-null `value`
+     *
      * @throws NoSuchElementException if `value` is null
      */
     public virtual Long get() {
@@ -54,6 +64,7 @@ public virtual inherited sharing class OptionalLong {
 
     /**
      * @description Returns `true` if a value is present, otherwise `false`.
+     *
      * @return `true` or `false`
      */
     public virtual Boolean isPresent() {
@@ -62,6 +73,7 @@ public virtual inherited sharing class OptionalLong {
 
     /**
      * @description Returns `true` if a value is not present, otherwise `false`.
+     *
      * @return `true` or `false`
      */
     public virtual Boolean isEmpty() {
@@ -71,6 +83,7 @@ public virtual inherited sharing class OptionalLong {
     /**
      * @description If a value is present, performs `consumer` action with `value`,
      * otherwise does nothing.
+     *
      * @param consumer the consumer action to perform
      */
     public virtual void ifPresent(final ILongConsumer consumer) {
@@ -83,8 +96,10 @@ public virtual inherited sharing class OptionalLong {
     /**
      * @description If a value is present, performs `consumer` action with `value`,
      * otherwise performs runnable `action`.
+     *
      * @param consumer the consumer action
      * @param action the runnable action
+     *
      * @throws NullPointerException if `consumer` or `action` is null
      */
     public virtual void ifPresentOrElse(final ILongConsumer consumer, final IRunnable action) {
@@ -100,7 +115,9 @@ public virtual inherited sharing class OptionalLong {
     /**
      * @description Returns a value if the value is present,
      * otherwise returns the fallback `other` Long. May be null.
+     *
      * @param other the supplying function
+     *
      * @return the `Long`
      */
     public virtual Long orElse(final Long other) {
@@ -110,8 +127,11 @@ public virtual inherited sharing class OptionalLong {
     /**
      * @description Returns a value if the value is present,
      * otherwise returns the value provided by `supplier`.
+     *
      * @param supplier the supplying function
+     *
      * @return the `Long`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual Long orElseGet(final ILongSupplier supplier) {
@@ -122,23 +142,22 @@ public virtual inherited sharing class OptionalLong {
     /**
      * @description Returns a value if the value is present,
      * otherwise throws an Exception provided by `exceptionSupplier`.
+     *
      * @param exceptionSupplier the exception supplying function
+     *
      * @return the `Long`
-     * @throws NullPointerException if `exceptionSupplier` is null
+     *
      * @throws Exception if no value is present
+     * @throws NullPointerException if `exceptionSupplier` is null
      */
     public virtual Long orElseThrow(final ISupplier exceptionSupplier) {
         Validate.notNull(exceptionSupplier);
-        if (isPresent()) {
-            return value;
-        }
+        if (isPresent()) { return value; }
         throw (Exception) exceptionSupplier.get();
     }
 
     private void requireNonNullValue() {
-        if (value == null) {
-            throw new NoSuchElementException('No value present');
-        }
+        if (value == null) { throw new NoSuchElementException(Label.NoValuePresentErrorMessage); }
     }
 
     public virtual Boolean equals(Object obj) {

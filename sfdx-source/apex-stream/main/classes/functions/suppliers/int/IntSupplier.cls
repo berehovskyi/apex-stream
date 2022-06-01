@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IntSupplier} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class IntSupplier implements IIntSupplier {
 
@@ -19,6 +21,7 @@ public abstract inherited sharing class IntSupplier implements IIntSupplier {
      * incremented by 1 starting at 0.
      * <p><strong>Note: </strong></p>
      * <p>This is a stateful function.</p>
+     *
      * @return the `IntSupplier`
      */
     public static IntSupplier increment() {
@@ -30,18 +33,24 @@ public abstract inherited sharing class IntSupplier implements IIntSupplier {
      * incremented by `step` starting at `fromInt` inclusively.
      * <p><strong>Note: </strong></p>
      * <p>This is a stateful function.</p>
+     *
+     * @param fromInt the starting value
+     * @param step the incremental step
+     *
      * @return the `IntSupplier`
+     *
      * @throws NullPointerException if `fromInt` or `step` is null
      */
     public static IntSupplier increment(final Integer fromInt, final Integer step) {
         return new Increment(fromInt, step);
     }
 
-        /**
+    /**
      * @description Returns a `IntSupplier` that returns a next fibonacci Integer value
      * starting at 1.
      * <p><strong>Note: </strong></p>
      * <p>This is a stateful function.</p>
+     *
      * @return the `IntSupplier`
      */
     public static IntSupplier fibonacci() {

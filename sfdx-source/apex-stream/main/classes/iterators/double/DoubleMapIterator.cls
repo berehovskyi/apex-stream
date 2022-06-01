@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleMapIterator implements Iterator<Double> {
+public inherited sharing class DoubleMapIterator implements Iterator<Double> {
 
     private final Iterator<Double> iterator;
     private final IDoubleUnaryOperator mapper;

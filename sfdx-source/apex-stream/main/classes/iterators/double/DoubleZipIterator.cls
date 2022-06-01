@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleZipIterator implements Iterator<Double> {
+public inherited sharing class DoubleZipIterator implements Iterator<Double> {
 
     private final Iterator<Double> iterator1;
     private final Iterator<Double> iterator2;

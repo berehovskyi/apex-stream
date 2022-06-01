@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public virtual class ObjectFilterIterator implements Iterator<Object> {
+public virtual inherited sharing class ObjectFilterIterator implements Iterator<Object> {
 
     protected final Iterator<Object> iterator;
     private final IPredicate predicate;

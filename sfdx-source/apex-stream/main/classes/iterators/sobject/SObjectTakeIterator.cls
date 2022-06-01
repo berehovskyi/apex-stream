@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectTakeIterator implements Iterator<SObject> {
+public inherited sharing class SObjectTakeIterator implements Iterator<SObject> {
 
     private final Iterator<SObject> iterator;
     private final ISObjectPredicate predicate;

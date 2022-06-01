@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  */
 @IsTest
 public class IterTestUtils {
@@ -203,7 +203,7 @@ public class IterTestUtils {
     }
     public class SumIntFieldReducer extends SObjectBinaryOperator {
         private final String fieldName;
-        public SumIntFieldReducer(String fieldName) { this.fieldName = fieldName.contains('.') ? fieldName.substringAfter('.') : fieldName; }
+        public SumIntFieldReducer(String fieldName) { this.fieldName = Schemas.isXRef(fieldName) ? fieldName.substringAfter('.') : fieldName; }
         public override SObject apply(SObject seed, SObject sObj) {
             seed.put(fieldName, (Integer) seed.get(fieldName) + (Integer) sObj.get(fieldName));
             return seed;

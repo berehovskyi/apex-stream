@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
 public virtual inherited sharing class SObjectSortIterator extends SObjectBaseIterator {
 

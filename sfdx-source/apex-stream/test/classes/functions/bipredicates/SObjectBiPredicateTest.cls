@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see SObjectBiPredicate
  */
 @IsTest(IsParallel = true)
@@ -55,7 +55,6 @@ private class SObjectBiPredicateTest {
         ISObjectBiPredicate decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate = SObjectBiPredicate.some(
                 new List<ISObjectBiPredicate>{ numOfEmployeesIsGreaterBiPredicate, typesAreEqualBiPredicate }
         );
-        ISObjectBiPredicate decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate1 = SObjectBiPredicate.some(numOfEmployeesIsGreaterBiPredicate, typesAreEqualBiPredicate);
         ISObjectPredicate isNumOfEmployeesEquals = SObjectPredicate.isEqual(accNumOfEmployeesField, value);
         ISObjectPredicate isTypeEquals = SObjectPredicate.isEqual(accTypeField, value1);
         ISObjectBiPredicate isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate = SObjectBiPredicate.somePredicate(isTypeEquals, isNumOfEmployeesEquals);
@@ -66,10 +65,6 @@ private class SObjectBiPredicateTest {
             Validate.assertEquals(
                     areSameTypes || isDecreasedNum,
                     decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate.test(acc, change)
-            );
-            Validate.assertEquals(
-                    areSameTypes || isDecreasedNum,
-                    decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate1.test(acc, change)
             );
             Boolean isLeftTypeCustomer = acc.get(accTypeField) == value1;
             Boolean isRightNumOfEmployees = change.get(accNumOfEmployeesField) == value;
@@ -94,7 +89,6 @@ private class SObjectBiPredicateTest {
         SObjectBiPredicate numOfEmployeesIsGreaterBiPredicate = SObjectBiPredicate.isGreater(accNumOfEmployeesField);
         SObjectBiPredicate typesAreEqualBiPredicate = SObjectBiPredicate.areEqual(accTypeField);
         ISObjectBiPredicate decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate = SObjectBiPredicate.every(new List<ISObjectBiPredicate>{ numOfEmployeesIsGreaterBiPredicate, typesAreEqualBiPredicate });
-        ISObjectBiPredicate decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate1 = SObjectBiPredicate.every(numOfEmployeesIsGreaterBiPredicate, typesAreEqualBiPredicate);
         ISObjectPredicate isNumOfEmployeesEquals = SObjectPredicate.isEqual(accNumOfEmployeesField, value);
         ISObjectPredicate isTypeEquals = SObjectPredicate.isEqual(accTypeField, value1);
         ISObjectBiPredicate isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate = SObjectBiPredicate.everyPredicate(isTypeEquals, isNumOfEmployeesEquals);
@@ -105,10 +99,6 @@ private class SObjectBiPredicateTest {
             Validate.assertEquals(
                     areSameTypes && isDecreasedNum,
                     decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate.test(acc, change)
-            );
-            Validate.assertEquals(
-                    areSameTypes && isDecreasedNum,
-                    decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate1.test(acc, change)
             );
             Boolean isLeftTypeCustomer = acc.get(accTypeField) == value1;
             Boolean isRightNumOfEmployees = change.get(accNumOfEmployeesField) == value;

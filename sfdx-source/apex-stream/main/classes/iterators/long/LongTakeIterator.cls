@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongTakeIterator implements Iterator<Long> {
+public inherited sharing class LongTakeIterator implements Iterator<Long> {
 
     private final Iterator<Long> iterator;
     private final ILongPredicate predicate;

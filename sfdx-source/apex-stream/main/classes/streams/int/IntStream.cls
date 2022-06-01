@@ -1,8 +1,17 @@
 /**
- * @author O. Berehovskyi
- * @group Iterables
  * @description A sequence of `Integer` elements supporting aggregate operations,
  * a primitive specialization of {@link ObjectStream}.
+ *
+ * @see IntSequence
+ * @see SObjectStream
+ * @see ObjectStream
+ * @see DoubleStream
+ * @see LongStream
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Iterables
+ *
  * @example
  * Integer sumAnnualRevenueOfUniquePeopleFromLondon
  *     = ObjectStream.of(people)
@@ -10,11 +19,6 @@
  *         .distinct()
  *         .mapToInt(getAnnualRevenueToIntFunction)
  *         .sum();
- * @see IntSequence
- * @see SObjectStream
- * @see ObjectStream
- * @see DoubleStream
- * @see LongStream
  */
 public virtual inherited sharing class IntStream extends IntIterable implements IIntIterable {
 
@@ -38,7 +42,9 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns an internal iterator for the elements of this stream.
      * <p>Terminal Operation.</p>
+     *
      * @return the internal `Iterator<Integer>`
+     *
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public Iterator<Integer> iterator() {
@@ -54,6 +60,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     // @start-group Conversion Operations
     /**
      * @description Returns an `ObjectStream` consisting of the elements of this stream, converted to Object.
+     *
      * @return the `ObjectStream`
      */
     public virtual IObjectIterable toObjectIterable() {
@@ -66,13 +73,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     // @start-group Sources
     /**
      * @description Returns a `IntStream` created from `iterator`.
+     *
+     * @param iterator the iterator
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterator` is null
+     *
      * @example
      * IIntIterable intStream = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }.iterator());
      * IIntIterable intStream = IntStream.of(new Set<Integer>{ 0, 5, 1, -10 }.iterator());
      * IIntIterable intStream = IntStream.of(otherStream.iterator());
-     * @param iterator the iterator
-     * @return the new `IntStream`
-     * @throws NullPointerException if `iterator` is null
      */
     public static IIntIterable of(final Iterator<Integer> iterator) {
         Validate.notNull(iterator);
@@ -81,12 +92,16 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
 
     /**
      * @description Returns a `IntStream` created from `integers`.
+     *
+     * @param integers the iterable
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `integers` is null
+     *
      * @example
      * IIntIterable intStream = IntStream.of(new List<Integer>{ 0, 5, 1, -10 });
      * IIntIterable intStream = IntStream.of((Iterable<Integer>) new Set<Integer>{ 0, 5, 1, -10 });
-     * @param integers the iterable
-     * @return the new `IntStream`
-     * @throws NullPointerException if `integers` is null
      */
     public static IIntIterable of(final Iterable<Integer> integers) {
         Validate.notNull(integers);
@@ -96,11 +111,14 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a `IntStream` created from `integers` if non-null,
      * otherwise returns an empty `IntStream`.
-     * @example
-     * IIntIterable intStream = IntStream.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
+     *
      * @param integers the iterable
+     *
      * @return the new `IntStream` if `integers` is non-null,
      * otherwise an empty `IntStream`
+     *
+     * @example
+     * IIntIterable intStream = IntStream.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
      */
     public static IIntIterable ofNullable(final Iterable<Integer> integers) {
         if (integers == null) { return empty(); }
@@ -109,6 +127,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
 
     /**
      * @description Returns an empty `IntStream`.
+     *
      * @return the empty `IntStream`
      */
     public static IIntIterable empty() {
@@ -116,14 +135,18 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     }
 
     /**
-     * @description Returns an ordered `IntStream` 
+     * @description Returns an ordered `IntStream`
      * from `fromInt` (inclusive) to `toInt` (inclusive) by an incremental step of 1.
-     * @example
-     * IIntIterable intStreamFrom0To100 = IntStream.range(0, 100);
+     *
      * @param fromInt the inclusive initial value
      * @param toInt the inclusive upper bound
+     *
      * @return the new `IntStream`
+     *
      * @throws NullPointerException if `fromInt` or `toInt` is null
+     *
+     * @example
+     * IIntIterable intStreamFrom0To100 = IntStream.range(0, 100);
      */
     public static IIntIterable range(final Integer fromInt, final Integer toInt) {
         Validate.notNull(fromInt);
@@ -134,11 +157,15 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns an infinite `IntStream` where each element is
      * generated by `supplier`.
-     * @example 
-     * IIntIterable fibonacciInfiniteStream = IntStream.generate(IntSupplier.fibonacci());
+     *
      * @param supplier the supplier of generated elements
+     *
      * @return the new `IntStream`
+     *
      * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IIntIterable fibonacciInfiniteStream = IntStream.generate(IntSupplier.fibonacci());
      */
     public static IIntIterable generate(final IIntSupplier supplier) {
         Validate.notNull(supplier);
@@ -150,12 +177,16 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * application of `operator` to an initial element `seed`,
      * producing a `IntStream` consisting of `seed`, `operator(seed)`,
      * `operator(operator(seed))`, etc.
-     * @example 
-     * IIntIterable intIncrementalStream = IntStream.iterate(0, IntUnaryOperator.add(1));
+     *
      * @param seed the initial element
      * @param operator the operator to be applied to the previous element to produce a new element
+     *
      * @return the new `IntStream`
+     *
      * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IIntIterable intIncrementalStream = IntStream.iterate(0, IntUnaryOperator.add(1));
      */
     public static IIntIterable iterate(final Integer seed, final IIntUnaryOperator operator) {
         Validate.notNull(operator);
@@ -166,10 +197,13 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns an infinite `IntStream` produced by iterative
      * application of `operator` to an initial element `seed`,
      * conditioned on satisfying `predicate`.
+     *
      * @param seed the initial element
      * @param predicate the predicate to determine when the stream must be terminated
      * @param operator the operator to be applied to the previous element to produce a new element
+     *
      * @return the new `IntStream`
+     *
      * @throws NullPointerException if `supplier` or `supplier` is null
      */
     public static IIntIterable iterate(
@@ -186,12 +220,16 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns lazily concatenated `IntStream` whose elements are all the
      * elements of the first `Iterable<Integer>` followed by all the elements of the
      * second `Iterable<Integer>`.
-     * @example
-     * IIntIterable intStream = IntStream.concat(stream1, stream2);
+     *
      * @param iterable1 the first `Iterable<Integer>`
      * @param iterable2 the second `Iterable<Integer>`
+     *
      * @return the new `IntStream`
+     *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
+     *
+     * @example
+     * IIntIterable intStream = IntStream.concat(stream1, stream2);
      */
     public static IIntIterable concat(final Iterable<Integer> iterable1, final Iterable<Integer> iterable2) {
         return concat(new List<Iterable<Integer>>{ iterable1, iterable2 });
@@ -199,11 +237,15 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
 
     /**
      * @description Returns lazily concatenated `List<Iterable<Integer>>`.
+     *
+     * @param iterables the list of `Iterable<Integer>`
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterables` or some element in a list is null
+     *
      * @example
      * IIntIterable intStream = IntStream.concat(streams);
-     * @param iterables the list of `Iterable<Integer>`
-     * @return the new `IntStream`
-     * @throws NullPointerException if `iterables` or some element in a list is null
      */
     public static IIntIterable concat(final List<Iterable<Integer>> iterables) {
         Validate.noNullElements(iterables);
@@ -219,10 +261,13 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a combined `IntStream` by applying `combiner` function
      * to each element at the same position.
+     *
      * @param iterable1 the first `Iterable<Integer>`
      * @param iterable2 the second `Iterable<Integer>`
      * @param combiner the binary operator to be applied to each element at the same position
+     *
      * @return the new `IntStream`
+     *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      */
     public static IIntIterable zip(
@@ -239,11 +284,15 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns new `IntStream` by appending `iterable`
      * to the current stream.
+     *
+     * @param iterable the `Iterable<Integer>` to append to the current stream
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * IIntIterable intStream = stream1.append(stream2);
-     * @param iterable the `Iterable<Integer>` to append to the current stream
-     * @return the new `IntStream`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual override IIntIterable append(final Iterable<Integer> iterable) {
         return concat(this, iterable);
@@ -252,11 +301,15 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns new `IntStream` by prepending `iterable`
      * to the current stream.
+     *
+     * @param iterable the `Iterable<Integer>` to prepend to the current stream
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
      * @example
      * IIntIterable intStream = stream1.prepend(stream2);
-     * @param iterable the `Iterable<Integer>` to prepend to the current stream
-     * @return the new `IntStream`
-     * @throws NullPointerException if `iterable` is null
      */
     public virtual IIntIterable prepend(final Iterable<Integer> iterable) {
         return concat(iterable, this);
@@ -269,9 +322,11 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns new `IntSequence` from the current stream.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the new `IntSequence`
+     *
      * @example
      * IIntIterable intSeq = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).sequence();
-     * @return the new `IntSequence`
      */
     public virtual IIntIterable sequence() {
         return IntSequence.of(Iterators.toIntList(iterator()));
@@ -280,13 +335,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a `IntStream` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Integer> filtered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .filter(IntPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `IntStream`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override IIntIterable filter(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -296,13 +355,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a `IntStream` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Integer> firstFiltered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .take(IntPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `IntStream`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual IIntIterable take(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -313,13 +376,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns a `IntStream` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * List<Integer> rest = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .drop(IntPredicate.isGreater(0))
      *     .toList();
-     * @param predicate the non-interfering, stateless predicate
-     * @return the `IntStream`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual IIntIterable drop(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -330,13 +397,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns a `IntStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<Integer> incrementedInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .mapTo(IntUnaryOperator.add(1))
      *     .toList();
-     * @param mapper the non-interfering, stateless operator
-     * @return the `IntStream`
-     * @throws NullPointerException if `mapper` is null
      */
     public virtual IIntIterable mapTo(final IIntUnaryOperator mapper) {
         Validate.notNull(mapper);
@@ -347,8 +418,11 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns a `LongStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `LongStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual override ILongIterable mapToLong(final IIntToLongFunction mapper) {
@@ -360,8 +434,11 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns a `DoubleStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `DoubleStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual override IDoubleIterable mapToDouble(final IIntToDoubleFunction mapper) {
@@ -373,8 +450,11 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns a `SObjectStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `SObjectStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual ISObjectIterable mapToSObject(final IIntToSObjectFunction mapper) {
@@ -386,8 +466,11 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns a `ObjectStream` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param mapper the non-interfering, stateless operator
+     *
      * @return the `ObjectStream`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public virtual IObjectIterable mapToObject(final IIntFunction mapper) {
@@ -398,9 +481,12 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a `IntStream` after performing `consumer` action on each element.
      * <p>Stateless Intermediate Operation.</p>
+     *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
+     *
      * @return the `IntStream`
+     *
      * @throws NullPointerException if `consumer` is null
      */
     public virtual IIntIterable forEach(final IIntConsumer consumer) {
@@ -411,11 +497,13 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a `IntStream` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `IntStream`
+     *
      * @example
      * List<Integer> distinct = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .distinct()
      *     .toList();
-     * @return the `IntStream`
      */
     public virtual override IIntIterable distinct() {
         return new IntStream(new IntDistinctIterator(iterator()));
@@ -424,11 +512,13 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a `IntStream` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `IntStream`
+     *
      * @example
      * List<Integer> sorted = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .sort()
      *     .toList();
-     * @return the `IntStream`
      */
     public virtual IIntIterable sort() {
         final List<Integer> integers = Iterators.toIntList(iterator());
@@ -439,14 +529,18 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns a `IntStream` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param lim the number of elements to limit
+     *
+     * @return the `IntStream`
+     *
+     * @throws IllegalStateException if `lim` is less than 0
+     * @throws NullPointerException if `lim` is null
+     *
      * @example
      * List<Integer> first3Ints = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .lim(3)
      *     .toList();
-     * @param lim the number of elements to limit
-     * @return the `IntStream`
-     * @throws NullPointerException if `lim` is null
-     * @throws IllegalStateException if `lim` is less than 0
      */
     public virtual IIntIterable lim(final Integer lim) {
         Validate.notNull(lim);
@@ -459,14 +553,18 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns a new `IntStream` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param n the number of elements to skip
+     *
+     * @return the `IntStream`
+     *
+     * @throws IllegalStateException if `n` is less than 0
+     * @throws NullPointerException if `n` is null
+     *
      * @example
      * List<Integer> restLongs = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .skip(1)
      *     .toList();
-     * @param n the number of elements to skip
-     * @return the `IntStream`
-     * @throws NullPointerException if `n` is null
-     * @throws IllegalStateException if `n` is less than 0
      */
     public virtual IIntIterable skip(final Integer n) {
         Validate.notNull(n);
@@ -483,13 +581,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Performs a reduction on `Integer` elements,
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Integer` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperator.sum());
      * Integer factorialOfN = IntStream.range(1, n).reduce(1, IntBinaryOperator.product());
-     * @param identity the identity value for `accumulator`
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `Integer` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual Integer reduce(final Integer identity, final IIntBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -506,13 +608,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * using `identity` value and associative `accumulator` function, and returns
      * an `OptionalInt` describing the reduced value.
      * <p>Terminal Operation.</p>
+     *
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `OptionalInt` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *      .reduce(IntBinaryOperator.sum())
      *      .get();
-     * @param accumulator the associative, non-interfering, stateless accumulation function
-     * @return the `OptionalInt` result of the reduction
-     * @throws NullPointerException if `accumulator` is null
      */
     public virtual override OptionalInt reduce(final IIntBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -535,9 +641,12 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Performs a mutable reduction operation on elements, collecting elements
      * to a container returned by `supplier` by applying `accumulator` function.
      * <p>Terminal Operation.</p>
+     *
      * @param supplier the function that returns a mutable result container
      * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
      * @return the `Object` result of the collection
+     *
      * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public virtual Object collect(final ISupplier supplier, final IObjectIntConsumer accumulator) {
@@ -555,13 +664,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns an `OptionalInt` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `OptionalInt`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Integer firstEvenInt = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .find(IntPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return the `OptionalInt`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual OptionalInt find(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -581,13 +694,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns whether all elements match `predicate`.
      * If `IntStream` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isEveryIntEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .every(IntPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual Boolean every(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -598,13 +715,17 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @description Returns whether some element matches `predicate`.
      * If `IntStream` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Boolean isSomeLongEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .some(IntPredicate.isEven())
      *     .get();
-     * @param predicate the predicate
-     * @return `true` or `false`
-     * @throws NullPointerException if `predicate` is null
      */
     public virtual override Boolean some(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -614,6 +735,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns the sum of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the sum of elements
      */
     public virtual Integer sum() {
@@ -628,9 +750,10 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     }
 
     /**
-     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this stream, 
+     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this stream,
      * or an empty `OptionalDouble` if this stream is empty.
      * <p>Terminal Operation.</p>
+     *
      * @return the arithmetic mean of elements
      */
     public virtual OptionalDouble avg() {
@@ -647,6 +770,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns the count of elements.
      * <p>Terminal Operation.</p>
+     *
      * @return the count of elements
      */
     public virtual Integer count() {
@@ -662,6 +786,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Returns whether the count of elements is 0.
      * <p>Terminal Operation.</p>
+     *
      * @return `true` or `false`
      */
     public virtual Boolean isEmpty() {
@@ -671,11 +796,13 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Accumulates elements into a `List<Integer>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `List<Integer>` containing the stream elements
+     *
      * @example
      * List<Integer> restInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .skip(1)
      *     .toList();
-     * @return the `List<Integer>` containing the stream elements
      */
     public virtual List<Integer> toList() {
         return Iterators.toIntList(iterator());
@@ -684,11 +811,13 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
     /**
      * @description Accumulates elements into a `Set<Integer>`.
      * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<Integer>` containing the stream elements
+     *
      * @example
      * Set<Integer> restInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .skip(1)
      *     .toSet();
-     * @return the `Set<Integer>` containing the stream elements
      */
     public virtual Set<Integer> toSet() {
         return Iterators.toIntSet(iterator());

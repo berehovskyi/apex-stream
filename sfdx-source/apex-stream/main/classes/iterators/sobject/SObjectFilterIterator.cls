@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public virtual class SObjectFilterIterator implements Iterator<SObject> {
+public virtual inherited sharing class SObjectFilterIterator implements Iterator<SObject> {
 
     protected final Iterator<SObject> iterator;
     private final ISObjectPredicate predicate;

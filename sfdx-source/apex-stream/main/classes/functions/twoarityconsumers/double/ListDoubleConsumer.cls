@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Provides common class level implementations, and related utilities for
  * `List<Double> - Double` two-arity consumers. Typically is used by collectors.
+ *
  * @see Collector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ListDoubleConsumer extends ObjectDoubleConsumer {
 
@@ -13,8 +16,11 @@ public abstract inherited sharing class ListDoubleConsumer extends ObjectDoubleC
      * @description Returns a `ObjectDoubleConsumer` that casts the first input argument to
      * `List<Double>`, which is used as a container to track the number of elements
      * and the total sum using `Kahan Summation`.
+     *
      * @return the `ObjectDoubleConsumer`
+     *
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.averagingDouble
      */
     public static ObjectDoubleConsumer averagingDouble() {
@@ -25,8 +31,11 @@ public abstract inherited sharing class ListDoubleConsumer extends ObjectDoubleC
      * @description Returns a `ObjectDoubleConsumer` that casts the first input argument to
      * `List<Double>`, which is used as a container to track the total sum using
      * `Kahan Summation`.
+     *
      * @return the `ObjectDoubleConsumer`
+     *
      * @throws NullPointerException if at least one of the input arguments is null
+     *
      * @see Collector.summingDouble
      */
     public static ObjectDoubleConsumer summingDouble() {
@@ -42,8 +51,10 @@ public abstract inherited sharing class ListDoubleConsumer extends ObjectDoubleC
      * <a href="https://en.wikipedia.org/wiki/Kahan_summation_algorithm">Kahan Summation</a>.
      * High-order bits of the sum are in intermediateSum[0], low-order
      * bits of the sum are in intermediateSum[1]
+     *
      * @param intermediateSum the high-order and low-order bits of the intermediate sum
      * @param d the summand
+     *
      * @return intermediate high-order / low-order sum container
      */
     public static Double kahanSum(final List<Double> intermediateSum, final Double d) {

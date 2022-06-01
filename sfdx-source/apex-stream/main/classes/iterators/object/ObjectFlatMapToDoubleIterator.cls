@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  */
-public class ObjectFlatMapToDoubleIterator extends DoubleBaseIterator {
+public inherited sharing class ObjectFlatMapToDoubleIterator extends DoubleBaseIterator {
 
     private final Iterator<Object> iterator;
     private final IFunction mapper;

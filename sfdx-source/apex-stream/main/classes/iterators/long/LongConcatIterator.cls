@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongConcatIterator extends LongBaseIterator {
+public inherited sharing class LongConcatIterator extends LongBaseIterator {
 
     private final List<Iterator<Long>> iterators;
     private final Integer count;

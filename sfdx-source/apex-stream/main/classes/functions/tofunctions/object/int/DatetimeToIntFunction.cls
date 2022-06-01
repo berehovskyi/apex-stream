@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `ToIntFunction` functions and provides `DatetimeToIntFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunction {
 
@@ -11,7 +13,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the day-of-month component
      * of the Datetime input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.day
      */
     public static ToIntFunction day() {
@@ -21,7 +25,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the day-of-month component
      * of the Datetime input argument in the GMT time zone.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.dayGmt
      */
     public static ToIntFunction dayGmt() {
@@ -31,7 +37,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the day-of-year component
      * of the Datetime input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.dayOfYear
      */
     public static ToIntFunction dayOfYear() {
@@ -41,7 +49,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the day-of-year component
      * of the Datetime input argument in the GMT time zone.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.dayOfYearGmt
      */
     public static ToIntFunction dayOfYearGmt() {
@@ -51,7 +61,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the hour component
      * of the Datetime input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.hour
      */
     public static ToIntFunction hour() {
@@ -61,7 +73,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the hour component
      * of the Datetime input argument in the GMT time zone.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.hourGmt
      */
     public static ToIntFunction hourGmt() {
@@ -71,7 +85,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the millisecond component
      * of the Datetime input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.millisecond
      */
     public static ToIntFunction millisecond() {
@@ -81,7 +97,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the millisecond component
      * of the Datetime input argument in the GMT time zone.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.millisecondGmt
      */
     public static ToIntFunction millisecondGmt() {
@@ -91,7 +109,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the minute component
      * of the Datetime input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.minute
      */
     public static ToIntFunction minute() {
@@ -101,7 +121,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the minute component
      * of the Datetime input argument in the GMT time zone.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.minuteGmt
      */
     public static ToIntFunction minuteGmt() {
@@ -111,7 +133,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the month component
      * of the Datetime input argument in the local time zone of the context user (1 = Jan).
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.month
      */
     public static ToIntFunction month() {
@@ -121,7 +145,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the month component
      * of the Datetime input argument in the GMT time zone (1 = Jan).
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.monthGmt
      */
     public static ToIntFunction monthGmt() {
@@ -131,7 +157,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the second component
      * of the Datetime input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.second
      */
     public static ToIntFunction second() {
@@ -141,7 +169,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the second component
      * of the Datetime input argument in the GMT time zone.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.secondGmt
      */
     public static ToIntFunction secondGmt() {
@@ -151,7 +181,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the year component
      * of the Datetime input argument in the local time zone of the context user.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.year
      */
     public static ToIntFunction year() {
@@ -161,7 +193,9 @@ public abstract inherited sharing class DatetimeToIntFunction extends ToIntFunct
     /**
      * @description Returns a `ToIntFunction` that returns the year component
      * of the Datetime input argument in the GMT time zone.
+     *
      * @return the `ToIntFunction`
+     *
      * @see Datetime.yearGmt
      */
     public static ToIntFunction yearGmt() {

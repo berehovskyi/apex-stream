@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Interfaces
  * @description A function that takes one argument of `SObject` type and returns a Boolean value
  * (`true` or `false`).
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Interfaces
  */
 public interface ISObjectPredicate {
 
@@ -14,7 +16,9 @@ public interface ISObjectPredicate {
      *     <li>Does not cause any side effects.</li>
      *     <li>Does not return `null`.</li>
      * </ul>
+     *
      * @param sObj the input argument of `SObject` type
+     *
      * @return `true` if the input satisfies the predicate, `false` otherwise
      */
     Boolean test(SObject sObj);

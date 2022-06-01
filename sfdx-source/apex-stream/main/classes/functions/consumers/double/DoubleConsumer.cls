@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IDoubleConsumer} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IDoubleIterable.forEach
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DoubleConsumer implements IDoubleConsumer {
 
@@ -16,12 +19,15 @@ public abstract inherited sharing class DoubleConsumer implements IDoubleConsume
     //<editor-fold desc="Default Methods">
     // @start-group Default Methods
     /**
-    * @description Returns a composed `DoubleConsumer` that executes `this` operation
-    * first, then the `after` operation in that order.
-    * @param after the operation to perform after this operation
-    * @return the composed `DoubleConsumer`
-    * @throws NullPointerException if `after` is null
-    */
+     * @description Returns a composed `DoubleConsumer` that executes `this` operation
+     * first, then the `after` operation in that order.
+     *
+     * @param after the operation to perform after this operation
+     *
+     * @return the composed `DoubleConsumer`
+     *
+     * @throws NullPointerException if `after` is null
+     */
     public virtual DoubleConsumer andThen(final IDoubleConsumer after) {
         return compose(new List<IDoubleConsumer>{ this, after });
     }
@@ -33,8 +39,11 @@ public abstract inherited sharing class DoubleConsumer implements IDoubleConsume
     /**
      * @description Returns a composed `DoubleConsumer` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param consumers the operations to sequentially perform
+     *
      * @return the composed `DoubleConsumer`
+     *
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static DoubleConsumer compose(final List<IDoubleConsumer> consumers) {
@@ -48,9 +57,12 @@ public abstract inherited sharing class DoubleConsumer implements IDoubleConsume
     // @start-group Built-Ins
     /**
      * @description Returns a `DoubleConsumer` that debugs an input argument.
+     *
      * @param loggingLevel the logging level
      * @param message the message
+     *
      * @return the `DoubleConsumer`
+     *
      * @throws NullPointerException if `loggingLevel` or `message` is null
      */
     public static DoubleConsumer debug(final LoggingLevel loggingLevel, final String message) {
@@ -61,26 +73,7 @@ public abstract inherited sharing class DoubleConsumer implements IDoubleConsume
 
     /**
      * @description Returns a `DoubleConsumer` that debugs an input argument.
-     * @param loggingLevel the logging level
-     * @return the `DoubleConsumer`
-     * @throws NullPointerException if `loggingLevel` is null
-     */
-    public static DoubleConsumer debug(final LoggingLevel loggingLevel) {
-        return debug(loggingLevel, '');
-    }
-
-    /**
-     * @description Returns a `DoubleConsumer` that debugs an input argument.
-     * @param message the message
-     * @return the `DoubleConsumer`
-     * @throws NullPointerException if `message` is null
-     */
-    public static DoubleConsumer debug(final String message) {
-        return debug(LoggingLevel.INFO, message);
-    }
-
-    /**
-     * @description Returns a `DoubleConsumer` that debugs an input argument.
+     *
      * @return the `DoubleConsumer`
      */
     public static DoubleConsumer debug() {

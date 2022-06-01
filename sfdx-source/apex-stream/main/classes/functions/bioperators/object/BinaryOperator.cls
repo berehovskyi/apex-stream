@@ -1,12 +1,15 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IBinaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ObjectStream.zip
  * @see ObjectSequence.zip
  * @see IObjectIterable.reduce
  * @see Collector
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class BinaryOperator implements IBinaryOperator {
 
@@ -20,6 +23,7 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
     // @start-group Static Methods
     /**
      * @description Returns a `SObjectBinaryOperator` that return the first input argument.
+     *
      * @return the `SObjectBinaryOperator`
      */
     public static BinaryOperator left() {
@@ -28,6 +32,7 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
 
     /**
      * @description Returns a `SObjectBinaryOperator` that return the second input argument.
+     *
      * @return the `SObjectBinaryOperator`
      */
     public static BinaryOperator right() {
@@ -37,8 +42,11 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a lesser input argument according to
      * the `comparator`.
+     *
      * @param comparator the comparator to compare arguments
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static BinaryOperator minBy(final IComparator comparator) {
@@ -49,8 +57,11 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
     /**
      * @description Returns a `SObjectBinaryOperator` that returns a greater input argument according to
      * the `comparator`.
+     *
      * @param comparator the comparator to compare arguments
+     *
      * @return the `SObjectBinaryOperator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static BinaryOperator maxBy(final IComparator comparator) {
@@ -60,8 +71,11 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
 
     /**
      * @description Returns a composed `BinaryOperator` of the `IIntBinaryOperator`.
+     *
      * @param operator the binary operator
+     *
      * @return the `BinaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static BinaryOperator upcast(final IIntBinaryOperator operator) {
@@ -71,8 +85,11 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
 
     /**
      * @description Returns a composed `BinaryOperator` of the `ILongBinaryOperator`.
+     *
      * @param operator the binary operator
+     *
      * @return the `BinaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static BinaryOperator upcast(final ILongBinaryOperator operator) {
@@ -82,8 +99,11 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
 
     /**
      * @description Returns a composed `BinaryOperator` of the `IDoubleBinaryOperator`.
+     *
      * @param operator the binary operator
+     *
      * @return the `BinaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static BinaryOperator upcast(final IDoubleBinaryOperator operator) {
@@ -93,8 +113,11 @@ public abstract inherited sharing class BinaryOperator implements IBinaryOperato
 
     /**
      * @description Returns a composed `BinaryOperator` of the `ISObjectBinaryOperator`.
+     *
      * @param operator the binary operator
+     *
      * @return the `BinaryOperator`
+     *
      * @throws NullPointerException if `operator` is null
      */
     public static BinaryOperator upcast(final ISObjectBinaryOperator operator) {

@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see IntBinaryOperator
  */
 @IsTest(IsParallel = true)

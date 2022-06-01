@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleLimitIterator implements Iterator<Double> {
+public inherited sharing class DoubleLimitIterator implements Iterator<Double> {
 
     private final Iterator<Double> iterator;
     private final Integer lim;

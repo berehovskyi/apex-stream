@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongMapIterator implements Iterator<Long> {
+public inherited sharing class LongMapIterator implements Iterator<Long> {
 
     private final Iterator<Long> iterator;
     private final ILongUnaryOperator mapper;

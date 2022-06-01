@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectToDoubleFunction} functional interface and provides
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectToDoubleFunction implements ISObjectToDoubleFunction {
 
@@ -16,8 +18,11 @@ public abstract inherited sharing class SObjectToDoubleFunction implements ISObj
     // @start-group Static Methods
     /**
      * @description Returns a composed `SObjectToDoubleFunction` of the `ISObjectFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `SObjectToDoubleFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static SObjectToDoubleFunction downcast(final ISObjectFunction mapper) {
@@ -27,8 +32,11 @@ public abstract inherited sharing class SObjectToDoubleFunction implements ISObj
 
     /**
      * @description Returns a composed `SObjectToDoubleFunction` of the `IFunction`.
+     *
      * @param mapper the function
+     *
      * @return the `SObjectToDoubleFunction`
+     *
      * @throws NullPointerException if `mapper` is null
      */
     public static SObjectToDoubleFunction downcast(final IFunction mapper) {
@@ -43,17 +51,22 @@ public abstract inherited sharing class SObjectToDoubleFunction implements ISObj
     /**
      * @description Returns a `SObjectToDoubleFunction` that gets a value for
      * the specified `fieldName` as Double. Cross-reference fields and safe navigation are supported.
-     * @example
-     * SObjectToDoubleFunction.get('BillingLatitude');
-     * SObjectToDoubleFunction.get('Parent.BillingLatitude');
-     * SObjectToDoubleFunction.get('Parent?.BillingLatitude');
+     *
      * @param fieldName the field to get a Double value
+     *
      * @return the `SObjectToDoubleFunction`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
+     *
      * @see SObject.get
+     *
+     * @example
+     * SObjectToDoubleFunction.get('BillingLatitude');
+     * SObjectToDoubleFunction.get('Parent.BillingLatitude');
+     * SObjectToDoubleFunction.get('Parent?.BillingLatitude');
      */
     public static SObjectToDoubleFunction get(final String fieldName) {
         return downcast(SObjectFunction.get(fieldName));
@@ -62,12 +75,17 @@ public abstract inherited sharing class SObjectToDoubleFunction implements ISObj
     /**
      * @description Returns a `SObjectToDoubleFunction` that gets a value for
      * the specified `field` as Double.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `SObjectToDoubleFunction`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see SObject.get
+     *
      * @example
      * SObjectToDoubleFunction.get(Account.BillingLatitude);
-     * @param field the field to get a value
-     * @return the `SObjectToDoubleFunction`
-     * @throws NullPointerException if `field` is null
-     * @see SObject.get
      */
     public static SObjectToDoubleFunction get(final SObjectField field) {
         return downcast(SObjectFunction.get(field));

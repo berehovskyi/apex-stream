@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class LongToIntMapIterator implements Iterator<Integer> {
+public inherited sharing class LongToIntMapIterator implements Iterator<Integer> {
 
     private final Iterator<Long> iterator;
     private final ILongToIntFunction mapper;

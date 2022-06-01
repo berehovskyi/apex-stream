@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see SObjectPredicate
  */
 @IsTest(IsParallel = true)
@@ -69,16 +69,11 @@ private class SObjectPredicateTest {
         SObjectPredicate bigAccPredicate = SObjectPredicate.isGreater(accNumOfEmployeesField, value);
         SObjectPredicate customerPredicate = SObjectPredicate.isEqual(accTypeField, value1);
         ISObjectPredicate bigAccOrCustomer = SObjectPredicate.some(new List<ISObjectPredicate>{ bigAccPredicate, customerPredicate });
-        ISObjectPredicate bigAccOrCustomer1 = SObjectPredicate.some(bigAccPredicate, customerPredicate);
         // Then
         for (Account acc : input) {
             Validate.assertEquals(
                     (Integer) acc.get(accNumOfEmployeesField) > value || acc.get(accTypeField) == value1,
                     bigAccOrCustomer.test(acc)
-            );
-            Validate.assertEquals(
-                    (Integer) acc.get(accNumOfEmployeesField) > value || acc.get(accTypeField) == value1,
-                    bigAccOrCustomer1.test(acc)
             );
         }
     }
@@ -97,16 +92,11 @@ private class SObjectPredicateTest {
         SObjectPredicate bigAccPredicate = SObjectPredicate.isGreater(accNumOfEmployeesField, value);
         SObjectPredicate customerPredicate = SObjectPredicate.isEqual(accTypeField, value1);
         ISObjectPredicate bigAccAndCustomer = SObjectPredicate.every(new List<ISObjectPredicate>{ bigAccPredicate, customerPredicate });
-        ISObjectPredicate bigAccAndCustomer1 = SObjectPredicate.every(bigAccPredicate, customerPredicate);
         // Then
         for (Account acc : input) {
             Validate.assertEquals(
                     (Integer) acc.get(accNumOfEmployeesField) > value && acc.get(accTypeField) == value1,
                     bigAccAndCustomer.test(acc)
-            );
-            Validate.assertEquals(
-                    (Integer) acc.get(accNumOfEmployeesField) > value && acc.get(accTypeField) == value1,
-                    bigAccAndCustomer1.test(acc)
             );
         }
     }

@@ -1,18 +1,22 @@
 /**
- * @author O. Berehovskyi
- * @group Utils
  * @description Contains static utility arguments validation methods.
  * <ul>
  *   <li>An invalid `null` argument causes a {@link NullPointerException}.</li>
  *   <li>A non-`null` argument causes an {@link IllegalArgumentException}.</li>
  *   <li>Assertion failure causes a fatal error that causes code execution to halt.</li>
  * </ul>
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Utils
  */
 public virtual inherited sharing class Validate {
 
     /**
      * @description Checks whether the specified Object reference is not null.
+     *
      * @param o the validated object reference
+     *
      * @throws NullPointerException if `o` is null
      */
     public static void notNull(final Object o) {
@@ -21,7 +25,9 @@ public virtual inherited sharing class Validate {
 
     /**
      * @description Checks whether the specified String reference is not blank.
+     *
      * @param o the validated String
+     *
      * @throws NullPointerException if `o` is blank
      */
     public static void notBlank(final String o) {
@@ -29,10 +35,12 @@ public virtual inherited sharing class Validate {
     }
 
     /**
-     * @description Checks whether the specified `List<Object>` reference is not null 
+     * @description Checks whether the specified `List<Object>` reference is not null
      * nor contains any null elements.
+     *
      * @param objs the validated list
-     * @throws NullPointerException if `objs` or any element is null 
+     *
+     * @throws NullPointerException if `objs` or any element is null
      */
     public static void noNullElements(final List<Object> objs) {
         if (objs == null && !objs.isEmpty()) { throw new NullPointerException(); }
@@ -43,7 +51,9 @@ public virtual inherited sharing class Validate {
 
     /**
      * @description Checks whether the specified `condition` is true.
+     *
      * @param condition the boolean expression to check
+     *
      * @throws IllegalArgumentException if `condition` evaluates to false
      */
     public static void isTrue(final Boolean condition) {
@@ -52,8 +62,10 @@ public virtual inherited sharing class Validate {
 
     /**
      * @description Checks whether the specified `condition` is true.
+     *
      * @param condition the boolean expression to check
      * @param message the exception message
+     *
      * @throws IllegalArgumentException if `condition` evaluates to false
      */
     public static void isTrue(final Boolean condition, final String message) {
@@ -62,8 +74,10 @@ public virtual inherited sharing class Validate {
 
     /**
      * @description Checks whether the specified `condition` is true.
+     *
      * @param condition the boolean expression to check
      * @param exc the exception to throw
+     *
      * @throws Exception if `condition` evaluates to false
      */
     public static void isTrue(final Boolean condition, final Exception exc) {
@@ -72,12 +86,14 @@ public virtual inherited sharing class Validate {
 
     /**
      * @description Checks whether the specified `condition` is true.
-     * @example 
-     * Validate.isTrue(n >= 0, 'The argument should be positive, actual: {0}.', new List<Object>{ n });
+     *
      * @param condition the boolean expression to check
      * @param message the formatted exception message
      * @param arguments the optional values for the formatted exception message
+     *
      * @throws IllegalArgumentException if `condition` evaluates to false
+     *
+     * @example Validate.isTrue(n >= 0, 'The argument should be positive, actual: {0}.', new List<Object>{ n });
      */
     public static void isTrue(final Boolean condition, final String message, final List<Object> arguments) {
         if (!condition) { throw new IllegalArgumentException(String.format(message, arguments)); }
@@ -85,16 +101,19 @@ public virtual inherited sharing class Validate {
 
     /**
      * @description Checks whether the specified `condition` is true.
-     * @example 
+     *
+     * @param condition the boolean expression to check
+     * @param message the formatted exception message
+     * @param arguments the optional values for the formatted exception message
+     *
+     * @throws IllegalStateException if `condition` evaluates to false
+     *
+     * @example
      * Validate.validState(
      *     !map.containsKey(key),
      *     'Duplicate key {0} (attempted merging values {1} and {2}).',
      *     new List<Object>{ key, oldValue, newValue }
      * );
-     * @param condition the boolean expression to check
-     * @param message the formatted exception message
-     * @param arguments the optional values for the formatted exception message
-     * @throws IllegalStateException if `condition` evaluates to false
      */
     public static void validState(final Boolean condition, String message, final List<Object> arguments) {
         isTrue(condition, new IllegalStateException(String.format(message, arguments)));
@@ -112,6 +131,7 @@ public virtual inherited sharing class Validate {
     /**
      * @description Asserts whether the specified `condition` is true.
      * If it is not, a fatal error is returned that causes code execution to halt.
+     *
      * @param condition the boolean expression to check
      * @param message the optional message returned as part of the error message
      */
@@ -122,6 +142,7 @@ public virtual inherited sharing class Validate {
     /**
      * @description Asserts that the first two arguments are the same.
      * If it is not, a fatal error is returned that causes code execution to halt.
+     *
      * @param expected the expected value
      * @param actual the actual value
      */
@@ -132,6 +153,7 @@ public virtual inherited sharing class Validate {
     /**
      * @description Asserts that the first two arguments are the same.
      * If it is not, a fatal error is returned that causes code execution to halt.
+     *
      * @param expected the expected value
      * @param actual the actual value
      * @param message the optional message returned as part of the error message
@@ -143,6 +165,7 @@ public virtual inherited sharing class Validate {
     /**
      * @description Asserts that the first two arguments are not the same.
      * If it is, a fatal error is returned that causes code execution to halt.
+     *
      * @param expected the expected value
      * @param actual the actual value
      */
@@ -153,6 +176,7 @@ public virtual inherited sharing class Validate {
     /**
      * @description Asserts that the first two arguments are not the same.
      * If it is, a fatal error is returned that causes code execution to halt.
+     *
      * @param expected the expected value
      * @param actual the actual value
      * @param message the optional message returned as part of the error message

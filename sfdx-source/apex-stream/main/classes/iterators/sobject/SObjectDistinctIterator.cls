@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectDistinctIterator extends SObjectBaseIterator {
+public inherited sharing class SObjectDistinctIterator extends SObjectBaseIterator {
 
     private final Iterator<SObject> iterator;
     private final ISObjectFunction classifier;

@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleToSObjectMapIterator implements Iterator<SObject> {
+public inherited sharing class DoubleToSObjectMapIterator implements Iterator<SObject> {
 
     private final Iterator<Double> iterator;
     private final IDoubleToSObjectFunction mapper;

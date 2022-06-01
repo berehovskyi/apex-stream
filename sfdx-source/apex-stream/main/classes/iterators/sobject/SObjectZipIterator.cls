@@ -1,13 +1,17 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectZipIterator implements Iterator<SObject> {
+public inherited sharing class SObjectZipIterator implements Iterator<SObject> {
 
     private final Iterator<SObject> iterator1;
     private final Iterator<SObject> iterator2;
     private final ISObjectBinaryOperator combiner;
 
-    public SObjectZipIterator(final Iterator<SObject> iterator1, final Iterator<SObject> iterator2, final ISObjectBinaryOperator combiner) {
+    public SObjectZipIterator(
+            final Iterator<SObject> iterator1,
+            final Iterator<SObject> iterator2,
+            final ISObjectBinaryOperator combiner
+    ) {
         this.iterator1 = iterator1;
         this.iterator2 = iterator2;
         this.combiner = combiner;

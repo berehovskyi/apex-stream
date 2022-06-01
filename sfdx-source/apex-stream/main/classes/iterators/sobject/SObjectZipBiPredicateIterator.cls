@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectZipBiPredicateIterator implements Iterator<SObject> {
+public inherited sharing class SObjectZipBiPredicateIterator implements Iterator<SObject> {
 
     private final Iterator<SObject> iterator1;
     private final Iterator<SObject> iterator2;

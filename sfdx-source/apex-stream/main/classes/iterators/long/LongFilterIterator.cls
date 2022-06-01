@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public virtual class LongFilterIterator implements Iterator<Long> {
+public virtual inherited sharing class LongFilterIterator implements Iterator<Long> {
 
     protected final Iterator<Long> iterator;
     private final ILongPredicate predicate;

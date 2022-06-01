@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public abstract class ObjectBaseIterator implements Iterator<Object> {
+public abstract inherited sharing class ObjectBaseIterator implements Iterator<Object> {
 
     protected Object next;
     protected Boolean hasNext = false, isInit = false;

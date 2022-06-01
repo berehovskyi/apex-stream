@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Extends `Function` functions and provides `ListFunction`
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class ListFunction extends Function {
 
@@ -10,9 +12,13 @@ public abstract inherited sharing class ListFunction extends Function {
     // @start-group List Functions
     /**
      * @description Returns a `Function` that returns the list element stored at the specified index.
+     *
      * @param index the index
+     *
      * @return the `Function`
+     *
      * @throws NullPointerException if `index` is null
+     *
      * @see List.get
      */
     public static Function get(final Integer index) {

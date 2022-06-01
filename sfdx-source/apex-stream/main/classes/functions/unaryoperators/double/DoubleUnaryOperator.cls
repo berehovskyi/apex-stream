@@ -1,9 +1,12 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IDoubleUnaryOperator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IDoubleIterable.mapTo
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUnaryOperator {
 
@@ -18,8 +21,11 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a composed `DoubleUnaryOperator` that executes `this` operation
      * first, then the `after` operation in that order.
+     *
      * @param after the operation to perform after this operation
+     *
      * @return the composed `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `after` is null
      */
     public virtual DoubleUnaryOperator andThen(final IDoubleUnaryOperator after) {
@@ -29,8 +35,11 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a composed `DoubleUnaryOperator` that executes `before` operation
      * first, then the `this` operation in that order.
+     *
      * @param before the operation to perform before this operation
+     *
      * @return the composed `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `before` is null
      */
     public virtual DoubleUnaryOperator compose(final IDoubleUnaryOperator before) {
@@ -44,8 +53,11 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a composed `DoubleUnaryOperator` that sequentially executes the operations
      * in the same order as the order of the consumers input list.
+     *
      * @param operators the operations to sequentially perform
+     *
      * @return the composed `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static DoubleUnaryOperator compose(final List<IDoubleUnaryOperator> operators) {
@@ -55,6 +67,7 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that always returns the input argument.
+     *
      * @return the `DoubleUnaryOperator`
      */
     public static DoubleUnaryOperator identity() {
@@ -63,7 +76,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that always returns the `value`.
+     *
      * @param value the Double value
+     *
      * @return the `DoubleUnaryOperator`
      */
     public static DoubleUnaryOperator constant(final Double value) {
@@ -77,7 +92,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the absolute value
      * of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.abs
      */
     public static DoubleUnaryOperator abs() {
@@ -87,8 +104,11 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the sum of the input argument
      * and the `d`.
+     *
      * @param d the Double value
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `d` is null
      */
     public static DoubleUnaryOperator add(final Double d) {
@@ -98,7 +118,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the arc cos of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.acos
      */
     public static DoubleUnaryOperator acos() {
@@ -107,7 +129,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the arc sin of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.asin
      */
     public static DoubleUnaryOperator asin() {
@@ -116,7 +140,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the arc tan of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.atan
      */
     public static DoubleUnaryOperator atan() {
@@ -125,7 +151,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the cube root of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.cbrt
      */
     public static DoubleUnaryOperator cbrt() {
@@ -134,7 +162,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the ceil of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.ceil
      */
     public static DoubleUnaryOperator ceil() {
@@ -143,7 +173,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the cos of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.cos
      */
     public static DoubleUnaryOperator cos() {
@@ -152,7 +184,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the cosh of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.cosh
      */
     public static DoubleUnaryOperator cosh() {
@@ -162,10 +196,13 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the division of the input argument
      * and the `d`.
+     *
      * @param d the Double value
+     *
      * @return the `DoubleUnaryOperator`
-     * @throws NullPointerException if `d` is null
+     *
      * @throws IllegalArgumentException if `d` is 0
+     * @throws NullPointerException if `d` is null
      */
     public static DoubleUnaryOperator divide(final Double d) {
         Validate.notNull(d);
@@ -174,7 +211,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the e ^ the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.exp
      */
     public static DoubleUnaryOperator exp() {
@@ -183,7 +222,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the floor of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.floor
      */
     public static DoubleUnaryOperator floor() {
@@ -192,7 +233,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the ln of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.log
      */
     public static DoubleUnaryOperator ln() {
@@ -201,7 +244,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the log of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.log10
      */
     public static DoubleUnaryOperator log() {
@@ -211,9 +256,13 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns a larger value between the input argument
      * and the `d`.
+     *
      * @param d the Double value
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `d` is null
+     *
      * @see Math.max
      */
     public static DoubleUnaryOperator max(final Double d) {
@@ -224,9 +273,13 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns a smaller value between the input argument
      * and the `d`.
+     *
      * @param d the Double value
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `d` is null
+     *
      * @see Math.min
      */
     public static DoubleUnaryOperator min(final Double d) {
@@ -237,8 +290,11 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the multiplication
      * of the of the input argument and the `d`.
+     *
      * @param d the Double value
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `d` is null
      */
     public static DoubleUnaryOperator multiply(final Double d) {
@@ -249,9 +305,13 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the input argument
      * raised to the power of the `exp`.
+     *
      * @param exp the Double power value
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `d` is null
+     *
      * @see Math.pow
      */
     public static DoubleUnaryOperator pow(final Double exp) {
@@ -261,7 +321,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the rint of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.rint
      */
     public static DoubleUnaryOperator rint() {
@@ -270,7 +332,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the signum of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.signum
      */
     public static DoubleUnaryOperator signum() {
@@ -279,7 +343,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the sin of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.sin
      */
     public static DoubleUnaryOperator sin() {
@@ -288,7 +354,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the sinh of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.sinh
      */
     public static DoubleUnaryOperator sinh() {
@@ -297,7 +365,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the square root of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.sqrt
      */
     public static DoubleUnaryOperator sqrt() {
@@ -307,8 +377,11 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the subtraction of the input argument
      * and the `d`.
+     *
      * @param d the Double value
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @throws NullPointerException if `d` is null
      */
     public static DoubleUnaryOperator subtract(final Double d) {
@@ -318,7 +391,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the tan of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.tan
      */
     public static DoubleUnaryOperator tan() {
@@ -327,7 +402,9 @@ public abstract inherited sharing class DoubleUnaryOperator implements IDoubleUn
 
     /**
      * @description Returns a `DoubleUnaryOperator` that returns the tanh of the input argument.
+     *
      * @return the `DoubleUnaryOperator`
+     *
      * @see Math.tanh
      */
     public static DoubleUnaryOperator tanh() {

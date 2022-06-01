@@ -1,13 +1,16 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link ISObjectComparator} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see ISObjectIterable.sort
  * @see ISObjectIterable.min
  * @see ISObjectIterable.max
  * @see SObjectBinaryOperator.minBy
  * @see SObjectBinaryOperator.maxBy
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class SObjectComparator implements ISObjectComparator {
 
@@ -23,8 +26,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @description Returns a composed `SObjectComparator` of `this` and the `other`
      * comparator. If `this` considers two elements equal, the `other` determines
      * the final result.
+     *
      * @param other the comparator to compare keys
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual SObjectComparator thenComparing(final ISObjectComparator other) {
@@ -36,9 +42,12 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @description Returns a composed `SObjectComparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function to be compared with the given
      * `keyComparator`.
+     *
      * @param keyExtractor the function to extract the key to compare
      * @param keyComparator the comparator to compare keys
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual SObjectComparator thenComparing(
@@ -51,8 +60,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a composed `SObjectComparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual SObjectComparator thenComparing(final ISObjectFunction keyExtractor) {
@@ -62,8 +74,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a composed `SObjectComparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the Integer key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual SObjectComparator thenComparingInt(final ISObjectToIntFunction keyExtractor) {
@@ -73,8 +88,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a composed `SObjectComparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the Long key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual SObjectComparator thenComparingLong(final ISObjectToLongFunction keyExtractor) {
@@ -84,8 +102,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a composed `SObjectComparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the Double key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual SObjectComparator thenComparingDouble(final ISObjectToDoubleFunction keyExtractor) {
@@ -95,8 +116,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a composed `SObjectComparator` of `this` and then comparing on the
      * key extracted by the `keyExtractor` function.
+     *
      * @param keyExtractor the function to extract the SObject key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public virtual SObjectComparator thenComparingSObject(final ISObjectUnaryOperator keyExtractor) {
@@ -106,9 +130,13 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that imposes either `default` or
      * `reversed` ordering depending on the `order`.
+     *
      * @param order the sort order
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `order` is null
+     *
      * @see SortOrder
      */
     public virtual SObjectComparator order(final SortOrder order) {
@@ -119,6 +147,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a null-safe `SObjectComparator` of `this` comparator
      * that considers null to be less than non-null.
+     *
      * @return the `SObjectComparator`
      */
     public virtual SObjectComparator nullsFirst() {
@@ -128,6 +157,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a null-safe `SObjectComparator` of `this` comparator
      * that considers null to be greater than non-null.
+     *
      * @return the `SObjectComparator`
      */
     public virtual SObjectComparator nullsLast() {
@@ -136,6 +166,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
 
     /**
      * @description Returns a comparator that imposes the reverse ordering of `this` comparator.
+     *
      * @return the `SObjectComparator`
      */
     public virtual SObjectComparator reversed() {
@@ -151,9 +182,12 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares extracted by
      * the `keyExtractor` keys using the `keyComparator`.
+     *
      * @param keyExtractor the function to extract the key to compare
      * @param keyComparator the comparator to compare keys
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` or `keyComparator` is null
      */
     public static SObjectComparator comparing(final ISObjectFunction keyExtractor, final IComparator keyComparator) {
@@ -165,8 +199,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static SObjectComparator comparing(final ISObjectFunction keyExtractor) {
@@ -176,8 +213,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares `fieldName` values.
      * Cross-reference fields and safe navigation are supported.
+     *
      * @param fieldName the value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
@@ -189,8 +229,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
 
     /**
      * @description Returns a `SObjectComparator` that compares `field` values.
+     *
      * @param field the value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparing(final SObjectField field) {
@@ -200,8 +243,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the Integer key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static SObjectComparator comparingInt(final ISObjectToIntFunction keyExtractor) {
@@ -212,8 +258,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares `fieldName` values.
      * Cross-reference fields and safe navigation are supported.
+     *
      * @param fieldName the Integer value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
@@ -225,8 +274,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
 
     /**
      * @description Returns a `SObjectComparator` that compares `field` values.
+     *
      * @param field the Integer value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingInt(final SObjectField field) {
@@ -236,8 +288,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the Long key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static SObjectComparator comparingLong(final ISObjectToLongFunction keyExtractor) {
@@ -248,8 +303,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares `fieldName` values.
      * Cross-reference fields and safe navigation are supported.
+     *
      * @param fieldName the Long value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
@@ -261,8 +319,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
 
     /**
      * @description Returns a `SObjectComparator` that compares `field` values.
+     *
      * @param field the Long value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingLong(final SObjectField field) {
@@ -272,8 +333,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the Double key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static SObjectComparator comparingDouble(final ISObjectToDoubleFunction keyExtractor) {
@@ -284,8 +348,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares `fieldName` values.
      * Cross-reference fields and safe navigation are supported.
+     *
      * @param fieldName the Double value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
@@ -297,8 +364,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
 
     /**
      * @description Returns a `SObjectComparator` that compares `field` values.
+     *
      * @param field the Double value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingDouble(final SObjectField field) {
@@ -308,8 +378,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares extracted by
      * the `keyExtractor` keys.
+     *
      * @param keyExtractor the function to extract the SObject key to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `keyExtractor` is null
      */
     public static SObjectComparator comparingSObject(final ISObjectUnaryOperator keyExtractor) {
@@ -320,8 +393,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a `SObjectComparator` that compares `fieldName` values.
      * Cross-reference fields and safe navigation are supported.
+     *
      * @param fieldName the SObject value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `fieldName` is blank
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
@@ -333,8 +409,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
 
     /**
      * @description Returns a `SObjectComparator` that compares `field` values.
+     *
      * @param field the SObject value of which to compare
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingSObject(final SObjectField field) {
@@ -345,6 +424,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     //<editor-fold desc="Ordering">
     /**
      * @description Returns a comparator that imposes the default ordering.
+     *
      * @return the `SObjectComparator`
      */
     public static SObjectComparator defaultOrder() {
@@ -353,6 +433,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
 
     /**
      * @description Returns a comparator that imposes the reverse ordering.
+     *
      * @return the `SObjectComparator`
      */
     public static SObjectComparator reverseOrder() {
@@ -362,7 +443,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a null-safe `SObjectComparator` of the `comparator`
      * that considers null to be less than non-null.
+     *
+     * @param comparator the comparator for comparing nullable values
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static SObjectComparator nullsFirst(final SObjectComparator comparator) {
@@ -373,7 +458,11 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
     /**
      * @description Returns a null-safe `SObjectComparator` of the `comparator`
      * that considers null to be greater than non-null.
+     *
+     * @param comparator the comparator for comparing nullable values
+     *
      * @return the `SObjectComparator`
+     *
      * @throws NullPointerException if `comparator` is null
      */
     public static SObjectComparator nullsLast(final SObjectComparator comparator) {
@@ -453,9 +542,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
             this.comp = comparator;
         }
         public override Integer compare(SObject sObj1, SObject sObj2) {
-            if (sObj1 == null || sObj2 == null) {
-                return Comparator.compareNullables(sObj1, sObj2, !nullsFirst);
-            }
+            if (sObj1 == null || sObj2 == null) { return Comparator.compareNullables(sObj1, sObj2, !nullsFirst); }
             return comp.compare(sObj1, sObj2);
         }
         public override SObjectComparator thenComparing(ISObjectComparator other) {

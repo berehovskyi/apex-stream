@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectGenerator implements Iterator<Object> {
+public inherited sharing class ObjectGenerator implements Iterator<Object> {
 
     private final ISupplier supplier;
 

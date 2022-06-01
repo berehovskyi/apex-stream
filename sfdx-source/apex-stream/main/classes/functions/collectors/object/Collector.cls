@@ -1,8 +1,10 @@
 /**
- * @author O. Berehovskyi
- * @group Collectors
  * @description Inherits {@link ICollector} interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Collectors
  */
 public abstract inherited sharing class Collector implements ICollector {
 
@@ -20,9 +22,12 @@ public abstract inherited sharing class Collector implements ICollector {
     // @start-group Static Methods
     /**
      * @description Returns a `Collector` by the given `supplier` and `accumulator`.
+     *
      * @param supplier the supplier function for the `Collector`
      * @param accumulator the accumulator function for the `Collector`
+     *
      * @return the `Collector`
+     *
      * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public static Collector of(final ISupplier supplier, final IBiConsumer accumulator) {
@@ -32,10 +37,13 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` by the given `supplier`, `accumulator`,
      * and `finisher`.
+     *
      * @param supplier the supplier function for the `Collector`
      * @param accumulator the accumulator function for the `Collector`
      * @param finisher the final transformation function for the `Collector`
+     *
      * @return the `Collector`
+     *
      * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public static Collector of(final ISupplier supplier, final IBiConsumer accumulator, final IFunction finisher) {
@@ -63,12 +71,16 @@ public abstract inherited sharing class Collector implements ICollector {
      *     <li>{@link #partitioningBy(IPredicate)}</li>
      *     <li>{@link #partitioningBy(IPredicate, ICollector)}</li>
      * </ul>
-     * @example
-     * Collector.toList(getNameFunction).cast(List<String>.class);
+     *
      * @param t the Type to cast the result container to
+     *
      * @return the `Collector`
+     *
      * @throws NullPointerException if `t` is null
      * @throws TypeException if invalid `t` is provided
+     *
+     * @example
+     * Collector.toList(getNameFunction).cast(List<String>.class);
      */
     public virtual Collector cast(final Type t) {
         Validate.notNull(t);
@@ -99,13 +111,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * <p>The result container can be cast to a specific `Type`.</p>
      * <p>{@link IObjectIterable.collect(Collector.toList())} can be replaced with
      * {@link IObjectIterable.toList()}</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates Objects into a List
      * List<Object> strs = (List<Object>) Stream.of(strings)
      *     .collect(Collector.toList());
      * List<String> strs = (List<String>) Stream.of(strings)
      *     .collect(Collector.toList().cast(List<String>.class));
-     * @return the `Collector`
      */
     public static Collector toList() {
         return Collector.of(Supplier.of(List<Object>.class), ListObjectConsumer.addToList());
@@ -115,15 +129,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates the values returned by `mapper`
      * into a new `List<Object>`.
      * <p>The result container can be cast to a specific type using {@link Collector.cast}.</p>
+     *
+     * @param mapper the function that returns values to accumulate
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * // Accumulates values returned by mapper into a List
      * List<Object> names = (List<Object>) Stream.of(people)
      *     .collect(Collector.toList(getNameFunction));
      * List<String> names = (List<String>) Stream.of(people)
      *     .collect(Collector.toList(getNameFunction).cast(List<String>.class));
-     * @param mapper the function that returns values to accumulate
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector toList(final IFunction mapper) {
         return Collector.of(Supplier.of(List<Object>.class), ListObjectConsumer.addToList(mapper));
@@ -139,10 +157,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
      * <p>{@link IObjectIterable.collect(Collector.toSet())} can be replaced with
      * {@link IObjectIterable.toSet()}</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Object> ppl = (Set<Object>) Stream.of(people).collect(Collector.toSet());
-     * @return the `Collector`
      */
     public static Collector toSet() {
         return Collector.of(Supplier.of(Set<Object>.class), SetObjectConsumer.addToSet());
@@ -152,10 +172,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Boolean>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Boolean> bools = (Set<Boolean>) Stream.of(booleans).collect(Collector.toBoolSet());
-     * @return the `Collector`
      */
     public static Collector toBoolSet() {
         return Collector.of(Supplier.of(Set<Boolean>.class), SetObjectConsumer.addToBoolSet());
@@ -165,10 +187,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Id>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Boolean> ids = (Set<Boolean>) Stream.of(ids).collect(Collector.toIdSet());
-     * @return the `Collector`
      */
     public static Collector toIdSet() {
         return Collector.of(Supplier.of(Set<Id>.class), SetObjectConsumer.addToIdSet());
@@ -178,10 +202,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<String>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<String> strs = (Set<String>) Stream.of(strings).collect(Collector.toStringSet());
-     * @return the `Collector`
      */
     public static Collector toStringSet() {
         return Collector.of(Supplier.of(Set<String>.class), SetObjectConsumer.addToStringSet());
@@ -191,10 +217,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Blob>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Blob> blbs = (Set<Blob>) Stream.of(blobs).collect(Collector.toBlobSet());
-     * @return the `Collector`
      */
     public static Collector toBlobSet() {
         return Collector.of(Supplier.of(Set<Blob>.class), SetObjectConsumer.addToBlobSet());
@@ -204,10 +232,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Date>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Date> dts = (Set<Date>) Stream.of(dates).collect(Collector.toDateSet());
-     * @return the `Collector`
      */
     public static Collector toDateSet() {
         return Collector.of(Supplier.of(Set<Date>.class), SetObjectConsumer.addToDateSet());
@@ -217,10 +247,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Datetime>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Datetime> dts = (Set<Datetime>) Stream.of(datetimes).collect(Collector.toDatetimeSet());
-     * @return the `Collector`
      */
     public static Collector toDatetimeSet() {
         return Collector.of(Supplier.of(Set<Datetime>.class), SetObjectConsumer.addToDatetimeSet());
@@ -230,10 +262,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Time>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Time> tms = (Set<Time>) Stream.of(times).collect(Collector.toTimeSet());
-     * @return the `Collector`
      */
     public static Collector toTimeSet() {
         return Collector.of(Supplier.of(Set<Time>.class), SetObjectConsumer.addToTimeSet());
@@ -243,10 +277,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Integer>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Integer> ints = (Set<Integer>) Stream.of(integers).collect(Collector.toIntSet());
-     * @return the `Collector`
      */
     public static Collector toIntSet() {
         return Collector.of(Supplier.of(Set<Integer>.class), SetObjectConsumer.addToIntSet());
@@ -256,10 +292,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Long>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Long> ls = (Set<Long>) Stream.of(longs).collect(Collector.toLongSet());
-     * @return the `Collector`
      */
     public static Collector toLongSet() {
         return Collector.of(Supplier.of(Set<Long>.class), SetObjectConsumer.addToLongSet());
@@ -269,10 +307,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Double>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<Double> ds = (Set<Double>) Stream.of(doubles).collect(Collector.toDoubleSet());
-     * @return the `Collector`
      */
     public static Collector toDoubleSet() {
         return Collector.of(Supplier.of(Set<Double>.class), SetObjectConsumer.addToDoubleSet());
@@ -282,10 +322,12 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<SObject>`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @return the `Collector`
+     *
      * @example
      * // Accumulates input arguments into a List
      * Set<SObject> sObjects = (Set<SObject>) Stream.of(accounts).collect(Collector.toSObjectSet());
-     * @return the `Collector`
      */
     public static Collector toSObjectSet() {
         return Collector.of(Supplier.of(Set<SObject>.class), SetObjectConsumer.addToSObjectSet());
@@ -305,16 +347,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping function
      * Map<Boolean, Object> personByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getBoolProperty));
      * Map<Boolean, Comparable> personByBoolProperty = (Map<Boolean, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getBoolProperty).cast(Map<Boolean, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByBoolMap(final IFunction keyMapper) {
         return toByBoolMap(keyMapper, Function.identity());
@@ -328,17 +374,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByBoolMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getBoolProperty, getStringProperty));
      * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getBoolProperty, getStringProperty).cast(Map<Boolean, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByBoolMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toByBoolMap(keyMapper, valueMapper, null);
@@ -350,6 +400,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
@@ -364,11 +423,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Boolean, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByBoolMap(
             final IFunction keyMapper,
@@ -384,6 +438,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Boolean, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
@@ -393,13 +458,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Boolean, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Boolean, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByBoolMap(
             final IFunction keyMapper,
@@ -425,16 +483,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByIdMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Id, Object> personByIdProperty = (Map<Id, Object>) Stream.of(people)
      *     .collect(Collector.toByIdMap(getIdProperty));
      * Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getIdProperty).cast(Map<Id, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByIdMap(final IFunction keyMapper) {
         return toByIdMap(keyMapper, Function.identity());
@@ -448,17 +510,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByIdMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) Stream.of(people)
      *     .collect(Collector.toByIdMap(getIdProperty, getStringProperty));
      * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
      *     .collect(Collector.toByIdMap(getIdProperty, getStringProperty).cast(Map<Id, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByIdMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toByIdMap(keyMapper, valueMapper, null);
@@ -470,6 +536,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) Stream.of(people)
@@ -484,11 +559,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Id, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByIdMap(
             final IFunction keyMapper,
@@ -504,6 +574,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Id, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
@@ -513,13 +594,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Id, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Id, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByIdMap(
             final IFunction keyMapper,
@@ -545,16 +619,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByStringMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<String, Object> personByStringProperty = (Map<String, Object>) Stream.of(people)
      *     .collect(Collector.toByStringMap(getStringProperty));
      * Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getStringProperty).cast(Map<String, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByStringMap(final IFunction keyMapper) {
         return toByStringMap(keyMapper, Function.identity());
@@ -568,16 +646,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByStringMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) Stream.of(people)
      *     .collect(Collector.toByStringMap(getStringProperty, getStringProperty));
      * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
      *     .collect(Collector.toByStringMap(getStringProperty, getStringProperty).cast(Map<String, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByStringMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toByStringMap(keyMapper, valueMapper, null);
@@ -589,6 +671,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) Stream.of(people)
@@ -603,11 +694,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<String, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByStringMap(
             final IFunction keyMapper,
@@ -623,6 +709,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<String, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
@@ -632,13 +729,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<String, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<String, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByStringMap(
             final IFunction keyMapper,
@@ -664,16 +754,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Blob, Object> personByBlobProperty = (Map<Blob, Object>) Stream.of(people)
      *     .collect(Collector.toByBlobMap(getBlobProperty));
      * Map<Blob, Comparable> personByBlobProperty = (Map<Blob, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getBlobProperty).cast(Map<Blob, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByBlobMap(final IFunction keyMapper) {
         return toByBlobMap(keyMapper, Function.identity());
@@ -687,17 +781,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByBlobMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) Stream.of(people)
      *     .collect(Collector.toByBlobMap(getBlobProperty, getStringProperty));
      * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
      *     .collect(Collector.toByBlobMap(getBlobProperty, getStringProperty).cast(Map<Blob, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByBlobMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toByBlobMap(keyMapper, valueMapper, null);
@@ -709,6 +807,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) Stream.of(people)
@@ -723,11 +830,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Blob, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByBlobMap(
             final IFunction keyMapper,
@@ -743,6 +845,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Blob, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
@@ -752,13 +865,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Blob, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Blob, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByBlobMap(
             final IFunction keyMapper,
@@ -784,16 +890,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByDateMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Date, Object> personByDateProperty = (Map<Date, Object>) Stream.of(people)
      *     .collect(Collector.toByDateMap(getDateProperty));
      * Map<Date, Comparable> personByDateProperty = (Map<Date, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getDateProperty).cast(Map<Date, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByDateMap(final IFunction keyMapper) {
         return toByDateMap(keyMapper, Function.identity());
@@ -807,17 +917,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByDateMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) Stream.of(people)
      *     .collect(Collector.toByDateMap(getDateProperty, getStringProperty));
      * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
      *     .collect(Collector.toByDateMap(getDateProperty, getStringProperty).cast(Map<Date, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByDateMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toByDateMap(keyMapper, valueMapper, null);
@@ -829,6 +943,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) Stream.of(people)
@@ -843,11 +966,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Date, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByDateMap(
             final IFunction keyMapper,
@@ -863,6 +981,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Date, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
@@ -872,13 +1001,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Date, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Date, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByDateMap(
             final IFunction keyMapper,
@@ -901,16 +1023,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Datetime, Object> personByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
      *     .collect(Collector.toByDatetimeMap(getDatetimeProperty));
      * Map<Datetime, Comparable> personByDatetimeProperty = (Map<Datetime, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getDatetimeProperty).cast(Map<Datetime, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByDatetimeMap(final IFunction keyMapper) {
         return toByDatetimeMap(keyMapper, Function.identity());
@@ -924,17 +1050,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByDatetimeMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
      *     .collect(Collector.toByDatetimeMap(getDatetimeProperty, getStringProperty));
      * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
      *     .collect(Collector.toByDatetimeMap(getDatetimeProperty, getStringProperty).cast(Map<Datetime, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByDatetimeMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toByDatetimeMap(keyMapper, valueMapper, null);
@@ -946,6 +1076,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
@@ -960,11 +1099,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Datetime, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByDatetimeMap(
             final IFunction keyMapper,
@@ -980,6 +1114,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Datetime, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
@@ -989,13 +1134,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Datetime, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Datetime, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByDatetimeMap(
             final IFunction keyMapper,
@@ -1018,16 +1156,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Time, Object> personByTimeProperty = (Map<Time, Object>) Stream.of(people)
      *     .collect(Collector.toByTimeMap(getTimeProperty));
      * Map<Time, Comparable> personByTimeProperty = (Map<Time, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getTimeProperty).cast(Map<Time, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByTimeMap(final IFunction keyMapper) {
         return toByTimeMap(keyMapper, Function.identity());
@@ -1041,17 +1183,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByTimeMap(IFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) Stream.of(people)
      *     .collect(Collector.toByTimeMap(getTimeProperty, getStringProperty));
      * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
      *     .collect(Collector.toByTimeMap(getTimeProperty, getStringProperty).cast(Map<Time, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByTimeMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toByTimeMap(keyMapper, valueMapper, null);
@@ -1063,6 +1209,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) Stream.of(people)
@@ -1077,11 +1232,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Time, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByTimeMap(
             final IFunction keyMapper,
@@ -1097,6 +1247,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Time, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
@@ -1106,13 +1267,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Time, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Time, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByTimeMap(
             final IFunction keyMapper,
@@ -1135,16 +1289,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Integer, Object> personByIntProperty = (Map<Integer, Object>) Stream.of(people)
      *     .collect(Collector.toByIntMap(getIntProperty));
      * Map<Integer, Comparable> personByIntProperty = (Map<Integer, Comparable>) Stream.of(people)
      *     .collect(Collector.toByIntMap(getIntProperty).cast(Map<Integer, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByIntMap(final IToIntFunction keyMapper) {
         return toByIntMap(keyMapper, Function.identity());
@@ -1158,17 +1316,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByIntMap(IToIntFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Integer, Object> stringPropertyByIntProperty = (Map<Integer, Object>) Stream.of(people)
      *     .collect(Collector.toByIntMap(getIntProperty, getStringProperty));
      * Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream.of(people)
      *     .collect(Collector.toByIntMap(getIntProperty, getStringProperty).cast(Map<Integer, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByIntMap(final IToIntFunction keyMapper, final IFunction valueMapper) {
         return toByIntMap(keyMapper, valueMapper, null);
@@ -1180,6 +1342,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Integer, Object> stringPropertyByTimeProperty = (Map<Integer, Object>) Stream.of(people)
@@ -1194,11 +1365,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Integer, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByIntMap(
             final IToIntFunction keyMapper,
@@ -1214,6 +1380,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Integer, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream.of(people)
@@ -1223,13 +1400,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Integer, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Integer, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByIntMap(
             final IToIntFunction keyMapper,
@@ -1252,16 +1422,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Long, Object> personByLongProperty = (Map<Long, Object>) Stream.of(people)
      *     .collect(Collector.toByLongMap(getLongProperty));
      * Map<Long, Comparable> personByLongProperty = (Map<Long, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getLongProperty).cast(Map<Long, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByLongMap(final IToLongFunction keyMapper) {
         return toByLongMap(keyMapper, Function.identity());
@@ -1275,17 +1449,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByLongMap(IToLongFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) Stream.of(people)
      *     .collect(Collector.toByLongMap(getLongProperty, getStringProperty));
      * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
      *     .collect(Collector.toByLongMap(getLongProperty, getStringProperty).cast(Map<Long, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByLongMap(final IToLongFunction keyMapper, final IFunction valueMapper) {
         return toByLongMap(keyMapper, valueMapper, null);
@@ -1297,6 +1475,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) Stream.of(people)
@@ -1311,11 +1498,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Long, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByLongMap(
             final IToLongFunction keyMapper,
@@ -1331,6 +1513,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Long, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
@@ -1340,13 +1533,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Long, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Long, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByLongMap(
             final IToLongFunction keyMapper,
@@ -1369,16 +1555,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Double, Object> personByDoubleProperty = (Map<Double, Object>) Stream.of(people)
      *     .collect(Collector.toByDoubleMap(getDoubleProperty));
      * Map<Double, Comparable> personByDoubleProperty = (Map<Double, Comparable>) Stream.of(people)
      *     .collect(Collector.toByBoolMap(getDoubleProperty).cast(Map<Double, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByDoubleMap(final IToDoubleFunction keyMapper) {
         return toByDoubleMap(keyMapper, Function.identity());
@@ -1392,17 +1582,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * use {@link Collector.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) Stream.of(people)
      *     .collect(Collector.toByDoubleMap(getDoubleProperty, getStringProperty));
      * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
      *     .collect(Collector.toByDoubleMap(getDoubleProperty, getStringProperty).cast(Map<Double, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toByDoubleMap(final IToDoubleFunction keyMapper, final IFunction valueMapper) {
         return toByDoubleMap(keyMapper, valueMapper, null);
@@ -1414,6 +1608,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) Stream.of(people)
@@ -1428,11 +1631,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Double, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toByDoubleMap(
             final IToDoubleFunction keyMapper,
@@ -1448,6 +1646,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Double, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
@@ -1457,13 +1666,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Double, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Double, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toByDoubleMap(
             final IToDoubleFunction keyMapper,
@@ -1489,16 +1691,20 @@ public abstract inherited sharing class Collector implements ICollector {
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link Collector.toByIdMap}, {@link Collector.toByStringMap}, etc.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` is null
+     *
      * @example
      * // Maps values by keys provided by field
      * Map<Object, Object> personByTimeProperty = (Map<Object, Object>) Stream.of(people)
      *     .collect(Collector.toMap(getTimeProperty));
      * Map<Object, Comparable> personByTimeProperty = (Map<Object, Comparable>) Stream.of(people)
      *     .collect(Collector.toMap(getTimeProperty).cast(Map<Object, Comparable>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toMap(final IFunction keyMapper) {
         return toMap(keyMapper, Function.identity());
@@ -1513,17 +1719,21 @@ public abstract inherited sharing class Collector implements ICollector {
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link Collector.toByIdMap}, {@link Collector.toByStringMap}, etc.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     *
+     * @return the `Collector`
+     *
+     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) Stream.of(people)
      *     .collect(Collector.toMap(getTimeProperty, getStringProperty));
      * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
      *     .collect(Collector.toMap(getTimeProperty, getStringProperty).cast(Map<Object, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
-     * @throws IllegalStateException if mapped keys contain duplicates
      */
     public static Collector toMap(final IFunction keyMapper, final IFunction valueMapper) {
         return toMap(keyMapper, valueMapper, null);
@@ -1536,6 +1746,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link Collector.toByIdMap}, {@link Collector.toByStringMap}, etc.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) Stream.of(people)
@@ -1550,11 +1769,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         BinaryOperator.right()
      *     ).cast(Map<Object, String>.class));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      */
     public static Collector toMap(
             final IFunction keyMapper,
@@ -1570,6 +1784,17 @@ public abstract inherited sharing class Collector implements ICollector {
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param keyMapper the field value to accumulate as key
+     * @param valueMapper the function that returns values
+     * @param merger the merge function to resolve collisions between values associated with the same key
+     * @param mapSupplier the function that returns a `Map<Object, ?>`
+     * into which the results are inserted
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
+     *
      * @example
      * // Maps values by keys provided by mapping functions
      * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
@@ -1579,13 +1804,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         BinaryOperator.right(),
      *         Supplier.of(Map<Object, String>.class)
      *     ));
-     * @param keyMapper the field value to accumulate as key
-     * @param valueMapper the function that returns values
-     * @param merger the merge function to resolve collisions between values associated with the same key
-     * @param mapSupplier the function that returns a `Map<Object, ?>`
-     * into which the results are inserted
-     * @return the `Collector`
-     * @throws NullPointerException if `keyMapper`, `valueMapper` or `mapSupplier` is null
      */
     public static Collector toMap(
             final IFunction keyMapper,
@@ -1609,15 +1827,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Boolean, List<Object>> personsByBoolProperty = (Map<Boolean, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByBool(getBoolProperty));
      * Map<Boolean, List<Comparable>> personsByBoolProperty = (Map<Boolean, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByBool(getBoolProperty).cast(Map<Boolean, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByBool(final IFunction classifier) {
         return groupingByBool(classifier, Collector.toList());
@@ -1629,6 +1851,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Boolean, Object> personsByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
@@ -1641,10 +1871,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getBoolProperty,
      *         Collector.toSet()
      *     ).cast(Map<Boolean, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByBool(final IFunction classifier, final ICollector downstream) {
         return groupingByBool(classifier, Supplier.of(Map<Boolean, Object>.class), downstream);
@@ -1657,6 +1883,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Boolean, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) Stream.of(people)
@@ -1665,12 +1901,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Boolean, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Boolean, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByBool(
             final IFunction classifier,
@@ -1693,15 +1923,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Id, List<Object>> personsByIdProperty = (Map<Id, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingById(getIdProperty));
      * Map<Id, List<Comparable>> personsByIdProperty = (Map<Id, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingById(getIdProperty).cast(Map<Id, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingById(final IFunction classifier) {
         return groupingById(classifier, Collector.toList());
@@ -1713,6 +1947,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Id, Object> personsByIdProperty = (Map<Id, Object>) Stream.of(people)
@@ -1725,10 +1967,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getIdProperty,
      *         Collector.toSet()
      *     ).cast(Map<Id, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingById(final IFunction classifier, final ICollector downstream) {
         return groupingById(classifier, Supplier.of(Map<Id, Object>.class), downstream);
@@ -1741,6 +1979,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Id, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) Stream.of(people)
@@ -1749,12 +1997,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Id, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Id, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingById(
             final IFunction classifier,
@@ -1777,15 +2019,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<String, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<String, List<Object>> personsByStringProperty = (Map<String, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByString(getStringProperty));
      * Map<String, List<Comparable>> personsByStringProperty = (Map<String, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByString(getStringProperty).cast(Map<String, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByString(final IFunction classifier) {
         return groupingByString(classifier, Collector.toList());
@@ -1797,6 +2043,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<String, Object> personsByStringProperty = (Map<String, Object>) Stream.of(people)
@@ -1809,10 +2063,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getStringProperty,
      *         Collector.toSet()
      *     ).cast(Map<String, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByString(final IFunction classifier, final ICollector downstream) {
         return groupingByString(classifier, Supplier.of(Map<String, Object>.class), downstream);
@@ -1825,6 +2075,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<String, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) Stream.of(people)
@@ -1833,12 +2093,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<String, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<String, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByString(
             final IFunction classifier,
@@ -1861,15 +2115,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Blob, List<Object>> personsByBlobProperty = (Map<Blob, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByBlob(getBlobProperty));
      * Map<Blob, List<Comparable>> personsByBlobProperty = (Map<Blob, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByBlob(getBlobProperty).cast(Map<Blob, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByBlob(final IFunction classifier) {
         return groupingByBlob(classifier, Collector.toList());
@@ -1881,6 +2139,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Blob, Object> personsByBlobProperty = (Map<Blob, Object>) Stream.of(people)
@@ -1893,10 +2159,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getBlobProperty,
      *         Collector.toSet()
      *     ).cast(Map<Blob, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByBlob(final IFunction classifier, final ICollector downstream) {
         return groupingByBlob(classifier, Supplier.of(Map<Blob, Object>.class), downstream);
@@ -1909,6 +2171,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Blob, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) Stream.of(people)
@@ -1917,12 +2189,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Blob, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Blob, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByBlob(
             final IFunction classifier,
@@ -1945,15 +2211,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Date, List<Object>> personsByDateProperty = (Map<Date, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByDate(getDateProperty));
      * Map<Date, List<Comparable>> personsByDateProperty = (Map<Date, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByDate(getDateProperty).cast(Map<Date, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByDate(final IFunction classifier) {
         return groupingByDate(classifier, Collector.toList());
@@ -1965,6 +2235,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Date, Object> personsByDateProperty = (Map<Date, Object>) Stream.of(people)
@@ -1977,10 +2255,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getDateProperty,
      *         Collector.toSet()
      *     ).cast(Map<Date, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByDate(final IFunction classifier, final ICollector downstream) {
         return groupingByDate(classifier, Supplier.of(Map<Date, Object>.class), downstream);
@@ -1993,6 +2267,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Date, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) Stream.of(people)
@@ -2001,12 +2285,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Date, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Date, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByDate(
             final IFunction classifier,
@@ -2029,15 +2307,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Datetime, List<Object>> personsByDatetimeProperty = (Map<Datetime, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByDatetime(getDatetimeProperty));
      * Map<Datetime, List<Comparable>> personsByDatetimeProperty = (Map<Datetime, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByDatetime(getDatetimeProperty).cast(Map<Datetime, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByDatetime(final IFunction classifier) {
         return groupingByDatetime(classifier, Collector.toList());
@@ -2049,6 +2331,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Datetime, Object> personsByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
@@ -2061,10 +2351,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getDatetimeProperty,
      *         Collector.toSet()
      *     ).cast(Map<Datetime, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByDatetime(final IFunction classifier, final ICollector downstream) {
         return groupingByDatetime(classifier, Supplier.of(Map<Datetime, Object>.class), downstream);
@@ -2077,6 +2363,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Datetime, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>) Stream.of(people)
@@ -2085,12 +2381,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Datetime, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Datetime, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByDatetime(
             final IFunction classifier,
@@ -2113,15 +2403,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Time, List<Object>> personsByTimeProperty = (Map<Time, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByTime(getTimeProperty));
      * Map<Time, List<Comparable>> personsByTimeProperty = (Map<Time, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByTime(getTimeProperty).cast(Map<Time, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByTime(final IFunction classifier) {
         return groupingByTime(classifier, Collector.toList());
@@ -2133,6 +2427,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Time, Object> personsByTimeProperty = (Map<Time, Object>) Stream.of(people)
@@ -2145,10 +2447,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getTimeProperty,
      *         Collector.toSet()
      *     ).cast(Map<Time, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByTime(final IFunction classifier, final ICollector downstream) {
         return groupingByTime(classifier, Supplier.of(Map<Time, Object>.class), downstream);
@@ -2161,6 +2459,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Time, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) Stream.of(people)
@@ -2169,12 +2477,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Time, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Time, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByTime(
             final IFunction classifier,
@@ -2197,15 +2499,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Integer, List<Object>> personsByIntProperty = (Map<Integer, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByInt(getIntProperty));
      * Map<Integer, List<Comparable>> personsByIntProperty = (Map<Integer, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByInt(getIntProperty).cast(Map<Integer, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByInt(final IToIntFunction classifier) {
         return groupingByInt(classifier, Collector.toList());
@@ -2217,6 +2523,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Integer, Object> personsByIntProperty = (Map<Integer, Object>) Stream.of(people)
@@ -2229,10 +2543,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getIntProperty,
      *         Collector.toSet()
      *     ).cast(Map<Integer, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByInt(final IToIntFunction classifier, final ICollector downstream) {
         return groupingByInt(classifier, Supplier.of(Map<Integer, Object>.class), downstream);
@@ -2245,6 +2555,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Integer, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Integer, Set<Object>> personsByIntProperty = (Map<Integer, Set<Object>>) Stream.of(people)
@@ -2253,12 +2573,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Integer, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Integer, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByInt(
             final IToIntFunction classifier,
@@ -2281,15 +2595,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Long, List<Object>> personsByLongProperty = (Map<Long, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByLong(getLongProperty));
      * Map<Long, List<Comparable>> personsByLongProperty = (Map<Long, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByLong(getLongProperty).cast(Map<Long, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByLong(final IToLongFunction classifier) {
         return groupingByLong(classifier, Collector.toList());
@@ -2301,6 +2619,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Long, Object> personsByLongProperty = (Map<Long, Object>) Stream.of(people)
@@ -2313,10 +2639,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getLongProperty,
      *         Collector.toSet()
      *     ).cast(Map<Long, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByLong(final IToLongFunction classifier, final ICollector downstream) {
         return groupingByLong(classifier, Supplier.of(Map<Long, Object>.class), downstream);
@@ -2329,6 +2651,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Long, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) Stream.of(people)
@@ -2337,12 +2669,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Long, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Long, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByLong(
             final IToLongFunction classifier,
@@ -2365,15 +2691,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Double, List<Object>> personsByDoubleProperty = (Map<Double, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingByDouble(getDoubleProperty));
      * Map<Double, List<Comparable>> personsByDoubleProperty = (Map<Double, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingByDouble(getDoubleProperty).cast(Map<Double, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingByDouble(final IToDoubleFunction classifier) {
         return groupingByDouble(classifier, Collector.toList());
@@ -2385,6 +2715,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * associated with a given key using the specified `downstream` Collector.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Double, Object> personsByDoubleProperty = (Map<Double, Object>) Stream.of(people)
@@ -2397,10 +2735,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getDoubleProperty,
      *         Collector.toSet()
      *     ).cast(Map<Double, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingByDouble(final IToDoubleFunction classifier, final ICollector downstream) {
         return groupingByDouble(classifier, Supplier.of(Map<Double, Object>.class), downstream);
@@ -2413,6 +2747,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Double, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) Stream.of(people)
@@ -2421,12 +2765,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Double, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Double, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingByDouble(
             final IToDoubleFunction classifier,
@@ -2452,15 +2790,19 @@ public abstract inherited sharing class Collector implements ICollector {
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link Collector.groupingById}, {@link Collector.groupingByString}, etc.</p>
+     *
+     * @param classifier the function that returns keys
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Object, List<Object>> personsByTimeProperty = (Map<Object, List<Object>>) Stream.of(people)
      *     .collect(Collector.groupingBy(getTimeProperty));
      * Map<Object, List<Comparable>> personsByTimeProperty = (Map<Object, List<Comparable>>) Stream.of(people)
      *     .collect(Collector.groupingBy(getTimeProperty).cast(Map<Object, List<Comparable>>.class));
-     * @param classifier the function that returns keys
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` is null
      */
     public static Collector groupingBy(final IFunction classifier) {
         return groupingBy(classifier, Collector.toList());
@@ -2475,6 +2817,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link Collector.groupingById}, {@link Collector.groupingByString}, etc.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Object, Object> personsByTimeProperty = (Map<Object, Object>) Stream.of(people)
@@ -2487,10 +2837,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         getTimeProperty,
      *         Collector.toSet()
      *     ).cast(Map<Object, Set<Object>>.class));
-     * @param classifier the function that returns keys
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier` or `downstream` is null
      */
     public static Collector groupingBy(final IFunction classifier, final ICollector downstream) {
         return groupingBy(classifier, Supplier.of(Map<Object, Object>.class), downstream);
@@ -2503,6 +2849,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * The Map container is created by `mapSupplier`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param classifier the function that returns keys
+     * @param mapSupplier the supplier that returns a `Map<Object, ?>` container
+     * into which the results will be inserted
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
+     *
      * @example
      * // Group values by keys provided by function
      * Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) Stream.of(people)
@@ -2511,12 +2867,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Supplier.of(Map<Object, Set<Object>>.class),
      *         Collector.toSet()
      *     ));
-     * @param classifier the function that returns keys
-     * @param mapSupplier the supplier that returns a `Map<Object, ?>` container
-     * into which the results will be inserted
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `classifier`, `mapSupplier` or `downstream` is null
      */
     public static Collector groupingBy(
             final IFunction classifier,
@@ -2541,6 +2891,13 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to `predicate` and organizes them into a `Map<Boolean, Object>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param predicate the predicate that classifies input arguments (true or false)
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Map<Boolean, Object> personsPartitionedByPredicate = (Map<Boolean, Object>)
      *     Stream.of(people)
@@ -2548,9 +2905,6 @@ public abstract inherited sharing class Collector implements ICollector {
      * Map<Boolean, List<Comparable>> personsPartitionedByPredicate = (Map<Boolean, List<Comparable>>)
      *     Stream.of(people)
      *         .collect(Collector.partitioningBy(predicate).cast(Map<Boolean, List<Comparable>>.class));
-     * @param predicate the predicate that classifies input arguments (true or false)
-     * @return the `Collector`
-     * @throws NullPointerException if `predicate` is null
      */
     public static Collector partitioningBy(final IPredicate predicate) {
         return partitioningBy(predicate, Collector.toList());
@@ -2561,6 +2915,14 @@ public abstract inherited sharing class Collector implements ICollector {
      * according to `predicate` and organizes them into a `Map<Boolean, Object>`.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
+     *
+     * @param predicate the predicate that classifies input arguments (true or false)
+     * @param downstream the downstream reduction collector
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `predicate` or `downstream` is null
+     *
      * @example
      * Map<Boolean, Set<String>> personNamesPartitionedByPredicate = (Map<Boolean, Set<String>>)
      *     Stream.of(people)
@@ -2568,10 +2930,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *             predicate,
      *             Collector.toStringSet(getStringProperty)
      *         ).cast(Map<Boolean, Set<String>>.class));
-     * @param predicate the predicate that classifies input arguments (true or false)
-     * @param downstream the downstream reduction collector
-     * @return the `Collector`
-     * @throws NullPointerException if `predicate` or `downstream` is null
      */
     public static Collector partitioningBy(final IPredicate predicate, final ICollector downstream) {
         return Collector.of(
@@ -2589,40 +2947,50 @@ public abstract inherited sharing class Collector implements ICollector {
     //<editor-fold desc="Joining">
     // @start-group Joining
     /**
-    * @description Returns a `Collector` that concatenates String input arguments.
-    * @example
-    * String concatenatedStrings = (String) Stream.of(strings).collect(Collector.joining());
-    * @return the `Collector`
-    */
+     * @description Returns a `Collector` that concatenates String input arguments.
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * String concatenatedStrings = (String) Stream.of(strings).collect(Collector.joining());
+     */
     public static Collector joining() {
         return joining('');
     }
 
     /**
-    * @description Returns a `Collector` that concatenates String input arguments,
-    * separated by `delimiter`.
-    * @example
-    * String concatenatedStrings = (String) Stream.of(strings).collect(Collector.joining('; '));
-    * @param delimiter the delimiter between each element
-    * @return the `Collector`
-    * @throws NullPointerException if `delimiter` is null
-    */
+     * @description Returns a `Collector` that concatenates String input arguments,
+     * separated by `delimiter`.
+     *
+     * @param delimiter the delimiter between each element
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `delimiter` is null
+     *
+     * @example
+     * String concatenatedStrings = (String) Stream.of(strings).collect(Collector.joining('; '));
+     */
     public static Collector joining(final String delimiter) {
         return joining(delimiter, '', '');
     }
 
     /**
-    * @description Returns a `Collector` that concatenates String input arguments,
-    * separated by `delimiter`.
-    * @example
-    * String concatenatedStrings = (String) Stream.of(strings)
-    *     .collect(Collector.joining('; ', 'prefix', 'suffix'));
-    * @param delimiter the delimiter between each element
-    * @param prefix the prefix
-    * @param suffix the suffix
-    * @return the `Collector`
-    * @throws NullPointerException if `delimiter`, `prefix` or `suffix` is null
-    */
+     * @description Returns a `Collector` that concatenates String input arguments,
+     * separated by `delimiter`.
+     *
+     * @param delimiter the delimiter between each element
+     * @param prefix the prefix
+     * @param suffix the suffix
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `delimiter`, `prefix` or `suffix` is null
+     *
+     * @example
+     * String concatenatedStrings = (String) Stream.of(strings)
+     *     .collect(Collector.joining('; ', 'prefix', 'suffix'));
+     */
     public static Collector joining(final String delimiter, final String prefix, final String suffix) {
         return Collector.of(
                 Supplier.joiningString(),
@@ -2639,12 +3007,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that returns the arithmetic mean
      * of values returned by `mapper`.
      * If no elements are present, the result is 0.
+     *
+     * @param mapper the function extracting the Integer value to average
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Double averageOfIntProperties = (Double) Stream.of(people)
      *     .collect(Collector.averagingInt(getIntProperty));
-     * @param mapper the function extracting the Integer value to average
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector averagingInt(final IToIntFunction mapper) {
         return Collector.of(
@@ -2657,9 +3029,11 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` that counts the number of input elements.
      * If no elements are present, the result is 0.
+     *
+     * @return the `Collector`
+     *
      * @example
      * Integer numberOfPeople = (Integer) Stream.of(people).collect(Collector.counting());
-     * @return the `Collector`
      */
     public static Collector counting() {
         return summingInt(ToIntFunction.downcast(Function.constant(1)));
@@ -2669,12 +3043,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that returns the arithmetic sum
      * of values returned by `mapper`.
      * If no elements are present, the result is 0.
+     *
+     * @param mapper the function extracting the Integer value to sum
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Integer sumOfIntProperties = (Integer) Stream.of(people)
      *     .collect(Collector.summingInt(getIntProperty));
-     * @param mapper the function extracting the Integer value to sum
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector summingInt(final IToIntFunction mapper) {
         return Collector.of(
@@ -2692,12 +3070,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that returns the arithmetic mean
      * of values returned by `mapper`.
      * If no elements are present, the result is 0.
+     *
+     * @param mapper the function extracting the Long value to average
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Double averageOfLongProperties = (Double) Stream.of(people)
      *     .collect(Collector.averagingLong(getLongProperty));
-     * @param mapper the function extracting the Long value to average
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector averagingLong(final IToLongFunction mapper) {
         return Collector.of(
@@ -2711,12 +3093,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that returns the arithmetic sum
      * of values returned by `mapper`.
      * If no elements are present, the result is 0.
+     *
+     * @param mapper the function extracting the Long value to sum
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Long sumOfLongProperties = (Long) Stream.of(people)
      *     .collect(Collector.summingLong(getLongProperty));
-     * @param mapper the function extracting the Long value to sum
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector summingLong(final IToLongFunction mapper) {
         return Collector.of(
@@ -2734,12 +3120,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that returns the arithmetic mean
      * of values returned by `mapper`.
      * If no elements are present, the result is 0.
+     *
+     * @param mapper the function extracting the Double value to average
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Double averageOfDoubleProperties = (Double) Stream.of(people)
      *     .collect(Collector.averagingDouble(getDoubleProperty));
-     * @param mapper the function extracting the Double value to average
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector averagingDouble(final IToDoubleFunction mapper) {
         return Collector.of(
@@ -2753,12 +3143,16 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` that returns the arithmetic sum
      * of values returned by `mapper`.
      * If no elements are present, the result is 0.
+     *
+     * @param mapper the function extracting the Double value to sum
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * Double sumOfDoubleProperties = (Double) Stream.of(people)
      *     .collect(Collector.summingDouble(getDoubleProperty));
-     * @param mapper the function extracting the Double value to sum
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector summingDouble(final IToDoubleFunction mapper) {
         return Collector.of(
@@ -2775,6 +3169,13 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Adapts a `Collector` to one accepting elements by applying
      * `predicate` to each input element and only accumulating if it returns true.
+     *
+     * @param predicate the predicate to test input arguments
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * // Get people matched by predicate
      * List<Object> filteredPeople = (List<Object>) Stream.of(people)
@@ -2787,9 +3188,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *                 getStringProperty,
      *                 Collector.filtering(predicate)
      *        ).cast(Map<String, List<Comparable>>.class));
-     * @param predicate the predicate to test input arguments
-     * @return the `Collector`
-     * @throws NullPointerException if `predicate` is null
      */
     public static Collector filtering(final IPredicate predicate) {
         return filtering(predicate, Collector.toList());
@@ -2798,6 +3196,14 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Adapts a `Collector` to one accepting elements by applying
      * `predicate` to each input element and only accumulating if it returns true.
+     *
+     * @param predicate the predicate to test input arguments
+     * @param downstream the collector that accumulates only matched values
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * // Get people String properties matched by predicate
      * List<String> filteredStringProperties = (List<String>) Stream.of(people)
@@ -2805,10 +3211,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         predicate,
      *         Collector.toList(getStringProperty)
      *     ).cast(List<String>.class));
-     * @param predicate the predicate to test input arguments
-     * @param downstream the collector that accumulates only matched values
-     * @return the `Collector`
-     * @throws NullPointerException if `predicate` is null
      */
     public static Collector filtering(final IPredicate predicate, final ICollector downstream) {
         return Collector.of(
@@ -2821,13 +3223,17 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Adapts a `Collector` to one accepting elements by
      * applying `mapper` function to each input element before accumulation.
+     *
+     * @param mapper the function to return the value to accumulate
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * List<String> accountNames = (List<String>)
      *     Stream.of(people)
      *         .collect(Collector.mapping(getStringProperty).cast(List<String>.class));
-     * @param mapper the function to return the value to accumulate
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` is null
      */
     public static Collector mapping(final IFunction mapper) {
         return mapping(mapper, Collector.toList());
@@ -2836,6 +3242,14 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Adapts a `Collector` to one accepting elements by
      * applying `mapper` function to each input element before accumulation.
+     *
+     * @param mapper the function to return the value to accumulate
+     * @param downstream the collector which accepts mapped values
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` or `downstream` is null
+     *
      * @example
      * Map<String, Set<String>> otherStringPropertiesByStringProperty = (Map<String, Set<String>>)
      *     Stream.of(people)
@@ -2846,10 +3260,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *                 Collector.toStringSet()
      *             )
      *         ).cast(Map<String, Set<String>>.class));
-     * @param mapper the function to return the value to accumulate
-     * @param downstream the collector which accepts mapped values
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` or `downstream` is null
      */
     public static Collector mapping(final IFunction mapper, final ICollector downstream) {
         return Collector.of(
@@ -2860,40 +3270,50 @@ public abstract inherited sharing class Collector implements ICollector {
     }
 
     /**
-     * @description Adapts a `Collector` to one accepting elements as a result of 
-     * replacing each input element with the contents of a mapped iterable created by applying 
+     * @description Adapts a `Collector` to one accepting elements as a result of
+     * replacing each input element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element before accumulation.
+     *
+     * @param mapper the function which must produce `Iterable<Object>`
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` or `downstream` is null
+     *
      * @example
      * List<String> flattenedStringProperties = (List<String>) Stream.of(people)
      *     .collect(
      *         Collector.flatMapping(getStringListProperty)
      *     ).cast(List<String>.class));
-     * 
      * Map<String, List<String>> flattenedStringPropertiesByOtherStringProperty
      *     = (Map<String, List<String>>) Stream.of(people)
      *         .collect(Collector.groupingByString(
      *             getOtherStringProperty,
      *             Collector.flatMapping(getStringListProperty)
      *         ).cast(Map<String, List<String>>.class));
-     * @param mapper the function which must produce `Iterable<Object>`
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` or `downstream` is null
      */
     public static Collector flatMapping(final IFunction mapper) {
         return flatMapping(mapper, Collector.toList());
     }
 
     /**
-     * @description Adapts a `Collector` to one accepting elements as a result of 
-     * replacing each input element with the contents of a mapped iterable created by applying 
+     * @description Adapts a `Collector` to one accepting elements as a result of
+     * replacing each input element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element before accumulation.
+     *
+     * @param mapper the function which must produce `Iterable<Object>`
+     * @param downstream the collector which accepts mapped values
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` or `downstream` is null
+     *
      * @example
      * Set<String> contacts = (Set<String>) Stream.of(people)
      *     .collect(Collector.flatMapping(
      *         getStringListProperty,
      *         Collector.toStringSet()
      *     ));
-     *     
      * Map<String, Set<String>> flattenedStringPropertiesByOtherStringProperty
      *    = (Map<String, Set<String>>) Stream.of(people)
      *         .collect(Collector.groupingByString(
@@ -2902,10 +3322,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *                 getStringListProperty,
      *                 Collector.toStringSet()
      *         ).cast(Map<String, Set<String>>.class));
-     * @param mapper the function which must produce `Iterable<Object>`
-     * @param downstream the collector which accepts mapped values
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` or `downstream` is null
      */
     public static Collector flatMapping(final IFunction mapper, final ICollector downstream) {
         return Collector.of(
@@ -2918,16 +3334,20 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` which performs a reduction of its input elements
      * under `accumulator` using `identity`.
+     *
+     * @param identity the identity value for the reduction
+     * @param accumulator the input arguments reducer
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Person personWithSummedIntProperties = (Person) Stream.of(people)
      *     .collect(Collector.reducing(
      *         new Person(IntProperty = 0),
      *         sumIntPropertyReducer
      *      ));
-     * @param identity the identity value for the reduction
-     * @param accumulator the input arguments reducer
-     * @return the `Collector`
-     * @throws NullPointerException if `accumulator` is null
      */
     public static Collector reducing(final Object identity, final IBinaryOperator accumulator) {
         return Collector.of(Supplier.box(identity), ListObjectConsumer.reducing(accumulator), ListFunction.get(0));
@@ -2936,6 +3356,15 @@ public abstract inherited sharing class Collector implements ICollector {
     /**
      * @description Returns a `Collector` which performs a reduction of its input elements
      * under `mapper` function and `accumulator`.
+     *
+     * @param identity the identity value for the reduction
+     * @param mapper the function to return the value to accumulate
+     * @param accumulator the input arguments reducer
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` or `accumulator` is null
+     *
      * @example
      * Person personWithSummedIntProperties = (Person) Stream.of(people)
      *     .collect(Collector.reducing(
@@ -2943,11 +3372,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         Function.identity(),
      *         sumIntPropertyReducer
      *      ));
-     * @param identity the identity value for the reduction
-     * @param mapper the function to return the value to accumulate
-     * @param accumulator the input arguments reducer
-     * @return the `Collector`
-     * @throws NullPointerException if `mapper` or `accumulator` is null
      */
     public static Collector reducing(final Object identity, IFunction mapper, final IBinaryOperator accumulator) {
         return Collector.of(
@@ -2965,6 +3389,13 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` which performs a reduction of its input elements
      * under `accumulator`. The result is described as an `Optional`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
+     *
+     * @param accumulator the input arguments reducer
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
      * @example
      * Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
      *     Stream.of(people)
@@ -2974,9 +3405,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         ));
      * Person personWithMaxIntProperty = (Person)
      *     optionalPersonWithMaxIntPropertyByStringProperty.get('SomePropertyValues').get();
-     * @param accumulator the input arguments reducer
-     * @return the `Collector`
-     * @throws NullPointerException if `accumulator` is null
      */
     public static Collector reducing(final IBinaryOperator accumulator) {
         return Collector.of(
@@ -2990,6 +3418,13 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` which produces the maximal element
      * according to `comparator`. The result is described as an `Optional`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
+     *
+     * @param comparator the comparator
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `comparator` is null
+     *
      * @example
      * Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
      *     Stream.of(people)
@@ -2999,9 +3434,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         ));
      * Person personWithMaxIntProperty = (Person)
      *     optionalPersonWithMaxIntPropertyByStringProperty.get('SomePropertyValues').get();
-     * @param comparator the comparator
-     * @return the `Collector`
-     * @throws NullPointerException if `comparator` is null
      */
     public static Collector maximizing(final IComparator comparator) {
         return reducing(BinaryOperator.maxBy(comparator));
@@ -3011,6 +3443,13 @@ public abstract inherited sharing class Collector implements ICollector {
      * @description Returns a `Collector` which produces the minimal element
      * according to `comparator`. The result is described as an `Optional`.
      * <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
+     *
+     * @param comparator the comparator
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `comparator` is null
+     *
      * @example
      * Map<String, Object> optionalPersonWithMinIntPropertyByStringProperty = (Map<String, Object>)
      *     Stream.of(people)
@@ -3020,9 +3459,6 @@ public abstract inherited sharing class Collector implements ICollector {
      *         ));
      * Person personWithMaxIntProperty = (Person)
      *     optionalPersonWithMinIntPropertyByStringProperty.get('SomePropertyValues').get();
-     * @param comparator the comparator
-     * @return the `Collector`
-     * @throws NullPointerException if `comparator` is null
      */
     public static Collector minimizing(final IComparator comparator) {
         return reducing(BinaryOperator.minBy(comparator));

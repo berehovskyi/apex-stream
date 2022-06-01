@@ -1,5 +1,5 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  * @see DateToIntFunction
  */
 @IsTest(IsParallel = true)

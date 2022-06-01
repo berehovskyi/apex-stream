@@ -1,8 +1,7 @@
 /**
- * @author O. Berehovskyi
- * @group Functional Abstract Classes
  * @description Inherits {@link IPredicate} functional interface and provides default methods,
  * common class level implementations, and related utilities.
+ *
  * @see IObjectIterable.filter
  * @see IObjectIterable.take
  * @see IObjectIterable.drop
@@ -10,6 +9,10 @@
  * @see IObjectIterable.some
  * @see IObjectIterable.every
  * @see IObjectIterable.none
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Predicate implements IPredicate {
 
@@ -25,36 +28,46 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a composed `Predicate` that applies short-circuiting logical
      * OR} operator to `this` `IPredicate` and `other`
      * in that order.
+     *
+     * @param other the other `Predicate`
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * somePredicate1.orElse(somePredicate2);
-     * @param other the other `Predicate`
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual Predicate orElse(final IPredicate other) {
-        return some(this, other);
+        return some(new List<IPredicate>{ this, other });
     }
 
     /**
      * @description Returns a composed `Predicate` that applies short-circuiting logical
      * AND} operator to `this` `IPredicate` and `other`
      * in that order.
+     *
+     * @param other the other `Predicate`
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `other` is null
+     *
      * @example
      * somePredicate1.andAlso(somePredicate2);
-     * @param other the other `Predicate`
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `other` is null
      */
     public virtual Predicate andAlso(final IPredicate other) {
-        return every(this, other);
+        return every(new List<IPredicate>{ this, other });
     }
 
     /**
      * @description Returns a `Predicate` that applies logical `NOT` operator
      * to `this` `IPredicate`.
+     *
+     * @return the negated `Predicate`
+     *
      * @example
      * somePredicate1.negate();
-     * @return the negated `Predicate`
      */
     public virtual Predicate negate() {
         return negate(this);
@@ -67,11 +80,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a composed `Predicate` that applies sequentially short-circuiting
      * logical `OR` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`IPredicates`
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * Predicate.some(somePredicates);
-     * @param predicates the list of`IPredicates`
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static Predicate some(final List<IPredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -79,28 +96,17 @@ public abstract inherited sharing class Predicate implements IPredicate {
     }
 
     /**
-     * @description Returns a composed `Predicate` that applies short-circuiting logical
-     * OR} operator to `predicate1` `IPredicate` and `predicate2`
-     * in that order.
-     * @example
-     * Predicate.some(somePredicate1, somePredicate2);
-     * @param predicate1 the first `IPredicate`
-     * @param predicate2 the second `IPredicate`
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static Predicate some(final IPredicate predicate1, final IPredicate predicate2) {
-        return some(new List<IPredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a composed `Predicate` that applies sequentially short-circuiting
      * logical `AND` operator to `predicates` in the same order as the order of the input list.
+     *
+     * @param predicates the list of`IPredicates`
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `other` is null or some of the list element is null
+     *
      * @example
      * Predicate.every(somePredicates);
-     * @param predicates the list of`IPredicates`
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `other` is null or some of the list element is null
      */
     public static Predicate every(final List<IPredicate> predicates) {
         Validate.noNullElements(predicates);
@@ -108,27 +114,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
     }
 
     /**
-     * @description Returns a composed `Predicate` that applies short-circuiting logical
-     * AND} operator to `predicate1` `IPredicate` and `predicate2`
-     * in that order.
-     * @example
-     * Predicate.every(somePredicate1, somePredicate2);
-     * @param predicate1 the first `IPredicate`
-     * @param predicate2 the second `IPredicate`
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `predicate1` or `predicate2` is null
-     */
-    public static Predicate every(final IPredicate predicate1, final IPredicate predicate2) {
-        return every(new List<IPredicate>{ predicate1, predicate2 });
-    }
-
-    /**
      * @description Returns a `Predicate` that applies logical `NOT` operator
      * to `predicate`.
+     *
+     * @param predicate the `IPredicate`
+     *
+     * @return the negated `Predicate`
+     *
      * @example
      * Predicate.negate(somePredicate);
-     * @param predicate the `IPredicate`
-     * @return the negated `Predicate`
      */
     public static Predicate negate(final IPredicate predicate) {
         Validate.notNull(predicate);
@@ -138,11 +132,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that always evaluates to the Boolean `value`
      * (`true` or `false`).
+     *
+     * @param value the evaluated value
+     *
+     * @return predicate the `Predicate`
+     *
+     * @throws NullPointerException if `value` is null
+     *
      * @example
      * Predicate.always(true);
-     * @param value the evaluated value
-     * @return predicate the `Predicate`
-     * @throws NullPointerException if `value` is null
      */
     public static Predicate always(final Boolean value) {
         Validate.notNull(value);
@@ -152,12 +150,16 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a composed `Predicate` of the `IFunction` and
      * the `IPredicate`.
-     * @example
-     * Predicate.compose(someFunction, somePredicate);
+     *
      * @param mapper the function applied to the input argument
      * @param predicate the predicate to the result returned by the `mapper`
+     *
      * @return the composed `Predicate`
+     *
      * @throws NullPointerException if `mapper` or `predicate` is null
+     *
+     * @example
+     * Predicate.compose(someFunction, somePredicate);
      */
     public static Predicate compose(final IFunction mapper, final IPredicate predicate) {
         Validate.notNull(mapper);
@@ -168,12 +170,16 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a composed `Predicate` of the `IToIntFunction` and
      * the `IIntPredicate`.
-     * @example
-     * Predicate.compose(someToIntFunction, someIntPredicate);
+     *
      * @param mapper the function applied to the input argument
      * @param predicate the predicate to the result returned by the `mapper`
+     *
      * @return the composed `Predicate`
+     *
      * @throws NullPointerException if `mapper` or `predicate` is null
+     *
+     * @example
+     * Predicate.compose(someToIntFunction, someIntPredicate);
      */
     public static Predicate compose(final IToIntFunction mapper, final IIntPredicate predicate) {
         Validate.notNull(mapper);
@@ -184,12 +190,16 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a composed `Predicate` of the `IToLongFunction` and
      * the `ILongPredicate`.
-     * @example
-     * Predicate.compose(someToLongFunction, someLongPredicate);
+     *
      * @param mapper the function applied to the input argument
      * @param predicate the predicate to the result returned by the `mapper`
+     *
      * @return the composed `Predicate`
+     *
      * @throws NullPointerException if `mapper` or `predicate` is null
+     *
+     * @example
+     * Predicate.compose(someToLongFunction, someLongPredicate);
      */
     public static Predicate compose(final IToLongFunction mapper, final ILongPredicate predicate) {
         Validate.notNull(mapper);
@@ -200,12 +210,16 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a composed `Predicate` of the `IToDoubleFunction` and
      * the `IDoublePredicate`.
-     * @example
-     * Predicate.compose(someToDoubleFunction, someDoublePredicate);
+     *
      * @param mapper the function applied to the input argument
      * @param predicate the predicate to the result returned by the `mapper`
+     *
      * @return the composed `Predicate`
+     *
      * @throws NullPointerException if `mapper` or `predicate` is null
+     *
+     * @example
+     * Predicate.compose(someToDoubleFunction, someDoublePredicate);
      */
     public static Predicate compose(final IToDoubleFunction mapper, final IDoublePredicate predicate) {
         Validate.notNull(mapper);
@@ -216,12 +230,16 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a composed `Predicate` of the `IToSObjectFunction` and
      * the `ISObjectPredicate`.
-     * @example
-     * Predicate.compose(someToSObjectFunction, someSObjectPredicate);
+     *
      * @param mapper the function applied to the input argument
      * @param predicate the predicate to the result returned by the `mapper`
+     *
      * @return the composed `Predicate`
+     *
      * @throws NullPointerException if `mapper` or `predicate` is null
+     *
+     * @example
+     * Predicate.compose(someToSObjectFunction, someSObjectPredicate);
      */
     public static Predicate compose(final IToSObjectFunction mapper, final ISObjectPredicate predicate) {
         Validate.notNull(mapper);
@@ -231,11 +249,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     /**
      * @description Returns a composed `Predicate` of the `IIntPredicate`.
+     *
+     * @param predicate the predicate
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Predicate.upcast(someIntPredicate);
-     * @param predicate the predicate
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `predicate` is null
      */
     public static Predicate upcast(final IIntPredicate predicate) {
         Validate.notNull(predicate);
@@ -244,11 +266,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     /**
      * @description Returns a composed `Predicate` of the `ILongPredicate`.
+     *
+     * @param predicate the predicate
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Predicate.upcast(someLongPredicate);
-     * @param predicate the predicate
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `predicate` is null
      */
     public static Predicate upcast(final ILongPredicate predicate) {
         Validate.notNull(predicate);
@@ -257,11 +283,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     /**
      * @description Returns a composed `Predicate` of the `IDoublePredicate`.
+     *
+     * @param predicate the predicate
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Predicate.upcast(someDoublePredicate);
-     * @param predicate the predicate
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `predicate` is null
      */
     public static Predicate upcast(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
@@ -270,11 +300,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     /**
      * @description Returns a composed `Predicate` of the `ISObjectPredicate`.
+     *
+     * @param predicate the predicate
+     *
+     * @return the composed `Predicate`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
      * @example
      * Predicate.upcast(someSObjectPredicate);
-     * @param predicate the predicate
-     * @return the composed `Predicate`
-     * @throws NullPointerException if `predicate` is null
      */
     public static Predicate upcast(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -291,6 +325,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a `Predicate` that tests if the result of comparing
      * the values returned by the applied `left` and `right` functions
      * by the `comparator` is equal to the expected `result`.
+     *
+     * @param left the function applied to the input argument the result of which is passed to
+     * the `comparator` as the first argument
+     * @param right the function applied to the input argument the result of which is passed to
+     * the `comparator` as the second argument
+     * @param comparator the function that compares two arguments
+     * @param result the expected result of comparison (1, -1, or 0)
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `left`, or the `right`,
+     * or `comparator`, or `result` is null
+     *
      * @example
      * Predicate.isCompared(
      *     func1,
@@ -298,15 +345,6 @@ public abstract inherited sharing class Predicate implements IPredicate {
      *     Comparator.defaultOrder(),
      *     1
      * );
-     * @param left the function applied to the input argument the result of which is passed to
-     * the `comparator` as the first argument
-     * @param right the function applied to the input argument the result of which is passed to
-     * the `comparator` as the second argument
-     * @param comparator the function that compares two arguments
-     * @param result the expected result of comparison (1, -1, or 0)
-     * @return the `Predicate`
-     * @throws NullPointerException if the `left`, or the `right`,
-     * or `comparator`, or `result` is null
      */
     public static Predicate isCompared(
             final IFunction left,
@@ -329,14 +367,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `>` "greater than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param left the function whose application result is considered as the left argument of comparison
+     * @param right the function whose application result is considered as the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `left`, or the `right` is null
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isGreater(func1, func2);
      * Predicate.isGreater(func1, Function.constant(100));
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     * @return the `Predicate`
-     * @throws NullPointerException if the `left`, or the `right` is null
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isGreater(final IFunction left, final IFunction right) {
         return isCompared(left, right, Comparator.defaultOrder(), 1);
@@ -349,11 +392,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `>` "greater than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isGreater(100);
-     * @param value the right argument of comparison
-     * @return the `Predicate`
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isGreater(final Object value) {
         return isGreater(Function.identity(), Function.constant(value));
@@ -367,14 +414,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `>=` "greater than or equal to " operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param left the function whose application result is considered as the left argument of comparison
+     * @param right the function whose application result is considered as the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `left`, or the `right` is null
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isGreaterOrEqual(func1, func2);
      * Predicate.isGreaterOrEqual(func1, Function.constant(100));
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     * @return the `Predicate`
-     * @throws NullPointerException if the `left`, or the `right` is null
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isGreaterOrEqual(final IFunction left, final IFunction right) {
         return isGreater(left, right).orElse(isEqual(left, right));
@@ -387,11 +439,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isGreaterOrEqual(100);
-     * @param value the right argument of comparison
-     * @return the `Predicate`
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isGreaterOrEqual(final Object value) {
         return isGreater(value).orElse(isEqual(value));
@@ -405,14 +461,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `<` "less than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param left the function whose application result is considered as the left argument of comparison
+     * @param right the function whose application result is considered as the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `left`, or the `right` is null
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isLess(func1, func2);
      * Predicate.isLess(func1, Function.constant(100));
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     * @return the `Predicate`
-     * @throws NullPointerException if the `left`, or the `right` is null
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isLess(final IFunction left, final IFunction right) {
         return isCompared(left, right, Comparator.defaultOrder(), -1);
@@ -425,11 +486,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `<` "less than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isLess(100);
-     * @param value the right argument of comparison
-     * @return the `Predicate`
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isLess(final Object value) {
         return isLess(Function.identity(), Function.constant(value));
@@ -443,14 +508,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param left the function whose application result is considered as the left argument of comparison
+     * @param right the function whose application result is considered as the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `left`, or the `right` is null
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isLessOrEqual(func1, func2);
      * Predicate.isLessOrEqual(func1, Function.constant(100));
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     * @return the `Predicate`
-     * @throws NullPointerException if the `left`, or the `right` is null
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isLessOrEqual(final IFunction left, final IFunction right) {
         return isLess(left, right).orElse(isEqual(left, right));
@@ -463,11 +533,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value. User-defined types must implement the `Comparable` interface.</p>
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isLess(100);
-     * @param value the right argument of comparison
-     * @return the `Predicate`
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isLessOrEqual(final Object value) {
         return isLess(value).orElse(isEqual(value));
@@ -477,14 +551,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a `Predicate` that tests the input object if the result returned by
      * the `left` function is equal to the result returned by the `right`
      * function, comparing object value equality not reference equality.
+     *
+     * @param left the function whose application result is considered as the left argument of comparison
+     * @param right the function whose application result is considered as the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `left`, or the `right` is null
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isEqual(func1, func2);
      * Predicate.isEqual(func1, Function.constant(100));
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     * @return the `Predicate`
-     * @throws NullPointerException if the `left`, or the `right` is null
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isEqual(final IFunction left, final IFunction right) {
         return isCompared(left, right, Comparator.defaultOrder(), 0);
@@ -493,11 +572,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is equal to
      * the `value`, comparing object value equality not reference equality.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isEqual(100);
-     * @param value the right argument of comparison
-     * @return the `Predicate`
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isEqual(final Object value) {
         return isEqual(Function.identity(), Function.constant(value));
@@ -507,14 +590,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @description Returns a `Predicate` that tests the input object if the result returned by
      * the `left` function is not equal to the result returned by the `right`
      * function, comparing object value equality not reference equality.
+     *
+     * @param left the function whose application result is considered as the left argument of comparison
+     * @param right the function whose application result is considered as the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `left`, or the `right` is null
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isNotEqual(func1, func2);
      * Predicate.isNotEqual(func1, Function.constant(100));
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     * @return the `Predicate`
-     * @throws NullPointerException if the `left`, or the `right` is null
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isNotEqual(final IFunction left, final IFunction right) {
         return isEqual(left, right).negate();
@@ -523,11 +611,15 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is not equal to
      * the `value`, comparing object value equality not reference equality.
+     *
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @see Comparator.compareNullSafeUntyped
+     *
      * @example
      * Predicate.isEqual(100);
-     * @param value the right argument of comparison
-     * @return the `Predicate`
-     * @see Comparator.compareNullSafeUntyped
      */
     public static Predicate isNotEqual(final Object value) {
         return isEqual(value).negate();
@@ -536,15 +628,20 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if the result returned by
      * the `function` is contained in the `container`.
+     *
+     * @param function the function whose application result is tested
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `function`, or the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * Predicate.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
      * Predicate.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
      * Predicate.isIn(getNameFunc, nameStream);
-     * @param function the function whose application result is tested
-     * @param container the iterable that checks for the presence of an element
-     * @return the `Predicate`
-     * @throws NullPointerException if the `function`, or the `container` is null
-     * @see List.contains
      */
     public static Predicate isIn(final IFunction function, final Iterable<Object> container) {
         Validate.notNull(function);
@@ -555,14 +652,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * Predicate.isIn(new List<Object>{ 'John', 'Jim' });
      * Predicate.isIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
      * Predicate.isIn(nameStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `Predicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static Predicate isIn(final Iterable<Object> container) {
         return isIn(Function.identity(), container);
@@ -571,15 +673,20 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if the result returned by
      * the `function` is not contained in the `container`.
+     *
+     * @param function the function whose application result is tested
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `function`, or the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * Predicate.isNotIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
      * Predicate.isNotIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
      * Predicate.isNotIn(getNameFunc, nameStream);
-     * @param function the function whose application result is tested
-     * @param container the iterable that checks for the presence of an element
-     * @return the `Predicate`
-     * @throws NullPointerException if the `function`, or the `container` is null
-     * @see List.contains
      */
     public static Predicate isNotIn(final IFunction function, final Iterable<Object> container) {
         return isIn(function, container).negate();
@@ -588,14 +695,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is not contained in
      * the `container`.
+     *
+     * @param container the iterable that checks for the presence of an element
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if the `container` is null
+     *
+     * @see List.contains
+     *
      * @example
      * Predicate.isNotIn(new List<Object>{ 'John', 'Jim' });
      * Predicate.isNotIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
      * Predicate.isNotIn(nameStream);
-     * @param container the iterable that checks for the presence of an element
-     * @return the `Predicate`
-     * @throws NullPointerException if the `container` is null
-     * @see List.contains
      */
     public static Predicate isNotIn(final Iterable<Object> container) {
         return isIn(container).negate();
@@ -605,9 +717,11 @@ public abstract inherited sharing class Predicate implements IPredicate {
     //<editor-fold desc="Object Predicates">
     /**
      * @description Returns a `Predicate` that tests the input object if it is null.
+     *
+     * @return the `Predicate`
+     *
      * @example
      * Predicate.isNull();
-     * @return the `Predicate`
      */
     public static Predicate isNull() {
         return isEqual(null);
@@ -615,9 +729,11 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is not null.
+     *
+     * @return the `Predicate`
+     *
      * @example
      * Predicate.isNotNull();
-     * @return the `Predicate`
      */
     public static Predicate isNotNull() {
         return isEqual(null).negate();
@@ -628,6 +744,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Boolean} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfBool() {
@@ -637,6 +754,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Id} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfId() {
@@ -646,6 +764,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * String} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfString() {
@@ -655,6 +774,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Blob} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfBlob() {
@@ -664,6 +784,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Date} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfDate() {
@@ -673,6 +794,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Datetime} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfDatetime() {
@@ -682,6 +804,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Time} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfTime() {
@@ -691,6 +814,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Integer} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfInt() {
@@ -700,6 +824,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Long} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfLong() {
@@ -709,6 +834,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Double} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfDouble() {
@@ -718,6 +844,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * SObject} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfSObject() {
@@ -727,6 +854,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
      * Comparable} type.
+     *
      * @return the `Predicate`
      */
     public static Predicate isInstanceOfComparable() {

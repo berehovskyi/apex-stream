@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class DoubleIterate implements Iterator<Double> {
+public inherited sharing class DoubleIterate implements Iterator<Double> {
 
     private final IDoubleUnaryOperator operator;
     private Double next;

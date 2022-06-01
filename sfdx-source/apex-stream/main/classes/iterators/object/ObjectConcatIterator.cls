@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class ObjectConcatIterator extends ObjectBaseIterator {
+public inherited sharing class ObjectConcatIterator extends ObjectBaseIterator {
 
     private final List<Iterator<Object>> iterators;
     private final Integer count;

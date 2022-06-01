@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class IntForEachIterator implements Iterator<Integer> {
+public inherited sharing class IntForEachIterator implements Iterator<Integer> {
 
     private final Iterator<Integer> iterator;
     private final IIntConsumer consumer;

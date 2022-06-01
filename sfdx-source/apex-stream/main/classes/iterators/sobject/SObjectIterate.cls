@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi>
+ * @author Oleh Berehovskyi
  */
-public class SObjectIterate implements Iterator<SObject> {
+public inherited sharing class SObjectIterate implements Iterator<SObject> {
 
     private final ISObjectUnaryOperator operator;
     private SObject next;

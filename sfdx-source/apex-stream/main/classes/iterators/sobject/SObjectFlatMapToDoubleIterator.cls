@@ -1,7 +1,7 @@
 /**
- * @author O. Berehovskyi
+ * @author Oleh Berehovskyi
  */
-public class SObjectFlatMapToDoubleIterator extends DoubleBaseIterator {
+public inherited sharing class SObjectFlatMapToDoubleIterator extends DoubleBaseIterator {
 
     private final Iterator<SObject> iterator;
     private final ISObjectFunction mapper;
