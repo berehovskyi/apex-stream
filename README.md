@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/github/v/release/berehovskyi/apex-stream?include_prereleases) ![](https://img.shields.io/badge/build-passing-brightgreen.svg) ![](https://img.shields.io/badge/coverage-99%25-brightgreen.svg)
 
-Apex Stream is a framework for processing sequences of elements taking advantage of the functional programming paradigm.
+Apex Stream is a framework for processing sequences of elements that takes advantage of the functional programming paradigm.
 
 Inspired by [Java Stream API](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/stream/package-summary.html), 
 slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable) and 
@@ -28,15 +28,15 @@ slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dot
 
 ## Introduction
 
-**Apex Stream Framework** is built on custom `Iterables` allows processing a sequence of elements supporting sequential aggregate operations, 
-providing convenient declarative API. There are 2 types that implements `Iterable` - `Stream` and `Sequence`.
+**Apex Stream Framework** is built on custom `Iterables` that allow processing a sequence of elements supporting sequential aggregate operations, 
+providing a convenient declarative API. There are 2 types that implement `Iterable` - `Stream` and `Sequence`.
 
 `Stream` is lazy. Computation on the source data is only performed when the terminal operation is initiated, 
 and source elements are consumed only as needed. Also, a `Stream` can be operated on 
 (invoking an intermediate or terminal stream operation) only **once**.
 
-`Sequence` is eager. Computation on the source data is performed every time when intermediate or terminal operation invoked.
-Since `Sequence` is stateful it can be reused multiple times.
+`Sequence` is eager. Computation on the source data is performed every time an intermediate or terminal operation is invoked.
+Since `Sequence` is stateful, it can be reused multiple times.
 
 There are reference and primitive specializations of `Streams` and `Sequences`
 - Reference: `ObjectStream`, `SObjectStream`, `ObjectSequence`, `SObjectSequence`
@@ -111,7 +111,7 @@ streamIterator.next(); // 0.5196704529392165
 // so on...
 ```
 
-To prevent hitting the CPU time limit an infinite stream can be limited:
+To prevent hitting the CPU time limit, an infinite stream can be limited:
 
 ```apex
 IDoubleIterable firstTenRandomStream = Stream.generate(DoubleSupplier.random()).lim(10);
@@ -135,7 +135,7 @@ streamIterator.next(); // 7
 
 - ### Concatenation
 
-The simplest way to concat two streams is using static `concat` method, 
+The simplest way to concat two streams is by using the static `concat` method, 
 or instance `append`, `prepend` methods:
 
 ```apex
@@ -147,7 +147,7 @@ ISObjectIterable mergedStream1 = accountStream1.append(accountStream2); // [acc1
 ISObjectIterable mergedStream2 = accountStream1.prepend(accountStream2); // [acc4, acc5, acc6, acc1, acc2, acc3]
 ```
 
-To concat multiple streams use static `concat` method that takes a list of streams:
+To concat multiple streams, use the static `concat` method that takes a list of streams:
 
 ```apex
 ISObjectIterable mergedStream = Stream.concat(
@@ -157,7 +157,7 @@ ISObjectIterable mergedStream = Stream.concat(
 
 - ### Zipping
 
-A `zip` operation takes an element from each `Iterable` and combine them by `BinaryOperator`:
+A `zip` operation takes an element from each `Iterable` and combines them by `BinaryOperator`:
 
 ```apex
 List<Integer> ints1 = new List<Integer>{ 5, 3, 9, 7, 5, 9, 3, 7 };
@@ -167,7 +167,7 @@ IIntIterable zippedStream = Stream.zip(ints1, ints2, IntBinaryOperator.sum());
 zippedStream.toList(); // [13, 6, 15, 11, 9, 18, 4, 7]
 ```
 
-For reference streams `zip` operation has a variation that additionally takes an `BiPredicate` argument
+For reference streams, `zip` operation has a variation that additionally takes a `BiPredicate` argument
 to filter elements before zipping.
 
 Get all `Account` records from `Trigger.new` list on update if `Rating` field has changed:
@@ -187,7 +187,7 @@ ISObjectIterable newAccountStreamWithChangedRating = Stream.zip(
 
 **Intermediate Operation** transforms a stream into another stream.
 
-*Please note that unlike for `Sequence`, for `Stream` an intermediate operation is not invoked
+*Please note that, unlike for `Sequence`, for `Stream` an intermediate operation is not invoked
 until a terminal operation is invoked.*
 
 - ### Set Operations
@@ -201,7 +201,7 @@ An `intersect` operation returns the set intersection, which means unique elemen
 that appear *in each* of two iterables.
 
 An `except` operation returns the set difference, which means the elements of one iterable
-that *do not appear* in a second iterable.
+that *does not appear* in the second iterable.
 
 A `distinct` operation returns an iterable without duplicates.
 
@@ -284,7 +284,7 @@ ISObjectIterable mutatedAccountStream = Stream.of(accounts)
 A `mapTo` operation converts elements by applying a function to them 
 and collects these new elements into a new stream.
 
-Create a stream of parent `Accounts` from contact stream:
+Create a stream of parent `Accounts` from the contact stream:
 
 ```apex
 ISObjectIterable accountStream = Stream.of(contacts)
@@ -298,10 +298,10 @@ IDoubleIterable revenueStream = Stream.of(accounts)
         .mapToDouble(SObjectToDoubleFunction.get(Account.AnnualRevenue));
 ```
 
-A `flatMapTo` operation converts elements by applying a function that return an `Iterable` to them 
+A `flatMapTo` operation converts elements by applying a function that returns an `Iterable` to them 
 and collects these new *inner* elements into a new stream.
 
-Create a stream of related child contacts from account stream:
+Create a stream of related child contacts from the account stream:
 
 ```apex
 ISObjectIterable contactStream = Stream.of(accounts)
@@ -367,7 +367,7 @@ ISObjectIterable sortedAccountStream = Stream.of(accounts)
         .sort(Account.Name);
 ```
 
-Sort accounts by `Rating` and then if ratings are equal sort
+Sort accounts by `Rating` and then, if ratings are equal, sort
 by `NumberOfEmployees` considering `nulls` greater than any value and then sort
 by `AnnualRevenue` in descending order:
 
@@ -437,8 +437,8 @@ Long factorial(Long n) {
 factorial(20L); // 2432902008176640000
 ```
 
-`min`, `max` operations on a primitive stream find a minimal or a maximal element 
-according to default order as [Optional](#optional):
+`min`, `max` operations on a primitive stream find a minimal or maximal element 
+according to the default order as [Optional](#optional):
 
 ```apex
 Integer maxInt = Stream.of(integers)
@@ -446,10 +446,10 @@ Integer maxInt = Stream.of(integers)
         .get(); // returns a value if present or throws NoSuchElementException otherwise
 ```
 
-On a reference stream search reduction is operated according to 
+On a reference stream, search reduction is operated according to 
 a comparator and returns a result as [Optional](#optional).
 
-Find an optional account with max `AnnualRevenue`:
+Find an optional account with a max `AnnualRevenue`:
 
 ```apex
 OptionalSObject optionalAccountWithMaxAnnualRevenue = Stream.of(accounts)
@@ -458,16 +458,16 @@ OptionalSObject optionalAccountWithMaxAnnualRevenue = Stream.of(accounts)
 
 `sum`, `avg` operations on a primitive stream calculate an arithmetic *sum* and *mean*.
 
-Calculate a sum of elements of stream:
+Calculate the sum of elements of the stream:
 
 ```apex
 Double sum = Stream.of(doubles).sum();
 ```
 
-`sum`, `avg` operations on a reference stream calculates an arithmetic sum and mean 
+`sum`, `avg` operations on a reference stream calculate an arithmetic sum and mean 
 of elements returned by a mapping function.
 
-Find an optional account with max `AnnualRevenue`:
+Find an optional account with a max `AnnualRevenue`:
 
 ```apex
 Double sumOfAnnualRevenue = Stream.of(accounts).sum(Account.AnnualRevenue);
@@ -476,7 +476,7 @@ Double sumOfAnnualRevenue = Stream.of(accounts).sum(Account.AnnualRevenue);
 - ### Collecting
 
 A `collect` operation performs a mutable reduction operation on stream elements, 
-collecting elements to a container using `Collector` or (`Suppier` and `BiConsumer`) functions.
+collecting elements into a container using `Collector` or (`Suppier` and `BiConsumer`) functions.
 
 `collect` is equivalent to:
 
@@ -535,7 +535,7 @@ Map<String, List<Account>> accountsByRating = (Map<String, List<Account>>) Strea
         .collect(SObjectCollector.groupingByString(Account.Rating));
 ```
 
-Apex Stream Framework provide built-in collectors for each primitive type:
+Apex Stream Framework provides built-in collectors for each primitive type:
 
 ```apex
 Map<Datetime, List<Account>> accountsByRating = (Map<Datetime, List<Account>>) Stream.of(accounts)
@@ -634,7 +634,7 @@ Account acc = optionalAccount.get();
 
 - ### Fast Collecting
 
-`SObjectIterable` also support simple fast collecting methods if you don't want to use `collect` operation:
+`SObjectIterable` also supports simple fast collecting methods if you don't want to use `collect` operation:
 - `toList`
 - `toSet`
 - `toIdSet`
@@ -659,7 +659,7 @@ List<Id> accountIds = (List<Id>) Stream.of(contact).toList(Contact.AccountId, Li
 Group accounts by `Rating`:
 
 ```apex
-Map<String, List<Account>> accountsByRating = Stream.of(contact).groupByString(Contact.Rating);
+Map<String, List<Account>> accountsByRating = Stream.of(accounts).groupByString(Account.Rating);
 ```
 
 
@@ -682,14 +682,14 @@ OptionalSObject optionalAccount = OptionalSObject.of(account);
 OptionalSObject optionalAccount = OptionalSObject.ofNullable(account);
 ```
 
-To check if `Optional` contains a value use `isPresent` or `isEmpty` methods:
+To check if `Optional` contains a value, use `isPresent` or `isEmpty` methods:
 
 ```apex
 Boolean isNonNullAccount = optionalAccount.isPresent();
 Boolean isNullAccount = optionalAccount.isEmpty();
 ```
 
-To perform an action with value if value is present use `ifPresent` method:
+To perform an action with value if value is present, use `ifPresent` method:
 
 ```apex
 optionalAccount.ifPresent(SObjectConsumer.addError('Error Message'));
@@ -701,13 +701,13 @@ optionalAccount.ifPresent(SObjectConsumer.addError('Error Message'));
 Account acc = (Account) optionalAccount.get(); 
 ```
 
-To return a default value if `Optional` is empty, otherwise return value use `orElse` method:
+To return a default value if `Optional` is empty, otherwise return value, use `orElse` method:
 
 ```apex
 Account acc = (Account) optionalAccount.orElse(new Account()); 
 ```
 
-`orElseGet` is similar to `orElse` but returns a value from provided `Supplier`:
+`orElseGet` is similar to `orElse` but returns a value from a provided `Supplier`:
 
 ```apex
 Account acc = (Account) optionalAccount.orElseGet(SObjectSupplier.of(Account.SObjectType)); 
@@ -732,7 +732,7 @@ List<Account> accounts = Stream.of(contacts)
         .forEach('NumberOfEmployees', 0)
         .toList();
 ```
-Create and relate `contacts` to parent `accounts` and set `Descripton` field:
+Create and relate `contacts` to parent `accounts` and set the `Descripton` field:
 ```apex
 List<Contact> contacts = Stream.of(accounts)
         .mapTo(
@@ -763,7 +763,7 @@ Map<String, List<String>> lastNamesByOtherCountry = (Map<String, List<String>>) 
 ```
 
 Filter `input` allowing not blank strings, convert all the characters to uppercase, sort, 
-skip the first element and return as list containing first 2 elements:
+skip the first element and return a list containing the first 2 elements:
 ```apex
 List<Object> input = new List<Object>{
         new Account(), 1, 1L, null, '  ', '', 'hello',
@@ -790,5 +790,5 @@ Find more examples [here](/sfdx-source/apex-stream/test/classes).
 [Full Apex Stream Framework Documentation](/docs/README.md).
 
 ## User Guide (in development)
-If you want to know more take a look at the [User Guide](https://github.com/berehovskyi/apex-stream/wiki) for brief introduction to the Apex Stream Framework.
+If you want to know more, take a look at the [User Guide](https://github.com/berehovskyi/apex-stream/wiki) for a brief introduction to the Apex Stream Framework.
 
