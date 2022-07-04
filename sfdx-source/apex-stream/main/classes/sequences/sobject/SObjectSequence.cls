@@ -31,7 +31,7 @@
  * @see LongSequence
  * @see DoubleSequence
  *
- * @author Oleh Berehovskyi.
+ * @author Oleh Berehovskyi
  *
  * @group Iterables
  *
@@ -240,7 +240,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = SObjectSequence.zip(
      *     Trigger.old,
      *     Trigger.new,
-     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
      */
@@ -328,7 +328,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Account> accountsWithHotRating = SObjectSequence.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual override ISObjectIterable filter(final ISObjectPredicate predicate) {
@@ -355,7 +355,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Account> firstAccountsWithHotRating = SObjectSequence.of(accounts)
-     *     .take(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .take(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual override ISObjectIterable take(final ISObjectPredicate predicate) {
@@ -385,7 +385,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Account> restAccounts = SObjectSequence.of(accounts)
-     *     .drop(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .drop(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual override ISObjectIterable drop(final ISObjectPredicate predicate) {
@@ -415,7 +415,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Account> accounts = SObjectSequence.of(contacts)
-     *     .mapTo(SObjectUnaryOperator.getSObject(Contact.AccountId))
+     *     .mapTo(SObjectUnaryOperators.getSObject(Contact.AccountId))
      *     .toList();
      */
     public virtual override ISObjectIterable mapTo(final ISObjectUnaryOperator mapper) {
@@ -440,7 +440,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Integer> numberOfEmployees = SObjectSequence.of(accounts)
-     *     .mapToInt(SObjectToIntFunction.get(Account.NumberOfEmployees))
+     *     .mapToInt(SObjectToIntFunctions.get(Account.NumberOfEmployees))
      *     .toList();
      */
     public virtual override IIntIterable mapToInt(final ISObjectToIntFunction mapper) {
@@ -465,7 +465,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Long> numberOfEmployees = SObjectSequence.of(accounts)
-     *     .mapToLong(SObjectToLongFunction.get(Account.NumberOfEmployees))
+     *     .mapToLong(SObjectToLongFunctions.get(Account.NumberOfEmployees))
      *     .toList();
      */
     public virtual override ILongIterable mapToLong(final ISObjectToLongFunction mapper) {
@@ -490,7 +490,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Double> annualRevenues = SObjectSequence.of(accounts)
-     *     .mapToDouble(SObjectToDoubleFunction.get(Account.AnnualRevenue))
+     *     .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue))
      *     .toList();
      */
     public virtual override IDoubleIterable mapToDouble(final ISObjectToDoubleFunction mapper) {
@@ -515,7 +515,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Object> birthdates = SObjectSequence.of(contacts)
-     *     .mapToObject(SObjectToDoubleFunction.get(Contact.Birthdate))
+     *     .mapToObject(SObjectToDoubleFunctions.get(Contact.Birthdate))
      *     .toList();
      */
     public virtual override IObjectIterable mapToObject(final ISObjectFunction mapper) {
@@ -541,7 +541,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Contact> contacts = SObjectSequence.of(accounts)
-     *     .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+     *     .flatMapTo(SObjectFunctions.getSObjects('Contacts'))
      *     .toList();
      */
     public virtual override ISObjectIterable flatMapTo(final ISObjectFunction mapper) {
@@ -665,7 +665,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Account> accountsWithResetAnnualRevenue = SObjectSequence.of(accounts)
-     *     .forEach(SObjectConsumer.set(Account.AnnualRevenue, 0))
+     *     .forEach(SObjectConsumers.set(Account.AnnualRevenue, 0))
      *     .toList();
      */
     public virtual override ISObjectIterable forEach(final ISObjectConsumer consumer) {
@@ -710,7 +710,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Account> distinctAccountsByName = SObjectSequence.of(accounts)
-     *     .distinct(SObjectFunction.get(Account.Name))
+     *     .distinct(SObjectFunctions.get(Account.Name))
      *     .toList();
      */
     public virtual override ISObjectIterable distinct(final ISObjectFunction classifier) {
@@ -891,7 +891,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
      *     .collect(
      *         Supplier.of(List<String>.class),
-     *         ListSObjectConsumer.addToList(SObjectFunction.get(Account.Name))
+     *         ListSObjectConsumers.addToList(SObjectFunctions.get(Account.Name))
      *     );
      */
     public virtual Object collect(final ISupplier supplier, final IObjectSObjectConsumer accumulator) {
@@ -919,16 +919,16 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * // Group contacts by AccountId
      * Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
      *     SObjectSequence.of(contacts)
-     *         .collect(SObjectCollector.groupingById(Contact.AccountId));
+     *         .collect(SObjectCollectors.groupingById(Contact.AccountId));
      *         
      * // Group contacts by Department and by Account.Rating, cascading two collectors
      * Map<String, Map<String, List<Contact>>> contactsByAccountRatingByDepartment
      *     = (Map<String, Map<String, List<Contact>>>)
      *         SObjectSequence.of(contacts)
-     *             .collect(SObjectCollector.groupingByString(
-     *                 SObjectFunction.get(Contact.Department),
-     *                 SObjectCollector.groupingByString(
-     *                     SObjectFunction.get('Account?.Rating')
+     *             .collect(SObjectCollectors.groupingByString(
+     *                 SObjectFunctions.get(Contact.Department),
+     *                 SObjectCollectors.groupingByString(
+     *                     SObjectFunctions.get('Account?.Rating')
      *                 )
      *             ).cast(Map<String, Map<String, List<Contact>>>.class));
      */
@@ -956,7 +956,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Account firstAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
-     *     .find(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100))
+     *     .find(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100))
      *     .get();
      */
     public virtual override OptionalSObject find(final ISObjectPredicate predicate) {
@@ -983,7 +983,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Boolean isEveryAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
-     *     .every(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+     *     .every(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
      */
     public virtual override Boolean every(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -1003,7 +1003,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Boolean isSomeAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
-     *     .some(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+     *     .some(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
      */
     public virtual override Boolean some(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -1038,7 +1038,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<Account> accountsWithHotRating = SObjectSequence.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual List<SObject> toList() {
@@ -1058,7 +1058,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
-     *     .toList(SObjectFunction.get('Name'), List<String>.class);
+     *     .toList(SObjectFunctions.get('Name'), List<String>.class);
      */
     public virtual override List<Object> toList(final ISObjectFunction mapper, final Type listType) {
         return Lists.toList(sObjects, mapper, listType);
@@ -1072,7 +1072,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Set<SObject> accountsWithHotRating = SObjectSequence.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toSet();
      */
     public virtual Set<SObject> toSet() {
@@ -1090,7 +1090,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<Object> createdDates = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('CreatedDate'));
+     * Set<Object> createdDates = SObjectSequence.of(contacts).toIdSet(SObjectFunctions.get('CreatedDate'));
      */
     public virtual override Set<Object> toSet(final ISObjectFunction mapper) {
         return Lists.toObjectSet(sObjects, mapper);
@@ -1120,7 +1120,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('AccountId'));
+     * Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(SObjectFunctions.get('AccountId'));
      */
     public virtual override Set<Id> toIdSet(final ISObjectFunction mapper) {
         return Lists.toIdSet(sObjects, mapper);
@@ -1137,7 +1137,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(SObjectFunction.get('Name'));
+     * Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(SObjectFunctions.get('Name'));
      */
     public virtual override Set<String> toStringSet(final ISObjectFunction mapper) {
         return Lists.toStringSet(sObjects, mapper);
@@ -1151,7 +1151,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Map<Id, SObject> accountsWithHotRating = SObjectSequence.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toMap();
      */
     public virtual Map<Id, SObject> toMap() {
@@ -1173,7 +1173,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectSequence.of(contacts)
-     *     .toByIdMap(SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+     *     .toByIdMap(SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
      */
     public virtual override Map<Id, SObject> toByIdMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Lists.toByIdMap(sObjects, keyMapper, mapType);
@@ -1194,7 +1194,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Map<String, Account> accountByName = (Map<String, Account>) SObjectSequence.of(accounts)
-     *     .toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+     *     .toByStringMap(SObjectFunctions.get('Name'), Map<String, Account>.class);
      */
     public virtual override Map<String, SObject> toByStringMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Lists.toByStringMap(sObjects, keyMapper, mapType);
@@ -1213,7 +1213,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts)
-     *     .groupById(SObjectFunction.get('AccountId'));
+     *     .groupById(SObjectFunctions.get('AccountId'));
      */
     public virtual override Map<Id, List<SObject>> groupById(final ISObjectFunction keyMapper) {
         return Lists.groupById(sObjects, keyMapper);
@@ -1232,7 +1232,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts)
-     *     .groupByString(SObjectFunction.get('Rating'));
+     *     .groupByString(SObjectFunctions.get('Rating'));
      */
     public virtual override Map<String, List<SObject>> groupByString(final ISObjectFunction keyMapper) {
         return Lists.groupByString(sObjects, keyMapper);
@@ -1250,7 +1250,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectIterable i
      *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = SObjectSequence.of(accounts).partition(SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+     *     = SObjectSequence.of(accounts).partition(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
      */
     public virtual override Map<Boolean, List<SObject>> partition(final ISObjectPredicate predicate) {
         return Lists.partition(sObjects, predicate);

@@ -1,16 +1,13 @@
 # LongBinaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ILongBinaryOperator](/docs/Functional-Interfaces/ILongBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [ILongBinaryOperator](/docs/Functional-Interfaces/ILongBinaryOperator.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [ILongBinaryOperator](/docs/Functional-Interfaces/ILongBinaryOperator.md)
 
 
 **See** LongStream.zip
@@ -22,7 +19,13 @@ Inherits [ILongBinaryOperator](/docs/Functional-Interfaces/ILongBinaryOperator.m
 **See** ILongIterable.reduce
 
 
-**See** [Collector](/docs/Collectors/Collector.md)
+**See** [Collector](/docs/Functional-Abstract-Classes/Collector.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -30,89 +33,5 @@ Inherits [ILongBinaryOperator](/docs/Functional-Interfaces/ILongBinaryOperator.m
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static max()`
-
-Returns a `LongBinaryOperator` that return a greater Long input argument.
-
-###### Return
-
-**Type**
-
-LongBinaryOperator
-
-**Description**
-
-the `LongBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Long input argument is null|
-
-
-**See** Math.max
-
-##### `static min()`
-
-Returns a `LongBinaryOperator` that return a lesser Long input argument.
-
-###### Return
-
-**Type**
-
-LongBinaryOperator
-
-**Description**
-
-the `LongBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Long input argument is null|
-
-
-**See** Math.min
-
-##### `static product()`
-
-Returns a `LongBinaryOperator` that return a product of two Long input arguments.
-
-###### Return
-
-**Type**
-
-LongBinaryOperator
-
-**Description**
-
-the `LongBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Long input argument is null|
-
-##### `static sum()`
-
-Returns a `LongBinaryOperator` that return a sum of two Long input arguments.
-
-###### Return
-
-**Type**
-
-LongBinaryOperator
-
-**Description**
-
-the `LongBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Long input argument is null|
 
 ---

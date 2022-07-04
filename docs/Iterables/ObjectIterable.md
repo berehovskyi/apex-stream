@@ -1,13 +1,13 @@
 # ObjectIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Provides a skeletal implementation of [IObjectIterable](/docs/Iterables/IObjectIterable.md).
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Iterables

@@ -16,10 +16,10 @@ public abstract inherited sharing class LongBaseIterator implements Iterator<Lon
 
     public Long next() {
         if (!isInit) { hasNext(); }
-        if (!hasNext) throw new NoSuchElementException();
+        if (!hasNext) { throw new NoSuchElementException(); }
         final Long result = next;
         computeNext();
-        if (!hasNext) next = null;
+        if (!hasNext) { next = null; }
         return result;
     }
 

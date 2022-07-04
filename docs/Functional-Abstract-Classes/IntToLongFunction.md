@@ -1,13 +1,16 @@
 # IntToLongFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IIntToLongFunction](/docs/Functional-Interfaces/IIntToLongFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IIntToLongFunction](/docs/Functional-Interfaces/IIntToLongFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IIntToLongFunction](/docs/Functional-Interfaces/IIntToLongFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -18,21 +21,5 @@ Inherits [IIntToLongFunction](/docs/Functional-Interfaces/IIntToLongFunction.md)
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static asLong()`
-
-Returns a `IIntToLongFunction` that returns the Long value of the Integer input argument by casting it to an Long.
-
-###### Return
-
-**Type**
-
-IntToLongFunction
-
-**Description**
-
-the `IIntToLongFunction`
 
 ---

@@ -1,19 +1,22 @@
 # Function
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IFunction](/docs/Functional-Interfaces/IFunction.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [IFunction](/docs/Functional-Interfaces/IFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [IFunction](/docs/Functional-Interfaces/IFunction.md)
 
 
 **See** IObjectIterable.mapTo
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -131,7 +134,7 @@ Function
 
 the `Function`
 
-##### `static forPredicate(IPredicate predicate)`
+##### `static compose(IPredicate predicate)`
 
 Returns a composed `Function` of the `predicate`.
 
@@ -155,7 +158,7 @@ the `Function`
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-##### `static upcast(ISObjectFunction function)`
+##### `static compose(ISObjectFunction function)`
 
 Returns a composed `Function` of the `ISObjectFunction`.
 

@@ -1,7 +1,9 @@
 /**
- * @description Inherits {@link IToSObjectFunction} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IToSObjectFunction} functional interface.
  *
+ * @see IToSObjectFunction
+ * 
  * @author Oleh Berehovskyi
  *
  * @group Functional Abstract Classes
@@ -25,17 +27,9 @@ public abstract inherited sharing class ToSObjectFunction implements IToSObjectF
      *
      * @throws NullPointerException if `mapper` is null
      */
-    public static ToSObjectFunction downcast(final IFunction mapper) {
+    public static ToSObjectFunction compose(final IFunction mapper) {
         Validate.notNull(mapper);
         return new ForFunction(mapper);
-    }
-    // @end-group
-    //</editor-fold>
-
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-    public static ToSObjectFunction asSObject() {
-        return new ToSObject();
     }
     // @end-group
     //</editor-fold>
@@ -46,10 +40,6 @@ public abstract inherited sharing class ToSObjectFunction implements IToSObjectF
         private final IFunction mapper;
         private ForFunction(IFunction mapper) { this.mapper = mapper; }
         public override SObject apply(Object o) { return (SObject) mapper.apply(o); }
-    }
-
-    private class ToSObject extends ToSObjectFunction {
-        public override SObject apply(Object o) { return (SObject) o; }
     }
     // @end-group
     //</editor-fold>

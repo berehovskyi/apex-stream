@@ -1,16 +1,10 @@
 # IDoubleIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Double` elements supporting aggregate operations.
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [IObjectIterable](/docs/Iterables/IObjectIterable.md)
@@ -23,6 +17,12 @@ A sequence of `Double` elements supporting aggregate operations.
 
 
 **See** [ILongIterable](/docs/Iterables/ILongIterable.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### `append(Iterable<Double> iterable)`

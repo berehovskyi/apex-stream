@@ -1,16 +1,10 @@
 # IObjectIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `SObject` elements supporting aggregate operations.
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [ISObjectIterable](/docs/Iterables/ISObjectIterable.md)
@@ -23,6 +17,12 @@ A sequence of `SObject` elements supporting aggregate operations.
 
 
 **See** [IDoubleIterable](/docs/Iterables/IDoubleIterable.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### `append(Iterable<Object> iterable)`
@@ -514,6 +514,7 @@ Returns a new `IObjectIterable` with sorted `Object` elements considering `order
 #### Parameters
 |Param|Description|
 |---|---|
+|`order`|the sort order|
 
 #### Return
 

@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link IUnaryOperator} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IUnaryOperator} functional interface.
  *
+ * @see IUnaryOperator
  * @see IObjectIterable.mapTo
  *
  * @author Oleh Berehovskyi
@@ -94,7 +95,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
      *
      * @throws NullPointerException if `operator` is null
      */
-    public static UnaryOperator upcast(final IIntUnaryOperator operator) {
+    public static UnaryOperator compose(final IIntUnaryOperator operator) {
         Validate.notNull(operator);
         return new ForIntUnaryOperator(operator);
     }
@@ -108,7 +109,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
      *
      * @throws NullPointerException if `operator` is null
      */
-    public static UnaryOperator upcast(final ILongUnaryOperator operator) {
+    public static UnaryOperator compose(final ILongUnaryOperator operator) {
         Validate.notNull(operator);
         return new ForLongUnaryOperator(operator);
     }
@@ -122,7 +123,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
      *
      * @throws NullPointerException if `operator` is null
      */
-    public static UnaryOperator upcast(final IDoubleUnaryOperator operator) {
+    public static UnaryOperator compose(final IDoubleUnaryOperator operator) {
         Validate.notNull(operator);
         return new ForDoubleUnaryOperator(operator);
     }
@@ -136,7 +137,7 @@ public abstract inherited sharing class UnaryOperator implements IUnaryOperator 
      *
      * @throws NullPointerException if `operator` is null
      */
-    public static UnaryOperator upcast(final ISObjectUnaryOperator operator) {
+    public static UnaryOperator compose(final ISObjectUnaryOperator operator) {
         Validate.notNull(operator);
         return new ForSObjectUnaryOperator(operator);
     }

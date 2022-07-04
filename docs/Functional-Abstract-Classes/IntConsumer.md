@@ -1,19 +1,22 @@
 # IntConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IIntConsumer](/docs/Functional-Interfaces/IIntConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [IIntConsumer](/docs/Functional-Interfaces/IIntConsumer.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [IIntConsumer](/docs/Functional-Interfaces/IIntConsumer.md)
 
 
 **See** IIntIterable.forEach
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -73,94 +76,5 @@ the composed `IntConsumer`
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|
-
----
-### Built-Ins
-##### `static debug(LoggingLevel loggingLevel, String message)`
-
-Returns a `IntConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`loggingLevel`|the logging level|
-|`message`|the message|
-
-###### Return
-
-**Type**
-
-IntConsumer
-
-**Description**
-
-the `IntConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `loggingLevel` or `message` is null|
-
-##### `static debug(LoggingLevel loggingLevel)`
-
-Returns a `IntConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`loggingLevel`|the logging level|
-
-###### Return
-
-**Type**
-
-IntConsumer
-
-**Description**
-
-the `IntConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `loggingLevel` is null|
-
-##### `static debug(String message)`
-
-Returns a `IntConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`message`|the message|
-
-###### Return
-
-**Type**
-
-IntConsumer
-
-**Description**
-
-the `IntConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `message` is null|
-
-##### `static debug()`
-
-Returns a `IntConsumer` that debugs an input argument.
-
-###### Return
-
-**Type**
-
-IntConsumer
-
-**Description**
-
-the `IntConsumer`
 
 ---

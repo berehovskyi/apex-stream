@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see DoubleSequence
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class DoubleSequenceTest {
@@ -83,7 +84,7 @@ private class DoubleSequenceTest {
         // Given
         List<Double> input = new List<Double>{ -5.0, 0, 1.0 };
         List<Double> input1 = new List<Double>{ 3.0, 0, 8.5 };
-        IDoubleIterable seq = DoubleSequence.zip(DoubleSequence.of(input), DoubleSequence.of(input1), DoubleBinaryOperator.sum());
+        IDoubleIterable seq = DoubleSequence.zip(DoubleSequence.of(input), DoubleSequence.of(input1), DoubleBinaryOperators.sum());
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -168,7 +169,7 @@ private class DoubleSequenceTest {
     private static void filter() {
         // Given
         List<Double> input = new List<Double>{ -5.5, 0, 1.0, 3, 8.99, null, -6, 4.01, 4.01 };
-        IDoubleIterable seq = DoubleSequence.of(input).filter(DoublePredicate.isPositive());
+        IDoubleIterable seq = DoubleSequence.of(input).filter(DoublePredicates.isGreater(0));
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -183,7 +184,7 @@ private class DoubleSequenceTest {
     private static void take() {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, null, -6, 4.01, 4.01 };
-        IDoubleIterable seq = DoubleSequence.of(input).take(DoublePredicate.isPositive());
+        IDoubleIterable seq = DoubleSequence.of(input).take(DoublePredicates.isGreater(0));
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -198,7 +199,7 @@ private class DoubleSequenceTest {
     private static void drop() {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, null, -6, 4.01, 4.01 };
-        IDoubleIterable seq = DoubleSequence.of(input).drop(DoublePredicate.isPositive());
+        IDoubleIterable seq = DoubleSequence.of(input).drop(DoublePredicates.isGreater(0));
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -231,7 +232,7 @@ private class DoubleSequenceTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IDoubleIterable seq = DoubleSequence.of(clone).mapTo(DoubleUnaryOperator.multiply(2));
+        IDoubleIterable seq = DoubleSequence.of(clone).mapTo(new IterTestUtils.MultiplyDoubleOp(2));
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -248,7 +249,7 @@ private class DoubleSequenceTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        ILongIterable seq = DoubleSequence.of(clone).mapToLong(DoubleToLongFunction.roundToLong());
+        ILongIterable seq = DoubleSequence.of(clone).mapToLong(DoubleToLongFunctions.roundToLong());
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -265,7 +266,7 @@ private class DoubleSequenceTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IIntIterable seq = DoubleSequence.of(clone).mapToInt(DoubleToIntFunction.round());
+        IIntIterable seq = DoubleSequence.of(clone).mapToInt(DoubleToIntFunctions.round());
         // When
         List<Integer> actual = seq.toList();
         // Then
@@ -300,7 +301,7 @@ private class DoubleSequenceTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IObjectIterable seq = DoubleSequence.of(clone).mapToObject(DoubleFunction.toString());
+        IObjectIterable seq = DoubleSequence.of(clone).mapToObject(new IterTestUtils.DoubleToString());
         // When
         List<Object> actual = seq.toList();
         // Then
@@ -317,7 +318,7 @@ private class DoubleSequenceTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IDoubleIterable seq = DoubleSequence.of(clone).forEach(DoubleConsumer.debug());
+        IDoubleIterable seq = DoubleSequence.of(clone).forEach(new IterTestUtils.DoNothingDoubleConsumer());
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -438,11 +439,11 @@ private class DoubleSequenceTest {
         IDoubleIterable seq2 = DoubleSequence.of(cloneWithNulls);
         Double seed = 10;
         // When
-        Double actual = seq.reduce(seed, DoubleBinaryOperator.max());
-        Double actual1 = seq1.reduce(DoubleBinaryOperator.max()).get();
+        Double actual = seq.reduce(seed, DoubleBinaryOperators.max());
+        Double actual1 = seq1.reduce(DoubleBinaryOperators.max()).get();
         Exception exc1;
         try {
-            seq2.reduce(DoubleBinaryOperator.sum());
+            seq2.reduce(DoubleBinaryOperators.sum());
         } catch (Exception exc) {
             exc1 = exc;
         }
@@ -465,7 +466,7 @@ private class DoubleSequenceTest {
         List<Double> clone = input.clone();
         IDoubleIterable seq = DoubleSequence.of(clone);
         // When
-        Set<Double> actual = (Set<Double>) seq.collect(Supplier.of(Set<Double>.class), ObjectDoubleConsumer.of(SetObjectConsumer.addToDoubleSet()));
+        Set<Double> actual = (Set<Double>) seq.collect(Supplier.of(Set<Double>.class), ObjectDoubleConsumer.compose(new IterTestUtils.AddToDoubleSet()));
         // Then
         Set<Double> expected = new Set<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01 };
         Validate.assertEquals(expected, actual);
@@ -483,8 +484,8 @@ private class DoubleSequenceTest {
         IDoubleIterable seq = DoubleSequence.of(clone);
         IDoubleIterable seq1 = DoubleSequence.of(clone);
         // When
-        Double actual = seq.find(DoublePredicate.isNegative()).get();
-        Double actual1 = seq1.find(DoublePredicate.isGreater(50)).orElse((Double) 42.0);
+        Double actual = seq.find(DoublePredicates.isLess(0)).get();
+        Double actual1 = seq1.find(DoublePredicates.isGreater(50)).orElse((Double) 42.0);
         // Then
         Validate.assertEquals(-8.99, actual);
         Validate.assertEquals(42.0, actual1);
@@ -502,8 +503,8 @@ private class DoubleSequenceTest {
         IDoubleIterable seq = DoubleSequence.of(clone);
         IDoubleIterable seq1 = DoubleSequence.of(clone);
         // When
-        Boolean actual = seq.every(DoublePredicate.isLess(42));
-        Boolean actual1 = seq1.every(DoublePredicate.isPositive());
+        Boolean actual = seq.every(DoublePredicates.isLess(42));
+        Boolean actual1 = seq1.every(DoublePredicates.isGreater(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -521,8 +522,8 @@ private class DoubleSequenceTest {
         IDoubleIterable seq = DoubleSequence.of(clone);
         IDoubleIterable seq1 = DoubleSequence.of(clone);
         // When
-        Boolean actual = seq.some(DoublePredicate.isNegative());
-        Boolean actual1 = seq1.some(DoublePredicate.isZero());
+        Boolean actual = seq.some(DoublePredicates.isLess(0));
+        Boolean actual1 = seq1.some(DoublePredicates.isEqual(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -540,8 +541,8 @@ private class DoubleSequenceTest {
         IDoubleIterable seq = DoubleSequence.of(clone);
         IDoubleIterable seq1 = DoubleSequence.of(clone);
         // When
-        Boolean actual = seq.none(DoublePredicate.isGreater(42));
-        Boolean actual1 = seq1.none(DoublePredicate.isNegative());
+        Boolean actual = seq.none(DoublePredicates.isGreater(42));
+        Boolean actual1 = seq1.none(DoublePredicates.isLess(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);

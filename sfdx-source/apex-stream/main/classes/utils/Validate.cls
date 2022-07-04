@@ -10,7 +10,10 @@
  *
  * @group Utils
  */
-public virtual inherited sharing class Validate {
+public inherited sharing class Validate {
+
+    @TestVisible
+    private Validate(){}
 
     /**
      * @description Checks whether the specified Object reference is not null.

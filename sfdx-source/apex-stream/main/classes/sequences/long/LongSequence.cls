@@ -290,7 +290,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * List<Long> filtered = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .filter(LongPredicate.isGreater(0))
+     *     .filter(LongPredicates.isGreater(0))
      *     .toList();
      */
     public virtual override ILongIterable filter(final ILongPredicate predicate) {
@@ -317,7 +317,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .take(LongPredicate.isGreater(0))
+     *     .take(LongPredicates.isGreater(0))
      *     .toList();
      */
     public virtual ILongIterable take(final ILongPredicate predicate) {
@@ -347,7 +347,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * List<Long> rest = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .drop(LongPredicate.isGreater(0))
+     *     .drop(LongPredicates.isGreater(0))
      *     .toList();
      */
     public virtual ILongIterable drop(final ILongPredicate predicate) {
@@ -377,7 +377,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * List<Long> incrementedLongs = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .mapTo(LongUnaryOperator.add(1L))
+     *     .mapTo(LongUnaryOperators.add(1L))
      *     .toList();
      */
     public virtual ILongIterable mapTo(final ILongUnaryOperator mapper) {
@@ -602,8 +602,8 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperator.sum());
-     * Long factorialOfN = LongSequence.range(1, n).reduce(1, LongBinaryOperator.product());
+     * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperators.sum());
+     * Long factorialOfN = LongSequence.range(1, n).reduce(1, LongBinaryOperators.product());
      */
     public virtual Long reduce(final Long identity, final ILongBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -628,7 +628,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *      .reduce(LongBinaryOperator.sum())
+     *      .reduce(LongBinaryOperators.sum())
      *      .get();
      */
     public virtual override OptionalLong reduce(final ILongBinaryOperator accumulator) {
@@ -675,7 +675,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * Long firstEvenLong = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .find(LongPredicate.isEven())
+     *     .find(LongPredicates.isEven())
      *     .get();
      */
     public virtual OptionalLong find(final ILongPredicate predicate) {
@@ -702,7 +702,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * Boolean isEveryLongEven = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .every(LongPredicate.isEven())
+     *     .every(LongPredicates.isEven())
      *     .get();
      */
     public virtual Boolean every(final ILongPredicate predicate) {
@@ -723,7 +723,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      *
      * @example
      * Boolean isSomeLongEven = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .some(LongPredicate.isEven())
+     *     .some(LongPredicates.isEven())
      *     .get();
      */
     public virtual override Boolean some(final ILongPredicate predicate) {

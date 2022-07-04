@@ -1,13 +1,13 @@
 # Lists
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Contains static utility methods that operate Lists.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Utils
@@ -101,7 +101,7 @@ the `List<Object>` which can be cast into `listType`
 
 #### Example
 ```apex
-List<String> accNames = (List<String>) Lists.toList(accounts, SObjectFunction.get('Name'), List<String>.class);
+List<String> accNames = (List<String>) Lists.toList(accounts, SObjectFunctions.get('Name'), List<String>.class);
 ```
 
 ### `static toObjectSet(List<SObject> sObjects, ISObjectFunction mapper)`
@@ -131,7 +131,7 @@ the `Set<Object>`
 
 #### Example
 ```apex
-Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunction.get('CreatedDate'));
+Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunctions.get('CreatedDate'));
 ```
 
 ### `static toIdSet(List<SObject> sObjects, ISObjectFunction mapper)`
@@ -161,7 +161,7 @@ the `Set<Id>`
 
 #### Example
 ```apex
-Set<Id> parentIds = Lists.toIdSet(accounts, SObjectFunction.get('ParentId'));
+Set<Id> parentIds = Lists.toIdSet(accounts, SObjectFunctions.get('ParentId'));
 ```
 
 ### `static toStringSet(List<SObject> sObjects, ISObjectFunction mapper)`
@@ -191,7 +191,7 @@ the `Set<String>`
 
 #### Example
 ```apex
-Set<String> names = Lists.toStringSet(accounts, SObjectFunction.get('Name'));
+Set<String> names = Lists.toStringSet(accounts, SObjectFunctions.get('Name'));
 ```
 
 ### `static toByIdMap(List<SObject> sObjects, ISObjectFunction keyMapper, Type mapType)`
@@ -218,13 +218,13 @@ the `Map<Id, SObject>` which can be cast into `mapType`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `sObjects`, `keyMapper` or `listType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `sObjects`, `keyMapper` or `listType` is null|
 
 #### Example
 ```apex
 Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Lists
-    .toByIdMap(contacts, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+    .toByIdMap(contacts, SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
 ```
 
 ### `static toByStringMap(List<SObject> sObjects, ISObjectFunction keyMapper, Type mapType)`
@@ -251,13 +251,13 @@ the `Map<String, SObject>` which can be cast into `mapType`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `sObjects`, `keyMapper` or `listType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `sObjects`, `keyMapper` or `listType` is null|
 
 #### Example
 ```apex
 Map<String, Account> accountByName = (Map<String, Account>) Lists
-    .toByIdMap(accounts, SObjectFunction.get('Name'), Map<String, Account>.class);
+    .toByIdMap(accounts, SObjectFunctions.get('Name'), Map<String, Account>.class);
 ```
 
 ### `static groupById(List<SObject> sObjects, ISObjectFunction keyMapper)`
@@ -287,7 +287,7 @@ the `Map<Id, List<SObject>>` containing the elements
 
 #### Example
 ```apex
-Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, SObjectFunction.get('AccountId'));
+Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, SObjectFunctions.get('AccountId'));
 ```
 
 ### `static groupByString(List<SObject> sObjects, ISObjectFunction keyMapper)`
@@ -317,7 +317,7 @@ the `Map<Id, List<SObject>>` containing the elements
 
 #### Example
 ```apex
-Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, SObjectFunction.get('Rating'));
+Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, SObjectFunctions.get('Rating'));
 ```
 
 ### `static partition(List<SObject> sObjects, ISObjectPredicate predicate)`
@@ -348,7 +348,7 @@ the `Map<Boolean, List<SObject>>` containing the elements
 #### Example
 ```apex
 Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-    = Lists.partition(accounts, SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+    = Lists.partition(accounts, SObjectPredicates.isEqual(Account.Rating, 'Hot'));
 ```
 
 ---

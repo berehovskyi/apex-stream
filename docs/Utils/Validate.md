@@ -1,13 +1,13 @@
 # Validate
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Contains static utility arguments validation methods. <ul>   <li>An invalid `null` argument causes a NullPointerException.</li>   <li>A non-`null` argument causes an IllegalArgumentException.</li>   <li>Assertion failure causes a fatal error that causes code execution to halt.</li> </ul>
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Utils

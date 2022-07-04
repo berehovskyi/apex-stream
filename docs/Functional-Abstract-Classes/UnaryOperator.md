@@ -1,19 +1,22 @@
 # UnaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IUnaryOperator](/docs/Functional-Interfaces/IUnaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [IUnaryOperator](/docs/Functional-Interfaces/IUnaryOperator.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [IUnaryOperator](/docs/Functional-Interfaces/IUnaryOperator.md)
 
 
 **See** IObjectIterable.mapTo
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -131,7 +134,7 @@ UnaryOperator
 
 the `UnaryOperator`
 
-##### `static upcast(IIntUnaryOperator operator)`
+##### `static compose(IIntUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `IIntUnaryOperator`.
 
@@ -155,7 +158,7 @@ the `UnaryOperator`
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-##### `static upcast(ILongUnaryOperator operator)`
+##### `static compose(ILongUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `ILongUnaryOperator`.
 
@@ -179,7 +182,7 @@ the `UnaryOperator`
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-##### `static upcast(IDoubleUnaryOperator operator)`
+##### `static compose(IDoubleUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `IDoubleUnaryOperator`.
 
@@ -203,7 +206,7 @@ the `UnaryOperator`
 |---|---|
 |`NullPointerException`|if `operator` is null|
 
-##### `static upcast(ISObjectUnaryOperator operator)`
+##### `static compose(ISObjectUnaryOperator operator)`
 
 Returns a composed `UnaryOperator` of the `ISObjectUnaryOperator`.
 

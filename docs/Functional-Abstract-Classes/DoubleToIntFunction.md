@@ -1,13 +1,16 @@
 # DoubleToIntFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IDoubleToIntFunction](/docs/Functional-Interfaces/IDoubleToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IDoubleToIntFunction](/docs/Functional-Interfaces/IDoubleToIntFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IDoubleToIntFunction](/docs/Functional-Interfaces/IDoubleToIntFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -18,44 +21,5 @@ Inherits [IDoubleToIntFunction](/docs/Functional-Interfaces/IDoubleToIntFunction
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static intValue()`
-
-Returns a `DoubleToIntFunction` that returns the Integer value of the Double input argument by casting it to an Integer.
-
-###### Return
-
-**Type**
-
-DoubleToIntFunction
-
-**Description**
-
-the `DoubleToIntFunction`
-
-
-**See** Double.intValue
-
-##### `static round()`
-
-Returns a `DoubleToIntFunction` that returns the closest Integer to the Double input argument. If the result is less than -2,147,483,648 or greater than 2,147,483,647, Apex generates an error.
-
-###### Return
-
-**Type**
-
-DoubleToIntFunction
-
-**Description**
-
-the `DoubleToIntFunction`
-
-
-**See** Math.round
-
-
-**Deprecated** use Math.roundToLong instead.
 
 ---

@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see Comparator
+ * 
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class ComparatorTest {
@@ -153,7 +154,7 @@ private class ComparatorTest {
     static void comparingSObject() {
         // Given
         List<Account> accounts = IterTestUtils.generateAccounts();
-        IToSObjectFunction keyExtractor = ToSObjectFunction.asSObject();
+        IToSObjectFunction keyExtractor = new IterTestUtils.ToSObject();
         // When
         IComparator comparing = Comparator.comparingSObject(keyExtractor);
         // Then
@@ -275,12 +276,12 @@ private class ComparatorTest {
             Integer value3 = person.getAge();
             Integer value4 = other.getAge();
             Integer value5 = other1.getAge();
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1, true) == 0
-                    ? Comparator.compareNullSafeUntyped(value4, value3)
-                    : Comparator.compareNullSafeUntyped(value, value1, true);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2, true) == 0
-                    ? Comparator.compareNullSafeUntyped(value5, value3)
-                    : Comparator.compareNullSafeUntyped(value, value2, true);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1, true) == 0
+                    ? Comparators.compareNullSafeUntyped(value4, value3)
+                    : Comparators.compareNullSafeUntyped(value, value1, true);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2, true) == 0
+                    ? Comparators.compareNullSafeUntyped(value5, value3)
+                    : Comparators.compareNullSafeUntyped(value, value2, true);
             Validate.assertEquals(expected, comparing.compare(person, other));
             Validate.assertEquals(expected1, comparing.compare(person, other1));
         }
@@ -308,12 +309,12 @@ private class ComparatorTest {
             Integer value3 = person.getAge();
             Integer value4 = other.getAge();
             Integer value5 = other1.getAge();
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeUntyped(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeUntyped(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeUntyped(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeUntyped(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(person, other));
             Validate.assertEquals(expected1, comparing.compare(person, other1));
         }
@@ -341,12 +342,12 @@ private class ComparatorTest {
             Integer value3 = person.getAge();
             Integer value4 = other.getAge();
             Integer value5 = other1.getAge();
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeInts(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeInts(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeInts(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeInts(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(person, other));
             Validate.assertEquals(expected1, comparing.compare(person, other1));
         }
@@ -374,12 +375,12 @@ private class ComparatorTest {
             Long value3 = person.getAutoId();
             Long value4 = other.getAutoId();
             Long value5 = other1.getAutoId();
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeLongs(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeLongs(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeLongs(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeLongs(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(person, other));
             Validate.assertEquals(expected1, comparing.compare(person, other1));
         }
@@ -407,12 +408,12 @@ private class ComparatorTest {
             Double value3 = person.getProbability();
             Double value4 = other.getProbability();
             Double value5 = other1.getProbability();
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeDoubles(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeDoubles(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeDoubles(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeDoubles(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(person, other));
             Validate.assertEquals(expected1, comparing.compare(person, other1));
         }
@@ -440,12 +441,12 @@ private class ComparatorTest {
             SObject value3 = keyExtractor1.apply(person);
             SObject value4 = keyExtractor1.apply(other);
             SObject value5 = keyExtractor1.apply(other1);
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeSObjects(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeSObjects(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeSObjects(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeSObjects(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(person, other));
             Validate.assertEquals(expected1, comparing.compare(person, other1));
         }
@@ -479,63 +480,17 @@ private class ComparatorTest {
             Integer value4 = other?.getAge();
             Integer value5 = other1.getAge();
             Integer expected = (person == null || other == null)
-                    ? Comparator.compareNullables(person, other)
-                    : Comparator.compareNullSafeUntyped(value, value1) == 0
-                            ? Comparator.compareNullSafeUntyped(value3, value4)
-                            : Comparator.compareNullSafeUntyped(value1, value);
+                    ? Comparators.compareNullables(person, other)
+                    : Comparators.compareNullSafeUntyped(value, value1) == 0
+                            ? Comparators.compareNullSafeUntyped(value3, value4)
+                            : Comparators.compareNullSafeUntyped(value1, value);
             Integer expected1 = (person == null || other1 == null)
-                    ? Comparator.compareNullables(person, other1)
-                    : Comparator.compareNullSafeUntyped(value, value2) == 0
-                            ? Comparator.compareNullSafeUntyped(value3, value5)
-                            : Comparator.compareNullSafeUntyped(value2, value);
+                    ? Comparators.compareNullables(person, other1)
+                    : Comparators.compareNullSafeUntyped(value, value2) == 0
+                            ? Comparators.compareNullSafeUntyped(value3, value5)
+                            : Comparators.compareNullSafeUntyped(value2, value);
             Validate.assertEquals(expected, comparing.compare(person, other));
             Validate.assertEquals(expected1, comparing.compare(person, other1));
-        }
-    }
-
-    /**
-    * @see Comparator.compareNullables
-    * @see Comparator.bools
-    * @see Comparator.ids
-    * @see Comparator.strings
-    * @see Comparator.blobs
-    * @see Comparator.dates
-    * @see Comparator.datetimes
-    * @see Comparator.times
-    * @see Comparator.ints
-    * @see Comparator.longs
-    * @see Comparator.doubles
-    * @see Comparator.sObjects
-    * @see Comparator.comparables
-    * @see Comparator.compareNullSafeUntyped
-    */
-    @IsTest
-    static void compare() {
-        // Then
-        Validate.assertEquals(-1, Comparator.compareNullables(null, 1));
-        Validate.assertEquals(0, Comparator.compareNullables(null, null));
-        Validate.assertEquals(1, Comparator.compareNullables(1, null));
-        Validate.assertEquals(1, Comparator.bools().compare(true, false));
-        Id id1 = IterTestUtils.generateId(Account.SObjectType);
-        Id id2 = IterTestUtils.generateId(Account.SObjectType);
-        Validate.assertEquals(1, Comparator.ids().compare(id2, id1));
-        Validate.assertEquals(1, Comparator.ids().compare(id2, id1));
-        Validate.assertEquals(1, Comparator.strings().compare('b', 'a'));
-        Validate.assertEquals(1, Comparator.blobs().compare(Blob.valueOf('a'), Blob.valueOf('b')));
-        Validate.assertEquals(1, Comparator.dates().compare(Date.today().addDays(1), Date.today()));
-        Validate.assertEquals(1, Comparator.datetimes().compare(Date.today().addDays(1), Date.today()));
-        Validate.assertEquals(1, Comparator.times().compare(Time.newInstance(22, 0, 0, 0), Time.newInstance(21, 0, 0, 0)));
-        Validate.assertEquals(1, Comparator.ints().compare(1, 0));
-        Validate.assertEquals(1, Comparator.longs().compare(1L, 0L));
-        Validate.assertEquals(1, Comparator.doubles().compare((Double) 1.0, (Double) 0.0));
-        Validate.assertEquals(1, Comparator.sObjects().compare(new Account(Name = 'b'), new Account(Name = 'a')));
-        IterTestUtils.Person frank = new IterTestUtils.Person('Frank', 20, Date.newInstance(1990, 1, 2), 1L, true);
-        IterTestUtils.Person tom = new IterTestUtils.Person('Tom', 20, Date.newInstance(1990, 1, 2), 2L, true);
-        Validate.assertEquals(1, Comparator.comparables().compare(tom, frank));
-        try {
-            Comparator.compareUntyped(1, 'a');
-        } catch (TypeException exc) {
-            Validate.assertEquals('Types of comparing objects (Integer, String) mismatch or do not support comparison operators.', exc.getMessage());
         }
     }
 

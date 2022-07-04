@@ -305,7 +305,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * ISObjectIterable newAccountsWithChangedAnnualRevenueStream = SObjectStream.zip(
      *     Trigger.old,
      *     Trigger.new,
-     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
      */
@@ -390,7 +390,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Account> accountsWithHotRating = SObjectStream.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual override ISObjectIterable filter(final ISObjectPredicate predicate) {
@@ -410,7 +410,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Account> firstAccountsWithHotRating = SObjectStream.of(accounts)
-     *     .take(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .take(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual override ISObjectIterable take(final ISObjectPredicate predicate) {
@@ -431,7 +431,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Account> restAccounts = SObjectStream.of(accounts)
-     *     .drop(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .drop(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual override ISObjectIterable drop(final ISObjectPredicate predicate) {
@@ -452,7 +452,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Account> accounts = SObjectStream.of(contacts)
-     *     .mapTo(SObjectUnaryOperator.getSObject(Contact.AccountId))
+     *     .mapTo(SObjectUnaryOperators.getSObject(Contact.AccountId))
      *     .toList();
      */
     public virtual override ISObjectIterable mapTo(final ISObjectUnaryOperator mapper) {
@@ -473,7 +473,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Integer> numberOfEmployees = SObjectStream.of(accounts)
-     *     .mapToInt(SObjectToIntFunction.get(Account.NumberOfEmployees))
+     *     .mapToInt(SObjectToIntFunctions.get(Account.NumberOfEmployees))
      *     .toList();
      */
     public virtual override IIntIterable mapToInt(final ISObjectToIntFunction mapper) {
@@ -494,7 +494,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Long> numberOfEmployees = SObjectStream.of(accounts)
-     *     .mapToLong(SObjectToLongFunction.get(Account.NumberOfEmployees))
+     *     .mapToLong(SObjectToLongFunctions.get(Account.NumberOfEmployees))
      *     .toList();
      */
     public virtual override ILongIterable mapToLong(final ISObjectToLongFunction mapper) {
@@ -515,7 +515,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Double> annualRevenues = SObjectStream.of(accounts)
-     *     .mapToDouble(SObjectToDoubleFunction.get(Account.AnnualRevenue))
+     *     .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue))
      *     .toList();
      */
     public virtual override IDoubleIterable mapToDouble(final ISObjectToDoubleFunction mapper) {
@@ -536,7 +536,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Object> birthdates = SObjectStream.of(contacts)
-     *     .mapToObject(SObjectToDoubleFunction.get(Contact.Birthdate))
+     *     .mapToObject(SObjectToDoubleFunctions.get(Contact.Birthdate))
      *     .toList();
      */
     public virtual override IObjectIterable mapToObject(final ISObjectFunction mapper) {
@@ -558,7 +558,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Contact> contacts = SObjectStream.of(accounts)
-     *     .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+     *     .flatMapTo(SObjectFunctions.getSObjects('Contacts'))
      *     .toList();
      */
     public virtual override ISObjectIterable flatMapTo(final ISObjectFunction mapper) {
@@ -647,7 +647,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Account> accountsWithResetAnnualRevenue = SObjectStream.of(accounts)
-     *     .forEach(SObjectConsumer.set(Account.AnnualRevenue, 0))
+     *     .forEach(SObjectConsumers.set(Account.AnnualRevenue, 0))
      *     .toList();
      */
     public virtual override ISObjectIterable forEach(final ISObjectConsumer consumer) {
@@ -683,7 +683,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Account> distinctAccountsByName = SObjectStream.of(accounts)
-     *     .distinct(SObjectFunction.get(Account.Name))
+     *     .distinct(SObjectFunctions.get(Account.Name))
      *     .toList();
      */
     public virtual override ISObjectIterable distinct(final ISObjectFunction classifier) {
@@ -855,7 +855,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * List<String> accountNames = (List<String>) SObjectStream.of(accounts)
      *     .collect(
      *         Supplier.of(List<String>.class),
-     *         ListSObjectConsumer.addToList(SObjectFunction.get(Account.Name))
+     *         ListSObjectConsumers.addToList(SObjectFunctions.get(Account.Name))
      *     );
      */
     public virtual Object collect(final ISupplier supplier, final IObjectSObjectConsumer accumulator) {
@@ -884,16 +884,16 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * // Group contacts by AccountId
      * Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
      *     SObjectStream.of(contacts)
-     *         .collect(SObjectCollector.groupingById(Contact.AccountId));
+     *         .collect(SObjectCollectors.groupingById(Contact.AccountId));
      *         
      * // Group contacts by Department and by Account.Rating, cascading two collectors
      * Map<String, Map<String, List<Contact>>> contactsByAccountRatingByDepartment
      *     = (Map<String, Map<String, List<Contact>>>)
      *         SObjectStream.of(contacts)
-     *             .collect(SObjectCollector.groupingByString(
-     *                 SObjectFunction.get(Contact.Department),
-     *                 SObjectCollector.groupingByString(
-     *                     SObjectFunction.get('Account?.Rating')
+     *             .collect(SObjectCollectors.groupingByString(
+     *                 SObjectFunctions.get(Contact.Department),
+     *                 SObjectCollectors.groupingByString(
+     *                     SObjectFunctions.get('Account?.Rating')
      *                 )
      *             ).cast(Map<String, Map<String, List<Contact>>>.class));
      */
@@ -920,7 +920,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Account firstAccountWithMoreThan100NumberOfEmployees = SObjectStream.of(accounts)
-     *     .find(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100))
+     *     .find(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100))
      *     .get();
      */
     public virtual override OptionalSObject find(final ISObjectPredicate predicate) {
@@ -950,7 +950,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Boolean isEveryAccountWithMoreThan100NumberOfEmployees = SObjectStream.of(accounts)
-     *     .every(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+     *     .every(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
      */
     public virtual override Boolean every(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -970,7 +970,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Boolean isSomeAccountWithMoreThan100NumberOfEmployees = SObjectStream.of(accounts)
-     *     .some(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+     *     .some(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
      */
     public virtual override Boolean some(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
@@ -1011,7 +1011,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<Account> accountsWithHotRating = SObjectStream.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toList();
      */
     public virtual List<SObject> toList() {
@@ -1031,7 +1031,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * List<String> accountNames = (List<String>) SObjectStream.of(accounts)
-     *     .toList(SObjectFunction.get('Name'), List<String>.class);
+     *     .toList(SObjectFunctions.get('Name'), List<String>.class);
      */
     public virtual override List<Object> toList(final ISObjectFunction mapper, final Type listType) {
         return Iterators.toList(iterator(), mapper, listType);
@@ -1045,7 +1045,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Set<SObject> accountsWithHotRating = SObjectStream.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toSet();
      */
     public virtual Set<SObject> toSet() {
@@ -1063,7 +1063,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<Object> createdDates = SObjectStream.of(accounts).toSet(SObjectFunction.get('CreatedDate'));
+     * Set<Object> createdDates = SObjectStream.of(accounts).toSet(SObjectFunctions.get('CreatedDate'));
      */
     public virtual override Set<Object> toSet(final ISObjectFunction mapper) {
         return Iterators.toObjectSet(iterator(), mapper);
@@ -1093,7 +1093,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<Id> accountIds = SObjectStream.of(contacts).toIdSet(SObjectFunction.get('AccountId'));
+     * Set<Id> accountIds = SObjectStream.of(contacts).toIdSet(SObjectFunctions.get('AccountId'));
      */
     public virtual override Set<Id> toIdSet(final ISObjectFunction mapper) {
         return Iterators.toIdSet(iterator(), mapper);
@@ -1110,7 +1110,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<String> accountNames = SObjectStream.of(accounts).toStringSet(SObjectFunction.get('Name'));
+     * Set<String> accountNames = SObjectStream.of(accounts).toStringSet(SObjectFunctions.get('Name'));
      */
     public virtual override Set<String> toStringSet(final ISObjectFunction mapper) {
         return Iterators.toStringSet(iterator(), mapper);
@@ -1124,7 +1124,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Map<Id, SObject> accountsWithHotRating = SObjectStream.of(accounts)
-     *     .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
      *     .toMap();
      */
     public virtual Map<Id, SObject> toMap() {
@@ -1146,7 +1146,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectStream.of(contacts)
-     *     .toByIdMap(SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+     *     .toByIdMap(SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
      */
     public virtual override Map<Id, SObject> toByIdMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Iterators.toByIdMap(iterator(), keyMapper, mapType);
@@ -1167,7 +1167,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Map<String, Account> accountByName = (Map<String, Account>) SObjectStream.of(accounts)
-     *     .toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+     *     .toByStringMap(SObjectFunctions.get('Name'), Map<String, Account>.class);
      */
     public virtual override Map<String, SObject> toByStringMap(final ISObjectFunction keyMapper, final Type mapType) {
         return Iterators.toByStringMap(iterator(), keyMapper, mapType);
@@ -1186,7 +1186,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Map<Id, List<Contact>> contactsByAccountId = SObjectStream.of(contacts)
-     *     .groupById(SObjectFunction.get('AccountId'));
+     *     .groupById(SObjectFunctions.get('AccountId'));
      */
     public virtual override Map<Id, List<SObject>> groupById(final ISObjectFunction keyMapper) {
         return Iterators.groupById(iterator(), keyMapper);
@@ -1205,7 +1205,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Map<String, List<Account>> accountsByRating = SObjectStream.of(accounts)
-     *     .groupByString(SObjectFunction.get('Rating'));
+     *     .groupByString(SObjectFunctions.get('Rating'));
      */
     public virtual override Map<String, List<SObject>> groupByString(final ISObjectFunction keyMapper) {
         return Iterators.groupByString(iterator(), keyMapper);
@@ -1223,7 +1223,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = SObjectStream.of(accounts).partition(SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+     *     = SObjectStream.of(accounts).partition(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
      */
     public virtual override Map<Boolean, List<SObject>> partition(final ISObjectPredicate predicate) {
         return Iterators.partition(iterator(), predicate);

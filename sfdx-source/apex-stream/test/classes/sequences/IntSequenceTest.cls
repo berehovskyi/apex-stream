@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see IntSequence
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class IntSequenceTest {
@@ -120,7 +121,7 @@ private class IntSequenceTest {
         // Given
         List<Integer> input = new List<Integer>{ -5, 0, 1 };
         List<Integer> input1 = new List<Integer>{ 3, 0, 8 };
-        IIntIterable seq = IntSequence.zip(IntSequence.of(input), IntSequence.of(input1), IntBinaryOperator.sum());
+        IIntIterable seq = IntSequence.zip(IntSequence.of(input), IntSequence.of(input1), IntBinaryOperators.sum());
         // When
         List<Integer> actual = seq.toList();
         // Then
@@ -216,7 +217,7 @@ private class IntSequenceTest {
     private static void filter() {
         // Given
         List<Integer> input = new List<Integer>{ -5, 0, 1, 3, 8, null, -6, 4, 4 };
-        IIntIterable seq = IntSequence.of(input).filter(IntPredicate.isPositive());
+        IIntIterable seq = IntSequence.of(input).filter(IntPredicates.isGreater(0));
         // When
         List<Integer> actual = seq.toList();
         // Then
@@ -231,7 +232,7 @@ private class IntSequenceTest {
     private static void take() {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, null, -6, 4, 4 };
-        IIntIterable seq = IntSequence.of(input).take(IntPredicate.isPositive());
+        IIntIterable seq = IntSequence.of(input).take(IntPredicates.isGreater(0));
         // When
         List<Integer> actual = seq.toList();
         // Then
@@ -246,7 +247,7 @@ private class IntSequenceTest {
     private static void drop() {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, null, -6, 4, 4 };
-        IIntIterable seq = IntSequence.of(input).drop(IntPredicate.isPositive());
+        IIntIterable seq = IntSequence.of(input).drop(IntPredicates.isGreater(0));
         // When
         List<Integer> actual = seq.toList();
         // Then
@@ -279,7 +280,7 @@ private class IntSequenceTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IIntIterable seq = IntSequence.of(clone).mapTo(IntUnaryOperator.multiply(2));
+        IIntIterable seq = IntSequence.of(clone).mapTo(new IterTestUtils.MultiplyIntOp(2));
         // When
         List<Integer> actual = seq.toList();
         // Then
@@ -296,7 +297,7 @@ private class IntSequenceTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        ILongIterable seq = IntSequence.of(clone).mapToLong(IntToLongFunction.asLong());
+        ILongIterable seq = IntSequence.of(clone).mapToLong(IntToLongFunctions.asLong());
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -313,7 +314,7 @@ private class IntSequenceTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IDoubleIterable seq = IntSequence.of(clone).mapToDouble(IntToDoubleFunction.valueOf());
+        IDoubleIterable seq = IntSequence.of(clone).mapToDouble(IntToDoubleFunctions.valueOf());
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -348,7 +349,7 @@ private class IntSequenceTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IObjectIterable seq = IntSequence.of(clone).mapToObject(IntFunction.toString());
+        IObjectIterable seq = IntSequence.of(clone).mapToObject(new IterTestUtils.IntToString());
         // When
         List<String> actual = (List<String>) seq.toList(List<String>.class);
         // Then
@@ -365,7 +366,7 @@ private class IntSequenceTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IIntIterable seq = IntSequence.of(clone).forEach(IntConsumer.debug());
+        IIntIterable seq = IntSequence.of(clone).forEach(new IterTestUtils.DoNothingIntConsumer());
         // When
         List<Integer> actual = seq.toList();
         // Then
@@ -486,11 +487,11 @@ private class IntSequenceTest {
         IIntIterable seq2 = IntSequence.of(cloneWithNulls);
         Integer seed = 10;
         // When
-        Integer actual = seq.reduce(seed, IntBinaryOperator.sum());
-        Integer actual1 = seq1.reduce(IntBinaryOperator.sum()).get();
+        Integer actual = seq.reduce(seed, IntBinaryOperators.sum());
+        Integer actual1 = seq1.reduce(IntBinaryOperators.sum()).get();
         Exception exc1;
         try {
-            seq2.reduce(IntBinaryOperator.sum());
+            seq2.reduce(IntBinaryOperators.sum());
         } catch (Exception exc) {
             exc1 = exc;
         }
@@ -513,7 +514,7 @@ private class IntSequenceTest {
         List<Integer> clone = input.clone();
         IIntIterable seq = IntSequence.of(clone);
         // When
-        Set<Integer> actual = (Set<Integer>) seq.collect(Supplier.of(Set<Integer>.class), ObjectIntConsumer.of(SetObjectConsumer.addToIntSet()));
+        Set<Integer> actual = (Set<Integer>) seq.collect(Supplier.of(Set<Integer>.class), ObjectIntConsumer.compose(new IterTestUtils.AddToIntSet()));
         // Then
         Set<Integer> expected = new Set<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0 };
         Validate.assertEquals(expected, actual);
@@ -531,8 +532,8 @@ private class IntSequenceTest {
         IIntIterable seq = IntSequence.of(clone);
         IIntIterable seq1 = IntSequence.of(clone);
         // When
-        Integer actual = seq.find(IntPredicate.isNegative()).get();
-        Integer actual1 =seq1.find(IntPredicate.isGreater(50)).orElse(42);
+        Integer actual = seq.find(IntPredicates.isLess(0)).get();
+        Integer actual1 =seq1.find(IntPredicates.isGreater(50)).orElse(42);
         // Then
         Validate.assertEquals(-3, actual);
         Validate.assertEquals(42, actual1);
@@ -550,8 +551,8 @@ private class IntSequenceTest {
         IIntIterable seq = IntSequence.of(clone);
         IIntIterable seq1 = IntSequence.of(clone);
         // When
-        Boolean actual = seq.every(IntPredicate.isOdd());
-        Boolean actual1 = seq1.every(IntPredicate.isPrime());
+        Boolean actual = seq.every(IntPredicates.isEven().negate());
+        Boolean actual1 = seq1.every(IntPredicates.isPrime());
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -569,8 +570,8 @@ private class IntSequenceTest {
         IIntIterable seq = IntSequence.of(clone);
         IIntIterable seq1 = IntSequence.of(clone);
         // When
-        Boolean actual = seq.some(IntPredicate.isNegative());
-        Boolean actual1 = seq1.some(IntPredicate.isZero());
+        Boolean actual = seq.some(IntPredicates.isLess(0));
+        Boolean actual1 = seq1.some(IntPredicates.isEqual(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -588,8 +589,8 @@ private class IntSequenceTest {
         IIntIterable seq = IntSequence.of(clone);
         IIntIterable seq1 = IntSequence.of(clone);
         // When
-        Boolean actual = seq.none(IntPredicate.isEven());
-        Boolean actual1 = seq1.none(IntPredicate.isNegative());
+        Boolean actual = seq.none(IntPredicates.isEven());
+        Boolean actual1 = seq1.none(IntPredicates.isLess(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);

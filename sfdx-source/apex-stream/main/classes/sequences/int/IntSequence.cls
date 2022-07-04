@@ -290,7 +290,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * List<Integer> filtered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .filter(IntPredicate.isGreater(0))
+     *     .filter(IntPredicates.isGreater(0))
      *     .toList();
      */
     public virtual override IIntIterable filter(final IIntPredicate predicate) {
@@ -317,7 +317,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * List<Integer> firstFiltered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .take(IntPredicate.isGreater(0))
+     *     .take(IntPredicates.isGreater(0))
      *     .toList();
      */
     public virtual IIntIterable take(final IIntPredicate predicate) {
@@ -347,7 +347,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * List<Integer> rest = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .drop(IntPredicate.isGreater(0))
+     *     .drop(IntPredicates.isGreater(0))
      *     .toList();
      */
     public virtual IIntIterable drop(final IIntPredicate predicate) {
@@ -377,7 +377,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * List<Integer> incrementedInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .mapTo(IntUnaryOperator.add(1))
+     *     .mapTo(IntUnaryOperators.add(1))
      *     .toList();
      */
     public virtual IIntIterable mapTo(final IIntUnaryOperator mapper) {
@@ -602,8 +602,8 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperator.sum());
-     * Integer factorialOfN = IntSequence.range(1, n).reduce(1, IntBinaryOperator.product());
+     * Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperators.sum());
+     * Integer factorialOfN = IntSequence.range(1, n).reduce(1, IntBinaryOperators.product());
      */
     public virtual Integer reduce(final Integer identity, final IIntBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -628,7 +628,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *      .reduce(IntBinaryOperator.sum())
+     *      .reduce(IntBinaryOperators.sum())
      *      .get();
      */
     public override OptionalInt reduce(final IIntBinaryOperator accumulator) {
@@ -675,7 +675,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * Integer firstEvenInt = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .find(IntPredicate.isEven())
+     *     .find(IntPredicates.isEven())
      *     .get();
      */
     public virtual OptionalInt find(final IIntPredicate predicate) {
@@ -702,7 +702,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * Boolean isEveryIntEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .every(IntPredicate.isEven())
+     *     .every(IntPredicates.isEven())
      *     .get();
      */
     public virtual Boolean every(final IIntPredicate predicate) {
@@ -723,7 +723,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      *
      * @example
      * Boolean isSomeLongEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .some(IntPredicate.isEven())
+     *     .some(IntPredicates.isEven())
      *     .get();
      */
     public override Boolean some(final IIntPredicate predicate) {

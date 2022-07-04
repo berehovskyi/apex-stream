@@ -1,13 +1,13 @@
 # ISObjectComparator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A function that takes two arguments of `SObject` type and returns an `Integer` value, which represents a comparison result. Typically is used for sorting. Permits comparison of null arguments.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

@@ -1,16 +1,10 @@
 # IIntIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Integer` elements supporting aggregate operations.
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [IObjectIterable](/docs/Iterables/IObjectIterable.md)
@@ -23,6 +17,12 @@ A sequence of `Integer` elements supporting aggregate operations.
 
 
 **See** [IDoubleIterable](/docs/Iterables/IDoubleIterable.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### `append(Iterable<Integer> iterable)`

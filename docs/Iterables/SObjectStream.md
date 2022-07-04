@@ -1,16 +1,10 @@
 # SObjectStream
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `SObject` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as SObjectStream.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectStream.count() or SObjectStream.collect(ISObjectCollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/docs/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/docs/Iterables/IntStream.md), [LongStream](/docs/Iterables/LongStream.md), and [DoubleStream](/docs/Iterables/DoubleStream.md) and [ObjectStream](/docs/Iterables/ObjectStream.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [SObjectSequence](/docs/Iterables/SObjectSequence.md)
@@ -26,6 +20,12 @@ A sequence of `SObject` elements supporting aggregate operations. Stream operati
 
 
 **See** [DoubleStream](/docs/Iterables/DoubleStream.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Properties
 
@@ -370,7 +370,7 @@ the new `SObjectStream`
 ISObjectIterable newAccountsWithChangedAnnualRevenueStream = SObjectStream.zip(
     Trigger.old,
     Trigger.new,
-    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ```
@@ -481,7 +481,7 @@ the `SObjectStream`
 ###### Example
 ```apex
 List<Account> accountsWithHotRating = SObjectStream.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -512,7 +512,7 @@ the `SObjectStream`
 ###### Example
 ```apex
 List<Account> firstAccountsWithHotRating = SObjectStream.of(accounts)
-    .take(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .take(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -543,7 +543,7 @@ the `SObjectStream`
 ###### Example
 ```apex
 List<Account> restAccounts = SObjectStream.of(accounts)
-    .drop(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .drop(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -574,7 +574,7 @@ the `SObjectStream`
 ###### Example
 ```apex
 List<Account> accounts = SObjectStream.of(contacts)
-    .mapTo(SObjectUnaryOperator.getSObject(Contact.AccountId))
+    .mapTo(SObjectUnaryOperators.getSObject(Contact.AccountId))
     .toList();
 ```
 
@@ -605,7 +605,7 @@ the `IntStream`
 ###### Example
 ```apex
 List<Integer> numberOfEmployees = SObjectStream.of(accounts)
-    .mapToInt(SObjectToIntFunction.get(Account.NumberOfEmployees))
+    .mapToInt(SObjectToIntFunctions.get(Account.NumberOfEmployees))
     .toList();
 ```
 
@@ -636,7 +636,7 @@ the `LongStream`
 ###### Example
 ```apex
 List<Long> numberOfEmployees = SObjectStream.of(accounts)
-    .mapToLong(SObjectToLongFunction.get(Account.NumberOfEmployees))
+    .mapToLong(SObjectToLongFunctions.get(Account.NumberOfEmployees))
     .toList();
 ```
 
@@ -667,7 +667,7 @@ the `DoubleStream`
 ###### Example
 ```apex
 List<Double> annualRevenues = SObjectStream.of(accounts)
-    .mapToDouble(SObjectToDoubleFunction.get(Account.AnnualRevenue))
+    .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue))
     .toList();
 ```
 
@@ -698,7 +698,7 @@ the `ObjectStream`
 ###### Example
 ```apex
 List<Object> birthdates = SObjectStream.of(contacts)
-    .mapToObject(SObjectToDoubleFunction.get(Contact.Birthdate))
+    .mapToObject(SObjectToDoubleFunctions.get(Contact.Birthdate))
     .toList();
 ```
 
@@ -729,7 +729,7 @@ the new `SObjectStream`
 ###### Example
 ```apex
 List<Contact> contacts = SObjectStream.of(accounts)
-    .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+    .flatMapTo(SObjectFunctions.getSObjects('Contacts'))
     .toList();
 ```
 
@@ -856,7 +856,7 @@ the `SObjectStream`
 ###### Example
 ```apex
 List<Account> accountsWithResetAnnualRevenue = SObjectStream.of(accounts)
-    .forEach(SObjectConsumer.set(Account.AnnualRevenue, 0))
+    .forEach(SObjectConsumers.set(Account.AnnualRevenue, 0))
     .toList();
 ```
 
@@ -908,7 +908,7 @@ the `SObjectStream`
 ###### Example
 ```apex
 List<Account> distinctAccountsByName = SObjectStream.of(accounts)
-    .distinct(SObjectFunction.get(Account.Name))
+    .distinct(SObjectFunctions.get(Account.Name))
     .toList();
 ```
 
@@ -986,8 +986,8 @@ the `SObjectStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -1018,8 +1018,8 @@ the `SObjectStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -1122,7 +1122,7 @@ the `Object` result of the collection
 List<String> accountNames = (List<String>) SObjectStream.of(accounts)
     .collect(
         Supplier.of(List<String>.class),
-        ListSObjectConsumer.addToList(SObjectFunction.get(Account.Name))
+        ListSObjectConsumers.addToList(SObjectFunctions.get(Account.Name))
     );
 ```
 
@@ -1155,15 +1155,15 @@ the `Object` result of the collection
 // Group contacts by AccountId
 Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
     SObjectStream.of(contacts)
-        .collect(SObjectCollector.groupingById(Contact.AccountId));
+        .collect(SObjectCollectors.groupingById(Contact.AccountId));
 // Group contacts by Department and by Account.Rating, cascading two collectors
 Map<String, Map<String, List<Contact>>> contactsByAccountRatingByDepartment
     = (Map<String, Map<String, List<Contact>>>)
         SObjectStream.of(contacts)
-            .collect(SObjectCollector.groupingByString(
-                SObjectFunction.get(Contact.Department),
-                SObjectCollector.groupingByString(
-                    SObjectFunction.get('Account?.Rating')
+            .collect(SObjectCollectors.groupingByString(
+                SObjectFunctions.get(Contact.Department),
+                SObjectCollectors.groupingByString(
+                    SObjectFunctions.get('Account?.Rating')
                 )
             ).cast(Map<String, Map<String, List<Contact>>>.class));
 ```
@@ -1195,7 +1195,7 @@ the `OptionalSObject`
 ###### Example
 ```apex
 Account firstAccountWithMoreThan100NumberOfEmployees = SObjectStream.of(accounts)
-    .find(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100))
+    .find(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100))
     .get();
 ```
 
@@ -1226,7 +1226,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isEveryAccountWithMoreThan100NumberOfEmployees = SObjectStream.of(accounts)
-    .every(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+    .every(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
 ```
 
 ##### `override some(ISObjectPredicate predicate)`
@@ -1256,7 +1256,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isSomeAccountWithMoreThan100NumberOfEmployees = SObjectStream.of(accounts)
-    .some(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+    .some(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
 ```
 
 ##### `count()`
@@ -1304,7 +1304,7 @@ the `List<SObject>` containing the stream elements
 ###### Example
 ```apex
 List<Account> accountsWithHotRating = SObjectStream.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -1336,7 +1336,7 @@ the `List<Object>` containing the stream elements
 ###### Example
 ```apex
 List<String> accountNames = (List<String>) SObjectStream.of(accounts)
-    .toList(SObjectFunction.get('Name'), List<String>.class);
+    .toList(SObjectFunctions.get('Name'), List<String>.class);
 ```
 
 ##### `toSet()`
@@ -1356,7 +1356,7 @@ the `Set<SObject>` containing the stream elements
 ###### Example
 ```apex
 Set<SObject> accountsWithHotRating = SObjectStream.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toSet();
 ```
 
@@ -1386,7 +1386,7 @@ the `Set<Object>`containing the stream elements field values
 
 ###### Example
 ```apex
-Set<Object> createdDates = SObjectStream.of(accounts).toSet(SObjectFunction.get('CreatedDate'));
+Set<Object> createdDates = SObjectStream.of(accounts).toSet(SObjectFunctions.get('CreatedDate'));
 ```
 
 ##### `toIdSet()`
@@ -1434,7 +1434,7 @@ the `Set<Id>` containing the stream elements field values
 
 ###### Example
 ```apex
-Set<Id> accountIds = SObjectStream.of(contacts).toIdSet(SObjectFunction.get('AccountId'));
+Set<Id> accountIds = SObjectStream.of(contacts).toIdSet(SObjectFunctions.get('AccountId'));
 ```
 
 ##### `override toStringSet(ISObjectFunction mapper)`
@@ -1463,7 +1463,7 @@ the `Set<String>`containing the stream elements field values
 
 ###### Example
 ```apex
-Set<String> accountNames = SObjectStream.of(accounts).toStringSet(SObjectFunction.get('Name'));
+Set<String> accountNames = SObjectStream.of(accounts).toStringSet(SObjectFunctions.get('Name'));
 ```
 
 ##### `toMap()`
@@ -1483,7 +1483,7 @@ the `Map<Id, SObject>` containing the stream elements
 ###### Example
 ```apex
 Map<Id, SObject> accountsWithHotRating = SObjectStream.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toMap();
 ```
 
@@ -1510,13 +1510,13 @@ the `Map<Id, SObject>` containing the stream elements
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `keyMapper` or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `mapType`|
+|`NullPointerException`|if `keyMapper` or `mapType` is null|
 
 ###### Example
 ```apex
 Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectStream.of(contacts)
-    .toByIdMap(SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+    .toByIdMap(SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
 ```
 
 ##### `override toByStringMap(ISObjectFunction keyMapper, Type mapType)`
@@ -1542,13 +1542,13 @@ the `Map<String, SObject>` containing the stream elements
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `keyMapper` or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `mapType`|
+|`NullPointerException`|if `keyMapper` or `mapType` is null|
 
 ###### Example
 ```apex
 Map<String, Account> accountByName = (Map<String, Account>) SObjectStream.of(accounts)
-    .toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+    .toByStringMap(SObjectFunctions.get('Name'), Map<String, Account>.class);
 ```
 
 ##### `override groupById(ISObjectFunction keyMapper)`
@@ -1578,7 +1578,7 @@ the `Map<Id, List<SObject>>` containing the stream elements
 ###### Example
 ```apex
 Map<Id, List<Contact>> contactsByAccountId = SObjectStream.of(contacts)
-    .groupById(SObjectFunction.get('AccountId'));
+    .groupById(SObjectFunctions.get('AccountId'));
 ```
 
 ##### `override groupByString(ISObjectFunction keyMapper)`
@@ -1608,7 +1608,7 @@ the `Map<String, List<SObject>>` containing the stream elements
 ###### Example
 ```apex
 Map<String, List<Account>> accountsByRating = SObjectStream.of(accounts)
-    .groupByString(SObjectFunction.get('Rating'));
+    .groupByString(SObjectFunctions.get('Rating'));
 ```
 
 ##### `override partition(ISObjectPredicate predicate)`
@@ -1638,7 +1638,7 @@ the `Map<Boolean, List<SObject>>` containing the stream elements
 ###### Example
 ```apex
 Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-    = SObjectStream.of(accounts).partition(SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+    = SObjectStream.of(accounts).partition(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
 ```
 
 ---

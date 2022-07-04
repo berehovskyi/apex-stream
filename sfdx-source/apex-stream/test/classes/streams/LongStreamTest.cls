@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see LongStream
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 public class LongStreamTest {
@@ -109,8 +110,8 @@ public class LongStreamTest {
         Integer lim = 10;
         Long fromLong = 10L;
         Integer step = 10;
-        ILongIterable stream = LongStream.generate(LongSupplier.fibonacci()).lim(lim);
-        ILongIterable stream1 = LongStream.generate(LongSupplier.increment(fromLong, 10)).lim(step);
+        ILongIterable stream = LongStream.generate(LongSuppliers.fibonacci()).lim(lim);
+        ILongIterable stream1 = LongStream.generate(LongSuppliers.increment(fromLong, 10)).lim(step);
         // When
         List<Long> actual = stream.toList();
         List<Long> actual1 = stream1.toList();
@@ -136,9 +137,9 @@ public class LongStreamTest {
         Long seed2 = 50L;
         Integer lim = 10;
         Long i = 5;
-        ILongIterable stream = LongStream.iterate(seed, LongUnaryOperator.increment()).lim(lim);
-        ILongIterable stream1 = LongStream.iterate(seed1, LongUnaryOperator.add(i)).lim(lim);
-        ILongIterable stream2 = LongStream.iterate(seed2, LongPredicate.isPositive(), LongUnaryOperator.subtract(i));
+        ILongIterable stream = LongStream.iterate(seed, new IterTestUtils.AddLongOp(1)).lim(lim);
+        ILongIterable stream1 = LongStream.iterate(seed1, new IterTestUtils.AddLongOp(i)).lim(lim);
+        ILongIterable stream2 = LongStream.iterate(seed2, LongPredicates.isGreater(0L), new IterTestUtils.AddLongOp(-i));
         // When
         List<Long> actual = stream.toList();
         List<Long> actual1 = stream1.toList();
@@ -189,7 +190,7 @@ public class LongStreamTest {
         // Given
         List<Long> input = new List<Long>{ -5L, 0L, 1L };
         List<Long> input1 = new List<Long>{ 3L, 0L, 8L };
-        ILongIterable stream = LongStream.zip(LongStream.of(input), LongStream.of(input1), LongBinaryOperator.sum());
+        ILongIterable stream = LongStream.zip(LongStream.of(input), LongStream.of(input1), LongBinaryOperators.sum());
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -297,7 +298,7 @@ public class LongStreamTest {
     private static void filter() {
         // Given
         List<Long> input = new List<Long>{ -5L, 0L, 1L, 3L, 8L, null, -6L, 4L, 4L };
-        ILongIterable stream = LongStream.of(input).filter(LongPredicate.isPositive());
+        ILongIterable stream = LongStream.of(input).filter(LongPredicates.isGreater(0L));
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -313,13 +314,22 @@ public class LongStreamTest {
     private static void take() {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, null, -6L, 4L, 4L };
-        ILongIterable stream = LongStream.of(input).take(LongPredicate.isPositive());
+        ILongIterable stream = LongStream.of(input).take(LongPredicates.isGreater(0L));
+        ILongIterable stream1 = LongStream.of(input).take(LongPredicates.isGreater(2L));
         // When
         List<Long> actual = stream.toList();
+        Iterator<Long> iterator = stream1.iterator();
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L };
         Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input[0], iterator.next());
+        try {
+            iterator.next();
+        } catch (Exception exc) {
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+        }
         Validate.assert(((LongStream) stream).isOperated);
+        Validate.assert(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -329,7 +339,7 @@ public class LongStreamTest {
     private static void drop() {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, null, -6L, 4L, 4L };
-        ILongIterable stream = LongStream.of(input).drop(LongPredicate.isPositive());
+        ILongIterable stream = LongStream.of(input).drop(LongPredicates.isGreater(0L));
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -364,7 +374,7 @@ public class LongStreamTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        ILongIterable stream = LongStream.of(clone).mapTo(LongUnaryOperator.multiply(2));
+        ILongIterable stream = LongStream.of(clone).mapTo(new IterTestUtils.MultiplyLongOp(2));
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -382,7 +392,7 @@ public class LongStreamTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        IIntIterable stream = LongStream.of(clone).mapToInt(LongToIntFunction.valueOf());
+        IIntIterable stream = LongStream.of(clone).mapToInt(LongToIntFunctions.valueOf());
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -400,7 +410,7 @@ public class LongStreamTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        IDoubleIterable stream = LongStream.of(clone).mapToDouble(LongToDoubleFunction.valueOf());
+        IDoubleIterable stream = LongStream.of(clone).mapToDouble(LongToDoubleFunctions.valueOf());
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -437,7 +447,7 @@ public class LongStreamTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        IObjectIterable stream = LongStream.of(clone).mapToObject(LongFunction.toString());
+        IObjectIterable stream = LongStream.of(clone).mapToObject(new IterTestUtils.LongToString());
         // When
         List<String> actual = (List<String>) stream.toList(List<String>.class);
         // Then
@@ -455,7 +465,7 @@ public class LongStreamTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        ILongIterable stream = LongStream.of(clone).forEach(LongConsumer.debug());
+        ILongIterable stream = LongStream.of(clone).forEach(new IterTestUtils.DoNothingLongConsumer());
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -587,11 +597,11 @@ public class LongStreamTest {
         ILongIterable stream2 = LongStream.of(cloneWithNulls);
         Long seed = 10;
         // When
-        Long actual = stream.reduce(seed, LongBinaryOperator.sum());
-        Long actual1 = stream1.reduce(LongBinaryOperator.sum()).get();
+        Long actual = stream.reduce(seed, LongBinaryOperators.sum());
+        Long actual1 = stream1.reduce(LongBinaryOperators.sum()).get();
         Exception exc1;
         try {
-            stream2.reduce(LongBinaryOperator.sum());
+            stream2.reduce(LongBinaryOperators.sum());
         } catch (Exception exc) {
             exc1 = exc;
         }
@@ -616,7 +626,7 @@ public class LongStreamTest {
         List<Long> clone = input.clone();
         ILongIterable stream = LongStream.of(clone);
         // When
-        Set<Long> actual = (Set<Long>) stream.collect(Supplier.of(Set<Long>.class), ObjectLongConsumer.of(SetObjectConsumer.addToLongSet()));
+        Set<Long> actual = (Set<Long>) stream.collect(Supplier.of(Set<Long>.class), ObjectLongConsumer.compose(new IterTestUtils.AddToLongSet()));
         // Then
         Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
         Validate.assertEquals(expected, actual);
@@ -635,8 +645,8 @@ public class LongStreamTest {
         ILongIterable stream = LongStream.of(clone);
         ILongIterable stream1 = LongStream.of(clone);
         // When
-        Long actual = stream.find(LongPredicate.isNegative()).get();
-        Long actual1 =stream1.find(LongPredicate.isGreater(50L)).orElse(42L);
+        Long actual = stream.find(LongPredicates.isLess(0L)).get();
+        Long actual1 =stream1.find(LongPredicates.isGreater(50L)).orElse(42L);
         // Then
         Validate.assertEquals(-3L, actual);
         Validate.assertEquals(42L, actual1);
@@ -656,8 +666,8 @@ public class LongStreamTest {
         ILongIterable stream = LongStream.of(clone);
         ILongIterable stream1 = LongStream.of(clone);
         // When
-        Boolean actual = stream.every(LongPredicate.isOdd());
-        Boolean actual1 = stream1.every(LongPredicate.isPrime());
+        Boolean actual = stream.every(LongPredicates.isEven().negate());
+        Boolean actual1 = stream1.every(LongPredicates.isPrime());
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -677,8 +687,8 @@ public class LongStreamTest {
         ILongIterable stream = LongStream.of(clone);
         ILongIterable stream1 = LongStream.of(clone);
         // When
-        Boolean actual = stream.some(LongPredicate.isNegative());
-        Boolean actual1 = stream1.some(LongPredicate.isZero());
+        Boolean actual = stream.some(LongPredicates.isLess(0L));
+        Boolean actual1 = stream1.some(LongPredicates.isEqual(0L));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -698,8 +708,8 @@ public class LongStreamTest {
         ILongIterable stream = LongStream.of(clone);
         ILongIterable stream1 = LongStream.of(clone);
         // When
-        Boolean actual = stream.none(LongPredicate.isEven());
-        Boolean actual1 = stream1.none(LongPredicate.isNegative());
+        Boolean actual = stream.none(LongPredicates.isEven());
+        Boolean actual1 = stream1.none(LongPredicates.isLess(0L));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);

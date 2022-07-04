@@ -12,7 +12,10 @@
  *
  * @group Iterables
  */
-public virtual inherited sharing class Stream {
+public inherited sharing class Stream {
+
+    @TestVisible
+    private Stream(){}
 
     /**
      * @description Returns a `ObjectStream` created from `List<Object>`.
@@ -376,7 +379,7 @@ public virtual inherited sharing class Stream {
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * IIntIterable fibonacciInfiniteStream = Stream.generate(IntSupplier.fibonacci());
+     * IIntIterable fibonacciInfiniteStream = Stream.generate(IntSuppliers.fibonacci());
      */
     public static IIntIterable generate(final IIntSupplier supplier) {
         return IntStream.generate(supplier);
@@ -393,7 +396,7 @@ public virtual inherited sharing class Stream {
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * ILongIterable fibonacciInfiniteStream = Stream.generate(LongSupplier.fibonacci());
+     * ILongIterable fibonacciInfiniteStream = Stream.generate(LongSuppliers.fibonacci());
      */
     public static ILongIterable generate(final ILongSupplier supplier) {
         return LongStream.generate(supplier);
@@ -464,7 +467,7 @@ public virtual inherited sharing class Stream {
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * IIntIterable intIncrementalStream = Stream.iterate(0, IntUnaryOperator.add(1));
+     * IIntIterable intIncrementalStream = Stream.iterate(0, IntUnaryOperators.add(1));
      */
     public static IIntIterable iterate(final Integer seed, final IIntUnaryOperator operator) {
         return IntStream.iterate(seed, operator);
@@ -484,7 +487,7 @@ public virtual inherited sharing class Stream {
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * ILongIterable longIncrementalStream = Stream.iterate(0L, LongUnaryOperator.add(1L));
+     * ILongIterable longIncrementalStream = Stream.iterate(0L, LongUnaryOperators.add(1L));
      */
     public static ILongIterable iterate(final Long seed, final ILongUnaryOperator operator) {
         return LongStream.iterate(seed, operator);
@@ -504,7 +507,7 @@ public virtual inherited sharing class Stream {
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * IDoubleIterable doubleIncrementalStream = Stream.iterate(0, DoubleUnaryOperator.add(1));
+     * IDoubleIterable doubleIncrementalStream = Stream.iterate(0, DoubleUnaryOperators.add(1));
      */
     public static IDoubleIterable iterate(final Double seed, final IDoubleUnaryOperator operator) {
         return DoubleStream.iterate(seed, operator);
@@ -943,13 +946,13 @@ public virtual inherited sharing class Stream {
      * ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
      *     Trigger.old,
      *     Trigger.new,
-     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
      * ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
      *     Stream.of(Trigger.old),
      *     Stream.of(Trigger.new),
-     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
      */

@@ -1,19 +1,19 @@
 # DoubleFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IDoubleFunction](/docs/Functional-Interfaces/IDoubleFunction.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [IDoubleFunction](/docs/Functional-Interfaces/IDoubleFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IDoubleFunction](/docs/Functional-Interfaces/IDoubleFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
-
-
-**See** IDoubleIterable.mapToObject
 
 ## Methods
 ### Function
@@ -21,41 +21,5 @@ Inherits [IDoubleFunction](/docs/Functional-Interfaces/IDoubleFunction.md) funct
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static format()`
-
-Returns a `DoubleFunction` that returns a string that represents the Double input argument using the locale of the context user.
-
-###### Return
-
-**Type**
-
-DoubleFunction
-
-**Description**
-
-the `SObjectFunction`
-
-
-**See** Double.format
-
-##### `static toString()`
-
-Returns a `DoubleFunction` that returns a string that represents the Double input argument.
-
-###### Return
-
-**Type**
-
-DoubleFunction
-
-**Description**
-
-the `SObjectFunction`
-
-
-**See** String.valueOf
 
 ---

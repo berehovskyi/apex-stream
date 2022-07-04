@@ -1,13 +1,13 @@
 # ILongToSObjectFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 An entity that takes one argument of `Long` type and returns an `SObject` value.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

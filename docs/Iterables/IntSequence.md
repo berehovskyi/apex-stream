@@ -1,16 +1,10 @@
 # IntSequence
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Integer` elements supporting aggregate operations, a primitive specialization of [ObjectSequence](/docs/Iterables/ObjectSequence.md).
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [IntStream](/docs/Iterables/IntStream.md)
@@ -26,6 +20,12 @@ A sequence of `Integer` elements supporting aggregate operations, a primitive sp
 
 
 **See** [LongSequence](/docs/Iterables/LongSequence.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### Other
@@ -402,7 +402,7 @@ the `IntSequence`
 ###### Example
 ```apex
 List<Integer> filtered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-    .filter(IntPredicate.isGreater(0))
+    .filter(IntPredicates.isGreater(0))
     .toList();
 ```
 
@@ -433,7 +433,7 @@ the `IntSequence`
 ###### Example
 ```apex
 List<Integer> firstFiltered = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-    .take(IntPredicate.isGreater(0))
+    .take(IntPredicates.isGreater(0))
     .toList();
 ```
 
@@ -464,7 +464,7 @@ the `IntSequence`
 ###### Example
 ```apex
 List<Integer> rest = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-    .drop(IntPredicate.isGreater(0))
+    .drop(IntPredicates.isGreater(0))
     .toList();
 ```
 
@@ -495,7 +495,7 @@ the `IntSequence`
 ###### Example
 ```apex
 List<Integer> incrementedInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-    .mapTo(IntUnaryOperator.add(1))
+    .mapTo(IntUnaryOperators.add(1))
     .toList();
 ```
 
@@ -683,8 +683,8 @@ the `IntSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -715,8 +715,8 @@ the `IntSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -754,8 +754,8 @@ the `Integer` result of the reduction
 
 ###### Example
 ```apex
-Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperator.sum());
-Integer factorialOfN = IntSequence.range(1, n).reduce(1, IntBinaryOperator.product());
+Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperators.sum());
+Integer factorialOfN = IntSequence.range(1, n).reduce(1, IntBinaryOperators.product());
 ```
 
 ##### `override reduce(IIntBinaryOperator accumulator)`
@@ -785,7 +785,7 @@ the `OptionalInt` result of the reduction
 ###### Example
 ```apex
 Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-     .reduce(IntBinaryOperator.sum())
+     .reduce(IntBinaryOperators.sum())
      .get();
 ```
 
@@ -841,7 +841,7 @@ the `OptionalInt`
 ###### Example
 ```apex
 Integer firstEvenInt = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-    .find(IntPredicate.isEven())
+    .find(IntPredicates.isEven())
     .get();
 ```
 
@@ -872,7 +872,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isEveryIntEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-    .every(IntPredicate.isEven())
+    .every(IntPredicates.isEven())
     .get();
 ```
 
@@ -903,7 +903,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isSomeLongEven = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
-    .some(IntPredicate.isEven())
+    .some(IntPredicates.isEven())
     .get();
 ```
 

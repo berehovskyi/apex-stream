@@ -1,16 +1,10 @@
 # DoubleSequence
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Double` elements supporting aggregate operations, a primitive specialization of [ObjectSequence](/docs/Iterables/ObjectSequence.md). <p><a href=&quot;https://en.wikipedia.org/wiki/Monte_Carlo_method&quot;>Monte Carlo method</a></p>
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [DoubleStream](/docs/Iterables/DoubleStream.md)
@@ -26,6 +20,12 @@ A sequence of `Double` elements supporting aggregate operations, a primitive spe
 
 
 **See** [LongSequence](/docs/Iterables/LongSequence.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### Other
@@ -372,7 +372,7 @@ the `DoubleSequence`
 ###### Example
 ```apex
 List<Double> filtered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .filter(DoublePredicate.isGreater(0))
+    .filter(DoublePredicates.isGreater(0))
     .toList();
 ```
 
@@ -403,7 +403,7 @@ the `DoubleSequence`
 ###### Example
 ```apex
 List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .take(DoublePredicate.isGreater(0))
+    .take(DoublePredicates.isGreater(0))
     .toList();
 ```
 
@@ -434,7 +434,7 @@ the `DoubleSequence`
 ###### Example
 ```apex
 List<Double> rest = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .drop(DoublePredicate.isGreater(0))
+    .drop(DoublePredicates.isGreater(0))
     .toList();
 ```
 
@@ -465,7 +465,7 @@ the `DoubleSequence`
 ###### Example
 ```apex
 List<Double> incrementedDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .mapTo(DoubleUnaryOperator.add(1.5))
+    .mapTo(DoubleUnaryOperators.add(1.5))
     .toList();
 ```
 
@@ -653,8 +653,8 @@ the `DoubleSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -685,8 +685,8 @@ the `DoubleSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -724,7 +724,8 @@ the `Double` result of the reduction
 
 ###### Example
 ```apex
-Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).reduce(0.0, DoubleBinaryOperator.sum());
+Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+    .reduce((Double) 0.0, DoubleBinaryOperators.sum());
 ```
 
 ##### `override reduce(IDoubleBinaryOperator accumulator)`
@@ -754,7 +755,7 @@ the `OptionalDouble` result of the reduction
 ###### Example
 ```apex
 Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     .reduce(DoubleBinaryOperator.sum())
+     .reduce(DoubleBinaryOperators.sum())
      .get();
 ```
 
@@ -810,7 +811,7 @@ the `OptionalDouble`
 ###### Example
 ```apex
 Double firstGreaterDouble = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .find(DoublePredicate.isGreater(1.5))
+    .find(DoublePredicates.isGreater(1.5))
     .get();
 ```
 
@@ -841,7 +842,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isEveryDoubleGreater = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .every(DoublePredicate.isGreater(1.5))
+    .every(DoublePredicates.isGreater(1.5))
     .get();
 ```
 
@@ -872,7 +873,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isSomeDoubleGreater = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .some(DoublePredicate.isGreater(1.5))
+    .some(DoublePredicates.isGreater(1.5))
     .get();
 ```
 
@@ -943,7 +944,7 @@ the `Set<Double>` containing the sequence elements
 ```apex
 Set<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .skip(1)
-    .toSett();
+    .toSet();
 ```
 
 ---

@@ -1,19 +1,22 @@
 # DoubleConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IDoubleConsumer](/docs/Functional-Interfaces/IDoubleConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [IDoubleConsumer](/docs/Functional-Interfaces/IDoubleConsumer.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [IDoubleConsumer](/docs/Functional-Interfaces/IDoubleConsumer.md)
 
 
 **See** IDoubleIterable.forEach
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -73,94 +76,5 @@ the composed `DoubleConsumer`
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|
-
----
-### Built-Ins
-##### `static debug(LoggingLevel loggingLevel, String message)`
-
-Returns a `DoubleConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`loggingLevel`|the logging level|
-|`message`|the message|
-
-###### Return
-
-**Type**
-
-DoubleConsumer
-
-**Description**
-
-the `DoubleConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `loggingLevel` or `message` is null|
-
-##### `static debug(LoggingLevel loggingLevel)`
-
-Returns a `DoubleConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`loggingLevel`|the logging level|
-
-###### Return
-
-**Type**
-
-DoubleConsumer
-
-**Description**
-
-the `DoubleConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `loggingLevel` is null|
-
-##### `static debug(String message)`
-
-Returns a `DoubleConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`message`|the message|
-
-###### Return
-
-**Type**
-
-DoubleConsumer
-
-**Description**
-
-the `DoubleConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `message` is null|
-
-##### `static debug()`
-
-Returns a `DoubleConsumer` that debugs an input argument.
-
-###### Return
-
-**Type**
-
-DoubleConsumer
-
-**Description**
-
-the `DoubleConsumer`
 
 ---

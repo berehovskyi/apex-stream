@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link IBinaryOperator} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IBinaryOperator} functional interface.
  *
+ * @see IBinaryOperator
  * @see ObjectStream.zip
  * @see ObjectSequence.zip
  * @see IObjectIterable.reduce

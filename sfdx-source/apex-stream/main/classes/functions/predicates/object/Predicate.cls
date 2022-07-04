@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link IPredicate} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IPredicate} functional interface.
  *
+ * @see IPredicate
  * @see IObjectIterable.filter
  * @see IObjectIterable.take
  * @see IObjectIterable.drop
@@ -164,7 +165,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     public static Predicate compose(final IFunction mapper, final IPredicate predicate) {
         Validate.notNull(mapper);
         Validate.notNull(predicate);
-        return new OfFunctionPredicate(mapper, predicate);
+        return new ForFunctionPredicate(mapper, predicate);
     }
 
     /**
@@ -184,7 +185,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     public static Predicate compose(final IToIntFunction mapper, final IIntPredicate predicate) {
         Validate.notNull(mapper);
         Validate.notNull(predicate);
-        return new OfIntFunctionPredicate(mapper, predicate);
+        return new ForIntFunctionPredicate(mapper, predicate);
     }
 
     /**
@@ -204,7 +205,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     public static Predicate compose(final IToLongFunction mapper, final ILongPredicate predicate) {
         Validate.notNull(mapper);
         Validate.notNull(predicate);
-        return new OfLongFunctionPredicate(mapper, predicate);
+        return new ForLongFunctionPredicate(mapper, predicate);
     }
 
     /**
@@ -224,7 +225,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     public static Predicate compose(final IToDoubleFunction mapper, final IDoublePredicate predicate) {
         Validate.notNull(mapper);
         Validate.notNull(predicate);
-        return new OfDoubleFunctionPredicate(mapper, predicate);
+        return new ForDoubleFunctionPredicate(mapper, predicate);
     }
 
     /**
@@ -244,7 +245,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     public static Predicate compose(final IToSObjectFunction mapper, final ISObjectPredicate predicate) {
         Validate.notNull(mapper);
         Validate.notNull(predicate);
-        return new OfSObjectFunctionPredicate(mapper, predicate);
+        return new ForSObjectFunctionPredicate(mapper, predicate);
     }
 
     /**
@@ -257,11 +258,11 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Predicate.upcast(someIntPredicate);
+     * Predicate.compose(someIntPredicate);
      */
-    public static Predicate upcast(final IIntPredicate predicate) {
+    public static Predicate compose(final IIntPredicate predicate) {
         Validate.notNull(predicate);
-        return new OfIntPredicate(predicate);
+        return new ForIntPredicate(predicate);
     }
 
     /**
@@ -274,11 +275,11 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Predicate.upcast(someLongPredicate);
+     * Predicate.compose(someLongPredicate);
      */
-    public static Predicate upcast(final ILongPredicate predicate) {
+    public static Predicate compose(final ILongPredicate predicate) {
         Validate.notNull(predicate);
-        return new OfLongPredicate(predicate);
+        return new ForLongPredicate(predicate);
     }
 
     /**
@@ -291,11 +292,11 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Predicate.upcast(someDoublePredicate);
+     * Predicate.compose(someDoublePredicate);
      */
-    public static Predicate upcast(final IDoublePredicate predicate) {
+    public static Predicate compose(final IDoublePredicate predicate) {
         Validate.notNull(predicate);
-        return new OfDoublePredicate(predicate);
+        return new ForDoublePredicate(predicate);
     }
 
     /**
@@ -308,560 +309,12 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Predicate.upcast(someSObjectPredicate);
+     * Predicate.compose(someSObjectPredicate);
      */
-    public static Predicate upcast(final ISObjectPredicate predicate) {
+    public static Predicate compose(final ISObjectPredicate predicate) {
         Validate.notNull(predicate);
-        return new OfSObjectPredicate(predicate);
+        return new ForSObjectPredicate(predicate);
     }
-    // @end-group
-    //</editor-fold>
-
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-
-    //<editor-fold desc="Comparison Predicates">
-    /**
-     * @description Returns a `Predicate` that tests if the result of comparing
-     * the values returned by the applied `left` and `right` functions
-     * by the `comparator` is equal to the expected `result`.
-     *
-     * @param left the function applied to the input argument the result of which is passed to
-     * the `comparator` as the first argument
-     * @param right the function applied to the input argument the result of which is passed to
-     * the `comparator` as the second argument
-     * @param comparator the function that compares two arguments
-     * @param result the expected result of comparison (1, -1, or 0)
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `left`, or the `right`,
-     * or `comparator`, or `result` is null
-     *
-     * @example
-     * Predicate.isCompared(
-     *     func1,
-     *     func2,
-     *     Comparator.defaultOrder(),
-     *     1
-     * );
-     */
-    public static Predicate isCompared(
-            final IFunction left,
-            final IFunction right,
-            final IComparator comparator,
-            final Integer result
-    ) {
-        Validate.notNull(left);
-        Validate.notNull(right);
-        Validate.notNull(comparator);
-        Validate.notNull(result);
-        return new ComparatorPredicate(left, right, comparator, result);
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `left` function is greater than the result returned by the `right`
-     * function.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `>` "greater than" operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `left`, or the `right` is null
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isGreater(func1, func2);
-     * Predicate.isGreater(func1, Function.constant(100));
-     */
-    public static Predicate isGreater(final IFunction left, final IFunction right) {
-        return isCompared(left, right, Comparator.defaultOrder(), 1);
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is greater than
-     * the `value`.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `>` "greater than" operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param value the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isGreater(100);
-     */
-    public static Predicate isGreater(final Object value) {
-        return isGreater(Function.identity(), Function.constant(value));
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `left` function is greater than or equal to the result returned by the `right`
-     * function.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `>=` "greater than or equal to " operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `left`, or the `right` is null
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isGreaterOrEqual(func1, func2);
-     * Predicate.isGreaterOrEqual(func1, Function.constant(100));
-     */
-    public static Predicate isGreaterOrEqual(final IFunction left, final IFunction right) {
-        return isGreater(left, right).orElse(isEqual(left, right));
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is greater than or equal to
-     * the `value`.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param value the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isGreaterOrEqual(100);
-     */
-    public static Predicate isGreaterOrEqual(final Object value) {
-        return isGreater(value).orElse(isEqual(value));
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `left` function is less than the result returned by the `right`
-     * function.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `<` "less than" operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `left`, or the `right` is null
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isLess(func1, func2);
-     * Predicate.isLess(func1, Function.constant(100));
-     */
-    public static Predicate isLess(final IFunction left, final IFunction right) {
-        return isCompared(left, right, Comparator.defaultOrder(), -1);
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is less than
-     * the `value`.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `<` "less than" operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param value the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isLess(100);
-     */
-    public static Predicate isLess(final Object value) {
-        return isLess(Function.identity(), Function.constant(value));
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `left` function is less than or equal to the result returned by the `right`
-     * function.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `left`, or the `right` is null
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isLessOrEqual(func1, func2);
-     * Predicate.isLessOrEqual(func1, Function.constant(100));
-     */
-    public static Predicate isLessOrEqual(final IFunction left, final IFunction right) {
-        return isLess(left, right).orElse(isEqual(left, right));
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is less than or equal to
-     * the `value`.
-     * <p><strong>Note: </strong></p>
-     * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
-     * comparison of all primitive types and considers a non-null value as always greater than
-     * a null value. User-defined types must implement the `Comparable` interface.</p>
-     *
-     * @param value the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isLess(100);
-     */
-    public static Predicate isLessOrEqual(final Object value) {
-        return isLess(value).orElse(isEqual(value));
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `left` function is equal to the result returned by the `right`
-     * function, comparing object value equality not reference equality.
-     *
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `left`, or the `right` is null
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isEqual(func1, func2);
-     * Predicate.isEqual(func1, Function.constant(100));
-     */
-    public static Predicate isEqual(final IFunction left, final IFunction right) {
-        return isCompared(left, right, Comparator.defaultOrder(), 0);
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is equal to
-     * the `value`, comparing object value equality not reference equality.
-     *
-     * @param value the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isEqual(100);
-     */
-    public static Predicate isEqual(final Object value) {
-        return isEqual(Function.identity(), Function.constant(value));
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `left` function is not equal to the result returned by the `right`
-     * function, comparing object value equality not reference equality.
-     *
-     * @param left the function whose application result is considered as the left argument of comparison
-     * @param right the function whose application result is considered as the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `left`, or the `right` is null
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isNotEqual(func1, func2);
-     * Predicate.isNotEqual(func1, Function.constant(100));
-     */
-    public static Predicate isNotEqual(final IFunction left, final IFunction right) {
-        return isEqual(left, right).negate();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is not equal to
-     * the `value`, comparing object value equality not reference equality.
-     *
-     * @param value the right argument of comparison
-     *
-     * @return the `Predicate`
-     *
-     * @see Comparator.compareNullSafeUntyped
-     *
-     * @example
-     * Predicate.isEqual(100);
-     */
-    public static Predicate isNotEqual(final Object value) {
-        return isEqual(value).negate();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `function` is contained in the `container`.
-     *
-     * @param function the function whose application result is tested
-     * @param container the iterable that checks for the presence of an element
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `function`, or the `container` is null
-     *
-     * @see List.contains
-     *
-     * @example
-     * Predicate.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
-     * Predicate.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
-     * Predicate.isIn(getNameFunc, nameStream);
-     */
-    public static Predicate isIn(final IFunction function, final Iterable<Object> container) {
-        Validate.notNull(function);
-        Validate.notNull(container);
-        return new IsIn(function, container);
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is contained in
-     * the `container`.
-     *
-     * @param container the iterable that checks for the presence of an element
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `container` is null
-     *
-     * @see List.contains
-     *
-     * @example
-     * Predicate.isIn(new List<Object>{ 'John', 'Jim' });
-     * Predicate.isIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
-     * Predicate.isIn(nameStream);
-     */
-    public static Predicate isIn(final Iterable<Object> container) {
-        return isIn(Function.identity(), container);
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if the result returned by
-     * the `function` is not contained in the `container`.
-     *
-     * @param function the function whose application result is tested
-     * @param container the iterable that checks for the presence of an element
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `function`, or the `container` is null
-     *
-     * @see List.contains
-     *
-     * @example
-     * Predicate.isNotIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
-     * Predicate.isNotIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
-     * Predicate.isNotIn(getNameFunc, nameStream);
-     */
-    public static Predicate isNotIn(final IFunction function, final Iterable<Object> container) {
-        return isIn(function, container).negate();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is not contained in
-     * the `container`.
-     *
-     * @param container the iterable that checks for the presence of an element
-     *
-     * @return the `Predicate`
-     *
-     * @throws NullPointerException if the `container` is null
-     *
-     * @see List.contains
-     *
-     * @example
-     * Predicate.isNotIn(new List<Object>{ 'John', 'Jim' });
-     * Predicate.isNotIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
-     * Predicate.isNotIn(nameStream);
-     */
-    public static Predicate isNotIn(final Iterable<Object> container) {
-        return isIn(container).negate();
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="Object Predicates">
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is null.
-     *
-     * @return the `Predicate`
-     *
-     * @example
-     * Predicate.isNull();
-     */
-    public static Predicate isNull() {
-        return isEqual(null);
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is not null.
-     *
-     * @return the `Predicate`
-     *
-     * @example
-     * Predicate.isNotNull();
-     */
-    public static Predicate isNotNull() {
-        return isEqual(null).negate();
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="Type Predicates">
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Boolean} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfBool() {
-        return new IsInstanceOfBoolean();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Id} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfId() {
-        return new IsInstanceOfId();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * String} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfString() {
-        return new IsInstanceOfString();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Blob} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfBlob() {
-        return new IsInstanceOfBlob();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Date} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfDate() {
-        return new IsInstanceOfDate();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Datetime} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfDatetime() {
-        return new IsInstanceOfDatetime();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Time} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfTime() {
-        return new IsInstanceOfTime();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Integer} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfInt() {
-        return new IsInstanceOfInt();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Long} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfLong() {
-        return new IsInstanceOfLong();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Double} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfDouble() {
-        return new IsInstanceOfDouble();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * SObject} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfSObject() {
-        return new IsInstanceOfSObject();
-    }
-
-    /**
-     * @description Returns a `Predicate` that tests the input object if it is of
-     * Comparable} type.
-     *
-     * @return the `Predicate`
-     */
-    public static Predicate isInstanceOfComparable() {
-        return new IsInstanceOfComparable();
-    }
-    //</editor-fold>
-
     // @end-group
     //</editor-fold>
 
@@ -901,157 +354,78 @@ public abstract inherited sharing class Predicate implements IPredicate {
         public override Boolean test(Object o) { return value; }
     }
 
-    private class OfFunctionPredicate extends Predicate {
+    private class ForFunctionPredicate extends Predicate {
         private final IFunction function;
         private final IPredicate predicate;
-        private OfFunctionPredicate(IFunction function, IPredicate predicate) {
+        private ForFunctionPredicate(IFunction function, IPredicate predicate) {
             this.function = function;
             this.predicate = predicate;
         }
         public override Boolean test(Object o) { return predicate.test(function.apply(o)); }
     }
 
-    private class OfIntFunctionPredicate extends Predicate {
+    private class ForIntFunctionPredicate extends Predicate {
         private final IToIntFunction function;
         private final IIntPredicate predicate;
-        private OfIntFunctionPredicate(IToIntFunction function, IIntPredicate predicate) {
+        private ForIntFunctionPredicate(IToIntFunction function, IIntPredicate predicate) {
             this.function = function;
             this.predicate = predicate;
         }
         public override Boolean test(Object o) { return predicate.test(function.apply(o)); }
     }
 
-    private class OfLongFunctionPredicate extends Predicate {
+    private class ForLongFunctionPredicate extends Predicate {
         private final IToLongFunction function;
         private final ILongPredicate predicate;
-        private OfLongFunctionPredicate(IToLongFunction function, ILongPredicate predicate) {
+        private ForLongFunctionPredicate(IToLongFunction function, ILongPredicate predicate) {
             this.function = function;
             this.predicate = predicate;
         }
         public override Boolean test(Object o) { return predicate.test(function.apply(o)); }
     }
 
-    private class OfDoubleFunctionPredicate extends Predicate {
+    private class ForDoubleFunctionPredicate extends Predicate {
         private final IToDoubleFunction function;
         private final IDoublePredicate predicate;
-        private OfDoubleFunctionPredicate(IToDoubleFunction function, IDoublePredicate predicate) {
+        private ForDoubleFunctionPredicate(IToDoubleFunction function, IDoublePredicate predicate) {
             this.function = function;
             this.predicate = predicate;
         }
         public override Boolean test(Object o) { return predicate.test(function.apply(o)); }
     }
 
-    private class OfSObjectFunctionPredicate extends Predicate {
+    private class ForSObjectFunctionPredicate extends Predicate {
         private final IToSObjectFunction function;
         private final ISObjectPredicate predicate;
-        private OfSObjectFunctionPredicate(IToSObjectFunction function, ISObjectPredicate predicate) {
+        private ForSObjectFunctionPredicate(IToSObjectFunction function, ISObjectPredicate predicate) {
             this.function = function;
             this.predicate = predicate;
         }
         public override Boolean test(Object o) { return predicate.test(function.apply(o)); }
     }
 
-    private class OfIntPredicate extends Predicate {
+    private class ForIntPredicate extends Predicate {
         private final IIntPredicate predicate;
-        private OfIntPredicate(IIntPredicate predicate) { this.predicate = predicate; }
+        private ForIntPredicate(IIntPredicate predicate) { this.predicate = predicate; }
         public override Boolean test(Object o) { return predicate.test((Integer) o); }
     }
 
-    private class OfLongPredicate extends Predicate {
+    private class ForLongPredicate extends Predicate {
         private final ILongPredicate predicate;
-        private OfLongPredicate(ILongPredicate predicate) { this.predicate = predicate; }
+        private ForLongPredicate(ILongPredicate predicate) { this.predicate = predicate; }
         public override Boolean test(Object o) { return predicate.test((Long) o); }
     }
 
-    private class OfDoublePredicate extends Predicate {
+    private class ForDoublePredicate extends Predicate {
         private final IDoublePredicate predicate;
-        private OfDoublePredicate(IDoublePredicate predicate) { this.predicate = predicate; }
+        private ForDoublePredicate(IDoublePredicate predicate) { this.predicate = predicate; }
         public override Boolean test(Object o) { return predicate.test((Double) o); }
     }
 
-    private class OfSObjectPredicate extends Predicate {
+    private class ForSObjectPredicate extends Predicate {
         private final ISObjectPredicate predicate;
-        private OfSObjectPredicate(ISObjectPredicate predicate) { this.predicate = predicate; }
+        private ForSObjectPredicate(ISObjectPredicate predicate) { this.predicate = predicate; }
         public override Boolean test(Object o) { return predicate.test((SObject) o); }
-    }
-
-    private class ComparatorPredicate extends Predicate {
-        private final IFunction left;
-        private final IFunction right;
-        private final IComparator comparator;
-        private final Integer comparisonResult;
-        private ComparatorPredicate(
-                IFunction left,
-                IFunction right,
-                IComparator comparator,
-                Integer comparisonResult
-        ) {
-            this.left = left;
-            this.right = right;
-            this.comparator = comparator;
-            this.comparisonResult = comparisonResult;
-        }
-        public override Boolean test(Object o) {
-            return comparator.compare(left.apply(o), right.apply(o)) == comparisonResult;
-        }
-    }
-
-    private class IsIn extends Predicate {
-        private final IFunction function;
-        private final Set<Object> container;
-        private IsIn(IFunction function, Iterable<Object> container) {
-            this.function = function;
-            this.container = Iterators.toObjectSet(container.iterator());
-        }
-        public override Boolean test(Object o) { return container.contains(function.apply(o)); }
-    }
-
-    private class IsInstanceOfBoolean extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Boolean; }
-    }
-
-    private class IsInstanceOfBlob extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Blob; }
-    }
-
-    private class IsInstanceOfId extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Id; }
-    }
-
-    private class IsInstanceOfString extends Predicate {
-        public override Boolean test(Object o) { return o instanceof String; }
-    }
-
-    private class IsInstanceOfDate extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Date; }
-    }
-
-    private class IsInstanceOfDatetime extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Datetime; }
-    }
-
-    private class IsInstanceOfTime extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Time; }
-    }
-
-    private class IsInstanceOfInt extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Integer; }
-    }
-
-    private class IsInstanceOfLong extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Long; }
-    }
-
-    private class IsInstanceOfDouble extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Double; }
-    }
-
-    private class IsInstanceOfSObject extends Predicate {
-        public override Boolean test(Object o) { return o instanceof SObject && !(o instanceof List<SObject>); }
-    }
-
-    private class IsInstanceOfComparable extends Predicate {
-        public override Boolean test(Object o) { return o instanceof Comparable; }
     }
     // @end-group
     //</editor-fold>

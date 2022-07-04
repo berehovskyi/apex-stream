@@ -1,13 +1,16 @@
 # ToSObjectFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IToSObjectFunction](/docs/Functional-Interfaces/IToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IToSObjectFunction](/docs/Functional-Interfaces/IToSObjectFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IToSObjectFunction](/docs/Functional-Interfaces/IToSObjectFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -21,7 +24,7 @@ Inherits [IToSObjectFunction](/docs/Functional-Interfaces/IToSObjectFunction.md)
 
 ---
 ### Static Methods
-##### `static downcast(IFunction mapper)`
+##### `static compose(IFunction mapper)`
 
 Returns a composed `ToSObjectFunction` of the `IFunction`.
 
@@ -45,7 +48,4 @@ the `ToSObjectFunction`
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
----
-### Built-Ins
-##### `static asSObject()`
 ---

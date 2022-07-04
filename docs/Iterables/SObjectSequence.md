@@ -1,16 +1,10 @@
 # SObjectSequence
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `SObject` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as SObjectSequence.filter(ISObjectPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     SObjectSequence.count() or SObjectSequence.collect(ISObjectCollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/docs/Iterables/IntSequence.md), [LongSequence](/docs/Iterables/LongSequence.md), and [DoubleSequence](/docs/Iterables/DoubleSequence.md) and [ObjectSequence](/docs/Iterables/ObjectSequence.md) for Object references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
-
-
-**Author** O. Berehovskyi.
-
-
-**Group** Iterables
 
 
 **See** [SObjectStream](/docs/Iterables/SObjectStream.md)
@@ -26,6 +20,12 @@ A sequence of `SObject` elements supporting aggregate operations. Sequence opera
 
 
 **See** [DoubleSequence](/docs/Iterables/DoubleSequence.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### Other
@@ -291,7 +291,7 @@ the new `SObjectSequence`
 ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = SObjectSequence.zip(
     Trigger.old,
     Trigger.new,
-    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ```
@@ -402,7 +402,7 @@ the `SObjectSequence`
 ###### Example
 ```apex
 List<Account> accountsWithHotRating = SObjectSequence.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -433,7 +433,7 @@ the `SObjectSequence`
 ###### Example
 ```apex
 List<Account> firstAccountsWithHotRating = SObjectSequence.of(accounts)
-    .take(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .take(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -464,7 +464,7 @@ the `SObjectSequence`
 ###### Example
 ```apex
 List<Account> restAccounts = SObjectSequence.of(accounts)
-    .drop(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .drop(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -495,7 +495,7 @@ the `SObjectSequence`
 ###### Example
 ```apex
 List<Account> accounts = SObjectSequence.of(contacts)
-    .mapTo(SObjectUnaryOperator.getSObject(Contact.AccountId))
+    .mapTo(SObjectUnaryOperators.getSObject(Contact.AccountId))
     .toList();
 ```
 
@@ -526,7 +526,7 @@ the `IntSequence`
 ###### Example
 ```apex
 List<Integer> numberOfEmployees = SObjectSequence.of(accounts)
-    .mapToInt(SObjectToIntFunction.get(Account.NumberOfEmployees))
+    .mapToInt(SObjectToIntFunctions.get(Account.NumberOfEmployees))
     .toList();
 ```
 
@@ -557,7 +557,7 @@ the `LongSequence`
 ###### Example
 ```apex
 List<Long> numberOfEmployees = SObjectSequence.of(accounts)
-    .mapToLong(SObjectToLongFunction.get(Account.NumberOfEmployees))
+    .mapToLong(SObjectToLongFunctions.get(Account.NumberOfEmployees))
     .toList();
 ```
 
@@ -588,7 +588,7 @@ the `DoubleSequence`
 ###### Example
 ```apex
 List<Double> annualRevenues = SObjectSequence.of(accounts)
-    .mapToDouble(SObjectToDoubleFunction.get(Account.AnnualRevenue))
+    .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue))
     .toList();
 ```
 
@@ -619,7 +619,7 @@ the `ObjectSequence`
 ###### Example
 ```apex
 List<Object> birthdates = SObjectSequence.of(contacts)
-    .mapToObject(SObjectToDoubleFunction.get(Contact.Birthdate))
+    .mapToObject(SObjectToDoubleFunctions.get(Contact.Birthdate))
     .toList();
 ```
 
@@ -650,7 +650,7 @@ the new `SObjectSequence`
 ###### Example
 ```apex
 List<Contact> contacts = SObjectSequence.of(accounts)
-    .flatMapTo(SObjectFunction.getSObjects('Contacts'))
+    .flatMapTo(SObjectFunctions.getSObjects('Contacts'))
     .toList();
 ```
 
@@ -777,7 +777,7 @@ this `SObjectSequence`
 ###### Example
 ```apex
 List<Account> accountsWithResetAnnualRevenue = SObjectSequence.of(accounts)
-    .forEach(SObjectConsumer.set(Account.AnnualRevenue, 0))
+    .forEach(SObjectConsumers.set(Account.AnnualRevenue, 0))
     .toList();
 ```
 
@@ -829,7 +829,7 @@ the `SObjectSequence`
 ###### Example
 ```apex
 List<Account> distinctAccountsByName = SObjectSequence.of(accounts)
-    .distinct(SObjectFunction.get(Account.Name))
+    .distinct(SObjectFunctions.get(Account.Name))
     .toList();
 ```
 
@@ -907,8 +907,8 @@ the `SObjectSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -939,8 +939,8 @@ the `SObjectSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -1043,7 +1043,7 @@ the `Object` result of the collection
 List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
     .collect(
         Supplier.of(List<String>.class),
-        ListSObjectConsumer.addToList(SObjectFunction.get(Account.Name))
+        ListSObjectConsumers.addToList(SObjectFunctions.get(Account.Name))
     );
 ```
 
@@ -1076,15 +1076,15 @@ the `Object` result of the collection
 // Group contacts by AccountId
 Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
     SObjectSequence.of(contacts)
-        .collect(SObjectCollector.groupingById(Contact.AccountId));
+        .collect(SObjectCollectors.groupingById(Contact.AccountId));
 // Group contacts by Department and by Account.Rating, cascading two collectors
 Map<String, Map<String, List<Contact>>> contactsByAccountRatingByDepartment
     = (Map<String, Map<String, List<Contact>>>)
         SObjectSequence.of(contacts)
-            .collect(SObjectCollector.groupingByString(
-                SObjectFunction.get(Contact.Department),
-                SObjectCollector.groupingByString(
-                    SObjectFunction.get('Account?.Rating')
+            .collect(SObjectCollectors.groupingByString(
+                SObjectFunctions.get(Contact.Department),
+                SObjectCollectors.groupingByString(
+                    SObjectFunctions.get('Account?.Rating')
                 )
             ).cast(Map<String, Map<String, List<Contact>>>.class));
 ```
@@ -1116,7 +1116,7 @@ the `OptionalSObject`
 ###### Example
 ```apex
 Account firstAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
-    .find(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100))
+    .find(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100))
     .get();
 ```
 
@@ -1147,7 +1147,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isEveryAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
-    .every(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+    .every(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
 ```
 
 ##### `override some(ISObjectPredicate predicate)`
@@ -1177,7 +1177,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isSomeAccountWithMoreThan100NumberOfEmployees = SObjectSequence.of(accounts)
-    .some(SObjectPredicate.isGreater(Account.NumberOfEmployees, 100));
+    .some(SObjectPredicates.isGreater(Account.NumberOfEmployees, 100));
 ```
 
 ##### `count()`
@@ -1225,7 +1225,7 @@ the `List<SObject>` containing the sequence elements
 ###### Example
 ```apex
 List<Account> accountsWithHotRating = SObjectSequence.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toList();
 ```
 
@@ -1257,7 +1257,7 @@ the `List<Object>` containing the sequence elements
 ###### Example
 ```apex
 List<String> accountNames = (List<String>) SObjectSequence.of(accounts)
-    .toList(SObjectFunction.get('Name'), List<String>.class);
+    .toList(SObjectFunctions.get('Name'), List<String>.class);
 ```
 
 ##### `toSet()`
@@ -1277,7 +1277,7 @@ the `Set<SObject>` containing the sequence elements
 ###### Example
 ```apex
 Set<SObject> accountsWithHotRating = SObjectSequence.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toSet();
 ```
 
@@ -1307,7 +1307,7 @@ the `Set<Object>` containing the sequence elements field values
 
 ###### Example
 ```apex
-Set<Object> createdDates = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('CreatedDate'));
+Set<Object> createdDates = SObjectSequence.of(contacts).toIdSet(SObjectFunctions.get('CreatedDate'));
 ```
 
 ##### `toIdSet()`
@@ -1355,7 +1355,7 @@ the `Set<Id>` containing the sequence elements field values
 
 ###### Example
 ```apex
-Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(SObjectFunction.get('AccountId'));
+Set<Id> accountIds = SObjectSequence.of(contacts).toIdSet(SObjectFunctions.get('AccountId'));
 ```
 
 ##### `override toStringSet(ISObjectFunction mapper)`
@@ -1384,7 +1384,7 @@ the `Set<String>`containing the sequence elements field values
 
 ###### Example
 ```apex
-Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(SObjectFunction.get('Name'));
+Set<String> accountNames = SObjectSequence.of(accounts).toStringSet(SObjectFunctions.get('Name'));
 ```
 
 ##### `toMap()`
@@ -1404,7 +1404,7 @@ the `Map<Id, SObject>` containing the sequence elements
 ###### Example
 ```apex
 Map<Id, SObject> accountsWithHotRating = SObjectSequence.of(accounts)
-    .filter(SObjectPredicate.isEqual(Account.Rating, 'Hot'))
+    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     .toMap();
 ```
 
@@ -1431,13 +1431,13 @@ the `Map<Id, SObject>` containing the sequence elements
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `keyMapper` or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `mapType`|
+|`NullPointerException`|if `keyMapper` or `mapType` is null|
 
 ###### Example
 ```apex
 Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectSequence.of(contacts)
-    .toByIdMap(SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+    .toByIdMap(SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
 ```
 
 ##### `override toByStringMap(ISObjectFunction keyMapper, Type mapType)`
@@ -1463,13 +1463,13 @@ the `Map<String, SObject>` containing the sequence elements
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `keyMapper` or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `mapType`|
+|`NullPointerException`|if `keyMapper` or `mapType` is null|
 
 ###### Example
 ```apex
 Map<String, Account> accountByName = (Map<String, Account>) SObjectSequence.of(accounts)
-    .toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+    .toByStringMap(SObjectFunctions.get('Name'), Map<String, Account>.class);
 ```
 
 ##### `override groupById(ISObjectFunction keyMapper)`
@@ -1499,7 +1499,7 @@ the `Map<Id, List<SObject>>` containing the sequence elements
 ###### Example
 ```apex
 Map<Id, List<Contact>> contactsByAccountId = SObjectSequence.of(contacts)
-    .groupById(SObjectFunction.get('AccountId'));
+    .groupById(SObjectFunctions.get('AccountId'));
 ```
 
 ##### `override groupByString(ISObjectFunction keyMapper)`
@@ -1529,7 +1529,7 @@ the `Map<String, List<SObject>>` containing the sequence elements
 ###### Example
 ```apex
 Map<String, List<Account>> accountsByRating = SObjectSequence.of(accounts)
-    .groupByString(SObjectFunction.get('Rating'));
+    .groupByString(SObjectFunctions.get('Rating'));
 ```
 
 ##### `override partition(ISObjectPredicate predicate)`
@@ -1559,7 +1559,7 @@ the `Map<Boolean, List<SObject>>` containing the sequence elements
 ###### Example
 ```apex
 Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-    = SObjectSequence.of(accounts).partition(SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+    = SObjectSequence.of(accounts).partition(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
 ```
 
 ---

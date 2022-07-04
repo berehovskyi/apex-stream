@@ -1,13 +1,13 @@
 # IRunnable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A function that takes no arguments and returns nothing.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

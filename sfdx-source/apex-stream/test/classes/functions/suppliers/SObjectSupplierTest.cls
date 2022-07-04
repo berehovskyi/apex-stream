@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see SObjectSupplier
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class SObjectSupplierTest {

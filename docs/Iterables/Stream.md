@@ -1,16 +1,10 @@
 # Stream
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 An entry point that returns a stream of a certain type, depending on the type of the parameter.
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [ObjectStream](/docs/Iterables/ObjectStream.md)
@@ -26,6 +20,12 @@ An entry point that returns a stream of a certain type, depending on the type of
 
 
 **See** [DoubleStream](/docs/Iterables/DoubleStream.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### `static of(List<Object> objects)`
@@ -637,7 +637,7 @@ the new `IntStream`
 
 #### Example
 ```apex
-IIntIterable fibonacciInfiniteStream = Stream.generate(IntSupplier.fibonacci());
+IIntIterable fibonacciInfiniteStream = Stream.generate(IntSuppliers.fibonacci());
 ```
 
 ### `static generate(ILongSupplier supplier)`
@@ -666,7 +666,7 @@ the new `LongStream`
 
 #### Example
 ```apex
-ILongIterable fibonacciInfiniteStream = Stream.generate(LongSupplier.fibonacci());
+ILongIterable fibonacciInfiniteStream = Stream.generate(LongSuppliers.fibonacci());
 ```
 
 ### `static generate(IDoubleSupplier supplier)`
@@ -775,7 +775,7 @@ the new `IntStream`
 
 #### Example
 ```apex
-IIntIterable intIncrementalStream = Stream.iterate(0, IntUnaryOperator.add(1));
+IIntIterable intIncrementalStream = Stream.iterate(0, IntUnaryOperators.add(1));
 ```
 
 ### `static iterate(Long seed, ILongUnaryOperator operator)`
@@ -805,7 +805,7 @@ the new `LongStream`
 
 #### Example
 ```apex
-ILongIterable longIncrementalStream = Stream.iterate(0L, LongUnaryOperator.add(1L));
+ILongIterable longIncrementalStream = Stream.iterate(0L, LongUnaryOperators.add(1L));
 ```
 
 ### `static iterate(Double seed, IDoubleUnaryOperator operator)`
@@ -835,7 +835,7 @@ the new `DoubleStream`
 
 #### Example
 ```apex
-IDoubleIterable doubleIncrementalStream = Stream.iterate(0, DoubleUnaryOperator.add(1));
+IDoubleIterable doubleIncrementalStream = Stream.iterate(0, DoubleUnaryOperators.add(1));
 ```
 
 ### `static iterate(Object seed, IPredicate predicate, IUnaryOperator operator)`
@@ -1466,13 +1466,13 @@ the new `SObjectStream`
 ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
     Trigger.old,
     Trigger.new,
-    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ISObjectIterable newAccountsWithChangedAnnualRevenueStream = Stream.zip(
     Stream.of(Trigger.old),
     Stream.of(Trigger.new),
-    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ```

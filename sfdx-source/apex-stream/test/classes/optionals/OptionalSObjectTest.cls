@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see OptionalSObject
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class OptionalSObjectTest {
@@ -23,7 +24,7 @@ private class OptionalSObjectTest {
      * @see OptionalSObject.orElseThrow
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // Given
         String initialName = 'New Name';
         Account acc = new Account(Name = initialName);
@@ -34,10 +35,10 @@ private class OptionalSObjectTest {
         String newName = 'New Name';
         String newName1 = 'New Name1';
         String fieldName = 'Name';
-        ISObjectConsumer setNewNameConsumer = SObjectConsumer.set(fieldName, newName);
-        ISObjectConsumer setNewNameConsumer1 = SObjectConsumer.set(fieldName, newName1);
-        ISObjectPredicate isNameChanged = SObjectPredicate.isNotEqual(fieldName, initialName);
-        ISObjectFunction getName = SObjectFunction.get('Name');
+        ISObjectConsumer setNewNameConsumer = SObjectConsumers.set(fieldName, newName);
+        ISObjectConsumer setNewNameConsumer1 = SObjectConsumers.set(fieldName, newName1);
+        ISObjectPredicate isNameChanged = SObjectPredicates.isNotEqual(fieldName, initialName);
+        ISObjectFunction getName = SObjectFunctions.get(fieldName);
         ISObjectSupplier newAccountSupplier = SObjectSupplier.of(Account.SObjectType);
         ISObjectFunction getAcc1Optional = SObjectFunction.constant(Optional.of(acc1));
         ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
@@ -69,17 +70,17 @@ private class OptionalSObjectTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals('System.NoSuchElementException', exc.getTypeName());
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals('System.NoSuchElementException', exc.getTypeName());
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals('System.NullPointerException', exc.getTypeName());
+            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see Optional
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class OptionalTest {
@@ -24,7 +25,7 @@ private class OptionalTest {
      * @see Optional.orElseThrow
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // Given
         String initialName = 'Luke';
         Object luke = new IterTestUtils.Person(initialName, 15, Date.newInstance(2005, 2, 3), 4L, false);
@@ -69,17 +70,17 @@ private class OptionalTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals('System.NoSuchElementException', exc.getTypeName());
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals('System.NoSuchElementException', exc.getTypeName());
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals('System.NullPointerException', exc.getTypeName());
+            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

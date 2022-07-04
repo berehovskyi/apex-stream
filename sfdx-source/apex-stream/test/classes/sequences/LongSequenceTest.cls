@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see LongSequence
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class LongSequenceTest {
@@ -122,7 +123,7 @@ private class LongSequenceTest {
         // Given
         List<Long> input = new List<Long>{ -5L, 0L, 1L };
         List<Long> input1 = new List<Long>{ 3L, 0L, 8L };
-        ILongIterable seq = LongSequence.zip(LongSequence.of(input), LongSequence.of(input1), LongBinaryOperator.sum());
+        ILongIterable seq = LongSequence.zip(LongSequence.of(input), LongSequence.of(input1), LongBinaryOperators.sum());
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -218,7 +219,7 @@ private class LongSequenceTest {
     private static void filter() {
         // Given
         List<Long> input = new List<Long>{ -5L, 0L, 1L, 3L, 8L, null, -6L, 4L, 4L };
-        ILongIterable seq = LongSequence.of(input).filter(LongPredicate.isPositive());
+        ILongIterable seq = LongSequence.of(input).filter(LongPredicates.isGreater(0L));
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -233,7 +234,7 @@ private class LongSequenceTest {
     private static void take() {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, null, -6L, 4L, 4L };
-        ILongIterable seq = LongSequence.of(input).take(LongPredicate.isPositive());
+        ILongIterable seq = LongSequence.of(input).take(LongPredicates.isGreater(0L));
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -248,7 +249,7 @@ private class LongSequenceTest {
     private static void drop() {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, null, -6L, 4L, 4L };
-        ILongIterable seq = LongSequence.of(input).drop(LongPredicate.isPositive());
+        ILongIterable seq = LongSequence.of(input).drop(LongPredicates.isGreater(0L));
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -281,7 +282,7 @@ private class LongSequenceTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        ILongIterable seq = LongSequence.of(clone).mapTo(LongUnaryOperator.multiply(2));
+        ILongIterable seq = LongSequence.of(clone).mapTo(new IterTestUtils.MultiplyLongOp(2));
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -298,7 +299,7 @@ private class LongSequenceTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        IIntIterable seq = LongSequence.of(clone).mapToInt(LongToIntFunction.valueOf());
+        IIntIterable seq = LongSequence.of(clone).mapToInt(LongToIntFunctions.valueOf());
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -315,7 +316,7 @@ private class LongSequenceTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        IDoubleIterable seq = LongSequence.of(clone).mapToDouble(LongToDoubleFunction.valueOf());
+        IDoubleIterable seq = LongSequence.of(clone).mapToDouble(LongToDoubleFunctions.valueOf());
         // When
         List<Double> actual = seq.toList();
         // Then
@@ -350,7 +351,7 @@ private class LongSequenceTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        IObjectIterable seq = LongSequence.of(clone).mapToObject(LongFunction.toString());
+        IObjectIterable seq = LongSequence.of(clone).mapToObject(new IterTestUtils.LongToString());
         // When
         List<String> actual = (List<String>) seq.toList(List<String>.class);
         // Then
@@ -367,7 +368,7 @@ private class LongSequenceTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         List<Long> clone = input.clone();
-        ILongIterable seq = LongSequence.of(clone).forEach(LongConsumer.debug());
+        ILongIterable seq = LongSequence.of(clone).forEach(new IterTestUtils.DoNothingLongConsumer());
         // When
         List<Long> actual = seq.toList();
         // Then
@@ -488,11 +489,11 @@ private class LongSequenceTest {
         ILongIterable seq2 = LongSequence.of(cloneWithNulls);
         Long seed = 10;
         // When
-        Long actual = seq.reduce(seed, LongBinaryOperator.sum());
-        Long actual1 = seq1.reduce(LongBinaryOperator.sum()).get();
+        Long actual = seq.reduce(seed, LongBinaryOperators.sum());
+        Long actual1 = seq1.reduce(LongBinaryOperators.sum()).get();
         Exception exc1;
         try {
-            seq2.reduce(LongBinaryOperator.sum());
+            seq2.reduce(LongBinaryOperators.sum());
         } catch (Exception exc) {
             exc1 = exc;
         }
@@ -515,7 +516,7 @@ private class LongSequenceTest {
         List<Long> clone = input.clone();
         ILongIterable seq = LongSequence.of(clone);
         // When
-        Set<Long> actual = (Set<Long>) seq.collect(Supplier.of(Set<Long>.class), ObjectLongConsumer.of(SetObjectConsumer.addToLongSet()));
+        Set<Long> actual = (Set<Long>) seq.collect(Supplier.of(Set<Long>.class), ObjectLongConsumer.compose(new IterTestUtils.AddToLongSet()));
         // Then
         Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
         Validate.assertEquals(expected, actual);
@@ -533,8 +534,8 @@ private class LongSequenceTest {
         ILongIterable seq = LongSequence.of(clone);
         ILongIterable seq1 = LongSequence.of(clone);
         // When
-        Long actual = seq.find(LongPredicate.isNegative()).get();
-        Long actual1 =seq1.find(LongPredicate.isGreater(50L)).orElse(42L);
+        Long actual = seq.find(LongPredicates.isLess(0L)).get();
+        Long actual1 =seq1.find(LongPredicates.isGreater(50L)).orElse(42L);
         // Then
         Validate.assertEquals(-3L, actual);
         Validate.assertEquals(42L, actual1);
@@ -552,8 +553,8 @@ private class LongSequenceTest {
         ILongIterable seq = LongSequence.of(clone);
         ILongIterable seq1 = LongSequence.of(clone);
         // When
-        Boolean actual = seq.every(LongPredicate.isOdd());
-        Boolean actual1 = seq1.every(LongPredicate.isPrime());
+        Boolean actual = seq.every(LongPredicates.isEven().negate());
+        Boolean actual1 = seq1.every(LongPredicates.isPrime());
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -571,8 +572,8 @@ private class LongSequenceTest {
         ILongIterable seq = LongSequence.of(clone);
         ILongIterable seq1 = LongSequence.of(clone);
         // When
-        Boolean actual = seq.some(LongPredicate.isNegative());
-        Boolean actual1 = seq1.some(LongPredicate.isZero());
+        Boolean actual = seq.some(LongPredicates.isLess(0L));
+        Boolean actual1 = seq1.some(LongPredicates.isEqual(0L));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -590,8 +591,8 @@ private class LongSequenceTest {
         ILongIterable seq = LongSequence.of(clone);
         ILongIterable seq1 = LongSequence.of(clone);
         // When
-        Boolean actual = seq.none(LongPredicate.isEven());
-        Boolean actual1 = seq1.none(LongPredicate.isNegative());
+        Boolean actual = seq.none(LongPredicates.isEven());
+        Boolean actual1 = seq1.none(LongPredicates.isLess(0L));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);

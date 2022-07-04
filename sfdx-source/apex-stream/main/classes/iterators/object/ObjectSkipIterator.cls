@@ -14,9 +14,7 @@ public inherited sharing class ObjectSkipIterator implements Iterator<Object> {
 
     public Boolean hasNext() {
         while (skipped < n) {
-            if (!iterator.hasNext()) {
-                return false;
-            }
+            if (!iterator.hasNext()) { return false; }
             iterator.next();
             skipped++;
         }

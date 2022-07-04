@@ -1,16 +1,10 @@
 # LongStream
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Long` elements supporting aggregate operations, a primitive specialization of [ObjectStream](/docs/Iterables/ObjectStream.md).
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [LongSequence](/docs/Iterables/LongSequence.md)
@@ -26,6 +20,12 @@ A sequence of `Long` elements supporting aggregate operations, a primitive speci
 
 
 **See** [IntStream](/docs/Iterables/IntStream.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Properties
 
@@ -229,7 +229,7 @@ the new `LongStream`
 
 ###### Example
 ```apex
-ILongIterable fibonacciInfiniteStream = LongStream.generate(LongSupplier.fibonacci());
+ILongIterable fibonacciInfiniteStream = LongStream.generate(LongSuppliers.fibonacci());
 ```
 
 ##### `static iterate(Long seed, ILongUnaryOperator operator)`
@@ -259,7 +259,7 @@ the new `LongStream`
 
 ###### Example
 ```apex
-ILongIterable longIncrementalStream = LongStream.iterate(0L, LongUnaryOperator.add(1L));
+ILongIterable longIncrementalStream = LongStream.iterate(0L, LongUnaryOperators.add(1L));
 ```
 
 ##### `static iterate(Long seed, ILongPredicate predicate, ILongUnaryOperator operator)`
@@ -479,7 +479,7 @@ the `LongStream`
 ###### Example
 ```apex
 List<Long> filtered = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-    .filter(LongPredicate.isGreater(0))
+    .filter(LongPredicates.isGreater(0))
     .toList();
 ```
 
@@ -510,7 +510,7 @@ the `LongStream`
 ###### Example
 ```apex
 List<Long> firstFiltered = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-    .take(LongPredicate.isGreater(0))
+    .take(LongPredicates.isGreater(0))
     .toList();
 ```
 
@@ -541,7 +541,7 @@ the `LongStream`
 ###### Example
 ```apex
 List<Long> rest = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-    .drop(LongPredicate.isGreater(0))
+    .drop(LongPredicates.isGreater(0))
     .toList();
 ```
 
@@ -572,7 +572,7 @@ the `LongStream`
 ###### Example
 ```apex
 List<Long> incrementedLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-    .mapTo(LongUnaryOperator.add(1L))
+    .mapTo(LongUnaryOperators.add(1L))
     .toList();
 ```
 
@@ -760,8 +760,8 @@ the `LongStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -792,8 +792,8 @@ the `LongStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -831,8 +831,8 @@ the `Long` result of the reduction
 
 ###### Example
 ```apex
-Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperator.sum());
-Long factorialOfN = LongStream.range(1, n).reduce(1, LongBinaryOperator.product());
+Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperators.sum());
+Long factorialOfN = LongStream.range(1, n).reduce(1, LongBinaryOperators.product());
 ```
 
 ##### `override reduce(ILongBinaryOperator accumulator)`
@@ -862,7 +862,7 @@ the `OptionalLong` result of the reduction
 ###### Example
 ```apex
 Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     .reduce(LongBinaryOperator.sum())
+     .reduce(LongBinaryOperators.sum())
      .get();
 ```
 
@@ -918,7 +918,7 @@ the `OptionalLong`
 ###### Example
 ```apex
 Long firstEvenLong = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-    .find(LongPredicate.isEven())
+    .find(LongPredicates.isEven())
     .get();
 ```
 
@@ -949,7 +949,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isEveryLongEven = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-    .every(LongPredicate.isEven())
+    .every(LongPredicates.isEven())
     .get();
 ```
 
@@ -980,7 +980,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isSomeLongEven = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-    .some(LongPredicate.isEven())
+    .some(LongPredicates.isEven())
     .get();
 ```
 

@@ -1,13 +1,13 @@
 # IToIntFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 An entity that takes one argument of `Object` type and returns an `Integer` value.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

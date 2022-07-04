@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link ISObjectBinaryOperator} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link ISObjectBinaryOperator} functional interface.
  *
+ * @see ISObjectBinaryOperator
  * @see SObjectStream.zip
  * @see SObjectSequence.zip
  * @see ISObjectBaseIterable.reduce

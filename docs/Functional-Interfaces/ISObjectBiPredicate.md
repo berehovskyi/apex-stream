@@ -1,13 +1,13 @@
 # ISObjectBiPredicate
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A function that takes two arguments of `SObject` type and returns a Boolean value (`true` or `false`).
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

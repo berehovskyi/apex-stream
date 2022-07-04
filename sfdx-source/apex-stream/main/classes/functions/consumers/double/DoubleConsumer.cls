@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link IDoubleConsumer} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IDoubleConsumer} functional interface.
  *
+ * @see IDoubleConsumer
  * @see IDoubleIterable.forEach
  *
  * @author Oleh Berehovskyi
@@ -53,35 +54,6 @@ public abstract inherited sharing class DoubleConsumer implements IDoubleConsume
     // @end-group
     //</editor-fold>
 
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-    /**
-     * @description Returns a `DoubleConsumer` that debugs an input argument.
-     *
-     * @param loggingLevel the logging level
-     * @param message the message
-     *
-     * @return the `DoubleConsumer`
-     *
-     * @throws NullPointerException if `loggingLevel` or `message` is null
-     */
-    public static DoubleConsumer debug(final LoggingLevel loggingLevel, final String message) {
-        Validate.notNull(loggingLevel);
-        Validate.notNull(message);
-        return new Debug(loggingLevel, message);
-    }
-
-    /**
-     * @description Returns a `DoubleConsumer` that debugs an input argument.
-     *
-     * @return the `DoubleConsumer`
-     */
-    public static DoubleConsumer debug() {
-        return debug(LoggingLevel.INFO, '');
-    }
-    // @end-group
-    //</editor-fold>
-
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Compose extends DoubleConsumer {
@@ -92,17 +64,6 @@ public abstract inherited sharing class DoubleConsumer implements IDoubleConsume
                 consumer.accept(d);
             }
         }
-    }
-
-    private class Debug extends DoubleConsumer {
-        private final String message;
-        private final LoggingLevel level;
-        private Debug(LoggingLevel level, String message){
-            this.level = level;
-            this.message = message;
-        }
-        public override void accept(Double d) { System.debug(level, message + d); }
-
     }
     // @end-group
     //</editor-fold>

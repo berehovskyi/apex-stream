@@ -1,16 +1,13 @@
 # BinaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IBinaryOperator](/docs/Functional-Interfaces/IBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [IBinaryOperator](/docs/Functional-Interfaces/IBinaryOperator.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [IBinaryOperator](/docs/Functional-Interfaces/IBinaryOperator.md)
 
 
 **See** ObjectStream.zip
@@ -22,7 +19,13 @@ Inherits [IBinaryOperator](/docs/Functional-Interfaces/IBinaryOperator.md) funct
 **See** IObjectIterable.reduce
 
 
-**See** [Collector](/docs/Collectors/Collector.md)
+**See** [Collector](/docs/Functional-Abstract-Classes/Collector.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function

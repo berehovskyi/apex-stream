@@ -1,13 +1,13 @@
 # LongIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Provides a skeletal implementation of [ILongIterable](/docs/Iterables/ILongIterable.md).
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Iterables

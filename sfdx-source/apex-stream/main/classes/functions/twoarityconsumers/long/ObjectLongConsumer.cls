@@ -1,7 +1,9 @@
 /**
- * @description Inherits {@link IObjectLongConsumer} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IObjectLongConsumer} functional interface.
  *
+ * @see IObjectLongConsumer
+ * 
  * @author Oleh Berehovskyi
  *
  * @group Functional Abstract Classes
@@ -25,21 +27,19 @@ public abstract inherited sharing class ObjectLongConsumer implements IObjectLon
      *
      * @throws NullPointerException if `consumer` is null
      */
-    public static ObjectLongConsumer of(final IBiConsumer consumer) {
+    public static ObjectLongConsumer compose(final IBiConsumer consumer) {
         Validate.notNull(consumer);
-        return new OfBiConsumer(consumer);
+        return new ForBiConsumer(consumer);
     }
     // @end-group
     //</editor-fold>
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-    private class OfBiConsumer extends ObjectLongConsumer {
+    private class ForBiConsumer extends ObjectLongConsumer {
         private final IBiConsumer consumer;
-        private OfBiConsumer(IBiConsumer consumer) { this.consumer = consumer; }
-        public override void accept(Object container, Long l) {
-            consumer.accept(container, l);
-        }
+        private ForBiConsumer(IBiConsumer consumer) { this.consumer = consumer; }
+        public override void accept(Object container, Long l) { consumer.accept(container, l); }
     }
     // @end-group
     //</editor-fold>

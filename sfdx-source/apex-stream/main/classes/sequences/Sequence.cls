@@ -12,7 +12,10 @@
  *
  * @group Iterables
  */
-public virtual inherited sharing class Sequence {
+public inherited sharing class Sequence {
+
+    @TestVisible
+    private Sequence(){}
 
     /**
      * @description Returns a `ObjectSequence` created from `List<Object>`.
@@ -662,13 +665,13 @@ public virtual inherited sharing class Sequence {
      * ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
      *     Trigger.old,
      *     Trigger.new,
-     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
      * ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
      *     Sequence.of(Trigger.old),
      *     Sequence.of(Trigger.new),
-     *     SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+     *     SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
      *     SObjectBinaryOperator.right()
      * );
      */

@@ -165,7 +165,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * ILongIterable fibonacciInfiniteStream = LongStream.generate(LongSupplier.fibonacci());
+     * ILongIterable fibonacciInfiniteStream = LongStream.generate(LongSuppliers.fibonacci());
      */
     public static ILongIterable generate(final ILongSupplier supplier) {
         Validate.notNull(supplier);
@@ -186,7 +186,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * ILongIterable longIncrementalStream = LongStream.iterate(0L, LongUnaryOperator.add(1L));
+     * ILongIterable longIncrementalStream = LongStream.iterate(0L, LongUnaryOperators.add(1L));
      */
     public static ILongIterable iterate(final Long seed, final ILongUnaryOperator operator) {
         Validate.notNull(operator);
@@ -344,7 +344,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * List<Long> filtered = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .filter(LongPredicate.isGreater(0))
+     *     .filter(LongPredicates.isGreater(0))
      *     .toList();
      */
     public virtual override ILongIterable filter(final ILongPredicate predicate) {
@@ -364,7 +364,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * List<Long> firstFiltered = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .take(LongPredicate.isGreater(0))
+     *     .take(LongPredicates.isGreater(0))
      *     .toList();
      */
     public virtual ILongIterable take(final ILongPredicate predicate) {
@@ -385,7 +385,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * List<Long> rest = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .drop(LongPredicate.isGreater(0))
+     *     .drop(LongPredicates.isGreater(0))
      *     .toList();
      */
     public virtual ILongIterable drop(final ILongPredicate predicate) {
@@ -406,7 +406,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * List<Long> incrementedLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .mapTo(LongUnaryOperator.add(1L))
+     *     .mapTo(LongUnaryOperators.add(1L))
      *     .toList();
      */
     public virtual ILongIterable mapTo(final ILongUnaryOperator mapper) {
@@ -590,8 +590,8 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperator.sum());
-     * Long factorialOfN = LongStream.range(1, n).reduce(1, LongBinaryOperator.product());
+     * Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperators.sum());
+     * Long factorialOfN = LongStream.range(1, n).reduce(1, LongBinaryOperators.product());
      */
     public virtual Long reduce(final Long identity, final ILongBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -617,7 +617,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *      .reduce(LongBinaryOperator.sum())
+     *      .reduce(LongBinaryOperators.sum())
      *      .get();
      */
     public virtual override OptionalLong reduce(final ILongBinaryOperator accumulator) {
@@ -673,7 +673,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * Long firstEvenLong = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .find(LongPredicate.isEven())
+     *     .find(LongPredicates.isEven())
      *     .get();
      */
     public virtual OptionalLong find(final ILongPredicate predicate) {
@@ -703,7 +703,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * Boolean isEveryLongEven = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .every(LongPredicate.isEven())
+     *     .every(LongPredicates.isEven())
      *     .get();
      */
     public virtual Boolean every(final ILongPredicate predicate) {
@@ -724,7 +724,7 @@ public virtual inherited sharing class LongStream extends LongIterable implement
      *
      * @example
      * Boolean isSomeLongEven = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .some(LongPredicate.isEven())
+     *     .some(LongPredicates.isEven())
      *     .get();
      */
     public virtual override Boolean some(final ILongPredicate predicate) {

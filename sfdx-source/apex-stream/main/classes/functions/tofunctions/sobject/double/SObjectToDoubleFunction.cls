@@ -1,7 +1,9 @@
 /**
- * @description Inherits {@link ISObjectToDoubleFunction} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link ISObjectToDoubleFunction} functional interface.
  *
+ * @see ISObjectToDoubleFunction
+ * 
  * @author Oleh Berehovskyi
  *
  * @group Functional Abstract Classes
@@ -25,7 +27,7 @@ public abstract inherited sharing class SObjectToDoubleFunction implements ISObj
      *
      * @throws NullPointerException if `mapper` is null
      */
-    public static SObjectToDoubleFunction downcast(final ISObjectFunction mapper) {
+    public static SObjectToDoubleFunction compose(final ISObjectFunction mapper) {
         Validate.notNull(mapper);
         return new ForSObjectFunction(mapper);
     }
@@ -42,53 +44,6 @@ public abstract inherited sharing class SObjectToDoubleFunction implements ISObj
     public static SObjectToDoubleFunction downcast(final IFunction mapper) {
         Validate.notNull(mapper);
         return new ForFunction(mapper);
-    }
-    // @end-group
-    //</editor-fold>
-
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-    /**
-     * @description Returns a `SObjectToDoubleFunction` that gets a value for
-     * the specified `fieldName` as Double. Cross-reference fields and safe navigation are supported.
-     *
-     * @param fieldName the field to get a Double value
-     *
-     * @return the `SObjectToDoubleFunction`
-     *
-     * @throws NullPointerException if `fieldName` is blank
-     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
-     * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
-     *
-     * @see SObject.get
-     *
-     * @example
-     * SObjectToDoubleFunction.get('BillingLatitude');
-     * SObjectToDoubleFunction.get('Parent.BillingLatitude');
-     * SObjectToDoubleFunction.get('Parent?.BillingLatitude');
-     */
-    public static SObjectToDoubleFunction get(final String fieldName) {
-        return downcast(SObjectFunction.get(fieldName));
-    }
-
-    /**
-     * @description Returns a `SObjectToDoubleFunction` that gets a value for
-     * the specified `field` as Double.
-     *
-     * @param field the field to get a value
-     *
-     * @return the `SObjectToDoubleFunction`
-     *
-     * @throws NullPointerException if `field` is null
-     *
-     * @see SObject.get
-     *
-     * @example
-     * SObjectToDoubleFunction.get(Account.BillingLatitude);
-     */
-    public static SObjectToDoubleFunction get(final SObjectField field) {
-        return downcast(SObjectFunction.get(field));
     }
     // @end-group
     //</editor-fold>

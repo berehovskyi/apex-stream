@@ -13,11 +13,11 @@ public abstract inherited sharing class IntIterable implements IIntIterable {
 
     //<editor-fold desc="Conversion Operations">
     public virtual ILongIterable toLongIterable() {
-        return mapToLong(IntToLongFunction.asLong());
+        return mapToLong(IntToLongFunctions.asLong());
     }
 
     public virtual IDoubleIterable toDoubleIterable() {
-        return mapToDouble(IntToDoubleFunction.valueOf());
+        return mapToDouble(IntToDoubleFunctions.valueOf());
     }
     //</editor-fold>
 
@@ -53,7 +53,7 @@ public abstract inherited sharing class IntIterable implements IIntIterable {
      * List<Integer> intersection = intsIterable1.intersect(ints2).toList(); // [3, 9]
      */
     public virtual IIntIterable intersect(final Iterable<Integer> iterable) {
-        return distinct().filter(IntPredicate.isIn(iterable));
+        return distinct().filter(IntPredicates.isIn(iterable));
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract inherited sharing class IntIterable implements IIntIterable {
      * List<Integer> diff = intsIterable1.except(ints2).toList(); // [5, 7]
      */
     public virtual IIntIterable except(final Iterable<Integer> iterable) {
-        return distinct().filter(IntPredicate.isIn(iterable).negate());
+        return distinct().filter(IntPredicates.isIn(iterable).negate());
     }
 
     public abstract IIntIterable distinct();
@@ -78,7 +78,7 @@ public abstract inherited sharing class IntIterable implements IIntIterable {
     public abstract IIntIterable filter(final IIntPredicate predicate);
 
     public virtual IIntIterable withoutNulls() {
-        return filter(IntPredicate.isNotNull());
+        return filter(IntPredicates.isNotNull());
     }
 
     public abstract ILongIterable mapToLong(final IIntToLongFunction mapper);
@@ -96,11 +96,11 @@ public abstract inherited sharing class IntIterable implements IIntIterable {
     }
 
     public virtual OptionalInt max() {
-        return reduce(IntBinaryOperator.max());
+        return reduce(IntBinaryOperators.max());
     }
 
     public virtual OptionalInt min() {
-        return reduce(IntBinaryOperator.min());
+        return reduce(IntBinaryOperators.min());
     }
     //</editor-fold>
 

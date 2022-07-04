@@ -1,13 +1,16 @@
 # DoubleToSObjectFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IDoubleToSObjectFunction](/docs/Functional-Interfaces/IDoubleToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IDoubleToSObjectFunction](/docs/Functional-Interfaces/IDoubleToSObjectFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IDoubleToSObjectFunction](/docs/Functional-Interfaces/IDoubleToSObjectFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes

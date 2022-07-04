@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see SObjectComparator
+ * 
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class SObjectComparatorTest {
@@ -13,7 +14,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void comparingByKeyComparator() {
         // Given
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         IComparator keyComparator = Comparator.defaultOrder().nullsLast();
         String fieldName = IterTestUtils.CONSTS.NAME;
         List<Account> input = accounts;
@@ -45,7 +46,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void comparing() {
         // Given
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         SObjectField field = IterTestUtils.CONSTS.Account.Name;
         String fieldName = IterTestUtils.CONSTS.NAME;
         // When
@@ -80,7 +81,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void comparingInt() {
         // Given
-        ISObjectToIntFunction keyExtractor = SObjectToIntFunction.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
+        ISObjectToIntFunction keyExtractor = SObjectToIntFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         // When
@@ -115,7 +116,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void comparingLong() {
         // Given
-        ISObjectToLongFunction keyExtractor = SObjectToLongFunction.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
+        ISObjectToLongFunction keyExtractor = SObjectToLongFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         // When
@@ -150,7 +151,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void comparingDouble() {
         // Given
-        ISObjectToDoubleFunction keyExtractor = SObjectToDoubleFunction.get(IterTestUtils.CONSTS.Account.BillingLatitude);
+        ISObjectToDoubleFunction keyExtractor = SObjectToDoubleFunctions.get(IterTestUtils.CONSTS.Account.BillingLatitude);
         SObjectField field = IterTestUtils.CONSTS.Account.BillingLatitude;
         String fieldName = IterTestUtils.CONSTS.BILLING_LATITUDE;
         // When
@@ -262,7 +263,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void nullsOrdering() {
         // Given
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         String fieldName = IterTestUtils.CONSTS.NAME;
         // When
         ISObjectComparator comparing = SObjectComparator.comparing(keyExtractor).nullsFirst();
@@ -295,15 +296,15 @@ private class SObjectComparatorTest {
     }
 
     /**
-    * @see SObjectComparator.thenComparing
-    */
+     * @see SObjectComparator.thenComparing
+     */
     @IsTest
     static void thenComparingByKeyComparator() {
         // Given
         List<Account> input = accounts;
         input[6].Name = input[5].Name;
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        ISObjectFunction keyExtractor1 = SObjectFunction.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectFunction keyExtractor1 = SObjectFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
         IComparator keyComparator = Comparator.defaultOrder().nullsLast();
         IComparator keyComparator1 = Comparator.reverseOrder();
         String fieldName = IterTestUtils.CONSTS.NAME;
@@ -320,27 +321,27 @@ private class SObjectComparatorTest {
             Integer value3 = (Integer) acc.get(fieldName1);
             Integer value4 = (Integer) other.get(fieldName1);
             Integer value5 = (Integer) other1.get(fieldName1);
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1, true) == 0
-                    ? Comparator.compareNullSafeUntyped(value4, value3)
-                    : Comparator.compareNullSafeUntyped(value, value1, true);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2, true) == 0
-                    ? Comparator.compareNullSafeUntyped(value5, value3)
-                    : Comparator.compareNullSafeUntyped(value, value2, true);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1, true) == 0
+                    ? Comparators.compareNullSafeUntyped(value4, value3)
+                    : Comparators.compareNullSafeUntyped(value, value1, true);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2, true) == 0
+                    ? Comparators.compareNullSafeUntyped(value5, value3)
+                    : Comparators.compareNullSafeUntyped(value, value2, true);
             Validate.assertEquals(expected, comparing.compare(acc, other));
             Validate.assertEquals(expected1, comparing.compare(acc, other1));
         }
     }
 
     /**
-    * @see SObjectComparator.thenComparing
-    */
+     * @see SObjectComparator.thenComparing
+     */
     @IsTest
     static void thenComparing() {
         // Given
         List<Account> input = accounts;
         input[6].Name = input[5].Name;
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        ISObjectFunction keyExtractor1 = SObjectFunction.get(IterTestUtils.CONSTS.Account.Type);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectFunction keyExtractor1 = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Type);
         String fieldName = IterTestUtils.CONSTS.NAME;
         String fieldName1 = IterTestUtils.CONSTS.TYPE;
         // When
@@ -355,27 +356,27 @@ private class SObjectComparatorTest {
             String value3 = (String) acc.get(fieldName1);
             String value4 = (String) other.get(fieldName1);
             String value5 = (String) other1.get(fieldName1);
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeUntyped(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeUntyped(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeUntyped(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeUntyped(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(acc, other));
             Validate.assertEquals(expected1, comparing.compare(acc, other1));
         }
     }
 
     /**
-    * @see SObjectComparator.thenComparingInt
-    */
+     * @see SObjectComparator.thenComparingInt
+     */
     @IsTest
     static void thenComparingInt() {
         // Given
         List<Account> input = accounts;
         input[6].Name = input[5].Name;
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        ISObjectToIntFunction keyExtractor1 = SObjectToIntFunction.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectToIntFunction keyExtractor1 = SObjectToIntFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
         String fieldName = IterTestUtils.CONSTS.NAME;
         String fieldName1 = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         // When
@@ -390,27 +391,27 @@ private class SObjectComparatorTest {
             Integer value3 = (Integer) acc.get(fieldName1);
             Integer value4 = (Integer) other.get(fieldName1);
             Integer value5 = (Integer) other1.get(fieldName1);
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeInts(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeInts(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeInts(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeInts(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(acc, other));
             Validate.assertEquals(expected1, comparing.compare(acc, other1));
         }
     }
 
     /**
-    * @see SObjectComparator.thenComparingLong
-    */
+     * @see SObjectComparator.thenComparingLong
+     */
     @IsTest
     static void thenComparingLong() {
         // Given
         List<Account> input = accounts;
         input[6].Name = input[5].Name;
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        ISObjectToLongFunction keyExtractor1 = SObjectToLongFunction.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectToLongFunction keyExtractor1 = SObjectToLongFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
         String fieldName = IterTestUtils.CONSTS.NAME;
         String fieldName1 = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         // When
@@ -425,27 +426,27 @@ private class SObjectComparatorTest {
             Long value3 = (Long) acc.get(fieldName1);
             Long value4 = (Long) other.get(fieldName1);
             Long value5 = (Long) other1.get(fieldName1);
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeLongs(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeLongs(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeLongs(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeLongs(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(acc, other));
             Validate.assertEquals(expected1, comparing.compare(acc, other1));
         }
     }
 
     /**
-    * @see SObjectComparator.thenComparingDouble
-    */
+     * @see SObjectComparator.thenComparingDouble
+     */
     @IsTest
     static void thenComparingDouble() {
         // Given
         List<Account> input = accounts;
         input[6].Name = input[5].Name;
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        ISObjectToDoubleFunction keyExtractor1 = SObjectToDoubleFunction.get(IterTestUtils.CONSTS.Account.BillingLatitude);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectToDoubleFunction keyExtractor1 = SObjectToDoubleFunctions.get(IterTestUtils.CONSTS.Account.BillingLatitude);
         String fieldName = IterTestUtils.CONSTS.NAME;
         String fieldName1 = IterTestUtils.CONSTS.BILLING_LATITUDE;
         // When
@@ -460,27 +461,27 @@ private class SObjectComparatorTest {
             Double value3 = (Double) acc.get(fieldName1);
             Double value4 = (Double) other.get(fieldName1);
             Double value5 = (Double) other1.get(fieldName1);
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeDoubles(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeDoubles(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeDoubles(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeDoubles(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(acc, other));
             Validate.assertEquals(expected1, comparing.compare(acc, other1));
         }
     }
 
     /**
-    * @see SObjectComparator.thenComparingSObject
-    */
+     * @see SObjectComparator.thenComparingSObject
+     */
     @IsTest
     static void thenComparingSObject() {
         // Given
         List<Account> input = accounts;
         input[6].Name = input[5].Name;
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        ISObjectUnaryOperator keyExtractor1 = SObjectUnaryOperator.getSObject(IterTestUtils.CONSTS.PARENT);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectUnaryOperator keyExtractor1 = SObjectUnaryOperators.getSObject(IterTestUtils.CONSTS.PARENT);
         String fieldName = IterTestUtils.CONSTS.NAME;
         String fieldName1 = IterTestUtils.CONSTS.PARENT;
         // When
@@ -495,20 +496,20 @@ private class SObjectComparatorTest {
             SObject value3 = (SObject) acc.getSObject(fieldName1);
             SObject value4 = (SObject) other.getSObject(fieldName1);
             SObject value5 = (SObject) other1.getSObject(fieldName1);
-            Integer expected = Comparator.compareNullSafeUntyped(value, value1) == 0
-                    ? Comparator.compareNullSafeSObjects(value3, value4)
-                    : Comparator.compareNullSafeUntyped(value, value1);
-            Integer expected1 = Comparator.compareNullSafeUntyped(value, value2) == 0
-                    ? Comparator.compareNullSafeSObjects(value3, value5)
-                    : Comparator.compareNullSafeUntyped(value, value2);
+            Integer expected = Comparators.compareNullSafeUntyped(value, value1) == 0
+                    ? Comparators.compareNullSafeSObjects(value3, value4)
+                    : Comparators.compareNullSafeUntyped(value, value1);
+            Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
+                    ? Comparators.compareNullSafeSObjects(value3, value5)
+                    : Comparators.compareNullSafeUntyped(value, value2);
             Validate.assertEquals(expected, comparing.compare(acc, other));
             Validate.assertEquals(expected1, comparing.compare(acc, other1));
         }
     }
 
     /**
-    * @see SObjectComparator.thenComparing
-    */
+     * @see SObjectComparator.thenComparing
+     */
     @IsTest
     static void thenComparingByComparator() {
         // Given
@@ -516,8 +517,8 @@ private class SObjectComparatorTest {
         input[6].Name = input[5].Name;
         input.add(0, null);
         input.add(null);
-        ISObjectFunction keyExtractor = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        ISObjectFunction keyExtractor1 = SObjectFunction.get(IterTestUtils.CONSTS.Account.Type);
+        ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        ISObjectFunction keyExtractor1 = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Type);
         String fieldName = IterTestUtils.CONSTS.NAME;
         String fieldName1 = IterTestUtils.CONSTS.TYPE;
         // When
@@ -536,15 +537,15 @@ private class SObjectComparatorTest {
             String value4 = (String) other?.get(fieldName1);
             String value5 = (String) other1.get(fieldName1);
             Integer expected = (acc == null || other == null)
-                    ? Comparator.compareNullables(acc, other)
-                    : Comparator.compareNullSafeUntyped(value, value1) == 0
-                            ? Comparator.compareNullSafeUntyped(value3, value4)
-                            : Comparator.compareNullSafeUntyped(value1, value);
+                    ? Comparators.compareNullables(acc, other)
+                    : Comparators.compareNullSafeUntyped(value, value1) == 0
+                            ? Comparators.compareNullSafeUntyped(value3, value4)
+                            : Comparators.compareNullSafeUntyped(value1, value);
             Integer expected1 = (acc == null || other1 == null)
-                    ? Comparator.compareNullables(acc, other1)
-                    : Comparator.compareNullSafeUntyped(value, value2) == 0
-                            ? Comparator.compareNullSafeUntyped(value3, value5)
-                            : Comparator.compareNullSafeUntyped(value2, value);
+                    ? Comparators.compareNullables(acc, other1)
+                    : Comparators.compareNullSafeUntyped(value, value2) == 0
+                            ? Comparators.compareNullSafeUntyped(value3, value5)
+                            : Comparators.compareNullSafeUntyped(value2, value);
             Validate.assertEquals(expected, comparing.compare(acc, other));
             Validate.assertEquals(expected1, comparing.compare(acc, other1));
         }

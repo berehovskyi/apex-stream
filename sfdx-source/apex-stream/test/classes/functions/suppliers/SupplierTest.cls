@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see Supplier
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class SupplierTest {
@@ -8,17 +9,17 @@ private class SupplierTest {
     /**
      * @see Supplier.of
      * @see Supplier.constant
-     * @see Supplier.upcast
+     * @see Supplier.compose
      */
     @IsTest
     static void default() {
         // Given
         ISupplier stringListSupplier = Supplier.of(List<String>.class);
-        ISupplier accIdSupplier = IdSupplier.of(Account.SObjectType);
-        ISupplier forIntSupplier = Supplier.upcast(IntSupplier.increment());
-        ISupplier forLongSupplier = Supplier.upcast(LongSupplier.increment());
-        ISupplier forDoubleSupplier = Supplier.upcast(DoubleSupplier.random());
-        ISupplier forSObjectSupplier = Supplier.upcast(SObjectSupplier.of(Account.SObjectType));
+        ISupplier accIdSupplier = IdSuppliers.of(Account.SObjectType);
+        ISupplier forIntSupplier = Supplier.compose(IntSuppliers.increment());
+        ISupplier forLongSupplier = Supplier.compose(LongSuppliers.increment());
+        ISupplier forDoubleSupplier = Supplier.compose(DoubleSuppliers.random());
+        ISupplier forSObjectSupplier = Supplier.compose(SObjectSupplier.of(Account.SObjectType));
         ISupplier constSupplier = Supplier.constant(new IterTestUtils.Person('Name', 18, Date.today(), 1L, true));
         // When
         List<String> actual = (List<String>) stringListSupplier.get();

@@ -1,7 +1,9 @@
 /**
- * @description Inherits {@link IIntToSObjectFunction} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IIntToSObjectFunction} functional interface.
  *
+ * @see IIntToSObjectFunction
+ * 
  * @author Oleh Berehovskyi
  *
  * @group Functional Abstract Classes

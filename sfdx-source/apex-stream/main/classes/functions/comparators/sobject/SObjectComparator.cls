@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link ISObjectComparator} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link ISObjectComparator} functional interface.
  *
+ * @see ISObjectComparator
  * @see ISObjectIterable.sort
  * @see ISObjectIterable.min
  * @see ISObjectIterable.max
@@ -224,7 +225,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws SObjectException if provided invalid `fieldName`
      */
     public static SObjectComparator comparing(final String fieldName) {
-        return comparing(SObjectFunction.get(fieldName));
+        return comparing(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -237,7 +238,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparing(final SObjectField field) {
-        return comparing(SObjectFunction.get(field));
+        return comparing(SObjectFunctions.get(field));
     }
 
     /**
@@ -269,7 +270,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws SObjectException if provided invalid `fieldName`
      */
     public static SObjectComparator comparingInt(final String fieldName) {
-        return comparingInt(SObjectToIntFunction.get(fieldName));
+        return comparingInt(SObjectToIntFunctions.get(fieldName));
     }
 
     /**
@@ -282,7 +283,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingInt(final SObjectField field) {
-        return comparingInt(SObjectToIntFunction.get(field));
+        return comparingInt(SObjectToIntFunctions.get(field));
     }
 
     /**
@@ -314,7 +315,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws SObjectException if provided invalid `fieldName`
      */
     public static SObjectComparator comparingLong(final String fieldName) {
-        return comparingLong(SObjectToLongFunction.get(fieldName));
+        return comparingLong(SObjectToLongFunctions.get(fieldName));
     }
 
     /**
@@ -327,7 +328,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingLong(final SObjectField field) {
-        return comparingLong(SObjectToLongFunction.get(field));
+        return comparingLong(SObjectToLongFunctions.get(field));
     }
 
     /**
@@ -359,7 +360,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws SObjectException if provided invalid `fieldName`
      */
     public static SObjectComparator comparingDouble(final String fieldName) {
-        return comparingDouble(SObjectToDoubleFunction.get(fieldName));
+        return comparingDouble(SObjectToDoubleFunctions.get(fieldName));
     }
 
     /**
@@ -372,7 +373,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingDouble(final SObjectField field) {
-        return comparingDouble(SObjectToDoubleFunction.get(field));
+        return comparingDouble(SObjectToDoubleFunctions.get(field));
     }
 
     /**
@@ -404,7 +405,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws SObjectException if provided invalid `fieldName`
      */
     public static SObjectComparator comparingSObject(final String fieldName) {
-        return comparingSObject(SObjectUnaryOperator.getSObject(fieldName));
+        return comparingSObject(SObjectUnaryOperators.getSObject(fieldName));
     }
 
     /**
@@ -417,7 +418,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      * @throws NullPointerException if `field` is null
      */
     public static SObjectComparator comparingSObject(final SObjectField field) {
-        return comparingSObject(SObjectUnaryOperator.getSObject(field));
+        return comparingSObject(SObjectUnaryOperators.getSObject(field));
     }
     //</editor-fold>
 
@@ -492,7 +493,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
         private final ISObjectToIntFunction keyExtractor;
         private ComparingInt(ISObjectToIntFunction keyExtractor) { this.keyExtractor = keyExtractor; }
         public override Integer compare(SObject sObj1, SObject sObj2) {
-            return Comparator.compareNullSafeInts(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
+            return Comparators.compareNullSafeInts(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
         }
     }
 
@@ -500,7 +501,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
         private final ISObjectToLongFunction keyExtractor;
         private ComparingLong(ISObjectToLongFunction keyExtractor) { this.keyExtractor = keyExtractor; }
         public override Integer compare(SObject sObj1, SObject sObj2) {
-            return Comparator.compareNullSafeLongs(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
+            return Comparators.compareNullSafeLongs(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
         }
     }
 
@@ -508,7 +509,7 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
         private final ISObjectToDoubleFunction keyExtractor;
         private ComparingDouble(ISObjectToDoubleFunction keyExtractor) { this.keyExtractor = keyExtractor; }
         public override Integer compare(SObject sObj1, SObject sObj2) {
-            return Comparator.compareNullSafeDoubles(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
+            return Comparators.compareNullSafeDoubles(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
         }
     }
 
@@ -516,13 +517,13 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
         private final ISObjectUnaryOperator keyExtractor;
         private ComparingSObject(ISObjectUnaryOperator keyExtractor) { this.keyExtractor = keyExtractor; }
         public override Integer compare(SObject sObj1, SObject sObj2) {
-            return Comparator.compareNullSafeSObjects(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
+            return Comparators.compareNullSafeSObjects(keyExtractor.apply(sObj1), keyExtractor.apply(sObj2));
         }
     }
 
     private class DefaultOrder extends SObjectComparator {
         public override Integer compare(SObject sObj1, SObject sObj2) {
-            return Comparator.compareNullSafeSObjects(sObj1, sObj2);
+            return Comparators.compareNullSafeSObjects(sObj1, sObj2);
         }
     }
 
@@ -542,11 +543,10 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
             this.comp = comparator;
         }
         public override Integer compare(SObject sObj1, SObject sObj2) {
-            if (sObj1 == null || sObj2 == null) { return Comparator.compareNullables(sObj1, sObj2, !nullsFirst); }
+            if (sObj1 == null || sObj2 == null) { return Comparators.compareNullables(sObj1, sObj2, !nullsFirst); }
             return comp.compare(sObj1, sObj2);
         }
         public override SObjectComparator thenComparing(ISObjectComparator other) {
-            Validate.notNull(other);
             return new NullsOrder(nullsFirst, comp.thenComparing(other));
         }
         public override SObjectComparator reversed() {

@@ -1,16 +1,10 @@
 # IntStream
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Integer` elements supporting aggregate operations, a primitive specialization of [ObjectStream](/docs/Iterables/ObjectStream.md).
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [IntSequence](/docs/Iterables/IntSequence.md)
@@ -26,6 +20,12 @@ A sequence of `Integer` elements supporting aggregate operations, a primitive sp
 
 
 **See** [LongStream](/docs/Iterables/LongStream.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Properties
 
@@ -229,7 +229,7 @@ the new `IntStream`
 
 ###### Example
 ```apex
-IIntIterable fibonacciInfiniteStream = IntStream.generate(IntSupplier.fibonacci());
+IIntIterable fibonacciInfiniteStream = IntStream.generate(IntSuppliers.fibonacci());
 ```
 
 ##### `static iterate(Integer seed, IIntUnaryOperator operator)`
@@ -259,7 +259,7 @@ the new `IntStream`
 
 ###### Example
 ```apex
-IIntIterable intIncrementalStream = IntStream.iterate(0, IntUnaryOperator.add(1));
+IIntIterable intIncrementalStream = IntStream.iterate(0, IntUnaryOperators.add(1));
 ```
 
 ##### `static iterate(Integer seed, IIntPredicate predicate, IIntUnaryOperator operator)`
@@ -479,7 +479,7 @@ the `IntStream`
 ###### Example
 ```apex
 List<Integer> filtered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-    .filter(IntPredicate.isGreater(0))
+    .filter(IntPredicates.isGreater(0))
     .toList();
 ```
 
@@ -510,7 +510,7 @@ the `IntStream`
 ###### Example
 ```apex
 List<Integer> firstFiltered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-    .take(IntPredicate.isGreater(0))
+    .take(IntPredicates.isGreater(0))
     .toList();
 ```
 
@@ -541,7 +541,7 @@ the `IntStream`
 ###### Example
 ```apex
 List<Integer> rest = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-    .drop(IntPredicate.isGreater(0))
+    .drop(IntPredicates.isGreater(0))
     .toList();
 ```
 
@@ -572,7 +572,7 @@ the `IntStream`
 ###### Example
 ```apex
 List<Integer> incrementedInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-    .mapTo(IntUnaryOperator.add(1))
+    .mapTo(IntUnaryOperators.add(1))
     .toList();
 ```
 
@@ -760,8 +760,8 @@ the `IntStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -792,8 +792,8 @@ the `IntStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -831,8 +831,8 @@ the `Integer` result of the reduction
 
 ###### Example
 ```apex
-Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperator.sum());
-Integer factorialOfN = IntStream.range(1, n).reduce(1, IntBinaryOperator.product());
+Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperators.sum());
+Integer factorialOfN = IntStream.range(1, n).reduce(1, IntBinaryOperators.product());
 ```
 
 ##### `override reduce(IIntBinaryOperator accumulator)`
@@ -862,7 +862,7 @@ the `OptionalInt` result of the reduction
 ###### Example
 ```apex
 Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     .reduce(IntBinaryOperator.sum())
+     .reduce(IntBinaryOperators.sum())
      .get();
 ```
 
@@ -918,7 +918,7 @@ the `OptionalInt`
 ###### Example
 ```apex
 Integer firstEvenInt = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-    .find(IntPredicate.isEven())
+    .find(IntPredicates.isEven())
     .get();
 ```
 
@@ -949,7 +949,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isEveryIntEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-    .every(IntPredicate.isEven())
+    .every(IntPredicates.isEven())
     .get();
 ```
 
@@ -980,7 +980,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isSomeLongEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-    .some(IntPredicate.isEven())
+    .some(IntPredicates.isEven())
     .get();
 ```
 

@@ -1,13 +1,16 @@
 # DoubleToLongFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IDoubleToLongFunction](/docs/Functional-Interfaces/IDoubleToLongFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IDoubleToLongFunction](/docs/Functional-Interfaces/IDoubleToLongFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IDoubleToLongFunction](/docs/Functional-Interfaces/IDoubleToLongFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -18,41 +21,5 @@ Inherits [IDoubleToLongFunction](/docs/Functional-Interfaces/IDoubleToLongFuncti
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static longValue()`
-
-Returns a `IDoubleToLongFunction` that returns the Long value of the Double input argument by casting it to an Long.
-
-###### Return
-
-**Type**
-
-DoubleToLongFunction
-
-**Description**
-
-the `IDoubleToLongFunction`
-
-
-**See** Double.longValue
-
-##### `static roundToLong()`
-
-Returns a `IDoubleToLongFunction` that returns the closest Long to the Double input argument.
-
-###### Return
-
-**Type**
-
-DoubleToLongFunction
-
-**Description**
-
-the `IDoubleToLongFunction`
-
-
-**See** Math.roundToLong
 
 ---

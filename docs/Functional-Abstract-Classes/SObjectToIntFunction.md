@@ -1,13 +1,16 @@
 # SObjectToIntFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ISObjectToIntFunction](/docs/Functional-Interfaces/ISObjectToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [ISObjectToIntFunction](/docs/Functional-Interfaces/ISObjectToIntFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [ISObjectToIntFunction](/docs/Functional-Interfaces/ISObjectToIntFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -21,7 +24,7 @@ Inherits [ISObjectToIntFunction](/docs/Functional-Interfaces/ISObjectToIntFuncti
 
 ---
 ### Static Methods
-##### `static downcast(ISObjectFunction mapper)`
+##### `static compose(ISObjectFunction mapper)`
 
 Returns a composed `SObjectToIntFunction` of the `ISObjectFunction`.
 
@@ -44,75 +47,5 @@ the `SObjectToIntFunction`
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
-
----
-### Built-Ins
-##### `static get(String fieldName)`
-
-Returns a `SObjectToIntFunction` that gets a value for the specified `fieldName` as Integer. Cross-reference fields and safe navigation are supported.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`fieldName`|the field to get a Integer value|
-
-###### Return
-
-**Type**
-
-SObjectToIntFunction
-
-**Description**
-
-the `SObjectToIntFunction`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `fieldName` is blank|
-|`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
-
-
-**See** SObject.get
-
-###### Example
-```apex
-SObjectToIntFunction.get('NumberOfEmployees');
-SObjectToIntFunction.get('Parent.NumberOfEmployees');
-SObjectToIntFunction.get('Parent?.NumberOfEmployees');
-```
-
-##### `static get(SObjectField field)`
-
-Returns a `SObjectToIntFunction` that gets a value for the specified `field` as Integer.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`field`|the field to get a value|
-
-###### Return
-
-**Type**
-
-SObjectToIntFunction
-
-**Description**
-
-the `SObjectToIntFunction`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `field` is null|
-
-
-**See** SObject.get
-
-###### Example
-```apex
-SObjectToIntFunction.get(Account.NumberOfEmployees);
-```
 
 ---

@@ -1,16 +1,10 @@
 # ObjectSequence
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Object` elements supporting aggregate operations. Sequence operations are composed of sequence chain. A sequence chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set)).</li>     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,     such as ObjectSequence.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectSequence.count() or ObjectSequence.collect(ICollector)).</li> </ul> <p>Sequences are <strong>eager</strong>:</p> <ul>     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li> </ul> <p>A sequence may not consume all elements. It may not be infinite.</p> <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation) <strong>multiple times</strong>. <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li> </ul> <p>There are primitive specializations for [IntSequence](/docs/Iterables/IntSequence.md), [LongSequence](/docs/Iterables/LongSequence.md), and [DoubleSequence](/docs/Iterables/DoubleSequence.md) and [SObjectSequence](/docs/Iterables/SObjectSequence.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [ObjectStream](/docs/Iterables/ObjectStream.md)
@@ -26,6 +20,12 @@ A sequence of `Object` elements supporting aggregate operations. Sequence operat
 
 
 **See** [DoubleSequence](/docs/Iterables/DoubleSequence.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### Other
@@ -150,7 +150,7 @@ the new `ObjectSequence` if `objects` is non-null, otherwise an empty `ObjectSeq
 ###### Example
 ```apex
 IObjectIterable peopleSeq = ObjectSequence.ofNullable(new Set<Person>(people));
-IObjectIterable emptypeopleSeq = ObjectSequence.ofNullable(null);
+IObjectIterable emptySeq = ObjectSequence.ofNullable(null);
 ```
 
 ##### `static empty()`
@@ -910,8 +910,8 @@ the `ObjectSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -942,8 +942,8 @@ the `ObjectSequence`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -1040,7 +1040,7 @@ the `Object` result of the collection
 List<String> peopleNames = (List<String>) ObjectSequence.of(people)
     .collect(
         Supplier.of(List<String>.class),
-        ListObjectConsumer.addToList(getName)
+        ListObjectConsumers.addToList(getName)
     );
 ```
 
@@ -1073,14 +1073,14 @@ the `Object` result of the collection
 // Group people by city
 Map<String, List<Person>> peopleByCity = (Map<String, List<Person>>)
     ObjectSequence.of(people)
-         .collect(Collector.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
+         .collect(Collectors.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
 // Group people by city and by country, cascading two collectors
 Map<String, Map<String, List<Person>>> peopleByCityByCountry
     = (Map<String, Map<String, List<Person>>>)
         ObjectSequence.of(people)
-            .collect(Collector.groupingByString(
+            .collect(Collectors.groupingByString(
                 getCountry,
-                Collector.groupingByString(getCity)
+                Collectors.groupingByString(getCity)
             ).cast(Map<String, Map<String, List<Person>>>.class));
 ```
 

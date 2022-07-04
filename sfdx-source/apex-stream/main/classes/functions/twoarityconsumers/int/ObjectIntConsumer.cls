@@ -1,7 +1,9 @@
 /**
- * @description Inherits {@link IObjectIntConsumer} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IObjectIntConsumer} functional interface.
  *
+ * @see IObjectIntConsumer
+ * 
  * @author Oleh Berehovskyi
  *
  * @group Functional Abstract Classes
@@ -25,7 +27,8 @@ public abstract inherited sharing class ObjectIntConsumer implements IObjectIntC
      *
      * @throws NullPointerException if `consumer` is null
      */
-    public static ObjectIntConsumer of(final IBiConsumer consumer) {
+    public static ObjectIntConsumer compose(final IBiConsumer consumer) {
+        Validate.notNull(consumer);
         return new OfBiConsumer(consumer);
     }
     // @end-group
@@ -36,9 +39,7 @@ public abstract inherited sharing class ObjectIntConsumer implements IObjectIntC
     private class OfBiConsumer extends ObjectIntConsumer {
         private final IBiConsumer consumer;
         private OfBiConsumer(IBiConsumer consumer) { this.consumer = consumer; }
-        public override void accept(Object container, Integer i) {
-            consumer.accept(container, i);
-        }
+        public override void accept(Object container, Integer i) { consumer.accept(container, i); }
     }
     // @end-group
     //</editor-fold>

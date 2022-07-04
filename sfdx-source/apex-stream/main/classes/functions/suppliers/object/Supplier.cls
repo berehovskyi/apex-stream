@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link ISupplier} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link ISupplier} functional interface.
  *
+ * @see ISupplier
  * @see Collector
  * @see SObjectCollector
  *
@@ -58,7 +59,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
      *
      * @throws NullPointerException if `consumer` is null
      */
-    public static Supplier upcast(final IIntSupplier supplier) {
+    public static Supplier compose(final IIntSupplier supplier) {
         Validate.notNull(supplier);
         return new ForIntSupplier(supplier);
     }
@@ -72,7 +73,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
      *
      * @throws NullPointerException if `consumer` is null
      */
-    public static Supplier upcast(final ILongSupplier supplier) {
+    public static Supplier compose(final ILongSupplier supplier) {
         Validate.notNull(supplier);
         return new ForLongSupplier(supplier);
     }
@@ -86,7 +87,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
      *
      * @throws NullPointerException if `consumer` is null
      */
-    public static Supplier upcast(final IDoubleSupplier supplier) {
+    public static Supplier compose(final IDoubleSupplier supplier) {
         Validate.notNull(supplier);
         return new ForDoubleSupplier(supplier);
     }
@@ -100,125 +101,9 @@ public abstract inherited sharing class Supplier implements ISupplier {
      *
      * @throws NullPointerException if `consumer` is null
      */
-    public static Supplier upcast(final ISObjectSupplier supplier) {
+    public static Supplier compose(final ISObjectSupplier supplier) {
         Validate.notNull(supplier);
         return new ForSObjectSupplier(supplier);
-    }
-    // @end-group
-    //</editor-fold>
-
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-    /**
-     * @description Returns a `Supplier` that returns a list container to track joining string.
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.joining
-     * @see SObjectCollector.joining
-     */
-    public static Supplier joiningString() {
-        return new JoiningStringSupplier();
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track int averaging.
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.averagingInt
-     * @see SObjectCollector.averagingInt
-     */
-    public static Supplier averagingInt() {
-        return new AveragingIntSupplier();
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track Long averaging.
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.averagingLong
-     * @see SObjectCollector.averagingLong
-     */
-    public static Supplier averagingLong() {
-        return new AveragingLongSupplier();
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track Double averaging.
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.averagingDouble
-     * @see SObjectCollector.averagingDouble
-     */
-    public static Supplier averagingDouble() {
-        return new AveragingDoubleSupplier();
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track int summing.
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.summingInt
-     * @see SObjectCollector.summingInt
-     */
-    public static Supplier summingInt() {
-        return new SummingIntSupplier();
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track Long summing.
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.summingLong
-     * @see SObjectCollector.summingLong
-     */
-    public static Supplier summingLong() {
-        return new SummingLongSupplier();
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track Double summing.
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.summingDouble
-     * @see SObjectCollector.summingDouble
-     */
-    public static Supplier summingDouble() {
-        return new SummingDoubleSupplier();
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track `identity`
-     * mutation.
-     *
-     * @param identity 
-     *
-     * @return the `Supplier`
-     *
-     * @see Collector.reducing
-     */
-    public static Supplier box(final Object identity) {
-        return new BoxSupplier(identity);
-    }
-
-    /**
-     * @description Returns a `Supplier` that returns a list container to track `identity`
-     * mutation.
-     *
-     * @param identity 
-     *
-     * @return the `Supplier`
-     *
-     * @see SObjectCollector.reducing
-     */
-    public static Supplier sObjectBox(final SObject identity) {
-        return new SObjectBoxSupplier(identity);
     }
     // @end-group
     //</editor-fold>
@@ -229,6 +114,12 @@ public abstract inherited sharing class Supplier implements ISupplier {
         private final Type t;
         private OfType(Type t) { this.t = t; }
         public override Object get() { return t.newInstance(); }
+    }
+
+    private class Constant extends Supplier {
+        private final Object identity;
+        public Constant(Object identity) { this.identity = identity; }
+        public override Object get() { return identity; }
     }
 
     private class ForIntSupplier extends Supplier {
@@ -253,52 +144,6 @@ public abstract inherited sharing class Supplier implements ISupplier {
         private final ISObjectSupplier supplier;
         private ForSObjectSupplier(ISObjectSupplier supplier) { this.supplier = supplier; }
         public override Object get() { return supplier.get(); }
-    }
-
-    private class JoiningStringSupplier extends Supplier {
-        public override Object get() { return new List<String>{ '' }; }
-    }
-
-    private class AveragingIntSupplier extends Supplier {
-        public override Object get() { return new List<Integer>{ 0, 0 }; }
-    }
-
-    private class AveragingLongSupplier extends Supplier {
-        public override Object get() { return new List<Long>{ 0, 0 }; }
-    }
-
-    private class AveragingDoubleSupplier extends Supplier {
-        public override Object get() { return new List<Double>{ 0, 0, 0, 0 }; }
-    }
-
-    private class SummingIntSupplier extends Supplier {
-        public override Object get() { return new List<Integer>{ 0 }; }
-    }
-
-    private class SummingLongSupplier extends Supplier {
-        public override Object get() { return new List<Long>{ 0L }; }
-    }
-
-    private class SummingDoubleSupplier extends Supplier {
-        public override Object get() { return new List<Double>{ 0, 0, 0 }; }
-    }
-
-    private class BoxSupplier extends Supplier {
-        private final Object identity;
-        public BoxSupplier(Object identity) { this.identity = identity; }
-        public override Object get() { return new List<Object>{ identity }; }
-    }
-
-    private class SObjectBoxSupplier extends Supplier {
-        private final SObject identity;
-        public SObjectBoxSupplier(SObject identity) { this.identity = identity; }
-        public override Object get() { return new List<SObject>{ identity }; }
-    }
-
-    private class Constant extends Supplier {
-        private final Object identity;
-        public Constant(Object identity) { this.identity = identity; }
-        public override Object get() { return identity; }
     }
     // @end-group
     //</editor-fold>

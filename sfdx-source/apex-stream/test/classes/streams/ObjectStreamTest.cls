@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see ObjectStream
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class ObjectStreamTest {
@@ -65,7 +66,7 @@ private class ObjectStreamTest {
     @IsTest
     private static void generate() {
         // Given
-        ISupplier uuid = StringSupplier.uuid();
+        ISupplier uuid = StringSuppliers.uuid();
         Integer lim = 10;
         IObjectIterable stream = ObjectStream.generate(uuid).lim(lim);
         // When
@@ -85,17 +86,17 @@ private class ObjectStreamTest {
     private static void iterate() {
         // Given
         Integer value = 5;
-        IIntUnaryOperator increment = IntUnaryOperator.increment();
-        IIntUnaryOperator add = IntUnaryOperator.add(value);
-        IIntUnaryOperator subtract = IntUnaryOperator.subtract(value);
-        IToIntFunction toInt = ToIntFunction.valueOf();
-        IIntPredicate isPositive = IntPredicate.isPositive();
+        IIntUnaryOperator increment = new IterTestUtils.AddIntOp(1);
+        IIntUnaryOperator add = new IterTestUtils.AddIntOp(value);
+        IIntUnaryOperator subtract = new IterTestUtils.AddIntOp(-value);
+        IToIntFunction toInt = new IterTestUtils.IntValueOf();
+        IIntPredicate isPositive = IntPredicates.isGreater(0);
         Integer seed = 100;
         Integer seed1 = 10;
         Integer seed2 = 50;
-        IUnaryOperator incrementObj = UnaryOperator.upcast(increment);
-        IUnaryOperator addObj = UnaryOperator.upcast(add);
-        IUnaryOperator subtractObj = UnaryOperator.upcast(subtract);
+        IUnaryOperator incrementObj = UnaryOperator.compose(increment);
+        IUnaryOperator addObj = UnaryOperator.compose(add);
+        IUnaryOperator subtractObj = UnaryOperator.compose(subtract);
         IPredicate isPositiveObj = Predicate.compose(toInt, isPositive);
         Integer lim = 10;
         IObjectIterable stream = ObjectStream.iterate(seed, incrementObj).lim(lim);
@@ -160,8 +161,8 @@ private class ObjectStreamTest {
         IBinaryOperator right = BinaryOperator.right();
         IBinaryOperator left = BinaryOperator.left();
         IPredicate alwaysTrue = Predicate.always(true);
-        IPredicate isNotBlank = StringPredicate.isNotBlank();
-        IBiPredicate rightIsNotBlank = BiPredicate.everyPredicate(alwaysTrue, isNotBlank);
+        IPredicate isNotBlank = new IterTestUtils.IsNotBlank();
+        IBiPredicate rightIsNotBlank = BiPredicate.every(alwaysTrue, isNotBlank);
         IObjectIterable stream4 = ObjectStream.zip(stream, stream1, right);
         IObjectIterable stream5 = ObjectStream.zip(stream2, stream3, rightIsNotBlank, left);
         // When
@@ -271,8 +272,8 @@ private class ObjectStreamTest {
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
         List<Object> input = new List<Object>{ 'foo', 1, 'baz', john, true, 'ipsum', jake };
-        IPredicate isInstanceOfString = Predicate.isInstanceOfString();
-        IPredicate isInstanceOfComparable = Predicate.isInstanceOfComparable();
+        IPredicate isInstanceOfString = TypePredicates.isInstanceOfString();
+        IPredicate isInstanceOfComparable = TypePredicates.isInstanceOfComparable();
         IObjectIterable stream = ObjectStream.of(input).filter(isInstanceOfString);
         IObjectIterable stream1 = ObjectStream.of(input).filter(isInstanceOfComparable);
         // When
@@ -281,6 +282,8 @@ private class ObjectStreamTest {
         // Then
         Validate.assertEquals(new List<String>{ 'foo', 'baz', 'ipsum' }, actual);
         Validate.assertEquals(new List<Comparable>{ john, jake }, actual1);
+        Validate.assert(((ObjectStream) stream).isOperated);
+        Validate.assert(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -292,12 +295,22 @@ private class ObjectStreamTest {
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
         List<Object> input = new List<Object>{ 'foo', '', 'baz', john, true, 'ipsum', jake };
-        IPredicate isInstanceOfString = Predicate.isInstanceOfString();
+        Predicate isInstanceOfString = TypePredicates.isInstanceOfString();
         IObjectIterable stream = ObjectStream.of(input).take(isInstanceOfString);
+        IObjectIterable stream1 = ObjectStream.of(input).take(isInstanceOfString.andAlso(new IterTestUtils.IsNotBlank()));
         // When
         List<Object> actual = stream.toList();
+        Iterator<Object> iterator = stream1.iterator();
         // Then
         Validate.assertEquals(new List<Object>{ 'foo', '', 'baz' }, actual);
+        Validate.assertEquals(input[0], iterator.next());
+        try {
+            iterator.next();
+        } catch (Exception exc) {
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+        }
+        Validate.assert(((ObjectStream) stream).isOperated);
+        Validate.assert(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -309,12 +322,13 @@ private class ObjectStreamTest {
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
         List<Object> input = new List<Object>{ 'foo', '', 'baz', john, true, 'ipsum', jake };
-        IPredicate isInstanceOfString = Predicate.isInstanceOfString();
+        IPredicate isInstanceOfString = TypePredicates.isInstanceOfString();
         IObjectIterable stream = ObjectStream.of(input).drop(isInstanceOfString);
         // When
         List<Object> actual = stream.toList();
         // Then
         Validate.assertEquals(new List<Object>{ john, true, 'ipsum', jake }, actual);
+        Validate.assert(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -343,7 +357,7 @@ private class ObjectStreamTest {
         // Given
         List<String> input = new List<String>{ 'foo', '', 'baz', 'ipsum', 'Hello' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        IObjectIterable stream = ObjectStream.of(clone).mapTo(StringFunction.capitalize());
+        IObjectIterable stream = ObjectStream.of(clone).mapTo(new IterTestUtils.Capitalize());
         // When
         List<Object> actual = stream.toList();
         // Then
@@ -361,7 +375,7 @@ private class ObjectStreamTest {
         // Given
         List<String> input = new List<String>{ 'foo', '', 'baz', 'ipsum', 'Hello' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        IIntIterable intStream = ObjectStream.of(clone).mapToInt(StringToIntFunction.length());
+        IIntIterable intStream = ObjectStream.of(clone).mapToInt(new IterTestUtils.Length());
         // When
         List<Integer> actual = intStream.toList();
         // Then
@@ -379,7 +393,7 @@ private class ObjectStreamTest {
         // Given
         List<String> input = new List<String>{ '6', '0', '1', '3', '-9', '-6', '4', '4' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        ILongIterable longStream = ObjectStream.of(clone).mapToLong(StringToLongFunction.valueOf());
+        ILongIterable longStream = ObjectStream.of(clone).mapToLong(new IterTestUtils.LongValueOf());
         // When
         List<Long> actual = longStream.toList();
         // Then
@@ -397,7 +411,7 @@ private class ObjectStreamTest {
         // Given
         List<String> input = new List<String>{ '6.1', '0.0', '1.66', '3.06', '-8.99', '-6.4', '4.0', '4.0' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        IDoubleIterable doubleStream = ObjectStream.of(clone).mapToDouble(ToDoubleFunction.valueOf());
+        IDoubleIterable doubleStream = ObjectStream.of(clone).mapToDouble(new IterTestUtils.DoubleValueOf());
         // When
         List<Double> actual = doubleStream.toList();
         // Then
@@ -598,7 +612,7 @@ private class ObjectStreamTest {
         List<Object> input = new List<Object>{ john, jake, 'foo', 1, 'foo', jake };
         List<Object> clone =  IterTestUtils.deepClone(input);
         IObjectIterable stream = ObjectStream.of(clone).distinct();
-        IObjectIterable stream1 = ObjectStream.of(input).filter(Predicate.isInstanceOfComparable()).distinct(new IterTestUtils.GetIdFunction());
+        IObjectIterable stream1 = ObjectStream.of(input).filter(TypePredicates.isInstanceOfComparable()).distinct(new IterTestUtils.GetIdFunction());
         // When
         List<Object> actual = stream.toList();
         List<Object> actual1 = stream1.toList();
@@ -742,8 +756,8 @@ private class ObjectStreamTest {
         IObjectIterable stream1 = ObjectStream.of(clone1);
         String seed = 'seed';
         // When
-        String actual = (String) stream.reduce(seed, StringBinaryOperator.concat());
-        Integer actual1 = (Integer) stream1.reduce(BinaryOperator.upcast(IntBinaryOperator.sum())).get();
+        String actual = (String) stream.reduce(seed, new IterTestUtils.Concat());
+        Integer actual1 = (Integer) stream1.reduce(BinaryOperator.upcast(IntBinaryOperators.sum())).get();
         // Then
         String expected = 'seedfoobarbazlorem';
         Integer expected1 = 16;
@@ -771,8 +785,8 @@ private class ObjectStreamTest {
         IObjectIterable stream = ObjectStream.of(clone);
         IObjectIterable stream1 = ObjectStream.of(clone1);
         // When
-        Set<Object> actual = (Set<Object>) stream.collect(Collector.toSet());
-        Set<Object> actual1 = (Set<Object>) stream1.collect(Supplier.of(Set<Object>.class), SetObjectConsumer.addToSet());
+        Set<Object> actual = (Set<Object>) stream.collect(Collector.of(Supplier.of(Set<Object>.class), new IterTestUtils.AddToSet()));
+        Set<Object> actual1 = (Set<Object>) stream1.collect(Supplier.of(Set<Object>.class), new IterTestUtils.AddToSet());
         // Then
         Set<Object> expected = new Set<Object>{ john, jake, sam, lucy };
         Validate.assertEquals(expected, actual);
@@ -799,8 +813,8 @@ private class ObjectStreamTest {
         IObjectIterable stream1 = ObjectStream.of(clone1);
         Integer elseValue = 42;
         // When
-        String actual = (String) stream.find(Predicate.isInstanceOfString()).get();
-        Integer actual1 = (Integer) stream1.find(Predicate.isInstanceOfInt()).orElse(elseValue);
+        String actual = (String) stream.find(TypePredicates.isInstanceOfString()).get();
+        Integer actual1 = (Integer) stream1.find(TypePredicates.isInstanceOfInt()).orElse(elseValue);
         // Then
         Validate.assertEquals('jake', actual);
         Validate.assertEquals(elseValue, actual1);
@@ -825,8 +839,8 @@ private class ObjectStreamTest {
         IObjectIterable stream = ObjectStream.of(clone);
         IObjectIterable stream1 = ObjectStream.of(clone1);
         // When
-        Boolean actual = stream.every(Predicate.isInstanceOfString());
-        Boolean actual1 = stream1.every(Predicate.isInstanceOfInt().negate());
+        Boolean actual = stream.every(TypePredicates.isInstanceOfString());
+        Boolean actual1 = stream1.every(TypePredicates.isInstanceOfInt().negate());
         // Then
         Validate.assertEquals(false, actual);
         Validate.assertEquals(true, actual1);
@@ -851,8 +865,8 @@ private class ObjectStreamTest {
         IObjectIterable stream = ObjectStream.of(clone);
         IObjectIterable stream1 = ObjectStream.of(clone1);
         // When
-        Boolean actual = stream.some(Predicate.isInstanceOfString());
-        Boolean actual1 = stream1.some(Predicate.isInstanceOfInt());
+        Boolean actual = stream.some(TypePredicates.isInstanceOfString());
+        Boolean actual1 = stream1.some(TypePredicates.isInstanceOfInt());
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -877,8 +891,8 @@ private class ObjectStreamTest {
         IObjectIterable stream = ObjectStream.of(clone);
         IObjectIterable stream1 = ObjectStream.of(clone1);
         // When
-        Boolean actual = stream.none(Predicate.isInstanceOfString());
-        Boolean actual1 = stream1.none(Predicate.isInstanceOfInt());
+        Boolean actual = stream.none(TypePredicates.isInstanceOfString());
+        Boolean actual1 = stream1.none(TypePredicates.isInstanceOfInt());
         // Then
         Validate.assertEquals(false, actual);
         Validate.assertEquals(true, actual1);
@@ -1005,15 +1019,25 @@ private class ObjectStreamTest {
     private static void toList() {
         // Given
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 1L, true);
-        List<Object> input = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
-        List<Object> clone = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
+        IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 2L, false);
+        IterTestUtils.Person sam = new IterTestUtils.Person('Sam', 16, Date.newInstance(2005, 2, 3), 0L, false);
+        IterTestUtils.Person lucy = new IterTestUtils.Person('Lucy', 25, Date.newInstance(1991, 2, 3), 3L, true);
+        List<IterTestUtils.Person> input = new List<IterTestUtils.Person>{ john, jake, sam, lucy, lucy, jake };
+        List<IterTestUtils.Person> clone = (List<IterTestUtils.Person>) IterTestUtils.deepClone(input, List<IterTestUtils.Person>.class);
+        List<Object> input1 = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
+        List<Object> clone1 = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
         IObjectIterable stream = ObjectStream.of(clone);
+        IObjectIterable stream1 = ObjectStream.of(clone1);
         // When
-        List<Object> actual = stream.toList();
+        List<IterTestUtils.Person> actual = (List<IterTestUtils.Person>) stream.toList(List<IterTestUtils.Person>.class);
+        List<Object> actual1 = stream1.toList();
         // Then
         Validate.assertEquals(input, actual);
+        Validate.assertEquals(input1, actual1);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
         Validate.assert(((ObjectStream) stream).isOperated);
+        Validate.assert(((ObjectStream) stream1).isOperated);
     }
 
     /**

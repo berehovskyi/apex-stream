@@ -5,7 +5,7 @@ public inherited sharing class LongTakeIterator implements Iterator<Long> {
 
     private final Iterator<Long> iterator;
     private final ILongPredicate predicate;
-    private Boolean hasNext = false, hasNextEvaluated = false, hasNextPresent = false;
+    private Boolean hasNext = false, hasNextEvaluated = false, isNextCached = false;
     private Long next;
 
     public LongTakeIterator(final Iterator<Long> iterator, final ILongPredicate predicate) {
@@ -17,33 +17,27 @@ public inherited sharing class LongTakeIterator implements Iterator<Long> {
         if (hasNextEvaluated) { return hasNext; }
         hasNext = iterator.hasNext();
         hasNextEvaluated = true;
-        if (hasNext) { hasNextPresent = testNext(); }
+        if (hasNext) { isNextCached = testNext(); }
         return hasNext;
     }
 
     public Long next() {
-        if (hasNextEvaluated && !hasNext) {
-            next = null;
-            throw new NoSuchElementException();
-        }
+        if (hasNextEvaluated && !hasNext) { throw new NoSuchElementException(); }
         hasNextEvaluated = false;
-        if (hasNextPresent) {
-            hasNextPresent = false;
+        if (isNextCached) {
+            isNextCached = false;
             return next;
         }
         if (testNext()) {
             return next;
         } else {
-            next = null;
-            hasNextPresent = true;
             throw new NoSuchElementException();
         }
     }
 
     private Boolean testNext() {
         next = iterator.next();
-        hasNext = predicate.test(next);
-        return hasNext;
+        return (hasNext = predicate.test(next));
     }
 
 }

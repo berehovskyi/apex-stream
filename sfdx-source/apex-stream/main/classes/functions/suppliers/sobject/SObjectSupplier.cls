@@ -1,7 +1,9 @@
 /**
- * @description Inherits {@link ISObjectSupplier} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link ISObjectSupplier} functional interface.
  *
+ * @see ISObjectSupplier
+ * 
  * @author Oleh Berehovskyi
  *
  * @group Functional Abstract Classes

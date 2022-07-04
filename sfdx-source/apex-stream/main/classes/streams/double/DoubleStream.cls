@@ -16,14 +16,14 @@
  * <p><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method</a></p>
  * // Approximating the value of π using Monte Carlo method and streams
  * Integer s = 200000;
- * IDoubleIterable x = DoubleStream.generate(DoubleSupplier.random());
- * IDoubleIterable y = DoubleStream.generate(DoubleSupplier.random());
- * IDoubleBinaryOperator euclidean = DoubleBinaryOperator.euclideanDistance();
+ * IDoubleIterable x = DoubleStream.generate(DoubleSuppliers.random());
+ * IDoubleIterable y = DoubleStream.generate(DoubleSuppliers.random());
+ * IDoubleBinaryOperator euclidean = DoubleBinaryOperators.euclideanDistance();
  * // The number of points inside the quadrant,
  * // i.e. having a distance from the origin of less than 1
  * Integer n = DoubleStream.zip(x, y, euclidean)
  *       .lim(s)
- *       .filter(DoublePredicate.isLess(1))
+ *       .filter(DoublePredicates.isLess(1))
  *       .count();
  * // The ratio of the inside-count and the total-sample-count is an estimate of the ratio
  * // of the two areas, π / 4. Multiply the result by 4 to estimate π.
@@ -175,7 +175,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * IDoubleIterable doubleIncrementalStream = DoubleStream.iterate(0, DoubleUnaryOperator.add(1));
+     * IDoubleIterable doubleIncrementalStream = DoubleStream.iterate(0, DoubleUnaryOperators.add(1));
      */
     public static IDoubleIterable iterate(final Double seed, final IDoubleUnaryOperator operator) {
         Validate.notNull(operator);
@@ -333,7 +333,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * List<Double> filtered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .filter(DoublePredicate.isGreater(0))
+     *     .filter(DoublePredicates.isGreater(0))
      *     .toList();
      */
     public virtual override IDoubleIterable filter(final IDoublePredicate predicate) {
@@ -353,7 +353,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * List<Double> firstFiltered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .take(DoublePredicate.isGreater(0))
+     *     .take(DoublePredicates.isGreater(0))
      *     .toList();
      */
     public virtual IDoubleIterable take(final IDoublePredicate predicate) {
@@ -374,7 +374,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * List<Double> rest = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .drop(DoublePredicate.isGreater(0))
+     *     .drop(DoublePredicates.isGreater(0))
      *     .toList();
      */
     public virtual IDoubleIterable drop(final IDoublePredicate predicate) {
@@ -395,7 +395,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * List<Double> incrementedDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .mapTo(DoubleUnaryOperator.add(1.5))
+     *     .mapTo(DoubleUnaryOperators.add(1.5))
      *     .toList();
      */
     public virtual IDoubleIterable mapTo(final IDoubleUnaryOperator mapper) {
@@ -579,7 +579,8 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).reduce(0.0, DoubleBinaryOperator.sum());
+     * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .reduce((Double) 0.0, DoubleBinaryOperators.sum());
      */
     public virtual Double reduce(final Double identity, final IDoubleBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -605,7 +606,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *      .reduce(DoubleBinaryOperator.sum())
+     *      .reduce(DoubleBinaryOperators.sum())
      *      .get();
      */
     public virtual override OptionalDouble reduce(final IDoubleBinaryOperator accumulator) {
@@ -661,7 +662,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * Double firstGreaterDouble = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .find(DoublePredicate.isGreater(1.5))
+     *     .find(DoublePredicates.isGreater(1.5))
      *     .get();
      */
     public virtual OptionalDouble find(final IDoublePredicate predicate) {
@@ -691,7 +692,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * Boolean isEveryDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .every(DoublePredicate.isGreater(1.5))
+     *     .every(DoublePredicates.isGreater(1.5))
      *     .get();
      */
     public virtual Boolean every(final IDoublePredicate predicate) {
@@ -712,7 +713,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      *
      * @example
      * Boolean isSomeDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .some(DoublePredicate.isGreater(1.5))
+     *     .some(DoublePredicates.isGreater(1.5))
      *     .get();
      */
     public virtual override Boolean some(final IDoublePredicate predicate) {

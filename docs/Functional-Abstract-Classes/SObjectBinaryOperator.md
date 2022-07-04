@@ -1,16 +1,13 @@
 # SObjectBinaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ISObjectBinaryOperator](/docs/Functional-Interfaces/ISObjectBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [ISObjectBinaryOperator](/docs/Functional-Interfaces/ISObjectBinaryOperator.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [ISObjectBinaryOperator](/docs/Functional-Interfaces/ISObjectBinaryOperator.md)
 
 
 **See** SObjectStream.zip
@@ -22,7 +19,13 @@ Inherits [ISObjectBinaryOperator](/docs/Functional-Interfaces/ISObjectBinaryOper
 **See** ISObjectBaseIterable.reduce
 
 
-**See** [SObjectCollector](/docs/Collectors/SObjectCollector.md)
+**See** [SObjectCollector](/docs/Functional-Abstract-Classes/SObjectCollector.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function

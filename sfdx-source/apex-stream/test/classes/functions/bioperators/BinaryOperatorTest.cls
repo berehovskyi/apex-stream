@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see BinaryOperator
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class BinaryOperatorTest {
@@ -9,7 +10,6 @@ private class BinaryOperatorTest {
     private static List<Object> ints = IterTestUtils.generateInts();
     private static List<Object> longs = IterTestUtils.generateLongs();
     private static List<Object> doubles = IterTestUtils.generateDoubles();
-    private static List<String> strings = IterTestUtils.generateStrings();
     private static List<Object> contacts = IterTestUtils.generateContacts();
 
     /**
@@ -17,10 +17,9 @@ private class BinaryOperatorTest {
      * @see BinaryOperator.right
      * @see BinaryOperator.minBy
      * @see BinaryOperator.maxBy
-     * @see BinaryOperator.upcast
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // When
         IComparator comparator = Comparator.comparing(new IterTestUtils.GetAgeFunction());
         IBinaryOperator left = BinaryOperator.left();
@@ -49,14 +48,14 @@ private class BinaryOperatorTest {
      * @see BinaryOperator.upcast
      */
     @IsTest
-    static void of() {
+    static void upcast() {
         // Given
         Integer i = 1;
         Contact con = new Contact(LastName = 'Other');
         // When
-        IBinaryOperator ofIntSum = BinaryOperator.upcast(IntBinaryOperator.sum());
-        IBinaryOperator ofLongSum = BinaryOperator.upcast(LongBinaryOperator.sum());
-        IBinaryOperator ofDoubleSum = BinaryOperator.upcast(DoubleBinaryOperator.sum());
+        IBinaryOperator ofIntSum = BinaryOperator.upcast(IntBinaryOperators.sum());
+        IBinaryOperator ofLongSum = BinaryOperator.upcast(LongBinaryOperators.sum());
+        IBinaryOperator ofDoubleSum = BinaryOperator.upcast(DoubleBinaryOperators.sum());
         IBinaryOperator getLeftArg = BinaryOperator.upcast(SObjectBinaryOperator.left());
         // Then
         for (Object o : ints) {
@@ -70,26 +69,6 @@ private class BinaryOperatorTest {
         }
         for (Object o : contacts) {
             Validate.assertEquals(o, getLeftArg.apply(o, con));
-        }
-    }
-
-    /**
-     * @see BinaryOperator.upcast
-     */
-    @IsTest
-    static void concat() {
-        // Given
-        String s = 'Str';
-        String delimiter = ';';
-        // When
-        IBinaryOperator concat = StringBinaryOperator.concat();
-        IBinaryOperator concat1 = StringBinaryOperator.concat(delimiter);
-        // Then
-        for (String o : strings) {
-            Validate.assertEquals(o + s, concat.apply(o, s));
-        }
-        for (String o : strings) {
-            Validate.assertEquals(o + delimiter + s, concat1.apply(o, s));
         }
     }
 

@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see BiConsumer
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class BiConsumerTest {
@@ -12,13 +13,13 @@ private class BiConsumerTest {
      * @see BiConsumer.compose
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         IterTestUtils.Person sam = new IterTestUtils.Person('Sam', 15, Date.newInstance(1990, 1, 2), 5L, true);
         // Given
         BiConsumer setNameFromRight = new IterTestUtils.SetNameFromRight();
         BiConsumer setAgeFromLeft = new IterTestUtils.SetAgeFromLeft();
         IBiConsumer consumer = setNameFromRight.andThen(setAgeFromLeft);
-        IBiConsumer consumer1 = setAgeFromLeft.andThen(setNameFromRight);
+        IBiConsumer consumer1 = setNameFromRight.compose(setAgeFromLeft);
         IBiConsumer consumer2 = BiConsumer.compose(new List<IBiConsumer>{ setNameFromRight, setAgeFromLeft });
         for (IterTestUtils.Person person : input) {
             IterTestUtils.Person expectedO1 = (IterTestUtils.Person) IterTestUtils.deepClone(sam, IterTestUtils.Person.class);

@@ -1,13 +1,13 @@
 # IObjectLongConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A function that takes two arguments of `Object` and `Long` types and returns no value.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

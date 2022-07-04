@@ -22,7 +22,7 @@ public virtual inherited sharing class SObjectFilterIterator implements Iterator
     }
 
     public SObject next() {
-        if (!hasNextEvaluated) hasNext = hasNext();
+        if (!hasNextEvaluated) { hasNext = hasNext(); }
         if (!hasNext) { throw new NoSuchElementException(); }
         hasNextEvaluated = false;
         return next;

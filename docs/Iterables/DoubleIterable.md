@@ -1,13 +1,13 @@
 # DoubleIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Provides a skeletal implementation of [IDoubleIterable](/docs/Iterables/IDoubleIterable.md).
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Iterables

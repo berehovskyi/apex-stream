@@ -1,16 +1,13 @@
 # IntBinaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IIntBinaryOperator](/docs/Functional-Interfaces/IIntBinaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [IIntBinaryOperator](/docs/Functional-Interfaces/IIntBinaryOperator.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [IIntBinaryOperator](/docs/Functional-Interfaces/IIntBinaryOperator.md)
 
 
 **See** IntStream.zip
@@ -22,7 +19,13 @@ Inherits [IIntBinaryOperator](/docs/Functional-Interfaces/IIntBinaryOperator.md)
 **See** IIntIterable.reduce
 
 
-**See** [Collector](/docs/Collectors/Collector.md)
+**See** [Collector](/docs/Functional-Abstract-Classes/Collector.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -30,89 +33,5 @@ Inherits [IIntBinaryOperator](/docs/Functional-Interfaces/IIntBinaryOperator.md)
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static max()`
-
-Returns a `IntBinaryOperator` that return a greater Integer input argument.
-
-###### Return
-
-**Type**
-
-IntBinaryOperator
-
-**Description**
-
-the `IntBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Integer input argument is null|
-
-
-**See** Math.max
-
-##### `static min()`
-
-Returns a `IntBinaryOperator` that return a lesser Integer input argument.
-
-###### Return
-
-**Type**
-
-IntBinaryOperator
-
-**Description**
-
-the `IntBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Integer input argument is null|
-
-
-**See** Math.min
-
-##### `static product()`
-
-Returns a `IntBinaryOperator` that return a product of two Integer input arguments.
-
-###### Return
-
-**Type**
-
-IntBinaryOperator
-
-**Description**
-
-the `IntBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Integer input argument is null|
-
-##### `static sum()`
-
-Returns a `IntBinaryOperator` that return a sum of two Integer input arguments.
-
-###### Return
-
-**Type**
-
-IntBinaryOperator
-
-**Description**
-
-the `IntBinaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if one of the Integer input argument is null|
 
 ---

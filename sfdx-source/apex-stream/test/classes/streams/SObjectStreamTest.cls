@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see SObjectStream
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class SObjectStreamTest {
@@ -92,7 +93,7 @@ private class SObjectStreamTest {
         Integer lim = 10;
         Account seed = new Account(Name = name, NumberOfEmployees = numOfEmployees);
         Account seed1 = new Account(Name = name1, NumberOfEmployees = numOfEmployees1);
-        ISObjectPredicate predicate = SObjectPredicate.isLessOrEqual('NumberOfEmployees', 3600);
+        ISObjectPredicate predicate = SObjectPredicates.isLessOrEqual('NumberOfEmployees', 3600);
         ISObjectUnaryOperator accIterator = new IterTestUtils.TestAccountIterate();
         ISObjectUnaryOperator accIterator1 = new IterTestUtils.TestAccountIterate();
         ISObjectIterable accStream = SObjectStream.iterate(seed, accIterator).lim(lim);
@@ -177,7 +178,7 @@ private class SObjectStreamTest {
         ISObjectIterable oldAccsSteam1 = SObjectStream.of(oldList);
         ISObjectIterable newAccsSteam = SObjectStream.of(newList);
         ISObjectIterable newAccsSteam1 = SObjectStream.of(newList);
-        ISObjectBiPredicate numOfEmployeesIsChanged = SObjectBiPredicate.areNotEqual(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES);
+        ISObjectBiPredicate numOfEmployeesIsChanged = SObjectBiPredicates.areNotEqual(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES);
         ISObjectBinaryOperator getNewAcc = SObjectBinaryOperator.right();
         ISObjectIterable accStream = SObjectStream.zip(oldAccsSteam, newAccsSteam, maxNumber);
         ISObjectIterable accStream1 = SObjectStream.zip(oldAccsSteam1, newAccsSteam1, numOfEmployeesIsChanged, getNewAcc);
@@ -249,8 +250,8 @@ private class SObjectStreamTest {
         Account acc8 = new Account(Name = 'Test Acc8');
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
-        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
-        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc, acc2 };
+        ISObjectFunction getName = SObjectFunctions.get(IterTestUtils.CONSTS.NAME);
         String fieldName = IterTestUtils.CONSTS.NAME;
         SObjectField field = IterTestUtils.CONSTS.Account.Name;
         ISObjectIterable stream = SObjectStream.of(input).union(input1);
@@ -265,7 +266,7 @@ private class SObjectStreamTest {
         List<Account> actual3 = stream3.toList();
         List<Account> actual4 = stream4.toList();
         // Then
-        List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc };
+        List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc, acc2 };
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected, actual2);
@@ -295,8 +296,8 @@ private class SObjectStreamTest {
         Account acc8 = new Account(Name = 'Test Acc8');
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
-        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
-        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc, acc2 };
+        ISObjectFunction getName = SObjectFunctions.get(IterTestUtils.CONSTS.NAME);
         String fieldName = IterTestUtils.CONSTS.NAME;
         SObjectField field = IterTestUtils.CONSTS.Account.Name;
         ISObjectIterable stream = SObjectStream.of(input).intersect(input1);
@@ -341,8 +342,8 @@ private class SObjectStreamTest {
         Account acc8 = new Account(Name = 'Test Acc8');
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
-        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc };
-        ISObjectFunction getName = SObjectFunction.get(IterTestUtils.CONSTS.NAME);
+        List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc, acc2 };
+        ISObjectFunction getName = SObjectFunctions.get(IterTestUtils.CONSTS.NAME);
         String fieldName = IterTestUtils.CONSTS.NAME;
         SObjectField field = IterTestUtils.CONSTS.Account.Name;
         ISObjectIterable stream = SObjectStream.of(input).except(input1);
@@ -385,8 +386,8 @@ private class SObjectStreamTest {
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         Integer value = 200;
-        ISObjectPredicate isFieldEqual = SObjectPredicate.isEqual(fieldName, value);
-        ISObjectPredicate isFieldEqual1 = SObjectPredicate.isEqual(field, value);
+        ISObjectPredicate isFieldEqual = SObjectPredicates.isEqual(fieldName, value);
+        ISObjectPredicate isFieldEqual1 = SObjectPredicates.isEqual(field, value);
         ISObjectIterable accStream = SObjectStream.of(input).filter(fieldName, value);
         ISObjectIterable accStream1 = SObjectStream.of(input).filter(field, value);
         ISObjectIterable accStream2 = SObjectStream.of(input).filter(isFieldEqual);
@@ -414,7 +415,7 @@ private class SObjectStreamTest {
     @IsTest
     private static void take() {
         // Given
-        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200);
+        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200, AnnualRevenue = 50000);
         Account acc1 = new Account(Name = 'Test Acc1', NumberOfEmployees = 200);
         Account acc2 = new Account(Name = 'Test Acc2', NumberOfEmployees = 200);
         Account acc3 = new Account(Name = 'Test Acc3', NumberOfEmployees = 400);
@@ -423,26 +424,36 @@ private class SObjectStreamTest {
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         Integer value = 200;
-        ISObjectPredicate isFieldEqual = SObjectPredicate.isEqual(fieldName, value);
-        ISObjectPredicate isFieldEqual1 = SObjectPredicate.isEqual(field, value);
+        ISObjectPredicate isFieldEqual = SObjectPredicates.isEqual(fieldName, value);
+        SObjectPredicate isFieldEqual1 = SObjectPredicates.isEqual(field, value);
         ISObjectIterable accStream = SObjectStream.of(input).take(fieldName, value);
         ISObjectIterable accStream1 = SObjectStream.of(input).take(field, value);
         ISObjectIterable accStream2 = SObjectStream.of(input).take(isFieldEqual);
         ISObjectIterable accStream3 = SObjectStream.of(input).take(isFieldEqual1);
+        ISObjectIterable accStream4 = SObjectStream.of(input).take(isFieldEqual1.andAlso(SObjectPredicates.has(Account.AnnualRevenue)));
         // When
         List<Account> actual = accStream.toList();
         List<Account> actual1 = accStream1.toList();
         List<Account> actual2 = accStream2.toList();
         List<Account> actual3 = accStream3.toList();
+        Iterator<Account> iterator = (Iterator<Account>) accStream4.iterator();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2 };
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected, actual2);
         Validate.assertEquals(expected, actual3);
+        Validate.assertEquals(input[0], iterator.next());
+        try {
+            iterator.next();
+        } catch (Exception exc) {
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+        }
         Validate.assert(((SObjectStream) accStream).isOperated);
         Validate.assert(((SObjectStream) accStream1).isOperated);
         Validate.assert(((SObjectStream) accStream2).isOperated);
+        Validate.assert(((SObjectStream) accStream3).isOperated);
+        Validate.assert(((SObjectStream) accStream4).isOperated);
     }
 
     /**
@@ -460,8 +471,8 @@ private class SObjectStreamTest {
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         Integer value = 200;
-        ISObjectPredicate isFieldEqual = SObjectPredicate.isEqual(fieldName, value);
-        ISObjectPredicate isFieldEqual1 = SObjectPredicate.isEqual(field, value);
+        ISObjectPredicate isFieldEqual = SObjectPredicates.isEqual(fieldName, value);
+        ISObjectPredicate isFieldEqual1 = SObjectPredicates.isEqual(field, value);
         ISObjectIterable accStream = SObjectStream.of(input).drop(fieldName, value);
         ISObjectIterable accStream1 = SObjectStream.of(input).drop(field, value);
         ISObjectIterable accStream2 = SObjectStream.of(input).drop(isFieldEqual);
@@ -528,17 +539,17 @@ private class SObjectStreamTest {
         SObjectField field1 = IterTestUtils.CONSTS.Account.ParentId;
         String value = 'Value';
         ISObjectFunction getConstFunction = SObjectFunction.constant(value);
-        ISObjectFunction getIdByRightFunction = SObjectFunction.get(IterTestUtils.CONSTS.ID);
-        ISObjectFunction getAccountIdByRightFunction = SObjectFunction.get(Account.Id);
-        ISObjectFunction getAccNameByRightFunction = SObjectFunction.get(IterTestUtils.CONSTS.Account.Name);
-        SObjectBiConsumer setIdByFunctionBiConsumer = SObjectBiConsumer.set(IterTestUtils.CONSTS.ACCOUNT_ID, getIdByRightFunction);
-        SObjectBiConsumer setDescriptionByFunctionBiConsumer = SObjectBiConsumer.set(field, getAccNameByRightFunction);
+        ISObjectFunction getIdByRightFunction = SObjectFunctions.get(IterTestUtils.CONSTS.ID);
+        ISObjectFunction getAccountIdByRightFunction = SObjectFunctions.get(Account.Id);
+        ISObjectFunction getAccNameByRightFunction = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
+        SObjectBiConsumer setIdByFunctionBiConsumer = SObjectBiConsumers.set(IterTestUtils.CONSTS.ACCOUNT_ID, getIdByRightFunction);
+        SObjectBiConsumer setDescriptionByFunctionBiConsumer = SObjectBiConsumers.set(field, getAccNameByRightFunction);
         ISObjectBiConsumer biConsumer = setIdByFunctionBiConsumer.andThen(setDescriptionByFunctionBiConsumer);
         ISObjectBinaryOperator binaryOperator = SObjectBinaryOperator.forBiConsumer(biConsumer);
-        SObjectUnaryOperator createNewContactOperator = SObjectUnaryOperator.newSObject(Contact.SObjectType, binaryOperator);
-        SObjectUnaryOperator setDepartmentByConstFunction = SObjectUnaryOperator.set(IterTestUtils.CONSTS.Contact.Department, getConstFunction);
+        SObjectUnaryOperator createNewContactOperator = SObjectUnaryOperators.newSObject(Contact.SObjectType, binaryOperator);
+        SObjectUnaryOperator setDepartmentByConstFunction = SObjectUnaryOperators.set(IterTestUtils.CONSTS.Contact.Department, getConstFunction);
         ISObjectUnaryOperator operator = createNewContactOperator.andThen(setDepartmentByConstFunction);
-        ISObjectUnaryOperator createNewContactFromAccount = SObjectUnaryOperator.newSObject(
+        ISObjectUnaryOperator createNewContactFromAccount = SObjectUnaryOperators.newSObject(
                 Contact.SObjectType, IterTestUtils.CONSTS.Contact.AccountId, getAccountIdByRightFunction
         );
 
@@ -582,7 +593,7 @@ private class SObjectStreamTest {
         List<Account> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
-        ISObjectToIntFunction getNumOfEmployeesAsInt = SObjectToIntFunction.get(field);
+        ISObjectToIntFunction getNumOfEmployeesAsInt = SObjectToIntFunctions.get(field);
         IIntIterable intStream = SObjectStream.of(clone).mapToInt(getNumOfEmployeesAsInt);
         IIntIterable intStream1 = SObjectStream.of(clone).mapToInt(fieldName);
         IIntIterable intStream2 = SObjectStream.of(clone).mapToInt(field);
@@ -616,7 +627,7 @@ private class SObjectStreamTest {
         List<Account> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
-        ISObjectToLongFunction getNumOfEmployeesAsLong = SObjectToLongFunction.get(field);
+        ISObjectToLongFunction getNumOfEmployeesAsLong = SObjectToLongFunctions.get(field);
         ILongIterable longStream = SObjectStream.of(clone).mapToLong(getNumOfEmployeesAsLong);
         ILongIterable longStream1 = SObjectStream.of(clone).mapToLong(fieldName);
         ILongIterable longStream2 = SObjectStream.of(clone).mapToLong(field);
@@ -650,7 +661,7 @@ private class SObjectStreamTest {
         List<Account> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Account.AnnualRevenue;
         String fieldName = IterTestUtils.CONSTS.ANNUAL_REVENUE;
-        ISObjectToDoubleFunction getNumOfEmployeesAsDouble = SObjectToDoubleFunction.get(field);
+        ISObjectToDoubleFunction getNumOfEmployeesAsDouble = SObjectToDoubleFunctions.get(field);
         IDoubleIterable doubleStream = SObjectStream.of(clone).mapToDouble(getNumOfEmployeesAsDouble);
         IDoubleIterable doubleStream1 = SObjectStream.of(clone).mapToDouble(fieldName);
         IDoubleIterable doubleStream2 = SObjectStream.of(clone).mapToDouble(field);
@@ -688,7 +699,7 @@ private class SObjectStreamTest {
         List<Contact> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Contact.Birthdate;
         String fieldName = IterTestUtils.CONSTS.BIRTHDATE;
-        ISObjectFunction getBirthday = SObjectFunction.get(field);
+        ISObjectFunction getBirthday = SObjectFunctions.get(field);
         IObjectIterable objStream = SObjectStream.of(clone).mapToObject(getBirthday);
         IObjectIterable objStream1 = SObjectStream.of(clone).mapToObject(fieldName);
         IObjectIterable objStream2 = SObjectStream.of(clone).mapToObject(field);
@@ -717,7 +728,7 @@ private class SObjectStreamTest {
         List<Account> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Contact.AccountId;
         String fieldName = IterTestUtils.CONSTS.CONTACTS;
-        ISObjectFunction getContacts = SObjectFunction.getSObjects(field);
+        ISObjectFunction getContacts = SObjectFunctions.getSObjects(field);
         ISObjectIterable conStream = SObjectStream.of(clone).flatMapTo(getContacts);
         ISObjectIterable conStream1 = SObjectStream.of(clone).flatMapTo(fieldName);
         ISObjectIterable conStream2 = SObjectStream.of(clone).flatMapTo(field);
@@ -876,7 +887,7 @@ private class SObjectStreamTest {
         SObjectField field = IterTestUtils.CONSTS.Account.Name;
         String fieldName = IterTestUtils.CONSTS.NAME;
         String value = 'New Name';
-        ISObjectConsumer setNewName = SObjectConsumer.set(fieldName, value);
+        ISObjectConsumer setNewName = SObjectConsumers.set(fieldName, value);
         ISObjectIterable accStream = SObjectStream.of(clone).forEach(setNewName);
         ISObjectIterable accStream1 = SObjectStream.of(clone1).forEach(fieldName, value);
         ISObjectIterable accStream2 = SObjectStream.of(clone2).forEach(field, value);
@@ -913,7 +924,7 @@ private class SObjectStreamTest {
         List<Account> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
-        ISObjectFunction getNumOfEmployees = SObjectFunction.get(field);
+        ISObjectFunction getNumOfEmployees = SObjectFunctions.get(field);
         ISObjectIterable accStream = SObjectStream.of(clone).distinct();
         ISObjectIterable accStream1 = SObjectStream.of(clone).withoutNulls().distinct(getNumOfEmployees);
         ISObjectIterable accStream2 = SObjectStream.of(clone).withoutNulls().distinct(fieldName);
@@ -1114,9 +1125,9 @@ private class SObjectStreamTest {
         Account acc4 = new Account(Name = 'Test Acc4');
         List<Account> input = new List<Account>{ acc1, acc, acc2, acc3, acc4, acc2 };
         List<Account> clone = IterTestUtils.deepClone(input);
-        ISObjectCollector toSetCollector = SObjectCollector.toSet();
+        ISObjectCollector toSetCollector = SObjectCollectors.toSet();
         ISupplier sObjectSetSupplier = Supplier.of(Set<SObject>.class);
-        IObjectSObjectConsumer biConsumer = SetSObjectConsumer.addToSObjectSet(SObjectUnaryOperator.identity());
+        IObjectSObjectConsumer biConsumer = SetSObjectConsumers.addToSObjectSet(SObjectUnaryOperator.identity());
         ISObjectIterable accStream = SObjectStream.of(clone);
         ISObjectIterable accStream1 = SObjectStream.of(clone);
         // When
@@ -1147,22 +1158,27 @@ private class SObjectStreamTest {
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
         Integer value = 0;
-        SObjectPredicate isFieldEqualPredicate = SObjectPredicate.isEqual(field, 0);
+        Integer value1 = 500;
+        SObjectPredicate isFieldEqualPredicate = SObjectPredicates.isEqual(field, 0);
         ISObjectIterable accStream = SObjectStream.of(clone);
         ISObjectIterable accStream1 = SObjectStream.of(clone);
         ISObjectIterable accStream2 = SObjectStream.of(clone);
+        ISObjectIterable accStream3 = SObjectStream.of(clone);
         // When
         Account actual = (Account) accStream.find(isFieldEqualPredicate).get();
         Account actual1 = (Account) accStream1.find(field, value).get();
         Account actual2 = (Account) accStream2.find(fieldName, value).get();
+        Boolean actual3 = accStream3.find(fieldName, value1).isEmpty();
         // Then
         Validate.assertEquals(acc2, actual);
         Validate.assertEquals(acc2, actual1);
         Validate.assertEquals(acc2, actual2);
+        Validate.assert(actual3);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((SObjectStream) accStream).isOperated);
         Validate.assert(((SObjectStream) accStream1).isOperated);
         Validate.assert(((SObjectStream) accStream2).isOperated);
+        Validate.assert(((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -1181,7 +1197,7 @@ private class SObjectStreamTest {
         String value = 'T';
         Boolean value1 = false;
         String value2 = 'Finance';
-        ISObjectPredicate isLastNameStartsWith = SObjectPredicate.compose(SObjectFunction.get(IterTestUtils.CONSTS.Contact.LastName), StringPredicate.startsWith(value));
+        ISObjectPredicate isLastNameStartsWith = SObjectPredicate.compose(SObjectFunctions.get(IterTestUtils.CONSTS.Contact.LastName), new IterTestUtils.StartsWith(value));
         ISObjectIterable accStream = SObjectStream.of(clone);
         ISObjectIterable accStream1 = SObjectStream.of(clone);
         ISObjectIterable accStream2 = SObjectStream.of(clone);
@@ -1215,7 +1231,7 @@ private class SObjectStreamTest {
         String value = 'A';
         Boolean value1 = true;
         String value2 = 'HR';
-        ISObjectPredicate isLastNameStartsWith = SObjectPredicate.compose(SObjectFunction.get(IterTestUtils.CONSTS.Contact.LastName), StringPredicate.startsWith(value));
+        ISObjectPredicate isLastNameStartsWith = SObjectPredicate.compose(SObjectFunctions.get(IterTestUtils.CONSTS.Contact.LastName), new IterTestUtils.StartsWith(value));
         ISObjectIterable accStream = SObjectStream.of(clone);
         ISObjectIterable accStream1 = SObjectStream.of(clone);
         ISObjectIterable accStream2 = SObjectStream.of(clone);
@@ -1249,7 +1265,7 @@ private class SObjectStreamTest {
         String value = 'A';
         Boolean value1 = true;
         String value2 = 'HR';
-        ISObjectPredicate isLastNameStartsWith = SObjectPredicate.compose(SObjectFunction.get(IterTestUtils.CONSTS.Contact.LastName), StringPredicate.startsWith(value));
+        ISObjectPredicate isLastNameStartsWith = SObjectPredicate.compose(SObjectFunctions.get(IterTestUtils.CONSTS.Contact.LastName), new IterTestUtils.StartsWith(value));
         ISObjectIterable accStream = SObjectStream.of(clone);
         ISObjectIterable accStream1 = SObjectStream.of(clone);
         ISObjectIterable accStream2 = SObjectStream.of(clone);
@@ -1348,8 +1364,8 @@ private class SObjectStreamTest {
         List<Account> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
-        ISObjectToDoubleFunction getAsDouble = SObjectToDoubleFunction.get(fieldName);
-        ISObjectPredicate hasFieldValue = SObjectPredicate.has(field);
+        ISObjectToDoubleFunction getAsDouble = SObjectToDoubleFunctions.get(fieldName);
+        ISObjectPredicate hasFieldValue = SObjectPredicates.has(field);
         ISObjectIterable accStream = SObjectStream.of(clone).filter(hasFieldValue);
         ISObjectIterable accStream1 = SObjectStream.of(clone).filter(hasFieldValue);
         ISObjectIterable accStream2 = SObjectStream.of(clone).filter(hasFieldValue);
@@ -1383,8 +1399,8 @@ private class SObjectStreamTest {
         List<Account> clone = IterTestUtils.deepClone(input);
         SObjectField field = IterTestUtils.CONSTS.Account.NumberOfEmployees;
         String fieldName = IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES;
-        ISObjectToDoubleFunction getAsDouble = SObjectToDoubleFunction.get(fieldName);
-        ISObjectPredicate hasFieldValue = SObjectPredicate.has(field);
+        ISObjectToDoubleFunction getAsDouble = SObjectToDoubleFunctions.get(fieldName);
+        ISObjectPredicate hasFieldValue = SObjectPredicates.has(field);
         ISObjectIterable accStream = SObjectStream.of(clone).filter(hasFieldValue);
         ISObjectIterable accStream1 = SObjectStream.of(clone).filter(hasFieldValue);
         ISObjectIterable accStream2 = SObjectStream.of(clone).filter(hasFieldValue);
@@ -1485,16 +1501,16 @@ private class SObjectStreamTest {
         ISObjectIterable accStream6 = SObjectStream.of(clone).withoutNulls();
         // When
         List<Account> actual = accStream.toList();
-        List<Integer> actual1 = (List<Integer>) accStream1.toList(SObjectFunction.get('NumberOfEmployees'), List<Integer>.class);
+        List<Integer> actual1 = (List<Integer>) accStream1.toList(SObjectFunctions.get('NumberOfEmployees'), List<Integer>.class);
         List<Integer> actual2 = (List<Integer>) accStream2.toList('NumberOfEmployees', List<Integer>.class);
         List<Integer> actual3 = (List<Integer>) accStream3.toList(Account.NumberOfEmployees, List<Integer>.class);
-        List<Object> actual4 = accStream4.toList(SObjectFunction.get('NumberOfEmployees'));
+        List<Object> actual4 = accStream4.toList(SObjectFunctions.get('NumberOfEmployees'));
         List<Object> actual5 = accStream5.toList('NumberOfEmployees');
         List<Object> actual6 = accStream6.toList(Account.NumberOfEmployees);
         // Then
         List<Integer> expected = (List<Integer>) SObjectStream.of(clone)
                 .withoutNulls()
-                .collect(SObjectCollector.toList(Account.NumberOfEmployees).cast(List<Integer>.class));
+                .collect(SObjectCollectors.toList(Account.NumberOfEmployees).cast(List<Integer>.class));
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected, actual2);
@@ -1520,7 +1536,7 @@ private class SObjectStreamTest {
     @IsTest
     private static void toSet() {
         // Given
-        ISupplier idGenerator = IdSupplier.of(Account.SObjectType);
+        ISupplier idGenerator = IdSuppliers.of(Account.SObjectType);
         Account acc = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc', NumberOfEmployees = 200);
         Account acc1 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc1', NumberOfEmployees = 100);
         Account acc2 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc2', NumberOfEmployees = 0);
@@ -1542,26 +1558,26 @@ private class SObjectStreamTest {
         // When
         Set<SObject> actual = accStream.toSet();
         Set<Id> actual1 = accStream1.toIdSet();
-        Set<Id> actual2 = accStream2.toIdSet(SObjectFunction.get('Id'));
+        Set<Id> actual2 = accStream2.toIdSet(SObjectFunctions.get('Id'));
         Set<Id> actual3 = accStream3.toIdSet('Id');
         Set<Id> actual4 = accStream4.toIdSet(Account.Id);
-        Set<String> actual5 = accStream5.toStringSet(SObjectFunction.get('Name'));
+        Set<String> actual5 = accStream5.toStringSet(SObjectFunctions.get('Name'));
         Set<String> actual6 = accStream6.toStringSet('Name');
         Set<String> actual7 = accStream7.toStringSet(Account.Name);
-        Set<Object> actual8 = accStream8.toSet(SObjectFunction.get('Name'));
+        Set<Object> actual8 = accStream8.toSet(SObjectFunctions.get('Name'));
         Set<Object> actual9 = accStream9.toSet('Name');
         Set<Object> actual10 = accStream10.toSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectStream.of(clone)
                 .withoutNulls()
-                .collect(SObjectCollector.toIdSet(Account.Id));
+                .collect(SObjectCollectors.toIdSet(Account.Id));
         Set<String> expected2 = (Set<String>) SObjectStream.of(clone)
                 .withoutNulls()
-                .collect(SObjectCollector.toStringSet(Account.Name));
+                .collect(SObjectCollectors.toStringSet(Account.Name));
         Set<Object> expected3 = (Set<Object>) SObjectStream.of(clone)
                 .withoutNulls()
-                .collect(SObjectCollector.toSet(Account.Name));
+                .collect(SObjectCollectors.toSet(Account.Name));
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
@@ -1595,7 +1611,7 @@ private class SObjectStreamTest {
     @IsTest
     private static void toMap() {
         // Given
-        ISupplier idGenerator = IdSupplier.of(Account.SObjectType);
+        ISupplier idGenerator = IdSuppliers.of(Account.SObjectType);
         Account acc = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc', NumberOfEmployees = 200);
         Account acc1 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc1', NumberOfEmployees = 100);
         Account acc2 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc2', NumberOfEmployees = 0);
@@ -1612,18 +1628,18 @@ private class SObjectStreamTest {
         ISObjectIterable accStream6 = SObjectStream.of(clone);
         // When
         Map<Id, SObject> actual = accStream.toMap();
-        Map<Id, Account> actual1 = (Map<Id, Account>) accStream1.toByIdMap(SObjectFunction.get('Id'), Map<Id, Account>.class);
+        Map<Id, Account> actual1 = (Map<Id, Account>) accStream1.toByIdMap(SObjectFunctions.get('Id'), Map<Id, Account>.class);
         Map<Id, Account> actual2 = (Map<Id, Account>) accStream2.toByIdMap('Id', Map<Id, Account>.class);
         Map<Id, Account> actual3 = (Map<Id, Account>) accStream3.toByIdMap(Account.Id, Map<Id, Account>.class);
-        Map<String, Account> actual4 = (Map<String, Account>) accStream4.toByStringMap(SObjectFunction.get('Name'), Map<String, Account>.class);
+        Map<String, Account> actual4 = (Map<String, Account>) accStream4.toByStringMap(SObjectFunctions.get('Name'), Map<String, Account>.class);
         Map<String, Account> actual5 = (Map<String, Account>) accStream5.toByStringMap('Name', Map<String, Account>.class);
         Map<String, Account> actual6 = (Map<String, Account>) accStream6.toByStringMap(Account.Name, Map<String, Account>.class);
         // Then
         Map<Id, Account> expected = new Map<Id, Account>(input);
         Map<Id, Account> expected1 = (Map<Id, Account>) SObjectStream.of(clone)
-                .collect(SObjectCollector.toByIdMap(Account.Id).cast(Map<Id, Account>.class));
+                .collect(SObjectCollectors.toByIdMap(Account.Id).cast(Map<Id, Account>.class));
         Map<String, Account> expected2 = (Map<String, Account>) SObjectStream.of(clone)
-                .collect(SObjectCollector.toByStringMap(Account.Name).cast(Map<String, Account>.class));
+                .collect(SObjectCollectors.toByStringMap(Account.Name).cast(Map<String, Account>.class));
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected1, actual1);
         Validate.assertEquals(expected1, actual2);
@@ -1648,7 +1664,7 @@ private class SObjectStreamTest {
     @IsTest
     private static void group() {
         // Given
-        ISupplier idGenerator = IdSupplier.of(Account.SObjectType);
+        ISupplier idGenerator = IdSuppliers.of(Account.SObjectType);
         Id parentId1 = (Id) idGenerator.get();
         Id parentId2 = (Id) idGenerator.get();
         Account acc = new Account(ParentId = parentId1, Name = 'Test Acc', NumberOfEmployees = 200, Rating = 'Hot');
@@ -1665,17 +1681,17 @@ private class SObjectStreamTest {
         ISObjectIterable accStream4 = SObjectStream.of(clone);
         ISObjectIterable accStream5 = SObjectStream.of(clone);
         // When
-        Map<Id, List<Account>> actual = accStream.groupById(SObjectFunction.get('ParentId'));
+        Map<Id, List<Account>> actual = accStream.groupById(SObjectFunctions.get('ParentId'));
         Map<Id, List<Account>> actual2 = accStream1.groupById('ParentId');
         Map<Id, List<Account>> actual3 = accStream2.groupById(Account.ParentId);
-        Map<String, List<Account>> actual4 = accStream3.groupByString(SObjectFunction.get('Rating'));
+        Map<String, List<Account>> actual4 = accStream3.groupByString(SObjectFunctions.get('Rating'));
         Map<String, List<Account>> actual5 = accStream4.groupByString('Rating');
         Map<String, List<Account>> actual6 = accStream5.groupByString(Account.Rating);
         // Then
         Map<Id, List<Account>> expected = (Map<Id, List<Account>>) SObjectStream.of(clone)
-                .collect(SObjectCollector.groupingById(Account.ParentId).cast(Map<Id, List<Account>>.class));
+                .collect(SObjectCollectors.groupingById(Account.ParentId).cast(Map<Id, List<Account>>.class));
         Map<String, List<Account>> expected1 = (Map<String, List<Account>>) SObjectStream.of(clone)
-                .collect(SObjectCollector.groupingByString(Account.Rating).cast(Map<String, List<Account>>.class));
+                .collect(SObjectCollectors.groupingByString(Account.Rating).cast(Map<String, List<Account>>.class));
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(expected, actual2);
         Validate.assertEquals(expected, actual3);
@@ -1697,7 +1713,7 @@ private class SObjectStreamTest {
     @IsTest
     private static void partition() {
         // Given
-        ISupplier idGenerator = IdSupplier.of(Account.SObjectType);
+        ISupplier idGenerator = IdSuppliers.of(Account.SObjectType);
         Account acc = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc', NumberOfEmployees = 200);
         Account acc1 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc1', NumberOfEmployees = 100);
         Account acc2 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc2', NumberOfEmployees = 0);
@@ -1705,7 +1721,7 @@ private class SObjectStreamTest {
         Account acc4 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc4');
         List<Account> input = new List<Account>{ acc1, acc, acc2, acc3, acc4 };
         List<Account> clone = IterTestUtils.deepClone(input);
-        ISObjectPredicate predicate = SObjectPredicate.isGreater(Account.NumberOfEmployees, 150);
+        ISObjectPredicate predicate = SObjectPredicates.isGreater(Account.NumberOfEmployees, 150);
         ISObjectIterable accStream = SObjectStream.of(clone);
         ISObjectIterable accStream1 = SObjectStream.of(clone);
         ISObjectIterable accStream2 = SObjectStream.of(clone);
@@ -1715,7 +1731,7 @@ private class SObjectStreamTest {
         Map<Boolean, List<Account>> actual2 = accStream2.partition(Account.NumberOfEmployees, 100);
         // Then
         Map<Boolean, List<Account>> expected = (Map<Boolean, List<Account>>) SObjectStream.of(clone)
-                .collect(SObjectCollector.partitioningBy(predicate).cast(Map<Boolean, List<Account>>.class));
+                .collect(SObjectCollectors.partitioningBy(predicate).cast(Map<Boolean, List<Account>>.class));
         Map<Boolean, List<Account>> expected1 = new Map<Boolean, List<Account>>{
                 true => new List<Account>{ acc1 },
                 false => new List<Account>{ acc, acc2, acc3, acc4 }

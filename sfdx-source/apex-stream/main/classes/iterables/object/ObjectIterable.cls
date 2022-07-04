@@ -62,7 +62,7 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
      * List<Object> intersection = objectsIterable1.intersect(objects2).toList(); // [obj3, obj9]
      */
     public virtual IObjectIterable intersect(final Iterable<Object> iterable) {
-        return distinct().filter(Predicate.isIn(iterable));
+        return distinct().filter(Predicates.isIn(iterable));
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
      * List<Object> intersectionByClassifier = objectsIterable1.intersect(objects2, classifier);
      */
     public virtual IObjectIterable intersect(final Iterable<Object> iterable, final IFunction classifier) {
-        return distinct(classifier).filter(Predicate.isIn(
+        return distinct(classifier).filter(Predicates.isIn(
                 classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier))
         );
     }
@@ -99,7 +99,7 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
      * List<Object> diff = objectsIterable1.except(objects2).toList(); // [obj5, obj7]
      */
     public virtual IObjectIterable except(final Iterable<Object> iterable) {
-        return distinct().filter(Predicate.isIn(iterable).negate());
+        return distinct().filter(Predicates.isIn(iterable).negate());
     }
 
     /**
@@ -117,7 +117,7 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
      * List<Object> diffByClassifier = objectsIterable1.except(objects2, classifier);
      */
     public virtual IObjectIterable except(final Iterable<Object> iterable, final IFunction classifier) {
-        return distinct(classifier).filter(Predicate.isIn(
+        return distinct(classifier).filter(Predicates.isIn(
                 classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier)
         ).negate());
     }
@@ -129,7 +129,7 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
     public abstract IObjectIterable filter(final IPredicate predicate);
 
     public virtual IObjectIterable withoutNulls() {
-        return filter(Predicate.isNotNull());
+        return filter(Predicates.isNotNull());
     }
 
     public abstract IObjectIterable sort(final IComparator comparator);
@@ -159,7 +159,9 @@ public abstract inherited sharing class ObjectIterable implements IObjectIterabl
     }
 
     public virtual List<Object> toList(final Type t) {
-        return (List<Object>) collect(Collector.toList().cast(t));
+        return (List<Object>) collect(
+                Collector.of(Supplier.of(List<Object>.class), ListObjectBaseConsumers.addToList()).cast(t)
+        );
     }
     //</editor-fold>
 

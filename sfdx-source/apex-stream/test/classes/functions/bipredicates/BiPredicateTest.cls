@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see BiPredicate
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class BiPredicateTest {
@@ -22,8 +23,8 @@ private class BiPredicateTest {
         Boolean value = true;
         // When
         IBiPredicate valueBiPredicate = BiPredicate.always(value);
-        BiPredicate ageIsGreaterBiPredicate = BiPredicate.isGreater(getAgeFunction, getAgeFunction);
-        BiPredicate namesAreEqualBiPredicate = BiPredicate.areEqual(getNameFunction, getNameFunction);
+        BiPredicate ageIsGreaterBiPredicate = new IterTestUtils.CompareBiPredicate(getAgeFunction, 1);
+        BiPredicate namesAreEqualBiPredicate = new IterTestUtils.CompareBiPredicate(getNameFunction, 0);
         IBiPredicate decreasedAgeAndTheSameNamesBiPredicate = ageIsGreaterBiPredicate.andAlso(namesAreEqualBiPredicate);
         IBiPredicate decreasedAgeOrTheSameNamesBiPredicate = ageIsGreaterBiPredicate.orElse(namesAreEqualBiPredicate);
         IBiPredicate notAgeIsNotGreaterBiPredicate = ageIsGreaterBiPredicate.negate();
@@ -47,14 +48,14 @@ private class BiPredicateTest {
         Integer value = 18;
         Object value1 = 'Sam';
         // When
-        BiPredicate ageIsGreaterBiPredicate = BiPredicate.isGreater(getAgeFunction, getAgeFunction);
-        BiPredicate namesAreEqualBiPredicate = BiPredicate.areEqual(getNameFunction, getNameFunction);
+        BiPredicate ageIsGreaterBiPredicate = new IterTestUtils.CompareBiPredicate(getAgeFunction, 1);
+        BiPredicate namesAreEqualBiPredicate = new IterTestUtils.CompareBiPredicate(getNameFunction, 0);
         IBiPredicate decreasedAgeOrTheSameNamesBiPredicate = BiPredicate.some(
                 new List<IBiPredicate>{ ageIsGreaterBiPredicate, namesAreEqualBiPredicate }
         );
-        IPredicate isAgeEquals = Predicate.isEqual(getAgeFunction, Function.constant(value));
-        IPredicate isNameEquals = Predicate.isEqual(getNameFunction, Function.constant(value1));
-        IBiPredicate isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate = BiPredicate.somePredicate(isNameEquals, isAgeEquals);
+        IPredicate isAgeEquals = Predicates.isEqual(getAgeFunction, Function.constant(value));
+        IPredicate isNameEquals = Predicates.isEqual(getNameFunction, Function.constant(value1));
+        IBiPredicate isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate = BiPredicate.some(isNameEquals, isAgeEquals);
         // Then
         for (IterTestUtils.Person person : input) {
             Boolean areSameNames = person.getName() == change.getName();
@@ -81,14 +82,14 @@ private class BiPredicateTest {
         Integer value = 18;
         Object value1 = 'Sam';
         // When
-        BiPredicate ageIsGreaterBiPredicate = BiPredicate.isGreater(getAgeFunction, getAgeFunction);
-        BiPredicate namesAreEqualBiPredicate = BiPredicate.areEqual(getNameFunction, getNameFunction);
+        BiPredicate ageIsGreaterBiPredicate = new IterTestUtils.CompareBiPredicate(getAgeFunction,  1);
+        BiPredicate namesAreEqualBiPredicate = new IterTestUtils.CompareBiPredicate(getNameFunction, 0);
         IBiPredicate decreasedAgeOrTheSameNamesBiPredicate = BiPredicate.every(
                 new List<IBiPredicate>{ ageIsGreaterBiPredicate, namesAreEqualBiPredicate }
         );
-        IPredicate isAgeEquals = Predicate.isEqual(getAgeFunction, Function.constant(value));
-        IPredicate isNameEquals = Predicate.isEqual(getNameFunction, Function.constant(value1));
-        IBiPredicate isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate = BiPredicate.everyPredicate(isNameEquals, isAgeEquals);
+        IPredicate isAgeEquals = Predicates.isEqual(getAgeFunction, Function.constant(value));
+        IPredicate isNameEquals = Predicates.isEqual(getNameFunction, Function.constant(value1));
+        IBiPredicate isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate = BiPredicate.every(isNameEquals, isAgeEquals);
         // Then
         for (IterTestUtils.Person person : input) {
             Boolean areSameNames = person.getName() == change.getName();
@@ -112,7 +113,7 @@ private class BiPredicateTest {
     @IsTest
     static void negate() {
         // When
-        BiPredicate ageIsGreaterBiPredicate = BiPredicate.isGreater(getAgeFunction, getAgeFunction);
+        BiPredicate ageIsGreaterBiPredicate = new IterTestUtils.CompareBiPredicate(getAgeFunction, 1);
         IBiPredicate notAgeIsNotGreaterBiPredicate = BiPredicate.negate(ageIsGreaterBiPredicate);
         // Then
         for (IterTestUtils.Person person : input) {
@@ -120,106 +121,5 @@ private class BiPredicateTest {
             Validate.assertEquals(!isDecreasedAge, notAgeIsNotGreaterBiPredicate.test(person, change));
         }
     }
-
-    /**
-     * @see BiPredicate.isGreater
-     */
-    @IsTest
-    static void isGreater() {
-        // When
-        BiPredicate ageIsGreaterBiPredicate = BiPredicate.isGreater(getAgeFunction, getAgeFunction);
-        IBiPredicate isGreaterBiPredicate = BiPredicate.isGreater();
-        // Then
-        for (IterTestUtils.Person person : input) {
-            Boolean isDecreasedAge = person.getAge() > change.getAge();
-            Boolean isGreater = person.compareTo(change) == 1;
-            Validate.assertEquals(isDecreasedAge, ageIsGreaterBiPredicate.test(person, change));
-            Validate.assertEquals(isGreater, isGreaterBiPredicate.test(person, change));
-        }
-    }
-
-    /**
-     * @see BiPredicate.isGreaterOrEqual
-     */
-    @IsTest
-    static void isGreaterOrEqual() {
-        // When
-        BiPredicate ageIsGreaterOrEqualBiPredicate = BiPredicate.isGreaterOrEqual(getAgeFunction, getAgeFunction);
-        IBiPredicate isGreaterOrEqualBiPredicate = BiPredicate.isGreaterOrEqual();
-        // Then
-        for (IterTestUtils.Person person : input) {
-            Boolean isDecreasedAge = person.getAge() >= change.getAge();
-            Boolean isGreater = person.compareTo(change) >= 0;
-            Validate.assertEquals(isDecreasedAge, ageIsGreaterOrEqualBiPredicate.test(person, change));
-            Validate.assertEquals(isGreater, isGreaterOrEqualBiPredicate.test(person, change));
-        }
-    }
-
-    /**
-     * @see BiPredicate.areEqual
-     */
-    @IsTest
-    static void areEqual() {
-        // When
-        BiPredicate agesAreEqualBiPredicate = BiPredicate.areEqual(getAgeFunction, getAgeFunction);
-        IBiPredicate areEqualBiPredicate = BiPredicate.areEqual();
-        // Then
-        for (IterTestUtils.Person person : input) {
-            Boolean isDecreasedAge = person.getAge() == change.getAge();
-            Boolean isGreater = person.compareTo(change) == 0;
-            Validate.assertEquals(isDecreasedAge, agesAreEqualBiPredicate.test(person, change));
-            Validate.assertEquals(isGreater, areEqualBiPredicate.test(person, change));
-        }
-    }
-
-    /**
-     * @see BiPredicate.areNotEqual
-     */
-    @IsTest
-    static void areNotEqual() {
-        // When
-        BiPredicate agesAreNotEqualBiPredicate = BiPredicate.areNotEqual(getAgeFunction, getAgeFunction);
-        IBiPredicate areNotEqualBiPredicate = BiPredicate.areNotEqual();
-        // Then
-        for (IterTestUtils.Person person : input) {
-            Boolean isDecreasedAge = person.getAge() != change.getAge();
-            Boolean isGreater = person.compareTo(change) != 0;
-            Validate.assertEquals(isDecreasedAge, agesAreNotEqualBiPredicate.test(person, change));
-            Validate.assertEquals(isGreater, areNotEqualBiPredicate.test(person, change));
-        }
-    }
-
-    /**
-     * @see BiPredicate.isLess
-     */
-    @IsTest
-    static void isLess() {
-        // When
-        BiPredicate ageIsLessBiPredicate = BiPredicate.isLess(getAgeFunction, getAgeFunction);
-        IBiPredicate isLessBiPredicate = BiPredicate.isLess();
-        // Then
-        for (IterTestUtils.Person person : input) {
-            Boolean isIncreasedAge = person.getAge() == null ? true : person.getAge() < change.getAge();
-            Boolean isLess = person.compareTo(change) == -1;
-            Validate.assertEquals(isIncreasedAge, ageIsLessBiPredicate.test(person, change));
-            Validate.assertEquals(isLess, isLessBiPredicate.test(person, change));
-        }
-    }
-
-    /**
-     * @see BiPredicate.isLessOrEqual
-     */
-    @IsTest
-    static void isLessOrEqual() {
-        // When
-        BiPredicate ageIsLessOrEqualBiPredicate = BiPredicate.isLessOrEqual(getAgeFunction, getAgeFunction);
-        IBiPredicate isLessOrEqualBiPredicate = BiPredicate.isLessOrEqual();
-        // Then
-        for (IterTestUtils.Person person : input) {
-            Boolean isIncreasedAge = person.getAge() == null ? true : person.getAge() <= change.getAge();
-            Boolean isLessOrEqual = person.compareTo(change) <= 0;
-            Validate.assertEquals(isIncreasedAge, ageIsLessOrEqualBiPredicate.test(person, change));
-            Validate.assertEquals(isLessOrEqual, isLessOrEqualBiPredicate.test(person, change));
-        }
-    }
+    
 }

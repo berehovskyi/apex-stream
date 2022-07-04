@@ -5,7 +5,7 @@ public inherited sharing class DoubleTakeIterator implements Iterator<Double> {
 
     private final Iterator<Double> iterator;
     private final IDoublePredicate predicate;
-    private Boolean hasNext = false, hasNextEvaluated = false, hasNextPresent = false;
+    private Boolean hasNext = false, hasNextEvaluated = false, isNextCached = false;
     private Double next;
 
     public DoubleTakeIterator(final Iterator<Double> iterator, final IDoublePredicate predicate) {
@@ -14,36 +14,30 @@ public inherited sharing class DoubleTakeIterator implements Iterator<Double> {
     }
 
     public Boolean hasNext() {
-        if (hasNextEvaluated) return hasNext;
+        if (hasNextEvaluated) { return hasNext; }
         hasNext = iterator.hasNext();
         hasNextEvaluated = true;
-        if (hasNext) hasNextPresent = testNext();
+        if (hasNext) { isNextCached = testNext(); }
         return hasNext;
     }
 
     public Double next() {
-        if (hasNextEvaluated && !hasNext) {
-            next = null;
-            throw new NoSuchElementException();
-        }
+        if (hasNextEvaluated && !hasNext) { throw new NoSuchElementException(); }
         hasNextEvaluated = false;
-        if (hasNextPresent) {
-            hasNextPresent = false;
+        if (isNextCached) {
+            isNextCached = false;
             return next;
         }
         if (testNext()) {
             return next;
         } else {
-            next = null;
-            hasNextPresent = true;
             throw new NoSuchElementException();
         }
     }
 
     private Boolean testNext() {
         next = iterator.next();
-        hasNext = predicate.test(next);
-        return hasNext;
+        return (hasNext = predicate.test(next));
     }
 
 }

@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see ObjectSequence
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class ObjectSequenceTest {
@@ -96,8 +97,8 @@ private class ObjectSequenceTest {
         IBinaryOperator right = BinaryOperator.right();
         IBinaryOperator left = BinaryOperator.left();
         IPredicate alwaysTrue = Predicate.always(true);
-        IPredicate isNotBlank = StringPredicate.isNotBlank();
-        IBiPredicate rightIsNotBlank = BiPredicate.everyPredicate(alwaysTrue, isNotBlank);
+        IPredicate isNotBlank = new IterTestUtils.IsNotBlank();
+        IBiPredicate rightIsNotBlank = BiPredicate.every(alwaysTrue, isNotBlank);
         IObjectIterable seq4 = ObjectSequence.zip(seq, seq1, right);
         IObjectIterable seq5 = ObjectSequence.zip(seq2, seq3, rightIsNotBlank, left);
         // When
@@ -186,8 +187,8 @@ private class ObjectSequenceTest {
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
         List<Object> input = new List<Object>{ 'foo', 1, 'baz', john, true, 'ipsum', jake };
-        IPredicate isInstanceOfString = Predicate.isInstanceOfString();
-        IPredicate isInstanceOfComparable = Predicate.isInstanceOfComparable();
+        IPredicate isInstanceOfString = TypePredicates.isInstanceOfString();
+        IPredicate isInstanceOfComparable = TypePredicates.isInstanceOfComparable();
         IObjectIterable seq = ObjectSequence.of(input).filter(isInstanceOfString);
         IObjectIterable seq1 = ObjectSequence.of(input).filter(isInstanceOfComparable);
         // When
@@ -207,7 +208,7 @@ private class ObjectSequenceTest {
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
         List<Object> input = new List<Object>{ 'foo', '', 'baz', john, true, 'ipsum', jake };
-        IPredicate isInstanceOfString = Predicate.isInstanceOfString();
+        IPredicate isInstanceOfString = TypePredicates.isInstanceOfString();
         IObjectIterable seq = ObjectSequence.of(input).take(isInstanceOfString);
         // When
         List<Object> actual = seq.toList();
@@ -224,7 +225,7 @@ private class ObjectSequenceTest {
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
         List<Object> input = new List<Object>{ 'foo', '', 'baz', john, true, 'ipsum', jake };
-        IPredicate isInstanceOfString = Predicate.isInstanceOfString();
+        IPredicate isInstanceOfString = TypePredicates.isInstanceOfString();
         IObjectIterable seq = ObjectSequence.of(input).drop(isInstanceOfString);
         // When
         List<Object> actual = seq.toList();
@@ -258,7 +259,7 @@ private class ObjectSequenceTest {
         // Given
         List<String> input = new List<String>{ 'foo', '', 'baz', 'ipsum', 'Hello' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        IObjectIterable seq = ObjectSequence.of(clone).mapTo(StringFunction.capitalize());
+        IObjectIterable seq = ObjectSequence.of(clone).mapTo(new IterTestUtils.Capitalize());
         // When
         List<Object> actual = seq.toList();
         // Then
@@ -275,7 +276,7 @@ private class ObjectSequenceTest {
         // Given
         List<String> input = new List<String>{ 'foo', '', 'baz', 'ipsum', 'Hello' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        IIntIterable intSeq = ObjectSequence.of(clone).mapToInt(StringToIntFunction.length());
+        IIntIterable intSeq = ObjectSequence.of(clone).mapToInt(new IterTestUtils.Length());
         // When
         List<Integer> actual = intSeq.toList();
         // Then
@@ -292,7 +293,7 @@ private class ObjectSequenceTest {
         // Given
         List<String> input = new List<String>{ '6', '0', '1', '3', '-9', '-6', '4', '4' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        ILongIterable longSeq = ObjectSequence.of(clone).mapToLong(StringToLongFunction.valueOf());
+        ILongIterable longSeq = ObjectSequence.of(clone).mapToLong(new IterTestUtils.LongValueOf());
         // When
         List<Long> actual = longSeq.toList();
         // Then
@@ -309,7 +310,7 @@ private class ObjectSequenceTest {
         // Given
         List<String> input = new List<String>{ '6.1', '0.0', '1.66', '3.06', '-8.99', '-6.4', '4.0', '4.0' };
         List<String> clone = (List<String>) IterTestUtils.deepClone(input, List<String>.class);
-        IDoubleIterable doubleSeq = ObjectSequence.of(clone).mapToDouble(ToDoubleFunction.valueOf());
+        IDoubleIterable doubleSeq = ObjectSequence.of(clone).mapToDouble(new IterTestUtils.DoubleValueOf());
         // When
         List<Double> actual = doubleSeq.toList();
         // Then
@@ -507,7 +508,7 @@ private class ObjectSequenceTest {
         List<Object> input = new List<Object>{ john, jake, 'foo', 1, 'foo', jake };
         List<Object> clone =  IterTestUtils.deepClone(input);
         IObjectIterable seq = ObjectSequence.of(clone).distinct();
-        IObjectIterable seq1 = ObjectSequence.of(input).filter(Predicate.isInstanceOfComparable()).distinct(new IterTestUtils.GetIdFunction());
+        IObjectIterable seq1 = ObjectSequence.of(input).filter(TypePredicates.isInstanceOfComparable()).distinct(new IterTestUtils.GetIdFunction());
         // When
         List<Object> actual = seq.toList();
         List<Object> actual1 = seq1.toList();
@@ -637,8 +638,8 @@ private class ObjectSequenceTest {
         IObjectIterable seq1 = ObjectSequence.of(clone1);
         String seed = 'seed';
         // When
-        String actual = (String) seq.reduce(seed, StringBinaryOperator.concat());
-        Integer actual1 = (Integer) seq1.reduce(BinaryOperator.upcast(IntBinaryOperator.sum())).get();
+        String actual = (String) seq.reduce(seed, new IterTestUtils.Concat());
+        Integer actual1 = (Integer) seq1.reduce(BinaryOperator.upcast(IntBinaryOperators.sum())).get();
         // Then
         String expected = 'seedfoobarbazlorem';
         Integer expected1 = 16;
@@ -664,8 +665,8 @@ private class ObjectSequenceTest {
         IObjectIterable seq = ObjectSequence.of(clone);
         IObjectIterable seq1 = ObjectSequence.of(clone1);
         // When
-        Set<Object> actual = (Set<Object>) seq.collect(Collector.toSet());
-        Set<Object> actual1 = (Set<Object>) seq1.collect(Supplier.of(Set<Object>.class), SetObjectConsumer.addToSet());
+        Set<Object> actual = (Set<Object>) seq.collect(Collector.of(Supplier.of(Set<Object>.class), new IterTestUtils.AddToSet()));
+        Set<Object> actual1 = (Set<Object>) seq1.collect(Supplier.of(Set<Object>.class), new IterTestUtils.AddToSet());
         // Then
         Set<Object> expected = new Set<Object>{ john, jake, sam, lucy };
         Validate.assertEquals(expected, actual);
@@ -690,8 +691,8 @@ private class ObjectSequenceTest {
         IObjectIterable seq1 = ObjectSequence.of(clone1);
         Integer elseValue = 42;
         // When
-        String actual = (String) seq.find(Predicate.isInstanceOfString()).get();
-        Integer actual1 = (Integer) seq1.find(Predicate.isInstanceOfInt()).orElse(elseValue);
+        String actual = (String) seq.find(TypePredicates.isInstanceOfString()).get();
+        Integer actual1 = (Integer) seq1.find(TypePredicates.isInstanceOfInt()).orElse(elseValue);
         // Then
         Validate.assertEquals('jake', actual);
         Validate.assertEquals(elseValue, actual1);
@@ -714,8 +715,8 @@ private class ObjectSequenceTest {
         IObjectIterable seq = ObjectSequence.of(clone);
         IObjectIterable seq1 = ObjectSequence.of(clone1);
         // When
-        Boolean actual = seq.every(Predicate.isInstanceOfString());
-        Boolean actual1 = seq1.every(Predicate.isInstanceOfInt().negate());
+        Boolean actual = seq.every(TypePredicates.isInstanceOfString());
+        Boolean actual1 = seq1.every(TypePredicates.isInstanceOfInt().negate());
         // Then
         Validate.assertEquals(false, actual);
         Validate.assertEquals(true, actual1);
@@ -738,8 +739,8 @@ private class ObjectSequenceTest {
         IObjectIterable seq = ObjectSequence.of(clone);
         IObjectIterable seq1 = ObjectSequence.of(clone1);
         // When
-        Boolean actual = seq.some(Predicate.isInstanceOfString());
-        Boolean actual1 = seq1.some(Predicate.isInstanceOfInt());
+        Boolean actual = seq.some(TypePredicates.isInstanceOfString());
+        Boolean actual1 = seq1.some(TypePredicates.isInstanceOfInt());
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -762,8 +763,8 @@ private class ObjectSequenceTest {
         IObjectIterable seq = ObjectSequence.of(clone);
         IObjectIterable seq1 = ObjectSequence.of(clone1);
         // When
-        Boolean actual = seq.none(Predicate.isInstanceOfString());
-        Boolean actual1 = seq1.none(Predicate.isInstanceOfInt());
+        Boolean actual = seq.none(TypePredicates.isInstanceOfString());
+        Boolean actual1 = seq1.none(TypePredicates.isInstanceOfInt());
         // Then
         Validate.assertEquals(false, actual);
         Validate.assertEquals(true, actual1);
@@ -878,14 +879,23 @@ private class ObjectSequenceTest {
     private static void toList() {
         // Given
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 1L, true);
-        List<Object> input = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
-        List<Object> clone = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
+        IterTestUtils.Person jake = new IterTestUtils.Person('Jake', 33, Date.newInstance(1991, 2, 3), 2L, false);
+        IterTestUtils.Person sam = new IterTestUtils.Person('Sam', 16, Date.newInstance(2005, 2, 3), 0L, false);
+        IterTestUtils.Person lucy = new IterTestUtils.Person('Lucy', 25, Date.newInstance(1991, 2, 3), 3L, true);
+        List<IterTestUtils.Person> input = new List<IterTestUtils.Person>{ john, jake, sam, lucy, lucy, jake };
+        List<IterTestUtils.Person> clone = (List<IterTestUtils.Person>) IterTestUtils.deepClone(input, List<IterTestUtils.Person>.class);
+        List<Object> input1 = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
+        List<Object> clone1 = new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
         IObjectIterable seq = ObjectSequence.of(clone);
+        IObjectIterable seq1 = ObjectSequence.of(clone1);
         // When
-        List<Object> actual = seq.toList();
+        List<IterTestUtils.Person> actual = (List<IterTestUtils.Person>) seq.toList(List<IterTestUtils.Person>.class);
+        List<Object> actual1 = seq1.toList();
         // Then
         Validate.assertEquals(input, actual);
+        Validate.assertEquals(input1, actual1);
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**

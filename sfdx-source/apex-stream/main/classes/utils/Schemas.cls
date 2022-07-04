@@ -5,7 +5,10 @@
  *
  * @group Utils
  */
-public virtual inherited sharing class Schemas {
+public inherited sharing class Schemas {
+
+    @TestVisible
+    private Schemas(){}
 
     /**
      * @description Returns the name of the child relationship for the `SObjectField`.
@@ -22,12 +25,14 @@ public virtual inherited sharing class Schemas {
     public static String findChildRelationshipName(final SObjectField field) {
         final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
         Validate.isTrue(!referenceTo.isEmpty(), Label.NotReferenceFieldErrorMessage, new List<Object>{ field });
+        String result;
         for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
             if (relationship.getField() == field) {
-                return relationship.getRelationshipName();
+                result = relationship.getRelationshipName();
+                break;
             }
         }
-        return null;
+        return result;
     }
 
     /**

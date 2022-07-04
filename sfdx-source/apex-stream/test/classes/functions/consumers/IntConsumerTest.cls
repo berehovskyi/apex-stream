@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see IntConsumer
+ * 
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class IntConsumerTest {
@@ -12,36 +13,17 @@ private class IntConsumerTest {
      * @see IntConsumer.compose
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // When
-        IntConsumer debugConsumer = IntConsumer.debug();
-        IIntConsumer composed = IntConsumer.compose(new List<IIntConsumer>{ debugConsumer, debugConsumer });
-        IIntConsumer composed1 = debugConsumer.andThen(debugConsumer);
+        IntConsumer cons = new IterTestUtils.DoNothingIntConsumer();
+        IIntConsumer composed = IntConsumer.compose(new List<IIntConsumer>{ cons, cons });
+        IIntConsumer composed1 = cons.andThen(cons);
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             List<Integer> clone = input.clone();
-            debugConsumer.accept(clone[i]);
+            cons.accept(clone[i]);
             composed.accept(clone[i]);
             composed1.accept(clone[i]);
-            Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
-        }
-    }
-
-    /**
-     * @see IntConsumer.debug
-     */
-    @IsTest
-    static void debug() {
-        // Given
-        String message = 'message ';
-        // When
-        IIntConsumer debugConsumer = IntConsumer.debug();
-        IIntConsumer debugConsumer1 = IntConsumer.debug(LoggingLevel.DEBUG, message);
-        // Then
-        for (Integer i = 0, size = input.size(); i < size; i++) {
-            List<Integer> clone = input.clone();
-            debugConsumer.accept(clone[i]);
-            debugConsumer1.accept(clone[i]);
             Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
         }
     }

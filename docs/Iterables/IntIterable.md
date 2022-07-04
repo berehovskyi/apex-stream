@@ -1,13 +1,13 @@
 # IntIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Provides a skeletal implementation of [IIntIterable](/docs/Iterables/IIntIterable.md).
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Iterables

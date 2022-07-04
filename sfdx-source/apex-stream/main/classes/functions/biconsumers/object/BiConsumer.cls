@@ -1,6 +1,6 @@
 /**
- * @description Inherits {@link IBiConsumer} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IBiConsumer} functional interface.
  *
  * @see IBiConsumer
  * @see Collector
@@ -73,61 +73,6 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     // @end-group
     //</editor-fold>
 
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-    /**
-     * @description Returns a composed `BiConsumer` that executes `accumulator` operation,
-     * if the second input argument satisfies the predicate.
-     *
-     * @param predicate the predicate applied to the second input argument
-     * @param accumulator the operation to perform after filtering
-     *
-     * @return the composed `BiConsumer`
-     *
-     * @throws NullPointerException if `predicate` or `accumulator` is null
-     */
-    public static BiConsumer filtering(final IPredicate predicate, final IBiConsumer accumulator) {
-        Validate.notNull(predicate);
-        Validate.notNull(accumulator);
-        return new Filtering(predicate, accumulator);
-    }
-
-    /**
-     * @description Returns a composed `BiConsumer` that applies `accumulator` operation to
-     * the result returned by the mapper.
-     *
-     * @param mapper the operator applied to the second input argument
-     * @param accumulator the operation to perform
-     *
-     * @return the composed `BiConsumer`
-     *
-     * @throws NullPointerException if `mapper` or `accumulator` is null
-     */
-    public static BiConsumer mapping(final IFunction mapper, final IBiConsumer accumulator) {
-        Validate.notNull(mapper);
-        Validate.notNull(accumulator);
-        return new Mapping(mapper, accumulator);
-    }
-
-    /**
-     * @description Returns a composed `BiConsumer` that applies `accumulator`
-     * operation to the `Iterable<Object>` elements produced by the `mapper`.
-     *
-     * @param mapper the operator applied to the second input argument which must produce `Iterable<Object>`
-     * @param accumulator the operation to perform
-     *
-     * @return the composed `BiConsumer`
-     *
-     * @throws NullPointerException if `mapper` or `accumulator` is null
-     */
-    public static BiConsumer flatMapping(final IFunction mapper, final IBiConsumer accumulator) {
-        Validate.notNull(mapper);
-        Validate.notNull(accumulator);
-        return new FlatMapping(mapper, accumulator);
-    }
-    // @end-group
-    //</editor-fold>
-
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Compose extends BiConsumer {
@@ -136,46 +81,6 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
         public override void accept(Object o1, Object o2) {
             for (IBiConsumer consumer : consumers) {
                 consumer.accept(o1, o2);
-            }
-        }
-    }
-
-    private class Filtering extends BiConsumer {
-        private final IPredicate predicate;
-        private final IBiConsumer accumulator;
-        private Filtering(IPredicate predicate, IBiConsumer accumulator) {
-            this.predicate = predicate;
-            this.accumulator = accumulator;
-        }
-        public override void accept(Object container, Object o) {
-            if (predicate.test(o)) { accumulator.accept(container, o); }
-        }
-    }
-
-    private class Mapping extends BiConsumer {
-        private final IFunction mapper;
-        private final IBiConsumer accumulator;
-        private Mapping(IFunction mapper, IBiConsumer accumulator) {
-            this.mapper = mapper;
-            this.accumulator = accumulator;
-        }
-        public override void accept(Object container, Object o) { accumulator.accept(container, mapper.apply(o)); }
-    }
-
-    private class FlatMapping extends BiConsumer {
-        private final IFunction mapper;
-        private final IBiConsumer accumulator;
-        private FlatMapping(IFunction mapper, IBiConsumer accumulator) {
-            this.mapper = mapper;
-            this.accumulator = accumulator;
-        }
-        public override void accept(Object container, Object o) {
-            final Iterable<Object> result = (Iterable<Object>) mapper.apply(o);
-            if (result != null) {
-                final Iterator<Object> iterator = result.iterator();
-                while (iterator.hasNext()) {
-                    this.accumulator.accept(container, iterator.next());
-                }
             }
         }
     }

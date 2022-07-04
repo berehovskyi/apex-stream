@@ -1,13 +1,16 @@
 # ToIntFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IToIntFunction](/docs/Functional-Interfaces/IToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IToIntFunction](/docs/Functional-Interfaces/IToIntFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IToIntFunction](/docs/Functional-Interfaces/IToIntFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -21,7 +24,7 @@ Inherits [IToIntFunction](/docs/Functional-Interfaces/IToIntFunction.md) functio
 
 ---
 ### Static Methods
-##### `static downcast(ISObjectFunction mapper)`
+##### `static compose(ISObjectFunction mapper)`
 
 Returns a composed `ToDoubleFunction` of the `ISObjectFunction`.
 
@@ -45,7 +48,7 @@ the `ToIntFunction`
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-##### `static downcast(IFunction mapper)`
+##### `static compose(IFunction mapper)`
 
 Returns a composed `ToDoubleFunction` of the `IFunction`.
 
@@ -68,38 +71,5 @@ the `ToIntFunction`
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
-
----
-### Object To Int Functions
-##### `static asInt()`
-
-Returns a `ToIntFunction` that returns the Integer value of the Object input argument by casting it to an Integer.
-
-###### Return
-
-**Type**
-
-ToIntFunction
-
-**Description**
-
-the `ToIntFunction`
-
-##### `static valueOf()`
-
-Returns a `ToIntFunction` that returns the Integer value of the Object input argument.
-
-###### Return
-
-**Type**
-
-ToIntFunction
-
-**Description**
-
-the `ToIntFunction`
-
-
-**See** Integer.valueOf
 
 ---

@@ -1,16 +1,10 @@
 # DoubleStream
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-A sequence of `Double` elements supporting aggregate operations, a primitive specialization of [ObjectStream](/docs/Iterables/ObjectStream.md). <p><a href=&quot;https://en.wikipedia.org/wiki/Monte_Carlo_method&quot;>Monte Carlo method</a></p>
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
+A sequence of `Double` elements supporting aggregate operations, a primitive specialization of [ObjectStream](/docs/Iterables/ObjectStream.md).
 
 
 **See** [DoubleSequence](/docs/Iterables/DoubleSequence.md)
@@ -26,6 +20,12 @@ A sequence of `Double` elements supporting aggregate operations, a primitive spe
 
 
 **See** [LongStream](/docs/Iterables/LongStream.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Properties
 
@@ -229,7 +229,7 @@ the new `DoubleStream`
 
 ###### Example
 ```apex
-IDoubleIterable doubleIncrementalStream = DoubleStream.iterate(0, DoubleUnaryOperator.add(1));
+IDoubleIterable doubleIncrementalStream = DoubleStream.iterate(0, DoubleUnaryOperators.add(1));
 ```
 
 ##### `static iterate(Double seed, IDoublePredicate predicate, IDoubleUnaryOperator operator)`
@@ -449,7 +449,7 @@ the `DoubleStream`
 ###### Example
 ```apex
 List<Double> filtered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .filter(DoublePredicate.isGreater(0))
+    .filter(DoublePredicates.isGreater(0))
     .toList();
 ```
 
@@ -480,7 +480,7 @@ the `DoubleStream`
 ###### Example
 ```apex
 List<Double> firstFiltered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .take(DoublePredicate.isGreater(0))
+    .take(DoublePredicates.isGreater(0))
     .toList();
 ```
 
@@ -511,7 +511,7 @@ the `DoubleStream`
 ###### Example
 ```apex
 List<Double> rest = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .drop(DoublePredicate.isGreater(0))
+    .drop(DoublePredicates.isGreater(0))
     .toList();
 ```
 
@@ -542,7 +542,7 @@ the `DoubleStream`
 ###### Example
 ```apex
 List<Double> incrementedDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .mapTo(DoubleUnaryOperator.add(1.5))
+    .mapTo(DoubleUnaryOperators.add(1.5))
     .toList();
 ```
 
@@ -730,8 +730,8 @@ the `DoubleStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -762,8 +762,8 @@ the `DoubleStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -801,7 +801,8 @@ the `Double` result of the reduction
 
 ###### Example
 ```apex
-Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).reduce(0.0, DoubleBinaryOperator.sum());
+Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+    .reduce((Double) 0.0, DoubleBinaryOperators.sum());
 ```
 
 ##### `override reduce(IDoubleBinaryOperator accumulator)`
@@ -831,7 +832,7 @@ the `OptionalDouble` result of the reduction
 ###### Example
 ```apex
 Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     .reduce(DoubleBinaryOperator.sum())
+     .reduce(DoubleBinaryOperators.sum())
      .get();
 ```
 
@@ -887,7 +888,7 @@ the `OptionalDouble`
 ###### Example
 ```apex
 Double firstGreaterDouble = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .find(DoublePredicate.isGreater(1.5))
+    .find(DoublePredicates.isGreater(1.5))
     .get();
 ```
 
@@ -918,7 +919,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isEveryDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .every(DoublePredicate.isGreater(1.5))
+    .every(DoublePredicates.isGreater(1.5))
     .get();
 ```
 
@@ -949,7 +950,7 @@ Boolean
 ###### Example
 ```apex
 Boolean isSomeDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .some(DoublePredicate.isGreater(1.5))
+    .some(DoublePredicates.isGreater(1.5))
     .get();
 ```
 

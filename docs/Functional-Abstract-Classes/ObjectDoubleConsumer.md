@@ -1,13 +1,16 @@
 # ObjectDoubleConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IObjectDoubleConsumer](/docs/Functional-Interfaces/IObjectDoubleConsumer.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IObjectDoubleConsumer](/docs/Functional-Interfaces/IObjectDoubleConsumer.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IObjectDoubleConsumer](/docs/Functional-Interfaces/IObjectDoubleConsumer.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -21,7 +24,7 @@ Inherits [IObjectDoubleConsumer](/docs/Functional-Interfaces/IObjectDoubleConsum
 
 ---
 ### Static Methods
-##### `static of(IBiConsumer consumer)`
+##### `static compose(IBiConsumer consumer)`
 
 Returns a composed `ObjectDoubleConsumer` of the `IBiConsumer`.
 

@@ -5,7 +5,7 @@
  *
  * @author Oleh Berehovskyi
  *
- * @group Collectors
+ * @group Functional Interfaces
  */
 public interface ISObjectCollector {
 

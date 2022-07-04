@@ -1,7 +1,9 @@
 /**
- * @description Inherits {@link IObjectDoubleConsumer} functional interface and provides
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IObjectDoubleConsumer} functional interface.
  *
+ * @see IObjectDoubleConsumer
+ * 
  * @author Oleh Berehovskyi
  *
  * @group Functional Abstract Classes
@@ -25,17 +27,18 @@ public abstract inherited sharing class ObjectDoubleConsumer implements IObjectD
      *
      * @throws NullPointerException if `consumer` is null
      */
-    public static ObjectDoubleConsumer of(final IBiConsumer consumer) {
-        return new OfBiConsumer(consumer);
+    public static ObjectDoubleConsumer compose(final IBiConsumer consumer) {
+        Validate.notNull(consumer);
+        return new ForBiConsumer(consumer);
     }
     // @end-group
     //</editor-fold>
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-    private class OfBiConsumer extends ObjectDoubleConsumer {
+    private class ForBiConsumer extends ObjectDoubleConsumer {
         private final IBiConsumer consumer;
-        private OfBiConsumer(IBiConsumer consumer) { this.consumer = consumer; }
+        private ForBiConsumer(IBiConsumer consumer) { this.consumer = consumer; }
         public override void accept(Object container, Double d) { consumer.accept(container, d); }
     }
     // @end-group

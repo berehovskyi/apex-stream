@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see IntStream
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class IntStreamTest {
@@ -109,8 +110,8 @@ private class IntStreamTest {
         Integer lim = 10;
         Integer fromInt = 10;
         Integer step = 10;
-        IIntIterable stream = IntStream.generate(IntSupplier.fibonacci()).lim(lim);
-        IIntIterable stream1 = IntStream.generate(IntSupplier.increment(fromInt, 10)).lim(step);
+        IIntIterable stream = IntStream.generate(IntSuppliers.fibonacci()).lim(lim);
+        IIntIterable stream1 = IntStream.generate(IntSuppliers.increment(fromInt, 10)).lim(step);
         // When
         List<Integer> actual = stream.toList();
         List<Integer> actual1 = stream1.toList();
@@ -136,9 +137,9 @@ private class IntStreamTest {
         Integer seed2 = 50;
         Integer lim = 10;
         Integer i = 5;
-        IIntIterable stream = IntStream.iterate(seed, IntUnaryOperator.increment()).lim(lim);
-        IIntIterable stream1 = IntStream.iterate(seed1, IntUnaryOperator.add(i)).lim(lim);
-        IIntIterable stream2 = IntStream.iterate(seed2, IntPredicate.isPositive(), IntUnaryOperator.subtract(i));
+        IIntIterable stream = IntStream.iterate(seed, new IterTestUtils.AddIntOp(1)).lim(lim);
+        IIntIterable stream1 = IntStream.iterate(seed1, new IterTestUtils.AddIntOp(i)).lim(lim);
+        IIntIterable stream2 = IntStream.iterate(seed2, IntPredicates.isGreater(0), new IterTestUtils.AddIntOp(-i));
         // When
         List<Integer> actual = stream.toList();
         List<Integer> actual1 = stream1.toList();
@@ -189,7 +190,7 @@ private class IntStreamTest {
         // Given
         List<Integer> input = new List<Integer>{ -5, 0, 1 };
         List<Integer> input1 = new List<Integer>{ 3, 0, 8 };
-        IIntIterable stream = IntStream.zip(IntStream.of(input), IntStream.of(input1), IntBinaryOperator.sum());
+        IIntIterable stream = IntStream.zip(IntStream.of(input), IntStream.of(input1), IntBinaryOperators.sum());
         // When
         List<Integer> actual = stream.toList();
         // Then
@@ -297,7 +298,7 @@ private class IntStreamTest {
     private static void filter() {
         // Given
         List<Integer> input = new List<Integer>{ -5, 0, 1, 3, 8, null, -6, 4, 4 };
-        IIntIterable stream = IntStream.of(input).filter(IntPredicate.isPositive());
+        IIntIterable stream = IntStream.of(input).filter(IntPredicates.isGreater(0));
         // When
         List<Integer> actual = stream.toList();
         // Then
@@ -313,13 +314,22 @@ private class IntStreamTest {
     private static void take() {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, null, -6, 4, 4 };
-        IIntIterable stream = IntStream.of(input).take(IntPredicate.isPositive());
+        IIntIterable stream = IntStream.of(input).take(IntPredicates.isGreater(0));
+        IIntIterable stream1 = IntStream.of(input).take(IntPredicates.isGreater(2));
         // When
         List<Integer> actual = stream.toList();
+        Iterator<Integer> iterator = stream1.iterator();
         // Then
         List<Integer> expected = new List<Integer>{ 5, 1, 3, 8 };
         Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input[0], iterator.next());
+        try {
+            iterator.next();
+        } catch (Exception exc) {
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+        }
         Validate.assert(((IntStream) stream).isOperated);
+        Validate.assert(((IntStream) stream1).isOperated);
     }
 
     /**
@@ -329,7 +339,7 @@ private class IntStreamTest {
     private static void drop() {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, null, -6, 4, 4 };
-        IIntIterable stream = IntStream.of(input).drop(IntPredicate.isPositive());
+        IIntIterable stream = IntStream.of(input).drop(IntPredicates.isGreater(0));
         // When
         List<Integer> actual = stream.toList();
         // Then
@@ -364,7 +374,7 @@ private class IntStreamTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IIntIterable stream = IntStream.of(clone).mapTo(IntUnaryOperator.multiply(2));
+        IIntIterable stream = IntStream.of(clone).mapTo(new IterTestUtils.MultiplyIntOp(2));
         // When
         List<Integer> actual = stream.toList();
         // Then
@@ -382,7 +392,7 @@ private class IntStreamTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        ILongIterable stream = IntStream.of(clone).mapToLong(IntToLongFunction.asLong());
+        ILongIterable stream = IntStream.of(clone).mapToLong(IntToLongFunctions.asLong());
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -400,7 +410,7 @@ private class IntStreamTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IDoubleIterable stream = IntStream.of(clone).mapToDouble(IntToDoubleFunction.valueOf());
+        IDoubleIterable stream = IntStream.of(clone).mapToDouble(IntToDoubleFunctions.valueOf());
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -437,7 +447,7 @@ private class IntStreamTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IObjectIterable stream = IntStream.of(clone).mapToObject(IntFunction.toString());
+        IObjectIterable stream = IntStream.of(clone).mapToObject(new IterTestUtils.IntToString());
         // When
         List<String> actual = (List<String>) stream.toList(List<String>.class);
         // Then
@@ -455,7 +465,7 @@ private class IntStreamTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         List<Integer> clone = input.clone();
-        IIntIterable stream = IntStream.of(clone).forEach(IntConsumer.debug());
+        IIntIterable stream = IntStream.of(clone).forEach(new IterTestUtils.DoNothingIntConsumer());
         // When
         List<Integer> actual = stream.toList();
         // Then
@@ -587,11 +597,11 @@ private class IntStreamTest {
         IIntIterable stream2 = IntStream.of(cloneWithNulls);
         Integer seed = 10;
         // When
-        Integer actual = stream.reduce(seed, IntBinaryOperator.sum());
-        Integer actual1 = stream1.reduce(IntBinaryOperator.sum()).get();
+        Integer actual = stream.reduce(seed, IntBinaryOperators.sum());
+        Integer actual1 = stream1.reduce(IntBinaryOperators.sum()).get();
         Exception exc1;
         try {
-            stream2.reduce(IntBinaryOperator.sum());
+            stream2.reduce(IntBinaryOperators.sum());
         } catch (Exception exc) {
             exc1 = exc;
         }
@@ -617,7 +627,7 @@ private class IntStreamTest {
         List<Integer> clone = input.clone();
         IIntIterable stream = IntStream.of(clone);
         // When
-        Set<Integer> actual = (Set<Integer>) stream.collect(Supplier.of(Set<Integer>.class), ObjectIntConsumer.of(SetObjectConsumer.addToIntSet()));
+        Set<Integer> actual = (Set<Integer>) stream.collect(Supplier.of(Set<Integer>.class), ObjectIntConsumer.compose(new IterTestUtils.AddToIntSet()));
         // Then
         Set<Integer> expected = new Set<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0 };
         Validate.assertEquals(expected, actual);
@@ -636,8 +646,8 @@ private class IntStreamTest {
         IIntIterable stream = IntStream.of(clone);
         IIntIterable stream1 = IntStream.of(clone);
         // When
-        Integer actual = stream.find(IntPredicate.isNegative()).get();
-        Integer actual1 = stream1.find(IntPredicate.isGreater(50)).orElse(42);
+        Integer actual = stream.find(IntPredicates.isLess(0)).get();
+        Integer actual1 = stream1.find(IntPredicates.isGreater(50)).orElse(42);
         // Then
         Validate.assertEquals(-3, actual);
         Validate.assertEquals(42, actual1);
@@ -657,8 +667,8 @@ private class IntStreamTest {
         IIntIterable stream = IntStream.of(clone);
         IIntIterable stream1 = IntStream.of(clone);
         // When
-        Boolean actual = stream.every(IntPredicate.isOdd());
-        Boolean actual1 = stream1.every(IntPredicate.isPrime());
+        Boolean actual = stream.every(IntPredicates.isEven().negate());
+        Boolean actual1 = stream1.every(IntPredicates.isPrime());
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -678,8 +688,8 @@ private class IntStreamTest {
         IIntIterable stream = IntStream.of(clone);
         IIntIterable stream1 = IntStream.of(clone);
         // When
-        Boolean actual = stream.some(IntPredicate.isNegative());
-        Boolean actual1 = stream1.some(IntPredicate.isZero());
+        Boolean actual = stream.some(IntPredicates.isLess(0));
+        Boolean actual1 = stream1.some(IntPredicates.isEqual(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -699,8 +709,8 @@ private class IntStreamTest {
         IIntIterable stream = IntStream.of(clone);
         IIntIterable stream1 = IntStream.of(clone);
         // When
-        Boolean actual = stream.none(IntPredicate.isEven());
-        Boolean actual1 = stream1.none(IntPredicate.isNegative());
+        Boolean actual = stream.none(IntPredicates.isEven());
+        Boolean actual1 = stream1.none(IntPredicates.isLess(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);

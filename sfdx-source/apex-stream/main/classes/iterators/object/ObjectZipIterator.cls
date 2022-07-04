@@ -7,7 +7,11 @@ public inherited sharing class ObjectZipIterator implements Iterator<Object> {
     private final Iterator<Object> iterator2;
     private final IBinaryOperator combiner;
 
-    public ObjectZipIterator(final Iterator<Object> iterator1, final Iterator<Object> iterator2, final IBinaryOperator combiner) {
+    public ObjectZipIterator(
+            final Iterator<Object> iterator1,
+            final Iterator<Object> iterator2,
+            final IBinaryOperator combiner
+    ) {
         this.iterator1 = iterator1;
         this.iterator2 = iterator2;
         this.combiner = combiner;

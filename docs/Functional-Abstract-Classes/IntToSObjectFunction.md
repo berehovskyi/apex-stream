@@ -1,13 +1,16 @@
 # IntToSObjectFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IIntToSObjectFunction](/docs/Functional-Interfaces/IIntToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IIntToSObjectFunction](/docs/Functional-Interfaces/IIntToSObjectFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IIntToSObjectFunction](/docs/Functional-Interfaces/IIntToSObjectFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes

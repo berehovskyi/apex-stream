@@ -1,22 +1,22 @@
 # BiConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IBiConsumer](/docs/Functional-Interfaces/IBiConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+Provides default and static methods of [IBiConsumer](/docs/Functional-Interfaces/IBiConsumer.md) functional interface.
 
 
 **See** [IBiConsumer](/docs/Functional-Interfaces/IBiConsumer.md)
 
 
-**See** [Collector](/docs/Collectors/Collector.md)
+**See** [Collector](/docs/Functional-Abstract-Classes/Collector.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Properties
 
@@ -108,82 +108,5 @@ the composed `BiConsumer`
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|
-
----
-### Built-Ins
-##### `static filtering(IPredicate predicate, IBiConsumer accumulator)`
-
-Returns a composed `BiConsumer` that executes `accumulator` operation, if the second input argument satisfies the predicate.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`predicate`|the predicate applied to the second input argument|
-|`accumulator`|the operation to perform after filtering|
-
-###### Return
-
-**Type**
-
-BiConsumer
-
-**Description**
-
-the composed `BiConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `predicate` or `accumulator` is null|
-
-##### `static mapping(IFunction mapper, IBiConsumer accumulator)`
-
-Returns a composed `BiConsumer` that applies `accumulator` operation to the result returned by the mapper.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the operator applied to the second input argument|
-|`accumulator`|the operation to perform|
-
-###### Return
-
-**Type**
-
-BiConsumer
-
-**Description**
-
-the composed `BiConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `mapper` or `accumulator` is null|
-
-##### `static flatMapping(IFunction mapper, IBiConsumer accumulator)`
-
-Returns a composed `BiConsumer` that applies `accumulator` operation to the `Iterable<Object>` elements produced by the `mapper`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the operator applied to the second input argument which must produce `Iterable<Object>`|
-|`accumulator`|the operation to perform|
-
-###### Return
-
-**Type**
-
-BiConsumer
-
-**Description**
-
-the composed `BiConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `mapper` or `accumulator` is null|
 
 ---

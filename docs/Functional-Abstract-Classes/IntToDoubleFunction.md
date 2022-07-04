@@ -1,13 +1,16 @@
 # IntToDoubleFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IIntToDoubleFunction](/docs/Functional-Interfaces/IIntToDoubleFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IIntToDoubleFunction](/docs/Functional-Interfaces/IIntToDoubleFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IIntToDoubleFunction](/docs/Functional-Interfaces/IIntToDoubleFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -18,24 +21,5 @@ Inherits [IIntToDoubleFunction](/docs/Functional-Interfaces/IIntToDoubleFunction
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static valueOf()`
-
-Returns a `IIntToDoubleFunction` that returns the Double value of the Integer input argument.
-
-###### Return
-
-**Type**
-
-IntToDoubleFunction
-
-**Description**
-
-the `IIntToDoubleFunction`
-
-
-**See** Double.valueOf
 
 ---

@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link IIntConsumer} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IIntConsumer} functional interface.
  *
+ * @see IIntConsumer
  * @see IIntIterable.forEach
  *
  * @author Oleh Berehovskyi
@@ -53,35 +54,6 @@ public abstract inherited sharing class IntConsumer implements IIntConsumer {
     // @end-group
     //</editor-fold>
 
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-    /**
-     * @description Returns a `IntConsumer` that debugs an input argument.
-     *
-     * @param loggingLevel the logging level
-     * @param message the message
-     *
-     * @return the `IntConsumer`
-     *
-     * @throws NullPointerException if `loggingLevel` or `message` is null
-     */
-    public static IntConsumer debug(final LoggingLevel loggingLevel, final String message) {
-        Validate.notNull(loggingLevel);
-        Validate.notNull(message);
-        return new Debug(loggingLevel, message);
-    }
-
-    /**
-     * @description Returns a `IntConsumer` that debugs an input argument.
-     *
-     * @return the `IntConsumer`
-     */
-    public static IntConsumer debug() {
-        return debug(LoggingLevel.INFO, '');
-    }
-    // @end-group
-    //</editor-fold>
-
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Compose extends IntConsumer {
@@ -92,14 +64,6 @@ public abstract inherited sharing class IntConsumer implements IIntConsumer {
                 consumer.accept(i);
             }
         }
-    }
-
-    private class Debug extends IntConsumer {
-        private final String message;
-        private final LoggingLevel level;
-        private Debug(LoggingLevel level, String message){ this.level = level; this.message = message; }
-        public override void accept(Integer i) { System.debug(level, message + i); }
-
     }
     // @end-group
     //</editor-fold>

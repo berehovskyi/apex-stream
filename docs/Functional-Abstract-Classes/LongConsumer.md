@@ -1,19 +1,22 @@
 # LongConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ILongConsumer](/docs/Functional-Interfaces/ILongConsumer.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [ILongConsumer](/docs/Functional-Interfaces/ILongConsumer.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [ILongConsumer](/docs/Functional-Interfaces/ILongConsumer.md)
 
 
 **See** ILongIterable.forEach
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -73,94 +76,5 @@ the composed `LongConsumer`
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|
-
----
-### Built-Ins
-##### `static debug(LoggingLevel loggingLevel, String message)`
-
-Returns a `LongConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`loggingLevel`|the logging level|
-|`message`|the message|
-
-###### Return
-
-**Type**
-
-LongConsumer
-
-**Description**
-
-the `LongConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `loggingLevel` or `message` is null|
-
-##### `static debug(LoggingLevel loggingLevel)`
-
-Returns a `LongConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`loggingLevel`|the logging level|
-
-###### Return
-
-**Type**
-
-LongConsumer
-
-**Description**
-
-the `LongConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `loggingLevel` is null|
-
-##### `static debug(String message)`
-
-Returns a `LongConsumer` that debugs an input argument.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`message`|the message|
-
-###### Return
-
-**Type**
-
-LongConsumer
-
-**Description**
-
-the `LongConsumer`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `message` is null|
-
-##### `static debug()`
-
-Returns a `LongConsumer` that debugs an input argument.
-
-###### Return
-
-**Type**
-
-LongConsumer
-
-**Description**
-
-the `LongConsumer`
 
 ---

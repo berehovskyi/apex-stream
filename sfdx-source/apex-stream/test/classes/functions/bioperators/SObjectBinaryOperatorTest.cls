@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see SObjectBinaryOperator
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class SObjectBinaryOperatorTest {
@@ -15,11 +16,11 @@ private class SObjectBinaryOperatorTest {
      * @see SObjectBinaryOperator.forBiConsumer
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // When
         ISObjectComparator comparator = SObjectComparator.comparing(IterTestUtils.CONSTS.Account.NumberOfEmployees);
-        ISObjectBiConsumer consumer = SObjectBiConsumer.set(IterTestUtils.CONSTS.Contact.Department, SObjectFunction.get(IterTestUtils.CONSTS.Account.Type))
-                .andThen(SObjectBiConsumer.set(IterTestUtils.CONSTS.ACCOUNT_ID, SObjectFunction.get(IterTestUtils.CONSTS.ID)));
+        ISObjectBiConsumer consumer = SObjectBiConsumers.set(IterTestUtils.CONSTS.Contact.Department, SObjectFunctions.get(IterTestUtils.CONSTS.Account.Type))
+                .andThen(SObjectBiConsumers.set(IterTestUtils.CONSTS.ACCOUNT_ID, SObjectFunctions.get(IterTestUtils.CONSTS.ID)));
         ISObjectBinaryOperator left = SObjectBinaryOperator.left();
         ISObjectBinaryOperator right = SObjectBinaryOperator.right();
         ISObjectBinaryOperator minBy = SObjectBinaryOperator.minBy(comparator);
@@ -66,4 +67,5 @@ private class SObjectBinaryOperatorTest {
             Validate.assertEquals(src1, actual7);
         }
     }
+    
 }

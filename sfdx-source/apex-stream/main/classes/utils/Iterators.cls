@@ -5,7 +5,10 @@
  *
  * @group Utils
  */
-public virtual inherited sharing class Iterators {
+public inherited sharing class Iterators {
+
+    @TestVisible
+    private Iterators(){}
 
     /**
      * @description Returns a `List<SObject>` created from `iterator`.
@@ -213,7 +216,7 @@ public virtual inherited sharing class Iterators {
      *
      * @example
      * List<String> accNames = (List<String>)
-     *     Iterators.toList(accIterator, SObjectFunction.get('Name'), List<String>.class);
+     *     Iterators.toList(accIterator, SObjectFunctions.get('Name'), List<String>.class);
      */
     public static List<Object> toList(
             final Iterator<SObject> iterator,
@@ -241,7 +244,7 @@ public virtual inherited sharing class Iterators {
      * @throws NullPointerException if `iterator` or `mapper` is null
      *
      * @example
-     * Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunction.get('CreatedDate'));
+     * Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunctions.get('CreatedDate'));
      */
     public static Set<Object> toObjectSet(final Iterator<SObject> iterator, final ISObjectFunction mapper) {
         Validate.notNull(iterator);
@@ -284,7 +287,7 @@ public virtual inherited sharing class Iterators {
      * @throws NullPointerException if `iterator` or `mapper` is null
      *
      * @example
-     * Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunction.get('ParentId'));
+     * Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunctions.get('ParentId'));
      */
     public static Set<Id> toIdSet(final Iterator<SObject> iterator, final ISObjectFunction mapper) {
         Validate.notNull(iterator);
@@ -307,7 +310,7 @@ public virtual inherited sharing class Iterators {
      * @throws NullPointerException if `iterator` or `mapper` is null
      *
      * @example
-     * Set<String> names = Iterators.toStringSet(accIterator, SObjectFunction.get('Name'));
+     * Set<String> names = Iterators.toStringSet(accIterator, SObjectFunctions.get('Name'));
      */
     public static Set<String> toStringSet(final Iterator<SObject> iterator, final ISObjectFunction mapper) {
         Validate.notNull(iterator);
@@ -334,7 +337,7 @@ public virtual inherited sharing class Iterators {
      *
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
-     *     .toByIdMap(contIterator, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+     *     .toByIdMap(contIterator, SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
      */
     public static Map<Id, SObject> toByIdMap(
             final Iterator<SObject> iterator,
@@ -373,7 +376,7 @@ public virtual inherited sharing class Iterators {
      *
      * @example
      * Map<String, Account> accountByName = (Map<String, Account>) Iterators
-     *     .toByIdMap(accIterator, SObjectFunction.get('Name'), Map<String, Account>.class);
+     *     .toByIdMap(accIterator, SObjectFunctions.get('Name'), Map<String, Account>.class);
      */
     public static Map<String, SObject> toByStringMap(
             final Iterator<SObject> iterator,
@@ -409,7 +412,7 @@ public virtual inherited sharing class Iterators {
      * @throws NullPointerException if `iterator` or `keyMapper` is blank
      *
      * @example 
-     * Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, SObjectFunction.get('AccountId'));
+     * Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, SObjectFunctions.get('AccountId'));
      */
     public static Map<Id, List<SObject>> groupById(
             final Iterator<SObject> iterator,
@@ -444,7 +447,7 @@ public virtual inherited sharing class Iterators {
      *
      * @example
      * Map<String, List<Account>> accountsByRating = Iterators
-     *     .groupByString(accIterator, SObjectFunction.get('Rating'));
+     *     .groupByString(accIterator, SObjectFunctions.get('Rating'));
      */
     public static Map<String, List<SObject>> groupByString(
             final Iterator<SObject> iterator,
@@ -478,7 +481,7 @@ public virtual inherited sharing class Iterators {
      *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = Iterators.partition(accIterator, SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+     *     = Iterators.partition(accIterator, SObjectPredicates.isEqual(Account.Rating, 'Hot'));
      */
     public static Map<Boolean, List<SObject>> partition(
             final Iterator<SObject> iterator,

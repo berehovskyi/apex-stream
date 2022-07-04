@@ -165,7 +165,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * IIntIterable fibonacciInfiniteStream = IntStream.generate(IntSupplier.fibonacci());
+     * IIntIterable fibonacciInfiniteStream = IntStream.generate(IntSuppliers.fibonacci());
      */
     public static IIntIterable generate(final IIntSupplier supplier) {
         Validate.notNull(supplier);
@@ -186,7 +186,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * IIntIterable intIncrementalStream = IntStream.iterate(0, IntUnaryOperator.add(1));
+     * IIntIterable intIncrementalStream = IntStream.iterate(0, IntUnaryOperators.add(1));
      */
     public static IIntIterable iterate(final Integer seed, final IIntUnaryOperator operator) {
         Validate.notNull(operator);
@@ -344,7 +344,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * List<Integer> filtered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .filter(IntPredicate.isGreater(0))
+     *     .filter(IntPredicates.isGreater(0))
      *     .toList();
      */
     public virtual override IIntIterable filter(final IIntPredicate predicate) {
@@ -364,7 +364,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * List<Integer> firstFiltered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .take(IntPredicate.isGreater(0))
+     *     .take(IntPredicates.isGreater(0))
      *     .toList();
      */
     public virtual IIntIterable take(final IIntPredicate predicate) {
@@ -385,7 +385,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * List<Integer> rest = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .drop(IntPredicate.isGreater(0))
+     *     .drop(IntPredicates.isGreater(0))
      *     .toList();
      */
     public virtual IIntIterable drop(final IIntPredicate predicate) {
@@ -406,7 +406,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * List<Integer> incrementedInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .mapTo(IntUnaryOperator.add(1))
+     *     .mapTo(IntUnaryOperators.add(1))
      *     .toList();
      */
     public virtual IIntIterable mapTo(final IIntUnaryOperator mapper) {
@@ -590,8 +590,8 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperator.sum());
-     * Integer factorialOfN = IntStream.range(1, n).reduce(1, IntBinaryOperator.product());
+     * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperators.sum());
+     * Integer factorialOfN = IntStream.range(1, n).reduce(1, IntBinaryOperators.product());
      */
     public virtual Integer reduce(final Integer identity, final IIntBinaryOperator accumulator) {
         Validate.notNull(accumulator);
@@ -617,7 +617,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *      .reduce(IntBinaryOperator.sum())
+     *      .reduce(IntBinaryOperators.sum())
      *      .get();
      */
     public virtual override OptionalInt reduce(final IIntBinaryOperator accumulator) {
@@ -673,7 +673,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * Integer firstEvenInt = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .find(IntPredicate.isEven())
+     *     .find(IntPredicates.isEven())
      *     .get();
      */
     public virtual OptionalInt find(final IIntPredicate predicate) {
@@ -703,7 +703,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * Boolean isEveryIntEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .every(IntPredicate.isEven())
+     *     .every(IntPredicates.isEven())
      *     .get();
      */
     public virtual Boolean every(final IIntPredicate predicate) {
@@ -724,7 +724,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      *
      * @example
      * Boolean isSomeLongEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .some(IntPredicate.isEven())
+     *     .some(IntPredicates.isEven())
      *     .get();
      */
     public virtual override Boolean some(final IIntPredicate predicate) {

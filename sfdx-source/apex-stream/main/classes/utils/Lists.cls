@@ -5,7 +5,10 @@
  *
  * @group Utils
  */
-public virtual inherited sharing class Lists {
+public inherited sharing class Lists {
+
+    @TestVisible
+    private Lists(){}
 
     /**
      * @description Returns a sorted `List<SObject>` with sorted elements according to `comparator`.
@@ -61,7 +64,7 @@ public virtual inherited sharing class Lists {
      * @throws NullPointerException if `sObjects`, `mapper` or `listType` is null
      *
      * @example 
-     * List<String> accNames = (List<String>) Lists.toList(accounts, SObjectFunction.get('Name'), List<String>.class);
+     * List<String> accNames = (List<String>) Lists.toList(accounts, SObjectFunctions.get('Name'), List<String>.class);
      */
     public static List<Object> toList(
             final List<SObject> sObjects,
@@ -89,7 +92,7 @@ public virtual inherited sharing class Lists {
      * @throws NullPointerException if `sObjects` or `mapper` is null
      *
      * @example
-     * Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunction.get('CreatedDate'));
+     * Set<Object> createdDates = Lists.toObjectSet(accounts, SObjectFunctions.get('CreatedDate'));
      */
     public static Set<Object> toObjectSet(final List<SObject> sObjects, final ISObjectFunction mapper) {
         Validate.notNull(sObjects);
@@ -112,7 +115,7 @@ public virtual inherited sharing class Lists {
      * @throws NullPointerException if `sObjects` or `mapper` is null
      *
      * @example
-     * Set<Id> parentIds = Lists.toIdSet(accounts, SObjectFunction.get('ParentId'));
+     * Set<Id> parentIds = Lists.toIdSet(accounts, SObjectFunctions.get('ParentId'));
      */
     public static Set<Id> toIdSet(final List<SObject> sObjects, final ISObjectFunction mapper) {
         Validate.notNull(sObjects);
@@ -135,7 +138,7 @@ public virtual inherited sharing class Lists {
      * @throws NullPointerException if `sObjects` or `mapper` is null
      *
      * @example
-     * Set<String> names = Lists.toStringSet(accounts, SObjectFunction.get('Name'));
+     * Set<String> names = Lists.toStringSet(accounts, SObjectFunctions.get('Name'));
      */
     public static Set<String> toStringSet(final List<SObject> sObjects, final ISObjectFunction mapper) {
         Validate.notNull(sObjects);
@@ -162,7 +165,7 @@ public virtual inherited sharing class Lists {
      *
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Lists
-     *     .toByIdMap(contacts, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+     *     .toByIdMap(contacts, SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
      */
     public static Map<Id, SObject> toByIdMap(
             final List<SObject> sObjects,
@@ -201,7 +204,7 @@ public virtual inherited sharing class Lists {
      *
      * @example
      * Map<String, Account> accountByName = (Map<String, Account>) Lists
-     *     .toByIdMap(accounts, SObjectFunction.get('Name'), Map<String, Account>.class);
+     *     .toByIdMap(accounts, SObjectFunctions.get('Name'), Map<String, Account>.class);
      */
     public static Map<String, SObject> toByStringMap(
             final List<SObject> sObjects,
@@ -237,7 +240,7 @@ public virtual inherited sharing class Lists {
      * @throws NullPointerException if `sObjects` or `keyMapper` is blank
      *
      * @example
-     * Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, SObjectFunction.get('AccountId'));
+     * Map<Id, List<Contact>> contactsByAccountId = Lists.groupById(contacts, SObjectFunctions.get('AccountId'));
      */
     public static Map<Id, List<SObject>> groupById(final List<SObject> sObjects, final ISObjectFunction keyMapper) {
         Validate.notNull(sObjects);
@@ -268,7 +271,7 @@ public virtual inherited sharing class Lists {
      * @throws NullPointerException if `sObjects` or `keyMapper` is null
      *
      * @example 
-     * Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, SObjectFunction.get('Rating'));
+     * Map<String, List<Account>> accountsByRating = Lists.groupByString(accounts, SObjectFunctions.get('Rating'));
      */
     public static Map<String, List<SObject>> groupByString(
             final List<SObject> sObjects,
@@ -302,7 +305,7 @@ public virtual inherited sharing class Lists {
      *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = Lists.partition(accounts, SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+     *     = Lists.partition(accounts, SObjectPredicates.isEqual(Account.Rating, 'Hot'));
      */
     public static Map<Boolean, List<SObject>> partition(
             final List<SObject> sObjects,
@@ -347,7 +350,7 @@ public virtual inherited sharing class Lists {
 
     private static List<Object> unwrap(final List<ObjectComparable> comparables, final List<Object> objects) {
         final List<Object> results = objects.clone();
-        results.clear(); // To keep it possible to downcast the result
+        results.clear(); // To keep it possible to cast the result
         for (Integer i = 0, size = comparables.size(); i < size; i++) {
             results.add(comparables[i].o);
         }
@@ -361,9 +364,7 @@ public virtual inherited sharing class Lists {
             this.sObj = sObj;
             this.comparator = comparator;
         }
-        public Integer compareTo(Object that) {
-            return comparator.compare(this.sObj, ((SObjectComparable) that).sObj);
-        }
+        public Integer compareTo(Object that) { return comparator.compare(sObj, ((SObjectComparable) that).sObj); }
     }
 
     private class ObjectComparable implements Comparable {
@@ -373,9 +374,7 @@ public virtual inherited sharing class Lists {
             this.o = o;
             this.comparator = comparator;
         }
-        public Integer compareTo(Object that) {
-            return comparator.compare(this.o, ((ObjectComparable) that).o);
-        }
+        public Integer compareTo(Object that) { return comparator.compare(o, ((ObjectComparable) that).o); }
     }
 
 }

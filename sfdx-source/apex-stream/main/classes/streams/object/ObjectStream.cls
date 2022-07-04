@@ -920,7 +920,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * List<String> peopleNames = (List<String>) ObjectStream.of(people)
      *     .collect(
      *         Supplier.of(List<String>.class),
-     *         ListObjectConsumer.addToList(getName)
+     *         ListObjectConsumers.addToList(getName)
      *     );
      */
     public virtual Object collect(final ISupplier supplier, final IBiConsumer accumulator) {
@@ -949,15 +949,15 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * // Group people by city
      * Map<String, List<Person>> peopleByCity = (Map<String, List<Person>>)
      *     ObjectStream.of(people)
-     *          .collect(Collector.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
+     *          .collect(Collectors.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
      *          
      * // Group people by city and by country, cascading two collectors
      * Map<String, Map<String, List<Person>>> peopleByCityByCountry
      *     = (Map<String, Map<String, List<Person>>>)
      *         ObjectStream.of(people)
-     *             .collect(Collector.groupingByString(
+     *             .collect(Collectors.groupingByString(
      *                 getCountry,
-     *                 Collector.groupingByString(getCity)
+     *                 Collectors.groupingByString(getCity)
      *             ).cast(Map<String, Map<String, List<Person>>>.class));
      */
     public virtual override Object collect(final ICollector collector) {

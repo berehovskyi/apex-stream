@@ -1,16 +1,13 @@
 # SObjectComparator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ISObjectComparator](/docs/Functional-Interfaces/ISObjectComparator.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [ISObjectComparator](/docs/Functional-Interfaces/ISObjectComparator.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [ISObjectComparator](/docs/Functional-Interfaces/ISObjectComparator.md)
 
 
 **See** ISObjectIterable.sort
@@ -26,6 +23,12 @@ Inherits [ISObjectComparator](/docs/Functional-Interfaces/ISObjectComparator.md)
 
 
 **See** SObjectBinaryOperator.maxBy
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -706,6 +709,7 @@ Returns a null-safe `SObjectComparator` of the `comparator` that considers null 
 ###### Parameters
 |Param|Description|
 |---|---|
+|`comparator`|the comparator for comparing nullable values|
 
 ###### Return
 
@@ -729,6 +733,7 @@ Returns a null-safe `SObjectComparator` of the `comparator` that considers null 
 ###### Parameters
 |Param|Description|
 |---|---|
+|`comparator`|the comparator for comparing nullable values|
 
 ###### Return
 

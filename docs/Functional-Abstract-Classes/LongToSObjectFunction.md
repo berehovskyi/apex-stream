@@ -1,13 +1,16 @@
 # LongToSObjectFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ILongToSObjectFunction](/docs/Functional-Interfaces/ILongToSObjectFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [ILongToSObjectFunction](/docs/Functional-Interfaces/ILongToSObjectFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [ILongToSObjectFunction](/docs/Functional-Interfaces/ILongToSObjectFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes

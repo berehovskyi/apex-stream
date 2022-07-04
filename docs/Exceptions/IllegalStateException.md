@@ -1,13 +1,13 @@
 # IllegalStateException
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Indicates that a method has been invoked at an illegal state.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Exceptions

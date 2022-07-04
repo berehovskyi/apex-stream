@@ -1,13 +1,16 @@
 # LongToDoubleFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ILongToDoubleFunction](/docs/Functional-Interfaces/ILongToDoubleFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [ILongToDoubleFunction](/docs/Functional-Interfaces/ILongToDoubleFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [ILongToDoubleFunction](/docs/Functional-Interfaces/ILongToDoubleFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -18,24 +21,5 @@ Inherits [ILongToDoubleFunction](/docs/Functional-Interfaces/ILongToDoubleFuncti
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static valueOf()`
-
-Returns a `LongToDoubleFunction` that returns the Double value of the Long input argument.
-
-###### Return
-
-**Type**
-
-LongToDoubleFunction
-
-**Description**
-
-the `LongToDoubleFunction`
-
-
-**See** Double.valueOf
 
 ---

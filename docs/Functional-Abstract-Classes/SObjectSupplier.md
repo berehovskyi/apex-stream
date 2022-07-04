@@ -1,13 +1,16 @@
 # SObjectSupplier
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ISObjectSupplier](/docs/Functional-Interfaces/ISObjectSupplier.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [ISObjectSupplier](/docs/Functional-Interfaces/ISObjectSupplier.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [ISObjectSupplier](/docs/Functional-Interfaces/ISObjectSupplier.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes

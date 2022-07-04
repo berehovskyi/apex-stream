@@ -13,11 +13,11 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
 
     //<editor-fold desc="Conversion Operations">
     public virtual IIntIterable toIntIterable() {
-        return mapToInt(LongToIntFunction.valueOf());
+        return mapToInt(LongToIntFunctions.valueOf());
     }
 
     public virtual IDoubleIterable toDoubleIterable() {
-        return mapToDouble(LongToDoubleFunction.valueOf());
+        return mapToDouble(LongToDoubleFunctions.valueOf());
     }
     //</editor-fold>
 
@@ -53,7 +53,7 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
      * List<Long> intersection = longsIterable1.intersect(longs2).toList(); // [3L, 9L]
      */
     public virtual ILongIterable intersect(final Iterable<Long> iterable) {
-        return distinct().filter(LongPredicate.isIn(iterable));
+        return distinct().filter(LongPredicates.isIn(iterable));
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
      * List<Long> diff = longsIterable1.except(longs2).toList(); // [5L, 7L]
      */
     public virtual ILongIterable except(final Iterable<Long> iterable) {
-        return distinct().filter(LongPredicate.isIn(iterable).negate());
+        return distinct().filter(LongPredicates.isIn(iterable).negate());
     }
 
     public abstract ILongIterable distinct();
@@ -78,7 +78,7 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
     public abstract ILongIterable filter(final ILongPredicate predicate);
 
     public virtual ILongIterable withoutNulls() {
-        return filter(LongPredicate.isNotNull());
+        return filter(LongPredicates.isNotNull());
     }
 
     public abstract IIntIterable mapToInt(final ILongToIntFunction mapper);
@@ -96,11 +96,11 @@ public abstract inherited sharing class LongIterable implements ILongIterable {
     }
 
     public virtual OptionalLong max() {
-        return reduce(LongBinaryOperator.max());
+        return reduce(LongBinaryOperators.max());
     }
 
     public virtual OptionalLong min() {
-        return reduce(LongBinaryOperator.min());
+        return reduce(LongBinaryOperators.min());
     }
     //</editor-fold>
 

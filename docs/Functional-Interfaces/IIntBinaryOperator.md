@@ -1,13 +1,13 @@
 # IIntBinaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A functions that takes two arguments of `Integer` type and returns an `Integer` value.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

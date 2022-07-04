@@ -1,19 +1,22 @@
 # LongUnaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ILongUnaryOperator](/docs/Functional-Interfaces/ILongUnaryOperator.md) functional interface and provides default methods, common class level implementations, and related utilities.
+Provides default and static methods of [ILongUnaryOperator](/docs/Functional-Interfaces/ILongUnaryOperator.md) functional interface.
 
 
-**Author** O. Berehovskyi
-
-
-**Group** Functional Abstract Classes
+**See** [ILongUnaryOperator](/docs/Functional-Interfaces/ILongUnaryOperator.md)
 
 
 **See** ILongIterable.mapTo
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Functional Abstract Classes
 
 ## Methods
 ### Function
@@ -130,231 +133,5 @@ LongUnaryOperator
 **Description**
 
 the `LongUnaryOperator`
-
----
-### Built-Ins
-##### `static abs()`
-
-Returns a `LongUnaryOperator` that returns the absolute value of the input argument.
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-
-**See** Math.abs
-
-##### `static add(Long l)`
-
-Returns a `LongUnaryOperator` that returns the sum of the input argument and the `l`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`l`|the Long value|
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `l` is null|
-
-##### `static decrement()`
-
-Returns a `LongUnaryOperator` that returns the input argument decremented by 1.
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-##### `static divide(Long l)`
-
-Returns a `LongUnaryOperator` that returns the division of the input argument and the `l`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`l`|the Long value|
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `l` is null|
-|`IllegalArgumentException`|if `l` is 0|
-
-##### `static increment()`
-
-Returns a `LongUnaryOperator` that returns the input argument incremented by 1.
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-##### `static max(Long l)`
-
-Returns a `LongUnaryOperator` that returns a larger value between the input argument and the `l`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`l`|the Long value|
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `l` is null|
-
-
-**See** Math.max
-
-##### `static min(Long l)`
-
-Returns a `LongUnaryOperator` that returns a smaller value between the input argument and the `l`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`l`|the Long value|
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `l` is null|
-
-
-**See** Math.min
-
-##### `static mod(Long l)`
-
-Returns a `LongUnaryOperator` that returns a remainder of the input argument divided by the `l`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`l`|the Long value|
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `l` is null|
-|`IllegalArgumentException`|if `l` is 0|
-
-
-**See** Math.mod
-
-##### `static multiply(Long l)`
-
-Returns a `LongUnaryOperator` that returns the multiplication of the of the input argument and the `l`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`l`|the Long value|
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `l` is null|
-
-##### `static subtract(Long l)`
-
-Returns a `LongUnaryOperator` that returns the subtraction of the input argument and the `l`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`l`|the Long value|
-
-###### Return
-
-**Type**
-
-LongUnaryOperator
-
-**Description**
-
-the `LongUnaryOperator`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `l` is null|
 
 ---

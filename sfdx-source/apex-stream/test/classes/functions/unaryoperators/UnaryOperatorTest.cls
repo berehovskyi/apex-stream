@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see UnaryOperator
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class UnaryOperatorTest {
@@ -13,21 +14,21 @@ private class UnaryOperatorTest {
      * @see UnaryOperator.compose
      * @see UnaryOperator.identity
      * @see UnaryOperator.constant
-     * @see UnaryOperator.upcast
+     * @see UnaryOperator.compose
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // Given
         Integer factor = 2;
         Object constant = '1';
         // When
         IUnaryOperator identity = UnaryOperator.identity();
         IUnaryOperator ofConst = UnaryOperator.constant(constant);
-        UnaryOperator incOperator = UnaryOperator.upcast(IntUnaryOperator.increment());
-        UnaryOperator x2IntOperator = UnaryOperator.upcast(IntUnaryOperator.multiply(factor));
-        IUnaryOperator x2LongOperator = UnaryOperator.upcast(LongUnaryOperator.multiply(factor));
-        IUnaryOperator x2DoubleOperator = UnaryOperator.upcast(DoubleUnaryOperator.multiply(factor));
-        IUnaryOperator sObjectIdentity = UnaryOperator.upcast(SObjectUnaryOperator.identity());
+        UnaryOperator incOperator = UnaryOperator.compose(new IterTestUtils.AddIntOp(1));
+        UnaryOperator x2IntOperator = UnaryOperator.compose(new IterTestUtils.MultiplyIntOp(factor));
+        IUnaryOperator x2LongOperator = UnaryOperator.compose(new IterTestUtils.MultiplyLongOp(factor));
+        IUnaryOperator x2DoubleOperator = UnaryOperator.compose(new IterTestUtils.MultiplyDoubleOp(factor));
+        IUnaryOperator sObjectIdentity = UnaryOperator.compose(SObjectUnaryOperator.identity());
         IUnaryOperator operator = incOperator.andThen(x2IntOperator);
         IUnaryOperator operator1 = x2IntOperator.compose(incOperator);
         IUnaryOperator operator2 = UnaryOperator.compose(new List<IUnaryOperator>{ incOperator, x2IntOperator });

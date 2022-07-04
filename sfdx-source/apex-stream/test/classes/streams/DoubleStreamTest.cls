@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see DoubleStream
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class DoubleStreamTest {
@@ -65,7 +66,7 @@ private class DoubleStreamTest {
     private static void generate() {
         // Given
         Integer lim = 10;
-        IDoubleIterable stream = DoubleStream.generate(DoubleSupplier.random()).lim(lim);
+        IDoubleIterable stream = DoubleStream.generate(DoubleSuppliers.random()).lim(lim);
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -81,8 +82,8 @@ private class DoubleStreamTest {
         Double seed1 = 50;
         Integer lim = 10;
         Double inc = 5;
-        IDoubleIterable stream = DoubleStream.iterate(seed, DoubleUnaryOperator.add(inc)).lim(lim);
-        IDoubleIterable stream1 = DoubleStream.iterate(seed1, DoublePredicate.isPositive(), DoubleUnaryOperator.subtract(inc));
+        IDoubleIterable stream = DoubleStream.iterate(seed, new IterTestUtils.AddDoubleOp(inc)).lim(lim);
+        IDoubleIterable stream1 = DoubleStream.iterate(seed1, DoublePredicates.isGreater(0), new IterTestUtils.AddDoubleOp(-inc));
         // When
         List<Double> actual = stream.toList();
         List<Double> actual1 = stream1.toList();
@@ -128,7 +129,7 @@ private class DoubleStreamTest {
         // Given
         List<Double> input = new List<Double>{ -5.0, 0, 1.0 };
         List<Double> input1 = new List<Double>{ 3.0, 0, 8.5 };
-        IDoubleIterable stream = DoubleStream.zip(DoubleStream.of(input), DoubleStream.of(input1), DoubleBinaryOperator.sum());
+        IDoubleIterable stream = DoubleStream.zip(DoubleStream.of(input), DoubleStream.of(input1), DoubleBinaryOperators.sum());
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -223,7 +224,7 @@ private class DoubleStreamTest {
     private static void filter() {
         // Given
         List<Double> input = new List<Double>{ -5.5, 0, 1.0, 3, 8.99, null, -6, 4.01, 4.01 };
-        IDoubleIterable stream = DoubleStream.of(input).filter(DoublePredicate.isPositive());
+        IDoubleIterable stream = DoubleStream.of(input).filter(DoublePredicates.isGreater(0));
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -239,13 +240,22 @@ private class DoubleStreamTest {
     private static void take() {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, null, -6, 4.01, 4.01 };
-        IDoubleIterable stream = DoubleStream.of(input).take(DoublePredicate.isPositive());
+        IDoubleIterable stream = DoubleStream.of(input).take(DoublePredicates.isGreater(0));
+        IDoubleIterable stream1 = DoubleStream.of(input).take(DoublePredicates.isGreater(1));
         // When
         List<Double> actual = stream.toList();
+        Iterator<Double> iterator = stream1.iterator();
         // Then
         List<Double> expected = new List<Double>{ 5.5, 0.01, 1.0, 3 };
         Validate.assertEquals(expected, actual);
+        Validate.assertEquals(input[0], iterator.next());
+        try {
+            iterator.next();
+        } catch (Exception exc) {
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+        }
         Validate.assert(((DoubleStream) stream).isOperated);
+        Validate.assert(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -255,7 +265,7 @@ private class DoubleStreamTest {
     private static void drop() {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, null, -6, 4.01, 4.01 };
-        IDoubleIterable stream = DoubleStream.of(input).drop(DoublePredicate.isPositive());
+        IDoubleIterable stream = DoubleStream.of(input).drop(DoublePredicates.isGreater(0));
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -290,7 +300,7 @@ private class DoubleStreamTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IDoubleIterable stream = DoubleStream.of(clone).mapTo(DoubleUnaryOperator.multiply(2));
+        IDoubleIterable stream = DoubleStream.of(clone).mapTo(new IterTestUtils.MultiplyDoubleOp(2));
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -308,7 +318,7 @@ private class DoubleStreamTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        ILongIterable stream = DoubleStream.of(clone).mapToLong(DoubleToLongFunction.roundToLong());
+        ILongIterable stream = DoubleStream.of(clone).mapToLong(DoubleToLongFunctions.roundToLong());
         // When
         List<Long> actual = stream.toList();
         // Then
@@ -326,7 +336,7 @@ private class DoubleStreamTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IIntIterable stream = DoubleStream.of(clone).mapToInt(DoubleToIntFunction.round());
+        IIntIterable stream = DoubleStream.of(clone).mapToInt(DoubleToIntFunctions.round());
         // When
         List<Integer> actual = stream.toList();
         // Then
@@ -363,7 +373,7 @@ private class DoubleStreamTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IObjectIterable stream = DoubleStream.of(clone).mapToObject(DoubleFunction.toString());
+        IObjectIterable stream = DoubleStream.of(clone).mapToObject(new IterTestUtils.DoubleToString());
         // When
         List<Object> actual = stream.toList();
         // Then
@@ -381,7 +391,7 @@ private class DoubleStreamTest {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
         List<Double> clone = input.clone();
-        IDoubleIterable stream = DoubleStream.of(clone).forEach(DoubleConsumer.debug());
+        IDoubleIterable stream = DoubleStream.of(clone).forEach(new IterTestUtils.DoNothingDoubleConsumer());
         // When
         List<Double> actual = stream.toList();
         // Then
@@ -513,11 +523,11 @@ private class DoubleStreamTest {
         IDoubleIterable stream2 = DoubleStream.of(cloneWithNulls);
         Double seed = 10;
         // When
-        Double actual = stream.reduce(seed, DoubleBinaryOperator.max());
-        Double actual1 = stream1.reduce(DoubleBinaryOperator.max()).get();
+        Double actual = stream.reduce(seed, DoubleBinaryOperators.max());
+        Double actual1 = stream1.reduce(DoubleBinaryOperators.max()).get();
         Exception exc1;
         try {
-            stream2.reduce(DoubleBinaryOperator.sum());
+            stream2.reduce(DoubleBinaryOperators.sum());
         } catch (Exception exc) {
             exc1 = exc;
         }
@@ -543,7 +553,7 @@ private class DoubleStreamTest {
         List<Double> clone = input.clone();
         IDoubleIterable stream = DoubleStream.of(clone);
         // When
-        Set<Double> actual = (Set<Double>) stream.collect(Supplier.of(Set<Double>.class), ObjectDoubleConsumer.of(SetObjectConsumer.addToDoubleSet()));
+        Set<Double> actual = (Set<Double>) stream.collect(Supplier.of(Set<Double>.class), ObjectDoubleConsumer.compose(new IterTestUtils.AddToDoubleSet()));
         // Then
         Set<Double> expected = new Set<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01 };
         Validate.assertEquals(expected, actual);
@@ -562,8 +572,8 @@ private class DoubleStreamTest {
         IDoubleIterable stream = DoubleStream.of(clone);
         IDoubleIterable stream1 = DoubleStream.of(clone);
         // When
-        Double actual = stream.find(DoublePredicate.isNegative()).get();
-        Double actual1 = stream1.find(DoublePredicate.isGreater(50)).orElse((Double) 42.0);
+        Double actual = stream.find(DoublePredicates.isLess(0)).get();
+        Double actual1 = stream1.find(DoublePredicates.isGreater(50)).orElse((Double) 42.0);
         // Then
         Validate.assertEquals(-8.99, actual);
         Validate.assertEquals(42.0, actual1);
@@ -583,8 +593,8 @@ private class DoubleStreamTest {
         IDoubleIterable stream = DoubleStream.of(clone);
         IDoubleIterable stream1 = DoubleStream.of(clone);
         // When
-        Boolean actual = stream.every(DoublePredicate.isLess(42));
-        Boolean actual1 = stream1.every(DoublePredicate.isPositive());
+        Boolean actual = stream.every(DoublePredicates.isLess(42));
+        Boolean actual1 = stream1.every(DoublePredicates.isGreater(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -604,8 +614,8 @@ private class DoubleStreamTest {
         IDoubleIterable stream = DoubleStream.of(clone);
         IDoubleIterable stream1 = DoubleStream.of(clone);
         // When
-        Boolean actual = stream.some(DoublePredicate.isNegative());
-        Boolean actual1 = stream1.some(DoublePredicate.isZero());
+        Boolean actual = stream.some(DoublePredicates.isLess(0));
+        Boolean actual1 = stream1.some(DoublePredicates.isEqual(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);
@@ -625,8 +635,8 @@ private class DoubleStreamTest {
         IDoubleIterable stream = DoubleStream.of(clone);
         IDoubleIterable stream1 = DoubleStream.of(clone);
         // When
-        Boolean actual = stream.none(DoublePredicate.isGreater(42));
-        Boolean actual1 = stream1.none(DoublePredicate.isNegative());
+        Boolean actual = stream.none(DoublePredicates.isGreater(42));
+        Boolean actual1 = stream1.none(DoublePredicates.isLess(0));
         // Then
         Validate.assertEquals(true, actual);
         Validate.assertEquals(false, actual1);

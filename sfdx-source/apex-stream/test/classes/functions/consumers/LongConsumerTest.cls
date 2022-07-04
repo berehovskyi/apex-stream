@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see LongConsumer
+ * 
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class LongConsumerTest {
@@ -12,36 +13,17 @@ private class LongConsumerTest {
      * @see LongConsumer.compose
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // When
-        LongConsumer debugConsumer = LongConsumer.debug();
-        ILongConsumer composed = LongConsumer.compose(new List<ILongConsumer>{ debugConsumer, debugConsumer });
-        ILongConsumer composed1 = debugConsumer.andThen(debugConsumer);
+        LongConsumer cons = new IterTestUtils.DoNothingLongConsumer();
+        ILongConsumer composed = LongConsumer.compose(new List<ILongConsumer>{ cons, cons });
+        ILongConsumer composed1 = cons.andThen(cons);
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             List<Long> clone = input.clone();
-            debugConsumer.accept(clone[i]);
+            cons.accept(clone[i]);
             composed.accept(clone[i]);
             composed1.accept(clone[i]);
-            Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
-        }
-    }
-
-    /**
-     * @see LongConsumer.debug
-     */
-    @IsTest
-    static void debug() {
-        // Given
-        String message = 'message ';
-        // When
-        ILongConsumer debugConsumer = LongConsumer.debug();
-        ILongConsumer debugConsumer1 = LongConsumer.debug(LoggingLevel.DEBUG, message);
-        // Then
-        for (Integer i = 0, size = input.size(); i < size; i++) {
-            List<Long> clone = input.clone();
-            debugConsumer.accept(clone[i]);
-            debugConsumer1.accept(clone[i]);
             Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
         }
     }

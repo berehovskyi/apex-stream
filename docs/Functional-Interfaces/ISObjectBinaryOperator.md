@@ -1,13 +1,13 @@
 # ISObjectBinaryOperator
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A functions that takes two arguments of `SObject` type and returns an `SObject` value.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Interfaces

@@ -1,13 +1,13 @@
 # Iterators
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Contains static utility methods that operate Iterators.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Utils
@@ -306,7 +306,7 @@ the `List<Object>` which can be cast into `listType`
 #### Example
 ```apex
 List<String> accNames = (List<String>)
-    Iterators.toList(accIterator, SObjectFunction.get('Name'), List<String>.class);
+    Iterators.toList(accIterator, SObjectFunctions.get('Name'), List<String>.class);
 ```
 
 ### `static toObjectSet(Iterator<SObject> iterator, ISObjectFunction mapper)`
@@ -336,7 +336,7 @@ the `Set<Object>`
 
 #### Example
 ```apex
-Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunction.get('CreatedDate'));
+Set<Object> createdDates = Iterators.toObjectSet(accIterator, SObjectFunctions.get('CreatedDate'));
 ```
 
 ### `static toObjectSet(Iterator<Object> iterator, IFunction mapper)`
@@ -391,7 +391,7 @@ the `Set<Id>`
 
 #### Example
 ```apex
-Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunction.get('ParentId'));
+Set<Id> parentIds = Iterators.toIdSet(accIterator, SObjectFunctions.get('ParentId'));
 ```
 
 ### `static toStringSet(Iterator<SObject> iterator, ISObjectFunction mapper)`
@@ -421,7 +421,7 @@ the `Set<String>`
 
 #### Example
 ```apex
-Set<String> names = Iterators.toStringSet(accIterator, SObjectFunction.get('Name'));
+Set<String> names = Iterators.toStringSet(accIterator, SObjectFunctions.get('Name'));
 ```
 
 ### `static toByIdMap(Iterator<SObject> iterator, ISObjectFunction keyMapper, Type mapType)`
@@ -448,13 +448,13 @@ the `Map<Id, SObject>` which can be cast into `mapType`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator`, `keyMapper` or `listType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `iterator`, `keyMapper` or `listType` is null|
 
 #### Example
 ```apex
 Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Iterators
-    .toByIdMap(contIterator, SObjectFunction.get('AccountId'), Map<Id, Contact>.class);
+    .toByIdMap(contIterator, SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
 ```
 
 ### `static toByStringMap(Iterator<SObject> iterator, ISObjectFunction keyMapper, Type mapType)`
@@ -481,13 +481,13 @@ the `Map<String, SObject>` which can be cast into `mapType`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator`, `keyMapper` or `listType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `iterator`, `keyMapper` or `listType` is null|
 
 #### Example
 ```apex
 Map<String, Account> accountByName = (Map<String, Account>) Iterators
-    .toByIdMap(accIterator, SObjectFunction.get('Name'), Map<String, Account>.class);
+    .toByIdMap(accIterator, SObjectFunctions.get('Name'), Map<String, Account>.class);
 ```
 
 ### `static groupById(Iterator<SObject> iterator, ISObjectFunction keyMapper)`
@@ -517,7 +517,7 @@ the `Map<Id, List<SObject>>` containing the elements
 
 #### Example
 ```apex
-Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, SObjectFunction.get('AccountId'));
+Map<Id, List<Contact>> contactsByAccountId = Iterators.groupById(conIterator, SObjectFunctions.get('AccountId'));
 ```
 
 ### `static groupByString(Iterator<SObject> iterator, ISObjectFunction keyMapper)`
@@ -548,7 +548,7 @@ the `Map<Id, List<SObject>>` containing the elements
 #### Example
 ```apex
 Map<String, List<Account>> accountsByRating = Iterators
-    .groupByString(accIterator, SObjectFunction.get('Rating'));
+    .groupByString(accIterator, SObjectFunctions.get('Rating'));
 ```
 
 ### `static partition(Iterator<SObject> iterator, ISObjectPredicate predicate)`
@@ -579,7 +579,7 @@ the `Map<Boolean, List<SObject>>` containing the elements
 #### Example
 ```apex
 Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-    = Iterators.partition(accIterator, SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+    = Iterators.partition(accIterator, SObjectPredicates.isEqual(Account.Rating, 'Hot'));
 ```
 
 ---

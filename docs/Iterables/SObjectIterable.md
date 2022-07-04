@@ -1,13 +1,13 @@
 # SObjectIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 Provides a skeletal implementation of [ISObjectIterable](/docs/Iterables/ISObjectIterable.md).
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Iterables
@@ -1478,7 +1478,7 @@ Boolean
 #### Example
 ```apex
 Boolean isNoAccountWithHotRating = accountsIterable
-    .none(SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+    .none(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
 ```
 
 ### `none(String fieldName, Object value)`
@@ -1756,7 +1756,7 @@ the sum of elements returned by function
 #### Example
 ```apex
 Double sumOfAnnualRevenue = accountsIterable
-    .sum(SObjectToDoubleFunction.get(Account.AnnualRevenue));
+    .sum(SObjectToDoubleFunctions.get(Account.AnnualRevenue));
 ```
 
 ### `sum(String fieldName)`
@@ -1846,7 +1846,7 @@ the arithmetic mean of elements returned by function
 #### Example
 ```apex
 Double avgAnnualRevenue = accountsIterable
-    .avg(SObjectToDoubleFunction.get(Account.AnnualRevenue))
+    .avg(SObjectToDoubleFunctions.get(Account.AnnualRevenue))
     .get();
 ```
 
@@ -1933,12 +1933,12 @@ the `List<Object>` containing the collected elements
 
 #### Example
 ```apex
-List<Object> accountNames = accountsIterable.toList(SObjectFunction.get('Name'));
+List<Object> accountNames = accountsIterable.toList(SObjectFunctions.get('Name'));
 ```
 
 ### `toList(String fieldName)`
 
-Accumulates `Object` elements into a `List<Object>` according to `fieldName`.
+Accumulates `Object` elements into a `List<Object>` according to `fieldName`. <p>Terminal Operation.</p>
 
 #### Parameters
 |Param|Description|
@@ -1958,7 +1958,6 @@ the `List<Object>` containing the collected elements
 #### Example
 ```apex
 List<Object> accountNames = accountsIterable.toList('Name');
-<p>Terminal Operation.</p>
 ```
 
 ### `toList(SObjectField field)`
@@ -2269,8 +2268,8 @@ the `Map<Id, SObject>` containing the collected elements, which can be cast to `
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
 
 #### Example
 ```apex
@@ -2301,8 +2300,8 @@ the `Map<Id, SObject>` containing the collected elements, which can be cast to `
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
 
 #### Example
 ```apex
@@ -2338,8 +2337,8 @@ the `Map<String, SObject>` containing the collected elements, which can be cast 
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
 
 #### Example
 ```apex
@@ -2370,8 +2369,8 @@ the `Map<String, SObject>` containing the collected elements, which can be cast 
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `field` or `mapType` is null|
 |`IllegalStateException`|if mapped keys contain duplicates|
+|`NullPointerException`|if `field` or `mapType` is null|
 
 #### Example
 ```apex

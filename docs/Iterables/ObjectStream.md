@@ -1,16 +1,10 @@
 # ObjectStream
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A sequence of `Object` elements supporting aggregate operations. Stream operations are composed of stream chain. A stream chain consists of: <ul>     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>     <li>Zero or more Intermediate Operations (which transform a stream into another stream,     such as ObjectStream.filter(IPredicate)).</li>     <li>A Terminal Operation (which produces a result such as     ObjectStream.count() or ObjectStream.collect(ICollector)).</li> </ul> <p>Streams are <strong>lazy</strong>:</p> <ul>     <li>Intermediate operations describe how a stream is processed without performing any action.</li>     <li>Computation is only performed when the terminal operation is initiated, and source elements are consumed only as needed.</li> </ul> <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p> <p>A stream should be operated on (invoking an intermediate or terminal stream operation) only <strong>once</strong>. A stream throws [IllegalStateException](/docs/Exceptions/IllegalStateException.md) if it detects that the stream is being reused.</p> <p>Intermediate operations describe how a stream is processed without performing any action.</p> <p>Contract:</p> <ul>     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>     <li>Should be stateless in most cases.</li> </ul> <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>, i.e. do not support `spliterator()`.</p> <p>There are primitive specializations for [IntStream](/docs/Iterables/IntStream.md), [LongStream](/docs/Iterables/LongStream.md), and [DoubleStream](/docs/Iterables/DoubleStream.md) and [SObjectStream](/docs/Iterables/SObjectStream.md) for SObject references.</p> <p>Sequences and streams equally ensure the fulfillment of the set goals, but are implemented in different ways.</p>
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [ObjectSequence](/docs/Iterables/ObjectSequence.md)
@@ -26,6 +20,12 @@ A sequence of `Object` elements supporting aggregate operations. Stream operatio
 
 
 **See** [DoubleStream](/docs/Iterables/DoubleStream.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Properties
 
@@ -1080,8 +1080,8 @@ the `ObjectStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `lim` is null|
 |`IllegalStateException`|if `lim` is less than 0|
+|`NullPointerException`|if `lim` is null|
 
 ###### Example
 ```apex
@@ -1112,8 +1112,8 @@ the `ObjectStream`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `n` is null|
 |`IllegalStateException`|if `n` is less than 0|
+|`NullPointerException`|if `n` is null|
 
 ###### Example
 ```apex
@@ -1210,7 +1210,7 @@ the `Object` result of the collection
 List<String> peopleNames = (List<String>) ObjectStream.of(people)
     .collect(
         Supplier.of(List<String>.class),
-        ListObjectConsumer.addToList(getName)
+        ListObjectConsumers.addToList(getName)
     );
 ```
 
@@ -1243,14 +1243,14 @@ the `Object` result of the collection
 // Group people by city
 Map<String, List<Person>> peopleByCity = (Map<String, List<Person>>)
     ObjectStream.of(people)
-         .collect(Collector.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
+         .collect(Collectors.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
 // Group people by city and by country, cascading two collectors
 Map<String, Map<String, List<Person>>> peopleByCityByCountry
     = (Map<String, Map<String, List<Person>>>)
         ObjectStream.of(people)
-            .collect(Collector.groupingByString(
+            .collect(Collectors.groupingByString(
                 getCountry,
-                Collector.groupingByString(getCity)
+                Collectors.groupingByString(getCity)
             ).cast(Map<String, Map<String, List<Person>>>.class));
 ```
 

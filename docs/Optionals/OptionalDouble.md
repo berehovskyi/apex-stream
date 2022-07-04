@@ -1,13 +1,13 @@
 # OptionalDouble
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 A container which may or may not contain a non-null `Double` value.
 
 
-**Author** O. Berehovskyi
+**Author** Oleh Berehovskyi
 
 
 **Group** Optionals
@@ -206,8 +206,8 @@ the `Double`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `exceptionSupplier` is null|
 |`Exception`|if no value is present|
+|`NullPointerException`|if `exceptionSupplier` is null|
 
 ### `equals(Object obj)`
 #### Parameters

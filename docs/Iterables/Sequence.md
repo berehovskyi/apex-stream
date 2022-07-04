@@ -1,16 +1,10 @@
 # Sequence
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
 An entry point that returns a sequence of a certain type, depending on the type of the parameter.
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
 
 
 **See** [ObjectSequence](/docs/Iterables/ObjectSequence.md)
@@ -26,6 +20,12 @@ An entry point that returns a sequence of a certain type, depending on the type 
 
 
 **See** [DoubleSequence](/docs/Iterables/DoubleSequence.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### `static of(List<Object> objects)`
@@ -1056,13 +1056,13 @@ the new `SObjectStream`
 ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
     Trigger.old,
     Trigger.new,
-    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ISObjectIterable newAccountsWithChangedAnnualRevenueSeq = Sequence.zip(
     Sequence.of(Trigger.old),
     Sequence.of(Trigger.new),
-    SObjectBiPredicate.areEqual(Account.AnnualRevenue).negate(),
+    SObjectBiPredicates.areEqual(Account.AnnualRevenue).negate(),
     SObjectBinaryOperator.right()
 );
 ```

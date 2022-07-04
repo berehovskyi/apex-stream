@@ -1,6 +1,7 @@
 /**
- * @author Oleh Berehovskyi
  * @see OptionalDouble
+ *
+ * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 private class OptionalDoubleTest {
@@ -20,15 +21,15 @@ private class OptionalDoubleTest {
      * @see OptionalDouble.orElseThrow
      */
     @IsTest
-    static void defaultMethods() {
+    static void default() {
         // Given
         Double value = 42L;
         Double other = 0l;
         OptionalDouble optDouble = OptionalDouble.of(value);
         OptionalDouble emptyOpt = OptionalDouble.empty();
         OptionalDouble optNull = OptionalDouble.ofNullable(null);
-        IDoubleConsumer setNewNameConsumer = DoubleConsumer.debug();
-        IDoubleSupplier increment = DoubleSupplier.random();
+        IDoubleConsumer cons = new IterTestUtils.DoNothingDoubleConsumer();
+        IDoubleSupplier increment = DoubleSuppliers.random();
         ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
         // When
         Validate.assertEquals(value, optDouble.get());
@@ -36,10 +37,10 @@ private class OptionalDoubleTest {
         Validate.assertEquals(false, optNull.isPresent());
         Validate.assertEquals(false, optDouble.isEmpty());
         Validate.assertEquals(true, optNull.isEmpty());
-        optDouble.ifPresent(setNewNameConsumer);
+        optDouble.ifPresent(cons);
         Validate.assertEquals(value, (optDouble.get()));
-        optDouble.ifPresentOrElse(setNewNameConsumer, new IterTestUtils.DoNothingRunnable());
-        optNull.ifPresentOrElse(setNewNameConsumer, new IterTestUtils.DoNothingRunnable());
+        optDouble.ifPresentOrElse(cons, new IterTestUtils.DoNothingRunnable());
+        optNull.ifPresentOrElse(cons, new IterTestUtils.DoNothingRunnable());
         Validate.assertEquals(optDouble.get(), optDouble.orElse(other));
         Validate.assertEquals(other, optNull.orElse(other));
         Validate.assertEquals(optDouble.get(), optDouble.orElseGet(increment));
@@ -50,17 +51,17 @@ private class OptionalDoubleTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals('System.NoSuchElementException', exc.getTypeName());
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals('System.NoSuchElementException', exc.getTypeName());
+            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals('System.NullPointerException', exc.getTypeName());
+            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

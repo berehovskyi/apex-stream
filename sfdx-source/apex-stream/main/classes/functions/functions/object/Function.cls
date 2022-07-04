@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link IFunction} functional interface and provides default methods,
- * common class level implementations, and related utilities.
- *
+ * @description Provides default and static methods of 
+ * {@link IFunction} functional interface.
+ * 
+ * @see IFunction
  * @see IObjectIterable.mapTo
  *
  * @author Oleh Berehovskyi
@@ -94,7 +95,7 @@ public abstract inherited sharing class Function implements IFunction {
      *
      * @throws NullPointerException if `predicate` is null
      */
-    public static Function forPredicate(final IPredicate predicate) {
+    public static Function compose(final IPredicate predicate) {
         Validate.notNull(predicate);
         return new ForPredicate(predicate);
     }
@@ -108,7 +109,7 @@ public abstract inherited sharing class Function implements IFunction {
      *
      * @throws NullPointerException if `function` is null
      */
-    public static Function upcast(final ISObjectFunction function) {
+    public static Function compose(final ISObjectFunction function) {
         Validate.notNull(function);
         return new ForSObjectFunction(function);
     }

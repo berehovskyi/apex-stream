@@ -1,13 +1,16 @@
 # DoubleSupplier
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IDoubleSupplier](/docs/Functional-Interfaces/IDoubleSupplier.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IDoubleSupplier](/docs/Functional-Interfaces/IDoubleSupplier.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IDoubleSupplier](/docs/Functional-Interfaces/IDoubleSupplier.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -15,23 +18,4 @@ Inherits [IDoubleSupplier](/docs/Functional-Interfaces/IDoubleSupplier.md) funct
 ## Methods
 ### Function
 ##### `get()`
----
-### Built-Ins
-##### `static random()`
-
-Returns a `DoubleSupplier` that returns a next random Double value.
-
-###### Return
-
-**Type**
-
-DoubleSupplier
-
-**Description**
-
-the `DoubleSupplier`
-
-
-**See** Math.random
-
 ---

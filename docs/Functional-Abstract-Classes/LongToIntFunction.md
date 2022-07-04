@@ -1,13 +1,16 @@
 # LongToIntFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [ILongToIntFunction](/docs/Functional-Interfaces/ILongToIntFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [ILongToIntFunction](/docs/Functional-Interfaces/ILongToIntFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [ILongToIntFunction](/docs/Functional-Interfaces/ILongToIntFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -18,24 +21,5 @@ Inherits [ILongToIntFunction](/docs/Functional-Interfaces/ILongToIntFunction.md)
 ###### Parameters
 |Param|Description|
 |---|---|
-
----
-### Built-Ins
-##### `static valueOf()`
-
-Returns a `ILongToIntFunction` that returns the Integer value of the Long input argument.
-
-###### Return
-
-**Type**
-
-LongToIntFunction
-
-**Description**
-
-the `ILongToIntFunction`
-
-
-**See** Integer.valueOf
 
 ---

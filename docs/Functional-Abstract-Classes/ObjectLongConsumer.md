@@ -1,13 +1,16 @@
 # ObjectLongConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IObjectLongConsumer](/docs/Functional-Interfaces/IObjectLongConsumer.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IObjectLongConsumer](/docs/Functional-Interfaces/IObjectLongConsumer.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IObjectLongConsumer](/docs/Functional-Interfaces/IObjectLongConsumer.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -21,7 +24,7 @@ Inherits [IObjectLongConsumer](/docs/Functional-Interfaces/IObjectLongConsumer.m
 
 ---
 ### Static Methods
-##### `static of(IBiConsumer consumer)`
+##### `static compose(IBiConsumer consumer)`
 
 Returns a composed `ObjectLongConsumer` of the `IBiConsumer`.
 

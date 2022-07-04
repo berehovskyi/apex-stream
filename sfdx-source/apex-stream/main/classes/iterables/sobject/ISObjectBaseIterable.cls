@@ -1,5 +1,5 @@
 /**
- * @description A sequence of `SObject` elements core supporting aggregate operations.
+ * @description A sequence of `SObject` elements that supports core aggregate operations.
  *
  * @see ISObjectIterable
  *

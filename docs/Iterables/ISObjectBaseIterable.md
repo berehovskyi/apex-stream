@@ -1,19 +1,19 @@
 # ISObjectBaseIterable
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-A sequence of `SObject` elements core supporting aggregate operations.
-
-
-**Author** O. Berehovskyi
-
-
-**Group** Iterables
+A sequence of `SObject` elements that supports core aggregate operations.
 
 
 **See** [ISObjectIterable](/docs/Iterables/ISObjectIterable.md)
+
+
+**Author** Oleh Berehovskyi
+
+
+**Group** Iterables
 
 ## Methods
 ### `append(Iterable<SObject> iterable)`

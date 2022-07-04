@@ -37,14 +37,14 @@ public abstract inherited sharing class DoubleIterable implements IDoubleIterabl
      * @param iterable the other iterable
      *
      * @return the new `IDoubleIterable`
-     *
+     * 
      * @example
      * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
      * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
      * List<Double> intersection = doublesIterable1.intersect(doubles2).toList(); // [3.0, 9.0]
      */
     public virtual IDoubleIterable intersect(final Iterable<Double> iterable) {
-        return distinct().filter(DoublePredicate.isIn(iterable));
+        return distinct().filter(DoublePredicates.isIn(iterable));
     }
 
     /**
@@ -61,15 +61,15 @@ public abstract inherited sharing class DoubleIterable implements IDoubleIterabl
      * List<Double> diff = doublesIterable1.except(doubles2).toList(); // [5.0, 7.0]
      */
     public virtual IDoubleIterable except(final Iterable<Double> iterable) {
-        return distinct().filter(DoublePredicate.isIn(iterable).negate());
+        return distinct().filter(DoublePredicates.isIn(iterable).negate());
     }
 
     public abstract IDoubleIterable distinct();
 
-    public abstract IDoubleIterable filter(IDoublePredicate predicate);
+    public abstract IDoubleIterable filter(final IDoublePredicate predicate);
 
     public virtual IDoubleIterable withoutNulls() {
-        return filter(DoublePredicate.isNotNull());
+        return filter(DoublePredicates.isNotNull());
     }
     //</editor-fold>
 
@@ -85,20 +85,23 @@ public abstract inherited sharing class DoubleIterable implements IDoubleIterabl
     }
 
     public virtual OptionalDouble max() {
-        return reduce(DoubleBinaryOperator.max());
+        return reduce(DoubleBinaryOperators.max());
     }
 
     public virtual OptionalDouble min() {
-        return reduce(DoubleBinaryOperator.min());
+        return reduce(DoubleBinaryOperators.min());
     }
 
     public virtual Double sum() {
-        return (Double) CollectorFunction.summingDouble()
-                .apply(collect(Supplier.summingDouble(), ListDoubleConsumer.summingDouble()));
+        return (Double) CollectorBaseFunctions.summingDouble()
+                .apply(collect(CollectorBaseSuppliers.summingDouble(), ListDoubleConsumers.summingDouble()));
     }
 
     public virtual OptionalDouble avg() {
-        List<Double> avg = (List<Double>) collect(Supplier.averagingDouble(), ListDoubleConsumer.averagingDouble());
+        final List<Double> avg = (List<Double>) collect(
+                CollectorBaseSuppliers.averagingDouble(),
+                ListDoubleConsumers.averagingDouble()
+        );
         return avg[2] == 0 ? OptionalDouble.empty() : OptionalDouble.of((avg[0] + avg[1]) / avg[2]);
     }
     //</editor-fold>

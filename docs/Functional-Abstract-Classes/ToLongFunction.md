@@ -1,13 +1,16 @@
 # ToLongFunction
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IToLongFunction](/docs/Functional-Interfaces/IToLongFunction.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IToLongFunction](/docs/Functional-Interfaces/IToLongFunction.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IToLongFunction](/docs/Functional-Interfaces/IToLongFunction.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -21,7 +24,7 @@ Inherits [IToLongFunction](/docs/Functional-Interfaces/IToLongFunction.md) funct
 
 ---
 ### Static Methods
-##### `static downcast(ISObjectFunction mapper)`
+##### `static compose(ISObjectFunction mapper)`
 
 Returns a composed `ToLongFunction` of the `ISObjectFunction`.
 
@@ -45,7 +48,7 @@ the `ToLongFunction`
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
-##### `static downcast(IFunction mapper)`
+##### `static compose(IFunction mapper)`
 
 Returns a composed `ToLongFunction` of the `IFunction`.
 
@@ -68,21 +71,5 @@ the `ToLongFunction`
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
-
----
-### Built-Ins
-##### `static asLong()`
-
-Returns a `ToLongFunction` that returns the Long value of the Object input argument by casting it to an Long.
-
-###### Return
-
-**Type**
-
-ToLongFunction
-
-**Description**
-
-the `ToLongFunction`
 
 ---

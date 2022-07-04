@@ -1,7 +1,8 @@
 /**
- * @description Inherits {@link IConsumer} functional interface and provides default methods,
- * common class level implementations, and related utilities.
+ * @description Provides default and static methods of 
+ * {@link IConsumer} functional interface.
  *
+ * @see IConsumer
  * @see IObjectIterable.forEach
  *
  * @author Oleh Berehovskyi
@@ -53,62 +54,6 @@ public abstract inherited sharing class Consumer implements IConsumer {
     // @end-group
     //</editor-fold>
 
-    //<editor-fold desc="Built-Ins">
-    // @start-group Built-Ins
-    /**
-     * @description Returns a `Consumer` that debugs an input argument.
-     *
-     * @param loggingLevel the logging level
-     * @param message the message
-     *
-     * @return the `Consumer`
-     *
-     * @throws NullPointerException if `loggingLevel` or `message` is null
-     */
-    public static Consumer debug(final LoggingLevel loggingLevel, final String message) {
-        Validate.notNull(loggingLevel);
-        Validate.notNull(message);
-        return new Debug(loggingLevel, message);
-    }
-
-    /**
-     * @description Returns a `Consumer` that debugs an input argument.
-     *
-     * @return the `Consumer`
-     */
-    public static Consumer debug() {
-        return debug(LoggingLevel.INFO, '');
-    }
-
-    /**
-     * @description Returns a `Consumer` that debugs an input argument
-     * using the pretty-print format.
-     *
-     * @param loggingLevel the logging level
-     * @param message the message
-     *
-     * @return the `Consumer`
-     *
-     * @throws NullPointerException if `loggingLevel` or `message` is null
-     */
-    public static Consumer debugPretty(final LoggingLevel loggingLevel, final String message) {
-        Validate.notNull(loggingLevel);
-        Validate.notNull(message);
-        return new DebugPretty(loggingLevel, message);
-    }
-
-    /**
-     * @description Returns a `Consumer` that debugs an input argument
-     * using the pretty-print format.
-     *
-     * @return the `Consumer`
-     */
-    public static Consumer debugPretty() {
-        return debugPretty(LoggingLevel.INFO, '');
-    }
-    // @end-group
-    //</editor-fold>
-
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Compose extends Consumer {
@@ -119,20 +64,6 @@ public abstract inherited sharing class Consumer implements IConsumer {
                 consumer.accept(o);
             }
         }
-    }
-
-    private class Debug extends Consumer {
-        private final String message;
-        private final LoggingLevel level;
-        private Debug(LoggingLevel level, String message){ this.level = level; this.message = message; }
-        public override void accept(Object o) { System.debug(level, message + o); }
-    }
-
-    private class DebugPretty extends Consumer {
-        private final String message;
-        private final LoggingLevel level;
-        private DebugPretty(LoggingLevel level, String message){ this.level = level; this.message = message; }
-        public override void accept(Object o) { System.debug(level, message + JSON.serializePretty(o)); }
     }
     // @end-group
     //</editor-fold>

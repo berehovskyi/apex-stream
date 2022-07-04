@@ -1,13 +1,16 @@
 # ObjectIntConsumer
 
-`APIVERSION: 54`
+`APIVERSION: 55`
 
 `STATUS: ACTIVE`
 
-Inherits [IObjectIntConsumer](/docs/Functional-Interfaces/IObjectIntConsumer.md) functional interface and provides common class level implementations, and related utilities.
+Provides default and static methods of [IObjectIntConsumer](/docs/Functional-Interfaces/IObjectIntConsumer.md) functional interface.
 
 
-**Author** O. Berehovskyi
+**See** [IObjectIntConsumer](/docs/Functional-Interfaces/IObjectIntConsumer.md)
+
+
+**Author** Oleh Berehovskyi
 
 
 **Group** Functional Abstract Classes
@@ -21,7 +24,7 @@ Inherits [IObjectIntConsumer](/docs/Functional-Interfaces/IObjectIntConsumer.md)
 
 ---
 ### Static Methods
-##### `static of(IBiConsumer consumer)`
+##### `static compose(IBiConsumer consumer)`
 
 Returns a composed `ObjectIntConsumer` of the `IBiConsumer`.
 

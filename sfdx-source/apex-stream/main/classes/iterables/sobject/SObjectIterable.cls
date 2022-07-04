@@ -59,14 +59,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param fieldName the field
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> unionByName = accountsIterable1.union(accounts2, 'Name');
      */
     public virtual ISObjectIterable union(final Iterable<SObject> iterable, final String fieldName) {
-        return union(iterable, SObjectFunction.get(fieldName));
+        return union(iterable, SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -78,14 +78,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param field the field
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> unionByName = accountsIterable1.union(accounts2, Account.Name);
      */
     public virtual ISObjectIterable union(final Iterable<SObject> iterable, final SObjectField field) {
-        return union(iterable, SObjectFunction.get(field));
+        return union(iterable, SObjectFunctions.get(field));
     }
 
     /**
@@ -96,14 +96,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param iterable the other iterable
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> intersection = accountsIterable1.intersect(accounts2).toList(); // [acc3, acc9]
      */
     public virtual ISObjectIterable intersect(final Iterable<SObject> iterable) {
-        return distinct().filter(SObjectPredicate.isIn(iterable));
+        return distinct().filter(SObjectPredicates.isIn(iterable));
     }
 
     /**
@@ -115,14 +115,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param classifier the classifier function
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> intersectionByClassifier = accountsIterable1.intersect(accounts2, classifier);
      */
     public virtual ISObjectIterable intersect(final Iterable<SObject> iterable, final ISObjectFunction classifier) {
-        return distinct(classifier).filter(SObjectPredicate.isIn(
+        return distinct(classifier).filter(SObjectPredicates.isIn(
                 classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier)
         ));
     }
@@ -136,14 +136,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param fieldName the field
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> intersectionByName = accountsIterable1.intersect(accounts2, 'Name');
      */
     public virtual ISObjectIterable intersect(final Iterable<SObject> iterable, final String fieldName) {
-        return intersect(iterable, SObjectFunction.get(fieldName));
+        return intersect(iterable, SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -155,14 +155,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param field the field
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> intersectionByName = accountsIterable1.intersect(accounts2, Account.Name);
      */
     public virtual ISObjectIterable intersect(final Iterable<SObject> iterable, final SObjectField field) {
-        return intersect(iterable, SObjectFunction.get(field));
+        return intersect(iterable, SObjectFunctions.get(field));
     }
 
     /**
@@ -173,14 +173,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param iterable the other iterable
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> diff = accountsIterable1.except(accounts2).toList(); // [acc5, acc7]
      */
     public virtual ISObjectIterable except(final Iterable<SObject> iterable) {
-        return distinct().filter(SObjectPredicate.isIn(iterable).negate());
+        return distinct().filter(SObjectPredicates.isIn(iterable).negate());
     }
 
     /**
@@ -192,14 +192,14 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @param classifier the classifier function
      *
      * @return the new `ISObjectIterable`
-     *
+     * 
      * @example
      * List<Account> accounts1 = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
      * List<Account> accounts2 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc0 };
      * List<Account> diffByClassifier = accountsIterable1.except(accounts2, classifier);
      */
     public virtual ISObjectIterable except(final Iterable<SObject> iterable, final ISObjectFunction classifier) {
-        return distinct(classifier).filter(SObjectPredicate.isIn(
+        return distinct(classifier).filter(SObjectPredicates.isIn(
                 classifier, (Iterable<Object>) Iterators.toObjectSet(iterable.iterator(), classifier)
         ).negate());
     }
@@ -220,7 +220,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * List<Account> diffByName = accountsIterable1.except(accounts2, 'Name');
      */
     public virtual ISObjectIterable except(final Iterable<SObject> iterable, final String fieldName) {
-        return except(iterable, SObjectFunction.get(fieldName));
+        return except(iterable, SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -239,7 +239,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * List<Account> diffByName = accountsIterable1.except(accounts2, Account.Name);
      */
     public virtual ISObjectIterable except(final Iterable<SObject> iterable, final SObjectField field) {
-        return except(iterable, SObjectFunction.get(field));
+        return except(iterable, SObjectFunctions.get(field));
     }
 
     public abstract ISObjectIterable distinct();
@@ -263,7 +263,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable distinct(final String fieldName) {
-        return distinct(SObjectFunction.get(fieldName));
+        return distinct(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -283,7 +283,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable distinct(final SObjectField field) {
-        return distinct(SObjectFunction.get(field));
+        return distinct(SObjectFunctions.get(field));
     }
 
     public abstract ISObjectIterable filter(final ISObjectPredicate predicate);
@@ -309,7 +309,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable filter(final String fieldName, final Object value) {
-        return filter(SObjectPredicate.isEqual(fieldName, value));
+        return filter(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -330,7 +330,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable filter(final SObjectField field, final Object value) {
-        return filter(SObjectPredicate.isEqual(field, value));
+        return filter(SObjectPredicates.isEqual(field, value));
     }
 
     public abstract ISObjectIterable take(final ISObjectPredicate predicate);
@@ -353,7 +353,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable take(final String fieldName, final Object value) {
-        return take(SObjectPredicate.isEqual(fieldName, value));
+        return take(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -374,7 +374,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable take(final SObjectField field, final Object value) {
-        return take(SObjectPredicate.isEqual(field, value));
+        return take(SObjectPredicates.isEqual(field, value));
     }
 
     public abstract ISObjectIterable drop(final ISObjectPredicate predicate);
@@ -397,7 +397,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable drop(final String fieldName, final Object value) {
-        return drop(SObjectPredicate.isEqual(fieldName, value));
+        return drop(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -418,7 +418,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable drop(final SObjectField field, final Object value) {
-        return drop(SObjectPredicate.isEqual(field, value));
+        return drop(SObjectPredicates.isEqual(field, value));
     }
 
     /**
@@ -432,7 +432,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @return the new `ISObjectIterable`
      */
     public virtual ISObjectIterable withoutNulls() {
-        return filter(SObjectPredicate.isNull().negate());
+        return filter(SObjectPredicates.isNull().negate());
     }
 
     public abstract ISObjectIterable mapTo(final ISObjectUnaryOperator mapper);
@@ -454,7 +454,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable mapTo(final String fieldName) {
-        return mapTo(SObjectUnaryOperator.getSObject(fieldName));
+        return mapTo(SObjectUnaryOperators.getSObject(fieldName));
     }
 
     /**
@@ -474,7 +474,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable mapTo(final SObjectField field) {
-        return mapTo(SObjectUnaryOperator.getSObject(field));
+        return mapTo(SObjectUnaryOperators.getSObject(field));
     }
 
     public abstract IIntIterable mapToInt(final ISObjectToIntFunction mapper);
@@ -496,7 +496,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual IIntIterable mapToInt(final String fieldName) {
-        return mapToInt(SObjectToIntFunction.get(fieldName));
+        return mapToInt(SObjectToIntFunctions.get(fieldName));
     }
 
     /**
@@ -516,7 +516,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual IIntIterable mapToInt(final SObjectField field) {
-        return mapToInt(SObjectToIntFunction.get(field));
+        return mapToInt(SObjectToIntFunctions.get(field));
     }
 
     public abstract ILongIterable mapToLong(final ISObjectToLongFunction mapper);
@@ -538,7 +538,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ILongIterable mapToLong(final String fieldName) {
-        return mapToLong(SObjectToLongFunction.get(fieldName));
+        return mapToLong(SObjectToLongFunctions.get(fieldName));
     }
 
     /**
@@ -558,7 +558,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ILongIterable mapToLong(final SObjectField field) {
-        return mapToLong(SObjectToLongFunction.get(field));
+        return mapToLong(SObjectToLongFunctions.get(field));
     }
 
     public abstract IDoubleIterable mapToDouble(final ISObjectToDoubleFunction mapper);
@@ -580,7 +580,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual IDoubleIterable mapToDouble(final String fieldName) {
-        return mapToDouble(SObjectToDoubleFunction.get(fieldName));
+        return mapToDouble(SObjectToDoubleFunctions.get(fieldName));
     }
 
     /**
@@ -600,7 +600,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual IDoubleIterable mapToDouble(final SObjectField field) {
-        return mapToDouble(SObjectToDoubleFunction.get(field));
+        return mapToDouble(SObjectToDoubleFunctions.get(field));
     }
 
     public abstract IObjectIterable mapToObject(final ISObjectFunction mapper);
@@ -622,7 +622,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual IObjectIterable mapToObject(final String fieldName) {
-        return mapToObject(SObjectFunction.get(fieldName));
+        return mapToObject(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -642,7 +642,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual IObjectIterable mapToObject(final SObjectField field) {
-        return mapToObject(SObjectFunction.get(field));
+        return mapToObject(SObjectFunctions.get(field));
     }
 
     public abstract ISObjectIterable flatMapTo(final ISObjectFunction mapper);
@@ -663,7 +663,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable flatMapTo(final String fieldName) {
-        return flatMapTo(SObjectFunction.getSObjects(fieldName));
+        return flatMapTo(SObjectFunctions.getSObjects(fieldName));
     }
 
     /**
@@ -682,7 +682,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable flatMapTo(final SObjectField field) {
-        return flatMapTo(SObjectFunction.getSObjects(field));
+        return flatMapTo(SObjectFunctions.getSObjects(field));
     }
 
     public abstract ISObjectIterable forEach(final ISObjectConsumer consumer);
@@ -705,7 +705,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable forEach(final String fieldName, final Object value) {
-        return forEach(SObjectConsumer.set(fieldName, value));
+        return forEach(SObjectConsumers.set(fieldName, value));
     }
 
     /**
@@ -726,7 +726,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList();
      */
     public virtual ISObjectIterable forEach(final SObjectField field, final Object value) {
-        return forEach(SObjectConsumer.set(field, value));
+        return forEach(SObjectConsumers.set(field, value));
     }
 
     public abstract ISObjectIterable sort(final ISObjectComparator comparator);
@@ -853,7 +853,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .get();
      */
     public virtual OptionalSObject find(final String fieldName, final Object value) {
-        return find(SObjectPredicate.isEqual(fieldName, value));
+        return find(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -874,7 +874,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .get();
      */
     public virtual OptionalSObject find(final SObjectField field, final Object value) {
-        return find(SObjectPredicate.isEqual(field, value));
+        return find(SObjectPredicates.isEqual(field, value));
     }
 
     public abstract Boolean every(final ISObjectPredicate predicate);
@@ -896,7 +896,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .every('Rating', 'Hot');
      */
     public virtual Boolean every(final String fieldName, final Object value) {
-        return every(SObjectPredicate.isEqual(fieldName, value));
+        return every(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -916,7 +916,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .every(Account.Rating, 'Hot');
      */
     public virtual Boolean every(final SObjectField field, final Object value) {
-        return every(SObjectPredicate.isEqual(field, value));
+        return every(SObjectPredicates.isEqual(field, value));
     }
 
     public abstract Boolean some(final ISObjectPredicate predicate);
@@ -938,7 +938,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .some('Rating', 'Hot');
      */
     public virtual Boolean some(final String fieldName, final Object value) {
-        return some(SObjectPredicate.isEqual(fieldName, value));
+        return some(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -958,7 +958,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .some(Account.Rating, 'Hot');
      */
     public virtual Boolean some(final SObjectField field, final Object value) {
-        return some(SObjectPredicate.isEqual(field, value));
+        return some(SObjectPredicates.isEqual(field, value));
     }
 
     /**
@@ -974,7 +974,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @example
      * Boolean isNoAccountWithHotRating = accountsIterable
-     *     .none(SObjectPredicate.isEqual(Account.Rating, 'Hot'));
+     *     .none(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
      */
     public virtual Boolean none(final ISObjectPredicate predicate) {
         return !some(predicate);
@@ -997,7 +997,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .none('Rating', 'Hot');
      */
     public virtual Boolean none(final String fieldName, final Object value) {
-        return none(SObjectPredicate.isEqual(fieldName, value));
+        return none(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -1017,7 +1017,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .none(Account.Rating, 'Hot');
      */
     public virtual Boolean none(final SObjectField field, final Object value) {
-        return none(SObjectPredicate.isEqual(field, value));
+        return none(SObjectPredicates.isEqual(field, value));
     }
 
     /**
@@ -1152,7 +1152,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @example
      * Double sumOfAnnualRevenue = accountsIterable
-     *     .sum(SObjectToDoubleFunction.get(Account.AnnualRevenue));
+     *     .sum(SObjectToDoubleFunctions.get(Account.AnnualRevenue));
      */
     public virtual Double sum(final ISObjectToDoubleFunction classifier) {
         return mapToDouble(classifier).sum();
@@ -1173,7 +1173,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .sum('AnnualRevenue');
      */
     public virtual Double sum(final String fieldName) {
-        return sum(SObjectToDoubleFunction.get(fieldName));
+        return sum(SObjectToDoubleFunctions.get(fieldName));
     }
 
     /**
@@ -1191,7 +1191,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .sum(Account.AnnualRevenue);
      */
     public virtual Double sum(final SObjectField field) {
-        return sum(SObjectToDoubleFunction.get(field));
+        return sum(SObjectToDoubleFunctions.get(field));
     }
 
     /**
@@ -1206,7 +1206,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @example
      * Double avgAnnualRevenue = accountsIterable
-     *     .avg(SObjectToDoubleFunction.get(Account.AnnualRevenue))
+     *     .avg(SObjectToDoubleFunctions.get(Account.AnnualRevenue))
      *     .get();
      */
     public virtual OptionalDouble avg(final ISObjectToDoubleFunction classifier) {
@@ -1229,7 +1229,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .get();
      */
     public virtual OptionalDouble avg(final String fieldName) {
-        return avg(SObjectToDoubleFunction.get(fieldName));
+        return avg(SObjectToDoubleFunctions.get(fieldName));
     }
 
     /**
@@ -1248,7 +1248,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .get();
      */
     public virtual OptionalDouble avg(final SObjectField field) {
-        return avg(SObjectToDoubleFunction.get(field));
+        return avg(SObjectToDoubleFunctions.get(field));
     }
 
     /**
@@ -1260,7 +1260,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @return the `List<Object>` containing the collected elements
      *
      * @example
-     * List<Object> accountNames = accountsIterable.toList(SObjectFunction.get('Name'));
+     * List<Object> accountNames = accountsIterable.toList(SObjectFunctions.get('Name'));
      */
     public virtual List<Object> toList(final ISObjectFunction mapper) {
         return toList(mapper, List<Object>.class);
@@ -1269,6 +1269,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
     /**
      * @description Accumulates `Object` elements into a `List<Object>`
      * according to `fieldName`.
+     * <p>Terminal Operation.</p>
      *
      * @param fieldName the field
      *
@@ -1276,7 +1277,6 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @example
      * List<Object> accountNames = accountsIterable.toList('Name');
-     * <p>Terminal Operation.</p>
      */
     public virtual List<Object> toList(final String fieldName) {
         return toList(fieldName, List<Object>.class);
@@ -1317,7 +1317,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList('Name', List<String>.class);
      */
     public virtual List<Object> toList(final String fieldName, final Type listType) {
-        return toList(SObjectFunction.get(fieldName), listType);
+        return toList(SObjectFunctions.get(fieldName), listType);
     }
 
     /**
@@ -1337,7 +1337,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toList(Account.Name, List<String>.class);
      */
     public virtual List<Object> toList(final SObjectField field, final Type listType) {
-        return toList(SObjectFunction.get(field), listType);
+        return toList(SObjectFunctions.get(field), listType);
     }
 
     public abstract Set<Object> toSet(final ISObjectFunction mapper);
@@ -1357,7 +1357,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Set<Object> createdDates = contactsIterable.toSet('CreatedDate');
      */
     public virtual Set<Object> toSet(final String fieldName) {
-        return toSet(SObjectFunction.get(fieldName));
+        return toSet(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -1375,7 +1375,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Set<Object> createdDates = contactsIterable.toSet(Contact.CreatedDate);
      */
     public virtual Set<Object> toSet(final SObjectField field) {
-        return toSet(SObjectFunction.get(field));
+        return toSet(SObjectFunctions.get(field));
     }
 
     public abstract Set<Id> toIdSet(final ISObjectFunction mapper);
@@ -1395,7 +1395,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Set<Id> accountIds = contactsIterable.toIdSet('AccountId');
      */
     public virtual Set<Id> toIdSet(final String fieldName) {
-        return toIdSet(SObjectFunction.get(fieldName));
+        return toIdSet(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -1413,7 +1413,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Set<Id> accountIds = contactsIterable.toIdSet(Contact.AccountId);
      */
     public virtual Set<Id> toIdSet(final SObjectField field) {
-        return toIdSet(SObjectFunction.get(field));
+        return toIdSet(SObjectFunctions.get(field));
     }
 
     public abstract Set<String> toStringSet(final ISObjectFunction mapper);
@@ -1433,7 +1433,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Set<String> accountNames = accountsIterable.toStringSet('Name');
      */
     public virtual Set<String> toStringSet(final String fieldName) {
-        return toStringSet(SObjectFunction.get(fieldName));
+        return toStringSet(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -1451,7 +1451,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Set<String> accountNames = accountsIterable.toStringSet(Account.Name);
      */
     public virtual Set<String> toStringSet(final SObjectField field) {
-        return toStringSet(SObjectFunction.get(field));
+        return toStringSet(SObjectFunctions.get(field));
     }
 
     public abstract Map<Id, SObject> toByIdMap(final ISObjectFunction keyMapper, final Type mapType);
@@ -1474,7 +1474,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByIdMap('AccountId', Map<Id, Contact>.class);
      */
     public virtual Map<Id, SObject> toByIdMap(final String fieldName, final Type mapType) {
-        return toByIdMap(SObjectFunction.get(fieldName), mapType);
+        return toByIdMap(SObjectFunctions.get(fieldName), mapType);
     }
 
     /**
@@ -1495,7 +1495,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByIdMap(Contact.AccountId, Map<Id, Contact>.class);
      */
     public virtual Map<Id, SObject> toByIdMap(final SObjectField field, final Type mapType) {
-        return toByIdMap(SObjectFunction.get(field), mapType);
+        return toByIdMap(SObjectFunctions.get(field), mapType);
     }
 
     public abstract Map<String, SObject> toByStringMap(final ISObjectFunction keyMapper, final Type mapType);
@@ -1518,7 +1518,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByStringMap('Name', Map<String, Account>.class);
      */
     public virtual Map<String, SObject> toByStringMap(final String fieldName, final Type mapType) {
-        return toByStringMap(SObjectFunction.get(fieldName), mapType);
+        return toByStringMap(SObjectFunctions.get(fieldName), mapType);
     }
 
     /**
@@ -1539,7 +1539,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     .toByStringMap(Account.Name, Map<String, Account>.class);
      */
     public virtual Map<String, SObject> toByStringMap(final SObjectField field, final Type mapType) {
-        return toByStringMap(SObjectFunction.get(field), mapType);
+        return toByStringMap(SObjectFunctions.get(field), mapType);
     }
 
     public abstract Map<Id, List<SObject>> groupById(final ISObjectFunction keyMapper);
@@ -1559,7 +1559,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Map<Id, List<Contact>> contactsByAccountId = contactsIterable.groupById('AccountId');
      */
     public virtual Map<Id, List<SObject>> groupById(final String fieldName) {
-        return groupById(SObjectFunction.get(fieldName));
+        return groupById(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -1577,7 +1577,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Map<Id, List<Contact>> contactsByAccountId = contactsIterable.groupById(Contact.AccountId);
      */
     public virtual Map<Id, List<SObject>> groupById(final SObjectField field) {
-        return groupById(SObjectFunction.get(field));
+        return groupById(SObjectFunctions.get(field));
     }
 
     public abstract Map<String, List<SObject>> groupByString(final ISObjectFunction keyMapper);
@@ -1597,7 +1597,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Map<String, List<Account>> accountsByRating = accountsIterable.groupByString('Rating');
      */
     public virtual Map<String, List<SObject>> groupByString(final String fieldName) {
-        return groupByString(SObjectFunction.get(fieldName));
+        return groupByString(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -1615,7 +1615,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * Map<String, List<Account>> accountsByRating = accountsIterable.groupByString(Account.Rating);
      */
     public virtual Map<String, List<SObject>> groupByString(final SObjectField field) {
-        return groupByString(SObjectFunction.get(field));
+        return groupByString(SObjectFunctions.get(field));
     }
 
     public abstract Map<Boolean, List<SObject>> partition(final ISObjectPredicate predicate);
@@ -1636,7 +1636,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     = accountsIterable.partition('Rating', 'Hot');
      */
     public virtual Map<Boolean, List<SObject>> partition(final String fieldName, final Object value) {
-        return partition(SObjectPredicate.isEqual(fieldName, value));
+        return partition(SObjectPredicates.isEqual(fieldName, value));
     }
 
     /**
@@ -1655,7 +1655,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *     = accountsIterable.partition(Account.Rating, 'Hot');
      */
     public virtual Map<Boolean, List<SObject>> partition(final SObjectField field, final Object value) {
-        return partition(SObjectPredicate.isEqual(field, value));
+        return partition(SObjectPredicates.isEqual(field, value));
     }
     //</editor-fold>
 
