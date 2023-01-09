@@ -20,8 +20,8 @@ private class ToDoubleFunctionTest {
         IToDoubleFunction get42 = ToDoubleFunction.compose(Function.constant(value));
         // Then
         for (Object acc : INPUT) {
-            Validate.assertEquals(((Account) acc).get(IterTestUtils.CONSTS.Account.NumberOfEmployees), getNumOfEmployeesAsDouble.apply(acc));
-            Validate.assertEquals(value, get42.apply(acc));
+            Assert.areEqual(((Account) acc).get(IterTestUtils.CONSTS.Account.NumberOfEmployees), getNumOfEmployeesAsDouble.apply(acc));
+            Assert.areEqual(value, get42.apply(acc));
         }
     }
    

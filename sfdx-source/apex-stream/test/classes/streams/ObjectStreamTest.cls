@@ -42,22 +42,22 @@ private class ObjectStreamTest {
         // Then
         List<Object> expected = new List<Object>(new Set<Object>(input));
         List<IterTestUtils.Person> expected1 = new List<IterTestUtils.Person>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(input, actual6);
-        Validate.assertEquals(false, seq.isEmpty());
-        Validate.assertEquals(PEOPLE, input, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(((ObjectStream) stream3).isOperated);
-        Validate.assert(((ObjectStream) stream4).isOperated);
-        Validate.assert(((ObjectStream) stream5).isOperated);
-        Validate.assert(((ObjectStream) stream6).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(input, actual6);
+        Assert.areEqual(false, seq.isEmpty());
+        Assert.areEqual(PEOPLE, input, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(((ObjectStream) stream3).isOperated);
+        Assert.isTrue(((ObjectStream) stream4).isOperated);
+        Assert.isTrue(((ObjectStream) stream5).isOperated);
+        Assert.isTrue(((ObjectStream) stream6).isOperated);
     }
 
     /**
@@ -72,11 +72,11 @@ private class ObjectStreamTest {
         // When
         List<String> actual = (List<String>) stream.toList(List<String>.class);
         // Then
-        Validate.assertEquals(lim, actual.size());
+        Assert.areEqual(lim, actual.size());
         for (Integer i = 0, size = actual.size(); i < size; i++) {
-            Validate.assert( actual[i] != null);
+            Assert.isTrue( actual[i] != null);
         }
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -107,12 +107,12 @@ private class ObjectStreamTest {
         List<Object> actual1 = stream1.toList();
         List<Object> actual2 = stream2.toList();
         // Then
-        Validate.assertEquals(lim, actual.size());
-        Validate.assertEquals(lim, actual1.size());
-        Validate.assertEquals(lim, actual2.size());
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
+        Assert.areEqual(lim, actual.size());
+        Assert.areEqual(lim, actual1.size());
+        Assert.areEqual(lim, actual2.size());
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
     }
 
     /**
@@ -137,13 +137,13 @@ private class ObjectStreamTest {
         // Then
         List<Object> expected = new List<Object>{ -5.1, '0', 10L, 3, true, john, 0, 'bar' };
         List<Object> expected1 = new List<Object>{ -5.1, '0', 10L, 3, true, john, 0, 'bar', null, jake, 'baz' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(((ObjectStream) stream3).isOperated);
-        Validate.assert(((ObjectStream) stream4).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(((ObjectStream) stream3).isOperated);
+        Assert.isTrue(((ObjectStream) stream4).isOperated);
     }
 
     /**
@@ -169,14 +169,14 @@ private class ObjectStreamTest {
         List<Object> actual = stream4.toList();
         List<Object> actual1 = stream5.toList();
         // Then
-        Validate.assertEquals(new List<Object>{ 'lorem', '', null }, actual);
-        Validate.assertEquals(new List<Object>{ 'foo' }, actual1);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(((ObjectStream) stream3).isOperated);
-        Validate.assert(((ObjectStream) stream4).isOperated);
-        Validate.assert(((ObjectStream) stream5).isOperated);
+        Assert.areEqual(new List<Object>{ 'lorem', '', null }, actual);
+        Assert.areEqual(new List<Object>{ 'foo' }, actual1);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(((ObjectStream) stream3).isOperated);
+        Assert.isTrue(((ObjectStream) stream4).isOperated);
+        Assert.isTrue(((ObjectStream) stream5).isOperated);
     }
 
     /**
@@ -200,14 +200,14 @@ private class ObjectStreamTest {
         // Then
         List<Object> expected = new List<Object>{ 'foo', 1, 'baz', true, 'ipsum', null };
         List<Object> expected1 = new List<Object>{ true, 'ipsum', null, 'foo', 1, 'baz' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(((ObjectStream) stream3).isOperated);
-        Validate.assert(((ObjectStream) stream4).isOperated);
-        Validate.assert(((ObjectStream) stream5).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(((ObjectStream) stream3).isOperated);
+        Assert.isTrue(((ObjectStream) stream4).isOperated);
+        Assert.isTrue(((ObjectStream) stream5).isOperated);
     }
 
     /**
@@ -243,24 +243,24 @@ private class ObjectStreamTest {
         List<Object> expected = new List<Object>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
         List<Object> expected1 = new List<Object>{ 3, 9 };
         List<Object> expected2 = new List<Object>{ 5, 7 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected2, actual6);
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(((ObjectStream) stream3).isOperated);
-        Validate.assert(((ObjectStream) stream4).isOperated);
-        Validate.assert(((ObjectStream) stream5).isOperated);
-        Validate.assert(((ObjectStream) stream6).isOperated);
-        Validate.assert(((ObjectStream) stream7).isOperated);
-        Validate.assert(((ObjectStream) stream8).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(((ObjectStream) stream3).isOperated);
+        Assert.isTrue(((ObjectStream) stream4).isOperated);
+        Assert.isTrue(((ObjectStream) stream5).isOperated);
+        Assert.isTrue(((ObjectStream) stream6).isOperated);
+        Assert.isTrue(((ObjectStream) stream7).isOperated);
+        Assert.isTrue(((ObjectStream) stream8).isOperated);
     }
 
     /**
@@ -280,10 +280,10 @@ private class ObjectStreamTest {
         List<Object> actual = stream.toList();
         List<Object> actual1 = stream1.toList();
         // Then
-        Validate.assertEquals(new List<String>{ 'foo', 'baz', 'ipsum' }, actual);
-        Validate.assertEquals(new List<Comparable>{ john, jake }, actual1);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(new List<String>{ 'foo', 'baz', 'ipsum' }, actual);
+        Assert.areEqual(new List<Comparable>{ john, jake }, actual1);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -302,15 +302,15 @@ private class ObjectStreamTest {
         List<Object> actual = stream.toList();
         Iterator<Object> iterator = stream1.iterator();
         // Then
-        Validate.assertEquals(new List<Object>{ 'foo', '', 'baz' }, actual);
-        Validate.assertEquals(input[0], iterator.next());
+        Assert.areEqual(new List<Object>{ 'foo', '', 'baz' }, actual);
+        Assert.areEqual(input[0], iterator.next());
         try {
             iterator.next();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -327,8 +327,8 @@ private class ObjectStreamTest {
         // When
         List<Object> actual = stream.toList();
         // Then
-        Validate.assertEquals(new List<Object>{ john, true, 'ipsum', jake }, actual);
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areEqual(new List<Object>{ john, true, 'ipsum', jake }, actual);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -345,8 +345,8 @@ private class ObjectStreamTest {
         List<Object> actual = ObjectStream.of(clone).withoutNulls().toList();
         // Then
         List<Object> expected = new List<Object>{ 'foo', '', jake, 'baz', john, true, 'ipsum', jake };
-        Validate.assertEquals(IterTestUtils.deepClone(expected), actual);
-        Validate.assertEquals(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(IterTestUtils.deepClone(expected), actual);
+        Assert.areEqual(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -362,9 +362,9 @@ private class ObjectStreamTest {
         List<Object> actual = stream.toList();
         // Then
         List<Object> expected = new List<Object>{ 'Foo', '', 'Baz', 'Ipsum', 'Hello' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -380,9 +380,9 @@ private class ObjectStreamTest {
         List<Integer> actual = intStream.toList();
         // Then
         List<Integer> expected = new List<Integer>{ 3, 0, 3, 5, 5 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((IntStream) intStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((IntStream) intStream).isOperated);
     }
 
     /**
@@ -398,9 +398,9 @@ private class ObjectStreamTest {
         List<Long> actual = longStream.toList();
         // Then
         List<Long> expected = new List<Long>{ 6L, 0L, 1L, 3L, -9L, -6L, 4L, 4L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) longStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) longStream).isOperated);
     }
 
     /**
@@ -416,9 +416,9 @@ private class ObjectStreamTest {
         List<Double> actual = doubleStream.toList();
         // Then
         List<Double> expected = new List<Double>{ 6.1, 0.0, 1.66, 3.06, -8.99, -6.4, 4.0, 4.0 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) doubleStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) doubleStream).isOperated);
     }
 
     /**
@@ -436,9 +436,9 @@ private class ObjectStreamTest {
         List<SObject> actual = sObjStream.toList();
         // Then
         List<User> expected = new List<User>{ new User(LastName = 'John', IsActive = true), new User(LastName = 'Jake', IsActive = true) };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) sObjStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) sObjStream).isOperated);
     }
 
     /**
@@ -464,8 +464,8 @@ private class ObjectStreamTest {
         List<String> actual = (List<String>) objStream.toList(List<String>.class);
         // Then
         List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -491,8 +491,8 @@ private class ObjectStreamTest {
         List<Integer> actual = (List<Integer>) intStream.toList();
         // Then
         List<Integer> expected = new List<Integer>{ 1, 0, 2 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -518,8 +518,8 @@ private class ObjectStreamTest {
         List<Long> actual = (List<Long>) longStream.toList();
         // Then
         List<Long> expected = new List<Long>{ 1L, 0L, 2L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -545,8 +545,8 @@ private class ObjectStreamTest {
         List<Double> actual = (List<Double>) doubleStream.toList();
         // Then
         List<Double> expected = new List<Double>{ 1.1, 0, Math.PI };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -573,8 +573,8 @@ private class ObjectStreamTest {
         List<Account> actual = (List<Account>) doubleStream.toList();
         // Then
         List<Account> expected = new List<Account>{ accounts[1], accounts[0], accounts[2] };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -595,10 +595,10 @@ private class ObjectStreamTest {
         List<IterTestUtils.Person> actual = (List<IterTestUtils.Person>) stream.toList(List<IterTestUtils.Person>.class);
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
-            Validate.assertEquals(value, actual[i].getAutoId());
+            Assert.areEqual(value, actual[i].getAutoId());
         }
-        Validate.assertNotEquals(input, clone, Label.InputNotMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areNotEqual(input, clone, Label.InputNotMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -619,10 +619,10 @@ private class ObjectStreamTest {
         // Then
         List<Object> expected = new List<Object>{ john, jake, 'foo', 1 };
         List<Object> expected1 = new List<Object>{ john };
-        Validate.assertEquals(IterTestUtils.deepClone(expected), actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areEqual(IterTestUtils.deepClone(expected), actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -655,17 +655,17 @@ private class ObjectStreamTest {
         List<Object> expected1 = new List<Object>{ null, '', 'bar', 'baz', 'foo' };
         List<Object> expected2 = new List<Object>{ sam, john, jake, lucy, null };
         List<Object> expected3 = new List<Object>{ 'foo', 'baz', 'bar', '', null };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected2, actual2);
-        Validate.assertEquals(expected3, actual3);
-        Validate.assertEquals(expected3, actual4);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(((ObjectStream) stream3).isOperated);
-        Validate.assert(((ObjectStream) stream4).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected2, actual2);
+        Assert.areEqual(expected3, actual3);
+        Assert.areEqual(expected3, actual4);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(((ObjectStream) stream3).isOperated);
+        Assert.isTrue(((ObjectStream) stream4).isOperated);
     }
 
     /**
@@ -694,15 +694,15 @@ private class ObjectStreamTest {
         // Then
         List<Object> expected = new List<Object>{ -5.1, '0', 10L };
         List<Object> expected1 = new List<Object>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(!((ObjectStream) stream3).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(!((ObjectStream) stream3).isOperated);
     }
 
     /**
@@ -731,15 +731,15 @@ private class ObjectStreamTest {
         // Then
         List<Object> expected = new List<Object>{ new Account(), null, john, Math.PI };
         List<Object> expected1 = new List<Object>();
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
-        Validate.assert(!((ObjectStream) stream3).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
+        Assert.isTrue(!((ObjectStream) stream3).isOperated);
     }
 
     /**
@@ -761,12 +761,12 @@ private class ObjectStreamTest {
         // Then
         String expected = 'seedfoobarbazlorem';
         Integer expected1 = 16;
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals('seed', seed, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual('seed', seed, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -789,12 +789,12 @@ private class ObjectStreamTest {
         Set<Object> actual1 = (Set<Object>) stream1.collect(Supplier.of(Set<Object>.class), new IterTestUtils.AddToSet());
         // Then
         Set<Object> expected = new Set<Object>{ john, jake, sam, lucy };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -816,12 +816,12 @@ private class ObjectStreamTest {
         String actual = (String) stream.find(TypePredicates.isInstanceOfString()).get();
         Integer actual1 = (Integer) stream1.find(TypePredicates.isInstanceOfInt()).orElse(elseValue);
         // Then
-        Validate.assertEquals('jake', actual);
-        Validate.assertEquals(elseValue, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual('jake', actual);
+        Assert.areEqual(elseValue, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -842,12 +842,12 @@ private class ObjectStreamTest {
         Boolean actual = stream.every(TypePredicates.isInstanceOfString());
         Boolean actual1 = stream1.every(TypePredicates.isInstanceOfInt().negate());
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -868,12 +868,12 @@ private class ObjectStreamTest {
         Boolean actual = stream.some(TypePredicates.isInstanceOfString());
         Boolean actual1 = stream1.some(TypePredicates.isInstanceOfInt());
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -894,12 +894,12 @@ private class ObjectStreamTest {
         Boolean actual = stream.none(TypePredicates.isInstanceOfString());
         Boolean actual1 = stream1.none(TypePredicates.isInstanceOfInt());
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -923,12 +923,12 @@ private class ObjectStreamTest {
         IterTestUtils.Person actual = (IterTestUtils.Person) stream.max(defaultOrderComparator).get();
         String actual1 = (String) stream1.max(defaultOrderComparator).get();
         // Then
-        Validate.assertEquals(lucy, actual);
-        Validate.assertEquals('lucy', actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(lucy, actual);
+        Assert.areEqual('lucy', actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input1, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -952,12 +952,12 @@ private class ObjectStreamTest {
         IterTestUtils.Person actual = (IterTestUtils.Person) stream.min(defaultOrderComparator).get();
         String actual1 = (String) stream1.min(defaultOrderComparator).get();
         // Then
-        Validate.assertEquals(sam, actual);
-        Validate.assertEquals('a', actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(sam, actual);
+        Assert.areEqual('a', actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input1, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -977,13 +977,13 @@ private class ObjectStreamTest {
         Integer actual1 = stream1.count();
         Integer actual2 = stream2.count();
         // Then
-        Validate.assertEquals(input.size(), actual);
-        Validate.assertEquals(0, actual1);
-        Validate.assertEquals(0, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
+        Assert.areEqual(input.size(), actual);
+        Assert.areEqual(0, actual1);
+        Assert.areEqual(0, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
     }
 
     /**
@@ -1003,13 +1003,13 @@ private class ObjectStreamTest {
         Boolean actual1 = stream1.isEmpty();
         Boolean actual2 = stream2.isEmpty();
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(true, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
-        Validate.assert(((ObjectStream) stream2).isOperated);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(true, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
+        Assert.isTrue(((ObjectStream) stream2).isOperated);
     }
 
     /**
@@ -1032,12 +1032,12 @@ private class ObjectStreamTest {
         List<IterTestUtils.Person> actual = (List<IterTestUtils.Person>) stream.toList(List<IterTestUtils.Person>.class);
         List<Object> actual1 = stream1.toList();
         // Then
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(input1, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((ObjectStream) stream1).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(input1, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input1, clone1, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((ObjectStream) stream1).isOperated);
     }
 
     /**
@@ -1054,9 +1054,9 @@ private class ObjectStreamTest {
         Set<Object> actual = stream.toSet();
         // Then
         Set<Object> expected = new Set<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
 }

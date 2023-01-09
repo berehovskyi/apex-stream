@@ -1,10 +1,10 @@
 # CollectorBaseSuppliers
 
-`APIVERSION: 55`
+`APIVERSION: 56`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/Supplier.md) and related utilities that are used by [SObjectCollectors](/Functional-Built-In-Classes/SObjectCollectors.md).
+Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/Supplier.md) and related utilities that are used by [SObjectCollectors](/docs/Functional-Built-In-Classes/SObjectCollectors.md).
 
 
 **See** [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)

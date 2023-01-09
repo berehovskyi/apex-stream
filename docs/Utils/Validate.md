@@ -1,6 +1,6 @@
 # Validate
 
-`APIVERSION: 55`
+`APIVERSION: 56`
 
 `STATUS: ACTIVE`
 
@@ -202,66 +202,5 @@ Validate.validState(
     new List<Object>{ key, oldValue, newValue }
 );
 ```
-
-### `static assert(Boolean condition)`
-
-Asserts whether the specified `condition` is true. If it is not, a fatal error is returned that causes code execution to halt.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`condition`|the boolean expression to check|
-
-### `static assert(Boolean condition, String message)`
-
-Asserts whether the specified `condition` is true. If it is not, a fatal error is returned that causes code execution to halt.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`condition`|the boolean expression to check|
-|`message`|the optional message returned as part of the error message|
-
-### `static assertEquals(Object expected, Object actual)`
-
-Asserts that the first two arguments are the same. If it is not, a fatal error is returned that causes code execution to halt.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`expected`|the expected value|
-|`actual`|the actual value|
-
-### `static assertEquals(Object expected, Object actual, String message)`
-
-Asserts that the first two arguments are the same. If it is not, a fatal error is returned that causes code execution to halt.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`expected`|the expected value|
-|`actual`|the actual value|
-|`message`|the optional message returned as part of the error message|
-
-### `static assertNotEquals(Object expected, Object actual)`
-
-Asserts that the first two arguments are not the same. If it is, a fatal error is returned that causes code execution to halt.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`expected`|the expected value|
-|`actual`|the actual value|
-
-### `static assertNotEquals(Object expected, Object actual, String message)`
-
-Asserts that the first two arguments are not the same. If it is, a fatal error is returned that causes code execution to halt.
-
-#### Parameters
-|Param|Description|
-|---|---|
-|`expected`|the expected value|
-|`actual`|the actual value|
-|`message`|the optional message returned as part of the error message|
 
 ---

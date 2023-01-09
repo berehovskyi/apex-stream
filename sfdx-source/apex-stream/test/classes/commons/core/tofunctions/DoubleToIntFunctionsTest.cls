@@ -23,8 +23,8 @@ private class DoubleToIntFunctionsTest {
         IDoubleToIntFunction round = DoubleToIntFunctions.round();
         // Then
         for (Double d : INPUT) {
-            Validate.assertEquals(d.intValue(), intValue.apply(d));
-            Validate.assertEquals(Math.round(d), round.apply(d));
+            Assert.areEqual(d.intValue(), intValue.apply(d));
+            Assert.areEqual(Math.round(d), round.apply(d));
         }
     }
     

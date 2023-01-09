@@ -28,11 +28,11 @@ private class SObjectFunctionTest {
         ISObjectFunction generateAccId = SObjectFunction.compose(IdSuppliers.of(accSObjectType));
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(con, identity.apply(con));
-            Validate.assertEquals(constant, get42.apply(con));
-            Validate.assertEquals(!(con.getSObjects('Assets')).isEmpty(), hasAssets.apply(con));
-            Validate.assertEquals(con.getSObject(field), getParent.apply(con));
-            Validate.assertEquals(accSObjectType, ((Id) generateAccId.apply(con)).getSobjectType());
+            Assert.areEqual(con, identity.apply(con));
+            Assert.areEqual(constant, get42.apply(con));
+            Assert.areEqual(!(con.getSObjects('Assets')).isEmpty(), hasAssets.apply(con));
+            Assert.areEqual(con.getSObject(field), getParent.apply(con));
+            Assert.areEqual(accSObjectType, ((Id) generateAccId.apply(con)).getSobjectType());
         }
     }
 

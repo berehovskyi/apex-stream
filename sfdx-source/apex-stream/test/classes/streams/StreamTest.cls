@@ -36,20 +36,20 @@ private class StreamTest {
         IObjectIterable stream12 = Stream.of(new Set<Object>{ STRINGS[0] });
         IObjectIterable stream13 = Stream.of(new Set<Object>{ COMPARABLES[0] });
         // Then
-        Validate.assert(stream0 instanceof IntStream);
-        Validate.assert(stream1 instanceof LongStream);
-        Validate.assert(stream2 instanceof DoubleStream);
-        Validate.assert(stream3 instanceof SObjectStream);
-        Validate.assert(stream4 instanceof ObjectStream);
-        Validate.assert(stream5 instanceof ObjectStream);
-        Validate.assert(stream6 instanceof ObjectStream);
-        Validate.assert(stream7 instanceof IntStream);
-        Validate.assert(stream8 instanceof LongStream);
-        Validate.assert(stream9 instanceof DoubleStream);
-        Validate.assert(stream10 instanceof SObjectStream);
-        Validate.assert(stream11 instanceof ObjectStream);
-        Validate.assert(stream12 instanceof ObjectStream);
-        Validate.assert(stream13 instanceof ObjectStream);
+        Assert.isTrue(stream0 instanceof IntStream);
+        Assert.isTrue(stream1 instanceof LongStream);
+        Assert.isTrue(stream2 instanceof DoubleStream);
+        Assert.isTrue(stream3 instanceof SObjectStream);
+        Assert.isTrue(stream4 instanceof ObjectStream);
+        Assert.isTrue(stream5 instanceof ObjectStream);
+        Assert.isTrue(stream6 instanceof ObjectStream);
+        Assert.isTrue(stream7 instanceof IntStream);
+        Assert.isTrue(stream8 instanceof LongStream);
+        Assert.isTrue(stream9 instanceof DoubleStream);
+        Assert.isTrue(stream10 instanceof SObjectStream);
+        Assert.isTrue(stream11 instanceof ObjectStream);
+        Assert.isTrue(stream12 instanceof ObjectStream);
+        Assert.isTrue(stream13 instanceof ObjectStream);
     }
     /**
      * @see Stream.ofNullable
@@ -72,20 +72,20 @@ private class StreamTest {
         IObjectIterable stream12 = Stream.ofNullable(new Set<Object>{ STRINGS[0] });
         IObjectIterable stream13 = Stream.ofNullable(new Set<Object>{ COMPARABLES[0] });
         // Then
-        Validate.assert(stream0 instanceof IntStream);
-        Validate.assert(stream1 instanceof LongStream);
-        Validate.assert(stream2 instanceof DoubleStream);
-        Validate.assert(stream3 instanceof SObjectStream);
-        Validate.assert(stream4 instanceof ObjectStream);
-        Validate.assert(stream5 instanceof ObjectStream);
-        Validate.assert(stream6 instanceof ObjectStream);
-        Validate.assert(stream7 instanceof IntStream);
-        Validate.assert(stream8 instanceof LongStream);
-        Validate.assert(stream9 instanceof DoubleStream);
-        Validate.assert(stream10 instanceof SObjectStream);
-        Validate.assert(stream11 instanceof ObjectStream);
-        Validate.assert(stream12 instanceof ObjectStream);
-        Validate.assert(stream13 instanceof ObjectStream);
+        Assert.isTrue(stream0 instanceof IntStream);
+        Assert.isTrue(stream1 instanceof LongStream);
+        Assert.isTrue(stream2 instanceof DoubleStream);
+        Assert.isTrue(stream3 instanceof SObjectStream);
+        Assert.isTrue(stream4 instanceof ObjectStream);
+        Assert.isTrue(stream5 instanceof ObjectStream);
+        Assert.isTrue(stream6 instanceof ObjectStream);
+        Assert.isTrue(stream7 instanceof IntStream);
+        Assert.isTrue(stream8 instanceof LongStream);
+        Assert.isTrue(stream9 instanceof DoubleStream);
+        Assert.isTrue(stream10 instanceof SObjectStream);
+        Assert.isTrue(stream11 instanceof ObjectStream);
+        Assert.isTrue(stream12 instanceof ObjectStream);
+        Assert.isTrue(stream13 instanceof ObjectStream);
     }
 
     /**
@@ -101,12 +101,12 @@ private class StreamTest {
         IObjectIterable stream4 = Stream.generate(StringSuppliers.uuid());
         IObjectIterable stream5 = Stream.generate(Supplier.of(List<String>.class));
         // Then
-        Validate.assert(stream0 instanceof IntStream);
-        Validate.assert(stream1 instanceof LongStream);
-        Validate.assert(stream2 instanceof DoubleStream);
-        Validate.assert(stream3 instanceof SObjectStream);
-        Validate.assert(stream4 instanceof ObjectStream);
-        Validate.assert(stream5 instanceof ObjectStream);
+        Assert.isTrue(stream0 instanceof IntStream);
+        Assert.isTrue(stream1 instanceof LongStream);
+        Assert.isTrue(stream2 instanceof DoubleStream);
+        Assert.isTrue(stream3 instanceof SObjectStream);
+        Assert.isTrue(stream4 instanceof ObjectStream);
+        Assert.isTrue(stream5 instanceof ObjectStream);
     }
 
     /**
@@ -126,16 +126,16 @@ private class StreamTest {
         ISObjectIterable stream8 = Stream.iterate(new Account(), SObjectPredicates.isSet(Account.Name), SObjectUnaryOperator.identity());
         IObjectIterable stream9 = Stream.iterate('', Predicates.isLess('aaaaaa'), UnaryOperator.constant('a'));
         // Then
-        Validate.assert(stream0 instanceof IntStream);
-        Validate.assert(stream1 instanceof LongStream);
-        Validate.assert(stream2 instanceof DoubleStream);
-        Validate.assert(stream3 instanceof SObjectStream);
-        Validate.assert(stream4 instanceof ObjectStream);
-        Validate.assert(stream5 instanceof IntStream);
-        Validate.assert(stream6 instanceof LongStream);
-        Validate.assert(stream7 instanceof DoubleStream);
-        Validate.assert(stream8 instanceof SObjectStream);
-        Validate.assert(stream9 instanceof ObjectStream);
+        Assert.isTrue(stream0 instanceof IntStream);
+        Assert.isTrue(stream1 instanceof LongStream);
+        Assert.isTrue(stream2 instanceof DoubleStream);
+        Assert.isTrue(stream3 instanceof SObjectStream);
+        Assert.isTrue(stream4 instanceof ObjectStream);
+        Assert.isTrue(stream5 instanceof IntStream);
+        Assert.isTrue(stream6 instanceof LongStream);
+        Assert.isTrue(stream7 instanceof DoubleStream);
+        Assert.isTrue(stream8 instanceof SObjectStream);
+        Assert.isTrue(stream9 instanceof ObjectStream);
     }
 
     /**
@@ -159,20 +159,20 @@ private class StreamTest {
         IObjectIterable stream12 = Stream.concat(new List<IObjectIterable>{ Stream.of(STRINGS), Stream.of(STRINGS) });
         IObjectIterable stream13 = Stream.concat(new List<IObjectIterable>{ Stream.of(COMPARABLES), Stream.of(COMPARABLES) });
         // Then
-        Validate.assert(stream0 instanceof IntStream);
-        Validate.assert(stream1 instanceof LongStream);
-        Validate.assert(stream2 instanceof DoubleStream);
-        Validate.assert(stream3 instanceof SObjectStream);
-        Validate.assert(stream4 instanceof ObjectStream);
-        Validate.assert(stream5 instanceof ObjectStream);
-        Validate.assert(stream6 instanceof ObjectStream);
-        Validate.assert(stream7 instanceof IntStream);
-        Validate.assert(stream8 instanceof LongStream);
-        Validate.assert(stream9 instanceof DoubleStream);
-        Validate.assert(stream10 instanceof SObjectStream);
-        Validate.assert(stream11 instanceof ObjectStream);
-        Validate.assert(stream12 instanceof ObjectStream);
-        Validate.assert(stream13 instanceof ObjectStream);
+        Assert.isTrue(stream0 instanceof IntStream);
+        Assert.isTrue(stream1 instanceof LongStream);
+        Assert.isTrue(stream2 instanceof DoubleStream);
+        Assert.isTrue(stream3 instanceof SObjectStream);
+        Assert.isTrue(stream4 instanceof ObjectStream);
+        Assert.isTrue(stream5 instanceof ObjectStream);
+        Assert.isTrue(stream6 instanceof ObjectStream);
+        Assert.isTrue(stream7 instanceof IntStream);
+        Assert.isTrue(stream8 instanceof LongStream);
+        Assert.isTrue(stream9 instanceof DoubleStream);
+        Assert.isTrue(stream10 instanceof SObjectStream);
+        Assert.isTrue(stream11 instanceof ObjectStream);
+        Assert.isTrue(stream12 instanceof ObjectStream);
+        Assert.isTrue(stream13 instanceof ObjectStream);
     }
 
     /**
@@ -189,13 +189,13 @@ private class StreamTest {
         IObjectIterable stream5 = Stream.zip(Stream.of(STRINGS), Stream.of(STRINGS), new IterTestUtils.Concat());
         IObjectIterable stream6 = Stream.zip(Stream.of(STRINGS), Stream.of(STRINGS), new IterTestUtils.AreNotEqual(), new IterTestUtils.Concat());
         // Then
-        Validate.assert(stream0 instanceof IntStream);
-        Validate.assert(stream1 instanceof LongStream);
-        Validate.assert(stream2 instanceof DoubleStream);
-        Validate.assert(stream3 instanceof SObjectStream);
-        Validate.assert(stream4 instanceof SObjectStream);
-        Validate.assert(stream5 instanceof ObjectStream);
-        Validate.assert(stream6 instanceof ObjectStream);
+        Assert.isTrue(stream0 instanceof IntStream);
+        Assert.isTrue(stream1 instanceof LongStream);
+        Assert.isTrue(stream2 instanceof DoubleStream);
+        Assert.isTrue(stream3 instanceof SObjectStream);
+        Assert.isTrue(stream4 instanceof SObjectStream);
+        Assert.isTrue(stream5 instanceof ObjectStream);
+        Assert.isTrue(stream6 instanceof ObjectStream);
     }
 
 }

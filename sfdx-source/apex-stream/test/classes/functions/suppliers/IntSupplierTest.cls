@@ -35,17 +35,17 @@ private class IntSupplierTest {
         Integer actual8 = repeatSupplier1.get();
         Integer actual9 = repeatSupplier1.get();
         // Then
-        Validate.assertEquals(val, actual);
-        Validate.assertEquals(val, actual1);
-        Validate.assertEquals(val, actual2);
-        Validate.assertEquals(val1, actual3);
-        Validate.assertEquals(val2, actual4);
-        Validate.assertEquals(val, actual5);
-        Validate.assertEquals(val, actual6);
-        Validate.assertEquals(val1, actual7);
-        Validate.assertEquals(val2, actual8);
-        Validate.assertEquals(val, actual9);
-        Validate.assert(((IntStream) intStream).isOperated);
+        Assert.areEqual(val, actual);
+        Assert.areEqual(val, actual1);
+        Assert.areEqual(val, actual2);
+        Assert.areEqual(val1, actual3);
+        Assert.areEqual(val2, actual4);
+        Assert.areEqual(val, actual5);
+        Assert.areEqual(val, actual6);
+        Assert.areEqual(val1, actual7);
+        Assert.areEqual(val2, actual8);
+        Assert.areEqual(val, actual9);
+        Assert.isTrue(((IntStream) intStream).isOperated);
     }
 
 }

@@ -37,13 +37,13 @@ private class SObjectConsumersTest {
             addFieldNameError.accept(clone1);
             addFieldError.accept(clone2);
             addErrorException.accept(clone3);
-            Validate.assertEquals(errorMessage, clone.getErrors()[0].getMessage());
-            Validate.assertEquals(errorMessage, clone1.getErrors()[0].getMessage());
-            Validate.assertEquals(errorMessage, clone2.getErrors()[0].getMessage());
+            Assert.areEqual(errorMessage, clone.getErrors()[0].getMessage());
+            Assert.areEqual(errorMessage, clone1.getErrors()[0].getMessage());
+            Assert.areEqual(errorMessage, clone2.getErrors()[0].getMessage());
             try {
                 clone3.getErrors();
             } catch (Exception e) {
-                Validate.assertEquals(exc, e);
+                Assert.areEqual(exc, e);
             }
         }
     }
@@ -76,30 +76,30 @@ private class SObjectConsumersTest {
             setFinanceToDepartmentConsumer2.accept(cloneToConsume2);
             SObject cloneToConsume3 = IterTestUtils.deepClone(con);
             setFinanceToDepartmentConsumer3.accept(cloneToConsume3);
-            Validate.assertEquals(clone, cloneToConsume);
-            Validate.assertEquals(clone, cloneToConsume1);
-            Validate.assertEquals(clone, cloneToConsume2);
-            Validate.assertEquals(clone, cloneToConsume3);
+            Assert.areEqual(clone, cloneToConsume);
+            Assert.areEqual(clone, cloneToConsume1);
+            Assert.areEqual(clone, cloneToConsume2);
+            Assert.areEqual(clone, cloneToConsume3);
             SObject clone1 = IterTestUtils.deepClone(con);
             clone1.put(IterTestUtils.CONSTS.DEPARTMENT, con.getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME)?.get(IterTestUtils.CONSTS.TYPE));
             SObject cloneToConsume4 = IterTestUtils.deepClone(con);
             setDepartmentFromParentConsumer.accept(cloneToConsume4);
-            Validate.assertEquals(clone1, cloneToConsume4);
+            Assert.areEqual(clone1, cloneToConsume4);
             SObject clone2 = IterTestUtils.deepClone(con);
             clone2.getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME)?.put(IterTestUtils.CONSTS.DESCRIPTION, con.get(IterTestUtils.CONSTS.DEPARTMENT));
             SObject cloneToConsume5 = IterTestUtils.deepClone(con);
             setDescriptionOnParentConsumer.accept(cloneToConsume5);
-            Validate.assertEquals(clone2, cloneToConsume5);
+            Assert.areEqual(clone2, cloneToConsume5);
             String expectedException = NullPointerException.class.getName();
             try {
                 setDepartmentFromParentConsumerUnsafe.accept(con);
             } catch (Exception exc) {
-                Validate.assertEquals(expectedException, exc.getTypeName());
+                Assert.areEqual(expectedException, exc.getTypeName());
             }
             try {
                 setDescriptionOnParentConsumerUnsafe.accept(con);
             } catch (Exception exc) {
-                Validate.assertEquals(expectedException, exc.getTypeName());
+                Assert.areEqual(expectedException, exc.getTypeName());
             }
         }
     }
@@ -127,27 +127,27 @@ private class SObjectConsumersTest {
             setParentConsumer.accept(cloneToConsume);
             SObject cloneToConsume1 = IterTestUtils.deepClone(con);
             setParentConsumer1.accept(cloneToConsume1);
-            Validate.assertEquals(clone, cloneToConsume);
-            Validate.assertEquals(clone, cloneToConsume1);
+            Assert.areEqual(clone, cloneToConsume);
+            Assert.areEqual(clone, cloneToConsume1);
             SObject clone1 = IterTestUtils.deepClone(con);
             clone1.putSObject(IterTestUtils.CONSTS.Contact.AccountId, testAccountOperator.apply(con));
             SObject cloneToConsume2 = IterTestUtils.deepClone(con);
             setParentConsumerByOperator.accept(cloneToConsume2);
             SObject cloneToConsume3 = IterTestUtils.deepClone(con);
             setParentConsumerByOperator1.accept(cloneToConsume3);
-            Validate.assertEquals(clone1, cloneToConsume2);
-            Validate.assertEquals(clone1, cloneToConsume3);
+            Assert.areEqual(clone1, cloneToConsume2);
+            Assert.areEqual(clone1, cloneToConsume3);
             SObject clone2 = IterTestUtils.deepClone(con);
             clone2.getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME)?.putSObject(IterTestUtils.CONSTS.PARENT, constant);
             SObject cloneToConsume4 = IterTestUtils.deepClone(con);
             setGrandParentConsumerSafe.accept(cloneToConsume4);
-            Validate.assertEquals(clone2, cloneToConsume4);
+            Assert.areEqual(clone2, cloneToConsume4);
             SObject cloneToConsume5 = IterTestUtils.deepClone(con);
             if (con.getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME) == null) {
                 try {
                     setGrandParentConsumer.accept(cloneToConsume5);
                 } catch (NullPointerException exc) {
-                    Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
+                    Assert.areEqual(NullPointerException.class.getName(), exc.getTypeName());
                 }
             }
         }

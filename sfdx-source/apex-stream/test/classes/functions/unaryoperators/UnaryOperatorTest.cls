@@ -34,18 +34,18 @@ private class UnaryOperatorTest {
         IUnaryOperator operator2 = UnaryOperator.compose(new List<IUnaryOperator>{ incOperator, x2IntOperator });
         // Then
         for (Object o : INTS) {
-            Validate.assertEquals(o, identity.apply(o));
-            Validate.assertEquals(constant, ofConst.apply(o));
-            Validate.assertEquals(((Integer) o) + 1, incOperator.apply(o));
-            Validate.assertEquals(((Integer) o) * factor, x2IntOperator.apply(o));
-            Validate.assertEquals(((Long) o) * factor, x2LongOperator.apply(o));
-            Validate.assertEquals(((Double) o) * factor, x2DoubleOperator.apply(o));
-            Validate.assertEquals((((Integer) o) + 1) * factor, operator.apply(o));
-            Validate.assertEquals((((Integer) o) + 1) * factor, operator1.apply(o));
-            Validate.assertEquals((((Integer) o) + 1) * factor, operator2.apply(o));
+            Assert.areEqual(o, identity.apply(o));
+            Assert.areEqual(constant, ofConst.apply(o));
+            Assert.areEqual(((Integer) o) + 1, incOperator.apply(o));
+            Assert.areEqual(((Integer) o) * factor, x2IntOperator.apply(o));
+            Assert.areEqual(((Long) o) * factor, x2LongOperator.apply(o));
+            Assert.areEqual(((Double) o) * factor, x2DoubleOperator.apply(o));
+            Assert.areEqual((((Integer) o) + 1) * factor, operator.apply(o));
+            Assert.areEqual((((Integer) o) + 1) * factor, operator1.apply(o));
+            Assert.areEqual((((Integer) o) + 1) * factor, operator2.apply(o));
         }
         for (Object o : ACCOUNTS) {
-            Validate.assertEquals(o, sObjectIdentity.apply(o));
+            Assert.areEqual(o, sObjectIdentity.apply(o));
         }
     }
 

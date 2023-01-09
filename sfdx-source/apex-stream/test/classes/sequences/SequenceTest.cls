@@ -36,20 +36,20 @@ private class SequenceTest {
         IObjectIterable stream12 = Sequence.of(new Set<Object>{ STRINGS[0] });
         IObjectIterable stream13 = Sequence.of(new Set<Object>{ COMPARABLES[0] });
         // Then
-        Validate.assert(stream0 instanceof IntSequence);
-        Validate.assert(stream1 instanceof LongSequence);
-        Validate.assert(stream2 instanceof DoubleSequence);
-        Validate.assert(stream3 instanceof SObjectSequence);
-        Validate.assert(stream4 instanceof ObjectSequence);
-        Validate.assert(stream5 instanceof ObjectSequence);
-        Validate.assert(stream6 instanceof ObjectSequence);
-        Validate.assert(stream7 instanceof IntSequence);
-        Validate.assert(stream8 instanceof LongSequence);
-        Validate.assert(stream9 instanceof DoubleSequence);
-        Validate.assert(stream10 instanceof SObjectSequence);
-        Validate.assert(stream11 instanceof ObjectSequence);
-        Validate.assert(stream12 instanceof ObjectSequence);
-        Validate.assert(stream13 instanceof ObjectSequence);
+        Assert.isTrue(stream0 instanceof IntSequence);
+        Assert.isTrue(stream1 instanceof LongSequence);
+        Assert.isTrue(stream2 instanceof DoubleSequence);
+        Assert.isTrue(stream3 instanceof SObjectSequence);
+        Assert.isTrue(stream4 instanceof ObjectSequence);
+        Assert.isTrue(stream5 instanceof ObjectSequence);
+        Assert.isTrue(stream6 instanceof ObjectSequence);
+        Assert.isTrue(stream7 instanceof IntSequence);
+        Assert.isTrue(stream8 instanceof LongSequence);
+        Assert.isTrue(stream9 instanceof DoubleSequence);
+        Assert.isTrue(stream10 instanceof SObjectSequence);
+        Assert.isTrue(stream11 instanceof ObjectSequence);
+        Assert.isTrue(stream12 instanceof ObjectSequence);
+        Assert.isTrue(stream13 instanceof ObjectSequence);
     }
     /**
      * @see Sequence.ofNullable
@@ -72,20 +72,20 @@ private class SequenceTest {
         IObjectIterable stream12 = Sequence.ofNullable(new Set<Object>{ STRINGS[0] });
         IObjectIterable stream13 = Sequence.ofNullable(new Set<Object>{ COMPARABLES[0] });
         // Then
-        Validate.assert(stream0 instanceof IntSequence);
-        Validate.assert(stream1 instanceof LongSequence);
-        Validate.assert(stream2 instanceof DoubleSequence);
-        Validate.assert(stream3 instanceof SObjectSequence);
-        Validate.assert(stream4 instanceof ObjectSequence);
-        Validate.assert(stream5 instanceof ObjectSequence);
-        Validate.assert(stream6 instanceof ObjectSequence);
-        Validate.assert(stream7 instanceof IntSequence);
-        Validate.assert(stream8 instanceof LongSequence);
-        Validate.assert(stream9 instanceof DoubleSequence);
-        Validate.assert(stream10 instanceof SObjectSequence);
-        Validate.assert(stream11 instanceof ObjectSequence);
-        Validate.assert(stream12 instanceof ObjectSequence);
-        Validate.assert(stream13 instanceof ObjectSequence);
+        Assert.isTrue(stream0 instanceof IntSequence);
+        Assert.isTrue(stream1 instanceof LongSequence);
+        Assert.isTrue(stream2 instanceof DoubleSequence);
+        Assert.isTrue(stream3 instanceof SObjectSequence);
+        Assert.isTrue(stream4 instanceof ObjectSequence);
+        Assert.isTrue(stream5 instanceof ObjectSequence);
+        Assert.isTrue(stream6 instanceof ObjectSequence);
+        Assert.isTrue(stream7 instanceof IntSequence);
+        Assert.isTrue(stream8 instanceof LongSequence);
+        Assert.isTrue(stream9 instanceof DoubleSequence);
+        Assert.isTrue(stream10 instanceof SObjectSequence);
+        Assert.isTrue(stream11 instanceof ObjectSequence);
+        Assert.isTrue(stream12 instanceof ObjectSequence);
+        Assert.isTrue(stream13 instanceof ObjectSequence);
     }
 
     /**
@@ -109,20 +109,20 @@ private class SequenceTest {
         IObjectIterable stream12 = Sequence.concat(new List<IObjectIterable>{ Sequence.of(STRINGS), Sequence.of(STRINGS) });
         IObjectIterable stream13 = Sequence.concat(new List<IObjectIterable>{ Sequence.of(COMPARABLES), Sequence.of(COMPARABLES) });
         // Then
-        Validate.assert(stream0 instanceof IntSequence);
-        Validate.assert(stream1 instanceof LongSequence);
-        Validate.assert(stream2 instanceof DoubleSequence);
-        Validate.assert(stream3 instanceof SObjectSequence);
-        Validate.assert(stream4 instanceof ObjectSequence);
-        Validate.assert(stream5 instanceof ObjectSequence);
-        Validate.assert(stream6 instanceof ObjectSequence);
-        Validate.assert(stream7 instanceof IntSequence);
-        Validate.assert(stream8 instanceof LongSequence);
-        Validate.assert(stream9 instanceof DoubleSequence);
-        Validate.assert(stream10 instanceof SObjectSequence);
-        Validate.assert(stream11 instanceof ObjectSequence);
-        Validate.assert(stream12 instanceof ObjectSequence);
-        Validate.assert(stream13 instanceof ObjectSequence);
+        Assert.isTrue(stream0 instanceof IntSequence);
+        Assert.isTrue(stream1 instanceof LongSequence);
+        Assert.isTrue(stream2 instanceof DoubleSequence);
+        Assert.isTrue(stream3 instanceof SObjectSequence);
+        Assert.isTrue(stream4 instanceof ObjectSequence);
+        Assert.isTrue(stream5 instanceof ObjectSequence);
+        Assert.isTrue(stream6 instanceof ObjectSequence);
+        Assert.isTrue(stream7 instanceof IntSequence);
+        Assert.isTrue(stream8 instanceof LongSequence);
+        Assert.isTrue(stream9 instanceof DoubleSequence);
+        Assert.isTrue(stream10 instanceof SObjectSequence);
+        Assert.isTrue(stream11 instanceof ObjectSequence);
+        Assert.isTrue(stream12 instanceof ObjectSequence);
+        Assert.isTrue(stream13 instanceof ObjectSequence);
     }
 
     /**
@@ -139,13 +139,13 @@ private class SequenceTest {
         IObjectIterable stream5 = Sequence.zip(Sequence.of(STRINGS), Sequence.of(STRINGS), new IterTestUtils.Concat());
         IObjectIterable stream6 = Sequence.zip(Sequence.of(STRINGS), Sequence.of(STRINGS), new IterTestUtils.AreNotEqual(), new IterTestUtils.Concat());
         // Then
-        Validate.assert(stream0 instanceof IntSequence);
-        Validate.assert(stream1 instanceof LongSequence);
-        Validate.assert(stream2 instanceof DoubleSequence);
-        Validate.assert(stream3 instanceof SObjectSequence);
-        Validate.assert(stream4 instanceof SObjectSequence);
-        Validate.assert(stream5 instanceof ObjectSequence);
-        Validate.assert(stream6 instanceof ObjectSequence);
+        Assert.isTrue(stream0 instanceof IntSequence);
+        Assert.isTrue(stream1 instanceof LongSequence);
+        Assert.isTrue(stream2 instanceof DoubleSequence);
+        Assert.isTrue(stream3 instanceof SObjectSequence);
+        Assert.isTrue(stream4 instanceof SObjectSequence);
+        Assert.isTrue(stream5 instanceof ObjectSequence);
+        Assert.isTrue(stream6 instanceof ObjectSequence);
     }
 
 }

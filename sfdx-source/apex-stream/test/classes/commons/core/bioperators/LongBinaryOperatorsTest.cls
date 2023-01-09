@@ -28,10 +28,10 @@ private class LongBinaryOperatorsTest {
         // Then
         for (Long l : INPUT) {
             Long src = 5;
-            Validate.assertEquals(Math.min(src, l), min.apply(src, l));
-            Validate.assertEquals(Math.max(src, l), max.apply(src, l));
-            Validate.assertEquals(src + l, sum.apply(src, l));
-            Validate.assertEquals(src * l, product.apply(src, l));
+            Assert.areEqual(Math.min(src, l), min.apply(src, l));
+            Assert.areEqual(Math.max(src, l), max.apply(src, l));
+            Assert.areEqual(src + l, sum.apply(src, l));
+            Assert.areEqual(src * l, product.apply(src, l));
         }
     }
     

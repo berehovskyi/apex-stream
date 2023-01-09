@@ -45,26 +45,26 @@ private class FunctionTest {
         IFunction getName = Function.compose(SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name));
         // Then
         for (String str : STRINGS) {
-            Validate.assertEquals(str, identity.apply(str));
-            Validate.assertEquals(constant, get42.apply(str));
-            Validate.assertEquals(str.startsWith(val1), startsWithS.apply(str));
-            Validate.assertEquals(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate.apply(str));
-            Validate.assertEquals(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate1.apply(str));
-            Validate.assertEquals(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate2.apply(str));
+            Assert.areEqual(str, identity.apply(str));
+            Assert.areEqual(constant, get42.apply(str));
+            Assert.areEqual(str.startsWith(val1), startsWithS.apply(str));
+            Assert.areEqual(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate.apply(str));
+            Assert.areEqual(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate1.apply(str));
+            Assert.areEqual(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate2.apply(str));
         }
         for (Integer i : INTS) {
-            Validate.assertEquals(i > 4, isGreaterThan4Int.apply(i));
+            Assert.areEqual(i > 4, isGreaterThan4Int.apply(i));
         }
         for (Long l : LONGS) {
-            Validate.assertEquals(l > 4, isGreaterThan4Long.apply(l));
+            Assert.areEqual(l > 4, isGreaterThan4Long.apply(l));
         }
         for (Double d : DOUBLES) {
-            Validate.assertEquals(d > 4, isGreaterThan4Double.apply(d));
+            Assert.areEqual(d > 4, isGreaterThan4Double.apply(d));
         }
         for (Object a : ACCOUNTS) {
-            Validate.assertEquals(((Account) a).get(IterTestUtils.CONSTS.Account.Name), getName.apply(a));
+            Assert.areEqual(((Account) a).get(IterTestUtils.CONSTS.Account.Name), getName.apply(a));
         }
-        Validate.assert((Boolean) isEmptyAcc.apply(new Account()));
+        Assert.isTrue((Boolean) isEmptyAcc.apply(new Account()));
     }
 
 }

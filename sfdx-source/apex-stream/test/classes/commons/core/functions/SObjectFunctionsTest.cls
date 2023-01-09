@@ -29,10 +29,10 @@ private class SObjectFunctionsTest {
         ISObjectFunction getParentName = SObjectFunctions.get(accountName);
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(con.get(fieldName), getName.apply(con));
-            Validate.assertEquals(con.get(field), getName1.apply(con));
-            Validate.assertEquals(con.getSObject('Account')?.get('Name'), getParentNameSafe.apply(con));
-            Validate.assertEquals(con.getSObject('Account').get('Name'), getParentName.apply(con));
+            Assert.areEqual(con.get(fieldName), getName.apply(con));
+            Assert.areEqual(con.get(field), getName1.apply(con));
+            Assert.areEqual(con.getSObject('Account')?.get('Name'), getParentNameSafe.apply(con));
+            Assert.areEqual(con.getSObject('Account').get('Name'), getParentName.apply(con));
         }
     }
 
@@ -53,10 +53,10 @@ private class SObjectFunctionsTest {
         ISObjectFunction getParentSObjects = SObjectFunctions.getSObjects(accountContacts);
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(con.getSObjects(fieldName), getSObjects.apply(con));
-            Validate.assertEquals(con.getSObjects(field), getSObjects1.apply(con));
-            Validate.assertEquals(con.getSObject('Account')?.getSObjects('Contacts'), getParentSObjectsSafe.apply(con));
-            Validate.assertEquals(con.getSObject('Account').getSObjects('Contacts'), getParentSObjects.apply(con));
+            Assert.areEqual(con.getSObjects(fieldName), getSObjects.apply(con));
+            Assert.areEqual(con.getSObjects(field), getSObjects1.apply(con));
+            Assert.areEqual(con.getSObject('Account')?.getSObjects('Contacts'), getParentSObjectsSafe.apply(con));
+            Assert.areEqual(con.getSObject('Account').getSObjects('Contacts'), getParentSObjects.apply(con));
         }
     }
 
@@ -80,12 +80,12 @@ private class SObjectFunctionsTest {
         ISObjectFunction putName5 = SObjectFunctions.put(accountNameSafe, SObjectFunction.constant(constant));
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(IterTestUtils.deepClone(con).put(field, constant), putName.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(IterTestUtils.deepClone(con).put(fieldName, constant), putName1.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(IterTestUtils.deepClone(con).put(field, constant), putName2.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(IterTestUtils.deepClone(con).put(fieldName, constant), putName3.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(IterTestUtils.deepClone(con).getSObject('Account').put('Name', constant), putName4.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(IterTestUtils.deepClone(con).getSObject('Account')?.put('Name', constant), putName5.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(IterTestUtils.deepClone(con).put(field, constant), putName.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(IterTestUtils.deepClone(con).put(fieldName, constant), putName1.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(IterTestUtils.deepClone(con).put(field, constant), putName2.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(IterTestUtils.deepClone(con).put(fieldName, constant), putName3.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(IterTestUtils.deepClone(con).getSObject('Account').put('Name', constant), putName4.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(IterTestUtils.deepClone(con).getSObject('Account')?.put('Name', constant), putName5.apply(IterTestUtils.deepClone(con)));
         }
     }
 
@@ -98,9 +98,9 @@ private class SObjectFunctionsTest {
     static void others() {
         // When
         for (Contact con : INPUT) {
-            Validate.assertEquals(con.getPopulatedFieldsAsMap(), SObjectFunctions.getPopulatedFieldsAsMap().apply(con));
-            Validate.assertEquals(con.getQuickActionName(), SObjectFunctions.getQuickActionName().apply(con));
-            Validate.assertEquals(con.getSObjectType(), SObjectFunctions.getSObjectType().apply(con));
+            Assert.areEqual(con.getPopulatedFieldsAsMap(), SObjectFunctions.getPopulatedFieldsAsMap().apply(con));
+            Assert.areEqual(con.getQuickActionName(), SObjectFunctions.getQuickActionName().apply(con));
+            Assert.areEqual(con.getSObjectType(), SObjectFunctions.getSObjectType().apply(con));
         }
     }
     

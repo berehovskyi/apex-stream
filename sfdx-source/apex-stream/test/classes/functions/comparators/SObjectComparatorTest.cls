@@ -35,8 +35,8 @@ private class SObjectComparatorTest {
             Integer expected1 = (value == null || value2 == null)
                     ? (value == value2 ? 0 : value == null ? 1 : -1)
                     : (value > value2 ? 1 : value == value2 ? 0 : -1);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 
@@ -66,12 +66,12 @@ private class SObjectComparatorTest {
             Integer expected1 = (value == null || value2 == null)
                     ? (value == value2 ? 0 : value == null ? -1 : 1)
                     : (value > value2 ? 1 : value == value2 ? 0 : -1);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
-            Validate.assertEquals(expected, comparing1.compare(acc, other));
-            Validate.assertEquals(expected1, comparing1.compare(acc, other1));
-            Validate.assertEquals(expected, comparing2.compare(acc, other));
-            Validate.assertEquals(expected1, comparing2.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing1.compare(acc, other));
+            Assert.areEqual(expected1, comparing1.compare(acc, other1));
+            Assert.areEqual(expected, comparing2.compare(acc, other));
+            Assert.areEqual(expected1, comparing2.compare(acc, other1));
         }
     }
 
@@ -101,12 +101,12 @@ private class SObjectComparatorTest {
             Integer expected1 = (value == null || value2 == null)
                     ? (value == value2 ? 0 : value == null ? -1 : 1)
                     : (value > value2 ? 1 : value == value2 ? 0 : -1);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
-            Validate.assertEquals(expected, comparing1.compare(acc, other));
-            Validate.assertEquals(expected1, comparing1.compare(acc, other1));
-            Validate.assertEquals(expected, comparing2.compare(acc, other));
-            Validate.assertEquals(expected1, comparing2.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing1.compare(acc, other));
+            Assert.areEqual(expected1, comparing1.compare(acc, other1));
+            Assert.areEqual(expected, comparing2.compare(acc, other));
+            Assert.areEqual(expected1, comparing2.compare(acc, other1));
         }
     }
 
@@ -136,12 +136,12 @@ private class SObjectComparatorTest {
             Integer expected1 = (value == null || value2 == null)
                     ? (value == value2 ? 0 : value == null ? -1 : 1)
                     : (value > value2 ? 1 : value == value2 ? 0 : -1);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
-            Validate.assertEquals(expected, comparing1.compare(acc, other));
-            Validate.assertEquals(expected1, comparing1.compare(acc, other1));
-            Validate.assertEquals(expected, comparing2.compare(acc, other));
-            Validate.assertEquals(expected1, comparing2.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing1.compare(acc, other));
+            Assert.areEqual(expected1, comparing1.compare(acc, other1));
+            Assert.areEqual(expected, comparing2.compare(acc, other));
+            Assert.areEqual(expected1, comparing2.compare(acc, other1));
         }
     }
 
@@ -171,12 +171,12 @@ private class SObjectComparatorTest {
             Integer expected1 = (value == null || value2 == null)
                     ? (value == value2 ? 0 : value == null ? -1 : 1)
                     : (value > value2 ? 1 : value == value2 ? 0 : -1);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
-            Validate.assertEquals(expected, comparing1.compare(acc, other));
-            Validate.assertEquals(expected1, comparing1.compare(acc, other1));
-            Validate.assertEquals(expected, comparing2.compare(acc, other));
-            Validate.assertEquals(expected1, comparing2.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing1.compare(acc, other));
+            Assert.areEqual(expected1, comparing1.compare(acc, other1));
+            Assert.areEqual(expected, comparing2.compare(acc, other));
+            Assert.areEqual(expected1, comparing2.compare(acc, other1));
         }
     }
 
@@ -212,10 +212,10 @@ private class SObjectComparatorTest {
             Integer expected2 = (acc.Parent == null || other.Parent == null)
                     ? (acc.Parent == other.Parent ? 0 : acc.Parent == null ? -1 : 1)
                     : (pair2[0] == other ? 1 : -1);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
-            Validate.assertEquals(expected2, comparing1.compare(acc, other));
-            Validate.assertEquals(expected2, comparing2.compare(acc, other));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected2, comparing1.compare(acc, other));
+            Assert.areEqual(expected2, comparing2.compare(acc, other));
         }
     }
 
@@ -247,12 +247,12 @@ private class SObjectComparatorTest {
             Integer expected1 = (acc == null || other == null)
                     ? (acc == other ? 0 : acc == null ? 1 : -1)
                     : (pair[0] == other ? -1 : 1);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected, comparing1.compare(acc, other));
-            Validate.assertEquals(expected, comparing2.compare(acc, other));
-            Validate.assertEquals(expected1, comparing3.compare(acc, other));
-            Validate.assertEquals(expected1, comparing4.compare(acc, other));
-            Validate.assertEquals(expected1, comparing5.compare(acc, other));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected, comparing1.compare(acc, other));
+            Assert.areEqual(expected, comparing2.compare(acc, other));
+            Assert.areEqual(expected1, comparing3.compare(acc, other));
+            Assert.areEqual(expected1, comparing4.compare(acc, other));
+            Assert.areEqual(expected1, comparing5.compare(acc, other));
         }
     }
 
@@ -288,10 +288,10 @@ private class SObjectComparatorTest {
                     (value == null || value1 == null)
                     ? (value == value1 ? 0 : value == null ? -1 : 1)
                     : (value > value1 ? 1 : value == value1 ? 0 : -1));
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected, comparing1.compare(acc, other));
-            Validate.assertEquals(expected1, comparing2.compare(acc, other));
-            Validate.assertEquals(expected1, comparing3.compare(acc, other));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected, comparing1.compare(acc, other));
+            Assert.areEqual(expected1, comparing2.compare(acc, other));
+            Assert.areEqual(expected1, comparing3.compare(acc, other));
         }
     }
 
@@ -327,8 +327,8 @@ private class SObjectComparatorTest {
             Integer expected1 = Comparators.compareNullSafeUntyped(value, value2, true) == 0
                     ? Comparators.compareNullSafeUntyped(value5, value3)
                     : Comparators.compareNullSafeUntyped(value, value2, true);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 
@@ -362,8 +362,8 @@ private class SObjectComparatorTest {
             Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
                     ? Comparators.compareNullSafeUntyped(value3, value5)
                     : Comparators.compareNullSafeUntyped(value, value2);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 
@@ -397,8 +397,8 @@ private class SObjectComparatorTest {
             Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
                     ? Comparators.compareNullSafeInts(value3, value5)
                     : Comparators.compareNullSafeUntyped(value, value2);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 
@@ -432,8 +432,8 @@ private class SObjectComparatorTest {
             Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
                     ? Comparators.compareNullSafeLongs(value3, value5)
                     : Comparators.compareNullSafeUntyped(value, value2);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 
@@ -467,8 +467,8 @@ private class SObjectComparatorTest {
             Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
                     ? Comparators.compareNullSafeDoubles(value3, value5)
                     : Comparators.compareNullSafeUntyped(value, value2);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 
@@ -502,8 +502,8 @@ private class SObjectComparatorTest {
             Integer expected1 = Comparators.compareNullSafeUntyped(value, value2) == 0
                     ? Comparators.compareNullSafeSObjects(value3, value5)
                     : Comparators.compareNullSafeUntyped(value, value2);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 
@@ -546,8 +546,8 @@ private class SObjectComparatorTest {
                     : Comparators.compareNullSafeUntyped(value, value2) == 0
                             ? Comparators.compareNullSafeUntyped(value3, value5)
                             : Comparators.compareNullSafeUntyped(value2, value);
-            Validate.assertEquals(expected, comparing.compare(acc, other));
-            Validate.assertEquals(expected1, comparing.compare(acc, other1));
+            Assert.areEqual(expected, comparing.compare(acc, other));
+            Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
     }
 

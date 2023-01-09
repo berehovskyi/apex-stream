@@ -22,8 +22,8 @@ private class IntFunctionsTest {
         IIntFunction toObject = IntFunctions.toObject();
         // Then
         for (Integer i : input) {
-            Validate.assertEquals(String.valueOf(i), toString.apply(i));
-            Validate.assertEquals((Object) i, toObject.apply(i));
+            Assert.areEqual(String.valueOf(i), toString.apply(i));
+            Assert.areEqual((Object) i, toObject.apply(i));
         }
     }
 

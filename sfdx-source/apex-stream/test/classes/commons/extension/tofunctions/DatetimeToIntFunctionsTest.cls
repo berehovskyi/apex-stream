@@ -51,22 +51,22 @@ private class DatetimeToIntFunctionsTest {
         IToIntFunction yearGmt = DatetimeToIntFunctions.yearGmt();
         // Then
         for (Datetime dt : INPUT) {
-            Validate.assertEquals(dt.day(), day.apply(dt));
-            Validate.assertEquals(dt.dayGmt(), dayGmt.apply(dt));
-            Validate.assertEquals(dt.dayOfYear(), dayOfYear.apply(dt));
-            Validate.assertEquals(dt.dayOfYearGmt(), dayOfYearGmt.apply(dt));
-            Validate.assertEquals(dt.hour(), hour.apply(dt));
-            Validate.assertEquals(dt.hourGmt(), hourGmt.apply(dt));
-            Validate.assertEquals(dt.millisecond(), millisecond.apply(dt));
-            Validate.assertEquals(dt.millisecondGmt(), millisecondGmt.apply(dt));
-            Validate.assertEquals(dt.minute(), minute.apply(dt));
-            Validate.assertEquals(dt.minuteGmt(), minuteGmt.apply(dt));
-            Validate.assertEquals(dt.month(), month.apply(dt));
-            Validate.assertEquals(dt.monthGmt(), monthGmt.apply(dt));
-            Validate.assertEquals(dt.second(), second.apply(dt));
-            Validate.assertEquals(dt.secondGmt(), secondGmt.apply(dt));
-            Validate.assertEquals(dt.year(), year.apply(dt));
-            Validate.assertEquals(dt.yearGmt(), yearGmt.apply(dt));
+            Assert.areEqual(dt.day(), day.apply(dt));
+            Assert.areEqual(dt.dayGmt(), dayGmt.apply(dt));
+            Assert.areEqual(dt.dayOfYear(), dayOfYear.apply(dt));
+            Assert.areEqual(dt.dayOfYearGmt(), dayOfYearGmt.apply(dt));
+            Assert.areEqual(dt.hour(), hour.apply(dt));
+            Assert.areEqual(dt.hourGmt(), hourGmt.apply(dt));
+            Assert.areEqual(dt.millisecond(), millisecond.apply(dt));
+            Assert.areEqual(dt.millisecondGmt(), millisecondGmt.apply(dt));
+            Assert.areEqual(dt.minute(), minute.apply(dt));
+            Assert.areEqual(dt.minuteGmt(), minuteGmt.apply(dt));
+            Assert.areEqual(dt.month(), month.apply(dt));
+            Assert.areEqual(dt.monthGmt(), monthGmt.apply(dt));
+            Assert.areEqual(dt.second(), second.apply(dt));
+            Assert.areEqual(dt.secondGmt(), secondGmt.apply(dt));
+            Assert.areEqual(dt.year(), year.apply(dt));
+            Assert.areEqual(dt.yearGmt(), yearGmt.apply(dt));
         }
     }
 

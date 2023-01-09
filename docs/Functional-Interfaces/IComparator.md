@@ -1,6 +1,6 @@
 # IComparator
 
-`APIVERSION: 55`
+`APIVERSION: 56`
 
 `STATUS: ACTIVE`
 

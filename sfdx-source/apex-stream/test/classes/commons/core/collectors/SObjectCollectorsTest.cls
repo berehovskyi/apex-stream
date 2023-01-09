@@ -106,7 +106,7 @@ private class SObjectCollectorsTest {
         List<String> actual2 = (List<String>) Stream.of(ACCOUNTS).collect(toNameListCollector1);
         List<String> actual3 = (List<String>) Stream.of(ACCOUNTS).collect(toNameListCollector2);
         // Then
-        Validate.assertEquals(ACCOUNTS, actual);
+        Assert.areEqual(ACCOUNTS, actual);
         List<String> expected = new List<String>{
                 (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME),
                 (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME),
@@ -119,9 +119,9 @@ private class SObjectCollectorsTest {
                 (String) ACCOUNTS[8].get(IterTestUtils.CONSTS.NAME),
                 (String) ACCOUNTS[9].get(IterTestUtils.CONSTS.NAME)
         };
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
     }
 
     /**
@@ -146,7 +146,7 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[8],
                 ACCOUNTS[9]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
     }
 
     /**
@@ -160,8 +160,8 @@ private class SObjectCollectorsTest {
         Map<Id, SObject> actual = (Map<Id, SObject>) Stream.of(ACCOUNTS).collect(toMapCollector);
         Map<Id, Account> actual1 = (Map<Id, Account>) Stream.of(ACCOUNTS).collect(toMapCollector.cast(Map<Id, Account>.class));
         // Then
-        Validate.assertEquals(new Map<Id, Account>(ACCOUNTS), actual);
-        Validate.assertEquals(new Map<Id, Account>(ACCOUNTS), actual1);
+        Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual);
+        Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual1);
     }
 
     /**
@@ -185,9 +185,9 @@ private class SObjectCollectorsTest {
                 (Boolean) CONTACTS[3].get(IterTestUtils.CONSTS.DO_NOT_CALL),
                 (Boolean) CONTACTS[4].get(IterTestUtils.CONSTS.DO_NOT_CALL)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -211,9 +211,9 @@ private class SObjectCollectorsTest {
                 (Id) CONTACTS[3].get(IterTestUtils.CONSTS.ID),
                 (Id) CONTACTS[4].get(IterTestUtils.CONSTS.ID)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -237,9 +237,9 @@ private class SObjectCollectorsTest {
                 (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME),
                 (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -264,9 +264,9 @@ private class SObjectCollectorsTest {
                 (Blob) ATTACHMENTS[4].get(IterTestUtils.CONSTS.BODY),
                 (Blob) ATTACHMENTS[5].get(IterTestUtils.CONSTS.BODY)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -290,9 +290,9 @@ private class SObjectCollectorsTest {
                 (Date) CONTACTS[3].get(IterTestUtils.CONSTS.BIRTHDATE),
                 (Date) CONTACTS[4].get(IterTestUtils.CONSTS.BIRTHDATE)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -316,9 +316,9 @@ private class SObjectCollectorsTest {
                 (Datetime) EVENTS[3].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME),
                 (Datetime) EVENTS[4].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -342,9 +342,9 @@ private class SObjectCollectorsTest {
                 (Time) SLOTS[3].get(IterTestUtils.CONSTS.START_TIME),
                 (Time) SLOTS[4].get(IterTestUtils.CONSTS.START_TIME)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -373,9 +373,9 @@ private class SObjectCollectorsTest {
                 (Integer) ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES),
                 (Integer) ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -404,9 +404,9 @@ private class SObjectCollectorsTest {
                 (Long) ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES),
                 (Long) ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -435,9 +435,9 @@ private class SObjectCollectorsTest {
                 (Double) ACCOUNTS[8].get(IterTestUtils.CONSTS.BILLING_LATITUDE),
                 (Double) ACCOUNTS[9].get(IterTestUtils.CONSTS.BILLING_LATITUDE)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -466,9 +466,9 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[8].get(IterTestUtils.CONSTS.BILLING_LATITUDE),
                 ACCOUNTS[9].get(IterTestUtils.CONSTS.BILLING_LATITUDE)
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
     }
 
     /**
@@ -495,7 +495,7 @@ private class SObjectCollectorsTest {
             input1.add(input1[0]);
             Stream.of(input1).collect(SObjectCollectors.toByBoolMap(IterTestUtils.CONSTS.DO_NOT_CALL));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<Boolean, Contact> expected = new Map<Boolean, Contact>{
@@ -503,23 +503,23 @@ private class SObjectCollectorsTest {
                 (Boolean) CONTACTS[1].get(IterTestUtils.CONSTS.DO_NOT_CALL) => CONTACTS[1],
                 (Boolean) CONTACTS[4].get(IterTestUtils.CONSTS.DO_NOT_CALL) => CONTACTS[4]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
         Map<Boolean, SObject> expected1 = new Map<Boolean, SObject>{
                 (Boolean) CONTACTS[2].get(IterTestUtils.CONSTS.DO_NOT_CALL) => CONTACTS[2].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
                 (Boolean) CONTACTS[3].get(IterTestUtils.CONSTS.DO_NOT_CALL) => CONTACTS[3].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
                 (Boolean) CONTACTS[4].get(IterTestUtils.CONSTS.DO_NOT_CALL) => CONTACTS[4].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME)
         };
-        Validate.assertEquals(expected1, actual4);
+        Assert.areEqual(expected1, actual4);
         Map<Boolean, String> expected2 = new Map<Boolean, String>{
                 (Boolean) CONTACTS[0].get(IterTestUtils.CONSTS.DO_NOT_CALL) => (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME),
                 (Boolean) CONTACTS[1].get(IterTestUtils.CONSTS.DO_NOT_CALL) => (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME),
                 (Boolean) CONTACTS[4].get(IterTestUtils.CONSTS.DO_NOT_CALL) => (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -549,7 +549,7 @@ private class SObjectCollectorsTest {
         try {
             Stream.of(input).collect(SObjectCollectors.toByIdMap(IterTestUtils.CONSTS.ACCOUNT_ID));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<Id, Contact> expected = new Map<Id, Contact>{
@@ -559,11 +559,11 @@ private class SObjectCollectorsTest {
                 (Id) CONTACTS[3].get(IterTestUtils.CONSTS.ACCOUNT_ID) => CONTACTS[3],
                 (Id) CONTACTS[4].get(IterTestUtils.CONSTS.ACCOUNT_ID) => CONTACTS[4]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual8);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual8);
         Map<Id, SObject> expected1 = new Map<Id, SObject>{
                 (Id) CONTACTS[0].get(IterTestUtils.CONSTS.ACCOUNT_ID) => CONTACTS[0].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
                 (Id) CONTACTS[1].get(IterTestUtils.CONSTS.ACCOUNT_ID) => CONTACTS[1].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
@@ -571,8 +571,8 @@ private class SObjectCollectorsTest {
                 (Id) CONTACTS[3].get(IterTestUtils.CONSTS.ACCOUNT_ID) => CONTACTS[3].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
                 (Id) CONTACTS[4].get(IterTestUtils.CONSTS.ACCOUNT_ID) => CONTACTS[4].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME)
         };
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual7);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual7);
         Map<Id, String> expected2 = new Map<Id, String>{
                 (Id) CONTACTS[0].get(IterTestUtils.CONSTS.ACCOUNT_ID) => (String) CONTACTS[0].get(IterTestUtils.CONSTS.Contact.LastName),
                 (Id) CONTACTS[1].get(IterTestUtils.CONSTS.ACCOUNT_ID) => (String) CONTACTS[1].get(IterTestUtils.CONSTS.Contact.LastName),
@@ -580,8 +580,8 @@ private class SObjectCollectorsTest {
                 (Id) CONTACTS[3].get(IterTestUtils.CONSTS.ACCOUNT_ID) => (String) CONTACTS[3].get(IterTestUtils.CONSTS.Contact.LastName),
                 (Id) CONTACTS[4].get(IterTestUtils.CONSTS.ACCOUNT_ID) => (String) CONTACTS[4].get(IterTestUtils.CONSTS.Contact.LastName)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -607,7 +607,7 @@ private class SObjectCollectorsTest {
             input.add(input[0]);
             Stream.of(input).collect(SObjectCollectors.toByStringMap(IterTestUtils.CONSTS.FIRST_NAME));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<String, Contact> expected = new Map<String, Contact>{
@@ -617,10 +617,10 @@ private class SObjectCollectorsTest {
                 (String) CONTACTS[3].get(IterTestUtils.CONSTS.FIRST_NAME) => CONTACTS[3],
                 (String) CONTACTS[4].get(IterTestUtils.CONSTS.FIRST_NAME) => CONTACTS[4]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
         Map<String, SObject> expected1 = new Map<String, SObject>{
                 (String) CONTACTS[0].get(IterTestUtils.CONSTS.FIRST_NAME) => CONTACTS[0].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
                 (String) CONTACTS[1].get(IterTestUtils.CONSTS.FIRST_NAME) => CONTACTS[1].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
@@ -628,7 +628,7 @@ private class SObjectCollectorsTest {
                 (String) CONTACTS[3].get(IterTestUtils.CONSTS.FIRST_NAME) => CONTACTS[3].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME),
                 (String) CONTACTS[4].get(IterTestUtils.CONSTS.FIRST_NAME) => CONTACTS[4].getSObject(IterTestUtils.CONSTS.Account.SOBJECT_NAME)
         };
-        Validate.assertEquals(expected1, actual4);
+        Assert.areEqual(expected1, actual4);
         Map<String, String> expected2 = new Map<String, String>{
                 (String) CONTACTS[0].get(IterTestUtils.CONSTS.FIRST_NAME) => (String) CONTACTS[0].get(IterTestUtils.CONSTS.Contact.LastName),
                 (String) CONTACTS[1].get(IterTestUtils.CONSTS.FIRST_NAME) => (String) CONTACTS[1].get(IterTestUtils.CONSTS.Contact.LastName),
@@ -636,8 +636,8 @@ private class SObjectCollectorsTest {
                 (String) CONTACTS[3].get(IterTestUtils.CONSTS.FIRST_NAME) => (String) CONTACTS[3].get(IterTestUtils.CONSTS.Contact.LastName),
                 (String) CONTACTS[4].get(IterTestUtils.CONSTS.FIRST_NAME) => (String) CONTACTS[4].get(IterTestUtils.CONSTS.Contact.LastName)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -662,7 +662,7 @@ private class SObjectCollectorsTest {
             input.add(input[0]);
             Stream.of(input).collect(SObjectCollectors.toByBlobMap(IterTestUtils.CONSTS.BODY));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<Blob, Attachment> expected = new Map<Blob, Attachment>{
@@ -673,11 +673,11 @@ private class SObjectCollectorsTest {
                 (Blob) ATTACHMENTS[4].get(IterTestUtils.CONSTS.BODY) => ATTACHMENTS[4],
                 (Blob) ATTACHMENTS[5].get(IterTestUtils.CONSTS.BODY) => ATTACHMENTS[5]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Blob, String> expected2 = new Map<Blob, String>{
                 (Blob) ATTACHMENTS[0].get(IterTestUtils.CONSTS.BODY) => (String) ATTACHMENTS[0].get(IterTestUtils.CONSTS.Attachment.Name),
                 (Blob) ATTACHMENTS[1].get(IterTestUtils.CONSTS.BODY) => (String) ATTACHMENTS[1].get(IterTestUtils.CONSTS.Attachment.Name),
@@ -686,8 +686,8 @@ private class SObjectCollectorsTest {
                 (Blob) ATTACHMENTS[4].get(IterTestUtils.CONSTS.BODY) => (String) ATTACHMENTS[4].get(IterTestUtils.CONSTS.Attachment.Name),
                 (Blob) ATTACHMENTS[5].get(IterTestUtils.CONSTS.BODY) => (String) ATTACHMENTS[5].get(IterTestUtils.CONSTS.Attachment.Name)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -712,7 +712,7 @@ private class SObjectCollectorsTest {
             input.add(input[0]);
             Stream.of(input).collect(SObjectCollectors.toByDateMap(IterTestUtils.CONSTS.BIRTHDATE));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<Date, Contact> expected = new Map<Date, Contact>{
@@ -722,11 +722,11 @@ private class SObjectCollectorsTest {
                 (Date) CONTACTS[3].get(IterTestUtils.CONSTS.BIRTHDATE) => CONTACTS[3],
                 (Date) CONTACTS[4].get(IterTestUtils.CONSTS.BIRTHDATE) => CONTACTS[4]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Date, String> expected2 = new Map<Date, String>{
                 (Date) CONTACTS[0].get(IterTestUtils.CONSTS.BIRTHDATE) => (String) CONTACTS[0].get(IterTestUtils.CONSTS.Contact.LastName),
                 (Date) CONTACTS[1].get(IterTestUtils.CONSTS.BIRTHDATE) => (String) CONTACTS[1].get(IterTestUtils.CONSTS.Contact.LastName),
@@ -734,8 +734,8 @@ private class SObjectCollectorsTest {
                 (Date) CONTACTS[3].get(IterTestUtils.CONSTS.BIRTHDATE) => (String) CONTACTS[3].get(IterTestUtils.CONSTS.Contact.LastName),
                 (Date) CONTACTS[4].get(IterTestUtils.CONSTS.BIRTHDATE) => (String) CONTACTS[4].get(IterTestUtils.CONSTS.Contact.LastName)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -760,7 +760,7 @@ private class SObjectCollectorsTest {
             input.add(input[0]);
             Stream.of(input).collect(SObjectCollectors.toByDatetimeMap(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<Datetime, Event> expected = new Map<Datetime, Event>{
@@ -770,11 +770,11 @@ private class SObjectCollectorsTest {
                 (Datetime) EVENTS[3].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME) => EVENTS[3],
                 (Datetime) EVENTS[4].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME) => EVENTS[4]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Datetime, String> expected2 = new Map<Datetime, String>{
                 (Datetime) EVENTS[0].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME) => (String) EVENTS[0].get(IterTestUtils.CONSTS.Event.Description),
                 (Datetime) EVENTS[1].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME) => (String) EVENTS[1].get(IterTestUtils.CONSTS.Event.Description),
@@ -782,8 +782,8 @@ private class SObjectCollectorsTest {
                 (Datetime) EVENTS[3].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME) => (String) EVENTS[3].get(IterTestUtils.CONSTS.Event.Description),
                 (Datetime) EVENTS[4].get(IterTestUtils.CONSTS.ACTIVITY_DATE_TIME) => (String) EVENTS[4].get(IterTestUtils.CONSTS.Event.Description)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -808,7 +808,7 @@ private class SObjectCollectorsTest {
             input.add(input[0]);
             Stream.of(input).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.START_TIME));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<Time, TimeSlot> expected = new Map<Time, TimeSlot>{
@@ -818,11 +818,11 @@ private class SObjectCollectorsTest {
                 (Time) SLOTS[3].get(IterTestUtils.CONSTS.START_TIME) => SLOTS[3],
                 (Time) SLOTS[4].get(IterTestUtils.CONSTS.START_TIME) => SLOTS[4]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Time, Time> expected2 = new Map<Time, Time>{
                 (Time) SLOTS[0].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[0].get(IterTestUtils.CONSTS.END_TIME),
                 (Time) SLOTS[1].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[1].get(IterTestUtils.CONSTS.END_TIME),
@@ -830,8 +830,8 @@ private class SObjectCollectorsTest {
                 (Time) SLOTS[3].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[3].get(IterTestUtils.CONSTS.END_TIME),
                 (Time) SLOTS[4].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[4].get(IterTestUtils.CONSTS.END_TIME)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -856,7 +856,7 @@ private class SObjectCollectorsTest {
             input.add(input[0]);
             Stream.of(input).collect(SObjectCollectors.toByIntMap(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES));
         } catch (Exception exc) {
-            Validate.assert(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
+            Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
         Map<Integer, Account> expected = new Map<Integer, Account>{
@@ -871,11 +871,11 @@ private class SObjectCollectorsTest {
                 (Integer) ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => ACCOUNTS[8],
                 (Integer) ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => ACCOUNTS[9]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Integer, String> expected2 = new Map<Integer, String>{
                 (Integer) ACCOUNTS[0].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.Account.Name),
                 (Integer) ACCOUNTS[1].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.Account.Name),
@@ -888,8 +888,8 @@ private class SObjectCollectorsTest {
                 (Integer) ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[8].get(IterTestUtils.CONSTS.Account.Name),
                 (Integer) ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[9].get(IterTestUtils.CONSTS.Account.Name)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -922,11 +922,11 @@ private class SObjectCollectorsTest {
                 (Long) ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => ACCOUNTS[8],
                 (Long) ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => ACCOUNTS[9]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Long, String> expected2 = new Map<Long, String>{
                 (Long) ACCOUNTS[0].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.Account.Name),
                 (Long) ACCOUNTS[1].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.Account.Name),
@@ -939,8 +939,8 @@ private class SObjectCollectorsTest {
                 (Long) ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[8].get(IterTestUtils.CONSTS.Account.Name),
                 (Long) ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[9].get(IterTestUtils.CONSTS.Account.Name)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -973,11 +973,11 @@ private class SObjectCollectorsTest {
                 (Double) ACCOUNTS[8].get(IterTestUtils.CONSTS.Account.BillingLatitude) => ACCOUNTS[8],
                 (Double) ACCOUNTS[9].get(IterTestUtils.CONSTS.Account.BillingLatitude) => ACCOUNTS[9]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Double, String> expected2 = new Map<Double, String>{
                 (Double) ACCOUNTS[0].get(IterTestUtils.CONSTS.Account.BillingLatitude) => (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.Account.Name),
                 (Double) ACCOUNTS[1].get(IterTestUtils.CONSTS.Account.BillingLatitude) => (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.Account.Name),
@@ -990,8 +990,8 @@ private class SObjectCollectorsTest {
                 (Double) ACCOUNTS[8].get(IterTestUtils.CONSTS.Account.BillingLatitude) => (String) ACCOUNTS[8].get(IterTestUtils.CONSTS.Account.Name),
                 (Double) ACCOUNTS[9].get(IterTestUtils.CONSTS.Account.BillingLatitude) => (String) ACCOUNTS[9].get(IterTestUtils.CONSTS.Account.Name)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -1024,11 +1024,11 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => ACCOUNTS[8],
                 ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => ACCOUNTS[9]
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
         Map<Object, String> expected2 = new Map<Object, String>{
                 ACCOUNTS[0].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.Account.Name),
                 ACCOUNTS[1].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.Account.Name),
@@ -1041,8 +1041,8 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[8].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[8].get(IterTestUtils.CONSTS.Account.Name),
                 ACCOUNTS[9].get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) => (String) ACCOUNTS[9].get(IterTestUtils.CONSTS.Account.Name)
         };
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -1070,25 +1070,25 @@ private class SObjectCollectorsTest {
                 false => new List<Contact>{ CONTACTS[1], CONTACTS[3] },
                 null => new List<Contact>{ CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Boolean, List<String>> expected1 = new Map<Boolean, List<String>>{
                 true => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME) },
                 false => new List<String>{ (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) },
                 null => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Boolean, Map<Boolean, List<String>>> expected2 = new Map<Boolean, Map<Boolean, List<String>>>{
                 true => new Map<Boolean, List<String>>{ true => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 false => new Map<Boolean, List<String>>{ true => new List<String>{ (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME) }, false => new List<String>{ (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 null => new Map<Boolean, List<String>>{ false => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1121,25 +1121,25 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[1].Id => new List<Contact>{ CONTACTS[2], CONTACTS[3] },
                 null => new List<Contact>{ CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Id, List<String>> expected1 = new Map<Id, List<String>>{
                 ACCOUNTS[0].Id => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME) },
                 ACCOUNTS[1].Id => new List<String>{ (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) },
                 null => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Id, Map<Id, List<String>>> expected2 = new Map<Id, Map<Id, List<String>>>{
                 ACCOUNTS[0].Id => new Map<Id, List<String>>{ CONTACTS[0].Id => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME) }, CONTACTS[1].Id => new List<String>{ (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 ACCOUNTS[1].Id => new Map<Id, List<String>>{ CONTACTS[2].Id => new List<String>{ (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME) }, CONTACTS[3].Id => new List<String>{ (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 null => new Map<Id, List<String>>{ CONTACTS[4].Id => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1167,25 +1167,25 @@ private class SObjectCollectorsTest {
                 IterTestUtils.CONSTS.UK => new List<Contact>{ CONTACTS[2], CONTACTS[3] },
                 null => new List<Contact>{ CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<String, List<String>> expected1 = new Map<String, List<String>>{
                 IterTestUtils.CONSTS.FRANCE => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME) },
                 IterTestUtils.CONSTS.UK => new List<String>{ (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) },
                 null => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<String, Map<String, List<String>>> expected2 = new Map<String, Map<String, List<String>>>{
                 IterTestUtils.CONSTS.FRANCE => new Map<String, List<String>>{ IterTestUtils.CONSTS.PARIS => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME) }, IterTestUtils.CONSTS.LYON => new List<String>{ (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 IterTestUtils.CONSTS.UK => new Map<String, List<String>>{ IterTestUtils.CONSTS.LONDON => new List<String>{ (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME) }, IterTestUtils.CONSTS.BRISTOL => new List<String>{ (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1218,18 +1218,18 @@ private class SObjectCollectorsTest {
                 ATTACHMENTS[1].Body => new List<Attachment>{ ATTACHMENTS[1], ATTACHMENTS[3] },
                 null => new List<Attachment>{ ATTACHMENTS[5] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Blob, List<String>> expected1 = new Map<Blob, List<String>>{
                 ATTACHMENTS[0].Body => new List<String>{ (String) ATTACHMENTS[0].get(IterTestUtils.CONSTS.NAME), (String) ATTACHMENTS[2].get(IterTestUtils.CONSTS.NAME), (String) ATTACHMENTS[4].get(IterTestUtils.CONSTS.NAME) },
                 ATTACHMENTS[1].Body => new List<String>{ (String) ATTACHMENTS[1].get(IterTestUtils.CONSTS.NAME), (String) ATTACHMENTS[3].get(IterTestUtils.CONSTS.NAME) },
                 null => new List<String>{ (String) ATTACHMENTS[5].get(IterTestUtils.CONSTS.NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Blob, Map<String, List<String>>> expected2 = new Map<Blob, Map<String, List<String>>>{
                 ATTACHMENTS[0].Body => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.DOC => new List<String>{ (String) ATTACHMENTS[0].get(IterTestUtils.CONSTS.NAME), (String) ATTACHMENTS[2].get(IterTestUtils.CONSTS.NAME) },
@@ -1241,8 +1241,8 @@ private class SObjectCollectorsTest {
                 },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) ATTACHMENTS[5].get(IterTestUtils.CONSTS.NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1275,25 +1275,25 @@ private class SObjectCollectorsTest {
                 CONTACTS[1].Birthdate => new List<Contact>{ CONTACTS[1], CONTACTS[3] },
                 null => new List<Contact>{ CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Date, List<String>> expected1 = new Map<Date, List<String>>{
                 CONTACTS[0].Birthdate => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME) },
                 CONTACTS[1].Birthdate => new List<String>{ (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) },
                 null => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Date, Map<String, List<String>>> expected2 = new Map<Date, Map<String, List<String>>>{
                 CONTACTS[0].Birthdate => new Map<String, List<String>>{ IterTestUtils.CONSTS.HR => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME) }, IterTestUtils.CONSTS.FINANCE => new List<String>{ (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 CONTACTS[1].Birthdate => new Map<String, List<String>>{ IterTestUtils.CONSTS.HR => new List<String>{ (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME) }, IterTestUtils.CONSTS.FINANCE => new List<String>{ (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) } },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1326,25 +1326,25 @@ private class SObjectCollectorsTest {
                 EVENTS[1].ActivityDateTime => new List<Event>{ EVENTS[1], EVENTS[3] },
                 null => new List<Event>{ EVENTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Datetime, List<String>> expected1 = new Map<Datetime, List<String>>{
                 EVENTS[0].ActivityDateTime => new List<String>{ (String) EVENTS[0].get(IterTestUtils.CONSTS.DESCRIPTION), (String) EVENTS[2].get(IterTestUtils.CONSTS.DESCRIPTION) },
                 EVENTS[1].ActivityDateTime => new List<String>{ (String) EVENTS[1].get(IterTestUtils.CONSTS.DESCRIPTION), (String) EVENTS[3].get(IterTestUtils.CONSTS.DESCRIPTION) },
                 null => new List<String>{ (String) EVENTS[4].get(IterTestUtils.CONSTS.DESCRIPTION) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Datetime, Map<String, List<String>>> expected2 = new Map<Datetime, Map<String, List<String>>>{
                 EVENTS[0].ActivityDateTime => new Map<String, List<String>>{ IterTestUtils.CONSTS.CALL => new List<String>{ (String) EVENTS[0].get(IterTestUtils.CONSTS.DESCRIPTION) }, IterTestUtils.CONSTS.EMAIL => new List<String>{ (String) EVENTS[2].get(IterTestUtils.CONSTS.DESCRIPTION) } },
                 EVENTS[1].ActivityDateTime => new Map<String, List<String>>{ IterTestUtils.CONSTS.CALL => new List<String>{ (String) EVENTS[1].get(IterTestUtils.CONSTS.DESCRIPTION) }, IterTestUtils.CONSTS.EMAIL => new List<String>{ (String) EVENTS[3].get(IterTestUtils.CONSTS.DESCRIPTION) } },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) EVENTS[4].get(IterTestUtils.CONSTS.DESCRIPTION) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1377,25 +1377,25 @@ private class SObjectCollectorsTest {
                 SLOTS[1].StartTime => new List<TimeSlot>{ SLOTS[1], SLOTS[3] },
                 null => new List<TimeSlot>{ SLOTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Time, List<Id>> expected1 = new Map<Time, List<Id>>{
                 SLOTS[0].StartTime => new List<Id>{ (Id) SLOTS[0].get(IterTestUtils.CONSTS.ID), (Id) SLOTS[2].get(IterTestUtils.CONSTS.ID) },
                 SLOTS[1].StartTime => new List<Id>{ (Id) SLOTS[1].get(IterTestUtils.CONSTS.ID), (Id) SLOTS[3].get(IterTestUtils.CONSTS.ID) },
                 null => new List<Id>{ (Id) SLOTS[4].get(IterTestUtils.CONSTS.ID) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Time, Map<String, List<Id>>> expected2 = new Map<Time, Map<String, List<Id>>>{
                 SLOTS[0].StartTime => new Map<String, List<Id>>{ IterTestUtils.CONSTS.NORMAL => new List<Id>{ (Id) SLOTS[0].get(IterTestUtils.CONSTS.ID) }, IterTestUtils.CONSTS.EXTENDED => new List<Id>{ (Id) SLOTS[2].get(IterTestUtils.CONSTS.ID) } },
                 SLOTS[1].StartTime => new Map<String, List<Id>>{ IterTestUtils.CONSTS.NORMAL => new List<Id>{ (Id) SLOTS[1].get(IterTestUtils.CONSTS.ID) }, IterTestUtils.CONSTS.EXTENDED => new List<Id>{ (Id) SLOTS[3].get(IterTestUtils.CONSTS.ID) } },
                 null => new Map<String, List<Id>>{ null => new List<Id>{ (Id) SLOTS[4].get(IterTestUtils.CONSTS.ID) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1433,25 +1433,25 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[1].NumberOfEmployees => new List<Account>{ ACCOUNTS[1], ACCOUNTS[3] },
                 null => new List<Account>{ ACCOUNTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Integer, List<String>> expected1 = new Map<Integer, List<String>>{
                 ACCOUNTS[0].NumberOfEmployees => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) },
                 ACCOUNTS[1].NumberOfEmployees => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) },
                 null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Integer, Map<String, List<String>>> expected2 = new Map<Integer, Map<String, List<String>>>{
                 ACCOUNTS[0].NumberOfEmployees => new Map<String, List<String>>{ IterTestUtils.CONSTS.CUSTOMER => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.PARTNER => new List<String>{ (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) } },
                 ACCOUNTS[1].NumberOfEmployees => new Map<String, List<String>>{ IterTestUtils.CONSTS.CUSTOMER => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.PARTNER => new List<String>{ (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) } },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1489,25 +1489,25 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[1].NumberOfEmployees => new List<Account>{ ACCOUNTS[1], ACCOUNTS[3] },
                 null => new List<Account>{ ACCOUNTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Long, List<String>> expected1 = new Map<Long, List<String>>{
                 ACCOUNTS[0].NumberOfEmployees => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) },
                 ACCOUNTS[1].NumberOfEmployees => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) },
                 null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Long, Map<String, List<String>>> expected2 = new Map<Long, Map<String, List<String>>>{
                 ACCOUNTS[0].NumberOfEmployees => new Map<String, List<String>>{ IterTestUtils.CONSTS.CUSTOMER => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.PARTNER => new List<String>{ (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) } },
                 ACCOUNTS[1].NumberOfEmployees => new Map<String, List<String>>{ IterTestUtils.CONSTS.CUSTOMER => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.PARTNER => new List<String>{ (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) } },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1545,25 +1545,25 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[1].BillingLatitude => new List<Account>{ ACCOUNTS[1], ACCOUNTS[3] },
                 null => new List<Account>{ ACCOUNTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Double, List<String>> expected1 = new Map<Double, List<String>>{
                 ACCOUNTS[0].BillingLatitude => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) },
                 ACCOUNTS[1].BillingLatitude => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) },
                 null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Double, Map<String, List<String>>> expected2 = new Map<Double, Map<String, List<String>>>{
                 ACCOUNTS[0].BillingLatitude => new Map<String, List<String>>{ IterTestUtils.CONSTS.FRANCE => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.UK => new List<String>{ (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) } },
                 ACCOUNTS[1].BillingLatitude => new Map<String, List<String>>{ IterTestUtils.CONSTS.FRANCE => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.UK => new List<String>{ (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) } },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1601,25 +1601,25 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[1].BillingLatitude => new List<Account>{ ACCOUNTS[1], ACCOUNTS[3] },
                 null => new List<Account>{ ACCOUNTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Object, List<String>> expected1 = new Map<Object, List<String>>{
                 ACCOUNTS[0].BillingLatitude => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) },
                 ACCOUNTS[1].BillingLatitude => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME), (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) },
                 null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<Object, Map<String, List<String>>> expected2 = new Map<Object, Map<String, List<String>>>{
                 ACCOUNTS[0].BillingLatitude => new Map<String, List<String>>{ IterTestUtils.CONSTS.FRANCE => new List<String>{ (String) ACCOUNTS[0].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.UK => new List<String>{ (String) ACCOUNTS[2].get(IterTestUtils.CONSTS.NAME) } },
                 ACCOUNTS[1].BillingLatitude => new Map<String, List<String>>{ IterTestUtils.CONSTS.FRANCE => new List<String>{ (String) ACCOUNTS[1].get(IterTestUtils.CONSTS.NAME) }, IterTestUtils.CONSTS.UK => new List<String>{ (String) ACCOUNTS[3].get(IterTestUtils.CONSTS.NAME) } },
                 null => new Map<String, List<String>>{ null => new List<String>{ (String) ACCOUNTS[4].get(IterTestUtils.CONSTS.NAME) } }
         };
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -1643,14 +1643,14 @@ private class SObjectCollectorsTest {
                 true => new List<Contact>{ CONTACTS[2], CONTACTS[3] },
                 false => new List<Contact>{ CONTACTS[0], CONTACTS[1], CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Map<Boolean, List<String>> expected1 = new Map<Boolean, List<String>>{
                 true => new List<String>{ (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[3].get(IterTestUtils.CONSTS.LAST_NAME) },
                 false => new List<String>{ (String) CONTACTS[0].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[1].get(IterTestUtils.CONSTS.LAST_NAME), (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) }
         };
-        Validate.assertEquals(expected1, actual3);
+        Assert.areEqual(expected1, actual3);
         Map<Boolean, Map<String, List<String>>> expected2 = new Map<Boolean, Map<String, List<String>>>{
                 true => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.LONDON => new List<String>{ (String) CONTACTS[2].get(IterTestUtils.CONSTS.LAST_NAME) },
@@ -1662,8 +1662,8 @@ private class SObjectCollectorsTest {
                         null => new List<String>{ (String) CONTACTS[4].get(IterTestUtils.CONSTS.LAST_NAME) }
                 }
         };
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
+        Assert.areEqual(expected2, actual4);
+        Assert.areEqual(expected2, actual5);
     }
 
     /**
@@ -1687,15 +1687,15 @@ private class SObjectCollectorsTest {
                         + CONTACTS[2].LastName
                         + CONTACTS[3].LastName
                         + CONTACTS[4].LastName;
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
         String expected1 =
                                       CONTACTS[0].LastName
                         + delimiter + CONTACTS[1].LastName
                         + delimiter + CONTACTS[2].LastName
                         + delimiter + CONTACTS[3].LastName
                         + delimiter + CONTACTS[4].LastName;
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual2);
         String expected2 = prefix +
                                               CONTACTS[0].LastName
                                 + delimiter + CONTACTS[1].LastName
@@ -1703,7 +1703,7 @@ private class SObjectCollectorsTest {
                                 + delimiter + CONTACTS[3].LastName
                                 + delimiter + CONTACTS[4].LastName
                            + suffix;
-        Validate.assertEquals(expected2, actual3);
+        Assert.areEqual(expected2, actual3);
     }
 
     /**
@@ -1727,7 +1727,7 @@ private class SObjectCollectorsTest {
         Integer actual6 = (Integer) Stream.of(ACCOUNTS).collect(SObjectCollectors.summingInt(mapper));
         Map<String, Object> actual7 = (Map<String, Object>) Stream.of(ACCOUNTS).collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.summingInt(mapper)));
         // Then
-        Validate.assertEquals(actual, ACCOUNTS.size());
+        Assert.areEqual(actual, ACCOUNTS.size());
         Integer sum = (
                 ACCOUNTS[0].NumberOfEmployees
                         + ACCOUNTS[1].NumberOfEmployees
@@ -1740,20 +1740,20 @@ private class SObjectCollectorsTest {
                         + ACCOUNTS[8].NumberOfEmployees
         );
         Double expected = (sum) / ((Double) ACCOUNTS.size());
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
         Double expected1 = sum;
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
         Map<String, Integer> expected2 = new Map<String, Integer>{
                 IterTestUtils.CONSTS.CUSTOMER => ACCOUNTS[0].NumberOfEmployees + ACCOUNTS[1].NumberOfEmployees,
                 IterTestUtils.CONSTS.PARTNER => ACCOUNTS[2].NumberOfEmployees + ACCOUNTS[3].NumberOfEmployees + ACCOUNTS[4].NumberOfEmployees,
                 IterTestUtils.CONSTS.COMPETITOR => ACCOUNTS[5].NumberOfEmployees + ACCOUNTS[6].NumberOfEmployees + ACCOUNTS[7].NumberOfEmployees,
                 null => ACCOUNTS[8].NumberOfEmployees
         };
-        Validate.assertEquals(expected2, actual7);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -1787,20 +1787,20 @@ private class SObjectCollectorsTest {
                         + ACCOUNTS[8].NumberOfEmployees
         );
         Double expected = (sum) / ((Double) ACCOUNTS.size());
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Double expected1 = sum;
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
         Map<String, Long> expected2 = new Map<String, Long>{
                 IterTestUtils.CONSTS.CUSTOMER => ACCOUNTS[0].NumberOfEmployees + ACCOUNTS[1].NumberOfEmployees,
                 IterTestUtils.CONSTS.PARTNER => ACCOUNTS[2].NumberOfEmployees + ACCOUNTS[3].NumberOfEmployees + ACCOUNTS[4].NumberOfEmployees,
                 IterTestUtils.CONSTS.COMPETITOR => ACCOUNTS[5].NumberOfEmployees + ACCOUNTS[6].NumberOfEmployees + ACCOUNTS[7].NumberOfEmployees,
                 null => ACCOUNTS[8].NumberOfEmployees
         };
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -1834,20 +1834,20 @@ private class SObjectCollectorsTest {
                         + ACCOUNTS[9].BillingLatitude
         );
         Double expected = (sum) / ((Double) ACCOUNTS.size());
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
         Double expected1 = sum;
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
         Map<String, Double> expected2 = new Map<String, Double>{
                 IterTestUtils.CONSTS.CUSTOMER => ACCOUNTS[0].BillingLatitude + ACCOUNTS[1].BillingLatitude,
                 IterTestUtils.CONSTS.PARTNER => ACCOUNTS[2].BillingLatitude + ACCOUNTS[3].BillingLatitude + ACCOUNTS[5].BillingLatitude,
                 IterTestUtils.CONSTS.COMPETITOR => ACCOUNTS[6].BillingLatitude + ACCOUNTS[7].BillingLatitude + ACCOUNTS[8].BillingLatitude,
                 null => ACCOUNTS[4].BillingLatitude + ACCOUNTS[9].BillingLatitude
         };
-        Validate.assertEquals(expected2, actual6);
+        Assert.areEqual(expected2, actual6);
     }
 
     /**
@@ -1867,19 +1867,19 @@ private class SObjectCollectorsTest {
         Map<String, List<Account>> actual4 = (Map<String, List<Account>>) Stream.of(ACCOUNTS).collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.filtering(predicate)).cast(Map<String, List<Account>>.class));
         // Then
         List<Account> expected = new List<Account>{ ACCOUNTS[2] };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
         List<Account> expected1 = new List<Account>{ ACCOUNTS[0], ACCOUNTS[1], ACCOUNTS[5], ACCOUNTS[7], ACCOUNTS[8], ACCOUNTS[9] };
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual2);
         Set<SObject> expected2 = new Set<SObject>{ ACCOUNTS[0], ACCOUNTS[1], ACCOUNTS[5], ACCOUNTS[7], ACCOUNTS[8], ACCOUNTS[9] };
-        Validate.assertEquals(expected2, actual3);
+        Assert.areEqual(expected2, actual3);
         Map<String, List<Account>> expected3 = new Map<String, List<Account>>{
                 IterTestUtils.CONSTS.CUSTOMER => new List<Account>{ ACCOUNTS[0], ACCOUNTS[1] },
                 IterTestUtils.CONSTS.PARTNER => new List<Account>{ ACCOUNTS[5] },
                 IterTestUtils.CONSTS.COMPETITOR => new List<Account>{ ACCOUNTS[7], ACCOUNTS[8] },
                 null => new List<Account>{ ACCOUNTS[9] }
         };
-        Validate.assertEquals(expected3, actual4);
+        Assert.areEqual(expected3, actual4);
     }
 
     /**
@@ -1911,12 +1911,12 @@ private class SObjectCollectorsTest {
                 ACCOUNTS[8].Id,
                 ACCOUNTS[9].Id
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
         Set<Id> expected1 = new Set<Id>(expected);
-        Validate.assertEquals(expected1, actual4);
+        Assert.areEqual(expected1, actual4);
         Map<String, List<Id>> expected2 = new Map<String, List<Id>>{
                 IterTestUtils.CONSTS.CUSTOMER => new List<Id>{
                         ACCOUNTS[0].Id,
@@ -1937,7 +1937,7 @@ private class SObjectCollectorsTest {
                         ACCOUNTS[9].Id
                 }
         };
-        Validate.assertEquals(expected2, actual5);
+        Assert.areEqual(expected2, actual5);
     }
 
     /**
@@ -1965,12 +1965,12 @@ private class SObjectCollectorsTest {
                 expected.addAll(children);
             }
         }
-        Validate.assertEquals(ObjectStream.of(expected).toList(), actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
+        Assert.areEqual(ObjectStream.of(expected).toList(), actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
         Set<SObject> expected1 = new Set<SObject>(expected);
-        Validate.assertEquals(expected1, actual4);
+        Assert.areEqual(expected1, actual4);
         Map<String, List<Contact>> expected2 = new Map<String, List<Contact>>{
                 IterTestUtils.CONSTS.CUSTOMER => new List<Contact>{
                         accounts[0].Contacts[0],
@@ -1987,7 +1987,7 @@ private class SObjectCollectorsTest {
                         accounts[4].Contacts[0]
                 }
         };
-        Validate.assertEquals(expected2, actual5);
+        Assert.areEqual(expected2, actual5);
     }
 
     /**
@@ -2006,7 +2006,7 @@ private class SObjectCollectorsTest {
         Map<String, Object> actual2 = (Map<String, Object>) Stream.of(ACCOUNTS).collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.reducing(accumulator)));
         OptionalSObject actual3 = (OptionalSObject) Stream.of(new List<Account>()).collect(SObjectCollectors.reducing(accumulator));
         // Then
-        Validate.assertEquals(ACCOUNTS[8], actual.get());
+        Assert.areEqual(ACCOUNTS[8], actual.get());
         Account expected2 = new Account(NumberOfEmployees =
                   ACCOUNTS[0].NumberOfEmployees
                 + ACCOUNTS[1].NumberOfEmployees
@@ -2018,15 +2018,15 @@ private class SObjectCollectorsTest {
                 + ACCOUNTS[7].NumberOfEmployees
                 + ACCOUNTS[8].NumberOfEmployees
         );
-        Validate.assertEquals(expected2, actual1);
+        Assert.areEqual(expected2, actual1);
         Map<String, OptionalSObject> expected = new Map<String, OptionalSObject>{
                 IterTestUtils.CONSTS.CUSTOMER => OptionalSObject.of(ACCOUNTS[0]),
                 IterTestUtils.CONSTS.PARTNER => OptionalSObject.of(ACCOUNTS[4]),
                 IterTestUtils.CONSTS.COMPETITOR => OptionalSObject.of(ACCOUNTS[7]),
                 null => OptionalSObject.of(ACCOUNTS[8])
         };
-        Validate.assertEquals(expected, actual2);
-        Validate.assert(actual3.isEmpty(), Label.NoValuePresentErrorMessage);
+        Assert.areEqual(expected, actual2);
+        Assert.isTrue(actual3.isEmpty(), Label.NoValuePresentErrorMessage);
     }
 
     /**
@@ -2047,19 +2047,19 @@ private class SObjectCollectorsTest {
         OptionalSObject actual5 = (OptionalSObject) Stream.of(ACCOUNTS).collect(SObjectCollectors.minimizing(comparator));
         Map<String, Object> actual6 = (Map<String, Object>) Stream.of(ACCOUNTS).collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.minimizing(comparator)));
         // Then
-        Validate.assertEquals(ACCOUNTS[9], actual.get());
-        Validate.assertEquals(ACCOUNTS[9], actual1.get());
-        Validate.assertEquals(ACCOUNTS[9], actual2.get());
-        Validate.assertEquals(ACCOUNTS[4], actual3.get());
-        Validate.assertEquals(ACCOUNTS[4], actual4.get());
-        Validate.assertEquals(ACCOUNTS[4], actual5.get());
+        Assert.areEqual(ACCOUNTS[9], actual.get());
+        Assert.areEqual(ACCOUNTS[9], actual1.get());
+        Assert.areEqual(ACCOUNTS[9], actual2.get());
+        Assert.areEqual(ACCOUNTS[4], actual3.get());
+        Assert.areEqual(ACCOUNTS[4], actual4.get());
+        Assert.areEqual(ACCOUNTS[4], actual5.get());
         Map<String, OptionalSObject> expected = new Map<String, OptionalSObject>{
                 IterTestUtils.CONSTS.CUSTOMER => OptionalSObject.of(ACCOUNTS[1]),
                 IterTestUtils.CONSTS.PARTNER => OptionalSObject.of(ACCOUNTS[3]),
                 IterTestUtils.CONSTS.COMPETITOR => OptionalSObject.of(ACCOUNTS[6]),
                 null => OptionalSObject.of(ACCOUNTS[4])
         };
-        Validate.assertEquals(expected, actual6);
+        Assert.areEqual(expected, actual6);
     }
 
 }

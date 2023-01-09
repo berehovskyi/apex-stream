@@ -61,20 +61,20 @@ private class CollectorTest {
         List<Comparable> actual12 = (List<Comparable>) Stream.of(COMPARABLES).collect(Collectors.toList().cast(List<Comparable>.class));
         List<String> actual13 = (List<String>) Stream.of(STRINGS).collect(Collectors.toList(StringFunctions.toUpperCase()).cast(List<String>.class));
         // Then
-        Validate.assertEquals(BOOLS, actual);
-        Validate.assertEquals(IDS, actual1);
-        Validate.assertEquals(STRINGS, actual2);
-        Validate.assertEquals(BLOBS, actual3);
-        Validate.assertEquals(DATES, actual4);
-        Validate.assertEquals(DATETIMES, actual5);
-        Validate.assertEquals(TIMES, actual6);
-        Validate.assertEquals(INTS, actual7);
-        Validate.assertEquals(LONGS, actual8);
-        Validate.assertEquals(DOUBLES, actual9);
-        Validate.assertEquals(CONTACTS, actual10);
-        Validate.assertEquals(MIX, actual11);
-        Validate.assertEquals(COMPARABLES, actual12);
-        Validate.assertEquals(new List<String>{
+        Assert.areEqual(BOOLS, actual);
+        Assert.areEqual(IDS, actual1);
+        Assert.areEqual(STRINGS, actual2);
+        Assert.areEqual(BLOBS, actual3);
+        Assert.areEqual(DATES, actual4);
+        Assert.areEqual(DATETIMES, actual5);
+        Assert.areEqual(TIMES, actual6);
+        Assert.areEqual(INTS, actual7);
+        Assert.areEqual(LONGS, actual8);
+        Assert.areEqual(DOUBLES, actual9);
+        Assert.areEqual(CONTACTS, actual10);
+        Assert.areEqual(MIX, actual11);
+        Assert.areEqual(COMPARABLES, actual12);
+        Assert.areEqual(new List<String>{
                 STRINGS[0].toUpperCase(),
                 STRINGS[1].toUpperCase(),
                 STRINGS[2].toUpperCase(),
@@ -103,19 +103,19 @@ private class CollectorTest {
         Set<Object> actual11 = (Set<Object>) Stream.of(MIX).collect(Collectors.toSet());
         Set<Object> actual12 = (Set<Object>) Stream.of(COMPARABLES).collect(Collectors.toSet());
         // Then
-        Validate.assertEquals(new Set<Boolean>(BOOLS), actual);
-        Validate.assertEquals(new Set<Id>(IDS), actual1);
-        Validate.assertEquals(new Set<String>(STRINGS), actual2);
-        Validate.assertEquals(new Set<Blob>(BLOBS), actual3);
-        Validate.assertEquals(new Set<Date>(DATES), actual4);
-        Validate.assertEquals(new Set<Datetime>(DATETIMES), actual5);
-        Validate.assertEquals(new Set<Time>(TIMES), actual6);
-        Validate.assertEquals(new Set<Integer>{ (Integer) INTS[0], (Integer) INTS[1], (Integer) INTS[2], (Integer) INTS[3], (Integer) INTS[4] }, actual7);
-        Validate.assertEquals(new Set<Long>{ (Long) LONGS[0], (Long) LONGS[1], (Long) LONGS[2], (Long) LONGS[3], (Long) LONGS[4] }, actual8);
-        Validate.assertEquals(new Set<Double>{ (Double) DOUBLES[0], (Double) DOUBLES[1], (Double) DOUBLES[2], (Double) DOUBLES[3], (Double) DOUBLES[4] }, actual9);
-        Validate.assertEquals(new Set<SObject>{ (SObject) CONTACTS[0], (SObject) CONTACTS[1], (SObject) CONTACTS[2], (SObject) CONTACTS[3], (SObject) CONTACTS[4] }, actual10);
-        Validate.assertEquals(new Set<Object>(MIX), actual11);
-        Validate.assertEquals(new Set<Object>{ (Object) COMPARABLES[0], (Object) COMPARABLES[1], (Object) COMPARABLES[2], (Object) COMPARABLES[3] }, actual12);
+        Assert.areEqual(new Set<Boolean>(BOOLS), actual);
+        Assert.areEqual(new Set<Id>(IDS), actual1);
+        Assert.areEqual(new Set<String>(STRINGS), actual2);
+        Assert.areEqual(new Set<Blob>(BLOBS), actual3);
+        Assert.areEqual(new Set<Date>(DATES), actual4);
+        Assert.areEqual(new Set<Datetime>(DATETIMES), actual5);
+        Assert.areEqual(new Set<Time>(TIMES), actual6);
+        Assert.areEqual(new Set<Integer>{ (Integer) INTS[0], (Integer) INTS[1], (Integer) INTS[2], (Integer) INTS[3], (Integer) INTS[4] }, actual7);
+        Assert.areEqual(new Set<Long>{ (Long) LONGS[0], (Long) LONGS[1], (Long) LONGS[2], (Long) LONGS[3], (Long) LONGS[4] }, actual8);
+        Assert.areEqual(new Set<Double>{ (Double) DOUBLES[0], (Double) DOUBLES[1], (Double) DOUBLES[2], (Double) DOUBLES[3], (Double) DOUBLES[4] }, actual9);
+        Assert.areEqual(new Set<SObject>{ (SObject) CONTACTS[0], (SObject) CONTACTS[1], (SObject) CONTACTS[2], (SObject) CONTACTS[3], (SObject) CONTACTS[4] }, actual10);
+        Assert.areEqual(new Set<Object>(MIX), actual11);
+        Assert.areEqual(new Set<Object>{ (Object) COMPARABLES[0], (Object) COMPARABLES[1], (Object) COMPARABLES[2], (Object) COMPARABLES[3] }, actual12);
     }
 
     /**
@@ -134,11 +134,11 @@ private class CollectorTest {
         Map<Boolean, String> actual2 = (Map<Boolean, String>) Stream.of(PEOPLE).collect(Collectors.toByBoolMap(isActiveFunction, nameFunction, right).cast(Map<Boolean, String>.class));
         // Then
         Map<Boolean, Comparable> expected = new Map<Boolean, Comparable>{ true => PEOPLE[0], false => PEOPLE[1] };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Boolean, String> expected1 = new Map<Boolean, String>{ true => PEOPLE[0].getName(), false => PEOPLE[1].getName() };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Boolean, String> expected2 = new Map<Boolean, String>{ true => PEOPLE[3].getName(), false => PEOPLE[2].getName() };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -165,7 +165,7 @@ private class CollectorTest {
                 ((Contact) CONTACTS[3]).Id => (Contact) CONTACTS[3],
                 ((Contact) CONTACTS[4]).Id => (Contact) CONTACTS[4]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Id, String> expected1 = new Map<Id, String>{
                 ((Contact) CONTACTS[0]).Id => ((Contact) CONTACTS[0]).LastName,
                 ((Contact) CONTACTS[1]).Id => ((Contact) CONTACTS[1]).LastName,
@@ -173,8 +173,8 @@ private class CollectorTest {
                 ((Contact) CONTACTS[3]).Id => ((Contact) CONTACTS[3]).LastName,
                 ((Contact) CONTACTS[4]).Id => ((Contact) CONTACTS[4]).LastName
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -201,15 +201,15 @@ private class CollectorTest {
                 PEOPLE[2].getName() => PEOPLE[2],
                 PEOPLE[3].getName() => PEOPLE[3]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<String, Integer> expected1 = new Map<String, Integer>{
                 PEOPLE[0].getName() => PEOPLE[0].getAge(),
                 PEOPLE[1].getName() => PEOPLE[1].getAge(),
                 PEOPLE[2].getName() => PEOPLE[2].getAge(),
                 PEOPLE[3].getName() => PEOPLE[3].getAge()
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -237,7 +237,7 @@ private class CollectorTest {
                 ((Attachment) ATTACHMENTS[4]).Body => (Attachment) ATTACHMENTS[4],
                 ((Attachment) ATTACHMENTS[5]).Body => (Attachment) ATTACHMENTS[5]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Blob, String> expected1 = new Map<Blob, String>{
                 ((Attachment) ATTACHMENTS[0]).Body => ((Attachment) ATTACHMENTS[0]).Name,
                 ((Attachment) ATTACHMENTS[1]).Body => ((Attachment) ATTACHMENTS[1]).Name,
@@ -246,8 +246,8 @@ private class CollectorTest {
                 ((Attachment) ATTACHMENTS[4]).Body => ((Attachment) ATTACHMENTS[4]).Name,
                 ((Attachment) ATTACHMENTS[5]).Body => ((Attachment) ATTACHMENTS[5]).Name
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -274,7 +274,7 @@ private class CollectorTest {
                 ((Contact) CONTACTS[3]).Birthdate => (Contact) CONTACTS[3],
                 ((Contact) CONTACTS[4]).Birthdate => (Contact) CONTACTS[4]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Date, String> expected1 = new Map<Date, String>{
                 ((Contact) CONTACTS[0]).Birthdate => ((Contact) CONTACTS[0]).LastName,
                 ((Contact) CONTACTS[1]).Birthdate => ((Contact) CONTACTS[1]).LastName,
@@ -282,8 +282,8 @@ private class CollectorTest {
                 ((Contact) CONTACTS[3]).Birthdate => ((Contact) CONTACTS[3]).LastName,
                 ((Contact) CONTACTS[4]).Birthdate => ((Contact) CONTACTS[4]).LastName
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -310,7 +310,7 @@ private class CollectorTest {
                 ((Event) EVENTS[3]).ActivityDateTime => (Event) EVENTS[3],
                 ((Event) EVENTS[4]).ActivityDateTime => (Event) EVENTS[4]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Datetime, String> expected1 = new Map<Datetime, String>{
                 ((Event) EVENTS[0]).ActivityDateTime => ((Event) EVENTS[0]).Description,
                 ((Event) EVENTS[1]).ActivityDateTime => ((Event) EVENTS[1]).Description,
@@ -318,8 +318,8 @@ private class CollectorTest {
                 ((Event) EVENTS[3]).ActivityDateTime => ((Event) EVENTS[3]).Description,
                 ((Event) EVENTS[4]).ActivityDateTime => ((Event) EVENTS[4]).Description
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -347,7 +347,7 @@ private class CollectorTest {
                 ((TimeSlot) SLOTS[3]).StartTime => (TimeSlot) SLOTS[3],
                 ((TimeSlot) SLOTS[4]).StartTime => (TimeSlot) SLOTS[4]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Time, Time> expected1 = new Map<Time, Time>{
                 ((TimeSlot) SLOTS[0]).StartTime => ((TimeSlot) SLOTS[0]).EndTime,
                 ((TimeSlot) SLOTS[1]).StartTime => ((TimeSlot) SLOTS[1]).EndTime,
@@ -355,8 +355,8 @@ private class CollectorTest {
                 ((TimeSlot) SLOTS[3]).StartTime => ((TimeSlot) SLOTS[3]).EndTime,
                 ((TimeSlot) SLOTS[4]).StartTime => ((TimeSlot) SLOTS[4]).EndTime
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -383,15 +383,15 @@ private class CollectorTest {
                 PEOPLE[2].getAge() => PEOPLE[2],
                 PEOPLE[3].getAge() => PEOPLE[3]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Integer, String> expected1 = new Map<Integer, String>{
                 PEOPLE[0].getAge() => PEOPLE[0].getName(),
                 PEOPLE[1].getAge() => PEOPLE[1].getName(),
                 PEOPLE[2].getAge() => PEOPLE[2].getName(),
                 PEOPLE[3].getAge() => PEOPLE[3].getName()
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -418,15 +418,15 @@ private class CollectorTest {
                 PEOPLE[2].getAutoId() => PEOPLE[2],
                 PEOPLE[3].getAutoId() => PEOPLE[3]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Long, String> expected1 = new Map<Long, String>{
                 PEOPLE[0].getAutoId() => PEOPLE[0].getName(),
                 PEOPLE[1].getAutoId() => PEOPLE[1].getName(),
                 PEOPLE[2].getAutoId() => PEOPLE[2].getName(),
                 PEOPLE[3].getAutoId() => PEOPLE[3].getName()
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -453,15 +453,15 @@ private class CollectorTest {
                 PEOPLE[2].getProbability() => PEOPLE[2],
                 PEOPLE[3].getProbability() => PEOPLE[3]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Double, String> expected1 = new Map<Double, String>{
                 PEOPLE[0].getProbability() => PEOPLE[0].getName(),
                 PEOPLE[1].getProbability() => PEOPLE[1].getName(),
                 PEOPLE[2].getProbability() => PEOPLE[2].getName(),
                 PEOPLE[3].getProbability() => PEOPLE[3].getName()
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -488,15 +488,15 @@ private class CollectorTest {
                 PEOPLE[2].getName() => PEOPLE[2],
                 PEOPLE[3].getName() => PEOPLE[3]
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Object, Integer> expected1 = new Map<Object, Integer>{
                 PEOPLE[0].getName() => PEOPLE[0].getAge(),
                 PEOPLE[1].getName() => PEOPLE[1].getAge(),
                 PEOPLE[2].getName() => PEOPLE[2].getAge(),
                 PEOPLE[3].getName() => PEOPLE[3].getAge()
         };
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -523,17 +523,17 @@ private class CollectorTest {
                 true => new List<Comparable>{ PEOPLE[0], PEOPLE[3], richard },
                 false => new List<Comparable>{ PEOPLE[1], PEOPLE[2], luke }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Boolean, List<String>> expected1 = new Map<Boolean, List<String>>{
                 true => new List<String>{ PEOPLE[0].getName(), PEOPLE[3].getName(), richard.getName() },
                 false => new List<String>{ PEOPLE[1].getName(), PEOPLE[2].getName(), luke.getName() }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Boolean, Map<Boolean, List<Comparable>>> expected2 = new Map<Boolean, Map<Boolean, List<Comparable>>>{
                 true => new Map<Boolean, List<Comparable>>{ true => new List<Comparable>{ PEOPLE[0], PEOPLE[3], richard } },
                 false => new Map<Boolean, List<Comparable>>{ true => new List<Comparable>{ PEOPLE[1] }, false => new List<Comparable>{ PEOPLE[2], luke } }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -554,12 +554,12 @@ private class CollectorTest {
                 ((Contact) CONTACTS[0]).AccountId => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[2], (Contact) CONTACTS[4] },
                 ((Contact) CONTACTS[1]).AccountId => new List<Contact>{ (Contact) CONTACTS[1], (Contact) CONTACTS[3] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Id, List<String>> expected1 = new Map<Id, List<String>>{
                 ((Contact) CONTACTS[0]).AccountId => new List<String>{ ((Contact) CONTACTS[0]).LastName, ((Contact) CONTACTS[2]).LastName, ((Contact) CONTACTS[4]).LastName },
                 ((Contact) CONTACTS[1]).AccountId => new List<String>{ ((Contact) CONTACTS[1]).LastName, ((Contact) CONTACTS[3]).LastName }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Id, Map<String, List<Contact>>> expected2 = new Map<Id, Map<String, List<Contact>>>{
                 ((Contact) CONTACTS[0]).AccountId => new Map<String, List<Contact>>{
                         IterTestUtils.CONSTS.HR => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[2] },
@@ -570,7 +570,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.FINANCE => new List<Contact>{ (Contact) CONTACTS[3] }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -591,12 +591,12 @@ private class CollectorTest {
                 ((Contact) CONTACTS[0]).Department => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[1], (Contact) CONTACTS[2] },
                 ((Contact) CONTACTS[3]).Department => new List<Contact>{ (Contact) CONTACTS[3], (Contact) CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<String, List<String>> expected1 = new Map<String, List<String>>{
                 ((Contact) CONTACTS[0]).Department => new List<String>{ ((Contact) CONTACTS[0]).LastName, ((Contact) CONTACTS[1]).LastName, ((Contact) CONTACTS[2]).LastName },
                 ((Contact) CONTACTS[3]).Department => new List<String>{ ((Contact) CONTACTS[3]).LastName, ((Contact) CONTACTS[4]).LastName }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<String, Map<Id, List<Contact>>> expected2 = new Map<String, Map<Id, List<Contact>>>{
                 ((Contact) CONTACTS[0]).Department => new Map<Id, List<Contact>>{
                         ((Contact) CONTACTS[0]).AccountId => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[2] },
@@ -607,7 +607,7 @@ private class CollectorTest {
                         ((Contact) CONTACTS[1]).AccountId => new List<Contact>{ (Contact) CONTACTS[3] }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -633,12 +633,12 @@ private class CollectorTest {
                 ((Attachment) ATTACHMENTS[0]).Body => new List<Attachment>{ (Attachment) ATTACHMENTS[0], (Attachment) ATTACHMENTS[2], (Attachment) ATTACHMENTS[4] },
                 ((Attachment) ATTACHMENTS[1]).Body => new List<Attachment>{ (Attachment) ATTACHMENTS[1], (Attachment) ATTACHMENTS[3], (Attachment) ATTACHMENTS[5] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Blob, List<String>> expected1 = new Map<Blob, List<String>>{
                 ((Attachment) ATTACHMENTS[0]).Body => new List<String>{ ((Attachment) ATTACHMENTS[0]).Name, ((Attachment) ATTACHMENTS[2]).Name, ((Attachment) ATTACHMENTS[4]).Name },
                 ((Attachment) ATTACHMENTS[1]).Body => new List<String>{ ((Attachment) ATTACHMENTS[1]).Name, ((Attachment) ATTACHMENTS[3]).Name, ((Attachment) ATTACHMENTS[5]).Name }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Blob, Map<String, List<String>>> expected2 = new Map<Blob, Map<String, List<String>>>{
                 ((Attachment) ATTACHMENTS[0]).Body => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.DOC => new List<String>{ ((Attachment) ATTACHMENTS[0]).Name, ((Attachment) ATTACHMENTS[2]).Name },
@@ -649,7 +649,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.PDF => new List<String>{ ((Attachment) ATTACHMENTS[3]).Name, ((Attachment) ATTACHMENTS[5]).Name }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -674,12 +674,12 @@ private class CollectorTest {
                 ((Contact) CONTACTS[0]).Birthdate => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[2], (Contact) CONTACTS[4] },
                 ((Contact) CONTACTS[1]).Birthdate => new List<Contact>{ (Contact) CONTACTS[1], (Contact) CONTACTS[3] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Date, List<String>> expected1 = new Map<Date, List<String>>{
                 ((Contact) CONTACTS[0]).Birthdate => new List<String>{ ((Contact) CONTACTS[0]).LastName, ((Contact) CONTACTS[2]).LastName, ((Contact) CONTACTS[4]).LastName },
                 ((Contact) CONTACTS[1]).Birthdate => new List<String>{ ((Contact) CONTACTS[1]).LastName, ((Contact) CONTACTS[3]).LastName }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Date, Map<String, List<String>>> expected2 = new Map<Date, Map<String, List<String>>>{
                 ((Contact) CONTACTS[0]).Birthdate => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.HR => new List<String>{ ((Contact) CONTACTS[0]).LastName, ((Contact) CONTACTS[2]).LastName },
@@ -690,7 +690,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.FINANCE => new List<String>{ ((Contact) CONTACTS[3]).LastName }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -715,12 +715,12 @@ private class CollectorTest {
                 ((Event) EVENTS[0]).ActivityDateTime => new List<Event>{ (Event) EVENTS[0], (Event) EVENTS[2], (Event) EVENTS[4] },
                 ((Event) EVENTS[1]).ActivityDateTime => new List<Event>{ (Event) EVENTS[1], (Event) EVENTS[3] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Datetime, List<String>> expected1 = new Map<Datetime, List<String>>{
                 ((Event) EVENTS[0]).ActivityDateTime => new List<String>{ ((Event) EVENTS[0]).Description, ((Event) EVENTS[2]).Description, ((Event) EVENTS[4]).Description },
                 ((Event) EVENTS[1]).ActivityDateTime => new List<String>{ ((Event) EVENTS[1]).Description, ((Event) EVENTS[3]).Description }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Datetime, Map<String, List<String>>> expected2 = new Map<Datetime, Map<String, List<String>>>{
                 ((Event) EVENTS[0]).ActivityDateTime => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.CALL => new List<String>{ ((Event) EVENTS[0]).Description, ((Event) EVENTS[2]).Description },
@@ -731,7 +731,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.EMAIL => new List<String>{ ((Event) EVENTS[3]).Description }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -756,12 +756,12 @@ private class CollectorTest {
                 ((TimeSlot) SLOTS[0]).StartTime => new List<TimeSlot>{ (TimeSlot) SLOTS[0], (TimeSlot) SLOTS[2], (TimeSlot) SLOTS[4] },
                 ((TimeSlot) SLOTS[1]).StartTime => new List<TimeSlot>{ (TimeSlot) SLOTS[1], (TimeSlot) SLOTS[3] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Time, List<Id>> expected1 = new Map<Time, List<Id>>{
                 ((TimeSlot) SLOTS[0]).StartTime => new List<String>{ ((TimeSlot) SLOTS[0]).Id, ((TimeSlot) SLOTS[2]).Id, ((TimeSlot) SLOTS[4]).Id },
                 ((TimeSlot) SLOTS[1]).StartTime => new List<String>{ ((TimeSlot) SLOTS[1]).Id, ((TimeSlot) SLOTS[3]).Id }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Time, Map<String, List<Id>>> expected2 = new Map<Time, Map<String, List<Id>>>{
                 ((TimeSlot) SLOTS[0]).StartTime => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.NORMAL => new List<String>{ ((TimeSlot) SLOTS[0]).Id, ((TimeSlot) SLOTS[2]).Id },
@@ -772,7 +772,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.EXTENDED => new List<String>{ ((TimeSlot) SLOTS[3]).Id }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -797,12 +797,12 @@ private class CollectorTest {
                 ((Account) ACCOUNTS[0]).NumberOfEmployees => new List<Account>{ (Account) ACCOUNTS[0], (Account) ACCOUNTS[2], (Account) ACCOUNTS[4] },
                 ((Account) ACCOUNTS[1]).NumberOfEmployees => new List<Account>{ (Account) ACCOUNTS[1], (Account) ACCOUNTS[3] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Integer, List<String>> expected1 = new Map<Integer, List<String>>{
                 ((Account) ACCOUNTS[0]).NumberOfEmployees => new List<String>{ ((Account) ACCOUNTS[0]).Name, ((Account) ACCOUNTS[2]).Name, ((Account) ACCOUNTS[4]).Name },
                 ((Account) ACCOUNTS[1]).NumberOfEmployees => new List<String>{ ((Account) ACCOUNTS[1]).Name, ((Account) ACCOUNTS[3]).Name }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Integer, Map<String, List<String>>> expected2 = new Map<Integer, Map<String, List<String>>>{
                 ((Account) ACCOUNTS[0]).NumberOfEmployees => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.CUSTOMER => new List<String>{ ((Account) ACCOUNTS[0]).Name, ((Account) ACCOUNTS[2]).Name },
@@ -813,7 +813,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.PARTNER => new List<String>{ ((Account) ACCOUNTS[3]).Name }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -838,12 +838,12 @@ private class CollectorTest {
                 ((Account) ACCOUNTS[0]).NumberOfEmployees => new List<Account>{ (Account) ACCOUNTS[0], (Account) ACCOUNTS[2], (Account) ACCOUNTS[4] },
                 ((Account) ACCOUNTS[1]).NumberOfEmployees => new List<Account>{ (Account) ACCOUNTS[1], (Account) ACCOUNTS[3] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Long, List<String>> expected1 = new Map<Long, List<String>>{
                 ((Account) ACCOUNTS[0]).NumberOfEmployees => new List<String>{ ((Account) ACCOUNTS[0]).Name, ((Account) ACCOUNTS[2]).Name, ((Account) ACCOUNTS[4]).Name },
                 ((Account) ACCOUNTS[1]).NumberOfEmployees => new List<String>{ ((Account) ACCOUNTS[1]).Name, ((Account) ACCOUNTS[3]).Name }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Long, Map<String, List<String>>> expected2 = new Map<Long, Map<String, List<String>>>{
                 ((Account) ACCOUNTS[0]).NumberOfEmployees => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.CUSTOMER => new List<String>{ ((Account) ACCOUNTS[0]).Name, ((Account) ACCOUNTS[2]).Name },
@@ -854,7 +854,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.PARTNER => new List<String>{ ((Account) ACCOUNTS[3]).Name }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -879,12 +879,12 @@ private class CollectorTest {
                 ((Account) ACCOUNTS[0]).BillingLatitude => new List<Account>{ (Account) ACCOUNTS[0], (Account) ACCOUNTS[2], (Account) ACCOUNTS[4] },
                 ((Account) ACCOUNTS[1]).BillingLatitude => new List<Account>{ (Account) ACCOUNTS[1], (Account) ACCOUNTS[3] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Double, List<String>> expected1 = new Map<Double, List<String>>{
                 ((Account) ACCOUNTS[0]).BillingLatitude => new List<String>{ ((Account) ACCOUNTS[0]).Name, ((Account) ACCOUNTS[2]).Name, ((Account) ACCOUNTS[4]).Name },
                 ((Account) ACCOUNTS[1]).BillingLatitude => new List<String>{ ((Account) ACCOUNTS[1]).Name, ((Account) ACCOUNTS[3]).Name }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Double, Map<String, List<String>>> expected2 = new Map<Double, Map<String, List<String>>>{
                 ((Account) ACCOUNTS[0]).BillingLatitude => new Map<String, List<String>>{
                         IterTestUtils.CONSTS.CUSTOMER => new List<String>{ ((Account) ACCOUNTS[0]).Name, ((Account) ACCOUNTS[2]).Name },
@@ -895,7 +895,7 @@ private class CollectorTest {
                         IterTestUtils.CONSTS.PARTNER => new List<String>{ ((Account) ACCOUNTS[3]).Name }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -916,12 +916,12 @@ private class CollectorTest {
                 ((Contact) CONTACTS[0]).Department => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[1], (Contact) CONTACTS[2] },
                 ((Contact) CONTACTS[3]).Department => new List<Contact>{ (Contact) CONTACTS[3], (Contact) CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Object, List<String>> expected1 = new Map<Object, List<String>>{
                 ((Contact) CONTACTS[0]).Department => new List<String>{ ((Contact) CONTACTS[0]).LastName, ((Contact) CONTACTS[1]).LastName, ((Contact) CONTACTS[2]).LastName },
                 ((Contact) CONTACTS[3]).Department => new List<String>{ ((Contact) CONTACTS[3]).LastName, ((Contact) CONTACTS[4]).LastName }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Object, Map<Id, List<Contact>>> expected2 = new Map<Object, Map<Id, List<Contact>>>{
                 ((Contact) CONTACTS[0]).Department => new Map<Id, List<Contact>>{
                         ((Contact) CONTACTS[0]).AccountId => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[2] },
@@ -932,7 +932,7 @@ private class CollectorTest {
                         ((Contact) CONTACTS[1]).AccountId => new List<Contact>{ (Contact) CONTACTS[3] }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -953,12 +953,12 @@ private class CollectorTest {
                 true => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[1], (Contact) CONTACTS[2] },
                 false => new List<Contact>{ (Contact) CONTACTS[3], (Contact) CONTACTS[4] }
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Boolean, List<String>> expected1 = new Map<Boolean, List<String>>{
                 true => new List<String>{ ((Contact) CONTACTS[0]).LastName, ((Contact) CONTACTS[1]).LastName, ((Contact) CONTACTS[2]).LastName },
                 false => new List<String>{ ((Contact) CONTACTS[3]).LastName, ((Contact) CONTACTS[4]).LastName }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         Map<Boolean, Map<Id, List<Contact>>> expected2 = new Map<Boolean, Map<Id, List<Contact>>>{
                 true => new Map<Id, List<Contact>>{
                         ((Contact) CONTACTS[0]).AccountId => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[2] },
@@ -969,7 +969,7 @@ private class CollectorTest {
                         ((Contact) CONTACTS[1]).AccountId => new List<Contact>{ (Contact) CONTACTS[3] }
                 }
         };
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -987,14 +987,14 @@ private class CollectorTest {
         String actual2 = (String) Stream.of(STRINGS).collect(Collectors.joining(delimiter, prefix, suffix));
         // Then
         String expected = STRINGS[0] + STRINGS[1] + STRINGS[2] + STRINGS[3] + STRINGS[4];
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         String expected1 =
                                       STRINGS[0]
                         + delimiter + STRINGS[1]
                         + delimiter + STRINGS[2]
                         + delimiter + STRINGS[3]
                         + delimiter + STRINGS[4];
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
         String expected2 = prefix +
                                       STRINGS[0]
                         + delimiter + STRINGS[1]
@@ -1002,7 +1002,7 @@ private class CollectorTest {
                         + delimiter + STRINGS[3]
                         + delimiter + STRINGS[4]
                 + suffix;
-        Validate.assertEquals(expected2, actual2);
+        Assert.areEqual(expected2, actual2);
     }
 
     /**
@@ -1019,13 +1019,13 @@ private class CollectorTest {
         Integer actual1 = (Integer) Stream.of(PEOPLE).collect(Collectors.summingInt(ageFunction));
         Double actual2 = (Double) Stream.of(PEOPLE).collect(Collectors.averagingInt(ageFunction));
         // Then
-        Validate.assertEquals(PEOPLE.size(), actual);
+        Assert.areEqual(PEOPLE.size(), actual);
         Integer expected = (
                 PEOPLE[0].getAge() + PEOPLE[1].getAge() + PEOPLE[2].getAge() + PEOPLE[3].getAge()
         );
-        Validate.assertEquals(expected, actual1);
+        Assert.areEqual(expected, actual1);
         Double expected1 = expected / (Double) PEOPLE.size();
-        Validate.assertEquals(expected1, actual2);
+        Assert.areEqual(expected1, actual2);
     }
 
     /**
@@ -1043,9 +1043,9 @@ private class CollectorTest {
         Long expected = (
                 PEOPLE[0].getAutoId() + PEOPLE[1].getAutoId() + PEOPLE[2].getAutoId() + PEOPLE[3].getAutoId()
         );
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Double expected1 = expected / (Double) PEOPLE.size();
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
     }
 
     /**
@@ -1063,9 +1063,9 @@ private class CollectorTest {
         Double expected = (
                 PEOPLE[0].getProbability() + PEOPLE[1].getProbability() + PEOPLE[2].getProbability() + PEOPLE[3].getProbability()
         );
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Double expected1 = expected / (Double) PEOPLE.size();
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
     }
 
     /**
@@ -1081,12 +1081,12 @@ private class CollectorTest {
         Map<Boolean, List<Comparable>> actual1 = (Map<Boolean, List<Comparable>>) Stream.of(PEOPLE).collect(Collectors.groupingByBool(keyMapper, Collectors.filtering(predicate)).cast(Map<Boolean, List<Comparable>>.class));
         // Then
         List<Comparable> expected = new List<Comparable>{ PEOPLE[0], PEOPLE[1], PEOPLE[3] };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Boolean, List<Comparable>> expected1 = new Map<Boolean, List<Comparable>>{
                 true => new List<Comparable>{ PEOPLE[0], PEOPLE[3] },
                 false => new List<Comparable>{ PEOPLE[1]  }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
     }
 
     /**
@@ -1108,7 +1108,7 @@ private class CollectorTest {
                 PEOPLE[2].getName(),
                 PEOPLE[3].getName()
         };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
         Map<Boolean, List<String>> expected1 = new Map<Boolean, List<String>>{
                 true => new List<String>{
                         PEOPLE[0].getName(),
@@ -1119,7 +1119,7 @@ private class CollectorTest {
                         PEOPLE[2].getName()
                 }
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
     }
 
     /**
@@ -1138,7 +1138,7 @@ private class CollectorTest {
         List<String> actual = (List<String>) ObjectStream.of(input).collect(Collectors.flatMapping(Function.identity()).cast(List<String>.class));
         // Then
         List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
-        Validate.assertEquals(expected, actual);
+        Assert.areEqual(expected, actual);
     }
 
     /**
@@ -1155,14 +1155,14 @@ private class CollectorTest {
         Comparable actual2 = (Comparable) Stream.of(PEOPLE).collect(Collectors.reducing(new IterTestUtils.Person('seed', 0, Date.newInstance(2014, 2, 3), 4L, true), accumulator));
         Map<Boolean, Object> actual3 = (Map<Boolean, Object>) Stream.of(PEOPLE).collect(Collectors.groupingByBool(keyMapper, Collectors.reducing(accumulator)));
         // Then
-        Validate.assertEquals(PEOPLE[1], actual.get());
-        Validate.assertEquals(PEOPLE[1], actual1);
-        Validate.assertEquals(PEOPLE[1], actual2);
+        Assert.areEqual(PEOPLE[1], actual.get());
+        Assert.areEqual(PEOPLE[1], actual1);
+        Assert.areEqual(PEOPLE[1], actual2);
         Map<Boolean, Optional> expected1 = new Map<Boolean, Optional>{
                 true => Optional.of(PEOPLE[0]),
                 false => Optional.of(PEOPLE[1])
         };
-        Validate.assertEquals(expected1, actual3);
+        Assert.areEqual(expected1, actual3);
     }
 
     /**
@@ -1178,12 +1178,12 @@ private class CollectorTest {
         Optional actual = (Optional) Stream.of(PEOPLE).collect(Collectors.maximizing(ageComparator));
         Map<Boolean, Object> actual1 = (Map<Boolean, Object>) Stream.of(PEOPLE).collect(Collectors.groupingByBool(keyMapper, Collectors.minimizing(ageComparator)));
         // Then
-        Validate.assertEquals(PEOPLE[1], actual.get());
+        Assert.areEqual(PEOPLE[1], actual.get());
         Map<Boolean, Optional> expected1 = new Map<Boolean, Optional>{
                 true => Optional.of(PEOPLE[3]),
                 false => Optional.of(PEOPLE[2])
         };
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected1, actual1);
     }
 
 }

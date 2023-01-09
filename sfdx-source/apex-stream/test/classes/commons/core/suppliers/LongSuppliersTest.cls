@@ -32,14 +32,14 @@ private class LongSuppliersTest {
         Long actual6 = fibonacciSupp.get();
         Long actual7 = randomSupp.get();
         // Then
-        Validate.assertEquals(0L, actual);
-        Validate.assertEquals(1L, actual1);
-        Validate.assertEquals(0L, actual2);
-        Validate.assertEquals(2L, actual3);
-        Validate.assertEquals(1L, actual4);
-        Validate.assertEquals(1L, actual5);
-        Validate.assertEquals(2L, actual6);
-        Validate.assert((Object) actual7 instanceof Long);
+        Assert.areEqual(0L, actual);
+        Assert.areEqual(1L, actual1);
+        Assert.areEqual(0L, actual2);
+        Assert.areEqual(2L, actual3);
+        Assert.areEqual(1L, actual4);
+        Assert.areEqual(1L, actual5);
+        Assert.areEqual(2L, actual6);
+        Assert.isTrue((Object) actual7 instanceof Long);
     }
 
 }

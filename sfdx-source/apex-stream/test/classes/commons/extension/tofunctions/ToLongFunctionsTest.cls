@@ -27,13 +27,13 @@ private class ToLongFunctionsTest {
         IToLongFunction longValue = StringToLongFunctions.valueOf();
         // Then
         for (Datetime o : datetimes) {
-            Validate.assertEquals(o.getTime(), getTime.apply(o));
+            Assert.areEqual(o.getTime(), getTime.apply(o));
         }
         for (Object o : input) {
-            Validate.assertEquals((Long) o, asLong.apply(o));
+            Assert.areEqual((Long) o, asLong.apply(o));
         }
         for (String s : input1) {
-            Validate.assertEquals(Long.valueOf(s), longValue.apply(s));
+            Assert.areEqual(Long.valueOf(s), longValue.apply(s));
         }
     }
     

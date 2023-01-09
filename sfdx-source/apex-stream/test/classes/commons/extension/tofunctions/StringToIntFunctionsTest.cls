@@ -67,34 +67,34 @@ private class StringToIntFunctionsTest {
         // Then
         for (String s : INPUT) {
             if (s.length() > i) {
-                Validate.assertEquals(s.charAt(i), charAt.apply(s));
-                Validate.assertEquals(s.codePointAt(i), codePointAt.apply(s));
-                Validate.assertEquals(s.codePointBefore(i), codePointBefore.apply(s));
-                Validate.assertEquals(s.codePointCount(i, e), codePointCount.apply(s));
-                Validate.assertEquals(s.compareTo(str), compareTo.apply(s));
-                Validate.assertEquals(s.countMatches(str), countMatches.apply(s));
-                Validate.assertEquals(s.getLevenshteinDistance(str), getLevenshteinDistance.apply(s));
-                Validate.assertEquals(s.getLevenshteinDistance(str, e), getLevenshteinDistance1.apply(s));
-                Validate.assertEquals(s.indexOf(str), indexOf.apply(s));
-                Validate.assertEquals(s.indexOf(str, i), indexOf1.apply(s));
-                Validate.assertEquals(s.indexOfAny(str), indexOfAny.apply(s));
-                Validate.assertEquals(s.indexOfAnyBut(str), indexOfAnyBut.apply(s));
-                Validate.assertEquals(s.indexOfChar(i), indexOfChar.apply(s));
-                Validate.assertEquals(s.indexOfChar(i, e), indexOfChar1.apply(s));
-                Validate.assertEquals(s.indexOfDifference(str), indexOfDifference.apply(s));
-                Validate.assertEquals(s.indexOfIgnoreCase(str), indexOfIgnoreCase.apply(s));
-                Validate.assertEquals(s.indexOfIgnoreCase(str, i), indexOfIgnoreCase1.apply(s));
-                Validate.assertEquals(s.lastIndexOf(str), lastIndexOf.apply(s));
-                Validate.assertEquals(s.lastIndexOf(str, i), lastIndexOf1.apply(s));
-                Validate.assertEquals(s.lastIndexOfChar(i), lastIndexOfChar.apply(s));
-                Validate.assertEquals(s.lastIndexOfChar(i, e), lastIndexOfChar1.apply(s));
-                Validate.assertEquals(s.lastIndexOfIgnoreCase(str), lastIndexOfIgnoreCase.apply(s));
-                Validate.assertEquals(s.lastIndexOfIgnoreCase(str, i), lastIndexOfIgnoreCase1.apply(s));
+                Assert.areEqual(s.charAt(i), charAt.apply(s));
+                Assert.areEqual(s.codePointAt(i), codePointAt.apply(s));
+                Assert.areEqual(s.codePointBefore(i), codePointBefore.apply(s));
+                Assert.areEqual(s.codePointCount(i, e), codePointCount.apply(s));
+                Assert.areEqual(s.compareTo(str), compareTo.apply(s));
+                Assert.areEqual(s.countMatches(str), countMatches.apply(s));
+                Assert.areEqual(s.getLevenshteinDistance(str), getLevenshteinDistance.apply(s));
+                Assert.areEqual(s.getLevenshteinDistance(str, e), getLevenshteinDistance1.apply(s));
+                Assert.areEqual(s.indexOf(str), indexOf.apply(s));
+                Assert.areEqual(s.indexOf(str, i), indexOf1.apply(s));
+                Assert.areEqual(s.indexOfAny(str), indexOfAny.apply(s));
+                Assert.areEqual(s.indexOfAnyBut(str), indexOfAnyBut.apply(s));
+                Assert.areEqual(s.indexOfChar(i), indexOfChar.apply(s));
+                Assert.areEqual(s.indexOfChar(i, e), indexOfChar1.apply(s));
+                Assert.areEqual(s.indexOfDifference(str), indexOfDifference.apply(s));
+                Assert.areEqual(s.indexOfIgnoreCase(str), indexOfIgnoreCase.apply(s));
+                Assert.areEqual(s.indexOfIgnoreCase(str, i), indexOfIgnoreCase1.apply(s));
+                Assert.areEqual(s.lastIndexOf(str), lastIndexOf.apply(s));
+                Assert.areEqual(s.lastIndexOf(str, i), lastIndexOf1.apply(s));
+                Assert.areEqual(s.lastIndexOfChar(i), lastIndexOfChar.apply(s));
+                Assert.areEqual(s.lastIndexOfChar(i, e), lastIndexOfChar1.apply(s));
+                Assert.areEqual(s.lastIndexOfIgnoreCase(str), lastIndexOfIgnoreCase.apply(s));
+                Assert.areEqual(s.lastIndexOfIgnoreCase(str, i), lastIndexOfIgnoreCase1.apply(s));
                 if (s.length() > e) {
-                    Validate.assertEquals(s.offsetByCodePoints(i, e), offsetByCodePoints.apply(s));
+                    Assert.areEqual(s.offsetByCodePoints(i, e), offsetByCodePoints.apply(s));
                 }
             }
-            Validate.assertEquals(s.length(), length.apply(s));
+            Assert.areEqual(s.length(), length.apply(s));
         }
     }
 

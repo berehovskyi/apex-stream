@@ -42,22 +42,22 @@ public class LongStreamTest {
         // Then
         List<Long> expected = new List<Long>(new Set<Long>(input));
         List<Long> expected1 = new List<Long>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(input, actual6);
-        Validate.assertEquals(false, seq.isEmpty());
-        Validate.assertEquals(LONGS, input, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
-        Validate.assert(((LongStream) stream3).isOperated);
-        Validate.assert(((LongStream) stream4).isOperated);
-        Validate.assert(((LongStream) stream5).isOperated);
-        Validate.assert(((LongStream) stream6).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(input, actual6);
+        Assert.areEqual(false, seq.isEmpty());
+        Assert.areEqual(LONGS, input, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
+        Assert.isTrue(((LongStream) stream3).isOperated);
+        Assert.isTrue(((LongStream) stream4).isOperated);
+        Assert.isTrue(((LongStream) stream5).isOperated);
+        Assert.isTrue(((LongStream) stream6).isOperated);
     }
 
     /**
@@ -82,23 +82,23 @@ public class LongStreamTest {
         List<Long> actual2 = stream2.toList();
         List<Long> actual3 = stream3.toList();
         // Then
-        Validate.assertEquals(toI - fromI + 1, actual.size());
+        Assert.areEqual(toI - fromI + 1, actual.size());
         for (Integer i = 0, size = actual.size(); i < size; i++) {
-            Validate.assertEquals(i, actual[i]);
+            Assert.areEqual(i, actual[i]);
         }
-        Validate.assertEquals(toI1 - fromI1 + 1, actual1.size());
+        Assert.areEqual(toI1 - fromI1 + 1, actual1.size());
         for (Integer i = 0, size = actual1.size(); i < size; i++)  {
-            Validate.assertEquals(i + fromI1, actual1[i]);
+            Assert.areEqual(i + fromI1, actual1[i]);
         }
-        Validate.assertEquals(toI1 - fromI2 + 1, actual2.size());
+        Assert.areEqual(toI1 - fromI2 + 1, actual2.size());
         for (Integer i = 0, size = actual2.size(); i < size; i++) {
-            Validate.assertEquals(i + fromI2, actual2[i]);
+            Assert.areEqual(i + fromI2, actual2[i]);
         }
-        Validate.assertEquals(0, actual3.size());
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
-        Validate.assert(((LongStream) stream3).isOperated);
+        Assert.areEqual(0, actual3.size());
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
+        Assert.isTrue(((LongStream) stream3).isOperated);
     }
 
     /**
@@ -116,14 +116,14 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         List<Long> actual1 = stream1.toList();
         // Then
-        Validate.assertEquals(lim, actual.size());
-        Validate.assertEquals(1L, actual[0]);
-        Validate.assertEquals(55L, actual[9]);
-        Validate.assertEquals(lim, actual1.size());
-        Validate.assertEquals(fromLong, actual1[0]);
-        Validate.assertEquals(fromLong + (lim - 1) * step, actual1[9]);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(lim, actual.size());
+        Assert.areEqual(1L, actual[0]);
+        Assert.areEqual(55L, actual[9]);
+        Assert.areEqual(lim, actual1.size());
+        Assert.areEqual(fromLong, actual1[0]);
+        Assert.areEqual(fromLong + (lim - 1) * step, actual1[9]);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -145,18 +145,18 @@ public class LongStreamTest {
         List<Long> actual1 = stream1.toList();
         List<Long> actual2 = stream2.toList();
         // Then
-        Validate.assertEquals(lim, actual.size());
-        Validate.assertEquals(seed, actual[0]);
-        Validate.assertEquals(109L, actual[9]);
-        Validate.assertEquals(lim, actual1.size());
-        Validate.assertEquals(seed1, actual1[0]);
-        Validate.assertEquals(55L, actual1[9]);
-        Validate.assertEquals(lim, actual2.size());
-        Validate.assertEquals(seed2, actual2[0]);
-        Validate.assertEquals(5L, actual2[9]);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
+        Assert.areEqual(lim, actual.size());
+        Assert.areEqual(seed, actual[0]);
+        Assert.areEqual(109L, actual[9]);
+        Assert.areEqual(lim, actual1.size());
+        Assert.areEqual(seed1, actual1[0]);
+        Assert.areEqual(55L, actual1[9]);
+        Assert.areEqual(lim, actual2.size());
+        Assert.areEqual(seed2, actual2[0]);
+        Assert.areEqual(5L, actual2[9]);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
     }
 
     /**
@@ -176,10 +176,10 @@ public class LongStreamTest {
         // Then
         List<Long> expected = new List<Long>{ -5L, 0L, 1L, 3L, 150L, 3L, 0L, 8L };
         List<Long> expected1 = new List<Long>{ -5L, 0L, 1L, 3L, 150L, 3L, 0L, 8L, 9L, 5L, 7L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -195,8 +195,8 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ -2L, 0L, 9L };
-        Validate.assertEquals(expected, actual);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -216,10 +216,10 @@ public class LongStreamTest {
         // Then
         List<Long> expected = new List<Long>{ -5L, 0L, 1L, 3L, 0L, 8L };
         List<Long> expected1 = new List<Long>{ 3L, 0L, 8L, -5L, 0L, 1L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -249,18 +249,18 @@ public class LongStreamTest {
         List<Long> expected = new List<Long>{ 5L, 3L, 9L, 7L, 8L, 6L, 4L, 1L, 0L };
         List<Long> expected1 = new List<Long>{ 3L, 9L };
         List<Long> expected2 = new List<Long>{ 5L, 7L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
-        Validate.assert(((LongStream) stream3).isOperated);
-        Validate.assert(((LongStream) stream4).isOperated);
-        Validate.assert(((LongStream) stream5).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected2, actual4);
+        Assert.areEqual(expected2, actual5);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
+        Assert.isTrue(((LongStream) stream3).isOperated);
+        Assert.isTrue(((LongStream) stream4).isOperated);
+        Assert.isTrue(((LongStream) stream5).isOperated);
     }
 
     /**
@@ -283,12 +283,12 @@ public class LongStreamTest {
         List<Object> expected = new List<Object>{ -5L, 0L, 1L, 3L, 8L, null };
         List<Integer> expected1 = new List<Integer>{ -5, 0, 1, 3, 8, null };
         List<Double> expected2 = new List<Double>{ -5, 0, 1, 3, 8, null };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected2, actual2);
-        Validate.assert(((ObjectStream) stream).isOperated);
-        Validate.assert(((IntStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected2, actual2);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
+        Assert.isTrue(((IntStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
     }
 
     /**
@@ -303,8 +303,8 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ 1L, 3L, 8L, 4L, 4L };
-        Validate.assertEquals(expected, actual);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -321,15 +321,15 @@ public class LongStreamTest {
         Iterator<Long> iterator = stream1.iterator();
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input[0], iterator.next());
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input[0], iterator.next());
         try {
             iterator.next();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -344,8 +344,8 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ -3L, null, -6L, 4L, 4L };
-        Validate.assertEquals(expected, actual);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -361,9 +361,9 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -379,9 +379,9 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ 10L, 2L, 6L, 16L, -6L, 8L, -12L, 0L, 8L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -397,9 +397,9 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Integer> expected = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((IntStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((IntStream) stream).isOperated);
     }
 
     /**
@@ -415,9 +415,9 @@ public class LongStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ 5.0, 1.0, 3.0, 8.0, -3.0, 4.0, -6.0, 0.0, 4.0 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -432,11 +432,11 @@ public class LongStreamTest {
         // When
         List<Account> actual = stream.toList();
         // Then
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
         for (Integer i = 0, size = input.size(); i < size; i++ ) {
-            Validate.assertEquals(Math.abs(clone[i]), actual[i].NumberOfEmployees);
+            Assert.areEqual(Math.abs(clone[i]), actual[i].NumberOfEmployees);
         }
-        Validate.assert(((SObjectStream) stream).isOperated);
+        Assert.isTrue(((SObjectStream) stream).isOperated);
     }
 
     /**
@@ -452,9 +452,9 @@ public class LongStreamTest {
         List<String> actual = (List<String>) stream.toList(List<String>.class);
         // Then
         List<String> expected = new List<String>{ '5', '1', '3', '8', '-3', '4', '-6', '0', '4' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -469,9 +469,9 @@ public class LongStreamTest {
         // When
         List<Long> actual = stream.toList();
         // Then
-        Validate.assertEquals(clone, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(clone, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -487,9 +487,9 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -505,9 +505,9 @@ public class LongStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ null, -6L, -3L, 0L, 1L, 3L, 4L, 4L, 5L, 8L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -535,15 +535,15 @@ public class LongStreamTest {
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L };
         List<Long> expected1 = new List<Long>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
-        Validate.assert(!((LongStream) stream3).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
+        Assert.isTrue(!((LongStream) stream3).isOperated);
     }
 
     /**
@@ -571,15 +571,15 @@ public class LongStreamTest {
         // Then
         List<Long> expected = new List<Long>{ 4L, null, -6L, 0L, 4L };
         List<Long> expected1 = new List<Long>();
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
-        Validate.assert(!((LongStream) stream3).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
+        Assert.isTrue(!((LongStream) stream3).isOperated);
     }
 
     /**
@@ -608,12 +608,12 @@ public class LongStreamTest {
         // Then
         Long expected = 26;
         Long expected1 = 16;
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(10, seed, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(10, seed, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -629,9 +629,9 @@ public class LongStreamTest {
         Set<Long> actual = (Set<Long>) stream.collect(Supplier.of(Set<Long>.class), ObjectLongConsumer.compose(new IterTestUtils.AddToLongSet()));
         // Then
         Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -648,11 +648,11 @@ public class LongStreamTest {
         Long actual = stream.find(LongPredicates.isLess(0L)).get();
         Long actual1 =stream1.find(LongPredicates.isGreater(50L)).orElse(42L);
         // Then
-        Validate.assertEquals(-3L, actual);
-        Validate.assertEquals(42L, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(-3L, actual);
+        Assert.areEqual(42L, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -669,11 +669,11 @@ public class LongStreamTest {
         Boolean actual = stream.every(LongPredicates.isEven().negate());
         Boolean actual1 = stream1.every(LongPredicates.isPrime());
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -690,11 +690,11 @@ public class LongStreamTest {
         Boolean actual = stream.some(LongPredicates.isLess(0L));
         Boolean actual1 = stream1.some(LongPredicates.isEqual(0L));
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -711,11 +711,11 @@ public class LongStreamTest {
         Boolean actual = stream.none(LongPredicates.isEven());
         Boolean actual1 = stream1.none(LongPredicates.isLess(0L));
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
     }
 
     /**
@@ -730,9 +730,9 @@ public class LongStreamTest {
         // When
         Long actual = stream.max().get();
         // Then
-        Validate.assertEquals(9, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(9, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -747,9 +747,9 @@ public class LongStreamTest {
         // When
         Long actual = stream.min().get();
         // Then
-        Validate.assertEquals(-3L, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(-3L, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -764,9 +764,9 @@ public class LongStreamTest {
         // When
         Long actual = stream.sum();
         // Then
-        Validate.assertEquals(22L, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(22L, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -781,9 +781,9 @@ public class LongStreamTest {
         // When
         Double actual = stream.avg().get();
         // Then
-        Validate.assertEquals(3.625, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(3.625, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -802,13 +802,13 @@ public class LongStreamTest {
         Long actual1 = stream1.count();
         Long actual2 = stream2.count();
         // Then
-        Validate.assertEquals(8L, actual);
-        Validate.assertEquals(0L, actual1);
-        Validate.assertEquals(0L, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
+        Assert.areEqual(8L, actual);
+        Assert.areEqual(0L, actual1);
+        Assert.areEqual(0L, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
     }
 
     /**
@@ -827,13 +827,13 @@ public class LongStreamTest {
         Boolean actual1 = stream1.isEmpty();
         Boolean actual2 = stream2.isEmpty();
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(true, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
-        Validate.assert(((LongStream) stream1).isOperated);
-        Validate.assert(((LongStream) stream2).isOperated);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(true, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
+        Assert.isTrue(((LongStream) stream1).isOperated);
+        Assert.isTrue(((LongStream) stream2).isOperated);
     }
 
     /**
@@ -848,9 +848,9 @@ public class LongStreamTest {
         // When
         List<Long> actual = stream.toList();
         // Then
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -866,9 +866,9 @@ public class LongStreamTest {
         Set<Long> actual = stream.toSet();
         // Then
         Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
 }

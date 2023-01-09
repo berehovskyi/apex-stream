@@ -22,8 +22,8 @@ private class DoubleFunctionsTest {
         IDoubleFunction format = DoubleFunctions.format();
         // When
         for (Double d : input) {
-            Validate.assertEquals(String.valueOf(d), toString.apply(d));
-            Validate.assertEquals(d.format(), format.apply(d));
+            Assert.areEqual(String.valueOf(d), toString.apply(d));
+            Assert.areEqual(d.format(), format.apply(d));
         }
     }
 

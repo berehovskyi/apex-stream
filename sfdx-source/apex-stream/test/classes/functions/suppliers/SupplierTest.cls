@@ -47,24 +47,24 @@ private class SupplierTest {
         String actual15 = (String) repeatSupplier1.get();
         String actual16 = (String) repeatSupplier1.get();
         // Then
-        Validate.assertEquals(new List<String>(), actual);
-        Validate.assertEquals(Account.SObjectType, actual1.getSobjectType());
-        Validate.assertEquals(0, actual2);
-        Validate.assertEquals(0L, actual3);
-        Validate.assertNotEquals(null, actual4);
-        Validate.assertEquals(new Account(), actual5);
-        Validate.assertEquals(false, actual6.isActive());
-        Validate.assertEquals(values[0], actual7);
-        Validate.assertEquals(values[1], actual8);
-        Validate.assertEquals(values[2], actual9);
-        Validate.assertEquals(values[3], actual10);
-        Validate.assertEquals(values[0], actual11);
-        Validate.assertEquals(values[0], actual12);
-        Validate.assertEquals(values[1], actual13);
-        Validate.assertEquals(values[2], actual14);
-        Validate.assertEquals(values[3], actual15);
-        Validate.assertEquals(values[0], actual16);
-        Validate.assert(((ObjectStream) stringStream).isOperated);
+        Assert.areEqual(new List<String>(), actual);
+        Assert.areEqual(Account.SObjectType, actual1.getSobjectType());
+        Assert.areEqual(0, actual2);
+        Assert.areEqual(0L, actual3);
+        Assert.areNotEqual(null, actual4);
+        Assert.areEqual(new Account(), actual5);
+        Assert.areEqual(false, actual6.isActive());
+        Assert.areEqual(values[0], actual7);
+        Assert.areEqual(values[1], actual8);
+        Assert.areEqual(values[2], actual9);
+        Assert.areEqual(values[3], actual10);
+        Assert.areEqual(values[0], actual11);
+        Assert.areEqual(values[0], actual12);
+        Assert.areEqual(values[1], actual13);
+        Assert.areEqual(values[2], actual14);
+        Assert.areEqual(values[3], actual15);
+        Assert.areEqual(values[0], actual16);
+        Assert.isTrue(((ObjectStream) stringStream).isOperated);
     }
 
 }

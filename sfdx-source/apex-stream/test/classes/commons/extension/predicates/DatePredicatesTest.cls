@@ -38,8 +38,8 @@ private class DatePredicatesTest {
         IPredicate isLeapYear = DatePredicates.isLeapYear();
         // Then
         for (Date d : DATES) {
-            Validate.assertEquals(d.isSameDay(d1), isSameDay.test(d));
-            Validate.assertEquals(Date.isLeapYear(d.year()), isLeapYear.test(d));
+            Assert.areEqual(d.isSameDay(d1), isSameDay.test(d));
+            Assert.areEqual(Date.isLeapYear(d.year()), isLeapYear.test(d));
         }
     }
 
@@ -54,7 +54,7 @@ private class DatePredicatesTest {
         IPredicate isSameDay = DatetimePredicates.isSameDay(dt1);
         // Then
         for (Datetime dt : DATETIMES) {
-            Validate.assertEquals(dt.isSameDay(dt1), isSameDay.test(dt));
+            Assert.areEqual(dt.isSameDay(dt1), isSameDay.test(dt));
         }
     }
     

@@ -38,18 +38,18 @@ private class SObjectPredicateTest {
             Boolean isNumOfEmployeesGreater = (Integer) acc.get(accNumOfEmployeesField) > value;
             Boolean isAccTypeCustomer = acc.get(accTypeField) == value1;
             Boolean isAccTypeCompetitor = acc.get(accTypeField) == value2;
-            Validate.assertEquals(value3, alwaysPredicate.test(acc));
-            Validate.assertEquals(isNumOfEmployeesGreater, bigAccPredicate.test(acc));
-            Validate.assertEquals(isAccTypeCustomer, customerPredicate.test(acc));
-            Validate.assertEquals(isAccTypeCompetitor, competitorPredicate.test(acc));
-            Validate.assertEquals(isNumOfEmployeesGreater && isAccTypeCustomer, bigCustomerPredicate.test(acc));
-            Validate.assertEquals(isNumOfEmployeesGreater || isAccTypeCustomer, bigAccountOrCustomerPredicate.test(acc));
-            Validate.assertEquals(!(isNumOfEmployeesGreater), notBigCustomerPredicate.test(acc));
-            Validate.assertEquals(
+            Assert.areEqual(value3, alwaysPredicate.test(acc));
+            Assert.areEqual(isNumOfEmployeesGreater, bigAccPredicate.test(acc));
+            Assert.areEqual(isAccTypeCustomer, customerPredicate.test(acc));
+            Assert.areEqual(isAccTypeCompetitor, competitorPredicate.test(acc));
+            Assert.areEqual(isNumOfEmployeesGreater && isAccTypeCustomer, bigCustomerPredicate.test(acc));
+            Assert.areEqual(isNumOfEmployeesGreater || isAccTypeCustomer, bigAccountOrCustomerPredicate.test(acc));
+            Assert.areEqual(!(isNumOfEmployeesGreater), notBigCustomerPredicate.test(acc));
+            Assert.areEqual(
                     (isNumOfEmployeesGreater && isAccTypeCustomer) || isAccTypeCompetitor,
                     bigCustomerOrAnyCompetitorPredicate.test(acc)
             );
-            Validate.assertEquals(
+            Assert.areEqual(
                     isNumOfEmployeesGreater && (isAccTypeCustomer || isAccTypeCompetitor),
                     bigCustomerOrBigCompetitorPredicate.test(acc)
             );
@@ -72,7 +72,7 @@ private class SObjectPredicateTest {
         ISObjectPredicate bigAccOrCustomer = SObjectPredicate.some(new List<ISObjectPredicate>{ bigAccPredicate, customerPredicate });
         // Then
         for (Account acc : INPUT) {
-            Validate.assertEquals(
+            Assert.areEqual(
                     (Integer) acc.get(accNumOfEmployeesField) > value || acc.get(accTypeField) == value1,
                     bigAccOrCustomer.test(acc)
             );
@@ -95,7 +95,7 @@ private class SObjectPredicateTest {
         ISObjectPredicate bigAccAndCustomer = SObjectPredicate.every(new List<ISObjectPredicate>{ bigAccPredicate, customerPredicate });
         // Then
         for (Account acc : INPUT) {
-            Validate.assertEquals(
+            Assert.areEqual(
                     (Integer) acc.get(accNumOfEmployeesField) > value && acc.get(accTypeField) == value1,
                     bigAccAndCustomer.test(acc)
             );
@@ -115,7 +115,7 @@ private class SObjectPredicateTest {
         ISObjectPredicate notBigAccPredicate = SObjectPredicate.negate(bigAccPredicate);
         // Then
         for (Account acc : INPUT) {
-            Validate.assertEquals(!((Integer) acc.get(accNumOfEmployeesField) > value), notBigAccPredicate.test(acc));
+            Assert.areEqual(!((Integer) acc.get(accNumOfEmployeesField) > value), notBigAccPredicate.test(acc));
         }
     }
 
@@ -144,19 +144,19 @@ private class SObjectPredicateTest {
         ISObjectPredicate latIsPositivePredicate = SObjectPredicate.compose(getLatFunction, positiveDoublePredicate);
         // Then
         for (Account acc : INPUT) {
-            Validate.assertEquals(((String) acc.get(accNameField)).startsWith(value), nameStartsWithTPredicate.test(acc));
+            Assert.areEqual(((String) acc.get(accNameField)).startsWith(value), nameStartsWithTPredicate.test(acc));
             Integer numOfEmployees = (Integer) acc.get(accNumOfEmployeesField);
             if (numOfEmployees != null) {
-                Validate.assertEquals(
+                Assert.areEqual(
                         Math.mod(numOfEmployees, 2) == 0,
                         numberOfEmployeesAsIntIsEvenPredicate.test(acc)
                 );
-                Validate.assertEquals(
+                Assert.areEqual(
                         Math.mod((Long) numOfEmployees, 2) == 0,
                         numberOfEmployeesAsLongIsEvenPredicate.test(acc)
                 );
             }
-            Validate.assertEquals(((Double) acc.get(accBillingLatitudeField)) > 0, latIsPositivePredicate.test(acc));
+            Assert.areEqual(((Double) acc.get(accBillingLatitudeField)) > 0, latIsPositivePredicate.test(acc));
         }
     }
 

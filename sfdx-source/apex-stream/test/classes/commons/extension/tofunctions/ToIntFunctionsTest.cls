@@ -24,10 +24,10 @@ private class ToIntFunctionsTest {
         IToIntFunction intValue = ToIntFunctions.valueOf();
         // Then
         for (Object o : input) {
-            Validate.assertEquals((Integer) o, asInt.apply(o));
+            Assert.areEqual((Integer) o, asInt.apply(o));
         }
         for (Object o : input1) {
-            Validate.assertEquals(Integer.valueOf(o), intValue.apply(o));
+            Assert.areEqual(Integer.valueOf(o), intValue.apply(o));
         }
     }
 

@@ -30,8 +30,8 @@ private class SObjectPredicatesTest {
         // Then
         for (Account acc : INPUT) {
             Integer numOfEmployees = (Integer) acc.get(numberOfEmployeesFieldName);
-            Validate.assertEquals((numOfEmployees == null ? false : numOfEmployees > value), bigAccPredicate.test(acc));
-            Validate.assertEquals((numOfEmployees == null ? true : numOfEmployees > value), bigAccPredicate1.test(acc));
+            Assert.areEqual((numOfEmployees == null ? false : numOfEmployees > value), bigAccPredicate.test(acc));
+            Assert.areEqual((numOfEmployees == null ? true : numOfEmployees > value), bigAccPredicate1.test(acc));
         }
     }
 
@@ -61,13 +61,13 @@ private class SObjectPredicatesTest {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
-            Validate.assertEquals(numOfEmployees > value, bigAccPredicate.test(acc));
-            Validate.assertEquals(numOfEmployees > value, bigAccPredicate1.test(acc));
-            Validate.assertEquals(numOfEmployees > value, bigAccPredicate2.test(acc));
-            Validate.assertEquals(numOfEmployees > value, bigAccPredicate3.test(acc));
-            Validate.assertEquals(numOfEmployees > value, bigAccPredicate4.test(acc));
-            Validate.assertEquals(name > type, nameGTTypePredicate.test(acc));
-            Validate.assertEquals(name > type, nameGTTypePredicate1.test(acc));
+            Assert.areEqual(numOfEmployees > value, bigAccPredicate.test(acc));
+            Assert.areEqual(numOfEmployees > value, bigAccPredicate1.test(acc));
+            Assert.areEqual(numOfEmployees > value, bigAccPredicate2.test(acc));
+            Assert.areEqual(numOfEmployees > value, bigAccPredicate3.test(acc));
+            Assert.areEqual(numOfEmployees > value, bigAccPredicate4.test(acc));
+            Assert.areEqual(name > type, nameGTTypePredicate.test(acc));
+            Assert.areEqual(name > type, nameGTTypePredicate1.test(acc));
         }
     }
 
@@ -97,13 +97,13 @@ private class SObjectPredicatesTest {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
-            Validate.assertEquals(numOfEmployees >= value, bigAccPredicate.test(acc));
-            Validate.assertEquals(numOfEmployees >= value, bigAccPredicate1.test(acc));
-            Validate.assertEquals(numOfEmployees >= value, bigAccPredicate2.test(acc));
-            Validate.assertEquals(numOfEmployees >= value, bigAccPredicate3.test(acc));
-            Validate.assertEquals(numOfEmployees >= value, bigAccPredicate4.test(acc));
-            Validate.assertEquals(name >= type, nameGTTypePredicate.test(acc));
-            Validate.assertEquals(name >= type, nameGTTypePredicate1.test(acc));
+            Assert.areEqual(numOfEmployees >= value, bigAccPredicate.test(acc));
+            Assert.areEqual(numOfEmployees >= value, bigAccPredicate1.test(acc));
+            Assert.areEqual(numOfEmployees >= value, bigAccPredicate2.test(acc));
+            Assert.areEqual(numOfEmployees >= value, bigAccPredicate3.test(acc));
+            Assert.areEqual(numOfEmployees >= value, bigAccPredicate4.test(acc));
+            Assert.areEqual(name >= type, nameGTTypePredicate.test(acc));
+            Assert.areEqual(name >= type, nameGTTypePredicate1.test(acc));
         }
     }
 
@@ -137,15 +137,15 @@ private class SObjectPredicatesTest {
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
             Account parent = (Account) acc.getSObject(parentFieldName);
-            Validate.assertEquals(numOfEmployees == value, bigAccPredicate.test(acc));
-            Validate.assertEquals(numOfEmployees == value, bigAccPredicate1.test(acc));
-            Validate.assertEquals(numOfEmployees == value, bigAccPredicate2.test(acc));
-            Validate.assertEquals(numOfEmployees == value, bigAccPredicate3.test(acc));
-            Validate.assertEquals(numOfEmployees == value, bigAccPredicate4.test(acc));
-            Validate.assertEquals(name == type, nameGTTypePredicate.test(acc));
-            Validate.assertEquals(name == type, nameGTTypePredicate1.test(acc));
-            Validate.assertEquals(parent == null, hasNoParentPredicate.test(acc));
-            Validate.assertEquals(parent == acc, parentIsIdentityPredicate.test(acc));
+            Assert.areEqual(numOfEmployees == value, bigAccPredicate.test(acc));
+            Assert.areEqual(numOfEmployees == value, bigAccPredicate1.test(acc));
+            Assert.areEqual(numOfEmployees == value, bigAccPredicate2.test(acc));
+            Assert.areEqual(numOfEmployees == value, bigAccPredicate3.test(acc));
+            Assert.areEqual(numOfEmployees == value, bigAccPredicate4.test(acc));
+            Assert.areEqual(name == type, nameGTTypePredicate.test(acc));
+            Assert.areEqual(name == type, nameGTTypePredicate1.test(acc));
+            Assert.areEqual(parent == null, hasNoParentPredicate.test(acc));
+            Assert.areEqual(parent == acc, parentIsIdentityPredicate.test(acc));
         }
     }
 
@@ -179,15 +179,15 @@ private class SObjectPredicatesTest {
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
             Account parent = (Account) acc.getSObject(parentFieldName);
-            Validate.assertEquals(numOfEmployees != value, bigAccPredicate.test(acc));
-            Validate.assertEquals(numOfEmployees != value, bigAccPredicate1.test(acc));
-            Validate.assertEquals(numOfEmployees != value, bigAccPredicate2.test(acc));
-            Validate.assertEquals(numOfEmployees != value, bigAccPredicate3.test(acc));
-            Validate.assertEquals(numOfEmployees != value, bigAccPredicate4.test(acc));
-            Validate.assertEquals(name != type, nameGTTypePredicate.test(acc));
-            Validate.assertEquals(name != type, nameGTTypePredicate1.test(acc));
-            Validate.assertEquals(parent != null, hasParentPredicate.test(acc));
-            Validate.assertEquals(parent != acc, parentIsNotIdentityPredicate.test(acc));
+            Assert.areEqual(numOfEmployees != value, bigAccPredicate.test(acc));
+            Assert.areEqual(numOfEmployees != value, bigAccPredicate1.test(acc));
+            Assert.areEqual(numOfEmployees != value, bigAccPredicate2.test(acc));
+            Assert.areEqual(numOfEmployees != value, bigAccPredicate3.test(acc));
+            Assert.areEqual(numOfEmployees != value, bigAccPredicate4.test(acc));
+            Assert.areEqual(name != type, nameGTTypePredicate.test(acc));
+            Assert.areEqual(name != type, nameGTTypePredicate1.test(acc));
+            Assert.areEqual(parent != null, hasParentPredicate.test(acc));
+            Assert.areEqual(parent != acc, parentIsNotIdentityPredicate.test(acc));
         }
     }
 
@@ -217,13 +217,13 @@ private class SObjectPredicatesTest {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate1.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate2.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate3.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate4.test(acc));
-            Validate.assertEquals(name == null ? true : name < type, nameGTTypePredicate.test(acc));
-            Validate.assertEquals(name == null ? true : name < type, nameGTTypePredicate1.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate1.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate2.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate3.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees < value, bigAccPredicate4.test(acc));
+            Assert.areEqual(name == null ? true : name < type, nameGTTypePredicate.test(acc));
+            Assert.areEqual(name == null ? true : name < type, nameGTTypePredicate1.test(acc));
         }
     }
 
@@ -253,13 +253,13 @@ private class SObjectPredicatesTest {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate1.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate2.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate3.test(acc));
-            Validate.assertEquals(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate4.test(acc));
-            Validate.assertEquals(name == null ? true : name <= type, nameGTTypePredicate.test(acc));
-            Validate.assertEquals(name == null ? true : name <= type, nameGTTypePredicate1.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate1.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate2.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate3.test(acc));
+            Assert.areEqual(numOfEmployees == null ? true : numOfEmployees <= value, bigAccPredicate4.test(acc));
+            Assert.areEqual(name == null ? true : name <= type, nameGTTypePredicate.test(acc));
+            Assert.areEqual(name == null ? true : name <= type, nameGTTypePredicate1.test(acc));
         }
     }
 
@@ -289,9 +289,9 @@ private class SObjectPredicatesTest {
                     '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
                             .replace('%', '.*?').replace('_', '.{1}?') + '$', name1
             );
-            Validate.assertEquals(isLikeName, nameStartsWithTPredicate.test(acc));
-            Validate.assertEquals(isLikeName1, nameStartsWithTPredicate1.test(acc));
-            Validate.assertEquals(isLikeName, nameStartsWithTPredicate2.test(acc));
+            Assert.areEqual(isLikeName, nameStartsWithTPredicate.test(acc));
+            Assert.areEqual(isLikeName1, nameStartsWithTPredicate1.test(acc));
+            Assert.areEqual(isLikeName, nameStartsWithTPredicate2.test(acc));
         }
     }
 
@@ -313,9 +313,9 @@ private class SObjectPredicatesTest {
         for (Account acc : INPUT) {
             String type = ((String) acc.get(accTypeField));
             String type1 = ((String) acc.get(typeNameFieldName));
-            Validate.assertEquals(types.contains(type), typeInPredicate.test(acc));
-            Validate.assertEquals(types.contains(type1), typeInPredicate1.test(acc));
-            Validate.assertEquals(types.contains(type), typeInPredicate2.test(acc));
+            Assert.areEqual(types.contains(type), typeInPredicate.test(acc));
+            Assert.areEqual(types.contains(type1), typeInPredicate1.test(acc));
+            Assert.areEqual(types.contains(type), typeInPredicate2.test(acc));
         }
     }
 
@@ -337,9 +337,9 @@ private class SObjectPredicatesTest {
         for (Account acc : INPUT) {
             String type = ((String) acc.get(accTypeField));
             String type1 = ((String) acc.get(typeNameFieldName));
-            Validate.assertEquals(!types.contains(type), typeNotInPredicate.test(acc));
-            Validate.assertEquals(!types.contains(type1), typeNotInPredicate1.test(acc));
-            Validate.assertEquals(!types.contains(type), typeNotInPredicate2.test(acc));
+            Assert.areEqual(!types.contains(type), typeNotInPredicate.test(acc));
+            Assert.areEqual(!types.contains(type1), typeNotInPredicate1.test(acc));
+            Assert.areEqual(!types.contains(type), typeNotInPredicate2.test(acc));
         }
     }
 
@@ -366,12 +366,12 @@ private class SObjectPredicatesTest {
         ISObjectPredicate accNotInPredicate = SObjectPredicates.isNotIn(subset);
         // When
         for (Account acc : INPUT) {
-            Validate.assertEquals(acc == null, nullPredicate.test(acc));
-            Validate.assertEquals(acc != null, notNullPredicate.test(acc));
-            Validate.assertEquals(acc == INPUT[2], accEqualPredicate.test(acc));
-            Validate.assertEquals(acc != INPUT[2], accNotEqualPredicate.test(acc));
-            Validate.assertEquals(subset.contains(acc), accInPredicate.test(acc));
-            Validate.assertEquals(!subset.contains(acc), accNotInPredicate.test(acc));
+            Assert.areEqual(acc == null, nullPredicate.test(acc));
+            Assert.areEqual(acc != null, notNullPredicate.test(acc));
+            Assert.areEqual(acc == INPUT[2], accEqualPredicate.test(acc));
+            Assert.areEqual(acc != INPUT[2], accNotEqualPredicate.test(acc));
+            Assert.areEqual(subset.contains(acc), accInPredicate.test(acc));
+            Assert.areEqual(!subset.contains(acc), accNotInPredicate.test(acc));
         }
     }
 
@@ -400,14 +400,14 @@ private class SObjectPredicatesTest {
         ISObjectPredicate hasSObjects1 = SObjectPredicates.hasSObjects(accountsFieldName);
         // When
         for (Account acc : INPUT) {
-            Validate.assertEquals(acc.get(accNumberOfEmployeesField) != null, has.test(acc));
-            Validate.assertEquals(acc.get(accNumberOfEmployeesField) != null, has1.test(acc));
-            Validate.assertEquals(acc.get(numberOfEmployeesFieldName) != null, has2.test(acc));
-            Validate.assertEquals(acc.getSObject(parentFieldName) != null, hasSObject.test(acc));
-            Validate.assertEquals(acc.getSObject(accParentField) != null, hasSObject1.test(acc));
-            Validate.assertEquals(acc.getSObject(parentFieldName) != null, hasSObject2.test(acc));
-            Validate.assertEquals(acc.getSObjects(accountsFieldName) != null, hasSObjects1.test(acc));
-            Validate.assertEquals(acc.getSObjects(accountsFieldName) != null, hasSObjects.test(acc));
+            Assert.areEqual(acc.get(accNumberOfEmployeesField) != null, has.test(acc));
+            Assert.areEqual(acc.get(accNumberOfEmployeesField) != null, has1.test(acc));
+            Assert.areEqual(acc.get(numberOfEmployeesFieldName) != null, has2.test(acc));
+            Assert.areEqual(acc.getSObject(parentFieldName) != null, hasSObject.test(acc));
+            Assert.areEqual(acc.getSObject(accParentField) != null, hasSObject1.test(acc));
+            Assert.areEqual(acc.getSObject(parentFieldName) != null, hasSObject2.test(acc));
+            Assert.areEqual(acc.getSObjects(accountsFieldName) != null, hasSObjects1.test(acc));
+            Assert.areEqual(acc.getSObjects(accountsFieldName) != null, hasSObjects.test(acc));
         }
     }
 
@@ -437,13 +437,13 @@ private class SObjectPredicatesTest {
         ISObjectPredicate setParentTypePredicateSafe = SObjectPredicates.isSet(parentTypeFieldNameSafe);
         // Then
         for (Account acc : INPUT) {
-            Validate.assertEquals(acc.hasErrors(), hasErrorsPredicate.test(acc));
-            Validate.assertEquals(acc.isClone(), clonePredicate.test(acc));
-            Validate.assertEquals(acc.isSet(typeFieldName), setTypePredicate.test(acc));
-            Validate.assertEquals(acc.isSet(accTypeField), setTypePredicate1.test(acc));
-            Validate.assertEquals(acc.getSObject('Parent')?.isSet(accTypeField), setParentTypePredicateSafe.test(acc));
+            Assert.areEqual(acc.hasErrors(), hasErrorsPredicate.test(acc));
+            Assert.areEqual(acc.isClone(), clonePredicate.test(acc));
+            Assert.areEqual(acc.isSet(typeFieldName), setTypePredicate.test(acc));
+            Assert.areEqual(acc.isSet(accTypeField), setTypePredicate1.test(acc));
+            Assert.areEqual(acc.getSObject('Parent')?.isSet(accTypeField), setParentTypePredicateSafe.test(acc));
             if (acc.getSObject('Parent') != null) {
-                Validate.assertEquals(acc.getSObject('Parent').isSet(accTypeField), setParentTypePredicate.test(acc));
+                Assert.areEqual(acc.getSObject('Parent').isSet(accTypeField), setParentTypePredicate.test(acc));
             }
         }
     }

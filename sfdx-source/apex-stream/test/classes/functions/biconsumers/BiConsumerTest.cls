@@ -30,20 +30,20 @@ private class BiConsumerTest {
             IterTestUtils.Person o1 = (IterTestUtils.Person) IterTestUtils.deepClone(sam, IterTestUtils.Person.class);
             IterTestUtils.Person o2 = (IterTestUtils.Person) IterTestUtils.deepClone(person, IterTestUtils.Person.class);
             consumer.accept(o1, o2);
-            Validate.assertEquals(expectedO1, o1);
-            Validate.assertEquals(expectedO2, o2);
+            Assert.areEqual(expectedO1, o1);
+            Assert.areEqual(expectedO2, o2);
 
             IterTestUtils.Person o3 = (IterTestUtils.Person) IterTestUtils.deepClone(sam, IterTestUtils.Person.class);
             IterTestUtils.Person o4 = (IterTestUtils.Person) IterTestUtils.deepClone(person, IterTestUtils.Person.class);
             consumer1.accept(o3, o4);
-            Validate.assertEquals(expectedO1, o3);
-            Validate.assertEquals(expectedO2, o4);
+            Assert.areEqual(expectedO1, o3);
+            Assert.areEqual(expectedO2, o4);
 
             IterTestUtils.Person o5 = (IterTestUtils.Person) IterTestUtils.deepClone(sam, IterTestUtils.Person.class);
             IterTestUtils.Person o6 = (IterTestUtils.Person) IterTestUtils.deepClone(person, IterTestUtils.Person.class);
             consumer2.accept(o5, o6);
-            Validate.assertEquals(expectedO1, o5);
-            Validate.assertEquals(expectedO2, o6);
+            Assert.areEqual(expectedO1, o5);
+            Assert.areEqual(expectedO2, o6);
         }
     }
     

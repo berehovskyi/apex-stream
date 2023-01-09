@@ -27,10 +27,10 @@ private class TimeToIntFunctionsTest {
         IToIntFunction second = TimeToIntFunctions.second();
         // Then
         for (Time t : INPUT) {
-            Validate.assertEquals(t.hour(), hour.apply(t));
-            Validate.assertEquals(t.millisecond(), millisecond.apply(t));
-            Validate.assertEquals(t.minute(), minute.apply(t));
-            Validate.assertEquals(t.second(), second.apply(t));
+            Assert.areEqual(t.hour(), hour.apply(t));
+            Assert.areEqual(t.millisecond(), millisecond.apply(t));
+            Assert.areEqual(t.minute(), minute.apply(t));
+            Assert.areEqual(t.second(), second.apply(t));
         }
     }
 

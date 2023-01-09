@@ -47,20 +47,20 @@ private class PredicatesTest {
         IPredicate notInInput1Predicate1 = Predicates.isNotIn(Function.identity(), subList);
         // Then
         for (Object i : INPUT) {
-            Validate.assertEquals(i == null, isNullPredicate.test(i));
-            Validate.assertEquals(i != null, isNotNullPredicate.test(i));
-            Validate.assertEquals(((Integer) i) > value, greaterThan1Predicate.test(i));
-            Validate.assertEquals(((Integer) i) >= value, greaterOrEqual1Predicate.test(i));
-            Validate.assertEquals(((Integer) i) >= value, greaterOrEqual1Predicate1.test(i));
-            Validate.assertEquals(i == null ? true : ((Integer) i) < value, lessThan1Predicate.test(i));
-            Validate.assertEquals(i == null ? true : ((Integer) i) <= value, lessOrEqual1Predicate.test(i));
-            Validate.assertEquals(i == null ? true : ((Integer) i) <= value, lessOrEqual1Predicate1.test(i));
-            Validate.assertEquals(((Integer) i) == value1, equal4Predicate.test(i));
-            Validate.assertEquals(((Integer) i) != value1, notEqual4Predicate.test(i));
-            Validate.assertEquals(((Integer) i) != value1, notEqual4Predicate1.test(i));
-            Validate.assertEquals(subList.contains(i), inInput1Predicate.test(i));
-            Validate.assertEquals(!subList.contains(i), notInInput1Predicate.test(i));
-            Validate.assertEquals(!subList.contains(i), notInInput1Predicate1.test(i));
+            Assert.areEqual(i == null, isNullPredicate.test(i));
+            Assert.areEqual(i != null, isNotNullPredicate.test(i));
+            Assert.areEqual(((Integer) i) > value, greaterThan1Predicate.test(i));
+            Assert.areEqual(((Integer) i) >= value, greaterOrEqual1Predicate.test(i));
+            Assert.areEqual(((Integer) i) >= value, greaterOrEqual1Predicate1.test(i));
+            Assert.areEqual(i == null ? true : ((Integer) i) < value, lessThan1Predicate.test(i));
+            Assert.areEqual(i == null ? true : ((Integer) i) <= value, lessOrEqual1Predicate.test(i));
+            Assert.areEqual(i == null ? true : ((Integer) i) <= value, lessOrEqual1Predicate1.test(i));
+            Assert.areEqual(((Integer) i) == value1, equal4Predicate.test(i));
+            Assert.areEqual(((Integer) i) != value1, notEqual4Predicate.test(i));
+            Assert.areEqual(((Integer) i) != value1, notEqual4Predicate1.test(i));
+            Assert.areEqual(subList.contains(i), inInput1Predicate.test(i));
+            Assert.areEqual(!subList.contains(i), notInInput1Predicate.test(i));
+            Assert.areEqual(!subList.contains(i), notInInput1Predicate1.test(i));
         }
     }
 

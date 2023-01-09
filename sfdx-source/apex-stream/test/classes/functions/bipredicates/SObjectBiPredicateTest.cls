@@ -32,10 +32,10 @@ private class SObjectBiPredicateTest {
         for (Account acc : INPUT) {
             Boolean areSameTypes = acc.get(accTypeField) == DELTA.get(accTypeField);
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) > (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(value, valueBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(areSameTypes && isDecreasedNum, decreasedNumOfEmployeesAndWithTheSameTypesBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(areSameTypes || isDecreasedNum, decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(!isDecreasedNum, numOfEmployeesIsNotGreaterBiPredicate.test(acc, DELTA));
+            Assert.areEqual(value, valueBiPredicate.test(acc, DELTA));
+            Assert.areEqual(areSameTypes && isDecreasedNum, decreasedNumOfEmployeesAndWithTheSameTypesBiPredicate.test(acc, DELTA));
+            Assert.areEqual(areSameTypes || isDecreasedNum, decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate.test(acc, DELTA));
+            Assert.areEqual(!isDecreasedNum, numOfEmployeesIsNotGreaterBiPredicate.test(acc, DELTA));
         }
     }
 
@@ -62,13 +62,13 @@ private class SObjectBiPredicateTest {
         for (Account acc : INPUT) {
             Boolean areSameTypes = acc.get(accTypeField) == DELTA.get(accTypeField);
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) > (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(
+            Assert.areEqual(
                     areSameTypes || isDecreasedNum,
                     decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate.test(acc, DELTA)
             );
             Boolean isLeftTypeCustomer = acc.get(accTypeField) == value1;
             Boolean isRightNumOfEmployees = DELTA.get(accNumOfEmployeesField) == value;
-            Validate.assertEquals(
+            Assert.areEqual(
                     isLeftTypeCustomer || isRightNumOfEmployees,
                     isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate.test(acc, DELTA)
             );
@@ -96,13 +96,13 @@ private class SObjectBiPredicateTest {
         for (Account acc : INPUT) {
             Boolean areSameTypes = acc.get(accTypeField) == DELTA.get(accTypeField);
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) > (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(
+            Assert.areEqual(
                     areSameTypes && isDecreasedNum,
                     decreasedNumOfEmployeesAndOrTheSameTypesBiPredicate.test(acc, DELTA)
             );
             Boolean isLeftTypeCustomer = acc.get(accTypeField) == value1;
             Boolean isRightNumOfEmployees = DELTA.get(accNumOfEmployeesField) == value;
-            Validate.assertEquals(
+            Assert.areEqual(
                     isLeftTypeCustomer && isRightNumOfEmployees,
                     isLeftTypeCustomerOrRightNumOfEmployeesBiPredicate.test(acc, DELTA)
             );
@@ -122,7 +122,7 @@ private class SObjectBiPredicateTest {
         // Then
         for (Account acc : INPUT) {
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) > (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(!isDecreasedNum, numOfEmployeesIsNotGreaterBiPredicate.test(acc, DELTA));
+            Assert.areEqual(!isDecreasedNum, numOfEmployeesIsNotGreaterBiPredicate.test(acc, DELTA));
         }
     }
 

@@ -19,7 +19,7 @@ private class ToSObjectFunctionTest {
         IToSObjectFunction getValue = ToSObjectFunction.compose(Function.constant(value));
         // Then
         for (Object acc : INPUT) {
-            Validate.assertEquals(value, getValue.apply(acc));
+            Assert.areEqual(value, getValue.apply(acc));
         }
     }
     

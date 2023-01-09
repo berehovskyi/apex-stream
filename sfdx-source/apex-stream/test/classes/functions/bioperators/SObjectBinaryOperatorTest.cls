@@ -34,8 +34,8 @@ private class SObjectBinaryOperatorTest {
         // Then
         for (Account acc : INPUT) {
             SObject target = new Contact();
-            Validate.assertEquals(acc, left.apply(acc, target));
-            Validate.assertEquals(target, right.apply(acc, target));
+            Assert.areEqual(acc, left.apply(acc, target));
+            Assert.areEqual(target, right.apply(acc, target));
             SObject target1 = new Account(NumberOfEmployees = 100);
             SObject actual = minBy.apply(acc, target1);
             SObject actual1 = minBy1.apply(acc, target1);
@@ -49,22 +49,22 @@ private class SObjectBinaryOperatorTest {
             SObject expected1 = acc.NumberOfEmployees == null
                     ? target1
                     : acc.NumberOfEmployees <= (Integer) target1.get(IterTestUtils.CONSTS.NUMBER_OF_EMPLOYEES) ? target1 : acc;
-            Validate.assertEquals(expected, actual);
-            Validate.assertEquals(expected, actual1);
-            Validate.assertEquals(expected, actual2);
-            Validate.assertEquals(expected1, actual3);
-            Validate.assertEquals(expected1, actual4);
-            Validate.assertEquals(expected1, actual5);
+            Assert.areEqual(expected, actual);
+            Assert.areEqual(expected, actual1);
+            Assert.areEqual(expected, actual2);
+            Assert.areEqual(expected1, actual3);
+            Assert.areEqual(expected1, actual4);
+            Assert.areEqual(expected1, actual5);
 
             SObject expected2 = new Contact(Department = acc.Type, AccountId = acc.Id);
             SObject target2 = new Contact();
             SObject src = IterTestUtils.deepClone(acc);
             SObject actual6 = ofBiConsumer.apply(src, target2);
-            Validate.assertEquals(expected2, actual6);
+            Assert.areEqual(expected2, actual6);
             SObject target3 = new Contact();
             SObject src1 = IterTestUtils.deepClone(acc);
             SObject actual7 = ofBiConsumerMergingToLeft.apply(src1, target3);
-            Validate.assertEquals(src1, actual7);
+            Assert.areEqual(src1, actual7);
         }
     }
     

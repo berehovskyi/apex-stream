@@ -23,8 +23,8 @@ private class DoubleToLongFunctionsTest {
         IDoubleToLongFunction round = DoubleToLongFunctions.roundToLong();
         // Then
         for (Double d : INPUT) {
-            Validate.assertEquals(d.longValue(), longValue.apply(d));
-            Validate.assertEquals(Math.roundToLong(d), round.apply(d));
+            Assert.areEqual(d.longValue(), longValue.apply(d));
+            Assert.areEqual(Math.roundToLong(d), round.apply(d));
         }
     }
     

@@ -52,36 +52,36 @@ private class DoubleUnaryOperatorsTest {
         Double exp = 2;
         // Then
         for (Double d : INPUT) {
-            Validate.assertEquals(Math.abs(d), DoubleUnaryOperators.abs().apply(d));
-            Validate.assertEquals(d + inc, DoubleUnaryOperators.add(inc).apply(d));
-            Validate.assertEquals(Math.atan(d), DoubleUnaryOperators.atan().apply(d));
-            Validate.assertEquals(Math.cbrt(d), DoubleUnaryOperators.cbrt().apply(d));
-            Validate.assertEquals(Math.ceil(d), DoubleUnaryOperators.ceil().apply(d));
-            Validate.assertEquals(Math.cos(d), DoubleUnaryOperators.cos().apply(d));
-            Validate.assertEquals(Math.cosh(d), DoubleUnaryOperators.cosh().apply(d));
-            Validate.assertEquals(d / div, DoubleUnaryOperators.divide(div).apply(d));
-            Validate.assertEquals(Math.exp(d), DoubleUnaryOperators.exp().apply(d));
-            Validate.assertEquals(Math.floor(d), DoubleUnaryOperators.floor().apply(d));
-            Validate.assertEquals(Math.log(d), DoubleUnaryOperators.ln().apply(d));
-            Validate.assertEquals(Math.log10(d), DoubleUnaryOperators.log().apply(d));
-            Validate.assertEquals(Math.max(d, lim), DoubleUnaryOperators.max(lim).apply(d));
-            Validate.assertEquals(Math.min(d, lim), DoubleUnaryOperators.min(lim).apply(d));
-            Validate.assertEquals(d * div, DoubleUnaryOperators.multiply(div).apply(d));
-            Validate.assertEquals(Math.pow(d, exp), DoubleUnaryOperators.pow(exp).apply(d));
-            Validate.assertEquals(Math.rint(d), DoubleUnaryOperators.rint().apply(d));
-            Validate.assertEquals(Math.signum(d), DoubleUnaryOperators.signum().apply(d));
-            Validate.assertEquals(Math.sin(d), DoubleUnaryOperators.sin().apply(d));
-            Validate.assertEquals(Math.sinh(d), DoubleUnaryOperators.sinh().apply(d));
-            Validate.assertEquals(d - inc, DoubleUnaryOperators.subtract(inc).apply(d));
-            Validate.assertEquals(Math.tan(d), DoubleUnaryOperators.tan().apply(d));
-            Validate.assertEquals(Math.tanh(d), DoubleUnaryOperators.tanh().apply(d));
+            Assert.areEqual(Math.abs(d), DoubleUnaryOperators.abs().apply(d));
+            Assert.areEqual(d + inc, DoubleUnaryOperators.add(inc).apply(d));
+            Assert.areEqual(Math.atan(d), DoubleUnaryOperators.atan().apply(d));
+            Assert.areEqual(Math.cbrt(d), DoubleUnaryOperators.cbrt().apply(d));
+            Assert.areEqual(Math.ceil(d), DoubleUnaryOperators.ceil().apply(d));
+            Assert.areEqual(Math.cos(d), DoubleUnaryOperators.cos().apply(d));
+            Assert.areEqual(Math.cosh(d), DoubleUnaryOperators.cosh().apply(d));
+            Assert.areEqual(d / div, DoubleUnaryOperators.divide(div).apply(d));
+            Assert.areEqual(Math.exp(d), DoubleUnaryOperators.exp().apply(d));
+            Assert.areEqual(Math.floor(d), DoubleUnaryOperators.floor().apply(d));
+            Assert.areEqual(Math.log(d), DoubleUnaryOperators.ln().apply(d));
+            Assert.areEqual(Math.log10(d), DoubleUnaryOperators.log().apply(d));
+            Assert.areEqual(Math.max(d, lim), DoubleUnaryOperators.max(lim).apply(d));
+            Assert.areEqual(Math.min(d, lim), DoubleUnaryOperators.min(lim).apply(d));
+            Assert.areEqual(d * div, DoubleUnaryOperators.multiply(div).apply(d));
+            Assert.areEqual(Math.pow(d, exp), DoubleUnaryOperators.pow(exp).apply(d));
+            Assert.areEqual(Math.rint(d), DoubleUnaryOperators.rint().apply(d));
+            Assert.areEqual(Math.signum(d), DoubleUnaryOperators.signum().apply(d));
+            Assert.areEqual(Math.sin(d), DoubleUnaryOperators.sin().apply(d));
+            Assert.areEqual(Math.sinh(d), DoubleUnaryOperators.sinh().apply(d));
+            Assert.areEqual(d - inc, DoubleUnaryOperators.subtract(inc).apply(d));
+            Assert.areEqual(Math.tan(d), DoubleUnaryOperators.tan().apply(d));
+            Assert.areEqual(Math.tanh(d), DoubleUnaryOperators.tanh().apply(d));
         }
         for (Double d : trig) {
-            Validate.assertEquals(Math.acos(d), DoubleUnaryOperators.acos().apply(d));
-            Validate.assertEquals(Math.asin(d), DoubleUnaryOperators.asin().apply(d));
+            Assert.areEqual(Math.acos(d), DoubleUnaryOperators.acos().apply(d));
+            Assert.areEqual(Math.asin(d), DoubleUnaryOperators.asin().apply(d));
         }
         for (Double d : positive) {
-            Validate.assertEquals(Math.sqrt(d), DoubleUnaryOperators.sqrt().apply(d));
+            Assert.areEqual(Math.sqrt(d), DoubleUnaryOperators.sqrt().apply(d));
         }
     }
 

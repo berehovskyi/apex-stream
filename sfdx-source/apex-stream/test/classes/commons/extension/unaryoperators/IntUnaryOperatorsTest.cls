@@ -33,16 +33,16 @@ private class IntUnaryOperatorsTest {
         Integer lim = 5;
         // Then
         for (Integer i : INPUT) {
-            Validate.assertEquals(Math.abs(i), IntUnaryOperators.abs().apply(i));
-            Validate.assertEquals(i + inc, IntUnaryOperators.add(inc).apply(i));
-            Validate.assertEquals(i - 1, IntUnaryOperators.decrement().apply(i));
-            Validate.assertEquals(i / div, IntUnaryOperators.divide(div).apply(i));
-            Validate.assertEquals(i + 1, IntUnaryOperators.increment().apply(i));
-            Validate.assertEquals(Math.max(i, lim), IntUnaryOperators.max(lim).apply(i));
-            Validate.assertEquals(Math.min(i, lim), IntUnaryOperators.min(lim).apply(i));
-            Validate.assertEquals(Math.mod(i, div), IntUnaryOperators.mod(div).apply(i));
-            Validate.assertEquals(i * div, IntUnaryOperators.multiply(div).apply(i));
-            Validate.assertEquals(i - inc, IntUnaryOperators.subtract(inc).apply(i));
+            Assert.areEqual(Math.abs(i), IntUnaryOperators.abs().apply(i));
+            Assert.areEqual(i + inc, IntUnaryOperators.add(inc).apply(i));
+            Assert.areEqual(i - 1, IntUnaryOperators.decrement().apply(i));
+            Assert.areEqual(i / div, IntUnaryOperators.divide(div).apply(i));
+            Assert.areEqual(i + 1, IntUnaryOperators.increment().apply(i));
+            Assert.areEqual(Math.max(i, lim), IntUnaryOperators.max(lim).apply(i));
+            Assert.areEqual(Math.min(i, lim), IntUnaryOperators.min(lim).apply(i));
+            Assert.areEqual(Math.mod(i, div), IntUnaryOperators.mod(div).apply(i));
+            Assert.areEqual(i * div, IntUnaryOperators.multiply(div).apply(i));
+            Assert.areEqual(i - inc, IntUnaryOperators.subtract(inc).apply(i));
         }
     }
     

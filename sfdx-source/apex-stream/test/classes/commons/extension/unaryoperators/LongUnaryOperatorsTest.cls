@@ -32,16 +32,16 @@ private class LongUnaryOperatorsTest {
         Long lim = 5L;
         // Then
         for (Long l : INPUT) {
-            Validate.assertEquals(Math.abs(l), LongUnaryOperators.abs().apply(l));
-            Validate.assertEquals(l + inc, LongUnaryOperators.add(inc).apply(l));
-            Validate.assertEquals(l - 1, LongUnaryOperators.decrement().apply(l));
-            Validate.assertEquals(l / div, LongUnaryOperators.divide(div).apply(l));
-            Validate.assertEquals(l + 1, LongUnaryOperators.increment().apply(l));
-            Validate.assertEquals(Math.max(l, lim), LongUnaryOperators.max(lim).apply(l));
-            Validate.assertEquals(Math.min(l, lim), LongUnaryOperators.min(lim).apply(l));
-            Validate.assertEquals(Math.mod(l, div), LongUnaryOperators.mod(div).apply(l));
-            Validate.assertEquals(l * div, LongUnaryOperators.multiply(div).apply(l));
-            Validate.assertEquals(l - inc, LongUnaryOperators.subtract(inc).apply(l));
+            Assert.areEqual(Math.abs(l), LongUnaryOperators.abs().apply(l));
+            Assert.areEqual(l + inc, LongUnaryOperators.add(inc).apply(l));
+            Assert.areEqual(l - 1, LongUnaryOperators.decrement().apply(l));
+            Assert.areEqual(l / div, LongUnaryOperators.divide(div).apply(l));
+            Assert.areEqual(l + 1, LongUnaryOperators.increment().apply(l));
+            Assert.areEqual(Math.max(l, lim), LongUnaryOperators.max(lim).apply(l));
+            Assert.areEqual(Math.min(l, lim), LongUnaryOperators.min(lim).apply(l));
+            Assert.areEqual(Math.mod(l, div), LongUnaryOperators.mod(div).apply(l));
+            Assert.areEqual(l * div, LongUnaryOperators.multiply(div).apply(l));
+            Assert.areEqual(l - inc, LongUnaryOperators.subtract(inc).apply(l));
         }
     }
     

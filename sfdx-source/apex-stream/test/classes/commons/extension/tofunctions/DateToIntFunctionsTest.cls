@@ -33,12 +33,12 @@ private class DateToIntFunctionsTest {
         IToIntFunction year = DateToIntFunctions.year();
         // Then
         for (Date d : INPUT) {
-            Validate.assertEquals(d.day(), day.apply(d));
-            Validate.assertEquals(d.dayOfYear(), dayOfYear.apply(d));
-            Validate.assertEquals(d.daysBetween(other), daysBetween.apply(d));
-            Validate.assertEquals(d.month(), month.apply(d));
-            Validate.assertEquals(d.monthsBetween(other), monthsBetween.apply(d));
-            Validate.assertEquals(d.year(), year.apply(d));
+            Assert.areEqual(d.day(), day.apply(d));
+            Assert.areEqual(d.dayOfYear(), dayOfYear.apply(d));
+            Assert.areEqual(d.daysBetween(other), daysBetween.apply(d));
+            Assert.areEqual(d.month(), month.apply(d));
+            Assert.areEqual(d.monthsBetween(other), monthsBetween.apply(d));
+            Assert.areEqual(d.year(), year.apply(d));
         }
     }
 

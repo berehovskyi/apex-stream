@@ -26,8 +26,8 @@ private class BiPredicatesTest {
         for (IterTestUtils.Person person : INPUT) {
             Boolean isDecreasedAge = person.getAge() > CHANGE.getAge();
             Boolean isGreater = person.compareTo(CHANGE) == 1;
-            Validate.assertEquals(isDecreasedAge, ageIsGreaterBiPredicate.test(person, CHANGE));
-            Validate.assertEquals(isGreater, isGreaterBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isDecreasedAge, ageIsGreaterBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isGreater, isGreaterBiPredicate.test(person, CHANGE));
         }
     }
 
@@ -43,8 +43,8 @@ private class BiPredicatesTest {
         for (IterTestUtils.Person person : INPUT) {
             Boolean isDecreasedAge = person.getAge() >= CHANGE.getAge();
             Boolean isGreater = person.compareTo(CHANGE) >= 0;
-            Validate.assertEquals(isDecreasedAge, ageIsGreaterOrEqualBiPredicate.test(person, CHANGE));
-            Validate.assertEquals(isGreater, isGreaterOrEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isDecreasedAge, ageIsGreaterOrEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isGreater, isGreaterOrEqualBiPredicate.test(person, CHANGE));
         }
     }
 
@@ -60,8 +60,8 @@ private class BiPredicatesTest {
         for (IterTestUtils.Person person : INPUT) {
             Boolean isDecreasedAge = person.getAge() == CHANGE.getAge();
             Boolean isGreater = person.compareTo(CHANGE) == 0;
-            Validate.assertEquals(isDecreasedAge, agesAreEqualBiPredicate.test(person, CHANGE));
-            Validate.assertEquals(isGreater, areEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isDecreasedAge, agesAreEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isGreater, areEqualBiPredicate.test(person, CHANGE));
         }
     }
 
@@ -77,8 +77,8 @@ private class BiPredicatesTest {
         for (IterTestUtils.Person person : INPUT) {
             Boolean isDecreasedAge = person.getAge() != CHANGE.getAge();
             Boolean isGreater = person.compareTo(CHANGE) != 0;
-            Validate.assertEquals(isDecreasedAge, agesAreNotEqualBiPredicate.test(person, CHANGE));
-            Validate.assertEquals(isGreater, areNotEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isDecreasedAge, agesAreNotEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isGreater, areNotEqualBiPredicate.test(person, CHANGE));
         }
     }
 
@@ -94,8 +94,8 @@ private class BiPredicatesTest {
         for (IterTestUtils.Person person : INPUT) {
             Boolean isIncreasedAge = person.getAge() == null ? true : person.getAge() < CHANGE.getAge();
             Boolean isLess = person.compareTo(CHANGE) == -1;
-            Validate.assertEquals(isIncreasedAge, ageIsLessBiPredicate.test(person, CHANGE));
-            Validate.assertEquals(isLess, isLessBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isIncreasedAge, ageIsLessBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isLess, isLessBiPredicate.test(person, CHANGE));
         }
     }
 
@@ -111,8 +111,8 @@ private class BiPredicatesTest {
         for (IterTestUtils.Person person : INPUT) {
             Boolean isIncreasedAge = person.getAge() == null ? true : person.getAge() <= CHANGE.getAge();
             Boolean isLessOrEqual = person.compareTo(CHANGE) <= 0;
-            Validate.assertEquals(isIncreasedAge, ageIsLessOrEqualBiPredicate.test(person, CHANGE));
-            Validate.assertEquals(isLessOrEqual, isLessOrEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isIncreasedAge, ageIsLessOrEqualBiPredicate.test(person, CHANGE));
+            Assert.areEqual(isLessOrEqual, isLessOrEqualBiPredicate.test(person, CHANGE));
         }
     }
 }

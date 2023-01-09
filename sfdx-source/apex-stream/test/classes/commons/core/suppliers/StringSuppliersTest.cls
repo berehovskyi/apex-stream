@@ -36,18 +36,18 @@ private class StringSuppliersTest {
         String actual11 = (String) autonumberSupp3.get();
         // Then
         String uuidRegex = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
-        Validate.assert(Pattern.matches(uuidRegex, actual));
-        Validate.assert(Pattern.matches(uuidRegex, actual1));
-        Validate.assert(Pattern.matches(uuidRegex, actual2));
-        Validate.assertEquals('A-0000', actual3);
-        Validate.assertEquals('A-0001', actual4);
-        Validate.assertEquals('A-0002', actual5);
-        Validate.assertEquals('1234', actual6);
-        Validate.assertEquals('1235', actual7);
-        Validate.assertEquals('1236', actual8);
-        Validate.assertEquals('A-9--N9', actual9);
-        Validate.assertEquals('A-10--N9', actual10);
-        Validate.assertEquals('A-11--N9', actual11);
+        Assert.isTrue(Pattern.matches(uuidRegex, actual));
+        Assert.isTrue(Pattern.matches(uuidRegex, actual1));
+        Assert.isTrue(Pattern.matches(uuidRegex, actual2));
+        Assert.areEqual('A-0000', actual3);
+        Assert.areEqual('A-0001', actual4);
+        Assert.areEqual('A-0002', actual5);
+        Assert.areEqual('1234', actual6);
+        Assert.areEqual('1235', actual7);
+        Assert.areEqual('1236', actual8);
+        Assert.areEqual('A-9--N9', actual9);
+        Assert.areEqual('A-10--N9', actual10);
+        Assert.areEqual('A-11--N9', actual11);
     }
     
 }

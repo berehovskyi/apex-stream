@@ -37,14 +37,14 @@ private class SObjectUnaryOperatorTest {
         );
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(con, identity.apply(con));
-            Validate.assertEquals(acc, constant.apply(con));
+            Assert.areEqual(con, identity.apply(con));
+            Assert.areEqual(acc, constant.apply(con));
             if (con.Account != null) {
                 Contact clone = (Contact) IterTestUtils.deepClone(con);
                 clone.getSObject(conAccIdField).put(accDescriptionField, value);
-                Validate.assertEquals(clone.getSObject(conAccIdField), operator.apply(IterTestUtils.deepClone(con)));
-                Validate.assertEquals(clone.getSObject(conAccIdField), operator1.apply(IterTestUtils.deepClone(con)));
-                Validate.assertEquals(clone.getSObject(conAccIdField), operator2.apply(IterTestUtils.deepClone(con)));
+                Assert.areEqual(clone.getSObject(conAccIdField), operator.apply(IterTestUtils.deepClone(con)));
+                Assert.areEqual(clone.getSObject(conAccIdField), operator1.apply(IterTestUtils.deepClone(con)));
+                Assert.areEqual(clone.getSObject(conAccIdField), operator2.apply(IterTestUtils.deepClone(con)));
             }
         }
     }

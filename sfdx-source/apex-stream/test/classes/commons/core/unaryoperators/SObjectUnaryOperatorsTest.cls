@@ -23,7 +23,7 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator newAccountOperator = SObjectUnaryOperators.newSObject(accSObjectType);
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(accSObjectType.newSObject(), newAccountOperator.apply(con));
+            Assert.areEqual(accSObjectType.newSObject(), newAccountOperator.apply(con));
         }
     }
 
@@ -41,9 +41,9 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator getGrandAccount = SObjectUnaryOperators.getSObject('Account?.Parent');
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(con.getSObject(accFieldName), getAccount.apply(con));
-            Validate.assertEquals(con.getSObject(accFieldName), getAccount1.apply(con));
-            Validate.assertEquals(con.getSObject(accFieldName)?.getSObject('Parent'), getGrandAccount.apply(con));
+            Assert.areEqual(con.getSObject(accFieldName), getAccount.apply(con));
+            Assert.areEqual(con.getSObject(accFieldName), getAccount1.apply(con));
+            Assert.areEqual(con.getSObject(accFieldName)?.getSObject('Parent'), getGrandAccount.apply(con));
         }
     }
 
@@ -68,13 +68,13 @@ private class SObjectUnaryOperatorsTest {
         for (Contact con : INPUT) {
             SObject newSObject = leadSObjectType.newSObject();
             newSObject.put(leadLastNameField, con.get(conLastNameField));
-            Validate.assertEquals(newSObject, convertToLead.apply(con));
-            Validate.assertEquals(newSObject, convertToLead1.apply(con));
-            Validate.assertEquals(newSObject, convertToLead2.apply(con));
+            Assert.areEqual(newSObject, convertToLead.apply(con));
+            Assert.areEqual(newSObject, convertToLead1.apply(con));
+            Assert.areEqual(newSObject, convertToLead2.apply(con));
             SObject newSObject1 = leadSObjectType.newSObject();
             newSObject1.put(leadLastNameField, constant);
-            Validate.assertEquals(newSObject1, convertToLead5.apply(con));
-            Validate.assertEquals(newSObject1, convertToLead6.apply(con));
+            Assert.areEqual(newSObject1, convertToLead5.apply(con));
+            Assert.areEqual(newSObject1, convertToLead6.apply(con));
         }
     }
 
@@ -98,12 +98,12 @@ private class SObjectUnaryOperatorsTest {
         for (Contact con : INPUT) {
             SObject clone = IterTestUtils.deepClone(con);
             clone.put(conDescriptionField, clone.get(conDepartmentField));
-            Validate.assertEquals(clone, setDescriptionFromDepartment.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(clone, setDescriptionFromDepartment1.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone, setDescriptionFromDepartment.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone, setDescriptionFromDepartment1.apply(IterTestUtils.deepClone(con)));
             SObject clone1 = IterTestUtils.deepClone(con);
             clone1.put(conDescriptionField, constant);
-            Validate.assertEquals(clone1, setDescriptionValue.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(clone1, setDescriptionValue1.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone1, setDescriptionValue.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone1, setDescriptionValue1.apply(IterTestUtils.deepClone(con)));
         }
     }
 
@@ -125,10 +125,10 @@ private class SObjectUnaryOperatorsTest {
         for (Contact con : INPUT) {
             SObject clone = IterTestUtils.deepClone(con);
             clone.putSObject(conAccountIdField, parent);
-            Validate.assertEquals(clone, setSObjectOperator.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(clone, setSObjectOperator1.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(clone, setSObjectOperator2.apply(IterTestUtils.deepClone(con)));
-            Validate.assertEquals(clone, setSObjectOperator3.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone, setSObjectOperator.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone, setSObjectOperator1.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone, setSObjectOperator2.apply(IterTestUtils.deepClone(con)));
+            Assert.areEqual(clone, setSObjectOperator3.apply(IterTestUtils.deepClone(con)));
         }
     }
 
@@ -153,12 +153,12 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator setSObjectsOperator4 = SObjectUnaryOperators.setSObjects(assetsFieldName, children1);
         // Then
         for (Contact con : INPUT) {
-            Validate.assertEquals(children, setSObjectsOperator.apply(IterTestUtils.deepClone(con)).getSObjects(assetsFieldName));
-            Validate.assertEquals(children, setSObjectsOperator1.apply(IterTestUtils.deepClone(con)).getSObjects(assetContactIdField));
-            Validate.assertEquals(children, setSObjectsOperator2.apply(IterTestUtils.deepClone(con)).getSObjects(assetsFieldName));
+            Assert.areEqual(children, setSObjectsOperator.apply(IterTestUtils.deepClone(con)).getSObjects(assetsFieldName));
+            Assert.areEqual(children, setSObjectsOperator1.apply(IterTestUtils.deepClone(con)).getSObjects(assetContactIdField));
+            Assert.areEqual(children, setSObjectsOperator2.apply(IterTestUtils.deepClone(con)).getSObjects(assetsFieldName));
             Contact actual = (Contact) setSObjectsOperator3.apply(IterTestUtils.deepClone(con));
-            Validate.assertEquals(children, actual.getSObjects(assetContactIdField));
-            Validate.assertEquals(null, setSObjectsOperator4.apply(IterTestUtils.deepClone(actual)).getSObjects(assetsFieldName));
+            Assert.areEqual(children, actual.getSObjects(assetContactIdField));
+            Assert.areEqual(null, setSObjectsOperator4.apply(IterTestUtils.deepClone(actual)).getSObjects(assetsFieldName));
         }
     }
     

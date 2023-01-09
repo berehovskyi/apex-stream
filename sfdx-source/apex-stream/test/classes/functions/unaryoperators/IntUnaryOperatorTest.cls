@@ -29,13 +29,13 @@ private class IntUnaryOperatorTest {
         IIntUnaryOperator operator2 = IntUnaryOperator.compose(new List<IIntUnaryOperator>{ incOperator, multiplyOperator });
         // Then
         for (Integer i : INPUT) {
-            Validate.assertEquals(i, identity.apply(i));
-            Validate.assertEquals(constant, of10.apply(i));
-            Validate.assertEquals(i + 1, incOperator.apply(i));
-            Validate.assertEquals(i * factor, multiplyOperator.apply(i));
-            Validate.assertEquals((i + 1) * 2, operator.apply(i));
-            Validate.assertEquals((i + 1) * 2, operator1.apply(i));
-            Validate.assertEquals((i + 1) * 2, operator2.apply(i));
+            Assert.areEqual(i, identity.apply(i));
+            Assert.areEqual(constant, of10.apply(i));
+            Assert.areEqual(i + 1, incOperator.apply(i));
+            Assert.areEqual(i * factor, multiplyOperator.apply(i));
+            Assert.areEqual((i + 1) * 2, operator.apply(i));
+            Assert.areEqual((i + 1) * 2, operator1.apply(i));
+            Assert.areEqual((i + 1) * 2, operator2.apply(i));
         }
     }
 

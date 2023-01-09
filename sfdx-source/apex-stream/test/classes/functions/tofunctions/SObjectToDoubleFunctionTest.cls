@@ -20,8 +20,8 @@ private class SObjectToDoubleFunctionTest {
         ISObjectToDoubleFunction get42 = SObjectToDoubleFunction.downcast(Function.constant(value));
         // Then
         for (Account acc : INPUT) {
-            Validate.assertEquals(acc.get(IterTestUtils.CONSTS.Account.NumberOfEmployees), getNumOfEmployeesAsDouble.apply(acc));
-            Validate.assertEquals(value, get42.apply(acc));
+            Assert.areEqual(acc.get(IterTestUtils.CONSTS.Account.NumberOfEmployees), getNumOfEmployeesAsDouble.apply(acc));
+            Assert.areEqual(value, get42.apply(acc));
         }
     }
     

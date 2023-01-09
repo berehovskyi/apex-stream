@@ -1,10 +1,10 @@
 # ListFunctions
 
-`APIVERSION: 55`
+`APIVERSION: 56`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of [Function](/docs/Functional-Abstract-Classes/Function.md) and related utilities that are used by [SObjectCollectors](/Functional-Built-In-Classes/SObjectCollectors.md).
+Provides common implementations of [Function](/docs/Functional-Abstract-Classes/Function.md) and related utilities that are used by [SObjectCollectors](/docs/Functional-Built-In-Classes/SObjectCollectors.md).
 
 
 **See** [Function](/docs/Functional-Abstract-Classes/Function.md)

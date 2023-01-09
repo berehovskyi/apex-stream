@@ -56,15 +56,15 @@ private class PredicateTest {
         IPredicate adultActiveWithNameStartsWithJPredicate = adultPredicate.andAlso(activePredicate.orElse(nameStartsWithJPredicate)); // 1 AND (2 OR 3)
         // Then
         for (IterTestUtils.Person person : INPUT) {
-            Validate.assertEquals(value1, alwaysPredicate.test(person));
-            Validate.assertEquals(person.getAge() >= value, adultPredicate.test(person));
-            Validate.assertEquals(person.isActive(), activePredicate.test(person));
-            Validate.assertEquals(person.getAge() >= value && person.isActive(), adultActivePredicate.test(person));
-            Validate.assertEquals(person.getAge() >= value && person.isActive(), adultPredicate.andAlso(activePredicate).test(person));
-            Validate.assertEquals(person.getAge() >= value || person.isActive(), adultOrActivePredicate.test(person));
-            Validate.assertEquals(!(person.getAge() >= value), notAdultPredicate.test(person));
-            Validate.assertEquals(person.getAge() >= value && person.isActive() || person.getName().startsWith(j), adultActiveOrWithNameStartsWithJPredicate.test(person));
-            Validate.assertEquals(person.getAge() >= value && (person.isActive() || person.getName().startsWith(j)), adultActiveWithNameStartsWithJPredicate.test(person));
+            Assert.areEqual(value1, alwaysPredicate.test(person));
+            Assert.areEqual(person.getAge() >= value, adultPredicate.test(person));
+            Assert.areEqual(person.isActive(), activePredicate.test(person));
+            Assert.areEqual(person.getAge() >= value && person.isActive(), adultActivePredicate.test(person));
+            Assert.areEqual(person.getAge() >= value && person.isActive(), adultPredicate.andAlso(activePredicate).test(person));
+            Assert.areEqual(person.getAge() >= value || person.isActive(), adultOrActivePredicate.test(person));
+            Assert.areEqual(!(person.getAge() >= value), notAdultPredicate.test(person));
+            Assert.areEqual(person.getAge() >= value && person.isActive() || person.getName().startsWith(j), adultActiveOrWithNameStartsWithJPredicate.test(person));
+            Assert.areEqual(person.getAge() >= value && (person.isActive() || person.getName().startsWith(j)), adultActiveWithNameStartsWithJPredicate.test(person));
         }
     }
 
@@ -82,7 +82,7 @@ private class PredicateTest {
         Predicate adultPredicate = Predicates.isGreaterOrEqual(getAgeFunction, valueFunction);
         // Then
         for (IterTestUtils.Person person : INPUT) {
-            Validate.assertEquals(person.getAge() >= value || person.isActive(), Predicate.some(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
+            Assert.areEqual(person.getAge() >= value || person.isActive(), Predicate.some(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
         }
     }
 
@@ -100,7 +100,7 @@ private class PredicateTest {
         Predicate adultPredicate = Predicates.isGreaterOrEqual(getAgeFunction, valueFunction);
         // Then
         for (IterTestUtils.Person person : INPUT) {
-            Validate.assertEquals(person.getAge() >= value && person.isActive(), Predicate.every(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
+            Assert.areEqual(person.getAge() >= value && person.isActive(), Predicate.every(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
         }
     }
 
@@ -117,7 +117,7 @@ private class PredicateTest {
         Predicate adultPredicate = Predicates.isGreaterOrEqual(getAgeFunction, valueFunction);
         // Then
         for (IterTestUtils.Person person : INPUT) {
-            Validate.assertEquals(!(person.getAge() >= value), Predicate.negate(adultPredicate).test(person));
+            Assert.areEqual(!(person.getAge() >= value), Predicate.negate(adultPredicate).test(person));
         }
     }
 
@@ -145,11 +145,11 @@ private class PredicateTest {
         Predicate isActivePredicate = Predicate.compose(getAsUserFunction, SObjectPredicates.isEqual(userIsActiveField, value3));
         // Then
         for (IterTestUtils.Person person : INPUT) {
-            Validate.assertEquals(person.getAge() > value, agePredicate.test(person));
-            Validate.assertEquals(person.getAge() > value, ageAsIntPredicate.test(person));
-            Validate.assertEquals(person.getAutoId() > value1, numberPredicate.test(person));
-            Validate.assertEquals(person.getProbability() > value2, probPredicate.test(person));
-            Validate.assertEquals(person.isActive(), isActivePredicate.test(person));
+            Assert.areEqual(person.getAge() > value, agePredicate.test(person));
+            Assert.areEqual(person.getAge() > value, ageAsIntPredicate.test(person));
+            Assert.areEqual(person.getAutoId() > value1, numberPredicate.test(person));
+            Assert.areEqual(person.getProbability() > value2, probPredicate.test(person));
+            Assert.areEqual(person.isActive(), isActivePredicate.test(person));
         }
     }
 

@@ -28,10 +28,10 @@ private class IntBinaryOperatorsTest {
         // Then
         for (Integer i : INPUT) {
             Integer src = 5;
-            Validate.assertEquals(Math.min(src, i), min.apply(src, i));
-            Validate.assertEquals(Math.max(src, i), max.apply(src, i));
-            Validate.assertEquals(src + i, sum.apply(src, i));
-            Validate.assertEquals(src * i, product.apply(src, i));
+            Assert.areEqual(Math.min(src, i), min.apply(src, i));
+            Assert.areEqual(Math.max(src, i), max.apply(src, i));
+            Assert.areEqual(src + i, sum.apply(src, i));
+            Assert.areEqual(src * i, product.apply(src, i));
         }
     }
     

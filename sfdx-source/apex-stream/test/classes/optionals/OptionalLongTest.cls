@@ -32,36 +32,36 @@ private class OptionalLongTest {
         ILongSupplier increment = LongSuppliers.increment();
         ISupplier npeSupplier = Supplier.of(NullPointerException.class);
         // When
-        Validate.assertEquals(value, optLong.get());
-        Validate.assertEquals(true, optLong.isPresent());
-        Validate.assertEquals(false, optNull.isPresent());
-        Validate.assertEquals(false, optLong.isEmpty());
-        Validate.assertEquals(true, optNull.isEmpty());
+        Assert.areEqual(value, optLong.get());
+        Assert.areEqual(true, optLong.isPresent());
+        Assert.areEqual(false, optNull.isPresent());
+        Assert.areEqual(false, optLong.isEmpty());
+        Assert.areEqual(true, optNull.isEmpty());
         optLong.ifPresent(cons);
-        Validate.assertEquals(value, (optLong.get()));
+        Assert.areEqual(value, (optLong.get()));
         optLong.ifPresentOrElse(cons, new IterTestUtils.DoNothingRunnable());
         optNull.ifPresentOrElse(cons, new IterTestUtils.DoNothingRunnable());
-        Validate.assertEquals(optLong.get(), optLong.orElse(other));
-        Validate.assertEquals(other, optNull.orElse(other));
-        Validate.assertEquals(optLong.get(), optLong.orElseGet(increment));
-        Validate.assertEquals(0, optNull.orElseGet(increment));
-        Validate.assertEquals(optLong.get(), optLong.orElseThrow(npeSupplier));
-        Validate.assert(emptyOpt.equals(optNull));
-        Validate.assertEquals(emptyOpt.hashCode(), optNull.hashCode());
+        Assert.areEqual(optLong.get(), optLong.orElse(other));
+        Assert.areEqual(other, optNull.orElse(other));
+        Assert.areEqual(optLong.get(), optLong.orElseGet(increment));
+        Assert.areEqual(0, optNull.orElseGet(increment));
+        Assert.areEqual(optLong.get(), optLong.orElseThrow(npeSupplier));
+        Assert.isTrue(emptyOpt.equals(optNull));
+        Assert.areEqual(emptyOpt.hashCode(), optNull.hashCode());
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

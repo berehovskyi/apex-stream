@@ -42,22 +42,22 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<SObject>(new Set<SObject>(input));
         List<Account> expected1 = new List<SObject>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(input, actual6);
-        Validate.assertEquals(false, accSeq.isEmpty());
-        Validate.assertEquals(ACCOUNTS, input, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream5).isOperated);
-        Validate.assert(((SObjectStream) accStream6).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(input, actual6);
+        Assert.areEqual(false, accSeq.isEmpty());
+        Assert.areEqual(ACCOUNTS, input, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream5).isOperated);
+        Assert.isTrue(((SObjectStream) accStream6).isOperated);
     }
 
     /**
@@ -72,12 +72,12 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStream.toList();
         // Then
-        Validate.assertEquals(lim, actual.size());
+        Assert.areEqual(lim, actual.size());
         for (Integer i = 0, size = actual.size(); i < size; i++) {
-            Validate.assertEquals('Test' + i, actual[i].Name);
-            Validate.assertEquals(100 * i, actual[i].NumberOfEmployees);
+            Assert.areEqual('Test' + i, actual[i].Name);
+            Assert.areEqual(100 * i, actual[i].NumberOfEmployees);
         }
-        Validate.assert(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
     }
 
     /**
@@ -102,23 +102,23 @@ private class SObjectStreamTest {
         List<Account> actual = accStream.toList();
         List<Account> actual1 = accStream1.toList();
         // Then
-        Validate.assertEquals(lim, actual.size());
-        Validate.assertEquals(lim, actual1.size());
+        Assert.areEqual(lim, actual.size());
+        Assert.areEqual(lim, actual1.size());
         for (Integer i = 0, size = actual.size(); i < size; i++) {
             if (i == 0) {
-                Validate.assertEquals(name, actual[i].Name);
-                Validate.assertEquals(numOfEmployees, actual[i].NumberOfEmployees);
-                Validate.assertEquals(name1, actual1[i].Name);
-                Validate.assertEquals(numOfEmployees1, actual1[i].NumberOfEmployees);
+                Assert.areEqual(name, actual[i].Name);
+                Assert.areEqual(numOfEmployees, actual[i].NumberOfEmployees);
+                Assert.areEqual(name1, actual1[i].Name);
+                Assert.areEqual(numOfEmployees1, actual1[i].NumberOfEmployees);
             } else {
-                Validate.assertEquals(name = name + (i - 1), actual[i].Name);
-                Validate.assertEquals(numOfEmployees = numOfEmployees + 100 * (i - 1), actual[i].NumberOfEmployees);
-                Validate.assertEquals(name1 = name1 + (i - 1), actual1[i].Name);
-                Validate.assertEquals(numOfEmployees1 = numOfEmployees1 + 100 * (i - 1), actual1[i].NumberOfEmployees);
+                Assert.areEqual(name = name + (i - 1), actual[i].Name);
+                Assert.areEqual(numOfEmployees = numOfEmployees + 100 * (i - 1), actual[i].NumberOfEmployees);
+                Assert.areEqual(name1 = name1 + (i - 1), actual1[i].Name);
+                Assert.areEqual(numOfEmployees1 = numOfEmployees1 + 100 * (i - 1), actual1[i].NumberOfEmployees);
             }
         }
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
     }
 
     /**
@@ -148,13 +148,13 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc5 };
         List<Account> expected1 = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc5, acc6 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
     }
 
     /**
@@ -188,12 +188,12 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<Account>{ oldAcc, oldAcc1, newAcc2, oldAcc3 };
         List<Account> expected1 = new List<Account>{ newAcc1, newAcc2 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((SObjectStream) oldAccsSteam).isOperated);
-        Validate.assert(((SObjectStream) oldAccsSteam1).isOperated);
-        Validate.assert(((SObjectStream) newAccsSteam).isOperated);
-        Validate.assert(((SObjectStream) newAccsSteam1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((SObjectStream) oldAccsSteam).isOperated);
+        Assert.isTrue(((SObjectStream) oldAccsSteam1).isOperated);
+        Assert.isTrue(((SObjectStream) newAccsSteam).isOperated);
+        Assert.isTrue(((SObjectStream) newAccsSteam1).isOperated);
     }
 
     /**
@@ -223,14 +223,14 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc5 };
         List<Account> expected1 = new List<Account>{ acc3, acc4, acc5, acc, acc1, acc2 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream5).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream5).isOperated);
     }
 
     /**
@@ -267,16 +267,16 @@ private class SObjectStreamTest {
         List<Account> actual4 = stream4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc, acc2 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
-        Validate.assert(((SObjectStream) stream).isOperated);
-        Validate.assert(((SObjectStream) stream1).isOperated);
-        Validate.assert(((SObjectStream) stream2).isOperated);
-        Validate.assert(((SObjectStream) stream3).isOperated);
-        Validate.assert(((SObjectStream) stream4).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
+        Assert.isTrue(((SObjectStream) stream).isOperated);
+        Assert.isTrue(((SObjectStream) stream1).isOperated);
+        Assert.isTrue(((SObjectStream) stream2).isOperated);
+        Assert.isTrue(((SObjectStream) stream3).isOperated);
+        Assert.isTrue(((SObjectStream) stream4).isOperated);
     }
 
     /**
@@ -313,16 +313,16 @@ private class SObjectStreamTest {
         List<Account> actual4 = stream4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc3, acc9 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
-        Validate.assert(((SObjectStream) stream).isOperated);
-        Validate.assert(((SObjectStream) stream1).isOperated);
-        Validate.assert(((SObjectStream) stream2).isOperated);
-        Validate.assert(((SObjectStream) stream3).isOperated);
-        Validate.assert(((SObjectStream) stream4).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
+        Assert.isTrue(((SObjectStream) stream).isOperated);
+        Assert.isTrue(((SObjectStream) stream1).isOperated);
+        Assert.isTrue(((SObjectStream) stream2).isOperated);
+        Assert.isTrue(((SObjectStream) stream3).isOperated);
+        Assert.isTrue(((SObjectStream) stream4).isOperated);
     }
 
     /**
@@ -359,16 +359,16 @@ private class SObjectStreamTest {
         List<Account> actual4 = stream4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc7 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
-        Validate.assert(((SObjectStream) stream).isOperated);
-        Validate.assert(((SObjectStream) stream1).isOperated);
-        Validate.assert(((SObjectStream) stream2).isOperated);
-        Validate.assert(((SObjectStream) stream3).isOperated);
-        Validate.assert(((SObjectStream) stream4).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
+        Assert.isTrue(((SObjectStream) stream).isOperated);
+        Assert.isTrue(((SObjectStream) stream1).isOperated);
+        Assert.isTrue(((SObjectStream) stream2).isOperated);
+        Assert.isTrue(((SObjectStream) stream3).isOperated);
+        Assert.isTrue(((SObjectStream) stream4).isOperated);
     }
 
     /**
@@ -399,14 +399,14 @@ private class SObjectStreamTest {
         List<Account> actual3 = accStream3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc1, acc2 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -439,21 +439,21 @@ private class SObjectStreamTest {
         Iterator<Account> iterator = (Iterator<Account>) accStream4.iterator();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(input[0], iterator.next());
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(input[0], iterator.next());
         try {
             iterator.next();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
     }
 
     /**
@@ -484,14 +484,14 @@ private class SObjectStreamTest {
         List<Account> actual3 = accStream3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc3, acc4 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -511,8 +511,8 @@ private class SObjectStreamTest {
         List<Account> actual = SObjectStream.of(clone).withoutNulls().toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc1 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -564,18 +564,18 @@ private class SObjectStreamTest {
         List<Contact> actual3 = conStream3.toList();
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
-            Validate.assertEquals(input[i].Id, actual[i].AccountId);
-            Validate.assertEquals(acc5, actual1[i]);
-            Validate.assertEquals(acc5, actual2[i]);
-            Validate.assertEquals(input[i].Id, actual3[i].AccountId);
-            Validate.assertEquals(input[i].Name, actual3[i].Description);
-            Validate.assertEquals(value, actual3[i].Department);
+            Assert.areEqual(input[i].Id, actual[i].AccountId);
+            Assert.areEqual(acc5, actual1[i]);
+            Assert.areEqual(acc5, actual2[i]);
+            Assert.areEqual(input[i].Id, actual3[i].AccountId);
+            Assert.areEqual(input[i].Name, actual3[i].Description);
+            Assert.areEqual(value, actual3[i].Department);
         }
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) conStream).isOperated);
-        Validate.assert(((SObjectStream) conStream1).isOperated);
-        Validate.assert(((SObjectStream) conStream2).isOperated);
-        Validate.assert(((SObjectStream) conStream3).isOperated);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) conStream).isOperated);
+        Assert.isTrue(((SObjectStream) conStream1).isOperated);
+        Assert.isTrue(((SObjectStream) conStream2).isOperated);
+        Assert.isTrue(((SObjectStream) conStream3).isOperated);
     }
 
     /**
@@ -603,13 +603,13 @@ private class SObjectStreamTest {
         List<Integer> actual2 = intStream2.toList();
         // Then
         List<Integer> expected = new List<Integer>{ 200, 200, 200, 400, null };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((IntStream) intStream).isOperated);
-        Validate.assert(((IntStream) intStream1).isOperated);
-        Validate.assert(((IntStream) intStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((IntStream) intStream).isOperated);
+        Assert.isTrue(((IntStream) intStream1).isOperated);
+        Assert.isTrue(((IntStream) intStream2).isOperated);
     }
 
     /**
@@ -637,13 +637,13 @@ private class SObjectStreamTest {
         List<Long> actual2 = longStream2.toList();
         // Then
         List<Long> expected = new List<Long>{ 200L, 200L, 200L, 400L, null };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) longStream).isOperated);
-        Validate.assert(((LongStream) longStream1).isOperated);
-        Validate.assert(((LongStream) longStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) longStream).isOperated);
+        Assert.isTrue(((LongStream) longStream1).isOperated);
+        Assert.isTrue(((LongStream) longStream2).isOperated);
     }
 
     /**
@@ -671,13 +671,13 @@ private class SObjectStreamTest {
         List<Double> actual2 = doubleStream2.toList();
         // Then
         List<Double> expected = new List<Double>{ 20000.0, 10000.5, 40000.4, 2581.9, null };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) doubleStream).isOperated);
-        Validate.assert(((DoubleStream) doubleStream1).isOperated);
-        Validate.assert(((DoubleStream) doubleStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) doubleStream).isOperated);
+        Assert.isTrue(((DoubleStream) doubleStream1).isOperated);
+        Assert.isTrue(((DoubleStream) doubleStream2).isOperated);
     }
 
     /**
@@ -709,13 +709,13 @@ private class SObjectStreamTest {
         List<Date> actual2 = (List<Date>) objStream2.toList(List<Date>.class);
         // Then
         List<Date> expected = new List<Date>{ d, d1, d2, d3, null };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) objStream).isOperated);
-        Validate.assert(((ObjectStream) objStream1).isOperated);
-        Validate.assert(((ObjectStream) objStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) objStream).isOperated);
+        Assert.isTrue(((ObjectStream) objStream1).isOperated);
+        Assert.isTrue(((ObjectStream) objStream2).isOperated);
     }
 
     /**
@@ -744,13 +744,13 @@ private class SObjectStreamTest {
                 expected.addAll(children);
             }
         }
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) conStream).isOperated);
-        Validate.assert(((SObjectStream) conStream1).isOperated);
-        Validate.assert(((SObjectStream) conStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) conStream).isOperated);
+        Assert.isTrue(((SObjectStream) conStream1).isOperated);
+        Assert.isTrue(((SObjectStream) conStream2).isOperated);
     }
 
     /**
@@ -779,9 +779,9 @@ private class SObjectStreamTest {
                 expected.addAll(result);
             }
         }
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((IntStream) intStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((IntStream) intStream).isOperated);
     }
 
     /**
@@ -810,9 +810,9 @@ private class SObjectStreamTest {
                 expected.addAll(result);
             }
         }
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) longStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) longStream).isOperated);
     }
 
     /**
@@ -837,9 +837,9 @@ private class SObjectStreamTest {
             expected.add(value1);
             expected.add(value2);
         }
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) doubleStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) doubleStream).isOperated);
     }
 
     /**
@@ -864,9 +864,9 @@ private class SObjectStreamTest {
             expected.add(value1);
             expected.add(value2);
         }
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) objStream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) objStream).isOperated);
     }
 
     /**
@@ -897,16 +897,16 @@ private class SObjectStreamTest {
         List<Account> actual2 = accStream2.toList();
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
-            Validate.assertEquals(value, actual[i].Name);
-            Validate.assertEquals(value, actual1[i].Name);
-            Validate.assertEquals(value, actual2[i].Name);
+            Assert.areEqual(value, actual[i].Name);
+            Assert.areEqual(value, actual1[i].Name);
+            Assert.areEqual(value, actual2[i].Name);
         }
-        Validate.assertNotEquals(input, clone, Label.InputNotMutatedErrorMessage);
-        Validate.assertNotEquals(input, clone1, Label.InputNotMutatedErrorMessage);
-        Validate.assertNotEquals(input, clone2, Label.InputNotMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areNotEqual(input, clone, Label.InputNotMutatedErrorMessage);
+        Assert.areNotEqual(input, clone1, Label.InputNotMutatedErrorMessage);
+        Assert.areNotEqual(input, clone2, Label.InputNotMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -937,15 +937,15 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, null, acc4 };
         List<Account> expected1 = new List<Account>{ acc, acc3, acc4 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -983,21 +983,21 @@ private class SObjectStreamTest {
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc2, acc3, acc4 };
         List<Account> expected1 = new List<Account>{ acc4, acc2, acc2, acc1, acc, acc3 };
         List<Account> expected2 = new List<Account>{ acc3, acc, acc1, acc2, acc2, acc4 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream6).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream6).isOperated);
     }
 
     /**
@@ -1030,15 +1030,15 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<Account>{ acc1, acc, acc2 };
         List<Account> expected1 = new List<Account>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(!((SObjectStream) accStream3).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(!((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -1071,15 +1071,15 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<Account>{ acc2 };
         List<Account> expected1 = new List<Account>();
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(!((SObjectStream) accStream3).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(!((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -1105,11 +1105,11 @@ private class SObjectStreamTest {
         SObject actual = accStream.reduce(seed, maxBy);
         SObject actual1 = accStream1.reduce(maxBy).get();
         // Then
-        Validate.assertEquals(acc3, actual);
-        Validate.assertEquals(acc3, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
+        Assert.areEqual(acc3, actual);
+        Assert.areEqual(acc3, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
     }
 
     /**
@@ -1135,11 +1135,11 @@ private class SObjectStreamTest {
         Set<SObject> actual1 = (Set<SObject>) accStream1.collect(sObjectSetSupplier, biConsumer);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, acc3, acc4 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
     }
 
     /**
@@ -1170,15 +1170,15 @@ private class SObjectStreamTest {
         Account actual2 = (Account) accStream2.find(fieldName, value).get();
         Boolean actual3 = accStream3.find(fieldName, value1).isEmpty();
         // Then
-        Validate.assertEquals(acc2, actual);
-        Validate.assertEquals(acc2, actual1);
-        Validate.assertEquals(acc2, actual2);
-        Validate.assert(actual3);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
+        Assert.areEqual(acc2, actual);
+        Assert.areEqual(acc2, actual1);
+        Assert.areEqual(acc2, actual2);
+        Assert.isTrue(actual3);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
     }
 
     /**
@@ -1206,13 +1206,13 @@ private class SObjectStreamTest {
         Boolean isEveryConDoNotCall = accStream1.every(IterTestUtils.CONSTS.Contact.DoNotCall, value1);
         Boolean isEveryConFinanceDepartment = accStream2.every(IterTestUtils.CONSTS.DEPARTMENT, value2);
         // Then
-        Validate.assertEquals(true, isEveryConNameStartsWithT);
-        Validate.assertEquals(false, isEveryConDoNotCall);
-        Validate.assertEquals(false, isEveryConFinanceDepartment);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(true, isEveryConNameStartsWithT);
+        Assert.areEqual(false, isEveryConDoNotCall);
+        Assert.areEqual(false, isEveryConFinanceDepartment);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1240,13 +1240,13 @@ private class SObjectStreamTest {
         Boolean isSomeConDoNotCall = accStream1.some(IterTestUtils.CONSTS.Contact.DoNotCall, value1);
         Boolean isSomeConHR = accStream2.some(IterTestUtils.CONSTS.DEPARTMENT, value2);
         // Then
-        Validate.assertEquals(false, isSomeConNameStartsWithA);
-        Validate.assertEquals(true, isSomeConDoNotCall);
-        Validate.assertEquals(false, isSomeConHR);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(false, isSomeConNameStartsWithA);
+        Assert.areEqual(true, isSomeConDoNotCall);
+        Assert.areEqual(false, isSomeConHR);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1274,13 +1274,13 @@ private class SObjectStreamTest {
         Boolean isSomeConDoNotCall = accStream1.none(IterTestUtils.CONSTS.Contact.DoNotCall, value1);
         Boolean isSomeConHR = accStream2.none(IterTestUtils.CONSTS.DEPARTMENT, value2);
         // Then
-        Validate.assertEquals(true, isSomeConLNameStartsWithA);
-        Validate.assertEquals(false, isSomeConDoNotCall);
-        Validate.assertEquals(true, isSomeConHR);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(true, isSomeConLNameStartsWithA);
+        Assert.areEqual(false, isSomeConDoNotCall);
+        Assert.areEqual(true, isSomeConHR);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1307,13 +1307,13 @@ private class SObjectStreamTest {
         Account actual1 = (Account) accStream1.max(fieldName).get();
         Account actual2 = (Account) accStream2.max(field).get();
         // Then
-        Validate.assertEquals(acc3, actual);
-        Validate.assertEquals(acc3, actual1);
-        Validate.assertEquals(acc3, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(acc3, actual);
+        Assert.areEqual(acc3, actual1);
+        Assert.areEqual(acc3, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1340,13 +1340,13 @@ private class SObjectStreamTest {
         Account actual1 = (Account) accStream1.min(fieldName).get();
         Account actual2 = (Account) accStream2.min(field).get();
         // Then
-        Validate.assertEquals(acc4, actual);
-        Validate.assertEquals(acc4, actual1);
-        Validate.assertEquals(acc4, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(acc4, actual);
+        Assert.areEqual(acc4, actual1);
+        Assert.areEqual(acc4, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1375,13 +1375,13 @@ private class SObjectStreamTest {
         Double actual2 = (Double) accStream2.sum(field);
         // Then
         Integer expected = 700;
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1410,13 +1410,13 @@ private class SObjectStreamTest {
         Double actual2 = (Double) accStream2.avg(field).get();
         // Then
         Double expected = 700 / 5;
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1440,13 +1440,13 @@ private class SObjectStreamTest {
         Integer actual1 = accStream1.count();
         Integer actual2 = accStream2.count();
         // Then
-        Validate.assertEquals(input.size(), actual);
-        Validate.assertEquals(0, actual1);
-        Validate.assertEquals(0, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(input.size(), actual);
+        Assert.areEqual(0, actual1);
+        Assert.areEqual(0, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1470,13 +1470,13 @@ private class SObjectStreamTest {
         Boolean actual1 = accStream1.isEmpty();
         Boolean actual2 = accStream2.isEmpty();
         // Then
-        Validate.assertEquals(input.isEmpty(), actual);
-        Validate.assert(actual1);
-        Validate.assert(actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(input.isEmpty(), actual);
+        Assert.isTrue(actual1);
+        Assert.isTrue(actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
     /**
@@ -1511,21 +1511,21 @@ private class SObjectStreamTest {
         List<Integer> expected = (List<Integer>) SObjectStream.of(clone)
                 .withoutNulls()
                 .collect(SObjectCollectors.toList(Account.NumberOfEmployees).cast(List<Integer>.class));
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected, actual4);
-        Validate.assertEquals(expected, actual5);
-        Validate.assertEquals(expected, actual6);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream5).isOperated);
-        Validate.assert(((SObjectStream) accStream6).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected, actual4);
+        Assert.areEqual(expected, actual5);
+        Assert.areEqual(expected, actual6);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream5).isOperated);
+        Assert.isTrue(((SObjectStream) accStream6).isOperated);
     }
 
     /**
@@ -1578,29 +1578,29 @@ private class SObjectStreamTest {
         Set<Object> expected3 = (Set<Object>) SObjectStream.of(clone)
                 .withoutNulls()
                 .collect(SObjectCollectors.toSet(Account.Name));
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected3, actual8);
-        Validate.assertEquals(expected3, actual9);
-        Validate.assertEquals(expected3, actual10);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream5).isOperated);
-        Validate.assert(((SObjectStream) accStream6).isOperated);
-        Validate.assert(((SObjectStream) accStream7).isOperated);
-        Validate.assert(((SObjectStream) accStream8).isOperated);
-        Validate.assert(((SObjectStream) accStream9).isOperated);
-        Validate.assert(((SObjectStream) accStream10).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected3, actual8);
+        Assert.areEqual(expected3, actual9);
+        Assert.areEqual(expected3, actual10);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream5).isOperated);
+        Assert.isTrue(((SObjectStream) accStream6).isOperated);
+        Assert.isTrue(((SObjectStream) accStream7).isOperated);
+        Assert.isTrue(((SObjectStream) accStream8).isOperated);
+        Assert.isTrue(((SObjectStream) accStream9).isOperated);
+        Assert.isTrue(((SObjectStream) accStream10).isOperated);
     }
 
     /**
@@ -1640,21 +1640,21 @@ private class SObjectStreamTest {
                 .collect(SObjectCollectors.toByIdMap(Account.Id).cast(Map<Id, Account>.class));
         Map<String, Account> expected2 = (Map<String, Account>) SObjectStream.of(clone)
                 .collect(SObjectCollectors.toByStringMap(Account.Name).cast(Map<String, Account>.class));
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
-        Validate.assertEquals(expected2, actual6);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream5).isOperated);
-        Validate.assert(((SObjectStream) accStream6).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected2, actual4);
+        Assert.areEqual(expected2, actual5);
+        Assert.areEqual(expected2, actual6);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream5).isOperated);
+        Assert.isTrue(((SObjectStream) accStream6).isOperated);
     }
 
     /**
@@ -1692,19 +1692,19 @@ private class SObjectStreamTest {
                 .collect(SObjectCollectors.groupingById(Account.ParentId).cast(Map<Id, List<Account>>.class));
         Map<String, List<Account>> expected1 = (Map<String, List<Account>>) SObjectStream.of(clone)
                 .collect(SObjectCollectors.groupingByString(Account.Rating).cast(Map<String, List<Account>>.class));
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected1, actual6);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
-        Validate.assert(((SObjectStream) accStream3).isOperated);
-        Validate.assert(((SObjectStream) accStream4).isOperated);
-        Validate.assert(((SObjectStream) accStream5).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected1, actual6);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
+        Assert.isTrue(((SObjectStream) accStream3).isOperated);
+        Assert.isTrue(((SObjectStream) accStream4).isOperated);
+        Assert.isTrue(((SObjectStream) accStream5).isOperated);
     }
 
     /**
@@ -1736,13 +1736,13 @@ private class SObjectStreamTest {
                 true => new List<Account>{ acc1 },
                 false => new List<Account>{ acc, acc2, acc3, acc4 }
         };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((SObjectStream) accStream).isOperated);
-        Validate.assert(((SObjectStream) accStream1).isOperated);
-        Validate.assert(((SObjectStream) accStream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
+        Assert.isTrue(((SObjectStream) accStream1).isOperated);
+        Assert.isTrue(((SObjectStream) accStream2).isOperated);
     }
 
 }

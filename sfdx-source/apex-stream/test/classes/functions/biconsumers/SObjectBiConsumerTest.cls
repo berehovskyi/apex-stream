@@ -28,15 +28,15 @@ private class SObjectBiConsumerTest {
             SObject src = IterTestUtils.deepClone(con);
             SObject target = new Contact();
             consumer.accept(src, target);
-            Validate.assertEquals(expected, target);
+            Assert.areEqual(expected, target);
             SObject src1 = IterTestUtils.deepClone(con);
             SObject target1 = new Contact();
             consumer1.accept(src1, target1);
-            Validate.assertEquals(expected, target1);
+            Assert.areEqual(expected, target1);
             SObject src2 = IterTestUtils.deepClone(con);
             SObject target2 = new Contact();
             consumer2.accept(src2, target2);
-            Validate.assertEquals(expected, target2);
+            Assert.areEqual(expected, target2);
         }
     }
 

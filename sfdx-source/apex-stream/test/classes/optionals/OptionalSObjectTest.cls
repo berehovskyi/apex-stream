@@ -43,44 +43,44 @@ private class OptionalSObjectTest {
         ISObjectFunction getAcc1Optional = SObjectFunction.constant(Optional.of(acc1));
         ISupplier npeSupplier = Supplier.of(NullPointerException.class);
         // When
-        Validate.assertEquals(acc, optSObject.get());
-        Validate.assertEquals(true, optSObject.isPresent());
-        Validate.assertEquals(false, optNull.isPresent());
-        Validate.assertEquals(false, optSObject.isEmpty());
-        Validate.assertEquals(true, optNull.isEmpty());
+        Assert.areEqual(acc, optSObject.get());
+        Assert.areEqual(true, optSObject.isPresent());
+        Assert.areEqual(false, optNull.isPresent());
+        Assert.areEqual(false, optSObject.isEmpty());
+        Assert.areEqual(true, optNull.isEmpty());
         optSObject.ifPresent(setNewNameConsumer);
-        Validate.assertEquals(newName, optSObject.get().get(fieldName));
+        Assert.areEqual(newName, optSObject.get().get(fieldName));
         optSObject.ifPresentOrElse(setNewNameConsumer1, new IterTestUtils.DoNothingRunnable());
-        Validate.assertEquals(newName1, optSObject.get().get(fieldName));
+        Assert.areEqual(newName1, optSObject.get().get(fieldName));
         optNull.ifPresentOrElse(setNewNameConsumer1, new IterTestUtils.DoNothingRunnable());
-        Validate.assertEquals(optSObject, optSObject.filter(isNameChanged));
-        Validate.assertEquals(optNull, optNull.filter(isNameChanged));
-        Validate.assertEquals(Optional.of(acc.Name), optSObject.mapTo(getName));
-        Validate.assertEquals(Optional.empty(), optNull.mapTo(getName));
-        Validate.assertEquals(Optional.of(acc1), optSObject.flatMapTo(getAcc1Optional));
-        Validate.assertEquals(Optional.empty(), optNull.flatMapTo(getAcc1Optional));
-        Validate.assertEquals(optSObject, optSObject.orGet(newAccountSupplier));
-        Validate.assertEquals(OptionalSObject.of(Account.SObjectType.newSObject()), optNull.orGet(newAccountSupplier));
-        Validate.assertEquals(optSObject.get(), optSObject.orElse(acc1));
-        Validate.assertEquals(acc1, optNull.orElse(acc1));
-        Validate.assertEquals(optSObject.get(), optSObject.orElseGet(newAccountSupplier));
-        Validate.assertEquals(Account.SObjectType.newSObject(), optNull.orElseGet(newAccountSupplier));
-        Validate.assertEquals(optSObject.get(), optSObject.orElseThrow(npeSupplier));
-        Validate.assertEquals(emptyOpt.hashCode(), optNull.hashCode());
+        Assert.areEqual(optSObject, optSObject.filter(isNameChanged));
+        Assert.areEqual(optNull, optNull.filter(isNameChanged));
+        Assert.areEqual(Optional.of(acc.Name), optSObject.mapTo(getName));
+        Assert.areEqual(Optional.empty(), optNull.mapTo(getName));
+        Assert.areEqual(Optional.of(acc1), optSObject.flatMapTo(getAcc1Optional));
+        Assert.areEqual(Optional.empty(), optNull.flatMapTo(getAcc1Optional));
+        Assert.areEqual(optSObject, optSObject.orGet(newAccountSupplier));
+        Assert.areEqual(OptionalSObject.of(Account.SObjectType.newSObject()), optNull.orGet(newAccountSupplier));
+        Assert.areEqual(optSObject.get(), optSObject.orElse(acc1));
+        Assert.areEqual(acc1, optNull.orElse(acc1));
+        Assert.areEqual(optSObject.get(), optSObject.orElseGet(newAccountSupplier));
+        Assert.areEqual(Account.SObjectType.newSObject(), optNull.orElseGet(newAccountSupplier));
+        Assert.areEqual(optSObject.get(), optSObject.orElseThrow(npeSupplier));
+        Assert.areEqual(emptyOpt.hashCode(), optNull.hashCode());
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

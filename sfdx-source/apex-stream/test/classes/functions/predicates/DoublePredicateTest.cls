@@ -38,18 +38,18 @@ private class DoublePredicateTest {
         DoublePredicate predicate1 = positivePredicate.andAlso(gt1Predicate.orElse(le13Predicate)); // 1 AND (2 OR 3)
         // Then
         for (Double d : INPUT) {
-            Validate.assertEquals(d > 0, positivePredicate.test(d));
-            Validate.assertEquals(d > value, gt1Predicate.test(d));
-            Validate.assertEquals(d <= value1, le13Predicate.test(d));
-            Validate.assertEquals(value2, alwaysPredicate.test(d));
-            Validate.assertEquals(d > value, positiveAndGt1Predicate.test(d));
-            Validate.assertEquals(d > value, positiveAndGt1Predicate1.test(d));
-            Validate.assertEquals(d > 0, positiveOrGt1Predicate.test(d));
-            Validate.assertEquals(d > 0, positiveOrGt1Predicate1.test(d));
-            Validate.assertEquals(!(d > 0), notPositivePredicate.test(d));
-            Validate.assertEquals(!(d > 0), notPositivePredicate1.test(d));
-            Validate.assertEquals(((d > 0) && (d > value)) || d < value1, predicate.test(d));
-            Validate.assertEquals((d > 0) && ((d > value) || (d < value1)), predicate1.test(d));
+            Assert.areEqual(d > 0, positivePredicate.test(d));
+            Assert.areEqual(d > value, gt1Predicate.test(d));
+            Assert.areEqual(d <= value1, le13Predicate.test(d));
+            Assert.areEqual(value2, alwaysPredicate.test(d));
+            Assert.areEqual(d > value, positiveAndGt1Predicate.test(d));
+            Assert.areEqual(d > value, positiveAndGt1Predicate1.test(d));
+            Assert.areEqual(d > 0, positiveOrGt1Predicate.test(d));
+            Assert.areEqual(d > 0, positiveOrGt1Predicate1.test(d));
+            Assert.areEqual(!(d > 0), notPositivePredicate.test(d));
+            Assert.areEqual(!(d > 0), notPositivePredicate1.test(d));
+            Assert.areEqual(((d > 0) && (d > value)) || d < value1, predicate.test(d));
+            Assert.areEqual((d > 0) && ((d > value) || (d < value1)), predicate1.test(d));
         }
     }
 

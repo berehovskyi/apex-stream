@@ -34,18 +34,18 @@ private class LongPredicateTest {
         ILongPredicate positiveEvenOrPrimePredicate = positivePredicate.andAlso(evenPredicate.orElse(primePredicate)); // 1 AND (2 OR 3)
         // Then
         for (Long l : INPUT) {
-            Validate.assertEquals(l > 0, positivePredicate.test(l));
-            Validate.assertEquals(Math.mod(l, 2) == 0, evenPredicate.test(l));
-            Validate.assertEquals(primes.contains(l), primePredicate.test(l));
-            Validate.assertEquals(value, alwaysPredicate.test(l));
-            Validate.assertEquals(l > 0 && Math.mod(l, 2) == 0, positiveAndEvenPredicate.test(l));
-            Validate.assertEquals(l > 0 && Math.mod(l, 2) == 0, positiveAndEvenPredicate1.test(l));
-            Validate.assertEquals(l > 0 || Math.mod(l, 2) == 0, positiveOrEvenPredicate.test(l));
-            Validate.assertEquals(l > 0 || Math.mod(l, 2) == 0, positiveOrEvenPredicate1.test(l));
-            Validate.assertEquals(!(l > 0), notPositivePredicate.test(l));
-            Validate.assertEquals(!(l > 0), notPositivePredicate1.test(l));
-            Validate.assertEquals(l > 0 && Math.mod(l, 2) == 0 || primes.contains(l), positiveEvenOrJustPrimePredicate.test(l));
-            Validate.assertEquals(l > 0 && (Math.mod(l, 2) == 0 || primes.contains(l)), positiveEvenOrPrimePredicate.test(l));
+            Assert.areEqual(l > 0, positivePredicate.test(l));
+            Assert.areEqual(Math.mod(l, 2) == 0, evenPredicate.test(l));
+            Assert.areEqual(primes.contains(l), primePredicate.test(l));
+            Assert.areEqual(value, alwaysPredicate.test(l));
+            Assert.areEqual(l > 0 && Math.mod(l, 2) == 0, positiveAndEvenPredicate.test(l));
+            Assert.areEqual(l > 0 && Math.mod(l, 2) == 0, positiveAndEvenPredicate1.test(l));
+            Assert.areEqual(l > 0 || Math.mod(l, 2) == 0, positiveOrEvenPredicate.test(l));
+            Assert.areEqual(l > 0 || Math.mod(l, 2) == 0, positiveOrEvenPredicate1.test(l));
+            Assert.areEqual(!(l > 0), notPositivePredicate.test(l));
+            Assert.areEqual(!(l > 0), notPositivePredicate1.test(l));
+            Assert.areEqual(l > 0 && Math.mod(l, 2) == 0 || primes.contains(l), positiveEvenOrJustPrimePredicate.test(l));
+            Assert.areEqual(l > 0 && (Math.mod(l, 2) == 0 || primes.contains(l)), positiveEvenOrPrimePredicate.test(l));
         }
     }
 

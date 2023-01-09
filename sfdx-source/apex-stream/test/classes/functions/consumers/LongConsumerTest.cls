@@ -24,7 +24,7 @@ private class LongConsumerTest {
             cons.accept(clone[i]);
             composed.accept(clone[i]);
             composed1.accept(clone[i]);
-            Validate.assertEquals(clone[i], INPUT[i], Label.InputMutatedErrorMessage);
+            Assert.areEqual(clone[i], INPUT[i], Label.InputMutatedErrorMessage);
         }
     }
 

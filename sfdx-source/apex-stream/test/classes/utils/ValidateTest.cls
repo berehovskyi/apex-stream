@@ -77,14 +77,14 @@ private class ValidateTest {
             actual7 = exc;
         }
         // Then
-        Validate.assertEquals(NullPointerException.class.getName(), actual.getTypeName());
-        Validate.assertEquals(NullPointerException.class.getName(), actual1.getTypeName());
-        Validate.assertEquals(null, actual2);
-        Validate.assertEquals(null, actual3);
-        Validate.assertEquals(null, actual4);
-        Validate.assertEquals(null, actual5);
-        Validate.assertEquals(null, actual6);
-        Validate.assertEquals(null, actual7);
+        Assert.areEqual(NullPointerException.class.getName(), actual.getTypeName());
+        Assert.areEqual(NullPointerException.class.getName(), actual1.getTypeName());
+        Assert.areEqual(null, actual2);
+        Assert.areEqual(null, actual3);
+        Assert.areEqual(null, actual4);
+        Assert.areEqual(null, actual5);
+        Assert.areEqual(null, actual6);
+        Assert.areEqual(null, actual7);
     }
 
     /**
@@ -124,11 +124,11 @@ private class ValidateTest {
             actual4 = exc;
         }
         // Then
-        Validate.assertEquals(NullPointerException.class.getName(), actual.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual1.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual2.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual3.getTypeName());
-        Validate.assertEquals(null, actual4);
+        Assert.areEqual(NullPointerException.class.getName(), actual.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual1.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual2.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual3.getTypeName());
+        Assert.areEqual(null, actual4);
     }
 
     /**
@@ -198,16 +198,16 @@ private class ValidateTest {
             actual9 = exc;
         }
         // Then
-        Validate.assertEquals(NullPointerException.class.getName(), actual.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual1.getTypeName());
-        Validate.assertEquals(null, actual2);
-        Validate.assertEquals(null, actual3);
-        Validate.assertEquals(null, actual4);
-        Validate.assertEquals(NullPointerException.class.getName(), actual5.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual6.getTypeName());
-        Validate.assertEquals(null, actual7);
-        Validate.assertEquals(null, actual8);
-        Validate.assertEquals(null, actual9);
+        Assert.areEqual(NullPointerException.class.getName(), actual.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual1.getTypeName());
+        Assert.areEqual(null, actual2);
+        Assert.areEqual(null, actual3);
+        Assert.areEqual(null, actual4);
+        Assert.areEqual(NullPointerException.class.getName(), actual5.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual6.getTypeName());
+        Assert.areEqual(null, actual7);
+        Assert.areEqual(null, actual8);
+        Assert.areEqual(null, actual9);
     }
 
     /**
@@ -253,12 +253,12 @@ private class ValidateTest {
             actual5 = exc;
         }
         // Then
-        Validate.assertEquals(NullPointerException.class.getName(), actual.getTypeName());
-        Validate.assertEquals(NullPointerException.class.getName(), actual1.getTypeName());
-        Validate.assertEquals(null, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual3.getTypeName());
-        Validate.assertEquals(null, actual4);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual5.getTypeName());
+        Assert.areEqual(NullPointerException.class.getName(), actual.getTypeName());
+        Assert.areEqual(NullPointerException.class.getName(), actual1.getTypeName());
+        Assert.areEqual(null, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual3.getTypeName());
+        Assert.areEqual(null, actual4);
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual5.getTypeName());
     }
 
     /**
@@ -316,16 +316,16 @@ private class ValidateTest {
             actual7 = exc;
         }
         // Then
-        Validate.assertEquals(NullPointerException.class.getName(), actual.getTypeName());
-        Validate.assertEquals(null, actual1);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual2.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual3.getTypeName());
-        Validate.assertEquals(null, actual4);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual5.getTypeName());
-        Validate.assertEquals(MESSAGE, actual5.getMessage());
-        Validate.assertEquals(NullPointerException.class.getName(), actual6.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual7.getTypeName());
-        Validate.assertEquals(String.format(MESSAGE, ARGUMENTS), actual7.getMessage());
+        Assert.areEqual(NullPointerException.class.getName(), actual.getTypeName());
+        Assert.areEqual(null, actual1);
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual2.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual3.getTypeName());
+        Assert.areEqual(null, actual4);
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual5.getTypeName());
+        Assert.areEqual(MESSAGE, actual5.getMessage());
+        Assert.areEqual(NullPointerException.class.getName(), actual6.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual7.getTypeName());
+        Assert.areEqual(String.format(MESSAGE, ARGUMENTS), actual7.getMessage());
     }
 
     /**
@@ -378,14 +378,14 @@ private class ValidateTest {
             actual5 = exc;
         }
         // Then
-        Validate.assertEquals(NullPointerException.class.getName(), actual.getTypeName());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual1.getTypeName());
-        Validate.assertEquals(String.format(MESSAGE, ARGUMENTS), actual1.getMessage());
-        Validate.assertEquals(IllegalArgumentException.class.getName(), actual2.getTypeName());
-        Validate.assertEquals(String.format(MESSAGE, ARGUMENTS), actual2.getMessage());
-        Validate.assertEquals(null, actual3);
-        Validate.assertEquals(null, actual4);
-        Validate.assertEquals(null, actual5);
+        Assert.areEqual(NullPointerException.class.getName(), actual.getTypeName());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual1.getTypeName());
+        Assert.areEqual(String.format(MESSAGE, ARGUMENTS), actual1.getMessage());
+        Assert.areEqual(IllegalArgumentException.class.getName(), actual2.getTypeName());
+        Assert.areEqual(String.format(MESSAGE, ARGUMENTS), actual2.getMessage());
+        Assert.areEqual(null, actual3);
+        Assert.areEqual(null, actual4);
+        Assert.areEqual(null, actual5);
     }
 
     /**
@@ -413,10 +413,10 @@ private class ValidateTest {
             actual2 = exc;
         }
         // Then
-        Validate.assertEquals(NullPointerException.class.getName(), actual.getTypeName());
-        Validate.assertEquals(IllegalStateException.class.getName(), actual1.getTypeName());
-        Validate.assertEquals(String.format(MESSAGE, ARGUMENTS), actual1.getMessage());
-        Validate.assertEquals(null, actual2);
+        Assert.areEqual(NullPointerException.class.getName(), actual.getTypeName());
+        Assert.areEqual(IllegalStateException.class.getName(), actual1.getTypeName());
+        Assert.areEqual(String.format(MESSAGE, ARGUMENTS), actual1.getMessage());
+        Assert.areEqual(null, actual2);
     }
     
 }

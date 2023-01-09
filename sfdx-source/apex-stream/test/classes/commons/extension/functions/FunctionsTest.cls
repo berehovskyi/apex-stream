@@ -134,85 +134,85 @@ private class FunctionsTest {
         String separator = 'a';
         // Then
         for (String str : STRINGS) {
-            Validate.assertEquals(str.abbreviate(maxWidth), StringFunctions.abbreviate(maxWidth).apply(str));
-            Validate.assertEquals(str.abbreviate(maxWidth, offset), StringFunctions.abbreviate(maxWidth, offset).apply(str));
-            Validate.assertEquals(str + suffix, StringFunctions.append(suffix).apply(str));
-            Validate.assertEquals(str.capitalize(), StringFunctions.capitalize().apply(str));
-            Validate.assertEquals(str.center(size), StringFunctions.center(size).apply(str));
-            Validate.assertEquals(str.center(size, padStr), StringFunctions.center(size, padStr).apply(str));
-            Validate.assertEquals(str.deleteWhitespace(), StringFunctions.deleteWhitespace().apply(str));
-            Validate.assertEquals(str.difference(sample), StringFunctions.difference(sample).apply(str));
-            Validate.assertEquals(str.escapeCsv(), StringFunctions.escapeCsv().apply(str));
-            Validate.assertEquals(str.escapeEcmaScript(), StringFunctions.escapeEcmaScript().apply(str));
-            Validate.assertEquals(str.escapeHtml3(), StringFunctions.escapeHtml3().apply(str));
-            Validate.assertEquals(str.escapeHtml4(), StringFunctions.escapeHtml4().apply(str));
-            Validate.assertEquals(str.escapeJava(), StringFunctions.escapeJava().apply(str));
-            Validate.assertEquals(String.escapeSingleQuotes(str), StringFunctions.escapeSingleQuotes().apply(str));
-            Validate.assertEquals(str.escapeUnicode(), StringFunctions.escapeUnicode().apply(str));
-            Validate.assertEquals(str.escapeXml(), StringFunctions.escapeXml().apply(str));
-            Validate.assertEquals(str.getChars(), StringFunctions.getChars().apply(str));
-            Validate.assertEquals(String.format(str, format), StringFunctions.format(format).apply(str));
-            Validate.assertEquals(str.left(len), StringFunctions.left(len).apply(str));
-            Validate.assertEquals(str.leftPad(len), StringFunctions.leftPad(len).apply(str));
-            Validate.assertEquals(str.leftPad(len, padStr), StringFunctions.leftPad(len, padStr).apply(str));
-            Validate.assertEquals(str.mid(pos, len), StringFunctions.mid(pos, len).apply(str));
-            Validate.assertEquals(str.normalizeSpace(), StringFunctions.normalizeSpace().apply(str));
-            Validate.assertEquals(prefix + str, StringFunctions.prepend(prefix).apply(str));
-            Validate.assertEquals(str.remove(toRemove), StringFunctions.remove(toRemove).apply(str));
-            Validate.assertEquals(str.removeEnd(toRemove), StringFunctions.removeEnd(toRemove).apply(str));
-            Validate.assertEquals(str.removeEndIgnoreCase(toRemove), StringFunctions.removeEndIgnoreCase(toRemove).apply(str));
-            Validate.assertEquals(str.removeStart(toRemove), StringFunctions.removeStart(toRemove).apply(str));
-            Validate.assertEquals(str.removeStartIgnoreCase(toRemove), StringFunctions.removeStartIgnoreCase(toRemove).apply(str));
-            Validate.assertEquals(str.repeat(pos), StringFunctions.repeat(pos).apply(str));
-            Validate.assertEquals(str.repeat(separator, pos), StringFunctions.repeat(separator, pos).apply(str));
-            Validate.assertEquals(str.replace(separator, sample), StringFunctions.replace(separator, sample).apply(str));
-            Validate.assertEquals(str.replaceAll(separator, sample), StringFunctions.replaceAll(separator, sample).apply(str));
-            Validate.assertEquals(str.replaceFirst(separator, sample), StringFunctions.replaceFirst(separator, sample).apply(str));
-            Validate.assertEquals(str.reverse(), StringFunctions.reverse().apply(str));
-            Validate.assertEquals(str.right(len), StringFunctions.right(len).apply(str));
-            Validate.assertEquals(str.rightPad(len), StringFunctions.rightPad(len).apply(str));
-            Validate.assertEquals(str.rightPad(len, padStr), StringFunctions.rightPad(len, padStr).apply(str));
-            Validate.assertEquals(str.split(padStr), StringFunctions.split(padStr).apply(str));
-            Validate.assertEquals(str.split(padStr, len), StringFunctions.split(padStr, len).apply(str));
-            Validate.assertEquals(str.splitByCharacterType(), StringFunctions.splitByCharacterType().apply(str));
-            Validate.assertEquals(str.splitByCharacterTypeCamelCase(), StringFunctions.splitByCharacterTypeCamelCase().apply(str));
-            Validate.assertEquals(str.stripHtmlTags(), StringFunctions.stripHtmlTags().apply(str));
-            Validate.assertEquals(str.substring(pos), StringFunctions.substring(pos).apply(str));
-            Validate.assertEquals(str.substring(pos, pos * 2), StringFunctions.substring(pos, pos * 2).apply(str));
-            Validate.assertEquals(str.substringAfter(separator), StringFunctions.substringAfter(separator).apply(str));
-            Validate.assertEquals(str.substringAfterLast(separator), StringFunctions.substringAfterLast(separator).apply(str));
-            Validate.assertEquals(str.substringBefore(separator), StringFunctions.substringBefore(separator).apply(str));
-            Validate.assertEquals(str.substringBeforeLast(separator), StringFunctions.substringBeforeLast(separator).apply(str));
-            Validate.assertEquals(str.substringBetween(separator), StringFunctions.substringBetween(separator).apply(str));
-            Validate.assertEquals(str.substringBetween(separator, sample), StringFunctions.substringBetween(separator, sample).apply(str));
-            Validate.assertEquals(str.swapCase(), StringFunctions.swapCase().apply(str));
-            Validate.assertEquals(str.toLowerCase(), StringFunctions.toLowerCase().apply(str));
-            Validate.assertEquals(str.toLowerCase(enUs), StringFunctions.toLowerCase(enUs).apply(str));
-            Validate.assertEquals(str.toUpperCase(), StringFunctions.toUpperCase().apply(str));
-            Validate.assertEquals(str.toUpperCase(enUs), StringFunctions.toUpperCase(enUs).apply(str));
-            Validate.assertEquals(str.trim(), StringFunctions.trim().apply(str));
-            Validate.assertEquals(str.uncapitalize(), StringFunctions.uncapitalize().apply(str));
-            Validate.assertEquals(str.unescapeCsv(), StringFunctions.unescapeCsv().apply(str));
-            Validate.assertEquals(str.unescapeEcmaScript(), StringFunctions.unescapeEcmaScript().apply(str));
-            Validate.assertEquals(str.unescapeHtml3(), StringFunctions.unescapeHtml3().apply(str));
-            Validate.assertEquals(str.unescapeHtml4(), StringFunctions.unescapeHtml4().apply(str));
-            Validate.assertEquals(str.unescapeJava(), StringFunctions.unescapeJava().apply(str));
-            Validate.assertEquals(str.unescapeUnicode(), StringFunctions.unescapeUnicode().apply(str));
-            Validate.assertEquals(str.unescapeXml(), StringFunctions.unescapeXml().apply(str));
+            Assert.areEqual(str.abbreviate(maxWidth), StringFunctions.abbreviate(maxWidth).apply(str));
+            Assert.areEqual(str.abbreviate(maxWidth, offset), StringFunctions.abbreviate(maxWidth, offset).apply(str));
+            Assert.areEqual(str + suffix, StringFunctions.append(suffix).apply(str));
+            Assert.areEqual(str.capitalize(), StringFunctions.capitalize().apply(str));
+            Assert.areEqual(str.center(size), StringFunctions.center(size).apply(str));
+            Assert.areEqual(str.center(size, padStr), StringFunctions.center(size, padStr).apply(str));
+            Assert.areEqual(str.deleteWhitespace(), StringFunctions.deleteWhitespace().apply(str));
+            Assert.areEqual(str.difference(sample), StringFunctions.difference(sample).apply(str));
+            Assert.areEqual(str.escapeCsv(), StringFunctions.escapeCsv().apply(str));
+            Assert.areEqual(str.escapeEcmaScript(), StringFunctions.escapeEcmaScript().apply(str));
+            Assert.areEqual(str.escapeHtml3(), StringFunctions.escapeHtml3().apply(str));
+            Assert.areEqual(str.escapeHtml4(), StringFunctions.escapeHtml4().apply(str));
+            Assert.areEqual(str.escapeJava(), StringFunctions.escapeJava().apply(str));
+            Assert.areEqual(String.escapeSingleQuotes(str), StringFunctions.escapeSingleQuotes().apply(str));
+            Assert.areEqual(str.escapeUnicode(), StringFunctions.escapeUnicode().apply(str));
+            Assert.areEqual(str.escapeXml(), StringFunctions.escapeXml().apply(str));
+            Assert.areEqual(str.getChars(), StringFunctions.getChars().apply(str));
+            Assert.areEqual(String.format(str, format), StringFunctions.format(format).apply(str));
+            Assert.areEqual(str.left(len), StringFunctions.left(len).apply(str));
+            Assert.areEqual(str.leftPad(len), StringFunctions.leftPad(len).apply(str));
+            Assert.areEqual(str.leftPad(len, padStr), StringFunctions.leftPad(len, padStr).apply(str));
+            Assert.areEqual(str.mid(pos, len), StringFunctions.mid(pos, len).apply(str));
+            Assert.areEqual(str.normalizeSpace(), StringFunctions.normalizeSpace().apply(str));
+            Assert.areEqual(prefix + str, StringFunctions.prepend(prefix).apply(str));
+            Assert.areEqual(str.remove(toRemove), StringFunctions.remove(toRemove).apply(str));
+            Assert.areEqual(str.removeEnd(toRemove), StringFunctions.removeEnd(toRemove).apply(str));
+            Assert.areEqual(str.removeEndIgnoreCase(toRemove), StringFunctions.removeEndIgnoreCase(toRemove).apply(str));
+            Assert.areEqual(str.removeStart(toRemove), StringFunctions.removeStart(toRemove).apply(str));
+            Assert.areEqual(str.removeStartIgnoreCase(toRemove), StringFunctions.removeStartIgnoreCase(toRemove).apply(str));
+            Assert.areEqual(str.repeat(pos), StringFunctions.repeat(pos).apply(str));
+            Assert.areEqual(str.repeat(separator, pos), StringFunctions.repeat(separator, pos).apply(str));
+            Assert.areEqual(str.replace(separator, sample), StringFunctions.replace(separator, sample).apply(str));
+            Assert.areEqual(str.replaceAll(separator, sample), StringFunctions.replaceAll(separator, sample).apply(str));
+            Assert.areEqual(str.replaceFirst(separator, sample), StringFunctions.replaceFirst(separator, sample).apply(str));
+            Assert.areEqual(str.reverse(), StringFunctions.reverse().apply(str));
+            Assert.areEqual(str.right(len), StringFunctions.right(len).apply(str));
+            Assert.areEqual(str.rightPad(len), StringFunctions.rightPad(len).apply(str));
+            Assert.areEqual(str.rightPad(len, padStr), StringFunctions.rightPad(len, padStr).apply(str));
+            Assert.areEqual(str.split(padStr), StringFunctions.split(padStr).apply(str));
+            Assert.areEqual(str.split(padStr, len), StringFunctions.split(padStr, len).apply(str));
+            Assert.areEqual(str.splitByCharacterType(), StringFunctions.splitByCharacterType().apply(str));
+            Assert.areEqual(str.splitByCharacterTypeCamelCase(), StringFunctions.splitByCharacterTypeCamelCase().apply(str));
+            Assert.areEqual(str.stripHtmlTags(), StringFunctions.stripHtmlTags().apply(str));
+            Assert.areEqual(str.substring(pos), StringFunctions.substring(pos).apply(str));
+            Assert.areEqual(str.substring(pos, pos * 2), StringFunctions.substring(pos, pos * 2).apply(str));
+            Assert.areEqual(str.substringAfter(separator), StringFunctions.substringAfter(separator).apply(str));
+            Assert.areEqual(str.substringAfterLast(separator), StringFunctions.substringAfterLast(separator).apply(str));
+            Assert.areEqual(str.substringBefore(separator), StringFunctions.substringBefore(separator).apply(str));
+            Assert.areEqual(str.substringBeforeLast(separator), StringFunctions.substringBeforeLast(separator).apply(str));
+            Assert.areEqual(str.substringBetween(separator), StringFunctions.substringBetween(separator).apply(str));
+            Assert.areEqual(str.substringBetween(separator, sample), StringFunctions.substringBetween(separator, sample).apply(str));
+            Assert.areEqual(str.swapCase(), StringFunctions.swapCase().apply(str));
+            Assert.areEqual(str.toLowerCase(), StringFunctions.toLowerCase().apply(str));
+            Assert.areEqual(str.toLowerCase(enUs), StringFunctions.toLowerCase(enUs).apply(str));
+            Assert.areEqual(str.toUpperCase(), StringFunctions.toUpperCase().apply(str));
+            Assert.areEqual(str.toUpperCase(enUs), StringFunctions.toUpperCase(enUs).apply(str));
+            Assert.areEqual(str.trim(), StringFunctions.trim().apply(str));
+            Assert.areEqual(str.uncapitalize(), StringFunctions.uncapitalize().apply(str));
+            Assert.areEqual(str.unescapeCsv(), StringFunctions.unescapeCsv().apply(str));
+            Assert.areEqual(str.unescapeEcmaScript(), StringFunctions.unescapeEcmaScript().apply(str));
+            Assert.areEqual(str.unescapeHtml3(), StringFunctions.unescapeHtml3().apply(str));
+            Assert.areEqual(str.unescapeHtml4(), StringFunctions.unescapeHtml4().apply(str));
+            Assert.areEqual(str.unescapeJava(), StringFunctions.unescapeJava().apply(str));
+            Assert.areEqual(str.unescapeUnicode(), StringFunctions.unescapeUnicode().apply(str));
+            Assert.areEqual(str.unescapeXml(), StringFunctions.unescapeXml().apply(str));
         }
         for (Integer i : INTS) {
-            Validate.assertEquals(String.valueOf(i), StringFunctions.valueOf().apply(i));
+            Assert.areEqual(String.valueOf(i), StringFunctions.valueOf().apply(i));
         }
         for (String str : DATETIMES_AS_STRINGS) {
-            Validate.assertEquals(Date.valueOf(str), StringFunctions.dateValueOf().apply(str));
-            Validate.assertEquals(Datetime.valueOf(str), StringFunctions.datetimeValueOf().apply(str));
-            Validate.assertEquals(Datetime.valueOfGmt(str), StringFunctions.datetimeValueOfGmt().apply(str));
+            Assert.areEqual(Date.valueOf(str), StringFunctions.dateValueOf().apply(str));
+            Assert.areEqual(Datetime.valueOf(str), StringFunctions.datetimeValueOf().apply(str));
+            Assert.areEqual(Datetime.valueOfGmt(str), StringFunctions.datetimeValueOfGmt().apply(str));
         }
         for (String str : DATES_AS_STRINGS) {
-            Validate.assertEquals(Date.parse(str), StringFunctions.parseDate().apply(str));
+            Assert.areEqual(Date.parse(str), StringFunctions.parseDate().apply(str));
         }
         for (String str : DATETIMES_TO_PARSE) {
-            Validate.assertEquals(Datetime.parse(str), StringFunctions.parseDatetime().apply(str));
+            Assert.areEqual(Datetime.parse(str), StringFunctions.parseDatetime().apply(str));
         }
     }
 
@@ -231,12 +231,12 @@ private class FunctionsTest {
         // Then
         new DateFunctions();
         for (Date d : DATES) {
-            Validate.assertEquals(d.addDays(inc), DateFunctions.addDays(inc).apply(d));
-            Validate.assertEquals(d.addMonths(inc), DateFunctions.addMonths(inc).apply(d));
-            Validate.assertEquals(d.addYears(inc), DateFunctions.addYears(inc).apply(d));
-            Validate.assertEquals(d.format(), DateFunctions.format().apply(d));
-            Validate.assertEquals(d.toStartOfMonth(), DateFunctions.toStartOfMonth().apply(d));
-            Validate.assertEquals(d.toStartOfWeek(), DateFunctions.toStartOfWeek().apply(d));
+            Assert.areEqual(d.addDays(inc), DateFunctions.addDays(inc).apply(d));
+            Assert.areEqual(d.addMonths(inc), DateFunctions.addMonths(inc).apply(d));
+            Assert.areEqual(d.addYears(inc), DateFunctions.addYears(inc).apply(d));
+            Assert.areEqual(d.format(), DateFunctions.format().apply(d));
+            Assert.areEqual(d.toStartOfMonth(), DateFunctions.toStartOfMonth().apply(d));
+            Assert.areEqual(d.toStartOfWeek(), DateFunctions.toStartOfWeek().apply(d));
         }
     }
 
@@ -265,22 +265,22 @@ private class FunctionsTest {
         // Then
         new DatetimeFunctions();
         for (Datetime dt : DATETIMES) {
-            Validate.assertEquals(dt.addDays(inc), DatetimeFunctions.addDays(inc).apply(dt));
-            Validate.assertEquals(dt.addHours(inc), DatetimeFunctions.addHours(inc).apply(dt));
-            Validate.assertEquals(dt.addMinutes(inc), DatetimeFunctions.addMinutes(inc).apply(dt));
-            Validate.assertEquals(dt.addMonths(inc), DatetimeFunctions.addMonths(inc).apply(dt));
-            Validate.assertEquals(dt.addSeconds(inc), DatetimeFunctions.addSeconds(inc).apply(dt));
-            Validate.assertEquals(dt.addYears(inc), DatetimeFunctions.addYears(inc).apply(dt));
-            Validate.assertEquals(dt.date(), DatetimeFunctions.getDate().apply(dt));
-            Validate.assertEquals(dt.dateGmt(), DatetimeFunctions.dateGmt().apply(dt));
-            Validate.assertEquals(dt.format(), DatetimeFunctions.format().apply(dt));
-            Validate.assertEquals(dt.format(dateFormat), DatetimeFunctions.format(dateFormat).apply(dt));
-            Validate.assertEquals(dt.format(dateFormat, tz), DatetimeFunctions.format(dateFormat, tz).apply(dt));
-            Validate.assertEquals(dt.formatGmt(dateFormat), DatetimeFunctions.formatGmt(dateFormat).apply(dt));
-            Validate.assertEquals(dt.formatLong(), DatetimeFunctions.formatLong().apply(dt));
-            Validate.assertEquals(dt.time(), DatetimeFunctions.getTime().apply(dt));
-            Validate.assertEquals(dt.timeGmt(), DatetimeFunctions.timeGmt().apply(dt));
-            Validate.assertEquals(String.valueOfGmt(dt), DatetimeFunctions.stringValueOfGmt().apply(dt));
+            Assert.areEqual(dt.addDays(inc), DatetimeFunctions.addDays(inc).apply(dt));
+            Assert.areEqual(dt.addHours(inc), DatetimeFunctions.addHours(inc).apply(dt));
+            Assert.areEqual(dt.addMinutes(inc), DatetimeFunctions.addMinutes(inc).apply(dt));
+            Assert.areEqual(dt.addMonths(inc), DatetimeFunctions.addMonths(inc).apply(dt));
+            Assert.areEqual(dt.addSeconds(inc), DatetimeFunctions.addSeconds(inc).apply(dt));
+            Assert.areEqual(dt.addYears(inc), DatetimeFunctions.addYears(inc).apply(dt));
+            Assert.areEqual(dt.date(), DatetimeFunctions.getDate().apply(dt));
+            Assert.areEqual(dt.dateGmt(), DatetimeFunctions.dateGmt().apply(dt));
+            Assert.areEqual(dt.format(), DatetimeFunctions.format().apply(dt));
+            Assert.areEqual(dt.format(dateFormat), DatetimeFunctions.format(dateFormat).apply(dt));
+            Assert.areEqual(dt.format(dateFormat, tz), DatetimeFunctions.format(dateFormat, tz).apply(dt));
+            Assert.areEqual(dt.formatGmt(dateFormat), DatetimeFunctions.formatGmt(dateFormat).apply(dt));
+            Assert.areEqual(dt.formatLong(), DatetimeFunctions.formatLong().apply(dt));
+            Assert.areEqual(dt.time(), DatetimeFunctions.getTime().apply(dt));
+            Assert.areEqual(dt.timeGmt(), DatetimeFunctions.timeGmt().apply(dt));
+            Assert.areEqual(String.valueOfGmt(dt), DatetimeFunctions.stringValueOfGmt().apply(dt));
         }
     }
 
@@ -297,10 +297,10 @@ private class FunctionsTest {
         // Then
         new TimeFunctions();
         for (Time t : TIMES) {
-            Validate.assertEquals(t.addHours(inc), TimeFunctions.addHours(inc).apply(t));
-            Validate.assertEquals(t.addMilliseconds(inc), TimeFunctions.addMilliseconds(inc).apply(t));
-            Validate.assertEquals(t.addMinutes(inc), TimeFunctions.addMinutes(inc).apply(t));
-            Validate.assertEquals(t.addSeconds(inc), TimeFunctions.addSeconds(inc).apply(t));
+            Assert.areEqual(t.addHours(inc), TimeFunctions.addHours(inc).apply(t));
+            Assert.areEqual(t.addMilliseconds(inc), TimeFunctions.addMilliseconds(inc).apply(t));
+            Assert.areEqual(t.addMinutes(inc), TimeFunctions.addMinutes(inc).apply(t));
+            Assert.areEqual(t.addSeconds(inc), TimeFunctions.addSeconds(inc).apply(t));
         }
     }
     

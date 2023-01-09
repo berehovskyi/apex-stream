@@ -40,20 +40,20 @@ private class ObjectSequenceTest {
         // Then
         List<Object> expected = new List<Object>(new Set<Object>(input));
         List<IterTestUtils.Person> expected1 = new List<IterTestUtils.Person>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(true, seq.iterator().hasNext());
-        Validate.assertEquals(true, seq1.iterator().hasNext());
-        Validate.assertEquals(true, seq2.iterator().hasNext());
-        Validate.assertEquals(true, seq3.iterator().hasNext());
-        Validate.assertEquals(false, seq4.iterator().hasNext());
-        Validate.assertEquals(false, seq5.iterator().hasNext());
-        Validate.assertEquals(false, stream.isEmpty());
-        Validate.assertEquals(PEOPLE, input, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(true, seq.iterator().hasNext());
+        Assert.areEqual(true, seq1.iterator().hasNext());
+        Assert.areEqual(true, seq2.iterator().hasNext());
+        Assert.areEqual(true, seq3.iterator().hasNext());
+        Assert.areEqual(false, seq4.iterator().hasNext());
+        Assert.areEqual(false, seq5.iterator().hasNext());
+        Assert.areEqual(false, stream.isEmpty());
+        Assert.areEqual(PEOPLE, input, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -78,8 +78,8 @@ private class ObjectSequenceTest {
         // Then
         List<Object> expected = new List<Object>{ -5.1, '0', 10L, 3, true, john, 0, 'bar' };
         List<Object> expected1 = new List<Object>{ -5.1, '0', 10L, 3, true, john, 0, 'bar', null, jake, 'baz' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
     }
 
     /**
@@ -105,8 +105,8 @@ private class ObjectSequenceTest {
         List<Object> actual = seq4.toList();
         List<Object> actual1 = seq5.toList();
         // Then
-        Validate.assertEquals(new List<Object>{ 'lorem', '', null }, actual);
-        Validate.assertEquals(new List<Object>{ 'foo' }, actual1);
+        Assert.areEqual(new List<Object>{ 'lorem', '', null }, actual);
+        Assert.areEqual(new List<Object>{ 'foo' }, actual1);
     }
 
     /**
@@ -130,8 +130,8 @@ private class ObjectSequenceTest {
         // Then
         List<Object> expected = new List<Object>{ 'foo', 1, 'baz', true, 'ipsum', null };
         List<Object> expected1 = new List<Object>{ true, 'ipsum', null, 'foo', 1, 'baz' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
     }
 
     /**
@@ -167,15 +167,15 @@ private class ObjectSequenceTest {
         List<Object> expected = new List<Object>{ 5, 3, 9, 7, 8, 6, 4, 1, 0 };
         List<Object> expected1 = new List<Object>{ 3, 9 };
         List<Object> expected2 = new List<Object>{ 5, 7 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(expected2, actual6);
-        Validate.assertEquals(expected2, actual7);
-        Validate.assertEquals(expected2, actual8);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
+        Assert.areEqual(expected2, actual8);
     }
 
     /**
@@ -195,8 +195,8 @@ private class ObjectSequenceTest {
         List<Object> actual = seq.toList();
         List<Object> actual1 = seq1.toList();
         // Then
-        Validate.assertEquals(new List<String>{ 'foo', 'baz', 'ipsum' }, actual);
-        Validate.assertEquals(new List<Comparable>{ john, jake }, actual1);
+        Assert.areEqual(new List<String>{ 'foo', 'baz', 'ipsum' }, actual);
+        Assert.areEqual(new List<Comparable>{ john, jake }, actual1);
     }
 
     /**
@@ -213,7 +213,7 @@ private class ObjectSequenceTest {
         // When
         List<Object> actual = seq.toList();
         // Then
-        Validate.assertEquals(new List<Object>{ 'foo', '', 'baz' }, actual);
+        Assert.areEqual(new List<Object>{ 'foo', '', 'baz' }, actual);
     }
 
     /**
@@ -230,7 +230,7 @@ private class ObjectSequenceTest {
         // When
         List<Object> actual = seq.toList();
         // Then
-        Validate.assertEquals(new List<Object>{ john, true, 'ipsum', jake }, actual);
+        Assert.areEqual(new List<Object>{ john, true, 'ipsum', jake }, actual);
     }
 
     /**
@@ -247,8 +247,8 @@ private class ObjectSequenceTest {
         List<Object> actual = ObjectSequence.of(clone).withoutNulls().toList();
         // Then
         List<Object> expected = new List<Object>{ 'foo', '', jake, 'baz', john, true, 'ipsum', jake };
-        Validate.assertEquals(IterTestUtils.deepClone(expected), actual);
-        Validate.assertEquals(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(IterTestUtils.deepClone(expected), actual);
+        Assert.areEqual(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -264,8 +264,8 @@ private class ObjectSequenceTest {
         List<Object> actual = seq.toList();
         // Then
         List<Object> expected = new List<Object>{ 'Foo', '', 'Baz', 'Ipsum', 'Hello' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -281,8 +281,8 @@ private class ObjectSequenceTest {
         List<Integer> actual = intSeq.toList();
         // Then
         List<Integer> expected = new List<Integer>{ 3, 0, 3, 5, 5 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -298,8 +298,8 @@ private class ObjectSequenceTest {
         List<Long> actual = longSeq.toList();
         // Then
         List<Long> expected = new List<Long>{ 6L, 0L, 1L, 3L, -9L, -6L, 4L, 4L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -315,8 +315,8 @@ private class ObjectSequenceTest {
         List<Double> actual = doubleSeq.toList();
         // Then
         List<Double> expected = new List<Double>{ 6.1, 0.0, 1.66, 3.06, -8.99, -6.4, 4.0, 4.0 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -334,8 +334,8 @@ private class ObjectSequenceTest {
         List<SObject> actual = sObjSeq.toList();
         // Then
         List<User> expected = new List<User>{ new User(LastName = 'John', IsActive = true), new User(LastName = 'Jake', IsActive = true) };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -361,8 +361,8 @@ private class ObjectSequenceTest {
         List<String> actual = (List<String>) objSeq.toList(List<String>.class);
         // Then
         List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -388,8 +388,8 @@ private class ObjectSequenceTest {
         List<Integer> actual = (List<Integer>) intSeq.toList();
         // Then
         List<Integer> expected = new List<Integer>{ 1, 0, 2 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -415,8 +415,8 @@ private class ObjectSequenceTest {
         List<Long> actual = (List<Long>) longSeq.toList();
         // Then
         List<Long> expected = new List<Long>{ 1L, 0L, 2L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -442,8 +442,8 @@ private class ObjectSequenceTest {
         List<Double> actual = (List<Double>) doubleSeq.toList();
         // Then
         List<Double> expected = new List<Double>{ 1.1, 0, Math.PI };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -470,8 +470,8 @@ private class ObjectSequenceTest {
         List<Account> actual = (List<Account>) doubleSeq.toList();
         // Then
         List<Account> expected = new List<Account>{ accounts[1], accounts[0], accounts[2] };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -492,9 +492,9 @@ private class ObjectSequenceTest {
         List<IterTestUtils.Person> actual = (List<IterTestUtils.Person>) seq.toList(List<IterTestUtils.Person>.class);
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
-            Validate.assertEquals(value, actual[i].getAutoId());
+            Assert.areEqual(value, actual[i].getAutoId());
         }
-        Validate.assertNotEquals(input, clone, Label.InputNotMutatedErrorMessage);
+        Assert.areNotEqual(input, clone, Label.InputNotMutatedErrorMessage);
     }
 
     /**
@@ -515,9 +515,9 @@ private class ObjectSequenceTest {
         // Then
         List<Object> expected = new List<Object>{ john, jake, 'foo', 1 };
         List<Object> expected1 = new List<Object>{ john };
-        Validate.assertEquals(IterTestUtils.deepClone(expected), actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(IterTestUtils.deepClone(expected), actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(IterTestUtils.deepClone(input), clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -550,12 +550,12 @@ private class ObjectSequenceTest {
         List<Object> expected1 = new List<Object>{ null, '', 'bar', 'baz', 'foo' };
         List<Object> expected2 = new List<Object>{ sam, john, jake, lucy, null };
         List<Object> expected3 = new List<Object>{ 'foo', 'baz', 'bar', '', null };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(expected2, actual2);
-        Validate.assertEquals(expected3, actual3);
-        Validate.assertEquals(expected3, actual4);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(expected2, actual2);
+        Assert.areEqual(expected3, actual3);
+        Assert.areEqual(expected3, actual4);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -584,11 +584,11 @@ private class ObjectSequenceTest {
         // Then
         List<Object> expected = new List<Object>{ -5.1, '0', 10L };
         List<Object> expected1 = new List<Object>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -617,11 +617,11 @@ private class ObjectSequenceTest {
         // Then
         List<Object> expected = new List<Object>{ new Account(), null, john, Math.PI };
         List<Object> expected1 = new List<Object>();
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -643,10 +643,10 @@ private class ObjectSequenceTest {
         // Then
         String expected = 'seedfoobarbazlorem';
         Integer expected1 = 16;
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals('seed', seed, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual('seed', seed, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -669,10 +669,10 @@ private class ObjectSequenceTest {
         Set<Object> actual1 = (Set<Object>) seq1.collect(Supplier.of(Set<Object>.class), new IterTestUtils.AddToSet());
         // Then
         Set<Object> expected = new Set<Object>{ john, jake, sam, lucy };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -694,10 +694,10 @@ private class ObjectSequenceTest {
         String actual = (String) seq.find(TypePredicates.isInstanceOfString()).get();
         Integer actual1 = (Integer) seq1.find(TypePredicates.isInstanceOfInt()).orElse(elseValue);
         // Then
-        Validate.assertEquals('jake', actual);
-        Validate.assertEquals(elseValue, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual('jake', actual);
+        Assert.areEqual(elseValue, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -718,10 +718,10 @@ private class ObjectSequenceTest {
         Boolean actual = seq.every(TypePredicates.isInstanceOfString());
         Boolean actual1 = seq1.every(TypePredicates.isInstanceOfInt().negate());
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -742,10 +742,10 @@ private class ObjectSequenceTest {
         Boolean actual = seq.some(TypePredicates.isInstanceOfString());
         Boolean actual1 = seq1.some(TypePredicates.isInstanceOfInt());
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -766,10 +766,10 @@ private class ObjectSequenceTest {
         Boolean actual = seq.none(TypePredicates.isInstanceOfString());
         Boolean actual1 = seq1.none(TypePredicates.isInstanceOfInt());
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -793,10 +793,10 @@ private class ObjectSequenceTest {
         IterTestUtils.Person actual = (IterTestUtils.Person) seq.max(defaultOrderComparator).get();
         String actual1 = (String) seq1.max(defaultOrderComparator).get();
         // Then
-        Validate.assertEquals(lucy, actual);
-        Validate.assertEquals('lucy', actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual(lucy, actual);
+        Assert.areEqual('lucy', actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input1, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -820,10 +820,10 @@ private class ObjectSequenceTest {
         IterTestUtils.Person actual = (IterTestUtils.Person) seq.min(defaultOrderComparator).get();
         String actual1 = (String) seq1.min(defaultOrderComparator).get();
         // Then
-        Validate.assertEquals(sam, actual);
-        Validate.assertEquals('a', actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual(sam, actual);
+        Assert.areEqual('a', actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input1, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -843,10 +843,10 @@ private class ObjectSequenceTest {
         Integer actual1 = seq1.count();
         Integer actual2 = seq2.count();
         // Then
-        Validate.assertEquals(input.size(), actual);
-        Validate.assertEquals(0, actual1);
-        Validate.assertEquals(0, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input.size(), actual);
+        Assert.areEqual(0, actual1);
+        Assert.areEqual(0, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -866,10 +866,10 @@ private class ObjectSequenceTest {
         Boolean actual1 = seq1.isEmpty();
         Boolean actual2 = seq2.isEmpty();
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(true, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(true, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -892,10 +892,10 @@ private class ObjectSequenceTest {
         List<IterTestUtils.Person> actual = (List<IterTestUtils.Person>) seq.toList(List<IterTestUtils.Person>.class);
         List<Object> actual1 = seq1.toList();
         // Then
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(input1, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input1, clone1, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(input1, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input1, clone1, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -912,8 +912,8 @@ private class ObjectSequenceTest {
         Set<Object> actual = seq.toSet();
         // Then
         Set<Object> expected = new Set<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
     }
 
 }

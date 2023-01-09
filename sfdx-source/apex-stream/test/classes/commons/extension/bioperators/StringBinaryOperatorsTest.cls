@@ -25,10 +25,10 @@ private class StringBinaryOperatorsTest {
         IBinaryOperator concat1 = StringBinaryOperators.concat(delimiter);
         // Then
         for (String o : INPUT) {
-            Validate.assertEquals(o + s, concat.apply(o, s));
+            Assert.areEqual(o + s, concat.apply(o, s));
         }
         for (String o : INPUT) {
-            Validate.assertEquals(o + delimiter + s, concat1.apply(o, s));
+            Assert.areEqual(o + delimiter + s, concat1.apply(o, s));
         }
     }
     

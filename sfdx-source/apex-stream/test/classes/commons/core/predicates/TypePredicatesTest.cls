@@ -57,18 +57,18 @@ private class TypePredicatesTest {
         IPredicate isInstanceOfComparable = TypePredicates.isInstanceOfComparable();
         // Then
         for (Object o : input) {
-            Validate.assertEquals(o instanceof Boolean, isInstanceOfBoolean.test(o));
-            Validate.assertEquals(o instanceof Id, isInstanceOfId.test(o));
-            Validate.assertEquals(o instanceof String, isInstanceOfString.test(o));
-            Validate.assertEquals(o instanceof Blob, isInstanceOfBlob.test(o));
-            Validate.assertEquals(o instanceof Date, isInstanceOfDate.test(o));
-            Validate.assertEquals(o instanceof Datetime, isInstanceOfDatetime.test(o));
-            Validate.assertEquals(o instanceof Time, isInstanceOfTime.test(o));
-            Validate.assertEquals(o instanceof Integer, isInstanceOfInt.test(o));
-            Validate.assertEquals(o instanceof Long, isInstanceOfLong.test(o));
-            Validate.assertEquals(o instanceof Double, isInstanceOfDouble.test(o));
-            Validate.assertEquals(o instanceof SObject, isInstanceOfSObject.test(o));
-            Validate.assertEquals(o instanceof Comparable, isInstanceOfComparable.test(o));
+            Assert.areEqual(o instanceof Boolean, isInstanceOfBoolean.test(o));
+            Assert.areEqual(o instanceof Id, isInstanceOfId.test(o));
+            Assert.areEqual(o instanceof String, isInstanceOfString.test(o));
+            Assert.areEqual(o instanceof Blob, isInstanceOfBlob.test(o));
+            Assert.areEqual(o instanceof Date, isInstanceOfDate.test(o));
+            Assert.areEqual(o instanceof Datetime, isInstanceOfDatetime.test(o));
+            Assert.areEqual(o instanceof Time, isInstanceOfTime.test(o));
+            Assert.areEqual(o instanceof Integer, isInstanceOfInt.test(o));
+            Assert.areEqual(o instanceof Long, isInstanceOfLong.test(o));
+            Assert.areEqual(o instanceof Double, isInstanceOfDouble.test(o));
+            Assert.areEqual(o instanceof SObject, isInstanceOfSObject.test(o));
+            Assert.areEqual(o instanceof Comparable, isInstanceOfComparable.test(o));
         }
     }
     

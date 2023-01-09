@@ -37,17 +37,17 @@ private class SObjectSupplierTest {
         Account actual8 = (Account) repeatSupplier1.get();
         Account actual9 = (Account) repeatSupplier1.get();
         // Then
-        Validate.assertEquals(new Account(), actual);
-        Validate.assertEquals(new Account(Name = 'Name'), actual1);
-        Validate.assertEquals(acc, actual2);
-        Validate.assertEquals(acc1, actual3);
-        Validate.assertEquals(acc2, actual4);
-        Validate.assertEquals(acc, actual5);
-        Validate.assertEquals(acc, actual6);
-        Validate.assertEquals(acc1, actual7);
-        Validate.assertEquals(acc2, actual8);
-        Validate.assertEquals(acc, actual9);
-        Validate.assert(((SObjectStream) accStream).isOperated);
+        Assert.areEqual(new Account(), actual);
+        Assert.areEqual(new Account(Name = 'Name'), actual1);
+        Assert.areEqual(acc, actual2);
+        Assert.areEqual(acc1, actual3);
+        Assert.areEqual(acc2, actual4);
+        Assert.areEqual(acc, actual5);
+        Assert.areEqual(acc, actual6);
+        Assert.areEqual(acc1, actual7);
+        Assert.areEqual(acc2, actual8);
+        Assert.areEqual(acc, actual9);
+        Assert.isTrue(((SObjectStream) accStream).isOperated);
     }
     
 }

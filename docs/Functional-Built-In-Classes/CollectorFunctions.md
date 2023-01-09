@@ -1,10 +1,10 @@
 # CollectorFunctions
 
-`APIVERSION: 55`
+`APIVERSION: 56`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of [Function](/docs/Functional-Abstract-Classes/Function.md) and related utilities that are used by [Collectors](/Functional-Built-In-Classes/Collectors.md).
+Provides common implementations of [Function](/docs/Functional-Abstract-Classes/Function.md) and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
 
 
 **See** [Function](/docs/Functional-Abstract-Classes/Function.md)

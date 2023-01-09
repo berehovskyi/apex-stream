@@ -22,8 +22,8 @@ private class LongFunctionsTest {
         ILongFunction toObject = LongFunctions.toObject();
         // When
         for (Long l : input) {
-            Validate.assertEquals(String.valueOf(l), toString.apply(l));
-            Validate.assertEquals((Object) l, toObject.apply(l));
+            Assert.areEqual(String.valueOf(l), toString.apply(l));
+            Assert.areEqual((Object) l, toObject.apply(l));
         }
     }
 

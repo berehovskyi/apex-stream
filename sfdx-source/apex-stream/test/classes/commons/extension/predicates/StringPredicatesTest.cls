@@ -82,35 +82,35 @@ private class StringPredicatesTest {
         IPredicate startsWithIgnoreCase = StringPredicates.startsWithIgnoreCase(s11);
         // Then
         for (String s : INPUT) {
-            Validate.assertEquals(s.contains(s1), contains.test(s));
-            Validate.assertEquals(s.containsAny(s2), containsAny.test(s));
-            Validate.assertEquals(s.containsIgnoreCase(s3), containsIgnoreCase.test(s));
-            Validate.assertEquals(s.containsNone(s4), containsNone.test(s));
-            Validate.assertEquals(s.containsOnly(s5), containsOnly.test(s));
-            Validate.assertEquals(s.containsWhitespace(), containsWhitespace.test(s));
-            Validate.assertEquals(s.endsWith(s6), endsWith.test(s));
-            Validate.assertEquals(s.endsWithIgnoreCase(s7), endsWithIgnoreCase.test(s));
-            Validate.assertEquals(s.equalsIgnoreCase(s8), equalsIgnoreCase.test(s));
-            Validate.assertEquals(s.isAllLowerCase(), isAllLowerCase.test(s));
-            Validate.assertEquals(s.isAllUpperCase(), isAllUpperCase.test(s));
-            Validate.assertEquals(s.isAlpha(), isAlpha.test(s));
-            Validate.assertEquals(s.isAlphaSpace(), isAlphaSpace.test(s));
-            Validate.assertEquals(s.isAlphanumeric(), isAlphaNumeric.test(s));
-            Validate.assertEquals(s.isAlphanumericSpace(), isAlphaNumericSpace.test(s));
-            Validate.assertEquals(s.isAsciiPrintable(), isAsciiPrintable.test(s));
-            Validate.assertEquals(String.isBlank(s), isBlank.test(s));
-            Validate.assertEquals(String.isEmpty(s), isEmpty.test(s));
-            Validate.assertEquals(String.isNotBlank(s), isNotBlank.test(s));
-            Validate.assertEquals(String.isNotEmpty(s), isNotEmpty.test(s));
-            Validate.assertEquals(Pattern.matches(
+            Assert.areEqual(s.contains(s1), contains.test(s));
+            Assert.areEqual(s.containsAny(s2), containsAny.test(s));
+            Assert.areEqual(s.containsIgnoreCase(s3), containsIgnoreCase.test(s));
+            Assert.areEqual(s.containsNone(s4), containsNone.test(s));
+            Assert.areEqual(s.containsOnly(s5), containsOnly.test(s));
+            Assert.areEqual(s.containsWhitespace(), containsWhitespace.test(s));
+            Assert.areEqual(s.endsWith(s6), endsWith.test(s));
+            Assert.areEqual(s.endsWithIgnoreCase(s7), endsWithIgnoreCase.test(s));
+            Assert.areEqual(s.equalsIgnoreCase(s8), equalsIgnoreCase.test(s));
+            Assert.areEqual(s.isAllLowerCase(), isAllLowerCase.test(s));
+            Assert.areEqual(s.isAllUpperCase(), isAllUpperCase.test(s));
+            Assert.areEqual(s.isAlpha(), isAlpha.test(s));
+            Assert.areEqual(s.isAlphaSpace(), isAlphaSpace.test(s));
+            Assert.areEqual(s.isAlphanumeric(), isAlphaNumeric.test(s));
+            Assert.areEqual(s.isAlphanumericSpace(), isAlphaNumericSpace.test(s));
+            Assert.areEqual(s.isAsciiPrintable(), isAsciiPrintable.test(s));
+            Assert.areEqual(String.isBlank(s), isBlank.test(s));
+            Assert.areEqual(String.isEmpty(s), isEmpty.test(s));
+            Assert.areEqual(String.isNotBlank(s), isNotBlank.test(s));
+            Assert.areEqual(String.isNotEmpty(s), isNotEmpty.test(s));
+            Assert.areEqual(Pattern.matches(
                     '(?i)^' + s9.replaceAll('([^\\w%_ ])', '\\\\$1')
                             .replace('%', '.*?').replace('_', '.{1}?') + '$', s
             ), isLike.test(s));
-            Validate.assertEquals(s.isNumeric(), isNumeric.test(s));
-            Validate.assertEquals(s.isNumericSpace(), isNumericSpace.test(s));
-            Validate.assertEquals(s.isWhitespace(), isWhitespace.test(s));
-            Validate.assertEquals(s.startsWith(s10), startsWith.test(s));
-            Validate.assertEquals(s.startsWithIgnoreCase(s11), startsWithIgnoreCase.test(s));
+            Assert.areEqual(s.isNumeric(), isNumeric.test(s));
+            Assert.areEqual(s.isNumericSpace(), isNumericSpace.test(s));
+            Assert.areEqual(s.isWhitespace(), isWhitespace.test(s));
+            Assert.areEqual(s.startsWith(s10), startsWith.test(s));
+            Assert.areEqual(s.startsWithIgnoreCase(s11), startsWithIgnoreCase.test(s));
         }
     }
     

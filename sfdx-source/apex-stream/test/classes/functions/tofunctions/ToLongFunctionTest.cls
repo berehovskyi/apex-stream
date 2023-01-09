@@ -20,8 +20,8 @@ private class ToLongFunctionTest {
         IToLongFunction get42 = ToLongFunction.compose(Function.constant(value));
         // Then
         for (Account acc : INPUT) {
-            Validate.assertEquals(acc.get(IterTestUtils.CONSTS.Account.NumberOfEmployees), getNumOfEmployeesAsLong.apply(acc));
-            Validate.assertEquals(value, get42.apply(acc));
+            Assert.areEqual(acc.get(IterTestUtils.CONSTS.Account.NumberOfEmployees), getNumOfEmployeesAsLong.apply(acc));
+            Assert.areEqual(value, get42.apply(acc));
         }
     }
     

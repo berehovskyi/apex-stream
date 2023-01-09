@@ -30,10 +30,10 @@ private class SObjectBiPredicatesTest {
         // Then
         for (Account acc : INPUT) {
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) > (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate1.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate2.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate3.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate1.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate2.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterBiPredicate3.test(acc, DELTA));
         }
     }
 
@@ -53,10 +53,10 @@ private class SObjectBiPredicatesTest {
         // Then
         for (Account acc : INPUT) {
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) >= (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate1.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate2.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate3.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate1.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate2.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesIsGreaterOrEqualBiPredicate3.test(acc, DELTA));
         }
     }
 
@@ -77,11 +77,11 @@ private class SObjectBiPredicatesTest {
         // Then
         for (Account acc : INPUT) {
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) == (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreEqualBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreEqualBiPredicate1.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreEqualBiPredicate2.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreEqualBiPredicate3.test(acc, DELTA));
-            Validate.assertEquals(acc == DELTA, areEqualBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreEqualBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreEqualBiPredicate1.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreEqualBiPredicate2.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreEqualBiPredicate3.test(acc, DELTA));
+            Assert.areEqual(acc == DELTA, areEqualBiPredicate.test(acc, DELTA));
         }
     }
 
@@ -102,11 +102,11 @@ private class SObjectBiPredicatesTest {
         // Then
         for (Account acc : INPUT) {
             Boolean isDecreasedNum = (Integer) acc.get(accNumOfEmployeesField) != (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate1.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate2.test(acc, DELTA));
-            Validate.assertEquals(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate3.test(acc, DELTA));
-            Validate.assertEquals(acc != DELTA, areNotEqualBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate1.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate2.test(acc, DELTA));
+            Assert.areEqual(isDecreasedNum, numOfEmployeesAreNotEqualBiPredicate3.test(acc, DELTA));
+            Assert.areEqual(acc != DELTA, areNotEqualBiPredicate.test(acc, DELTA));
         }
     }
 
@@ -127,10 +127,10 @@ private class SObjectBiPredicatesTest {
         for (Account acc : INPUT) {
             Integer leftNumOfEmployees = (Integer) acc.get(accNumOfEmployeesField);
             Boolean isIncreasedNum = leftNumOfEmployees == null ? true : leftNumOfEmployees < (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessBiPredicate1.test(acc, DELTA));
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessBiPredicate2.test(acc, DELTA));
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessBiPredicate3.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessBiPredicate1.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessBiPredicate2.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessBiPredicate3.test(acc, DELTA));
         }
     }
 
@@ -151,10 +151,10 @@ private class SObjectBiPredicatesTest {
         for (Account acc : INPUT) {
             Integer leftNumOfEmployees = (Integer) acc.get(accNumOfEmployeesField);
             Boolean isIncreasedNum = leftNumOfEmployees == null ? true : leftNumOfEmployees <= (Integer) DELTA.get(accNumOfEmployeesField);
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate.test(acc, DELTA));
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate1.test(acc, DELTA));
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate2.test(acc, DELTA));
-            Validate.assertEquals(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate3.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate1.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate2.test(acc, DELTA));
+            Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate3.test(acc, DELTA));
         }
     }
     

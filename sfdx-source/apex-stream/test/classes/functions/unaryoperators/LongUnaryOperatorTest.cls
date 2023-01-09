@@ -29,13 +29,13 @@ private class LongUnaryOperatorTest {
         ILongUnaryOperator operator2 = LongUnaryOperator.compose(new List<ILongUnaryOperator>{ incOperator, multiply });
         // Then
         for (Long l : INPUT) {
-            Validate.assertEquals(l, identity.apply(l));
-            Validate.assertEquals(constant, of10.apply(l));
-            Validate.assertEquals(l + 1, incOperator.apply(l));
-            Validate.assertEquals(l * factor, multiply.apply(l));
-            Validate.assertEquals((l + 1) * 2, operator.apply(l));
-            Validate.assertEquals((l + 1) * 2, operator1.apply(l));
-            Validate.assertEquals((l + 1) * 2, operator2.apply(l));
+            Assert.areEqual(l, identity.apply(l));
+            Assert.areEqual(constant, of10.apply(l));
+            Assert.areEqual(l + 1, incOperator.apply(l));
+            Assert.areEqual(l * factor, multiply.apply(l));
+            Assert.areEqual((l + 1) * 2, operator.apply(l));
+            Assert.areEqual((l + 1) * 2, operator1.apply(l));
+            Assert.areEqual((l + 1) * 2, operator2.apply(l));
         }
     }
 

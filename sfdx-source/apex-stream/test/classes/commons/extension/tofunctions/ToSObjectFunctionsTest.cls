@@ -21,7 +21,7 @@ private class ToSObjectFunctionsTest {
         IToSObjectFunction asSObject = ToSObjectFunctions.asSObject();
         // Then
         for (Object acc : INPUT) {
-            Validate.assertEquals((SObject) acc, asSObject.apply(acc));
+            Assert.areEqual((SObject) acc, asSObject.apply(acc));
         }
     }
     

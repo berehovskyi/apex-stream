@@ -41,22 +41,22 @@ private class DoubleStreamTest {
         // Then
         List<Double> expected = new List<Double>(new Set<Double>(input));
         List<Double> expected1 = new List<Double>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(input, actual2);
-        Validate.assertEquals(expected, actual3);
-        Validate.assertEquals(expected1, actual4);
-        Validate.assertEquals(expected1, actual5);
-        Validate.assertEquals(input, actual6);
-        Validate.assertEquals(false, seq.isEmpty());
-        Validate.assertEquals(doubles, input, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
-        Validate.assert(((DoubleStream) stream3).isOperated);
-        Validate.assert(((DoubleStream) stream4).isOperated);
-        Validate.assert(((DoubleStream) stream5).isOperated);
-        Validate.assert(((DoubleStream) stream6).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(expected1, actual4);
+        Assert.areEqual(expected1, actual5);
+        Assert.areEqual(input, actual6);
+        Assert.areEqual(false, seq.isEmpty());
+        Assert.areEqual(doubles, input, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
+        Assert.isTrue(((DoubleStream) stream3).isOperated);
+        Assert.isTrue(((DoubleStream) stream4).isOperated);
+        Assert.isTrue(((DoubleStream) stream5).isOperated);
+        Assert.isTrue(((DoubleStream) stream6).isOperated);
     }
 
     /**
@@ -70,7 +70,7 @@ private class DoubleStreamTest {
         // When
         List<Double> actual = stream.toList();
         // Then
-        Validate.assertEquals(lim, actual.size());
+        Assert.areEqual(lim, actual.size());
     }
 
     /**
@@ -88,14 +88,14 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         List<Double> actual1 = stream1.toList();
         // Then
-        Validate.assertEquals(lim, actual.size());
-        Validate.assertEquals(seed, actual[0]);
-        Validate.assertEquals(55.0, actual[9]);
-        Validate.assertEquals(lim, actual1.size());
-        Validate.assertEquals(seed1, actual1[0]);
-        Validate.assertEquals(5.0, actual1[9]);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.areEqual(lim, actual.size());
+        Assert.areEqual(seed, actual[0]);
+        Assert.areEqual(55.0, actual[9]);
+        Assert.areEqual(lim, actual1.size());
+        Assert.areEqual(seed1, actual1[0]);
+        Assert.areEqual(5.0, actual1[9]);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -115,10 +115,10 @@ private class DoubleStreamTest {
         // Then
         List<Double> expected = new List<Double>{ -5.1, 0, 1.0, 3, 150.5, 3.0, 0, 8.5 };
         List<Double> expected1 = new List<Double>{ -5.1, 0, 1.0, 3, 150.5, 3.0, 0, 8.5, 9.1, 5.5, 7.3 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -134,8 +134,8 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ -2.0, 0, 9.5 };
-        Validate.assertEquals(expected, actual);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -155,10 +155,10 @@ private class DoubleStreamTest {
         // Then
         List<Double> expected = new List<Double>{ -5.1, 0, 1.0, 3.0, 0, 8.5 };
         List<Double> expected1 = new List<Double>{ 3.0, 0, 8.5, -5.1, 0, 1.0 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -188,18 +188,18 @@ private class DoubleStreamTest {
         List<Double> expected = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 8.0, 6.0, 4.0, 1.0, 0.0 };
         List<Double> expected1 = new List<Double>{ 3.0, 9.0 };
         List<Double> expected2 = new List<Double>{ 5.0, 7.0 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(expected1, actual3);
-        Validate.assertEquals(expected2, actual4);
-        Validate.assertEquals(expected2, actual5);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
-        Validate.assert(((DoubleStream) stream3).isOperated);
-        Validate.assert(((DoubleStream) stream4).isOperated);
-        Validate.assert(((DoubleStream) stream5).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(expected1, actual3);
+        Assert.areEqual(expected2, actual4);
+        Assert.areEqual(expected2, actual5);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
+        Assert.isTrue(((DoubleStream) stream3).isOperated);
+        Assert.isTrue(((DoubleStream) stream4).isOperated);
+        Assert.isTrue(((DoubleStream) stream5).isOperated);
     }
 
     /**
@@ -213,8 +213,8 @@ private class DoubleStreamTest {
         // When
         List<Object> actual = stream.toList();
         // Then
-        Validate.assertEquals(input.size(), actual.size());
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areEqual(input.size(), actual.size());
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -229,8 +229,8 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ 1.0, 3, 8.99, 4.01, 4.01 };
-        Validate.assertEquals(expected, actual);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -247,15 +247,15 @@ private class DoubleStreamTest {
         Iterator<Double> iterator = stream1.iterator();
         // Then
         List<Double> expected = new List<Double>{ 5.5, 0.01, 1.0, 3 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input[0], iterator.next());
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input[0], iterator.next());
         try {
             iterator.next();
         } catch (Exception exc) {
-            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
         }
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -270,8 +270,8 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ -8.99, null, -6, 4.01, 4.01 };
-        Validate.assertEquals(expected, actual);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -287,9 +287,9 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -305,9 +305,9 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ 11, 0.02, 2.0, 6.0, -17.98, -12.0, 8.02, 8.02 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -323,9 +323,9 @@ private class DoubleStreamTest {
         List<Long> actual = stream.toList();
         // Then
         List<Long> expected = new List<Long>{ 6L, 0L, 1L, 3L, -9L, -6L, 4L, 4L };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((LongStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((LongStream) stream).isOperated);
     }
 
     /**
@@ -341,9 +341,9 @@ private class DoubleStreamTest {
         List<Integer> actual = stream.toList();
         // Then
         List<Integer> expected = new List<Integer>{ 6, 0, 1, 3, -9, -6, 4, 4 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((IntStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((IntStream) stream).isOperated);
     }
 
     /**
@@ -358,11 +358,11 @@ private class DoubleStreamTest {
         // When
         List<Account> actual = stream.toList();
         // Then
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
         for (Integer i = 0, size = input.size(); i < size; i++ ) {
-            Validate.assertEquals(Math.abs(clone[i]), actual[i].AnnualRevenue);
+            Assert.areEqual(Math.abs(clone[i]), actual[i].AnnualRevenue);
         }
-        Validate.assert(((SObjectStream) stream).isOperated);
+        Assert.isTrue(((SObjectStream) stream).isOperated);
     }
 
     /**
@@ -378,9 +378,9 @@ private class DoubleStreamTest {
         List<Object> actual = stream.toList();
         // Then
         List<String> expected = new List<String>{ '5.5', '0.01', '1.0', '3.0', '-8.99', '-6.0', '4.01', '4.01' };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((ObjectStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((ObjectStream) stream).isOperated);
     }
 
     /**
@@ -395,9 +395,9 @@ private class DoubleStreamTest {
         // When
         List<Double> actual = stream.toList();
         // Then
-        Validate.assertEquals(clone, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(clone, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -413,9 +413,9 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -431,9 +431,9 @@ private class DoubleStreamTest {
         List<Double> actual = stream.toList();
         // Then
         List<Double> expected = new List<Double>{ null, -8.99, -6, 0.01, 1.0, 3, 4.01, 4.01, 5.5 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -461,15 +461,15 @@ private class DoubleStreamTest {
         // Then
         List<Double> expected = new List<Double>{ 5.5, 0.01, 1.0 };
         List<Double> expected1 = new List<Double>();
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(expected, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
-        Validate.assert(!((DoubleStream) stream3).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
+        Assert.isTrue(!((DoubleStream) stream3).isOperated);
     }
 
     /**
@@ -497,15 +497,15 @@ private class DoubleStreamTest {
         // Then
         List<Double> expected = new List<Double>{ -8.99, -6, 4.01, 4.01 };
         List<Double> expected1 = new List<Double>();
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, actual1);
-        Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
-        Validate.assert(!((DoubleStream) stream3).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, actual1);
+        Assert.areEqual(expected1, actual2);
+        Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
+        Assert.isTrue(!((DoubleStream) stream3).isOperated);
     }
 
     /**
@@ -534,13 +534,13 @@ private class DoubleStreamTest {
         // Then
         Double expected = 10;
         Double expected1 = 5.5;
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(expected1, actual1);
-        Validate.assertEquals(10, seed, Label.InputMutatedErrorMessage);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected1, actual1);
+        Assert.areEqual(10, seed, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
     }
 
     /**
@@ -556,9 +556,9 @@ private class DoubleStreamTest {
         Set<Double> actual = (Set<Double>) stream.collect(Supplier.of(Set<Double>.class), ObjectDoubleConsumer.compose(new IterTestUtils.AddToDoubleSet()));
         // Then
         Set<Double> expected = new Set<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -575,11 +575,11 @@ private class DoubleStreamTest {
         Double actual = stream.find(DoublePredicates.isLess(0)).get();
         Double actual1 = stream1.find(DoublePredicates.isGreater(50)).orElse((Double) 42.0);
         // Then
-        Validate.assertEquals(-8.99, actual);
-        Validate.assertEquals(42.0, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.areEqual(-8.99, actual);
+        Assert.areEqual(42.0, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -596,11 +596,11 @@ private class DoubleStreamTest {
         Boolean actual = stream.every(DoublePredicates.isLess(42));
         Boolean actual1 = stream1.every(DoublePredicates.isGreater(0));
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -617,11 +617,11 @@ private class DoubleStreamTest {
         Boolean actual = stream.some(DoublePredicates.isLess(0));
         Boolean actual1 = stream1.some(DoublePredicates.isEqual(0));
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -638,11 +638,11 @@ private class DoubleStreamTest {
         Boolean actual = stream.none(DoublePredicates.isGreater(42));
         Boolean actual1 = stream1.none(DoublePredicates.isLess(0));
         // Then
-        Validate.assertEquals(true, actual);
-        Validate.assertEquals(false, actual1);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
+        Assert.areEqual(true, actual);
+        Assert.areEqual(false, actual1);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
     }
 
     /**
@@ -657,9 +657,9 @@ private class DoubleStreamTest {
         // When
         Double actual = stream.max().get();
         // Then
-        Validate.assertEquals(5.5, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(5.5, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -674,9 +674,9 @@ private class DoubleStreamTest {
         // When
         Double actual = stream.min().get();
         // Then
-        Validate.assertEquals(-8.99, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(-8.99, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -691,9 +691,9 @@ private class DoubleStreamTest {
         // When
         Double actual = stream.sum();
         // Then
-        Validate.assertEquals(3.7, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(3.7, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -708,9 +708,9 @@ private class DoubleStreamTest {
         // When
         Double actual = stream.avg().get();
         // Then
-        Validate.assertEquals(0.4, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(0.4, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -729,13 +729,13 @@ private class DoubleStreamTest {
         Double actual1 = stream1.count();
         Double actual2 = stream2.count();
         // Then
-        Validate.assertEquals(8, actual);
-        Validate.assertEquals(0, actual1);
-        Validate.assertEquals(0, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
+        Assert.areEqual(8, actual);
+        Assert.areEqual(0, actual1);
+        Assert.areEqual(0, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
     }
 
     /**
@@ -754,13 +754,13 @@ private class DoubleStreamTest {
         Boolean actual1 = stream1.isEmpty();
         Boolean actual2 = stream2.isEmpty();
         // Then
-        Validate.assertEquals(false, actual);
-        Validate.assertEquals(true, actual1);
-        Validate.assertEquals(true, actual2);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
-        Validate.assert(((DoubleStream) stream1).isOperated);
-        Validate.assert(((DoubleStream) stream2).isOperated);
+        Assert.areEqual(false, actual);
+        Assert.areEqual(true, actual1);
+        Assert.areEqual(true, actual2);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
+        Assert.isTrue(((DoubleStream) stream1).isOperated);
+        Assert.isTrue(((DoubleStream) stream2).isOperated);
     }
 
     /**
@@ -775,9 +775,9 @@ private class DoubleStreamTest {
         // When
         List<Double> actual = stream.toList();
         // Then
-        Validate.assertEquals(input, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(input, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
     /**
@@ -793,9 +793,9 @@ private class DoubleStreamTest {
         Set<Double> actual = stream.toSet();
         // Then
         Set<Double> expected = new Set<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01 };
-        Validate.assertEquals(expected, actual);
-        Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
-        Validate.assert(((DoubleStream) stream).isOperated);
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.isTrue(((DoubleStream) stream).isOperated);
     }
 
 }

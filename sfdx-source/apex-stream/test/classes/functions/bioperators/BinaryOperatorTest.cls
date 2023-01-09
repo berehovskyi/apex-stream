@@ -29,8 +29,8 @@ private class BinaryOperatorTest {
         // Then
         for (IterTestUtils.Person person : PEOPLE) {
             IterTestUtils.Person jhene = new IterTestUtils.Person('Jhene', 18, Date.newInstance(1990, 1, 2), 5L, true);
-            Validate.assertEquals(person, left.apply(person, jhene));
-            Validate.assertEquals(jhene, right.apply(person, jhene));
+            Assert.areEqual(person, left.apply(person, jhene));
+            Assert.areEqual(jhene, right.apply(person, jhene));
             Object actual = minBy.apply(person, jhene);
             Object actual1 = maxBy.apply(person, jhene);
             IterTestUtils.Person expected = person.getAge() == null
@@ -39,8 +39,8 @@ private class BinaryOperatorTest {
             IterTestUtils.Person expected1 = person.getAge() == null
                     ? jhene
                     : person.getAge() <= (Integer) jhene.getAge() ? jhene : person;
-            Validate.assertEquals(expected, actual);
-            Validate.assertEquals(expected1, actual1);
+            Assert.areEqual(expected, actual);
+            Assert.areEqual(expected1, actual1);
         }
     }
 
@@ -59,16 +59,16 @@ private class BinaryOperatorTest {
         IBinaryOperator getLeftArg = BinaryOperator.upcast(SObjectBinaryOperator.left());
         // Then
         for (Object o : INTS) {
-            Validate.assertEquals((Integer) o + i, ofIntSum.apply(o, i));
+            Assert.areEqual((Integer) o + i, ofIntSum.apply(o, i));
         }
         for (Object o : LONGS) {
-            Validate.assertEquals((Long) o + i, ofLongSum.apply(o, i));
+            Assert.areEqual((Long) o + i, ofLongSum.apply(o, i));
         }
         for (Object o : DOUBLES) {
-            Validate.assertEquals((Double) o + i, ofDoubleSum.apply(o, i));
+            Assert.areEqual((Double) o + i, ofDoubleSum.apply(o, i));
         }
         for (Object o : CONTACTS) {
-            Validate.assertEquals(o, getLeftArg.apply(o, con));
+            Assert.areEqual(o, getLeftArg.apply(o, con));
         }
     }
 

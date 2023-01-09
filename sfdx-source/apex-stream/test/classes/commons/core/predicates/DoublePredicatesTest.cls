@@ -32,15 +32,15 @@ private class DoublePredicatesTest {
         List<Double> subList = new List<Double>{ -5.2, 11L };
         // When
         for(Double d : INPUT) {
-            Validate.assertEquals(d >= value, DoublePredicates.isGreaterOrEqual(value).test(d));
-            Validate.assertEquals(d < value, DoublePredicates.isLess(value).test(d));
-            Validate.assertEquals(d <= value, DoublePredicates.isLessOrEqual(value).test(d));
-            Validate.assertEquals(d == value1, DoublePredicates.isEqual(value1).test(d));
-            Validate.assertEquals(d != value1, DoublePredicates.isNotEqual(value1).test(d));
-            Validate.assertEquals(subList.contains(d), DoublePredicates.isIn(subList).test(d));
-            Validate.assertEquals(!subList.contains(d), DoublePredicates.isNotIn(subList).test(d));
-            Validate.assertEquals(d == null, DoublePredicates.isNull().test(d));
-            Validate.assertEquals(d != null, DoublePredicates.isNotNull().test(d));
+            Assert.areEqual(d >= value, DoublePredicates.isGreaterOrEqual(value).test(d));
+            Assert.areEqual(d < value, DoublePredicates.isLess(value).test(d));
+            Assert.areEqual(d <= value, DoublePredicates.isLessOrEqual(value).test(d));
+            Assert.areEqual(d == value1, DoublePredicates.isEqual(value1).test(d));
+            Assert.areEqual(d != value1, DoublePredicates.isNotEqual(value1).test(d));
+            Assert.areEqual(subList.contains(d), DoublePredicates.isIn(subList).test(d));
+            Assert.areEqual(!subList.contains(d), DoublePredicates.isNotIn(subList).test(d));
+            Assert.areEqual(d == null, DoublePredicates.isNull().test(d));
+            Assert.areEqual(d != null, DoublePredicates.isNotNull().test(d));
         }
     }
 

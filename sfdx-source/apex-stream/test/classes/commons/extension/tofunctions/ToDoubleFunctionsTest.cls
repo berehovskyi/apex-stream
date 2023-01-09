@@ -24,10 +24,10 @@ private class ToDoubleFunctionsTest {
         IToDoubleFunction doubleValue = ToDoubleFunctions.valueOf();
         // Then
         for (Object o : input) {
-            Validate.assertEquals((Double) o, asDouble.apply(o));
+            Assert.areEqual((Double) o, asDouble.apply(o));
         }
         for (String s : input1) {
-            Validate.assertEquals(Double.valueOf(s), doubleValue.apply(s));
+            Assert.areEqual(Double.valueOf(s), doubleValue.apply(s));
         }
     }
     

@@ -27,12 +27,12 @@ private class SObjectConsumerTest {
             clone.put(IterTestUtils.CONSTS.Contact.Description, clone.get(IterTestUtils.CONSTS.Contact.Department));
             SObject cloneToConsume = IterTestUtils.deepClone(con);
             setDescFromDepartment.accept(cloneToConsume);
-            Validate.assertEquals(clone, cloneToConsume);
+            Assert.areEqual(clone, cloneToConsume);
             SObject clone1 = IterTestUtils.deepClone(con);
             clone1.put(IterTestUtils.CONSTS.DO_NOT_CALL, constant);
             SObject cloneToConsume1 = IterTestUtils.deepClone(con);
             setDoNotCall.accept(cloneToConsume1);
-            Validate.assertEquals(clone1, cloneToConsume1);
+            Assert.areEqual(clone1, cloneToConsume1);
             SObject clone2 = IterTestUtils.deepClone(con);
             clone2.put(IterTestUtils.CONSTS.Contact.Description, clone2.get(IterTestUtils.CONSTS.Contact.Department));
             clone2.put(IterTestUtils.CONSTS.DO_NOT_CALL, constant);
@@ -40,8 +40,8 @@ private class SObjectConsumerTest {
             consumer.accept(cloneToConsume2);
             SObject cloneToConsume3 = IterTestUtils.deepClone(con);
             consumer1.accept(cloneToConsume3);
-            Validate.assertEquals(clone2, cloneToConsume2);
-            Validate.assertEquals(clone2, cloneToConsume3);
+            Assert.areEqual(clone2, cloneToConsume2);
+            Assert.areEqual(clone2, cloneToConsume3);
         }
     }
 

@@ -30,11 +30,11 @@ private class DoubleBinaryOperatorsTest {
         for (Integer i = 0, size = INPUT.size(); i < size; i++) {
             Double d = INPUT[i];
             Double src = 5.0;
-            Validate.assertEquals(Math.min(src, d), min.apply(src, d));
-            Validate.assertEquals(Math.max(src, d), max.apply(src, d));
-            Validate.assertEquals(src + d, sum.apply(src, d));
-            Validate.assertEquals(src * d, product.apply(src, d));
-            Validate.assertEquals(Math.sqrt(Math.pow(src, 2) + Math.pow(d, 2)), euclid.apply(src, d));
+            Assert.areEqual(Math.min(src, d), min.apply(src, d));
+            Assert.areEqual(Math.max(src, d), max.apply(src, d));
+            Assert.areEqual(src + d, sum.apply(src, d));
+            Assert.areEqual(src * d, product.apply(src, d));
+            Assert.areEqual(Math.sqrt(Math.pow(src, 2) + Math.pow(d, 2)), euclid.apply(src, d));
         }
     }
     

@@ -30,13 +30,13 @@ private class DoubleUnaryOperatorTest {
         IDoubleUnaryOperator operator2 = DoubleUnaryOperator.compose(new List<IDoubleUnaryOperator>{ incOperator, x2IntOperator });
         // Then
         for (Double d : INPUT) {
-            Validate.assertEquals(d, identity.apply(d));
-            Validate.assertEquals(constant, of1.apply(d));
-            Validate.assertEquals(d + inc, incOperator.apply(d));
-            Validate.assertEquals(d * factor, x2IntOperator.apply(d));
-            Validate.assertEquals((d + inc) * factor, operator.apply(d));
-            Validate.assertEquals((d + inc) * factor, operator1.apply(d));
-            Validate.assertEquals((d + inc) * factor, operator2.apply(d));
+            Assert.areEqual(d, identity.apply(d));
+            Assert.areEqual(constant, of1.apply(d));
+            Assert.areEqual(d + inc, incOperator.apply(d));
+            Assert.areEqual(d * factor, x2IntOperator.apply(d));
+            Assert.areEqual((d + inc) * factor, operator.apply(d));
+            Assert.areEqual((d + inc) * factor, operator1.apply(d));
+            Assert.areEqual((d + inc) * factor, operator2.apply(d));
         }
     }
 
