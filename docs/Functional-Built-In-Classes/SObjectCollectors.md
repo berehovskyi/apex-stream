@@ -93,7 +93,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -101,7 +102,7 @@ the `SObjectCollector`
 List<Object> accountNames = (List<Object>) Stream.of(accounts)
     .collect(SObjectCollectors.toList('Name'));
 List<String> parentAccountNames = (List<String>) Stream.of(accounts)
-    .collect(SObjectCollectors.toList('Parent?.Name')).cast(List<String>.class));
+    .collect(SObjectCollectors.toList('Parent?.Name').cast(List<String>.class));
 ```
 
 ##### `static toList(SObjectField field)`
@@ -134,7 +135,7 @@ the `SObjectCollector`
 List<Object> accountNames = (List<Object>) Stream.of(accounts)
     .collect(SObjectCollectors.toList(Account.Name));
 List<String> accountNames = (List<String>) Stream.of(accounts)
-    .collect(SObjectCollectors.toList(Account.Name)).cast(List<String>.class));
+    .collect(SObjectCollectors.toList(Account.Name).cast(List<String>.class));
 ```
 
 ---
@@ -212,7 +213,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -307,7 +309,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -346,7 +349,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Id> ids = (Set<Id>) Stream.of(accounts)
-    .collect(SObjectCollectors.toIdSet(Account.Id)));
+    .collect(SObjectCollectors.toIdSet(Account.Id));
 ```
 
 ##### `static toStringSet(ISObjectFunction mapper)`
@@ -402,7 +405,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -441,7 +445,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<String> names = (Set<String>) Stream.of(accounts)
-    .collect(SObjectCollectors.toStringSet(Account.Name)));
+    .collect(SObjectCollectors.toStringSet(Account.Name));
 ```
 
 ##### `static toBlobSet(ISObjectFunction mapper)`
@@ -497,7 +501,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -536,7 +541,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
-    .collect(SObjectCollectors.toBlobSet(Attachment.Body)));
+    .collect(SObjectCollectors.toBlobSet(Attachment.Body));
 ```
 
 ##### `static toDateSet(ISObjectFunction mapper)`
@@ -592,7 +597,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -631,7 +637,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
-    .collect(SObjectCollectors.toDateSet(Contact.Birthdate)));
+    .collect(SObjectCollectors.toDateSet(Contact.Birthdate));
 ```
 
 ##### `static toDatetimeSet(ISObjectFunction mapper)`
@@ -687,7 +693,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -726,7 +733,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
-    .collect(SObjectCollectors.toDatetimeSet(Event.ActivityDateTime)));
+    .collect(SObjectCollectors.toDatetimeSet(Event.ActivityDateTime));
 ```
 
 ##### `static toTimeSet(ISObjectFunction mapper)`
@@ -782,7 +789,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -821,7 +829,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Time> startTimes = (Set<Time>) Stream.of(slots)
-    .collect(SObjectCollectors.toTimeSet(TimeSlot.StartTime)));
+    .collect(SObjectCollectors.toTimeSet(TimeSlot.StartTime));
 ```
 
 ##### `static toIntSet(ISObjectToIntFunction mapper)`
@@ -877,7 +885,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -916,7 +925,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
-    .collect(SObjectCollectors.toIntSet(Account.NumberOfEmployees)));
+    .collect(SObjectCollectors.toIntSet(Account.NumberOfEmployees));
 ```
 
 ##### `static toLongSet(ISObjectToLongFunction mapper)`
@@ -972,7 +981,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -1011,7 +1021,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
-    .collect(SObjectCollectors.toLongSet(Account.NumberOfEmployees)));
+    .collect(SObjectCollectors.toLongSet(Account.NumberOfEmployees));
 ```
 
 ##### `static toDoubleSet(ISObjectToDoubleFunction mapper)`
@@ -1067,7 +1077,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -1106,7 +1117,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
-    .collect(SObjectCollectors.toDoubleSet(Account.BillingLatitude)));
+    .collect(SObjectCollectors.toDoubleSet(Account.BillingLatitude));
 ```
 
 ##### `static toSet(ISObjectFunction mapper)`
@@ -1162,7 +1173,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -1201,7 +1213,7 @@ the `SObjectCollector`
 ```apex
 // Accumulates values of field into a List
 Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
-    .collect(SObjectCollectors.toSet(Contact.Birthdate)));
+    .collect(SObjectCollectors.toSet(Contact.Birthdate));
 ```
 
 ---
@@ -1491,7 +1503,7 @@ Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(cont
         SObjectFunctions.get('DoNotCall'),
         SObjectFunctions.get('LastName'),
         BinaryOperator.right(),
-        Supplier.of(Map<Boolean, String>.class),
+        Supplier.of(Map<Boolean, String>.class)
     ));
 ```
 
@@ -5189,7 +5201,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -5347,7 +5360,7 @@ Map<Id, Set<SObject>> contactsByAccountId = (Map<Id, Set<SObject>>)
     Stream.of(contacts)
         .collect(SObjectCollectors.groupingById(
             SObjectFunctions.get('AccountId'),
-            Supplier.of(Map<Id, Set<SObject>>.class)
+            Supplier.of(Map<Id, Set<SObject>>.class),
             SObjectCollectors.toSet()
         ));
 ```
@@ -5446,7 +5459,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -5703,7 +5717,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -5960,7 +5975,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -6217,7 +6233,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -6474,7 +6491,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -6731,7 +6749,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -6889,7 +6908,7 @@ Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObje
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByInt(
             SObjectToIntFunctions.get('NumberOfEmployees'),
-            Supplier.of(Map<Integer, Set<SObject>>.class)
+            Supplier.of(Map<Integer, Set<SObject>>.class),
             SObjectCollectors.toSet()
         ));
 ```
@@ -6988,7 +7007,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -7146,7 +7166,7 @@ Map<Long, Set<SObject>> accountsByNumberOfEmployees = (Map<Long, Set<SObject>>)
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByInt(
             SObjectToLongFunctions.get('NumberOfEmployees'),
-            Supplier.of(Map<Long, Set<SObject>>.class)
+            Supplier.of(Map<Long, Set<SObject>>.class),
             SObjectCollectors.toSet()
         ));
 ```
@@ -7245,7 +7265,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -7403,7 +7424,7 @@ Map<Double, Set<SObject>> accountsByBillingLatitude = (Map<Double, Set<SObject>>
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByDouble(
             SObjectToDoubleFunctions.get('BillingLatitude'),
-            Supplier.of(Map<Double, Set<SObject>>.class)
+            Supplier.of(Map<Double, Set<SObject>>.class),
             SObjectCollectors.toSet()
         ));
 ```
@@ -7504,7 +7525,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -7759,7 +7781,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -7899,7 +7922,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -7967,7 +7991,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -8026,7 +8051,9 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `delimiter` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|`delimiter` is null|
 
 ###### Example
 ```apex
@@ -8090,7 +8117,9 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `delimiter`, `prefix` or `suffix` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `delimiter`, `prefix` or `suffix` is null|
 
 ###### Example
 ```apex
@@ -8185,7 +8214,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -8295,7 +8325,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -8387,7 +8418,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -8477,7 +8509,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -8569,7 +8602,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -8659,7 +8693,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -8807,7 +8842,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 
 **See** SObjectPredicates.isEqual
@@ -8958,7 +8994,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -9025,9 +9062,7 @@ the `SObjectCollector`
 ###### Example
 ```apex
 List<Contact> contacts = (List<Contact>) Stream.of(accounts)
-    .collect(
-        SObjectCollectors.flatMapping(SObjectFunctions.getSObjects('Contacts'))
-    ).cast(List<Contact>.class));
+    .collect(SObjectCollectors.flatMapping(SObjectFunctions.getSObjects('Contacts')).cast(List<Contact>.class));
 Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByString(
@@ -9075,6 +9110,7 @@ Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
             SObjectCollectors.flatMapping(
                 SObjectFunctions.getSObjects('Contacts'),
                 Collector.toSObjectList()
+            )
         ).cast(Map<String, List<Contact>>.class));
 ```
 
@@ -9100,12 +9136,13 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
 List<Contact> contacts = (List<Contact>) Stream.of(accounts)
-    .collect(SObjectCollectors.flatMapping('Contacts')).cast(List<Contact>.class));
+    .collect(SObjectCollectors.flatMapping('Contacts').cast(List<Contact>.class));
 Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByString(
@@ -9141,7 +9178,7 @@ the `SObjectCollector`
 ###### Example
 ```apex
 List<Contact> contacts = (List<Contact>) Stream.of(accounts)
-    .collect(SObjectCollectors.flatMapping(Contact.AccountId)).cast(List<Contact>.class));
+    .collect(SObjectCollectors.flatMapping(Contact.AccountId).cast(List<Contact>.class));
 Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByString(
@@ -9284,7 +9321,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex
@@ -9394,7 +9432,8 @@ the `SObjectCollector`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ###### Example
 ```apex

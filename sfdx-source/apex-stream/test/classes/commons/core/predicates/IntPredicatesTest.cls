@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class IntPredicatesTest {
 
-    private static List<Integer> input = IterTestUtils.generateInts2();
+    private static final List<Integer> INPUT = IterTestUtils.generateInts2();
+
+    static {
+        new IntPredicates();
+    }
 
     /**
      * @see IntPredicates.isGreater
@@ -35,9 +39,8 @@ private class IntPredicatesTest {
         Integer value4 = 3;
         List<Integer> subList = new List<Integer>{ -5, 11 };
         List<Integer> primes = new List<Integer>{ 13, 17 };
-        new IntPredicates();
         // Then
-        for (Integer i : input) {
+        for (Integer i : INPUT) {
             Validate.assertEquals(i > value, IntPredicates.isGreater(value).test(i));
             Validate.assertEquals(i >= value, IntPredicates.isGreaterOrEqual(value).test(i));
             Validate.assertEquals(i < value, IntPredicates.isLess(value).test(i));

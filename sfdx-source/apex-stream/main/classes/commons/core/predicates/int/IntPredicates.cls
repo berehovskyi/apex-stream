@@ -11,7 +11,7 @@
 public inherited sharing class IntPredicates {
 
     @TestVisible
-    private IntPredicates(){}
+    private IntPredicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -139,7 +139,7 @@ public inherited sharing class IntPredicates {
      *
      * @return the `IntPredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -161,7 +161,7 @@ public inherited sharing class IntPredicates {
      *
      * @return the `IntPredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -220,7 +220,7 @@ public inherited sharing class IntPredicates {
      *
      * @return the `IntPredicate`
      *
-     * @throws NullPointerException if the `i` is null
+     * @throws NullPointerException if `i` is null
      *
      * @example
      * IntPredicates.isFactorOf(5);
@@ -263,7 +263,7 @@ public inherited sharing class IntPredicates {
      *
      * @return the `IntPredicate`
      *
-     * @throws NullPointerException if the `divisor` is null
+     * @throws NullPointerException if `divisor` is null
      *
      * @example
      * IntPredicate.hasDivisor(10);

@@ -41,7 +41,7 @@ private class OptionalSObjectTest {
         ISObjectFunction getName = SObjectFunctions.get(fieldName);
         ISObjectSupplier newAccountSupplier = SObjectSupplier.of(Account.SObjectType);
         ISObjectFunction getAcc1Optional = SObjectFunction.constant(Optional.of(acc1));
-        ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
+        ISupplier npeSupplier = Supplier.of(NullPointerException.class);
         // When
         Validate.assertEquals(acc, optSObject.get());
         Validate.assertEquals(true, optSObject.isPresent());
@@ -70,17 +70,17 @@ private class OptionalSObjectTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

@@ -6,6 +6,10 @@
 @IsTest(IsParallel = true)
 private class IntSuppliersTest {
 
+    static {
+        new IntSuppliers();
+    }
+
     /**
      * @see IntSuppliers.increment
      * @see IntSuppliers.fibonacci
@@ -19,7 +23,6 @@ private class IntSuppliersTest {
         IIntSupplier fibonacciSupp = IntSuppliers.fibonacci();
         IIntSupplier randomSupp = IntSuppliers.random();
         // When
-        new IntSuppliers();
         Integer actual = incSupp.get();
         Integer actual1 = incSupp.get();
         Integer actual2 = incSupp1.get();

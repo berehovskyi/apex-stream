@@ -11,7 +11,7 @@
 public inherited sharing class DatePredicates {
 
     @TestVisible
-    private DatePredicates(){}
+    private DatePredicates() {}
 
     //<editor-fold desc="Date Predicates">
     // @start-group Date Predicates
@@ -23,7 +23,7 @@ public inherited sharing class DatePredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `dateToCompare` is null
+     * @throws NullPointerException if `dateToCompare` is null
      *
      * @see Date.isSameDay
      */

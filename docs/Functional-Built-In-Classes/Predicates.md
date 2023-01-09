@@ -42,7 +42,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right`, or `comparator`, or `result` is null|
+|`NullPointerException`|if `left` or  `right`, or `comparator`, or `result` is null|
 
 ###### Example
 ```apex
@@ -77,7 +77,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparators.compareNullSafeUntyped
@@ -138,7 +138,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparators.compareNullSafeUntyped
@@ -199,7 +199,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparators.compareNullSafeUntyped
@@ -260,7 +260,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparators.compareNullSafeUntyped
@@ -321,7 +321,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparators.compareNullSafeUntyped
@@ -382,7 +382,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparators.compareNullSafeUntyped
@@ -443,7 +443,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `function`, or the `container` is null|
+|`NullPointerException`|if `function` or `container` is null|
 
 
 **See** List.contains
@@ -477,7 +477,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains
@@ -512,7 +512,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `function`, or the `container` is null|
+|`NullPointerException`|if `function` or `container` is null|
 
 
 **See** List.contains
@@ -546,7 +546,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains

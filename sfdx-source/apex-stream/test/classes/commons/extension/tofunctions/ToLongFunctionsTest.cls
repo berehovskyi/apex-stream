@@ -5,6 +5,10 @@
  */
 @IsTest(IsParallel = true)
 private class ToLongFunctionsTest {
+
+    static {
+        new ToLongFunctions();
+    }
     
     /**
      * @see DatetimeToLongFunctions.getTime
@@ -18,7 +22,6 @@ private class ToLongFunctionsTest {
         List<Object> input = new List<Object>{ 1, 2, 3 };
         List<String> input1 = new List<String>{ '123', '1', '2', '-3', '33' };
         // When
-        new ToLongFunctions();
         IToLongFunction getTime = DatetimeToLongFunctions.getTime();
         IToLongFunction asLong = ToLongFunctions.asLong();
         IToLongFunction longValue = StringToLongFunctions.valueOf();

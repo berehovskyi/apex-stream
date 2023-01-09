@@ -8,7 +8,7 @@
 public inherited sharing class Iterators {
 
     @TestVisible
-    private Iterators(){}
+    private Iterators() {}
 
     /**
      * @description Returns a `List<SObject>` created from `iterator`.

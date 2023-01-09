@@ -11,7 +11,7 @@
 public inherited sharing class Predicates {
 
     @TestVisible
-    private Predicates(){}
+    private Predicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -31,7 +31,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `left`, or the `right`,
+     * @throws NullPointerException if `left` or  `right`,
      * or `comparator`, or `result` is null
      *
      * @example
@@ -69,7 +69,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparators.compareNullSafeUntyped
      *
@@ -116,7 +116,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparators.compareNullSafeUntyped
      *
@@ -163,7 +163,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparators.compareNullSafeUntyped
      *
@@ -210,7 +210,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparators.compareNullSafeUntyped
      *
@@ -253,7 +253,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparators.compareNullSafeUntyped
      *
@@ -292,7 +292,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparators.compareNullSafeUntyped
      *
@@ -330,7 +330,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `function`, or the `container` is null
+     * @throws NullPointerException if `function` or `container` is null
      *
      * @see List.contains
      *
@@ -353,7 +353,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -375,7 +375,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `function`, or the `container` is null
+     * @throws NullPointerException if `function` or `container` is null
      *
      * @see List.contains
      *
@@ -396,7 +396,7 @@ public inherited sharing class Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *

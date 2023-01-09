@@ -8,7 +8,7 @@
 public inherited sharing class Lists {
 
     @TestVisible
-    private Lists(){}
+    private Lists() {}
 
     /**
      * @description Returns a sorted `List<SObject>` with sorted elements according to `comparator`.

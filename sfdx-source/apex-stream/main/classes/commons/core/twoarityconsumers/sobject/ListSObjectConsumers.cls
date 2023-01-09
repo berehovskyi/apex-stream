@@ -12,7 +12,7 @@
 public inherited sharing class ListSObjectConsumers {
 
     @TestVisible
-    private ListSObjectConsumers(){}
+    private ListSObjectConsumers() {}
 
     //<editor-fold desc="Add to List<Object> ObjectSObjectConsumer">
     // @start-group Add to List<Object> ObjectSObjectConsumer
@@ -25,7 +25,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.toList
@@ -50,7 +50,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper`, `delimiter`, or the `prefix` is null
+     * @throws NullPointerException if `mapper`, `delimiter`, or `prefix` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.joining
@@ -78,7 +78,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.averagingInt
@@ -96,7 +96,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.summingInt
@@ -118,7 +118,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.averagingLong
@@ -136,7 +136,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.summingLong
@@ -159,7 +159,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.averagingDouble
@@ -178,7 +178,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see SObjectCollectors.summingDouble
@@ -200,7 +200,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `ObjectSObjectConsumer`
      *
-     * @throws NullPointerException if the `accumulator` is null
+     * @throws NullPointerException if `accumulator` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.reducing
@@ -219,7 +219,7 @@ public inherited sharing class ListSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `accumulator` is null
+     * @throws NullPointerException if `accumulator` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.reducing

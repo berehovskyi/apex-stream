@@ -11,7 +11,7 @@
 public inherited sharing class SObjectBiPredicates {
 
     @TestVisible
-    private SObjectBiPredicates(){}
+    private SObjectBiPredicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -101,7 +101,8 @@ public inherited sharing class SObjectBiPredicates {
      *
      * @return the `SObjectBiPredicate`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -167,7 +168,7 @@ public inherited sharing class SObjectBiPredicates {
     public static SObjectBiPredicate areEqual(final ISObjectFunction left, final ISObjectFunction right) {
         return isCompared(left, right, Comparator.defaultOrder(), 0);
     }
-    
+
     /**
      * @description Returns a `SObjectBiPredicate` that tests the input sobjects if the value of
      * the first input argument is not equal to the second input argument.
@@ -215,7 +216,8 @@ public inherited sharing class SObjectBiPredicates {
      *
      * @return the `SObjectBiPredicate`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -321,7 +323,8 @@ public inherited sharing class SObjectBiPredicates {
      *
      * @return the `SObjectBiPredicate`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -433,7 +436,8 @@ public inherited sharing class SObjectBiPredicates {
      *
      * @return the `SObjectBiPredicate`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -545,7 +549,8 @@ public inherited sharing class SObjectBiPredicates {
      *
      * @return the `SObjectBiPredicate`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -573,7 +578,7 @@ public inherited sharing class SObjectBiPredicates {
      *
      * @return the `SObjectBiPredicate`
      *
-     * @throws NullPointerException if the `function` is null
+     * @throws NullPointerException if `function` is null
      *
      * @see Comparators.compareNullSafeUntyped
      *
@@ -657,7 +662,8 @@ public inherited sharing class SObjectBiPredicates {
      *
      * @return the `SObjectBiPredicate`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`

@@ -5,6 +5,10 @@
  */
 @IsTest(IsParallel = true)
 private class TypePredicatesTest {
+
+    static {
+        new TypePredicates();
+    }
     
     /**
      * @see TypePredicates.isInstanceOfBool
@@ -37,9 +41,8 @@ private class TypePredicatesTest {
         Account acc = new Account();
         Contact con = new Contact();
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 1L, true);
-        List<Object> inp = new List<Object>{ null, b, accId, str, bl, d, dt, t, i, l1, l2, db, acc, con, john };
+        List<Object> input = new List<Object>{ null, b, accId, str, bl, d, dt, t, i, l1, l2, db, acc, con, john };
         // When
-        new TypePredicates();
         IPredicate isInstanceOfBoolean = TypePredicates.isInstanceOfBool();
         IPredicate isInstanceOfId = TypePredicates.isInstanceOfId();
         IPredicate isInstanceOfString = TypePredicates.isInstanceOfString();
@@ -53,7 +56,7 @@ private class TypePredicatesTest {
         IPredicate isInstanceOfSObject = TypePredicates.isInstanceOfSObject();
         IPredicate isInstanceOfComparable = TypePredicates.isInstanceOfComparable();
         // Then
-        for (Object o : inp) {
+        for (Object o : input) {
             Validate.assertEquals(o instanceof Boolean, isInstanceOfBoolean.test(o));
             Validate.assertEquals(o instanceof Id, isInstanceOfId.test(o));
             Validate.assertEquals(o instanceof String, isInstanceOfString.test(o));

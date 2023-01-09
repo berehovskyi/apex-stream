@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class DoubleToIntFunctionsTest {
     
-    private static List<Double> doubles = IterTestUtils.generateDoubles();
+    private static final List<Double> INPUT = IterTestUtils.generateDoubles();
+
+    static {
+        new DoubleToIntFunctions();
+    }
 
     /**
      * @see DoubleToIntFunctions.intValue
@@ -18,8 +22,7 @@ private class DoubleToIntFunctionsTest {
         IDoubleToIntFunction intValue = DoubleToIntFunctions.intValue();
         IDoubleToIntFunction round = DoubleToIntFunctions.round();
         // Then
-        new DoubleToIntFunctions();
-        for (Double d : doubles) {
+        for (Double d : INPUT) {
             Validate.assertEquals(d.intValue(), intValue.apply(d));
             Validate.assertEquals(Math.round(d), round.apply(d));
         }

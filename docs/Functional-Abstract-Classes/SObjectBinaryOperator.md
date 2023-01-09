@@ -110,7 +110,8 @@ the `SObjectBinaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ##### `static minBy(SObjectField field)`
 
@@ -182,7 +183,8 @@ the `SObjectBinaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 ##### `static maxBy(SObjectField field)`
 

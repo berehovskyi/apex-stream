@@ -11,7 +11,7 @@
 public inherited sharing class BiPredicates {
 
     @TestVisible
-    private BiPredicates(){}
+    private BiPredicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

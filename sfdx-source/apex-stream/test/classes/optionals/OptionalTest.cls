@@ -40,7 +40,7 @@ private class OptionalTest {
         IPredicate isNameChanged = new IterTestUtils.IsNameChangedPredicate(initialName);
         IFunction identity = Function.identity();
         ISupplier newAccountSupplier = Supplier.of(Account.class);
-        ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
+        ISupplier npeSupplier = Supplier.of(NullPointerException.class);
         IFunction getOptional = Function.constant(Optional.of(richard));
         // When
         Validate.assertEquals(luke, optObject.get());
@@ -70,17 +70,17 @@ private class OptionalTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

@@ -11,7 +11,7 @@
 public inherited sharing class Comparators {
 
     @TestVisible
-    private Comparators(){}
+    private Comparators() {}
 
     //<editor-fold desc="Null-Safe Comparators">
     /**

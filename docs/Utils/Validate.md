@@ -27,23 +27,54 @@ Checks whether the specified Object reference is not null.
 |---|---|
 |`NullPointerException`|if `o` is null|
 
-### `static notBlank(String o)`
+### `static notBlank(String s)`
 
-Checks whether the specified String reference is not blank.
+Checks whether the specified String reference is not whitespace nor empty (&apos;&apos;), nor null.
 
 #### Parameters
 |Param|Description|
 |---|---|
-|`o`|the validated String|
+|`s`|the validated string|
 
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `o` is blank|
+|`IllegalArgumentException`|if `s` is whitespace or empty ('')|
+|`NullPointerException`|if `s` is null|
+
+### `static notEmpty(String s)`
+
+Checks whether the specified String reference is not empty (&apos;&apos;) nor null.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`s`|the validated string|
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `s` is empty ('')|
+|`NullPointerException`|if `s` is null|
+
+### `static notEmpty(List<Object> objs)`
+
+Checks whether the specified `objs` reference is not null nor empty.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`objs`|the validated list|
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `objs` is empty|
+|`NullPointerException`|if `objs` is null|
 
 ### `static noNullElements(List<Object> objs)`
 
-Checks whether the specified `List<Object>` reference is not null nor contains any null elements.
+Checks whether the specified `objs` reference is not null nor contains any null elements.
 
 #### Parameters
 |Param|Description|
@@ -118,6 +149,33 @@ Checks whether the specified `condition` is true.
 #### Example
 ```apex
 Validate.isTrue(n >= 0, 'The argument should be positive, actual: {0}.', new List<Object>{ n });
+```
+
+### `static matches(String input, String regex, String message, List<Object> arguments)`
+
+Checks whether the specified `input` matches the specified `pattern`.
+
+#### Parameters
+|Param|Description|
+|---|---|
+|`input`|the string to validate|
+|`regex`|the regular expression pattern|
+|`message`|the formatted exception message|
+|`arguments`|the optional values for the formatted exception message|
+
+#### Throws
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `input` does not match `pattern`|
+
+#### Example
+```apex
+Validate.matches(
+    'A-{00000}',
+    '\\S*\\{\\d+\\}',
+    'The string {0} does not match the pattern {1}.',
+    new List<Object>{ 'A-{00000}', '\\S*\\{\\d+\\}' }
+);
 ```
 
 ### `static validState(Boolean condition, String message, List<Object> arguments)`

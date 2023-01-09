@@ -6,8 +6,8 @@
 @IsTest(IsParallel = true)
 private class UnaryOperatorTest {
 
-    private static List<Object> input = IterTestUtils.generateInts();
-    private static List<Object> input1 = IterTestUtils.generateAccounts();
+    private static final List<Object> INTS = IterTestUtils.generateInts();
+    private static final List<Object> ACCOUNTS = IterTestUtils.generateAccounts();
 
     /**
      * @see UnaryOperator.andThen
@@ -33,7 +33,7 @@ private class UnaryOperatorTest {
         IUnaryOperator operator1 = x2IntOperator.compose(incOperator);
         IUnaryOperator operator2 = UnaryOperator.compose(new List<IUnaryOperator>{ incOperator, x2IntOperator });
         // Then
-        for (Object o : input) {
+        for (Object o : INTS) {
             Validate.assertEquals(o, identity.apply(o));
             Validate.assertEquals(constant, ofConst.apply(o));
             Validate.assertEquals(((Integer) o) + 1, incOperator.apply(o));
@@ -44,7 +44,7 @@ private class UnaryOperatorTest {
             Validate.assertEquals((((Integer) o) + 1) * factor, operator1.apply(o));
             Validate.assertEquals((((Integer) o) + 1) * factor, operator2.apply(o));
         }
-        for (Object o : input1) {
+        for (Object o : ACCOUNTS) {
             Validate.assertEquals(o, sObjectIdentity.apply(o));
         }
     }

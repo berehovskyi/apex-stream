@@ -11,7 +11,7 @@
 public inherited sharing class DoubleSuppliers {
 
     @TestVisible
-    private DoubleSuppliers(){}
+    private DoubleSuppliers() {}
     
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

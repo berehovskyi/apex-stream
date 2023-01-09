@@ -41,6 +41,14 @@
         <value>Original input should be mutated</value>
     </labels>
     <labels>
+        <fullName>StringPatternMismatchErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>The string {0} does not match the pattern {1}.</value>
+    </labels>
+    <labels>
         <fullName>TypesMismatchErrorMessage</fullName>
         <language>en_US</language>
         <protected>true</protected>

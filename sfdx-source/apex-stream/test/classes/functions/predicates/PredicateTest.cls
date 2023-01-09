@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class PredicateTest {
 
-    private static List<IterTestUtils.Person> input;
+    private static final List<IterTestUtils.Person> INPUT;
 
     static {
         IterTestUtils.Person john = new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 1L, true);
@@ -25,7 +25,7 @@ private class PredicateTest {
         richard.setProbability((Double) 10.0);
         chris.setProbability((Double) 50.1);
         jhene.setProbability((Double) 80.0);
-        input = new List<IterTestUtils.Person>{ john, jake, sam, lucy, victor, richard, chris, jhene };
+        INPUT = new List<IterTestUtils.Person>{ john, jake, sam, lucy, victor, richard, chris, jhene };
     }
 
     /**
@@ -55,7 +55,7 @@ private class PredicateTest {
         IPredicate adultActiveOrWithNameStartsWithJPredicate = adultPredicate.andAlso(activePredicate).orElse(nameStartsWithJPredicate); // (1 AND 2) OR 3
         IPredicate adultActiveWithNameStartsWithJPredicate = adultPredicate.andAlso(activePredicate.orElse(nameStartsWithJPredicate)); // 1 AND (2 OR 3)
         // Then
-        for (IterTestUtils.Person person : input) {
+        for (IterTestUtils.Person person : INPUT) {
             Validate.assertEquals(value1, alwaysPredicate.test(person));
             Validate.assertEquals(person.getAge() >= value, adultPredicate.test(person));
             Validate.assertEquals(person.isActive(), activePredicate.test(person));
@@ -81,7 +81,7 @@ private class PredicateTest {
         Predicate activePredicate = new IterTestUtils.IsActivePredicate();
         Predicate adultPredicate = Predicates.isGreaterOrEqual(getAgeFunction, valueFunction);
         // Then
-        for (IterTestUtils.Person person : input) {
+        for (IterTestUtils.Person person : INPUT) {
             Validate.assertEquals(person.getAge() >= value || person.isActive(), Predicate.some(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
         }
     }
@@ -99,7 +99,7 @@ private class PredicateTest {
         Predicate activePredicate = new IterTestUtils.IsActivePredicate();
         Predicate adultPredicate = Predicates.isGreaterOrEqual(getAgeFunction, valueFunction);
         // Then
-        for (IterTestUtils.Person person : input) {
+        for (IterTestUtils.Person person : INPUT) {
             Validate.assertEquals(person.getAge() >= value && person.isActive(), Predicate.every(new List<IPredicate>{ adultPredicate, activePredicate }).test(person));
         }
     }
@@ -116,7 +116,7 @@ private class PredicateTest {
         IFunction valueFunction = Function.constant(value);
         Predicate adultPredicate = Predicates.isGreaterOrEqual(getAgeFunction, valueFunction);
         // Then
-        for (IterTestUtils.Person person : input) {
+        for (IterTestUtils.Person person : INPUT) {
             Validate.assertEquals(!(person.getAge() >= value), Predicate.negate(adultPredicate).test(person));
         }
     }
@@ -144,7 +144,7 @@ private class PredicateTest {
         Predicate probPredicate = Predicate.compose(getProbAsDoubleFunction, DoublePredicates.isGreater(value2));
         Predicate isActivePredicate = Predicate.compose(getAsUserFunction, SObjectPredicates.isEqual(userIsActiveField, value3));
         // Then
-        for (IterTestUtils.Person person : input) {
+        for (IterTestUtils.Person person : INPUT) {
             Validate.assertEquals(person.getAge() > value, agePredicate.test(person));
             Validate.assertEquals(person.getAge() > value, ageAsIntPredicate.test(person));
             Validate.assertEquals(person.getAutoId() > value1, numberPredicate.test(person));

@@ -12,7 +12,7 @@
 public inherited sharing class SetObjectConsumers {
 
     @TestVisible
-    private SetObjectConsumers(){}
+    private SetObjectConsumers() {}
 
     //<editor-fold desc="Add To Set<?> BiConsumers">
     // @start-group Add To Set<?> BiConsumers

@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class StringToIntFunctionsTest {
 
-    private static List<String> strings = IterTestUtils.generateStrings();
+    private static final List<String> INPUT = IterTestUtils.generateStrings();
+
+    static {
+        new StringToIntFunctions();
+    }
 
     /**
      * @see StringToIntFunctions.charAt
@@ -35,7 +39,6 @@ private class StringToIntFunctionsTest {
         Integer e = 3;
         String str = 'Hello';
         // When
-        new StringToIntFunctions();
         IToIntFunction charAt = StringToIntFunctions.charAt(i);
         IToIntFunction codePointAt = StringToIntFunctions.codePointAt(i);
         IToIntFunction codePointBefore = StringToIntFunctions.codePointBefore(i);
@@ -62,7 +65,7 @@ private class StringToIntFunctionsTest {
         IToIntFunction length = StringToIntFunctions.length();
         IToIntFunction offsetByCodePoints = StringToIntFunctions.offsetByCodePoints(i, e);
         // Then
-        for (String s : strings) {
+        for (String s : INPUT) {
             if (s.length() > i) {
                 Validate.assertEquals(s.charAt(i), charAt.apply(s));
                 Validate.assertEquals(s.codePointAt(i), codePointAt.apply(s));

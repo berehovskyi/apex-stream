@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class LongSequenceTest {
 
-    private static List<Long> ints = IterTestUtils.generateLongs();
+    private static final List<Long> LONGS = IterTestUtils.generateLongs();
 
     /**
      * @see LongSequence.of
@@ -18,9 +18,9 @@ private class LongSequenceTest {
     @IsTest
     private static void of() {
         // Given
-        ints.add(0, null);
-        ints.add(null);
-        List<Long> input = ints.clone();
+        LONGS.add(0, null);
+        LONGS.add(null);
+        List<Long> input = LONGS.clone();
         List<Long> input1;
         Set<Long> input2;
         ILongIterable seq = LongSequence.of(input);
@@ -53,7 +53,7 @@ private class LongSequenceTest {
         Validate.assertEquals(false, seq4.iterator().hasNext());
         Validate.assertEquals(false, seq5.iterator().hasNext());
         Validate.assertEquals(false, stream.isEmpty());
-        Validate.assertEquals(ints, input, Label.InputMutatedErrorMessage);
+        Validate.assertEquals(LONGS, input, Label.InputMutatedErrorMessage);
         Validate.assert(((LongStream) stream).isOperated);
     }
 
@@ -438,7 +438,7 @@ private class LongSequenceTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 
@@ -470,7 +470,7 @@ private class LongSequenceTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(input, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 

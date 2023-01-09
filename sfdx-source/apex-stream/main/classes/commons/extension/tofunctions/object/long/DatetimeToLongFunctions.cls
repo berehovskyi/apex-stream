@@ -11,7 +11,7 @@
 public inherited sharing class DatetimeToLongFunctions {
 
     @TestVisible
-    private DatetimeToLongFunctions(){}
+    private DatetimeToLongFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

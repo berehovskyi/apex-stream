@@ -11,7 +11,7 @@
 public inherited sharing class StringToIntFunctions {
 
     @TestVisible
-    private StringToIntFunctions(){}
+    private StringToIntFunctions() {}
 
     //<editor-fold desc="String To Int Functions">
     // @start-group String To Int Functions

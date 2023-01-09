@@ -42,7 +42,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -70,7 +70,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -98,7 +98,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -126,7 +126,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -154,7 +154,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -182,7 +182,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -210,7 +210,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -238,7 +238,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -266,7 +266,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -294,7 +294,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -322,7 +322,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -350,7 +350,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
 

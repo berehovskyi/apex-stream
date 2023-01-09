@@ -11,7 +11,7 @@
 public inherited sharing class LongUnaryOperators {
 
     @TestVisible
-    private LongUnaryOperators(){}
+    private LongUnaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

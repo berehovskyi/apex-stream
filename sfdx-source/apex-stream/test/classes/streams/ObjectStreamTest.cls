@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class ObjectStreamTest {
 
-    private static List<IterTestUtils.Person> persons = IterTestUtils.generatePersons();
+    private static final List<IterTestUtils.Person> PEOPLE = IterTestUtils.generatePersons();
 
     /**
      * @see ObjectStream.of
@@ -18,9 +18,9 @@ private class ObjectStreamTest {
     @IsTest
     private static void of() {
         // Given
-        persons.add(0, null);
-        persons.add(null);
-        List<Object> input = persons.clone();
+        PEOPLE.add(0, null);
+        PEOPLE.add(null);
+        List<Object> input = PEOPLE.clone();
         List<IterTestUtils.Person> input1;
         Set<Object> input2;
         IObjectIterable stream = ObjectStream.of(input);
@@ -50,7 +50,7 @@ private class ObjectStreamTest {
         Validate.assertEquals(expected1, actual5);
         Validate.assertEquals(input, actual6);
         Validate.assertEquals(false, seq.isEmpty());
-        Validate.assertEquals(persons, input, Label.InputMutatedErrorMessage);
+        Validate.assertEquals(PEOPLE, input, Label.InputMutatedErrorMessage);
         Validate.assert(((ObjectStream) stream).isOperated);
         Validate.assert(((ObjectStream) stream1).isOperated);
         Validate.assert(((ObjectStream) stream2).isOperated);
@@ -307,7 +307,7 @@ private class ObjectStreamTest {
         try {
             iterator.next();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         Validate.assert(((ObjectStream) stream).isOperated);
         Validate.assert(((ObjectStream) stream1).isOperated);
@@ -697,7 +697,7 @@ private class ObjectStreamTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((ObjectStream) stream).isOperated);
         Validate.assert(((ObjectStream) stream1).isOperated);
@@ -734,7 +734,7 @@ private class ObjectStreamTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(input, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((ObjectStream) stream).isOperated);
         Validate.assert(((ObjectStream) stream1).isOperated);

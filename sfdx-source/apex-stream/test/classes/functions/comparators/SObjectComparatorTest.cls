@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class SObjectComparatorTest {
 
-    private static List<Account> accounts = IterTestUtils.generateAccounts();
+    private static final List<Account> ACCOUNTS = IterTestUtils.generateAccounts();
 
     /**
      * @see SObjectComparator.comparing
@@ -17,7 +17,7 @@ private class SObjectComparatorTest {
         ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         IComparator keyComparator = Comparator.defaultOrder().nullsLast();
         String fieldName = IterTestUtils.CONSTS.NAME;
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[1].Name = null;
         input[3].Name = null;
         // When
@@ -54,7 +54,7 @@ private class SObjectComparatorTest {
         ISObjectComparator comparing1 = SObjectComparator.comparing(field);
         ISObjectComparator comparing2 = SObjectComparator.comparing(fieldName);
         // Then
-        for (Account acc : accounts) {
+        for (Account acc : ACCOUNTS) {
             Account other = new Account(Name = 'test');
             Account other1 = new Account();
             String value = (String) acc.get(fieldName);
@@ -89,7 +89,7 @@ private class SObjectComparatorTest {
         ISObjectComparator comparing1 = SObjectComparator.comparingInt(field);
         ISObjectComparator comparing2 = SObjectComparator.comparingInt(fieldName);
         // Then
-        for (Account acc : accounts) {
+        for (Account acc : ACCOUNTS) {
             Account other = new Account(NumberOfEmployees = 103);
             Account other1 = new Account();
             Integer value = (Integer) acc.get(fieldName);
@@ -124,7 +124,7 @@ private class SObjectComparatorTest {
         ISObjectComparator comparing1 = SObjectComparator.comparingLong(field);
         ISObjectComparator comparing2 = SObjectComparator.comparingLong(fieldName);
         // Then
-        for (Account acc : accounts) {
+        for (Account acc : ACCOUNTS) {
             Account other = new Account(NumberOfEmployees = 103);
             Account other1 = new Account();
             Long value = (Long) acc.get(fieldName);
@@ -159,7 +159,7 @@ private class SObjectComparatorTest {
         ISObjectComparator comparing1 = SObjectComparator.comparingDouble(field);
         ISObjectComparator comparing2 = SObjectComparator.comparingDouble(fieldName);
         // Then
-        for (Account acc : accounts) {
+        for (Account acc : ACCOUNTS) {
             Account other = new Account(BillingLatitude = 10.00);
             Account other1 = new Account();
             Double value = (Double) acc.get(fieldName);
@@ -192,7 +192,7 @@ private class SObjectComparatorTest {
         ISObjectComparator comparing1 = SObjectComparator.comparingSObject('Parent');
         ISObjectComparator comparing2 = SObjectComparator.comparingSObject(Account.ParentId);
         // Then
-        for (Account acc : accounts) {
+        for (Account acc : ACCOUNTS) {
             Account parent = new Account(Name = 'parent');
             Account other = new Account(Name = 'test');
             other.putSObject('Parent', parent);
@@ -237,7 +237,7 @@ private class SObjectComparatorTest {
         ISObjectComparator comparing4 = SObjectComparator.comparingSObject(keyExtractor).reversed();
         ISObjectComparator comparing5 = SObjectComparator.comparingSObject(keyExtractor).order(SortOrder.DESCENDING);
         // Then
-        for (Account acc : accounts) {
+        for (Account acc : ACCOUNTS) {
             Account other = new Account(Name = 'test');
             List<SObject> pair = new List<SObject>{ acc, other };
             pair.sort();
@@ -270,11 +270,11 @@ private class SObjectComparatorTest {
         ISObjectComparator comparing1 = SObjectComparator.nullsFirst(SObjectComparator.comparing(keyExtractor));
         ISObjectComparator comparing2 = SObjectComparator.comparing(keyExtractor).nullsLast();
         ISObjectComparator comparing3 = SObjectComparator.nullsLast(SObjectComparator.comparing(keyExtractor));
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input.add(0, null);
         input.add(null);
         // Then
-        for (Account acc : accounts) {
+        for (Account acc : ACCOUNTS) {
             Account other = new Account(Name = 'test');
             String value = (String) acc?.get(fieldName);
             String value1 = (String) other?.get(fieldName);
@@ -301,7 +301,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void thenComparingByKeyComparator() {
         // Given
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[6].Name = input[5].Name;
         ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         ISObjectFunction keyExtractor1 = SObjectFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
@@ -338,7 +338,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void thenComparing() {
         // Given
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[6].Name = input[5].Name;
         ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         ISObjectFunction keyExtractor1 = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Type);
@@ -373,7 +373,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void thenComparingInt() {
         // Given
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[6].Name = input[5].Name;
         ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         ISObjectToIntFunction keyExtractor1 = SObjectToIntFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
@@ -408,7 +408,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void thenComparingLong() {
         // Given
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[6].Name = input[5].Name;
         ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         ISObjectToLongFunction keyExtractor1 = SObjectToLongFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees);
@@ -443,7 +443,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void thenComparingDouble() {
         // Given
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[6].Name = input[5].Name;
         ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         ISObjectToDoubleFunction keyExtractor1 = SObjectToDoubleFunctions.get(IterTestUtils.CONSTS.Account.BillingLatitude);
@@ -478,7 +478,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void thenComparingSObject() {
         // Given
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[6].Name = input[5].Name;
         ISObjectFunction keyExtractor = SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name);
         ISObjectUnaryOperator keyExtractor1 = SObjectUnaryOperators.getSObject(IterTestUtils.CONSTS.PARENT);
@@ -513,7 +513,7 @@ private class SObjectComparatorTest {
     @IsTest
     static void thenComparingByComparator() {
         // Given
-        List<Account> input = accounts;
+        List<Account> input = ACCOUNTS;
         input[6].Name = input[5].Name;
         input.add(0, null);
         input.add(null);

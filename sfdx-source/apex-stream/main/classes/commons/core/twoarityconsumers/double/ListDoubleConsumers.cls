@@ -13,7 +13,7 @@
 public inherited sharing class ListDoubleConsumers {
 
     @TestVisible
-    private ListDoubleConsumers(){}
+    private ListDoubleConsumers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

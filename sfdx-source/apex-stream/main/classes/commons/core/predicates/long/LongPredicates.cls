@@ -11,7 +11,7 @@
 public inherited sharing class LongPredicates {
 
     @TestVisible
-    private LongPredicates(){}
+    private LongPredicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -139,7 +139,7 @@ public inherited sharing class LongPredicates {
      *
      * @return the `LongPredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -161,7 +161,7 @@ public inherited sharing class LongPredicates {
      *
      * @return the `LongPredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -220,7 +220,7 @@ public inherited sharing class LongPredicates {
      *
      * @return the `LongPredicate`
      *
-     * @throws NullPointerException if the `l` is null
+     * @throws NullPointerException if `l` is null
      *
      * @example
      * LongPredicates.isFactorOf(5);
@@ -262,7 +262,7 @@ public inherited sharing class LongPredicates {
      *
      * @return the `LongPredicate`
      *
-     * @throws NullPointerException if the `divisor` is null
+     * @throws NullPointerException if `divisor` is null
      *
      * @example
      * LongPredicate.hasDivisor(10);

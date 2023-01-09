@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class BiConsumerTest {
 
-    private static List<IterTestUtils.Person> input = IterTestUtils.generatePersons();
+    private static final List<IterTestUtils.Person> INPUT = IterTestUtils.generatePersons();
 
     /**
      * @see BiConsumer.andThen
@@ -21,7 +21,7 @@ private class BiConsumerTest {
         IBiConsumer consumer = setNameFromRight.andThen(setAgeFromLeft);
         IBiConsumer consumer1 = setNameFromRight.compose(setAgeFromLeft);
         IBiConsumer consumer2 = BiConsumer.compose(new List<IBiConsumer>{ setNameFromRight, setAgeFromLeft });
-        for (IterTestUtils.Person person : input) {
+        for (IterTestUtils.Person person : INPUT) {
             IterTestUtils.Person expectedO1 = (IterTestUtils.Person) IterTestUtils.deepClone(sam, IterTestUtils.Person.class);
             IterTestUtils.Person expectedO2 = (IterTestUtils.Person) IterTestUtils.deepClone(person, IterTestUtils.Person.class);
             expectedO1.setName(expectedO2.getName());

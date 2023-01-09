@@ -11,7 +11,7 @@
 public inherited sharing class DoubleBinaryOperators {
 
     @TestVisible
-    private DoubleBinaryOperators(){}
+    private DoubleBinaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

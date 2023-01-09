@@ -12,7 +12,7 @@
 public inherited sharing class CollectorBaseFunctions {
 
     @TestVisible
-    private CollectorBaseFunctions(){}
+    private CollectorBaseFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

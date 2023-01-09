@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class LongUnaryOperatorTest {
 
-    private static List<Long> input = IterTestUtils.generateLongs();
+    private static final List<Long> INPUT = IterTestUtils.generateLongs();
 
     /**
      * @see LongUnaryOperator.andThen
@@ -28,7 +28,7 @@ private class LongUnaryOperatorTest {
         ILongUnaryOperator operator1 = multiply.compose(incOperator);
         ILongUnaryOperator operator2 = LongUnaryOperator.compose(new List<ILongUnaryOperator>{ incOperator, multiply });
         // Then
-        for (Long l : input) {
+        for (Long l : INPUT) {
             Validate.assertEquals(l, identity.apply(l));
             Validate.assertEquals(constant, of10.apply(l));
             Validate.assertEquals(l + 1, incOperator.apply(l));

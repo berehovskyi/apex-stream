@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class DoublePredicateTest {
 
-    private static List<Double> input = IterTestUtils.generateDoubles2();
+    private static final List<Double> INPUT = IterTestUtils.generateDoubles2();
 
     /**
      * @see DoublePredicate.orElse
@@ -37,7 +37,7 @@ private class DoublePredicateTest {
         DoublePredicate predicate = positivePredicate.andAlso(gt1Predicate).orElse(le13Predicate); // (1 AND 2) OR 3
         DoublePredicate predicate1 = positivePredicate.andAlso(gt1Predicate.orElse(le13Predicate)); // 1 AND (2 OR 3)
         // Then
-        for (Double d : input) {
+        for (Double d : INPUT) {
             Validate.assertEquals(d > 0, positivePredicate.test(d));
             Validate.assertEquals(d > value, gt1Predicate.test(d));
             Validate.assertEquals(d <= value1, le13Predicate.test(d));

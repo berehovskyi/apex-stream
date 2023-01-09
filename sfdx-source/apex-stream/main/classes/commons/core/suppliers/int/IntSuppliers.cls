@@ -11,7 +11,7 @@
 public inherited sharing class IntSuppliers {
 
     @TestVisible
-    private IntSuppliers(){}
+    private IntSuppliers() {}
     
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

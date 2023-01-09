@@ -12,7 +12,7 @@
 public inherited sharing class CollectorSuppliers {
 
     @TestVisible
-    private CollectorSuppliers(){}
+    private CollectorSuppliers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

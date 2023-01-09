@@ -11,7 +11,7 @@
 public inherited sharing class IdSuppliers {
 
     @TestVisible
-    private IdSuppliers(){}
+    private IdSuppliers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

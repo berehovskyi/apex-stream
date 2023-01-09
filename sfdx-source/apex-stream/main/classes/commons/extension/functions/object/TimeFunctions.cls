@@ -11,7 +11,7 @@
 public inherited sharing class TimeFunctions {
 
     @TestVisible
-    private TimeFunctions(){}
+    private TimeFunctions() {}
 
     //<editor-fold desc="Date Functions">
     // @start-group Date Functions

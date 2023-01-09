@@ -11,7 +11,7 @@
 public inherited sharing class SObjectBiConsumers {
 
     @TestVisible
-    private SObjectBiConsumers(){}
+    private SObjectBiConsumers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -26,7 +26,9 @@ public inherited sharing class SObjectBiConsumers {
      *
      * @return the `SObjectBiConsumer`
      *
-     * @throws NullPointerException if `fieldName` is blank or `mapper` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -79,7 +81,8 @@ public inherited sharing class SObjectBiConsumers {
      *
      * @return the `SObjectBiConsumer`
      *
-     * @throws NullPointerException if `fieldName` is blank or `mapper` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -126,7 +129,9 @@ public inherited sharing class SObjectBiConsumers {
      *
      * @return the `SObjectBiConsumer`
      *
-     * @throws NullPointerException if `fieldName` is blank or `operator` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `operator` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -179,7 +184,8 @@ public inherited sharing class SObjectBiConsumers {
      *
      * @return the `SObjectBiConsumer`
      *
-     * @throws NullPointerException if `fieldName` is blank or `mapper` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`

@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class SObjectFunctionsTest {
 
-    private static List<Contact> input = IterTestUtils.generateContacts();
+    private static final List<Contact> INPUT = IterTestUtils.generateContacts();
+
+    static {
+        new SObjectFunctions();
+    }
 
     /**
      * @see SObjectFunctions.get
@@ -19,13 +23,12 @@ private class SObjectFunctionsTest {
         String accountNameSafe = 'Account?.Name';
         String accountName = 'Account.Name';
         // When
-        new SObjectFunctions();
         ISObjectFunction getName = SObjectFunctions.get(field);
         ISObjectFunction getName1 = SObjectFunctions.get(fieldName);
         ISObjectFunction getParentNameSafe = SObjectFunctions.get(accountNameSafe);
         ISObjectFunction getParentName = SObjectFunctions.get(accountName);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(con.get(fieldName), getName.apply(con));
             Validate.assertEquals(con.get(field), getName1.apply(con));
             Validate.assertEquals(con.getSObject('Account')?.get('Name'), getParentNameSafe.apply(con));
@@ -49,7 +52,7 @@ private class SObjectFunctionsTest {
         ISObjectFunction getParentSObjectsSafe = SObjectFunctions.getSObjects(accountContactsSafe);
         ISObjectFunction getParentSObjects = SObjectFunctions.getSObjects(accountContacts);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(con.getSObjects(fieldName), getSObjects.apply(con));
             Validate.assertEquals(con.getSObjects(field), getSObjects1.apply(con));
             Validate.assertEquals(con.getSObject('Account')?.getSObjects('Contacts'), getParentSObjectsSafe.apply(con));
@@ -76,7 +79,7 @@ private class SObjectFunctionsTest {
         ISObjectFunction putName4 = SObjectFunctions.put(accountName, SObjectFunction.constant(constant));
         ISObjectFunction putName5 = SObjectFunctions.put(accountNameSafe, SObjectFunction.constant(constant));
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(IterTestUtils.deepClone(con).put(field, constant), putName.apply(IterTestUtils.deepClone(con)));
             Validate.assertEquals(IterTestUtils.deepClone(con).put(fieldName, constant), putName1.apply(IterTestUtils.deepClone(con)));
             Validate.assertEquals(IterTestUtils.deepClone(con).put(field, constant), putName2.apply(IterTestUtils.deepClone(con)));
@@ -94,7 +97,7 @@ private class SObjectFunctionsTest {
     @IsTest
     static void others() {
         // When
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(con.getPopulatedFieldsAsMap(), SObjectFunctions.getPopulatedFieldsAsMap().apply(con));
             Validate.assertEquals(con.getQuickActionName(), SObjectFunctions.getQuickActionName().apply(con));
             Validate.assertEquals(con.getSObjectType(), SObjectFunctions.getSObjectType().apply(con));

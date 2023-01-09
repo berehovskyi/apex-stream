@@ -39,7 +39,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `dateToCompare` is null|
+|`NullPointerException`|if `dateToCompare` is null|
 
 
 **See** Datetime.isSameDay

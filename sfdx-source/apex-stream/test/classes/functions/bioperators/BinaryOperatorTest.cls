@@ -6,11 +6,11 @@
 @IsTest(IsParallel = true)
 private class BinaryOperatorTest {
 
-    private static List<IterTestUtils.Person> persons = IterTestUtils.generatePersons();
-    private static List<Object> ints = IterTestUtils.generateInts();
-    private static List<Object> longs = IterTestUtils.generateLongs();
-    private static List<Object> doubles = IterTestUtils.generateDoubles();
-    private static List<Object> contacts = IterTestUtils.generateContacts();
+    private static final List<IterTestUtils.Person> PEOPLE = IterTestUtils.generatePersons();
+    private static final List<Object> INTS = IterTestUtils.generateInts();
+    private static final List<Object> LONGS = IterTestUtils.generateLongs();
+    private static final List<Object> DOUBLES = IterTestUtils.generateDoubles();
+    private static final List<Object> CONTACTS = IterTestUtils.generateContacts();
 
     /**
      * @see BinaryOperator.left
@@ -27,7 +27,7 @@ private class BinaryOperatorTest {
         IBinaryOperator minBy = BinaryOperator.minBy(comparator);
         IBinaryOperator maxBy = BinaryOperator.maxBy(comparator);
         // Then
-        for (IterTestUtils.Person person : persons) {
+        for (IterTestUtils.Person person : PEOPLE) {
             IterTestUtils.Person jhene = new IterTestUtils.Person('Jhene', 18, Date.newInstance(1990, 1, 2), 5L, true);
             Validate.assertEquals(person, left.apply(person, jhene));
             Validate.assertEquals(jhene, right.apply(person, jhene));
@@ -58,16 +58,16 @@ private class BinaryOperatorTest {
         IBinaryOperator ofDoubleSum = BinaryOperator.upcast(DoubleBinaryOperators.sum());
         IBinaryOperator getLeftArg = BinaryOperator.upcast(SObjectBinaryOperator.left());
         // Then
-        for (Object o : ints) {
+        for (Object o : INTS) {
             Validate.assertEquals((Integer) o + i, ofIntSum.apply(o, i));
         }
-        for (Object o : longs) {
+        for (Object o : LONGS) {
             Validate.assertEquals((Long) o + i, ofLongSum.apply(o, i));
         }
-        for (Object o : doubles) {
+        for (Object o : DOUBLES) {
             Validate.assertEquals((Double) o + i, ofDoubleSum.apply(o, i));
         }
-        for (Object o : contacts) {
+        for (Object o : CONTACTS) {
             Validate.assertEquals(o, getLeftArg.apply(o, con));
         }
     }

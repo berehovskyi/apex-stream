@@ -48,6 +48,25 @@ public abstract inherited sharing class SObjectSupplier implements ISObjectSuppl
         Validate.notNull(sObj);
         return new Constant(sObj);
     }
+
+    /**
+     * @description Returns a `Supplier` that infinitely returns the elements in order.
+     *
+     * @param iterable the iterable
+     *
+     * @return the `Supplier`
+     * 
+     * @example
+     * ISupplier repeat = Supplier.repeat(new List<Object>{ 'a', 'b', 'c' });
+     * repeat.get(); // 'a'
+     * repeat.get(); // 'b'
+     * repeat.get(); // 'c'
+     * repeat.get(); // 'a'
+     */
+    public static SObjectSupplier repeat(final Iterable<SObject> iterable) {
+        Validate.notNull(iterable);
+        return new Repeat(iterable);
+    }
     // @end-group
     //</editor-fold>
 
@@ -63,6 +82,17 @@ public abstract inherited sharing class SObjectSupplier implements ISObjectSuppl
         private final SObject identity;
         public Constant(SObject identity) { this.identity = identity; }
         public override SObject get() { return identity; }
+    }
+
+    private class Repeat extends SObjectSupplier {
+        private final List<SObject> values;
+        private final Integer size;
+        private Integer i = 0;
+        private Repeat(Iterable<SObject> iterable) { 
+            values = Iterators.toSObjectList(iterable.iterator());
+            size = values.size();
+        }
+        public override SObject get() { return values[Math.mod(i++, size)]; }
     }
     // @end-group
     //</editor-fold>

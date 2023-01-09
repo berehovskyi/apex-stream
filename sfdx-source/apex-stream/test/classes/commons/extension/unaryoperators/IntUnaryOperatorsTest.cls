@@ -6,7 +6,12 @@
 @IsTest(IsParallel = true)
 private class IntUnaryOperatorsTest {
 
-    private static List<Integer> input = IterTestUtils.generateInts();
+    private static final List<Integer> INPUT = IterTestUtils.generateInts();
+
+    static {
+        new IntUnaryOperators();
+    }
+
 
     /**
      * @see IntUnaryOperators.abs
@@ -27,8 +32,7 @@ private class IntUnaryOperatorsTest {
         Integer div = 2;
         Integer lim = 5;
         // Then
-        new IntUnaryOperators();
-        for (Integer i : input) {
+        for (Integer i : INPUT) {
             Validate.assertEquals(Math.abs(i), IntUnaryOperators.abs().apply(i));
             Validate.assertEquals(i + inc, IntUnaryOperators.add(inc).apply(i));
             Validate.assertEquals(i - 1, IntUnaryOperators.decrement().apply(i));

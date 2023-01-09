@@ -11,7 +11,7 @@
 public inherited sharing class TimeToIntFunctions {
 
     @TestVisible
-    private TimeToIntFunctions(){}
+    private TimeToIntFunctions() {}
 
     //<editor-fold desc="Time To Int Functions">
     // @start-group Time To Int Functions

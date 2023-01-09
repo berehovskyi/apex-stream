@@ -12,7 +12,7 @@
 public inherited sharing class ListFunctions {
 
     @TestVisible
-    private ListFunctions(){}
+    private ListFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

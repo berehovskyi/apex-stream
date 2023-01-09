@@ -11,7 +11,7 @@
 public inherited sharing class StringPredicates {
 
     @TestVisible
-    private StringPredicates(){}
+    private StringPredicates() {}
 
     //<editor-fold desc="String Predicates">
     // @start-group String Predicates
@@ -23,7 +23,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `substring` is null
+     * @throws NullPointerException if `substring` is null
      *
      * @see String.contains
      */
@@ -40,7 +40,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `substring` is null
+     * @throws NullPointerException if `substring` is null
      *
      * @see String.containsAny
      */
@@ -57,7 +57,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `substring` is null
+     * @throws NullPointerException if `substring` is null
      *
      * @see String.containsIgnoreCase
      */
@@ -74,7 +74,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `substring` is null
+     * @throws NullPointerException if `substring` is null
      *
      * @see String.containsNone
      */
@@ -91,7 +91,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `substring` is null
+     * @throws NullPointerException if `substring` is null
      *
      * @see String.containsOnly
      */
@@ -120,7 +120,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `suffix` is null
+     * @throws NullPointerException if `suffix` is null
      *
      * @see String.endsWith
      */
@@ -137,7 +137,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `suffix` is null
+     * @throws NullPointerException if `suffix` is null
      *
      * @see String.endsWithIgnoreCase
      */
@@ -154,7 +154,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `that` is null
+     * @throws NullPointerException if `that` is null
      *
      * @see String.equalsIgnoreCase
      */
@@ -280,7 +280,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `likeString` is null
+     * @throws NullPointerException if `likeString` is null
      */
     public static Predicate isLike(final String likeString) {
         Validate.notNull(likeString);
@@ -355,7 +355,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `prefix` is null
+     * @throws NullPointerException if `prefix` is null
      *
      * @see String.startsWith
      */
@@ -372,7 +372,7 @@ public inherited sharing class StringPredicates {
      *
      * @return the `Predicate`
      *
-     * @throws NullPointerException if the `prefix` is null
+     * @throws NullPointerException if `prefix` is null
      *
      * @see String.startsWithIgnoreCase
      */

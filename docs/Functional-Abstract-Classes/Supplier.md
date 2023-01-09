@@ -53,6 +53,12 @@ the `Supplier`
 
 **See** Type.newInstance
 
+###### Example
+```apex
+ISupplier of = Supplier.of(List<Account>.class);
+List<Account> accounts = (List<Account>) of.get(); // new List<Account>()
+```
+
 ##### `static constant(Object o)`
 
 Returns a stateful `Supplier` that returns a reference of the `o` object.
@@ -72,10 +78,41 @@ Supplier
 
 the `Supplier`
 
-###### Throws
-|Exception|Description|
+###### Example
+```apex
+ISupplier constant = Supplier.constant('a');
+constant.get(); // 'a'
+constant.get(); // 'a'
+constant.get(); // 'a'
+```
+
+##### `static repeat(Iterable<Object> iterable)`
+
+Returns a `Supplier` that infinitely returns the elements in order.
+
+###### Parameters
+|Param|Description|
 |---|---|
-|`NullPointerException`|if `o` is null|
+|`iterable`|the iterable|
+
+###### Return
+
+**Type**
+
+Supplier
+
+**Description**
+
+the `Supplier`
+
+###### Example
+```apex
+ISupplier repeat = Supplier.repeat(new List<Object>{ 'a', 'b', 'c' });
+repeat.get(); // 'a'
+repeat.get(); // 'b'
+repeat.get(); // 'c'
+repeat.get(); // 'a'
+```
 
 ##### `static compose(IIntSupplier supplier)`
 

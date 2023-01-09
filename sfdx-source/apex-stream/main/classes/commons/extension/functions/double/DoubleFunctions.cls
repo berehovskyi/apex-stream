@@ -11,7 +11,7 @@
 public inherited sharing class DoubleFunctions {
 
     @TestVisible
-    private DoubleFunctions(){}
+    private DoubleFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

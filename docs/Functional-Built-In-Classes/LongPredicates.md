@@ -201,7 +201,7 @@ the `LongPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains
@@ -235,7 +235,7 @@ the `LongPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains
@@ -326,7 +326,7 @@ the `LongPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `l` is null|
+|`NullPointerException`|if `l` is null|
 
 ###### Example
 ```apex
@@ -398,7 +398,7 @@ the `LongPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `divisor` is null|
+|`NullPointerException`|if `divisor` is null|
 
 ###### Example
 ```apex

@@ -11,7 +11,7 @@
 public inherited sharing class SObjectCollectors {
 
     @TestVisible
-    private SObjectCollectors(){}
+    private SObjectCollectors() {}
     
     //<editor-fold desc="Built-Ins">
 
@@ -70,14 +70,15 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a List
      * List<Object> accountNames = (List<Object>) Stream.of(accounts)
      *     .collect(SObjectCollectors.toList('Name'));
      * List<String> parentAccountNames = (List<String>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toList('Parent?.Name')).cast(List<String>.class));
+     *     .collect(SObjectCollectors.toList('Parent?.Name').cast(List<String>.class));
      */
     public static SObjectCollector toList(final String fieldName) {
         return toList(SObjectFunctions.get(fieldName));
@@ -99,7 +100,7 @@ public inherited sharing class SObjectCollectors {
      * List<Object> accountNames = (List<Object>) Stream.of(accounts)
      *     .collect(SObjectCollectors.toList(Account.Name));
      * List<String> accountNames = (List<String>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toList(Account.Name)).cast(List<String>.class));
+     *     .collect(SObjectCollectors.toList(Account.Name).cast(List<String>.class));
      */
     public static SObjectCollector toList(final SObjectField field) {
         return toList(SObjectFunctions.get(field));
@@ -157,7 +158,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -217,7 +219,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -243,7 +246,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Id> ids = (Set<Id>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toIdSet(Account.Id)));
+     *     .collect(SObjectCollectors.toIdSet(Account.Id));
      */
     public static SObjectCollector toIdSet(final SObjectField field) {
         return toIdSet(SObjectFunctions.get(field));
@@ -277,7 +280,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -303,7 +307,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<String> names = (Set<String>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toStringSet(Account.Name)));
+     *     .collect(SObjectCollectors.toStringSet(Account.Name));
      */
     public static SObjectCollector toStringSet(final SObjectField field) {
         return toStringSet(SObjectFunctions.get(field));
@@ -337,7 +341,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -363,7 +368,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
-     *     .collect(SObjectCollectors.toBlobSet(Attachment.Body)));
+     *     .collect(SObjectCollectors.toBlobSet(Attachment.Body));
      */
     public static SObjectCollector toBlobSet(final SObjectField field) {
         return toBlobSet(SObjectFunctions.get(field));
@@ -397,7 +402,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -423,7 +429,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toDateSet(Contact.Birthdate)));
+     *     .collect(SObjectCollectors.toDateSet(Contact.Birthdate));
      */
     public static SObjectCollector toDateSet(final SObjectField field) {
         return toDateSet(SObjectFunctions.get(field));
@@ -457,7 +463,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -483,7 +490,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
-     *     .collect(SObjectCollectors.toDatetimeSet(Event.ActivityDateTime)));
+     *     .collect(SObjectCollectors.toDatetimeSet(Event.ActivityDateTime));
      */
     public static SObjectCollector toDatetimeSet(final SObjectField field) {
         return toDatetimeSet(SObjectFunctions.get(field));
@@ -517,7 +524,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -543,7 +551,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Time> startTimes = (Set<Time>) Stream.of(slots)
-     *     .collect(SObjectCollectors.toTimeSet(TimeSlot.StartTime)));
+     *     .collect(SObjectCollectors.toTimeSet(TimeSlot.StartTime));
      */
     public static SObjectCollector toTimeSet(final SObjectField field) {
         return toTimeSet(SObjectFunctions.get(field));
@@ -577,7 +585,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -603,7 +612,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toIntSet(Account.NumberOfEmployees)));
+     *     .collect(SObjectCollectors.toIntSet(Account.NumberOfEmployees));
      */
     public static SObjectCollector toIntSet(final SObjectField field) {
         return toIntSet(SObjectToIntFunctions.get(field));
@@ -637,7 +646,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -663,7 +673,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toLongSet(Account.NumberOfEmployees)));
+     *     .collect(SObjectCollectors.toLongSet(Account.NumberOfEmployees));
      */
     public static SObjectCollector toLongSet(final SObjectField field) {
         return toLongSet(SObjectToLongFunctions.get(field));
@@ -697,7 +707,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -723,7 +734,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toDoubleSet(Account.BillingLatitude)));
+     *     .collect(SObjectCollectors.toDoubleSet(Account.BillingLatitude));
      */
     public static SObjectCollector toDoubleSet(final SObjectField field) {
         return toDoubleSet(SObjectToDoubleFunctions.get(field));
@@ -763,7 +774,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Accumulates values of fieldName into a Set
@@ -792,7 +804,7 @@ public inherited sharing class SObjectCollectors {
      * @example
      * // Accumulates values of field into a List
      * Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toSet(Contact.Birthdate)));
+     *     .collect(SObjectCollectors.toSet(Contact.Birthdate));
      */
     public static SObjectCollector toSet(final SObjectField field) {
         return toSet(SObjectFunctions.get(field));
@@ -926,7 +938,7 @@ public inherited sharing class SObjectCollectors {
      *         SObjectFunctions.get('DoNotCall'),
      *         SObjectFunctions.get('LastName'),
      *         BinaryOperator.right(),
-     *         Supplier.of(Map<Boolean, String>.class),
+     *         Supplier.of(Map<Boolean, String>.class)
      *     ));
      */
     public static SObjectCollector toByBoolMap(
@@ -990,7 +1002,7 @@ public inherited sharing class SObjectCollectors {
      * Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(contacts)
      *     .collect(SObjectCollectors.toByBoolMap(
      *         Contact.DoNotCall,
-     *        Contact.LastName
+     *         Contact.LastName
      *    ).cast(Map<Boolean, String>.class));
      */
     public static SObjectCollector toByBoolMap(final SObjectField keyField, final SObjectField valueField) {
@@ -4327,7 +4339,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -4459,7 +4472,7 @@ public inherited sharing class SObjectCollectors {
      *     Stream.of(contacts)
      *         .collect(SObjectCollectors.groupingById(
      *             SObjectFunctions.get('AccountId'),
-     *             Supplier.of(Map<Id, Set<SObject>>.class)
+     *             Supplier.of(Map<Id, Set<SObject>>.class),
      *             SObjectCollectors.toSet()
      *         ));
      */
@@ -4541,7 +4554,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -4755,7 +4769,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -4968,7 +4983,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -5182,7 +5198,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -5396,7 +5413,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -5610,7 +5628,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -5709,7 +5728,7 @@ public inherited sharing class SObjectCollectors {
      *     Stream.of(accounts)
      *         .collect(SObjectCollectors.groupingByInt(
      *             SObjectToIntFunctions.get('NumberOfEmployees'),
-     *             SObjectCollectors.toSet()
+     *             SObjectCollectors.toSet(),
      *         ).cast(Map<Integer, Set<SObject>>.class));
      */
     public static SObjectCollector groupingByInt(
@@ -5824,7 +5843,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -5956,7 +5976,7 @@ public inherited sharing class SObjectCollectors {
      *     Stream.of(accounts)
      *         .collect(SObjectCollectors.groupingByInt(
      *             SObjectToLongFunctions.get('NumberOfEmployees'),
-     *             Supplier.of(Map<Long, Set<SObject>>.class)
+     *             Supplier.of(Map<Long, Set<SObject>>.class),
      *             SObjectCollectors.toSet()
      *         ));
      */
@@ -6038,7 +6058,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -6170,7 +6191,7 @@ public inherited sharing class SObjectCollectors {
      *     Stream.of(accounts)
      *         .collect(SObjectCollectors.groupingByDouble(
      *             SObjectToDoubleFunctions.get('BillingLatitude'),
-     *             Supplier.of(Map<Double, Set<SObject>>.class)
+     *             Supplier.of(Map<Double, Set<SObject>>.class),
      *             SObjectCollectors.toSet()
      *         ));
      */
@@ -6255,7 +6276,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -6487,7 +6509,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -6608,7 +6631,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * 
      * @example
      * Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees =
@@ -6671,7 +6695,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * String lastNames = (String) Stream.of(contacts).collect(SObjectCollectors.joining('LastName'));
@@ -6706,7 +6731,9 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank or `delimiter` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException `delimiter` is null
      *
      * @example
      * String lastNames = (String) Stream.of(contacts)
@@ -6746,8 +6773,9 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank or `delimiter`,
-     * `prefix` or `suffix` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `delimiter`, `prefix` or `suffix` is null
      *
      * @example
      * String lastNames = (String) Stream.of(contacts)
@@ -6832,7 +6860,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Double averageNumberOfEmployees = (Double) Stream.of(accounts)
@@ -6907,7 +6936,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Integer sumOfNumberOfEmployees = (Integer) Stream.of(accounts)
@@ -6972,7 +7002,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Double averageNumberOfEmployees = (Double) Stream.of(accounts)
@@ -7033,7 +7064,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Long sumOfNumberOfEmployees = (Long) Stream.of(accounts)
@@ -7098,7 +7130,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Double averageBillingLatitude = (Double) Stream.of(accounts)
@@ -7159,7 +7192,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Double sumOfBillingLatitude = (Double) Stream.of(accounts)
@@ -7266,7 +7300,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * 
      * @see SObjectPredicates.isEqual
      *
@@ -7372,7 +7407,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<String> accountNames = (List<String>)
@@ -7415,9 +7451,7 @@ public inherited sharing class SObjectCollectors {
      *
      * @example
      * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
-     *     .collect(
-     *         SObjectCollectors.flatMapping(SObjectFunctions.getSObjects('Contacts'))
-     *     ).cast(List<Contact>.class));
+     *     .collect(SObjectCollectors.flatMapping(SObjectFunctions.getSObjects('Contacts')).cast(List<Contact>.class));
      * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
@@ -7454,6 +7488,7 @@ public inherited sharing class SObjectCollectors {
      *             SObjectCollectors.flatMapping(
      *                 SObjectFunctions.getSObjects('Contacts'),
      *                 Collector.toSObjectList()
+     *             )
      *         ).cast(Map<String, List<Contact>>.class));
      */
     public static SObjectCollector flatMapping(final ISObjectFunction mapper, final ICollector downstream) {
@@ -7473,11 +7508,12 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.flatMapping('Contacts')).cast(List<Contact>.class));
+     *     .collect(SObjectCollectors.flatMapping('Contacts').cast(List<Contact>.class));
      * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
@@ -7502,7 +7538,7 @@ public inherited sharing class SObjectCollectors {
      *
      * @example
      * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.flatMapping(Contact.AccountId)).cast(List<Contact>.class));
+     *     .collect(SObjectCollectors.flatMapping(Contact.AccountId).cast(List<Contact>.class));
      * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
      *     Stream.of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
@@ -7611,7 +7647,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
@@ -7688,7 +7725,8 @@ public inherited sharing class SObjectCollectors {
      *
      * @return the `SObjectCollector`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)

@@ -11,7 +11,7 @@
 public inherited sharing class IntBinaryOperators {
 
     @TestVisible
-    private IntBinaryOperators(){}
+    private IntBinaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -72,13 +72,13 @@ public inherited sharing class IntBinaryOperators {
     }
 
     private class Min extends IntBinaryOperator {
-        public override Integer apply(Integer i1, Integer i2) { 
+        public override Integer apply(Integer i1, Integer i2) {
             return Comparators.compareNullSafeInts(i1, i2) != 1 ? i1 : i2;
         }
     }
 
     private class Max extends IntBinaryOperator {
-        public override Integer apply(Integer i1, Integer i2) { 
+        public override Integer apply(Integer i1, Integer i2) {
             return Comparators.compareNullSafeInts(i1, i2) == 1 ? i1 : i2;
         }
     }

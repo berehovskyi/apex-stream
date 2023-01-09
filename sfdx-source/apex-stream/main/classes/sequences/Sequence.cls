@@ -15,7 +15,7 @@
 public inherited sharing class Sequence {
 
     @TestVisible
-    private Sequence(){}
+    private Sequence() {}
 
     /**
      * @description Returns a `ObjectSequence` created from `List<Object>`.

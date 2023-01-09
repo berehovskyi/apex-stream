@@ -30,6 +30,10 @@ public abstract inherited sharing class Supplier implements ISupplier {
      * @throws NullPointerException if `t` is null
      *
      * @see Type.newInstance
+     * 
+     * @example
+     * ISupplier of = Supplier.of(List<Account>.class);
+     * List<Account> accounts = (List<Account>) of.get(); // new List<Account>()
      */
     public static Supplier of(final Type t) {
         Validate.notNull(t);
@@ -42,12 +46,34 @@ public abstract inherited sharing class Supplier implements ISupplier {
      * @param o the Object
      *
      * @return the `Supplier`
-     *
-     * @throws NullPointerException if `o` is null
+     * 
+     * @example 
+     * ISupplier constant = Supplier.constant('a');
+     * constant.get(); // 'a'
+     * constant.get(); // 'a'
+     * constant.get(); // 'a'
      */
     public static Supplier constant(final Object o) {
-        Validate.notNull(o);
         return new Constant(o);
+    }
+
+    /**
+     * @description Returns a `Supplier` that infinitely returns the elements in order.
+     *
+     * @param iterable the iterable
+     *
+     * @return the `Supplier`
+     * 
+     * @example
+     * ISupplier repeat = Supplier.repeat(new List<Object>{ 'a', 'b', 'c' });
+     * repeat.get(); // 'a'
+     * repeat.get(); // 'b'
+     * repeat.get(); // 'c'
+     * repeat.get(); // 'a'
+     */
+    public static Supplier repeat(final Iterable<Object> iterable) {
+        Validate.notNull(iterable);
+        return new Repeat(iterable);
     }
 
     /**
@@ -120,6 +146,17 @@ public abstract inherited sharing class Supplier implements ISupplier {
         private final Object identity;
         public Constant(Object identity) { this.identity = identity; }
         public override Object get() { return identity; }
+    }
+
+    private class Repeat extends Supplier {
+        private final List<Object> values;
+        private final Integer size;
+        private Integer i = 0;
+        private Repeat(Iterable<Object> iterable) {
+            values = Iterators.toObjectList(iterable.iterator());
+            size = values.size();
+        }
+        public override Object get() { return values[Math.mod(i++, size)]; }
     }
 
     private class ForIntSupplier extends Supplier {

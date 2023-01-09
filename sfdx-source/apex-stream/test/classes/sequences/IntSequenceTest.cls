@@ -436,7 +436,7 @@ private class IntSequenceTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 
@@ -468,7 +468,7 @@ private class IntSequenceTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(input, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 

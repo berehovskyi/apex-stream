@@ -12,7 +12,7 @@
 public inherited sharing class SetSObjectConsumers {
 
     @TestVisible
-    private SetSObjectConsumers(){}
+    private SetSObjectConsumers() {}
 
     //<editor-fold desc="Add To Set<?> BiConsumers">
     // @start-group Add To Set<?> BiConsumers
@@ -25,7 +25,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toBoolSet
@@ -44,7 +44,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toIdSet
@@ -63,7 +63,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toStringSet
@@ -82,7 +82,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toBlobSet
@@ -101,7 +101,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toDateSet
@@ -120,7 +120,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toDatetimeSet
@@ -139,7 +139,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toTimeSet
@@ -158,7 +158,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toIntSet
@@ -177,7 +177,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toLongSet
@@ -196,7 +196,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toDoubleSet
@@ -215,7 +215,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toSet
@@ -233,7 +233,7 @@ public inherited sharing class SetSObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see SObjectCollectors.toSet

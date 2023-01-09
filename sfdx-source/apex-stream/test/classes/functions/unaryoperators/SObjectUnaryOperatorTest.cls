@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class SObjectUnaryOperatorTest {
 
-    private static List<Contact> input = IterTestUtils.generateContacts2();
+    private static final List<Contact> INPUT = IterTestUtils.generateContacts2();
 
     /**
      * @see SObjectUnaryOperator.andThen
@@ -36,7 +36,7 @@ private class SObjectUnaryOperatorTest {
                 }
         );
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(con, identity.apply(con));
             Validate.assertEquals(acc, constant.apply(con));
             if (con.Account != null) {

@@ -30,7 +30,7 @@ private class OptionalDoubleTest {
         OptionalDouble optNull = OptionalDouble.ofNullable(null);
         IDoubleConsumer cons = new IterTestUtils.DoNothingDoubleConsumer();
         IDoubleSupplier increment = DoubleSuppliers.random();
-        ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
+        ISupplier npeSupplier = Supplier.of(NullPointerException.class);
         // When
         Validate.assertEquals(value, optDouble.get());
         Validate.assertEquals(true, optDouble.isPresent());
@@ -51,17 +51,17 @@ private class OptionalDoubleTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

@@ -6,13 +6,13 @@
 @IsTest(IsParallel = true)
 private class StreamTest {
 
-    private static List<Integer> ints = IterTestUtils.generateInts();
-    private static List<Long> longs = IterTestUtils.generateLongs();
-    private static List<Double> doubles = IterTestUtils.generateDoubles();
-    private static List<Account> accounts = IterTestUtils.generateAccounts();
-    private static List<IterTestUtils.Person> people = IterTestUtils.generatePersons();
-    private static List<String> strings = IterTestUtils.generateStrings();
-    private static List<Comparable> comparables = IterTestUtils.generateComparables();
+    private static final List<Integer> INTS = IterTestUtils.generateInts();
+    private static final List<Long> LONGS = IterTestUtils.generateLongs();
+    private static final List<Double> DOUBLES = IterTestUtils.generateDoubles();
+    private static final List<Account> ACCOUNTS = IterTestUtils.generateAccounts();
+    private static final List<IterTestUtils.Person> PEOPLE = IterTestUtils.generatePersons();
+    private static final List<String> STRINGS = IterTestUtils.generateStrings();
+    private static final List<Comparable> COMPARABLES = IterTestUtils.generateComparables();
 
     /**
      * @see Stream.of
@@ -21,20 +21,20 @@ private class StreamTest {
     static void of() {
         // When
         new Stream();
-        IIntIterable stream0 = Stream.of(ints);
-        ILongIterable stream1 = Stream.of(longs);
-        IDoubleIterable stream2 = Stream.of(doubles);
-        ISObjectIterable stream3 = Stream.of(accounts);
-        IObjectIterable stream4 = Stream.of(people);
-        IObjectIterable stream5 = Stream.of(strings);
-        IObjectIterable stream6 = Stream.of(comparables);
-        IIntIterable stream7 = Stream.of(new Set<Integer>(ints));
-        ILongIterable stream8 = Stream.of(new Set<Long>(longs));
-        IDoubleIterable stream9 = Stream.of(new Set<Double>(doubles));
-        ISObjectIterable stream10 = Stream.of(new Set<SObject>{ accounts[0] });
-        IObjectIterable stream11 = Stream.of(new Set<Object>{ people[0] });
-        IObjectIterable stream12 = Stream.of(new Set<Object>{ strings[0] });
-        IObjectIterable stream13 = Stream.of(new Set<Object>{ comparables[0] });
+        IIntIterable stream0 = Stream.of(INTS);
+        ILongIterable stream1 = Stream.of(LONGS);
+        IDoubleIterable stream2 = Stream.of(DOUBLES);
+        ISObjectIterable stream3 = Stream.of(ACCOUNTS);
+        IObjectIterable stream4 = Stream.of(PEOPLE);
+        IObjectIterable stream5 = Stream.of(STRINGS);
+        IObjectIterable stream6 = Stream.of(COMPARABLES);
+        IIntIterable stream7 = Stream.of(new Set<Integer>(INTS));
+        ILongIterable stream8 = Stream.of(new Set<Long>(LONGS));
+        IDoubleIterable stream9 = Stream.of(new Set<Double>(DOUBLES));
+        ISObjectIterable stream10 = Stream.of(new Set<SObject>{ ACCOUNTS[0] });
+        IObjectIterable stream11 = Stream.of(new Set<Object>{ PEOPLE[0] });
+        IObjectIterable stream12 = Stream.of(new Set<Object>{ STRINGS[0] });
+        IObjectIterable stream13 = Stream.of(new Set<Object>{ COMPARABLES[0] });
         // Then
         Validate.assert(stream0 instanceof IntStream);
         Validate.assert(stream1 instanceof LongStream);
@@ -57,20 +57,20 @@ private class StreamTest {
     @IsTest
     static void ofNullable() {
         // When
-        IIntIterable stream0 = Stream.ofNullable(ints);
-        ILongIterable stream1 = Stream.ofNullable(longs);
-        IDoubleIterable stream2 = Stream.ofNullable(doubles);
-        ISObjectIterable stream3 = Stream.ofNullable(accounts);
-        IObjectIterable stream4 = Stream.ofNullable(people);
-        IObjectIterable stream5 = Stream.ofNullable(strings);
-        IObjectIterable stream6 = Stream.ofNullable(comparables);
-        IIntIterable stream7 = Stream.ofNullable(new Set<Integer>(ints));
-        ILongIterable stream8 = Stream.ofNullable(new Set<Long>(longs));
-        IDoubleIterable stream9 = Stream.ofNullable(new Set<Double>(doubles));
-        ISObjectIterable stream10 = Stream.ofNullable(new Set<SObject>{ accounts[0] });
-        IObjectIterable stream11 = Stream.ofNullable(new Set<Object>{ people[0] });
-        IObjectIterable stream12 = Stream.ofNullable(new Set<Object>{ strings[0] });
-        IObjectIterable stream13 = Stream.ofNullable(new Set<Object>{ comparables[0] });
+        IIntIterable stream0 = Stream.ofNullable(INTS);
+        ILongIterable stream1 = Stream.ofNullable(LONGS);
+        IDoubleIterable stream2 = Stream.ofNullable(DOUBLES);
+        ISObjectIterable stream3 = Stream.ofNullable(ACCOUNTS);
+        IObjectIterable stream4 = Stream.ofNullable(PEOPLE);
+        IObjectIterable stream5 = Stream.ofNullable(STRINGS);
+        IObjectIterable stream6 = Stream.ofNullable(COMPARABLES);
+        IIntIterable stream7 = Stream.ofNullable(new Set<Integer>(INTS));
+        ILongIterable stream8 = Stream.ofNullable(new Set<Long>(LONGS));
+        IDoubleIterable stream9 = Stream.ofNullable(new Set<Double>(DOUBLES));
+        ISObjectIterable stream10 = Stream.ofNullable(new Set<SObject>{ ACCOUNTS[0] });
+        IObjectIterable stream11 = Stream.ofNullable(new Set<Object>{ PEOPLE[0] });
+        IObjectIterable stream12 = Stream.ofNullable(new Set<Object>{ STRINGS[0] });
+        IObjectIterable stream13 = Stream.ofNullable(new Set<Object>{ COMPARABLES[0] });
         // Then
         Validate.assert(stream0 instanceof IntStream);
         Validate.assert(stream1 instanceof LongStream);
@@ -144,20 +144,20 @@ private class StreamTest {
     @IsTest
     static void concat() {
         // When
-        IIntIterable stream0 = Stream.concat(Stream.of(ints), Stream.of(ints));
-        ILongIterable stream1 = Stream.concat(Stream.of(longs), Stream.of(longs));
-        IDoubleIterable stream2 = Stream.concat(Stream.of(doubles), Stream.of(doubles));
-        ISObjectIterable stream3 = Stream.concat(Stream.of(accounts), Stream.of(accounts));
-        IObjectIterable stream4 = Stream.concat(Stream.of(people), Stream.of(people));
-        IObjectIterable stream5 = Stream.concat(Stream.of(strings), Stream.of(strings));
-        IObjectIterable stream6 = Stream.concat(Stream.of(comparables), Stream.of(comparables));
-        IIntIterable stream7 = Stream.concat(new List<IIntIterable>{ Stream.of(ints), Stream.of(ints) });
-        ILongIterable stream8 = Stream.concat(new List<ILongIterable>{ Stream.of(longs), Stream.of(longs) });
-        IDoubleIterable stream9 = Stream.concat(new List<IDoubleIterable>{ Stream.of(doubles), Stream.of(doubles) });
-        ISObjectIterable stream10 = Stream.concat(new List<ISObjectIterable>{ Stream.of(accounts), Stream.of(accounts) });
-        IObjectIterable stream11 = Stream.concat(new List<IObjectIterable>{ Stream.of(people), Stream.of(people) });
-        IObjectIterable stream12 = Stream.concat(new List<IObjectIterable>{ Stream.of(strings), Stream.of(strings) });
-        IObjectIterable stream13 = Stream.concat(new List<IObjectIterable>{ Stream.of(comparables), Stream.of(comparables) });
+        IIntIterable stream0 = Stream.concat(Stream.of(INTS), Stream.of(INTS));
+        ILongIterable stream1 = Stream.concat(Stream.of(LONGS), Stream.of(LONGS));
+        IDoubleIterable stream2 = Stream.concat(Stream.of(DOUBLES), Stream.of(DOUBLES));
+        ISObjectIterable stream3 = Stream.concat(Stream.of(ACCOUNTS), Stream.of(ACCOUNTS));
+        IObjectIterable stream4 = Stream.concat(Stream.of(PEOPLE), Stream.of(PEOPLE));
+        IObjectIterable stream5 = Stream.concat(Stream.of(STRINGS), Stream.of(STRINGS));
+        IObjectIterable stream6 = Stream.concat(Stream.of(COMPARABLES), Stream.of(COMPARABLES));
+        IIntIterable stream7 = Stream.concat(new List<IIntIterable>{ Stream.of(INTS), Stream.of(INTS) });
+        ILongIterable stream8 = Stream.concat(new List<ILongIterable>{ Stream.of(LONGS), Stream.of(LONGS) });
+        IDoubleIterable stream9 = Stream.concat(new List<IDoubleIterable>{ Stream.of(DOUBLES), Stream.of(DOUBLES) });
+        ISObjectIterable stream10 = Stream.concat(new List<ISObjectIterable>{ Stream.of(ACCOUNTS), Stream.of(ACCOUNTS) });
+        IObjectIterable stream11 = Stream.concat(new List<IObjectIterable>{ Stream.of(PEOPLE), Stream.of(PEOPLE) });
+        IObjectIterable stream12 = Stream.concat(new List<IObjectIterable>{ Stream.of(STRINGS), Stream.of(STRINGS) });
+        IObjectIterable stream13 = Stream.concat(new List<IObjectIterable>{ Stream.of(COMPARABLES), Stream.of(COMPARABLES) });
         // Then
         Validate.assert(stream0 instanceof IntStream);
         Validate.assert(stream1 instanceof LongStream);
@@ -181,13 +181,13 @@ private class StreamTest {
     @IsTest
     static void zip() {
         // When
-        IIntIterable stream0 = Stream.zip(Stream.of(ints), Stream.of(ints), IntBinaryOperators.max());
-        ILongIterable stream1 = Stream.zip(Stream.of(longs), Stream.of(longs), LongBinaryOperators.max());
-        IDoubleIterable stream2 = Stream.zip(Stream.of(doubles), Stream.of(doubles), DoubleBinaryOperators.max());
-        ISObjectIterable stream3 = Stream.zip(Stream.of(accounts), Stream.of(accounts), SObjectBinaryOperator.maxBy(SObjectComparator.comparing(Account.NumberOfEmployees)));
-        ISObjectIterable stream4 = Stream.zip(Stream.of(accounts), Stream.of(accounts), SObjectBiPredicates.areEqual(), SObjectBinaryOperator.maxBy(SObjectComparator.comparing(Account.NumberOfEmployees)));
-        IObjectIterable stream5 = Stream.zip(Stream.of(strings), Stream.of(strings), new IterTestUtils.Concat());
-        IObjectIterable stream6 = Stream.zip(Stream.of(strings), Stream.of(strings), new IterTestUtils.AreNotEqual(), new IterTestUtils.Concat());
+        IIntIterable stream0 = Stream.zip(Stream.of(INTS), Stream.of(INTS), IntBinaryOperators.max());
+        ILongIterable stream1 = Stream.zip(Stream.of(LONGS), Stream.of(LONGS), LongBinaryOperators.max());
+        IDoubleIterable stream2 = Stream.zip(Stream.of(DOUBLES), Stream.of(DOUBLES), DoubleBinaryOperators.max());
+        ISObjectIterable stream3 = Stream.zip(Stream.of(ACCOUNTS), Stream.of(ACCOUNTS), SObjectBinaryOperator.maxBy(SObjectComparator.comparing(Account.NumberOfEmployees)));
+        ISObjectIterable stream4 = Stream.zip(Stream.of(ACCOUNTS), Stream.of(ACCOUNTS), SObjectBiPredicates.areEqual(), SObjectBinaryOperator.maxBy(SObjectComparator.comparing(Account.NumberOfEmployees)));
+        IObjectIterable stream5 = Stream.zip(Stream.of(STRINGS), Stream.of(STRINGS), new IterTestUtils.Concat());
+        IObjectIterable stream6 = Stream.zip(Stream.of(STRINGS), Stream.of(STRINGS), new IterTestUtils.AreNotEqual(), new IterTestUtils.Concat());
         // Then
         Validate.assert(stream0 instanceof IntStream);
         Validate.assert(stream1 instanceof LongStream);

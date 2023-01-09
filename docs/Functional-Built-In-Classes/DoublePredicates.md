@@ -201,7 +201,7 @@ the `DoublePredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains
@@ -235,7 +235,7 @@ the `DoublePredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains

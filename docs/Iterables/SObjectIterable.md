@@ -368,7 +368,8 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -436,7 +437,8 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -508,7 +510,8 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -577,7 +580,8 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -659,7 +663,8 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -726,7 +731,8 @@ the new `IIntIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -793,7 +799,8 @@ the new `ILongIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -860,7 +867,8 @@ the new `IDoubleIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -927,7 +935,8 @@ the new `IObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -958,7 +967,7 @@ the new `IObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`NullPointerException`|if `field` is null|
 
 #### Example
 ```apex
@@ -1052,7 +1061,8 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1139,7 +1149,8 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1171,7 +1182,9 @@ the new `ISObjectIterable`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `order` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `order` is null|
 
 #### Example
 ```apex
@@ -1276,7 +1289,8 @@ the `OptionalSObject`
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1345,7 +1359,8 @@ Boolean
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1412,7 +1427,8 @@ Boolean
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1504,7 +1520,8 @@ Boolean
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1596,7 +1613,8 @@ the `OptionalSObject` describing the result
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1689,7 +1707,8 @@ the `OptionalSObject` describing the result
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1781,7 +1800,8 @@ the sum of field values
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -1872,7 +1892,8 @@ the arithmetic mean of field values
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -2012,7 +2033,8 @@ the `List<Object>` containing the collected elements, which can be cast to `list
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `listType` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null or `listType` is null|
 
 #### Example
 ```apex
@@ -2078,7 +2100,8 @@ the `Set<Object>` containing the collected elements field values
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -2141,7 +2164,8 @@ the `Set<Id>` containing the collected elements field values
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -2204,7 +2228,8 @@ the `Set<String>` containing the collected elements field values
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -2269,7 +2294,9 @@ the `Map<Id, SObject>` containing the collected elements, which can be cast to `
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `mapType` is null|
 
 #### Example
 ```apex
@@ -2301,7 +2328,7 @@ the `Map<Id, SObject>` containing the collected elements, which can be cast to `
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
+|`NullPointerException`|if `field` is null or `mapType` is null|
 
 #### Example
 ```apex
@@ -2338,7 +2365,9 @@ the `Map<String, SObject>` containing the collected elements, which can be cast 
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
-|`NullPointerException`|if `fieldName` is blank or `mapType` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `mapType` is null|
 
 #### Example
 ```apex
@@ -2405,7 +2434,8 @@ the `Map<Id, List<SObject>>` containing the iterable elements
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -2468,7 +2498,8 @@ the `Map<String, List<SObject>>` containing the iterable elements
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex
@@ -2532,7 +2563,8 @@ the `Map<Boolean, List<SObject>>` containing the iterable elements
 #### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 
 #### Example
 ```apex

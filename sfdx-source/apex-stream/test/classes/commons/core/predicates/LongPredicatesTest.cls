@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class LongPredicatesTest {
 
-    private static List<Long> input = IterTestUtils.generateLongs2();
+    private static final List<Long> INPUT = IterTestUtils.generateLongs2();
+
+    static {
+        new LongPredicates();
+    }
 
     /**
      * @see LongPredicates.isGreater
@@ -34,9 +38,8 @@ private class LongPredicatesTest {
         Long value4 = 3L;
         List<Long> subList = new List<Long>{ -5L, 11L };
         List<Long> primes = new List<Long>{ 13L, 17L };
-        new LongPredicates();
         // Then
-        for (Long l : input) {
+        for (Long l : INPUT) {
             Validate.assertEquals(l > value, LongPredicates.isGreater(value).test(l));
             Validate.assertEquals(l >= value, LongPredicates.isGreaterOrEqual(value).test(l));
             Validate.assertEquals(l < value, LongPredicates.isLess(value).test(l));

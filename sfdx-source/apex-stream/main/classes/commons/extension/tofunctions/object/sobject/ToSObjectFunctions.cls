@@ -11,7 +11,7 @@
 public inherited sharing class ToSObjectFunctions {
 
     @TestVisible
-    private ToSObjectFunctions(){}
+    private ToSObjectFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

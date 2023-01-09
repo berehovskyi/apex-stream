@@ -6,6 +6,10 @@
 @IsTest(IsParallel = true)
 private class LongFunctionsTest {
 
+    static {
+        new LongFunctions();
+    }
+
     /**
      * @see LongFunctions.toString
      * @see LongFunctions.toObject
@@ -16,7 +20,6 @@ private class LongFunctionsTest {
         List<Long> input = new List<Long>{ 1L, 2L, 3L, 4L, 4L, 6L };
         ILongFunction toString = LongFunctions.toString();
         ILongFunction toObject = LongFunctions.toObject();
-        new LongFunctions();
         // When
         for (Long l : input) {
             Validate.assertEquals(String.valueOf(l), toString.apply(l));

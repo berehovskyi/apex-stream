@@ -11,7 +11,7 @@
 public inherited sharing class TypePredicates {
 
     @TestVisible
-    private TypePredicates(){}
+    private TypePredicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

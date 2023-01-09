@@ -219,7 +219,8 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      *
      * @return the `SObjectComparator`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -264,7 +265,8 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      *
      * @return the `SObjectComparator`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -309,7 +311,8 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      *
      * @return the `SObjectComparator`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -354,7 +357,8 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      *
      * @return the `SObjectComparator`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -399,7 +403,8 @@ public abstract inherited sharing class SObjectComparator implements ISObjectCom
      *
      * @return the `SObjectComparator`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`

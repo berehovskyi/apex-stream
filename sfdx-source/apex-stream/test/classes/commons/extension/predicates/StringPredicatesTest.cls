@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class StringPredicatesTest {
 
-    private static List<String> stringInput = IterTestUtils.generateStrings();
+    private static final List<String> INPUT = IterTestUtils.generateStrings();
+
+    static {
+        new StringPredicates();
+    }
     
     /**
      * @see StringPredicates.contains
@@ -50,7 +54,6 @@ private class StringPredicatesTest {
         String s10 = 'Hello';
         String s11 = 'hello';
         // When
-        new StringPredicates();
         IPredicate contains = StringPredicates.contains(s1);
         IPredicate containsAny = StringPredicates.containsAny(s2);
         IPredicate containsIgnoreCase = StringPredicates.containsIgnoreCase(s3);
@@ -78,7 +81,7 @@ private class StringPredicatesTest {
         IPredicate startsWith = StringPredicates.startsWith(s10);
         IPredicate startsWithIgnoreCase = StringPredicates.startsWithIgnoreCase(s11);
         // Then
-        for (String s : stringInput) {
+        for (String s : INPUT) {
             Validate.assertEquals(s.contains(s1), contains.test(s));
             Validate.assertEquals(s.containsAny(s2), containsAny.test(s));
             Validate.assertEquals(s.containsIgnoreCase(s3), containsIgnoreCase.test(s));

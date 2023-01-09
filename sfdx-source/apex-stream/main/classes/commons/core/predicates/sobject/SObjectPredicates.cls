@@ -11,7 +11,7 @@
 public inherited sharing class SObjectPredicates {
 
     @TestVisible
-    private SObjectPredicates(){}
+    private SObjectPredicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -33,7 +33,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left`, or the `right`,
+     * @throws NullPointerException if `left` or `right`,
      * or `comparator`, or `result` is null
      *
      * @example
@@ -73,7 +73,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -105,7 +105,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -136,7 +138,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws NullPointerException if `field` or `function` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -168,7 +170,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -196,7 +199,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -223,7 +226,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -255,7 +258,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -289,7 +294,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -321,7 +328,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -349,7 +357,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -376,7 +384,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` the `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -408,7 +416,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      * @throws SObjectException if provided invalid `fieldName`
      *
      * @see Comparator.defaultOrder
@@ -437,7 +447,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -469,7 +481,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -497,7 +510,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -524,7 +537,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -556,7 +569,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -590,7 +605,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws NullPointerException if `field` or `function` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -622,7 +637,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -650,7 +666,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -673,7 +689,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -702,7 +718,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -733,7 +751,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws NullPointerException if `field` or `function` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -761,7 +779,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -786,7 +805,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -807,7 +826,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left` or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -830,7 +849,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `operator` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -850,7 +869,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `operator` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -873,7 +892,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left`, or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -902,7 +921,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -933,7 +954,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `function` is null
+     * @throws NullPointerException if `field` or `function` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -961,7 +982,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -986,7 +1008,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -1007,7 +1029,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `left` or the `right` is null
+     * @throws NullPointerException if `left` or `right` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -1030,7 +1052,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `operator` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -1050,7 +1072,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `operator` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -1073,7 +1095,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `function`, or the `likeString` is null
+     * @throws NullPointerException if `function` or `likeString` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -1097,7 +1119,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `likeString` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `likeString` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -1122,7 +1146,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field`, or the `likeString` is null
+     * @throws NullPointerException if `field` or `likeString` is null
      *
      * @see Comparator.defaultOrder
      *
@@ -1144,7 +1168,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `function`, or the `container` is null
+     * @throws NullPointerException if `function` or `container` is null
      *
      * @see List.contains
      *
@@ -1169,7 +1193,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `container` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `container` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -1194,7 +1220,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field`, or the `container` is null
+     * @throws NullPointerException if `field` or `container` is null
      *
      * @see List.contains
      *
@@ -1215,7 +1241,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -1239,7 +1265,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `function`, or the `container` is null
+     * @throws NullPointerException if `function` or `container` is null
      *
      * @see List.contains
      *
@@ -1262,7 +1288,9 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank, or the `container` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `container` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -1287,7 +1315,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field`, or the `container` is null
+     * @throws NullPointerException if `field` or `container` is null
      *
      * @see List.contains
      *
@@ -1308,7 +1336,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -1359,7 +1387,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `function` is null
+     * @throws NullPointerException if `function` is null
      *
      * @see SObjectPredicates.isNotEqual
      *
@@ -1380,7 +1408,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -1404,7 +1433,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see SObjectPredicates.isNotEqual
      * @see SObjectFunctions.get
@@ -1424,7 +1453,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `operator` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @see SObjectPredicates.isNotEqual
      *
@@ -1445,7 +1474,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -1469,7 +1499,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see SObjectPredicates.isNotEqual
      * @see SObjectUnaryOperators.getSObject
@@ -1489,7 +1519,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -1513,7 +1544,7 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see SObjectPredicates.isNotEqual
      *
@@ -1557,7 +1588,8 @@ public inherited sharing class SObjectPredicates {
      *
      * @return the `SObjectPredicate`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`

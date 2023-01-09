@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class ObjectSequenceTest {
 
-    private static List<IterTestUtils.Person> persons = IterTestUtils.generatePersons();
+    private static final List<IterTestUtils.Person> PEOPLE = IterTestUtils.generatePersons();
 
     /**
      * @see ObjectSequence.of
@@ -18,9 +18,9 @@ private class ObjectSequenceTest {
     @IsTest
     private static void of() {
         // Given
-        persons.add(0, null);
-        persons.add(null);
-        List<Object> input = persons.clone();
+        PEOPLE.add(0, null);
+        PEOPLE.add(null);
+        List<Object> input = PEOPLE.clone();
         List<IterTestUtils.Person> input1;
         Set<Object> input2;
         IObjectIterable seq = ObjectSequence.of(input);
@@ -53,7 +53,7 @@ private class ObjectSequenceTest {
         Validate.assertEquals(false, seq4.iterator().hasNext());
         Validate.assertEquals(false, seq5.iterator().hasNext());
         Validate.assertEquals(false, stream.isEmpty());
-        Validate.assertEquals(persons, input, Label.InputMutatedErrorMessage);
+        Validate.assertEquals(PEOPLE, input, Label.InputMutatedErrorMessage);
     }
 
     /**
@@ -587,7 +587,7 @@ private class ObjectSequenceTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 
@@ -620,7 +620,7 @@ private class ObjectSequenceTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(input, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
     }
 

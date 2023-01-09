@@ -42,7 +42,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -74,7 +74,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper`, `delimiter`, or the `prefix` is null|
+|`NullPointerException`|if `mapper`, `delimiter`, or `prefix` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -104,7 +104,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -132,7 +132,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -162,7 +162,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -190,7 +190,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -220,7 +220,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -248,7 +248,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `mapper` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if at least one of the input arguments is null|
 
 
@@ -278,7 +278,7 @@ the `ObjectSObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `accumulator` is null|
+|`NullPointerException`|if `accumulator` is null|
 |`NullPointerException`|if the first input argument is null|
 
 
@@ -306,7 +306,7 @@ the `BiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `accumulator` is null|
+|`NullPointerException`|if `accumulator` is null|
 |`NullPointerException`|if the first input argument is null|
 
 

@@ -11,7 +11,7 @@
 public inherited sharing class ObjectSObjectConsumers {
 
     @TestVisible
-    private ObjectSObjectConsumers(){}
+    private ObjectSObjectConsumers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

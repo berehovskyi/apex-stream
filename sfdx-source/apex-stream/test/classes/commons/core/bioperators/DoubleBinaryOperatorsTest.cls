@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class DoubleBinaryOperatorsTest {
 
-    private static List<Double> input = IterTestUtils.generateDoubles();
+    private static final List<Double> INPUT = IterTestUtils.generateDoubles();
+
+    static {
+        new DoubleBinaryOperators();
+    }
 
     /**
      * @see DoubleBinaryOperators.min
@@ -17,15 +21,14 @@ private class DoubleBinaryOperatorsTest {
     @IsTest
     static void operators() {
         // When
-        new DoubleBinaryOperators();
         IDoubleBinaryOperator min = DoubleBinaryOperators.min();
         IDoubleBinaryOperator max = DoubleBinaryOperators.max();
         IDoubleBinaryOperator product = DoubleBinaryOperators.product();
         IDoubleBinaryOperator sum = DoubleBinaryOperators.sum();
         IDoubleBinaryOperator euclid = DoubleBinaryOperators.euclideanDistance();
         // Then
-        for (Integer i = 0, size = input.size(); i < size; i++) {
-            Double d = input[i];
+        for (Integer i = 0, size = INPUT.size(); i < size; i++) {
+            Double d = INPUT[i];
             Double src = 5.0;
             Validate.assertEquals(Math.min(src, d), min.apply(src, d));
             Validate.assertEquals(Math.max(src, d), max.apply(src, d));

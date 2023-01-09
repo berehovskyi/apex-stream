@@ -40,7 +40,9 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `message` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `message` is null|
 |`SObjectException`|if provided invalid `fieldName`|
 
 
@@ -74,7 +76,7 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `message` is null|
+|`NullPointerException`|if `field` is blank or `message` is null|
 
 
 **See** SObject.addError
@@ -171,7 +173,9 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapper` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -208,7 +212,7 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapper` is null|
+|`NullPointerException`|if `field` or `mapper` is null|
 |`SObjectException`|if provided invalid `fieldName`|
 
 
@@ -242,7 +246,8 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -279,7 +284,8 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`SObjectException`|if provided invalid `fieldName`|
 
 
@@ -314,7 +320,9 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `operator` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `operator` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -351,7 +359,7 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `operator` is null|
+|`NullPointerException`|if `field` or `operator` is null|
 
 
 **See** SObject.putSObject
@@ -384,7 +392,8 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -421,7 +430,7 @@ the `SObjectConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`NullPointerException`|if `field` is null|
 
 
 **See** SObject.putSObject

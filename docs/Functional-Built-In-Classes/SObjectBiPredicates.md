@@ -130,7 +130,8 @@ the `SObjectBiPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -291,7 +292,8 @@ the `SObjectBiPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -430,7 +432,8 @@ the `SObjectBiPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -569,7 +572,8 @@ the `SObjectBiPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -708,7 +712,8 @@ the `SObjectBiPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -743,7 +748,7 @@ the `SObjectBiPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `function` is null|
+|`NullPointerException`|if `function` is null|
 
 
 **See** Comparators.compareNullSafeUntyped
@@ -847,7 +852,8 @@ the `SObjectBiPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 

@@ -6,8 +6,12 @@
 @IsTest(IsParallel = true)
 private class DoubleToLongFunctionsTest {
     
-    private static List<Double> doubles = IterTestUtils.generateDoubles();
+    private static final List<Double> INPUT = IterTestUtils.generateDoubles();
 
+    static {
+        new DoubleToLongFunctions();
+    }
+    
     /**
      * @see DoubleToLongFunctions.longValue
      * @see DoubleToLongFunctions.roundToLong
@@ -18,8 +22,7 @@ private class DoubleToLongFunctionsTest {
         IDoubleToLongFunction longValue = DoubleToLongFunctions.longValue();
         IDoubleToLongFunction round = DoubleToLongFunctions.roundToLong();
         // Then
-        new DoubleToLongFunctions();
-        for (Double d : doubles) {
+        for (Double d : INPUT) {
             Validate.assertEquals(d.longValue(), longValue.apply(d));
             Validate.assertEquals(Math.roundToLong(d), round.apply(d));
         }

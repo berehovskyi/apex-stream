@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class DoublePredicatesTest {
 
-    private static List<Double> input = IterTestUtils.generateDoubles2();
+    private static final List<Double> INPUT = IterTestUtils.generateDoubles2();
+
+    static {
+        new DoublePredicates();
+    }
     
     /**
      * @see DoublePredicates.isGreater
@@ -26,9 +30,8 @@ private class DoublePredicatesTest {
         Double value = 1.0;
         Double value1 = 13;
         List<Double> subList = new List<Double>{ -5.2, 11L };
-        new DoublePredicates();
         // When
-        for(Double d : input) {
+        for(Double d : INPUT) {
             Validate.assertEquals(d >= value, DoublePredicates.isGreaterOrEqual(value).test(d));
             Validate.assertEquals(d < value, DoublePredicates.isLess(value).test(d));
             Validate.assertEquals(d <= value, DoublePredicates.isLessOrEqual(value).test(d));

@@ -11,7 +11,7 @@
 public inherited sharing class LongSuppliers {
 
     @TestVisible
-    private LongSuppliers(){}
+    private LongSuppliers() {}
     
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -75,7 +75,7 @@ public inherited sharing class LongSuppliers {
     // @start-group Lambdas
     private class Increment extends LongSupplier {
         private Long n0;
-        private Integer dn;
+        private final Integer dn;
         private Increment(Long fromLong, Integer step) {
             this.n0 = fromLong;
             this.dn = step;

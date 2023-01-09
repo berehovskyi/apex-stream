@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class DateToIntFunctionsTest {
 
-    private static List<Date> dates = IterTestUtils.generateDates1();
+    private static final List<Date> INPUT = IterTestUtils.generateDates1();
+
+    static {
+        new DateToIntFunctions();
+    }
 
     /**
      * @see DateToIntFunctions.day
@@ -21,7 +25,6 @@ private class DateToIntFunctionsTest {
         // Given
         Date other = Date.today();
         // When
-        new DateToIntFunctions();
         IToIntFunction day = DateToIntFunctions.day();
         IToIntFunction dayOfYear = DateToIntFunctions.dayOfYear();
         IToIntFunction daysBetween = DateToIntFunctions.daysBetween(other);
@@ -29,7 +32,7 @@ private class DateToIntFunctionsTest {
         IToIntFunction monthsBetween = DateToIntFunctions.monthsBetween(other);
         IToIntFunction year = DateToIntFunctions.year();
         // Then
-        for (Date d : dates) {
+        for (Date d : INPUT) {
             Validate.assertEquals(d.day(), day.apply(d));
             Validate.assertEquals(d.dayOfYear(), dayOfYear.apply(d));
             Validate.assertEquals(d.daysBetween(other), daysBetween.apply(d));

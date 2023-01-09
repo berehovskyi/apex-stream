@@ -40,7 +40,9 @@ the `SObjectBiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapper` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -110,7 +112,8 @@ the `SObjectBiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapper` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -180,7 +183,9 @@ the `SObjectBiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `operator` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `operator` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -250,7 +255,8 @@ the `SObjectBiConsumer`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is blank or `mapper` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 

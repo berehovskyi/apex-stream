@@ -11,7 +11,7 @@
 public inherited sharing class DoublePredicates {
 
     @TestVisible
-    private DoublePredicates(){}
+    private DoublePredicates() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -139,7 +139,7 @@ public inherited sharing class DoublePredicates {
      *
      * @return the `DoublePredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *
@@ -160,7 +160,7 @@ public inherited sharing class DoublePredicates {
      *
      * @return the `DoublePredicate`
      *
-     * @throws NullPointerException if the `container` is null
+     * @throws NullPointerException if `container` is null
      *
      * @see List.contains
      *

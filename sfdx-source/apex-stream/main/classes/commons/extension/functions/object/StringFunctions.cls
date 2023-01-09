@@ -11,7 +11,7 @@
 public inherited sharing class StringFunctions {
 
     @TestVisible
-    private StringFunctions(){}
+    private StringFunctions() {}
 
     //<editor-fold desc="String Functions">
     // @start-group String Functions

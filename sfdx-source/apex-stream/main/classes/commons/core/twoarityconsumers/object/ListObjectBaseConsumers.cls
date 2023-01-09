@@ -12,7 +12,7 @@
 public inherited sharing class ListObjectBaseConsumers {
 
     @TestVisible
-    private ListObjectBaseConsumers(){}
+    private ListObjectBaseConsumers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Add To List<Object>

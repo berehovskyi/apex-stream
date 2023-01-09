@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class DoubleUnaryOperatorTest {
 
-    private static List<Double> input = IterTestUtils.generateDoubles();
+    private static final List<Double> INPUT = IterTestUtils.generateDoubles();
 
     /**
      * @see DoubleUnaryOperator.andThen
@@ -29,7 +29,7 @@ private class DoubleUnaryOperatorTest {
         IDoubleUnaryOperator operator1 = x2IntOperator.compose(incOperator);
         IDoubleUnaryOperator operator2 = DoubleUnaryOperator.compose(new List<IDoubleUnaryOperator>{ incOperator, x2IntOperator });
         // Then
-        for (Double d : input) {
+        for (Double d : INPUT) {
             Validate.assertEquals(d, identity.apply(d));
             Validate.assertEquals(constant, of1.apply(d));
             Validate.assertEquals(d + inc, incOperator.apply(d));

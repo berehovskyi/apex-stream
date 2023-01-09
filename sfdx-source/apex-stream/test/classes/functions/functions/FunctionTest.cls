@@ -7,11 +7,11 @@
 private class FunctionTest {
 
     // Given
-    private static List<String> stringInput = IterTestUtils.generateStrings();
-    private static List<Integer> intInput = IterTestUtils.generateInts();
-    private static List<Long> longInput = IterTestUtils.generateLongs();
-    private static List<Double> doubleInput = IterTestUtils.generateDoubles();
-    private static List<Object> accounts = IterTestUtils.generateAccounts();
+    private static final List<String> STRINGS = IterTestUtils.generateStrings();
+    private static final List<Integer> INTS = IterTestUtils.generateInts();
+    private static final List<Long> LONGS = IterTestUtils.generateLongs();
+    private static final List<Double> DOUBLES = IterTestUtils.generateDoubles();
+    private static final List<Object> ACCOUNTS = IterTestUtils.generateAccounts();
 
     /**
      * @see Function.identity
@@ -44,7 +44,7 @@ private class FunctionTest {
         IFunction capitalizeAndAbbreviate2 = Function.compose(new List<IFunction>{ capitalize, abbreviate5 });
         IFunction getName = Function.compose(SObjectFunctions.get(IterTestUtils.CONSTS.Account.Name));
         // Then
-        for (String str : stringInput) {
+        for (String str : STRINGS) {
             Validate.assertEquals(str, identity.apply(str));
             Validate.assertEquals(constant, get42.apply(str));
             Validate.assertEquals(str.startsWith(val1), startsWithS.apply(str));
@@ -52,16 +52,16 @@ private class FunctionTest {
             Validate.assertEquals(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate1.apply(str));
             Validate.assertEquals(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate2.apply(str));
         }
-        for (Integer i : intInput) {
+        for (Integer i : INTS) {
             Validate.assertEquals(i > 4, isGreaterThan4Int.apply(i));
         }
-        for (Long l : longInput) {
+        for (Long l : LONGS) {
             Validate.assertEquals(l > 4, isGreaterThan4Long.apply(l));
         }
-        for (Double d : doubleInput) {
+        for (Double d : DOUBLES) {
             Validate.assertEquals(d > 4, isGreaterThan4Double.apply(d));
         }
-        for (Object a : accounts) {
+        for (Object a : ACCOUNTS) {
             Validate.assertEquals(((Account) a).get(IterTestUtils.CONSTS.Account.Name), getName.apply(a));
         }
         Validate.assert((Boolean) isEmptyAcc.apply(new Account()));

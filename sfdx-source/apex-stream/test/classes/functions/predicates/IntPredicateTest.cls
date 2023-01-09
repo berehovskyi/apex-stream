@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class IntPredicateTest {
 
-    private static List<Integer> input = IterTestUtils.generateInts2();
+    private static final List<Integer> INPUT = IterTestUtils.generateInts2();
 
     /**
      * @see IntPredicate.orElse
@@ -36,7 +36,7 @@ private class IntPredicateTest {
         IIntPredicate positiveEvenOrJustPrimePredicate = positivePredicate.andAlso(evenPredicate).orElse(primePredicate); // (1 AND 2) OR 3
         IIntPredicate positiveEvenOrPrimePredicate = positivePredicate.andAlso(evenPredicate.orElse(primePredicate)); // 1 AND (2 OR 3)
         // Then
-        for (Integer i : input) {
+        for (Integer i : INPUT) {
             Validate.assertEquals(i > 0, positivePredicate.test(i));
             Validate.assertEquals(Math.mod(i, 2) == 0, evenPredicate.test(i));
             Validate.assertEquals(primes.contains(i), primePredicate.test(i));

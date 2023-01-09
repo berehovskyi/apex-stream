@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class SObjectFunctionTest {
 
-    private static List<Contact> input = IterTestUtils.generateContacts();
+    private static final List<Contact> INPUT = IterTestUtils.generateContacts();
 
     /**
      * @see SObjectFunction.identity
@@ -27,7 +27,7 @@ private class SObjectFunctionTest {
         ISObjectFunction getParent = SObjectFunction.compose(SObjectUnaryOperators.getSObject(field));
         ISObjectFunction generateAccId = SObjectFunction.compose(IdSuppliers.of(accSObjectType));
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(con, identity.apply(con));
             Validate.assertEquals(constant, get42.apply(con));
             Validate.assertEquals(!(con.getSObjects('Assets')).isEmpty(), hasAssets.apply(con));

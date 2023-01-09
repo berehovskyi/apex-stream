@@ -71,4 +71,32 @@ the `SObjectSupplier`
 |---|---|
 |`NullPointerException`|if `sObj` is null|
 
+##### `static repeat(Iterable<SObject> iterable)`
+
+Returns a `Supplier` that infinitely returns the elements in order.
+
+###### Parameters
+|Param|Description|
+|---|---|
+|`iterable`|the iterable|
+
+###### Return
+
+**Type**
+
+SObjectSupplier
+
+**Description**
+
+the `Supplier`
+
+###### Example
+```apex
+ISupplier repeat = Supplier.repeat(new List<Object>{ 'a', 'b', 'c' });
+repeat.get(); // 'a'
+repeat.get(); // 'b'
+repeat.get(); // 'c'
+repeat.get(); // 'a'
+```
+
 ---

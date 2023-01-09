@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class IntBinaryOperatorsTest {
 
-    private static List<Integer> input = IterTestUtils.generateInts();
+    private static final List<Integer> INPUT = IterTestUtils.generateInts();
+
+    static {
+        new IntBinaryOperators();
+    }
 
     /**
      * @see IntBinaryOperators.max
@@ -17,13 +21,12 @@ private class IntBinaryOperatorsTest {
     @IsTest
     static void operators() {
         // When
-        new IntBinaryOperators();
         IIntBinaryOperator min = IntBinaryOperators.min();
         IIntBinaryOperator max = IntBinaryOperators.max();
         IIntBinaryOperator sum = IntBinaryOperators.sum();
         IIntBinaryOperator product = IntBinaryOperators.product();
         // Then
-        for (Integer i : input) {
+        for (Integer i : INPUT) {
             Integer src = 5;
             Validate.assertEquals(Math.min(src, i), min.apply(src, i));
             Validate.assertEquals(Math.max(src, i), max.apply(src, i));

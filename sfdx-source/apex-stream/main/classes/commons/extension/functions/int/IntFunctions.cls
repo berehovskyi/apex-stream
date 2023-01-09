@@ -11,7 +11,7 @@
 public inherited sharing class IntFunctions {
 
     @TestVisible
-    private IntFunctions(){}
+    private IntFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

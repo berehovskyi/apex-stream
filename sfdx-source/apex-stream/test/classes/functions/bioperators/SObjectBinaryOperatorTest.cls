@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class SObjectBinaryOperatorTest {
 
-    private static List<Account> input = IterTestUtils.generateAccounts();
+    private static final List<Account> INPUT = IterTestUtils.generateAccounts();
 
     /**
      * @see SObjectBinaryOperator.left
@@ -32,7 +32,7 @@ private class SObjectBinaryOperatorTest {
         ISObjectBinaryOperator ofBiConsumer = SObjectBinaryOperator.forBiConsumer(consumer);
         ISObjectBinaryOperator ofBiConsumerMergingToLeft = SObjectBinaryOperator.combine(consumer, SObjectBinaryOperator.left());
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             SObject target = new Contact();
             Validate.assertEquals(acc, left.apply(acc, target));
             Validate.assertEquals(target, right.apply(acc, target));

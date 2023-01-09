@@ -11,7 +11,7 @@
 public inherited sharing class ToLongFunctions {
 
     @TestVisible
-    private ToLongFunctions(){}
+    private ToLongFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

@@ -11,7 +11,7 @@
 public inherited sharing class Collectors {
 
     @TestVisible
-    private Collectors(){}
+    private Collectors() {}
 
     //<editor-fold desc="Built-Ins">
 
@@ -3317,7 +3317,7 @@ public inherited sharing class Collectors {
      *     Stream.of(people)
      *         .collect(Collectors.groupingByString(
      *             getStringProperty,
-     *             Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(getIntProperty))
+     *             Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(getIntProperty)))
      *         ));
      * Person personWithMaxIntProperty = (Person)
      *     optionalPersonWithMaxIntPropertyByStringProperty.get('SomePropertyValues').get();
@@ -3346,7 +3346,7 @@ public inherited sharing class Collectors {
      *     Stream.of(people)
      *         .collect(Collectors.groupingByString(
      *             getStringProperty,
-     *             Collectors.maximizing(Comparator.comparing(getIntProperty)))
+     *             Collectors.maximizing(Comparator.comparing(getIntProperty))
      *         ));
      * Person personWithMaxIntProperty = (Person)
      *     optionalPersonWithMaxIntPropertyByStringProperty.get('SomePropertyValues').get();

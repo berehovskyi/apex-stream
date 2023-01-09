@@ -12,7 +12,7 @@
 public inherited sharing class ListObjectConsumers {
 
     @TestVisible
-    private ListObjectConsumers(){}
+    private ListObjectConsumers() {}
 
     //<editor-fold desc="Add To List<Object>">
     // @start-group Add To List<Object>
@@ -25,7 +25,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.toList
@@ -49,7 +49,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `delimiter` or the `prefix` is null
+     * @throws NullPointerException if `delimiter` or `prefix` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.joining
@@ -73,7 +73,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.averagingInt
@@ -91,7 +91,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.summingInt
@@ -113,7 +113,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.averagingLong
@@ -131,7 +131,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.summingLong
@@ -154,7 +154,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.averagingDouble
@@ -173,7 +173,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `mapper` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if at least one of the input arguments is null
      *
      * @see Collectors.summingDouble
@@ -195,7 +195,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `accumulator` is null
+     * @throws NullPointerException if `accumulator` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.reducing
@@ -214,7 +214,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `accumulator` or the `mapper` is null
+     * @throws NullPointerException if `accumulator` or `mapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.reducing
@@ -234,7 +234,7 @@ public inherited sharing class ListObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `accumulator` is null
+     * @throws NullPointerException if `accumulator` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.reducing

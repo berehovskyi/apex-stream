@@ -30,7 +30,7 @@ private class OptionalIntTest {
         OptionalInt optNull = OptionalInt.ofNullable(null);
         IIntConsumer cons = new IterTestUtils.DoNothingIntConsumer();
         IIntSupplier increment = IntSuppliers.increment();
-        ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
+        ISupplier npeSupplier = Supplier.of(NullPointerException.class);
         // When
         Validate.assertEquals(value, optInt.get());
         Validate.assertEquals(true, optInt.isPresent());
@@ -51,17 +51,17 @@ private class OptionalIntTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

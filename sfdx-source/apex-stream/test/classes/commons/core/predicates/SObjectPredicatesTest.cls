@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class SObjectPredicatesTest {
 
-    private static List<Account> input = IterTestUtils.generateAccounts();
+    private static final List<Account> INPUT = IterTestUtils.generateAccounts();
+
+    static {
+        new SObjectPredicates();
+    }
     
     /**
      * @see SObjectPredicates.isCompared
@@ -21,11 +25,10 @@ private class SObjectPredicatesTest {
         IComparator comp1 = Comparator.defaultOrder().nullsLast();
         Integer result = 1;
         // When
-        new SObjectPredicates();
         ISObjectPredicate bigAccPredicate = SObjectPredicates.isCompared(SObjectFunctions.get(numberOfEmployeesFieldName), SObjectFunction.constant(value), comp, result);
         ISObjectPredicate bigAccPredicate1 = SObjectPredicates.isCompared(SObjectFunctions.get(accNumberOfEmployeesField), SObjectFunction.constant(value), comp1, result);
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Integer numOfEmployees = (Integer) acc.get(numberOfEmployeesFieldName);
             Validate.assertEquals((numOfEmployees == null ? false : numOfEmployees > value), bigAccPredicate.test(acc));
             Validate.assertEquals((numOfEmployees == null ? true : numOfEmployees > value), bigAccPredicate1.test(acc));
@@ -54,7 +57,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate nameGTTypePredicate = SObjectPredicates.isGreater(nameFieldName, SObjectFunctions.get(typeFieldName));
         ISObjectPredicate nameGTTypePredicate1 = SObjectPredicates.isGreater(accNameField, SObjectFunctions.get(accTypeField));
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
@@ -90,7 +93,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate nameGTTypePredicate = SObjectPredicates.isGreaterOrEqual(nameFieldName, SObjectFunctions.get(typeFieldName));
         ISObjectPredicate nameGTTypePredicate1 = SObjectPredicates.isGreaterOrEqual(accNameField, SObjectFunctions.get(accTypeField));
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
@@ -129,7 +132,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate hasNoParentPredicate = SObjectPredicates.isEqual(SObjectUnaryOperators.getSObject(parentFieldName), SObjectUnaryOperator.constant(null));
         ISObjectPredicate parentIsIdentityPredicate = SObjectPredicates.isEqual(SObjectUnaryOperators.getSObject(parentFieldName));
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
@@ -171,7 +174,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate hasParentPredicate = SObjectPredicates.isNotEqual(SObjectUnaryOperators.getSObject(parentFieldName), SObjectUnaryOperator.constant(null));
         ISObjectPredicate parentIsNotIdentityPredicate = SObjectPredicates.isNotEqual(SObjectUnaryOperators.getSObject(parentFieldName));
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
@@ -210,7 +213,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate nameGTTypePredicate = SObjectPredicates.isLess(nameFieldName, SObjectFunctions.get(typeFieldName));
         ISObjectPredicate nameGTTypePredicate1 = SObjectPredicates.isLess(accNameField, SObjectFunctions.get(accTypeField));
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
@@ -246,7 +249,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate nameGTTypePredicate = SObjectPredicates.isLessOrEqual(nameFieldName, SObjectFunctions.get(typeFieldName));
         ISObjectPredicate nameGTTypePredicate1 = SObjectPredicates.isLessOrEqual(accNameField, SObjectFunctions.get(accTypeField));
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(numberOfEmployeesFieldName));
             String name = ((String) acc.get(nameFieldName));
             String type = ((String) acc.get(typeFieldName));
@@ -275,7 +278,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate nameStartsWithTPredicate1 = SObjectPredicates.isLike(nameFieldName, likeString);
         ISObjectPredicate nameStartsWithTPredicate2 = SObjectPredicates.isLike(accNameField, likeString);
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             String name = ((String) acc.get(accNameField));
             String name1 = ((String) acc.get(nameFieldName));
             Boolean isLikeName = Pattern.matches(
@@ -307,7 +310,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate typeInPredicate1 = SObjectPredicates.isIn(typeNameFieldName, types);
         ISObjectPredicate typeInPredicate2 = SObjectPredicates.isIn(accTypeField, types);
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             String type = ((String) acc.get(accTypeField));
             String type1 = ((String) acc.get(typeNameFieldName));
             Validate.assertEquals(types.contains(type), typeInPredicate.test(acc));
@@ -331,7 +334,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate typeNotInPredicate1 = SObjectPredicates.isNotIn(typeNameFieldName, types);
         ISObjectPredicate typeNotInPredicate2 = SObjectPredicates.isNotIn(accTypeField, types);
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             String type = ((String) acc.get(accTypeField));
             String type1 = ((String) acc.get(typeNameFieldName));
             Validate.assertEquals(!types.contains(type), typeNotInPredicate.test(acc));
@@ -351,22 +354,22 @@ private class SObjectPredicatesTest {
     @IsTest
     static void comparisonPredicates() {
         // Given
-        List<Account> inputWithNull = new List<Account>(input);
+        List<Account> inputWithNull = new List<Account>(INPUT);
         inputWithNull.add(null);
-        List<Account> subset = new List<Account>{ input[0], input[3], input[7] };
+        List<Account> subset = new List<Account>{ INPUT[0], INPUT[3], INPUT[7] };
         // When
         ISObjectPredicate nullPredicate = SObjectPredicates.isNull();
         ISObjectPredicate notNullPredicate = SObjectPredicates.isNotNull();
-        ISObjectPredicate accEqualPredicate = SObjectPredicates.isEqual(input[2]);
-        ISObjectPredicate accNotEqualPredicate = SObjectPredicates.isNotEqual(input[2]);
+        ISObjectPredicate accEqualPredicate = SObjectPredicates.isEqual(INPUT[2]);
+        ISObjectPredicate accNotEqualPredicate = SObjectPredicates.isNotEqual(INPUT[2]);
         ISObjectPredicate accInPredicate = SObjectPredicates.isIn(subset);
         ISObjectPredicate accNotInPredicate = SObjectPredicates.isNotIn(subset);
         // When
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Validate.assertEquals(acc == null, nullPredicate.test(acc));
             Validate.assertEquals(acc != null, notNullPredicate.test(acc));
-            Validate.assertEquals(acc == input[2], accEqualPredicate.test(acc));
-            Validate.assertEquals(acc != input[2], accNotEqualPredicate.test(acc));
+            Validate.assertEquals(acc == INPUT[2], accEqualPredicate.test(acc));
+            Validate.assertEquals(acc != INPUT[2], accNotEqualPredicate.test(acc));
             Validate.assertEquals(subset.contains(acc), accInPredicate.test(acc));
             Validate.assertEquals(!subset.contains(acc), accNotInPredicate.test(acc));
         }
@@ -396,7 +399,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate hasSObjects = SObjectPredicates.hasSObjects(conAccountIdField);
         ISObjectPredicate hasSObjects1 = SObjectPredicates.hasSObjects(accountsFieldName);
         // When
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Validate.assertEquals(acc.get(accNumberOfEmployeesField) != null, has.test(acc));
             Validate.assertEquals(acc.get(accNumberOfEmployeesField) != null, has1.test(acc));
             Validate.assertEquals(acc.get(numberOfEmployeesFieldName) != null, has2.test(acc));
@@ -422,10 +425,10 @@ private class SObjectPredicatesTest {
         String parentTypeFieldName = 'Parent.Type';
         String parentTypeFieldNameSafe = 'Parent?.Type';
         // When
-        input[0].addError(error);
-        input[4].addError(error);
-        input[6].addError(error);
-        input[8] = input[7].clone();
+        INPUT[0].addError(error);
+        INPUT[4].addError(error);
+        INPUT[6].addError(error);
+        INPUT[8] = INPUT[7].clone();
         ISObjectPredicate hasErrorsPredicate = SObjectPredicates.hasErrors();
         ISObjectPredicate clonePredicate = SObjectPredicates.isClone();
         ISObjectPredicate setTypePredicate = SObjectPredicates.isSet(typeFieldName);
@@ -433,7 +436,7 @@ private class SObjectPredicatesTest {
         ISObjectPredicate setParentTypePredicate = SObjectPredicates.isSet(parentTypeFieldName);
         ISObjectPredicate setParentTypePredicateSafe = SObjectPredicates.isSet(parentTypeFieldNameSafe);
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Validate.assertEquals(acc.hasErrors(), hasErrorsPredicate.test(acc));
             Validate.assertEquals(acc.isClone(), clonePredicate.test(acc));
             Validate.assertEquals(acc.isSet(typeFieldName), setTypePredicate.test(acc));

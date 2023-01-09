@@ -11,7 +11,7 @@
 public inherited sharing class LongBinaryOperators {
 
     @TestVisible
-    private LongBinaryOperators(){}
+    private LongBinaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

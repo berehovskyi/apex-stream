@@ -11,7 +11,7 @@
 public inherited sharing class LongToDoubleFunctions {
 
     @TestVisible
-    private LongToDoubleFunctions(){}
+    private LongToDoubleFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

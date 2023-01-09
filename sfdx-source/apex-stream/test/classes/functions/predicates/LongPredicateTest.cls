@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class LongPredicateTest {
 
-    private static List<Long> input = IterTestUtils.generateLongs2();
+    private static final List<Long> INPUT = IterTestUtils.generateLongs2();
 
     /**
      * @see LongPredicate.orElse
@@ -33,7 +33,7 @@ private class LongPredicateTest {
         ILongPredicate positiveEvenOrJustPrimePredicate = positivePredicate.andAlso(evenPredicate).orElse(primePredicate); // (1 AND 2) OR 3
         ILongPredicate positiveEvenOrPrimePredicate = positivePredicate.andAlso(evenPredicate.orElse(primePredicate)); // 1 AND (2 OR 3)
         // Then
-        for (Long l : input) {
+        for (Long l : INPUT) {
             Validate.assertEquals(l > 0, positivePredicate.test(l));
             Validate.assertEquals(Math.mod(l, 2) == 0, evenPredicate.test(l));
             Validate.assertEquals(primes.contains(l), primePredicate.test(l));

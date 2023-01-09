@@ -42,7 +42,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right`, or `comparator`, or `result` is null|
+|`NullPointerException`|if `left` or `right`, or `comparator`, or `result` is null|
 
 ###### Example
 ```apex
@@ -77,7 +77,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -117,7 +117,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -156,7 +158,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`NullPointerException`|if `field` or `function` is null|
 
 
 **See** Comparator.defaultOrder
@@ -196,7 +198,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -232,7 +235,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** Comparator.defaultOrder
@@ -265,7 +268,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -305,7 +308,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -347,7 +352,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 
 
 **See** Comparator.defaultOrder
@@ -387,7 +394,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -423,7 +431,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** Comparator.defaultOrder
@@ -456,7 +464,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` the `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -496,7 +504,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 |`SObjectException`|if provided invalid `fieldName`|
 
 
@@ -534,7 +544,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 
 
 **See** Comparator.defaultOrder
@@ -574,7 +586,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -610,7 +623,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** Comparator.defaultOrder
@@ -643,7 +656,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -683,7 +696,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -725,7 +740,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`NullPointerException`|if `field` or `function` is null|
 
 
 **See** Comparator.defaultOrder
@@ -765,7 +780,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -801,7 +817,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** Comparator.defaultOrder
@@ -834,7 +850,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -874,7 +890,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -916,7 +934,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`NullPointerException`|if `field` or `function` is null|
 
 
 **See** Comparator.defaultOrder
@@ -956,7 +974,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -992,7 +1011,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1025,7 +1044,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left` or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1060,7 +1079,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `operator` is null|
+|`NullPointerException`|if `operator` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1092,7 +1111,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `operator` is null|
+|`NullPointerException`|if `operator` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1125,7 +1144,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left`, or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1165,7 +1184,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -1207,7 +1228,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `function` is null|
+|`NullPointerException`|if `field` or `function` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1247,7 +1268,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -1283,7 +1305,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1316,7 +1338,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `left` or the `right` is null|
+|`NullPointerException`|if `left` or `right` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1351,7 +1373,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `operator` is null|
+|`NullPointerException`|if `operator` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1383,7 +1405,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `operator` is null|
+|`NullPointerException`|if `operator` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1416,7 +1438,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `function`, or the `likeString` is null|
+|`NullPointerException`|if `function` or `likeString` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1450,7 +1472,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `likeString` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `likeString` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -1486,7 +1510,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field`, or the `likeString` is null|
+|`NullPointerException`|if `field` or `likeString` is null|
 
 
 **See** Comparator.defaultOrder
@@ -1519,7 +1543,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `function`, or the `container` is null|
+|`NullPointerException`|if `function` or `container` is null|
 
 
 **See** List.contains
@@ -1554,7 +1578,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `container` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `container` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -1591,7 +1617,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field`, or the `container` is null|
+|`NullPointerException`|if `field` or `container` is null|
 
 
 **See** List.contains
@@ -1625,7 +1651,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains
@@ -1660,7 +1686,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `function`, or the `container` is null|
+|`NullPointerException`|if `function` or `container` is null|
 
 
 **See** List.contains
@@ -1695,7 +1721,9 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank, or the `container` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `container` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -1732,7 +1760,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field`, or the `container` is null|
+|`NullPointerException`|if `field` or `container` is null|
 
 
 **See** List.contains
@@ -1766,7 +1794,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `container` is null|
+|`NullPointerException`|if `container` is null|
 
 
 **See** List.contains
@@ -1838,7 +1866,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `function` is null|
+|`NullPointerException`|if `function` is null|
 
 
 **See** SObjectPredicates.isNotEqual
@@ -1871,7 +1899,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -1909,7 +1938,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** SObjectPredicates.isNotEqual
@@ -1944,7 +1973,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `operator` is null|
+|`NullPointerException`|if `operator` is null|
 
 
 **See** SObjectPredicates.isNotEqual
@@ -1977,7 +2006,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -2015,7 +2045,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** SObjectPredicates.isNotEqual
@@ -2050,7 +2080,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -2088,7 +2119,7 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** SObjectPredicates.isNotEqual
@@ -2154,7 +2185,8 @@ the `SObjectPredicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 

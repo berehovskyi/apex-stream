@@ -3,6 +3,7 @@
 *.iml
 .sfdx
 .sf
+.run
 
 scripts/
 config/

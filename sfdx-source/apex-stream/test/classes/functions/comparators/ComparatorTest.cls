@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class ComparatorTest {
 
-    private static List<IterTestUtils.Person> persons = IterTestUtils.generateSimilarPersons();
+    private static final List<IterTestUtils.Person> PEOPLE = IterTestUtils.generateSimilarPersons();
 
     /**
      * @see Comparator.comparing
@@ -16,7 +16,7 @@ private class ComparatorTest {
         // Given
         IFunction keyExtractor = new IterTestUtils.GetNameFunction();
         IComparator keyComparator = Comparator.defaultOrder().nullsLast();
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[1].setName(null);
         input[3].setName(null);
         // When
@@ -49,7 +49,7 @@ private class ComparatorTest {
         // When
         IComparator comparing = Comparator.comparing(keyExtractor);
         // Then
-        for (IterTestUtils.Person person : persons) {
+        for (IterTestUtils.Person person : PEOPLE) {
             IterTestUtils.Person other = new IterTestUtils.Person('test', 17, Date.newInstance(1990, 1, 2), 0L, true);
             IterTestUtils.Person other1 = new IterTestUtils.Person(null, null, null, null, true);
             String value = person.getName();
@@ -76,7 +76,7 @@ private class ComparatorTest {
         // When
         IComparator comparing = Comparator.comparingInt(keyExtractor);
         // Then
-        for (IterTestUtils.Person person : persons) {
+        for (IterTestUtils.Person person : PEOPLE) {
             IterTestUtils.Person other = new IterTestUtils.Person('test', 17, Date.newInstance(1990, 1, 2), 0L, true);
             IterTestUtils.Person other1 = new IterTestUtils.Person(null, null, null, null, true);
             Integer value = (Integer) person.getAge();
@@ -103,7 +103,7 @@ private class ComparatorTest {
         // When
         IComparator comparing = Comparator.comparingLong(keyExtractor);
         // Then
-        for (IterTestUtils.Person person : persons) {
+        for (IterTestUtils.Person person : PEOPLE) {
             IterTestUtils.Person other = new IterTestUtils.Person('test', 17, Date.newInstance(1990, 1, 2), 0L, true);
             IterTestUtils.Person other1 = new IterTestUtils.Person(null, null, null, null, true);
             Long value = (Long) person.getAutoId();
@@ -130,7 +130,7 @@ private class ComparatorTest {
         // When
         IComparator comparing = Comparator.comparingDouble(keyExtractor);
         // Then
-        for (IterTestUtils.Person person : persons) {
+        for (IterTestUtils.Person person : PEOPLE) {
             IterTestUtils.Person other = new IterTestUtils.Person('test', 17, Date.newInstance(1990, 1, 2), 0L, true);
             IterTestUtils.Person other1 = new IterTestUtils.Person(null, null, null, null, true);
             Double value = (Double) person.getProbability();
@@ -194,7 +194,7 @@ private class ComparatorTest {
         IComparator comparing4 = Comparator.comparing(keyExtractor).reversed();
         IComparator comparing5 = Comparator.comparing(keyExtractor).order(SortOrder.DESCENDING);
         // Then
-        for (IterTestUtils.Person person : persons) {
+        for (IterTestUtils.Person person : PEOPLE) {
             IterTestUtils.Person other = new IterTestUtils.Person('test', 17, Date.newInstance(1990, 1, 2), 0L, true);
             IterTestUtils.Person other1 = new IterTestUtils.Person(null, null, null, null, true);
             Integer value = person.compareTo(other);
@@ -227,7 +227,7 @@ private class ComparatorTest {
         IComparator comparing1 = Comparator.nullsFirst(Comparator.comparing(keyExtractor));
         IComparator comparing2 = Comparator.comparing(keyExtractor).nullsLast();
         IComparator comparing3 = Comparator.nullsLast(Comparator.comparing(keyExtractor));
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input.add(0, null);
         input.add(null);
         // Then
@@ -258,7 +258,7 @@ private class ComparatorTest {
     @IsTest
     static void thenComparingByKeyComparator() {
         // Given
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[6].setName(input[5].getName());
         IFunction keyExtractor = new IterTestUtils.GetNameFunction();
         IFunction keyExtractor1 = new IterTestUtils.GetAgeFunction();
@@ -293,7 +293,7 @@ private class ComparatorTest {
     @IsTest
     static void thenComparing() {
         // Given
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[6].setName(input[5].getName());
         IFunction keyExtractor = new IterTestUtils.GetNameFunction();
         IFunction keyExtractor1 = new IterTestUtils.GetAgeFunction();
@@ -326,7 +326,7 @@ private class ComparatorTest {
     @IsTest
     static void thenComparingInt() {
         // Given
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[6].setName(input[5].getName());
         IFunction keyExtractor = new IterTestUtils.GetNameFunction();
         IToIntFunction keyExtractor1 = new IterTestUtils.GetAgeAsIntFunction();
@@ -359,7 +359,7 @@ private class ComparatorTest {
     @IsTest
     static void thenComparingLong() {
         // Given
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[6].setName(input[5].getName());
         IFunction keyExtractor = new IterTestUtils.GetNameFunction();
         IToLongFunction keyExtractor1 = new IterTestUtils.GetIdAsLongFunction();
@@ -392,7 +392,7 @@ private class ComparatorTest {
     @IsTest
     static void thenComparingDouble() {
         // Given
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[6].setName(input[5].getName());
         IFunction keyExtractor = new IterTestUtils.GetNameFunction();
         IToDoubleFunction keyExtractor1 = new IterTestUtils.GetProbabilityAsDoubleFunction();
@@ -425,7 +425,7 @@ private class ComparatorTest {
     @IsTest
     static void thenComparingSObject() {
         // Given
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[6].setName(input[5].getName());
         IFunction keyExtractor = new IterTestUtils.GetNameFunction();
         IToSObjectFunction keyExtractor1 = new IterTestUtils.ConvertToUser();
@@ -458,7 +458,7 @@ private class ComparatorTest {
     @IsTest
     static void thenComparingByComparator() {
         // Given
-        List<IterTestUtils.Person> input = persons;
+        List<IterTestUtils.Person> input = PEOPLE;
         input[6].setName(input[5].getName());
         input.add(0, null);
         input.add(null);

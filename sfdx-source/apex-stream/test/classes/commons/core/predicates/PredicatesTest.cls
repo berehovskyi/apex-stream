@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class PredicatesTest {
 
-    private static List<Object> intInput = new List<Object>{ 5, 1, 3, 8, -3, 4, null, -6, 0, 4 };
+    private static final List<Object> INPUT = new List<Object>{ 5, 1, 3, 8, -3, 4, null, -6, 0, 4 };
+
+    static {
+        new Predicates();
+    }
     
     /**
      * @see Predicates.isGreater
@@ -26,7 +30,6 @@ private class PredicatesTest {
         Integer value = 1;
         Integer value1 = 4;
         List<Object> subList = new List<Object>{ 5, null, 10 };
-        new Predicates();
         // When
         IPredicate isNullPredicate = Predicates.isNull();
         IPredicate isNotNullPredicate = Predicates.isNotNull();
@@ -43,7 +46,7 @@ private class PredicatesTest {
         IPredicate notInInput1Predicate = Predicates.isNotIn(subList);
         IPredicate notInInput1Predicate1 = Predicates.isNotIn(Function.identity(), subList);
         // Then
-        for (Object i : intInput) {
+        for (Object i : INPUT) {
             Validate.assertEquals(i == null, isNullPredicate.test(i));
             Validate.assertEquals(i != null, isNotNullPredicate.test(i));
             Validate.assertEquals(((Integer) i) > value, greaterThan1Predicate.test(i));

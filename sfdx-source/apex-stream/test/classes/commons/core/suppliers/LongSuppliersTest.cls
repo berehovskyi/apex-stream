@@ -6,6 +6,10 @@
 @IsTest(IsParallel = true)
 private class LongSuppliersTest {
 
+    static {
+        new LongSuppliers();
+    }
+
     /**
      * @see LongSuppliers.increment
      * @see LongSuppliers.fibonacci
@@ -19,7 +23,6 @@ private class LongSuppliersTest {
         ILongSupplier fibonacciSupp = LongSuppliers.fibonacci();
         ILongSupplier randomSupp = LongSuppliers.random();
         // When
-        new LongSuppliers();
         Long actual = incSupp.get();
         Long actual1 = incSupp.get();
         Long actual2 = incSupp1.get();

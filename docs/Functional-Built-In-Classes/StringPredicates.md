@@ -39,7 +39,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `substring` is null|
+|`NullPointerException`|if `substring` is null|
 
 
 **See** String.contains
@@ -66,7 +66,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `substring` is null|
+|`NullPointerException`|if `substring` is null|
 
 
 **See** String.containsAny
@@ -93,7 +93,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `substring` is null|
+|`NullPointerException`|if `substring` is null|
 
 
 **See** String.containsIgnoreCase
@@ -120,7 +120,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `substring` is null|
+|`NullPointerException`|if `substring` is null|
 
 
 **See** String.containsNone
@@ -147,7 +147,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `substring` is null|
+|`NullPointerException`|if `substring` is null|
 
 
 **See** String.containsOnly
@@ -191,7 +191,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `suffix` is null|
+|`NullPointerException`|if `suffix` is null|
 
 
 **See** String.endsWith
@@ -218,7 +218,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `suffix` is null|
+|`NullPointerException`|if `suffix` is null|
 
 
 **See** String.endsWithIgnoreCase
@@ -245,7 +245,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `that` is null|
+|`NullPointerException`|if `that` is null|
 
 
 **See** String.equalsIgnoreCase
@@ -425,7 +425,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `likeString` is null|
+|`NullPointerException`|if `likeString` is null|
 
 ##### `static isNotBlank()`
 
@@ -534,7 +534,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `prefix` is null|
+|`NullPointerException`|if `prefix` is null|
 
 
 **See** String.startsWith
@@ -561,7 +561,7 @@ the `Predicate`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `prefix` is null|
+|`NullPointerException`|if `prefix` is null|
 
 
 **See** String.startsWithIgnoreCase

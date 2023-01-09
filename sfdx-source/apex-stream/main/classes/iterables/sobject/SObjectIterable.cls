@@ -255,7 +255,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Account> distinctAccountsByName = accountsIterable
@@ -298,7 +299,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Account> accountsWithHotRating = accountsIterable
@@ -345,7 +347,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Account> firstAccountsWithHotRating = accountsIterable
@@ -389,7 +392,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Account> restAccounts = accountsIterable
@@ -446,7 +450,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Account> accounts = contactsIterable
@@ -488,7 +493,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `IIntIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Integer> numberOfEmployees = accountsIterable
@@ -530,7 +536,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ILongIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Long> numberOfEmployees = accountsIterable
@@ -572,7 +579,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `IDoubleIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Double> annualRevenues = accountsIterable
@@ -614,7 +622,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `IObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Object> birthdates = contactsIterable
@@ -634,7 +643,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `IObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * List<Object> birthdates = contactsIterable
@@ -697,7 +706,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Account> accountsWithResetAnnualRevenue = accountsIterable
@@ -756,7 +766,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * List<Account> sortedAccountsByName = accountsIterable
@@ -777,7 +788,9 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the new `ISObjectIterable`
      *
-     * @throws NullPointerException if `fieldName` is blank or `order` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `order` is null
      *
      * @example
      * List<Account> sortedAccountsByNameDesc = accountsIterable
@@ -845,7 +858,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `OptionalSObject`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Account firstAccountWithHotRating = accountsIterable
@@ -889,7 +903,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return `true` or `false`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Boolean isEveryAccountWithHotRating = accountsIterable
@@ -931,7 +946,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return `true` or `false`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Boolean isSomeAccountWithHotRating = accountsIterable
@@ -990,7 +1006,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return `true` or `false`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Boolean isNoAccountWithHotRating = accountsIterable
@@ -1049,7 +1066,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `OptionalSObject` describing the result
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Account accountWithMaxAnnualRevenue = accountsIterable
@@ -1109,7 +1127,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `OptionalSObject` describing the result
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Account accountWithMinAnnualRevenue = accountsIterable
@@ -1166,7 +1185,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the sum of field values
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Double sumOfAnnualRevenue = accountsIterable
@@ -1221,7 +1241,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the arithmetic mean of field values
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Double avgAnnualRevenue = accountsIterable
@@ -1310,7 +1331,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `List<Object>` containing the collected elements, which can be cast to `listType`
      *
-     * @throws NullPointerException if `fieldName` is blank or `listType` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null or `listType` is null
      *
      * @example
      * List<String> accountNames = (List<String>) accountsIterable
@@ -1351,7 +1373,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `Set<Object>` containing the collected elements field values
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Set<Object> createdDates = contactsIterable.toSet('CreatedDate');
@@ -1389,7 +1412,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `Set<Id>` containing the collected elements field values
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Set<Id> accountIds = contactsIterable.toIdSet('AccountId');
@@ -1427,7 +1451,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `Set<String>` containing the collected elements field values
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Set<String> accountNames = accountsIterable.toStringSet('Name');
@@ -1467,7 +1492,9 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
      *
      * @throws IllegalStateException if mapped keys contain duplicates
-     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapType` is null
      *
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) contactsIterable
@@ -1488,7 +1515,7 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `mapType`
      *
      * @throws IllegalStateException if mapped keys contain duplicates
-     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
+     * @throws NullPointerException if `field` is null or `mapType` is null
      *
      * @example
      * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) contactsIterable
@@ -1511,7 +1538,9 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `mapType`
      *
      * @throws IllegalStateException if mapped keys contain duplicates
-     * @throws NullPointerException if `fieldName` is blank or `mapType` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapType` is null
      *
      * @example
      * Map<String, Account> accountByName = (Map<String, Account>) accountsIterable
@@ -1553,7 +1582,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `Map<Id, List<SObject>>` containing the iterable elements
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Map<Id, List<Contact>> contactsByAccountId = contactsIterable.groupById('AccountId');
@@ -1591,7 +1621,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `Map<String, List<SObject>>` containing the iterable elements
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Map<String, List<Account>> accountsByRating = accountsIterable.groupByString('Rating');
@@ -1629,7 +1660,8 @@ public abstract inherited sharing class SObjectIterable implements ISObjectItera
      *
      * @return the `Map<Boolean, List<SObject>>` containing the iterable elements
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      *
      * @example
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating

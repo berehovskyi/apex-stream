@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class StringBinaryOperatorsTest {
 
-    private static List<String> strings = IterTestUtils.generateStrings();
+    private static final List<String> INPUT = IterTestUtils.generateStrings();
+
+    static {
+        new StringBinaryOperators();
+    }
     
     /**
      * @see StringBinaryOperators.concat
@@ -17,14 +21,13 @@ private class StringBinaryOperatorsTest {
         String s = 'Str';
         String delimiter = ';';
         // When
-        new StringBinaryOperators();
         IBinaryOperator concat = StringBinaryOperators.concat();
         IBinaryOperator concat1 = StringBinaryOperators.concat(delimiter);
         // Then
-        for (String o : strings) {
+        for (String o : INPUT) {
             Validate.assertEquals(o + s, concat.apply(o, s));
         }
-        for (String o : strings) {
+        for (String o : INPUT) {
             Validate.assertEquals(o + delimiter + s, concat1.apply(o, s));
         }
     }

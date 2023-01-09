@@ -11,7 +11,7 @@
 public inherited sharing class SObjectFunctions {
 
     @TestVisible
-    private SObjectFunctions(){}
+    private SObjectFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -23,7 +23,8 @@ public inherited sharing class SObjectFunctions {
      *
      * @return the `SObjectFunction`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -94,7 +95,8 @@ public inherited sharing class SObjectFunctions {
      *
      * @return the `SObjectFunction`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -160,7 +162,9 @@ public inherited sharing class SObjectFunctions {
      *
      * @return the `SObjectFunction`
      *
-     * @throws NullPointerException if `fieldName` is blank or the `mapper` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -213,7 +217,8 @@ public inherited sharing class SObjectFunctions {
      *
      * @return the `SObjectFunction`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`

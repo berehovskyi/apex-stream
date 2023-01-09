@@ -30,7 +30,7 @@ private class OptionalLongTest {
         OptionalLong optNull = OptionalLong.ofNullable(null);
         ILongConsumer cons = new IterTestUtils.DoNothingLongConsumer();
         ILongSupplier increment = LongSuppliers.increment();
-        ISupplier npeSupplier = Supplier.of(System.NullPointerException.class);
+        ISupplier npeSupplier = Supplier.of(NullPointerException.class);
         // When
         Validate.assertEquals(value, optLong.get());
         Validate.assertEquals(true, optLong.isPresent());
@@ -51,17 +51,17 @@ private class OptionalLongTest {
         try {
             emptyOpt.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.get();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         try {
             optNull.orElseThrow(npeSupplier);
         } catch (Exception exc) {
-            Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
 }

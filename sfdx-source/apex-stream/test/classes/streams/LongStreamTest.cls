@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 public class LongStreamTest {
 
-    private static List<Long> ints = IterTestUtils.generateLongs();
+    private static final List<Long> LONGS = IterTestUtils.generateLongs();
 
     /**
      * @see LongStream.of
@@ -18,9 +18,9 @@ public class LongStreamTest {
     @IsTest
     private static void of() {
         // Given
-        ints.add(0, null);
-        ints.add(null);
-        List<Long> input = ints.clone();
+        LONGS.add(0, null);
+        LONGS.add(null);
+        List<Long> input = LONGS.clone();
         List<Long> input1;
         Set<Long> input2;
         ILongIterable stream = LongStream.of(input);
@@ -50,7 +50,7 @@ public class LongStreamTest {
         Validate.assertEquals(expected1, actual5);
         Validate.assertEquals(input, actual6);
         Validate.assertEquals(false, seq.isEmpty());
-        Validate.assertEquals(ints, input, Label.InputMutatedErrorMessage);
+        Validate.assertEquals(LONGS, input, Label.InputMutatedErrorMessage);
         Validate.assert(((LongStream) stream).isOperated);
         Validate.assert(((LongStream) stream1).isOperated);
         Validate.assert(((LongStream) stream2).isOperated);
@@ -326,7 +326,7 @@ public class LongStreamTest {
         try {
             iterator.next();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         Validate.assert(((LongStream) stream).isOperated);
         Validate.assert(((LongStream) stream1).isOperated);
@@ -538,7 +538,7 @@ public class LongStreamTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((LongStream) stream).isOperated);
         Validate.assert(((LongStream) stream1).isOperated);
@@ -574,7 +574,7 @@ public class LongStreamTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(input, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((LongStream) stream).isOperated);
         Validate.assert(((LongStream) stream1).isOperated);

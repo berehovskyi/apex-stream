@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class DatetimeToIntFunctionsTest {
 
-    private static List<Datetime> datetimes = IterTestUtils.generateDatetimes1();
+    private static final List<Datetime> INPUT = IterTestUtils.generateDatetimes1();
+
+    static {
+        new DatetimeToIntFunctions();
+    }
 
     /**
      * @see DatetimeToIntFunctions.day
@@ -29,7 +33,6 @@ private class DatetimeToIntFunctionsTest {
     @IsTest
     static void convert() {
         // When
-        new DatetimeToIntFunctions();
         IToIntFunction day = DatetimeToIntFunctions.day();
         IToIntFunction dayGmt = DatetimeToIntFunctions.dayGmt();
         IToIntFunction dayOfYear = DatetimeToIntFunctions.dayOfYear();
@@ -47,7 +50,7 @@ private class DatetimeToIntFunctionsTest {
         IToIntFunction year = DatetimeToIntFunctions.year();
         IToIntFunction yearGmt = DatetimeToIntFunctions.yearGmt();
         // Then
-        for (Datetime dt : datetimes) {
+        for (Datetime dt : INPUT) {
             Validate.assertEquals(dt.day(), day.apply(dt));
             Validate.assertEquals(dt.dayGmt(), dayGmt.apply(dt));
             Validate.assertEquals(dt.dayOfYear(), dayOfYear.apply(dt));

@@ -11,7 +11,7 @@
 public inherited sharing class StringToLongFunctions {
 
     @TestVisible
-    private StringToLongFunctions(){}
+    private StringToLongFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

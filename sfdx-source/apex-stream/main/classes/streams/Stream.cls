@@ -15,7 +15,7 @@
 public inherited sharing class Stream {
 
     @TestVisible
-    private Stream(){}
+    private Stream() {}
 
     /**
      * @description Returns a `ObjectStream` created from `List<Object>`.

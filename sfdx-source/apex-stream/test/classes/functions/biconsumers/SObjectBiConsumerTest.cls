@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class SObjectBiConsumerTest {
 
-    private static List<Contact> input = IterTestUtils.generateContacts();
+    private static final List<Contact> INPUT = IterTestUtils.generateContacts();
 
     /**
      * @see SObjectBiConsumer.andThen
@@ -23,7 +23,7 @@ private class SObjectBiConsumerTest {
         ISObjectBiConsumer consumer1 = setDoNotCall.compose(setDescFromDepartment);
         ISObjectBiConsumer consumer2 = SObjectBiConsumer.compose(new List<ISObjectBiConsumer>{ setDescFromDepartment, setDoNotCall });
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Contact expected = new Contact(Description = con.Department, DoNotCall = true);
             SObject src = IterTestUtils.deepClone(con);
             SObject target = new Contact();

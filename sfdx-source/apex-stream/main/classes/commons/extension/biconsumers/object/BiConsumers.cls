@@ -11,7 +11,7 @@
 public inherited sharing class BiConsumers {
 
     @TestVisible
-    private BiConsumers(){}
+    private BiConsumers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

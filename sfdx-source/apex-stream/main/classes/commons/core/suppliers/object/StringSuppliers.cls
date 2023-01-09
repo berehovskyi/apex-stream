@@ -11,7 +11,7 @@
 public inherited sharing class StringSuppliers {
 
     @TestVisible
-    private StringSuppliers(){}
+    private StringSuppliers() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -27,6 +27,32 @@ public inherited sharing class StringSuppliers {
      */
     public static Supplier uuid() {
         return new UUID();
+    }
+
+    /**
+     * @description Returns a `Supplier` that returns the string in autonumber format.
+     *
+     * @param format autonumber format
+     *
+     * @return the `Supplier`
+     * 
+     * @throws IllegalArgumentException if `format` does not match '\\S*\\{\\d+\\}' pattern
+     * 
+     * @example
+     * ISupplier autonumber = StringSuppliers.autonumber('A-{0000}');
+     * autonumber.get(); // 'A-0000'
+     * autonumber.get(); // 'A-0001'
+     * autonumber.get(); // 'A-0002'
+     */
+    public static Supplier autonumber(final String format) {
+        final String pattern = '\\S*\\{\\d+\\}\\S*';
+        Validate.matches(
+                format,
+                pattern,
+                Label.StringPatternMismatchErrorMessage,
+                new List<Object>{ format, pattern }
+        );
+        return new AutoNumber(format);
     }
     // @end-group
     //</editor-fold>
@@ -48,11 +74,28 @@ public inherited sharing class StringSuppliers {
         }
         private String randomHex() {
             return EncodingUtil.convertToHex(
-                    Crypto.generateDigest(
-                            algorithmName,
-                            Blob.valueOf(Crypto.getRandomLong().format()))
+                    Crypto.generateDigest(algorithmName, Blob.valueOf(Crypto.getRandomLong().format()))
             );
         }
+    }
+
+    private class AutoNumber extends Supplier {
+        private final String zero = '0';
+        private final String format;
+        private final String prefix;
+        private final String suffix;
+        private final String displayNumber;
+        private final Integer displayLength;
+        private Integer i;
+        private AutoNumber(String format) { 
+            this.format = format;
+            this.prefix = format.substringBefore('{');
+            this.suffix = format.substringAfter('}');
+            this.displayNumber = format.substringBetween('{', '}');
+            this.displayLength = displayNumber.length();
+            this.i = Integer.valueOf(displayNumber);
+        }
+        public override Object get() { return prefix + String.valueOf(i++).leftPad(displayLength, zero) + suffix; }
     }
     // @end-group
     //</editor-fold>

@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class ToSObjectFunctionTest {
 
-    private static List<Object> accounts = IterTestUtils.generateAccounts();
+    private static final List<Object> INPUT = IterTestUtils.generateAccounts();
 
     /**
      * @see ToSObjectFunction.compose
@@ -18,7 +18,7 @@ private class ToSObjectFunctionTest {
         // When
         IToSObjectFunction getValue = ToSObjectFunction.compose(Function.constant(value));
         // Then
-        for (Object acc : accounts) {
+        for (Object acc : INPUT) {
             Validate.assertEquals(value, getValue.apply(acc));
         }
     }

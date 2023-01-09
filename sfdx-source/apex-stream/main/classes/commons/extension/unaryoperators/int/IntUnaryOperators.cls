@@ -11,7 +11,7 @@
 public inherited sharing class IntUnaryOperators {
 
     @TestVisible
-    private IntUnaryOperators(){}
+    private IntUnaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

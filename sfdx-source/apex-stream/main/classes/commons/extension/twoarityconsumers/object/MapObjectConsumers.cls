@@ -12,7 +12,7 @@
 public inherited sharing class MapObjectConsumers {
 
     @TestVisible
-    private MapObjectConsumers(){}
+    private MapObjectConsumers() {}
 
     //<editor-fold desc="Put to Map<?, ?> BiConsumers">
     // @start-group Put to Map<?, ?> BiConsumers
@@ -28,8 +28,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByBoolMap
@@ -56,8 +56,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByIdMap
@@ -84,8 +84,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByStringMap
@@ -112,8 +112,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByBlobMap
@@ -140,8 +140,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByDateMap
@@ -168,8 +168,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByDatetimeMap
@@ -196,8 +196,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByDatetimeMap
@@ -224,8 +224,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByIntMap
@@ -252,8 +252,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByLongMap
@@ -280,8 +280,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toByDoubleMap
@@ -308,8 +308,8 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if the the `merger` is null and mapped keys contain duplicates
-     * @throws NullPointerException if the `keyMapper` or the `valueMapper` is null
+     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.toMap
@@ -337,7 +337,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByBool
@@ -357,7 +357,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingById
@@ -377,7 +377,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByString
@@ -397,7 +397,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByBlob
@@ -417,7 +417,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByDate
@@ -437,7 +437,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByDatetime
@@ -457,7 +457,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByTime
@@ -477,7 +477,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByInt
@@ -497,7 +497,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByLong
@@ -517,7 +517,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingByDouble
@@ -537,7 +537,7 @@ public inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws NullPointerException if the `downstream` or the `classifier` is null
+     * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
      * @see Collectors.groupingBy

@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class ToDoubleFunctionTest {
 
-    private static List<Object> accounts = IterTestUtils.generateAccounts();
+    private static final List<Object> INPUT = IterTestUtils.generateAccounts();
 
     /**
      * @see ToDoubleFunction.compose
@@ -19,7 +19,7 @@ private class ToDoubleFunctionTest {
         IToDoubleFunction getNumOfEmployeesAsDouble = ToDoubleFunction.compose(SObjectFunctions.get(IterTestUtils.CONSTS.Account.NumberOfEmployees));
         IToDoubleFunction get42 = ToDoubleFunction.compose(Function.constant(value));
         // Then
-        for (Object acc : accounts) {
+        for (Object acc : INPUT) {
             Validate.assertEquals(((Account) acc).get(IterTestUtils.CONSTS.Account.NumberOfEmployees), getNumOfEmployeesAsDouble.apply(acc));
             Validate.assertEquals(value, get42.apply(acc));
         }

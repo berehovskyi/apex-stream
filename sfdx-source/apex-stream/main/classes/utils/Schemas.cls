@@ -8,7 +8,7 @@
 public inherited sharing class Schemas {
 
     @TestVisible
-    private Schemas(){}
+    private Schemas() {}
 
     /**
      * @description Returns the name of the child relationship for the `SObjectField`.

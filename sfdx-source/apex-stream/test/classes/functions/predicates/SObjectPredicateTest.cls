@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class SObjectPredicateTest {
 
-    private static List<Account> input = IterTestUtils.generateAccounts();
+    private static final List<Account> INPUT = IterTestUtils.generateAccounts();
 
     /**
      * @see SObjectPredicate.orElse
@@ -34,7 +34,7 @@ private class SObjectPredicateTest {
         ISObjectPredicate bigCustomerOrAnyCompetitorPredicate = bigAccPredicate.andAlso(customerPredicate).orElse(competitorPredicate); // (1 AND 2) OR 3
         ISObjectPredicate bigCustomerOrBigCompetitorPredicate = bigAccPredicate.andAlso(customerPredicate.orElse(competitorPredicate)); // 1 AND (2 OR 3)
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Boolean isNumOfEmployeesGreater = (Integer) acc.get(accNumOfEmployeesField) > value;
             Boolean isAccTypeCustomer = acc.get(accTypeField) == value1;
             Boolean isAccTypeCompetitor = acc.get(accTypeField) == value2;
@@ -71,7 +71,7 @@ private class SObjectPredicateTest {
         SObjectPredicate customerPredicate = SObjectPredicates.isEqual(accTypeField, value1);
         ISObjectPredicate bigAccOrCustomer = SObjectPredicate.some(new List<ISObjectPredicate>{ bigAccPredicate, customerPredicate });
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Validate.assertEquals(
                     (Integer) acc.get(accNumOfEmployeesField) > value || acc.get(accTypeField) == value1,
                     bigAccOrCustomer.test(acc)
@@ -94,7 +94,7 @@ private class SObjectPredicateTest {
         SObjectPredicate customerPredicate = SObjectPredicates.isEqual(accTypeField, value1);
         ISObjectPredicate bigAccAndCustomer = SObjectPredicate.every(new List<ISObjectPredicate>{ bigAccPredicate, customerPredicate });
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Validate.assertEquals(
                     (Integer) acc.get(accNumOfEmployeesField) > value && acc.get(accTypeField) == value1,
                     bigAccAndCustomer.test(acc)
@@ -114,7 +114,7 @@ private class SObjectPredicateTest {
         SObjectPredicate bigAccPredicate = SObjectPredicates.isGreater(accNumOfEmployeesField, value);
         ISObjectPredicate notBigAccPredicate = SObjectPredicate.negate(bigAccPredicate);
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Validate.assertEquals(!((Integer) acc.get(accNumOfEmployeesField) > value), notBigAccPredicate.test(acc));
         }
     }
@@ -143,7 +143,7 @@ private class SObjectPredicateTest {
         IDoublePredicate positiveDoublePredicate = DoublePredicates.isGreater(0);
         ISObjectPredicate latIsPositivePredicate = SObjectPredicate.compose(getLatFunction, positiveDoublePredicate);
         // Then
-        for (Account acc : input) {
+        for (Account acc : INPUT) {
             Validate.assertEquals(((String) acc.get(accNameField)).startsWith(value), nameStartsWithTPredicate.test(acc));
             Integer numOfEmployees = (Integer) acc.get(accNumOfEmployeesField);
             if (numOfEmployees != null) {

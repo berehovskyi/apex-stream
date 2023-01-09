@@ -11,7 +11,7 @@
 public inherited sharing class StringBinaryOperators {
 
     @TestVisible
-    private StringBinaryOperators(){}
+    private StringBinaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

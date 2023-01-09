@@ -6,7 +6,7 @@
 @IsTest(IsParallel = true)
 private class DoubleConsumerTest {
 
-    private static List<Double> input = new List<Double>{ 0, null, 1L, -10L };
+    private static final List<Double> INPUT = new List<Double>{ 0, null, 1L, -10L };
 
     /**
      * @see DoubleConsumer.andThen
@@ -19,12 +19,12 @@ private class DoubleConsumerTest {
         IDoubleConsumer composed = DoubleConsumer.compose(new List<IDoubleConsumer>{ cons, cons });
         IDoubleConsumer composed1 = cons.andThen(cons);
         // Then
-        for (Integer i = 0, size = input.size(); i < size; i++) {
-            List<Double> clone = input.clone();
+        for (Integer i = 0, size = INPUT.size(); i < size; i++) {
+            List<Double> clone = INPUT.clone();
             cons.accept(clone[i]);
             composed.accept(clone[i]);
             composed1.accept(clone[i]);
-            Validate.assertEquals(clone[i], input[i], Label.InputMutatedErrorMessage);
+            Validate.assertEquals(clone[i], INPUT[i], Label.InputMutatedErrorMessage);
         }
     }
 

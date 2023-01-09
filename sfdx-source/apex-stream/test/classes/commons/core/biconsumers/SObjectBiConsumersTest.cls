@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class SObjectBiConsumersTest {
 
-    private static List<Contact> input = IterTestUtils.generateContacts();
+    private static final List<Contact> INPUT = IterTestUtils.generateContacts();
+    
+    static {
+        new SObjectBiConsumers();
+    }
     
     /**
      * @see SObjectBiConsumers.set
@@ -16,7 +20,6 @@ private class SObjectBiConsumersTest {
         // Given
         Object constant = IterTestUtils.CONSTS.FINANCE;
         // When
-        new SObjectBiConsumers();
         ISObjectBiConsumer setFinanceToDepartment = SObjectBiConsumers.set(IterTestUtils.CONSTS.Contact.Department, constant);
         ISObjectBiConsumer setFinanceToDepartment1 = SObjectBiConsumers.set(IterTestUtils.CONSTS.DEPARTMENT, constant);
         ISObjectBiConsumer setFinanceToDepartment2 = SObjectBiConsumers.set(IterTestUtils.CONSTS.Contact.Department, SObjectFunction.constant(constant));
@@ -28,7 +31,7 @@ private class SObjectBiConsumersTest {
         ISObjectBiConsumer setDescriptionAndAccountId = SObjectBiConsumers.set(IterTestUtils.CONSTS.Contact.Description, SObjectFunctions.get(IterTestUtils.CONSTS.Contact.Department))
                 .andThen(SObjectBiConsumers.set(IterTestUtils.CONSTS.ACCOUNT_ID, SObjectFunctions.get('Account?.Id')));
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Contact expected = new Contact(Department = IterTestUtils.CONSTS.FINANCE);
             SObject src = IterTestUtils.deepClone(con);
             SObject target = new Contact();
@@ -65,7 +68,7 @@ private class SObjectBiConsumersTest {
             SObject target6 = new Contact();
             setDescriptionAndAccountId.accept(src6, target6);
             Validate.assertEquals(expected3, target6);
-            String expectedException = System.NullPointerException.class.getName();
+            String expectedException = NullPointerException.class.getName();
             try {
                 setDepartmentFromParentUnsafe.accept(con, new Contact());
             } catch (Exception exc) {
@@ -95,7 +98,7 @@ private class SObjectBiConsumersTest {
         ISObjectBiConsumer setGrandParentConsumer = SObjectBiConsumers.setSObject('Account.Parent', constant);
         // Then
         IterTestUtils.TestAccountOperator testAccountOperator = new IterTestUtils.TestAccountOperator();
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Contact expected = new Contact();
             expected.putSObject(IterTestUtils.CONSTS.Contact.AccountId, constant);
             SObject src = IterTestUtils.deepClone(con);
@@ -128,7 +131,7 @@ private class SObjectBiConsumersTest {
 
             SObject src5 = IterTestUtils.deepClone(con);
             SObject target5 = new Contact();
-            String expectedException = System.NullPointerException.class.getName();
+            String expectedException = NullPointerException.class.getName();
             try {
                 setGrandParentConsumer.accept(src5, target5);
                 Validate.assertEquals(expected2, target5);

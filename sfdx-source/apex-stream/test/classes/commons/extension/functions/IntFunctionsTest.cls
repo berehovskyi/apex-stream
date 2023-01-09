@@ -6,6 +6,10 @@
 @IsTest(IsParallel = true)
 private class IntFunctionsTest {
 
+    static {
+        new IntFunctions();
+    }
+
     /**
      * @see IntFunctions.toString
      * @see IntFunctions.toObject
@@ -16,7 +20,6 @@ private class IntFunctionsTest {
         List<Integer> input = new List<Integer>{ 1, 2, 3, 4, 4, 6, -10, -3 };
         IIntFunction toString = IntFunctions.toString();
         IIntFunction toObject = IntFunctions.toObject();
-        new IntFunctions();
         // Then
         for (Integer i : input) {
             Validate.assertEquals(String.valueOf(i), toString.apply(i));

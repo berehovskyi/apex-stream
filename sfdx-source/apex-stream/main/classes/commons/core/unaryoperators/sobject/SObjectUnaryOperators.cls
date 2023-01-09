@@ -11,7 +11,7 @@
 public inherited sharing class SObjectUnaryOperators {
 
     @TestVisible
-    private SObjectUnaryOperators(){}
+    private SObjectUnaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -23,7 +23,8 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -49,7 +50,7 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      *
      * @see SObject.getSObject
      *
@@ -71,7 +72,9 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `fieldName` is blank or the `mapper` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -96,7 +99,7 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `field` or the `mapper` is null
+     * @throws NullPointerException if `field` or `mapper` is null
      *
      * @see SObjectConsumers.set
      *
@@ -118,7 +121,8 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -143,7 +147,7 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -168,7 +172,9 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `fieldName` is blank or the `operator` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `operator` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -194,7 +200,7 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `field` or the `operator` is null
+     * @throws NullPointerException if `field` or `operator` is null
      *
      * @see SObjectConsumers.setSObject
      *
@@ -215,7 +221,8 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -241,7 +248,7 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -268,7 +275,9 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `fieldName` is blank or the `mapper` is null
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -295,7 +304,7 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `field` or the `mapper` is null
+     * @throws NullPointerException if `field` or `mapper` is null
      *
      * @example
      * SObjectUnaryOperators.setSObjects(Contact.AccountId, someSObjectFunction);
@@ -318,7 +327,8 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
@@ -344,7 +354,7 @@ public inherited sharing class SObjectUnaryOperators {
      *
      * @return the `SObjectUnaryOperator`
      *
-     * @throws NullPointerException if the `field` is null
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`

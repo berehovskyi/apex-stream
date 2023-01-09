@@ -6,6 +6,10 @@
 @IsTest(IsParallel = true)
 private class DoubleFunctionsTest {
 
+    static {
+        new DoubleFunctions();
+    }
+
     /**
      * @see DoubleFunctions.toString
      * @see DoubleFunctions.format
@@ -17,7 +21,6 @@ private class DoubleFunctionsTest {
         IDoubleFunction toString = DoubleFunctions.toString();
         IDoubleFunction format = DoubleFunctions.format();
         // When
-        new DoubleFunctions();
         for (Double d : input) {
             Validate.assertEquals(String.valueOf(d), toString.apply(d));
             Validate.assertEquals(d.format(), format.apply(d));

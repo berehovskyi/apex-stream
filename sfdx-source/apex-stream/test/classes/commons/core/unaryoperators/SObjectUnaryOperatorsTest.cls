@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class SObjectUnaryOperatorsTest {
 
-    private static List<Contact> input = IterTestUtils.generateContacts2();
+    private static final List<Contact> INPUT = IterTestUtils.generateContacts2();
+
+    static {
+        new SObjectUnaryOperators();
+    }
 
     /**
      * @see SObjectUnaryOperators.newSObject
@@ -16,10 +20,9 @@ private class SObjectUnaryOperatorsTest {
         // Given
         SObjectType accSObjectType = Account.SObjectType;
         // When
-        new SObjectUnaryOperators();
         ISObjectUnaryOperator newAccountOperator = SObjectUnaryOperators.newSObject(accSObjectType);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(accSObjectType.newSObject(), newAccountOperator.apply(con));
         }
     }
@@ -37,7 +40,7 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator getAccount1 = SObjectUnaryOperators.getSObject(accIdField);
         ISObjectUnaryOperator getGrandAccount = SObjectUnaryOperators.getSObject('Account?.Parent');
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(con.getSObject(accFieldName), getAccount.apply(con));
             Validate.assertEquals(con.getSObject(accFieldName), getAccount1.apply(con));
             Validate.assertEquals(con.getSObject(accFieldName)?.getSObject('Parent'), getGrandAccount.apply(con));
@@ -62,7 +65,7 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator convertToLead5 = SObjectUnaryOperators.newSObject(leadSObjectType, leadLastNameField, constant);
         ISObjectUnaryOperator convertToLead6 = SObjectUnaryOperators.newSObject(leadSObjectType, leadLastNameFieldName, constant);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             SObject newSObject = leadSObjectType.newSObject();
             newSObject.put(leadLastNameField, con.get(conLastNameField));
             Validate.assertEquals(newSObject, convertToLead.apply(con));
@@ -92,7 +95,7 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator setDescriptionValue = SObjectUnaryOperators.set(conDescriptionField, constant);
         ISObjectUnaryOperator setDescriptionValue1 = SObjectUnaryOperators.set(conDescriptionFieldName, constant);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             SObject clone = IterTestUtils.deepClone(con);
             clone.put(conDescriptionField, clone.get(conDepartmentField));
             Validate.assertEquals(clone, setDescriptionFromDepartment.apply(IterTestUtils.deepClone(con)));
@@ -119,7 +122,7 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator setSObjectOperator2 = SObjectUnaryOperators.setSObject(conAccountIdField, parent);
         ISObjectUnaryOperator setSObjectOperator3 = SObjectUnaryOperators.setSObject(conAccountFieldName, parent);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             SObject clone = IterTestUtils.deepClone(con);
             clone.putSObject(conAccountIdField, parent);
             Validate.assertEquals(clone, setSObjectOperator.apply(IterTestUtils.deepClone(con)));
@@ -149,7 +152,7 @@ private class SObjectUnaryOperatorsTest {
         ISObjectUnaryOperator setSObjectsOperator3 = SObjectUnaryOperators.setSObjects(assetsFieldName, children);
         ISObjectUnaryOperator setSObjectsOperator4 = SObjectUnaryOperators.setSObjects(assetsFieldName, children1);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             Validate.assertEquals(children, setSObjectsOperator.apply(IterTestUtils.deepClone(con)).getSObjects(assetsFieldName));
             Validate.assertEquals(children, setSObjectsOperator1.apply(IterTestUtils.deepClone(con)).getSObjects(assetContactIdField));
             Validate.assertEquals(children, setSObjectsOperator2.apply(IterTestUtils.deepClone(con)).getSObjects(assetsFieldName));

@@ -4,8 +4,8 @@
 
 Apex Stream is a framework for processing sequences of elements that takes advantage of the functional programming paradigm.
 
-Inspired by [Java Stream API](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/stream/package-summary.html), 
-slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable) and 
+Inspired by [Java Stream API](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/stream/package-summary.html),
+slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable) and
 [js Array.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
 
 <a href="https://githubsfdeploy.herokuapp.com?owner=berehovskyi&repo=apex-stream&ref=master">
@@ -15,12 +15,12 @@ slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dot
 ## Apex Stream Framework Features:
 
 - Iterables with implementations:
-  - Streams (`SObjectStream`, `ObjectStream` and primitive `DoubleStream`, `IntStream`, `LongStream`)
-  - Sequences (`SObjectSequence`, `ObjectSequence` and primitive `DoubleSequence`, `IntSequence`, `LongSequence`)
+    - Streams (`SObjectStream`, `ObjectStream` and primitive `DoubleStream`, `IntStream`, `LongStream`)
+    - Sequences (`SObjectSequence`, `ObjectSequence` and primitive `DoubleSequence`, `IntSequence`, `LongSequence`)
 - Functional Interfaces
 - Functional Abstract Classes with
-  - inherited abstract methods
-  - default methods
+    - inherited abstract methods
+    - default methods
 - Functional Built-In Classes with common Functional Abstract Classes implementations
 - Collectors (`SObjectCollector`, `Collector`) with common built-ins (`SObjectCollectors`, `Collectors`)
 - Optionals (`OptionalSObject`, `Optional` and primitive `OptionalDouble`, `OptionalInt`, `OptionalLong`)
@@ -28,28 +28,30 @@ slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dot
 
 ## Introduction
 
-**Apex Stream Framework** is built on custom `Iterables` that allow processing a sequence of elements supporting sequential aggregate operations, 
-providing a convenient declarative API. There are 2 types that implement `Iterable` - `Stream` and `Sequence`.
+**Apex Stream Framework
+** is built on custom `Iterables` that allows processing a sequence of elements supporting sequential aggregate operations,
+providing a convenient declarative API. 2 types implement `Iterable` - `Stream` and `Sequence`.
 
-`Stream` is lazy. Computation on the source data is only performed when the terminal operation is initiated, 
-and source elements are consumed only as needed. Also, a `Stream` can be operated on 
+`Stream` is lazy. Computation on the source data is only performed when the terminal operation is initiated,
+and source elements are consumed only as needed. Also, a `Stream` can be operated on
 (invoking an intermediate or terminal stream operation) only **once**.
 
 `Sequence` is eager. Computation on the source data is performed every time an intermediate or terminal operation is invoked.
 Since `Sequence` is stateful, it can be reused multiple times.
 
-There are reference and primitive specializations of `Streams` and `Sequences`
+There are a reference and primitive specializations of `Streams` and `Sequences`
+
 - Reference: `ObjectStream`, `SObjectStream`, `ObjectSequence`, `SObjectSequence`
 - Primitive: `IntStream`, `LongStream`, `DoubleStream`, `IntStream`, `LongStream`, `DoubleStream`
 
-`Iterables` are operated by `functions`. 
+`Iterables` are operated by `functions`.
 
 In terms of Apex Stream Framework, `function` is an instance of `Functional Interface` or `Functional Abstract Class`.
 
-A `Functional Interface` is an interface that contains only one *single* `abstract` method. 
+A `Functional Interface` is an interface that contains only one *single* `abstract` method.
 
-A `Functional Abstract Class` is an `abstract` class that contains only one *single* `abstract` method, 
-but may or may not contain `final`, `virtual` or `static` methods to make functional composition possible.
+A `Functional Abstract Class` is an `abstract` class that contains only one *single* `abstract` method,
+but may or may not contain `final`, `virtual`, or `static` methods to make functional composition possible.
 
 **Apex Stream Framework** contains most of the **built-in** functions, common implementations of `functions`
 so you don't have to recreate them every time you need them.
@@ -66,14 +68,15 @@ Operations on iterables **don't** change the source (but can mutate its elements
 
 ### Note
 
-All examples will be shown based on `Streams`, 
+All examples will be shown based on `Streams`,
 but all of them are also valid for `Sequences`, except for **infinite** `Streams`.
 
-### Stream Sources
+## Stream Sources
 
- - ### Stream of Iterable
+- ### Stream of Iterable
 
 Create a `Stream` depending on the input argument type:
+
 ```apex
 ISObjectIterable accountStream = Stream.of(new List<Account>{ acc1, acc2, acc3 });
 ISObjectIterable triggerNewStream = Stream.of(Trigger.new);
@@ -97,7 +100,6 @@ ISObjectIterable emptySObjectStream = SObjectStream.empty();
 ```
 
 - ### Infinite Stream[*](#note)
-
 
 Create an infinite `Stream` by passing `Supplier` to a `generate` method:
 
@@ -132,11 +134,12 @@ streamIterator.next(); // 6
 streamIterator.next(); // 7
 // so on...
 ```
+
 ## Merging Streams
 
 - ### Concatenation
 
-The simplest way to concat two streams is by using the static `concat` method, 
+The simplest way to concat two streams is by using the static `concat` method,
 or instance `append`, `prepend` methods:
 
 ```apex
@@ -180,7 +183,7 @@ ISObjectIterable newAccountStreamWithChangedRating = Stream.zip(
         // Checks if oldAccount[i].Rating != newAccount[i].Rating
         SObjectBiPredicates.areEqual(Account.Rating).negate(),
         // Always return the right argument i.e elements from Trigger.new in this case
-        SObjectBinaryOperator.right() 
+        SObjectBinaryOperator.right()
 );
 ```
 
@@ -193,7 +196,8 @@ until a terminal operation is invoked.*
 
 - ### Set Operations
 
-**Set operations** produce a result iterable that is based on the presence or absence of equivalent elements within the same or separate iterables.
+**Set operations
+** produce a result iterable that is based on the presence or absence of equivalent elements within the same or separate iterables.
 
 A `union` operation returns the set union, which means unique elements
 that appear in *either* of two iterables.
@@ -224,9 +228,9 @@ based on `Share` records' composite keys:
 ```apex
 // Implement function that returns a UserOrGroupId-AccountId composite key
 class CompositeKeyFunction implements ISObjectFunction {
-  public Object apply(SObject sObj) {
-    return sObj.get(AccountShare.UserOrGroupId) + sObj.get(AccountShare.AccountId);
-  }
+    public Object apply(SObject sObj) {
+        return sObj.get(AccountShare.UserOrGroupId) + sObj.get(AccountShare.AccountId);
+    }
 }
 
 List<AccountShare> sharingsToInsert = new List<AccountShare>{ sh1, sh2, sh3, sh4, sh5 };
@@ -248,20 +252,21 @@ ISObjectIterable accountStreamWithAnnualRevenueGreaterThan10k = Stream.of(accoun
         .filter(SObjectPredicates.isGreater(Account.AnnualRevenue, 10000));
 ```
 
-Get accounts with `AnnualRevenue` greater than `1000000` and with `Rating` == `Hot` 
+Get accounts with `AnnualRevenue` greater than `1000000` and with `Rating` == `Hot`
 using function composition:
+
 ```apex
 ISObjectIterable filteredAccountStream = Stream.of(accounts)
         .filter(
                 SObjectPredicates.isGreater(Account.AnnualRevenue, 10000)
-                    .andAlso(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
+                        .andAlso(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
         );
 ```
 
 - ### Iterating
 
-A `forEach` operation iterates over the stream of elements, 
-instead of using `for`, `for-each` and `while` loops. A `forEach` is expected to mutate elements.
+A `forEach` operation iterates over the stream of elements,
+instead of using `for`, `for-each`, and `while` loops. A `forEach` is expected to mutate elements.
 
 Set `Rating` to `Hot` for each account:
 
@@ -276,13 +281,13 @@ Set `Rating` to `Hot` and set `AnnualRevenue` to `0` for each account using func
 ISObjectIterable mutatedAccountStream = Stream.of(accounts)
         .forEach(
                 SObjectConsumers.set(Account.Rating, 'Hot')
-                    .andThen(SObjectConsumers.set(Account.AnnualRevenue, 0))
+                        .andThen(SObjectConsumers.set(Account.AnnualRevenue, 0))
         );
 ```
 
 - ### Mapping
 
-A `mapTo` operation converts elements by applying a function to them 
+A `mapTo` operation converts elements by applying a function to them
 and collects these new elements into a new stream.
 
 Create a stream of parent `Accounts` from the contact stream:
@@ -299,7 +304,7 @@ IDoubleIterable revenueStream = Stream.of(accounts)
         .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue));
 ```
 
-A `flatMapTo` operation converts elements by applying a function that returns an `Iterable` to them 
+A `flatMapTo` operation converts elements by applying a function that returns an `Iterable` to them
 and collects these new *inner* elements into a new stream.
 
 Create a stream of related child contacts from the account stream:
@@ -325,7 +330,7 @@ List<Integer> flattenedInts = Stream.of(containedInts)
         .toList(); // [1, 0, 10, null]
 ```
 
-- ### Limit and Skip 
+- ### Limit and Skip
 
 A `limit` operation returns a stream not longer than the requested size.
 
@@ -345,7 +350,7 @@ List<Account> accountsForTheSecondPage = Stream.of(accounts)
 
 - ### Sorting
 
-A `sort` operation returns a sorted stream considering sort order and `Comparator` function.
+A `sort` operation returns a sorted stream considering the sort order and `Comparator` function.
 
 Sort accounts according to default order:
 
@@ -376,19 +381,18 @@ by `AnnualRevenue` in descending order:
 ISObjectIterable sortedAccountStream = Stream.of(accounts)
         .sort(
                 SObjectComparator.comparing(Account.Rating)
-                    .thenComparingInt(SObjectToIntFunctions.get(Account.NumberOfEmployees).nullsLast())
-                    .thenComparingDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue).reversed())
+                        .thenComparingInt(SObjectToIntFunctions.get(Account.NumberOfEmployees).nullsLast())
+                        .thenComparingDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue).reversed())
         );
 ```
 
-
 ## Terminal Operations
 
-**Terminal Operations** produces a stream result, and can be invoked only *once*.
+**Terminal Operations** produces a stream result and can be invoked only *once*.
 
 - ### Matching
 
-`find`, `every`, `some`, `none` operations validate elements according to a predicate.
+`find`, `every`, `some`, and `none` operations validate elements according to a predicate.
 
 A `find` operation returns the *first* element that matches a predicate as [Optional](#optional).
 
@@ -396,9 +400,9 @@ An `every` operation checks if *all* elements match a predicate.
 
 An `some` operation checks if *some* element matches a predicate.
 
-An `none` operation checks if *no* elements match a predicate.
+A `none` operation checks if *no* elements match a predicate.
 
-Check is all accounts have `Hot` `Rating`:
+Check if all accounts have `Hot` `Rating`:
 
 ```apex
 Boolean isEveryAccountHot = Stream.of(accounts)
@@ -414,9 +418,9 @@ OptionalSObject optionalWarmAccount = Stream.of(accounts)
 
 - ### Reduction
 
-A `reduce` operation performs a stream reduction, 
-using the provided `identity` value and an associative `accumulation` function, 
-and returns the reduced value. 
+A `reduce` operation performs a stream reduction,
+using the provided `identity` value and an associative `accumulation` function,
+and returns the reduced value.
 
 `reduce` is equivalent to:
 
@@ -424,7 +428,7 @@ and returns the reduced value.
 T result = identity;
 for (T element : thisStream) {
     result = accumulator.apply(result, element);
-}        
+}
 return result;
 ```
 
@@ -438,7 +442,7 @@ Long factorial(Long n) {
 factorial(20L); // 2432902008176640000
 ```
 
-`min`, `max` operations on a primitive stream find a minimal or maximal element 
+`min`, `max` operations on a primitive stream find a minimal or maximal element
 according to the default order as [Optional](#optional):
 
 ```apex
@@ -447,7 +451,7 @@ Integer maxInt = Stream.of(integers)
         .get(); // returns a value if present or throws NoSuchElementException otherwise
 ```
 
-On a reference stream, search reduction is operated according to 
+On a reference stream, search reduction is operated according to
 a comparator and returns a result as [Optional](#optional).
 
 Find an optional account with a max `AnnualRevenue`:
@@ -465,7 +469,7 @@ Calculate the sum of elements of the stream:
 Double sum = Stream.of(doubles).sum();
 ```
 
-`sum`, `avg` operations on a reference stream calculate an arithmetic sum and mean 
+`sum`, `avg` operations on a reference stream calculate an arithmetic sum and mean
 of elements returned by a mapping function.
 
 Find an optional account with a max `AnnualRevenue`:
@@ -476,7 +480,7 @@ Double sumOfAnnualRevenue = Stream.of(accounts).sum(Account.AnnualRevenue);
 
 - ### Collecting
 
-A `collect` operation performs a mutable reduction operation on stream elements, 
+A `collect` operation performs a mutable reduction operation on stream elements,
 collecting elements into a container using `Collector` or (`Suppier` and `BiConsumer`) functions.
 
 `collect` is equivalent to:
@@ -526,10 +530,10 @@ Map<Object, Object> o = new Map<String, String>{ 'foo' => 'bar' };
 Map<String, String> asStrings = (Map<String, String>) o; // Illegal assignment from Map<String,String> to Map<Object,Object>
 ```
 
-This is why we should explicitly set a specific collecting function according to an 
+This is why we should explicitly set a specific collecting function according to an
 expected container type:
 
-Group accounts by `Rating` as string:
+Group accounts by `Rating` as a string:
 
 ```apex
 Map<String, List<Account>> accountsByRating = (Map<String, List<Account>>) Stream.of(accounts)
@@ -562,7 +566,7 @@ Account acc = (Account) sObj; // Should be cast explicitly
 
 To make `accountByRating` castable to `Map<String, Account>` it is possible either
 
- - to specify the type of `Supplier` and `BinaryOperator` explicitly:
+- to specify the type of `Supplier` and `BinaryOperator` explicitly:
 
 ```apex
 Map<Id, Account> accountByRating = (Map<Id, Account>) Stream.of(accounts)
@@ -577,15 +581,15 @@ Map<Id, Account> accountByRating = (Map<Id, Account>) Stream.of(accounts)
         );
 ```
 
- - or to use `cast` function:
+- or to use `cast` function:
 
 ```apex
 Map<Id, SObject> accountByRating = (Map<Id, SObject>) Stream.of(accounts)
         .collect(SObjectCollectors.mapById(Account.ParentId).cast(Map<Id, SObject>.class));
 ```
 
-Collectors also allow reusing of complex collection strategies 
-and composition of collect operations such as multiple-level grouping or partitioning by 
+Collectors also allow the reusing of complex collection strategies
+and composition of collect operations such as multiple-level grouping or partitioning by
 using *downstream* collectors.
 
 Classify account names by `BillingCountry` and by `BillingCity` cascading two collectors together:
@@ -594,12 +598,12 @@ Classify account names by `BillingCountry` and by `BillingCity` cascading two co
 ISObjectCollector groupNamesByBillingCityDownstreamCollector
         = SObjectCollectors.groupingByString(Account.BillingCity, Account.Name);
 
-Map<String, Map<String, List<String>>> accountNamesByCityByCountry = 
+Map<String, Map<String, List<String>>> accountNamesByCityByCountry =
         (Map<String, Map<String, List<String>>>) Stream.of(contacts)
-              .collect(SObjectCollectors.groupingByString(
-                      SObjectFunctions.get(Account.BillingCountry),
-                      groupNamesByBillingCityDownstreamCollector
-              ).cast(Map<String, Map<String, List<String>>>.class));
+                .collect(SObjectCollectors.groupingByString(
+                        SObjectFunctions.get(Account.BillingCountry),
+                        groupNamesByBillingCityDownstreamCollector
+                ).cast(Map<String, Map<String, List<String>>>.class));
 
 /* The result json structure: 
 {
@@ -636,6 +640,7 @@ Account acc = optionalAccount.get();
 - ### Fast Collecting
 
 `SObjectIterable` also supports simple fast collecting methods if you don't want to use `collect` operation:
+
 - `toList`
 - `toSet`
 - `toIdSet`
@@ -663,10 +668,9 @@ Group accounts by `Rating`:
 Map<String, List<Account>> accountsByRating = Stream.of(accounts).groupByString(Account.Rating);
 ```
 
-
 ## Optional
 
-An `Optional` is a container which may or may not contain a non-null value.
+An `Optional` is a container that may or may not contain a non-null value.
 
 To create an empty `Optional`:
 
@@ -690,7 +694,7 @@ Boolean isNonNullAccount = optionalAccount.isPresent();
 Boolean isNullAccount = optionalAccount.isEmpty();
 ```
 
-To perform an action with value if value is present, use `ifPresent` method:
+To act with value if the value is present, use `ifPresent` method:
 
 ```apex
 optionalAccount.ifPresent(SObjectConsumers.addError('Error Message'));
@@ -702,7 +706,7 @@ optionalAccount.ifPresent(SObjectConsumers.addError('Error Message'));
 Account acc = (Account) optionalAccount.get(); 
 ```
 
-To return a default value if `Optional` is empty, otherwise return value, use `orElse` method:
+To return a default value if `Optional` is empty, otherwise, return value, use `orElse` method:
 
 ```apex
 Account acc = (Account) optionalAccount.orElse(new Account()); 
@@ -716,7 +720,7 @@ Account acc = (Account) optionalAccount.orElseGet(SObjectSupplier.of(Account.SOb
 
 ## Altogether
 
-Calculate sum of `AnnualRevenue` of distinct by `Name` field accounts with hot rating:
+Calculate the sum of `AnnualRevenue` of distinct by `Name` field accounts with hot rating:
 
 ```apex
 Double annualRevenueSum = Stream.of(accounts)
@@ -733,7 +737,9 @@ List<Account> accounts = Stream.of(contacts)
         .forEach('NumberOfEmployees', 0)
         .toList();
 ```
+
 Create and relate `contacts` to parent `accounts` and set the `Descripton` field:
+
 ```apex
 List<Contact> contacts = Stream.of(accounts)
         .mapTo(
@@ -745,14 +751,18 @@ List<Contact> contacts = Stream.of(accounts)
         )
         .toList();
 ```
-Filter `accounts` having `AnnualRevenue > 10000` sort by `AnnualRevenue` in descending order, and group by `Rating`:
+
+Filter `accounts` having `AnnualRevenue > 10000` sort by `AnnualRevenue` in descending order and group by `Rating`:
+
 ```apex
 Map<String, List<Account>> accountsByRating = Stream.of(accounts)
         .filter(SObjectPredicates.isGreater('AnnualRevenue', 10000))
         .sort('AnnualRevenue', SortOrder.DESCENDING)
         .groupByString('Rating');
 ```
+
 Group `LastName` field values by `OtherCountry`:
+
 ```apex
 Map<String, List<String>> lastNamesByOtherCountry = (Map<String, List<String>>) Stream.of(contacts)
         .collect(
@@ -763,8 +773,9 @@ Map<String, List<String>> lastNamesByOtherCountry = (Map<String, List<String>>) 
         );
 ```
 
-Filter `input` allowing not blank strings, convert all the characters to uppercase, sort, 
+Filter `input` allowing not blank strings, convert all the characters to uppercase, sort,
 skip the first element and return a list containing the first 2 elements:
+
 ```apex
 List<Object> input = new List<Object>{
         new Account(), 1, 1L, null, '  ', '', 'hello',
@@ -780,8 +791,6 @@ List<String> result = (List<String>) Stream.of(input)
         .toList(List<String>.class); // ['BAR', 'BAZ']
 ```
 
-
-
 And more!
 
 Find more examples [here](/sfdx-source/apex-stream/test/classes).
@@ -791,5 +800,6 @@ Find more examples [here](/sfdx-source/apex-stream/test/classes).
 [Full Apex Stream Framework Documentation](/docs/README.md).
 
 ## User Guide (in development)
+
 If you want to know more, take a look at the [User Guide](https://github.com/berehovskyi/apex-stream/wiki) for a brief introduction to the Apex Stream Framework.
 

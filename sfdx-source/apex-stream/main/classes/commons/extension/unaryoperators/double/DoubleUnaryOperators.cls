@@ -11,7 +11,7 @@
 public inherited sharing class DoubleUnaryOperators {
 
     @TestVisible
-    private DoubleUnaryOperators(){}
+    private DoubleUnaryOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins

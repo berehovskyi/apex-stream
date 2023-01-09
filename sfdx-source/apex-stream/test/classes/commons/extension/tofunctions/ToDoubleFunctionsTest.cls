@@ -5,6 +5,10 @@
  */
 @IsTest(IsParallel = true)
 private class ToDoubleFunctionsTest {
+
+    static {
+        new ToDoubleFunctions();
+    }
     
    /**
     * @see ToDoubleFunctions.asDouble
@@ -16,7 +20,6 @@ private class ToDoubleFunctionsTest {
         List<Object> input = new List<Object>{ 1, 2.02, 3L };
         List<String> input1 = new List<String>{ '123', '1.02', '2.35', '-3', '33' };
         // When
-        new ToDoubleFunctions();
         IToDoubleFunction asDouble = ToDoubleFunctions.asDouble();
         IToDoubleFunction doubleValue = ToDoubleFunctions.valueOf();
         // Then

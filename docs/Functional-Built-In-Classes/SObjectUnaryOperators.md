@@ -39,7 +39,8 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -75,7 +76,7 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 
 
 **See** SObject.getSObject
@@ -108,7 +109,9 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank or the `mapper` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -145,7 +148,7 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` or the `mapper` is null|
+|`NullPointerException`|if `field` or `mapper` is null|
 
 
 **See** SObjectConsumers.set
@@ -179,7 +182,8 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -216,7 +220,7 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -252,7 +256,9 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank or the `operator` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `operator` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -289,7 +295,7 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` or the `operator` is null|
+|`NullPointerException`|if `field` or `operator` is null|
 
 
 **See** SObjectConsumers.setSObject
@@ -322,7 +328,8 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -359,7 +366,7 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -395,7 +402,9 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank or the `mapper` is null|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -429,7 +438,7 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` or the `mapper` is null|
+|`NullPointerException`|if `field` or `mapper` is null|
 
 ###### Example
 ```apex
@@ -459,7 +468,8 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `fieldName` is blank|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 
@@ -493,7 +503,7 @@ the `SObjectUnaryOperator`
 ###### Throws
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if the `field` is null|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
 |`SObjectException`|if provided invalid `fieldName`|
 

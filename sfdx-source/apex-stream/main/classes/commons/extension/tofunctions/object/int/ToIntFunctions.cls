@@ -11,7 +11,7 @@
 public inherited sharing class ToIntFunctions {
 
     @TestVisible
-    private ToIntFunctions(){}
+    private ToIntFunctions() {}
 
     //<editor-fold desc="Object To Int Functions">
     // @start-group Object To Int Functions

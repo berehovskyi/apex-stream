@@ -252,7 +252,7 @@ private class DoubleStreamTest {
         try {
             iterator.next();
         } catch (Exception exc) {
-            Validate.assertEquals(System.NoSuchElementException.class.getName(), exc.getTypeName());
+            Validate.assertEquals(NoSuchElementException.class.getName(), exc.getTypeName());
         }
         Validate.assert(((DoubleStream) stream).isOperated);
         Validate.assert(((DoubleStream) stream1).isOperated);
@@ -464,7 +464,7 @@ private class DoubleStreamTest {
         Validate.assertEquals(input, actual);
         Validate.assertEquals(expected, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((DoubleStream) stream).isOperated);
         Validate.assert(((DoubleStream) stream1).isOperated);
@@ -500,7 +500,7 @@ private class DoubleStreamTest {
         Validate.assertEquals(expected, actual);
         Validate.assertEquals(input, actual1);
         Validate.assertEquals(expected1, actual2);
-        Validate.assertEquals('System.IllegalArgumentException', exc1.getTypeName());
+        Validate.assertEquals(IllegalArgumentException.class.getName(), exc1.getTypeName());
         Validate.assertEquals(input, clone, Label.InputMutatedErrorMessage);
         Validate.assert(((DoubleStream) stream).isOperated);
         Validate.assert(((DoubleStream) stream1).isOperated);

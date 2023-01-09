@@ -63,7 +63,8 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
      *
      * @return the `SObjectBinaryOperator`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      */
     public static SObjectBinaryOperator minBy(final String fieldName) {
         return minBy(SObjectComparator.comparing(fieldName));
@@ -106,7 +107,8 @@ public abstract inherited sharing class SObjectBinaryOperator implements ISObjec
      *
      * @return the `SObjectBinaryOperator`
      *
-     * @throws NullPointerException if `fieldName` is blank
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
      */
     public static SObjectBinaryOperator maxBy(final String fieldName) {
         return maxBy(SObjectComparator.comparing(fieldName));

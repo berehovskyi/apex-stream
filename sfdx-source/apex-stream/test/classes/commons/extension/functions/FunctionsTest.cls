@@ -10,45 +10,49 @@
 private class FunctionsTest {
 
     // Given
-    private static List<String> stringInput = new List<String>{
+    private static final List<String> STRINGS = new List<String>{
             'publisher ', 'sustain', 'Triangle', ' activity', 'Invite', ' back ', 'Shop', 'stu mble'
     };
-    private static List<Integer> intInput = new List<Integer>{ 1, 2, 3, 4, 4, 6, -10, -3 };
-    private static List<Date> dateInput = new List<Date>{
+    private static final List<Integer> INTS = new List<Integer>{ 1, 2, 3, 4, 4, 6, -10, -3 };
+    private static final List<Date> DATES = new List<Date>{
             Date.newInstance(2020, 2, 2),
             Date.today(),
             Date.today().addDays(1),
             Date.today().addDays(-1)
     };
-    private static List<Datetime> datetimeInput = new List<Datetime>{
+    private static final List<Datetime> DATETIMES = new List<Datetime>{
             Datetime.newInstance(2020, 2, 2),
             Datetime.now(),
             Datetime.now().addDays(1),
             Datetime.now().addDays(-1)
     };
-    private static List<Time> timeInput = new List<Time>{
+    private static final List<Time> TIMES = new List<Time>{
             Time.newInstance(10, 10, 10, 10),
             Time.newInstance(11, 11, 11, 11),
             Time.newInstance(12, 12, 12, 12),
             Time.newInstance(13, 13, 13, 13)
     };
-    private static List<String> datetimeAsStringInput = new List<String>{
+    private static final List<String> DATETIMES_AS_STRINGS = new List<String>{
             '2008-10-5 12:20:20',
             '2008-10-15 12:20:20',
             '2008-12-10 12:20:20',
             '2008-20-58 12:20:20'
     };
-    private static List<String> datetimeToParseInput = new List<String>{
+    private static final List<String> DATETIMES_TO_PARSE = new List<String>{
             '10/14/2020, 11:46 AM',
             '10/14/2021, 11:46 AM',
             '10/14/2022, 11:46 AM',
             '10/14/2023, 11:46 AM'
     };
-    private static List<String> dateAsStringInput = new List<String>{
+    private static final List<String> DATES_AS_STRINGS = new List<String>{
             '05/05/2020',
             '05/05/2021',
             '05/05/2022'
     };
+
+    static {
+        new StringFunctions();
+    }
     
     /**
      * @see StringFunctions.abbreviate
@@ -128,9 +132,8 @@ private class FunctionsTest {
         Integer pos = 2;
         String toRemove = 'a';
         String separator = 'a';
-        new StringFunctions();
         // Then
-        for (String str : stringInput) {
+        for (String str : STRINGS) {
             Validate.assertEquals(str.abbreviate(maxWidth), StringFunctions.abbreviate(maxWidth).apply(str));
             Validate.assertEquals(str.abbreviate(maxWidth, offset), StringFunctions.abbreviate(maxWidth, offset).apply(str));
             Validate.assertEquals(str + suffix, StringFunctions.append(suffix).apply(str));
@@ -197,18 +200,18 @@ private class FunctionsTest {
             Validate.assertEquals(str.unescapeUnicode(), StringFunctions.unescapeUnicode().apply(str));
             Validate.assertEquals(str.unescapeXml(), StringFunctions.unescapeXml().apply(str));
         }
-        for (Integer i : intInput) {
+        for (Integer i : INTS) {
             Validate.assertEquals(String.valueOf(i), StringFunctions.valueOf().apply(i));
         }
-        for (String str : datetimeAsStringInput) {
+        for (String str : DATETIMES_AS_STRINGS) {
             Validate.assertEquals(Date.valueOf(str), StringFunctions.dateValueOf().apply(str));
             Validate.assertEquals(Datetime.valueOf(str), StringFunctions.datetimeValueOf().apply(str));
             Validate.assertEquals(Datetime.valueOfGmt(str), StringFunctions.datetimeValueOfGmt().apply(str));
         }
-        for (String str : dateAsStringInput) {
+        for (String str : DATES_AS_STRINGS) {
             Validate.assertEquals(Date.parse(str), StringFunctions.parseDate().apply(str));
         }
-        for (String str : datetimeToParseInput) {
+        for (String str : DATETIMES_TO_PARSE) {
             Validate.assertEquals(Datetime.parse(str), StringFunctions.parseDatetime().apply(str));
         }
     }
@@ -227,7 +230,7 @@ private class FunctionsTest {
         Integer inc = 1;
         // Then
         new DateFunctions();
-        for (Date d : dateInput) {
+        for (Date d : DATES) {
             Validate.assertEquals(d.addDays(inc), DateFunctions.addDays(inc).apply(d));
             Validate.assertEquals(d.addMonths(inc), DateFunctions.addMonths(inc).apply(d));
             Validate.assertEquals(d.addYears(inc), DateFunctions.addYears(inc).apply(d));
@@ -261,7 +264,7 @@ private class FunctionsTest {
         String tz = 'America/New_York';
         // Then
         new DatetimeFunctions();
-        for (Datetime dt : datetimeInput) {
+        for (Datetime dt : DATETIMES) {
             Validate.assertEquals(dt.addDays(inc), DatetimeFunctions.addDays(inc).apply(dt));
             Validate.assertEquals(dt.addHours(inc), DatetimeFunctions.addHours(inc).apply(dt));
             Validate.assertEquals(dt.addMinutes(inc), DatetimeFunctions.addMinutes(inc).apply(dt));
@@ -293,7 +296,7 @@ private class FunctionsTest {
         Integer inc = 1;
         // Then
         new TimeFunctions();
-        for (Time t : timeInput) {
+        for (Time t : TIMES) {
             Validate.assertEquals(t.addHours(inc), TimeFunctions.addHours(inc).apply(t));
             Validate.assertEquals(t.addMilliseconds(inc), TimeFunctions.addMilliseconds(inc).apply(t));
             Validate.assertEquals(t.addMinutes(inc), TimeFunctions.addMinutes(inc).apply(t));

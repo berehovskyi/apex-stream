@@ -11,7 +11,7 @@
 public inherited sharing class DateToIntFunctions {
 
     @TestVisible
-    private DateToIntFunctions(){}
+    private DateToIntFunctions() {}
 
     //<editor-fold desc="Date To Int Functions">
     // @start-group Date To Int Functions

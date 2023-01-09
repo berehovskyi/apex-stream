@@ -6,7 +6,11 @@
 @IsTest(IsParallel = true)
 private class SObjectConsumersTest {
 
-    private static List<Contact> input = IterTestUtils.generateContacts2();
+    private static final List<Contact> INPUT = IterTestUtils.generateContacts2();
+
+    static {
+        new SObjectConsumers();
+    }
 
     /**
      * @see SObjectConsumers.addError
@@ -19,13 +23,12 @@ private class SObjectConsumersTest {
         String fieldName = IterTestUtils.CONSTS.DEPARTMENT;
         SObjectField field = IterTestUtils.CONSTS.Contact.Department;
         // When
-        new SObjectConsumers();
         ISObjectConsumer addErrorMessage = SObjectConsumers.addError(errorMessage);
         ISObjectConsumer addFieldNameError = SObjectConsumers.addError(fieldName, errorMessage);
         ISObjectConsumer addFieldError = SObjectConsumers.addError(field, errorMessage);
         ISObjectConsumer addErrorException = SObjectConsumers.addError(exc);
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             SObject clone = IterTestUtils.deepClone(con);
             SObject clone1 = IterTestUtils.deepClone(con);
             SObject clone2 = IterTestUtils.deepClone(con);
@@ -62,7 +65,7 @@ private class SObjectConsumersTest {
         ISObjectConsumer setDescriptionOnParentConsumer = SObjectConsumers.set('Account?.Description', SObjectFunctions.get(IterTestUtils.CONSTS.DEPARTMENT));
         ISObjectConsumer setDescriptionOnParentConsumerUnsafe = SObjectConsumers.set('Account.Description', SObjectFunctions.get(IterTestUtils.CONSTS.DEPARTMENT));
         // Then
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             SObject clone = IterTestUtils.deepClone(con);
             clone.put(IterTestUtils.CONSTS.Contact.Department, constant);
             SObject cloneToConsume = IterTestUtils.deepClone(con);
@@ -87,7 +90,7 @@ private class SObjectConsumersTest {
             SObject cloneToConsume5 = IterTestUtils.deepClone(con);
             setDescriptionOnParentConsumer.accept(cloneToConsume5);
             Validate.assertEquals(clone2, cloneToConsume5);
-            String expectedException = System.NullPointerException.class.getName();
+            String expectedException = NullPointerException.class.getName();
             try {
                 setDepartmentFromParentConsumerUnsafe.accept(con);
             } catch (Exception exc) {
@@ -117,7 +120,7 @@ private class SObjectConsumersTest {
         ISObjectConsumer setGrandParentConsumerSafe = SObjectConsumers.setSObject('Account?.Parent', constant);
         // Then
         IterTestUtils.TestAccountOperator testAccountOperator = new IterTestUtils.TestAccountOperator();
-        for (Contact con : input) {
+        for (Contact con : INPUT) {
             SObject clone = IterTestUtils.deepClone(con);
             clone.putSObject(IterTestUtils.CONSTS.Contact.AccountId, constant);
             SObject cloneToConsume = IterTestUtils.deepClone(con);
@@ -144,7 +147,7 @@ private class SObjectConsumersTest {
                 try {
                     setGrandParentConsumer.accept(cloneToConsume5);
                 } catch (NullPointerException exc) {
-                    Validate.assertEquals(System.NullPointerException.class.getName(), exc.getTypeName());
+                    Validate.assertEquals(NullPointerException.class.getName(), exc.getTypeName());
                 }
             }
         }

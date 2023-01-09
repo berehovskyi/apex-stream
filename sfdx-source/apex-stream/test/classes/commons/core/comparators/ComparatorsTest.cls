@@ -5,6 +5,10 @@
  */
 @IsTest(IsParallel = true)
 private class ComparatorsTest {
+
+    static {
+        new Comparators();
+    }
     
     /**
      * @see Comparators.compareNullables
@@ -30,7 +34,6 @@ private class ComparatorsTest {
         IterTestUtils.Person frank = new IterTestUtils.Person('Frank', 20, Date.newInstance(1990, 1, 2), 1L, true);
         IterTestUtils.Person tom = new IterTestUtils.Person('Tom', 20, Date.newInstance(1990, 1, 2), 2L, true);
         // Then
-        new Comparators();
         Validate.assertEquals(-1, Comparators.compareNullables(null, 1));
         Validate.assertEquals(0, Comparators.compareNullables(null, null));
         Validate.assertEquals(1, Comparators.compareNullables(1, null));

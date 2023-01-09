@@ -13,7 +13,7 @@
 public inherited sharing class Validate {
 
     @TestVisible
-    private Validate(){}
+    private Validate() {}
 
     /**
      * @description Checks whether the specified Object reference is not null.
@@ -23,22 +23,52 @@ public inherited sharing class Validate {
      * @throws NullPointerException if `o` is null
      */
     public static void notNull(final Object o) {
-        if (o == null) { throw new NullPointerException(); }
+        if (o == null) {
+            throw new NullPointerException();
+        }
     }
 
     /**
-     * @description Checks whether the specified String reference is not blank.
+     * @description Checks whether the specified String reference is not whitespace nor empty (''), nor null.
      *
-     * @param o the validated String
+     * @param s the validated string
      *
-     * @throws NullPointerException if `o` is blank
+     * @throws IllegalArgumentException if `s` is whitespace or empty ('')
+     * @throws NullPointerException if `s` is null
      */
-    public static void notBlank(final String o) {
-        if (String.isBlank(o)) { throw new NullPointerException(); }
+    public static void notBlank(final String s) {
+        notNull(s);
+        isTrue(String.isNotBlank(s));
     }
 
     /**
-     * @description Checks whether the specified `List<Object>` reference is not null
+     * @description Checks whether the specified String reference is not empty ('') nor null.
+     *
+     * @param s the validated string
+     *
+     * @throws IllegalArgumentException if `s` is empty ('')
+     * @throws NullPointerException if `s` is null
+     */
+    public static void notEmpty(final String s) {
+        notNull(s);
+        isTrue(String.isNotEmpty(s));
+    }
+
+    /**
+     * @description Checks whether the specified `objs` reference is not null nor empty.
+     *
+     * @param objs the validated list
+     *
+     * @throws IllegalArgumentException if `objs` is empty
+     * @throws NullPointerException if `objs` is null
+     */
+    public static void notEmpty(final List<Object> objs) {
+        notNull(objs);
+        isTrue(!objs.isEmpty());
+    }
+
+    /**
+     * @description Checks whether the specified `objs` reference is not null
      * nor contains any null elements.
      *
      * @param objs the validated list
@@ -46,9 +76,9 @@ public inherited sharing class Validate {
      * @throws NullPointerException if `objs` or any element is null
      */
     public static void noNullElements(final List<Object> objs) {
-        if (objs == null && !objs.isEmpty()) { throw new NullPointerException(); }
-        for (Object o : objs) {
-            notNull(o);
+        notNull(objs);
+        for (Integer i = 0, size = objs.size(); i < size; i++) {
+            isTrue(objs[i] != null);
         }
     }
 
@@ -60,7 +90,9 @@ public inherited sharing class Validate {
      * @throws IllegalArgumentException if `condition` evaluates to false
      */
     public static void isTrue(final Boolean condition) {
-        if (!condition) { throw new IllegalArgumentException(); }
+        if (!condition) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -72,7 +104,7 @@ public inherited sharing class Validate {
      * @throws IllegalArgumentException if `condition` evaluates to false
      */
     public static void isTrue(final Boolean condition, final String message) {
-        if (!condition) { throw new IllegalArgumentException(message); }
+        isTrue(condition, new IllegalArgumentException(message));
     }
 
     /**
@@ -84,7 +116,9 @@ public inherited sharing class Validate {
      * @throws Exception if `condition` evaluates to false
      */
     public static void isTrue(final Boolean condition, final Exception exc) {
-        if (!condition) { throw exc; }
+        if (!condition) {
+            throw exc;
+        }
     }
 
     /**
@@ -96,10 +130,40 @@ public inherited sharing class Validate {
      *
      * @throws IllegalArgumentException if `condition` evaluates to false
      *
-     * @example Validate.isTrue(n >= 0, 'The argument should be positive, actual: {0}.', new List<Object>{ n });
+     * @example
+     * Validate.isTrue(n >= 0, 'The argument should be positive, actual: {0}.', new List<Object>{ n });
      */
     public static void isTrue(final Boolean condition, final String message, final List<Object> arguments) {
-        if (!condition) { throw new IllegalArgumentException(String.format(message, arguments)); }
+        if (!condition) {
+            throw new IllegalArgumentException(String.format(message, arguments));
+        }
+    }
+
+    /**
+     * @description Checks whether the specified `input` matches the specified `pattern`.
+     *
+     * @param input the string to validate
+     * @param regex the regular expression pattern
+     * @param message the formatted exception message
+     * @param arguments the optional values for the formatted exception message
+     *
+     * @throws IllegalArgumentException if `input` does not match `pattern`
+     *
+     * @example 
+     * Validate.matches(
+     *     'A-{00000}',
+     *     '\\S*\\{\\d+\\}',
+     *     'The string {0} does not match the pattern {1}.', 
+     *     new List<Object>{ 'A-{00000}', '\\S*\\{\\d+\\}' }
+     * );
+     */
+    public static void matches(
+            final String input,
+            final String regex,
+            final String message,
+            final List<Object> arguments
+    ) {
+        isTrue(Pattern.matches(regex, input), message, arguments);
     }
 
     /**
@@ -125,6 +189,7 @@ public inherited sharing class Validate {
     /**
      * @description Asserts whether the specified `condition` is true.
      * If it is not, a fatal error is returned that causes code execution to halt.
+     *
      * @param condition the boolean expression to check
      */
     public static void assert(final Boolean condition) {
