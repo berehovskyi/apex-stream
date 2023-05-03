@@ -1,10 +1,23 @@
 {
-  "packageDirectories": [
-    {
-      "path": "sfdx-source/apex-stream",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "sfdx-source/apex-stream",
+            "package": "apex-stream",
+            "default": true,
+            "versionName": "ver 2.2",
+            "versionNumber": "2.2.1.NEXT",
+            "dependencies": [
+                {
+                    "package": "apex-validate",
+                    "versionNumber": "1.0.0.LATEST"
+                }
+            ]
+        }
+    ],
+    "name": "apex-stream",
+    "namespace": "",
+    "packageAliases": {
+        "apex-validate": "0Ho1t000000CajuCAC",
+        "apex-stream": "0Ho1t00000000HWCAY"
     }
-  ],
-  "name": "apex-stream",
-  "namespace": ""
 }

@@ -39,15 +39,15 @@ private class FunctionsTest {
             '2008-20-58 12:20:20'
     };
     private static final List<String> DATETIMES_TO_PARSE = new List<String>{
-            '10/14/2020, 11:46 AM',
-            '10/14/2021, 11:46 AM',
-            '10/14/2022, 11:46 AM',
-            '10/14/2023, 11:46 AM'
+        Datetime.newInstance(2020, 10, 14, 11, 46, 0).format(),
+        Datetime.newInstance(2021, 10, 14, 11, 46, 0).format(),
+        Datetime.newInstance(2022, 10, 14, 11, 46, 0).format(),
+        Datetime.newInstance(2023, 10, 14, 11, 46, 0).format()
     };
     private static final List<String> DATES_AS_STRINGS = new List<String>{
-            '05/05/2020',
-            '05/05/2021',
-            '05/05/2022'
+        Date.newInstance(2020, 5, 5).format(),
+        Date.newInstance(2021, 5, 5).format(),
+        Date.newInstance(2022, 5, 5).format()
     };
 
     static {

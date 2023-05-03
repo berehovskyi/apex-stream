@@ -52,7 +52,7 @@ private class IntSequenceTest {
         Assert.areEqual(false, seq4.iterator().hasNext());
         Assert.areEqual(false, seq5.iterator().hasNext());
         Assert.isTrue(!((IntStream) stream).isOperated);
-        Assert.areEqual(ints, input, Label.InputMutatedErrorMessage);
+        Assert.areEqual(ints, input, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -269,7 +269,7 @@ private class IntSequenceTest {
         // Then
         List<Integer> expected = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -286,7 +286,7 @@ private class IntSequenceTest {
         // Then
         List<Integer> expected = new List<Integer>{ 10, 2, 6, 16, -6, 8, -12, 0, 8 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -303,7 +303,7 @@ private class IntSequenceTest {
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -320,7 +320,7 @@ private class IntSequenceTest {
         // Then
         List<Double> expected = new List<Double>{ 5.0, 1.0, 3.0, 8.0, -3.0, 4.0, -6.0, 0.0, 4.0 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -335,7 +335,7 @@ private class IntSequenceTest {
         // When
         List<Account> actual = seq.toList();
         // Then
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         for (Integer i = 0, size = input.size(); i < size; i++ ) {
             Assert.areEqual(Math.abs(clone[i]), actual[i].NumberOfEmployees);
         }
@@ -355,7 +355,7 @@ private class IntSequenceTest {
         // Then
         List<String> expected = new List<String>{ '5', '1', '3', '8', '-3', '4', '-6', '0', '4' };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -371,7 +371,7 @@ private class IntSequenceTest {
         List<Integer> actual = seq.toList();
         // Then
         Assert.areEqual(clone, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -388,7 +388,7 @@ private class IntSequenceTest {
         // Then
         List<Integer> expected = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -405,7 +405,7 @@ private class IntSequenceTest {
         // Then
         List<Integer> expected = new List<Integer>{ null, -6, -3, 0, 1, 3, 4, 4, 5, 8 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -437,7 +437,7 @@ private class IntSequenceTest {
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -469,7 +469,7 @@ private class IntSequenceTest {
         Assert.areEqual(input, actual1);
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -500,8 +500,8 @@ private class IntSequenceTest {
         Integer expected1 = 16;
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected1, actual1);
-        Assert.areEqual(10, seed, Label.InputMutatedErrorMessage);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(10, seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -518,7 +518,7 @@ private class IntSequenceTest {
         // Then
         Set<Integer> expected = new Set<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -537,7 +537,7 @@ private class IntSequenceTest {
         // Then
         Assert.areEqual(-3, actual);
         Assert.areEqual(42, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -556,7 +556,7 @@ private class IntSequenceTest {
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -575,7 +575,7 @@ private class IntSequenceTest {
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -594,7 +594,7 @@ private class IntSequenceTest {
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -610,7 +610,7 @@ private class IntSequenceTest {
         Integer actual = seq.max().get();
         // Then
         Assert.areEqual(9, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -626,7 +626,7 @@ private class IntSequenceTest {
         Integer actual = seq.min().get();
         // Then
         Assert.areEqual(-3, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -642,7 +642,7 @@ private class IntSequenceTest {
         Integer actual = seq.sum();
         // Then
         Assert.areEqual(22, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -658,7 +658,7 @@ private class IntSequenceTest {
         Double actual = seq.avg().get();
         // Then
         Assert.areEqual(3.625, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -680,7 +680,7 @@ private class IntSequenceTest {
         Assert.areEqual(8, actual);
         Assert.areEqual(0, actual1);
         Assert.areEqual(0, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -702,7 +702,7 @@ private class IntSequenceTest {
         Assert.areEqual(false, actual);
         Assert.areEqual(true, actual1);
         Assert.areEqual(true, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -718,7 +718,7 @@ private class IntSequenceTest {
         List<Integer> actual = seq.toList();
         // Then
         Assert.areEqual(input, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -735,7 +735,7 @@ private class IntSequenceTest {
         // Then
         Set<Integer> expected = new Set<Integer>{ 5, 1, 3, -3, 7, 9, 0 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
 }

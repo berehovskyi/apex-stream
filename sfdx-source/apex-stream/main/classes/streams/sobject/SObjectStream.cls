@@ -76,7 +76,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public Iterator<SObject> iterator() {
-        Validate.isTrue(!isOperated, Label.StreamOperatedErrorMessage);
+        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -746,7 +746,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      */
     public virtual ISObjectIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return SObjectStream.empty(); }
         return new SObjectStream(new SObjectLimitIterator(iterator(), lim));
     }
@@ -770,7 +770,7 @@ public virtual inherited sharing class SObjectStream extends SObjectIterable imp
      */
     public virtual ISObjectIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return new SObjectStream(iterator()); }
         return new SObjectStream(new SObjectSkipIteratorIterator(iterator(), n));
     }

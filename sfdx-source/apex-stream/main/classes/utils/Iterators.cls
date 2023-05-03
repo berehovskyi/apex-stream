@@ -351,9 +351,9 @@ public inherited sharing class Iterators {
         while (iterator.hasNext()) {
             final SObject sObj = iterator.next();
             final Id k = (Id) keyMapper.apply(sObj);
-            Validate.validState(
+            Validate.state(
                     !m.containsKey(k),
-                    Label.DuplicateKeyErrorMessage,
+                    Label.AS_ErrorMessage_DuplicateKey,
                     new List<Object>{ k, m.get(k), sObj }
             );
             m.put(k, sObj);
@@ -390,9 +390,9 @@ public inherited sharing class Iterators {
         while (iterator.hasNext()) {
             final SObject sObj = iterator.next();
             final String k = (String) keyMapper.apply(sObj);
-            Validate.validState(
+            Validate.state(
                     !m.containsKey(k),
-                    Label.DuplicateKeyErrorMessage,
+                    Label.AS_ErrorMessage_DuplicateKey,
                     new List<Object>{ k, m.get(k), sObj }
             );
             m.put(k, sObj);

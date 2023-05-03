@@ -1,5 +1,5 @@
 /**
- * @description A functions that takes two arguments of `Long` type and returns an `Long`
+ * @description A functions that takes two arguments of `Long` type and returns a `Long`
  * value.
  *
  * @author Oleh Berehovskyi

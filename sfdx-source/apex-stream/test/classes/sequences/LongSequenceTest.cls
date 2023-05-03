@@ -53,7 +53,7 @@ private class LongSequenceTest {
         Assert.areEqual(false, seq4.iterator().hasNext());
         Assert.areEqual(false, seq5.iterator().hasNext());
         Assert.areEqual(false, stream.isEmpty());
-        Assert.areEqual(LONGS, input, Label.InputMutatedErrorMessage);
+        Assert.areEqual(LONGS, input, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((LongStream) stream).isOperated);
     }
 
@@ -271,7 +271,7 @@ private class LongSequenceTest {
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -288,7 +288,7 @@ private class LongSequenceTest {
         // Then
         List<Long> expected = new List<Long>{ 10L, 2L, 6L, 16L, -6L, 8L, -12L, 0L, 8L };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -305,7 +305,7 @@ private class LongSequenceTest {
         // Then
         List<Integer> expected = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -322,7 +322,7 @@ private class LongSequenceTest {
         // Then
         List<Double> expected = new List<Double>{ 5.0, 1.0, 3.0, 8.0, -3.0, 4.0, -6.0, 0.0, 4.0 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -337,7 +337,7 @@ private class LongSequenceTest {
         // When
         List<Account> actual = seq.toList();
         // Then
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         for (Integer i = 0, size = input.size(); i < size; i++ ) {
             Assert.areEqual(Math.abs(clone[i]), actual[i].NumberOfEmployees);
         }
@@ -357,7 +357,7 @@ private class LongSequenceTest {
         // Then
         List<String> expected = new List<String>{ '5', '1', '3', '8', '-3', '4', '-6', '0', '4' };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -373,7 +373,7 @@ private class LongSequenceTest {
         List<Long> actual = seq.toList();
         // Then
         Assert.areEqual(clone, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -390,7 +390,7 @@ private class LongSequenceTest {
         // Then
         List<Long> expected = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -407,7 +407,7 @@ private class LongSequenceTest {
         // Then
         List<Long> expected = new List<Long>{ null, -6L, -3L, 0L, 1L, 3L, 4L, 4L, 5L, 8L };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -439,7 +439,7 @@ private class LongSequenceTest {
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -471,7 +471,7 @@ private class LongSequenceTest {
         Assert.areEqual(input, actual1);
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -502,8 +502,8 @@ private class LongSequenceTest {
         Long expected1 = 16;
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected1, actual1);
-        Assert.areEqual(10, seed, Label.InputMutatedErrorMessage);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(10, seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -520,7 +520,7 @@ private class LongSequenceTest {
         // Then
         Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -539,7 +539,7 @@ private class LongSequenceTest {
         // Then
         Assert.areEqual(-3L, actual);
         Assert.areEqual(42L, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -558,7 +558,7 @@ private class LongSequenceTest {
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -577,7 +577,7 @@ private class LongSequenceTest {
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -596,7 +596,7 @@ private class LongSequenceTest {
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -612,7 +612,7 @@ private class LongSequenceTest {
         Long actual = seq.max().get();
         // Then
         Assert.areEqual(9, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -628,7 +628,7 @@ private class LongSequenceTest {
         Long actual = seq.min().get();
         // Then
         Assert.areEqual(-3L, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -644,7 +644,7 @@ private class LongSequenceTest {
         Long actual = seq.sum();
         // Then
         Assert.areEqual(22L, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -660,7 +660,7 @@ private class LongSequenceTest {
         Double actual = seq.avg().get();
         // Then
         Assert.areEqual(3.625, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -682,7 +682,7 @@ private class LongSequenceTest {
         Assert.areEqual(8L, actual);
         Assert.areEqual(0L, actual1);
         Assert.areEqual(0L, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -704,7 +704,7 @@ private class LongSequenceTest {
         Assert.areEqual(false, actual);
         Assert.areEqual(true, actual1);
         Assert.areEqual(true, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -720,7 +720,7 @@ private class LongSequenceTest {
         List<Long> actual = seq.toList();
         // Then
         Assert.areEqual(input, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -737,7 +737,7 @@ private class LongSequenceTest {
         // Then
         Set<Long> expected = new Set<Long>{ 5L, 1L, 3L, -3L, 7L, 9L, 0L };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
 }

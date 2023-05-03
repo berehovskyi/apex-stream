@@ -17,7 +17,7 @@ public inherited sharing class TypePredicates {
     // @start-group Built-Ins
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Boolean} type.
+     * Boolean type.
      *
      * @return the `Predicate`
      */
@@ -27,7 +27,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Id} type.
+     * Id type.
      *
      * @return the `Predicate`
      */
@@ -37,7 +37,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * String} type.
+     * String type.
      *
      * @return the `Predicate`
      */
@@ -47,7 +47,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Blob} type.
+     * Blob type.
      *
      * @return the `Predicate`
      */
@@ -57,7 +57,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Date} type.
+     * Date type.
      *
      * @return the `Predicate`
      */
@@ -67,7 +67,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Datetime} type.
+     * Datetime type.
      *
      * @return the `Predicate`
      */
@@ -77,7 +77,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Time} type.
+     * Time type.
      *
      * @return the `Predicate`
      */
@@ -87,7 +87,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Integer} type.
+     * Integer type.
      *
      * @return the `Predicate`
      */
@@ -97,7 +97,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Long} type.
+     * Long type.
      *
      * @return the `Predicate`
      */
@@ -107,7 +107,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Double} type.
+     * Double type.
      *
      * @return the `Predicate`
      */
@@ -117,7 +117,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * SObject} type.
+     * SObject type.
      *
      * @return the `Predicate`
      */
@@ -127,7 +127,7 @@ public inherited sharing class TypePredicates {
 
     /**
      * @description Returns a `Predicate` that tests the input object if it is of
-     * Comparable} type.
+     * Comparable type.
      *
      * @return the `Predicate`
      */

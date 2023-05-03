@@ -48,7 +48,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public Iterator<Integer> iterator() {
-        Validate.isTrue(!isOperated, Label.StreamOperatedErrorMessage);
+        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -544,7 +544,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      */
     public virtual IIntIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return IntStream.empty(); }
         return new IntStream(new IntLimitIterator(iterator(), lim));
     }
@@ -568,7 +568,7 @@ public virtual inherited sharing class IntStream extends IntIterable implements 
      */
     public virtual IIntIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return new IntStream(iterator()); }
         return new IntStream(new IntSkipIterator(iterator(), n));
     }

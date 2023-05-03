@@ -1,6 +1,6 @@
 # ToDoubleFunctions
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
@@ -19,7 +19,7 @@ Provides common implementations of [ToDoubleFunction](/docs/Functional-Abstract-
 ### Built-Ins
 ##### `static asDouble()`
 
-Returns a `ToDoubleFunction` that returns the Double value of the Object input argument by casting it to an Double.
+Returns a `ToDoubleFunction` that returns the Double value of the Object input argument by casting it to a Double.
 
 ###### Return
 

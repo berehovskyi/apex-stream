@@ -17,7 +17,7 @@ public inherited sharing class IntToLongFunctions {
     // @start-group Built-Ins
     /**
      * @description Returns a `IIntToLongFunction` that returns the Long value
-     * of the Integer input argument by casting it to an Long.
+     * of the Integer input argument by casting it to a Long.
      *
      * @return the `IIntToLongFunction`
      */

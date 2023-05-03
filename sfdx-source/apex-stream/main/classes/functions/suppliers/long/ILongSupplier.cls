@@ -1,5 +1,5 @@
 /**
- * @description A function that takes no arguments and returns an `Long` value.
+ * @description A function that takes no arguments and returns a `Long` value.
  *
  * @author Oleh Berehovskyi
  *

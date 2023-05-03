@@ -1,6 +1,6 @@
 # IntToLongFunctions
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
@@ -19,7 +19,7 @@ Provides common implementations of [IntToLongFunction](/docs/Functional-Abstract
 ### Built-Ins
 ##### `static asLong()`
 
-Returns a `IIntToLongFunction` that returns the Long value of the Integer input argument by casting it to an Long.
+Returns a `IIntToLongFunction` that returns the Long value of the Integer input argument by casting it to a Long.
 
 ###### Return
 

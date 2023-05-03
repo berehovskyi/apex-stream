@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AV_ErrorMessage_Null</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument object is null</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_NullMessage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Exception message cannot be null</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_NotNull</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument object is not null. Actual value: {0}</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_FalseCondition</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument condition is false</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_TrueCondition</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument condition is true</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_EmptyList</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument list is empty</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_EmptyIterable</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument list is empty</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_NullElementList</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument list contains null element</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_NullElementIterable</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument iterable contains null element</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_InvalidIndexList</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>List index out of bounds: {0}</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_BlankString</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument string is blank</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_EmptyString</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument string is empty</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_InvalidEmail</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument email {0} is invalid</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_InvalidCreditCard</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument credit card {0} is invalid</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_InvalidIndexString</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>String index out of bounds: {0}</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_PatternMismatch</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument string {0} does not match the pattern {1}</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_InvalidState</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument state is invalid</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_NotBetween</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument {0} is not between inclusive range from {1} to {2}</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_NotEqual</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Arguments {0} and {1} are not equal</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_Equal</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Arguments {0} and {1} are equal</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_NotInstanceOf</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument object is not an instance of {0}. Actual type: {1}</value>
+    </labels>
+    <labels>
+        <fullName>AV_ErrorMessage_InstanceOf</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Argument object is an instance of {0}</value>
+    </labels>
+    <labels>
+        <fullName>AV_Regex_ValidEmail</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>regex</categories>
+        <shortDescription>Regular expression.</shortDescription>
+        <value>^[a-zA-Z0-9_!#$%&amp;'*+/=?`{|}~^-]+(?:\.[a-zA-Z0-9_!#$%&amp;'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$</value>
+    </labels>
+</CustomLabels>

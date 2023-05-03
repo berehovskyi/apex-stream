@@ -544,7 +544,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      */
     public virtual ILongIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return LongSequence.empty(); }
         if (lim >= longs.size()) { return this; }
         final List<Long> results = new List<Long>();
@@ -573,7 +573,7 @@ public virtual inherited sharing class LongSequence extends LongIterable impleme
      */
     public virtual ILongIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return this; }
         if (n >= longs.size()) { return LongSequence.empty(); }
         final List<Long> results = new List<Long>();

@@ -1,6 +1,6 @@
 # ToLongFunctions
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
@@ -19,7 +19,7 @@ Provides common implementations of [ToLongFunction](/docs/Functional-Abstract-Cl
 ### Built-Ins
 ##### `static asLong()`
 
-Returns a `ToLongFunction` that returns the Long value of the Object input argument by casting it to an Long.
+Returns a `ToLongFunction` that returns the Long value of the Object input argument by casting it to a Long.
 
 ###### Return
 

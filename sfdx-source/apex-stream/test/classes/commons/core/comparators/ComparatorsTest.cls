@@ -64,7 +64,7 @@ private class ComparatorsTest {
         try {
             Comparators.compareUntyped(1, 'a');
         } catch (TypeException exc) {
-            Assert.areEqual('Types of comparing objects (Integer, String) mismatch or do not support comparison operators.', exc.getMessage());
+            Assert.areEqual(String.format(Label.AS_ErrorMessage_TypesMismatch, new List<String>{ 'Integer', 'String' }), exc.getMessage());
         }
     }
     

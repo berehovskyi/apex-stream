@@ -1,6 +1,6 @@
 # SObjectStream
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 

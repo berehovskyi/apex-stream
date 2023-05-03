@@ -24,7 +24,7 @@ private class IntConsumerTest {
             cons.accept(clone[i]);
             composed.accept(clone[i]);
             composed1.accept(clone[i]);
-            Assert.areEqual(clone[i], INPUT[i], Label.InputMutatedErrorMessage);
+            Assert.areEqual(clone[i], INPUT[i], Label.AS_ErrorMessage_InputMutated);
         }
     }
 

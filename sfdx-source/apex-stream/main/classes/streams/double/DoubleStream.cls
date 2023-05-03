@@ -57,7 +57,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public Iterator<Double> iterator() {
-        Validate.isTrue(!isOperated, Label.StreamOperatedErrorMessage);
+        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -533,7 +533,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      */
     public virtual IDoubleIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return DoubleStream.empty(); }
         return new DoubleStream(new DoubleLimitIterator(iterator(), lim));
     }
@@ -557,7 +557,7 @@ public virtual inherited sharing class DoubleStream extends DoubleIterable imple
      */
     public virtual IDoubleIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return new DoubleStream(iterator()); }
         return new DoubleStream(new DoubleSkipIterator(iterator(), n));
     }

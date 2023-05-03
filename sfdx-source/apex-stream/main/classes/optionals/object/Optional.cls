@@ -219,7 +219,7 @@ public virtual inherited sharing class Optional {
     }
 
     private void requireNonNullValue() {
-        if (value == null) { throw new NoSuchElementException(Label.NoValuePresentErrorMessage); }
+        if (value == null) { throw new NoSuchElementException(Label.AS_ErrorMessage_NoValuePresent); }
     }
 
     public virtual Boolean equals(Object obj) {

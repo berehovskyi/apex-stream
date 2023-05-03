@@ -17,7 +17,7 @@ public inherited sharing class DoubleToLongFunctions {
     // @start-group Built-Ins
     /**
      * @description Returns a `IDoubleToLongFunction` that returns the Long value
-     * of the Double input argument by casting it to an Long.
+     * of the Double input argument by casting it to a Long.
      *
      * @return the `IDoubleToLongFunction`
      *

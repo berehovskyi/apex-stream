@@ -1,6 +1,6 @@
 # DoubleToLongFunctions
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
@@ -19,7 +19,7 @@ Provides common implementations of [DoubleToLongFunction](/docs/Functional-Abstr
 ### Built-Ins
 ##### `static longValue()`
 
-Returns a `IDoubleToLongFunction` that returns the Long value of the Double input argument by casting it to an Long.
+Returns a `IDoubleToLongFunction` that returns the Long value of the Double input argument by casting it to a Long.
 
 ###### Return
 

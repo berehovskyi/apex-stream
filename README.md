@@ -1,6 +1,8 @@
 # Apex Stream Framework
 
-![](https://img.shields.io/github/v/release/berehovskyi/apex-stream?include_prereleases) ![](https://img.shields.io/badge/build-passing-brightgreen.svg) ![](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+![](https://img.shields.io/github/v/release/berehovskyi/apex-stream?include_prereleases)
+![](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
 
 Apex Stream is a framework for processing sequences of elements that takes advantage of the functional programming paradigm.
 
@@ -8,11 +10,31 @@ Inspired by [Java Stream API](https://docs.oracle.com/en/java/javase/18/docs/api
 slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable) and
 [js Array.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
 
-<a href="https://githubsfdeploy.herokuapp.com?owner=berehovskyi&repo=apex-stream&ref=master">
+## Installation
+
+<a href="https://githubsfdeploy.herokuapp.com?owner=berehovskyi&repo=apex-stream&ref=main">
   <img alt="Deploy to Salesforce" src="https://img.shields.io/badge/Deploy%20to-Salesforce-%2300a1e0?style=for-the-badge&logo=appveyor">
 </a>
 
-## Apex Stream Framework Features:
+or install as an Unlocked Package using the CLI:
+
+### Dependencies
+
+- [Apex Validate](https://github.com/berehovskyi/apex-validate)
+
+Install dependencies first:
+
+```sh
+sf package install -p 04t1t000003HVTRAA4 -o me@example.com -r -w 5
+```
+
+Install the Apex Stream Unlocked Package:
+
+```sh
+sf package install -p 04t1t000003HVUeAAO -o me@example.com -r -w 10
+```
+
+## Key Features
 
 - Iterables with implementations:
     - Streams (`SObjectStream`, `ObjectStream` and primitive `DoubleStream`, `IntStream`, `LongStream`)
@@ -28,8 +50,7 @@ slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dot
 
 ## Introduction
 
-**Apex Stream Framework
-** is built on custom `Iterables` that allows processing a sequence of elements supporting sequential aggregate operations,
+**Apex Stream Framework** is built on custom `Iterables` that allows processing a sequence of elements supporting sequential aggregate operations,
 providing a convenient declarative API. 2 types implement `Iterable` - `Stream` and `Sequence`.
 
 `Stream` is lazy. Computation on the source data is only performed when the terminal operation is initiated,
@@ -58,13 +79,13 @@ so you don't have to recreate them every time you need them.
 
 `Iterable` operations are composed of a chain, which consists of:
 
-- A **Source** which might be an iterable such as list or set), an iterator, a generator function, etc).
+- A **Source** which might be an iterable (such as list or set, an iterator, a generator function, etc).
 - Zero or more **intermediate** operations that transform an iterable into another iterable.
 - A **terminal** operation that produces a result.
 
 Operations on iterables **don't** change the source (but can mutate its elements).
 
-## Examples
+## Get Started
 
 ### Note
 
@@ -155,7 +176,7 @@ To concat multiple streams, use the static `concat` method that takes a list of 
 
 ```apex
 ISObjectIterable mergedStream = Stream.concat(
-        new List<ISObjectIterable>(accountStream1, accountStream2, accountStream3)
+    new List<ISObjectIterable>(accountStream1, accountStream2, accountStream3)
 );
 ```
 
@@ -178,12 +199,12 @@ Get all `Account` records from `Trigger.new` list on update if `Rating` field ha
 
 ```apex
 ISObjectIterable newAccountStreamWithChangedRating = Stream.zip(
-        Trigger.old, // The first argument is considered as left
-        Trigger.new,  // The second argument is considered as right
-        // Checks if oldAccount[i].Rating != newAccount[i].Rating
-        SObjectBiPredicates.areEqual(Account.Rating).negate(),
-        // Always return the right argument i.e elements from Trigger.new in this case
-        SObjectBinaryOperator.right()
+    Trigger.old, // The first argument is considered as left
+    Trigger.new,  // The second argument is considered as right
+    // Checks if oldAccount[i].Rating != newAccount[i].Rating
+    SObjectBiPredicates.areEqual(Account.Rating).negate(),
+    // Always return the right argument i.e elements from Trigger.new in this case
+    SObjectBinaryOperator.right()
 );
 ```
 
@@ -233,12 +254,12 @@ class CompositeKeyFunction implements ISObjectFunction {
     }
 }
 
-List<AccountShare> sharingsToInsert = new List<AccountShare>{ sh1, sh2, sh3, sh4, sh5 };
-List<AccountShare> sharingsToDelete = new List<AccountShare>{ sh3, sh4, sh6 };
+List<AccountShare> sharesToInsert = new List<AccountShare>{ sh1, sh2, sh3, sh4, sh5 };
+List<AccountShare> sharesToDelete = new List<AccountShare>{ sh3, sh4, sh6 };
 
-// Get sharings based on set differences according to a composite key classifying function:
-Stream.of(sharingsToInsert).except(sharingsToDelete, new CompositeKeyFunction()).toList();
-Stream.of(sharingsToDelete).except(sharingsToInsert, new CompositeKeyFunction()).toList();
+// Get shares based on set differences according to a composite key classifying function:
+Stream.of(sharesToInsert).except(sharesToDelete, new CompositeKeyFunction()).toList();
+Stream.of(sharesToDelete).except(sharesToInsert, new CompositeKeyFunction()).toList();
 ```
 
 - ### Filtering
@@ -249,7 +270,7 @@ Get accounts with `AnnualRevenue` greater than `10000`:
 
 ```apex
 ISObjectIterable accountStreamWithAnnualRevenueGreaterThan10k = Stream.of(accounts)
-        .filter(SObjectPredicates.isGreater(Account.AnnualRevenue, 10000));
+    .filter(SObjectPredicates.isGreater(Account.AnnualRevenue, 10000));
 ```
 
 Get accounts with `AnnualRevenue` greater than `1000000` and with `Rating` == `Hot`
@@ -257,10 +278,10 @@ using function composition:
 
 ```apex
 ISObjectIterable filteredAccountStream = Stream.of(accounts)
-        .filter(
-                SObjectPredicates.isGreater(Account.AnnualRevenue, 10000)
-                        .andAlso(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
-        );
+    .filter(
+        SObjectPredicates.isGreater(Account.AnnualRevenue, 10000)
+            .andAlso(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
+    );
 ```
 
 - ### Iterating
@@ -272,17 +293,17 @@ Set `Rating` to `Hot` for each account:
 
 ```apex
 ISObjectIterable mutatedAccountStream = Stream.of(accounts)
-        .forEach(SObjectConsumers.set(Account.Rating, 'Hot'));
+    .forEach(SObjectConsumers.set(Account.Rating, 'Hot'));
 ```
 
 Set `Rating` to `Hot` and set `AnnualRevenue` to `0` for each account using function composition:
 
 ```apex
 ISObjectIterable mutatedAccountStream = Stream.of(accounts)
-        .forEach(
-                SObjectConsumers.set(Account.Rating, 'Hot')
-                        .andThen(SObjectConsumers.set(Account.AnnualRevenue, 0))
-        );
+    .forEach(
+        SObjectConsumers.set(Account.Rating, 'Hot')
+            .andThen(SObjectConsumers.set(Account.AnnualRevenue, 0))
+    );
 ```
 
 - ### Mapping
@@ -294,14 +315,14 @@ Create a stream of parent `Accounts` from the contact stream:
 
 ```apex
 ISObjectIterable accountStream = Stream.of(contacts)
-        .mapTo(SObjectUnaryOperators.getSObject('Account'));
+    .mapTo(SObjectUnaryOperators.getSObject('Account'));
 ```
 
 Create a `DoubleStream` from `Account.AnnualRevenue` values:
 
 ```apex
 IDoubleIterable revenueStream = Stream.of(accounts)
-        .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue));
+    .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue));
 ```
 
 A `flatMapTo` operation converts elements by applying a function that returns an `Iterable` to them
@@ -311,23 +332,23 @@ Create a stream of related child contacts from the account stream:
 
 ```apex
 ISObjectIterable contactStream = Stream.of(accounts)
-        .flatMapTo(SObjectFunctions.getSObjects('Contacts'));
+    .flatMapTo(SObjectFunctions.getSObjects('Contacts'));
 ```
 
 Create a stream of flattened ints from a nested `List<List<Integer>>` list:
 
 ```apex
 List<List<Integer>> containedInts = new List<List<Integer>>{
-        new List<Integer>{ 1 },
-        null,
-        new List<Integer>(),
-        new List<Integer>{ 0, 10 },
-        new List<Integer>{ null }
+    new List<Integer>{ 1 },
+    null,
+    new List<Integer>(),
+    new List<Integer>{ 0, 10 },
+    new List<Integer>{ null }
 }; // [ [1], null, [], [0, 10], [null] ]
 
 List<Integer> flattenedInts = Stream.of(containedInts)
-        .flatMapToInt(Function.identity())
-        .toList(); // [1, 0, 10, null]
+    .flatMapToInt(Function.identity())
+    .toList(); // [1, 0, 10, null]
 ```
 
 - ### Limit and Skip
@@ -343,9 +364,9 @@ Integer page = 2;
 Integer pageSize = 10;
 
 List<Account> accountsForTheSecondPage = Stream.of(accounts)
-        .skip(pageSize * (page - 1))
-        .lim(pageSize)
-        .toList();
+    .skip(pageSize * (page - 1))
+    .lim(pageSize)
+    .toList();
 ```
 
 - ### Sorting
@@ -356,21 +377,21 @@ Sort accounts according to default order:
 
 ```apex
 ISObjectIterable sortedAccountStream = Stream.of(accounts)
-        .sort();
+    .sort();
 ```
 
 Sort accounts according to order:
 
 ```apex
 ISObjectIterable sortedDescAccountStream = Stream.of(accounts)
-        .sort(SortOrder.DESCENDING);
+    .sort(SortOrder.DESCENDING);
 ```
 
 Sort accounts by `Name`:
 
 ```apex
 ISObjectIterable sortedAccountStream = Stream.of(accounts)
-        .sort(Account.Name);
+    .sort(Account.Name);
 ```
 
 Sort accounts by `Rating` and then, if ratings are equal, sort
@@ -379,11 +400,11 @@ by `AnnualRevenue` in descending order:
 
 ```apex
 ISObjectIterable sortedAccountStream = Stream.of(accounts)
-        .sort(
-                SObjectComparator.comparing(Account.Rating)
-                        .thenComparingInt(SObjectToIntFunctions.get(Account.NumberOfEmployees).nullsLast())
-                        .thenComparingDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue).reversed())
-        );
+    .sort(
+        SObjectComparator.comparing(Account.Rating)
+            .thenComparingInt(SObjectToIntFunctions.get(Account.NumberOfEmployees).nullsLast())
+            .thenComparingDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue).reversed())
+    );
 ```
 
 ## Terminal Operations
@@ -406,14 +427,14 @@ Check if all accounts have `Hot` `Rating`:
 
 ```apex
 Boolean isEveryAccountHot = Stream.of(accounts)
-        .every(Account.Rating, 'Hot');
+    .every(Account.Rating, 'Hot');
 ```
 
 Find a first `Warm` account:
 
 ```apex
 OptionalSObject optionalWarmAccount = Stream.of(accounts)
-        .find(Account.Rating, 'Warm');
+    .find(Account.Rating, 'Warm');
 ```
 
 - ### Reduction
@@ -447,8 +468,8 @@ according to the default order as [Optional](#optional):
 
 ```apex
 Integer maxInt = Stream.of(integers)
-        .max()  // returns an OptionalInt
-        .get(); // returns a value if present or throws NoSuchElementException otherwise
+    .max()  // returns an OptionalInt
+    .get(); // returns a value if present or throws NoSuchElementException otherwise
 ```
 
 On a reference stream, search reduction is operated according to
@@ -458,7 +479,7 @@ Find an optional account with a max `AnnualRevenue`:
 
 ```apex
 OptionalSObject optionalAccountWithMaxAnnualRevenue = Stream.of(accounts)
-        .max(Account.AnnualRevenue);
+    .max(Account.AnnualRevenue);
 ```
 
 `sum`, `avg` operations on a primitive stream calculate an arithmetic *sum* and *mean*.
@@ -500,7 +521,7 @@ Collect accounts to List:
 
 ```apex
 List<Account> sumOfAnnualRevenue = (List<Account>) Stream.of(accounts)
-        .collect(SObjectCollectors.toList());
+    .collect(SObjectCollectors.toList());
 // The same as
 List<Account> sumOfAnnualRevenue = Stream.of(accounts).toList();
 ```
@@ -509,7 +530,7 @@ Group accounts by `Rating`:
 
 ```apex
 Map<Object, List<Account>> accountsByRating = (Map<Object, List<Account>>) Stream.of(accounts)
-        .collect(SObjectCollectors.groupingBy(Account.Rating));
+    .collect(SObjectCollectors.groupingBy(Account.Rating));
 ```
 
 Type interference is "broken" in Apex for `Set` and `Map` keys:
@@ -537,21 +558,21 @@ Group accounts by `Rating` as a string:
 
 ```apex
 Map<String, List<Account>> accountsByRating = (Map<String, List<Account>>) Stream.of(accounts)
-        .collect(SObjectCollectors.groupingByString(Account.Rating));
+    .collect(SObjectCollectors.groupingByString(Account.Rating));
 ```
 
 Apex Stream Framework provides built-in collectors for each primitive type:
 
 ```apex
 Map<Datetime, List<Account>> accountsByRating = (Map<Datetime, List<Account>>) Stream.of(accounts)
-        .collect(SObjectCollectors.groupingByDatetime(Account.CreatedDate));
+    .collect(SObjectCollectors.groupingByDatetime(Account.CreatedDate));
 ```
 
 Map accounts by `ParentId`:
 
 ```apex
 Map<Id, SObject> accountByRating = (Map<Id, SObject>) Stream.of(accounts)
-        .collect(SObjectCollectors.mapById(Account.ParentId));
+    .collect(SObjectCollectors.mapById(Account.ParentId));
 ```
 
 `accountByRating` map cannot be cast to `Map<String, Account>` directly, because:
@@ -570,22 +591,22 @@ To make `accountByRating` castable to `Map<String, Account>` it is possible eith
 
 ```apex
 Map<Id, Account> accountByRating = (Map<Id, Account>) Stream.of(accounts)
-        .collect(
-                SObjectCollector.of(
-                        Supplier.of(Map<Id, Account>.class),
-                        MapSObjectConsumers.putToSObjectByIdMap(
-                                SObjectFunctions.get(Account.ParentId), // key mapping function
-                                SObjectFunction.identity() // value mapping function
-                        )
-                )
-        );
+    .collect(
+        SObjectCollector.of(
+            Supplier.of(Map<Id, Account>.class),
+            MapSObjectConsumers.putToSObjectByIdMap(
+                SObjectFunctions.get(Account.ParentId), // key mapping function
+                SObjectFunction.identity() // value mapping function
+            )
+        )
+    );
 ```
 
 - or to use `cast` function:
 
 ```apex
 Map<Id, SObject> accountByRating = (Map<Id, SObject>) Stream.of(accounts)
-        .collect(SObjectCollectors.mapById(Account.ParentId).cast(Map<Id, SObject>.class));
+    .collect(SObjectCollectors.mapById(Account.ParentId).cast(Map<Id, SObject>.class));
 ```
 
 Collectors also allow the reusing of complex collection strategies
@@ -596,14 +617,14 @@ Classify account names by `BillingCountry` and by `BillingCity` cascading two co
 
 ```apex
 ISObjectCollector groupNamesByBillingCityDownstreamCollector
-        = SObjectCollectors.groupingByString(Account.BillingCity, Account.Name);
+    = SObjectCollectors.groupingByString(Account.BillingCity, Account.Name);
 
 Map<String, Map<String, List<String>>> accountNamesByCityByCountry =
-        (Map<String, Map<String, List<String>>>) Stream.of(contacts)
-                .collect(SObjectCollectors.groupingByString(
-                        SObjectFunctions.get(Account.BillingCountry),
-                        groupNamesByBillingCityDownstreamCollector
-                ).cast(Map<String, Map<String, List<String>>>.class));
+    (Map<String, Map<String, List<String>>>) Stream.of(contacts)
+        .collect(SObjectCollectors.groupingByString(
+            SObjectFunctions.get(Account.BillingCountry),
+            groupNamesByBillingCityDownstreamCollector
+        ).cast(Map<String, Map<String, List<String>>>.class));
 
 /* The result json structure: 
 {
@@ -628,10 +649,10 @@ Classify accounts with max `AnnualRevenue` per `BillingCountry`:
 ISObjectBinaryOperator accumulator = SObjectBinaryOperator.maxBy(Account.AnnualRevenue);
 ISObjectCollector maximizeAnnualRevenueDownstreamCollector = SObjectCollectors.reducing(accumulator);
 Map<String, Object> optionalAccountWithMaxRevenueByCity = (Map<String, Object>) Stream.of(accounts)
-        .collect(SObjectCollectors.groupingByString(
-                SObjectFunctions.get(Account.BillingCity),
-                maximizeAnnualRevenueDownstreamCollector
-        )); // Cannot be cast to Map<String, OptionalSObject>
+    .collect(SObjectCollectors.groupingByString(
+        SObjectFunctions.get(Account.BillingCity),
+        maximizeAnnualRevenueDownstreamCollector
+    )); // Cannot be cast to Map<String, OptionalSObject>
 
 OptionalSObject optionalAccount = (OptionalSObject) optionalAccountWithMaxRevenueByCity.get('London');
 Account acc = optionalAccount.get();
@@ -718,59 +739,59 @@ Account acc = (Account) optionalAccount.orElse(new Account());
 Account acc = (Account) optionalAccount.orElseGet(SObjectSupplier.of(Account.SObjectType)); 
 ```
 
-## Altogether
+## Examples
 
 Calculate the sum of `AnnualRevenue` of distinct by `Name` field accounts with hot rating:
 
 ```apex
 Double annualRevenueSum = Stream.of(accounts)
-        .filter(Account.Rating, 'Hot')
-        .distinct(Account.Name)
-        .sum(Account.AnnualRevenue);
+    .filter(Account.Rating, 'Hot')
+    .distinct(Account.Name)
+    .sum(Account.AnnualRevenue);
 ```
 
 Set `NumberOfEmployees` to `0` for each parent `Account` taken from `contacts`:
 
 ```apex
 List<Account> accounts = Stream.of(contacts)
-        .mapTo('Account')
-        .forEach('NumberOfEmployees', 0)
-        .toList();
+    .mapTo('Account')
+    .forEach('NumberOfEmployees', 0)
+    .toList();
 ```
 
 Create and relate `contacts` to parent `accounts` and set the `Descripton` field:
 
 ```apex
 List<Contact> contacts = Stream.of(accounts)
-        .mapTo(
-                SObjectUnaryOperators.newSObject(
-                        Contact.SObjectType,
-                        Contact.AccountId,
-                        SObjectFunction.get(Account.Id)
-                ).andThen(SObjectUnaryOperators.set(Contact.Description, 'Some Description'))
-        )
-        .toList();
+    .mapTo(
+        SObjectUnaryOperators.newSObject(
+            Contact.SObjectType,
+            Contact.AccountId,
+            SObjectFunction.get(Account.Id)
+        ).andThen(SObjectUnaryOperators.set(Contact.Description, 'Some Description'))
+    )
+    .toList();
 ```
 
 Filter `accounts` having `AnnualRevenue > 10000` sort by `AnnualRevenue` in descending order and group by `Rating`:
 
 ```apex
 Map<String, List<Account>> accountsByRating = Stream.of(accounts)
-        .filter(SObjectPredicates.isGreater('AnnualRevenue', 10000))
-        .sort('AnnualRevenue', SortOrder.DESCENDING)
-        .groupByString('Rating');
+    .filter(SObjectPredicates.isGreater('AnnualRevenue', 10000))
+    .sort('AnnualRevenue', SortOrder.DESCENDING)
+    .groupByString('Rating');
 ```
 
 Group `LastName` field values by `OtherCountry`:
 
 ```apex
 Map<String, List<String>> lastNamesByOtherCountry = (Map<String, List<String>>) Stream.of(contacts)
-        .collect(
-                SObjectCollectors.groupingByString(
-                        Contact.OtherCountry,
-                        Contact.LastName
-                ).cast(Map<String, List<String>>.class)
-        );
+    .collect(
+        SObjectCollectors.groupingByString(
+            Contact.OtherCountry,
+            Contact.LastName
+        ).cast(Map<String, List<String>>.class)
+    );
 ```
 
 Filter `input` allowing not blank strings, convert all the characters to uppercase, sort,
@@ -778,17 +799,17 @@ skip the first element and return a list containing the first 2 elements:
 
 ```apex
 List<Object> input = new List<Object>{
-        new Account(), 1, 1L, null, '  ', '', 'hello',
-        'world', 'Amen', 'Doo', 'baz', 'Bar', 'World', 1.5
+    new Account(), 1, 1L, null, '  ', '', 'hello',
+    'world', 'Amen', 'Doo', 'baz', 'Bar', 'World', 1.5
 };
 
 List<String> result = (List<String>) Stream.of(input)
-        .filter(TypePredicates.isInstanceOfString().andAlso(StringPredicates.isNotBlank()))
-        .mapTo(StringFunctions.toUpperCase())
-        .sort()
-        .skip(1)
-        .lim(2)
-        .toList(List<String>.class); // ['BAR', 'BAZ']
+    .filter(TypePredicates.isInstanceOfString().andAlso(StringPredicates.isNotBlank()))
+    .mapTo(StringFunctions.toUpperCase())
+    .sort()
+    .skip(1)
+    .lim(2)
+    .toList(List<String>.class); // ['BAR', 'BAZ']
 ```
 
 And more!

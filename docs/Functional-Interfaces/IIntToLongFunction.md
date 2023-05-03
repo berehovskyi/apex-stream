@@ -1,10 +1,10 @@
 # IIntToLongFunction
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
-An entity that takes one argument of `Integer` type and returns an `Long` value.
+An entity that takes one argument of `Integer` type and returns a `Long` value.
 
 
 **Author** Oleh Berehovskyi

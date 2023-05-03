@@ -17,7 +17,7 @@ public inherited sharing class ToLongFunctions {
     // @start-group Built-Ins
     /**
      * @description Returns a `ToLongFunction` that returns the Long value
-     * of the Object input argument by casting it to an Long.
+     * of the Object input argument by casting it to a Long.
      *
      * @return the `ToLongFunction`
      */

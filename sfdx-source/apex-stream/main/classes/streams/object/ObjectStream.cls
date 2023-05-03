@@ -77,7 +77,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public Iterator<Object> iterator() {
-        Validate.isTrue(!isOperated, Label.StreamOperatedErrorMessage);
+        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -815,7 +815,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      */
     public virtual IObjectIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return ObjectStream.empty(); }
         return new ObjectStream(new ObjectLimitIterator(iterator(), lim));
     }
@@ -839,7 +839,7 @@ public virtual inherited sharing class ObjectStream extends ObjectIterable imple
      */
     public virtual IObjectIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return new ObjectStream(iterator()); }
         return new ObjectStream(new ObjectSkipIterator(iterator(), n));
     }

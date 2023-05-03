@@ -1,6 +1,6 @@
 /**
  * @description A function that takes two arguments of `SObject` type and returns
- * an `Integer` value, which represents a comparison result. Typically is used
+ * an `Integer` value, which represents a comparison result. Typically, is used
  * for sorting. Permits comparison of null arguments.
  *
  * @author Oleh Berehovskyi

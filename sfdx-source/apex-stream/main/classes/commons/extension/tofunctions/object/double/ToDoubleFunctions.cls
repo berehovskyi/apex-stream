@@ -17,7 +17,7 @@ public inherited sharing class ToDoubleFunctions {
     // @start-group Built-Ins
     /**
      * @description Returns a `ToDoubleFunction` that returns the Double value
-     * of the Object input argument by casting it to an Double.
+     * of the Object input argument by casting it to a Double.
      *
      * @return the `ToDoubleFunction`
      */

@@ -899,9 +899,9 @@ public inherited sharing class MapSObjectConsumers {
             final Object oldValue,
             final Object newValue
     ) {
-        Validate.validState(
+        Validate.state(
                 merger != null,
-                Label.DuplicateKeyErrorMessage,
+                Label.AS_ErrorMessage_DuplicateKey,
                 new List<Object>{ key, oldValue, newValue }
         );
         return merger.apply(oldValue, newValue);
@@ -913,9 +913,9 @@ public inherited sharing class MapSObjectConsumers {
             final SObject oldValue,
             final SObject newValue
     ) {
-        Validate.validState(
+        Validate.state(
                 merger != null,
-                Label.DuplicateKeyErrorMessage,
+                Label.AS_ErrorMessage_DuplicateKey,
                 new List<Object>{ key, oldValue, newValue }
         );
         return merger.apply(oldValue, newValue);

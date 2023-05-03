@@ -1,10 +1,10 @@
 # ILongBinaryOperator
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
-A functions that takes two arguments of `Long` type and returns an `Long` value.
+A functions that takes two arguments of `Long` type and returns a `Long` value.
 
 
 **Author** Oleh Berehovskyi

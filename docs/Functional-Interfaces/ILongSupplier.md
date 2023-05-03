@@ -1,10 +1,10 @@
 # ILongSupplier
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
-A function that takes no arguments and returns an `Long` value.
+A function that takes no arguments and returns a `Long` value.
 
 
 **Author** Oleh Berehovskyi

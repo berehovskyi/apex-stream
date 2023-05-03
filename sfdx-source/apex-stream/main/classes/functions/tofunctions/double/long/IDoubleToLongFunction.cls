@@ -1,5 +1,5 @@
 /**
- * @description An entity that takes one argument of `Double` type and returns an `Long` value.
+ * @description An entity that takes one argument of `Double` type and returns a `Long` value.
  *
  * @author Oleh Berehovskyi
  *

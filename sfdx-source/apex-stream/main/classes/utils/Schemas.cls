@@ -24,7 +24,7 @@ public inherited sharing class Schemas {
      */
     public static String findChildRelationshipName(final SObjectField field) {
         final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-        Validate.isTrue(!referenceTo.isEmpty(), Label.NotReferenceFieldErrorMessage, new List<Object>{ field });
+        Validate.isTrue(!referenceTo.isEmpty(), Label.AS_ErrorMessage_NotReferenceField, new List<Object>{ field });
         String result;
         for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
             if (relationship.getField() == field) {

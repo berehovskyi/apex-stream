@@ -1,6 +1,6 @@
 # TypePredicates
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
@@ -19,7 +19,7 @@ Provides common implementations of [Predicate](/docs/Functional-Abstract-Classes
 ### Built-Ins
 ##### `static isInstanceOfBool()`
 
-Returns a `Predicate` that tests the input object if it is of Boolean} type.
+Returns a `Predicate` that tests the input object if it is of Boolean type.
 
 ###### Return
 
@@ -33,7 +33,7 @@ the `Predicate`
 
 ##### `static isInstanceOfId()`
 
-Returns a `Predicate` that tests the input object if it is of Id} type.
+Returns a `Predicate` that tests the input object if it is of Id type.
 
 ###### Return
 
@@ -47,7 +47,7 @@ the `Predicate`
 
 ##### `static isInstanceOfString()`
 
-Returns a `Predicate` that tests the input object if it is of String} type.
+Returns a `Predicate` that tests the input object if it is of String type.
 
 ###### Return
 
@@ -61,7 +61,7 @@ the `Predicate`
 
 ##### `static isInstanceOfBlob()`
 
-Returns a `Predicate` that tests the input object if it is of Blob} type.
+Returns a `Predicate` that tests the input object if it is of Blob type.
 
 ###### Return
 
@@ -75,7 +75,7 @@ the `Predicate`
 
 ##### `static isInstanceOfDate()`
 
-Returns a `Predicate` that tests the input object if it is of Date} type.
+Returns a `Predicate` that tests the input object if it is of Date type.
 
 ###### Return
 
@@ -89,7 +89,7 @@ the `Predicate`
 
 ##### `static isInstanceOfDatetime()`
 
-Returns a `Predicate` that tests the input object if it is of Datetime} type.
+Returns a `Predicate` that tests the input object if it is of Datetime type.
 
 ###### Return
 
@@ -103,7 +103,7 @@ the `Predicate`
 
 ##### `static isInstanceOfTime()`
 
-Returns a `Predicate` that tests the input object if it is of Time} type.
+Returns a `Predicate` that tests the input object if it is of Time type.
 
 ###### Return
 
@@ -117,7 +117,7 @@ the `Predicate`
 
 ##### `static isInstanceOfInt()`
 
-Returns a `Predicate` that tests the input object if it is of Integer} type.
+Returns a `Predicate` that tests the input object if it is of Integer type.
 
 ###### Return
 
@@ -131,7 +131,7 @@ the `Predicate`
 
 ##### `static isInstanceOfLong()`
 
-Returns a `Predicate` that tests the input object if it is of Long} type.
+Returns a `Predicate` that tests the input object if it is of Long type.
 
 ###### Return
 
@@ -145,7 +145,7 @@ the `Predicate`
 
 ##### `static isInstanceOfDouble()`
 
-Returns a `Predicate` that tests the input object if it is of Double} type.
+Returns a `Predicate` that tests the input object if it is of Double type.
 
 ###### Return
 
@@ -159,7 +159,7 @@ the `Predicate`
 
 ##### `static isInstanceOfSObject()`
 
-Returns a `Predicate` that tests the input object if it is of SObject} type.
+Returns a `Predicate` that tests the input object if it is of SObject type.
 
 ###### Return
 
@@ -173,7 +173,7 @@ the `Predicate`
 
 ##### `static isInstanceOfComparable()`
 
-Returns a `Predicate` that tests the input object if it is of Comparable} type.
+Returns a `Predicate` that tests the input object if it is of Comparable type.
 
 ###### Return
 

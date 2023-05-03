@@ -544,7 +544,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      */
     public virtual IIntIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return IntSequence.empty(); }
         if (lim >= integers.size()) { return this; }
         final List<Integer> results = new List<Integer>();
@@ -573,7 +573,7 @@ public virtual inherited sharing class IntSequence extends IntIterable implement
      */
     public virtual IIntIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return this; }
         if (n >= integers.size()) { return IntSequence.empty(); }
         final List<Integer> results = new List<Integer>();

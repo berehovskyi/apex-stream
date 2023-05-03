@@ -1,6 +1,6 @@
 # SObjectCollectors
 
-`APIVERSION: 56`
+`APIVERSION: 57`
 
 `STATUS: ACTIVE`
 
@@ -6871,7 +6871,7 @@ Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObje
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByInt(
             SObjectToIntFunctions.get('NumberOfEmployees'),
-            SObjectCollectors.toSet(),
+            SObjectCollectors.toSet()
         ).cast(Map<Integer, Set<SObject>>.class));
 ```
 
@@ -6908,7 +6908,7 @@ Map<Integer, Set<SObject>> accountsByNumberOfEmployees = (Map<Integer, Set<SObje
     Stream.of(accounts)
         .collect(SObjectCollectors.groupingByInt(
             SObjectToIntFunctions.get('NumberOfEmployees'),
-            Supplier.of(Map<Integer, Set<SObject>>.class)
+            Supplier.of(Map<Integer, Set<SObject>>.class),
             SObjectCollectors.toSet()
         ));
 ```

@@ -795,7 +795,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      */
     public virtual IObjectIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return ObjectSequence.empty(); }
         if (lim >= objects.size()) { return this; }
         final List<Object> results = new List<Object>();
@@ -824,7 +824,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectIterable imp
      */
     public virtual IObjectIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return this; }
         if (n >= objects.size()) { return ObjectSequence.empty(); }
         final List<Object> results = new List<Object>();

@@ -49,7 +49,7 @@ public inherited sharing class StringSuppliers {
         Validate.matches(
                 format,
                 pattern,
-                Label.StringPatternMismatchErrorMessage,
+                Label.AS_ErrorMessage_StringPatternMismatch,
                 new List<Object>{ format, pattern }
         );
         return new AutoNumber(format);

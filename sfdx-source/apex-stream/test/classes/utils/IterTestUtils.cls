@@ -714,7 +714,7 @@ public class IterTestUtils {
         public final ContactSObject Contact = new ContactSObject();
         public final AttachmentSObject Attachment = new AttachmentSObject();
         public final EventSObject Event = new EventSObject();
-        public final TimeSlotSObject TimeSlot = new TimeSlotSObject();
+        public final BusinessHoursSObject BusinessHours = new BusinessHoursSObject();
 
         public final String NAME = 'Name';
         public final String DO_NOT_CALL = 'DoNotCall';
@@ -725,6 +725,7 @@ public class IterTestUtils {
         public final String BIRTHDATE = 'Birthdate';
         public final String ACTIVITY_DATE_TIME = 'ActivityDateTime';
         public final String START_TIME = 'StartTime';
+        public final String MONDAY_START_TIME = 'MondayStartTime';
         public final String NUMBER_OF_EMPLOYEES = 'NumberOfEmployees';
         public final String BILLING_LATITUDE = 'BillingLatitude';
         public final String BILLING_LONGITUDE = 'BillingLongitude';
@@ -732,6 +733,7 @@ public class IterTestUtils {
         public final String FIRST_NAME = 'FirstName';
         public final String DESCRIPTION = 'Description';
         public final String END_TIME = 'EndTime';
+        public final String MONDAY_END_TIME = 'MondayEndTime';
         public final String DUPLICATE_KEY = 'Duplicate key';
         public final String HAS_OPTED_OUT_OF_EMAIL = 'HasOptedOutOfEmail';
         public final String OTHER_COUNTRY = 'OtherCountry';
@@ -816,14 +818,14 @@ public class IterTestUtils {
             this.SOBJECT_NAME = 'Event';
         }
     }
-    public class TimeSlotSObject extends SObjectTypeConstants {
-        public final SObjectField Id = TimeSlot.Id;
-        public final SObjectField StartTime = TimeSlot.StartTime;
-        public final SObjectField EndTime = TimeSlot.EndTime;
-        public final SObjectField Type = TimeSlot.Type;
-        public TimeSlotSObject() {
-            this.SOBJECT_TYPE = TimeSlot.SObjectType;
-            this.SOBJECT_NAME = 'TimeSlot';
+    public class BusinessHoursSObject extends SObjectTypeConstants {
+        public final SObjectField Id = BusinessHours.Id;
+        public final SObjectField MondayStartTime = BusinessHours.MondayStartTime;
+        public final SObjectField MondayEndTime = BusinessHours.MondayEndTime;
+        public final SObjectField Name = BusinessHours.Name;
+        public BusinessHoursSObject() {
+            this.SOBJECT_TYPE = BusinessHours.SObjectType;
+            this.SOBJECT_NAME = 'BusinessHours';
         }
     }
 }

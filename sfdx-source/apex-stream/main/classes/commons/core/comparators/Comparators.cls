@@ -385,7 +385,7 @@ public inherited sharing class Comparators {
         try { result = (JSON) value1; } catch (TypeException exc) { type1Name = parseTypeName(exc); }
         try { result = (JSON) value2; } catch (TypeException exc) { type2Name = parseTypeName(exc); }
         throw new TypeException(
-                String.format(Label.TypesMismatchErrorMessage, new List<String>{ type1Name, type2Name })
+                String.format(Label.AS_ErrorMessage_TypesMismatch, new List<String>{ type1Name, type2Name })
         );
     }
 

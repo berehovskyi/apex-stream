@@ -179,9 +179,9 @@ public inherited sharing class Lists {
         for (Integer i = 0, size = sObjects.size(); i < size; i++) {
             final SObject sObj = sObjects[i];
             final Id k = (Id) keyMapper.apply(sObj);
-            Validate.validState(
+            Validate.state(
                     !m.containsKey(k),
-                    Label.DuplicateKeyErrorMessage,
+                    Label.AS_ErrorMessage_DuplicateKey,
                     new List<Object>{ k, m.get(k), sObj }
             );
             m.put(k, sObj);
@@ -218,9 +218,9 @@ public inherited sharing class Lists {
         for (Integer i = 0, size = sObjects.size(); i < size; i++) {
             final SObject sObj = sObjects[i];
             final String k = (String) keyMapper.apply(sObj);
-            Validate.validState(
+            Validate.state(
                     !m.containsKey(k),
-                    Label.DuplicateKeyErrorMessage,
+                    Label.AS_ErrorMessage_DuplicateKey,
                     new List<Object>{ k, m.get(k), sObj }
             );
             m.put(k, sObj);

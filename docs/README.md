@@ -634,7 +634,7 @@ A mutable reduction operation that accumulates input arguments into a mutable re
 
 ### [IComparator](/docs/Functional-Interfaces/IComparator.md)
 
-A function that takes two arguments of `Object` type and returns an `Integer` value, which represents a comparison result. Typically is used for sorting. Permits comparison of null arguments.
+A function that takes two arguments of `Object` type and returns an `Integer` value, which represents a comparison result. Typically, is used for sorting. Permits comparison of null arguments.
 
 ### [IConsumer](/docs/Functional-Interfaces/IConsumer.md)
 
@@ -798,7 +798,7 @@ A mutable reduction operation that accumulates input arguments into a mutable re
 
 ### [ISObjectComparator](/docs/Functional-Interfaces/ISObjectComparator.md)
 
-A function that takes two arguments of `SObject` type and returns an `Integer` value, which represents a comparison result. Typically is used for sorting. Permits comparison of null arguments.
+A function that takes two arguments of `SObject` type and returns an `Integer` value, which represents a comparison result. Typically, is used for sorting. Permits comparison of null arguments.
 
 ### [ISObjectConsumer](/docs/Functional-Interfaces/ISObjectConsumer.md)
 
@@ -874,9 +874,6 @@ Contains static utility methods that operate Lists.
 
 Schema related utilities.
 
-### [Validate](/docs/Utils/Validate.md)
-
-Contains static utility arguments validation methods. <ul>   <li>An invalid `null` argument causes a NullPointerException.</li>   <li>A non-`null` argument causes an IllegalArgumentException.</li>   <li>Assertion failure causes a fatal error that causes code execution to halt.</li> </ul>
 ## Optionals
 
 ### [Optional](/docs/Optionals/Optional.md)

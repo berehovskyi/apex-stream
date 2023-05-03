@@ -558,9 +558,9 @@ public inherited sharing class MapObjectConsumers {
             final Object oldValue,
             final Object newValue)
     {
-        Validate.validState(
+        Validate.state(
                 merger != null,
-                Label.DuplicateKeyErrorMessage,
+                Label.AS_ErrorMessage_DuplicateKey,
                 new List<Object>{ key, oldValue, newValue }
         );
         return merger.apply(oldValue, newValue);

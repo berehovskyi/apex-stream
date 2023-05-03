@@ -10,7 +10,7 @@ private class SObjectCollectorsTest {
     private static final List<Contact> CONTACTS;
     private static final List<Attachment> ATTACHMENTS;
     private static final List<Event> EVENTS;
-    private static final List<TimeSlot> SLOTS;
+    private static final List<BusinessHours> SLOTS;
 
     static {
         Account acc = new Account(Id = IterTestUtils.generateId(Account.SObjectType), Name = 'Test Acc', Type = 'Customer', NumberOfEmployees = 200, BillingLatitude = 45.45, BillingCountry = IterTestUtils.CONSTS.FRANCE);
@@ -61,12 +61,12 @@ private class SObjectCollectorsTest {
         Time t1 = Time.newInstance(16, 0, 0, 0);
         Time t2 = Time.newInstance(17, 0, 0, 0);
         Time t3 = Time.newInstance(18, 0, 0, 0);
-        TimeSlot slot = new TimeSlot(StartTime = t0, EndTime = t0.addMinutes(15), Type = IterTestUtils.CONSTS.NORMAL);
-        TimeSlot slot1 = new TimeSlot(StartTime = t1, EndTime = t1.addMinutes(15), Type = IterTestUtils.CONSTS.NORMAL);
-        TimeSlot slot2 = new TimeSlot(StartTime = t2, EndTime = t2.addMinutes(15), Type = IterTestUtils.CONSTS.EXTENDED);
-        TimeSlot slot3 = new TimeSlot(Type = IterTestUtils.CONSTS.EXTENDED);
-        TimeSlot slot4 = new TimeSlot(StartTime = t3, EndTime = t3.addMinutes(15));
-        SLOTS = new List<TimeSlot>{ slot, slot1, slot2, slot3, slot4 };
+        BusinessHours slot = new BusinessHours(MondayStartTime = t0, MondayEndTime = t0.addMinutes(15), Name = IterTestUtils.CONSTS.NORMAL);
+        BusinessHours slot1 = new BusinessHours(MondayStartTime = t1, MondayEndTime = t1.addMinutes(15), Name = IterTestUtils.CONSTS.NORMAL);
+        BusinessHours slot2 = new BusinessHours(MondayStartTime = t2, MondayEndTime = t2.addMinutes(15), Name = IterTestUtils.CONSTS.EXTENDED);
+        BusinessHours slot3 = new BusinessHours(Name = IterTestUtils.CONSTS.EXTENDED);
+        BusinessHours slot4 = new BusinessHours(MondayStartTime = t3, MondayEndTime = t3.addMinutes(15));
+        SLOTS = new List<BusinessHours>{ slot, slot1, slot2, slot3, slot4 };
         // Invoke private constructors for coverage
         new SObjectCollectors();
         new MapSObjectConsumers();
@@ -327,20 +327,20 @@ private class SObjectCollectorsTest {
     @IsTest
     static void toTimeSet() {
         // Given
-        ISObjectCollector toTimeSetCollector = SObjectCollectors.toTimeSet(SObjectFunctions.get(IterTestUtils.CONSTS.START_TIME));
-        ISObjectCollector toTimeSetCollector1 = SObjectCollectors.toTimeSet(IterTestUtils.CONSTS.START_TIME);
-        ISObjectCollector toTimeSetCollector2 = SObjectCollectors.toTimeSet(IterTestUtils.CONSTS.TimeSlot.StartTime);
+        ISObjectCollector toTimeSetCollector = SObjectCollectors.toTimeSet(SObjectFunctions.get(IterTestUtils.CONSTS.MONDAY_START_TIME));
+        ISObjectCollector toTimeSetCollector1 = SObjectCollectors.toTimeSet(IterTestUtils.CONSTS.MONDAY_START_TIME);
+        ISObjectCollector toTimeSetCollector2 = SObjectCollectors.toTimeSet(IterTestUtils.CONSTS.BusinessHours.MondayStartTime);
         // When
         Set<Time> actual = (Set<Time>) Stream.of(SLOTS).collect(toTimeSetCollector);
         Set<Time> actual1 = (Set<Time>) Stream.of(SLOTS).collect(toTimeSetCollector1);
         Set<Time> actual2 = (Set<Time>) Stream.of(SLOTS).collect(toTimeSetCollector2);
         // Then
         Set<Time> expected = new Set<Time>{
-                (Time) SLOTS[0].get(IterTestUtils.CONSTS.START_TIME),
-                (Time) SLOTS[1].get(IterTestUtils.CONSTS.START_TIME),
-                (Time) SLOTS[2].get(IterTestUtils.CONSTS.START_TIME),
-                (Time) SLOTS[3].get(IterTestUtils.CONSTS.START_TIME),
-                (Time) SLOTS[4].get(IterTestUtils.CONSTS.START_TIME)
+                (Time) SLOTS[0].get(IterTestUtils.CONSTS.MONDAY_START_TIME),
+                (Time) SLOTS[1].get(IterTestUtils.CONSTS.MONDAY_START_TIME),
+                (Time) SLOTS[2].get(IterTestUtils.CONSTS.MONDAY_START_TIME),
+                (Time) SLOTS[3].get(IterTestUtils.CONSTS.MONDAY_START_TIME),
+                (Time) SLOTS[4].get(IterTestUtils.CONSTS.MONDAY_START_TIME)
         };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
@@ -792,31 +792,31 @@ private class SObjectCollectorsTest {
     @IsTest
     static void toByTimeMap() {
         // Given
-        ISObjectFunction keyMapper = SObjectFunctions.get(IterTestUtils.CONSTS.TimeSlot.StartTime);
+        ISObjectFunction keyMapper = SObjectFunctions.get(IterTestUtils.CONSTS.BusinessHours.MondayStartTime);
         ISObjectFunction valueMapper = SObjectFunction.identity();
         IBinaryOperator mergeFunction = BinaryOperator.right();
         // When
-        Map<Time, SObject> actual = (Map<Time, SObject>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.START_TIME));
-        Map<Time, TimeSlot> actual1 = (Map<Time, TimeSlot>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.TimeSlot.StartTime).cast(Map<Time, TimeSlot>.class));
+        Map<Time, SObject> actual = (Map<Time, SObject>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.MONDAY_START_TIME));
+        Map<Time, BusinessHours> actual1 = (Map<Time, BusinessHours>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.BusinessHours.MondayStartTime).cast(Map<Time, BusinessHours>.class));
         Map<Time, SObject> actual2 = (Map<Time, SObject>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(keyMapper));
         Map<Time, Object> actual3 = (Map<Time, Object>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(keyMapper, valueMapper));
         Map<Time, Object> actual4 = (Map<Time, Object>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(keyMapper, valueMapper, mergeFunction));
-        Map<Time, Time> actual5 = (Map<Time, Time>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.START_TIME, IterTestUtils.CONSTS.END_TIME).cast(Map<Time, Time>.class));
-        Map<Time, Time> actual6 = (Map<Time, Time>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.TimeSlot.StartTime, IterTestUtils.CONSTS.TimeSlot.EndTime).cast(Map<Time, Time>.class));
+        Map<Time, Time> actual5 = (Map<Time, Time>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.MONDAY_START_TIME, IterTestUtils.CONSTS.MONDAY_END_TIME).cast(Map<Time, Time>.class));
+        Map<Time, Time> actual6 = (Map<Time, Time>) Stream.of(SLOTS).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.BusinessHours.MondayStartTime, IterTestUtils.CONSTS.BusinessHours.MondayEndTime).cast(Map<Time, Time>.class));
         try {
-            List<TimeSlot> input = new List<TimeSlot>(SLOTS);
+            List<BusinessHours> input = new List<BusinessHours>(SLOTS);
             input.add(input[0]);
-            Stream.of(input).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.START_TIME));
+            Stream.of(input).collect(SObjectCollectors.toByTimeMap(IterTestUtils.CONSTS.MONDAY_START_TIME));
         } catch (Exception exc) {
             Assert.isTrue(exc.getMessage().contains(IterTestUtils.CONSTS.DUPLICATE_KEY));
         }
         // Then
-        Map<Time, TimeSlot> expected = new Map<Time, TimeSlot>{
-                (Time) SLOTS[0].get(IterTestUtils.CONSTS.START_TIME) => SLOTS[0],
-                (Time) SLOTS[1].get(IterTestUtils.CONSTS.START_TIME) => SLOTS[1],
-                (Time) SLOTS[2].get(IterTestUtils.CONSTS.START_TIME) => SLOTS[2],
-                (Time) SLOTS[3].get(IterTestUtils.CONSTS.START_TIME) => SLOTS[3],
-                (Time) SLOTS[4].get(IterTestUtils.CONSTS.START_TIME) => SLOTS[4]
+        Map<Time, BusinessHours> expected = new Map<Time, BusinessHours>{
+                (Time) SLOTS[0].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => SLOTS[0],
+                (Time) SLOTS[1].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => SLOTS[1],
+                (Time) SLOTS[2].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => SLOTS[2],
+                (Time) SLOTS[3].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => SLOTS[3],
+                (Time) SLOTS[4].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => SLOTS[4]
         };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
@@ -824,11 +824,11 @@ private class SObjectCollectorsTest {
         Assert.areEqual(expected, actual3);
         Assert.areEqual(expected, actual4);
         Map<Time, Time> expected2 = new Map<Time, Time>{
-                (Time) SLOTS[0].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[0].get(IterTestUtils.CONSTS.END_TIME),
-                (Time) SLOTS[1].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[1].get(IterTestUtils.CONSTS.END_TIME),
-                (Time) SLOTS[2].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[2].get(IterTestUtils.CONSTS.END_TIME),
-                (Time) SLOTS[3].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[3].get(IterTestUtils.CONSTS.END_TIME),
-                (Time) SLOTS[4].get(IterTestUtils.CONSTS.START_TIME) => (Time) SLOTS[4].get(IterTestUtils.CONSTS.END_TIME)
+                (Time) SLOTS[0].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => (Time) SLOTS[0].get(IterTestUtils.CONSTS.MONDAY_END_TIME),
+                (Time) SLOTS[1].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => (Time) SLOTS[1].get(IterTestUtils.CONSTS.MONDAY_END_TIME),
+                (Time) SLOTS[2].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => (Time) SLOTS[2].get(IterTestUtils.CONSTS.MONDAY_END_TIME),
+                (Time) SLOTS[3].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => (Time) SLOTS[3].get(IterTestUtils.CONSTS.MONDAY_END_TIME),
+                (Time) SLOTS[4].get(IterTestUtils.CONSTS.MONDAY_START_TIME) => (Time) SLOTS[4].get(IterTestUtils.CONSTS.MONDAY_END_TIME)
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
@@ -1353,36 +1353,36 @@ private class SObjectCollectorsTest {
     @IsTest
     static void groupingByTime() {
         // Given
-        SLOTS[0].StartTime = SLOTS[0].StartTime;
-        SLOTS[1].StartTime = SLOTS[1].StartTime;
-        SLOTS[2].StartTime = SLOTS[0].StartTime;
-        SLOTS[3].StartTime = SLOTS[1].StartTime;
-        SLOTS[4].StartTime = null;
-        ISObjectFunction keyMapper = SObjectFunctions.get(IterTestUtils.CONSTS.TimeSlot.StartTime);
-        SObjectCollector downstream = SObjectCollectors.toList(IterTestUtils.CONSTS.TimeSlot.Id);
+        SLOTS[0].MondayStartTime = SLOTS[0].MondayStartTime;
+        SLOTS[1].MondayStartTime = SLOTS[1].MondayStartTime;
+        SLOTS[2].MondayStartTime = SLOTS[0].MondayStartTime;
+        SLOTS[3].MondayStartTime = SLOTS[1].MondayStartTime;
+        SLOTS[4].MondayStartTime = null;
+        ISObjectFunction keyMapper = SObjectFunctions.get(IterTestUtils.CONSTS.BusinessHours.MondayStartTime);
+        SObjectCollector downstream = SObjectCollectors.toList(IterTestUtils.CONSTS.BusinessHours.Id);
         // When
-        Map<Time, List<TimeSlot>> actual = (Map<Time,  List<TimeSlot>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.TimeSlot.StartTime));
-        Map<Time, List<TimeSlot>> actual1 = (Map<Time, List<TimeSlot>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.START_TIME));
+        Map<Time, List<BusinessHours>> actual = (Map<Time,  List<BusinessHours>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.BusinessHours.MondayStartTime));
+        Map<Time, List<BusinessHours>> actual1 = (Map<Time, List<BusinessHours>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.MONDAY_START_TIME));
         Map<Time, List<SObject>> actual2 = (Map<Time, List<SObject>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(keyMapper).cast(Map<Time, List<SObject>>.class));
-        Map<Time, List<Id>> actual3 = (Map<Time, List<Id>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.TimeSlot.StartTime, IterTestUtils.CONSTS.TimeSlot.Id).cast(Map<Time, List<Id>>.class));
-        Map<Time, Object> actual4 = (Map<Time, Object>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.START_TIME, IterTestUtils.CONSTS.ID));
+        Map<Time, List<Id>> actual3 = (Map<Time, List<Id>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.BusinessHours.MondayStartTime, IterTestUtils.CONSTS.BusinessHours.Id).cast(Map<Time, List<Id>>.class));
+        Map<Time, Object> actual4 = (Map<Time, Object>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(IterTestUtils.CONSTS.MONDAY_START_TIME, IterTestUtils.CONSTS.ID));
         Map<Time, Object> actual5 = (Map<Time, Object>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(keyMapper, downstream));
         Map<Time, List<Id>> actual6 = (Map<Time, List<Id>>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(keyMapper, Supplier.of(Map<Time, List<Id>>.class), downstream.cast(List<Id>.class)));
         Map<Time, Map<String, List<Id>>> actual7 = (Map<Time, Map<String, List<Id>>>) Stream.of(SLOTS)
-                .collect(SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(IterTestUtils.CONSTS.TimeSlot.Type, IterTestUtils.CONSTS.TimeSlot.Id)).cast(Map<Time, Map<String, List<Id>>>.class));
-        Map<Time, Object> actual8 = (Map<Time, Object>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(IterTestUtils.CONSTS.TYPE, IterTestUtils.CONSTS.ID)));
+                .collect(SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(IterTestUtils.CONSTS.BusinessHours.Name, IterTestUtils.CONSTS.BusinessHours.Id)).cast(Map<Time, Map<String, List<Id>>>.class));
+        Map<Time, Object> actual8 = (Map<Time, Object>) Stream.of(SLOTS).collect(SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(IterTestUtils.CONSTS.NAME, IterTestUtils.CONSTS.ID)));
         // Then
-        Map<Time, List<TimeSlot>> expected = new Map<Time, List<TimeSlot>>{
-                SLOTS[0].StartTime => new List<TimeSlot>{ SLOTS[0], SLOTS[2] },
-                SLOTS[1].StartTime => new List<TimeSlot>{ SLOTS[1], SLOTS[3] },
-                null => new List<TimeSlot>{ SLOTS[4] }
+        Map<Time, List<BusinessHours>> expected = new Map<Time, List<BusinessHours>>{
+                SLOTS[0].MondayStartTime => new List<BusinessHours>{ SLOTS[0], SLOTS[2] },
+                SLOTS[1].MondayStartTime => new List<BusinessHours>{ SLOTS[1], SLOTS[3] },
+                null => new List<BusinessHours>{ SLOTS[4] }
         };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
         Map<Time, List<Id>> expected1 = new Map<Time, List<Id>>{
-                SLOTS[0].StartTime => new List<Id>{ (Id) SLOTS[0].get(IterTestUtils.CONSTS.ID), (Id) SLOTS[2].get(IterTestUtils.CONSTS.ID) },
-                SLOTS[1].StartTime => new List<Id>{ (Id) SLOTS[1].get(IterTestUtils.CONSTS.ID), (Id) SLOTS[3].get(IterTestUtils.CONSTS.ID) },
+                SLOTS[0].MondayStartTime => new List<Id>{ (Id) SLOTS[0].get(IterTestUtils.CONSTS.ID), (Id) SLOTS[2].get(IterTestUtils.CONSTS.ID) },
+                SLOTS[1].MondayStartTime => new List<Id>{ (Id) SLOTS[1].get(IterTestUtils.CONSTS.ID), (Id) SLOTS[3].get(IterTestUtils.CONSTS.ID) },
                 null => new List<Id>{ (Id) SLOTS[4].get(IterTestUtils.CONSTS.ID) }
         };
         Assert.areEqual(expected1, actual3);
@@ -1390,8 +1390,8 @@ private class SObjectCollectorsTest {
         Assert.areEqual(expected1, actual5);
         Assert.areEqual(expected1, actual6);
         Map<Time, Map<String, List<Id>>> expected2 = new Map<Time, Map<String, List<Id>>>{
-                SLOTS[0].StartTime => new Map<String, List<Id>>{ IterTestUtils.CONSTS.NORMAL => new List<Id>{ (Id) SLOTS[0].get(IterTestUtils.CONSTS.ID) }, IterTestUtils.CONSTS.EXTENDED => new List<Id>{ (Id) SLOTS[2].get(IterTestUtils.CONSTS.ID) } },
-                SLOTS[1].StartTime => new Map<String, List<Id>>{ IterTestUtils.CONSTS.NORMAL => new List<Id>{ (Id) SLOTS[1].get(IterTestUtils.CONSTS.ID) }, IterTestUtils.CONSTS.EXTENDED => new List<Id>{ (Id) SLOTS[3].get(IterTestUtils.CONSTS.ID) } },
+                SLOTS[0].MondayStartTime => new Map<String, List<Id>>{ IterTestUtils.CONSTS.NORMAL => new List<Id>{ (Id) SLOTS[0].get(IterTestUtils.CONSTS.ID) }, IterTestUtils.CONSTS.EXTENDED => new List<Id>{ (Id) SLOTS[2].get(IterTestUtils.CONSTS.ID) } },
+                SLOTS[1].MondayStartTime => new Map<String, List<Id>>{ IterTestUtils.CONSTS.NORMAL => new List<Id>{ (Id) SLOTS[1].get(IterTestUtils.CONSTS.ID) }, IterTestUtils.CONSTS.EXTENDED => new List<Id>{ (Id) SLOTS[3].get(IterTestUtils.CONSTS.ID) } },
                 null => new Map<String, List<Id>>{ null => new List<Id>{ (Id) SLOTS[4].get(IterTestUtils.CONSTS.ID) } }
         };
         Assert.areEqual(expected2, actual7);
@@ -2026,7 +2026,7 @@ private class SObjectCollectorsTest {
                 null => OptionalSObject.of(ACCOUNTS[8])
         };
         Assert.areEqual(expected, actual2);
-        Assert.isTrue(actual3.isEmpty(), Label.NoValuePresentErrorMessage);
+        Assert.isTrue(actual3.isEmpty(), Label.AS_ErrorMessage_NoValuePresent);
     }
 
     /**

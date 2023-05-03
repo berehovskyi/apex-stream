@@ -48,14 +48,14 @@ public class IterTestUtilsExt {
         Event ev4 = new Event(Description = 'Test Name4', Type = IterTestUtils.CONSTS.EMAIL);
         return new List<Event>{ ev, ev1, ev2, ev3, ev4 };
     }
-    public static List<TimeSlot> generateTimeSlots() {
+    public static List<BusinessHours> generateHours() {
         List<Time> ts = IterTestUtils.generateTimes();
-        TimeSlot slot = new TimeSlot(StartTime = ts[0], EndTime = ts[0].addMinutes(15), Type = IterTestUtils.CONSTS.NORMAL);
-        TimeSlot slot1 = new TimeSlot(StartTime = ts[1], EndTime = ts[1].addMinutes(15), Type = IterTestUtils.CONSTS.NORMAL);
-        TimeSlot slot2 = new TimeSlot(StartTime = ts[2], EndTime = ts[2].addMinutes(15), Type = IterTestUtils.CONSTS.NORMAL);
-        TimeSlot slot3 = new TimeSlot(StartTime = ts[3], EndTime = ts[3].addMinutes(15), Type = IterTestUtils.CONSTS.EXTENDED);
-        TimeSlot slot4 = new TimeSlot(Type = IterTestUtils.CONSTS.EXTENDED);
-        return new List<TimeSlot>{ slot, slot1, slot2, slot3, slot4 };
+        BusinessHours slot = new BusinessHours(MondayStartTime = ts[0], MondayEndTime = ts[0].addMinutes(15), Name = IterTestUtils.CONSTS.NORMAL);
+        BusinessHours slot1 = new BusinessHours(MondayStartTime = ts[1], MondayEndTime = ts[1].addMinutes(15), Name = IterTestUtils.CONSTS.NORMAL);
+        BusinessHours slot2 = new BusinessHours(MondayStartTime = ts[2], MondayEndTime = ts[2].addMinutes(15), Name = IterTestUtils.CONSTS.NORMAL);
+        BusinessHours slot3 = new BusinessHours(MondayStartTime = ts[3], MondayEndTime = ts[3].addMinutes(15), Name = IterTestUtils.CONSTS.EXTENDED);
+        BusinessHours slot4 = new BusinessHours(Name = IterTestUtils.CONSTS.EXTENDED);
+        return new List<BusinessHours>{ slot, slot1, slot2, slot3, slot4 };
     }
     public static List<Object> generateMix() {
         return new List<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, new IterTestUtils.Person('John', 31, Date.newInstance(1990, 1, 2), 1L, true), Math.PI, 3, '0' };

@@ -50,7 +50,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected1, actual5);
         Assert.areEqual(input, actual6);
         Assert.areEqual(false, accSeq.isEmpty());
-        Assert.areEqual(ACCOUNTS, input, Label.InputMutatedErrorMessage);
+        Assert.areEqual(ACCOUNTS, input, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -512,7 +512,7 @@ private class SObjectStreamTest {
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc1 };
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -571,7 +571,7 @@ private class SObjectStreamTest {
             Assert.areEqual(input[i].Name, actual3[i].Description);
             Assert.areEqual(value, actual3[i].Department);
         }
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) conStream).isOperated);
         Assert.isTrue(((SObjectStream) conStream1).isOperated);
         Assert.isTrue(((SObjectStream) conStream2).isOperated);
@@ -606,7 +606,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((IntStream) intStream).isOperated);
         Assert.isTrue(((IntStream) intStream1).isOperated);
         Assert.isTrue(((IntStream) intStream2).isOperated);
@@ -640,7 +640,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((LongStream) longStream).isOperated);
         Assert.isTrue(((LongStream) longStream1).isOperated);
         Assert.isTrue(((LongStream) longStream2).isOperated);
@@ -674,7 +674,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((DoubleStream) doubleStream).isOperated);
         Assert.isTrue(((DoubleStream) doubleStream1).isOperated);
         Assert.isTrue(((DoubleStream) doubleStream2).isOperated);
@@ -712,7 +712,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((ObjectStream) objStream).isOperated);
         Assert.isTrue(((ObjectStream) objStream1).isOperated);
         Assert.isTrue(((ObjectStream) objStream2).isOperated);
@@ -747,7 +747,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) conStream).isOperated);
         Assert.isTrue(((SObjectStream) conStream1).isOperated);
         Assert.isTrue(((SObjectStream) conStream2).isOperated);
@@ -780,7 +780,7 @@ private class SObjectStreamTest {
             }
         }
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((IntStream) intStream).isOperated);
     }
 
@@ -811,7 +811,7 @@ private class SObjectStreamTest {
             }
         }
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((LongStream) longStream).isOperated);
     }
 
@@ -838,7 +838,7 @@ private class SObjectStreamTest {
             expected.add(value2);
         }
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((DoubleStream) doubleStream).isOperated);
     }
 
@@ -865,7 +865,7 @@ private class SObjectStreamTest {
             expected.add(value2);
         }
         Assert.areEqual(expected, actual);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((ObjectStream) objStream).isOperated);
     }
 
@@ -901,9 +901,9 @@ private class SObjectStreamTest {
             Assert.areEqual(value, actual1[i].Name);
             Assert.areEqual(value, actual2[i].Name);
         }
-        Assert.areNotEqual(input, clone, Label.InputNotMutatedErrorMessage);
-        Assert.areNotEqual(input, clone1, Label.InputNotMutatedErrorMessage);
-        Assert.areNotEqual(input, clone2, Label.InputNotMutatedErrorMessage);
+        Assert.areNotEqual(input, clone, Label.AS_ErrorMessage_InputNotMutated);
+        Assert.areNotEqual(input, clone1, Label.AS_ErrorMessage_InputNotMutated);
+        Assert.areNotEqual(input, clone2, Label.AS_ErrorMessage_InputNotMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -941,7 +941,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected1, actual1);
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(expected1, actual3);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -990,7 +990,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected1, actual4);
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1034,7 +1034,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1075,7 +1075,7 @@ private class SObjectStreamTest {
         Assert.areEqual(input, actual1);
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(IllegalArgumentException.class.getName(), exc1.getTypeName());
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1107,7 +1107,7 @@ private class SObjectStreamTest {
         // Then
         Assert.areEqual(acc3, actual);
         Assert.areEqual(acc3, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
     }
@@ -1137,7 +1137,7 @@ private class SObjectStreamTest {
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, acc3, acc4 };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
     }
@@ -1174,7 +1174,7 @@ private class SObjectStreamTest {
         Assert.areEqual(acc2, actual1);
         Assert.areEqual(acc2, actual2);
         Assert.isTrue(actual3);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1209,7 +1209,7 @@ private class SObjectStreamTest {
         Assert.areEqual(true, isEveryConNameStartsWithT);
         Assert.areEqual(false, isEveryConDoNotCall);
         Assert.areEqual(false, isEveryConFinanceDepartment);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1243,7 +1243,7 @@ private class SObjectStreamTest {
         Assert.areEqual(false, isSomeConNameStartsWithA);
         Assert.areEqual(true, isSomeConDoNotCall);
         Assert.areEqual(false, isSomeConHR);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1277,7 +1277,7 @@ private class SObjectStreamTest {
         Assert.areEqual(true, isSomeConLNameStartsWithA);
         Assert.areEqual(false, isSomeConDoNotCall);
         Assert.areEqual(true, isSomeConHR);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1310,7 +1310,7 @@ private class SObjectStreamTest {
         Assert.areEqual(acc3, actual);
         Assert.areEqual(acc3, actual1);
         Assert.areEqual(acc3, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1343,7 +1343,7 @@ private class SObjectStreamTest {
         Assert.areEqual(acc4, actual);
         Assert.areEqual(acc4, actual1);
         Assert.areEqual(acc4, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1378,7 +1378,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1413,7 +1413,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1443,7 +1443,7 @@ private class SObjectStreamTest {
         Assert.areEqual(input.size(), actual);
         Assert.areEqual(0, actual1);
         Assert.areEqual(0, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1473,7 +1473,7 @@ private class SObjectStreamTest {
         Assert.areEqual(input.isEmpty(), actual);
         Assert.isTrue(actual1);
         Assert.isTrue(actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1518,7 +1518,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual4);
         Assert.areEqual(expected, actual5);
         Assert.areEqual(expected, actual6);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1589,7 +1589,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected3, actual8);
         Assert.areEqual(expected3, actual9);
         Assert.areEqual(expected3, actual10);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1647,7 +1647,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected2, actual4);
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1698,7 +1698,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected1, actual4);
         Assert.areEqual(expected1, actual5);
         Assert.areEqual(expected1, actual6);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);
@@ -1739,7 +1739,7 @@ private class SObjectStreamTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected1, actual1);
         Assert.areEqual(expected1, actual2);
-        Assert.areEqual(input, clone, Label.InputMutatedErrorMessage);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) accStream).isOperated);
         Assert.isTrue(((SObjectStream) accStream1).isOperated);
         Assert.isTrue(((SObjectStream) accStream2).isOperated);

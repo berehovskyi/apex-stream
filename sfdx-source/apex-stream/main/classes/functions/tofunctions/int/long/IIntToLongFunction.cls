@@ -1,5 +1,5 @@
 /**
- * @description An entity that takes one argument of `Integer` type and returns an `Long`
+ * @description An entity that takes one argument of `Integer` type and returns a `Long`
  * value.
  *
  * @author Oleh Berehovskyi

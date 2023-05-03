@@ -528,7 +528,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
      */
     public virtual IDoubleIterable lim(final Integer lim) {
         Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ lim });
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         if (lim == 0) { return DoubleSequence.empty(); }
         if (lim >= doubles.size()) { return this; }
         final List<Double> results = new List<Double>();
@@ -557,7 +557,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleIterable imp
      */
     public virtual IDoubleIterable skip(final Integer n) {
         Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.ArgumentNotPositiveErrorMessage, new List<Object>{ n });
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         if (n == 0) { return this; }
         if (n >= doubles.size()) { return DoubleSequence.empty(); }
         final List<Double> results = new List<Double>();
