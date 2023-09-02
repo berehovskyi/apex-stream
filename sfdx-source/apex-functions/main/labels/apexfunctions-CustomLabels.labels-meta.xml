@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AF_ErrorMessage_NoValuePresent</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>No value present</value>
+    </labels>
+    <labels>
+        <fullName>AF_ErrorMessage_NotReferenceField</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>{0} is not a lookup or master-detail field</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,751 @@
+/**
+ * @description A sequence of `Integer` elements supporting aggregate operations,
+ * a primitive specialization of {@link ObjectStream}.
+ *
+ * @see IntSequence
+ * @see SObjectStream
+ * @see ObjectStream
+ * @see DoubleStream
+ * @see LongStream
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Iterables
+ *
+ * @example
+ * Integer sumAnnualRevenueOfUniquePeopleFromLondon
+ *     = ObjectStream.of(people)
+ *         .filter(isPersonFromLondonPredicate)
+ *         .distinct()
+ *         .mapToInt(getAnnualRevenueToIntFunction)
+ *         .sum();
+ */
+public virtual inherited sharing class IntStream extends IntEnumerable {
+
+    private final transient Iterator<Integer> iterator;
+
+    /**
+     * @description A flag defining whether this stream has been linked or consumed.
+     */
+    public Boolean isOperated { get { return isOperated; } protected set; } {
+        isOperated = false;
+    }
+
+    protected IntStream() {
+        this(new List<Integer>().iterator());
+    }
+
+    protected IntStream(final Iterator<Integer> iterator) {
+        this.iterator = iterator;
+    }
+
+    /**
+     * @description Returns an internal iterator for the elements of this stream.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the internal `Iterator<Integer>`
+     *
+     * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
+     */
+    public override Iterator<Integer> iterator() {
+        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
+        try {
+            return iterator;
+        } finally {
+            isOperated = true;
+        }
+    }
+
+//    //<editor-fold desc="Conversion Operations">
+//    // @start-group Conversion Operations
+//    /**
+//     * @description Returns an `ObjectStream` consisting of the elements of this stream, converted to Object.
+//     *
+//     * @return the `ObjectStream`
+//     */
+//    public virtual IEnumerable toObjectIterable() {
+//        return ObjectStream.of(iterator());
+//    }
+//    // @end-group
+//    //</editor-fold>
+
+    //<editor-fold desc="Sources">
+    // @start-group Sources
+    /**
+     * @description Returns a `IntStream` created from `iterator`.
+     *
+     * @param iterator the iterator
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterator` is null
+     *
+     * @example
+     * IIntIterable intStream = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }.iterator());
+     * IIntIterable intStream = IntStream.of(new Set<Integer>{ 0, 5, 1, -10 }.iterator());
+     * IIntIterable intStream = IntStream.of(otherStream.iterator());
+     */
+    public static IntEnumerable of(final Iterator<Integer> iterator) {
+        Validate.notNull(iterator);
+        return new IntStream(iterator);
+    }
+
+    /**
+     * @description Returns a `IntStream` created from `integers`.
+     *
+     * @param integers the iterable
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `integers` is null
+     *
+     * @example
+     * IIntIterable intStream = IntStream.of(new List<Integer>{ 0, 5, 1, -10 });
+     * IIntIterable intStream = IntStream.of((Iterable<Integer>) new Set<Integer>{ 0, 5, 1, -10 });
+     */
+    public static IntEnumerable of(final Iterable<Integer> integers) {
+        Validate.notNull(integers);
+        return new IntStream(integers.iterator());
+    }
+
+    /**
+     * @description Returns a `IntStream` created from `integers` if non-null,
+     * otherwise returns an empty `IntStream`.
+     *
+     * @param integers the iterable
+     *
+     * @return the new `IntStream` if `integers` is non-null,
+     * otherwise an empty `IntStream`
+     *
+     * @example
+     * IIntIterable intStream = IntStream.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
+     */
+    public static IntEnumerable ofNullable(final Iterable<Integer> integers) {
+        if (integers == null) { return empty(); }
+        return new IntStream(integers.iterator());
+    }
+
+    /**
+     * @description Returns an empty `IntStream`.
+     *
+     * @return the empty `IntStream`
+     */
+    public static IntEnumerable empty() {
+        return new IntStream();
+    }
+
+    /**
+     * @description Returns an ordered `IntStream`
+     * from `fromInt` (inclusive) to `toInt` (inclusive) by an incremental step of 1.
+     *
+     * @param fromInt the inclusive initial value
+     * @param toInt the inclusive upper bound
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `fromInt` or `toInt` is null
+     *
+     * @example
+     * IIntIterable intStreamFrom0To100 = IntStream.range(0, 100);
+     */
+    public static IntEnumerable range(final Integer fromInt, final Integer toInt) {
+        return new IntStream(StreamPipeline.rangeInt(fromInt, toInt));
+    }
+
+    /**
+     * @description Returns an infinite `IntStream` where each element is
+     * generated by `supplier`.
+     *
+     * @param supplier the supplier of generated elements
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IIntIterable fibonacciInfiniteStream = IntStream.generate(IntSuppliers.fibonacci());
+     */
+    public static IntEnumerable generate(final ISupplier supplier) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.generate(supplier));
+    }
+
+    /**
+     * @description Returns an infinite `IntStream` produced by iterative
+     * application of `operator` to an initial element `seed`,
+     * producing a `IntStream` consisting of `seed`, `operator(seed)`,
+     * `operator(operator(seed))`, etc.
+     *
+     * @param seed the initial element
+     * @param operator the operator to be applied to the previous element to produce a new element
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IIntIterable intIncrementalStream = IntStream.iterate(0, IntUnaryOperators.add(1));
+     */
+    public static IntEnumerable iterate(final Integer seed, final IOperator operator) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.iterate(seed, operator));
+    }
+
+    /**
+     * @description Returns an infinite `IntStream` produced by iterative
+     * application of `operator` to an initial element `seed`,
+     * conditioned on satisfying `predicate`.
+     *
+     * @param seed the initial element
+     * @param predicate the predicate to determine when the stream must be terminated
+     * @param operator the operator to be applied to the previous element to produce a new element
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `supplier` or `supplier` is null
+     */
+    public static IntEnumerable iterate(final Integer seed, final IPredicate predicate, final IOperator operator) {
+        return iterate(seed, operator).take(predicate);
+    }
+
+    /**
+     * @description Returns lazily concatenated `IntStream` whose elements are all the
+     * elements of the first `Iterable<Integer>` followed by all the elements of the
+     * second `Iterable<Integer>`.
+     *
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterable1` or `iterable2` is null
+     *
+     * @example
+     * IIntIterable intStream = IntStream.concat(stream1, stream2);
+     */
+    public static IntEnumerable concat(final Iterable<Integer> iterable1, final Iterable<Integer> iterable2) {
+        return concat(new List<Iterable<Integer>>{ iterable1, iterable2 });
+    }
+
+    /**
+     * @description Returns lazily concatenated `List<Iterable<Integer>>`.
+     *
+     * @param iterables the list of `Iterable<Integer>`
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterables` or some element in a list is null
+     *
+     * @example
+     * IIntIterable intStream = IntStream.concat(streams);
+     */
+    public static IntEnumerable concat(final List<Iterable<Integer>> iterables) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.concat(iterables, Integer.class));
+    }
+
+    /**
+     * @description Returns a combined `IntStream` by applying `combiner` function
+     * to each element at the same position.
+     *
+     * @param iterable1 the first `Iterable<Integer>`
+     * @param iterable2 the second `Iterable<Integer>`
+     * @param combiner the binary operator to be applied to each element at the same position
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     */
+    public static IntEnumerable zip(
+            final Iterable<Integer> iterable1,
+            final Iterable<Integer> iterable2,
+            final IBiOperator combiner
+    ) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.zip(iterable1, iterable2, combiner));
+    }
+
+    /**
+     * @description Returns new `IntStream` by appending `iterable`
+     * to the current stream.
+     *
+     * @param iterable the `Iterable<Integer>` to append to the current stream
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
+     * @example
+     * IIntIterable intStream = stream1.append(stream2);
+     */
+    public virtual override IntEnumerable append(final Iterable<Integer> iterable) {
+        return concat(this, iterable);
+    }
+
+    /**
+     * @description Returns new `IntStream` by prepending `iterable`
+     * to the current stream.
+     *
+     * @param iterable the `Iterable<Integer>` to prepend to the current stream
+     *
+     * @return the new `IntStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
+     * @example
+     * IIntIterable intStream = stream1.prepend(stream2);
+     */
+    public virtual override IntEnumerable prepend(final Iterable<Integer> iterable) {
+        return concat(iterable, this);
+    }
+    // @end-group
+    //</editor-fold>
+
+    //<editor-fold desc="Intermediate Operations">
+    // @start-group Intermediate Operations
+//    /**
+//     * @description Returns new `IntSequence` from the current stream.
+//     * <p>Stateful Intermediate Operation.</p>
+//     *
+//     * @return the new `IntSequence`
+//     *
+//     * @example
+//     * IIntIterable intSeq = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).sequence();
+//     */
+//    public virtual IntEnumerable sequence() {
+//        return IntSequence.of(toList());
+//    }
+
+    /**
+     * @description Returns a `IntStream` with elements that match `predicate`.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * List<Integer> filtered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .filter(IntPredicates.isGreater(0))
+     *     .toList();
+     */
+    public virtual override IntEnumerable filter(final IPredicate predicate) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.filter(iterator(), predicate));
+    }
+
+    /**
+     * @description Returns a `IntStream` which takes elements while elements match `predicate`.
+     * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * List<Integer> firstFiltered = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .take(IntPredicates.isGreater(0))
+     *     .toList();
+     */
+    public virtual override IntEnumerable take(final IPredicate predicate) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.take(iterator(), predicate));
+    }
+
+    /**
+     * @description Returns a `IntStream` which drops elements while elements match `predicate`,
+     * then takes the rest.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * List<Integer> rest = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .drop(IntPredicates.isGreater(0))
+     *     .toList();
+     */
+    public virtual override IntEnumerable drop(final IPredicate predicate) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.drop(iterator(), predicate));
+    }
+
+    /**
+     * @description Returns a `IntStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * List<Integer> incrementedInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .mapTo(IntUnaryOperators.add(1))
+     *     .toList();
+     */
+    public virtual override IntEnumerable mapTo(final IOperator mapper) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.mapTo(iterator(), (IFunction) mapper));
+    }
+
+    /**
+     * @description Returns a `LongStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `LongStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override LongEnumerable mapToLong(final IFunction mapper) {
+        return LongStream.of((Iterator<Long>) StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override DoubleEnumerable mapToDouble(final IFunction mapper) {
+        return DoubleStream.of((Iterator<Double>) StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `SObjectStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `SObjectStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
+        return SObjectStream.of((Iterator<SObject>) StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `ObjectStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `ObjectStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override ObjectEnumerable mapToObject(final IFunction mapper) {
+        return ObjectStream.of(StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    public virtual override IntEnumerable flatMapTo(final IFunction mapper) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.flatMapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `IntStream` after performing `consumer` action on each element.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param consumer the non-interfering, stateless action to be performed on each element.
+     * Expected to operate via side effects.
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `consumer` is null
+     */
+    public virtual override IntEnumerable forEach(final IConsumer consumer) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.forEach(iterator(), consumer));
+    }
+
+    /**
+     * @description Returns a `IntStream` with distinct elements.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `IntStream`
+     *
+     * @example
+     * List<Integer> distinct = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .distinct()
+     *     .toList();
+     */
+    public virtual override IntEnumerable distinct() {
+        return new IntStream((Iterator<Integer>) StreamPipeline.distinct(iterator()));
+    }
+
+    /**
+     * @description Returns a `IntStream` with sorted elements in ascending order.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `IntStream`
+     *
+     * @example
+     * List<Integer> sorted = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .sort()
+     *     .toList();
+     */
+    public virtual override IntEnumerable sort() {
+        return new IntStream((Iterator<Integer>) StreamPipeline.sort(iterator()));
+    }
+
+    public virtual override IntEnumerable sort(final SortOrder order) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.sort(iterator(), order));
+    }
+
+    /**
+     * @description Returns a `IntStream` with first `lim` elements.
+     * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param lim the number of elements to limit
+     *
+     * @return the `IntStream`
+     *
+     * @throws IllegalStateException if `lim` is less than 0
+     * @throws NullPointerException if `lim` is null
+     *
+     * @example
+     * List<Integer> first3Ints = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .lim(3)
+     *     .toList();
+     */
+    public virtual override IntEnumerable lim(final Integer lim) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.lim(iterator(), lim));
+    }
+
+    /**
+     * @description Returns a new `IntStream` that skips first `n` elements
+     * and returns remaining elements.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param n the number of elements to skip
+     *
+     * @return the `IntStream`
+     *
+     * @throws IllegalStateException if `n` is less than 0
+     * @throws NullPointerException if `n` is null
+     *
+     * @example
+     * List<Integer> restLongs = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .skip(1)
+     *     .toList();
+     */
+    public virtual override IntEnumerable skip(final Integer n) {
+        return new IntStream((Iterator<Integer>) StreamPipeline.skip(iterator(), n));
+    }
+    // @end-group
+    //</editor-fold>
+
+    //<editor-fold desc="Terminal Operations">
+    // @start-group Terminal Operations
+    /**
+     * @description Performs a reduction on `Integer` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Integer` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).reduce(0, IntBinaryOperators.sum());
+     * Integer factorialOfN = IntStream.range(1, n).reduce(1, IntBinaryOperators.product());
+     */
+    public virtual override Integer reduce(final Integer identity, final IBiOperator accumulator) {
+        return (Integer) StreamPipeline.reduce(iterator(), (Object) identity, accumulator);
+    }
+
+    /**
+     * @description Performs a reduction on `Integer` elements,
+     * using `identity` value and associative `accumulator` function, and returns
+     * an `OptionalInt` describing the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `OptionalInt` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *      .reduce(IntBinaryOperators.sum())
+     *      .get();
+     */
+    public virtual override Optional reduce(final IBiOperator accumulator) {
+        return Optional.ofNullable((Integer) StreamPipeline.reduce(iterator(), accumulator));
+    }
+
+    public virtual override Object collect(final ICollector collector) {
+        return StreamPipeline.collect(iterator(), collector);
+    }
+//    /**
+//     * @description Performs a mutable reduction operation on elements, collecting elements
+//     * to a container returned by `supplier` by applying `accumulator` function.
+//     * <p>Terminal Operation.</p>
+//     *
+//     * @param supplier the function that returns a mutable result container
+//     * @param accumulator the associative, non-interfering, stateless accumulation function
+//     *
+//     * @return the `Object` result of the collection
+//     *
+//     * @throws NullPointerException if `supplier` or `accumulator` is null
+//     */
+//    public virtual Object collect(final ISupplier supplier, final IObjectIntConsumer accumulator) {
+//        Validate.notNull(supplier);
+//        Validate.notNull(accumulator);
+//        final Object container = supplier.get();
+//        final Iterator<Integer> iterator = iterator();
+//        while (iterator.hasNext()) {
+//            accumulator.accept(container, iterator.next());
+//        }
+//        return container;
+//    }
+
+    /**
+     * @description Returns an `OptionalInt` describing the first element
+     * that matches `predicate`.
+     * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `OptionalInt`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * Integer firstEvenInt = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .find(IntPredicates.isEven())
+     *     .get();
+     */
+    public virtual override Optional find(final IPredicate predicate) {
+        return Optional.ofNullable((Integer) StreamPipeline.find(iterator(), predicate));
+    }
+
+    /**
+     * @description Returns whether all elements match `predicate`.
+     * If `IntStream` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * Boolean isEveryIntEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .every(IntPredicates.isEven())
+     *     .get();
+     */
+    public virtual override Boolean every(final IPredicate predicate) {
+        return StreamPipeline.match(iterator(), predicate, 1);
+    }
+
+    /**
+     * @description Returns whether some element matches `predicate`.
+     * If `IntStream` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * Boolean isSomeLongEven = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .some(IntPredicates.isEven())
+     *     .get();
+     */
+    public virtual override Boolean some(final IPredicate predicate) {
+        return StreamPipeline.match(iterator(), predicate, 0);
+    }
+
+    /**
+     * @description Returns the sum of elements.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the sum of elements
+     */
+    public virtual override Integer sum() {
+        return (Integer) StreamPipeline.avgInt(iterator(), false);
+    }
+
+    /**
+     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this stream,
+     * or an empty `OptionalDouble` if this stream is empty.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the arithmetic mean of elements
+     */
+    public virtual override Optional avg() {
+        return Optional.of((Double) StreamPipeline.avgInt(iterator(), true));
+    }
+
+    /**
+     * @description Returns the count of elements.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the count of elements
+     */
+    public virtual override Integer count() {
+        return StreamPipeline.count(iterator());
+    }
+
+    /**
+     * @description Returns whether the count of elements is 0.
+     * <p>Terminal Operation.</p>
+     *
+     * @return `true` or `false`
+     */
+    public virtual override Boolean isEmpty() {
+        return StreamPipeline.isEmpty(iterator());
+    }
+
+    /**
+     * @description Accumulates elements into a `List<Integer>`.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the `List<Integer>` containing the stream elements
+     *
+     * @example
+     * List<Integer> restInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .skip(1)
+     *     .toList();
+     */
+    public virtual override List<Integer> toList() {
+        return (List<Integer>) StreamPipeline.toList(iterator(), Integer.class);
+    }
+
+    /**
+     * @description Accumulates elements into a `Set<Integer>`.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<Integer>` containing the stream elements
+     *
+     * @example
+     * Set<Integer> restInts = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .skip(1)
+     *     .toSet();
+     */
+    public virtual override Set<Integer> toSet() {
+        return StreamPipeline.toIntSet(iterator());
+    }
+    // @end-group
+    //</editor-fold>
+
+}

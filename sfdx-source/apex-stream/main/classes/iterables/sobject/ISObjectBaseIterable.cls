@@ -210,7 +210,7 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      *
      * @return the new `IObjectIterable`
      */
-    IObjectIterable mapToObject(ISObjectFunction mapper);
+    IIterable mapToObject(ISObjectFunction mapper);
 
     /**
      * @description Returns a new `ISObjectIterable` with `SObject` elements as a result of
@@ -270,7 +270,7 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
      *
      * @return the new `IObjectIterable`
      */
-    IObjectIterable flatMapToObject(ISObjectFunction mapper);
+    IIterable flatMapToObject(ISObjectFunction mapper);
 
     /**
      * @description Returns a new `ISObjectIterable` after performing `consumer` action
@@ -293,14 +293,14 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
-     * according to `comparator`.
+     * according to `comparer`.
      * <p>Intermediate Operation.</p>
      *
-     * @param comparator the comparator
+     * @param comparer the comparer
      *
      * @return the new `ISObjectIterable`
      */
-    ISObjectIterable sort(ISObjectComparator comparator);
+    ISObjectIterable sort(ISObjectComparer comparer);
 
     /**
      * @description Returns a new `ISObjectIterable` with first `lim` `SObject` elements.
@@ -418,25 +418,25 @@ public interface ISObjectBaseIterable extends Iterable<SObject> {
 
     /**
      * @description Returns an `OptionalSObject` describing the maximum `SObject` element
-     * according to `comparator`.
+     * according to `comparer`.
      * <p>Terminal Operation.</p>
      *
-     * @param comparator the comparator
+     * @param comparer the comparer
      *
      * @return the `OptionalSObject` describing the result
      */
-    OptionalSObject max(ISObjectComparator comparator);
+    OptionalSObject max(ISObjectComparer comparer);
 
     /**
      * @description Returns an `OptionalSObject` describing the minimum `SObject` element
-     * according to `comparator`.
+     * according to `comparer`.
      * <p>Terminal Operation.</p>
      *
-     * @param comparator the comparator
+     * @param comparer the comparer
      *
      * @return the `OptionalSObject` describing the result
      */
-    OptionalSObject min(ISObjectComparator comparator);
+    OptionalSObject min(ISObjectComparer comparer);
 
     /**
      * @description Returns the arithmetic sum of values returned by `classifier` function.

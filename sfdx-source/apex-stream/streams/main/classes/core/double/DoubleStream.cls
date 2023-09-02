@@ -1,0 +1,732 @@
+/**
+ * @description A sequence of `Double` elements supporting aggregate operations,
+ * a primitive specialization of {@link ObjectStream}.
+ *
+ * @see DoubleSequence
+ * @see SObjectStream
+ * @see ObjectStream
+ * @see IntStream
+ * @see LongStream
+ *
+ * @author Oleh Berehovskyi
+ *
+ * @group Iterables
+ *
+ * @example
+ * <p><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method</a></p>
+ * // Approximating the value of π using Monte Carlo method and streams
+ * Integer s = 200000;
+ * IDoubleIterable x = DoubleStream.generate(DoubleSuppliers.random());
+ * IDoubleIterable y = DoubleStream.generate(DoubleSuppliers.random());
+ * IBiOperator euclidean = DoubleBinaryOperators.euclideanDistance();
+ * // The number of points inside the quadrant,
+ * // i.e. having a distance from the origin of less than 1
+ * Integer n = DoubleStream.zip(x, y, euclidean)
+ *       .lim(s)
+ *       .filter(DoublePredicates.isLess(1))
+ *       .count();
+ * // The ratio of the inside-count and the total-sample-count is an estimate of the ratio
+ * // of the two areas, π / 4. Multiply the result by 4 to estimate π.
+ * Double approxPi = 4 * n / (Double) s;
+ */
+public virtual inherited sharing class DoubleStream extends DoubleEnumerable {
+
+    private final transient Iterator<Double> iterator;
+
+    /**
+     * @description A flag defining whether this stream has been linked or consumed.
+     */
+    public Boolean isOperated { get { return isOperated; } protected set; } {
+        isOperated = false;
+    }
+
+    protected DoubleStream() {
+        this((new List<Double>()).iterator());
+    }
+
+    protected DoubleStream(final Iterator<Double> iterator) {
+        this.iterator = iterator;
+    }
+
+    /**
+     * @description Returns an internal iterator for the elements of this stream.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the internal `Iterator<Double>`
+     *
+     * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
+     */
+    public override Iterator<Double> iterator() {
+        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
+        try {
+            return iterator;
+        } finally {
+            isOperated = true;
+        }
+    }
+
+//    //<editor-fold desc="Conversion Operations">
+//    // @start-group Conversion Operations
+//    /**
+//     * @description Returns an `ObjectStream` consisting of the elements of this stream, converted to Object.
+//     *
+//     * @return the `ObjectStream`
+//     */
+//    public virtual IEnumerable toObjectIterable() {
+//        return ObjectStream.of(iterator());
+//    }
+//    // @end-group
+//    //</editor-fold>
+
+    //<editor-fold desc="Sources">
+    // @start-group Sources
+    /**
+     * @description Returns a `DoubleStream` created from `iterator`.
+     *
+     * @param iterator the iterator
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterator` is null
+     *
+     * @example
+     * IDoubleIterable doubleStream = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }.iterator());
+     * IDoubleIterable doubleStream = DoubleStream.of(new Set<Double>{ 0.1, 5, 1.5, Math.PI }.iterator());
+     * IDoubleIterable doubleStream = DoubleStream.of(otherStream.iterator());
+     */
+    public static DoubleEnumerable of(final Iterator<Double> iterator) {
+        Validate.notNull(iterator);
+        return new DoubleStream(iterator);
+    }
+
+    /**
+     * @description Returns a `DoubleStream` created from `doubles`.
+     *
+     * @param doubles the iterable
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `doubles` is null
+     *
+     * @example
+     * IDoubleIterable doubleStream = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI });
+     * IDoubleIterable doubleStream = DoubleStream.of((Iterable<Double>) new Set<Double>{ 0.1, 5, 1.5, Math.PI });
+     */
+    public static DoubleEnumerable of(final Iterable<Double> doubles) {
+        Validate.notNull(doubles);
+        return new DoubleStream(doubles.iterator());
+    }
+
+    /**
+     * @description Returns a `DoubleStream` created from `doubles` if non-null,
+     * otherwise returns an empty `DoubleStream`.
+     *
+     * @param doubles the iterable
+     *
+     * @return the new `DoubleStream` if `doubles` is non-null,
+     * otherwise an empty `DoubleStream`
+     *
+     * @example
+     * IDoubleIterable doubleStream = DoubleStream.ofNullable(new List<Double>{ 0.1, 5, 1.5, Math.PI });
+     */
+    public static DoubleEnumerable ofNullable(final Iterable<Double> doubles) {
+        if (doubles == null) { return empty(); }
+        return new DoubleStream(doubles.iterator());
+    }
+
+    /**
+     * @description Returns an empty `DoubleStream`.
+     *
+     * @return the empty `DoubleStream`
+     */
+    public static DoubleEnumerable empty() {
+        return new DoubleStream();
+    }
+
+    /**
+     * @description Returns an infinite `DoubleStream` where each element is
+     * generated by `supplier`.
+     *
+     * @param supplier the supplier of generated elements
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IDoubleIterable randomStream = DoubleStream.generate(DoubleSupplier.random());
+     */
+    public static DoubleEnumerable generate(final ISupplier supplier) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.generate(supplier));
+    }
+
+    /**
+     * @description Returns an infinite `DoubleStream` produced by iterative
+     * application of `operator` to an initial element `seed`,
+     * producing a `DoubleStream` consisting of `seed`, `operator(seed)`,
+     * `operator(operator(seed))`, etc.
+     *
+     * @param seed the initial element
+     * @param operator the operator to be applied to the previous element to produce a new element
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `supplier` is null
+     *
+     * @example
+     * IDoubleIterable doubleIncrementalStream = DoubleStream.iterate(0, DoubleUnaryOperators.add(1));
+     */
+    public static DoubleEnumerable iterate(final Double seed, final IOperator operator) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.iterate(seed, operator));
+    }
+
+    /**
+     * @description Returns an infinite `DoubleStream` produced by iterative
+     * application of `operator` to an initial element `seed`,
+     * conditioned on satisfying `predicate`.
+     *
+     * @param seed the initial element
+     * @param predicate the predicate to determine when the stream must be terminated
+     * @param operator the operator to be applied to the previous element to produce a new element
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `supplier` or `supplier` is null
+     */
+    public static DoubleEnumerable iterate(final Double seed, final IPredicate predicate, final IOperator operator) {
+        return iterate(seed, operator).take(predicate);
+    }
+
+    /**
+     * @description Returns lazily concatenated `DoubleStream` whose elements are all the
+     * elements of the first `Iterable<Double>` followed by all the elements of the
+     * second `Iterable<Double>`.
+     *
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterable1` or `iterable2` is null
+     *
+     * @example
+     * IDoubleIterable doubleStream = DoubleStream.concat(stream1, stream2);
+     */
+    public static DoubleEnumerable concat(final Iterable<Double> iterable1, final Iterable<Double> iterable2) {
+        return concat(new List<Iterable<Double>>{ iterable1, iterable2 });
+    }
+
+    /**
+     * @description Returns lazily concatenated `List<Iterable<Double>>`.
+     *
+     * @param iterables the list of `Iterable<Double>`
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterables` or some element in a list is null
+     *
+     * @example
+     * IDoubleIterable doubleStream = DoubleStream.concat(streams);
+     */
+    public static DoubleEnumerable concat(final List<Iterable<Double>> iterables) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.concat(iterables, Double.class));
+    }
+
+    /**
+     * @description Returns a combined `DoubleStream` by applying `combiner` function
+     * to each element at the same position.
+     *
+     * @param iterable1 the first `Iterable<Double>`
+     * @param iterable2 the second `Iterable<Double>`
+     * @param combiner the binary operator to be applied to each element at the same position
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     */
+    public static DoubleEnumerable zip(
+            final Iterable<Double> iterable1,
+            final Iterable<Double> iterable2,
+            final IBiOperator combiner
+    ) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.zip(iterable1, iterable2, combiner));
+    }
+
+    /**
+     * @description Returns new `DoubleStream` by appending `iterable`
+     * to the current stream.
+     *
+     * @param iterable the `Iterable<Double>` to append to the current stream
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
+     * @example
+     * IDoubleIterable doubleStream = stream1.append(stream2);
+     */
+    public virtual override DoubleEnumerable append(final Iterable<Double> iterable) {
+        return concat(this, iterable);
+    }
+
+    /**
+     * @description Returns new `DoubleStream` by prepending `iterable`
+     * to the current stream.
+     *
+     * @param iterable the `Iterable<Double>` to prepend to the current stream
+     *
+     * @return the new `DoubleStream`
+     *
+     * @throws NullPointerException if `iterable` is null
+     *
+     * @example
+     * IDoubleIterable doubleStream = stream1.prepend(stream2);
+     */
+    public virtual override DoubleEnumerable prepend(final Iterable<Double> iterable) {
+        return concat(iterable, this);
+    }
+    // @end-group
+    //</editor-fold>
+
+    //<editor-fold desc="Intermediate Operations">
+    // @start-group Intermediate Operations
+//    /**
+//     * @description Returns new `DoubleSequence` from the current stream.
+//     * <p>Stateful Intermediate Operation.</p>
+//     *
+//     * @return the new `DoubleSequence`
+//     *
+//     * @example
+//     * IDoubleIterable doubleSeq = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI }).sequence();
+//     */
+//    public virtual DoubleEnumerable sequence() {
+//        return DoubleSequence.of(toList());
+//    }
+
+    /**
+     * @description Returns a `DoubleStream` with elements that match `predicate`.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * List<Double> filtered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .filter(DoublePredicates.isGreater(0))
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable filter(final IPredicate predicate) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.filter(iterator(), predicate));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` which takes elements while elements match `predicate`.
+     * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * List<Double> firstFiltered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .take(DoublePredicates.isGreater(0))
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable take(final IPredicate predicate) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.take(iterator(), predicate));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` which drops elements while elements match `predicate`,
+     * then takes the rest.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param predicate the non-interfering, stateless predicate
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * List<Double> rest = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .drop(DoublePredicates.isGreater(0))
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable drop(final IPredicate predicate) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.drop(iterator(), predicate));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * List<Double> incrementedDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .mapTo(DoubleUnaryOperators.add(1.5))
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable mapTo(final IOperator mapper) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.mapTo(iterator(), (IFunction) mapper));
+    }
+
+    /**
+     * @description Returns a `IntStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `IntStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override IntEnumerable mapToInt(final IFunction mapper) {
+        return IntStream.of((Iterator<Integer>) StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `LongStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `LongStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override LongEnumerable mapToLong(final IFunction mapper) {
+        return LongStream.of((Iterator<Long>) StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `SObjectStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `SObjectStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
+        return SObjectStream.of((Iterator<SObject>) StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `ObjectStream` with elements returned by `mapper` function,
+     * applied to the elements of this stream.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param mapper the non-interfering, stateless operator
+     *
+     * @return the `ObjectStream`
+     *
+     * @throws NullPointerException if `mapper` is null
+     */
+    public virtual override ObjectEnumerable mapToObject(final IFunction mapper) {
+        return ObjectStream.of(StreamPipeline.mapTo(iterator(), mapper));
+    }
+
+    public virtual override DoubleEnumerable flatMapTo(final IFunction mapper) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.flatMapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` after performing `consumer` action on each element.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param consumer the non-interfering, stateless action to be performed on each element.
+     * Expected to operate via side effects.
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws NullPointerException if `consumer` is null
+     */
+    public virtual override DoubleEnumerable forEach(final IConsumer consumer) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.forEach(iterator(), consumer));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` with distinct elements.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `DoubleStream`
+     *
+     * @example
+     * List<Double> distinct = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .distinct()
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable distinct() {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.distinct(iterator()));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` with sorted elements in ascending order.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the `DoubleStream`
+     *
+     * @example
+     * List<Double> sorted = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .sort()
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable sort() {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.sort(iterator()));
+    }
+
+    public virtual override DoubleEnumerable sort(final SortOrder order) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.sort(iterator(), order));
+    }
+
+    /**
+     * @description Returns a `DoubleStream` with first `lim` elements.
+     * <p>Short-circuiting Stateful Intermediate Operation.</p>
+     *
+     * @param lim the number of elements to limit
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws IllegalStateException if `lim` is less than 0
+     * @throws NullPointerException if `lim` is null
+     *
+     * @example
+     * List<Double> first3Doubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .lim(3)
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable lim(final Integer lim) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.lim(iterator(), lim));
+    }
+
+    /**
+     * @description Returns a new `DoubleStream` that skips first `n` elements
+     * and returns remaining elements.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param n the number of elements to skip
+     *
+     * @return the `DoubleStream`
+     *
+     * @throws IllegalStateException if `n` is less than 0
+     * @throws NullPointerException if `n` is null
+     *
+     * @example
+     * List<Double> restDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .skip(1)
+     *     .toList();
+     */
+    public virtual override DoubleEnumerable skip(final Integer n) {
+        return new DoubleStream((Iterator<Double>) StreamPipeline.skip(iterator(), n));
+    }
+    // @end-group
+    //</editor-fold>
+
+    //<editor-fold desc="Terminal Operations">
+    // @start-group Terminal Operations
+    /**
+     * @description Performs a reduction on `Double` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Double` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .reduce((Double) 0.0, DoubleBinaryOperators.sum());
+     */
+    public virtual override Double reduce(final Double identity, final IBiOperator accumulator) {
+        return (Double) StreamPipeline.reduce(iterator(), (Object) identity, accumulator);
+    }
+
+    /**
+     * @description Performs a reduction on `Double` elements,
+     * using `identity` value and associative `accumulator` function, and returns
+     * an `OptionalDouble` describing the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `OptionalDouble` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *      .reduce(DoubleBinaryOperators.sum())
+     *      .get();
+     */
+    public virtual override Optional reduce(final IBiOperator accumulator) {
+        return Optional.ofNullable((Double) StreamPipeline.reduce(iterator(), accumulator));
+    }
+
+    public virtual override Object collect(final ICollector collector) {
+        return StreamPipeline.collect(iterator(), collector);
+    }
+//
+//    /**
+//     * @description Performs a mutable reduction operation on elements, collecting elements
+//     * to a container returned by `supplier` by applying `accumulator` function.
+//     * <p>Terminal Operation.</p>
+//     *
+//     * @param supplier the function that returns a mutable result container
+//     * @param accumulator the associative, non-interfering, stateless accumulation function
+//     *
+//     * @return the `Object` result of the collection
+//     *
+//     * @throws NullPointerException if `supplier` or `accumulator` is null
+//     */
+//    public virtual override Object collect(final ISupplier supplier, final IObjectConsumer accumulator) {
+//        Validate.notNull(supplier);
+//        Validate.notNull(accumulator);
+//        final Object container = supplier.get();
+//        final Iterator<Double> iterator = iterator();
+//        while (iterator.hasNext()) {
+//            accumulator.accept(container, iterator.next());
+//        }
+//        return container;
+//    }
+//
+    /**
+     * @description Returns an `OptionalDouble` describing the first element
+     * that matches `predicate`.
+     * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return the `OptionalDouble`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * Double firstGreaterDouble = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .find(DoublePredicates.isGreater(1.5))
+     *     .get();
+     */
+    public virtual override Optional find(final IPredicate predicate) {
+        return Optional.ofNullable((Double) StreamPipeline.find(iterator(), predicate));
+//        Double result;
+//        final Iterator<Double> iterator = iterator();
+//        while (iterator.hasNext()) {
+//            final Double d = iterator.next();
+//            if (predicate.test(d)) {
+//                result = d;
+//                break;
+//            }
+//        }
+//        return OptionalDouble.ofNullable(result);
+    }
+
+    /**
+     * @description Returns whether all elements match `predicate`.
+     * If `DoubleStream` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * Boolean isEveryDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .every(DoublePredicates.isGreater(1.5))
+     *     .get();
+     */
+    public virtual override Boolean every(final IPredicate predicate) {
+        return StreamPipeline.match(iterator(), predicate, 1);
+    }
+
+    /**
+     * @description Returns whether some element matches `predicate`.
+     * If `DoubleStream` is empty then `false` is returned.
+     * <p>Short-circuiting Terminal Operation.</p>
+     *
+     * @param predicate the predicate
+     *
+     * @return `true` or `false`
+     *
+     * @throws NullPointerException if `predicate` is null
+     *
+     * @example
+     * Boolean isSomeDoubleGreater = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .some(DoublePredicates.isGreater(1.5))
+     *     .get();
+     */
+    public virtual override Boolean some(final IPredicate predicate) {
+        return StreamPipeline.match(iterator(), predicate, 0);
+    }
+
+    /**
+     * @description Returns the count of elements.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the count of elements
+     */
+    public virtual override Integer count() {
+        return StreamPipeline.count(iterator());
+    }
+
+    /**
+     * @description Returns whether the count of elements is 0.
+     * <p>Terminal Operation.</p>
+     *
+     * @return `true` or `false`
+     */
+    public virtual override Boolean isEmpty() {
+        return StreamPipeline.isEmpty(iterator());
+    }
+
+    /**
+     * @description Accumulates elements into a `List<Double>`.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the `List<Double>` containing the stream elements
+     *
+     * @example
+     * List<Double> restDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .skip(1)
+     *     .toList();
+     */
+    public virtual override List<Double> toList() {
+        return (List<Double>) StreamPipeline.toList(iterator(), Double.class);
+    }
+
+    /**
+     * @description Accumulates elements into a `Set<Double>`.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the `Set<Double>` containing the stream elements
+     *
+     * @example
+     * Set<Double> restDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .skip(1)
+     *     .toSett();
+     */
+    public virtual override Set<Double> toSet() {
+        return StreamPipeline.toDoubleSet(iterator());
+    }
+    // @end-group
+    //</editor-fold>
+
+}
