@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>AF_ErrorMessage_IndexOutOfBounds</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>Index {0} is out of bounds</value>
+    </labels>
+    <labels>
         <fullName>AF_ErrorMessage_NoValuePresent</fullName>
         <language>en_US</language>
         <protected>true</protected>

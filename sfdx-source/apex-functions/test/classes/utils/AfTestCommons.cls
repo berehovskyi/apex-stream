@@ -22,6 +22,17 @@ private class AfTestCommons {
     public static Object deepClone(Object objects, Type t) {
         return JSON.deserialize(JSON.serialize(objects, false), t);
     }
+    public static Object collect(final List<Object> source, final ICollector collector) {
+        Validate.notNull(source);
+        Validate.notNull(collector);
+        final Object container = collector.supplier().get();
+        final IBiConsumer accumulator = collector.accumulator();
+        final IFunction finisher = collector.finisher();
+        for (Integer i = 0, size = source.size(); i < size; i++) {
+            accumulator.accept(container, source[i]);
+        }
+        return finisher == null ? container : finisher.apply(container);
+    }
 
     public class GetFieldFunction extends Function {
         private final String fieldName;
@@ -39,14 +50,29 @@ private class AfTestCommons {
         public SetActiveConsumer(Boolean isActive) { this.isActive = isActive; }
         public override void accept(Object o) { ((AfPerson) o).setActive(isActive); }
     }
+    public class GetIdFunction extends Function {
+        public override Object apply(Object o) { return ((AfPerson) o).getAutoId(); }
+    }
     public class GetNameFunction extends Function {
         public override Object apply(Object o) { return ((AfPerson) o).getName(); }
     }
     public class GetAgeFunction extends Function {
         public override Object apply(Object o) { return ((AfPerson) o).getAge(); }
     }
+    public class GetProbabilityFunction extends Function {
+        public override Object apply(Object o) { return ((AfPerson) o).getProbability(); }
+    }
+    public class GetActiveFunction extends Function {
+        public override Object apply(Object o) { return ((AfPerson) o).isActive(); }
+    }
     public class IsActivePredicate extends Predicate {
         public override Boolean test(Object o) { return ((AfPerson) o).isActive(); }
+    }
+    public class IsAdultFunction extends Function {
+        public override Object apply(Object o) { return ((AfPerson) o).getAge() >= 18; }
+    }
+    public class IsAdultPredicate extends Predicate {
+        public override Boolean test(Object o) { return ((AfPerson) o).getAge() >= 18; }
     }
     public class IsNameChangedPredicate extends Predicate {
         private final String oldName;
@@ -131,6 +157,14 @@ private class AfTestCommons {
             downstream.accumulator().accept(m.get(key), o);
         }
     }
+    public class SumIntFieldReducer extends BiOperator {
+        private final String fieldName;
+        public SumIntFieldReducer(String fieldName) { this.fieldName = fieldName.contains('.') ? fieldName.substringAfter('.') : fieldName; }
+        public override Object apply(Object seed, Object sObj) {
+            ((SObject) seed).put(fieldName, (Integer) ((SObject) seed).get(fieldName) + (Integer) ((SObject) sObj).get(fieldName));
+            return seed;
+        }
+    }
     public class GroupByStringFinisherFunction extends Function {
         private final IFunction finisher;
         public GroupByStringFinisherFunction(IFunction finisher) { this.finisher = finisher; }
@@ -208,6 +242,15 @@ private class AfTestCommons {
         private final Integer i;
         public MultiplyIntOperator(Integer i) { this.i = i; }
         public override Object apply(Object o) { return ((Integer) o) * i; }
+    }
+    public class TestAccountOperator extends Operator {
+        private Integer i = 0;
+        public override Object apply(Object sObj) {
+            return new Account(
+                Name = 'Test' + i,
+                NumberOfEmployees = 100 * i++
+            );
+        }
     }
     public virtual class ComparePredicate extends Predicate {
         private final IFunction left;

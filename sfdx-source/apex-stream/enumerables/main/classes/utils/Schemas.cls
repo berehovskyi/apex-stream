@@ -35,36 +35,36 @@ public inherited sharing class Schemas {
         return result;
     }
 
-    /**
-     * @description Checks if `fieldName` may be a cross-reference field.
-     * @param fieldName the fiend name
-     *
-     * @return true if `fieldName` may be a cross-reference field, false otherwise
-     * 
-     * @example 
-     * Schemas.isXRef('Name'); // false
-     * Schemas.isXRef('Parent.Name'); // true
-     */
-    public static Boolean isXRef(final String fieldName) {
-        return fieldName.contains('.');
-    }
-
-    /**
-     * @description Checks if `fieldName` may be a safe navigated cross-reference field.
-     * @param fieldName the fiend name
-     *
-     * @return true if `fieldName` may be a safe navigated cross-reference field, false otherwise
-     * 
-     * @example 
-     * Schemas.isSaveNav('Name'); // false
-     * Schemas.isSaveNav('Parent.Name'); // false
-     * Schemas.isSaveNav('Parent?.Name'); // true
-     * Schemas.isSaveNav('Parent?.Parent.Name'); // false
-     * Schemas.isSaveNav('Parent.Parent?.Name'); // true
-     */
-    public static Boolean isSaveNav(final String fieldName) {
-        return fieldName.substringBeforeLast('.').endsWith('?');
-    }
+//    /**
+//     * @description Checks if `fieldName` may be a cross-reference field.
+//     * @param fieldName the fiend name
+//     *
+//     * @return true if `fieldName` may be a cross-reference field, false otherwise
+//     * 
+//     * @example 
+//     * Schemas.isXRef('Name'); // false
+//     * Schemas.isXRef('Parent.Name'); // true
+//     */
+//    public static Boolean isXRef(final String fieldName) {
+//        return fieldName.contains('.');
+//    }
+//
+//    /**
+//     * @description Checks if `fieldName` may be a safe navigated cross-reference field.
+//     * @param fieldName the fiend name
+//     *
+//     * @return true if `fieldName` may be a safe navigated cross-reference field, false otherwise
+//     * 
+//     * @example 
+//     * Schemas.isSaveNav('Name'); // false
+//     * Schemas.isSaveNav('Parent.Name'); // false
+//     * Schemas.isSaveNav('Parent?.Name'); // true
+//     * Schemas.isSaveNav('Parent?.Parent.Name'); // false
+//     * Schemas.isSaveNav('Parent.Parent?.Name'); // true
+//     */
+//    public static Boolean isSaveNav(final String fieldName) {
+//        return fieldName.substringBeforeLast('.').endsWith('?');
+//    }
 
     public static Type getType(final List<Object> sObjects, final String fieldName) {
         Validate.notNull(sObjects);

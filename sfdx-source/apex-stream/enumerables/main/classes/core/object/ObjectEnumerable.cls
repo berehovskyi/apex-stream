@@ -209,9 +209,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract List<Object> toList();
 
     public virtual List<Object> toList(final Type elementType) {
-        return (List<Object>) collect(
-            BaseCollectors.toList(Function.identity()).cast(Type.forName('List<' + elementType + '>'))
-        );
+        return (List<Object>) collect(BaseCollectors.toList(elementType));
     }
 
     public abstract Set<Object> toSet();

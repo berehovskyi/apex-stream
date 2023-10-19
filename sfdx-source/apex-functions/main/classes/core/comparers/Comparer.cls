@@ -440,6 +440,7 @@ public abstract inherited sharing class Comparer implements IComparer {
             return compareUnequalDoubles((Double) value1, (Double) value2);
         }
         return compareStrings(String.valueOf(value1), String.valueOf(value2));
+//        throw new TypeException();
     }
 
 //    /**
@@ -798,7 +799,7 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     /**
-     * @description Compares the two non-null Objects identifying its types first.
+     * @description Compares the two nullable Objects identifying its types first.
      * Supports all primitive types as well as comparable type.
      * Considers a non-null value as always greater than a null value.
      *

@@ -68,6 +68,14 @@ private class AfTestData {
             'abcd1234!@#$%^&*()`~-_+={[}]|:<,>.?', '√', '1234567890', 'R32', '12.5', '', ' ', 'hello'
         };
     }
+    public static List<String> generateStrings1() {
+        String s0 = 'test.com';
+        String s1 = 'test1.com';
+        String s2 = 'test2.com';
+        String s3 = 'test3.com';
+        String s4 = 'test4.com';
+        return new List<String>{ s0, s1, s2, s3, s4 };
+    }
     public static List<Date> generateDates() {
         Date d0 = Date.newInstance(1990, 1, 1);
         Date d1 = Date.newInstance(1991, 2, 2);
@@ -296,6 +304,34 @@ private class AfTestData {
 
         return new List<Contact>{ con, con1, con2, con3, con4, con5, con6 };
     }
+    public static List<Attachment> generateAttachments() {
+        List<Blob> blobs = generateBlobs();
+        Attachment att = new Attachment(Name = 'Test Att', ContentType = AfTestConsts.DOC, Body = blobs[0]);
+        Attachment att1 = new Attachment(Name = 'Test Att1', ContentType = AfTestConsts.DOC, Body = blobs[1]);
+        Attachment att2 = new Attachment(Name = 'Test Att2', ContentType = AfTestConsts.DOC, Body = blobs[2]);
+        Attachment att3 = new Attachment(Name = 'Test Att3', ContentType = AfTestConsts.PDF, Body = blobs[3]);
+        Attachment att4 = new Attachment(Name = 'Test Att4', ContentType = AfTestConsts.PDF, Body = blobs[4]);
+        Attachment att5 = new Attachment(Name = 'Test Att5', ContentType = AfTestConsts.PDF);
+        return new List<Attachment>{ att, att1, att2, att3, att4, att5 };
+    }
+    public static List<Event> generateEvents() {
+        List<Datetime> dts = generateDatetimes1();
+        Event ev = new Event(Description = 'Test Name', Type = AfTestConsts.CALL, ActivityDateTime = dts[0]);
+        Event ev1 = new Event(Description = 'Test Name1', Type = AfTestConsts.CALL, ActivityDateTime = dts[1]);
+        Event ev2 = new Event(Description = 'Test Name2', Type = AfTestConsts.CALL, ActivityDateTime = dts[2]);
+        Event ev3 = new Event(Description = 'Test Name3', Type = AfTestConsts.EMAIL, ActivityDateTime = dts[3]);
+        Event ev4 = new Event(Description = 'Test Name4', Type = AfTestConsts.EMAIL);
+        return new List<Event>{ ev, ev1, ev2, ev3, ev4 };
+    }
+    public static List<BusinessHours> generateHours() {
+        List<Time> ts = generateTimes();
+        BusinessHours slot = new BusinessHours(MondayStartTime = ts[0], MondayEndTime = ts[0].addMinutes(15), Name = AfTestConsts.NORMAL);
+        BusinessHours slot1 = new BusinessHours(MondayStartTime = ts[1], MondayEndTime = ts[1].addMinutes(15), Name = AfTestConsts.NORMAL);
+        BusinessHours slot2 = new BusinessHours(MondayStartTime = ts[2], MondayEndTime = ts[2].addMinutes(15), Name = AfTestConsts.NORMAL);
+        BusinessHours slot3 = new BusinessHours(MondayStartTime = ts[3], MondayEndTime = ts[3].addMinutes(15), Name = AfTestConsts.EXTENDED);
+        BusinessHours slot4 = new BusinessHours(Name = AfTestConsts.EXTENDED);
+        return new List<BusinessHours>{ slot, slot1, slot2, slot3, slot4 };
+    }
     public static List<Comparable> generateComparables() {
         AfPerson john = new AfPerson('John', 31, Date.newInstance(1990, 1, 2), 1L, true);
         AfPerson jake = new AfPerson('Jake', 33, Date.newInstance(1991, 2, 3), 2L, false);
@@ -356,6 +392,65 @@ private class AfTestData {
 
     public static SObject setSObjects(SObject parent, SObjectField childRelField, List<SObject> children) {
         return (SObject) new AfTestCommons.SetSObjectsByFieldNameOperator(childRelField, Function.constant(children)).apply(parent);
+    }
+    
+    public static Map<SObjectType, List<SObject>> generateSObjects() {
+        Map<SObjectType, List<SObject>> sobjectsByTypes = new Map<SObjectType, List<SObject>>();
+        Account acc = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'Test Acc', Type = 'Customer', NumberOfEmployees = 200, BillingLatitude = 45.45, BillingCountry = AfTestConsts.FRANCE);
+        Account acc1 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'Test Acc1', Type = 'Customer', NumberOfEmployees = 180, BillingLatitude = 20.45, BillingCountry = AfTestConsts.FRANCE);
+        Account acc2 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'CTest Acc2', Type = 'Partner', NumberOfEmployees = 100, BillingLatitude = 45.50, BillingCountry = AfTestConsts.UK);
+        Account acc3 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'Test Acc3', Type = 'Partner', NumberOfEmployees = 0, BillingLatitude = 10.00, BillingCountry = AfTestConsts.UK);
+        Account acc4 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'test Acc4', BillingLatitude = 28.15);
+        Account acc5 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'Fest Acc4', Type = 'Partner', NumberOfEmployees = 605, BillingLatitude = 50.45);
+        Account acc6 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'BTest Acc6', Type = 'Competitor', NumberOfEmployees = 50, BillingLatitude = 17.40);
+        Account acc7 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'Test Acc7', Type = 'Competitor', NumberOfEmployees = 103, BillingLatitude = 63.80);
+        Account acc8 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'ATest Acc8', Type = 'Competitor', NumberOfEmployees = 150, BillingLatitude = 80.15);
+        Account acc9 = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'Parent Account', NumberOfEmployees = 1000, BillingLatitude = 57.00);
+        sobjectsByTypes.put(Account.SObjectType, new List<Account>{ acc, acc1, acc2, acc3, acc4, acc5, acc6, acc7, acc8, acc9 });
+
+        Contact con = new Contact(Id = AfTestData.generateId(Contact.SObjectType), AccountId = acc.Id, FirstName = 'Test FirstName', LastName = 'Test Name',
+            DoNotCall = true, HasOptedOutOfEmail = true, Birthdate = Date.newInstance(1990, 1, 1), OtherCountry = AfTestConsts.FRANCE, OtherCity = AfTestConsts.PARIS, Department = AfTestConsts.HR);
+        Contact con1 = new Contact(Id = AfTestData.generateId(Contact.SObjectType), AccountId = acc1.Id, FirstName = 'Test FirstName1', LastName = 'Test Name1',
+            DoNotCall = false, HasOptedOutOfEmail = true, Birthdate = Date.newInstance(1991, 2, 2), OtherCountry = AfTestConsts.FRANCE, OtherCity = AfTestConsts.LYON, Department = AfTestConsts.HR);
+        Contact con2 = new Contact(Id = AfTestData.generateId(Contact.SObjectType), AccountId = acc2.Id, FirstName = 'Test FirstName2', LastName = 'Test Name2',
+            DoNotCall = true, HasOptedOutOfEmail = true, Birthdate = Date.newInstance(1992, 3, 3), OtherCountry = AfTestConsts.UK, OtherCity = AfTestConsts.LONDON, Department = AfTestConsts.FINANCE);
+        Contact con3 = new Contact(Id = AfTestData.generateId(Contact.SObjectType), AccountId = acc3.Id, FirstName = 'Test FirstName3', LastName = 'Test Name3',
+            DoNotCall = false, HasOptedOutOfEmail = false, OtherCountry = AfTestConsts.UK, OtherCity = AfTestConsts.BRISTOL, Department = AfTestConsts.FINANCE);
+        Contact con4 = new Contact(Id = AfTestData.generateId(Contact.SObjectType), AccountId = acc4.Id, FirstName = 'Test FirstName4', LastName = 'Test Name4',
+            HasOptedOutOfEmail = false, Birthdate = Date.newInstance(1993, 4, 4));
+        con.putSObject('Account', acc);
+        con1.putSObject('Account', acc1);
+        con2.putSObject('Account', acc2);
+        con3.putSObject('Account', acc3);
+        con4.putSObject('Account', acc4);
+        sobjectsByTypes.put(Contact.SObjectType, new List<Contact>{ con, con1, con2, con3, con4 });
+
+        Attachment att = new Attachment(Name = 'Test Att', ContentType = AfTestConsts.DOC, Body = Blob.valueOf('0'));
+        Attachment att1 = new Attachment(Name = 'Test Att1', ContentType = AfTestConsts.DOC, Body = Blob.valueOf('1'));
+        Attachment att2 = new Attachment(Name = 'Test Att2', ContentType = AfTestConsts.DOC, Body = Blob.valueOf('2'));
+        Attachment att3 = new Attachment(Name = 'Test Att3', ContentType = AfTestConsts.PDF, Body = Blob.valueOf('3'));
+        Attachment att4 = new Attachment(Name = 'Test Att4', ContentType = AfTestConsts.PDF, Body = Blob.valueOf('4'));
+        Attachment att5 = new Attachment(Name = 'Test Att5');
+        sobjectsByTypes.put(Attachment.SObjectType, new List<Attachment>{ att, att1, att2, att3, att4, att5 });
+
+        Event ev = new Event(Description = 'Test Name', ActivityDateTime = Datetime.newInstance(1990, 1, 1, 15, 0, 0), Type = AfTestConsts.CALL);
+        Event ev1 = new Event(Description = 'Test Name1', ActivityDateTime = Datetime.newInstance(1991, 2, 2, 15, 0, 0), Type = AfTestConsts.CALL);
+        Event ev2 = new Event(Description = 'Test Name2', ActivityDateTime = Datetime.newInstance(1992, 3, 3, 15, 0, 0), Type = AfTestConsts.EMAIL);
+        Event ev3 = new Event(Type = AfTestConsts.EMAIL);
+        Event ev4 = new Event(Description = 'Test Name3', ActivityDateTime = Datetime.newInstance(1993, 4, 4, 15, 0, 0));
+        sobjectsByTypes.put(Event.SObjectType, new List<Event>{ ev, ev1, ev2, ev3, ev4 });
+
+        Time t0 = Time.newInstance(15, 0, 0, 0);
+        Time t1 = Time.newInstance(16, 0, 0, 0);
+        Time t2 = Time.newInstance(17, 0, 0, 0);
+        Time t3 = Time.newInstance(18, 0, 0, 0);
+        BusinessHours slot = new BusinessHours(MondayStartTime = t0, MondayEndTime = t0.addMinutes(15), Name = AfTestConsts.NORMAL);
+        BusinessHours slot1 = new BusinessHours(MondayStartTime = t1, MondayEndTime = t1.addMinutes(15), Name = AfTestConsts.NORMAL);
+        BusinessHours slot2 = new BusinessHours(MondayStartTime = t2, MondayEndTime = t2.addMinutes(15), Name = AfTestConsts.EXTENDED);
+        BusinessHours slot3 = new BusinessHours(Name = AfTestConsts.EXTENDED);
+        BusinessHours slot4 = new BusinessHours(MondayStartTime = t3, MondayEndTime = t3.addMinutes(15));
+        sobjectsByTypes.put(BusinessHours.SObjectType, new List<BusinessHours>{ slot, slot1, slot2, slot3, slot4 });
+        return sobjectsByTypes;
     }
 
 }

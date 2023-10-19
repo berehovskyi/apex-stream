@@ -1,5 +1,8 @@
 /**
  * @see BaseCollectors
+ * @see BaseCollectorFunctions
+ * @see BaseListObjectConsumers
+ * @see BaseCollectorSuppliers
  *
  * @author Oleh Berehovskyi
  */
@@ -24,6 +27,9 @@ private class BaseCollectorsTest {
 
     static {
         new BaseCollectors();
+        new BaseCollectorFunctions();
+        new BaseListObjectConsumers();
+        new BaseCollectorSuppliers();
     }
 
     /**
