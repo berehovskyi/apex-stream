@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
 private class LongOperatorsTest {
 
     private static final List<Long> INPUT = AfTestData.generateLongs();

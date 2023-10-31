@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class BiPredicatesTest {
     
     private static final List<AfPerson> INPUT = AfTestData.generatePersons();
@@ -13,10 +14,10 @@ private class BiPredicatesTest {
     static {
         new BiPredicates();
     }
-    
+
     /**
-    * @see BiPredicates.isGreater
-    */
+     * @see BiPredicates.isGreater
+     */
     @IsTest
     static void isGreater() {
         // When

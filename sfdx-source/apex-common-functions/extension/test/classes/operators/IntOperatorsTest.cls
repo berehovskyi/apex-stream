@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
 private class IntOperatorsTest {
 
     private static final List<Integer> INPUT = AfTestData.generateInts();
@@ -11,7 +12,6 @@ private class IntOperatorsTest {
     static {
         new IntOperators();
     }
-
 
     /**
      * @see IntOperators.abs

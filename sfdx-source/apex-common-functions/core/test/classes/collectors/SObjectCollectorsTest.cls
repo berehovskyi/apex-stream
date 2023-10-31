@@ -4,6 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings(
+    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.NcssTypeCount, PMD.CyclomaticComplexity'
+)
 private class SObjectCollectorsTest {
 
     private static final Map<SObjectType, List<SObject>> DATA = AfTestData.generateSObjects();
@@ -385,7 +388,6 @@ private class SObjectCollectorsTest {
     }
 
     /**
-     * @description 
      * @see SObjectCollectors.toMap
      */
     @IsTest

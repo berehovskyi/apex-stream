@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class SObjectBiPredicatesTest {
 
     private static final List<Account> INPUT = AfTestData.generateAccounts();

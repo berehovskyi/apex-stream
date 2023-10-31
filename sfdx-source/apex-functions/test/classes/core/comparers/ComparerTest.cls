@@ -32,11 +32,11 @@ private class ComparerTest {
             String value1 = (String) other.get(fieldName);
             String value2 = (String) other1.get(fieldName);
             Integer expected = (value == null || value1 == null)
-                    ? (value == value1 ? 0 : value == null ? 1 : -1)
-                    : (value > value1 ? 1 : value == value1 ? 0 : -1);
+                ? (value == value1 ? 0 : value == null ? 1 : -1)
+                : (value > value1 ? 1 : value == value1 ? 0 : -1);
             Integer expected1 = (value == null || value2 == null)
-                    ? (value == value2 ? 0 : value == null ? 1 : -1)
-                    : (value > value2 ? 1 : value == value2 ? 0 : -1);
+                ? (value == value2 ? 0 : value == null ? 1 : -1)
+                : (value > value2 ? 1 : value == value2 ? 0 : -1);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
@@ -63,11 +63,11 @@ private class ComparerTest {
             String value1 = (String) other.get(fieldName);
             String value2 = (String) other1.get(fieldName);
             Integer expected = (value == null || value1 == null)
-                    ? (value == value1 ? 0 : value == null ? -1 : 1)
-                    : (value > value1 ? 1 : value == value1 ? 0 : -1);
+                ? (value == value1 ? 0 : value == null ? -1 : 1)
+                : (value > value1 ? 1 : value == value1 ? 0 : -1);
             Integer expected1 = (value == null || value2 == null)
-                    ? (value == value2 ? 0 : value == null ? -1 : 1)
-                    : (value > value2 ? 1 : value == value2 ? 0 : -1);
+                ? (value == value2 ? 0 : value == null ? -1 : 1)
+                : (value > value2 ? 1 : value == value2 ? 0 : -1);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
             Assert.areEqual(expected, comparing1.compare(acc, other));
@@ -100,11 +100,11 @@ private class ComparerTest {
             List<SObject> pair = new List<SObject>{ acc, other };
             pair.sort();
             Integer expected = (acc == null || other == null)
-                    ? (acc == other ? 0 : acc == null ? -1 : 1)
-                    : (pair[0] == other ? 1 : -1);
+                ? (acc == other ? 0 : acc == null ? -1 : 1)
+                : (pair[0] == other ? 1 : -1);
             Integer expected1 = (acc == null || other == null)
-                    ? (acc == other ? 0 : acc == null ? 1 : -1)
-                    : (pair[0] == other ? -1 : 1);
+                ? (acc == other ? 0 : acc == null ? 1 : -1)
+                : (pair[0] == other ? -1 : 1);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected, comparing1.compare(acc, other));
             Assert.areEqual(expected, comparing2.compare(acc, other));
@@ -137,15 +137,15 @@ private class ComparerTest {
             String value = (String) acc?.get(fieldName);
             String value1 = (String) other?.get(fieldName);
             Integer expected =
-                    acc == null ? -1 : (
+                acc == null ? -1 : (
                     (value == null || value1 == null)
-                    ? (value == value1 ? 0 : value == null ? -1 : 1)
-                    : (value > value1 ? 1 : value == value1 ? 0 : -1));
+                        ? (value == value1 ? 0 : value == null ? -1 : 1)
+                        : (value > value1 ? 1 : value == value1 ? 0 : -1));
             Integer expected1 =
-                    acc == null ? 1 : (
+                acc == null ? 1 : (
                     (value == null || value1 == null)
-                    ? (value == value1 ? 0 : value == null ? -1 : 1)
-                    : (value > value1 ? 1 : value == value1 ? 0 : -1));
+                        ? (value == value1 ? 0 : value == null ? -1 : 1)
+                        : (value > value1 ? 1 : value == value1 ? 0 : -1));
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected, comparing1.compare(acc, other));
             Assert.areEqual(expected1, comparing2.compare(acc, other));
@@ -180,11 +180,11 @@ private class ComparerTest {
             Integer value4 = (Integer) other.get(fieldName1);
             Integer value5 = (Integer) other1.get(fieldName1);
             Integer expected = Comparer.compareObjects(value, value1, true) == 0
-                    ? Comparer.compareObjects(value4, value3)
-                    : Comparer.compareObjects(value, value1, true);
+                ? Comparer.compareObjects(value4, value3)
+                : Comparer.compareObjects(value, value1, true);
             Integer expected1 = Comparer.compareObjects(value, value2, true) == 0
-                    ? Comparer.compareObjects(value5, value3)
-                    : Comparer.compareObjects(value, value2, true);
+                ? Comparer.compareObjects(value5, value3)
+                : Comparer.compareObjects(value, value2, true);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
@@ -215,11 +215,11 @@ private class ComparerTest {
             String value4 = (String) other.get(fieldName1);
             String value5 = (String) other1.get(fieldName1);
             Integer expected = Comparer.compareObjects(value, value1) == 0
-                    ? Comparer.compareObjects(value3, value4)
-                    : Comparer.compareObjects(value, value1);
+                ? Comparer.compareObjects(value3, value4)
+                : Comparer.compareObjects(value, value1);
             Integer expected1 = Comparer.compareObjects(value, value2) == 0
-                    ? Comparer.compareObjects(value3, value5)
-                    : Comparer.compareObjects(value, value2);
+                ? Comparer.compareObjects(value3, value5)
+                : Comparer.compareObjects(value, value2);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
@@ -241,9 +241,9 @@ private class ComparerTest {
         String fieldName1 = AfTestConsts.TYPE;
         // When
         IComparer comparing = Comparer.comparing(keyExtractor)
-                .nullsLast()
-                .reversed()
-                    .thenComparing(Comparer.comparing(keyExtractor1));
+            .nullsLast()
+            .reversed()
+            .thenComparing(Comparer.comparing(keyExtractor1));
         // Then
         for (Account acc : input) {
             Account other = new Account(Name = input[6].Name, Type = AfTestConsts.COMPETITOR);
@@ -255,15 +255,15 @@ private class ComparerTest {
             String value4 = (String) other?.get(fieldName1);
             String value5 = (String) other1.get(fieldName1);
             Integer expected = (acc == null || other == null)
-                    ? Comparer.compareNulls(acc, other)
-                    : Comparer.compareObjects(value, value1) == 0
-                            ? Comparer.compareObjects(value3, value4)
-                            : Comparer.compareObjects(value1, value);
+                ? Comparer.compareNulls(acc, other)
+                : Comparer.compareObjects(value, value1) == 0
+                    ? Comparer.compareObjects(value3, value4)
+                    : Comparer.compareObjects(value1, value);
             Integer expected1 = (acc == null || other1 == null)
-                    ? Comparer.compareNulls(acc, other1)
-                    : Comparer.compareObjects(value, value2) == 0
-                            ? Comparer.compareObjects(value3, value5)
-                            : Comparer.compareObjects(value2, value);
+                ? Comparer.compareNulls(acc, other1)
+                : Comparer.compareObjects(value, value2) == 0
+                    ? Comparer.compareObjects(value3, value5)
+                    : Comparer.compareObjects(value2, value);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
         }

@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class BasePredicatesTest {
 
     private static final List<Integer> INTS = AsTestData.generateInts();

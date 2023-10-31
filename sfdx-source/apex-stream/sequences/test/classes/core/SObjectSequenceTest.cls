@@ -4,6 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings(
+    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
+)
 private class SObjectSequenceTest {
 
     /**
@@ -1087,7 +1090,7 @@ private class SObjectSequenceTest {
     }
 
     /**
-     * @see SObjectSequence.none
+     * @see SObjectEnumerable.none
      */
     @IsTest
     private static void none() {

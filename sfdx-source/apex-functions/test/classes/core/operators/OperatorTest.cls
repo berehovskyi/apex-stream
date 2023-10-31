@@ -73,12 +73,12 @@ private class OperatorTest {
     }
 
     /**
-    * @see Operator.andThen
-    * @see Operator.compose
-    * @see Operator.identity
-    * @see Operator.constant
-    * @see Operator.combine
-    */
+     * @see Operator.andThen
+     * @see Operator.compose
+     * @see Operator.identity
+     * @see Operator.constant
+     * @see Operator.combine
+     */
     @IsTest
     static void default() {
         // Given

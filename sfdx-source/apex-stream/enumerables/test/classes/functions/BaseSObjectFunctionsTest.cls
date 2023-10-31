@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class BaseSObjectFunctionsTest {
 
     private static final List<Contact> INPUT = AsTestData.generateContacts(false);

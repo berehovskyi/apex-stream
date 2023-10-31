@@ -7,7 +7,9 @@
  */
 public abstract inherited sharing class ObjectEnumerable implements IObjectEnumerable {
 
+    //<editor-fold desc="Iterator">
     public abstract Iterator<Object> iterator();
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     public abstract ObjectEnumerable append(final Iterable<Object> iterable);

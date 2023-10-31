@@ -93,11 +93,11 @@ private class BiOperatorTest {
             Object actual = minBy.apply(person, jhene);
             Object actual1 = maxBy.apply(person, jhene);
             AfPerson expected = person.getAge() == null
-                    ? person
-                    : person.getAge() >= (Integer) jhene.getAge() ? jhene : person;
+                ? person
+                : person.getAge() >= (Integer) jhene.getAge() ? jhene : person;
             AfPerson expected1 = person.getAge() == null
-                    ? jhene
-                    : person.getAge() <= (Integer) jhene.getAge() ? jhene : person;
+                ? jhene
+                : person.getAge() <= (Integer) jhene.getAge() ? jhene : person;
             Assert.areEqual(expected, actual);
             Assert.areEqual(expected1, actual1);
         }

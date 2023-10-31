@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class ObjectSequenceTest {
 
     /**
@@ -49,7 +50,7 @@ private class ObjectSequenceTest {
         Assert.areEqual(true, seq3.iterator().hasNext());
         Assert.areEqual(false, seq4.iterator().hasNext());
         Assert.areEqual(false, seq5.iterator().hasNext());
-        Assert.areEqual(PEOPLE, input, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(people, input, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -369,16 +370,16 @@ private class ObjectSequenceTest {
     private static void flatMapTo() {
         // Given
         List<List<String>> input = new List<List<String>>{
-                new List<String>{},
-                null,
-                new List<String>{ 'foo' },
-                new List<String>{ 'bar', 'baz' }
+            new List<String>{},
+            null,
+            new List<String>{ 'foo' },
+            new List<String>{ 'bar', 'baz' }
         };
         List<List<String>> clone = new List<List<String>>{
-                new List<String>{},
-                null,
-                new List<String>{ 'foo' },
-                new List<String>{ 'bar', 'baz' }
+            new List<String>{},
+            null,
+            new List<String>{ 'foo' },
+            new List<String>{ 'bar', 'baz' }
         };
         ObjectEnumerable objSeq = ObjectSequence.of(clone).flatMapTo(Function.identity());
         IObjectEnumerable objSeq1 = ObjectSequence.of(clone).flatMapTo(Function.identity());
@@ -399,16 +400,16 @@ private class ObjectSequenceTest {
     private static void flatMapToInt() {
         // Given
         List<List<Integer>> input = new List<List<Integer>>{
-                new List<Integer>{},
-                null,
-                new List<Integer>{ 1 },
-                new List<Integer>{ 0, 2 }
+            new List<Integer>{},
+            null,
+            new List<Integer>{ 1 },
+            new List<Integer>{ 0, 2 }
         };
         List<List<Integer>> clone = new List<List<Integer>>{
-                new List<Integer>{},
-                null,
-                new List<Integer>{ 1 },
-                new List<Integer>{ 0, 2 }
+            new List<Integer>{},
+            null,
+            new List<Integer>{ 1 },
+            new List<Integer>{ 0, 2 }
         };
         IntEnumerable intSeq = ObjectSequence.of(clone).flatMapToInt(Function.identity());
         IIntEnumerable intSeq1 = ObjectSequence.of(clone).flatMapToInt(Function.identity());
@@ -429,16 +430,16 @@ private class ObjectSequenceTest {
     private static void flatMapToLong() {
         // Given
         List<List<Long>> input = new List<List<Long>>{
-                new List<Long>{},
-                null,
-                new List<Long>{ 1L },
-                new List<Long>{ 0L, 2L }
+            new List<Long>{},
+            null,
+            new List<Long>{ 1L },
+            new List<Long>{ 0L, 2L }
         };
         List<List<Long>> clone = new List<List<Long>>{
-                new List<Long>{},
-                null,
-                new List<Long>{ 1L },
-                new List<Long>{ 0L, 2L }
+            new List<Long>{},
+            null,
+            new List<Long>{ 1L },
+            new List<Long>{ 0L, 2L }
         };
         LongEnumerable longSeq = ObjectSequence.of(clone).flatMapToLong(Function.identity());
         ILongEnumerable longSeq1 = ObjectSequence.of(clone).flatMapToLong(Function.identity());
@@ -459,16 +460,16 @@ private class ObjectSequenceTest {
     private static void flatMapToDouble() {
         // Given
         List<List<Double>> input = new List<List<Double>>{
-                new List<Double>{},
-                null,
-                new List<Double>{ 1.1 },
-                new List<Double>{ 0, Math.PI }
+            new List<Double>{},
+            null,
+            new List<Double>{ 1.1 },
+            new List<Double>{ 0, Math.PI }
         };
         List<List<Double>> clone = new List<List<Double>>{
-                new List<Double>{},
-                null,
-                new List<Double>{ 1.1 },
-                new List<Double>{ 0, Math.PI }
+            new List<Double>{},
+            null,
+            new List<Double>{ 1.1 },
+            new List<Double>{ 0, Math.PI }
         };
         DoubleEnumerable doubleSeq = ObjectSequence.of(clone).flatMapToDouble(Function.identity());
         IDoubleEnumerable doubleSeq1 = ObjectSequence.of(clone).flatMapToDouble(Function.identity());
@@ -490,16 +491,16 @@ private class ObjectSequenceTest {
         // Given
         List<Account> accounts = AsTestData.generateAccounts1();
         List<List<Account>> input = new List<List<Account>>{
-                new List<Account>{},
-                null,
-                new List<Account>{ accounts[1] },
-                new List<Account>{ accounts[0], accounts[2] }
+            new List<Account>{},
+            null,
+            new List<Account>{ accounts[1] },
+            new List<Account>{ accounts[0], accounts[2] }
         };
         List<List<Account>> clone = new List<List<Account>>{
-                new List<Account>{},
-                null,
-                new List<Account>{ accounts[1] },
-                new List<Account>{ accounts[0], accounts[2] }
+            new List<Account>{},
+            null,
+            new List<Account>{ accounts[1] },
+            new List<Account>{ accounts[0], accounts[2] }
         };
         SObjectEnumerable doubleSeq = ObjectSequence.of(clone).flatMapToSObject(Function.identity());
         ISObjectEnumerable doubleSeq1 = ObjectSequence.of(clone).flatMapToSObject(Function.identity());
@@ -509,12 +510,13 @@ private class ObjectSequenceTest {
         // Then
         List<Account> expected = new List<Account>{ accounts[1], accounts[0], accounts[2] };
         Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
-    * @see ObjectSequence.forEach
-    */
+     * @see ObjectSequence.forEach
+     */
     @IsTest
     private static void forEach() {
         // Given
@@ -539,8 +541,8 @@ private class ObjectSequenceTest {
     }
 
     /**
-    * @see ObjectSequence.distinct
-    */
+     * @see ObjectSequence.distinct
+     */
     @IsTest
     private static void distinct() {
         // Given
@@ -562,8 +564,8 @@ private class ObjectSequenceTest {
     }
 
     /**
-    * @see ObjectSequence.sort
-    */
+     * @see ObjectSequence.sort
+     */
     @IsTest
     private static void sort() {
         // Given
@@ -600,8 +602,8 @@ private class ObjectSequenceTest {
     }
 
     /**
-    * @see ObjectSequence.lim
-    */
+     * @see ObjectSequence.lim
+     */
     @IsTest
     private static void lim() {
         // Given
@@ -633,8 +635,8 @@ private class ObjectSequenceTest {
     }
 
     /**
-    * @see ObjectSequence.skip
-    */
+     * @see ObjectSequence.skip
+     */
     @IsTest
     private static void skip() {
         // Given
@@ -666,8 +668,8 @@ private class ObjectSequenceTest {
     }
 
     /**
-    * @see ObjectSequence.reduce
-    */
+     * @see ObjectSequence.reduce
+     */
     @IsTest
     private static void reduce() {
         // Given

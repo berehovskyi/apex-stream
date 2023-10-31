@@ -12,6 +12,10 @@
  */
 public interface ILongEnumerable extends INumberEnumerable<Long> {
 
+    //<editor-fold desc="Iterator">
+    Iterator<Long> iterator();
+    //</editor-fold>
+
 //    //<editor-fold desc="Sources">
 //    /**
 //     * @description Returns a new `ILongIterable` from the current
@@ -239,18 +243,18 @@ public interface ILongEnumerable extends INumberEnumerable<Long> {
 //    //</editor-fold>
 //
 //    //<editor-fold desc="Terminal Operations">
-//    /**
-//     * @description Performs a reduction on `Long` elements,
-//     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param identity the identity value for `accumulator`
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Long` result of the reduction
-//     */
-//    Long reduce(Long identity, ILongBinaryOperator accumulator);
-//
+    /**
+     * @description Performs a reduction on `Long` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Long` result of the reduction
+     */
+    Long reduce(Long identity, IBiOperator accumulator);
+
 //    /**
 //     * @description Performs a reduction on `Long` elements,
 //     * using `identity` value and associative `accumulator` function, and returns

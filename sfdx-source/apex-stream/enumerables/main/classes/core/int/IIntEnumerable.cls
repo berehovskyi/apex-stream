@@ -12,6 +12,10 @@
  */
 public interface IIntEnumerable extends INumberEnumerable<Integer> {
 
+    //<editor-fold desc="Iterator">
+    Iterator<Integer> iterator();
+    //</editor-fold>
+
 //    //<editor-fold desc="Sources">
 //    /**
 //     * @description Returns a new `IIntIterable` from the current
@@ -238,19 +242,19 @@ public interface IIntEnumerable extends INumberEnumerable<Integer> {
 //    IIntIterable skip(Integer n);
 //    //</editor-fold>
 //
-//    //<editor-fold desc="Terminal Operations">
-//    /**
-//     * @description Performs a reduction on `Integer` elements,
-//     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param identity the identity value for `accumulator`
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Integer` result of the reduction
-//     */
-//    Integer reduce(Integer identity, IIntBinaryOperator accumulator);
-//
+    //<editor-fold desc="Terminal Operations">
+    /**
+     * @description Performs a reduction on `Integer` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Integer` result of the reduction
+     */
+    Integer reduce(Integer identity, IBiOperator accumulator);
+
 //    /**
 //     * @description Performs a reduction on `Integer` elements,
 //     * using `identity` value and associative `accumulator` function, and returns
@@ -382,6 +386,6 @@ public interface IIntEnumerable extends INumberEnumerable<Integer> {
 //     * @return the Set<Integer> containing the iterable elements
 //     */
 //    Set<Integer> toSet();
-//    //</editor-fold>
+    //</editor-fold>
 
 }

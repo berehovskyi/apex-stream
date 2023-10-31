@@ -12,6 +12,10 @@
  */
 public interface IDoubleEnumerable extends INumberEnumerable<Double> {
 
+    //<editor-fold desc="Iterator">
+    Iterator<Double> iterator();
+    //</editor-fold>
+
 //    //<editor-fold desc="Sources">
 //    /**
 //     * @description Returns a new `IDoubleIterable` from the current
@@ -222,18 +226,18 @@ public interface IDoubleEnumerable extends INumberEnumerable<Double> {
 //    IDoubleIterable skip(Integer n);
 //    //</editor-fold>
 //
-//    //<editor-fold desc="Terminal Operations">
-//    /**
-//     * @description Performs a reduction on `Double` elements,
-//     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param identity the identity value for `accumulator`
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Double` result of the reduction
-//     */
-//    Double reduce(Double identity, IDoubleBinaryOperator accumulator);
+    //<editor-fold desc="Terminal Operations">
+    /**
+     * @description Performs a reduction on `Double` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Double` result of the reduction
+     */
+    Double reduce(Double identity, IBiOperator accumulator);
 //
 //    /**
 //     * @description Performs a reduction on `Double` elements,

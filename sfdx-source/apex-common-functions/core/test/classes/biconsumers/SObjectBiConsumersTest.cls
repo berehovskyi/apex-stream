@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class SObjectBiConsumersTest {
 
     private static final List<Contact> INPUT = AfTestData.generateContacts();
@@ -29,7 +30,7 @@ private class SObjectBiConsumersTest {
         IBiConsumer setDescriptionOnParent = SObjectBiConsumers.set('Account?.Description', SObjectFunctions.get(AfTestConsts.DEPARTMENT));
         IBiConsumer setDescriptionOnParentUnsafe = SObjectBiConsumers.set('Account.Description', SObjectFunctions.get(AfTestConsts.DEPARTMENT));
         IBiConsumer setDescriptionAndAccountId = SObjectBiConsumers.set(AfTestConsts.Contact.Description, SObjectFunctions.get(AfTestConsts.Contact.Department))
-                .andThen(SObjectBiConsumers.set(AfTestConsts.ACCOUNT_ID, SObjectFunctions.get('Account?.Id')));
+            .andThen(SObjectBiConsumers.set(AfTestConsts.ACCOUNT_ID, SObjectFunctions.get('Account?.Id')));
         // Then
         for (Contact con : INPUT) {
             Contact expected = new Contact(Department = AfTestConsts.FINANCE);

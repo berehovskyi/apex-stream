@@ -4,14 +4,15 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
 private class DateFunctionsTest {
 
     // Given
     private static final List<Date> DATES = new List<Date>{
-            Date.newInstance(2020, 2, 2),
-            Date.today(),
-            Date.today().addDays(1),
-            Date.today().addDays(-1)
+        Date.newInstance(2020, 2, 2),
+        Date.today(),
+        Date.today().addDays(1),
+        Date.today().addDays(-1)
     };
 
     static {

@@ -12,6 +12,10 @@
  */
 public interface IObjectEnumerable extends IEnumerable<Object> {
 
+    //<editor-fold desc="Iterator">
+    Iterator<Object> iterator();
+    //</editor-fold>
+
     //<editor-fold desc="Sources">
 //    /**
 //     * @description Returns a new `IObjectIterable` from the current
@@ -274,6 +278,10 @@ public interface IObjectEnumerable extends IEnumerable<Object> {
      * @return the new `IDoubleIterable`
      */
     ISObjectEnumerable flatMapToSObject(IFunction mapper);
+    //</editor-fold>
+
+    //<editor-fold desc="Terminal Operations">
+    Object reduce(Object identity, IBiOperator accumulator);
 
     /**
      * @description Accumulates `SObject` elements into a `List<T>`.

@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class BaseSObjectPredicatesTest {
 
     private static final List<Account> INPUT = AsTestData.generateAccounts();

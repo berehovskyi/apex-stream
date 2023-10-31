@@ -1,5 +1,4 @@
 /**
- * @description
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)

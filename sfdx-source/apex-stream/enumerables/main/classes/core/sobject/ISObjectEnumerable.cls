@@ -12,6 +12,10 @@
  */
 public interface ISObjectEnumerable extends IEnumerable<SObject> {
 
+    //<editor-fold desc="Iterator">
+    Iterator<SObject> iterator();
+    //</editor-fold>
+
     //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `ISObjectIterable` as a set union
@@ -422,6 +426,8 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">
+    SObject reduce(SObject identity, IBiOperator accumulator);
+    
     /**
      * @description Returns an `Optional` describing the first element
      * which has `value` of `fieldName`.

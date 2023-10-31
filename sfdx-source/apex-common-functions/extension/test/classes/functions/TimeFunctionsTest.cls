@@ -4,14 +4,15 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
 private class TimeFunctionsTest {
 
     // Given
     private static final List<Time> TIMES = new List<Time>{
-            Time.newInstance(10, 10, 10, 10),
-            Time.newInstance(11, 11, 11, 11),
-            Time.newInstance(12, 12, 12, 12),
-            Time.newInstance(13, 13, 13, 13)
+        Time.newInstance(10, 10, 10, 10),
+        Time.newInstance(11, 11, 11, 11),
+        Time.newInstance(12, 12, 12, 12),
+        Time.newInstance(13, 13, 13, 13)
     };
 
     static {

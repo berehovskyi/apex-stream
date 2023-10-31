@@ -7,7 +7,9 @@
  */
 public abstract inherited sharing class LongEnumerable implements ILongEnumerable {
 
+    //<editor-fold desc="Iterator">
     public abstract Iterator<Long> iterator();
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     public abstract LongEnumerable append(final Iterable<Long> iterable);

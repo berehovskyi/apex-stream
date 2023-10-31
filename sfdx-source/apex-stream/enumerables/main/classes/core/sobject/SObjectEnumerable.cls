@@ -7,7 +7,9 @@
  */
 public abstract inherited sharing class SObjectEnumerable implements ISObjectEnumerable {
 
+    //<editor-fold desc="Iterator">
     public abstract Iterator<SObject> iterator();
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     public abstract SObjectEnumerable append(final Iterable<SObject> iterable);

@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class CollectorsTest {
 
     private static final List<Boolean> BOOLS = AfTestData.generateBools();
@@ -690,8 +691,8 @@ private class CollectorsTest {
     }
 
     /**
-    * @see Collectors.groupingByDatetime
-    */
+     * @see Collectors.groupingByDatetime
+     */
     @IsTest
     static void groupingByDatetime() {
         // Given

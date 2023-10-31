@@ -7,7 +7,9 @@
  */
 public abstract inherited sharing class DoubleEnumerable implements IDoubleEnumerable {
 
+    //<editor-fold desc="Iterator">
     public abstract Iterator<Double> iterator();
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     public abstract DoubleEnumerable append(final Iterable<Double> iterable);

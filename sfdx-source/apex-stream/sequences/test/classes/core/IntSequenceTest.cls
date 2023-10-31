@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class IntSequenceTest {
 
     /**
@@ -130,9 +131,9 @@ private class IntSequenceTest {
     }
 
     /**
-    * @see IntSequence.append
-    * @see IntSequence.prepend
-    */
+     * @see IntSequence.append
+     * @see IntSequence.prepend
+     */
     @IsTest
     private static void appendPrepend() {
         // Given
@@ -185,34 +186,9 @@ private class IntSequenceTest {
         Assert.areEqual(expected2, actual5);
     }
 
-//    /**
-//    * @see IntSequence.toObjectIterable
-//    * @see IntIterable.toLongIterable
-//    * @see IntIterable.toDoubleIterable
-//    */
-//    @IsTest
-//    private static void convert() {
-//        // Given
-//        List<Integer> input = new List<Integer>{ -5, 0, 1, 3, 8, null };
-//        IIterable seq = IntSequence.of(input).toObjectIterable();
-//        ILongIterable seq1 = IntSequence.of(input).toLongIterable();
-//        IDoubleIterable seq2 = IntSequence.of(input).toDoubleIterable();
-//        // When
-//        List<Object> actual = seq.toList();
-//        List<Long> actual1 = seq1.toList();
-//        List<Double> actual2 = seq2.toList();
-//        // Then
-//        List<Object> expected = new List<Object>{ -5, 0, 1, 3, 8, null };
-//        List<Long> expected1 = new List<Long>{ -5, 0, 1, 3, 8, null };
-//        List<Double> expected2 = new List<Double>{ -5, 0, 1, 3, 8, null };
-//        Assert.areEqual(expected, actual);
-//        Assert.areEqual(expected1, actual1);
-//        Assert.areEqual(expected2, actual2);
-//    }
-
     /**
-    * @see IntSequence.filter
-    */
+     * @see IntSequence.filter
+     */
     @IsTest
     private static void filter() {
         // Given
@@ -229,8 +205,8 @@ private class IntSequenceTest {
     }
 
     /**
-    * @see IntSequence.take
-    */
+     * @see IntSequence.take
+     */
     @IsTest
     private static void take() {
         // Given
@@ -247,8 +223,8 @@ private class IntSequenceTest {
     }
 
     /**
-    * @see IntSequence.drop
-    */
+     * @see IntSequence.drop
+     */
     @IsTest
     private static void drop() {
         // Given
@@ -265,8 +241,8 @@ private class IntSequenceTest {
     }
 
     /**
-    * @see IntEnumerable.withoutNulls
-    */
+     * @see IntEnumerable.withoutNulls
+     */
     @IsTest
     private static void withoutNulls() {
         // Given
@@ -285,8 +261,8 @@ private class IntSequenceTest {
     }
 
     /**
-    * @see IntSequence.mapTo
-    */
+     * @see IntSequence.mapTo
+     */
     @IsTest
     private static void mapTo() {
         // Given
@@ -305,8 +281,8 @@ private class IntSequenceTest {
     }
 
     /**
-    * @see IntSequence.mapToLong
-    */
+     * @see IntSequence.mapToLong
+     */
     @IsTest
     private static void mapToLong() {
         // Given
@@ -325,8 +301,8 @@ private class IntSequenceTest {
     }
 
     /**
-    * @see IntSequence.mapToDouble
-    */
+     * @see IntSequence.mapToDouble
+     */
     @IsTest
     private static void mapToDouble() {
         // Given

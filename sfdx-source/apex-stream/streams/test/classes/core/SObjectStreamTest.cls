@@ -4,6 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings(
+    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
+)
 private class SObjectStreamTest {
 
     /**
@@ -97,7 +100,7 @@ private class SObjectStreamTest {
         Account seed = new Account(Name = name, NumberOfEmployees = numOfEmployees);
         Account seed1 = new Account(Name = name1, NumberOfEmployees = numOfEmployees1);
         IPredicate pred = new AsTestCommons.IsLessPredicate(BaseSObjectFunctions.get('NumberOfEmployees'), Function.constant(3600))
-            .orElse(new AfTestCommons.IsEqualPredicate(BaseSObjectFunctions.get('NumberOfEmployees'), Function.constant(3600)));
+            .orElse(BasePredicates.isEqual(BaseSObjectFunctions.get('NumberOfEmployees'), Function.constant(3600)));
         IOperator accIterator = new AsTestCommons.TestAccountOperator();
         IOperator accIterator1 = new AsTestCommons.TestAccountOperator();
         SObjectEnumerable stm = SObjectStream.iterate(seed, accIterator).lim(lim);
@@ -1101,7 +1104,7 @@ private class SObjectStreamTest {
     @IsTest
     private static void reduce() {
         // Given
-        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200);
+        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200); 
         Account acc1 = new Account(Name = 'Test Acc1', NumberOfEmployees = 100);
         Account acc2 = new Account(Name = 'Test Acc2', NumberOfEmployees = 0);
         Account acc3 = new Account(Name = 'Test Acc3', NumberOfEmployees = 400);
@@ -1267,7 +1270,7 @@ private class SObjectStreamTest {
     }
 
     /**
-     * @see SObjectStream.none
+     * @see SObjectEnumerable.none
      */
     @IsTest
     private static void none() {

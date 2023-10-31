@@ -1,5 +1,4 @@
 /**
- * @description
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
@@ -34,7 +33,6 @@ private class AsTestCommons {
         return finisher == null ? container : finisher.apply(container);
     }
     
-
     public class ToUpperCaseFunction extends Function {
         public override Object apply(Object o) { return ((String) o).toUpperCase(); }
     }

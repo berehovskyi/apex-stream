@@ -4,6 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings(
+    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
+)
 private class SObjectConsumersTest {
 
     private static final List<Contact> INPUT = AfTestData.generateContacts2();
@@ -152,4 +155,5 @@ private class SObjectConsumersTest {
             }
         }
     }
+
 }

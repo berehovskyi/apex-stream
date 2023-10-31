@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class DoubleStreamTest {
 
     /**
@@ -207,21 +208,7 @@ private class DoubleStreamTest {
         Assert.isTrue(((DoubleStream) stm4).isOperated);
         Assert.isTrue(((DoubleStream) stm5).isOperated);
     }
-////
-////    /**
-////    * @see DoubleStream.toObjectIterable
-////    */
-////    @IsTest
-////    private static void toObjectIterable() {
-////        // Given
-////        List<Double> input = new List<Double>{ -5.0, 0, 1.45, 3.99, 9.001, null };
-////        IIterable stm = DoubleStream.of(input).toObjectIterable();
-////        // When
-////        List<Object> actual = stm.toList();
-////        // Then
-////        Assert.areEqual(input.size(), actual.size());
-////    }
-////
+
     /**
      * @see DoubleStream.filter
      */

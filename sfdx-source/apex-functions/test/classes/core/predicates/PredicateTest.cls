@@ -51,12 +51,12 @@ private class PredicateTest {
             Assert.areEqual(isNumOfEmployeesGreater || isAccTypeCustomer, bigAccountOrCustomerPredicate.test(acc));
             Assert.areEqual(!(isNumOfEmployeesGreater), notBigCustomerPredicate.test(acc));
             Assert.areEqual(
-                    (isNumOfEmployeesGreater && isAccTypeCustomer) || isAccTypeCompetitor,
-                    bigCustomerOrAnyCompetitorPredicate.test(acc)
+                (isNumOfEmployeesGreater && isAccTypeCustomer) || isAccTypeCompetitor,
+                bigCustomerOrAnyCompetitorPredicate.test(acc)
             );
             Assert.areEqual(
-                    isNumOfEmployeesGreater && (isAccTypeCustomer || isAccTypeCompetitor),
-                    bigCustomerOrBigCompetitorPredicate.test(acc)
+                isNumOfEmployeesGreater && (isAccTypeCustomer || isAccTypeCompetitor),
+                bigCustomerOrBigCompetitorPredicate.test(acc)
             );
         }
     }
@@ -79,8 +79,8 @@ private class PredicateTest {
         // Then
         for (Account acc : ACCOUNTS) {
             Assert.areEqual(
-                    (Integer) acc.get(accNumOfEmployeesField) > value || acc.get(accTypeField) == value1,
-                    bigAccOrCustomer.test(acc)
+                (Integer) acc.get(accNumOfEmployeesField) > value || acc.get(accTypeField) == value1,
+                bigAccOrCustomer.test(acc)
             );
         }
     }
@@ -103,8 +103,8 @@ private class PredicateTest {
         // Then
         for (Account acc : ACCOUNTS) {
             Assert.areEqual(
-                    (Integer) acc.get(accNumOfEmployeesField) > value && acc.get(accTypeField) == value1,
-                    bigAccAndCustomer.test(acc)
+                (Integer) acc.get(accNumOfEmployeesField) > value && acc.get(accTypeField) == value1,
+                bigAccAndCustomer.test(acc)
             );
         }
     }

@@ -4,14 +4,15 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
 private class DatetimeFunctionsTest {
 
     // Given
     private static final List<Datetime> DATETIMES = new List<Datetime>{
-            Datetime.newInstance(2020, 2, 2),
-            Datetime.now(),
-            Datetime.now().addDays(1),
-            Datetime.now().addDays(-1)
+        Datetime.newInstance(2020, 2, 2),
+        Datetime.now(),
+        Datetime.now().addDays(1),
+        Datetime.now().addDays(-1)
     };
 
     static {

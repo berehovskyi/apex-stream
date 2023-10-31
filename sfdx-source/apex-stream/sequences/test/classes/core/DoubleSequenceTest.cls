@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class DoubleSequenceTest {
 
     /**
@@ -82,11 +83,14 @@ private class DoubleSequenceTest {
         List<Double> input = new List<Double>{ -5.0, 0, 1.0 };
         List<Double> input1 = new List<Double>{ 3.0, 0, 8.5 };
         DoubleEnumerable seq = DoubleSequence.zip(DoubleSequence.of(input), DoubleSequence.of(input1), new AsTestCommons.SumDoubleBiOperator());
+        IDoubleEnumerable seq1 = DoubleSequence.zip(DoubleSequence.of(input), DoubleSequence.of(input1), new AsTestCommons.SumDoubleBiOperator());
         // When
         List<Double> actual = seq.toList();
+        List<Double> actual1 = (List<Double>) seq1.toList();
         // Then
         List<Double> expected = new List<Double>{ -2.0, 0, 9.5 };
         Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
     }
 
     /**
@@ -144,21 +148,7 @@ private class DoubleSequenceTest {
         Assert.areEqual(expected2, actual4);
         Assert.areEqual(expected2, actual5);
     }
-//
-//    /**
-//    * @see DoubleSequence.toObjectIterable
-//    */
-//    @IsTest
-//    private static void toObjectIterable() {
-//        // Given
-//        List<Double> input = new List<Double>{ -5.0, 0, 1.45, 3.99, 9.001, null };
-//        IIterable seq = DoubleSequence.of(input).toObjectIterable();
-//        // When
-//        List<Object> actual = seq.toList();
-//        // Then
-//        Assert.areEqual(input.size(), actual.size());
-//    }
-//
+
     /**
      * @see DoubleSequence.filter
      */

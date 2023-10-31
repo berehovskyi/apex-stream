@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class SObjectPredicatesTest {
 
     private static final List<Account> INPUT = AfTestData.generateAccounts();
@@ -282,12 +283,12 @@ private class SObjectPredicatesTest {
             String name = ((String) acc.get(accNameField));
             String name1 = ((String) acc.get(nameFieldName));
             Boolean isLikeName = Pattern.matches(
-                    '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
-                            .replace('%', '.*?').replace('_', '.{1}?') + '$', name
+                '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
+                    .replace('%', '.*?').replace('_', '.{1}?') + '$', name
             );
             Boolean isLikeName1 = Pattern.matches(
-                    '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
-                            .replace('%', '.*?').replace('_', '.{1}?') + '$', name1
+                '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
+                    .replace('%', '.*?').replace('_', '.{1}?') + '$', name1
             );
             Assert.areEqual(isLikeName, nameStartsWithTPredicate.test(acc));
             Assert.areEqual(isLikeName1, nameStartsWithTPredicate1.test(acc));
@@ -374,78 +375,5 @@ private class SObjectPredicatesTest {
             Assert.areEqual(!subset.contains(acc), accNotInPredicate.test(acc));
         }
     }
-
-//    /**
-//     * @see SObjectPredicates.has
-//     * @see SObjectPredicates.hasSObject
-//     * @see SObjectPredicates.hasSObjects
-//     */
-//    @IsTest
-//    static void has() {
-//        // Given
-//        SObjectField accNumberOfEmployeesField = AfTestConsts.Account.NumberOfEmployees;
-//        String numberOfEmployeesFieldName = 'NumberOfEmployees';
-//        SObjectField accParentField = AfTestConsts.Account.ParentId;
-//        String parentFieldName = 'Parent';
-//        SObjectField conAccountIdField = AfTestConsts.Contact.AccountId;
-//        String accountsFieldName = 'Contacts';
-//        // When
-//        IPredicate has = SObjectPredicates.has(SObjectFunctions.get(accNumberOfEmployeesField));
-//        IPredicate has1 = SObjectPredicates.has(accNumberOfEmployeesField);
-//        IPredicate has2 = SObjectPredicates.has(numberOfEmployeesFieldName);
-//        IPredicate hasSObject = SObjectPredicates.hasSObject(SObjectUnaryOperators.getSObject(parentFieldName));
-//        IPredicate hasSObject1 = SObjectPredicates.hasSObject(accParentField);
-//        IPredicate hasSObject2 = SObjectPredicates.hasSObject(parentFieldName);
-//        IPredicate hasSObjects = SObjectPredicates.hasSObjects(conAccountIdField);
-//        IPredicate hasSObjects1 = SObjectPredicates.hasSObjects(accountsFieldName);
-//        // When
-//        for (Account acc : INPUT) {
-//            Assert.areEqual(acc.get(accNumberOfEmployeesField) != null, has.test(acc));
-//            Assert.areEqual(acc.get(accNumberOfEmployeesField) != null, has1.test(acc));
-//            Assert.areEqual(acc.get(numberOfEmployeesFieldName) != null, has2.test(acc));
-//            Assert.areEqual(acc.getSObject(parentFieldName) != null, hasSObject.test(acc));
-//            Assert.areEqual(acc.getSObject(accParentField) != null, hasSObject1.test(acc));
-//            Assert.areEqual(acc.getSObject(parentFieldName) != null, hasSObject2.test(acc));
-//            Assert.areEqual(acc.getSObjects(accountsFieldName) != null, hasSObjects1.test(acc));
-//            Assert.areEqual(acc.getSObjects(accountsFieldName) != null, hasSObjects.test(acc));
-//        }
-//    }
-//
-//    /**
-//     * @see SObjectPredicates.hasErrors
-//     * @see SObjectPredicates.isClone
-//     * @see SObjectPredicates.isSet
-//     */
-//    @IsTest
-//    static void propertyPredicates() {
-//        // Given
-//        String error = 'Error';
-//        SObjectField accTypeField = AfTestConsts.Account.Type;
-//        String typeFieldName = 'Type';
-//        String parentTypeFieldName = 'Parent.Type';
-//        String parentTypeFieldNameSafe = 'Parent?.Type';
-//        // When
-//        INPUT[0].addError(error);
-//        INPUT[4].addError(error);
-//        INPUT[6].addError(error);
-//        INPUT[8] = INPUT[7].clone();
-//        IPredicate hasErrorsPredicate = SObjectPredicates.hasErrors();
-//        IPredicate clonePredicate = SObjectPredicates.isClone();
-//        IPredicate setTypePredicate = SObjectPredicates.isSet(typeFieldName);
-//        IPredicate setTypePredicate1 = SObjectPredicates.isSet(accTypeField);
-//        IPredicate setParentTypePredicate = SObjectPredicates.isSet(parentTypeFieldName);
-//        IPredicate setParentTypePredicateSafe = SObjectPredicates.isSet(parentTypeFieldNameSafe);
-//        // Then
-//        for (Account acc : INPUT) {
-//            Assert.areEqual(acc.hasErrors(), hasErrorsPredicate.test(acc));
-//            Assert.areEqual(acc.isClone(), clonePredicate.test(acc));
-//            Assert.areEqual(acc.isSet(typeFieldName), setTypePredicate.test(acc));
-//            Assert.areEqual(acc.isSet(accTypeField), setTypePredicate1.test(acc));
-//            Assert.areEqual(acc.getSObject('Parent')?.isSet(accTypeField), setParentTypePredicateSafe.test(acc));
-//            if (acc.getSObject('Parent') != null) {
-//                Assert.areEqual(acc.getSObject('Parent').isSet(accTypeField), setParentTypePredicate.test(acc));
-//            }
-//        }
-//    }
     
 }

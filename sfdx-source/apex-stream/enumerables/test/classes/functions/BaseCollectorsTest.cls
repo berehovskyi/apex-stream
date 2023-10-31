@@ -7,7 +7,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class BaseCollectorsTest {
 
     private static final List<Boolean> BOOLS = AsTestData.generateBools();

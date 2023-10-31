@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class LongSequenceTest {
 
     /**
@@ -90,8 +91,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.concat
-    */
+     * @see LongSequence.concat
+     */
     @IsTest
     private static void concat() {
         // Given
@@ -111,8 +112,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.zip
-    */
+     * @see LongSequence.zip
+     */
     @IsTest
     private static void zip() {
         // Given
@@ -130,9 +131,9 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.append
-    * @see LongSequence.prepend
-    */
+     * @see LongSequence.append
+     * @see LongSequence.prepend
+     */
     @IsTest
     private static void appendPrepend() {
         // Given
@@ -185,34 +186,9 @@ private class LongSequenceTest {
         Assert.areEqual(expected2, actual5);
     }
 
-//    /**
-//    * @see LongSequence.toObjectIterable
-//    * @see LongIterable.toIntIterable
-//    * @see LongIterable.toDoubleIterable
-//    */
-//    @IsTest
-//    private static void convert() {
-//        // Given
-//        List<Long> input = new List<Long>{ -5L, 0L, 1L, 3L, 8L, null };
-//        IIterable seq = LongSequence.of(input).toObjectIterable();
-//        IIntIterable seq1 = LongSequence.of(input).toIntIterable();
-//        IDoubleIterable seq2 = LongSequence.of(input).toDoubleIterable();
-//        // When
-//        List<Object> actual = seq.toList();
-//        List<Integer> actual1 = seq1.toList();
-//        List<Double> actual2 = seq2.toList();
-//        // Then
-//        List<Object> expected = new List<Object>{ -5L, 0L, 1L, 3L, 8L, null };
-//        List<Integer> expected1 = new List<Integer>{ -5, 0, 1, 3, 8, null };
-//        List<Double> expected2 = new List<Double>{ -5, 0, 1, 3, 8, null };
-//        Assert.areEqual(expected, actual);
-//        Assert.areEqual(expected1, actual1);
-//        Assert.areEqual(expected2, actual2);
-//    }
-
     /**
-    * @see LongSequence.filter
-    */
+     * @see LongSequence.filter
+     */
     @IsTest
     private static void filter() {
         // Given
@@ -229,8 +205,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.take
-    */
+     * @see LongSequence.take
+     */
     @IsTest
     private static void take() {
         // Given
@@ -247,8 +223,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.drop
-    */
+     * @see LongSequence.drop
+     */
     @IsTest
     private static void drop() {
         // Given
@@ -265,8 +241,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongEnumerable.withoutNulls
-    */
+     * @see LongEnumerable.withoutNulls
+     */
     @IsTest
     private static void withoutNulls() {
         // Given
@@ -285,8 +261,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.mapTo
-    */
+     * @see LongSequence.mapTo
+     */
     @IsTest
     private static void mapTo() {
         // Given
@@ -305,8 +281,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.mapToInt
-    */
+     * @see LongSequence.mapToInt
+     */
     @IsTest
     private static void mapToInt() {
         // Given
@@ -325,8 +301,8 @@ private class LongSequenceTest {
     }
 
     /**
-    * @see LongSequence.mapToDouble
-    */
+     * @see LongSequence.mapToDouble
+     */
     @IsTest
     private static void mapToDouble() {
         // Given

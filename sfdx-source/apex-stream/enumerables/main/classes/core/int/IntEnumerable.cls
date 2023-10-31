@@ -7,7 +7,9 @@
  */
 public abstract inherited sharing class IntEnumerable implements IIntEnumerable {
 
+    //<editor-fold desc="Iterator">
     public abstract Iterator<Integer> iterator();
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     public abstract IntEnumerable append(final Iterable<Integer> iterable);

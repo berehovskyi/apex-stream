@@ -1,5 +1,4 @@
 /**
- * @description
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
@@ -9,15 +8,6 @@ private class AfTestCommons {
 
     public static SObject deepClone(SObject sObj) {
         return sObj.clone(true, true, true, true);
-    }
-    public static List<SObject> deepClone(List<SObject> sObjs) {
-        return sObjs.deepClone(true, true, true);
-    }
-    public static List<Object> deepClone(List<Object> objects) {
-        return (List<Object>) JSON.deserializeUntyped(JSON.serialize(objects, false));
-    }
-    public static List<Object> deepClone(List<Object> objects, Type t) {
-        return (List<Object>) JSON.deserialize(JSON.serialize(objects, false), t);
     }
     public static Object deepClone(Object objects, Type t) {
         return JSON.deserialize(JSON.serialize(objects, false), t);
@@ -219,7 +209,8 @@ private class AfTestCommons {
     public class GetSObjectOperator extends Operator {
         private final SObjectField field;
         public GetSObjectOperator(SObjectField field) { this.field = field; }
-        public override Object apply(Object o) { return ((SObject) o).getSObject(field); }  }
+        public override Object apply(Object o) { return ((SObject) o).getSObject(field); }
+    }
     public class HasSObjectsPredicate extends Predicate {
         private final String fieldName;
         public HasSObjectsPredicate(String fieldName) { this.fieldName = fieldName; }
@@ -252,12 +243,12 @@ private class AfTestCommons {
             );
         }
     }
-    public virtual class ComparePredicate extends Predicate {
+    public virtual class ComparerPredicate extends Predicate {
         private final IFunction left;
         private final IFunction right;
         private final IComparer comp = Comparer.defaultOrder();
         private final Integer comparisonResult;
-        public ComparePredicate(
+        public ComparerPredicate(
             IFunction left,
             IFunction right,
             Integer comparisonResult
@@ -270,31 +261,31 @@ private class AfTestCommons {
             return comp.compare(left.apply(obj), right.apply(obj)) == comparisonResult;
         }
     }
-    public class IsGreaterPredicate extends ComparePredicate {
+    public class IsGreaterPredicate extends ComparerPredicate {
         public IsGreaterPredicate(IFunction left, IFunction right) { super(left, right, 1); }
         public IsGreaterPredicate(SObjectField left, IFunction right) { this(new GetFieldFunction(left), right); }
         public IsGreaterPredicate(SObjectField left, Object right) {
             this(new GetFieldFunction(left), Function.constant(right));
         }
     }
-    public class IsEqualPredicate extends ComparePredicate {
+    public class IsEqualPredicate extends ComparerPredicate {
         public IsEqualPredicate(IFunction left, IFunction right) { super(left, right, 0); }
         public IsEqualPredicate(SObjectField left, IFunction right) { this(new GetFieldFunction(left), right); }
         public IsEqualPredicate(SObjectField left, Object right) {
             this(new GetFieldFunction(left), Function.constant(right));
         }
     }
-    public class CompareBiPredicate extends BiPredicate {
+    public class ComparerBiPredicate extends BiPredicate {
         private final IFunction left;
         private final IFunction right;
         private final IComparer comp = Comparer.defaultOrder();
         private final Integer comparisonResult;
-        public CompareBiPredicate(IFunction left, IFunction right, Integer comparisonResult) {
+        public ComparerBiPredicate(IFunction left, IFunction right, Integer comparisonResult) {
             this.left = left;
             this.right = right;
             this.comparisonResult = comparisonResult;
         }
-        public CompareBiPredicate(IFunction function, Integer comparisonResult) {
+        public ComparerBiPredicate(IFunction function, Integer comparisonResult) {
             this(function, function, comparisonResult);
         }
         public override Boolean test(Object o1, Object o2) {

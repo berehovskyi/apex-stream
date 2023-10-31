@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class ObjectStreamTest {
 
     /**
@@ -283,17 +284,26 @@ private class ObjectStreamTest {
         AsPerson john = new AsPerson('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         AsPerson jake = new AsPerson('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
         List<Object> input = new List<Object>{ 'foo', '', 'baz', john, true, 'ipsum', jake };
-        IPredicate isInstanceOfString = new AsTestCommons.IsInstanceOfStringPredicate();
+        Predicate isInstanceOfString = new AsTestCommons.IsInstanceOfStringPredicate();
         ObjectEnumerable stm = ObjectStream.of(input).take(isInstanceOfString);
         IObjectEnumerable stm1 = ObjectStream.of(input).take(isInstanceOfString);
+        IObjectEnumerable stm2 = ObjectStream.of(input).take(isInstanceOfString.andAlso(new AsTestCommons.IsNotBlankPredicate()));
         // When
         List<Object> actual = stm.toList();
         List<Object> actual1 = stm1.toList();
+        Iterator<Object> iterator = stm2.iterator();
         // Then
         Assert.areEqual(new List<Object>{ 'foo', '', 'baz' }, actual);
         Assert.areEqual(new List<Object>{ 'foo', '', 'baz' }, actual1);
+        Assert.areEqual(input[0], iterator.next());
+        try {
+            iterator.next();
+        } catch (Exception exc) {
+            Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
+        }
         Assert.isTrue(((ObjectStream) stm).isOperated);
         Assert.isTrue(((ObjectStream) stm1).isOperated);
+        Assert.isTrue(((ObjectStream) stm2).isOperated);
     }
 
     /**
@@ -461,16 +471,16 @@ private class ObjectStreamTest {
     private static void flatMapTo() {
         // Given
         List<List<String>> input = new List<List<String>>{
-                new List<String>{},
-                null,
-                new List<String>{ 'foo' },
-                new List<String>{ 'bar', 'baz' }
+            new List<String>{},
+            null,
+            new List<String>{ 'foo' },
+            new List<String>{ 'bar', 'baz' }
         };
         List<List<String>> clone = new List<List<String>>{
-                new List<String>{},
-                null,
-                new List<String>{ 'foo' },
-                new List<String>{ 'bar', 'baz' }
+            new List<String>{},
+            null,
+            new List<String>{ 'foo' },
+            new List<String>{ 'bar', 'baz' }
         };
         ObjectEnumerable stm = ObjectStream.of(clone).flatMapTo(Function.identity());
         IObjectEnumerable stm1 = ObjectStream.of(clone).flatMapTo(Function.identity());
@@ -493,16 +503,16 @@ private class ObjectStreamTest {
     private static void flatMapToInt() {
         // Given
         List<List<Integer>> input = new List<List<Integer>>{
-                new List<Integer>{},
-                null,
-                new List<Integer>{ 1 },
-                new List<Integer>{ 0, 2 }
+            new List<Integer>{},
+            null,
+            new List<Integer>{ 1 },
+            new List<Integer>{ 0, 2 }
         };
         List<List<Integer>> clone = new List<List<Integer>>{
-                new List<Integer>{},
-                null,
-                new List<Integer>{ 1 },
-                new List<Integer>{ 0, 2 }
+            new List<Integer>{},
+            null,
+            new List<Integer>{ 1 },
+            new List<Integer>{ 0, 2 }
         };
         IntEnumerable stm = ObjectStream.of(clone).flatMapToInt(Function.identity());
         IIntEnumerable stm1 = ObjectStream.of(clone).flatMapToInt(Function.identity());
@@ -525,16 +535,16 @@ private class ObjectStreamTest {
     private static void flatMapToLong() {
         // Given
         List<List<Long>> input = new List<List<Long>>{
-                new List<Long>{},
-                null,
-                new List<Long>{ 1L },
-                new List<Long>{ 0L, 2L }
+            new List<Long>{},
+            null,
+            new List<Long>{ 1L },
+            new List<Long>{ 0L, 2L }
         };
         List<List<Long>> clone = new List<List<Long>>{
-                new List<Long>{},
-                null,
-                new List<Long>{ 1L },
-                new List<Long>{ 0L, 2L }
+            new List<Long>{},
+            null,
+            new List<Long>{ 1L },
+            new List<Long>{ 0L, 2L }
         };
         LongEnumerable stm = ObjectStream.of(clone).flatMapToLong(Function.identity());
         ILongEnumerable stm1 = ObjectStream.of(clone).flatMapToLong(Function.identity());
@@ -616,8 +626,8 @@ private class ObjectStreamTest {
     }
 
     /**
-    * @see ObjectStream.forEach
-    */
+     * @see ObjectStream.forEach
+     */
     @IsTest
     private static void forEach() {
         // Given
@@ -644,8 +654,8 @@ private class ObjectStreamTest {
     }
 
     /**
-    * @see ObjectStream.distinct
-    */
+     * @see ObjectStream.distinct
+     */
     @IsTest
     private static void distinct() {
         // Given
@@ -669,8 +679,8 @@ private class ObjectStreamTest {
     }
 
     /**
-    * @see ObjectStream.sort
-    */
+     * @see ObjectStream.sort
+     */
     @IsTest
     private static void sort() {
         // Given
@@ -712,8 +722,8 @@ private class ObjectStreamTest {
     }
 
     /**
-    * @see ObjectStream.lim
-    */
+     * @see ObjectStream.lim
+     */
     @IsTest
     private static void lim() {
         // Given
@@ -749,8 +759,8 @@ private class ObjectStreamTest {
     }
 
     /**
-    * @see ObjectStream.skip
-    */
+     * @see ObjectStream.skip
+     */
     @IsTest
     private static void skip() {
         // Given
@@ -786,8 +796,8 @@ private class ObjectStreamTest {
     }
 
     /**
-    * @see ObjectStream.reduce
-    */
+     * @see ObjectStream.reduce
+     */
     @IsTest
     private static void reduce() {
         // Given

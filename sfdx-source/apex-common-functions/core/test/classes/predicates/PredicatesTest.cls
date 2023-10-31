@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
 private class PredicatesTest {
 
     private static final List<Object> INPUT = new List<Object>{ 5, 1, 3, 8, -3, 4, null, -6, 0, 4 };

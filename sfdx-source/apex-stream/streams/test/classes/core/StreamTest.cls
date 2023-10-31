@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class StreamTest {
 
     private static final List<Integer> INTS = AsTestData.generateInts();
@@ -54,6 +55,7 @@ private class StreamTest {
         Assert.isTrue(stream12 instanceof ObjectStream);
         Assert.isTrue(stream13 instanceof ObjectStream);
     }
+
     /**
      * @see Stream.ofNullable
      */
@@ -91,27 +93,6 @@ private class StreamTest {
         Assert.isTrue(stream13 instanceof ObjectStream);
     }
 
-//    /**
-//     * @see Stream.generate
-//     */
-//    @IsTest
-//    static void generate() {
-//        // When
-//        IIntEnumerable stream0 = Stream.generate(IntSuppliers.increment());
-//        ILongEnumerable stream1 = Stream.generate(LongSuppliers.increment());
-//        IDoubleEnumerable stream2 = Stream.generate(DoubleSuppliers.random());
-//        ISObjectEnumerable stream3 = Stream.generate(SObjectSupplier.of(Account.SObjectType));
-//        IEnumerable stream4 = Stream.generate(StringSuppliers.uuid());
-//        IEnumerable stream5 = Stream.generate(Supplier.of(List<String>.class));
-//        // Then
-//        Assert.isTrue(stream0 instanceof IntStream);
-//        Assert.isTrue(stream1 instanceof LongStream);
-//        Assert.isTrue(stream2 instanceof DoubleStream);
-//        Assert.isTrue(stream3 instanceof SObjectStream);
-//        Assert.isTrue(stream4 instanceof ObjectStream);
-//        Assert.isTrue(stream5 instanceof ObjectStream);
-//    }
-
     /**
      * @see Stream.iterate
      */
@@ -140,65 +121,5 @@ private class StreamTest {
         Assert.isTrue(stream8 instanceof SObjectStream);
         Assert.isTrue(stream9 instanceof ObjectStream);
     }
-
-//    /**
-//     * @see Stream.concat
-//     */
-//    @IsTest
-//    static void concat() {
-//        // When
-//        IIntEnumerable stream0 = Stream.concat(Stream.of(INTS), Stream.of(INTS));
-//        ILongEnumerable stream1 = Stream.concat(Stream.of(LONGS), Stream.of(LONGS));
-//        IDoubleEnumerable stream2 = Stream.concat(Stream.of(DOUBLES), Stream.of(DOUBLES));
-//        ISObjectEnumerable stream3 = Stream.concat(Stream.of(ACCOUNTS), Stream.of(ACCOUNTS));
-//        IEnumerable stream4 = Stream.concat(Stream.of(PEOPLE), Stream.of(PEOPLE));
-//        IEnumerable stream5 = Stream.concat(Stream.of(STRINGS), Stream.of(STRINGS));
-//        IEnumerable stream6 = Stream.concat(Stream.of(COMPARABLES), Stream.of(COMPARABLES));
-//        IIntEnumerable stream7 = Stream.concat(new List<IIntEnumerable>{ Stream.of(INTS), Stream.of(INTS) });
-//        ILongEnumerable stream8 = Stream.concat(new List<ILongEnumerable>{ Stream.of(LONGS), Stream.of(LONGS) });
-//        IDoubleEnumerable stream9 = Stream.concat(new List<IDoubleEnumerable>{ Stream.of(DOUBLES), Stream.of(DOUBLES) });
-//        ISObjectEnumerable stream10 = Stream.concat(new List<ISObjectEnumerable>{ Stream.of(ACCOUNTS), Stream.of(ACCOUNTS) });
-//        IEnumerable stream11 = Stream.concat(new List<IEnumerable>{ Stream.of(PEOPLE), Stream.of(PEOPLE) });
-//        IEnumerable stream12 = Stream.concat(new List<IEnumerable>{ Stream.of(STRINGS), Stream.of(STRINGS) });
-//        IEnumerable stream13 = Stream.concat(new List<IEnumerable>{ Stream.of(COMPARABLES), Stream.of(COMPARABLES) });
-//        // Then
-//        Assert.isTrue(stream0 instanceof IntStream);
-//        Assert.isTrue(stream1 instanceof LongStream);
-//        Assert.isTrue(stream2 instanceof DoubleStream);
-//        Assert.isTrue(stream3 instanceof SObjectStream);
-//        Assert.isTrue(stream4 instanceof ObjectStream);
-//        Assert.isTrue(stream5 instanceof ObjectStream);
-//        Assert.isTrue(stream6 instanceof ObjectStream);
-//        Assert.isTrue(stream7 instanceof IntStream);
-//        Assert.isTrue(stream8 instanceof LongStream);
-//        Assert.isTrue(stream9 instanceof DoubleStream);
-//        Assert.isTrue(stream10 instanceof SObjectStream);
-//        Assert.isTrue(stream11 instanceof ObjectStream);
-//        Assert.isTrue(stream12 instanceof ObjectStream);
-//        Assert.isTrue(stream13 instanceof ObjectStream);
-//    }
-//
-//    /**
-//     * @see Stream.zip
-//     */
-//    @IsTest
-//    static void zip() {
-//        // When
-//        IIntEnumerable stream0 = Stream.zip(Stream.of(INTS), Stream.of(INTS), IntBiOperators.max());
-//        ILongEnumerable stream1 = Stream.zip(Stream.of(LONGS), Stream.of(LONGS), LongBiOperators.max());
-//        IDoubleEnumerable stream2 = Stream.zip(Stream.of(DOUBLES), Stream.of(DOUBLES), DoubleBiOperators.max());
-//        ISObjectEnumerable stream3 = Stream.zip(Stream.of(ACCOUNTS), Stream.of(ACCOUNTS), SObjectBinaryOperator.maxBy(SObjectComparer.comparing(Account.NumberOfEmployees)));
-//        ISObjectEnumerable stream4 = Stream.zip(Stream.of(ACCOUNTS), Stream.of(ACCOUNTS), SObjectBiPredicates.areEqual(), SObjectBinaryOperator.maxBy(SObjectComparer.comparing(Account.NumberOfEmployees)));
-//        IEnumerable stream5 = Stream.zip(Stream.of(STRINGS), Stream.of(STRINGS), new IterTestUtils.Concat());
-//        IEnumerable stream6 = Stream.zip(Stream.of(STRINGS), Stream.of(STRINGS), new IterTestUtils.AreNotEqual(), new IterTestUtils.Concat());
-//        // Then
-//        Assert.isTrue(stream0 instanceof IntStream);
-//        Assert.isTrue(stream1 instanceof LongStream);
-//        Assert.isTrue(stream2 instanceof DoubleStream);
-//        Assert.isTrue(stream3 instanceof SObjectStream);
-//        Assert.isTrue(stream4 instanceof SObjectStream);
-//        Assert.isTrue(stream5 instanceof ObjectStream);
-//        Assert.isTrue(stream6 instanceof ObjectStream);
-//    }
 
 }

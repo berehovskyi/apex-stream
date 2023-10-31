@@ -84,4 +84,5 @@ private class OptionalTest {
             Assert.areEqual(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
+
 }

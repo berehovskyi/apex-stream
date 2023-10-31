@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
 private class BaseBiOperatorsTest {
 
     private static final List<Integer> INTS = AsTestData.generateInts();

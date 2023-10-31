@@ -147,8 +147,8 @@ private class BiPredicateTest {
         Boolean value = true;
         // When
         IBiPredicate valueBiPredicate = BiPredicate.always(value);
-        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.CompareBiPredicate(GET_AGE_FUNCTION, 1);
-        BiPredicate namesAreEqualBiPredicate = new AfTestCommons.CompareBiPredicate(GET_NAME_FUNCTION, 0);
+        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.ComparerBiPredicate(GET_AGE_FUNCTION, 1);
+        BiPredicate namesAreEqualBiPredicate = new AfTestCommons.ComparerBiPredicate(GET_NAME_FUNCTION, 0);
         IBiPredicate decreasedAgeAndTheSameNamesBiPredicate = ageIsGreaterBiPredicate.andAlso(namesAreEqualBiPredicate);
         IBiPredicate decreasedAgeOrTheSameNamesBiPredicate = ageIsGreaterBiPredicate.orElse(namesAreEqualBiPredicate);
         IBiPredicate notAgeIsNotGreaterBiPredicate = ageIsGreaterBiPredicate.negate();
@@ -172,8 +172,8 @@ private class BiPredicateTest {
         Integer value = 18;
         Object value1 = 'Sam';
         // When
-        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.CompareBiPredicate(GET_AGE_FUNCTION, 1);
-        BiPredicate namesAreEqualBiPredicate = new AfTestCommons.CompareBiPredicate(GET_NAME_FUNCTION, 0);
+        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.ComparerBiPredicate(GET_AGE_FUNCTION, 1);
+        BiPredicate namesAreEqualBiPredicate = new AfTestCommons.ComparerBiPredicate(GET_NAME_FUNCTION, 0);
         IBiPredicate decreasedAgeOrTheSameNamesBiPredicate = BiPredicate.some(
             new List<IBiPredicate>{ ageIsGreaterBiPredicate, namesAreEqualBiPredicate }
         );
@@ -206,8 +206,8 @@ private class BiPredicateTest {
         Integer value = 18;
         Object value1 = 'Sam';
         // When
-        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.CompareBiPredicate(GET_AGE_FUNCTION, 1);
-        BiPredicate namesAreEqualBiPredicate = new AfTestCommons.CompareBiPredicate(GET_NAME_FUNCTION, 0);
+        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.ComparerBiPredicate(GET_AGE_FUNCTION, 1);
+        BiPredicate namesAreEqualBiPredicate = new AfTestCommons.ComparerBiPredicate(GET_NAME_FUNCTION, 0);
         IBiPredicate decreasedAgeOrTheSameNamesBiPredicate = BiPredicate.every(
             new List<IBiPredicate>{ ageIsGreaterBiPredicate, namesAreEqualBiPredicate }
         );
@@ -237,7 +237,7 @@ private class BiPredicateTest {
     @IsTest
     static void negate() {
         // When
-        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.CompareBiPredicate(GET_AGE_FUNCTION, 1);
+        BiPredicate ageIsGreaterBiPredicate = new AfTestCommons.ComparerBiPredicate(GET_AGE_FUNCTION, 1);
         IBiPredicate notAgeIsNotGreaterBiPredicate = BiPredicate.negate(ageIsGreaterBiPredicate);
         // Then
         for (AfPerson person : PEOPLE) {

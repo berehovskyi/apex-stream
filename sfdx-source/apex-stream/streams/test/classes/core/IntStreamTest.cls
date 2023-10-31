@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class IntStreamTest {
 
     /**
@@ -259,31 +260,6 @@ private class IntStreamTest {
         Assert.isTrue(((IntStream) stm4).isOperated);
         Assert.isTrue(((IntStream) stm5).isOperated);
     }
-//
-////    /**
-////    * @see IntStream.toObjectIterable
-////    * @see IntIterable.toLongIterable
-////    * @see IntIterable.toDoubleIterable
-////    */
-////    @IsTest
-////    private static void convert() {
-////        // Given
-////        List<Integer> input = new List<Integer>{ -5, 0, 1, 3, 8, null };
-////        IIterable stm = IntStream.of(input).toObjectIterable();
-////        ILongIterable stm1 = IntStream.of(input).toLongIterable();
-////        IDoubleIterable stm2 = IntStream.of(input).toDoubleIterable();
-////        // When
-////        List<Object> actual = stm.toList();
-////        List<Long> actual1 = stm1.toList();
-////        List<Double> actual2 = stm2.toList();
-////        // Then
-////        List<Object> expected = new List<Object>{ -5, 0, 1, 3, 8, null };
-////        List<Long> expected1 = new List<Long>{ -5, 0, 1, 3, 8, null };
-////        List<Double> expected2 = new List<Double>{ -5, 0, 1, 3, 8, null };
-////        Assert.areEqual(expected, actual);
-////        Assert.areEqual(expected1, actual1);
-////        Assert.areEqual(expected2, actual2);
-////    }
 
     /**
      * @see IntStream.filter
