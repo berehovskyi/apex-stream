@@ -13,6 +13,10 @@ private class SequenceTest {
     private static final List<AsPerson> PEOPLE = AsTestData.generatePersons();
     private static final List<String> STRINGS = AsTestData.generateStrings();
     private static final List<Comparable> COMPARABLES = AsTestData.generateComparables();
+    
+    static {
+        new Sequence();
+    }
 
     /**
      * @see Sequence.of
@@ -20,7 +24,6 @@ private class SequenceTest {
     @IsTest
     static void of() {
         // When
-        new Sequence();
         IIntEnumerable stream0 = Sequence.of(INTS);
         ILongEnumerable stream1 = Sequence.of(LONGS);
         IDoubleEnumerable stream2 = Sequence.of(DOUBLES);

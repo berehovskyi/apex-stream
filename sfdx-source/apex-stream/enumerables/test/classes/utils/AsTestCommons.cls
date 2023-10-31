@@ -22,7 +22,17 @@ private class AsTestCommons {
     public static Object deepClone(Object objects, Type t) {
         return JSON.deserialize(JSON.serialize(objects, false), t);
     }
-    
+    public static Object collect(final List<Object> source, final ICollector collector) {
+        Validate.notNull(source);
+        Validate.notNull(collector);
+        final Object container = collector.supplier().get();
+        final IBiConsumer accumulator = collector.accumulator();
+        final IFunction finisher = collector.finisher();
+        for (Integer i = 0, size = source.size(); i < size; i++) {
+            accumulator.accept(container, source[i]);
+        }
+        return finisher == null ? container : finisher.apply(container);
+    }
     
 
     public class ToUpperCaseFunction extends Function {

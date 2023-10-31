@@ -39,22 +39,22 @@ private class BaseCollectorsTest {
     static void toList() {
         // When
         String lastName = 'LastName';
-        List<Boolean> actual = (List<Boolean>) AsEnumerable.of(BOOLS).collect(BaseCollectors.toList().cast(List<Boolean>.class));
-        List<Id> actual1 = (List<Id>) AsEnumerable.of(IDS).collect(BaseCollectors.toList().cast(List<Id>.class));
-        List<String> actual2 = (List<String>) AsEnumerable.of(STRINGS).collect(BaseCollectors.toList().cast(List<String>.class));
-        List<Blob> actual3 = (List<Blob>) AsEnumerable.of(BLOBS).collect(BaseCollectors.toList().cast(List<Blob>.class));
-        List<Date> actual4 = (List<Date>) AsEnumerable.of(DATES).collect(BaseCollectors.toList().cast(List<Date>.class));
-        List<Datetime> actual5 = (List<Datetime>) AsEnumerable.of(DATETIMES).collect(BaseCollectors.toList().cast(List<Datetime>.class));
-        List<Time> actual6 = (List<Time>) AsEnumerable.of(TIMES).collect(BaseCollectors.toList().cast(List<Time>.class));
-        List<Integer> actual7 = (List<Integer>) AsEnumerable.of(INTS).collect(BaseCollectors.toList().cast(List<Integer>.class));
-        List<Long> actual8 = (List<Long>) AsEnumerable.of(LONGS).collect(BaseCollectors.toList().cast(List<Long>.class));
-        List<Double> actual9 = (List<Double>) AsEnumerable.of(DOUBLES).collect(BaseCollectors.toList().cast(List<Double>.class));
-        List<Contact> actual10 = (List<Contact>) AsEnumerable.of(CONTACTS).collect(BaseCollectors.toList().cast(List<SObject>.class));
-        List<Object> actual11 = (List<Object>) AsEnumerable.of(MIX).collect(BaseCollectors.toList());
-        List<AsPerson> actual12 = (List<AsPerson>) AsEnumerable.of(PEOPLE).collect(BaseCollectors.toList().cast(List<AsPerson>.class));
-        List<Comparable> actual13 = (List<Comparable>) AsEnumerable.of(COMPARABLES).collect(BaseCollectors.toList().cast(List<Comparable>.class));
-        List<String> actual14 = (List<String>) AsEnumerable.of(STRINGS).collect(BaseCollectors.toList(new AsTestCommons.ToUpperCaseFunction()).cast(List<String>.class));
-        List<String> actual15 = (List<String>) AsEnumerable.of(CONTACTS).collect(BaseCollectors.toList(BaseSObjectFunctions.get(lastName)).cast(List<String>.class));
+        List<Boolean> actual = (List<Boolean>) AsTestCommons.collect(BOOLS, BaseCollectors.toList().cast(List<Boolean>.class));
+        List<Id> actual1 = (List<Id>) AsTestCommons.collect(IDS, BaseCollectors.toList().cast(List<Id>.class));
+        List<String> actual2 = (List<String>) AsTestCommons.collect(STRINGS, BaseCollectors.toList().cast(List<String>.class));
+        List<Blob> actual3 = (List<Blob>) AsTestCommons.collect(BLOBS, BaseCollectors.toList().cast(List<Blob>.class));
+        List<Date> actual4 = (List<Date>) AsTestCommons.collect(DATES, BaseCollectors.toList().cast(List<Date>.class));
+        List<Datetime> actual5 = (List<Datetime>) AsTestCommons.collect(DATETIMES, BaseCollectors.toList().cast(List<Datetime>.class));
+        List<Time> actual6 = (List<Time>) AsTestCommons.collect(TIMES, BaseCollectors.toList().cast(List<Time>.class));
+        List<Integer> actual7 = (List<Integer>) AsTestCommons.collect(INTS, BaseCollectors.toList().cast(List<Integer>.class));
+        List<Long> actual8 = (List<Long>) AsTestCommons.collect(LONGS, BaseCollectors.toList().cast(List<Long>.class));
+        List<Double> actual9 = (List<Double>) AsTestCommons.collect(DOUBLES, BaseCollectors.toList().cast(List<Double>.class));
+        List<Contact> actual10 = (List<Contact>) AsTestCommons.collect(CONTACTS, BaseCollectors.toList().cast(List<SObject>.class));
+        List<Object> actual11 = (List<Object>) AsTestCommons.collect(MIX, BaseCollectors.toList());
+        List<AsPerson> actual12 = (List<AsPerson>) AsTestCommons.collect(PEOPLE, BaseCollectors.toList().cast(List<AsPerson>.class));
+        List<Comparable> actual13 = (List<Comparable>) AsTestCommons.collect(COMPARABLES, BaseCollectors.toList().cast(List<Comparable>.class));
+        List<String> actual14 = (List<String>) AsTestCommons.collect(STRINGS, BaseCollectors.toList(new AsTestCommons.ToUpperCaseFunction()).cast(List<String>.class));
+        List<String> actual15 = (List<String>) AsTestCommons.collect(CONTACTS, BaseCollectors.toList(BaseSObjectFunctions.get(lastName)).cast(List<String>.class));
         // Then
         List<String> expected = new List<String>();
         for (String s : STRINGS) {
