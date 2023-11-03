@@ -2,7 +2,6 @@
  * @description A sequence of `Long` elements supporting aggregate operations,
  * a primitive specialization of {@link ObjectStream}.
  *
- * @see LongSequence
  * @see SObjectStream
  * @see ObjectStream
  * @see DoubleStream
@@ -10,7 +9,7 @@
  *
  * @author Oleh Berehovskyi
  *
- * @group Iterables
+ * @group Enumerables
  *
  * @example
  * Long sumAnnualRevenueOfUniquePeopleFromLondon
@@ -20,6 +19,7 @@
  *         .mapToLong(getAnnualRevenueToLongFunction)
  *         .sum();
  */
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class LongStream extends LongEnumerable {
 
     private final transient Iterator<Long> iterator;
@@ -39,6 +39,8 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
         this.iterator = iterator;
     }
 
+    //<editor-fold desc="Iterator">
+    // @start-group Iterator
     /**
      * @description Returns an internal iterator for the elements of this stream.
      * <p>Terminal Operation.</p>
@@ -55,35 +57,24 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
             isOperated = true;
         }
     }
-
-//    //<editor-fold desc="Conversion Operations">
-//    // @start-group Conversion Operations
-//    /**
-//     * @description Returns an `ObjectStream` consisting of the elements of this stream, converted to Object.
-//     *
-//     * @return the `ObjectStream`
-//     */
-//    public virtual IEnumerable toObjectIterable() {
-//        return ObjectStream.of(iterator());
-//    }
-//    // @end-group
-//    //</editor-fold>
+    // @end-group
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     // @start-group Sources
     /**
-     * @description Returns a `LongStream` created from `iterator`.
+     * @description Returns a `LongEnumerable` created from `iterator`.
      *
      * @param iterator the iterator
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterator` is null
      *
      * @example
-     * ILongIterable longStream = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }.iterator());
-     * ILongIterable longStream = LongStream.of(new Set<Long>{ 0, 5L, 1L, -10 }.iterator());
-     * ILongIterable longStream = LongStream.of(otherStream.iterator());
+     * LongEnumerable longStream = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }.iterator());
+     * LongEnumerable longStream = LongStream.of(new Set<Long>{ 0, 5L, 1L, -10 }.iterator());
+     * LongEnumerable longStream = LongStream.of(otherStream.iterator());
      */
     public static LongEnumerable of(final Iterator<Long> iterator) {
         Validate.notNull(iterator);
@@ -91,17 +82,17 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
     }
 
     /**
-     * @description Returns a `LongStream` created from `longs`.
+     * @description Returns a `LongEnumerable` created from `longs`.
      *
      * @param longs the iterable
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `longs` is null
      *
      * @example
-     * ILongIterable longStream = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 });
-     * ILongIterable longStream = LongStream.of((Iterable<Long>) new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longStream = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longStream = LongStream.of((Iterable<Long>) new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable of(final Iterable<Long> longs) {
         Validate.notNull(longs);
@@ -109,16 +100,16 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
     }
 
     /**
-     * @description Returns a `LongStream` created from `longs` if non-null,
-     * otherwise returns an empty `LongStream`.
+     * @description Returns a `LongEnumerable` created from `longs` if non-null,
+     * otherwise returns an empty `LongEnumerable`.
      *
      * @param longs the iterable
      *
-     * @return the new `LongStream` if `longs` is non-null,
-     * otherwise an empty `LongStream`
+     * @return the new `LongEnumerable` if `longs` is non-null,
+     * otherwise an empty `LongEnumerable`
      *
      * @example
-     * ILongIterable longStream = LongStream.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longStream = LongStream.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final Iterable<Long> longs) {
         if (longs == null) { return empty(); }
@@ -126,71 +117,96 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
     }
 
     /**
-     * @description Returns an empty `LongStream`.
+     * @description Returns an empty `LongEnumerable`.
      *
-     * @return the empty `LongStream`
+     * @return the empty `LongEnumerable`
      */
     public static LongEnumerable empty() {
         return new LongStream();
     }
 
     /**
-     * @description Returns an ordered `LongStream`
+     * @description Returns an ordered `LongEnumerable`
      * from `fromLong` (inclusive) to `toLong` (inclusive) by an incremental step of 1.
      *
      * @param fromLong the inclusive initial value
      * @param toLong the inclusive upper bound
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `fromLong` or `toLong` is null
      *
      * @example
-     * ILongIterable longStreamFrom0To100 = LongStream.range(0, 100);
+     * LongEnumerable longStreamFrom0To100 = LongStream.range(0, 100);
      */
     public static LongEnumerable range(final Long fromLong, final Long toLong) {
         return new LongStream(StreamPipeline.rangeLong(fromLong, toLong));
     }
 
     /**
-     * @description Returns an infinite `LongStream` where each element is
+     * @description Returns an infinite `LongEnumerable` where each element is
      * generated by `supplier`.
      *
      * @param supplier the supplier of generated elements
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * ILongIterable fibonacciInfiniteStream = LongStream.generate(LongSuppliers.fibonacci());
+     * public class FibonacciSupplier extends Supplier {
+     *     private Long n0 = 1;
+     *     private Long n1 = 1;
+     *     public override Object get() {
+     *         Long n2 = n0 + n1;
+     *         n0 = n1;
+     *         n1 = n2;
+     *         return n0;
+     *     }
+     * }
+     * LongEnumerable fibonacciInfiniteStream = LongStream.generate(new FibonacciSupplier());
+     * Iterator<Long> it = fibonacciInfiniteStream.iterator();
+     * it.next(); // 1L
+     * it.next(); // 2L
+     * it.next(); // 3L
+     * it.next(); // 5L
+     * it.next(); // 8L
      */
     public static LongEnumerable generate(final ISupplier supplier) {
         return new LongStream((Iterator<Long>) StreamPipeline.generate(supplier));
     }
 
     /**
-     * @description Returns an infinite `LongStream` produced by iterative
+     * @description Returns an infinite `LongEnumerable` produced by iterative
      * application of `operator` to an initial element `seed`,
-     * producing a `LongStream` consisting of `seed`, `operator(seed)`,
+     * producing a `LongEnumerable` consisting of `seed`, `operator(seed)`,
      * `operator(operator(seed))`, etc.
      *
      * @param seed the initial element
      * @param operator the operator to be applied to the previous element to produce a new element
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `supplier` is null
      *
      * @example
-     * ILongIterable longIncrementalStream = LongStream.iterate(0L, LongUnaryOperators.add(1L));
+     * public class AddOperator extends Operator {
+     *     private final Long i;
+     *     public AddOperator(Long d) { this.i = i; }
+     *     public override Object apply(Object j) { return (Long) j + i; }
+     * }
+     * LongEnumerable incrementalStream = LongStream.iterate(0L, new AddOperator(1L));
+     * Iterator<Long> it = incrementalStream.iterator();
+     * it.next(); // 0L
+     * it.next(); // 1L
+     * it.next(); // 2L
      */
     public static LongEnumerable iterate(final Long seed, final IOperator operator) {
         return new LongStream((Iterator<Long>) StreamPipeline.iterate(seed, operator));
     }
 
     /**
-     * @description Returns an infinite `LongStream` produced by iterative
+     * @description Returns an infinite `LongEnumerable` produced by iterative
      * application of `operator` to an initial element `seed`,
      * conditioned on satisfying `predicate`.
      *
@@ -198,28 +214,49 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @param predicate the predicate to determine when the stream must be terminated
      * @param operator the operator to be applied to the previous element to produce a new element
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `supplier` or `supplier` is null
+     * 
+     * @example
+     * public class IsLessPredicate extends Predicate {
+     *     private final Long d;
+     *     public IsLessPredicate(Long d) { this.d = d; }
+     *     public override Boolean test(Object o) { return (Long) o < d; }
+     * }
+     * public class AddOperator extends Operator {
+     *     private final Long d;
+     *     public AddOperator(Long d) { this.d = d; }
+     *     public override Object apply(Object j) { return (Long) j + d; }
+     * }
+     * List<Long> longs = LongStream.iterate(
+     *     0,
+     *     new IsLessPredicate(5L),
+     *     new AddOperator(1L)
+     * ).toList(); // [0L, 1L, 2L, 3L, 4L]
      */
     public static LongEnumerable iterate(final Long seed, final IPredicate predicate, final IOperator operator) {
         return iterate(seed, operator).take(predicate);
     }
 
     /**
-     * @description Returns lazily concatenated `LongStream` whose elements are all the
+     * @description Returns lazily concatenated `LongEnumerable` whose elements are all the
      * elements of the first `Iterable<Long>` followed by all the elements of the
      * second `Iterable<Long>`.
      *
      * @param iterable1 the first `Iterable<Long>`
      * @param iterable2 the second `Iterable<Long>`
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      *
      * @example
-     * ILongIterable longStream = LongStream.concat(stream1, stream2);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> concat = LongSequence.concat(longs1, longs2)
+     *     .toList();
+     * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
     public static LongEnumerable concat(final Iterable<Long> iterable1, final Iterable<Long> iterable2) {
         return concat(new List<Iterable<Long>>{ iterable1, iterable2 });
@@ -230,66 +267,90 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      *
      * @param iterables the list of `Iterable<Long>`
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterables` or some element in a list is null
      *
      * @example
-     * ILongIterable longStream = LongStream.concat(streams);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> concat = LongSequence.concat(new List<Iterable<Long>>{ longs1, longs2 })
+     *     .toList();
+     * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
     public static LongEnumerable concat(final List<Iterable<Long>> iterables) {
         return new LongStream((Iterator<Long>) StreamPipeline.concat(iterables, Long.class));
     }
 
     /**
-     * @description Returns a combined `LongStream` by applying `combiner` function
+     * @description Returns a combined `LongEnumerable` by applying `combiner` function
      * to each element at the same position.
      *
      * @param iterable1 the first `Iterable<Long>`
      * @param iterable2 the second `Iterable<Long>`
      * @param combiner the binary operator to be applied to each element at the same position
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     * 
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> zip = LongSequence.zip(longs1, longs2, new SumBiOperator())
+     *     .toList();
+     * // [13L, 6L, 15L, 11L, 9L, 18L, 4L, 7L]
      */
     public static LongEnumerable zip(
-            final Iterable<Long> iterable1,
-            final Iterable<Long> iterable2,
-            final IBiOperator combiner
+        final Iterable<Long> iterable1,
+        final Iterable<Long> iterable2,
+        final IBiOperator combiner
     ) {
         return new LongStream((Iterator<Long>) StreamPipeline.zip(iterable1, iterable2, combiner));
     }
 
     /**
-     * @description Returns new `LongStream` by appending `iterable`
+     * @description Returns new `LongEnumerable` by appending `iterable`
      * to the current stream.
      *
      * @param iterable the `Iterable<Long>` to append to the current stream
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * ILongIterable longStream = stream1.append(stream2);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> append = LongSequence.of(longs1)
+     *     .append(longs2)
+     *     .toList();
+     * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
     public virtual override LongEnumerable append(final Iterable<Long> iterable) {
         return concat(this, iterable);
     }
 
     /**
-     * @description Returns new `LongStream` by prepending `iterable`
+     * @description Returns new `LongEnumerable` by prepending `iterable`
      * to the current stream.
      *
      * @param iterable the `Iterable<Long>` to prepend to the current stream
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * ILongIterable longStream = stream1.prepend(stream2);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> append = LongSequence.of(longs1)
+     *     .prepend(longs2)
+     *     .toList();
+     * // [8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L, 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L]
      */
     public virtual override LongEnumerable prepend(final Iterable<Long> iterable) {
         return concat(iterable, this);
@@ -299,246 +360,325 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
 
     //<editor-fold desc="Intermediate Operations">
     // @start-group Intermediate Operations
-//    /**
-//     * @description Returns new `LongSequence` from the current stream.
-//     * <p>Stateful Intermediate Operation.</p>
-//     *
-//     * @return the new `LongSequence`
-//     *
-//     * @example
-//     * ILongIterable longSeq = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).sequence();
-//     */
-//    public virtual LongEnumerable sequence() {
-//        return LongSequence.of(toList());
-//    }
-
     /**
-     * @description Returns a `LongStream` with elements that match `predicate`.
+     * @description Returns a `LongEnumerable` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> filtered = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .filter(LongPredicates.isGreater(0))
-     *     .toList();
+     * List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
+     *     .filter(BasePredicates.isEqual(5L))
+     *     .toList(); // [5L, 5L]
      */
     public virtual override LongEnumerable filter(final IPredicate predicate) {
         return new LongStream((Iterator<Long>) StreamPipeline.filter(iterator(), predicate));
     }
 
     /**
-     * @description Returns a `LongStream` which takes elements while elements match `predicate`.
+     * @description Returns a `LongEnumerable` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> firstFiltered = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .take(LongPredicates.isGreater(0))
-     *     .toList();
+     * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+     *     .take(BasePredicates.isEqual(0L))
+     *     .toList(); // [0L, 0L]
      */
     public virtual override LongEnumerable take(final IPredicate predicate) {
         return new LongStream((Iterator<Long>) StreamPipeline.take(iterator(), predicate));
     }
 
     /**
-     * @description Returns a `LongStream` which drops elements while elements match `predicate`,
+     * @description Returns a `LongEnumerable` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> rest = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .drop(LongPredicates.isGreater(0))
-     *     .toList();
+     * List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+     *     .drop(BasePredicates.isEqual(0L))
+     *     .toList(); // [1L, 1L, 5L]
      */
     public virtual override LongEnumerable drop(final IPredicate predicate) {
         return new LongStream((Iterator<Long>) StreamPipeline.drop(iterator(), predicate));
     }
 
     /**
-     * @description Returns a `LongStream` with elements returned by `mapper` function,
+     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Long> incrementedLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .mapTo(LongUnaryOperators.add(1L))
-     *     .toList();
+     * public class MultiplyLongOperator extends Operator {
+     *     private final Long l;
+     *     public MultiplyLongOperator(Long l) { this.l = l; }
+     *     public override Object apply(Object j) { return (Long) j * l; }
+     * }
+     * List<Long> doubledLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapTo(new MultiplyLongOperator(2))
+     *     .toList(); // [0L, 10L, 2L, -20L]
      */
     public virtual override LongEnumerable mapTo(final IOperator mapper) {
         return new LongStream((Iterator<Long>) StreamPipeline.mapTo(iterator(), (IFunction) mapper));
     }
 
     /**
-     * @description Returns a `IntStream` with elements returned by `mapper` function,
+     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `IntStream`
+     * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class MultiplyIntFunction extends Function {
+     *     private final Integer i;
+     *     public MultiplyIntFunction(Integer i) { this.i = i; }
+     *     public override Object apply(Object j) { return (Long) j * i; }
+     * }
+     * List<Integer> doubledInts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToLong(new MultiplyIntFunction(2))
+     *     .toList(); // [0, 10, 2, -20]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
         return IntStream.of((Iterator<Integer>) StreamPipeline.mapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `DoubleStream` with elements returned by `mapper` function,
+     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `DoubleStream`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class MultiplyDoubleFunction extends Function {
+     *     private final Double d;
+     *     public MultiplyDoubleFunction(Double d) { this.d = d; }
+     *     public override Object apply(Object j) { return (Long) j * d; }
+     * }
+     * List<Double> doubledDoubles = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToDouble(new MultiplyDoubleFunction(2))
+     *     .toList(); // [0.0, 10.0, 2.0, -20.0]
      */
     public virtual override DoubleEnumerable mapToDouble(final IFunction mapper) {
         return DoubleStream.of((Iterator<Double>) StreamPipeline.mapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `SObjectStream` with elements returned by `mapper` function,
+     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `SObjectStream`
+     * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class CreateAccountFunction extends Function {
+     *     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
+     * }
+     * List<Account> accounts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToSObject(new CreateAccountFunction())
+     *     .toList(); //
+     * [
+     *   { AnnualRevenue: 0 },
+     *   { AnnualRevenue: 5 },
+     *   { AnnualRevenue: 1 },
+     *   { AnnualRevenue: 10 }
+     * ]
      */
     public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
         return SObjectStream.of((Iterator<SObject>) StreamPipeline.mapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `ObjectStream` with elements returned by `mapper` function,
+     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class ToStringFunction extends Function {
+     *     public override Object apply(Object i) { return String.valueOf(i); }
+     * }
+     * List<String> strings = (List<String>) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToObject(new ToStringFunction())
+     *     .toList(String.class); // ['0', '5', '1', '10']
      */
     public virtual override ObjectEnumerable mapToObject(final IFunction mapper) {
         return ObjectStream.of(StreamPipeline.mapTo(iterator(), mapper));
     }
 
+    /**
+     * @description Returns a new `LongEnumerable` with `Long` elements as a result of
+     * replacing each element with the contents of a mapped iterable created by applying
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     *
+     * @return the new `LongEnumerable`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * public class MultiplyLongFunction extends Function {
+     *     private final Long l;
+     *     public MultiplyLongFunction(Long l) { this.l = l; }
+     *     public override Object apply(Object o) { return new List<Long>{ ((Long) o) * l }; }
+     * }
+     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .flatMapTo(new MultiplyLongFunction(2L))
+     *     .toList(); // [0L, 10L, 2L, -20L]
+     */
     public virtual override LongEnumerable flatMapTo(final IFunction mapper) {
         return new LongStream((Iterator<Long>) StreamPipeline.flatMapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `LongStream` after performing `consumer` action on each element.
+     * @description Returns a `LongEnumerable` after performing `consumer` action on each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
+     *
+     * @example
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
+     *     .toList(); // [0L, 5L, 1L, -10L ]
      */
     public virtual override LongEnumerable forEach(final IConsumer consumer) {
         return new LongStream((Iterator<Long>) StreamPipeline.forEach(iterator(), consumer));
     }
 
     /**
-     * @description Returns a `LongStream` with distinct elements.
+     * @description Returns a `LongEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @example
-     * List<Long> distinct = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> distinct = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 5L })
      *     .distinct()
-     *     .toList();
+     *     .toList(); // [0L, 5L, 1L, -10L]
      */
     public virtual override LongEnumerable distinct() {
         return new LongStream((Iterator<Long>) StreamPipeline.distinct(iterator()));
     }
 
     /**
-     * @description Returns a `LongStream` with sorted elements in ascending order.
+     * @description Returns a `LongEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @example
-     * List<Long> sorted = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
      *     .sort()
-     *     .toList();
+     *     .toList(); // [null, -10L, 0L, 1L, 5L]
      */
     public virtual override LongEnumerable sort() {
         return new LongStream((Iterator<Long>) StreamPipeline.sort(iterator()));
     }
 
+    /**
+     * @description Returns a `LongEnumerable` with sorted elements considering `order`.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param order the sort order
+     *
+     * @return the `LongEnumerable`
+     *
+     * @throws NullPointerException if `order` is null
+     *
+     * @example
+     * List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
+     *     .sort(SortOrder.DESCENDING)
+     *     .toList(); // [5L, 1L, 0L, -10L, null]
+     */
     public virtual override LongEnumerable sort(final SortOrder order) {
         return new LongStream((Iterator<Long>) StreamPipeline.sort(iterator(), order));
     }
 
     /**
-     * @description Returns a `LongStream` with first `lim` elements.
+     * @description Returns a `LongEnumerable` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
-     * List<Long> first3Longs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> first3Longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .lim(3)
-     *     .toList();
+     *     .toList(); // [0L, 5L, 1L]
      */
     public virtual override LongEnumerable lim(final Integer lim) {
         return new LongStream((Iterator<Long>) StreamPipeline.lim(iterator(), lim));
     }
 
     /**
-     * @description Returns a new `LongStream` that skips first `n` elements
+     * @description Returns a new `LongEnumerable` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example
-     * List<Long> restLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> restLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
-     *     .toList();
+     *     .toList(); // [5L, 1L, -10L]
      */
     public virtual override LongEnumerable skip(final Integer n) {
         return new LongStream((Iterator<Long>) StreamPipeline.skip(iterator(), n));
@@ -561,8 +701,14 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperators.sum());
-     * Long factorialOfN = LongStream.range(1, n).reduce(1, LongBinaryOperators.product());
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * public class ProductBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 * (Long) o2; }
+     * }
+     * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, new SumBiOperator()); // -4L
+     * Long factorialOfN = LongSequence.range(1, n).reduce(1, new ProductBiOperator());
      */
     public virtual override Long reduce(final Long identity, final IBiOperator accumulator) {
         return (Long) StreamPipeline.reduce(iterator(), (Object) identity, accumulator);
@@ -571,66 +717,69 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
     /**
      * @description Performs a reduction on `Long` elements,
      * using `identity` value and associative `accumulator` function, and returns
-     * an `OptionalLong` describing the reduced value.
+     * an `Optional` Long describing the reduced value.
      * <p>Terminal Operation.</p>
      *
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
-     * @return the `OptionalLong` result of the reduction
+     * @return the `Optional` Long result of the reduction
      *
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *      .reduce(LongBinaryOperators.sum())
-     *      .get();
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * Long sum = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .reduce(new SumBiOperator())
+     *     .get(); // -4L
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
         return Optional.ofNullable((Long) StreamPipeline.reduce(iterator(), accumulator));
     }
 
-//    /**
-//     * @description Performs a mutable reduction operation on elements, collecting elements
-//     * to a container returned by `supplier` by applying `accumulator` function.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param supplier the function that returns a mutable result container
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Object` result of the collection
-//     *
-//     * @throws NullPointerException if `supplier` or `accumulator` is null
-//     */
-//    public virtual Object collect(final ISupplier supplier, final IObjectLongConsumer accumulator) {
-//        Validate.notNull(supplier);
-//        Validate.notNull(accumulator);
-//        final Object container = supplier.get();
-//        final Iterator<Long> iterator = iterator();
-//        while (iterator.hasNext()) {
-//            accumulator.accept(container, iterator.next());
-//        }
-//        return container;
-//    }
-
+    /**
+     * @description Performs a mutable reduction operation on elements, collecting elements
+     * to a container using `collector`.
+     * <p>Terminal Operation.</p>
+     *
+     * @param collector the function that returns a mutable result container
+     *
+     * @return the `Object` result of the collection
+     *
+     * @throws NullPointerException if `collector` is null
+     *
+     * @example
+     * public class AddToLongSetBiConsumer extends BiConsumer {
+     *     public override void accept(Object container, Object o) { ((Set<Long>) container).add((Long) o); }
+     * }
+     * Set<Long> longs = (Set<Long>)
+     *     LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 5L, 0L })
+     *     .collect(Collector.of(Supplier.of(Set<Long>.class), new AddToLongSetBiConsumer()));
+     * // [0L, 5L, 1L, -10L]
+     */
     public virtual override Object collect(final ICollector collector) {
         return StreamPipeline.collect(iterator(), collector);
     }
 
     /**
-     * @description Returns an `OptionalLong` describing the first element
+     * @description Returns an `Optional` Long describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return the `OptionalLong`
+     * @return the `Optional` Long
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Long firstEvenLong = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .find(LongPredicates.isEven())
-     *     .get();
+     * public class IsEvenPredicate extends Predicate {
+     *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
+     * }
+     * Long firstEvenLong = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .find(new IsEvenPredicate())
+     *     .get(); // 0L
      */
     public virtual override Optional find(final IPredicate predicate) {
         return Optional.ofNullable((Long) StreamPipeline.find(iterator(), predicate));
@@ -638,7 +787,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `LongStream` is empty then `false` is returned.
+     * If `LongEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -648,9 +797,11 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isEveryLongEven = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .every(LongPredicates.isEven())
-     *     .get();
+     * public class IsEvenPredicate extends Predicate {
+     *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
+     * }
+     * Boolean isEveryLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .every(new IsEvenPredicate()); // false
      */
     public virtual override Boolean every(final IPredicate predicate) {
         return StreamPipeline.match(iterator(), predicate, 1);
@@ -658,7 +809,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
 
     /**
      * @description Returns whether some element matches `predicate`.
-     * If `LongStream` is empty then `false` is returned.
+     * If `LongEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -668,9 +819,11 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isSomeLongEven = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .some(LongPredicates.isEven())
-     *     .get();
+     * public class IsEvenPredicate extends Predicate {
+     *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
+     * }
+     * Boolean isSomeLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .some(new IsEvenPredicate()); // true
      */
     public virtual override Boolean some(final IPredicate predicate) {
         return StreamPipeline.match(iterator(), predicate, 0);
@@ -681,17 +834,26 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the sum of elements
+     * 
+     * @example
+     * Long sum = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .sum(); // -4L
      */
     public virtual override Long sum() {
         return (Long) StreamPipeline.avgLong(iterator(), false);
     }
 
     /**
-     * @description Returns `OptionalDouble` describing the arithmetic mean of elements of this stream,
-     * or an empty `OptionalDouble` if this stream is empty.
+     * @description Returns `Optional` Double describing the arithmetic mean of elements of this stream,
+     * or an empty `Optional` Double if this stream is empty.
      * <p>Terminal Operation.</p>
      *
      * @return the arithmetic mean of elements
+     * 
+     * @example
+     * Double avg = (Double) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .avg()
+     *     .get(); // 1.0
      */
     public virtual override Optional avg() {
         return Optional.of((Double) StreamPipeline.avgLong(iterator(), true));
@@ -702,6 +864,10 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
+     * 
+     * @example
+     * Integer count = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .count(); // 4
      */
     public virtual override Integer count() {
         return StreamPipeline.count(iterator());
@@ -712,6 +878,12 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
+     * 
+     * @example
+     * LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .isEmpty(); // false
+     * LongSequence.of(new List<Long>()))
+     *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
         return StreamPipeline.isEmpty(iterator());
@@ -724,9 +896,9 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the `List<Long>` containing the stream elements
      *
      * @example
-     * List<Long> restLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
-     *     .toList();
+     *     .toList(); // [5L, 1L, -10L]
      */
     public virtual override List<Long> toList() {
         return (List<Long>) StreamPipeline.toList(iterator(), Long.class);
@@ -739,9 +911,9 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the `Set<Long>` containing the stream elements
      *
      * @example
-     * Set<Long> restLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * SSet<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
-     *     .toSet();
+     *     .toSet(); // [5L, 1L, -10L, 0L]
      */
     public virtual override Set<Long> toSet() {
         return StreamPipeline.toLongSet(iterator());

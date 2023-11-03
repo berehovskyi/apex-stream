@@ -11,6 +11,7 @@
 public virtual inherited sharing class BiConsumers {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected BiConsumers() {}
 
     //<editor-fold desc="Built-Ins">
@@ -27,8 +28,6 @@ public virtual inherited sharing class BiConsumers {
      * @throws NullPointerException if `predicate` or `accumulator` is null
      */
     public static BiConsumer filtering(final IPredicate predicate, final IBiConsumer accumulator) {
-        Validate.notNull(predicate);
-        Validate.notNull(accumulator);
         return new Filtering(predicate, accumulator);
     }
 
@@ -44,8 +43,6 @@ public virtual inherited sharing class BiConsumers {
      * @throws NullPointerException if `mapper` or `accumulator` is null
      */
     public static BiConsumer mapping(final IFunction mapper, final IBiConsumer accumulator) {
-        Validate.notNull(mapper);
-        Validate.notNull(accumulator);
         return new Mapping(mapper, accumulator);
     }
 
@@ -61,8 +58,6 @@ public virtual inherited sharing class BiConsumers {
      * @throws NullPointerException if `mapper` or `accumulator` is null
      */
     public static BiConsumer flatMapping(final IFunction mapper, final IBiConsumer accumulator) {
-        Validate.notNull(mapper);
-        Validate.notNull(accumulator);
         return new FlatMapping(mapper, accumulator);
     }
     // @end-group
@@ -70,10 +65,23 @@ public virtual inherited sharing class BiConsumers {
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
+    private abstract class Operating extends BiConsumer {
+        protected final IFunction mapper;
+        protected final IBiConsumer accumulator;
+        protected Operating(IFunction mapper, IBiConsumer accumulator) {
+            Validate.notNull(mapper);
+            Validate.notNull(accumulator);
+            this.mapper = mapper;
+            this.accumulator = accumulator;
+        }
+    }
+
     private class Filtering extends BiConsumer {
         private final IPredicate predicate;
         private final IBiConsumer accumulator;
         private Filtering(IPredicate predicate, IBiConsumer accumulator) {
+            Validate.notNull(predicate);
+            Validate.notNull(accumulator);
             this.predicate = predicate;
             this.accumulator = accumulator;
         }
@@ -82,30 +90,19 @@ public virtual inherited sharing class BiConsumers {
         }
     }
 
-    private class Mapping extends BiConsumer {
-        private final IFunction mapper;
-        private final IBiConsumer accumulator;
-        private Mapping(IFunction mapper, IBiConsumer accumulator) {
-            this.mapper = mapper;
-            this.accumulator = accumulator;
-        }
+    private class Mapping extends Operating {
+        private Mapping(IFunction mapper, IBiConsumer accumulator) { super(mapper, accumulator); }
         public override void accept(Object container, Object o) { accumulator.accept(container, mapper.apply(o)); }
     }
 
-    private class FlatMapping extends BiConsumer {
-        private final IFunction mapper;
-        private final IBiConsumer accumulator;
-        private FlatMapping(IFunction mapper, IBiConsumer accumulator) {
-            this.mapper = mapper;
-            this.accumulator = accumulator;
-        }
+    private class FlatMapping extends Operating {
+        private FlatMapping(IFunction mapper, IBiConsumer accumulator) { super(mapper, accumulator); }
         public override void accept(Object container, Object o) {
             final Iterable<Object> result = (Iterable<Object>) mapper.apply(o);
-            if (result != null) {
-                final Iterator<Object> iterator = result.iterator();
-                while (iterator.hasNext()) {
-                    this.accumulator.accept(container, iterator.next());
-                }
+            if (result == null) { return; } 
+            final Iterator<Object> iterator = result.iterator();
+            while (iterator.hasNext()) {
+                this.accumulator.accept(container, iterator.next());
             }
         }
     }

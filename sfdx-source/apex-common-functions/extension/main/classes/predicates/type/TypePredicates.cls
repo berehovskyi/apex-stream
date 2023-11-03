@@ -11,6 +11,7 @@
 public virtual inherited sharing class TypePredicates {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected TypePredicates() {}
 
     //<editor-fold desc="Built-Ins">

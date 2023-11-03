@@ -12,6 +12,7 @@
 public virtual inherited sharing class CollectorSuppliers extends BaseCollectorSuppliers {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected CollectorSuppliers() {}
     
     //<editor-fold desc="Built-Ins">

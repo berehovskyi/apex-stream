@@ -9,13 +9,14 @@
  *
  * @group Functional Built-In Classes
  */
-public inherited sharing class SetObjectConsumers {
+public virtual inherited sharing class SetObjectConsumers {
 
     @TestVisible
-    private SetObjectConsumers() {}
+    @SuppressWarnings('PMD.EmptyStatementBlock')
+    protected SetObjectConsumers() {}
 
-    //<editor-fold desc="Add To Set<?> BiConsumers">
-    // @start-group Add To Set<?> BiConsumers
+    //<editor-fold desc="Built-Ins">
+    // @start-group Built-Ins
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Object>` and adds the second input argument to it.
@@ -26,11 +27,10 @@ public inherited sharing class SetObjectConsumers {
      *
      * @throws NullPointerException if the first input argument is null
      *
-     * @see Collectors.toSet
+     * @see Collectors.toObjectSet
      */
     public static BiConsumer addToSet(final IFunction mapper) {
-        Validate.notNull(mapper);
-        return new AddToSet(mapper);
+        return new AddToObjectSet(mapper);
     }
 
     /**
@@ -46,7 +46,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toBoolSet
      */
     public static BiConsumer addToBoolSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToBoolSet(mapper);
     }
 
@@ -63,7 +62,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toIdSet
      */
     public static BiConsumer addToIdSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToIdSet(mapper);
     }
 
@@ -80,7 +78,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toStringSet
      */
     public static BiConsumer addToStringSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToStringSet(mapper);
     }
 
@@ -97,7 +94,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toBlobSet
      */
     public static BiConsumer addToBlobSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToBlobSet(mapper);
     }
 
@@ -114,7 +110,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toDateSet
      */
     public static BiConsumer addToDateSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToDateSet(mapper);
     }
 
@@ -131,7 +126,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toDatetimeSet
      */
     public static BiConsumer addToDatetimeSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToDatetimeSet(mapper);
     }
 
@@ -148,7 +142,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toTimeSet
      */
     public static BiConsumer addToTimeSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToTimeSet(mapper);
     }
 
@@ -165,7 +158,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toIntSet
      */
     public static BiConsumer addToIntSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToIntSet(mapper);
     }
 
@@ -182,7 +174,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toLongSet
      */
     public static BiConsumer addToLongSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToLongSet(mapper);
     }
 
@@ -199,7 +190,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toDoubleSet
      */
     public static BiConsumer addToDoubleSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToDoubleSet(mapper);
     }
 
@@ -216,7 +206,6 @@ public inherited sharing class SetObjectConsumers {
      * @see Collectors.toSObjectSet
      */
     public static BiConsumer addToSObjectSet(final IFunction mapper) {
-        Validate.notNull(mapper);
         return new AddToSObjectSet(mapper);
     }
     // @end-group
@@ -224,76 +213,84 @@ public inherited sharing class SetObjectConsumers {
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-    private class AddToSet extends BiConsumer {
+    private abstract class AddToSet extends BiConsumer {
         private final IFunction mapper;
-        private AddToSet(IFunction mapper) { this.mapper = mapper; }
+        protected AddToSet(IFunction mapper) {
+            Validate.notNull(mapper);
+            this.mapper = mapper;
+        }
+    }
+
+    private class AddToObjectSet extends AddToSet {
+        private AddToObjectSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) { ((Set<Object>) container).add(mapper.apply(o)); }
     }
 
-    private class AddToBoolSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToBoolSet(IFunction mapper) { this.mapper = mapper; }
-        public override void accept(Object container, Object o) { ((Set<Boolean>) container).add((Boolean) mapper.apply(o)); }
+    private class AddToBoolSet extends AddToSet {
+        private AddToBoolSet(IFunction mapper) { super(mapper); }
+        public override void accept(Object container, Object o) {
+            ((Set<Boolean>) container).add((Boolean) mapper.apply(o));
+        }
     }
 
-    private class AddToIdSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToIdSet(IFunction mapper) { this.mapper = mapper; }
+    private class AddToIdSet extends AddToSet {
+        private AddToIdSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) { ((Set<Id>) container).add((Id) mapper.apply(o)); }
     }
 
-    private class AddToStringSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToStringSet(IFunction mapper) { this.mapper = mapper; }
-        public override void accept(Object container, Object o) { ((Set<String>) container).add((String) mapper.apply(o)); }
+    private class AddToStringSet extends AddToSet {
+        private AddToStringSet(IFunction mapper) { super(mapper); }
+        public override void accept(Object container, Object o) {
+            ((Set<String>) container).add((String) mapper.apply(o));
+        }
     }
 
-    private class AddToBlobSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToBlobSet(IFunction mapper) { this.mapper = mapper; }
+    private class AddToBlobSet extends AddToSet {
+        private AddToBlobSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) { ((Set<Blob>) container).add((Blob) mapper.apply(o)); }
     }
 
-    private class AddToDateSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToDateSet(IFunction mapper) { this.mapper = mapper; }
+    private class AddToDateSet extends AddToSet {
+        private AddToDateSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) { ((Set<Date>) container).add((Date) mapper.apply(o)); }
     }
 
-    private class AddToDatetimeSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToDatetimeSet(IFunction mapper) { this.mapper = mapper; }
-        public override void accept(Object container, Object o) { ((Set<Datetime>) container).add((Datetime) mapper.apply(o)); }
+    private class AddToDatetimeSet extends AddToSet {
+        private AddToDatetimeSet(IFunction mapper) { super(mapper); }
+        public override void accept(Object container, Object o) {
+            ((Set<Datetime>) container).add((Datetime) mapper.apply(o));
+        }
     }
 
-    private class AddToTimeSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToTimeSet(IFunction mapper) { this.mapper = mapper; }
+    private class AddToTimeSet extends AddToSet {
+        private AddToTimeSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) { ((Set<Time>) container).add((Time) mapper.apply(o)); }
     }
 
-    private class AddToIntSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToIntSet(IFunction mapper) { this.mapper = mapper; }
-        public override void accept(Object container, Object o) { ((Set<Integer>) container).add((Integer) mapper.apply(o)); }
+    private class AddToIntSet extends AddToSet {
+        private AddToIntSet(IFunction mapper) { super(mapper); }
+        public override void accept(Object container, Object o) {
+            ((Set<Integer>) container).add((Integer) mapper.apply(o));
+        }
     }
 
-    private class AddToLongSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToLongSet(IFunction mapper) { this.mapper = mapper; }
+    private class AddToLongSet extends AddToSet {
+        private AddToLongSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) { ((Set<Long>) container).add((Long) mapper.apply(o)); }
     }
 
-    private class AddToDoubleSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToDoubleSet(IFunction mapper) { this.mapper = mapper; }
-        public override void accept(Object container, Object o) { ((Set<Double>) container).add((Double) mapper.apply(o)); }
+    private class AddToDoubleSet extends AddToSet {
+        private AddToDoubleSet(IFunction mapper) { super(mapper); }
+        public override void accept(Object container, Object o) {
+            ((Set<Double>) container).add((Double) mapper.apply(o));
+        }
     }
 
-    private class AddToSObjectSet extends BiConsumer {
-        private final IFunction mapper;
-        private AddToSObjectSet(IFunction mapper) { this.mapper = mapper; }
-        public override void accept(Object container, Object o) { ((Set<SObject>) container).add((SObject) mapper.apply(o)); }
+    private class AddToSObjectSet extends AddToSet {
+        private AddToSObjectSet(IFunction mapper) { super(mapper); }
+        public override void accept(Object container, Object o) {
+            ((Set<SObject>) container).add((SObject) mapper.apply(o));
+        }
     }
     // @end-group
     //</editor-fold>

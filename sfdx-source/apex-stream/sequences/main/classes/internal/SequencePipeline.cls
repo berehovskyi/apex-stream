@@ -1,7 +1,7 @@
 /**
- * @description
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public inherited sharing class SequencePipeline {
 
     public static List<Integer> rangeInt(final Integer fromInt, final Integer toInt) {
@@ -23,7 +23,7 @@ public inherited sharing class SequencePipeline {
         }
         return result;
     }
-    
+
     public static List<Object> concat(final List<Iterable<Object>> iterables, final List<Object> result) {
         Validate.noNullElements(iterables);
         Validate.noNullElements(result);
@@ -51,6 +51,7 @@ public inherited sharing class SequencePipeline {
         return result;
     }
 
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static List<Object> zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,
@@ -90,11 +91,7 @@ public inherited sharing class SequencePipeline {
         return result;
     }
 
-    public static List<Object> take(
-        final List<Object> source,
-        final IPredicate predicate,
-        final List<Object> result
-    ) {
+    public static List<Object> take(final List<Object> source, final IPredicate predicate, final List<Object> result) {
         Validate.notNull(source);
         Validate.notNull(predicate);
         Validate.notNull(result);
@@ -109,11 +106,7 @@ public inherited sharing class SequencePipeline {
         return result;
     }
 
-    public static List<Object> drop(
-        final List<Object> source,
-        final IPredicate predicate,
-        final List<Object> result
-    ) {
+    public static List<Object> drop(final List<Object> source, final IPredicate predicate, final List<Object> result) {
         Validate.notNull(source);
         Validate.notNull(predicate);
         Validate.notNull(result);
@@ -192,13 +185,10 @@ public inherited sharing class SequencePipeline {
     }
 
     public static List<Object> sort(final List<Object> source, final SortOrder order) {
-        Validate.notNull(order);
         return sort(source, Comparer.defaultOrder().order(order));
     }
 
     public static List<Object> sort(final List<Object> source, final IComparer comparer) {
-        Validate.notNull(source);
-        Validate.notNull(comparer);
         return EnumerablePipeline.sort(source, comparer);
     }
 
@@ -289,19 +279,29 @@ public inherited sharing class SequencePipeline {
         return !isSome;
     }
 
-//    public static List<Object> toList(final List<Object> source) {
-//        return toList(source, Object.class);
-//    }
-//
-//    public static List<Object> toList(final List<Object> source, final Type elementType) {
-//        Validate.notNull(source);
-//        Validate.notNull(elementType);
-//        final List<Object> result = (List<Object>) Type.forName('List<' + elementType + '>').newInstance();
-//        for (Integer i = 0, size = source.size(); i < size; i++) {
-//            result.add(source[i]);
-//        }
-//        return result;
-//    }
+    public static Object avgInt(final List<Integer> source, final Boolean doAvg) {
+        Integer sum = 0;
+        Integer i = 0;
+        for (Integer size = source.size(); i < size; i++) {
+            sum += source[i];
+        }
+        if (doAvg) {
+            return i == 0 ? null : (Double) sum / i;
+        }
+        return i == 0 ? null : sum;
+    }
+
+    public static Object avgLong(final List<Long> source, final Boolean doAvg) {
+        Long sum = 0;
+        Integer i = 0;
+        for (Integer size = source.size(); i < size; i++) {
+            sum += source[i];
+        }
+        if (doAvg) {
+            return i == 0 ? null : (Double) sum / i;
+        }
+        return i == 0 ? null : sum;
+    }
 
     public static List<Object> toList(final List<Object> source, final IFunction mapper, final Type elementType) {
         Validate.notNull(source);

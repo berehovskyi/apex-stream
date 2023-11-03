@@ -3,7 +3,6 @@
  * a primitive specialization of {@link ObjectSequence}.
  * <p><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method</a></p>
  *
- * @see DoubleStream
  * @see SObjectSequence
  * @see ObjectSequence
  * @see IntSequence
@@ -11,24 +10,38 @@
  *
  * @author Oleh Berehovskyi
  *
- * @group Iterables
+ * @group Enumerables
  *
  * @example
  * // Approximating the value of π using Monte Carlo method and sequences
+ * public class IsLessPredicate extends Predicate {
+ *     private final Double d;
+ *     public IsLessPredicate(Double d) { this.d = d; }
+ *     public override Boolean test(Object o) { return (Double) o < d; }
+ * }
+ * public class RandomDoubleSupplier extends Supplier {
+ *     public override Object get() { return Math.random(); }
+ * }
+ * public class EuclideanDistanceBiOperator extends BiOperator {
+ *     public override Object apply(Object o1, Object o2) {
+ *         return Math.sqrt(Math.pow((Double) o1, 2) + Math.pow((Double) o2, 2));
+ *     }
+ * }
  * Integer s = 200000;
- * IDoubleIterable x = DoubleSequence.generate(DoubleSuppliers.random());
- * IDoubleIterable y = DoubleSequence.generate(DoubleSuppliers.random());
- * IDoubleBinaryOperator euclidean = DoubleBinaryOperators.euclideanDistance();
+ * IDoubleEnumerable x = DoubleSequence.generate(new RandomDoubleSupplier());
+ * IDoubleEnumerable y = DoubleSequence.generate(new RandomDoubleSupplier());
+ * IDoubleBinaryOperator euclidean = new EuclideanDistanceBiOperator();
  * // The number of points inside the quadrant,
  * // i.e. having a distance from the origin of less than 1
  * Integer n = DoubleSequence.zip(x, y, euclidean)
  *       .lim(s)
- *       .filter(DoublePredicates.isLess(1))
+ *       .filter(new IsLessPredicate(1))
  *       .count();
  * // The ratio of the inside-count and the total-sample-count is an estimate of the ratio
  * // of the two areas, π / 4. Multiply the result by 4 to estimate π.
  * Double approxPi = 4 * n / (Double) s;
  */
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
 
     private final List<Double> doubles;
@@ -41,6 +54,8 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
         this.doubles = doubles;
     }
 
+    //<editor-fold desc="Iterator">
+    // @start-group Iterator
     /**
      * @description Returns an internal iterator for the elements of this sequence.
      * <p>Terminal Operation.</p>
@@ -50,33 +65,22 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
     public override Iterator<Double> iterator() {
         return doubles.iterator();
     }
-
-//    //<editor-fold desc="Conversion Operations">
-//    // @start-group Conversion Operations
-//    /**
-//     * @description Returns an `ObjectSequence` consisting of the elements of this sequence, converted to Object.
-//     *
-//     * @return the `ObjectSequence`
-//     */
-//    public virtual IIterable toObjectIterable() {
-//        return ObjectSequence.of(doubles);
-//    }
-//    // @end-group
-//    //</editor-fold>
+    // @end-group
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     // @start-group Sources
     /**
-     * @description Returns a `DoubleSequence` created from `doubles` list.
+     * @description Returns a `DoubleEnumerable` created from `doubles` list.
      *
      * @param doubles the list of Doubles
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `doubles` is null
      *
      * @example
-     * IDoubleIterable doubleSeq = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI });
+     * DoubleEnumerable doubleSeq = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI });
      */
     public static DoubleEnumerable of(final List<Double> doubles) {
         Validate.notNull(doubles);
@@ -84,32 +88,32 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
     }
 
     /**
-     * @description Returns a `DoubleSequence` created from `doubles` set.
+     * @description Returns a `DoubleEnumerable` created from `doubles` set.
      *
      * @param doubles the set of Doubles
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `doubles` is null
      *
      * @example
-     * IDoubleIterable doubleSeq = DoubleSequence.of(new Set<Double>{ 0.1, 5, 1.5, Math.PI });
+     * DoubleEnumerable doubleSeq = DoubleSequence.of(new Set<Double>{ 0.1, 5, 1.5, Math.PI });
      */
     public static DoubleEnumerable of(final Set<Double> doubles) {
         return new DoubleSequence(new List<Double>(doubles));
     }
 
     /**
-     * @description Returns a `DoubleSequence` created from `doubles` list if non-null,
-     * otherwise returns an empty `DoubleSequence`.
+     * @description Returns a `DoubleEnumerable` created from `doubles` list if non-null,
+     * otherwise returns an empty `DoubleEnumerable`.
      *
      * @param doubles the list of Doubles
      *
-     * @return the new `DoubleSequence` if `doubles` is non-null,
-     * otherwise an empty `DoubleSequence`
+     * @return the new `DoubleEnumerable` if `doubles` is non-null,
+     * otherwise an empty `DoubleEnumerable`
      *
      * @example
-     * IDoubleIterable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0, 5L, 1L, -10 });
+     * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new List<Double>{ 0, 5L, 1L, -10 });
      */
     public static DoubleEnumerable ofNullable(final List<Double> doubles) {
         if (doubles == null) { return empty(); }
@@ -117,16 +121,16 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
     }
 
     /**
-     * @description Returns a `DoubleSequence` created from `doubles` set if non-null,
-     * otherwise returns an empty `DoubleSequence`.
+     * @description Returns a `DoubleEnumerable` created from `doubles` set if non-null,
+     * otherwise returns an empty `DoubleEnumerable`.
      *
      * @param doubles the set of Doubles
      *
-     * @return the new `DoubleSequence` if `doubles` is non-null,
-     * otherwise an empty `DoubleSequence`
+     * @return the new `DoubleEnumerable` if `doubles` is non-null,
+     * otherwise an empty `DoubleEnumerable`
      *
      * @example
-     * IDoubleIterable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0, 5L, 1L, -10 });
+     * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0, 5, 1, -10 });
      */
     public static DoubleEnumerable ofNullable(final Set<Double> doubles) {
         if (doubles == null) { return empty(); }
@@ -134,28 +138,32 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
     }
 
     /**
-     * @description Returns an empty `DoubleSequence`.
+     * @description Returns an empty `DoubleEnumerable`.
      *
-     * @return the empty `DoubleSequence`
+     * @return the empty `DoubleEnumerable`
      */
     public static DoubleEnumerable empty() {
         return new DoubleSequence();
     }
 
     /**
-     * @description Returns eagerly concatenated `DoubleSequence` whose elements are all the
+     * @description Returns eagerly concatenated `DoubleEnumerable` whose elements are all the
      * elements of the first `Iterable<Double>` followed by all the elements of the
      * second `Iterable<Double>`.
      *
      * @param iterable1 the first `Iterable<Double>`
      * @param iterable2 the second `Iterable<Double>`
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      *
      * @example
-     * IDoubleIterable doubleSeq = LongSequence.concat(seq1, seq2);
+     * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+     * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+     * List<Double> concat = DoubleSequence.concat(doubles1, doubles2)
+     *     .toList();
+     * // [5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
      */
     public static DoubleEnumerable concat(final Iterable<Double> iterable1, final Iterable<Double> iterable2) {
         return concat(new List<Iterable<Double>>{ iterable1, iterable2 });
@@ -166,84 +174,92 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *
      * @param iterables the list of `Iterable<Double>`
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterables` or some element in a list is null
      *
      * @example
-     * IDoubleIterable doubleSeq = DoubleSequence.concat(seqs);
+     * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+     * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+     * List<Double> concat = DoubleSequence.concat(new List<Iterable<Double>>{ doubles1, doubles2 })
+     *     .toList();
+     * // [5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
      */
     public static DoubleEnumerable concat(final List<Iterable<Double>> iterables) {
         return new DoubleSequence((List<Double>) SequencePipeline.concat(iterables, new List<Double>()));
-//        Validate.noNullElements(iterables);
-//        final List<Double> doubles = new List<Double>();
-//        for (Integer i = 0, size = iterables.size(); i < size; i++) {
-//            doubles.addAll(Iterators.toDoubleList((Iterator<Double>) iterables[i].iterator()));
-//        }
-//        return new DoubleSequence(doubles);
     }
 
     /**
-     * @description Returns a combined `DoubleSequence` by applying `combiner` function
+     * @description Returns a combined `DoubleEnumerable` by applying `combiner` function
      * to each element at the same position.
      *
      * @param iterable1 the first `Iterable<Double>`
      * @param iterable2 the second `Iterable<Double>`
      * @param combiner the binary operator to be applied to each element at the same position
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     * 
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
+     * }
+     * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+     * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+     * List<Double> zip = DoubleSequence.zip(doubles1, doubles2, new SumBiOperator())
+     *     .toList();
+     * // [13.0, 6.0, 15.0, 11.0, 9.0, 18.0, 4.0, 7.0]
      */
     public static DoubleEnumerable zip(
-            final Iterable<Double> iterable1,
-            final Iterable<Double> iterable2,
-            final IBiOperator combiner
+        final Iterable<Double> iterable1,
+        final Iterable<Double> iterable2,
+        final IBiOperator combiner
     ) {
         return new DoubleSequence(
             (List<Double>) SequencePipeline.zip(iterable1, iterable2, combiner, new List<Double>())
         );
-//        Validate.notNull(iterable1);
-//        Validate.notNull(iterable2);
-//        Validate.notNull(combiner);
-//        final List<Double> results = new List<Double>();
-//        final List<Double> left = Iterators.toDoubleList((Iterator<Double>) iterable1.iterator());
-//        final List<Double> right = Iterators.toDoubleList((Iterator<Double>) iterable2.iterator());
-//        for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
-//            results.add((Double) combiner.apply(left[i], right[i]));
-//        }
-//        return new DoubleSequence(results);
     }
 
     /**
-     * @description Returns new `DoubleSequence` by appending `iterable`
+     * @description Returns new `DoubleEnumerable` by appending `iterable`
      * to the current sequence.
      *
      * @param iterable the `Iterable<Double>` to append to the current sequence
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * IDoubleIterable doubleSeq = seq1.append(seq2);
+     * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+     * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+     * List<Double> append = DoubleSequence.of(doubles1)
+     *     .append(doubles2)
+     *     .toList();
+     * // [5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
      */
     public virtual override DoubleEnumerable append(final Iterable<Double> iterable) {
         return concat(this, iterable);
     }
 
     /**
-     * @description Returns new `DoubleSequence` by prepending `iterable`
+     * @description Returns new `DoubleEnumerable` by prepending `iterable`
      * to the current sequence.
      *
      * @param iterable the `Iterable<Double>` to prepend to the current sequence
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * DoubleIterable doubleSeq = seq1.prepend(seq2);
+     * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+     * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+     * List<Double> prepend = DoubleSequence.of(doubles1)
+     *     .prepend(doubles2)
+     *     .toList();
+     * // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
      */
     public virtual override DoubleEnumerable prepend(final Iterable<Double> iterable) {
         return concat(iterable, this);
@@ -253,315 +269,293 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
 
     //<editor-fold desc="Intermediate Operations">
     // @start-group Intermediate Operations
-//    /**
-//     * @description Returns new `DoubleStream` from the current sequence.
-//     * <p>Stateful Intermediate Operation.</p>
-//     *
-//     * @return the new `DoubleStream`
-//     *
-//     * @example
-//     * IDoubleIterable doubleStream = DoubleSequence.of(new Set<Double>{ 0, 5L, 1L, -10 }).stream();
-//     */
-//    public virtual DoubleEnumerable stream() {
-//        return DoubleStream.of(iterator());
-//    }
-
     /**
-     * @description Returns a `DoubleSequence` with elements that match `predicate`.
+     * @description Returns a `DoubleEnumerable` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Double> filtered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .filter(DoublePredicates.isGreater(0))
-     *     .toList();
+     * List<Double> filtered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
+     *     .filter(BasePredicates.isEqual(5))
+     *     .toList(); // [5, 5]
      */
     public virtual override DoubleEnumerable filter(final IPredicate predicate) {
         return new DoubleSequence((List<Double>) SequencePipeline.filter(doubles, predicate, new List<Double>()));
-//        Validate.notNull(predicate);
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            final Double j = (Double) doubles[i];
-//            if (predicate.test(j)) {
-//                results.add(j);
-//            }
-//        }
-//        return new DoubleSequence(results);
     }
 
     /**
-     * @description Returns a `DoubleSequence` which takes elements while elements match `predicate`.
+     * @description Returns a `DoubleEnumerable` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .take(DoublePredicates.isGreater(0))
-     *     .toList();
+     * List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
+     *     .filter(BasePredicates.isEqual(0.1))
+     *     .toList(); // [0.1, 0.1]
      */
     public virtual override DoubleEnumerable take(final IPredicate predicate) {
         return new DoubleSequence((List<Double>) SequencePipeline.take(doubles, predicate, new List<Double>()));
-//        Validate.notNull(predicate);
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            final Double j = (Double) doubles[i];
-//            if (predicate.test(j)) {
-//                results.add(j);
-//            } else {
-//                break;
-//            }
-//        }
-//        return new DoubleSequence(results);
     }
 
     /**
-     * @description Returns a `DoubleSequence` which drops elements while elements match `predicate`,
+     * @description Returns a `DoubleEnumerable` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Double> rest = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .drop(DoublePredicates.isGreater(0))
-     *     .toList();
+     * List<Double> rest = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
+     *     .drop(BasePredicates.isEqual(0.1))
+     *     .toList(); // [5, 1.5, Math.PI]
      */
     public virtual override DoubleEnumerable drop(final IPredicate predicate) {
         return new DoubleSequence((List<Double>) SequencePipeline.drop(doubles, predicate, new List<Double>()));
-//        Validate.notNull(predicate);
-//        final List<Double> results = new List<Double>();
-//        Boolean drop = true;
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            final Double j = (Double) doubles[i];
-//            if (!predicate.test(j) || !drop) {
-//                results.add(j);
-//                drop = false;
-//            }
-//        }
-//        return new DoubleSequence(results);
     }
 
     /**
-     * @description Returns a `DoubleSequence` with elements returned by `mapper` function,
+     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Double> incrementedDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .mapTo(DoubleUnaryOperators.add(1.5))
-     *     .toList();
+     * public class MultiplyDoubleOperator extends Operator {
+     *     private final Double d;
+     *     public MultiplyDoubleOperator(Double d) { this.d = d; }
+     *     public override Object apply(Object j) { return (Double) j * d; }
+     * }
+     * List<Double> doubledDoubles = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+     *     .mapTo(new MultiplyDoubleOperator(2))
+     *     .toList(); // [11, 0.02, 2.0, 6.0]
      */
     public virtual override DoubleEnumerable mapTo(final IOperator mapper) {
         return new DoubleSequence((List<Double>) SequencePipeline.mapTo(doubles, mapper, new List<Double>()));
-//        Validate.notNull(mapper);
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            results.add((Double) mapper.apply(doubles[i]));
-//        }
-//        return new DoubleSequence(results);
     }
 
     /**
-     * @description Returns a `IntSequence` with elements returned by `mapper` function,
+     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `IntSequence`
+     * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class RoundToIntFunction extends Function {
+     *     public override Object apply(Object x) { return Math.round((Double) x); }
+     * }
+     * List<Integer> ints = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+     *     .mapToInt(new RoundToIntFunction())
+     *     .toList(); // [6, 0, 1, 3, -9, -6, 4, 4]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
         return IntSequence.of((List<Integer>) SequencePipeline.mapTo(doubles, mapper, new List<Integer>()));
-//        Validate.notNull(mapper);
-//        final List<Integer> results = new List<Integer>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            results.add((Integer) mapper.apply(doubles[i]));
-//        }
-//        return IntSequence.of(results);
     }
 
     /**
-     * @description Returns a `LongSequence` with elements returned by `mapper` function,
+     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class RoundToLongFunction extends Function {
+     *     public override Object apply(Object x) { return Math.roundToLong((Double) x); }
+     * }
+     * List<Long> longs = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+     *     .mapToLong(new RoundToLongFunction())
+     *     .toList(); // [6L, 0L, 1L, 3L, -9L, -6L, 4L, 4L]
      */
     public virtual override LongEnumerable mapToLong(final IFunction mapper) {
         return LongSequence.of((List<Long>) SequencePipeline.mapTo(doubles, mapper, new List<Long>()));
-//        Validate.notNull(mapper);
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            results.add((Long) mapper.apply(doubles[i]));
-//        }
-//        return LongSequence.of(results);
     }
 
     /**
-     * @description Returns a `SObjectSequence` with elements returned by `mapper` function,
+     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `SObjectSequence`
+     * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class CreateAccountFunction extends Function {
+     *     public override Object apply(Object d) { return new Account(AnnualRevenue = (Double) d); }
+     * }
+     * List<Account> accounts = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+     *     .mapToSObject(new CreateAccountFunction())
+     *     .toList(); //
+     * [
+     *   { AnnualRevenue: 5.5 }, 
+     *   { AnnualRevenue: 0.01 }, 
+     *   { AnnualRevenue: 1.0 }, 
+     *   { AnnualRevenue: 3 }
+     * ]
      */
     public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
         return SObjectSequence.of((List<SObject>) SequencePipeline.mapTo(doubles, mapper, new List<SObject>()));
-//        Validate.notNull(mapper);
-//        final List<SObject> results = new List<SObject>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            results.add((SObject) mapper.apply(doubles[i]));
-//        }
-//        return SObjectSequence.of(results);
     }
 
     /**
-     * @description Returns a `ObjectSequence` with elements returned by `mapper` function,
+     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class ToStringFunction extends Function {
+     *     public override Object apply(Object d) { return String.valueOf(d); }
+     * }
+     * List<String> strings = (List<String>) DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+     *     .mapToObject(new ToStringFunction())
+     *     .toList(String.class); // ['5.5', '0.01', '1.0', '3']
      */
     public virtual override ObjectEnumerable mapToObject(final IFunction mapper) {
         return ObjectSequence.of(SequencePipeline.mapTo(doubles, mapper, new List<Object>()));
-//        Validate.notNull(mapper);
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            results.add(mapper.apply(doubles[i]));
-//        }
-//        return ObjectSequence.of(results);
-    }
-
-    public virtual override DoubleEnumerable flatMapTo(final IFunction mapper) {
-        return new DoubleSequence((List<Double>) SequencePipeline.flatMapTo(doubles, mapper, new List<Double>()));
-//        Validate.notNull(mapper);
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            final Iterable<Double> result = (Iterable<Double>) mapper.apply(doubles[i]);
-//            if (result != null) {
-//                results.addAll(Iterators.toDoubleList(result.iterator()));
-//            }
-//        }
-//        return new DoubleSequence(results);
     }
 
     /**
-     * @description Returns a `DoubleSequence` after performing `consumer` action on each element.
+     * @description Returns a new `DoubleEnumerable` with `Double` elements as a result of
+     * replacing each element with the contents of a mapped iterable created by applying
+     * the specified `mapper` function to each element.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function which must produce `Iterable<Double>`
+     *
+     * @return the new `DoubleEnumerable`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * public class MultiplyDoubleFunction extends Function {
+     *     private final Double d;
+     *     public MultiplyDoubleFunction(Double d) { this.d = d; }
+     *     public override Object apply(Object o) { return new List<Double>{ ((Double) o) * d }; }
+     * }
+     * List<Double> doubles = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+     *     .flatMapTo(new MultiplyDoubleFunction(2))
+     *     .toList(); // [11, 0.02, 2.0, 6.0]
+     */
+    public virtual override DoubleEnumerable flatMapTo(final IFunction mapper) {
+        return new DoubleSequence((List<Double>) SequencePipeline.flatMapTo(doubles, mapper, new List<Double>()));
+    }
+
+    /**
+     * @description Returns a `DoubleEnumerable` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return this `DoubleSequence`
+     * @return this `DoubleEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
+     * 
+     * @example
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * List<Double> doubles = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+     *     .forEach(new DebugConsumer()) // prints 5.5, 0.01, 1.0, 3
+     *     .toList(); // [5.5, 0.01, 1.0, 3]
      */
     public virtual override DoubleEnumerable forEach(final IConsumer consumer) {
         SequencePipeline.forEach(doubles, consumer);
-//        Validate.notNull(consumer);
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            consumer.accept(doubles[i]);
-//        }
         return this;
     }
 
     /**
-     * @description Returns a `DoubleSequence` with distinct elements.
+     * @description Returns a `DoubleEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @example
-     * List<Double> distinct = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     * List<Double> distinct = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
      *     .distinct()
-     *     .toList();
+     *     .toList(); // [0.1, 5, 1.5, Math.PI]
      */
     public virtual override DoubleEnumerable distinct() {
         return new DoubleSequence((List<Double>) SequencePipeline.distinct(doubles, new List<Double>()));
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            if (!results.contains((Double) doubles[i])) {
-//                results.add((Double) doubles[i]);
-//            }
-//        }
-//        return new DoubleSequence(results);
     }
 
-//    public virtual override DoubleIterable distinct(final IFunction classifier) {
-//        Validate.notNull(classifier);
-//        final List<Double> results = new List<Double>();
-//        final Set<Object> classifierResults = new Set<Object>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            if (classifierResults.add(classifier.apply(doubles[i]))) {
-//                results.add((Double) doubles[i]);
-//            }
-//        }
-//        return new DoubleSequence(results);
-//    }
-
     /**
-     * @description Returns a `DoubleSequence` with sorted elements in ascending order.
+     * @description Returns a `DoubleEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @example
-     * List<Double> sorted = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     * List<Double> sorted = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
      *     .sort()
-     *     .toList();
+     *     .toList(); // [null, -8.99, -6, 0.01, 1.0, 3, 4.01, 4.01, 5.5]
      */
     public virtual override DoubleEnumerable sort() {
         return new DoubleSequence((List<Double>) SequencePipeline.sort(doubles));
-//        final List<Double> clone = (List<Double>) doubles.clone();
-//        clone.sort();
-//        return new DoubleSequence(clone);
-    }
-
-    public virtual override DoubleEnumerable sort(final SortOrder order) {
-        return new DoubleSequence((List<Double>) SequencePipeline.sort(doubles, order));
-//        return new DoubleSequence((List<Double>) Lists.sort(doubles, Comparer.defaultOrder().order(order)));
     }
 
     /**
-     * @description Returns a `DoubleSequence` with first `lim` elements.
+     * @description Returns a new `DoubleEnumerable` with sorted elements considering `order`.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param order the sort order
+     *
+     * @return the new `DoubleEnumerable`
+     *
+     * @throws NullPointerException if `order` is null
+     *
+     * @example
+     * List<Double> sorted = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
+     *     .sort(SortOrder.DESCENDING)
+     *     .toList(); // [5.5, 4.01, 4.01, 3, 1.0, 0.01, -6, -8.99, null]
+     */
+    public virtual override DoubleEnumerable sort(final SortOrder order) {
+        return new DoubleSequence((List<Double>) SequencePipeline.sort(doubles, order));
+    }
+
+    /**
+     * @description Returns a `DoubleEnumerable` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
@@ -569,29 +563,20 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @example
      * List<Double> first3Doubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .lim(3)
-     *     .toList();
+     *     .toList(); // [0.1, 5, 1.5]
      */
     public virtual override DoubleEnumerable lim(final Integer lim) {
         return new DoubleSequence((List<Double>) SequencePipeline.lim(doubles, lim, new List<Double>()));
-//        Validate.notNull(lim);
-//        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
-//        if (lim == 0) { return DoubleSequence.empty(); }
-//        if (lim >= doubles.size()) { return this; }
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0; i < lim; i++) {
-//            results.add((Double) doubles[i]);
-//        }
-//        return new DoubleSequence(results);
     }
 
     /**
-     * @description Returns a new `DoubleSequence` that skips first `n` elements
+     * @description Returns a new `DoubleEnumerable` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
@@ -599,21 +584,10 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @example
      * List<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .skip(1)
-     *     .toList();
+     *     .toList(); // [5, 1.5, Math.PI]
      */
     public virtual override DoubleEnumerable skip(final Integer n) {
         return new DoubleSequence((List<Double>) SequencePipeline.skip(doubles, n, new List<Double>()));
-//        Validate.notNull(n);
-//        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
-//        if (n == 0) { return this; }
-//        if (n >= doubles.size()) { return DoubleSequence.empty(); }
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            if (i >= n) {
-//                results.add((Double) doubles[i]);
-//            }
-//        }
-//        return new DoubleSequence(results);
     }
     // @end-group
     //</editor-fold>
@@ -633,17 +607,16 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
+     * }
      * Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .reduce((Double) 0.0, DoubleBinaryOperators.sum());
+     *     .reduce((Double) 0.0, new SumBiOperator());
+     * Double max = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+     *     .reduce((Double) 0.0, BaseBiOperators.max()); // 5.5
      */
     public virtual override Double reduce(final Double identity, final IBiOperator accumulator) {
         return (Double) SequencePipeline.reduce(doubles, identity, accumulator);
-//        Validate.notNull(accumulator);
-//        Double result = (Double) identity;
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            result = (Double) accumulator.apply(result, doubles[i]);
-//        }
-//        return result;
     }
 
     /**
@@ -659,52 +632,42 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
+     * }
      * Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *      .reduce(DoubleBinaryOperators.sum())
-     *      .get();
+     *     .reduce(new SumBiOperator())
+     *     .get();
+     * Double max = (Double) DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+     *     .reduce(BaseBiOperators.max())
+     *     .get(); // 5.5
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
         return Optional.ofNullable((Double) SequencePipeline.reduce(doubles, accumulator));
-//        Validate.notNull(accumulator);
-//        Double result;
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            result = i == 0 ? (Double) doubles[i] : (Double) accumulator.apply(result, doubles[i]);
-//        }
-//        return Optional.of(result);
     }
 
-//    /**
-//     * @description Performs a mutable reduction operation on elements, collecting elements
-//     * to a container returned by `supplier` by applying `accumulator` function.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param supplier the function that returns a mutable result container
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Object` result of the collection
-//     *
-//     * @throws NullPointerException if `supplier` or `accumulator` is null
-//     */
-//    public virtual override Object collect(final ISupplier supplier, final IBiConsumer accumulator) {
-//        Validate.notNull(supplier);
-//        Validate.notNull(accumulator);
-//        final Object container = supplier.get();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            accumulator.accept(container, doubles[i]);
-//        }
-//        return container;
-//    }
-
+    /**
+     * @description Performs a mutable reduction operation on elements, collecting elements
+     * to a container using `collector`.
+     * <p>Terminal Operation.</p>
+     *
+     * @param collector the function that returns a mutable result container
+     *
+     * @return the `Object` result of the collection
+     *
+     * @throws NullPointerException if `collector` is null
+     *
+     * @example
+     * public class AddToDoubleSetBiConsumer extends BiConsumer {
+     *     public override void accept(Object container, Object o) { ((Set<Double>) container).add((Double) o); }
+     * }
+     * Set<Double> doubles = (Set<Double>)
+     *     DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+     *     .collect(Collector.of(Supplier.of(Set<Double>.class), new AddToDoubleSetBiConsumer()));
+     * // [5.5, 0.01, 1.0, 3, -8.99, -6, 4.01]
+     */
     public virtual override Object collect(final ICollector collector) {
         return SequencePipeline.collect(doubles, collector);
-//        Validate.notNull(collector);
-//        final Object container = collector.supplier().get();
-//        final IBiConsumer accumulator = collector.accumulator();
-//        final IFunction finisher = collector.finisher();
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            accumulator.accept(container, doubles[i]);
-//        }
-//        return finisher == null ? container : finisher.apply(container);
     }
 
     /**
@@ -719,25 +682,22 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Double firstGreaterDouble = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .find(DoublePredicates.isGreater(1.5))
-     *     .get();
+     * public class IsGreaterPredicate extends Predicate {
+     *     private final Double d;
+     *     public IsGreaterPredicate(Double d) { this.d = d; }
+     *     public override Boolean test(Object o) { return (Double) o > d; }
+     * }
+     * Double firstGreaterThan4Double = DoubleSequence.of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+     *     .find(new IsGreaterPredicate(4))
+     *     .get(); // 5.5
      */
     public virtual override Optional find(final IPredicate predicate) {
         return Optional.ofNullable((Double) SequencePipeline.find(doubles, predicate));
-//        Validate.notNull(predicate);
-//        for (Integer i = 0, size = doubles.size(); i < size; i++) {
-//            final Double j = (Double) doubles[i];
-//            if (predicate.test(j)) {
-//                return Optional.ofNullable(j);
-//            }
-//        }
-//        return Optional.empty();
     }
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `DoubleSequence` is empty then `false` is returned.
+     * If `DoubleEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -747,19 +707,21 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isEveryDoubleGreater = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .every(DoublePredicates.isGreater(1.5))
-     *     .get();
+     * public class IsGreaterPredicate extends Predicate {
+     *     private final Double d;
+     *     public IsGreaterPredicate(Double d) { this.d = d; }
+     *     public override Boolean test(Object o) { return (Double) o > d; }
+     * }
+     * Boolean isEveryDoublePositive = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .every(new IsGreaterPredicate(0)); // true
      */
     public virtual override Boolean every(final IPredicate predicate) {
         return SequencePipeline.match(doubles, predicate, 1);
-//        Validate.notNull(predicate);
-//        return match(predicate, 1);
     }
 
     /**
      * @description Returns whether some element matches `predicate`.
-     * If `DoubleSequence` is empty then `false` is returned.
+     * If `DoubleEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -769,14 +731,16 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isSomeDoubleGreater = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .some(DoublePredicates.isGreater(1.5))
-     *     .get();
+     * public class IsGreaterPredicate extends Predicate {
+     *     private final Double d;
+     *     public IsGreaterPredicate(Double d) { this.d = d; }
+     *     public override Boolean test(Object o) { return (Double) o > d; }
+     * }
+     * Boolean isSomeDoubleGreaterThan6 = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .some(new IsGreaterPredicate(6)); // false
      */
     public virtual override Boolean some(final IPredicate predicate) {
         return SequencePipeline.match(doubles, predicate, 0);
-//        Validate.notNull(predicate);
-//        return match(predicate, 0);
     }
 
     /**
@@ -784,6 +748,10 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
+     * 
+     * @example
+     * Integer count = DoubleSequence.of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.3 })
+     *     .count(); // 10
      */
     public virtual override Integer count() {
         return doubles.size();
@@ -794,6 +762,12 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
+     * 
+     * @example
+     * DoubleSequence.of(new List<Double>{ 0.1, 0.2, 0.3 })
+     *     .isEmpty(); // false
+     * DoubleSequence.of(new List<Double>()))
+     *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
         return doubles.isEmpty();
@@ -806,9 +780,9 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return the `List<Double>` containing the sequence elements
      *
      * @example
-     * List<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     * List<Double> doubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .skip(1)
-     *     .toList();
+     *     .toList(); // [5, 1.5, Math.PI]
      */
     public virtual override List<Double> toList() {
         return doubles;
@@ -821,9 +795,9 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return the `Set<Double>` containing the sequence elements
      *
      * @example
-     * Set<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     * Set<Double> doubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 5 })
      *     .skip(1)
-     *     .toSet();
+     *     .toSet(); // [5, 1.5, Math.PI]
      */
     public virtual override Set<Double> toSet() {
         return new Set<Double>(doubles);

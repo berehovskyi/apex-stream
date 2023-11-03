@@ -11,6 +11,7 @@
 public virtual inherited sharing class SObjectSuppliers {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected SObjectSuppliers() {}
 
     //<editor-fold desc="Built-Ins">
@@ -28,7 +29,6 @@ public virtual inherited sharing class SObjectSuppliers {
      * @see SObjectType.newSObject
      */
     public static Supplier of(final SObjectType sObjectType) {
-        Validate.notNull(sObjectType);
         return new OfSObjectType(sObjectType);
     }
     // @end-group
@@ -38,7 +38,10 @@ public virtual inherited sharing class SObjectSuppliers {
     // @start-group Lambdas
     private class OfSObjectType extends Supplier {
         private final SObjectType t;
-        private OfSObjectType(SObjectType t) { this.t = t; }
+        private OfSObjectType(SObjectType t) {
+            Validate.notNull(t);
+            this.t = t;
+        }
         public override Object get() { return t.newSObject(); }
     }
     // @end-group

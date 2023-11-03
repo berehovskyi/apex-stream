@@ -61,7 +61,6 @@ public abstract inherited sharing class Function implements IFunction {
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static Function compose(final List<IFunction> functions) {
-        Validate.noNullElements(functions);
         return new Compose(functions);
     }
 
@@ -95,23 +94,8 @@ public abstract inherited sharing class Function implements IFunction {
      * @throws NullPointerException if `predicate` is null
      */
     public static Function compose(final IPredicate predicate) {
-        Validate.notNull(predicate);
         return new ForPredicate(predicate);
     }
-
-//    /**
-//     * @description Returns a composed `Function` of the `operator`.
-//     *
-//     * @param operator the operator
-//     *
-//     * @return the `Function`
-//     *
-//     * @throws NullPointerException if `operator` is null
-//     */
-//    public static Function compose(final IOperator operator) {
-//        Validate.notNull(operator);
-//        return new ForOperator(operator);
-//    }
 
     /**
      * @description Returns a composed `SObjectFunction` of the `supplier`.
@@ -123,7 +107,6 @@ public abstract inherited sharing class Function implements IFunction {
      * @throws NullPointerException if `supplier` is null
      */
     public static Function compose(final ISupplier supplier) {
-        Validate.notNull(supplier);
         return new ForSupplier(supplier);
     }
     // @end-group
@@ -137,7 +120,10 @@ public abstract inherited sharing class Function implements IFunction {
 
     private class Compose extends Function {
         private final List<IFunction> functions;
-        private Compose(List<IFunction> functions) { this.functions = functions; }
+        private Compose(List<IFunction> functions) {
+            Validate.noNullElements(functions);
+            this.functions = functions;
+        }
         public override Object apply(Object o) {
             Object result = o;
             for (IFunction function : functions) {
@@ -149,15 +135,12 @@ public abstract inherited sharing class Function implements IFunction {
 
     private class ForPredicate extends Function {
         private final IPredicate predicate;
-        private ForPredicate(IPredicate predicate) { this.predicate = predicate; }
+        private ForPredicate(IPredicate predicate) {
+            Validate.notNull(predicate);
+            this.predicate = predicate;
+        }
         public override Object apply(Object o) { return predicate.test(o); }
     }
-
-//    private class ForOperator extends Function {
-//        private final IOperator operator;
-//        private ForOperator(IOperator operator) { this.operator = operator; }
-//        public override Object apply(Object o) { return operator.apply(o); }
-//    }
     
     private class Constant extends Function {
         private final Object value;
@@ -167,7 +150,10 @@ public abstract inherited sharing class Function implements IFunction {
 
     private class ForSupplier extends Function {
         private final ISupplier supplier;
-        private ForSupplier(ISupplier supplier) { this.supplier = supplier; }
+        private ForSupplier(ISupplier supplier) {
+            Validate.notNull(supplier);
+            this.supplier = supplier;
+        }
         public override Object apply(Object o) { return supplier.get(); }
     }
     // @end-group

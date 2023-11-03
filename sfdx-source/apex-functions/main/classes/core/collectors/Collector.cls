@@ -49,8 +49,6 @@ public abstract inherited sharing class Collector implements ICollector {
      * @throws NullPointerException if `supplier` or `accumulator` is null
      */
     public static Collector of(final ISupplier supplier, final IBiConsumer accumulator, final IFunction finisher) {
-        Validate.notNull(supplier);
-        Validate.notNull(accumulator);
         return new CollectorOf(supplier, accumulator, finisher);
     }
     // @end-group
@@ -92,9 +90,9 @@ public abstract inherited sharing class Collector implements ICollector {
             typeName = typeName.substringAfter(',').substringBeforeLast('>');
             if (!typeName.startsWith('Map') && !typeName.startsWith('List') && !typeName.startsWith('Set')) { break; }
             accumulator.downstream = new CollectorOf(
-                    Supplier.of(Type.forName(typeName)),
-                    accumulator.downstream.accumulator(),
-                    accumulator.downstream.finisher()
+                Supplier.of(Type.forName(typeName)),
+                accumulator.downstream.accumulator(),
+                accumulator.downstream.finisher()
             );
             accumulator = (BiConsumer) accumulator.downstream?.accumulator();
         }
@@ -110,6 +108,8 @@ public abstract inherited sharing class Collector implements ICollector {
         private final IBiConsumer accumulator;
         private final IFunction finisher;
         private CollectorOf(ISupplier supplier, IBiConsumer accumulator, IFunction finisher) {
+            Validate.notNull(supplier);
+            Validate.notNull(accumulator);
             this.supplier = supplier;
             this.accumulator = accumulator;
             this.finisher = finisher;

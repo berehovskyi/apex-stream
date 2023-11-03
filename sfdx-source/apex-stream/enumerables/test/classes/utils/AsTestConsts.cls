@@ -3,7 +3,7 @@
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.ExcessivePublicCount, PMD.FieldNamingConventions')
 private class AsTestConsts {
 
     public static final AccountSObject Account = new AccountSObject();

@@ -1,7 +1,7 @@
 /**
- * @description
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public inherited sharing class StreamPipeline {
 
     public static Iterator<Integer> rangeInt(final Integer fromInt, final Integer toInt) {

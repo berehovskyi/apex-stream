@@ -9,10 +9,11 @@
  *
  * @group Functional Built-In Classes
  */
-public inherited sharing class IterableFunctions {
+public virtual inherited sharing class IterableFunctions {
 
     @TestVisible
-    private IterableFunctions() {}
+    @SuppressWarnings('PMD.EmptyStatementBlock')
+    protected IterableFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -28,7 +29,6 @@ public inherited sharing class IterableFunctions {
      * @see List.get
      */
     public static Function get(final Integer index) {
-        Validate.notNull(index);
         return new GetElement(index);
     }
     // @end-group
@@ -38,7 +38,10 @@ public inherited sharing class IterableFunctions {
     // @start-group Lambdas
     private class GetElement extends Function {
         private final Integer index;
-        private GetElement(Integer index) { this.index = index; }
+        private GetElement(Integer index) {
+            Validate.notNull(index);
+            this.index = index;
+        }
         public override Object apply(Object o) {
             Iterator<Object> iterator = ((Iterable<Object>) o)?.iterator();
             Validate.notNull(iterator);

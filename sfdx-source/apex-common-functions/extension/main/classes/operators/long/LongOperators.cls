@@ -11,6 +11,7 @@
 public virtual inherited sharing class LongOperators {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected LongOperators() {}
 
     //<editor-fold desc="Built-Ins">
@@ -38,7 +39,6 @@ public virtual inherited sharing class LongOperators {
      * @throws NullPointerException if `l` is null
      */
     public static Operator add(final Long l) {
-        Validate.notNull(l);
         return new Add(l);
     }
 
@@ -64,8 +64,6 @@ public virtual inherited sharing class LongOperators {
      * @throws NullPointerException if `l` is null
      */
     public static Operator divide(final Long l) {
-        Validate.notNull(l);
-        Validate.isTrue(l != 0);
         return new Divide(l);
     }
 
@@ -125,8 +123,6 @@ public virtual inherited sharing class LongOperators {
      * @see Math.mod
      */
     public static Operator mod(final Long l) {
-        Validate.notNull(l);
-        Validate.isTrue(l != 0);
         return new Mod(l);
     }
 
@@ -141,7 +137,6 @@ public virtual inherited sharing class LongOperators {
      * @throws NullPointerException if `l` is null
      */
     public static Operator multiply(final Long l) {
-        Validate.notNull(l);
         return new Multiply(l);
     }
 
@@ -156,7 +151,6 @@ public virtual inherited sharing class LongOperators {
      * @throws NullPointerException if `l` is null
      */
     public static Operator subtract(final Long l) {
-        Validate.notNull(l);
         return new Add(-l);
     }
     // @end-group
@@ -170,7 +164,7 @@ public virtual inherited sharing class LongOperators {
 
     private class Add extends Operator {
         private final Long l;
-        private Add(Long l) { this.l = l; }
+        private Add(Long l) { Validate.notNull(l); this.l = l; }
         public override Object apply(Object j) { return (Long) j + l; }
     }
 
@@ -188,19 +182,27 @@ public virtual inherited sharing class LongOperators {
 
     private class Mod extends Operator {
         private final Long l;
-        private Mod(Long l) { this.l = l; }
+        private Mod(Long l) {
+            Validate.notNull(l);
+            Validate.isTrue(l != 0);
+            this.l = l;
+        }
         public override Object apply(Object j) { return Math.mod((Long) j, l); }
     }
 
     private class Multiply extends Operator {
         private final Long l;
-        private Multiply(Long l) { this.l = l; }
+        private Multiply(Long l) { Validate.notNull(l); this.l = l; }
         public override Object apply(Object j) { return (Long) j * l; }
     }
 
     private class Divide extends Operator {
         private final Long l;
-        private Divide(Long l) { this.l = l; }
+        private Divide(Long l) {
+            Validate.notNull(l);
+            Validate.isTrue(l != 0);
+            this.l = l;
+        }
         public override Object apply(Object j) { return (Long) j / l; }
     }
     // @end-group

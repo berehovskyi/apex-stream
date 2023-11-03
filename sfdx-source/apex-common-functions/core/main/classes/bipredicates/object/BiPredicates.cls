@@ -11,6 +11,7 @@
 public virtual inherited sharing class BiPredicates {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected BiPredicates() {}
 
     //<editor-fold desc="Built-Ins">
@@ -37,15 +38,11 @@ public virtual inherited sharing class BiPredicates {
      * BiPredicates.isCompared(func1, func2, Comparer.defaultOrder(), 1);
      */
     public static BiPredicate isCompared(
-            final IFunction left,
-            final IFunction right,
-            final IComparer comparer,
-            final Integer result
+        final IFunction left,
+        final IFunction right,
+        final IComparer comparer,
+        final Integer result
     ) {
-        Validate.notNull(left);
-        Validate.notNull(right);
-        Validate.notNull(comparer);
-        Validate.notNull(result);
         return new Compared(left, right, comparer, result);
     }
 
@@ -54,8 +51,6 @@ public virtual inherited sharing class BiPredicates {
      * the first input argument is equal to the second input argument.
      *
      * @return the `BiPredicate`
-     *
-     * @see Comparers.compareNullSafeUntyped
      *
      * @example
      * BiPredicates.areEqual();
@@ -79,8 +74,6 @@ public virtual inherited sharing class BiPredicates {
      *
      * @throws NullPointerException if `left` or `right` is null
      *
-     * @see Comparers.compareNullSafeUntyped
-     *
      * @example
      * BiPredicates.areEqual(func1, func2);
      * BiPredicates.areEqual(func1, Function.constant(100));
@@ -94,8 +87,6 @@ public virtual inherited sharing class BiPredicates {
      * the first input argument is not equal to the second input argument.
      *
      * @return the `BiPredicate`
-     *
-     * @see Comparers.compareNullSafeUntyped
      *
      * @example
      * BiPredicates.areNotEqual();
@@ -119,8 +110,6 @@ public virtual inherited sharing class BiPredicates {
      *
      * @throws NullPointerException if `left` or `right` is null
      *
-     * @see Comparers.compareNullSafeUntyped
-     *
      * @example
      * BiPredicates.areNotEqual(func1, func2);
      * BiPredicates.areNotEqual(func1, Function.constant(100));
@@ -138,8 +127,6 @@ public virtual inherited sharing class BiPredicates {
      * a null value.</p>
      *
      * @return the `BiPredicate`
-     *
-     * @see Comparers.compareNullSafeUntyped
      *
      * @example
      * BiPredicates.isGreater();
@@ -166,8 +153,6 @@ public virtual inherited sharing class BiPredicates {
      *
      * @throws NullPointerException if `left` or `right` is null
      *
-     * @see Comparers.compareNullSafeUntyped
-     *
      * @example
      * BiPredicates.isGreater(func1, func2);
      * BiPredicates.isGreater(func1, Function.constant(100));
@@ -185,8 +170,6 @@ public virtual inherited sharing class BiPredicates {
      * a null value.</p>
      *
      * @return the `BiPredicate`
-     *
-     * @see Comparers.compareNullSafeUntyped
      *
      * @example
      * BiPredicates.isGreaterOrEqual();
@@ -213,8 +196,6 @@ public virtual inherited sharing class BiPredicates {
      *
      * @throws NullPointerException if `left` or `right` is null
      *
-     * @see Comparers.compareNullSafeUntyped
-     *
      * @example
      * BiPredicates.isGreaterOrEqual(func1, func2);
      */
@@ -231,8 +212,6 @@ public virtual inherited sharing class BiPredicates {
      * a null value.</p>
      *
      * @return the `BiPredicate`
-     *
-     * @see Comparers.compareNullSafeUntyped
      *
      * @example
      * BiPredicates.isLess();
@@ -259,8 +238,6 @@ public virtual inherited sharing class BiPredicates {
      *
      * @throws NullPointerException if `left` or `right` is null
      *
-     * @see Comparers.compareNullSafeUntyped
-     *
      * @example
      * BiPredicates.isLess(func1, func2);
      */
@@ -277,8 +254,6 @@ public virtual inherited sharing class BiPredicates {
      * a null value.</p>
      *
      * @return the `BiPredicate`
-     *
-     * @see Comparers.compareNullSafeUntyped
      *
      * @example
      * BiPredicates.isLessOrEqual();
@@ -305,8 +280,6 @@ public virtual inherited sharing class BiPredicates {
      *
      * @throws NullPointerException if `left` or `right` is null
      *
-     * @see Comparers.compareNullSafeUntyped
-     *
      * @example
      * BiPredicates.isLessOrEqual(func1, func2);
      */
@@ -323,12 +296,11 @@ public virtual inherited sharing class BiPredicates {
         private final IFunction right;
         private final IComparer comparer;
         private final Integer comparisonResult;
-        private Compared(
-                IFunction left,
-                IFunction right,
-                IComparer comparer,
-                Integer comparisonResult
-        ) {
+        private Compared(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
+            Validate.notNull(left);
+            Validate.notNull(right);
+            Validate.notNull(comparer);
+            Validate.notNull(comparisonResult);
             this.left = left;
             this.right = right;
             this.comparer = comparer;

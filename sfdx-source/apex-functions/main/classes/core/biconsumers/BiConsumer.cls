@@ -67,7 +67,6 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static BiConsumer compose(final List<IBiConsumer> consumers) {
-        Validate.noNullElements(consumers);
         return new Compose(consumers);
     }
     // @end-group
@@ -77,11 +76,12 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     // @start-group Lambdas
     private class Compose extends BiConsumer {
         private final List<IBiConsumer> consumers;
-        private Compose(List<IBiConsumer> consumers) { this.consumers = consumers; }
+        private Compose(List<IBiConsumer> consumers) {
+            Validate.noNullElements(consumers);
+            this.consumers = consumers;
+        }
         public override void accept(Object o1, Object o2) {
-            for (IBiConsumer consumer : consumers) {
-                consumer.accept(o1, o2);
-            }
+            for (IBiConsumer consumer : consumers) { consumer.accept(o1, o2); }
         }
     }
     // @end-group

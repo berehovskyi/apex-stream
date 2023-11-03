@@ -1,12 +1,19 @@
 /**
- * @description
+ * @description Provides base implementations of {@link Function}
+ * and related utilities that are used by {@link ISObjectEnumerable}.
+ *
  * @author Oleh Berehovskyi
+ *
+ * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BaseSObjectFunctions {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected BaseSObjectFunctions() {}
 
+    //<editor-fold desc="Built-Ins">
+    // @start-group Built-Ins
     /**
      * @description Returns a `Function` that gets a value for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
@@ -51,7 +58,6 @@ public virtual inherited sharing class BaseSObjectFunctions {
      * BaseSObjectFunctions.get(Account.Name);
      */
     public static Function get(final SObjectField field) {
-        Validate.notNull(field);
         return new GetByFieldFunction(field);
     }
 
@@ -94,7 +100,6 @@ public virtual inherited sharing class BaseSObjectFunctions {
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
      *
      * @see SObject.getSObjects
      *
@@ -102,22 +107,16 @@ public virtual inherited sharing class BaseSObjectFunctions {
      * BaseSObjectFunctions.getSObjects(Contact.AccountId);
      */
     public static Function getSObjects(final SObjectField field) {
-        Validate.notNull(field);
-        final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-        Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
-        String result;
-        for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
-            if (relationship.getField() == field) {
-                result = relationship.getRelationshipName();
-                break;
-            }
-        }
+        final String relationshipField = EnumerablePipeline.findRelationshipField(field);
         // Since UnexpectedException is thrown if SObject doesn't have
         // related sObjects returned using SObjectField navigation such as
         // acc.getSObjects(Contact.AccountId)
-        return getSObjects(result);
+        return getSObjects(relationshipField);
     }
+    // @end-group
+    //</editor-fold>
 
+    //<editor-fold desc="Lambdas">
     private abstract class SObjectPathFunction extends Function {
         protected final IOperator operator;
         protected final String xRefFieldName;
@@ -135,21 +134,24 @@ public virtual inherited sharing class BaseSObjectFunctions {
 
     private class GetFieldPathFunction extends SObjectPathFunction {
         private GetFieldPathFunction(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) { return
-            ((SObject) operator.apply((SObject) obj)).get(xRefFieldName);
+        public override Object apply(Object obj) {
+            return ((SObject) operator.apply((SObject) obj)).get(xRefFieldName);
         }
     }
 
     private class GetFieldPathSafeFunction extends SObjectPathFunction {
         private GetFieldPathSafeFunction(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) { return
-            ((SObject) operator.apply((SObject) obj))?.get(xRefFieldName);
+        public override Object apply(Object obj) {
+            return ((SObject) operator.apply((SObject) obj))?.get(xRefFieldName);
         }
     }
 
     private class GetByFieldFunction extends Function {
         private final SObjectField field;
-        private GetByFieldFunction(SObjectField field) { this.field = field; }
+        private GetByFieldFunction(SObjectField field) {
+            Validate.notNull(field);
+            this.field = field;
+        }
         public override Object apply(Object obj) { return ((SObject) obj).get(field); }
     }
 
@@ -172,5 +174,6 @@ public virtual inherited sharing class BaseSObjectFunctions {
             return ((SObject) operator.apply((SObject) obj))?.getSObjects(xRefFieldName);
         }
     }
+    //</editor-fold>
 
 }

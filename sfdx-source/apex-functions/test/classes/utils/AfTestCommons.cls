@@ -117,14 +117,14 @@ private class AfTestCommons {
         public final SObjectField field;
         public IsGreaterBiPredicate(SObjectField field) { this.field = field; }
         public override Boolean test(Object o1, Object o2) {
-            return Comparer.compareObjects(((SObject) o1).get(field), ((SObject) o2).get(field)) == 1;
+            return Comparer.defaultOrder().compare(((SObject) o1).get(field), ((SObject) o2).get(field)) == 1;
         }
     }
     public class AreEqualBiPredicate extends BiPredicate {
         public final SObjectField field;
         public AreEqualBiPredicate(SObjectField field) { this.field = field; }
         public override Boolean test(Object o1, Object o2) {
-            return Comparer.compareObjects(((SObject) o1).get(field), ((SObject) o2).get(field)) == 0;
+            return Comparer.defaultOrder().compare(((SObject) o1).get(field), ((SObject) o2).get(field)) == 0;
         }
     }
     public class AddToListBiConsumer extends BiConsumer {
@@ -338,6 +338,7 @@ private class AfTestCommons {
             return result;
         }
     }
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     public class DoNothingRunnable implements IRunnable {
         public void run() {}
     }

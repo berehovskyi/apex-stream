@@ -55,12 +55,12 @@ private class SObjectCollectorsTest {
     }
 
     /**
-     * @see SObjectCollectors.toSet
+     * @see SObjectCollectors.toSObjectSet
      */
     @IsTest
-    static void toSet() {
+    static void toSObjectSet() {
         // Given
-        ICollector toSetCollector = SObjectCollectors.toSet();
+        ICollector toSetCollector = SObjectCollectors.toSObjectSet();
         // When
         Set<SObject> actual = (Set<SObject>) AfTestCommons.collect(ACCOUNTS, toSetCollector);
         // Then
@@ -357,14 +357,14 @@ private class SObjectCollectorsTest {
     }
 
     /**
-     * @see SObjectCollectors.toSet
+     * @see SObjectCollectors.toObjectSet
      */
     @IsTest
     static void toObjectSet() {
         // Given
-        ICollector toSetCollector = SObjectCollectors.toSet(SObjectFunctions.get(AfTestConsts.BILLING_LATITUDE));
-        ICollector toSetCollector1 = SObjectCollectors.toSet(AfTestConsts.BILLING_LATITUDE);
-        ICollector toSetCollector2 = SObjectCollectors.toSet(AfTestConsts.Account.BillingLatitude);
+        ICollector toSetCollector = SObjectCollectors.toObjectSet(SObjectFunctions.get(AfTestConsts.BILLING_LATITUDE));
+        ICollector toSetCollector1 = SObjectCollectors.toObjectSet(AfTestConsts.BILLING_LATITUDE);
+        ICollector toSetCollector2 = SObjectCollectors.toObjectSet(AfTestConsts.Account.BillingLatitude);
         // When
         Set<Object> actual = (Set<Object>) AfTestCommons.collect(ACCOUNTS, toSetCollector);
         Set<Object> actual1 = (Set<Object>) AfTestCommons.collect(ACCOUNTS, toSetCollector1);
@@ -385,21 +385,6 @@ private class SObjectCollectorsTest {
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
-    }
-
-    /**
-     * @see SObjectCollectors.toMap
-     */
-    @IsTest
-    static void toMap() {
-        // Given
-        Collector toMapCollector = SObjectCollectors.toMap();
-        // When
-        Map<Id, SObject> actual = (Map<Id, SObject>) AfTestCommons.collect(ACCOUNTS, toMapCollector);
-        Map<Id, Account> actual1 = (Map<Id, Account>) AfTestCommons.collect(ACCOUNTS, toMapCollector.cast(Map<Id, Account>.class));
-        // Then
-        Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual);
-        Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual1);
     }
 
     /**
@@ -465,6 +450,7 @@ private class SObjectCollectorsTest {
         IBiOperator mergeFunction = BiOperator.right();
         IBiOperator mergeFunction1 = BiOperator.right();
         IFunction getParentAccFunction = SObjectOperators.getSObject(AfTestConsts.Contact.AccountId);
+        Collector toMapCollector = SObjectCollectors.toByIdMap();
         // When
         Map<Id, SObject> actual = (Map<Id, SObject>) AfTestCommons.collect(CONTACTS, SObjectCollectors.toByIdMap(AfTestConsts.ACCOUNT_ID));
         Map<Id, Contact> actual1 = (Map<Id, Contact>) AfTestCommons.collect(CONTACTS, SObjectCollectors.toByIdMap(AfTestConsts.Contact.AccountId).cast(Map<Id, Contact>.class));
@@ -482,6 +468,8 @@ private class SObjectCollectorsTest {
         } catch (Exception exc) {
             Assert.isTrue(exc.getMessage().contains(AfTestConsts.DUPLICATE_KEY));
         }
+        Map<Id, SObject> actual9 = (Map<Id, SObject>) AfTestCommons.collect(ACCOUNTS, toMapCollector);
+        Map<Id, Account> actual10 = (Map<Id, Account>) AfTestCommons.collect(ACCOUNTS, toMapCollector.cast(Map<Id, Account>.class));
         // Then
         Map<Id, Contact> expected = new Map<Id, Contact>{
             (Id) CONTACTS[0].get(AfTestConsts.ACCOUNT_ID) => CONTACTS[0],
@@ -513,6 +501,8 @@ private class SObjectCollectorsTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual9);
+        Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual10);
     }
 
     /**
@@ -927,7 +917,7 @@ private class SObjectCollectorsTest {
 
 
     /**
-     * @see SObjectCollectors.toMap
+     * @see SObjectCollectors.toByObjectMap
      */
     @IsTest
     static void toByObjectMap() {
@@ -936,13 +926,13 @@ private class SObjectCollectorsTest {
         IFunction valueMapper = Function.identity();
         IBiOperator mergeFunction = BiOperator.right();
         // When
-        Map<Object, SObject> actual = (Map<Object, SObject>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toMap(AfTestConsts.NUMBER_OF_EMPLOYEES));
-        Map<Object, Account> actual1 = (Map<Object, Account>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toMap(AfTestConsts.Account.NumberOfEmployees).cast(Map<Object, Account>.class));
-        Map<Object, SObject> actual2 = (Map<Object, SObject>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toMap(keyMapper).cast(Map<Object, SObject>.class));
-        Map<Object, Object> actual3 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toMap(keyMapper, valueMapper));
-        Map<Object, Object> actual4 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toMap(keyMapper, valueMapper, mergeFunction));
-        Map<Object, String> actual5 = (Map<Object, String>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toMap(AfTestConsts.NUMBER_OF_EMPLOYEES, AfTestConsts.NAME).cast(Map<Object, String>.class));
-        Map<Object, String> actual6 = (Map<Object, String>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toMap(AfTestConsts.Account.NumberOfEmployees, AfTestConsts.Account.Name).cast(Map<Object, String>.class));
+        Map<Object, SObject> actual = (Map<Object, SObject>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toByObjectMap(AfTestConsts.NUMBER_OF_EMPLOYEES));
+        Map<Object, Account> actual1 = (Map<Object, Account>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toByObjectMap(AfTestConsts.Account.NumberOfEmployees).cast(Map<Object, Account>.class));
+        Map<Object, SObject> actual2 = (Map<Object, SObject>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toByObjectMap(keyMapper).cast(Map<Object, SObject>.class));
+        Map<Object, Object> actual3 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toByObjectMap(keyMapper, valueMapper));
+        Map<Object, Object> actual4 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toByObjectMap(keyMapper, valueMapper, mergeFunction));
+        Map<Object, String> actual5 = (Map<Object, String>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toByObjectMap(AfTestConsts.NUMBER_OF_EMPLOYEES, AfTestConsts.NAME).cast(Map<Object, String>.class));
+        Map<Object, String> actual6 = (Map<Object, String>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.toByObjectMap(AfTestConsts.Account.NumberOfEmployees, AfTestConsts.Account.Name).cast(Map<Object, String>.class));
         // Then
         Map<Object, Account> expected = new Map<Object, Account>{
             ACCOUNTS[0].get(AfTestConsts.NUMBER_OF_EMPLOYEES) => ACCOUNTS[0],
@@ -1499,10 +1489,10 @@ private class SObjectCollectorsTest {
     }
 
     /**
-     * @see SObjectCollectors.groupingBy
+     * @see SObjectCollectors.groupingByObject
      */
     @IsTest
-    static void groupingBy() {
+    static void groupingByObject() {
         // Given
         ACCOUNTS[0].BillingLatitude = ACCOUNTS[0].BillingLatitude;
         ACCOUNTS[1].BillingLatitude = ACCOUNTS[1].BillingLatitude;
@@ -1517,16 +1507,16 @@ private class SObjectCollectorsTest {
         IFunction keyMapper = SObjectFunctions.get(AfTestConsts.Account.BillingLatitude);
         Collector downstream = SObjectCollectors.toList(AfTestConsts.Account.Name);
         // When
-        Map<Object, List<Account>> actual = (Map<Object, List<Account>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(AfTestConsts.Account.BillingLatitude));
-        Map<Object, List<Account>> actual1 = (Map<Object, List<Account>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(AfTestConsts.BILLING_LATITUDE));
-        Map<Object, List<SObject>> actual2 = (Map<Object, List<SObject>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(keyMapper).cast(Map<Object, List<SObject>>.class));
-        Map<Object, List<String>> actual3 = (Map<Object, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(AfTestConsts.Account.BillingLatitude, AfTestConsts.Account.Name).cast(Map<Object, List<String>>.class));
-        Map<Object, Object> actual4 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(AfTestConsts.BILLING_LATITUDE, AfTestConsts.NAME));
-        Map<Object, Object> actual5 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(keyMapper, downstream));
-        Map<Object, List<String>> actual6 = (Map<Object, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(keyMapper, Supplier.of(Map<Object, List<String>>.class), downstream.cast(List<String>.class)));
+        Map<Object, List<Account>> actual = (Map<Object, List<Account>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(AfTestConsts.Account.BillingLatitude));
+        Map<Object, List<Account>> actual1 = (Map<Object, List<Account>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(AfTestConsts.BILLING_LATITUDE));
+        Map<Object, List<SObject>> actual2 = (Map<Object, List<SObject>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper).cast(Map<Object, List<SObject>>.class));
+        Map<Object, List<String>> actual3 = (Map<Object, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(AfTestConsts.Account.BillingLatitude, AfTestConsts.Account.Name).cast(Map<Object, List<String>>.class));
+        Map<Object, Object> actual4 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(AfTestConsts.BILLING_LATITUDE, AfTestConsts.NAME));
+        Map<Object, Object> actual5 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper, downstream));
+        Map<Object, List<String>> actual6 = (Map<Object, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper, Supplier.of(Map<Object, List<String>>.class), downstream.cast(List<String>.class)));
         Map<Object, Map<String, List<String>>> actual7 = (Map<Object, Map<String, List<String>>>) Stream.of(ACCOUNTS)
-            .collect(SObjectCollectors.groupingBy(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.BillingCountry, AfTestConsts.Account.Name)).cast(Map<Object, Map<String, List<String>>>.class));
-        Map<Object, Object> actual8 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingBy(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.BILLING_COUNTRY, AfTestConsts.NAME)));
+            .collect(SObjectCollectors.groupingByObject(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.BillingCountry, AfTestConsts.Account.Name)).cast(Map<Object, Map<String, List<String>>>.class));
+        Map<Object, Object> actual8 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.BILLING_COUNTRY, AfTestConsts.NAME)));
         // Then
         Map<Object, List<Account>> expected = new Map<Object, List<Account>>{
             ACCOUNTS[0].BillingLatitude => new List<Account>{ ACCOUNTS[0], ACCOUNTS[2] },
@@ -1795,7 +1785,7 @@ private class SObjectCollectorsTest {
         List<Account> actual = (List<Account>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.filtering(AfTestConsts.NUMBER_OF_EMPLOYEES, value));
         List<Account> actual1 = (List<Account>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.filtering(AfTestConsts.Account.NumberOfEmployees, value));
         List<Account> actual2 = (List<Account>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.filtering(predicate).cast(List<Account>.class));
-        Set<SObject> actual3 = (Set<SObject>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.filtering(predicate, SObjectCollectors.toSet()));
+        Set<SObject> actual3 = (Set<SObject>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.filtering(predicate, SObjectCollectors.toSObjectSet()));
         Map<String, List<Account>> actual4 = (Map<String, List<Account>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.filtering(predicate)).cast(Map<String, List<Account>>.class));
         // Then
         List<Account> expected = new List<Account>{ ACCOUNTS[2] };
@@ -1886,7 +1876,7 @@ private class SObjectCollectorsTest {
         List<Contact> actual1 = (List<Contact>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(mapper).cast(List<Contact>.class));
         List<Contact> actual2 = (List<Contact>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(AfTestConsts.CONTACTS).cast(List<Contact>.class));
         List<Contact> actual3 = (List<Contact>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(AfTestConsts.Contact.AccountId).cast(List<Contact>.class));
-        Set<SObject> actual4 = (Set<SObject>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(mapper, Collector.of(Supplier.of(Set<SObject>.class), SetObjectConsumers.AddToSObjectSet(Function.identity()))));
+        Set<SObject> actual4 = (Set<SObject>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(mapper, Collector.of(Supplier.of(Set<SObject>.class), SetObjectConsumers.addToSObjectSet(Function.identity()))));
         Map<String, List<Contact>> actual5 = (Map<String, List<Contact>>) Stream.of(accounts)
             .collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.flatMapping(mapper)).cast(Map<String, List<Contact>>.class));
         // Then

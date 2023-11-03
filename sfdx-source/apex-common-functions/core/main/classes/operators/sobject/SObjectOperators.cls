@@ -8,60 +8,15 @@
  *
  * @group Functional Built-In Classes
  */
-public inherited sharing class SObjectOperators extends BaseSObjectOperators {
+@SuppressWarnings('PMD.CognitiveComplexity')
+public virtual inherited sharing class SObjectOperators extends BaseSObjectOperators {
 
     @TestVisible
-    private SObjectOperators() {}
+    @SuppressWarnings('PMD.EmptyStatementBlock')
+    protected SObjectOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
-//    /**
-//     * @description Returns a `Operator` that gets sobject
-//     * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
-//     *
-//     * @param fieldName the field to get a value
-//     *
-//     * @return the `Operator`
-//     *
-//     * @throws IllegalArgumentException if `fieldName` is blank
-//     * @throws NullPointerException if `fieldName` is null
-//     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
-//     * reference navigation
-//     * @throws SObjectException if provided invalid `fieldName`
-//     *
-//     * @see SObject.getSObject
-//     *
-//     * @example
-//     * Operators.getSObject('Parent');
-//     * Operators.getSObject('Parent.Parent');
-//     * Operators.getSObject('Parent?.Parent');
-//     */
-//    public static Operator getSObject(final String fieldName) {
-//        Validate.notBlank(fieldName);
-//        if (!fieldName.containsAny('?.')) { return new GetSObjectFieldName(fieldName); }
-//        return new GetSObjectFieldPathSafe(fieldName);
-//    }
-//
-//    /**
-//     * @description Returns a `Operator` that gets sobject
-//     * for the specified `field`.
-//     *
-//     * @param field the field to get a value
-//     *
-//     * @return the `Operator`
-//     *
-//     * @throws NullPointerException if `field` is null
-//     *
-//     * @see SObject.getSObject
-//     *
-//     * @example
-//     * Operators.getSObject(Account.ParentId);
-//     */
-//    public static Operator getSObject(final SObjectField field) {
-//        Validate.notNull(field);
-//        return new GetSObjectField(field);
-//    }
-
     /**
      * @description Returns a `Operator` that sets the value returned by
      * the `mapper` for the specified `fieldName` and returns a mutated argument.
@@ -79,12 +34,10 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
      *
-     * @see SObjectConsumers.set
-     *
      * @example
-     * Operators.set('NumberOfEmployees', someFunction);
-     * Operators.set('Parent.NumberOfEmployees', someFunction);
-     * Operators.set('Parent?.NumberOfEmployees', someFunction);
+     * SObjectOperators.set('NumberOfEmployees', someFunction);
+     * SObjectOperators.set('Parent.NumberOfEmployees', someFunction);
+     * SObjectOperators.set('Parent?.NumberOfEmployees', someFunction);
      */
     public static Operator set(final String fieldName, final IFunction mapper) {
         return Operator.compose(SObjectConsumers.set(fieldName, mapper));
@@ -101,11 +54,9 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      *
      * @throws NullPointerException if `field` or `mapper` is null
      *
-     * @see SObjectConsumers.set
-     *
      * @example
-     * Operators.set(Account.NumberOfEmployees, someFunction);
-     * Operators.set(Account.NumberOfEmployees, Function.constant(100));
+     * SObjectOperators.set(Account.NumberOfEmployees, someFunction);
+     * SObjectOperators.set(Account.NumberOfEmployees, Function.constant(100));
      */
     public static Operator set(final SObjectField field, final IFunction mapper) {
         return Operator.compose(SObjectConsumers.set(field, mapper));
@@ -127,12 +78,10 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
      *
-     * @see SObjectConsumers.set
-     *
      * @example
-     * Operators.set('NumberOfEmployees', 100);
-     * Operators.set('Parent.NumberOfEmployees', 100);
-     * Operators.set('Parent?.NumberOfEmployees', (Object) null);
+     * SObjectOperators.set('NumberOfEmployees', 100);
+     * SObjectOperators.set('Parent.NumberOfEmployees', 100);
+     * SObjectOperators.set('Parent?.NumberOfEmployees', (Object) null);
      */
     public static Operator set(final String fieldName, final Object value) {
         return set(fieldName, Function.constant(value));
@@ -152,11 +101,9 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
      *
-     * @see SObjectConsumers.set
-     *
      * @example
-     * Operators.set(Account.NumberOfEmployees, 100);
-     * Operators.set(Account.NumberOfEmployees, (Object) null);
+     * SObjectOperators.set(Account.NumberOfEmployees, 100);
+     * SObjectOperators.set(Account.NumberOfEmployees, (Object) null);
      */
     public static Operator set(final SObjectField field, final Object value) {
         return set(field, Function.constant(value));
@@ -182,9 +129,9 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @see SObjectConsumers.setSObject
      *
      * @example
-     * Operators.setSObject('Parent', someOperator);
-     * Operators.setSObject('Parent.Parent', someOperator);
-     * Operators.setSObject('Parent?.Parent', someOperator);
+     * SObjectOperators.setSObject('Parent', someOperator);
+     * SObjectOperators.setSObject('Parent.Parent', someOperator);
+     * SObjectOperators.setSObject('Parent?.Parent', someOperator);
      */
     public static Operator setSObject(final String fieldName, final IOperator valueMapper) {
         return Operator.compose(SObjectConsumers.setSObject(fieldName, valueMapper));
@@ -205,7 +152,7 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @see SObjectConsumers.setSObject
      *
      * @example
-     * Operators.setSObject(Account.ParentId, someOperator);
+     * SObjectOperators.setSObject(Account.ParentId, someOperator);
      */
     public static Operator setSObject(final SObjectField field, final IOperator valueMapper) {
         return Operator.compose(SObjectConsumers.setSObject(field, valueMapper));
@@ -230,9 +177,9 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @see SObjectConsumers.setSObject
      *
      * @example
-     * Operators.setSObject('Parent', someAccount);
-     * Operators.setSObject('Parent.Parent', someAccount);
-     * Operators.setSObject('Parent?.Parent', (SObject) null);
+     * SObjectOperators.setSObject('Parent', someAccount);
+     * SObjectOperators.setSObject('Parent.Parent', someAccount);
+     * SObjectOperators.setSObject('Parent?.Parent', (SObject) null);
      */
     public static Operator setSObject(final String fieldName, final SObject parent) {
         return setSObject(fieldName, Operator.constant(parent));
@@ -256,8 +203,8 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @see SObjectConsumers.setSObject
      *
      * @example
-     * Operators.setSObject(Account.ParentId, someAccount);
-     * Operators.setSObject(Account.ParentId, (SObject) null);
+     * SObjectOperators.setSObject(Account.ParentId, someAccount);
+     * SObjectOperators.setSObject(Account.ParentId, (SObject) null);
      */
     public static Operator setSObject(final SObjectField field, final SObject parent) {
         return setSObject(field, Operator.constant(parent));
@@ -283,13 +230,11 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @throws SObjectException if provided invalid `fieldName`
      *
      * @example
-     * Operators.setSObjects('Contacts', someFunction);
-     * Operators.setSObjects('Parent.Contacts', someFunction);
-     * Operators.setSObjects('Parent?.Contacts', someFunction);
+     * SObjectOperators.setSObjects('Contacts', someFunction);
+     * SObjectOperators.setSObjects('Parent.Contacts', someFunction);
+     * SObjectOperators.setSObjects('Parent?.Contacts', someFunction);
      */
     public static Operator setSObjects(final String fieldName, final IFunction mapper) {
-        Validate.notBlank(fieldName);
-        Validate.notNull(mapper);
         return new SetSObjectsByFieldNameOperator(fieldName, mapper);
     }
 
@@ -307,11 +252,9 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @throws NullPointerException if `field` or `mapper` is null
      *
      * @example
-     * Operators.setSObjects(Contact.AccountId, someFunction);
+     * SObjectOperators.setSObjects(Contact.AccountId, someFunction);
      */
     public static Operator setSObjects(final SObjectField field, final IFunction mapper) {
-        Validate.notNull(field);
-        Validate.notNull(mapper);
         return new SetSObjectsByFieldNameOperator(field, mapper);
     }
 
@@ -334,9 +277,9 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @throws SObjectException if provided invalid `fieldName`
      *
      * @example
-     * Operators.setSObjects('Contacts', someFunction);
-     * Operators.setSObjects('Parent.Contacts', someFunction);
-     * Operators.setSObjects('Parent?.Contacts', someFunction);
+     * SObjectOperators.setSObjects('Contacts', someFunction);
+     * SObjectOperators.setSObjects('Parent.Contacts', someFunction);
+     * SObjectOperators.setSObjects('Parent?.Contacts', someFunction);
      */
     public static Operator setSObjects(final String fieldName, final List<SObject> children) {
         return setSObjects(fieldName, Function.constant(children));
@@ -360,8 +303,8 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @throws SObjectException if provided invalid `fieldName`
      *
      * @example
-     * Operators.setSObjects(Contact.AccountId, childrenContacts);
-     * Operators.setSObjects(Contact.AccountId, (List<SObject>) null);
+     * SObjectOperators.setSObjects(Contact.AccountId, childrenContacts);
+     * SObjectOperators.setSObjects(Contact.AccountId, (List<SObject>) null);
      */
     public static Operator setSObjects(final SObjectField field, final List<SObject> children) {
         return setSObjects(field, Function.constant(children));
@@ -380,7 +323,7 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @see Supplier.of
      *
      * @example
-     * Operators.newSObject(Account.SObjectType);
+     * SObjectOperators.newSObject(Account.SObjectType);
      */
     public static Operator newSObject(final SObjectType sObjectType) {
         return Operator.compose(SObjectSuppliers.of(sObjectType));
@@ -397,8 +340,6 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @return the `Operator`
      *
      * @throws NullPointerException if `sObjectType` or `merger` is null
-     *
-     * @see SObjectCollectors.mapping
      */
     public static Operator newSObject(final SObjectType sObjectType, final IBiOperator merger) {
         return Operator.combine(newSObject(sObjectType), merger);
@@ -406,7 +347,7 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
 
     /**
      * @description Returns a combined `Operator` of the
-     * {@link SObjectOperators.newSObject} and the {@link BiConsumers.set}.
+     * {@link SObjectOperators.newSObject} and the {@link SObjectBiConsumers.set}.
      * Is typically used to create a new SObject based on an input argument.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -422,25 +363,21 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * reference navigation
      * @throws SObjectException if provided invalid `fieldName`
      *
-     * @see SObjectOperators.newSObject
-     * @see BiConsumers.set
-     * @see SObjectCollectors.mapping
-     *
      * @example
-     * Operators.newSObject(Account.SObjectType, 'Id', Functions.get('AccountId'));
-     * Operators.newSObject(Account.SObjectType, 'Id', Functions.get('Account.ParentId'));
+     * SObjectOperators.newSObject(Account.SObjectType, 'Id', Functions.get('AccountId'));
+     * SObjectOperators.newSObject(Account.SObjectType, 'Id', Functions.get('Account.ParentId'));
      */
     public static Operator newSObject(
-            final SObjectType sObjectType,
-            final String fieldName,
-            final IFunction mapper
+        final SObjectType sObjectType,
+        final String fieldName,
+        final IFunction mapper
     ) {
         return newSObject(sObjectType, BiOperator.combine(SObjectBiConsumers.set(fieldName, mapper)));
     }
 
     /**
      * @description Returns a combined `Operator` of the
-     * {@link SObjectOperators.newSObject} and the {@link BiConsumers.set}.
+     * {@link SObjectOperators.newSObject} and the {@link SObjectBiConsumers.set}.
      * Is typically used to create a new SObject based on an input argument.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -453,24 +390,20 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @throws NullPointerException if `sObjectType` or `field`,
      * `mapper` is null
      *
-     * @see SObjectOperators.newSObject
-     * @see BiConsumers.set
-     * @see SObjectCollectors.mapping
-     *
      * @example
-     * Operators.newSObject(Account.SObjectType, Account.Id, Functions.get('AccountId'));
+     * SObjectOperators.newSObject(Account.SObjectType, Account.Id, Functions.get('AccountId'));
      */
     public static Operator newSObject(
-            final SObjectType sObjectType,
-            final SObjectField field,
-            final IFunction mapper
+        final SObjectType sObjectType,
+        final SObjectField field,
+        final IFunction mapper
     ) {
         return newSObject(sObjectType, BiOperator.combine(SObjectBiConsumers.set(field, mapper)));
     }
 
     /**
      * @description Returns a combined `Operator` of the
-     * {@link SObjectOperators.newSObject} and the {@link BiConsumers.set}.
+     * {@link SObjectOperators.newSObject} and the {@link SObjectBiConsumers.set}.
      * Is typically used to create a new SObject and set the `value` for the `fieldName`.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -486,19 +419,19 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @throws SObjectException if provided invalid `fieldName`
      *
      * @example
-     * Operators.newSObject(Account.SObjectType, 'Id', someAccId);
+     * SObjectOperators.newSObject(Account.SObjectType, 'Id', someAccId);
      */
     public static Operator newSObject(
-            final SObjectType sObjectType,
-            final String fieldName,
-            final Object value
+        final SObjectType sObjectType,
+        final String fieldName,
+        final Object value
     ) {
         return newSObject(sObjectType, fieldName, Function.constant(value));
     }
 
     /**
      * @description Returns a combined `Operator` of the
-     * {@link SObjectOperators.newSObject} and the {@link BiConsumers.set}.
+     * {@link SObjectOperators.newSObject} and the {@link SObjectBiConsumers.set}.
      * Is typically used to create a new SObject and set the `value` for the `field`.
      *
      * @param sObjectType the SObjectType of a new SObject to be returned
@@ -510,12 +443,12 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
      * @throws NullPointerException if `sObjectType` or `fieldName` is null
      *
      * @example
-     * Operators.newSObject(Account.SObjectType, Account.Id, someAccId);
+     * SObjectOperators.newSObject(Account.SObjectType, Account.Id, someAccId);
      */
     public static Operator newSObject(
-            final SObjectType sObjectType,
-            final SObjectField field,
-            final Object value
+        final SObjectType sObjectType,
+        final SObjectField field,
+        final Object value
     ) {
         return newSObject(sObjectType, field, Function.constant(value));
     }
@@ -524,48 +457,19 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-//    private class GetSObjectFieldName extends Operator {
-//        private final String fieldName;
-//        private GetSObjectFieldName(String fieldName) { this.fieldName = fieldName; }
-//        public override Object apply(Object obj) { return ((SObject) obj).getSObject(fieldName); }
-//    }
-//
-//    private class GetSObjectFieldPathSafe extends Operator {
-//        private final List<String> path;
-//        private GetSObjectFieldPathSafe(String fieldName) { path = fieldName.split('\\.'); }
-//        public override Object apply(Object root) {
-//            SObject sObj = (SObject) root;
-//            for (Integer i = 0, size = path.size(); i < size; i++) {
-//                String fieldName = path[i];
-//                if (fieldName.endsWith('?')) { // Safe Navigation
-//                    fieldName = fieldName.removeEnd('?');
-//                    sObj = sObj.getSObject(fieldName);
-//                    if (sObj == null) {
-//                        return sObj;
-//                    }
-//                } else {
-//                    sObj = sObj.getSObject(fieldName);
-//                }
-//            }
-//            return sObj;
-//        }
-//    }
-
-//    private class GetSObjectField extends Operator {
-//        private final SObjectField field;
-//        private GetSObjectField(SObjectField field) { this.field = field; }
-//        public override Object apply(Object obj) { return ((SObject) obj).getSObject(field); }
-//    }
-
     private class SetSObjectsByFieldNameOperator extends Operator {
         private final String placeholder = '\'{\'"totalSize": {0}, "done": true, "records": {1}\'}\'';
         private final String fieldName;
         private final IFunction mapper;
         public SetSObjectsByFieldNameOperator(String fieldName, IFunction mapper) {
+            Validate.notBlank(fieldName);
+            Validate.notNull(mapper);
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
         public SetSObjectsByFieldNameOperator(SObjectField field, IFunction mapper) {
+            Validate.notNull(field);
+            Validate.notNull(mapper);
             this.fieldName = findChildRelationshipName(field);
             this.mapper = mapper;
         }
@@ -586,16 +490,7 @@ public inherited sharing class SObjectOperators extends BaseSObjectOperators {
             );
         }
         private String findChildRelationshipName(final SObjectField field) {
-            final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-            Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
-            String result;
-            for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
-                if (relationship.getField() == field) {
-                    result = relationship.getRelationshipName();
-                    break;
-                }
-            }
-            return result;
+            return EnumerablePipeline.findRelationshipField(field);
         }
     }
     // @end-group

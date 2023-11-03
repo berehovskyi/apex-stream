@@ -11,6 +11,7 @@
 public virtual inherited sharing class DatetimeFunctions {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected DatetimeFunctions() {}
 
     //<editor-fold desc="Date Functions">
@@ -27,7 +28,6 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.addDays
      */
     public static Function addDays(final Integer days) {
-        Validate.notNull(days);
         return new AddDays(days);
     }
 
@@ -43,7 +43,6 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.addHours
      */
     public static Function addHours(final Integer hours) {
-        Validate.notNull(hours);
         return new AddHours(hours);
     }
 
@@ -59,7 +58,6 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.addMinutes
      */
     public static Function addMinutes(final Integer minutes) {
-        Validate.notNull(minutes);
         return new AddMinutes(minutes);
     }
 
@@ -75,7 +73,6 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.addMonths
      */
     public static Function addMonths(final Integer months) {
-        Validate.notNull(months);
         return new AddMonths(months);
     }
 
@@ -91,7 +88,6 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.addSeconds
      */
     public static Function addSeconds(final Integer seconds) {
-        Validate.notNull(seconds);
         return new AddSeconds(seconds);
     }
 
@@ -107,7 +103,6 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.addYears
      */
     public static Function addYears(final Integer years) {
-        Validate.notNull(years);
         return new AddYears(years);
     }
 
@@ -196,7 +191,6 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.formatGmt
      */
     public static Function formatGmt(final String dateformat) {
-        Validate.notNull(dateformat);
         return new FormatGmt(dateformat);
     }
 
@@ -246,37 +240,37 @@ public virtual inherited sharing class DatetimeFunctions {
     // @start-group Lambdas
     private class AddDays extends Function {
         private final Integer days;
-        private AddDays(Integer days) { this.days = days; }
+        private AddDays(Integer days) { Validate.notNull(days); this.days = days; }
         public override Object apply(Object o) { return ((Datetime) o).addDays(days); }
     }
 
     private class AddHours extends Function {
         private final Integer hours;
-        private AddHours(Integer hours) { this.hours = hours; }
+        private AddHours(Integer hours) { Validate.notNull(hours); this.hours = hours; }
         public override Object apply(Object o) { return ((Datetime) o).addHours(hours); }
     }
 
     private class AddMinutes extends Function {
         private final Integer minutes;
-        private AddMinutes(Integer minutes) { this.minutes = minutes; }
+        private AddMinutes(Integer minutes) { Validate.notNull(minutes); this.minutes = minutes; }
         public override Object apply(Object o) { return ((Datetime) o).addMinutes(minutes); }
     }
 
     private class AddMonths extends Function {
         private final Integer months;
-        private AddMonths(Integer months) { this.months = months; }
+        private AddMonths(Integer months) { Validate.notNull(months); this.months = months; }
         public override Object apply(Object o) { return ((Datetime) o).addMonths(months); }
     }
 
     private class AddSeconds extends Function {
         private final Integer seconds;
-        private AddSeconds(Integer seconds) { this.seconds = seconds; }
+        private AddSeconds(Integer seconds) { Validate.notNull(seconds); this.seconds = seconds; }
         public override Object apply(Object o) { return ((Datetime) o).addSeconds(seconds); }
     }
 
     private class AddYears extends Function {
         private final Integer years;
-        private AddYears(Integer years) { this.years = years; }
+        private AddYears(Integer years) { Validate.notNull(years); this.years = years; }
         public override Object apply(Object o) { return ((Datetime) o).addYears(years); }
     }
 
@@ -302,7 +296,7 @@ public virtual inherited sharing class DatetimeFunctions {
 
     private class FormatGmt extends Function {
         private final String dateformat;
-        private FormatGmt(String dateformat) { this.dateformat = dateformat; }
+        private FormatGmt(String dateformat) { Validate.notNull(dateformat); this.dateformat = dateformat; }
         public override Object apply(Object o) { return ((Datetime) o).formatGmt(dateformat); }
     }
 

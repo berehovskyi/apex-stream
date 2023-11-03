@@ -8,9 +8,11 @@
  *
  * @group Functional Built-In Classes
  */
+@SuppressWarnings('PMD.ExcessivePublicCount')
 public virtual inherited sharing class DoubleOperators {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected DoubleOperators() {}
 
     //<editor-fold desc="Built-Ins">
@@ -38,7 +40,6 @@ public virtual inherited sharing class DoubleOperators {
      * @throws NullPointerException if `d` is null
      */
     public static Operator add(final Double d) {
-        Validate.notNull(d);
         return new Add(d);
     }
 
@@ -131,7 +132,6 @@ public virtual inherited sharing class DoubleOperators {
      * @throws NullPointerException if `d` is null
      */
     public static Operator divide(final Double d) {
-        Validate.notNull(d);
         return new Divide(d);
     }
 
@@ -192,7 +192,6 @@ public virtual inherited sharing class DoubleOperators {
      * @see Math.max
      */
     public static Operator max(final Double d) {
-        Validate.notNull(d);
         return new Max(d);
     }
 
@@ -209,7 +208,6 @@ public virtual inherited sharing class DoubleOperators {
      * @see Math.min
      */
     public static Operator min(final Double d) {
-        Validate.notNull(d);
         return new Min(d);
     }
 
@@ -224,7 +222,6 @@ public virtual inherited sharing class DoubleOperators {
      * @throws NullPointerException if `d` is null
      */
     public static Operator multiply(final Double d) {
-        Validate.notNull(d);
         return new Multiply(d);
     }
 
@@ -241,7 +238,6 @@ public virtual inherited sharing class DoubleOperators {
      * @see Math.pow
      */
     public static Operator pow(final Double exp) {
-        Validate.notNull(exp);
         return new Pow(exp);
     }
 
@@ -311,7 +307,6 @@ public virtual inherited sharing class DoubleOperators {
      * @throws NullPointerException if `d` is null
      */
     public static Operator subtract(final Double d) {
-        Validate.notNull(d);
         return new Add(-d);
     }
 
@@ -351,7 +346,7 @@ public virtual inherited sharing class DoubleOperators {
 
     private class Add extends Operator {
         private final Double i;
-        private Add(Double i) { this.i = i; }
+        private Add(Double i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object x) { return (Double) x + i; }
     }
 
@@ -397,25 +392,25 @@ public virtual inherited sharing class DoubleOperators {
 
     private class Min extends Operator {
         private final Double i;
-        private Min(Double i) { this.i = i; }
+        private Min(Double i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object j) { return Math.min((Double) j, (Double) i); }
     }
 
     private class Max extends Operator {
         private final Double i;
-        private Max(Double i) { this.i = i; }
+        private Max(Double i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object j) { return Math.max((Double) j, (Double) i); }
     }
 
     private class Multiply extends Operator {
         private final Double i;
-        private Multiply(Double i) { this.i = i; }
+        private Multiply(Double i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object x) { return (Double) x * i; }
     }
 
     private class Pow extends Operator {
         private final Double exp;
-        private Pow(Double exp) { this.exp = exp; }
+        private Pow(Double exp) { Validate.notNull(exp); this.exp = exp; }
         public override Object apply(Object x) { return Math.pow((Double) x, exp); }
     }
 
@@ -449,7 +444,7 @@ public virtual inherited sharing class DoubleOperators {
 
     private class Divide extends Operator {
         private final Double d;
-        private Divide(Double d) { this.d = d; }
+        private Divide(Double d) { Validate.notNull(d); this.d = d; }
         public override Object apply(Object x) { return (Double) x / d; }
     }
     // @end-group

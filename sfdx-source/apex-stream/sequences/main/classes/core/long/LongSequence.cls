@@ -2,7 +2,6 @@
  * @description A sequence of `Long` elements supporting aggregate operations,
  * a primitive specialization of {@link ObjectSequence}.
  *
- * @see LongStream
  * @see SObjectSequence
  * @see ObjectSequence
  * @see DoubleSequence
@@ -10,7 +9,7 @@
  *
  * @author Oleh Berehovskyi
  *
- * @group Iterables
+ * @group Enumerables
  *
  * @example
  * Long sumAnnualRevenueOfUniquePeopleFromLondon
@@ -20,6 +19,7 @@
  *         .mapToLong(getAnnualRevenueToLongFunction)
  *         .sum();
  */
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class LongSequence extends LongEnumerable {
 
     private final List<Long> longs;
@@ -32,6 +32,8 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
         this.longs = longs;
     }
 
+    //<editor-fold desc="Iterator">
+    // @start-group Iterator
     /**
      * @description Returns an internal iterator for the elements of this sequence.
      * <p>Terminal Operation.</p>
@@ -41,33 +43,22 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
     public override Iterator<Long> iterator() {
         return longs.iterator();
     }
-
-//    //<editor-fold desc="Conversion Operations">
-//    // @start-group Conversion Operations
-//    /**
-//     * @description Returns an `ObjectSequence` consisting of the elements of this sequence, converted to Object.
-//     *
-//     * @return the `ObjectSequence`
-//     */
-//    public virtual IIterable toObjectIterable() {
-//        return ObjectSequence.of(longs);
-//    }
-//    // @end-group
-//    //</editor-fold>
+    // @end-group
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     // @start-group Sources
     /**
-     * @description Returns a `LongSequence` created from `longs` list.
+     * @description Returns a `LongEnumerable` created from `longs` list.
      *
      * @param longs the list of Longs
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `longs` is null
      *
      * @example
-     * ILongIterable longSeq = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable of(final List<Long> longs) {
         Validate.notNull(longs);
@@ -75,16 +66,16 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
     }
 
     /**
-     * @description Returns a `LongSequence` created from `longs` set.
+     * @description Returns a `LongEnumerable` created from `longs` set.
      *
      * @param longs the set of Longs
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `longs` is null
      *
      * @example
-     * ILongIterable longSeq = LongSequence.of(new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.of(new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable of(final Set<Long> longs) {
         Validate.notNull(longs);
@@ -92,16 +83,16 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
     }
 
     /**
-     * @description Returns a `LongSequence` created from `longs` list if non-null,
-     * otherwise returns an empty `LongSequence`.
+     * @description Returns a `LongEnumerable` created from `longs` list if non-null,
+     * otherwise returns an empty `LongEnumerable`.
      *
      * @param longs the list of Longs
      *
-     * @return the new `LongSequence` if `longs` is non-null,
-     * otherwise an empty `LongSequence`
+     * @return the new `LongEnumerable` if `longs` is non-null,
+     * otherwise an empty `LongEnumerable`
      *
      * @example
-     * ILongIterable longSeq = LongSequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final List<Long> longs) {
         if (longs == null) { return empty(); }
@@ -109,16 +100,16 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
     }
 
     /**
-     * @description Returns a `LongSequence` created from `longs` set if non-null,
-     * otherwise returns an empty `LongSequence`.
+     * @description Returns a `LongEnumerable` created from `longs` set if non-null,
+     * otherwise returns an empty `LongEnumerable`.
      *
      * @param longs the set of Longs
      *
-     * @return the new `LongSequence` if `longs` is non-null,
-     * otherwise an empty `LongSequence`
+     * @return the new `LongEnumerable` if `longs` is non-null,
+     * otherwise an empty `LongEnumerable`
      *
      * @example
-     * ILongIterable longSeq = LongSequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final Set<Long> longs) {
         if (longs == null) { return empty(); }
@@ -126,46 +117,50 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
     }
 
     /**
-     * @description Returns an empty `LongSequence`.
+     * @description Returns an empty `LongEnumerable`.
      *
-     * @return the empty `LongSequence`
+     * @return the empty `LongEnumerable`
      */
     public static LongEnumerable empty() {
         return new LongSequence();
     }
 
     /**
-     * @description Returns an ordered `LongSequence`
+     * @description Returns an ordered `LongEnumerable`
      * from `fromLong` (inclusive) to `toLong` (inclusive) by an incremental step of 1.
      *
      * @param fromLong the inclusive initial value
      * @param toLong the inclusive upper bound
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `fromLong` or `toLong` is null
      *
      * @example
-     * ILongIterable longSeqFrom0To100 = LongSequence.range(0, 100);
+     * LongEnumerable longSeqFrom0To100 = LongSequence.range(0, 100);
      */
     public static LongEnumerable range(final Long fromLong, final Long toLong) {
         return new LongSequence(SequencePipeline.rangeLong(fromLong, toLong));
     }
 
     /**
-     * @description Returns eagerly concatenated `LongSequence` whose elements are all the
+     * @description Returns eagerly concatenated `LongEnumerable` whose elements are all the
      * elements of the first `Iterable<Long>` followed by all the elements of the
      * second `Iterable<Long>`.
      *
      * @param iterable1 the first `Iterable<Long>`
      * @param iterable2 the second `Iterable<Long>`
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      *
      * @example
-     * ILongIterable longSeq = LongSequence.concat(seq1, seq2);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> concat = LongSequence.concat(longs1, longs2)
+     *     .toList();
+     * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
     public static LongEnumerable concat(final Iterable<Long> iterable1, final Iterable<Long> iterable2) {
         return concat(new List<Iterable<Long>>{ iterable1, iterable2 });
@@ -176,84 +171,92 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *
      * @param iterables the list of `Iterable<Long>`
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterables` or some element in a list is null
      *
      * @example
-     * ILongIterable longSeq = LongStream.concat(seqs);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> concat = LongSequence.concat(new List<Iterable<Long>>{ longs1, longs2 })
+     *     .toList();
+     * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
     public static LongEnumerable concat(final List<Iterable<Long>> iterables) {
         return new LongSequence((List<Long>) SequencePipeline.concat(iterables, new List<Long>()));
-//        Validate.noNullElements(iterables);
-//        final List<Long> longs = new List<Long>();
-//        for (Integer i = 0, size = iterables.size(); i < size; i++) {
-//            longs.addAll(Iterators.toLongList((Iterator<Long>) iterables[i].iterator()));
-//        }
-//        return new LongSequence(longs);
     }
 
     /**
-     * @description Returns a combined `LongSequence` by applying `combiner` function
+     * @description Returns a combined `LongEnumerable` by applying `combiner` function
      * to each element at the same position.
      *
      * @param iterable1 the first `Iterable<Long>`
      * @param iterable2 the second `Iterable<Long>`
      * @param combiner the binary operator to be applied to each element at the same position
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     * 
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> zip = LongSequence.zip(longs1, longs2, new SumBiOperator())
+     *     .toList();
+     * // [13L, 6L, 15L, 11L, 9L, 18L, 4L, 7L]
      */
     public static LongEnumerable zip(
-            final Iterable<Long> iterable1,
-            final Iterable<Long> iterable2,
-            final IBiOperator combiner
+        final Iterable<Long> iterable1,
+        final Iterable<Long> iterable2,
+        final IBiOperator combiner
     ) {
         return new LongSequence(
             (List<Long>) SequencePipeline.zip(iterable1, iterable2, combiner, new List<Long>())
         );
-//        Validate.notNull(iterable1);
-//        Validate.notNull(iterable2);
-//        Validate.notNull(combiner);
-//        final List<Long> results = new List<Long>();
-//        final List<Long> left = Iterators.toLongList((Iterator<Long>) iterable1.iterator());
-//        final List<Long> right = Iterators.toLongList((Iterator<Long>) iterable2.iterator());
-//        for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
-//            results.add((Long) combiner.apply(left[i], right[i]));
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns new `LongSequence` by appending `iterable`
+     * @description Returns new `LongEnumerable` by appending `iterable`
      * to the current sequence.
      *
      * @param iterable the `Iterable<Long>` to append to the current sequence
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * ILongIterable longSeq = seq1.append(seq2);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> append = LongSequence.of(longs1)
+     *     .append(longs2)
+     *     .toList();
+     * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
     public virtual override LongEnumerable append(final Iterable<Long> iterable) {
         return concat(this, iterable);
     }
 
     /**
-     * @description Returns new `LongSequence` by prepending `iterable`
+     * @description Returns new `LongEnumerable` by prepending `iterable`
      * to the current sequence.
      *
      * @param iterable the `Iterable<Long>` to prepend to the current sequence
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * ILongIterable longSeq = seq1.prepend(seq2);
+     * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
+     * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
+     * List<Long> append = LongSequence.of(longs1)
+     *     .prepend(longs2)
+     *     .toList();
+     * // [8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L, 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L]
      */
     public virtual override LongEnumerable prepend(final Iterable<Long> iterable) {
         return concat(iterable, this);
@@ -263,354 +266,329 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
 
     //<editor-fold desc="Intermediate Operations">
     // @start-group Intermediate Operations
-//    /**
-//     * @description Returns new `LongStream` from the current sequence.
-//     * <p>Stateful Intermediate Operation.</p>
-//     *
-//     * @return the new `LongStream`
-//     *
-//     * @example
-//     * ILongIterable longStream = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).stream();
-//     */
-//    public virtual LongEnumerable stream() {
-//        return LongStream.of(iterator());
-//    }
-
     /**
-     * @description Returns a `LongSequence` with elements that match `predicate`.
+     * @description Returns a `LongEnumerable` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> filtered = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .filter(LongPredicates.isGreater(0))
-     *     .toList();
+     * List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
+     *     .filter(BasePredicates.isEqual(5L))
+     *     .toList(); // [5L, 5L]
      */
     public virtual override LongEnumerable filter(final IPredicate predicate) {
         return new LongSequence((List<Long>) SequencePipeline.filter(longs, predicate, new List<Long>()));
-//        Validate.notNull(predicate);
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            final Long j = (Long) longs[i];
-//            if (predicate.test(j)) {
-//                results.add(j);
-//            }
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns a `LongSequence` which takes elements while elements match `predicate`.
+     * @description Returns a `LongEnumerable` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .take(LongPredicates.isGreater(0))
-     *     .toList();
+     * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+     *     .take(BasePredicates.isEqual(0L))
+     *     .toList(); // [0L, 0L]
      */
     public virtual override LongEnumerable take(final IPredicate predicate) {
         return new LongSequence((List<Long>) SequencePipeline.take(longs, predicate, new List<Long>()));
-//        Validate.notNull(predicate);
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            final Long j = (Long) longs[i];
-//            if (predicate.test(j)) {
-//                results.add(j);
-//            } else {
-//                break;
-//            }
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns a `LongSequence` which drops elements while elements match `predicate`,
+     * @description Returns a `LongEnumerable` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> rest = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .drop(LongPredicates.isGreater(0))
-     *     .toList();
+     * List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+     *     .drop(BasePredicates.isEqual(0L))
+     *     .toList(); // [1L, 1L, 5L]
      */
     public virtual override LongEnumerable drop(final IPredicate predicate) {
         return new LongSequence((List<Long>) SequencePipeline.drop(longs, predicate, new List<Long>()));
-//        Validate.notNull(predicate);
-//        final List<Long> results = new List<Long>();
-//        Boolean drop = true;
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            final Long o = (Long) longs[i];
-//            if (!predicate.test(o) || !drop) {
-//                results.add(o);
-//                drop = false;
-//            }
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns a `LongSequence` with elements returned by `mapper` function,
+     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Long> incrementedLongs = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .mapTo(LongUnaryOperators.add(1L))
-     *     .toList();
+     * public class MultiplyLongOperator extends Operator {
+     *     private final Long l;
+     *     public MultiplyLongOperator(Long l) { this.l = l; }
+     *     public override Object apply(Object j) { return (Long) j * l; }
+     * }
+     * List<Long> doubledLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapTo(new MultiplyLongOperator(2))
+     *     .toList(); // [0L, 10L, 2L, -20L]
      */
     public virtual override LongEnumerable mapTo(final IOperator mapper) {
         return new LongSequence((List<Long>) SequencePipeline.mapTo(longs, mapper, new List<Long>()));
-//        Validate.notNull(mapper);
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            results.add((Long) mapper.apply(longs[i]));
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns a `IntSequence` with elements returned by `mapper` function,
+     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `IntSequence`
+     * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class MultiplyIntFunction extends Function {
+     *     private final Integer i;
+     *     public MultiplyIntFunction(Integer i) { this.i = i; }
+     *     public override Object apply(Object j) { return (Long) j * i; }
+     * }
+     * List<Integer> doubledInts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToLong(new MultiplyIntFunction(2))
+     *     .toList(); // [0, 10, 2, -20]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
         return IntSequence.of((List<Integer>) SequencePipeline.mapTo(longs, mapper, new List<Integer>()));
-//        Validate.notNull(mapper);
-//        final List<Integer> results = new List<Integer>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            results.add((Integer) mapper.apply(longs[i]));
-//        }
-//        return IntSequence.of(results);
     }
 
     /**
-     * @description Returns a `DoubleSequence` with elements returned by `mapper` function,
+     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class MultiplyDoubleFunction extends Function {
+     *     private final Double d;
+     *     public MultiplyDoubleFunction(Double d) { this.d = d; }
+     *     public override Object apply(Object j) { return (Long) j * d; }
+     * }
+     * List<Double> doubledDoubles = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToDouble(new MultiplyDoubleFunction(2))
+     *     .toList(); // [0.0, 10.0, 2.0, -20.0]
      */
     public virtual override DoubleEnumerable mapToDouble(final IFunction mapper) {
         return DoubleSequence.of((List<Double>) SequencePipeline.mapTo(longs, mapper, new List<Double>()));
-//        Validate.notNull(mapper);
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            results.add((Double) mapper.apply(longs[i]));
-//        }
-//        return DoubleSequence.of(results);
     }
 
     /**
-     * @description Returns a `SObjectSequence` with elements returned by `mapper` function,
+     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `SObjectSequence`
+     * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class CreateAccountFunction extends Function {
+     *     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
+     * }
+     * List<Account> accounts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToSObject(new CreateAccountFunction())
+     *     .toList(); //
+     * [
+     *   { AnnualRevenue: 0 },
+     *   { AnnualRevenue: 5 },
+     *   { AnnualRevenue: 1 },
+     *   { AnnualRevenue: 10 }
+     * ]
      */
     public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
         return SObjectSequence.of((List<SObject>) SequencePipeline.mapTo(longs, mapper, new List<SObject>()));
-//        Validate.notNull(mapper);
-//        final List<SObject> results = new List<SObject>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            results.add((SObject) mapper.apply(longs[i]));
-//        }
-//        return SObjectSequence.of(results);
     }
 
     /**
-     * @description Returns a `ObjectSequence` with elements returned by `mapper` function,
+     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
+     * 
+     * @example
+     * public class ToStringFunction extends Function {
+     *     public override Object apply(Object i) { return String.valueOf(i); }
+     * }
+     * List<String> strings = (List<String>) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .mapToObject(new ToStringFunction())
+     *     .toList(String.class); // ['0', '5', '1', '10']
      */
     public virtual override ObjectEnumerable mapToObject(final IFunction mapper) {
         return ObjectSequence.of(SequencePipeline.mapTo(longs, mapper, new List<Object>()));
-//        Validate.notNull(mapper);
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            results.add(mapper.apply(longs[i]));
-//        }
-//        return ObjectSequence.of(results);
-    }
-
-    public virtual override LongEnumerable flatMapTo(final IFunction mapper) {
-        return new LongSequence((List<Long>) SequencePipeline.flatMapTo(longs, mapper, new List<Long>()));
-//        Validate.notNull(mapper);
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            final Iterable<Long> result = (Iterable<Long>) mapper.apply(longs[i]);
-//            if (result != null) {
-//                results.addAll(Iterators.toLongList(result.iterator()));
-//            }
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns a `LongSequence` after performing `consumer` action on each element.
+     * @description Returns a new `LongEnumerable` with `Long` elements as a result of
+     * replacing each element with the contents of a mapped iterable created by applying
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     *
+     * @return the new `LongEnumerable`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * public class MultiplyLongFunction extends Function {
+     *     private final Long l;
+     *     public MultiplyLongFunction(Long l) { this.l = l; }
+     *     public override Object apply(Object o) { return new List<Long>{ ((Long) o) * l }; }
+     * }
+     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .flatMapTo(new MultiplyLongFunction(2L))
+     *     .toList(); // [0L, 10L, 2L, -20L]
+     */
+    public virtual override LongEnumerable flatMapTo(final IFunction mapper) {
+        return new LongSequence((List<Long>) SequencePipeline.flatMapTo(longs, mapper, new List<Long>()));
+    }
+
+    /**
+     * @description Returns a `LongEnumerable` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return this `LongSequence`
+     * @return this `LongEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
+     * 
+     * @example
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
+     *     .toList(); // [0L, 5L, 1L, -10L ]
      */
     public virtual override LongEnumerable forEach(final IConsumer consumer) {
         SequencePipeline.forEach(longs, consumer);
-//        Validate.notNull(consumer);
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            consumer.accept(longs[i]);
-//        }
         return this;
     }
 
     /**
-     * @description Returns a `LongSequence` with distinct elements.
+     * @description Returns a `LongEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @example
-     * List<Long> distinct = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> distinct = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 5L })
      *     .distinct()
-     *     .toList();
+     *     .toList(); // [0L, 5L, 1L, -10L]
      */
     public virtual override LongEnumerable distinct() {
         return new LongSequence((List<Long>) SequencePipeline.distinct(longs, new List<Long>()));
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            if (!results.contains((Long) longs[i])) {
-//                results.add((Long) longs[i]);
-//            }
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns a `LongSequence` with sorted elements in ascending order.
+     * @description Returns a `LongEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @example
-     * List<Long> sorted = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
      *     .sort()
-     *     .toList();
+     *     .toList(); // [null, -10L, 0L, 1L, 5L]
      */
     public virtual override LongEnumerable sort() {
         return new LongSequence((List<Long>) SequencePipeline.sort(longs));
-//        final List<Long> clone = (List<Long>) longs.clone();
-//        clone.sort();
-//        return new LongSequence(clone);
     }
 
+    /**
+     * @description Returns a `LongEnumerable` with sorted elements considering `order`.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param order the sort order
+     *
+     * @return the `LongEnumerable`
+     *
+     * @throws NullPointerException if `order` is null
+     *
+     * @example
+     * List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
+     *     .sort(SortOrder.DESCENDING)
+     *     .toList(); // [5L, 1L, 0L, -10L, null]
+     */
     public virtual override LongEnumerable sort(final SortOrder order) {
         return new LongSequence((List<Long>) SequencePipeline.sort(longs, order));
     }
 
     /**
-     * @description Returns a `LongSequence` with first `lim` elements.
+     * @description Returns a `LongEnumerable` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
-     * List<Long> first3Longs = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> first3Longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .lim(3)
-     *     .toList();
+     *     .toList(); // [0L, 5L, 1L]
      */
     public virtual override LongEnumerable lim(final Integer lim) {
         return new LongSequence((List<Long>) SequencePipeline.lim(longs, lim, new List<Long>()));
-//        Validate.notNull(lim);
-//        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
-//        if (lim == 0) { return LongSequence.empty(); }
-//        if (lim >= longs.size()) { return this; }
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0; i < lim; i++) {
-//            results.add((Long) longs[i]);
-//        }
-//        return new LongSequence(results);
     }
 
     /**
-     * @description Returns a new `LongSequence` that skips first `n` elements
+     * @description Returns a new `LongEnumerable` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example
-     * List<Long> restLongs = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 })
+     * List<Long> restLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
-     *     .toList();
+     *     .toList(); // [5L, 1L, -10L]
      */
     public virtual override LongEnumerable skip(final Integer n) {
         return new LongSequence((List<Long>) SequencePipeline.skip(longs, n, new List<Long>()));
-//        Validate.notNull(n);
-//        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
-//        if (n == 0) { return this; }
-//        if (n >= longs.size()) { return LongSequence.empty(); }
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            if (i >= n) {
-//                results.add((Long) longs[i]);
-//            }
-//        }
-//        return new LongSequence(results);
     }
     // @end-group
     //</editor-fold>
@@ -630,17 +608,17 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, LongBinaryOperators.sum());
-     * Long factorialOfN = LongSequence.range(1, n).reduce(1, LongBinaryOperators.product());
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * public class ProductBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 * (Long) o2; }
+     * }
+     * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, new SumBiOperator()); // -4L
+     * Long factorialOfN = LongSequence.range(1, n).reduce(1, new ProductBiOperator());
      */
     public virtual override Long reduce(final Long identity, final IBiOperator accumulator) {
         return (Long) SequencePipeline.reduce(longs, identity, accumulator);
-//        Validate.notNull(accumulator);
-//        Long result = (Long) identity;
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            result = (Long) accumulator.apply(result, longs[i]);
-//        }
-//        return result;
     }
 
     /**
@@ -656,52 +634,39 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *      .reduce(LongBinaryOperators.sum())
-     *      .get();
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * Long sum = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .reduce(new SumBiOperator())
+     *     .get(); // -4L
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
         return Optional.ofNullable((Long) SequencePipeline.reduce(longs, accumulator));
-//        Validate.notNull(accumulator);
-//        Long result;
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            result = i == 0 ? (Long) longs[i] : (Long) accumulator.apply(result, longs[i]);
-//        }
-//        return Optional.of(result);
     }
 
-//    /**
-//     * @description Performs a mutable reduction operation on elements, collecting elements
-//     * to a container returned by `supplier` by applying `accumulator` function.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param supplier the function that returns a mutable result container
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Object` result of the collection
-//     *
-//     * @throws NullPointerException if `supplier` or `accumulator` is null
-//     */
-//    public virtual Object collect(final ISupplier supplier, final IObjectLongConsumer accumulator) {
-//        Validate.notNull(supplier);
-//        Validate.notNull(accumulator);
-//        final Object container = supplier.get();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            accumulator.accept(container, longs[i]);
-//        }
-//        return container;
-//    }
-
+    /**
+     * @description Performs a mutable reduction operation on elements, collecting elements
+     * to a container using `collector`.
+     * <p>Terminal Operation.</p>
+     *
+     * @param collector the function that returns a mutable result container
+     *
+     * @return the `Object` result of the collection
+     *
+     * @throws NullPointerException if `collector` is null
+     *
+     * @example
+     * public class AddToLongSetBiConsumer extends BiConsumer {
+     *     public override void accept(Object container, Object o) { ((Set<Long>) container).add((Long) o); }
+     * }
+     * Set<Long> longs = (Set<Long>)
+     *     LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 5L, 0L })
+     *     .collect(Collector.of(Supplier.of(Set<Long>.class), new AddToLongSetBiConsumer()));
+     * // [0L, 5L, 1L, -10L]
+     */
     public virtual override Object collect(final ICollector collector) {
         return SequencePipeline.collect(longs, collector);
-//        Validate.notNull(collector);
-//        final Object container = collector.supplier().get();
-//        final IBiConsumer accumulator = collector.accumulator();
-//        final IFunction finisher = collector.finisher();
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            accumulator.accept(container, longs[i]);
-//        }
-//        return finisher == null ? container : finisher.apply(container);
     }
 
     /**
@@ -716,25 +681,20 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Long firstEvenLong = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .find(LongPredicates.isEven())
-     *     .get();
+     * public class IsEvenPredicate extends Predicate {
+     *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
+     * }
+     * Long firstEvenLong = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .find(new IsEvenPredicate())
+     *     .get(); // 0L
      */
     public virtual override Optional find(final IPredicate predicate) {
         return Optional.ofNullable((Long) SequencePipeline.find(longs, predicate));
-//        Validate.notNull(predicate);
-//        for (Integer i = 0, size = longs.size(); i < size; i++) {
-//            final Long j = (Long) longs[i];
-//            if (predicate.test(j)) {
-//                return Optional.ofNullable(j);
-//            }
-//        }
-//        return Optional.empty();
     }
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `LongSequence` is empty then `false` is returned.
+     * If `LongEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -744,19 +704,19 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isEveryLongEven = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .every(LongPredicates.isEven())
-     *     .get();
+     * public class IsEvenPredicate extends Predicate {
+     *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
+     * }
+     * Boolean isEveryLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .every(new IsEvenPredicate()); // false
      */
     public virtual override Boolean every(final IPredicate predicate) {
         return SequencePipeline.match(longs, predicate, 1);
-//        Validate.notNull(predicate);
-//        return match(predicate, 1);
     }
 
     /**
      * @description Returns whether some element matches `predicate`.
-     * If `LongSequence` is empty then `false` is returned.
+     * If `LongEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -766,14 +726,14 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isSomeLongEven = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .some(LongPredicates.isEven())
-     *     .get();
+     * public class IsEvenPredicate extends Predicate {
+     *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
+     * }
+     * Boolean isSomeLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .some(new IsEvenPredicate()); // true
      */
     public virtual override Boolean some(final IPredicate predicate) {
         return SequencePipeline.match(longs, predicate, 0);
-//        Validate.notNull(predicate);
-//        return match(predicate, 0);
     }
 
     /**
@@ -781,14 +741,13 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the sum of elements
+     * 
+     * @example
+     * Long sum = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .sum(); // -4L
      */
     public virtual override Long sum() {
-        Long sum = 0;
-        Integer i = 0;
-        for (Integer size = longs.size(); i < size; i++) {
-            sum += longs[i];
-        }
-        return i == 0 ? null : sum;
+        return (Long) SequencePipeline.avgLong(longs, false);
     }
 
     /**
@@ -797,14 +756,14 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the arithmetic mean of elements
+     * 
+     * @example
+     * Double avg = (Double) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .avg()
+     *     .get(); // 1.0
      */
     public virtual override Optional avg() {
-        Double sum = 0.0;
-        Integer i = 0;
-        for (Integer size = longs.size(); i < size; i++) {
-            sum += (Double) longs[i];
-        }
-        return i == 0 ? Optional.empty() : Optional.of(sum / i);
+        return Optional.of(SequencePipeline.avgLong(longs, true));
     }
 
     /**
@@ -812,6 +771,10 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
+     * 
+     * @example
+     * Integer count = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .count(); // 4
      */
     public virtual override Integer count() {
         return longs.size();
@@ -822,6 +785,12 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
+     * 
+     * @example
+     * LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .isEmpty(); // false
+     * LongSequence.of(new List<Long>()))
+     *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
         return longs.isEmpty();
@@ -834,9 +803,9 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return the `List<Long>` containing the sequence elements
      *
      * @example
-     * List<Long> restLongs = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 })
-     *     .lim(1)
-     *     .toList();
+     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .skip(1)
+     *     .toList(); // [5L, 1L, -10L]
      */
     public virtual override List<Long> toList() {
         return longs;
@@ -849,9 +818,9 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return the `Set<Long>` containing the sequence elements
      *
      * @example
-     * List<Long> restLongs = LongSequence.of(new Set<Long>{ 0, 5L, 1L, -10 })
-     *     .lim(1)
-     *     .toList();
+     * Set<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .skip(1)
+     *     .toSet(); // [5L, 1L, -10L, 0L]
      */
     public virtual override Set<Long> toSet() {
         return new Set<Long>(longs);

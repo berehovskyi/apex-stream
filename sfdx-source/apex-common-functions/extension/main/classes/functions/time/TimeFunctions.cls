@@ -11,6 +11,7 @@
 public virtual inherited sharing class TimeFunctions {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected TimeFunctions() {}
 
     //<editor-fold desc="Date Functions">
@@ -27,7 +28,6 @@ public virtual inherited sharing class TimeFunctions {
      * @see Time.addHours
      */
     public static Function addHours(final Integer hours) {
-        Validate.notNull(hours);
         return new AddHours(hours);
     }
 
@@ -43,7 +43,6 @@ public virtual inherited sharing class TimeFunctions {
      * @see Time.addMilliseconds
      */
     public static Function addMilliseconds(final Integer milliseconds) {
-        Validate.notNull(milliseconds);
         return new AddMilliseconds(milliseconds);
     }
 
@@ -59,7 +58,6 @@ public virtual inherited sharing class TimeFunctions {
      * @see Time.addMinutes
      */
     public static Function addMinutes(final Integer minutes) {
-        Validate.notNull(minutes);
         return new AddMinutes(minutes);
     }
 
@@ -75,7 +73,6 @@ public virtual inherited sharing class TimeFunctions {
      * @see Time.addMinutes
      */
     public static Function addSeconds(final Integer seconds) {
-        Validate.notNull(seconds);
         return new AddSeconds(seconds);
     }
     // @end-group
@@ -85,25 +82,28 @@ public virtual inherited sharing class TimeFunctions {
     // @start-group Lambdas
     private class AddHours extends Function {
         private final Integer hours;
-        private AddHours(Integer hours) { this.hours = hours; }
+        private AddHours(Integer hours) { Validate.notNull(hours); this.hours = hours; }
         public override Object apply(Object o) { return ((Time) o).addHours(hours); }
     }
 
     private class AddMilliseconds extends Function {
         private final Integer milliseconds;
-        private AddMilliseconds(Integer milliseconds) { this.milliseconds = milliseconds; }
+        private AddMilliseconds(Integer milliseconds) {
+            Validate.notNull(milliseconds);
+            this.milliseconds = milliseconds;
+        }
         public override Object apply(Object o) { return ((Time) o).addMilliseconds(milliseconds); }
     }
 
     private class AddMinutes extends Function {
         private final Integer minutes;
-        private AddMinutes(Integer minutes) { this.minutes = minutes; }
+        private AddMinutes(Integer minutes) { Validate.notNull(minutes); this.minutes = minutes; }
         public override Object apply(Object o) { return ((Time) o).addMinutes(minutes); }
     }
 
     private class AddSeconds extends Function {
         private final Integer seconds;
-        private AddSeconds(Integer seconds) { this.seconds = seconds; }
+        private AddSeconds(Integer seconds) { Validate.notNull(seconds); this.seconds = seconds; }
         public override Object apply(Object o) { return ((Time) o).addSeconds(seconds); }
     }
     // @end-group

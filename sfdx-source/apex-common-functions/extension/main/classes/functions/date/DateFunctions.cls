@@ -11,6 +11,7 @@
 public virtual inherited sharing class DateFunctions {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected DateFunctions() {}
 
     //<editor-fold desc="Date Functions">
@@ -27,7 +28,6 @@ public virtual inherited sharing class DateFunctions {
      * @see Date.addDays
      */
     public static Function addDays(final Integer days) {
-        Validate.notNull(days);
         return new AddDays(days);
     }
 
@@ -43,7 +43,6 @@ public virtual inherited sharing class DateFunctions {
      * @see Date.addMonths
      */
     public static Function addMonths(final Integer months) {
-        Validate.notNull(months);
         return new AddMonths(months);
     }
 
@@ -59,7 +58,6 @@ public virtual inherited sharing class DateFunctions {
      * @see Date.addYears
      */
     public static Function addYears(final Integer years) {
-        Validate.notNull(years);
         return new AddYears(years);
     }
 
@@ -103,19 +101,19 @@ public virtual inherited sharing class DateFunctions {
     // @start-group Lambdas
     private class AddDays extends Function {
         private final Integer days;
-        private AddDays(Integer days) { this.days = days; }
+        private AddDays(Integer days) { Validate.notNull(days); this.days = days; }
         public override Object apply(Object o) { return ((Date) o).addDays(days); }
     }
 
     private class AddMonths extends Function {
         private final Integer months;
-        private AddMonths(Integer months) { this.months = months; }
+        private AddMonths(Integer months) { Validate.notNull(months); this.months = months; }
         public override Object apply(Object o) { return ((Date) o).addMonths(months); }
     }
 
     private class AddYears extends Function {
         private final Integer years;
-        private AddYears(Integer years) { this.years = years; }
+        private AddYears(Integer years) { Validate.notNull(years); this.years = years; }
         public override Object apply(Object o) { return ((Date) o).addYears(years); }
     }
 

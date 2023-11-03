@@ -11,6 +11,7 @@
 public virtual inherited sharing class IdSuppliers {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected IdSuppliers() {}
 
     //<editor-fold desc="Built-Ins">
@@ -33,7 +34,6 @@ public virtual inherited sharing class IdSuppliers {
      * idSupp.get(); // '000000000000001AAA'
      */
     public static Supplier of(final SObjectType sObjectType) {
-        Validate.notNull(sObjectType);
         return new OfType(sObjectType);
     }
     // @end-group
@@ -46,6 +46,7 @@ public virtual inherited sharing class IdSuppliers {
         private final String keyPrefix;
         private final String placeholder = '000000000000';
         private OfType(SObjectType sObjectType) {
+            Validate.notNull(sObjectType);
             this.keyPrefix = sObjectType.getDescribe().getKeyPrefix();
         }
         public override Object get() {

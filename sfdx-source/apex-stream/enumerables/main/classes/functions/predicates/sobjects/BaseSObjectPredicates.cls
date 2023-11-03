@@ -1,12 +1,19 @@
 /**
- * @description
+ * @description Provides base implementations of {@link Predicate}
+ * and related utilities that are used by {@link ISObjectEnumerable}.
+ *
  * @author Oleh Berehovskyi
+ *
+ * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BaseSObjectPredicates extends BasePredicates {
 
     @TestVisible
-    private BaseSObjectPredicates() {}
+    @SuppressWarnings('PMD.EmptyStatementBlock')
+    protected BaseSObjectPredicates() {}
 
+    //<editor-fold desc="Built-Ins">
+    // @start-group Built-Ins
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
      * the `fieldName` is equal to the result returned by the `function`,
@@ -28,11 +35,11 @@ public virtual inherited sharing class BaseSObjectPredicates extends BasePredica
      * @see Comparer.defaultOrder
      *
      * @example
-     * Predicates.isEqual(
+     * BaseSObjectFunctions.isEqual(
      *     'NumberOfEmployees',
      *      Functions.get('OtherIntField__c')
      * );
-     * Predicates.isEqual(
+     * BaseSObjectFunctions.isEqual(
      *     'Parent?.NumberOfEmployees',
      *     Function.constant(100)
      * );
@@ -56,11 +63,11 @@ public virtual inherited sharing class BaseSObjectPredicates extends BasePredica
      * @see Comparer.defaultOrder
      *
      * @example
-     * Predicates.isEqual(
+     * BaseSObjectFunctions.isEqual(
      *     Account.NumberOfEmployees,
      *     Functions.get('OtherIntField__c')
      * );
-     * Predicates.isEqual(
+     * BaseSObjectFunctions.isEqual(
      *     Account.NumberOfEmployees,
      *     Function.constant(100)
      * );
@@ -88,8 +95,8 @@ public virtual inherited sharing class BaseSObjectPredicates extends BasePredica
      * @see Comparer.defaultOrder
      *
      * @example
-     * Predicates.isEqual('NumberOfEmployees', 100);
-     * Predicates.isEqual('Parent?.NumberOfEmployees', 100);
+     * BaseSObjectFunctions.isEqual('NumberOfEmployees', 100);
+     * BaseSObjectFunctions.isEqual('Parent?.NumberOfEmployees', 100);
      */
     public static Predicate isEqual(final String fieldName, final Object value) {
         return isEqual(BaseSObjectFunctions.get(fieldName), Function.constant(value));
@@ -110,10 +117,12 @@ public virtual inherited sharing class BaseSObjectPredicates extends BasePredica
      * @see Comparer.defaultOrder
      *
      * @example
-     * Predicates.isEqual(Account.NumberOfEmployees, 100);
+     * BaseSObjectFunctions.isEqual(Account.NumberOfEmployees, 100);
      */
     public static Predicate isEqual(final SObjectField field, final Object value) {
         return isEqual(BaseSObjectFunctions.get(field), Function.constant(value));
     }
+    // @end-group
+    //</editor-fold>
 
 }

@@ -11,58 +11,11 @@
 public virtual inherited sharing class SObjectFunctions extends BaseSObjectFunctions {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected SObjectFunctions() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
-//    /**
-//     * @description Returns a `Function` that gets a value for
-//     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
-//     *
-//     * @param fieldName the field to get a value
-//     *
-//     * @return the `Function`
-//     *
-//     * @throws IllegalArgumentException if `fieldName` is blank
-//     * @throws NullPointerException if `fieldName` is null
-//     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
-//     * reference navigation
-//     * @throws SObjectException if provided invalid `fieldName`
-//     *
-//     * @see SObject.get
-//     *
-//     * @example
-//     * Functions.get('Name');
-//     * Functions.get('Parent.Name');
-//     * Functions.get('Parent?.Name');
-//     */
-//    public static Function get(final String fieldName) {
-//        Validate.notBlank(fieldName);
-//        if (!Schemas.isXRef(fieldName)) { return new GetFieldName(fieldName); }
-//        if (Schemas.isSaveNav(fieldName)) { return new GetFieldPathSafe(fieldName); }
-//        return new GetFieldPath(fieldName);
-//    }
-//
-//    /**
-//     * @description Returns a `Function` that gets a value for
-//     * the specified `field`.
-//     *
-//     * @param field the field to get a value
-//     *
-//     * @return the `Function`
-//     *
-//     * @throws NullPointerException if `field` is null
-//     *
-//     * @see SObject.get
-//     *
-//     * @example
-//     * Functions.get(Account.Name);
-//     */
-//    public static Function get(final SObjectField field) {
-//        Validate.notNull(field);
-//        return new GetByField(field);
-//    }
-
     /**
      * @description Returns a `Function` that returns
      * a map of populated field names and their corresponding values for an input argument.
@@ -86,59 +39,6 @@ public virtual inherited sharing class SObjectFunctions extends BaseSObjectFunct
     public static Function getQuickActionName() {
         return new GetQuickActionName();
     }
-
-//    /**
-//     * @description Returns a `Function` that gets children sobjects for
-//     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
-//     *
-//     * @param fieldName the field to get a value
-//     *
-//     * @return the `Function`
-//     *
-//     * @throws IllegalArgumentException if `fieldName` is blank
-//     * @throws NullPointerException if `fieldName` is null
-//     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
-//     * reference navigation
-//     * @throws SObjectException if provided invalid `fieldName`
-//     *
-//     * @see SObject.getSObjects
-//     *
-//     * @example
-//     * Functions.getSObjects('Contacts');
-//     * Functions.getSObjects('Parent.Contacts');
-//     * Functions.getSObjects('Parent?.Contacts');
-//     */
-//    public static Function getSObjects(final String fieldName) {
-//        Validate.notBlank(fieldName);
-//        if (!Schemas.isXRef(fieldName)) { return new GetSObjectsFieldName(fieldName); }
-//        if (Schemas.isSaveNav(fieldName)) { return new GetSObjectsFieldPathSafe(fieldName); }
-//        return new GetSObjectsFieldPath(fieldName);
-//    }
-//
-//    /**
-//     * @description Returns a `Function` that gets children sobjects for
-//     * the specified `field`. Cross-reference fields and safe navigation are supported.
-//     *
-//     * @param field the field to get a value
-//     *
-//     * @return the `Function`
-//     *
-//     * @throws NullPointerException if `field` is null
-//     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
-//     * reference navigation
-//     * @throws SObjectException if provided invalid `fieldName`
-//     *
-//     * @see SObject.getSObjects
-//     *
-//     * @example
-//     * Functions.getSObjects(Contact.AccountId);
-//     */
-//    public static Function getSObjects(final SObjectField field) {
-//        // Since UnexpectedException is thrown if SObject doesn't have
-//        // related sObjects returned using SObjectField navigation such as
-//        // acc.getSObjects(Contact.AccountId)
-//        return getSObjects(Schemas.findChildRelationshipName(field));
-//    }
 
     /**
      * @description Returns a `Function` that returns
@@ -172,9 +72,9 @@ public virtual inherited sharing class SObjectFunctions extends BaseSObjectFunct
      * @see SObject.put
      *
      * @example
-     * Functions.put('NumberOfEmployees', someFunction);
-     * Functions.put('Parent.NumberOfEmployees', someFunction);
-     * Functions.put('Parent?.NumberOfEmployees', someFunction);
+     * SObjectFunctions.put('NumberOfEmployees', someFunction);
+     * SObjectFunctions.put('Parent.NumberOfEmployees', someFunction);
+     * SObjectFunctions.put('Parent?.NumberOfEmployees', someFunction);
      */
     public static Function put(final String fieldName, final IFunction mapper) {
         Validate.notBlank(fieldName);
@@ -198,12 +98,10 @@ public virtual inherited sharing class SObjectFunctions extends BaseSObjectFunct
      * @see SObject.put
      *
      * @example
-     * SObjectConsumers.put(Account.NumberOfEmployees, someFunction);
-     * SObjectConsumers.put(Account.NumberOfEmployees, Function.constant(100));
+     * SObjectFunctions.put(Account.NumberOfEmployees, someFunction);
+     * SObjectFunctions.put(Account.NumberOfEmployees, Function.constant(100));
      */
     public static Function put(final SObjectField field, final IFunction mapper) {
-        Validate.notNull(field);
-        Validate.notNull(mapper);
         return new PutByField(field, mapper);
     }
 
@@ -226,9 +124,9 @@ public virtual inherited sharing class SObjectFunctions extends BaseSObjectFunct
      * @see SObject.put
      *
      * @example
-     * Functions.put('NumberOfEmployees', 100);
-     * Functions.put('Parent.NumberOfEmployees', 100);
-     * Functions.put('Parent?.NumberOfEmployees', (Object) null);
+     * SObjectFunctions.put('NumberOfEmployees', 100);
+     * SObjectFunctions.put('Parent.NumberOfEmployees', 100);
+     * SObjectFunctions.put('Parent?.NumberOfEmployees', (Object) null);
      */
     public static Function put(final String fieldName, final Object value) {
         return put(fieldName, Function.constant(value));
@@ -251,8 +149,8 @@ public virtual inherited sharing class SObjectFunctions extends BaseSObjectFunct
      * @see SObject.put
      *
      * @example
-     * Functions.put(Account.NumberOfEmployees, 100);
-     * Functions.put(Account.NumberOfEmployees, (Object) null);
+     * SObjectFunctions.put(Account.NumberOfEmployees, 100);
+     * SObjectFunctions.put(Account.NumberOfEmployees, (Object) null);
      */
     public static Function put(final SObjectField field, final Object value) {
         return put(field, Function.constant(value));
@@ -319,6 +217,8 @@ public virtual inherited sharing class SObjectFunctions extends BaseSObjectFunct
         private final SObjectField field;
         private final IFunction mapper;
         private PutByField(SObjectField field, IFunction mapper) {
+            Validate.notNull(field);
+            Validate.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }

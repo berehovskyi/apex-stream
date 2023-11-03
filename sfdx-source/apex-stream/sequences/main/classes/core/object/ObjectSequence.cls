@@ -25,7 +25,6 @@
  * <p>Sequences and streams equally ensure the fulfillment of the set goals,
  * but are implemented in different ways.</p>
  *
- * @see ObjectStream
  * @see SObjectSequence
  * @see IntSequence
  * @see LongSequence
@@ -33,7 +32,7 @@
  *
  * @author Oleh Berehovskyi
  *
- * @group Iterables
+ * @group Enumerables
  *
  * @example
  * Double sumAnnualRevenueOfUniquePeopleFromLondon
@@ -43,6 +42,7 @@
  *         .mapToDouble(getAnnualRevenueToDoubleFunction)
  *         .sum();
  */
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount, PMD.ExcessiveClassLength')
 public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
 
     private final List<Object> objects;
@@ -55,6 +55,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
         this.objects = objects;
     }
 
+    //<editor-fold desc="Iterator">
+    // @start-group Iterator
     /**
      * @description Returns an internal iterator for the elements of this sequence.
      * <p>Terminal Operation.</p>
@@ -64,20 +66,22 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     public override Iterator<Object> iterator() {
         return objects.iterator();
     }
+    // @end-group
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     // @start-group Sources
     /**
-     * @description Returns a `ObjectSequence` created from `objects` list.
+     * @description Returns a `ObjectEnumerable` created from `objects` list.
      *
      * @param objects the list of Objects
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `objects` is null
      *
      * @example
-     * IObjectIterable peopleSeq = ObjectSequence.of(new List<Person>(people));
+     * ObjectEnumerable peopleSeq = ObjectSequence.of(new List<Person>(people));
      */
     public static ObjectEnumerable of(final List<Object> objects) {
         Validate.notNull(objects);
@@ -85,16 +89,16 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns a `ObjectSequence` created from `objects` set.
+     * @description Returns a `ObjectEnumerable` created from `objects` set.
      *
      * @param objects the set of Objects
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `objects` is null
      *
      * @example
-     * IObjectIterable peopleSeq = ObjectSequence.of(new Set<Person>(people));
+     * ObjectEnumerable peopleSeq = ObjectSequence.of(new Set<Person>(people));
      */
     public static ObjectEnumerable of(final Set<Object> objects) {
         Validate.notNull(objects);
@@ -102,17 +106,17 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns a `ObjectSequence` created from `objects` list if non-null,
-     * otherwise returns an empty `ObjectSequence`.
+     * @description Returns a `ObjectEnumerable` created from `objects` list if non-null,
+     * otherwise returns an empty `ObjectEnumerable`.
      *
      * @param objects the list of Objects
      *
-     * @return the new `ObjectSequence` if `objects` is non-null,
-     * otherwise an empty `ObjectSequence`
+     * @return the new `ObjectEnumerable` if `objects` is non-null,
+     * otherwise an empty `ObjectEnumerable`
      *
      * @example
-     * IObjectIterable peopleSeq = ObjectSequence.ofNullable(new List<Person>(people));
-     * IObjectIterable emptyPeopleSeq = ObjectSequence.ofNullable(null);
+     * ObjectEnumerable peopleSeq = ObjectSequence.ofNullable(new List<Person>(people));
+     * ObjectEnumerable emptyPeopleSeq = ObjectSequence.ofNullable((List<Object>) null);
      */
     public static ObjectEnumerable ofNullable(final List<Object> objects) {
         if (objects == null) { return empty(); }
@@ -120,17 +124,17 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns a `ObjectSequence` created from `objects` set if non-null,
-     * otherwise returns an empty `ObjectSequence`.
+     * @description Returns a `ObjectEnumerable` created from `objects` set if non-null,
+     * otherwise returns an empty `ObjectEnumerable`.
      *
      * @param objects the set of Objects
      *
-     * @return the new `ObjectSequence` if `objects` is non-null,
-     * otherwise an empty `ObjectSequence`
+     * @return the new `ObjectEnumerable` if `objects` is non-null,
+     * otherwise an empty `ObjectEnumerable`
      *
      * @example
-     * IObjectIterable peopleSeq = ObjectSequence.ofNullable(new Set<Person>(people));
-     * IObjectIterable emptySeq = ObjectSequence.ofNullable(null);
+     * ObjectEnumerable peopleSeq = ObjectSequence.ofNullable(new Set<Person>(people));
+     * ObjectEnumerable emptySeq = ObjectSequence.ofNullable((Set<Object>) null);
      */
     public static ObjectEnumerable ofNullable(final Set<Object> objects) {
         if (objects == null) { return empty(); }
@@ -138,28 +142,32 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns an empty `ObjectSequence`.
+     * @description Returns an empty `ObjectEnumerable`.
      *
-     * @return the empty `ObjectSequence`
+     * @return the empty `ObjectEnumerable`
      */
     public static ObjectEnumerable empty() {
         return new ObjectSequence();
     }
 
     /**
-     * @description Returns eagerly concatenated `ObjectSequence` whose elements are all the
+     * @description Returns eagerly concatenated `ObjectEnumerable` whose elements are all the
      * elements of the first `Iterable<Object>` followed by all the elements of the
      * second `Iterable<Object>`.
      *
      * @param iterable1 the first `Iterable<Object>`
      * @param iterable2 the second `Iterable<Object>`
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      *
      * @example
-     * IObjectIterable peopleSeq = ObjectSequence.concat(seq1, seq2);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> append = (List<String>) ObjectSequence.concat(strs1, strs2)
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
      */
     public static ObjectEnumerable concat(final Iterable<Object> iterable1, final Iterable<Object> iterable2) {
         return concat(new List<Iterable<Object>>{ iterable1, iterable2 });
@@ -170,55 +178,53 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *
      * @param iterables the list of `Iterable<Object>`
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterables` or some element in a list is null
      *
      * @example
-     * IObjectIterable peopleSeq = ObjectSequence.concat(sequences);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> concat = (List<String>) ObjectSequence.concat(new List<Iterable<Object>>{ strs1, strs2 })
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
      */
     public static ObjectEnumerable concat(final List<Iterable<Object>> iterables) {
         return new ObjectSequence(SequencePipeline.concat(iterables, new List<Object>()));
-//        Validate.noNullElements(iterables);
-//        final List<Object> objects = new List<Object>();
-//        for (Integer i = 0, size = iterables.size(); i < size; i++) {
-//            objects.addAll(Iterators.toList(iterables[i], Object.class));
-//        }
-//        return new ObjectSequence(objects);
     }
 
     /**
-     * @description Returns a combined `ObjectSequence` by applying `combiner` function
+     * @description Returns a combined `ObjectEnumerable` by applying `combiner` function
      * to each element at the same position.
      *
      * @param iterable1 the first `Iterable<Object>`
      * @param iterable2 the second `Iterable<Object>`
      * @param combiner the binary operator to be applied to each element at the same position
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     * 
+     * @example
+     * public class ConcatBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (String) o1 + '-' + (String) o2; }
+     * }
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> zip = ObjectSequence.zip(strs1, strs2, new ConcatBiOperator())
+     *     .toList();
+     * // ['foo-qux', 'bar-fred', 'baz-foo']
      */
     public static ObjectEnumerable zip(
-            final Iterable<Object> iterable1,
-            final Iterable<Object> iterable2,
-            final IBiOperator combiner
+        final Iterable<Object> iterable1,
+        final Iterable<Object> iterable2,
+        final IBiOperator combiner
     ) {
         return new ObjectSequence(SequencePipeline.zip(iterable1, iterable2, combiner, new List<Object>()));
-//        Validate.notNull(iterable1);
-//        Validate.notNull(iterable2);
-//        Validate.notNull(combiner);
-//        final List<Object> results = new List<Object>();
-//        final List<Object> left = Iterators.toList(iterable1, Object.class);
-//        final List<Object> right = Iterators.toList(iterable2, Object.class);
-//        for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
-//            results.add(combiner.apply(left[i], right[i]));
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a combined `ObjectSequence` by applying `combiner` function
+     * @description Returns a combined `ObjectEnumerable` by applying `combiner` function
      * to each element at the same position, conditioned on satisfying `predicate`.
      *
      * @param iterable1 the first `Iterable<Object>`
@@ -226,62 +232,81 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2`,
      * `predicate` or `combiner` is null
+     * 
+     * @example
+     * public class ContainsAnyBiPredicate extends BiPredicate {
+     *     private final String s;
+     *     public ContainsAnyBiPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o1, Object o2) {
+     *         return ((String) o1).contains(s) || ((String) o2).contains(s);
+     *     }
+     * }
+     * public class ConcatBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (String) o1 + '-' + (String) o2; }
+     * }
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> zip = (List<String>) ObjectSequence.zip(
+     *     strs1,
+     *     strs2,
+     *     new ContainsAnyBiPredicate('a'),
+     *     new ConcatBiOperator()
+     * )
+     *     .toList(String.class);
+     * // ['bar-fred', 'baz-foo']
      */
     public static ObjectEnumerable zip(
-            final Iterable<Object> iterable1,
-            final Iterable<Object> iterable2,
-            final IBiPredicate predicate,
-            final IBiOperator combiner
+        final Iterable<Object> iterable1,
+        final Iterable<Object> iterable2,
+        final IBiPredicate predicate,
+        final IBiOperator combiner
     ) {
         return new ObjectSequence(SequencePipeline.zip(iterable1, iterable2, predicate, combiner, new List<Object>()));
-//        Validate.notNull(iterable1);
-//        Validate.notNull(iterable2);
-//        Validate.notNull(predicate);
-//        Validate.notNull(combiner);
-//        final List<Object> results = new List<Object>();
-//        final List<Object> left = Iterators.toList(iterable1, Object.class);
-//        final List<Object> right = Iterators.toList(iterable2, Object.class);
-//        for (Integer i = 0, size = Math.min(left.size(), right.size()); i < size; i++) {
-//            if (predicate.test(left[i], right[i])) {
-//                results.add(combiner.apply(left[i], right[i]));
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns new `ObjectSequence` by appending `iterable`
+     * @description Returns new `ObjectEnumerable` by appending `iterable`
      * to the current sequence.
      *
      * @param iterable the `Iterable<Object>` to append to the current sequence
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * IObjectIterable peopleSeq = seq1.append(seq2);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> append = (List<String>) ObjectSequence.of(strs1)
+     *     .append(strs2)
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
      */
     public virtual override ObjectEnumerable append(final Iterable<Object> iterable) {
         return concat(this, iterable);
     }
 
     /**
-     * @description Returns new `ObjectSequence` by prepending `iterable`
+     * @description Returns new `ObjectEnumerable` by prepending `iterable`
      * to the current sequence.
      *
      * @param iterable the `Iterable<Object>` to prepend to the current sequence
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * IObjectIterable peopleSeq = seq1.prepend(seq2);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> union = (List<String>) ObjectSequence.of(strs1)
+     *     .union(strs2)
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred']
      */
     public virtual override ObjectEnumerable prepend(final Iterable<Object> iterable) {
         return concat(iterable, this);
@@ -291,572 +316,467 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
 
     //<editor-fold desc="Intermediate Operations">
     // @start-group Intermediate Operations
-//    /**
-//     * @description Returns new `ObjectStream` from the current sequence.
-//     * <p>Stateful Intermediate Operation.</p>
-//     *
-//     * @return the new `ObjectStream`
-//     *
-//     * @example
-//     * IObjectIterable peopleStream = ObjectSequence.of(people).stream();
-//     */
-//    public virtual ObjectEnumerable stream() {
-//        return ObjectStream.of(iterator()); // ToDo
-//        return null;
-//    }
-
     /**
-     * @description Returns a `ObjectSequence` with elements that match `predicate`.
+     * @description Returns a `ObjectEnumerable` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Person> filtered = (List<Person>) ObjectSequence.of(people)
-     *     .filter(predicate)
-     *     .toList();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * List<String> filtered = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .filter(new ContainsPredicate('a'))
+     *     .toList(String.class); // ['bar', 'baz']
      */
     public virtual override ObjectEnumerable filter(final IPredicate predicate) {
         return new ObjectSequence(SequencePipeline.filter(objects, predicate, new List<Object>()));
-//        Validate.notNull(predicate);
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Object o = objects[i];
-//            if (predicate.test(o)) {
-//                results.add(o);
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a `ObjectSequence` which takes elements while elements match `predicate`.
+     * @description Returns a `ObjectEnumerable` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Person> firstFiltered = (List<Person>) ObjectSequence.of(people)
-     *     .take(predicate)
-     *     .toList();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * List<String> firstMatched = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'bar', 'baz', 'foo' })
+     *     .take(new ContainsPredicate('a'))
+     *     .toList(String.class); // ['bar', 'baz']
      */
     public virtual override ObjectEnumerable take(final IPredicate predicate) {
         return new ObjectSequence(SequencePipeline.take(objects, predicate, new List<Object>()));
-//        Validate.notNull(predicate);
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Object o = objects[i];
-//            if (predicate.test(o)) {
-//                results.add(o);
-//            } else {
-//                break;
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a `ObjectSequence` which drops elements while elements match `predicate`,
+     * @description Returns a `ObjectEnumerable` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Person> rest = (List<Person>) ObjectSequence.of(people)
-     *     .drop(predicate)
-     *     .toList();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * List<String> rest = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'bar', 'baz', 'foo' })
+     *     .take(new ContainsPredicate('a'))
+     *     .toList(String.class); // ['foo']
      */
     public virtual override ObjectEnumerable drop(final IPredicate predicate) {
         return new ObjectSequence(SequencePipeline.drop(objects, predicate, new List<Object>()));
-//        Validate.notNull(predicate);
-//        final List<Object> results = new List<Object>();
-//        Boolean drop = true;
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Object o = objects[i];
-//            if (!predicate.test(o) || !drop) {
-//                results.add(o);
-//                drop = false;
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a `ObjectSequence` with elements returned by `mapper` function,
+     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<String> peopleNames = (List<String>) ObjectSequence.of(people)
-     *     .mapTo(getName)
-     *     .toList();
+     * public class ToLowerCaseOperator extends Operator {
+     *     public override Object apply(Object o) { return ((String) o).toLowerCase(); }
+     * }
+     * List<String> normalizedStrings = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .mapTo(new ToLowerCaseOperator())
+     *     .toList(String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
      */
     public virtual override ObjectEnumerable mapTo(final IOperator mapper) {
         return new ObjectSequence(SequencePipeline.mapTo(objects, mapper, new List<Object>()));
-//        Validate.notNull(mapper);
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            results.add(mapper.apply(objects[i]));
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a `IntSequence` with elements returned by `mapper` function,
+     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `IntSequence`
+     * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Integer> peopleAges = ObjectSequence.of(people)
-     *     .mapToInt(getAge)
-     *     .toList();
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return ((String) o).length(); }
+     * }
+     * List<Integer> ints = ObjectSequence.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .mapToInt(new LengthFunction())
+     *     .toList(); // [1, 2, 3]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
         return IntSequence.of((List<Integer>) SequencePipeline.mapTo(objects, mapper, new List<Integer>()));
-//        Validate.notNull(mapper);
-//        final List<Integer> results = new List<Integer>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            results.add((Integer) mapper.apply(objects[i]));
-//        }
-//        return IntSequence.of(results);
     }
 
     /**
-     * @description Returns a `LongSequence` with elements returned by `mapper` function,
+     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `LongSequence`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Long> peopleIds = ObjectSequence.of(people)
-     *     .mapToLong(getId)
-     *     .toList();
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return (Long) ((String) o).length(); }
+     * }
+     * List<Long> longs = ObjectSequence.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .mapToLong(new LengthFunction())
+     *     .toList(); // [1L, 2L, 3L]
      */
     public virtual override LongEnumerable mapToLong(final IFunction mapper) {
         return LongSequence.of((List<Long>) SequencePipeline.mapTo(objects, mapper, new List<Long>()));
-//        Validate.notNull(mapper);
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            results.add((Long) mapper.apply(objects[i]));
-//        }
-//        return LongSequence.of(results);
     }
 
     /**
-     * @description Returns a `DoubleSequence` with elements returned by `mapper` function,
+     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `DoubleSequence`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Double> peopleHeights = ObjectSequence.of(people)
-     *     .mapToDouble(getHeight)
-     *     .toList();
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return (Double) ((String) o).length(); }
+     * }
+     * List<Double> doubles = ObjectSequence.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .mapToDouble(new LengthFunction())
+     *     .toList(); // [1.0, 2.0, 3.0]
      */
     public virtual override DoubleEnumerable mapToDouble(final IFunction mapper) {
         return DoubleSequence.of((List<Double>) SequencePipeline.mapTo(objects, mapper, new List<Double>()));
-//        Validate.notNull(mapper);
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            results.add((Double) mapper.apply(objects[i]));
-//        }
-//        return DoubleSequence.of(results);
     }
 
     /**
-     * @description Returns a `SObjectSequence` with elements returned by `mapper` function,
+     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this sequence.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `SObjectSequence`
+     * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Contact> contacts = ObjectSequence.of(people)
-     *     .mapToSObject(getAsContact)
-     *     .toList();
+     * public class CreateAccountFunction extends Function {
+     *     public override Object apply(Object o) { return new Account(Name = (String) o); }
+     * }
+     * List<Account> accounts = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .mapToSObject(new CreateAccountFunction())
+     *     .toList(); //
+     * [
+     *   { Name: 'foo' },
+     *   { Name: 'bar' },
+     *   { Name: 'baz' }
+     * ]
      */
     public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
         return SObjectSequence.of((List<SObject>) SequencePipeline.mapTo(objects, mapper, new List<SObject>()));
-//        Validate.notNull(mapper);
-//        final List<SObject> results = new List<SObject>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            results.add((SObject) mapper.apply(objects[i]));
-//        }
-//        return SObjectSequence.of(results);
     }
 
     /**
-     * @description Returns a new `ObjectSequence` with `Object` elements as a result of
+     * @description Returns a new `ObjectEnumerable` with `Object` elements as a result of
      * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Object>`
      *
-     * @return the new `ObjectSequence`
+     * @return the new `ObjectEnumerable`
      *
      * @example
-     * List<Property> flattenedProperties = (List<Property>) ObjectSequence.of(people)
-     *     .flatMapTo(getListProperty)
-     *     .toList(List<Property>.class);
-     *     
-     * List<List<String>> containedStrings; // [ ['foo'], null, [], ['baz', 'bar'], [null] ]
-     * List<String> flattenedStrings = (List<String>) ObjectSequence.of(containedStrings)
-     *     .flatMapTo(Function.identity())
-     *     .toList(List<String>.class); // ['foo', 'baz', 'bar', null]
+     * public class ToLowerCaseFunction extends Function {
+     *     public override Object apply(Object o) { return new List<String>{ ((String) o).toLowerCase() }; }
+     * }
+     * List<String> normalizedStrings = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .flatMapTo(new ToLowerCaseFunction())
+     *     .toList(String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
      */
     public virtual override ObjectEnumerable flatMapTo(final IFunction mapper) {
         return new ObjectSequence(SequencePipeline.flatMapTo(objects, mapper, new List<Object>()));
-//        Validate.notNull(mapper);
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Iterable<Object> result = (Iterable<Object>) mapper.apply(objects[i]);
-//            if (result != null) {
-//                results.addAll(Iterators.toList(result));
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a new `IntSequence` with `Integer` elements as a result of
+     * @description Returns a new `IntEnumerable` with `Integer` elements as a result of
      * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Integer>`
      *
-     * @return the new `IntSequence`
+     * @return the new `IntEnumerable`
      *
      * @example
-     * List<Integer> flattenedProperties = (List<Integer>) ObjectSequence.of(people)
-     *     .flatMapToInt(getIntListProperty)
-     *     .toList();
-     *     
-     * List<List<Integer>> containedInts; // [ [1], null, [], [0, 10], [null] ]
-     * List<Integer> flattenedInts = ObjectSequence.of(containedInts)
-     *     .flatMapToInt(Function.identity())
-     *     .toList(); // [1, 0, 10, null]
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Integer>{ ((String) o).length() }; }
+     * }
+     * List<Integer> ints = ObjectSequence.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .flatMapToInt(new LengthFunction())
+     *     .toList(); // [1, 2, 3]
      */
     public virtual override IntEnumerable flatMapToInt(final IFunction mapper) {
         return IntSequence.of((List<Integer>) SequencePipeline.flatMapTo(objects, mapper, new List<Integer>()));
-//        Validate.notNull(mapper);
-//        final List<Integer> results = new List<Integer>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Iterable<Integer> result = (Iterable<Integer>) mapper.apply(objects[i]);
-//            if (result != null) {
-//                results.addAll(Iterators.toIntList(result.iterator()));
-//            }
-//        }
-//        return IntSequence.of(results);
     }
 
     /**
-     * @description Returns a new `LongSequence` with `Long` elements as a result of
+     * @description Returns a new `LongEnumerable` with `Long` elements as a result of
      * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Long>`
      *
-     * @return the new `LongSequence`
+     * @return the new `LongEnumerable`
      *
      * @example
-     * List<Long> flattenedProperties = (List<Long>) ObjectSequence.of(people)
-     *     .flatMapToLong(getLongListProperty)
-     *     .toList();
-     *     
-     * List<List<Long>> containedLongs; // [ [1L], null, [], [0L, 10L], [null] ]
-     * List<Long> flattenedLongs = ObjectSequence.of(containedLongs)
-     *     .flatMapToLong(Function.identity())
-     *     .toList(); // [1L, 0L, 10L, null]
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Long>{ ((String) o).length() }; }
+     * }
+     * List<Long> longs = ObjectSequence.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .flatMapToLong(new LengthFunction())
+     *     .toList(); // [1L, 2L, 3L]
      */
     public virtual override LongEnumerable flatMapToLong(final IFunction mapper) {
         return LongSequence.of((List<Long>) SequencePipeline.flatMapTo(objects, mapper, new List<Long>()));
-//        Validate.notNull(mapper);
-//        final List<Long> results = new List<Long>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Iterable<Long> result = (Iterable<Long>) mapper.apply(objects[i]);
-//            if (result != null) {
-//                results.addAll(Iterators.toLongList(result.iterator()));
-//            }
-//        }
-//        return LongSequence.of(results);
     }
 
     /**
-     * @description Returns a new `DoubleSequence` with `Double` elements as a result of
+     * @description Returns a new `DoubleEnumerable` with `Double` elements as a result of
      * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Double>`
      *
-     * @return the new `DoubleSequence`
+     * @return the new `DoubleEnumerable`
      *
      * @example
-     * List<Double> flattenedProperties = (List<Double>) ObjectSequence.of(people)
-     *     .flatMapToDouble(getDoubleListProperty)
-     *     .toList();
-     *     
-     * List<List<Double>> containedDoubles; // [ [1.0], null, [], [0.5, Math.PI], [null] ]
-     * List<Double> flattenedDoubles = ObjectSequence.of(containedDoubles)
-     *     .flatMapToDouble(Function.identity())
-     *     .toList(); // [1.0, 0.5, Math.PI, null]
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Double>{ ((String) o).length() }; }
+     * }
+     * List<Double> doubles = ObjectSequence.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .flatMapToDouble(new LengthFunction())
+     *     .toList(); // [1.0, 2.0, 3.0]
      */
     public virtual override DoubleEnumerable flatMapToDouble(final IFunction mapper) {
         return DoubleSequence.of((List<Double>) SequencePipeline.flatMapTo(objects, mapper, new List<Double>()));
-//        Validate.notNull(mapper);
-//        final List<Double> results = new List<Double>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Iterable<Double> result = (Iterable<Double>) mapper.apply(objects[i]);
-//            if (result != null) {
-//                results.addAll(Iterators.toDoubleList(result.iterator()));
-//            }
-//        }
-//        return DoubleSequence.of(results);
     }
 
     /**
-     * @description Returns a new `SObjectSequence` with `SObject` elements as a result of
+     * @description Returns a new `SObjectEnumerable` with `SObject` elements as a result of
      * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<SObject>`
      *
-     * @return the new `SObjectSequence`
+     * @return the new `SObjectEnumerable`
      *
      * @example
-     * List<List<Account>> containedAccounts; // [ [acc1], null, [], [acc2, acc3], [null] ]
-     * List<Account> flattenedAccounts = ObjectSequence.of(containedDoubles)
-     *     .flatMapToSObject(Function.identity())
-     *     .toList(); // [acc1, acc2, acc3, null]
+     * public class CreateAccountFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Account>{ new Account(Name = (String) o) }; }
+     * }
+     * List<Account> accounts = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .flatMapToSObject(new CreateAccountFunction())
+     *     .toList(); //
+     * [
+     *   { Name: 'foo' },
+     *   { Name: 'bar' },
+     *   { Name: 'baz' }
+     * ]
      */
     public virtual override SObjectEnumerable flatMapToSObject(final IFunction mapper) {
         return SObjectSequence.of((List<SObject>) SequencePipeline.flatMapTo(objects, mapper, new List<SObject>()));
-//        Validate.notNull(mapper);
-//        final List<SObject> results = new List<SObject>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Iterable<SObject> result = (Iterable<SObject>) mapper.apply(objects[i]);
-//            if (result != null) {
-//                results.addAll(Iterators.toSObjectList(result.iterator()));
-//            }
-//        }
-//        return SObjectSequence.of(results);
     }
 
     /**
-     * @description Returns a `SObjectSequence` after performing `consumer` action on each element.
+     * @description Returns a `SObjectEnumerable` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return this `SObjectSequence`
+     * @return this `SObjectEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
      * @example
-     * List<Person> editedPeople = (List<Person>) ObjectSequence.of(people)
-     *     .forEach(setSomeProperty)
-     *     .toList();
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * List<String> strings = (List<String>) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .forEach(new DebugConsumer()) // prints 'foo', 'bar', 'baz'
+     *     .toList(String.class); // ['foo', 'bar', 'baz']
      */
     public virtual override ObjectEnumerable forEach(final IConsumer consumer) {
         SequencePipeline.forEach(objects, consumer);
-//        Validate.notNull(consumer);
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            consumer.accept(objects[i]);
-//        }
         return this;
     }
 
     /**
-     * @description Returns a `ObjectSequence` with distinct elements.
+     * @description Returns a `ObjectEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @example
-     * List<Person> distinctPeople = (List<Person>) ObjectSequence.of(people)
+     * List<String> distinct = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', 'foo', 'bar' })
      *     .distinct()
-     *     .toList();
+     *     .toList(String.class); // ['foo', 'bar', 'baz']
      */
     public virtual override ObjectEnumerable distinct() {
         return new ObjectSequence(SequencePipeline.distinct(objects, new List<Object>()));
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            if (!results.contains(objects[i])) {
-//                results.add(objects[i]);
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a `ObjectSequence` with distinct elements
+     * @description Returns a `ObjectEnumerable` with distinct elements
      * according to `classifier` function.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param classifier the classifier function
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `classifier` is null
      *
      * @example
-     * List<Person> distinctPeopleByName = (List<Person>) ObjectSequence.of(people)
-     *     .distinct(getName)
-     *     .toList();
+     * public class ToLowerCaseOperator extends Operator {
+     *     public override Object apply(Object o) { return ((String) o).toLowerCase(); }
+     * }
+     * List<String> distinct = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .distinct(new ToLowerCaseOperator())
+     *     .toList(String.class); // ['foo', 'Bar', 'baz']
      */
     public virtual override ObjectEnumerable distinct(final IFunction classifier) {
         return new ObjectSequence(SequencePipeline.distinct(objects, classifier, new List<Object>()));
-//        Validate.notNull(classifier);
-//        final List<Object> results = new List<Object>();
-//        final Set<Object> classifierResults = new Set<Object>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            if (classifierResults.add(classifier.apply(objects[i]))) {
-//                results.add(objects[i]);
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a `ObjectSequence` with sorted elements in ascending order.
+     * @description Returns a `ObjectEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @example
-     * List<Person> sortedPeople = (List<Person>) ObjectSequence.of(people)
+     * List<String> sorted = (List<String>) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', null })
      *     .sort()
-     *     .toList();
+     *     .toList(String.class); // [null, 'bar', 'baz', 'foo']
      */
     public virtual override ObjectEnumerable sort() {
         return new ObjectSequence(SequencePipeline.sort(objects));
-//        final List<Object> clone = objects.clone();
-//        clone.sort();
-//        return new ObjectSequence(clone);
     }
 
     /**
-     * @description Returns a `ObjectSequence` with sorted elements according to `comparer`.
+     * @description Returns a `ObjectEnumerable` with sorted elements according to `comparer`.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param comparer the non-interfering, stateless comparer to compare sequence elements
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `comparer` is null
      *
      * @example
-     * List<Person> sortedPeopleByName = (List<Person>) ObjectSequence.of(people)
-     *     .sort(getName)
-     *     .toList();
+     * public class SecondLetterComparer extends Comparer {
+     *     public override Integer compare(Object o1, Object o2) {
+     *         String s1 = (String) o1;
+     *         String s2 = (String) o2;
+     *         if (s1.length() > 1 && s2.length() > 1) {
+     *             return s1.split('')[1].compareTo(s2.split('')[1]);
+     *         }
+     *         return s1.length() <= 1 ? -1 : 1;
+     *     }
+     * }
+     * List<String> sorted = (List<String>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .sort(new SecondCharComparer())
+     *     .toList(String.class); // ['Bar', 'baz', 'bar', 'foo', 'Foo']
      */
     public virtual override ObjectEnumerable sort(final IComparer comparer) {
         return new ObjectSequence(SequencePipeline.sort(objects, comparer));
     }
 
     /**
-     * @description Returns a `ObjectSequence` with first `lim` elements.
+     * @description Returns a `ObjectEnumerable` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
-     * List<Person> first100People = (List<Person>) ObjectSequence.of(people)
-     *     .lim(100)
-     *     .toList();
+     * List<String> first2 = (List<String>) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .lim(2)
+     *     .toList(String.class); // ['foo', 'baz']
      */
     public virtual override ObjectEnumerable lim(final Integer lim) {
         return new ObjectSequence(SequencePipeline.lim(objects, lim, new List<Object>()));
-//        Validate.notNull(lim);
-//        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
-//        if (lim == 0) { return ObjectSequence.empty(); }
-//        if (lim >= objects.size()) { return this; }
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0; i < lim; i++) {
-//            results.add(objects[i]);
-//        }
-//        return new ObjectSequence(results);
     }
 
     /**
-     * @description Returns a new `ObjectSequence` that skips first `n` elements
+     * @description Returns a new `ObjectEnumerable` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `ObjectSequence`
+     * @return the `ObjectEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example
-     * List<Person> restPeople = (List<Person>) ObjectSequence.of(people)
-     *     .skip(100)
-     *     .toList();
+     * List<String> rest = (List<String>) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .skip(1)
+     *     .toList(String.class); // ['bar', 'baz']
      */
     public virtual override ObjectEnumerable skip(final Integer n) {
         return new ObjectSequence(SequencePipeline.skip(objects, n, new List<Object>()));
-//        Validate.notNull(n);
-//        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
-//        if (n == 0) { return this; }
-//        if (n >= objects.size()) { return ObjectSequence.empty(); }
-//        final List<Object> results = new List<Object>();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            if (i >= n) {
-//                results.add(objects[i]);
-//            }
-//        }
-//        return new ObjectSequence(results);
     }
     // @end-group
     //</editor-fold>
@@ -874,15 +794,22 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @return the `Object` result of the reduction
      *
      * @throws NullPointerException if `accumulator` is null
+     * 
+     * @example
+     * public class ConcatenateBiOperator extends BiOperator {
+     *     private final String separator;
+     *     public ConcatenateBiOperator(String separator) { this.separator = separator; }
+     *     public override Object apply(Object o1, Object o2) {
+     *         return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+     *     }
+     * }
+     * String concatenated = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce('', new ConcatenateBiOperator('-')); // 'foo-bar-baz'
+     * String concatenated1 = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce('seed', new ConcatenateBiOperator(';')); // 'seed;foo;bar;baz'
      */
     public virtual override Object reduce(final Object identity, final IBiOperator accumulator) {
         return SequencePipeline.reduce(objects, identity, accumulator);
-//        Validate.notNull(accumulator);
-//        Object result = identity;
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            result = accumulator.apply(result, objects[i]);
-//        }
-//        return result;
     }
 
     /**
@@ -898,49 +825,23 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Person eldestPerson = (Person) ObjectSequence.of(people)
-     *     .reduce(maxBy(getAge))
-     *     .get();
+     * public class ConcatenateBiOperator extends BiOperator {
+     *     private final String separator;
+     *     public ConcatenateBiOperator(String separator) { this.separator = separator; }
+     *     public override Object apply(Object o1, Object o2) {
+     *         return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+     *     }
+     * }
+     * String concatenated = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce(new ConcatenateBiOperator('-'))
+     *     .get(); // 'foo-bar-baz'
+     * String concatenated1 = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce(new ConcatenateBiOperator(';'))
+     *     .get(); // 'seed;foo;bar;baz'
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
         return Optional.ofNullable(SequencePipeline.reduce(objects, accumulator));
-//        Validate.notNull(accumulator);
-//        Object result;
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            result = i == 0 ? objects[i] : accumulator.apply(result, objects[i]);
-//        }
-//        return Optional.ofNullable(result);
     }
-
-//    /**
-//     * @description Performs a mutable reduction operation on elements, collecting elements
-//     * to a container returned by `supplier` by applying `accumulator` function.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param supplier the function that returns a mutable result container
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Object` result of the collection
-//     *
-//     * @throws NullPointerException if `supplier` or `accumulator` is null
-//     *
-//     * @example
-//     * List<String> peopleNames = (List<String>) ObjectSequence.of(people)
-//     *     .collect(
-//     *         Supplier.of(List<String>.class),
-//     *         ListObjectConsumers.addToList(getName)
-//     *     );
-//     */
-//    public virtual override Object collect(final ISupplier supplier, final IBiConsumer accumulator) {
-//        return SequencePipeline.collect(objects, Collector.of(supplier, accumulator));
-//        Validate.notNull(supplier);
-//        Validate.notNull(accumulator);
-//        final Object container = supplier.get();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            accumulator.accept(container, objects[i]);
-//        }
-//        return container;
-//    }
 
     /**
      * @description Performs a mutable reduction operation on elements, collecting elements
@@ -954,30 +855,59 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @throws NullPointerException if `collector` is null
      *
      * @example
-     * // Group people by city
-     * Map<String, List<Person>> peopleByCity = (Map<String, List<Person>>)
-     *     ObjectSequence.of(people)
-     *          .collect(Collectors.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
-     *          
-     * // Group people by city and by country, cascading two collectors
-     * Map<String, Map<String, List<Person>>> peopleByCityByCountry
-     *     = (Map<String, Map<String, List<Person>>>)
-     *         ObjectSequence.of(people)
-     *             .collect(Collectors.groupingByString(
-     *                 getCountry,
-     *                 Collectors.groupingByString(getCity)
-     *             ).cast(Map<String, Map<String, List<Person>>>.class));
+     * // Simple collecting
+     * public class AddToStringSetBiConsumer extends BiConsumer {
+     *     public override void accept(Object container, Object o) { ((Set<String>) container).add((String) o); }
+     * }
+     * Set<String> strings = (Set<String>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', 'foo', 'bar' })
+     *     .collect(Collector.of(Supplier.of(Set<String>.class), new AddToStringSetBiConsumer()));
+     * // ['foo', 'bar', 'baz', 'quux', 'a']
+     * // Cascaded operation
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return ((String) o).length(); }
+     * }
+     * public class PutToObjectsByIntMap extends BiConsumer {
+     *     private final IFunction classifier;
+     *     public PutToObjectsByIntMap(ICollector downstream, IFunction classifier) {
+     *         this.downstream = downstream;
+     *         this.classifier = classifier;
+     *     }
+     *     public override void accept(Object container, Object o) {
+     *         final Map<Integer, Set<String>> m = (Map<Integer, Set<String>>) container;
+     *         final Integer key = (Integer) classifier.apply(o);
+     *         if (!m.containsKey(key)) { m.put(key, (Set<String>) downstream.supplier().get()); }
+     *         downstream.accumulator().accept(m.get(key), o);
+     *     }
+     * }
+     * // the classifier function mapping input elements to keys.
+     * IFunction classificationFunction = new LengthFunction();
+     * // the supplier providing a new empty Map into which the results will be inserted.
+     * ISupplier mapSupplier = Supplier.of(Map<Integer, Set<String>>.class);
+     * // the Collector implementing the downstream reduction.
+     * ICollector downstreamCollector = Collector.of(Supplier.of(Set<String>.class), new AddToStringSetBiConsumer());
+     * // the function that folds an element into a result container.
+     * IBiConsumer accumulator = new PutToObjectsByIntMap(downstreamCollector, new LengthFunction());
+     * // the Collector implementing the cascaded group-by operation.
+     * ICollector groupByLengthCollector = Collector.of(mapSupplier, accumulator);
+     * Map<Integer, Set<String>> stringsByLength = (Map<Integer, Set<String>>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', 'foo', 'bar' })
+     *     .collect(groupByLengthCollector); //
+     * {
+     *   1: ['a'],
+     *   3: ['foo', 'bar', 'baz'],
+     *   4: ['quux']
+     * }
+     * // The same result can be obtained by using built-in Collectors
+     * Map<Integer, Set<String>> stringsByLength1 = (Map<Integer, Set<String>>)
+     *     ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', 'foo', 'bar' })
+     *     .collect(
+     *         Collectors.groupingByInt(new LengthFunction(), Collectors.toStringSet())
+     *             .cast(Map<Integer, Set<String>>.class)
+     *     );
      */
     public virtual override Object collect(final ICollector collector) {
         return SequencePipeline.collect(objects, collector);
-//        Validate.notNull(collector);
-//        final Object container = collector.supplier().get();
-//        final IBiConsumer accumulator = collector.accumulator();
-//        final IFunction finisher = collector.finisher();
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            accumulator.accept(container, objects[i]);
-//        }
-//        return finisher == null ? container : finisher.apply(container);
     }
 
     /**
@@ -992,25 +922,22 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Person firstActivePerson = (Person) ObjectSequence.of(people)
-     *     .find(isActive)
-     *     .get();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * String firstFound = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .find(new ContainsPredicate('a'))
+     *     .get(); // 'bar'
      */
     public virtual override Optional find(final IPredicate predicate) {
         return Optional.ofNullable(SequencePipeline.find(objects, predicate));
-//        Validate.notNull(predicate);
-//        for (Integer i = 0, size = objects.size(); i < size; i++) {
-//            final Object o = objects[i];
-//            if (predicate.test(o)) {
-//                return Optional.ofNullable(o);
-//            }
-//        }
-//        return Optional.empty();
     }
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `ObjectSequence` is empty then `false` is returned.
+     * If `ObjectEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -1020,17 +947,21 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isEveryPersonActive = ObjectSequence.of(people).every(isActive);
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * Boolean doesEveryStringContainA = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .every(new ContainsPredicate('a')); // false
      */
     public virtual override Boolean every(final IPredicate predicate) {
         return SequencePipeline.match(objects, predicate, 1);
-//        Validate.notNull(predicate);
-//        return match(predicate, 1);
     }
 
     /**
      * @description Returns whether some element matches `predicate`.
-     * If `ObjectSequence` is empty then `false` is returned.
+     * If `ObjectEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -1040,12 +971,16 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isSomePersonActive = ObjectSequence.of(people).some(isActive);
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * Boolean doesSomeStringContainA = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .some(new ContainsPredicate('a')); // true
      */
     public virtual override Boolean some(final IPredicate predicate) {
         return SequencePipeline.match(objects, predicate, 0);
-//        Validate.notNull(predicate);
-//        return match(predicate, 0);
     }
 
     /**
@@ -1053,6 +988,10 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
+     * 
+     * @example
+     * Integer count = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .count(); // 3
      */
     public virtual override Integer count() {
         return objects.size();
@@ -1063,6 +1002,12 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
+     * 
+     * @example
+     * ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .isEmpty(); // false
+     * ObjectSequence.of(new List<String>()))
+     *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
         return objects.isEmpty();
@@ -1075,9 +1020,9 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @return the `List<Object>` containing the sequence elements
      *
      * @example
-     * List<Person> activePeople = (List<Person>) ObjectSequence.of(people)
-     *     .filter(isActive)
-     *     .toList();
+     * List<Object> strings = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', 'qux' })
+     *     .skip(1)
+     *     .toList(); // ['bar', 'baz', 'qux']
      */
     public virtual override List<Object> toList() {
         return objects;
@@ -1090,9 +1035,9 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @return the `Set<Object>` containing the sequence elements
      *
      * @example
-     * List<Object> activePeople = ObjectSequence.of(people)
-     *     .filter(isActive)
-     *     .toSet();
+     * Set<Object> strings = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', 'qux', 'foo', 'bar' })
+     *     .skip(1)
+     *     .toSet(); // ['bar', 'baz', 'qux']
      */
     public virtual override Set<Object> toSet() {
         return new Set<Object>(objects);

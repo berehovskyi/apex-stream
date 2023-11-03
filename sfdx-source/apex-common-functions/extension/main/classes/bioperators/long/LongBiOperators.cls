@@ -11,6 +11,7 @@
 public virtual inherited sharing class LongBiOperators {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected LongBiOperators() {}
 
     //<editor-fold desc="Built-Ins">
@@ -72,14 +73,16 @@ public virtual inherited sharing class LongBiOperators {
     }
 
     private class Min extends BiOperator {
+        final IComparer comp = Comparer.defaultOrder();
         public override Object apply(Object l1, Object l2) {
-            return Comparer.compareObjects((Long) l1, (Long) l2) != 1 ? l1 : l2;
+            return comp.compare((Long) l1, (Long) l2) != 1 ? l1 : l2;
         }
     }
 
     private class Max extends BiOperator {
+        final IComparer comp = Comparer.defaultOrder();
         public override Object apply(Object l1, Object l2) {
-            return Comparer.compareObjects((Long) l1, (Long) l2) == 1 ? l1 : l2;
+            return comp.compare((Long) l1, (Long) l2) == 1 ? l1 : l2;
         }
     }
     // @end-group

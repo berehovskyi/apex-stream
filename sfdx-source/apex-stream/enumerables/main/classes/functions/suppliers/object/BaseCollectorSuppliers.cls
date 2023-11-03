@@ -1,9 +1,9 @@
 /**
  * @description Provides common implementations of {@link Supplier}
- * and related utilities that are used by {@link Collectors}.
+ * and related utilities that are used by {@link IEnumerable}.
  *
  * @see Supplier
- * @see Collectors
+ * @see BaseCollectors
  *
  * @author Oleh Berehovskyi
  *
@@ -12,6 +12,7 @@
 public virtual inherited sharing class BaseCollectorSuppliers {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected BaseCollectorSuppliers() {}
     
     //<editor-fold desc="Built-Ins">

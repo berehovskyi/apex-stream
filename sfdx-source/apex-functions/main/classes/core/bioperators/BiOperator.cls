@@ -3,9 +3,6 @@
  * {@link IBiOperator} functional interface.
  *
  * @see IBiOperator
- * @see ObjectStream.zip
- * @see ObjectSequence.zip
- * @see IObjectEnumerable.reduce
  * @see Collector
  *
  * @author Oleh Berehovskyi
@@ -51,7 +48,6 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
      * @throws NullPointerException if `comparer` is null
      */
     public static BiOperator minBy(final IComparer comparer) {
-        Validate.notNull(comparer);
         return new MinBy(comparer);
     }
 
@@ -66,7 +62,6 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
      * @throws NullPointerException if `comparer` is null
      */
     public static BiOperator maxBy(final IComparer comparer) {
-        Validate.notNull(comparer);
         return new MaxBy(comparer);
     }
 
@@ -81,12 +76,7 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
      *
      * @throws NullPointerException if `consumer` or `merger` is null
      */
-    public static BiOperator combine(
-        final IBiConsumer consumer,
-        final IBiOperator merger
-    ) {
-        Validate.notNull(consumer);
-        Validate.notNull(merger);
+    public static BiOperator combine(final IBiConsumer consumer, final IBiOperator merger) {
         return new Combine(consumer, merger);
     }
 
@@ -118,13 +108,19 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
 
     private class MinBy extends BiOperator {
         private final IComparer comparer;
-        private MinBy(IComparer comparer) { this.comparer = comparer; }
+        private MinBy(IComparer comparer) {
+            Validate.notNull(comparer);
+            this.comparer = comparer;
+        }
         public override Object apply(Object o1, Object o2) { return comparer.compare(o1, o2) <= 0 ? o1 : o2; }
     }
 
     private class MaxBy extends BiOperator {
         private final IComparer comparer;
-        private MaxBy(IComparer comparer) { this.comparer = comparer; }
+        private MaxBy(IComparer comparer) {
+            Validate.notNull(comparer);
+            this.comparer = comparer;
+        }
         public override Object apply(Object o1, Object o2) { return comparer.compare(o1, o2) >= 0 ? o1 : o2; }
     }
 
@@ -132,6 +128,8 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
         private final IBiConsumer consumer;
         private final IBiOperator merger;
         private Combine(IBiConsumer consumer, IBiOperator merger) {
+            Validate.notNull(consumer);
+            Validate.notNull(merger);
             this.consumer = consumer;
             this.merger = merger;
         }

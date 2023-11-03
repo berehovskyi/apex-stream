@@ -4,7 +4,6 @@
  *
  * @see ISupplier
  * @see Collector
- * @see SObjectCollector
  *
  * @author Oleh Berehovskyi
  *
@@ -36,26 +35,8 @@ public abstract inherited sharing class Supplier implements ISupplier {
      * List<Account> accounts = (List<Account>) of.get(); // new List<Account>()
      */
     public static Supplier of(final Type t) {
-        Validate.notNull(t);
         return new OfType(t);
     }
-//
-//    /**
-//     * @description Returns a `SObjectSupplier` that returns a new `SObject` instance
-//     * of the given `sObjectType`.
-//     *
-//     * @param sObjectType SObjectType of the new instance to create
-//     *
-//     * @return the `SObjectSupplier`
-//     *
-//     * @throws NullPointerException if `sObjectType` is null
-//     *
-//     * @see SObjectType.newSObject
-//     */
-//    public static Supplier of(final SObjectType sObjectType) {
-//        Validate.notNull(sObjectType);
-//        return new OfSObjectType(sObjectType);
-//    }
 
     /**
      * @description Returns a stateful `Supplier` that returns a reference of the `o` object.
@@ -99,15 +80,12 @@ public abstract inherited sharing class Supplier implements ISupplier {
     // @start-group Lambdas
     private class OfType extends Supplier {
         private final Type t;
-        private OfType(Type t) { this.t = t; }
+        private OfType(Type t) {
+            Validate.notNull(t);
+            this.t = t;
+        }
         public override Object get() { return t.newInstance(); }
     }
-
-//    private class OfSObjectType extends Supplier {// ToDo
-//        private final SObjectType t;
-//        private OfSObjectType(SObjectType t) { this.t = t; }
-//        public override Object get() { return t.newSObject(); }
-//    }
 
     private class Constant extends Supplier {
         private final Object identity;
@@ -120,9 +98,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
         private Iterator<Object> iterator;
         private Repeat(Iterable<Object> iterable) { this.iterable = iterable; }
         public override Object get() {
-            if (iterator?.hasNext() != true) {
-                iterator = iterable.iterator();
-            }
+            if (iterator?.hasNext() != true) { iterator = iterable.iterator(); }
             return iterator.next();
         }
     }

@@ -11,6 +11,7 @@
 public virtual inherited sharing class IntBiOperators {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected IntBiOperators() {}
 
     //<editor-fold desc="Built-Ins">
@@ -64,7 +65,7 @@ public virtual inherited sharing class IntBiOperators {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Sum extends BiOperator {
-        public override Object apply(Object o1, Object o2) { return (Integer) o1 +(Integer)  o2; }
+        public override Object apply(Object o1, Object o2) { return (Integer) o1 + (Integer) o2; }
     }
 
     private class Product extends BiOperator {
@@ -72,14 +73,16 @@ public virtual inherited sharing class IntBiOperators {
     }
 
     private class Min extends BiOperator {
+        final IComparer comp = Comparer.defaultOrder();
         public override Object apply(Object o1, Object o2) {
-            return Comparer.compareObjects((Integer) o1, (Integer) o2) != 1 ? o1 : o2;
+            return comp.compare((Integer) o1, (Integer) o2) != 1 ? o1 : o2;
         }
     }
 
     private class Max extends BiOperator {
+        final IComparer comp = Comparer.defaultOrder();
         public override Object apply(Object o1, Object o2) {
-            return Comparer.compareObjects((Integer) o1, (Integer) o2) == 1 ? o1 : o2;
+            return comp.compare((Integer) o1, (Integer) o2) == 1 ? o1 : o2;
         }
     }
     // @end-group

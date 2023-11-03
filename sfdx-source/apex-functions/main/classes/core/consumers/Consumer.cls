@@ -47,7 +47,6 @@ public abstract inherited sharing class Consumer implements IConsumer {
      * @throws NullPointerException if `consumers` is null or some element is null
      */
     public static Consumer compose(final List<IConsumer> consumers) {
-        Validate.noNullElements(consumers);
         return new Compose(consumers);
     }
     // @end-group
@@ -57,7 +56,10 @@ public abstract inherited sharing class Consumer implements IConsumer {
     // @start-group Lambdas
     private class Compose extends Consumer {
         private final List<IConsumer> consumers;
-        private Compose(List<IConsumer> consumers) { this.consumers = consumers; }
+        private Compose(List<IConsumer> consumers) {
+            Validate.noNullElements(consumers);
+            this.consumers = consumers;
+        }
         public override void accept(Object o) {
             for (IConsumer consumer : consumers) { consumer.accept(o); }
         }

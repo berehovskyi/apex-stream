@@ -11,6 +11,7 @@
 public virtual inherited sharing class DoubleBiOperators {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected DoubleBiOperators() {}
 
     //<editor-fold desc="Built-Ins">
@@ -38,7 +39,7 @@ public virtual inherited sharing class DoubleBiOperators {
      *
      * @throws NullPointerException if one of the Integer input argument is null
      *
-     * @see IDoubleEnumerable.sum
+     * @see DoubleEnumerable.sum
      */
     public static BiOperator sum() {
         return new Sum();
@@ -96,14 +97,16 @@ public virtual inherited sharing class DoubleBiOperators {
     }
 
     private class Min extends BiOperator {
+        final IComparer comp = Comparer.defaultOrder();
         public override Object apply(Object o1, Object o2) {
-            return Comparer.compareObjects((Double) o1, (Double) o2) != 1 ? o1 : o2;
+            return comp.compare((Double) o1, (Double) o2) != 1 ? o1 : o2;
         }
     }
 
     private class Max extends BiOperator {
+        final IComparer comp = Comparer.defaultOrder();
         public override Object apply(Object o1, Object o2) {
-            return Comparer.compareObjects((Double) o1, (Double) o2) == 1 ? o1 : o2;
+            return comp.compare((Double) o1, (Double) o2) == 1 ? o1 : o2;
         }
     }
     // @end-group

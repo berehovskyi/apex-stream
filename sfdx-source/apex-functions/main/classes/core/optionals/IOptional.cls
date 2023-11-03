@@ -1,6 +1,9 @@
 /**
- * @description
+ * @description A container which may or may not contain a value.
+ *
  * @author Oleh Berehovskyi
+ * 
+ * @group Functional Interfaces
  */
 public interface IOptional {
 
@@ -9,8 +12,6 @@ public interface IOptional {
      * otherwise throws `NoSuchElementException`.
      *
      * @return the non-null `value`
-     *
-     * @throws NoSuchElementException if `value` is null
      */
      Object get();
 
@@ -35,65 +36,55 @@ public interface IOptional {
      * @param consumer the consumer action to perform
      */
     void ifPresent(IConsumer consumer);
-    
+
     /**
      * @description If a value is present, performs `consumer` action with `value`,
      * otherwise performs runnable `action`.
      *
      * @param consumer the consumer action
      * @param action the runnable action
-     *
-     * @throws NullPointerException if `consumer` or `action` is null
      */
     void ifPresentOrElse(IConsumer consumer, IRunnable action);
     
     /**
-     * @description Returns an `Optional` describing the value,
-     * if `value` matches `predicate`, otherwise returns an empty `Optional`.
+     * @description Returns an `IOptional` describing the value,
+     * if `value` matches `predicate`, otherwise returns an empty `IOptional`.
      *
      * @param predicate the predicate to test a value
      *
-     * @return the nullable `Optional` or an empty `Optional`
-     *
-     * @throws NullPointerException if `predicate` is null
+     * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional filter(IPredicate predicate);
     
     /**
-     * @description Returns an `Optional` describing the result of applying the
+     * @description Returns an `IOptional` describing the result of applying the
      * `mapper` function to the value if the value is present,
-     * otherwise returns an empty `Optional`.
+     * otherwise returns an empty `IOptional`.
      *
      * @param mapper the function
      *
-     * @return the nullable `Optional` or an empty `Optional`
-     *
-     * @throws NullPointerException if `mapper` is null
+     * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional mapTo(IFunction mapper);
     
     /**
-     * @description Returns an `Optional` the result of applying the
+     * @description Returns an `IOptional` the result of applying the
      * `mapper` function to the value if the value is present,
-     * otherwise returns an empty `Optional`.
+     * otherwise returns an empty `IOptional`.
      *
-     * @param mapper the function that returns an `Optional`
+     * @param mapper the function that returns an `IOptional`
      *
-     * @return the nullable `Optional` or an empty `Optional`
-     *
-     * @throws NullPointerException if `mapper` is null
+     * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional flatMapTo(IFunction mapper);
     
     /**
-     * @description Returns an `Optional` describing the value if the value is present,
-     * otherwise returns `Optional` produced by the supplying function.
+     * @description Returns an `IOptional` describing the value if the value is present,
+     * otherwise returns `IOptional` produced by the supplying function.
      *
      * @param supplier the supplying function
      *
-     * @return the nullable `Optional` or an empty `Optional`
-     *
-     * @throws NullPointerException if `supplier` is null
+     * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional orGet(ISupplier supplier);
     
@@ -114,8 +105,6 @@ public interface IOptional {
      * @param supplier the supplying function
      *
      * @return the `Object`
-     *
-     * @throws NullPointerException if `mapper` is null
      */
     Object orElseGet(ISupplier supplier);
     
@@ -128,7 +117,6 @@ public interface IOptional {
      * @return the `Object`
      *
      * @throws Exception if no value is present
-     * @throws NullPointerException if `exceptionSupplier` is null
      */
     Object orElseThrow(ISupplier exceptionSupplier);
 

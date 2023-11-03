@@ -31,7 +31,6 @@
  * <p>Sequences and streams equally ensure the fulfillment of the set goals,
  * but are implemented in different ways.</p>
  *
- * @see ObjectSequence
  * @see SObjectStream
  * @see IntStream
  * @see LongStream
@@ -39,7 +38,7 @@
  *
  * @author Oleh Berehovskyi
  *
- * @group Iterables
+ * @group Enumerables
  *
  * @example
  * Double sumAnnualRevenueOfUniquePeopleFromLondon
@@ -49,6 +48,9 @@
  *         .mapToDouble(getAnnualRevenueToDoubleFunction)
  *         .sum();
  */
+@SuppressWarnings(
+    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount'
+)
 public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
 
     private final transient Iterator<Object> iterator;
@@ -68,6 +70,8 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
         this.iterator = iterator;
     }
 
+    //<editor-fold desc="Iterator">
+    // @start-group Iterator
     /**
      * @description Returns an internal iterator for the elements of this stream.
      * <p>Terminal Operation.</p>
@@ -84,22 +88,24 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
             isOperated = true;
         }
     }
+    // @end-group
+    //</editor-fold>
 
     //<editor-fold desc="Sources">
     // @start-group Sources
     /**
-     * @description Returns a `ObjectStream` created from `iterator`.
+     * @description Returns a `ObjectEnumerable` created from `iterator`.
      *
      * @param iterator the iterator
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterator` is null
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people).iterator());
-     * IObjectIterable peopleStream = ObjectStream.of(new Set<Person>(people).iterator());
-     * IObjectIterable peopleStream = ObjectStream.of(otherStream.iterator());
+     * ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people).iterator());
+     * ObjectEnumerable peopleStream = ObjectStream.of(new Set<Person>(people).iterator());
+     * ObjectEnumerable peopleStream = ObjectStream.of(otherStream.iterator());
      */
     public static ObjectEnumerable of(final Iterator<Object> iterator) {
         Validate.notNull(iterator);
@@ -107,16 +113,16 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns a `ObjectStream` created from `Iterable<Object>`.
+     * @description Returns a `ObjectEnumerable` created from `Iterable<Object>`.
      *
      * @param iterable the iterable
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `objects` is null
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people));
+     * ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people));
      */
     public static ObjectEnumerable of(final Iterable<Object> iterable) {
         Validate.notNull(iterable);
@@ -124,48 +130,49 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns a `ObjectStream` created from `List<Object>`.
+     * @description Returns a `ObjectEnumerable` created from `List<Object>`.
      *
      * @param objects the list
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `objects` is null
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.of(new List<Person>(people));
+     * ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people));
      */
     public static ObjectEnumerable of(final List<Object> objects) {
         return of((Iterable<Object>) objects);
     }
 
     /**
-     * @description Returns a `ObjectStream` created from `Set<Object>`.
+     * @description Returns a `ObjectEnumerable` created from `Set<Object>`.
      *
      * @param objects the set
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `objects` is null
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.of(new Set<Object>(people));
+     * ObjectEnumerable peopleStream = ObjectStream.of(new Set<Object>(people));
      */
     public static ObjectEnumerable of(final Set<Object> objects) {
         return of((Iterable<Object>) objects);
     }
 
     /**
-     * @description Returns a `ObjectStream` created from `Iterable<Object>` if non-null,
-     * otherwise returns an empty `ObjectStream`.
+     * @description Returns a `ObjectEnumerable` created from `Iterable<Object>` if non-null,
+     * otherwise returns an empty `ObjectEnumerable`.
      *
      * @param iterable the iterable
      *
-     * @return the new `ObjectStream` if `iterable` is non-null,
-     * otherwise an empty `ObjectStream`
+     * @return the new `ObjectEnumerable` if `iterable` is non-null,
+     * otherwise an empty `ObjectEnumerable`
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
+     * ObjectEnumerable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
+     * ObjectEnumerable emptyStream = ObjectStream.ofNullable(null);
      */
     public static ObjectEnumerable ofNullable(final Iterable<Object> iterable) {
         if (iterable == null) { return empty(); }
@@ -173,53 +180,54 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns a `ObjectStream` created from `objects` if non-null,
-     * otherwise returns an empty `ObjectStream`.
+     * @description Returns a `ObjectEnumerable` created from `objects` if non-null,
+     * otherwise returns an empty `ObjectEnumerable`.
      *
      * @param objects the list
      *
-     * @return the new `ObjectStream` if `objects` is non-null,
-     * otherwise an empty `ObjectStream`
+     * @return the new `ObjectEnumerable` if `objects` is non-null,
+     * otherwise an empty `ObjectEnumerable`
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
+     * ObjectEnumerable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
+     * ObjectEnumerable emptyStream = ObjectStream.ofNullable((List<Object>) null);
      */
     public static ObjectEnumerable ofNullable(final List<Object> objects) {
         return ofNullable((Iterable<Object>) objects);
     }
 
     /**
-     * @description Returns a `ObjectStream` created from `objects` if non-null,
-     * otherwise returns an empty `ObjectStream`.
+     * @description Returns a `ObjectEnumerable` created from `objects` if non-null,
+     * otherwise returns an empty `ObjectEnumerable`.
      *
      * @param objects the set
      *
-     * @return the new `ObjectStream` if `objects` is non-null,
-     * otherwise an empty `ObjectStream`
+     * @return the new `ObjectEnumerable` if `objects` is non-null,
+     * otherwise an empty `ObjectEnumerable`
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.ofNullable(new Set<Object>(people));
+     * ObjectEnumerable peopleStream = ObjectStream.ofNullable(new Set<Object>(people));
      */
     public static ObjectEnumerable ofNullable(final Set<Object> objects) {
         return ofNullable((Iterable<Object>) objects);
     }
 
     /**
-     * @description Returns an empty `ObjectStream`.
+     * @description Returns an empty `ObjectEnumerable`.
      *
-     * @return the empty `ObjectStream`
+     * @return the empty `ObjectEnumerable`
      */
     public static ObjectEnumerable empty() {
         return new ObjectStream();
     }
 
     /**
-     * @description Returns an infinite `ObjectStream` where each element is
+     * @description Returns an infinite `ObjectEnumerable` where each element is
      * generated by `supplier`.
      *
      * @param supplier the supplier of generated elements
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `supplier` is null
      */
@@ -228,15 +236,15 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns an infinite `ObjectStream` produced by iterative
+     * @description Returns an infinite `ObjectEnumerable` produced by iterative
      * application of `operator` to an initial element `seed`,
-     * producing a `ObjectStream` consisting of `seed`, `operator(seed)`,
+     * producing a `ObjectEnumerable` consisting of `seed`, `operator(seed)`,
      * `operator(operator(seed))`, etc.
      *
      * @param seed the initial element
      * @param operator the operator to be applied to the previous element to produce a new element
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `supplier` is null
      */
@@ -245,7 +253,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns an infinite `ObjectStream` produced by iterative
+     * @description Returns an infinite `ObjectEnumerable` produced by iterative
      * application of `operator` to an initial element `seed`,
      * conditioned on satisfying `predicate`.
      *
@@ -253,7 +261,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @param predicate the predicate to determine when the stream must be terminated
      * @param operator the operator to be applied to the previous element to produce a new element
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `supplier` or `supplier` is null
      */
@@ -262,19 +270,23 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns lazily concatenated `ObjectStream` whose elements are all the
+     * @description Returns lazily concatenated `ObjectEnumerable` whose elements are all the
      * elements of the first `Iterable<Object>` followed by all the elements of the
      * second `Iterable<Object>`.
      *
      * @param iterable1 the first `Iterable<Object>`
      * @param iterable2 the second `Iterable<Object>`
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1` or `iterable2` is null
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.concat(stream1, stream2);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> append = (List<String>) ObjectStream.concat(strs1, strs2)
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
      */
     public static ObjectEnumerable concat(final Iterable<Object> iterable1, final Iterable<Object> iterable2) {
         return concat(new List<Iterable<Object>>{ iterable1, iterable2 });
@@ -285,39 +297,53 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      *
      * @param iterables the list of `Iterable<Object>`
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterables` or some element in a list is null
      *
      * @example
-     * IObjectIterable peopleStream = ObjectStream.concat(streams);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> concat = (List<String>) ObjectStream.concat(new List<Iterable<Object>>{ strs1, strs2 })
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
      */
     public static ObjectEnumerable concat(final List<Iterable<Object>> iterables) {
         return new ObjectStream(StreamPipeline.concat(iterables, Object.class));
     }
 
     /**
-     * @description Returns a combined `ObjectStream` by applying `combiner` function
+     * @description Returns a combined `ObjectEnumerable` by applying `combiner` function
      * to each element at the same position.
      *
      * @param iterable1 the first `Iterable<Object>`
      * @param iterable2 the second `Iterable<Object>`
      * @param combiner the binary operator to be applied to each element at the same position
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
+     * 
+     * @example
+     * public class ConcatBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (String) o1 + '-' + (String) o2; }
+     * }
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> zip = ObjectStream.zip(strs1, strs2, new ConcatBiOperator())
+     *     .toList();
+     * // ['foo-qux', 'bar-fred', 'baz-foo']
      */
     public static ObjectEnumerable zip(
-            final Iterable<Object> iterable1,
-            final Iterable<Object> iterable2,
-            final IBiOperator combiner
+        final Iterable<Object> iterable1,
+        final Iterable<Object> iterable2,
+        final IBiOperator combiner
     ) {
         return new ObjectStream(StreamPipeline.zip(iterable1, iterable2, combiner));
     }
 
     /**
-     * @description Returns a combined `ObjectStream` by applying `combiner` function
+     * @description Returns a combined `ObjectEnumerable` by applying `combiner` function
      * to each element at the same position, conditioned on satisfying `predicate`.
      *
      * @param iterable1 the first `Iterable<Object>`
@@ -325,10 +351,32 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @param predicate the binary predicate
      * @param combiner the binary operator to be applied to each element at the same position
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2`,
      * `predicate` or `combiner` is null
+     * 
+     * @example
+     * public class ContainsAnyBiPredicate extends BiPredicate {
+     *     private final String s;
+     *     public ContainsAnyBiPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o1, Object o2) {
+     *         return ((String) o1).contains(s) || ((String) o2).contains(s);
+     *     }
+     * }
+     * public class ConcatBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (String) o1 + '-' + (String) o2; }
+     * }
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> zip = (List<String>) ObjectStream.zip(
+     *     strs1,
+     *     strs2,
+     *     new ContainsAnyBiPredicate('a'),
+     *     new ConcatBiOperator()
+     * )
+     *     .toList(String.class);
+     * // ['bar-fred', 'baz-foo']
      */
     public static ObjectEnumerable zip(
             final Iterable<Object> iterable1,
@@ -340,34 +388,44 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns new `ObjectStream` by appending `iterable`
+     * @description Returns new `ObjectEnumerable` by appending `iterable`
      * to the current stream.
      *
      * @param iterable the `Iterable<Object>` to append to the current stream
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * IObjectIterable peopleStream = stream1.append(stream2);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> append = (List<String>) ObjectStream.of(strs1)
+     *     .append(strs2)
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
      */
     public virtual override ObjectEnumerable append(final Iterable<Object> iterable) {
         return concat(this, iterable);
     }
 
     /**
-     * @description Returns new `ObjectStream` by prepending `iterable`
+     * @description Returns new `ObjectEnumerable` by prepending `iterable`
      * to the current stream.
      *
      * @param iterable the `Iterable<Object>` to prepend to the current stream
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
-     * IObjectIterable peopleStream = stream1.prepend(stream2);
+     * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
+     * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
+     * List<String> union = (List<String>) ObjectStream.of(strs1)
+     *     .union(strs2)
+     *     .toList(String.class);
+     * // ['foo', 'bar', 'baz', 'qux', 'fred']
      */
     public virtual override ObjectEnumerable prepend(final Iterable<Object> iterable) {
         return concat(iterable, this);
@@ -377,422 +435,463 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
 
     //<editor-fold desc="Intermediate Operations">
     // @start-group Intermediate Operations
-//    /**
-//     * @description Returns new `ObjectSequence` from the current stream.
-//     * <p>Stateful Intermediate Operation.</p>
-//     *
-//     * @return the new `ObjectSequence`
-//     *
-//     * @example
-//     * IObjectIterable peopleSeq = ObjectStream.of(people).sequence();
-//     */
-//    public virtual ObjectEnumerable sequence() {
-//        return ObjectSequence.of(toList());
-//    }
-
     /**
-     * @description Returns a `ObjectStream` with elements that match `predicate`.
+     * @description Returns a `ObjectEnumerable` with elements that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Person> filtered = (List<Person>) ObjectStream.of(people)
-     *     .filter(predicate)
-     *     .toList();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * List<String> filtered = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .filter(new ContainsPredicate('a'))
+     *     .toList(String.class); // ['bar', 'baz']
      */
     public virtual override ObjectEnumerable filter(final IPredicate predicate) {
         return new ObjectStream(StreamPipeline.filter(iterator(), predicate));
     }
 
     /**
-     * @description Returns a `ObjectStream` which takes elements while elements match `predicate`.
+     * @description Returns a `ObjectEnumerable` which takes elements while elements match `predicate`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Person> firstFiltered = (List<Person>) ObjectStream.of(people)
-     *     .take(predicate)
-     *     .toList();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * List<String> firstMatched = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'bar', 'baz', 'foo' })
+     *     .take(new ContainsPredicate('a'))
+     *     .toList(String.class); // ['bar', 'baz']
      */
     public virtual override ObjectEnumerable take(final IPredicate predicate) {
         return new ObjectStream(StreamPipeline.take(iterator(), predicate));
     }
 
     /**
-     * @description Returns a `ObjectStream` which drops elements while elements match `predicate`,
+     * @description Returns a `ObjectEnumerable` which drops elements while elements match `predicate`,
      * then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Person> rest = (List<Person>) ObjectStream.of(people)
-     *     .drop(predicate)
-     *     .toList();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * List<String> rest = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'bar', 'baz', 'foo' })
+     *     .take(new ContainsPredicate('a'))
+     *     .toList(String.class); // ['foo']
      */
     public virtual override ObjectEnumerable drop(final IPredicate predicate) {
         return new ObjectStream(StreamPipeline.drop(iterator(), predicate));
     }
 
     /**
-     * @description Returns a `ObjectStream` with elements returned by `mapper` function,
+     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<String> peopleNames = (List<String>) ObjectStream.of(people)
-     *     .mapTo(getName)
-     *     .toList();
+     * public class ToLowerCaseOperator extends Operator {
+     *     public override Object apply(Object o) { return ((String) o).toLowerCase(); }
+     * }
+     * List<String> normalizedStrings = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .mapTo(new ToLowerCaseOperator())
+     *     .toList(String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
      */
     public virtual override ObjectEnumerable mapTo(final IOperator mapper) {
         return new ObjectStream(StreamPipeline.mapTo(iterator(), (IFunction) mapper));
     }
 
     /**
-     * @description Returns a `IntStream` with elements returned by `mapper` function,
+     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `IntStream`
+     * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Integer> peopleAges = ObjectStream.of(people)
-     *     .mapToInt(getAge)
-     *     .toList();
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return ((String) o).length(); }
+     * }
+     * List<Integer> ints = ObjectStream.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .mapToInt(new LengthFunction())
+     *     .toList(); // [1, 2, 3]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
         return IntStream.of((Iterator<Integer>) StreamPipeline.mapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `LongStream` with elements returned by `mapper` function,
+     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `LongStream`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Long> peopleIds = ObjectStream.of(people)
-     *     .mapToLong(getId)
-     *     .toList();
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return (Long) ((String) o).length(); }
+     * }
+     * List<Long> longs = ObjectStream.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .mapToLong(new LengthFunction())
+     *     .toList(); // [1L, 2L, 3L]
      */
     public virtual override LongEnumerable mapToLong(final IFunction mapper) {
         return LongStream.of((Iterator<Long>) StreamPipeline.mapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `DoubleStream` with elements returned by `mapper` function,
+     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `DoubleStream`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Double> peopleHeights = ObjectStream.of(people)
-     *     .mapToDouble(getHeight)
-     *     .toList();
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return (Double) ((String) o).length(); }
+     * }
+     * List<Double> doubles = ObjectStream.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .mapToDouble(new LengthFunction())
+     *     .toList(); // [1.0, 2.0, 3.0]
      */
     public virtual override DoubleEnumerable mapToDouble(final IFunction mapper) {
         return DoubleStream.of((Iterator<Double>) StreamPipeline.mapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `SObjectStream` with elements returned by `mapper` function,
+     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
      * applied to the elements of this stream.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `SObjectStream`
+     * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * List<Contact> contacts = ObjectStream.of(people)
-     *     .mapToSObject(getAsContact)
-     *     .toList();
+     * public class CreateAccountFunction extends Function {
+     *     public override Object apply(Object o) { return new Account(Name = (String) o); }
+     * }
+     * List<Account> accounts = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .mapToSObject(new CreateAccountFunction())
+     *     .toList(); //
+     * [
+     *   { Name: 'foo' },
+     *   { Name: 'bar' },
+     *   { Name: 'baz' }
+     * ]
      */
     public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
         return SObjectStream.of((Iterator<SObject>) StreamPipeline.mapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a new `ObjectStream` with `Object` elements as a result of
+     * @description Returns a new `ObjectEnumerable` with `Object` elements as a result of
      * replacing each element of this stream with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Object>`
      *
-     * @return the new `ObjectStream`
+     * @return the new `ObjectEnumerable`
      *
      * @example
-     * List<Property> flattenedProperties = (List<Property>) ObjectStream.of(people)
-     *     .flatMapTo(getListProperty)
-     *     .toList(List<Property>.class);
-     *     
-     * List<List<String>> containedStrings; // [ ['foo'], null, [], ['baz', 'bar'], [null] ]
-     * List<String> flattenedStrings = (List<String>) ObjectStream.of(containedStrings)
-     *     .flatMapTo(Function.identity())
-     *     .toList(List<String>.class); // ['foo', 'baz', 'bar', null]
+     * public class ToLowerCaseFunction extends Function {
+     *     public override Object apply(Object o) { return new List<String>{ ((String) o).toLowerCase() }; }
+     * }
+     * List<String> normalizedStrings = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .flatMapTo(new ToLowerCaseFunction())
+     *     .toList(String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
      */
     public virtual override ObjectEnumerable flatMapTo(final IFunction mapper) {
         return new ObjectStream(StreamPipeline.flatMapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a new `IntStream` with `Integer` elements as a result of
+     * @description Returns a new `IntEnumerable` with `Integer` elements as a result of
      * replacing each element of this stream with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Integer>`
      *
-     * @return the new `IntStream`
+     * @return the new `IntEnumerable`
      *
      * @example
-     * List<Integer> flattenedProperties = (List<Integer>) ObjectStream.of(people)
-     *     .flatMapToInt(getIntListProperty)
-     *     .toList();
-     *     
-     * List<List<Integer>> containedInts; // [ [1], null, [], [0, 10], [null] ]
-     * List<Integer> flattenedInts = ObjectStream.of(containedInts)
-     *     .flatMapToInt(Function.identity())
-     *     .toList(); // [1, 0, 10, null]
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Integer>{ ((String) o).length() }; }
+     * }
+     * List<Integer> ints = ObjectStream.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .flatMapToInt(new LengthFunction())
+     *     .toList(); // [1, 2, 3]
      */
     public virtual override IntEnumerable flatMapToInt(final IFunction mapper) {
         return IntStream.of((Iterator<Integer>) StreamPipeline.flatMapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a new `LongStream` with `Long` elements as a result of
+     * @description Returns a new `LongEnumerable` with `Long` elements as a result of
      * replacing each element of this stream with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Long>`
      *
-     * @return the new `LongStream`
+     * @return the new `LongEnumerable`
      *
      * @example
-     * List<Long> flattenedProperties = (List<Long>) ObjectStream.of(people)
-     *     .flatMapToLong(getLongListProperty)
-     *     .toList();
-     *     
-     * List<List<Long>> containedLongs; // [ [1L], null, [], [0L, 10L], [null] ]
-     * List<Long> flattenedLongs = ObjectStream.of(containedLongs)
-     *     .flatMapToLong(Function.identity())
-     *     .toList(); // [1L, 0L, 10L, null]
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Long>{ ((String) o).length() }; }
+     * }
+     * List<Long> longs = ObjectStream.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .flatMapToLong(new LengthFunction())
+     *     .toList(); // [1L, 2L, 3L]
      */
     public virtual override LongEnumerable flatMapToLong(final IFunction mapper) {
         return LongStream.of((Iterator<Long>) StreamPipeline.flatMapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a new `DoubleStream` with `Double` elements as a result of
+     * @description Returns a new `DoubleEnumerable` with `Double` elements as a result of
      * replacing each element of this stream with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Double>`
      *
-     * @return the new `DoubleStream`
+     * @return the new `DoubleEnumerable`
      *
      * @example
-     * List<Double> flattenedProperties = (List<Double>) ObjectStream.of(people)
-     *     .flatMapToDouble(getDoubleListProperty)
-     *     .toList();
-     *     
-     * List<List<Double>> containedDoubles; // [ [1.0], null, [], [0.5, Math.PI], [null] ]
-     * List<Double> flattenedDoubles = ObjectStream.of(containedDoubles)
-     *     .flatMapToDouble(Function.identity())
-     *     .toList(); // [1.0, 0.5, Math.PI, null]
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Double>{ ((String) o).length() }; }
+     * }
+     * List<Double> doubles = ObjectStream.of(new List<String>{ 'f', 'ba', 'baz' })
+     *     .flatMapToDouble(new LengthFunction())
+     *     .toList(); // [1.0, 2.0, 3.0]
      */
     public virtual override DoubleEnumerable flatMapToDouble(final IFunction mapper) {
         return DoubleStream.of((Iterator<Double>) StreamPipeline.flatMapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a new `SObjectStream` with `SObject` elements as a result of
+     * @description Returns a new `SObjectEnumerable` with `SObject` elements as a result of
      * replacing each element of this stream with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<SObject>`
      *
-     * @return the new `SObjectStream`
+     * @return the new `SObjectEnumerable`
      *
      * @example
-     * List<List<Account>> containedAccounts; // [ [acc1], null, [], [acc2, acc3], [null] ]
-     * List<Account> flattenedAccounts = ObjectStream.of(containedDoubles)
-     *     .flatMapToSObject(Function.identity())
-     *     .toList(); // [acc1, acc2, acc3, null]
+     * public class CreateAccountFunction extends Function {
+     *     public override Object apply(Object o) { return new List<Account>{ new Account(Name = (String) o) }; }
+     * }
+     * List<Account> accounts = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .flatMapToSObject(new CreateAccountFunction())
+     *     .toList(); //
+     * [
+     *   { Name: 'foo' },
+     *   { Name: 'bar' },
+     *   { Name: 'baz' }
+     * ]
      */
     public virtual override SObjectEnumerable flatMapToSObject(final IFunction mapper) {
         return SObjectStream.of((Iterator<SObject>) StreamPipeline.flatMapTo(iterator(), mapper));
     }
 
     /**
-     * @description Returns a `ObjectStream` after performing `consumer` action on each element.
+     * @description Returns a `ObjectEnumerable` after performing `consumer` action on each element.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
      * @example
-     * List<Person> editedPeople = (List<Person>) ObjectStream.of(people)
-     *     .forEach(setSomeProperty)
-     *     .toList();
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * List<String> strings = (List<String>) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .forEach(new DebugConsumer()) // prints 'foo', 'bar', 'baz'
+     *     .toList(String.class); // ['foo', 'bar', 'baz']
      */
     public virtual override ObjectEnumerable forEach(final IConsumer consumer) {
         return new ObjectStream(StreamPipeline.forEach(iterator(), consumer));
     }
 
     /**
-     * @description Returns a `ObjectStream` with distinct elements.
+     * @description Returns a `ObjectEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @example
-     * List<Person> distinctPeople = (List<Person>) ObjectStream.of(people)
+     * List<String> distinct = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', 'foo', 'bar' })
      *     .distinct()
-     *     .toList();
+     *     .toList(String.class); // ['foo', 'bar', 'baz']
      */
     public virtual override ObjectEnumerable distinct() {
         return new ObjectStream(StreamPipeline.distinct(iterator()));
     }
 
     /**
-     * @description Returns a `ObjectStream` with distinct elements
+     * @description Returns a `ObjectEnumerable` with distinct elements
      * according to `classifier` function.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param classifier the classifier function
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `classifier` is null
      *
      * @example
-     * List<Person> distinctPeopleByName = (List<Person>) ObjectStream.of(people)
-     *     .distinct(getName)
-     *     .toList();
+     * public class ToLowerCaseOperator extends Operator {
+     *     public override Object apply(Object o) { return ((String) o).toLowerCase(); }
+     * }
+     * List<String> distinct = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .distinct(new ToLowerCaseOperator())
+     *     .toList(String.class); // ['foo', 'Bar', 'baz']
      */
     public virtual override ObjectEnumerable distinct(final IFunction classifier) {
         return new ObjectStream(StreamPipeline.distinct(iterator(), classifier));
     }
 
     /**
-     * @description Returns a `ObjectStream` with sorted elements in ascending order.
+     * @description Returns a `ObjectEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @example
-     * List<Person> sortedPeople = (List<Person>) ObjectStream.of(people)
+     * List<String> sorted = (List<String>) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', null })
      *     .sort()
-     *     .toList();
+     *     .toList(String.class); // [null, 'bar', 'baz', 'foo']
      */
     public virtual override ObjectEnumerable sort() {
         return new ObjectStream(StreamPipeline.sort(iterator()));
     }
 
-    public virtual override ObjectEnumerable sort(final SortOrder order) {
-        return new ObjectStream(StreamPipeline.sort(iterator(), order));
-    }
-
     /**
-     * @description Returns a `ObjectStream` with sorted elements according to `comparer`.
+     * @description Returns a `ObjectEnumerable` with sorted elements according to `comparer`.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param comparer the non-interfering, stateless comparer to compare stream elements
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `comparer` is null
      *
      * @example
-     * List<Person> sortedPeopleByName = (List<Person>) ObjectStream.of(people)
-     *     .sort(getName)
-     *     .toList();
+     * public class SecondLetterComparer extends Comparer {
+     *     public override Integer compare(Object o1, Object o2) {
+     *         String s1 = (String) o1;
+     *         String s2 = (String) o2;
+     *         if (s1.length() > 1 && s2.length() > 1) {
+     *             return s1.split('')[1].compareTo(s2.split('')[1]);
+     *         }
+     *         return s1.length() <= 1 ? -1 : 1;
+     *     }
+     * }
+     * List<String> sorted = (List<String>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
+     *     .sort(new SecondCharComparer())
+     *     .toList(String.class); // ['Bar', 'baz', 'bar', 'foo', 'Foo']
      */
     public virtual override ObjectEnumerable sort(final IComparer comparer) {
         return new ObjectStream(StreamPipeline.sort(iterator(), comparer));
     }
 
     /**
-     * @description Returns a `ObjectStream` with first `lim` elements.
+     * @description Returns a `ObjectEnumerable` with first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
-     * List<Person> first100People = (List<Person>) ObjectStream.of(people)
-     *     .lim(100)
-     *     .toList();
+     * List<String> first2 = (List<String>) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .lim(2)
+     *     .toList(String.class); // ['foo', 'baz']
      */
     public virtual override ObjectEnumerable lim(final Integer lim) {
         return new ObjectStream(StreamPipeline.lim(iterator(), lim));
     }
 
     /**
-     * @description Returns a new `ObjectStream` that skips first `n` elements
+     * @description Returns a new `ObjectEnumerable` that skips first `n` elements
      * and returns remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `ObjectStream`
+     * @return the `ObjectEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example
-     * List<Person> restPeople = (List<Person>) ObjectStream.of(people)
-     *     .skip(100)
-     *     .toList();
+     * List<String> rest = (List<String>) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .skip(1)
+     *     .toList(String.class); // ['bar', 'baz']
      */
     public virtual override ObjectEnumerable skip(final Integer n) {
         return new ObjectStream(StreamPipeline.skip(iterator(), n));
@@ -813,6 +912,19 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @return the `Object` result of the reduction
      *
      * @throws NullPointerException if `accumulator` is null
+     * 
+     * @example
+     * public class ConcatenateBiOperator extends BiOperator {
+     *     private final String separator;
+     *     public ConcatenateBiOperator(String separator) { this.separator = separator; }
+     *     public override Object apply(Object o1, Object o2) {
+     *         return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+     *     }
+     * }
+     * String concatenated = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce('', new ConcatenateBiOperator('-')); // 'foo-bar-baz'
+     * String concatenated1 = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce('seed', new ConcatenateBiOperator(';')); // 'seed;foo;bar;baz'
      */
     public virtual override Object reduce(final Object identity, final IBiOperator accumulator) {
         return StreamPipeline.reduce(iterator(), identity, accumulator);
@@ -831,43 +943,23 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Person eldestPerson = (Person) ObjectStream.of(people)
-     *     .reduce(maxBy(getAge))
-     *     .get();
+     * public class ConcatenateBiOperator extends BiOperator {
+     *     private final String separator;
+     *     public ConcatenateBiOperator(String separator) { this.separator = separator; }
+     *     public override Object apply(Object o1, Object o2) {
+     *         return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+     *     }
+     * }
+     * String concatenated = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce(new ConcatenateBiOperator('-'))
+     *     .get(); // 'foo-bar-baz'
+     * String concatenated1 = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .reduce(new ConcatenateBiOperator(';'))
+     *     .get(); // 'seed;foo;bar;baz'
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
         return Optional.ofNullable(StreamPipeline.reduce(iterator(), accumulator));
     }
-
-//    /**
-//     * @description Performs a mutable reduction operation on elements, collecting elements
-//     * to a container returned by `supplier` by applying `accumulator` function.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @param supplier the function that returns a mutable result container
-//     * @param accumulator the associative, non-interfering, stateless accumulation function
-//     *
-//     * @return the `Object` result of the collection
-//     *
-//     * @throws NullPointerException if `supplier` or `accumulator` is null
-//     *
-//     * @example
-//     * List<String> peopleNames = (List<String>) ObjectStream.of(people)
-//     *     .collect(
-//     *         Supplier.of(List<String>.class),
-//     *         ListObjectConsumers.addToList(getName)
-//     *     );
-//     */
-//    public virtual Object collect(final ISupplier supplier, final IBiConsumer accumulator) {
-//        Validate.notNull(supplier);
-//        Validate.notNull(accumulator);
-//        final Object container = supplier.get();
-//        final Iterator<Object> iterator = iterator();
-//        while (iterator.hasNext()) {
-//            accumulator.accept(container, iterator.next());
-//        }
-//        return container;
-//    }
 
     /**
      * @description Performs a mutable reduction operation on elements, collecting elements
@@ -881,19 +973,56 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @throws NullPointerException if `collector` is null
      *
      * @example
-     * // Group people by city
-     * Map<String, List<Person>> peopleByCity = (Map<String, List<Person>>)
-     *     ObjectStream.of(people)
-     *          .collect(Collectors.groupingByString(getCityProperty).cast(Map<String, List<Person>>.class));
-     *          
-     * // Group people by city and by country, cascading two collectors
-     * Map<String, Map<String, List<Person>>> peopleByCityByCountry
-     *     = (Map<String, Map<String, List<Person>>>)
-     *         ObjectStream.of(people)
-     *             .collect(Collectors.groupingByString(
-     *                 getCountry,
-     *                 Collectors.groupingByString(getCity)
-     *             ).cast(Map<String, Map<String, List<Person>>>.class));
+     * // Simple collecting
+     * public class AddToStringSetBiConsumer extends BiConsumer {
+     *     public override void accept(Object container, Object o) { ((Set<String>) container).add((String) o); }
+     * }
+     * Set<String> strings = (Set<String>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', 'foo', 'bar' })
+     *     .collect(Collector.of(Supplier.of(Set<String>.class), new AddToStringSetBiConsumer()));
+     * // ['foo', 'bar', 'baz', 'quux', 'a']
+     * // Cascaded operation
+     * public class LengthFunction extends Function {
+     *     public override Object apply(Object o) { return ((String) o).length(); }
+     * }
+     * public class PutToObjectsByIntMap extends BiConsumer {
+     *     private final IFunction classifier;
+     *     public PutToObjectsByIntMap(ICollector downstream, IFunction classifier) {
+     *         this.downstream = downstream;
+     *         this.classifier = classifier;
+     *     }
+     *     public override void accept(Object container, Object o) {
+     *         final Map<Integer, Set<String>> m = (Map<Integer, Set<String>>) container;
+     *         final Integer key = (Integer) classifier.apply(o);
+     *         if (!m.containsKey(key)) { m.put(key, (Set<String>) downstream.supplier().get()); }
+     *         downstream.accumulator().accept(m.get(key), o);
+     *     }
+     * }
+     * // the classifier function mapping input elements to keys.
+     * IFunction classificationFunction = new LengthFunction();
+     * // the supplier providing a new empty Map into which the results will be inserted.
+     * ISupplier mapSupplier = Supplier.of(Map<Integer, Set<String>>.class);
+     * // the Collector implementing the downstream reduction.
+     * ICollector downstreamCollector = Collector.of(Supplier.of(Set<String>.class), new AddToStringSetBiConsumer());
+     * // the function that folds an element into a result container.
+     * IBiConsumer accumulator = new PutToObjectsByIntMap(downstreamCollector, new LengthFunction());
+     * // the Collector implementing the cascaded group-by operation.
+     * ICollector groupByLengthCollector = Collector.of(mapSupplier, accumulator);
+     * Map<Integer, Set<String>> stringsByLength = (Map<Integer, Set<String>>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', 'foo', 'bar' })
+     *     .collect(groupByLengthCollector); //
+     * {
+     *   1: ['a'],
+     *   3: ['foo', 'bar', 'baz'],
+     *   4: ['quux']
+     * }
+     * // The same result can be obtained by using built-in Collectors
+     * Map<Integer, Set<String>> stringsByLength1 = (Map<Integer, Set<String>>)
+     *     ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', 'foo', 'bar' })
+     *     .collect(
+     *         Collectors.groupingByInt(new LengthFunction(), Collectors.toStringSet())
+     *             .cast(Map<Integer, Set<String>>.class)
+     *     );
      */
     public virtual override Object collect(final ICollector collector) {
         return StreamPipeline.collect(iterator(), collector);
@@ -911,9 +1040,14 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Person firstActivePerson = (Person) ObjectStream.of(people)
-     *     .find(isActive)
-     *     .get();
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * String firstFound = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .find(new ContainsPredicate('a'))
+     *     .get(); // 'bar'
      */
     public virtual override Optional find(final IPredicate predicate) {
         return Optional.ofNullable(StreamPipeline.find(iterator(), predicate));
@@ -921,7 +1055,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `ObjectStream` is empty then `false` is returned.
+     * If `ObjectEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -931,7 +1065,13 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isEveryPersonActive = ObjectStream.of(people).every(isActive);
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * Boolean doesEveryStringContainA = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .every(new ContainsPredicate('a')); // false
      */
     public virtual override Boolean every(final IPredicate predicate) {
         return StreamPipeline.match(iterator(), predicate, 1);
@@ -939,7 +1079,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
 
     /**
      * @description Returns whether some element matches `predicate`.
-     * If `ObjectStream` is empty then `false` is returned.
+     * If `ObjectEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -949,7 +1089,13 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Boolean isSomePersonActive = ObjectStream.of(people).some(isActive);
+     * public class ContainsPredicate extends Predicate {
+     *     private final String s;
+     *     public ContainsPredicate(String s) { this.s = s; }
+     *     public override Boolean test(Object o) { return ((String) o).contains(s); }
+     * }
+     * Boolean doesSomeStringContainA = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .some(new ContainsPredicate('a')); // true
      */
     public virtual override Boolean some(final IPredicate predicate) {
         return StreamPipeline.match(iterator(), predicate, 0);
@@ -960,6 +1106,10 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
+     * 
+     * @example
+     * Integer count = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .count(); // 3
      */
     public virtual override Integer count() {
         return StreamPipeline.count(iterator());
@@ -970,6 +1120,12 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
+     * 
+     * @example
+     * ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .isEmpty(); // false
+     * ObjectStream.of(new List<String>()))
+     *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
         return StreamPipeline.isEmpty(iterator());
@@ -982,9 +1138,9 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @return the `List<Object>` containing the stream elements
      *
      * @example
-     * List<Person> activePeople = (List<Person>) ObjectStream.of(people)
-     *     .filter(isActive)
-     *     .toList();
+     * List<Object> strings = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', 'qux' })
+     *     .skip(1)
+     *     .toList(); // ['bar', 'baz', 'qux']
      */
     public virtual override List<Object> toList() {
         return StreamPipeline.toList(iterator());
@@ -997,9 +1153,9 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @return the `Set<Object>` containing the stream elements
      *
      * @example
-     * List<Object> activePeople = ObjectStream.of(people)
-     *     .filter(isActive)
-     *     .toSet();
+     * Set<Object> strings = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', 'qux', 'foo', 'bar' })
+     *     .skip(1)
+     *     .toSet(); // ['bar', 'baz', 'qux']
      */
     public virtual override Set<Object> toSet() {
         return StreamPipeline.toObjectSet(iterator());

@@ -81,7 +81,18 @@ private class CollectorsTest {
     }
 
     /**
-     * @see Collectors.toSet
+     * @see Collectors.toBoolSet
+     * @see Collectors.toIdSet
+     * @see Collectors.toStringSet
+     * @see Collectors.toBlobSet
+     * @see Collectors.toDateSet
+     * @see Collectors.toDatetimeSet
+     * @see Collectors.toTimeSet
+     * @see Collectors.toIntSet
+     * @see Collectors.toLongSet
+     * @see Collectors.toDoubleSet
+     * @see Collectors.toSObjectSet
+     * @see Collectors.toObjectSet
      */
     @IsTest
     static void toSet() {
@@ -97,8 +108,8 @@ private class CollectorsTest {
         Set<Long> actual8 = (Set<Long>) AfTestCommons.collect(LONGS, Collectors.toLongSet());
         Set<Double> actual9 = (Set<Double>) AfTestCommons.collect(DOUBLES, Collectors.toDoubleSet());
         Set<SObject> actual10 = (Set<SObject>) AfTestCommons.collect(CONTACTS, Collectors.toSObjectSet());
-        Set<Object> actual11 = (Set<Object>) AfTestCommons.collect(MIX, Collectors.toSet());
-        Set<Object> actual12 = (Set<Object>) AfTestCommons.collect(COMPARABLES, Collectors.toSet());
+        Set<Object> actual11 = (Set<Object>) AfTestCommons.collect(MIX, Collectors.toObjectSet());
+        Set<Object> actual12 = (Set<Object>) AfTestCommons.collect(COMPARABLES, Collectors.toObjectSet());
         // Then
         Assert.areEqual(new Set<Boolean>(BOOLS), actual);
         Assert.areEqual(new Set<Id>(IDS), actual1);
@@ -462,10 +473,10 @@ private class CollectorsTest {
     }
 
     /**
-     * @see Collectors.toMap
+     * @see Collectors.toByObjectMap
      */
     @IsTest
-    static void toMap() {
+    static void toByObjectMap() {
         // Given
         List<Object> input = new List<Object>();
         input.addAll(PEOPLE);
@@ -475,9 +486,9 @@ private class CollectorsTest {
         IFunction ageFunction = new AfTestCommons.GetAgeFunction();
         IBiOperator right = BiOperator.right();
         // When
-        Map<Object, Comparable> actual = (Map<Object, Comparable>) AfTestCommons.collect(PEOPLE, Collectors.toMap(nameFunction).cast(Map<Object, Comparable>.class));
-        Map<Object, Integer> actual1 = (Map<Object, Integer>) AfTestCommons.collect(PEOPLE, Collectors.toMap(nameFunction, ageFunction).cast(Map<Object, Integer>.class));
-        Map<Object, Integer> actual2 = (Map<Object, Integer>) AfTestCommons.collect(input, Collectors.toMap(nameFunction, ageFunction, right).cast(Map<Object, Integer>.class));
+        Map<Object, Comparable> actual = (Map<Object, Comparable>) AfTestCommons.collect(PEOPLE, Collectors.toByObjectMap(nameFunction).cast(Map<Object, Comparable>.class));
+        Map<Object, Integer> actual1 = (Map<Object, Integer>) AfTestCommons.collect(PEOPLE, Collectors.toByObjectMap(nameFunction, ageFunction).cast(Map<Object, Integer>.class));
+        Map<Object, Integer> actual2 = (Map<Object, Integer>) AfTestCommons.collect(input, Collectors.toByObjectMap(nameFunction, ageFunction, right).cast(Map<Object, Integer>.class));
         // Then
         Map<Object, Comparable> expected = new Map<Object, Comparable>{
             PEOPLE[0].getName() => PEOPLE[0],
@@ -896,18 +907,18 @@ private class CollectorsTest {
     }
 
     /**
-     * @see Collectors.groupingBy
+     * @see Collectors.groupingByObject
      */
     @IsTest
-    static void groupingBy() {
+    static void groupingByObject() {
         // Given
         IFunction departmentFunction = SObjectFunctions.get(AfTestConsts.Contact.Department);
         IFunction nameFunction = SObjectFunctions.get(AfTestConsts.Contact.LastName);
         IFunction accIdFunction = SObjectFunctions.get(AfTestConsts.Contact.AccountId);
         // When
-        Map<Object, List<Contact>> actual = (Map<Object, List<Contact>>) AfTestCommons.collect(CONTACTS, Collectors.groupingBy(departmentFunction).cast(Map<Object, List<Contact>>.class));
-        Map<Object, List<String>> actual1 = (Map<Object, List<String>>) AfTestCommons.collect(CONTACTS, Collectors.groupingBy(departmentFunction, Collectors.toList(nameFunction)).cast(Map<Object, List<String>>.class));
-        Map<Object, Map<Id, List<Contact>>> actual2 = (Map<Object, Map<Id, List<Contact>>>) AfTestCommons.collect(CONTACTS, Collectors.groupingBy(departmentFunction, Collectors.groupingById(accIdFunction)).cast(Map<Object, Map<Id, List<Contact>>>.class));
+        Map<Object, List<Contact>> actual = (Map<Object, List<Contact>>) AfTestCommons.collect(CONTACTS, Collectors.groupingByObject(departmentFunction).cast(Map<Object, List<Contact>>.class));
+        Map<Object, List<String>> actual1 = (Map<Object, List<String>>) AfTestCommons.collect(CONTACTS, Collectors.groupingByObject(departmentFunction, Collectors.toList(nameFunction)).cast(Map<Object, List<String>>.class));
+        Map<Object, Map<Id, List<Contact>>> actual2 = (Map<Object, Map<Id, List<Contact>>>) AfTestCommons.collect(CONTACTS, Collectors.groupingByObject(departmentFunction, Collectors.groupingById(accIdFunction)).cast(Map<Object, Map<Id, List<Contact>>>.class));
         // Then
         Map<Object, List<SObject>> expected = new Map<Object, List<SObject>>{
             ((Contact) CONTACTS[0]).Department => new List<Contact>{ (Contact) CONTACTS[0], (Contact) CONTACTS[1], (Contact) CONTACTS[2] },

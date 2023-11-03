@@ -85,7 +85,6 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * Predicate.some(somePredicates);
      */
     public static Predicate some(final List<IPredicate> predicates) {
-        Validate.noNullElements(predicates);
         return new OrPredicates(predicates);
     }
 
@@ -103,7 +102,6 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * Predicate.every(somePredicates);
      */
     public static Predicate every(final List<IPredicate> predicates) {
-        Validate.noNullElements(predicates);
         return new AndPredicates(predicates);
     }
 
@@ -119,7 +117,6 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * Predicate.negate(somePredicate);
      */
     public static Predicate negate(final IPredicate predicate) {
-        Validate.notNull(predicate);
         return new NegatePredicate(predicate);
     }
 
@@ -137,7 +134,6 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * Predicate.always(true);
      */
     public static Predicate always(final Boolean value) {
-        Validate.notNull(value);
         return new Always(value);
     }
 
@@ -156,8 +152,6 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * Predicate.compose(someFunction, somePredicate);
      */
     public static Predicate compose(final IFunction mapper, final IPredicate predicate) {
-        Validate.notNull(mapper);
-        Validate.notNull(predicate);
         return new ForFunctionPredicate(mapper, predicate);
     }
     // @end-group
@@ -167,7 +161,10 @@ public abstract inherited sharing class Predicate implements IPredicate {
     // @start-group Lambdas
     private class AndPredicates extends Predicate {
         private final List<IPredicate> predicates;
-        private AndPredicates(List<IPredicate> predicates) { this.predicates = predicates; }
+        private AndPredicates(List<IPredicate> predicates) {
+            Validate.noNullElements(predicates);
+            this.predicates = predicates;
+        }
         public override Boolean test(Object o) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
                 if (!predicates[i].test(o)) { return false; }
@@ -178,7 +175,10 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     private class OrPredicates extends Predicate {
         private final List<IPredicate> predicates;
-        private OrPredicates(List<IPredicate> predicates) { this.predicates = predicates; }
+        private OrPredicates(List<IPredicate> predicates) {
+            Validate.noNullElements(predicates);
+            this.predicates = predicates;
+        }
         public override Boolean test(Object o) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
                 if (predicates[i].test(o)) { return true; }
@@ -189,13 +189,19 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     private class NegatePredicate extends Predicate {
         private final IPredicate predicate;
-        private NegatePredicate(IPredicate predicate) { this.predicate = predicate; }
+        private NegatePredicate(IPredicate predicate) {
+            Validate.notNull(predicate);
+            this.predicate = predicate;
+        }
         public override Boolean test(Object o) { return !predicate.test(o); }
     }
 
     private class Always extends Predicate {
         private final Boolean value;
-        private Always(Boolean value) { this.value = value; }
+        private Always(Boolean value) {
+            Validate.notNull(value);
+            this.value = value;
+        }
         public override Boolean test(Object o) { return value; }
     }
 
@@ -203,6 +209,8 @@ public abstract inherited sharing class Predicate implements IPredicate {
         private final IFunction function;
         private final IPredicate predicate;
         private ForFunctionPredicate(IFunction function, IPredicate predicate) {
+            Validate.notNull(function);
+            Validate.notNull(predicate);
             this.function = function;
             this.predicate = predicate;
         }

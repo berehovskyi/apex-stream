@@ -9,13 +9,15 @@
  *
  * @group Functional Built-In Classes
  */
-public inherited sharing class MapObjectConsumers {
+@SuppressWarnings('PMD.CognitiveComplexity')
+public virtual inherited sharing class MapObjectConsumers {
 
     @TestVisible
-    private MapObjectConsumers() {}
+    @SuppressWarnings('PMD.EmptyStatementBlock')
+    protected MapObjectConsumers() {}
 
-    //<editor-fold desc="Put to Map<?, ?> BiConsumers">
-    // @start-group Put to Map<?, ?> BiConsumers
+    //<editor-fold desc="Built-Ins">
+    // @start-group Built-Ins
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Boolean, Object>` and puts an entry returned by the `keyMapper`
@@ -35,12 +37,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByBoolMap
      */
     public static BiConsumer putToObjectByBoolMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByBoolMap(keyMapper, valueMapper, merger);
     }
 
@@ -63,12 +63,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByIdMap
      */
     public static BiConsumer putToObjectByIdMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByIdMap(keyMapper, valueMapper, merger);
     }
 
@@ -91,12 +89,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByStringMap
      */
     public static BiConsumer putToObjectByStringMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByStringMap(keyMapper, valueMapper, merger);
     }
 
@@ -119,12 +115,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByBlobMap
      */
     public static BiConsumer putToObjectByBlobMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByBlobMap(keyMapper, valueMapper, merger);
     }
 
@@ -147,12 +141,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByDateMap
      */
     public static BiConsumer putToObjectByDateMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByDateMap(keyMapper, valueMapper, merger);
     }
 
@@ -175,12 +167,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByDatetimeMap
      */
     public static BiConsumer putToObjectByDatetimeMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByDatetimeMap(keyMapper, valueMapper, merger);
     }
 
@@ -203,12 +193,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByDatetimeMap
      */
     public static BiConsumer putToObjectByTimeMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByTimeMap(keyMapper, valueMapper, merger);
     }
 
@@ -231,12 +219,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByIntMap
      */
     public static BiConsumer putToObjectByIntMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByIntMap(keyMapper, valueMapper, merger);
     }
 
@@ -259,12 +245,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByLongMap
      */
     public static BiConsumer putToObjectByLongMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByLongMap(keyMapper, valueMapper, merger);
     }
 
@@ -287,12 +271,10 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.toByDoubleMap
      */
     public static BiConsumer putToObjectByDoubleMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByDoubleMap(keyMapper, valueMapper, merger);
     }
 
@@ -312,22 +294,16 @@ public inherited sharing class MapObjectConsumers {
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
-     * @see Collectors.toMap
+     * @see Collectors.toByObjectMap
      */
     public static BiConsumer putToObjectByObjectMap(
-            final IFunction keyMapper,
-            final IFunction valueMapper,
-            final IBiOperator merger
+        final IFunction keyMapper,
+        final IFunction valueMapper,
+        final IBiOperator merger
     ) {
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueMapper);
         return new PutToObjectByObjectMap(keyMapper, valueMapper, merger);
     }
-    // @end-group
-    //</editor-fold>
 
-    //<editor-fold desc="Put to Map<?, <?>> BiConsumers">
-    // @start-group Put to Map<?, ?> BiConsumers
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * `Map<Boolean, Object>` and groups input arguments according to a classification function.
@@ -343,8 +319,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByBool
      */
     public static BiConsumer putToObjectsByBoolMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByBoolMap(downstream, classifier);
     }
 
@@ -363,8 +337,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingById
      */
     public static BiConsumer putToObjectsByIdMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByIdMap(downstream, classifier);
     }
 
@@ -383,8 +355,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByString
      */
     public static BiConsumer putToObjectsByStringMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByStringMap(downstream, classifier);
     }
 
@@ -403,8 +373,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByBlob
      */
     public static BiConsumer putToObjectsByBlobMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByBlobMap(downstream, classifier);
     }
 
@@ -423,8 +391,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByDate
      */
     public static BiConsumer putToObjectsByDateMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByDateMap(downstream, classifier);
     }
 
@@ -443,8 +409,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByDatetime
      */
     public static BiConsumer putToObjectsByDatetimeMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByDatetimeMap(downstream, classifier);
     }
 
@@ -463,8 +427,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByTime
      */
     public static BiConsumer putToObjectsByTimeMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByTimeMap(downstream, classifier);
     }
 
@@ -483,8 +445,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByInt
      */
     public static BiConsumer putToObjectsByIntMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByIntMap(downstream, classifier);
     }
 
@@ -503,8 +463,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByLong
      */
     public static BiConsumer putToObjectsByLongMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByLongMap(downstream, classifier);
     }
 
@@ -523,8 +481,6 @@ public inherited sharing class MapObjectConsumers {
      * @see Collectors.groupingByDouble
      */
     public static BiConsumer putToObjectsByDoubleMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByDoubleMap(downstream, classifier);
     }
 
@@ -540,11 +496,9 @@ public inherited sharing class MapObjectConsumers {
      * @throws NullPointerException if `downstream` or `classifier` is null
      * @throws NullPointerException if the first input argument is null
      *
-     * @see Collectors.groupingBy
+     * @see Collectors.groupingByObject
      */
     public static BiConsumer putToObjectsByObjectMap(final ICollector downstream, final IFunction classifier) {
-        Validate.notNull(downstream);
-        Validate.notNull(classifier);
         return new PutToObjectsByObjectMap(downstream, classifier);
     }
     // @end-group
@@ -553,15 +507,15 @@ public inherited sharing class MapObjectConsumers {
     //<editor-fold desc="Private Methods">
     // @start-group Private Methods
     private static Object mergeValue(
-            final IBiOperator merger,
-            final Object key,
-            final Object oldValue,
-            final Object newValue)
-    {
+        final IBiOperator merger,
+        final Object key,
+        final Object oldValue,
+        final Object newValue
+    ) {
         Validate.state(
-                merger != null,
-                Label.AS_ErrorMessage_DuplicateKey,
-                new List<Object>{ key, oldValue, newValue }
+            merger != null,
+            Label.AS_ErrorMessage_DuplicateKey,
+            new List<Object>{ key, oldValue, newValue }
         );
         return merger.apply(oldValue, newValue);
     }
@@ -570,14 +524,32 @@ public inherited sharing class MapObjectConsumers {
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-    private class PutToObjectByBoolMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
-        private PutToObjectByBoolMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
+    private abstract class PutToMap extends BiConsumer {
+        protected final IFunction keyMapper;
+        protected final IFunction valueMapper;
+        protected final IBiOperator merger;
+        protected PutToMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
+            Validate.notNull(keyMapper);
+            Validate.notNull(valueMapper);
             this.keyMapper = keyMapper;
             this.valueMapper = valueMapper;
             this.merger = merger;
+        }
+    }
+
+    private abstract class PutToDownstreamMap extends BiConsumer {
+        protected final IFunction classifier;
+        protected PutToDownstreamMap(ICollector downstream, IFunction classifier) {
+            Validate.notNull(downstream);
+            Validate.notNull(classifier);
+            this.downstream = downstream;
+            this.classifier = classifier;
+        }
+    }
+
+    private class PutToObjectByBoolMap extends PutToMap {
+        private PutToObjectByBoolMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Boolean, Object> m = ((Map<Boolean, Object>) container);
@@ -588,14 +560,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByIdMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByIdMap extends PutToMap {
         private PutToObjectByIdMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Id, Object> m = ((Map<Id, Object>) container);
@@ -606,14 +573,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByStringMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByStringMap extends PutToMap {
         private PutToObjectByStringMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<String, Object> m = ((Map<String, Object>) container);
@@ -624,14 +586,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByBlobMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByBlobMap extends PutToMap {
         private PutToObjectByBlobMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Blob, Object> m = ((Map<Blob, Object>) container);
@@ -642,14 +599,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByDateMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByDateMap extends PutToMap {
         private PutToObjectByDateMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Date, Object> m = ((Map<Date, Object>) container);
@@ -660,14 +612,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByDatetimeMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByDatetimeMap extends PutToMap {
         private PutToObjectByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Datetime, Object> m = ((Map<Datetime, Object>) container);
@@ -678,14 +625,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByTimeMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByTimeMap extends PutToMap {
         private PutToObjectByTimeMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Time, Object> m = ((Map<Time, Object>) container);
@@ -696,14 +638,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByIntMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByIntMap extends PutToMap {
         private PutToObjectByIntMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Integer, Object> m = ((Map<Integer, Object>) container);
@@ -714,14 +651,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByLongMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByLongMap extends PutToMap {
         private PutToObjectByLongMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Long, Object> m = ((Map<Long, Object>) container);
@@ -732,14 +664,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByDoubleMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByDoubleMap extends PutToMap {
         private PutToObjectByDoubleMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Double, Object> m = ((Map<Double, Object>) container);
@@ -750,14 +677,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectByObjectMap extends BiConsumer {
-        private final IFunction keyMapper;
-        private final IFunction valueMapper;
-        private final IBiOperator merger;
+    private class PutToObjectByObjectMap extends PutToMap {
         private PutToObjectByObjectMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.merger = merger;
+            super(keyMapper, valueMapper, merger);
         }
         public override void accept(Object container, Object o) {
             final Map<Object, Object> m = ((Map<Object, Object>) container);
@@ -768,12 +690,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByBoolMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByBoolMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByBoolMap extends PutToDownstreamMap {
+        private PutToObjectsByBoolMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Boolean, Object> m = (Map<Boolean, Object>) container;
             final Boolean key = (Boolean) classifier.apply(o);
@@ -782,12 +700,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByIdMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByIdMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByIdMap extends PutToDownstreamMap {
+        private PutToObjectsByIdMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Id, Object> m = (Map<Id, Object>) container;
             final Id key = (Id) classifier.apply(o);
@@ -796,12 +710,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByStringMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByStringMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByStringMap extends PutToDownstreamMap {
+        private PutToObjectsByStringMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<String, Object> m = (Map<String, Object>) container;
             final String key = (String) classifier.apply(o);
@@ -810,12 +720,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByBlobMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByBlobMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByBlobMap extends PutToDownstreamMap {
+        private PutToObjectsByBlobMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Blob, Object> m = (Map<Blob, Object>) container;
             final Blob key = (Blob) classifier.apply(o);
@@ -824,12 +730,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByDateMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByDateMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByDateMap extends PutToDownstreamMap {
+        private PutToObjectsByDateMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Date, Object> m = (Map<Date, Object>) container;
             final Date key = (Date) classifier.apply(o);
@@ -838,11 +740,9 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByDatetimeMap extends BiConsumer {
-        private final IFunction classifier;
+    private class PutToObjectsByDatetimeMap extends PutToDownstreamMap {
         private PutToObjectsByDatetimeMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
+            super(downstream, classifier);
         }
         public override void accept(Object container, Object o) {
             final Map<Datetime, Object> m = (Map<Datetime, Object>) container;
@@ -852,12 +752,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByTimeMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByTimeMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByTimeMap extends PutToDownstreamMap {
+        private PutToObjectsByTimeMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Time, Object> m = (Map<Time, Object>) container;
             final Time key = (Time) classifier.apply(o);
@@ -866,12 +762,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByIntMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByIntMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByIntMap extends PutToDownstreamMap {
+        private PutToObjectsByIntMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Integer, Object> m = (Map<Integer, Object>) container;
             final Integer key = (Integer) classifier.apply(o);
@@ -880,12 +772,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByLongMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByLongMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByLongMap extends PutToDownstreamMap {
+        private PutToObjectsByLongMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Long, Object> m = (Map<Long, Object>) container;
             final Long key = (Long) classifier.apply(o);
@@ -894,12 +782,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByDoubleMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByDoubleMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByDoubleMap extends PutToDownstreamMap {
+        private PutToObjectsByDoubleMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Double, Object> m = (Map<Double, Object>) container;
             final Double key = (Double) classifier.apply(o);
@@ -908,12 +792,8 @@ public inherited sharing class MapObjectConsumers {
         }
     }
 
-    private class PutToObjectsByObjectMap extends BiConsumer {
-        private final IFunction classifier;
-        private PutToObjectsByObjectMap(ICollector downstream, IFunction classifier) {
-            this.downstream = downstream;
-            this.classifier = classifier;
-        }
+    private class PutToObjectsByObjectMap extends PutToDownstreamMap {
+        private PutToObjectsByObjectMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Object, Object> m = (Map<Object, Object>) container;
             final Object key = classifier.apply(o);

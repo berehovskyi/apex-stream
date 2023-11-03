@@ -1,12 +1,19 @@
 /**
- * @description
+ * @description Provides base implementations of {@link Predicate}
+ * and related utilities that are used by {@link IEnumerable}.
+ *
  * @author Oleh Berehovskyi
+ *
+ * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BasePredicates {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected BasePredicates() {}
 
+    //<editor-fold desc="Built-Ins">
+    // @start-group Built-Ins
     /**
      * @description Returns a `Predicate` that tests if the result of comparing
      * the values returned by the applied `left` and `right` functions
@@ -25,7 +32,7 @@ public virtual inherited sharing class BasePredicates {
      * or `comparer`, or `result` is null
      *
      * @example
-     * Predicates.isCompared(
+     * BasePredicates.isCompared(
      *     func1,
      *     func2,
      *     Comparer.defaultOrder(),
@@ -38,10 +45,6 @@ public virtual inherited sharing class BasePredicates {
         final IComparer comparer,
         final Integer result
     ) {
-        Validate.notNull(left);
-        Validate.notNull(right);
-        Validate.notNull(comparer);
-        Validate.notNull(result);
         return new ComparerPredicate(left, right, comparer, result);
     }
 
@@ -57,11 +60,11 @@ public virtual inherited sharing class BasePredicates {
      *
      * @throws NullPointerException if `left` or `right` is null
      *
-     * @see Comparers.compareNullSafeUntyped
+     * @see Comparer.defaultOrder
      *
      * @example
-     * Predicates.isEqual(func1, func2);
-     * Predicates.isEqual(func1, Function.constant(100));
+     * BasePredicates.isEqual(func1, func2);
+     * BasePredicates.isEqual(func1, Function.constant(100));
      */
     public static Predicate isEqual(final IFunction left, final IFunction right) {
         return isCompared(left, right, Comparer.defaultOrder(), 0);
@@ -75,10 +78,11 @@ public virtual inherited sharing class BasePredicates {
      *
      * @return the `Predicate`
      *
-     * @see Comparers.compareNullSafeUntyped
+     * @see Comparer.defaultOrder
      *
      * @example
-     * Predicates.isEqual(100);
+     * BasePredicates.isEqual(100).test(100); // true
+     * BasePredicates.isEqual(100).test(50); // false
      */
     public static Predicate isEqual(final Object value) {
         return isEqual(Function.identity(), Function.constant(value));
@@ -98,13 +102,11 @@ public virtual inherited sharing class BasePredicates {
      * @see List.contains
      *
      * @example
-     * Predicates.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
-     * Predicates.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
-     * Predicates.isIn(getNameFunc, nameStream);
+     * BasePredicates.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
+     * BasePredicates.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * BasePredicates.isIn(getNameFunc, nameEnumerable);
      */
     public static Predicate isIn(final IFunction function, final Iterable<Object> container) {
-        Validate.notNull(function);
-        Validate.notNull(container);
         return new IsInPredicate(function, container);
     }
 
@@ -121,9 +123,9 @@ public virtual inherited sharing class BasePredicates {
      * @see List.contains
      *
      * @example
-     * Predicates.isIn(new List<Object>{ 'John', 'Jim' });
-     * Predicates.isIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
-     * Predicates.isIn(nameStream);
+     * BasePredicates.isIn(new List<Object>{ 'John', 'Jim' });
+     * BasePredicates.isIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * BasePredicates.isIn(nameEnumerable);
      */
     public static Predicate isIn(final Iterable<Object> container) {
         return isIn(Function.identity(), container);
@@ -135,7 +137,8 @@ public virtual inherited sharing class BasePredicates {
      * @return the `Predicate`
      *
      * @example
-     * Predicates.isNull();
+     * BasePredicates.isNull().test(null); // true;
+     * BasePredicates.isNull().test(1); // false;
      */
     public static Predicate isNull() {
         return isEqual(null);
@@ -147,14 +150,16 @@ public virtual inherited sharing class BasePredicates {
      * @return the `Predicate`
      *
      * @example
-     * Predicates.isNotNull();
+     * BasePredicates.isNotNull().test(null); // false
+     * BasePredicates.isNotNull().test(1); // true
      */
     public static Predicate isNotNull() {
         return isNull().negate();
     }
+    // @end-group
+    //</editor-fold>
 
     //<editor-fold desc="Lambdas">
-    // @start-group Lambdas
     private class ComparerPredicate extends Predicate {
         private final IFunction left;
         private final IFunction right;
@@ -166,6 +171,10 @@ public virtual inherited sharing class BasePredicates {
             IComparer comparer,
             Integer comparisonResult
         ) {
+            Validate.notNull(left);
+            Validate.notNull(right);
+            Validate.notNull(comparer);
+            Validate.notNull(comparisonResult);
             this.left = left;
             this.right = right;
             this.comparer = comparer;
@@ -180,6 +189,8 @@ public virtual inherited sharing class BasePredicates {
         private final IFunction function;
         private final Set<Object> container;
         private IsInPredicate(IFunction function, Iterable<Object> container) {
+            Validate.notNull(function);
+            Validate.notNull(container);
             this.function = function;
             this.container = toSet(container);
         }
@@ -194,5 +205,6 @@ public virtual inherited sharing class BasePredicates {
             return objects;
         }
     }
+    //</editor-fold>
 
 }

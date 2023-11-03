@@ -11,6 +11,7 @@
 public virtual inherited sharing class StringSuppliers {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected StringSuppliers() {}
 
     //<editor-fold desc="Built-Ins">
@@ -45,13 +46,6 @@ public virtual inherited sharing class StringSuppliers {
      * autonumber.get(); // 'A-0002'
      */
     public static Supplier autonumber(final String format) {
-        final String pattern = '\\S*\\{\\d+\\}\\S*';
-        Validate.matches(
-                format,
-                pattern,
-                Label.AS_ErrorMessage_StringPatternMismatch,
-                new List<Object>{ format, pattern }
-        );
         return new AutoNumber(format);
     }
     // @end-group
@@ -65,21 +59,22 @@ public virtual inherited sharing class StringSuppliers {
         public override Object get() {
             String hex = randomHex();
             return String.format(pattern, new List<String>{
-                    hex.substring(0, 8),
-                    hex.substring(8, 12),
-                    hex.substring(12, 16),
-                    hex.substring(16, 20),
-                    hex.substring(20)
+                hex.substring(0, 8),
+                hex.substring(8, 12),
+                hex.substring(12, 16),
+                hex.substring(16, 20),
+                hex.substring(20)
             });
         }
         private String randomHex() {
             return EncodingUtil.convertToHex(
-                    Crypto.generateDigest(algorithmName, Blob.valueOf(Crypto.getRandomLong().format()))
+                Crypto.generateDigest(algorithmName, Blob.valueOf(Crypto.getRandomLong().format()))
             );
         }
     }
 
     private class AutoNumber extends Supplier {
+        final String pattern = '\\S*\\{\\d+\\}\\S*';
         private final String zero = '0';
         private final String format;
         private final String prefix;
@@ -87,7 +82,13 @@ public virtual inherited sharing class StringSuppliers {
         private final String displayNumber;
         private final Integer displayLength;
         private Integer i;
-        private AutoNumber(String format) { 
+        private AutoNumber(String format) {
+            Validate.matches(
+                format,
+                pattern,
+                Label.AS_ErrorMessage_StringPatternMismatch,
+                new List<Object>{ format, pattern }
+            );
             this.format = format;
             this.prefix = format.substringBefore('{');
             this.suffix = format.substringAfter('}');

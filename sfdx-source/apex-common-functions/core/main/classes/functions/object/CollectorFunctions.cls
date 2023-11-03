@@ -9,9 +9,11 @@
  *
  * @group Functional Built-In Classes
  */
+@SuppressWarnings('PMD.CognitiveComplexity')
 public virtual inherited sharing class CollectorFunctions extends BaseCollectorFunctions {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected CollectorFunctions() {}
 
     //<editor-fold desc="Built-Ins">
@@ -30,6 +32,18 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
      */
     public static Function append(final String suffix) {
         return new AppendFinisher(suffix);
+    }
+
+    /**
+     * @description Returns a `Function` that returns the final result of summing.
+     *
+     * @return the `Function`
+     *
+     * @see Collectors.summingInt
+     * @see Collectors.summingLong
+     */
+    public static Function summing() {
+        return new SummingFinisher();
     }
 
     /**
@@ -53,28 +67,6 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
     public static Function averagingLong() {
         return new AveragingLongFinisher();
     }
-
-//    /**
-//     * @description Returns a `Function` that returns the final result of Double averaging.
-//     *
-//     * @return the `Function`
-//     *
-//     * @see Collectors.averagingDouble
-//     */
-//    public static Function averagingDouble() {
-//        return new AveragingDoubleFinisher();
-//    }
-//
-//    /**
-//     * @description Returns a `Function` that returns the final result of Double summation.
-//     *
-//     * @return the `Function`
-//     *
-//     * @see Collectors.summingDouble
-//     */
-//    public static Function summingDouble() {
-//        return new SummingDoubleFinisher();
-//    }
 
     /**
      * @description Returns a `Function` that applies the `finisher` to every map value
@@ -224,7 +216,7 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
      *
      * @return the `Function`
      *
-     * @see Collectors.groupingBy
+     * @see Collectors.groupingByObject
      */
     public static Function groupByObject(final IFunction finisher) {
         return new GroupByObjectFinisher(finisher);
@@ -232,7 +224,7 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
 
     /**
      * @description Returns a `Function` that returns the final result of SObject reducing
-     * as `SObjectOptional`.
+     * as `Optional`.
      *
      * @return the `Function`
      *
@@ -246,9 +238,13 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-    private class GroupByBoolFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByBoolFinisher(IFunction finisher) { this.finisher = finisher; }
+    private abstract class GroupFinisher extends Function {
+        protected final IFunction finisher;
+        protected GroupFinisher(IFunction finisher) { this.finisher = finisher; }
+    }
+
+    private class GroupByBoolFinisher extends GroupFinisher {
+        private GroupByBoolFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Boolean, Object> m = ((Map<Boolean, Object>) o);
@@ -259,9 +255,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByIdFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByIdFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByIdFinisher extends GroupFinisher {
+        private GroupByIdFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Id, Object> m = ((Map<Id, Object>) o);
@@ -272,9 +267,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByStringFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByStringFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByStringFinisher extends GroupFinisher {
+        private GroupByStringFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<String, Object> m = ((Map<String, Object>) o);
@@ -285,9 +279,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByBlobFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByBlobFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByBlobFinisher extends GroupFinisher {
+        private GroupByBlobFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Blob, Object> m = ((Map<Blob, Object>) o);
@@ -298,9 +291,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByDateFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByDateFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByDateFinisher extends GroupFinisher {
+        private GroupByDateFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Date, Object> m = ((Map<Date, Object>) o);
@@ -311,9 +303,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByDatetimeFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByDatetimeFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByDatetimeFinisher extends GroupFinisher {
+        private GroupByDatetimeFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Datetime, Object> m = ((Map<Datetime, Object>) o);
@@ -324,9 +315,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByTimeFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByTimeFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByTimeFinisher extends GroupFinisher {
+        private GroupByTimeFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Time, Object> m = ((Map<Time, Object>) o);
@@ -337,9 +327,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByIntFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByIntFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByIntFinisher extends GroupFinisher {
+        private GroupByIntFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Integer, Object> m = ((Map<Integer, Object>) o);
@@ -350,9 +339,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByLongFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByLongFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByLongFinisher extends GroupFinisher {
+        private GroupByLongFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Long, Object> m = ((Map<Long, Object>) o);
@@ -363,9 +351,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByDoubleFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByDoubleFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByDoubleFinisher extends GroupFinisher {
+        private GroupByDoubleFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Double, Object> m = ((Map<Double, Object>) o);
@@ -376,9 +363,8 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
-    private class GroupByObjectFinisher extends Function {
-        private final IFunction finisher;
-        private GroupByObjectFinisher(IFunction finisher) { this.finisher = finisher; }
+    private class GroupByObjectFinisher extends GroupFinisher {
+        private GroupByObjectFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
             if (finisher == null) { return o; }
             final Map<Object, Object> m = ((Map<Object, Object>) o);
@@ -398,43 +384,35 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
     private class AveragingIntFinisher extends Function {
         public override Object apply(Object o) {
             final List<Integer> integers = (List<Integer>) o;
-//            if (integers[0] == 0) { return 0; }
             if (integers[0] == 0) { return null; }
             return integers[1] / (Double) integers[0];
+        }
+    }
+
+    private class SummingFinisher extends Function {
+        public override Object apply(Object o) {
+            final List<Object> objects = (List<Object>) o;
+            if (objects[0] == 0) { return null; }
+            return objects[1];
         }
     }
 
     private class AveragingLongFinisher extends Function {
         public override Object apply(Object o) {
             final List<Long> longs = (List<Long>) o;
-//            if (longs[0] == 0) { return 0; }
             if (longs[0] == 0) { return null; }
             return longs[1] / (Double) longs[0];
         }
     }
 
-//    private class AveragingDoubleFinisher extends Function {
-//        public override Object apply(Object o) {
-//            final List<Double> doubles = (List<Double>) o;
-//            if (doubles[2] == 0) { return 0; }
-//            return (doubles[0] + doubles[1]) / doubles[2];
-//        }
-//    }
-//
-//    private class SummingDoubleFinisher extends Function {
-//        public override Object apply(Object o) {
-//            final List<Double> doubles = (List<Double>) o;
-//            return doubles[0] + doubles[1];
-//        }
-//    }
-
     private class ReducingOptionalFinisher extends Function {
         public override Object apply(Object o) {
             return ((List<Object>) o).isEmpty()
-                    ? Optional.empty()
-                    : Optional.ofNullable(((List<Object>) o)[0]);
+                ? Optional.empty()
+                : Optional.ofNullable(((List<Object>) o)[0]);
         }
     }
     // @end-group
     //</editor-fold>
+
 }

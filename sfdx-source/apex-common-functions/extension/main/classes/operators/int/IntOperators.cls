@@ -11,6 +11,7 @@
 public virtual inherited sharing class IntOperators {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected IntOperators() {}
 
     //<editor-fold desc="Built-Ins">
@@ -38,7 +39,6 @@ public virtual inherited sharing class IntOperators {
      * @throws NullPointerException if `i` is null
      */
     public static Operator add(final Integer i) {
-        Validate.notNull(i);
         return new Add(i);
     }
 
@@ -64,8 +64,6 @@ public virtual inherited sharing class IntOperators {
      * @throws NullPointerException if `i` is null
      */
     public static Operator divide(final Integer i) {
-        Validate.notNull(i);
-        Validate.isTrue(i != 0);
         return new Divide(i);
     }
 
@@ -92,7 +90,6 @@ public virtual inherited sharing class IntOperators {
      * @see Math.max
      */
     public static Operator max(final Integer i) {
-        Validate.notNull(i);
         return new Max(i);
     }
 
@@ -109,7 +106,6 @@ public virtual inherited sharing class IntOperators {
      * @see Math.min
      */
     public static Operator min(final Integer i) {
-        Validate.notNull(i);
         return new Min(i);
     }
 
@@ -127,8 +123,6 @@ public virtual inherited sharing class IntOperators {
      * @see Math.mod
      */
     public static Operator mod(final Integer i) {
-        Validate.notNull(i);
-        Validate.isTrue(i != 0);
         return new Mod(i);
     }
 
@@ -143,7 +137,6 @@ public virtual inherited sharing class IntOperators {
      * @throws NullPointerException if `i` is null
      */
     public static Operator multiply(final Integer i) {
-        Validate.notNull(i);
         return new Multiply(i);
     }
 
@@ -171,37 +164,45 @@ public virtual inherited sharing class IntOperators {
 
     private class Add extends Operator {
         private final Integer i;
-        private Add(Integer i) { this.i = i; }
+        private Add(Integer i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object j) { return (Integer) j + i; }
     }
 
     private class Min extends Operator {
         private final Integer i;
-        private Min(Integer i) { this.i = i; }
+        private Min(Integer i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object j) { return Math.min((Integer) j, i); }
     }
 
     private class Max extends Operator {
         private final Integer i;
-        private Max(Integer i) { this.i = i; }
+        private Max(Integer i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object j) { return Math.max((Integer) j, i); }
     }
 
     private class Mod extends Operator {
         private final Integer i;
-        private Mod(Integer i) { this.i = i; }
+        private Mod(Integer i) {
+            Validate.notNull(i);
+            Validate.isTrue(i != 0);
+            this.i = i;
+        }
         public override Object apply(Object j) { return Math.mod((Integer) j, i); }
     }
 
     private class Multiply extends Operator {
         private final Integer i;
-        private Multiply(Integer i) { this.i = i; }
+        private Multiply(Integer i) { Validate.notNull(i); this.i = i; }
         public override Object apply(Object j) { return (Integer) j * i; }
     }
 
     private class Divide extends Operator {
         private final Integer i;
-        private Divide(Integer i) { this.i = i; }
+        private Divide(Integer i) {
+            Validate.notNull(i);
+            Validate.isTrue(i != 0);
+            this.i = i;
+        }
         public override Object apply(Object j) { return (Integer) j / i; }
     }
     // @end-group

@@ -1,18 +1,24 @@
 /**
  * @description A sequence of `SObject` elements supporting aggregate operations.
  *
- * @see IEnumerable
+ * @see IObjectEnumerable
  * @see IIntEnumerable
  * @see ILongEnumerable
  * @see IDoubleEnumerable
  *
  * @author Oleh Berehovskyi
  *
- * @group Iterables
+ * @group Enumerables
  */
 public interface ISObjectEnumerable extends IEnumerable<SObject> {
 
     //<editor-fold desc="Iterator">
+    /**
+     * @description Returns an instance of an iterator for this enumerable.
+     * <p>Terminal Operation.</p>
+     *
+     * @return the iterator
+     */
     Iterator<SObject> iterator();
     //</editor-fold>
 
@@ -205,6 +211,15 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      */
     ISObjectEnumerable mapTo(SObjectField field);
 
+    /**
+     * @description Returns a new `IIntEnumerable` with `Integer` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the new `IIntEnumerable`
+     */
     IIntEnumerable mapToInt(IFunction mapper);
 
     /**
@@ -229,6 +244,15 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      */
     IIntEnumerable mapToInt(SObjectField field);
 
+    /**
+     * @description Returns a new `ILongEnumerable` with `Long` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the new `ILongEnumerable`
+     */
     ILongEnumerable mapToLong(IFunction mapper);
 
     /**
@@ -253,6 +277,15 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      */
     ILongEnumerable mapToLong(SObjectField field);
 
+    /**
+     * @description Returns a new `IDoubleEnumerable` with `Double` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the new `IDoubleEnumerable`
+     */
     IDoubleEnumerable mapToDouble(IFunction mapper);
 
     /**
@@ -277,6 +310,15 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      */
     IDoubleEnumerable mapToDouble(SObjectField field);
 
+    /**
+     * @description Returns a new `IObjectEnumerable` with `Object` elements
+     * returned by `mapper`.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the new `IObjectEnumerable`
+     */
     IObjectEnumerable mapToObject(IFunction mapper);
 
     /**
@@ -325,10 +367,40 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      */
     ISObjectEnumerable flatMapTo(SObjectField field);
 
+    /**
+     * @description Returns a new `IIntEnumerable` with `Integer` elements as a result of
+     * replacing each element with the contents of a mapped iterable created by applying
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function which must produce `Iterable<Integer>`
+     *
+     * @return the new `IIntEnumerable`
+     */
     IIntEnumerable flatMapToInt(IFunction mapper);
 
+    /**
+     * @description Returns a new `ILongEnumerable` with `Long` elements as a result of
+     * replacing each element with the contents of a mapped iterable created by applying
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function which must produce `Iterable<Long>`
+     *
+     * @return the new `ILongEnumerable`
+     */
     ILongEnumerable flatMapToLong(IFunction mapper);
 
+    /**
+     * @description Returns a new `IDoubleEnumerable` with `Double` elements as a result of
+     * replacing each element with the contents of a mapped iterable created by applying
+     * the specified `mapper` function to each element.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param mapper the mapping function which must produce `Iterable<Double>`
+     *
+     * @return the new `IDoubleEnumerable`
+     */
     IDoubleEnumerable flatMapToDouble(IFunction mapper);
 
     /**
@@ -337,7 +409,7 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the mapping function which must produce `Iterable<SObject>`
+     * @param mapper the mapping function which must produce `Iterable<Object>`
      *
      * @return the new `IObjectIterable`
      */
@@ -366,17 +438,6 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      * @return the new `ISObjectIterable`
      */
     ISObjectEnumerable forEach(SObjectField field, Object value);
-
-//    /**
-//     * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
-//     * considering `order`.
-//     * <p>Intermediate Operation.</p>
-//     *
-//     * @param order the sort order
-//     *
-//     * @return the new `ISObjectIterable`
-//     */
-//    ISObjectIterable sort(SortOrder order);
 
     /**
      * @description Returns a new `ISObjectIterable` with sorted `SObject` elements
@@ -426,6 +487,16 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
     //</editor-fold>
 
     //<editor-fold desc="Terminal Operations">
+    /**
+     * @description Performs a reduction on `SObject` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @param identity the identity value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `SObject` result of the reduction
+     */
     SObject reduce(SObject identity, IBiOperator accumulator);
     
     /**
@@ -676,34 +747,34 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
     List<Object> toList(SObjectField field, Type listType);
 
     /**
-     * @description Accumulates `Object` elements returned by `mapper` into a `Set<Object>`.
+     * @description Accumulates `Object` elements returned by `mapper` into a `Set<?>`.
      * <p>Terminal Operation.</p>
      *
      * @param mapper the mapping function
      *
-     * @return the `Set<Object>` containing the collected elements
+     * @return the `Set<?>` containing the collected elements
      */
     Object toSet(IFunction mapper);
 
     /**
-     * @description Accumulates `Object` elements into a `Set<Object>`
+     * @description Accumulates `Object` elements into a `Set<?>`
      * according to `fieldName`.
      * <p>Terminal Operation.</p>
      *
      * @param fieldName the field
      *
-     * @return the `Set<Object>` containing the collected elements
+     * @return the `Set<?>` containing the collected elements
      */
     Object toSet(String fieldName);
 
     /**
-     * @description Accumulates `Object` elements into a `Set<Object>`
+     * @description Accumulates `Object` elements into a `Set<?>`
      * according to `field`.
      * <p>Terminal Operation.</p>
      *
      * @param field the field
      *
-     * @return the `Set<Object>` containing the collected elements
+     * @return the `Set<?>` containing the collected elements
      */
     Object toSet(SObjectField field);
 

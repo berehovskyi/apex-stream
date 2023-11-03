@@ -8,58 +8,17 @@
  *
  * @group Functional Built-In Classes
  */
+@SuppressWarnings('PMD')
 public virtual inherited sharing class SObjectCollectors extends Collectors {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected SObjectCollectors() {}
     
     //<editor-fold desc="Built-Ins">
 
     //<editor-fold desc="List<?> Collectors">
     // @start-group List<?> Collectors
-//    /**
-//     * @description Returns a `Collector` that accumulates SObject input arguments
-//     * into a new `List<SObject>`.
-//     * <p>The result container can be cast to a specific `SObjectType`.</p>
-//     * <p>{@link ISObjectBaseIterable.collect(SObjectCollectors.toList())} can be replaced with
-//     * {@link ISObjectEnumerable.toList()}</p>
-//     *
-//     * @return the `Collector`
-//     *
-//     * @example
-//     * // Accumulates SObjects into a List
-//     * List<SObject> sObjs = (List<SObject>) Stream.of(sObjects).collect(SObjectCollectors.toList());
-//     * List<Account> accs = (List<Account>) Stream.of(accounts).collect(SObjectCollectors.toList());
-//     */
-//    public static Collector toList() {
-//        return Collector.of(
-//                Supplier.of(List<SObject>.class),
-//                ListSObjectConsumers.addToList(SObjectFunction.identity())
-//        );
-//    }
-//
-//    /**
-//     * @description Returns a `Collector` that accumulates the values returned by `mapper`
-//     * into a new `List<Object>`.
-//     * <p>The result container can be cast to a specific type using {@link Collector.cast}.</p>
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a List
-//     * List<Object> accountNames = (List<Object>) Stream.of(accounts)
-//     *     .collect(SObjectCollectors.toList(SObjectFunctions.get('Name')));
-//     * List<String> accountNames = (List<String>) Stream.of(accounts)
-//     *     .collect(SObjectCollectors.toList(SObjectFunctions.get('Name')).cast(List<String>.class));
-//     */
-//    public static Collector toList(final IFunction mapper) {
-//        return Collector.of(Supplier.of(List<Object>.class), ListSObjectConsumers.addToList(mapper));
-//    }
-
     /**
      * @description Returns a `Collector` that accumulates the values of `fieldName`
      * into a new `List<Object>`.
@@ -75,9 +34,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a List
-     * List<Object> accountNames = (List<Object>) Stream.of(accounts)
+     * List<Object> accountNames = (List<Object>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toList('Name'));
-     * List<String> parentAccountNames = (List<String>) Stream.of(accounts)
+     * List<String> parentAccountNames = (List<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toList('Parent?.Name').cast(List<String>.class));
      */
     public static Collector toList(final String fieldName) {
@@ -97,9 +56,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * List<Object> accountNames = (List<Object>) Stream.of(accounts)
+     * List<Object> accountNames = (List<Object>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toList(Account.Name));
-     * List<String> accountNames = (List<String>) Stream.of(accounts)
+     * List<String> accountNames = (List<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toList(Account.Name).cast(List<String>.class));
      */
     public static Collector toList(final SObjectField field) {
@@ -110,45 +69,6 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
 
     //<editor-fold desc="Set<?> Collectors">
     // @start-group Set<?> Collectors
-    /**
-     * @description Returns a `Collector` that accumulates SObject input arguments
-     * into a new `Set<SObject>`.
-     * <p>The result container <strong>cannot</strong> be cast to a specific `SObjectType`.</p>
-     * <p>{@link ISObjectBaseIterable.collect(SObjectCollectors.toSet())} can be replaced with
-     * {@link ISObjectEnumerable.toSet()}</p>
-     *
-     * @return the `Collector`
-     *
-     * @example
-     * // Accumulates SObjects into a List
-     * Set<SObject> sObjs = (Set<SObject>) Stream.of(sObjects).collect(SObjectCollectors.toSet());
-     */
-    public static Collector toSet() {
-        return Collector.of(
-            Supplier.of(Set<SObject>.class),
-            SetObjectConsumers.addToSObjectSet(Function.identity())
-        );
-    }
-
-//    /**
-//     * @description Returns a `Collector` that accumulates the Boolean values
-//     * returned by `mapper` into a new `Set<Boolean>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Boolean> doNotCalls = (Set<Boolean>) Stream.of(contacts)
-//     *     .collect(SObjectCollectors.toBoolSet(SObjectFunctions.get('DoNotCall')));
-//     */
-//    public static Collector toBoolSet(final IFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Boolean>.class), SetObjectConsumers.addToBoolSet(mapper));
-//    }
-
     /**
      * @description Returns a `Collector` that accumulates the Boolean values of `fieldName`
      * into a new `Set<Boolean>`.
@@ -163,9 +83,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Boolean> doNotCalls = (Set<Boolean>) Stream.of(contacts)
+     * Set<Boolean> doNotCalls = (Set<Boolean>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toBoolSet('DoNotCall'));
-     * Set<Boolean> parentDoNotCalls = (Set<Boolean>) Stream.of(contacts)
+     * Set<Boolean> parentDoNotCalls = (Set<Boolean>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toBoolSet('Parent?.DoNotCall'));
      */
     public static Collector toBoolSet(final String fieldName) {
@@ -184,32 +104,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * List<Boolean> accountNames = (List<Boolean>) Stream.of(contacts)
+     * List<Boolean> accountNames = (List<Boolean>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toBoolSet(Contact.DoNotCall));
      */
     public static Collector toBoolSet(final SObjectField field) {
         return toBoolSet(SObjectFunctions.get(field));
     }
-//
-//    /**
-//     * @description Returns a `Collector` that accumulates the Id values
-//     * returned by `mapper` into a new `Set<Id>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Id> ids = (Set<Id>) Stream.of(accounts)
-//     *     .collect(SObjectCollectors.toIdSet(SObjectFunctions.get('Id')));
-//     */
-//    public static Collector toIdSet(final IFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Id>.class), SetObjectConsumers.addToIdSet(mapper));
-//    }
-//
+
     /**
      * @description Returns a `Collector` that accumulates the Boolean values of `fieldName`
      * into a new `Set<Boolean>`.
@@ -224,9 +125,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Id> ids = (Set<Id>) Stream.of(accounts)
+     * Set<Id> ids = (Set<Id>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIdSet('Id'));
-     * Set<Id> parentOwnerIds = (Set<Id>) Stream.of(accounts)
+     * Set<Id> parentOwnerIds = (Set<Id>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIdSet('Parent?.OwnerId'));
      */
     public static Collector toIdSet(final String fieldName) {
@@ -245,31 +146,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Id> ids = (Set<Id>) Stream.of(accounts)
+     * Set<Id> ids = (Set<Id>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIdSet(Account.Id));
      */
     public static Collector toIdSet(final SObjectField field) {
         return toIdSet(SObjectFunctions.get(field));
     }
-//
-//    /**
-//     * @description Returns a `Collector` that accumulates the String values
-//     * returned by `mapper` into a new `Set<String>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<String> names = (Set<String>) Stream.of(accounts)
-//     *     .collect(SObjectCollectors.toStringSet(SObjectFunctions.get('Name')));
-//     */
-//    public static Collector toStringSet(final IFunction mapper) {
-//        return Collector.of(Supplier.of(Set<String>.class), SetObjectConsumers.addToStringSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the String values of `fieldName`
@@ -285,9 +167,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<String> names = (Set<String>) Stream.of(accounts)
+     * Set<String> names = (Set<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toStringSet('Name'));
-     * Set<String> parentNames = (Set<String>) Stream.of(accounts)
+     * Set<String> parentNames = (Set<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toStringSet('Parent?.Name'));
      */
     public static Collector toStringSet(final String fieldName) {
@@ -306,31 +188,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<String> names = (Set<String>) Stream.of(accounts)
+     * Set<String> names = (Set<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toStringSet(Account.Name));
      */
     public static Collector toStringSet(final SObjectField field) {
         return toStringSet(SObjectFunctions.get(field));
     }
-//
-//    /**
-//     * @description Returns a `Collector` that accumulates the Blob values
-//     * returned by `mapper` into a new `Set<Blob>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
-//     *     .collect(SObjectCollectors.toBlobSet(SObjectFunctions.get('Body')));
-//     */
-//    public static Collector toBlobSet(final IFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Blob>.class), SetObjectConsumers.addToBlobSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the Blob values of `fieldName`
@@ -346,9 +209,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
+     * Set<Blob> bodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toBlobSet('Body'));
-     * Set<Blob> parentBodies = (Set<Blob>) Stream.of(attachments)
+     * Set<Blob> parentBodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toBlobSet('Parent?.Body'));
      */
     public static Collector toBlobSet(final String fieldName) {
@@ -367,31 +230,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Blob> bodies = (Set<Blob>) Stream.of(attachments)
+     * Set<Blob> bodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toBlobSet(Attachment.Body));
      */
     public static Collector toBlobSet(final SObjectField field) {
         return toBlobSet(SObjectFunctions.get(field));
     }
-//
-//    /**
-//     * @description Returns a `Collector` that accumulates the Date values
-//     * returned by `mapper` into a new `Set<Date>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
-//     *     .collect(SObjectCollectors.toDateSet(SObjectFunctions.get('Birthdate')));
-//     */
-//    public static Collector toDateSet(final IFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Date>.class), SetObjectConsumers.addToDateSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the Date values of `fieldName`
@@ -407,9 +251,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
+     * Set<Date> birthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toDateSet('Birthdate'));
-     * Set<Date> parentBirthdates = (Set<Date>) Stream.of(contacts)
+     * Set<Date> parentBirthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toDateSet('Parent?.Birthdate'));
      */
     public static Collector toDateSet(final String fieldName) {
@@ -428,31 +272,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Date> birthdates = (Set<Date>) Stream.of(contacts)
+     * Set<Date> birthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toDateSet(Contact.Birthdate));
      */
     public static Collector toDateSet(final SObjectField field) {
         return toDateSet(SObjectFunctions.get(field));
     }
-//
-//    /**
-//     * @description Returns a `Collector` that accumulates the Datetime values
-//     * returned by `mapper` into a new `Set<Datetime>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
-//     *     .collect(SObjectCollectors.toDatetimeSet(SObjectFunctions.get('ActivityDateTime')));
-//     */
-//    public static Collector toDatetimeSet(final IFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Datetime>.class), SetObjectConsumers.addToDatetimeSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the Datetime values of `fieldName`
@@ -468,9 +293,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
+     * Set<Datetime> activityDateTimes = (Set<Datetime>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toDatetimeSet('ActivityDateTime'));
-     * Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
+     * Set<Datetime> activityDateTimes = (Set<Datetime>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toDatetimeSet('Parent?.ActivityDateTime'));
      */
     public static Collector toDatetimeSet(final String fieldName) {
@@ -489,7 +314,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Datetime> activityDateTimes = (Set<Datetime>) Stream.of(events)
+     * Set<Datetime> activityDateTimes = (Set<Datetime>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toDatetimeSet(Event.ActivityDateTime));
      */
     public static Collector toDatetimeSet(final SObjectField field) {
@@ -508,7 +333,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values returned by mapper into a Set
-     * Set<Time> startTimes = (Set<Time>) Stream.of(slots)
+     * Set<Time> startTimes = (Set<Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toTimeSet(SObjectFunctions.get('StartTime')));
      */
     public static Collector toTimeSet(final IFunction mapper) {
@@ -529,9 +354,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Time> startTimes = (Set<Time>) Stream.of(slots)
+     * Set<Time> startTimes = (Set<Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toTimeSet('StartTime'));
-     * Set<Time> parentStartTimes = (Set<Time>) Stream.of(slots)
+     * Set<Time> parentStartTimes = (Set<Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toTimeSet('Parent?.StartTime'));
      */
     public static Collector toTimeSet(final String fieldName) {
@@ -550,31 +375,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Time> startTimes = (Set<Time>) Stream.of(slots)
+     * Set<Time> startTimes = (Set<Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toTimeSet(TimeSlot.StartTime));
      */
     public static Collector toTimeSet(final SObjectField field) {
         return toTimeSet(SObjectFunctions.get(field));
     }
-
-//    /**
-//     * @description Returns a `Collector` that accumulates the Integer values
-//     * returned by `mapper` into a new `Set<Integer>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
-//     *     .collect(SObjectCollectors.toIntSet(SObjectFunctions.get('NumberOfEmployees')));
-//     */
-//    public static Collector toIntSet(final ISObjectToIntFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Integer>.class), SetObjectConsumers.addToIntSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the Integer values of `fieldName`
@@ -590,9 +396,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
+     * Set<Integer> numberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIntSet('NumberOfEmployees'));
-     * Set<Integer> parentNumberOfEmployees = (Set<Integer>) Stream.of(accounts)
+     * Set<Integer> parentNumberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIntSet('Parent?.NumberOfEmployees'));
      */
     public static Collector toIntSet(final String fieldName) {
@@ -611,31 +417,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Integer> numberOfEmployees = (Set<Integer>) Stream.of(accounts)
+     * Set<Integer> numberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIntSet(Account.NumberOfEmployees));
      */
     public static Collector toIntSet(final SObjectField field) {
         return toIntSet(SObjectFunctions.get(field));
     }
-
-//    /**
-//     * @description Returns a `Collector` that accumulates the Long values
-//     * returned by `mapper` into a new `Set<Long>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
-//     *     .collect(SObjectCollectors.toLongSet(SObjectFunctions.get('NumberOfEmployees')));
-//     */
-//    public static Collector toLongSet(final ISObjectToLongFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Long>.class), SetObjectConsumers.addToLongSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the Long values of `fieldName`
@@ -651,9 +438,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
+     * Set<Long> numberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toLongSet('NumberOfEmployees'));
-     * Set<Long> parentNumberOfEmployees = (Set<Long>) Stream.of(accounts)
+     * Set<Long> parentNumberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toLongSet('Parent?.NumberOfEmployees'));
      */
     public static Collector toLongSet(final String fieldName) {
@@ -672,31 +459,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Long> numberOfEmployees = (Set<Long>) Stream.of(accounts)
+     * Set<Long> numberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toLongSet(Account.NumberOfEmployees));
      */
     public static Collector toLongSet(final SObjectField field) {
         return toLongSet(SObjectFunctions.get(field));
     }
-
-//    /**
-//     * @description Returns a `Collector` that accumulates the Double values
-//     * returned by `mapper` into a new `Set<Double>`.
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
-//     *     .collect(SObjectCollectors.toDoubleSet(SObjectFunctions.get('BillingLatitude')));
-//     */
-//    public static Collector toDoubleSet(final ISObjectToDoubleFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Double>.class), SetObjectConsumers.addToDoubleSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the Double values of `fieldName`
@@ -712,9 +480,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
+     * Set<Double> billingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toDoubleSet('BillingLatitude'));
-     * Set<Double> parentBillingLatitudes = (Set<Double>) Stream.of(accounts)
+     * Set<Double> parentBillingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toDoubleSet('Parent?.BillingLatitude'));
      */
     public static Collector toDoubleSet(final String fieldName) {
@@ -733,34 +501,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Double> billingLatitudes = (Set<Double>) Stream.of(accounts)
+     * Set<Double> billingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toDoubleSet(Account.BillingLatitude));
      */
     public static Collector toDoubleSet(final SObjectField field) {
         return toDoubleSet(SObjectFunctions.get(field));
     }
-
-//    /**
-//     * @description Returns a `Collector` that accumulates the Object values
-//     * returned by `mapper` into a new `Set<Object>`.
-//     * <p>The result container <strong>cannot</strong> be cast to a specific type.</p>
-//     * <p>To get a result container of a specific type use `to<T>Set()` collectors
-//     * such as {@link SObjectCollectors.toIdSet}, {@link SObjectCollectors.toStringSet}, etc.</p>
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a Set
-//     * Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
-//     *     .collect(SObjectCollectors.toSet(SObjectFunctions.get('Birthdate')));
-//     */
-//    public static Collector toSet(final IFunction mapper) {
-//        return Collector.of(Supplier.of(Set<Object>.class), SetObjectConsumers.addToObjectSet(mapper));
-//    }
 
     /**
      * @description Returns a `Collector` that accumulates the Object values of `fieldName`
@@ -779,13 +525,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of fieldName into a Set
-     * Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toSet('Birthdate'));
-     * Set<Object> parentBirthdates = (Set<Object>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toSet('Parent?.Birthdate'));
+     * Set<Object> birthdates = (Set<Object>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toObjectSet('Birthdate'));
+     * Set<Object> parentBirthdates = (Set<Object>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toObjectSet('Parent?.Birthdate'));
      */
-    public static Collector toSet(final String fieldName) {
-        return toSet(SObjectFunctions.get(fieldName));
+    public static Collector toObjectSet(final String fieldName) {
+        return toObjectSet(SObjectFunctions.get(fieldName));
     }
 
     /**
@@ -803,11 +549,11 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates values of field into a List
-     * Set<Object> birthdates = (Set<Object>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toSet(Contact.Birthdate));
+     * Set<Object> birthdates = (Set<Object>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toObjectSet(Contact.Birthdate));
      */
-    public static Collector toSet(final SObjectField field) {
-        return toSet(SObjectFunctions.get(field));
+    public static Collector toObjectSet(final SObjectField field) {
+        return toObjectSet(SObjectFunctions.get(field));
     }
     // @end-group
     //</editor-fold>
@@ -821,8 +567,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Id, SObject>`
      * <p>The result container value type can be cast to a specific `SObjectType`
      * using {@link Collector.cast}.</p>
-     * <p>{@link ISObjectBaseIterable.collect(SObjectCollectors.toMap())} can be replaced with
-     * {@link ISObjectEnumerable.toMap()}</p>
+     * <p>{@link SObjectEnumerable.collect(SObjectCollectors.toByIdMap())} can be replaced with
+     * {@link ISObjectEnumerable.toByIdMap()}</p>
      *
      * @return the `Collector`
      *
@@ -830,13 +576,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Accumulates SObjects into a List
-     * Map<Id, SObject> sObjs = (Map<Id, SObject>) Stream.of(sObjects)
-     *     .collect(SObjectCollectors.toMap());
-     * Map<Id, Account> accs = (Map<Id, Account>) Stream.of(accounts)
-     *     .collect(SObjectCollectors.toMap().cast(Map<Id, Account));
+     * Map<Id, SObject> sObjs = (Map<Id, SObject>) [SObjectEnumerable].of(sObjects)
+     *     .collect(SObjectCollectors.toByIdMap());
+     * Map<Id, Account> accs = (Map<Id, Account>) [SObjectEnumerable].of(accounts)
+     *     .collect(SObjectCollectors.toByIdMap().cast(Map<Id, Account));
      */
-    public static Collector toMap() {
-        return toByIdMap(SObjectFunctions.get('Id'), Function.identity(), null, Supplier.of(Map<Id, SObject>.class));
+    public static Collector toByIdMap() {
+        return toByIdMap('Id');
     }
     // @end-group
     //</editor-fold>
@@ -849,7 +595,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBoolMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -863,7 +609,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(contacts)
+     * Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByBoolMap('DoNotCall', 'LastName').cast(Map<Boolean, String>.class));
      */
     public static Collector toByBoolMap(final String keyFieldName, final String valueFieldName) {
@@ -875,7 +621,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Boolean, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBoolMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -889,7 +635,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) Stream.of(contacts)
+     * Map<Boolean, String> lastNameByDoNotCall = (Map<Boolean, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByBoolMap(
      *         Contact.DoNotCall,
      *         Contact.LastName
@@ -909,7 +655,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBoolMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -922,9 +668,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Boolean, SObject> contactByDoNotCall = (Map<Boolean, SObject>) Stream.of(contacts)
+     * Map<Boolean, SObject> contactByDoNotCall = (Map<Boolean, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByBoolMap('DoNotCall'));
-     * Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(contacts)
+     * Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByBoolMap('DoNotCall').cast(Map<Boolean, Contact>.class));
      */
     public static Collector toByBoolMap(final String keyFieldName) {
@@ -936,7 +682,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Boolean, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBoolMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBoolMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -949,9 +695,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Boolean, SObject> contactByDoNotCall = (Map<Boolean, SObject>) Stream.of(contacts)
+     * Map<Boolean, SObject> contactByDoNotCall = (Map<Boolean, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByBoolMap(Contact.DoNotCall));
-     * Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) Stream.of(contacts)
+     * Map<Boolean, Contact> contactByDoNotCall = (Map<Boolean, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByBoolMap(Contact.DoNotCall).cast(Map<Boolean, Contact>.class));
      */
     public static Collector toByBoolMap(final SObjectField keyField) {
@@ -968,7 +714,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIdMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -982,7 +728,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
+     * Map<Id, String> lastNameByAccountId = (Map<Id, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByIdMap(
      *         'AccountId',
      *         'LastName'
@@ -997,7 +743,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Id, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIdMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1011,7 +757,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Id, String> lastNameByAccountId = (Map<Id, String>) Stream.of(contacts)
+     * Map<Id, String> lastNameByAccountId = (Map<Id, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByIdMap(
      *         Contact.AccountId,
      *         Contact.LastName
@@ -1031,7 +777,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIdMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1044,9 +790,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
+     * Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByIdMap('AccountId'));
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
+     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByIdMap('AccountId').cast(Map<Id, Contact>.class));
      */
     public static Collector toByIdMap(final String keyFieldName) {
@@ -1058,7 +804,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Id, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIdMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIdMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1071,9 +817,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) Stream.of(contacts)
+     * Map<Id, SObject> contactByAccountId = (Map<Id, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByIdMap(Contact.AccountId));
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) Stream.of(contacts)
+     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByIdMap(Contact.AccountId).cast(Map<Id, Contact>.class));
      */
     public static Collector toByIdMap(final SObjectField keyField) {
@@ -1091,7 +837,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByStringMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1105,7 +851,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contacts)
+     * Map<String, String> lastNameByFirstName = (Map<String, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByStringMap(
      *         'FirstName',
      *         'LastName'
@@ -1120,7 +866,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<String, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByStringMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1134,7 +880,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<String, String> lastNameByFirstName = (Map<String, String>) Stream.of(contacts)
+     * Map<String, String> lastNameByFirstName = (Map<String, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByStringMap(
      *         Contact.FirstName,
      *         Contact.LastName
@@ -1154,7 +900,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByStringMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1167,9 +913,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<String, SObject> contactByFirstName = (Map<String, SObject>) Stream.of(contacts)
+     * Map<String, SObject> contactByFirstName = (Map<String, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByStringMap('FirstName'));
-     * Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(contacts)
+     * Map<String, Contact> contactByFirstName = (Map<String, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByStringMap('FirstName').cast(Map<String, Contact>.class));
      */
     public static Collector toByStringMap(final String keyFieldName) {
@@ -1181,7 +927,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<String, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByStringMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByStringMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1194,9 +940,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<String, SObject> contactByFirstName = (Map<String, SObject>) Stream.of(contacts)
+     * Map<String, SObject> contactByFirstName = (Map<String, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByStringMap(Contact.FirstName));
-     * Map<String, Contact> contactByFirstName = (Map<String, Contact>) Stream.of(contacts)
+     * Map<String, Contact> contactByFirstName = (Map<String, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByStringMap(Contact.FirstName).cast(Map<String, Contact>.class));
      */
     public static Collector toByStringMap(final SObjectField keyField) {
@@ -1213,7 +959,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBlobMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1227,7 +973,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
+     * Map<Blob, String> nameByBody = (Map<Blob, String>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toByBlobMap(
      *         'Body',
      *         'Name'
@@ -1242,7 +988,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Blob, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBlobMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1256,7 +1002,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Blob, String> nameByBody = (Map<Blob, String>) Stream.of(attachments)
+     * Map<Blob, String> nameByBody = (Map<Blob, String>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toByBlobMap(
      *         Attachment.Body,
      *         Attachment.Name
@@ -1276,7 +1022,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBlobMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1289,9 +1035,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Blob, SObject> attachmentByBody = (Map<Blob, SObject>) Stream.of(attachments)
+     * Map<Blob, SObject> attachmentByBody = (Map<Blob, SObject>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toByBlobMap('Body'));
-     * Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attachments)
+     * Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toByBlobMap('Body').cast(Map<Blob, Attachment>.class));
      */
     public static Collector toByBlobMap(final String keyFieldName) {
@@ -1303,7 +1049,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Blob, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByBlobMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByBlobMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1316,9 +1062,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Blob, SObject> attachmentByBody = (Map<Blob, SObject>) Stream.of(attachments)
+     * Map<Blob, SObject> attachmentByBody = (Map<Blob, SObject>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toByBlobMap(Attachment.Body));
-     * Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) Stream.of(attachments)
+     * Map<Blob, Attachment> attachmentByBody = (Map<Blob, Attachment>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toByBlobMap(Attachment.Body).cast(Map<Blob, Attachment>.class));
      */
     public static Collector toByBlobMap(final SObjectField keyField) {
@@ -1336,7 +1082,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDateMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1350,7 +1096,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
+     * Map<Date, String> lastNameByBirthdate = (Map<Date, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByDateMap(
      *         'Birthdate',
      *         'LastName'
@@ -1365,7 +1111,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Date, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDateMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1379,7 +1125,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Date, String> lastNameByBirthdate = (Map<Date, String>) Stream.of(contacts)
+     * Map<Date, String> lastNameByBirthdate = (Map<Date, String>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByDateMap(
      *         Contact.Birthdate,
      *         Contact.LastName
@@ -1399,7 +1145,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDateMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1412,9 +1158,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Date, SObject> contactByBirthdate = (Map<Date, SObject>) Stream.of(contacts)
+     * Map<Date, SObject> contactByBirthdate = (Map<Date, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByDateMap('Birthdate'));
-     * Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
+     * Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByDateMap('Birthdate').cast(Map<Date, Contact>.class));
      */
     public static Collector toByDateMap(final String keyFieldName) {
@@ -1422,11 +1168,11 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * into a `Map<Date, Object>` whose keys are values of `keyField`     * @description Returns a `Collector` that accumulates elements
-
+     * @description Returns a `Collector` that accumulates elements
+     * into a `Map<Date, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDateMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDateMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1439,9 +1185,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Date, SObject> contactByBirthdate = (Map<Date, SObject>) Stream.of(contacts)
+     * Map<Date, SObject> contactByBirthdate = (Map<Date, SObject>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByDateMap(Contact.Birthdate));
-     * Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) Stream.of(contacts)
+     * Map<Date, Contact> contactByBirthdate = (Map<Date, Contact>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toByDateMap(Contact.Birthdate).cast(Map<Date, Contact>.class));
      */
     public static Collector toByDateMap(final SObjectField keyField) {
@@ -1458,7 +1204,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1472,7 +1218,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) Stream.of(events)
+     * Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toByDatetimeMap(
      *         'ActivityDateTime',
      *         'Description'
@@ -1487,7 +1233,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Datetime, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1501,7 +1247,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) Stream.of(events)
+     * Map<Datetime, String> descriptionByActivityDateTime = (Map<Datetime, String>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toByDatetimeMap(
      *         Event.ActivityDateTime,
      *         Event.Description
@@ -1521,7 +1267,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1534,9 +1280,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Datetime, SObject> eventByActivityDateTime = (Map<Datetime, SObject>) Stream.of(events)
+     * Map<Datetime, SObject> eventByActivityDateTime = (Map<Datetime, SObject>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toByDatetimeMap('ActivityDateTime'));
-     * Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(events)
+     * Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toByDatetimeMap('ActivityDateTime').cast(Map<Datetime, Event>.class));
      */
     public static Collector toByDatetimeMap(final String keyFieldName) {
@@ -1548,7 +1294,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Datetime, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1561,9 +1307,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Datetime, SObject> eventByActivityDateTime = (Map<Datetime, SObject>) Stream.of(events)
+     * Map<Datetime, SObject> eventByActivityDateTime = (Map<Datetime, SObject>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toByDatetimeMap(Event.ActivityDateTime));
-     * Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) Stream.of(events)
+     * Map<Datetime, Event> eventByActivityDateTime = (Map<Datetime, Event>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toByDatetimeMap(Event.ActivityDateTime).cast(Map<Datetime, Event>.class));
      */
     public static Collector toByDatetimeMap(final SObjectField keyField) {
@@ -1580,7 +1326,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByTimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1594,7 +1340,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
+     * Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toByTimeMap(
      *         'StartTime',
      *         'EndTime'
@@ -1609,7 +1355,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Time, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByTimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1623,7 +1369,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) Stream.of(slots)
+     * Map<Time, Time> endTimeByStartTime = (Map<Time, Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toByTimeMap(
      *         TimeSlot.StartTime,
      *         TimeSlot.EndTime
@@ -1643,7 +1389,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByTimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByTimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1656,9 +1402,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Time, SObject> timeSlotByStartTime = (Map<Time, SObject>) Stream.of(slots)
+     * Map<Time, SObject> timeSlotByStartTime = (Map<Time, SObject>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toByTimeMap('StartTime'));
-     * Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
+     * Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toByTimeMap('StartTime').cast(Map<Time, TimeSlot>.class));
      */
     public static Collector toByTimeMap(final String keyFieldName) {
@@ -1670,7 +1416,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Datetime, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByDatetimeMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1683,9 +1429,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Time, SObject> timeSlotByStartTime = (Map<Time, SObject>) Stream.of(slots)
+     * Map<Time, SObject> timeSlotByStartTime = (Map<Time, SObject>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toByTimeMap(TimeSlot.StartTime));
-     * Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) Stream.of(slots)
+     * Map<Time, TimeSlot> timeSlotByStartTime = (Map<Time, TimeSlot>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toByTimeMap(TimeSlot.StartTime).cast(Map<Time, TimeSlot>.class));
      */
     public static Collector toByTimeMap(final SObjectField keyField) {
@@ -1702,7 +1448,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIntMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1716,7 +1462,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(accounts)
+     * Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByIntMap(
      *         'NumberOfEmployees',
      *         'Name'
@@ -1731,7 +1477,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Integer, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIntMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1745,7 +1491,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) Stream.of(accounts)
+     * Map<Integer, String> nameByNumberOfEmployees = (Map<Integer, String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByIntMap(
      *         Account.NumberOfEmployees,
      *         Account.Name
@@ -1765,7 +1511,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIntMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1778,9 +1524,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Integer, SObject> accountByNumberOfEmployees = (Map<Integer, SObject>) Stream.of(accounts)
+     * Map<Integer, SObject> accountByNumberOfEmployees = (Map<Integer, SObject>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByIntMap('NumberOfEmployees'));
-     * Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Stream.of(accounts)
+     * Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByIntMap('NumberOfEmployees').cast(Map<Integer, Account>.class));
      */
     public static Collector toByIntMap(final String keyFieldName) {
@@ -1792,7 +1538,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Integer, Object>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByIntMap(ISObjectToIntFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByIntMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1805,9 +1551,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Integer, SObject> accountByNumberOfEmployees = (Map<Integer, SObject>) Stream.of(accounts)
+     * Map<Integer, SObject> accountByNumberOfEmployees = (Map<Integer, SObject>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByIntMap(Account.NumberOfEmployees));
-     * Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) Stream.of(accounts)
+     * Map<Integer, Account> accountByNumberOfEmployees = (Map<Integer, Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByIntMap(Account.NumberOfEmployees).cast(Map<Integer, Account>.class));
      */
     public static Collector toByIntMap(final SObjectField keyField) {
@@ -1824,7 +1570,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByLongMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1838,7 +1584,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accounts)
+     * Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByIntMap(
      *         'NumberOfEmployees',
      *         'Name'
@@ -1853,7 +1599,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Long, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByLongMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1867,7 +1613,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) Stream.of(accounts)
+     * Map<Long, String> nameByNumberOfEmployees = (Map<Long, String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByLongMap(
      *         Account.NumberOfEmployees,
      *         Account.Name
@@ -1887,7 +1633,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByLongMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1900,9 +1646,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Long, SObject> accountByNumberOfEmployees = (Map<Long, SObject>) Stream.of(accounts)
+     * Map<Long, SObject> accountByNumberOfEmployees = (Map<Long, SObject>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByLongMap('NumberOfEmployees'));
-     * Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(accounts)
+     * Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByLongMap('NumberOfEmployees').cast(Map<Long, Account>.class));
      */
     public static Collector toByLongMap(final String keyFieldName) {
@@ -1914,7 +1660,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Long, SObject>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toByLongMap(ISObjectToLongFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByLongMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1927,9 +1673,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Long, SObject> accountByNumberOfEmployees = (Map<Long, SObject>) Stream.of(accounts)
+     * Map<Long, SObject> accountByNumberOfEmployees = (Map<Long, SObject>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByLongMap(Account.NumberOfEmployees));
-     * Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) Stream.of(accounts)
+     * Map<Long, Account> accountByNumberOfEmployees = (Map<Long, Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByLongMap(Account.NumberOfEmployees).cast(Map<Long, Account>.class));
      */
     public static Collector toByLongMap(final SObjectField keyField) {
@@ -1946,7 +1692,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates, use
-     * {@link SObjectCollectors.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * {@link SObjectCollectors.toByDoubleMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1960,7 +1706,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(accounts)
+     * Map<Double, String> nameByBillingLatitude = (Map<Double, String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByDoubleMap(
      *         'BillingLatitude',
      *         'Name'
@@ -1975,7 +1721,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Double, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates, use
-     * {@link SObjectCollectors.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * {@link SObjectCollectors.toByDoubleMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1989,7 +1735,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Double, String> nameByBillingLatitude = (Map<Double, String>) Stream.of(accounts)
+     * Map<Double, String> nameByBillingLatitude = (Map<Double, String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByDoubleMap(
      *         Account.BillingLatitude,
      *         Account.Name
@@ -2009,7 +1755,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates, use
-     * {@link SObjectCollectors.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * {@link SObjectCollectors.toByDoubleMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -2022,9 +1768,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Double, SObject> accountByBillingLatitude = (Map<Double, SObject>) Stream.of(accounts)
+     * Map<Double, SObject> accountByBillingLatitude = (Map<Double, SObject>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByDoubleMap('BillingLatitude'));
-     * Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of(accounts)
+     * Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByDoubleMap('BillingLatitude').cast(Map<Double, Account>.class));
      */
     public static Collector toByDoubleMap(final String keyFieldName) {
@@ -2036,7 +1782,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Double, SObject>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
-     * {@link SObjectCollectors.toByDoubleMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * {@link SObjectCollectors.toByDoubleMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -2049,9 +1795,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Double, SObject> accountByBillingLatitude = (Map<Double, SObject>) Stream.of(accounts)
+     * Map<Double, SObject> accountByBillingLatitude = (Map<Double, SObject>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByDoubleMap(Account.BillingLatitude));
-     * Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) Stream.of(accounts)
+     * Map<Double, Account> accountByBillingLatitude = (Map<Double, Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toByDoubleMap(Account.BillingLatitude).cast(Map<Double, Account>.class));
      */
     public static Collector toByDoubleMap(final SObjectField keyField) {
@@ -2068,7 +1814,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and `valueFieldName` of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates,
-     * use {@link SObjectCollectors.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * use {@link SObjectCollectors.toByObjectMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
@@ -2085,14 +1831,14 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toMap(
-     *         'Birtdate',
+     * Map<Object, String> lastNameByBirthdate = (Map<Object, String>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toByObjectMap(
+     *         'Birthdate',
      *         'LastName'
      *     ).cast(Map<Object, String>.class));
      */
-    public static Collector toMap(final String keyFieldName, final String valueFieldName) {
-        return toMap(SObjectFunctions.get(keyFieldName), SObjectFunctions.get(valueFieldName));
+    public static Collector toByObjectMap(final String keyFieldName, final String valueFieldName) {
+        return toByObjectMap(SObjectFunctions.get(keyFieldName), SObjectFunctions.get(valueFieldName));
     }
 
     /**
@@ -2100,7 +1846,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Object, Object>` whose keys and values are values of `keyField`
      * and `valueField` of the SObject input arguments.
      * If the mapped keys might have duplicates, use
-     * {@link SObjectCollectors.toMap(ISObjectFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * {@link SObjectCollectors.toByObjectMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
@@ -2117,14 +1863,14 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by fields
-     * Map<Object, String> lastNameByBirthdate = (Map<Object, String>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toMap(
+     * Map<Object, String> lastNameByBirthdate = (Map<Object, String>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toByObjectMap(
      *         Contact.Birthdate,
      *         Contact.LastName
      *     ).cast(Map<Object, String>.class));
      */
-    public static Collector toMap(final SObjectField keyField, final SObjectField valueField) {
-        return toMap(SObjectFunctions.get(keyField), SObjectFunctions.get(valueField));
+    public static Collector toByObjectMap(final SObjectField keyField, final SObjectField valueField) {
+        return toByObjectMap(SObjectFunctions.get(keyField), SObjectFunctions.get(valueField));
     }
     // @end-group
     //</editor-fold>
@@ -2137,7 +1883,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * and values are values of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      * If the mapped keys might have duplicates, use
-     * {@link SObjectCollectors.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * {@link SObjectCollectors.toByObjectMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
@@ -2153,13 +1899,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Object, SObject> contactByBirthdate = (Map<Object, SObject>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toMap('Birthdate'));
-     * Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toMap('Birthdate').cast(Map<Double, Contact>.class));
+     * Map<Object, SObject> contactByBirthdate = (Map<Object, SObject>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toByObjectMap('Birthdate'));
+     * Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toByObjectMap('Birthdate').cast(Map<Double, Contact>.class));
      */
-    public static Collector toMap(final String keyFieldName) {
-        return toMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Object, SObject>.class));
+    public static Collector toByObjectMap(final String keyFieldName) {
+        return toByObjectMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Object, SObject>.class));
     }
 
     /**
@@ -2167,7 +1913,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * into a `Map<Object, SObject>` whose keys are values of `keyField`
      * and values are values of the SObject input arguments.
      * If the mapped keys might have duplicates, use
-     * {@link SObjectCollectors.toMap(ISObjectToDoubleFunction, ISObjectFunction, IBinaryOperator)} instead.
+     * {@link SObjectCollectors.toByObjectMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
@@ -2183,13 +1929,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Object, SObject> contactByBirthdate = (Map<Object, SObject>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toMap(Contact.Birthdate));
-     * Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) Stream.of(contacts)
-     *     .collect(SObjectCollectors.toMap(Contact.Birthdate).cast(Map<Object, Contact>.class));
+     * Map<Object, SObject> contactByBirthdate = (Map<Object, SObject>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toByObjectMap(Contact.Birthdate));
+     * Map<Object, Contact> contactByBirthdate = (Map<Object, Contact>) [SObjectEnumerable].of(contacts)
+     *     .collect(SObjectCollectors.toByObjectMap(Contact.Birthdate).cast(Map<Object, Contact>.class));
      */
-    public static Collector toMap(final SObjectField keyField) {
-        return toMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Object, SObject>.class));
+    public static Collector toByObjectMap(final SObjectField keyField) {
+        return toByObjectMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Object, SObject>.class));
     }
     // @end-group
     //</editor-fold>
@@ -2217,7 +1963,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBool(
      *             'DoNotCall',
      *             'LastName'
@@ -2243,7 +1989,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBool(
      *             Contact.DoNotCall,
      *             Contact.LastName
@@ -2272,7 +2018,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBool('DoNotCall'));
      */
     public static Collector groupingByBool(final String fieldName) {
@@ -2296,7 +2042,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Boolean, List<Contact>> contactsByDoNotCall = (Map<Boolean, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBool(Contact.DoNotCall));
      */
     public static Collector groupingByBool(final SObjectField field) {
@@ -2328,7 +2074,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingById(
      *             'AccountId',
      *             'LastName'
@@ -2354,7 +2100,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBool(
      *             Contact.AccountId,
      *             Contact.LastName
@@ -2383,7 +2129,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Id, List<Contact>> contactsByAccountId = (Map<Id, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingById('AccountId'));
      */
     public static Collector groupingById(final String fieldName) {
@@ -2407,7 +2153,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<String, List<Contact>> contactsByAccountId = (Map<String, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingById(Contact.AccountId));
      */
     public static Collector groupingById(final SObjectField field) {
@@ -2439,7 +2185,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByString(
      *             'OtherCity',
      *             'LastName'
@@ -2465,7 +2211,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByString(
      *             Contact.OtherCity,
      *             Contact.LastName
@@ -2494,7 +2240,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByString('OtherCity'));
      */
     public static Collector groupingByString(final String fieldName) {
@@ -2518,7 +2264,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<String, List<Contact>> contactsByOtherCity = (Map<String, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByString(Contact.OtherCity));
      */
     public static Collector groupingByString(final SObjectField field) {
@@ -2550,7 +2296,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
-     *     Stream.of(attachments)
+     *     [SObjectEnumerable].of(attachments)
      *         .collect(SObjectCollectors.groupingByBlob(
      *             'Body',
      *             'Name'
@@ -2575,7 +2321,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
-     *     Stream.of(attachments)
+     *     [SObjectEnumerable].of(attachments)
      *         .collect(SObjectCollectors.groupingByString(
      *             Attachment.Body,
      *             Attachment.Name
@@ -2604,7 +2350,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Blob, List<Attachment>> attachmentsByBody = (Map<Blob, List<Attachment>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBlob('Body'));
      */
     public static Collector groupingByBlob(final String fieldName) {
@@ -2628,7 +2374,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Blob, List<Attachment>> attachmentsByBody = (Map<Blob, List<Attachment>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBlob(Attachment.Body));
      */
     public static Collector groupingByBlob(final SObjectField field) {
@@ -2660,7 +2406,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByDate(
      *             'Birthdate',
      *             'LastName'
@@ -2686,7 +2432,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByDate(
      *             Contact.Birthdate,
      *             Contact.LastName
@@ -2715,7 +2461,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Date, List<Contact>> contactsByBody = (Map<Date, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByDate('Birthdate'));
      */
     public static Collector groupingByDate(final String fieldName) {
@@ -2739,7 +2485,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Date, List<Contact>> contactsByBody = (Map<Date, List<Contact>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByDate(Contact.Birthdate));
      */
     public static Collector groupingByDate(final SObjectField field) {
@@ -2771,7 +2517,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List<String>>)
-     *     Stream.of(contacts)
+     *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByDatetime(
      *             'ActivityDateTime',
      *             'Description'
@@ -2797,7 +2543,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List<String>>)
-     *     Stream.of(events)
+     *     [SObjectEnumerable].of(events)
      *         .collect(SObjectCollectors.groupingByDatetime(
      *             Event.ActivityDateTime,
      *             Event.Description
@@ -2826,7 +2572,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>>)
-     *     Stream.of(events)
+     *     [SObjectEnumerable].of(events)
      *         .collect(SObjectCollectors.groupingByDatetime('ActivityDateTime'));
      */
     public static Collector groupingByDatetime(final String fieldName) {
@@ -2850,7 +2596,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Datetime, List<Event>> eventsByActivityDateTime = (Map<Datetime, List<Event>>)
-     *     Stream.of(events)
+     *     [SObjectEnumerable].of(events)
      *         .collect(SObjectCollectors.groupingByDatetime(Event.ActivityDateTime));
      */
     public static Collector groupingByDatetime(final SObjectField field) {
@@ -2882,7 +2628,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Time, List<String>> namesByStartTime = (Map<Time, List<String>>)
-     *     Stream.of(slots)
+     *     [SObjectEnumerable].of(slots)
      *         .collect(SObjectCollectors.groupingByDatetime(
      *             'StartTime',
      *             'Name'
@@ -2908,7 +2654,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Time, List<String>> descriptionsByActivityDateTime = (Map<Time, List<String>>)
-     *     Stream.of(slots)
+     *     [SObjectEnumerable].of(slots)
      *         .collect(SObjectCollectors.groupingByTime(
      *             TimeSlot.StartTime,
      *             TimeSlot.Description
@@ -2937,7 +2683,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
-     *     Stream.of(slots)
+     *     [SObjectEnumerable].of(slots)
      *         .collect(SObjectCollectors.groupingByTime('StartTime'));
      */
     public static Collector groupingByTime(final String fieldName) {
@@ -2961,7 +2707,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Time, List<TimeSlot>> slotsByStartTime = (Map<Time, List<TimeSlot>>)
-     *     Stream.of(slots)
+     *     [SObjectEnumerable].of(slots)
      *         .collect(SObjectCollectors.groupingByTime(TimeSlot.StartTime));
      */
     public static Collector groupingByTime(final SObjectField field) {
@@ -2993,7 +2739,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByInt(
      *             'NumberOfEmployees',
      *             'Name'
@@ -3019,7 +2765,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByInt(
      *             Account.NumberOfEmployees,
      *             Account.Name
@@ -3048,7 +2794,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Account>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByInt('NumberOfEmployees'));
      */
     public static Collector groupingByInt(final String fieldName) {
@@ -3072,7 +2818,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Integer, List<Account>> accountsByNumberOfEmployees = (Map<Integer, List<Account>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByInt(Account.NumberOfEmployees));
      */
     public static Collector groupingByInt(final SObjectField field) {
@@ -3104,7 +2850,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByLong(
      *             'NumberOfEmployees',
      *             'Name'
@@ -3130,7 +2876,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByLong(
      *             Account.NumberOfEmployees,
      *             Account.Name
@@ -3159,7 +2905,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByLong('NumberOfEmployees'));
      */
     public static Collector groupingByLong(final String fieldName) {
@@ -3183,7 +2929,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Long, List<Account>> accountsByNumberOfEmployees = (Map<Long, List<Account>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByLong(Account.NumberOfEmployees));
      */
     public static Collector groupingByLong(final SObjectField field) {
@@ -3215,7 +2961,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByDouble(
      *             'BillingLatitude',
      *             'Name'
@@ -3241,7 +2987,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByDouble(
      *             Account.BillingLatitude,
      *             Account.Name
@@ -3253,8 +2999,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @end-group
     //</editor-fold>
 
-    //<editor-fold desc="Map<Object, List<SObject>> Collectors">
-    // @start-group Map<Object, ?> Collectors
+    //<editor-fold desc="Map<Double, List<SObject>> Collectors">
+    // @start-group Map<Double, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
      * according to `fieldName`.
@@ -3270,7 +3016,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByDouble('BillingLatitude'));
      */
     public static Collector groupingByDouble(final String fieldName) {
@@ -3294,7 +3040,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Double, List<Account>> accountsByBillingLatitude = (Map<Double, List<Account>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByDouble(Account.BillingLatitude));
      */
     public static Collector groupingByDouble(final SObjectField field) {
@@ -3329,14 +3075,14 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by function
      * Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
-     *     Stream.of(contacts)
-     *         .collect(SObjectCollectors.groupingBy(
+     *     [SObjectEnumerable].of(contacts)
+     *         .collect(SObjectCollectors.groupingByObject(
      *             'Birthdate',
      *             'LastName'
      *         ).cast(Map<Object, List<String>>.class));
      */
-    public static Collector groupingBy(final String keyFieldName, final String valueFieldName) {
-        return groupingBy(SObjectFunctions.get(keyFieldName), SObjectCollectors.toList(valueFieldName));
+    public static Collector groupingByObject(final String keyFieldName, final String valueFieldName) {
+        return groupingByObject(SObjectFunctions.get(keyFieldName), SObjectCollectors.toList(valueFieldName));
     }
 
     /**
@@ -3358,14 +3104,14 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
-     *     Stream.of(contacts)
-     *         .collect(SObjectCollectors.groupingBy(
+     *     [SObjectEnumerable].of(contacts)
+     *         .collect(SObjectCollectors.groupingByObject(
      *             Contact.Birthdate,
      *             Contact.LastName
      *         ).cast(Map<Object, List<String>>.class));
      */
-    public static Collector groupingBy(final SObjectField keyField, final SObjectField valueField) {
-        return groupingBy(SObjectFunctions.get(keyField), SObjectCollectors.toList(valueField));
+    public static Collector groupingByObject(final SObjectField keyField, final SObjectField valueField) {
+        return groupingByObject(SObjectFunctions.get(keyField), SObjectCollectors.toList(valueField));
     }
     // @end-group
     //</editor-fold>
@@ -3390,11 +3136,11 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
-     *     Stream.of(contacts)
-     *         .collect(SObjectCollectors.groupingBy('Birthdate'));
+     *     [SObjectEnumerable].of(contacts)
+     *         .collect(SObjectCollectors.groupingByObject('Birthdate'));
      */
-    public static Collector groupingBy(final String fieldName) {
-        return groupingBy(
+    public static Collector groupingByObject(final String fieldName) {
+        return groupingByObject(
             SObjectFunctions.get(fieldName),
             Supplier.of(Map<Object, List<SObject>>.class),
             toList(SObject.class)
@@ -3417,11 +3163,11 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @example
      * // Group values by keys provided by field
      * Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
-     *     Stream.of(contacts)
-     *         .collect(SObjectCollectors.groupingBy(Contact.Birthdate));
+     *     [SObjectEnumerable].of(contacts)
+     *         .collect(SObjectCollectors.groupingByObject(Contact.Birthdate));
      */
-    public static Collector groupingBy(final SObjectField field) {
-        return groupingBy(
+    public static Collector groupingByObject(final SObjectField field) {
+        return groupingByObject(
             SObjectFunctions.get(field),
             Supplier.of(Map<Object, List<SObject>>.class),
             toList(SObject.class)
@@ -3450,7 +3196,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * 
      * @example
      * Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees =
-     *     (Map<Boolean, List<Account>>) Stream.of(contacts)
+     *     (Map<Boolean, List<Account>>) [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.partitioningBy('OtherCountry', 'UK'));
      */
     public static Collector partitioningBy(final String fieldName, final Object value) {
@@ -3481,7 +3227,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees =
-     *     (Map<Boolean, List<Account>>) Stream.of(contacts)
+     *     (Map<Boolean, List<Account>>) [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.partitioningBy(Contact.OtherCountry, 'UK'));
      */
     public static Collector partitioningBy(final SObjectField field, final Object value) {
@@ -3513,7 +3259,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * String lastNames = (String) Stream.of(contacts).collect(SObjectCollectors.joining('LastName'));
+     * String lastNames = (String) [SObjectEnumerable].of(contacts).collect(SObjectCollectors.joining('LastName'));
      */
     public static Collector joining(final String fieldName) {
         return joining(fieldName, '');
@@ -3530,7 +3276,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * String lastNames = (String) Stream.of(contacts).collect(SObjectCollectors.joining(Contact.LastName));
+     * String lastNames = (String) [SObjectEnumerable].of(contacts).collect(SObjectCollectors.joining(Contact.LastName));
      */
     public static Collector joining(final SObjectField field) {
         return joining(field, '');
@@ -3550,7 +3296,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException `delimiter` is null
      *
      * @example
-     * String lastNames = (String) Stream.of(contacts)
+     * String lastNames = (String) [SObjectEnumerable].of(contacts)
      *      .collect(SObjectCollectors.joining('LastName', '; '));
      */
     public static Collector joining(final String fieldName, final String delimiter) {
@@ -3569,7 +3315,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` or `delimiter` is null
      *
      * @example
-     * String lastNames = (String) Stream.of(contacts)
+     * String lastNames = (String) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.joining(Contact.LastName, '; '));
      */
     public static Collector joining(final SObjectField field, final String delimiter) {
@@ -3592,7 +3338,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `delimiter`, `prefix` or `suffix` is null
      *
      * @example
-     * String lastNames = (String) Stream.of(contacts)
+     * String lastNames = (String) [SObjectEnumerable].of(contacts)
      *      .collect(SObjectCollectors.joining('LastName', '; ', 'prefix', 'suffix'));
      */
     public static Collector joining(
@@ -3618,7 +3364,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field`, `delimiter`, `prefix` or `suffix` is null
      *
      * @example
-     * String lastNames = (String) Stream.of(contacts)
+     * String lastNames = (String) [SObjectEnumerable].of(contacts)
      *      .collect(SObjectCollectors.joining(Contact.LastName, '; ', 'prefix', 'suffix'));
      */
     public static Collector joining(
@@ -3647,7 +3393,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * Double averageNumberOfEmployees = (Double) Stream.of(accounts)
+     * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingInt('NumberOfEmployees'));
      */
     public static Collector averagingInt(final String fieldName) {
@@ -3657,7 +3403,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
      * of `field` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param field the field value to average
      *
@@ -3666,7 +3412,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * Double averageNumberOfEmployees = (Double) Stream.of(accounts)
+     * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingInt(Account.NumberOfEmployees));
      */
     public static Collector averagingInt(final SObjectField field) {
@@ -3680,7 +3426,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @return the `Collector`
      *
      * @example
-     * Double averageNumberOfEmployees = (Double) Stream.of(accounts)
+     * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.counting());
      */
     public static Collector counting() {
@@ -3689,7 +3435,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of `fieldName` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param fieldName the field value to sum
      *
@@ -3699,7 +3445,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * Integer sumOfNumberOfEmployees = (Integer) Stream.of(accounts)
+     * Integer sumOfNumberOfEmployees = (Integer) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingInt('NumberOfEmployees'));
      */
     public static Collector summingInt(final String fieldName) {
@@ -3709,7 +3455,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of `field` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param field the field value to sum
      *
@@ -3718,7 +3464,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * Integer sumOfNumberOfEmployees = (Integer) Stream.of(accounts)
+     * Integer sumOfNumberOfEmployees = (Integer) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingInt(Account.NumberOfEmployees));
      */
     public static Collector summingInt(final SObjectField field) {
@@ -3732,7 +3478,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
      * of `fieldName` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param fieldName the field value to average
      *
@@ -3742,7 +3488,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * Double averageNumberOfEmployees = (Double) Stream.of(accounts)
+     * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingLong('NumberOfEmployees'));
      */
     public static Collector averagingLong(final String fieldName) {
@@ -3752,7 +3498,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
      * of `field` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param field the field value to average
      *
@@ -3761,7 +3507,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * Double averageNumberOfEmployees = (Double) Stream.of(accounts)
+     * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingLong(Account.NumberOfEmployees));
      */
     public static Collector averagingLong(final SObjectField field) {
@@ -3770,7 +3516,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of `fieldName` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param fieldName the field value to sum
      *
@@ -3780,7 +3526,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * Long sumOfNumberOfEmployees = (Long) Stream.of(accounts)
+     * Long sumOfNumberOfEmployees = (Long) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingLong('NumberOfEmployees'));
      */
     public static Collector summingLong(final String fieldName) {
@@ -3790,7 +3536,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of `field` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param field the field value to sum
      *
@@ -3799,7 +3545,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * Long sumOfNumberOfEmployees = (Long) Stream.of(accounts)
+     * Long sumOfNumberOfEmployees = (Long) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingLong(Account.NumberOfEmployees));
      */
     public static Collector summingLong(final SObjectField field) {
@@ -3813,7 +3559,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
      * of `fieldName` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param fieldName the field value to average
      *
@@ -3823,7 +3569,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * Double averageBillingLatitude = (Double) Stream.of(accounts)
+     * Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingDouble('BillingLatitude'));
      */
     public static Collector averagingDouble(final String fieldName) {
@@ -3833,7 +3579,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
      * of `field` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param field the field value to average
      *
@@ -3842,7 +3588,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * Double averageBillingLatitude = (Double) Stream.of(accounts)
+     * Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingDouble(Account.BillingLatitude));
      */
     public static Collector averagingDouble(final SObjectField field) {
@@ -3852,7 +3598,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of `fieldName` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param fieldName the field value to sum
      *
@@ -3862,7 +3608,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * Double sumOfBillingLatitude = (Double) Stream.of(accounts)
+     * Double sumOfBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingDouble('BillingLatitude'));
      */
     public static Collector summingDouble(final String fieldName) {
@@ -3872,7 +3618,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of `field` values.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param field the field value to BillingLatitude
      *
@@ -3881,7 +3627,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * Double sumOfBillingLatitude = (Double) Stream.of(accounts)
+     * Double sumOfBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingDouble(Account.NumberOfEmployees));
      */
     public static Collector summingDouble(final SObjectField field) {
@@ -3908,11 +3654,11 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * // Get accounts with hot Rating
-     * List<Account> accountsHavingMoreThan100Employees = (List<Account>) Stream.of(accounts)
+     * List<Account> accountsHavingMoreThan100Employees = (List<Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.filtering('Rating', 'Hot'));
      * // Group accounts with hot Rating by type
      * Map<String, List<Account>> accountNamesHavingMoreThan100EmployeesByType =
-     *     (Map<String, List<Account>>) Stream.of(accounts)
+     *     (Map<String, List<Account>>) [SObjectEnumerable].of(accounts)
      *        .collect(
      *             SObjectCollectors.groupingByString(
      *                 SObjectFunctions.get('Type'),
@@ -3936,11 +3682,11 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * 
      * @example
      * // Get accounts with hot Rating
-     * List<Account> accountsHavingMoreThan100Employees = (List<Account>) Stream.of(accounts)
+     * List<Account> accountsHavingMoreThan100Employees = (List<Account>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.filtering(Account.Rating, 'Hot'));
      * // Group accounts with hot Rating by type
      * Map<String, List<Account>> accountNamesHavingMoreThan100EmployeesByType =
-     *     (Map<String, List<Account>>) Stream.of(accounts)
+     *     (Map<String, List<Account>>) [SObjectEnumerable].of(accounts)
      *        .collect(
      *             SObjectCollectors.groupingByString(
      *                 SObjectFunctions.get('Type'),
@@ -3964,7 +3710,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * List<String> accountNames = (List<String>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.mapping('Name').cast(List<String>.class));
      */
     public static Collector mapping(final String fieldName) {
@@ -3983,7 +3729,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * List<String> accountNames = (List<String>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.mapping(Account.Name).cast(List<String>.class));
      */
     public static Collector mapping(final SObjectField field) {
@@ -4003,10 +3749,10 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `fieldName` is null
      *
      * @example
-     * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+     * List<Contact> contacts = (List<Contact>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.flatMapping('Contacts').cast(List<Contact>.class));
      * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
      *             SObjectFunctions.get('Type'),
      *             SObjectCollectors.flatMapping('Contacts')
@@ -4028,10 +3774,10 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `field` is null
      *
      * @example
-     * List<Contact> contacts = (List<Contact>) Stream.of(accounts)
+     * List<Contact> contacts = (List<Contact>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.flatMapping(Contact.AccountId).cast(List<Contact>.class));
      * Map<String, List<Contact>> contactsByAccountType = (Map<String, List<Contact>>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
      *             SObjectFunctions.get('Type'),
      *             SObjectCollectors.flatMapping(Contact.AccountId)
@@ -4053,7 +3799,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Account accountWithSummedNumberOfEmployees = (Account) Stream.of(accounts)
+     * Account accountWithSummedNumberOfEmployees = (Account) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.reducing(
      *         new Account(NumberOfEmployees = 0),
      *         sumIntFieldReducer
@@ -4073,8 +3819,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Optional Collectors
     /**
      * @description Returns a `Collector` which produces the maximal element
-     * according to `fieldName`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
+     * according to `fieldName`, described as an `Optional` SObject .
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
      *
      * @param fieldName the field value to compare
      *
@@ -4085,13 +3831,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
      *             SObjectFunctions.get('Type'),
      *             SObjectCollectors.maximizing('NumberOfEmployees')
      *         ));
      * Account customerWithMaxNumberOfEmployees = (Account)
-     *     ((OptionalSObject) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
+     *     ((Optional) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
      */
     public static Collector maximizing(final String fieldName) {
         return maximizing(Comparer.comparing(SObjectFunctions.get(fieldName)));
@@ -4099,8 +3845,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
 
     /**
      * @description Returns a `Collector` which produces the maximal element
-     * according to `field`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
+     * according to `field`, described as an `Optional` SObject .
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
      *
      * @param field the field value to compare
      *
@@ -4110,21 +3856,21 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
      *             SObjectFunctions.get(Account.Type),
      *             SObjectCollectors.maximizing(Account.NumberOfEmployees)
      *         ));
      * Account customerWithMaxNumberOfEmployees = (Account)
-     *     ((OptionalSObject) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
+     *     ((Optional) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
      */
     public static Collector maximizing(final SObjectField field) {
         return maximizing(Comparer.comparing(SObjectFunctions.get(field)));
     }
     /**
      * @description Returns a `Collector` which produces the minimal element
-     * according to `fieldName`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
+     * according to `fieldName`, described as an `Optional` SObject .
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
      *
      * @param fieldName the field value to compare
      *
@@ -4135,13 +3881,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
      *             SObjectFunctions.get('Type'),
      *             SObjectCollectors.maximizing('NumberOfEmployees')
      *         ));
      * Account customerWithMinNumberOfEmployees = (Account)
-     *     ((OptionalSObject) accountOptionalWithMinNumberOfEmployeesPerType).get('Customer').get();
+     *     ((Optional) accountOptionalWithMinNumberOfEmployeesPerType).get('Customer').get();
      */
     public static Collector minimizing(final String fieldName) {
         return minimizing(Comparer.comparing(SObjectFunctions.get(fieldName)));
@@ -4149,8 +3895,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
 
     /**
      * @description Returns a `Collector` which produces the maximal element
-     * according to `field`, described as an `OptionalSObject` .
-     * <p>The result container <strong>cannot</strong> be cast to a specific `OptionalSObject`.</p>
+     * according to `field`, described as an `Optional` SObject .
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
      *
      * @param field the field value to compare
      *
@@ -4160,13 +3906,13 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @example
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
-     *     Stream.of(accounts)
+     *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByString(
      *             SObjectFunctions.get(Account.Type),
      *             SObjectCollectors.maximizing(Account.NumberOfEmployees)
      *         ));
      * Account customerWithMinNumberOfEmployees = (Account)
-     *     ((OptionalSObject) accountOptionalWithMinNumberOfEmployeesPerType).get('Customer').get();
+     *     ((Optional) accountOptionalWithMinNumberOfEmployeesPerType).get('Customer').get();
      */
     public static Collector minimizing(final SObjectField field) {
         return minimizing(Comparer.comparing(SObjectFunctions.get(field)));

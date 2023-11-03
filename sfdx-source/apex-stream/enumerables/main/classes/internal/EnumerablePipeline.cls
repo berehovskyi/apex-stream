@@ -1,5 +1,4 @@
 /**
- * @description
  * @author Oleh Berehovskyi
  */
 public inherited sharing class EnumerablePipeline {
@@ -35,6 +34,20 @@ public inherited sharing class EnumerablePipeline {
         while (iterator.hasNext()) {
             result.add(mapper.apply(iterator.next()));
         }
+        return result;
+    }
+
+    public static String findRelationshipField(final SObjectField field) {
+        final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
+        Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
+        String result;
+        for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
+            if (relationship.getField() == field) {
+                result = relationship.getRelationshipName();
+                break;
+            }
+        }
+        Validate.isNotNull(result);
         return result;
     }
 

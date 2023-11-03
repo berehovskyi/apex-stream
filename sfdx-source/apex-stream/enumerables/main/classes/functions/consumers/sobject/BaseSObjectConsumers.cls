@@ -1,12 +1,19 @@
 /**
- * @description
+ * @description Provides base implementations of {@link Consumer}
+ * and related utilities that are used by {@link ISObjectEnumerable}.
+ *
  * @author Oleh Berehovskyi
+ *
+ * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BaseSObjectConsumers {
-    
+
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected BaseSObjectConsumers() {}
 
+    //<editor-fold desc="Built-Ins">
+    // @start-group Built-Ins
     /**
      * @description Returns a `Consumer` that sets the value returned by
      * the `mapper` for the specified `fieldName`.
@@ -27,9 +34,9 @@ public virtual inherited sharing class BaseSObjectConsumers {
      * @see SObject.put
      *
      * @example
-     * Consumers.set('NumberOfEmployees', someFunction);
-     * Consumers.set('Parent.NumberOfEmployees', someFunction);
-     * Consumers.set('Parent?.NumberOfEmployees', someFunction);
+     * BaseSObjectConsumers.set('NumberOfEmployees', someFunction);
+     * BaseSObjectConsumers.set('Parent.NumberOfEmployees', someFunction);
+     * BaseSObjectConsumers.set('Parent?.NumberOfEmployees', someFunction);
      */
     public static Consumer set(final String fieldName, final IFunction mapper) {
         Validate.notBlank(fieldName);
@@ -54,11 +61,9 @@ public virtual inherited sharing class BaseSObjectConsumers {
      * @see SObject.put
      *
      * @example
-     * Consumers.set(Account.NumberOfEmployees, someFunction);
+     * BaseSObjectConsumers.set(Account.NumberOfEmployees, someFunction);
      */
     public static Consumer set(final SObjectField field, final IFunction mapper) {
-        Validate.notNull(field);
-        Validate.notNull(mapper);
         return new SetField(field, mapper);
     }
 
@@ -81,9 +86,9 @@ public virtual inherited sharing class BaseSObjectConsumers {
      * @see SObject.put
      * 
      * @example 
-     * Consumers.set('NumberOfEmployees', 100);
-     * Consumers.set('Parent.NumberOfEmployees', 100);
-     * Consumers.set('Parent?.NumberOfEmployees', (Object) null);
+     * BaseSObjectConsumers.set('NumberOfEmployees', 100);
+     * BaseSObjectConsumers.set('Parent.NumberOfEmployees', 100);
+     * BaseSObjectConsumers.set('Parent?.NumberOfEmployees', (Object) null);
      */
     public static Consumer set(final String fieldName, final Object value) {
         return set(fieldName, Function.constant(value));
@@ -105,13 +110,16 @@ public virtual inherited sharing class BaseSObjectConsumers {
      * @see SObject.put
      *
      * @example
-     * Consumers.set(Account.NumberOfEmployees, 100);
-     * Consumers.set(Account.NumberOfEmployees, (Object) null);
+     * BaseSObjectConsumers.set(Account.NumberOfEmployees, 100);
+     * BaseSObjectConsumers.set(Account.NumberOfEmployees, (Object) null);
      */
     public static Consumer set(final SObjectField field, final Object value) {
         return set(field, Function.constant(value));
     }
+    // @end-group
+    //</editor-fold>
 
+    //<editor-fold desc="Lambdas">
     private abstract class SObjectPathConsumer extends Consumer {
         protected final IOperator operator;
         protected final String xRefFieldName;
@@ -128,7 +136,7 @@ public virtual inherited sharing class BaseSObjectConsumers {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
-        public override void accept(Object obj) { ((SObject) obj).put(fieldName, this.mapper.apply(((SObject) obj))); }
+        public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(((SObject) obj))); }
     }
 
     private class SetFieldPath extends SObjectPathConsumer {
@@ -138,7 +146,7 @@ public virtual inherited sharing class BaseSObjectConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj)).put(xRefFieldName, this.mapper.apply(((SObject) obj)));
+            ((SObject) operator.apply((SObject) obj)).put(xRefFieldName, mapper.apply(((SObject) obj)));
         }
     }
 
@@ -149,7 +157,7 @@ public virtual inherited sharing class BaseSObjectConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj))?.put(xRefFieldName, this.mapper.apply((SObject) obj));
+            ((SObject) operator.apply((SObject) obj))?.put(xRefFieldName, mapper.apply((SObject) obj));
         }
     }
 
@@ -157,10 +165,13 @@ public virtual inherited sharing class BaseSObjectConsumers {
         private final SObjectField field;
         private final IFunction mapper;
         private SetField(SObjectField field, IFunction mapper) {
+            Validate.notNull(field);
+            Validate.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }
-        public override void accept(Object obj) { ((SObject) obj).put(field, this.mapper.apply((SObject) obj)); }
+        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply((SObject) obj)); }
     }
+    //</editor-fold>
 
 }

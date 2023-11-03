@@ -8,81 +8,17 @@
  *
  * @group Functional Built-In Classes
  */
+@SuppressWarnings('PMD')
 public virtual inherited sharing class Collectors extends BaseCollectors {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected Collectors() {}
 
     //<editor-fold desc="Built-Ins">
 
-    //<editor-fold desc="List<?> Collectors">
-    // @start-group List<?> Collectors
-//    /**
-//     * @description Returns a `Collector` that accumulates SObject input arguments
-//     * into a new `List<T>`.
-//     *
-//     * @param elementType the type of the element
-//     *
-//     * @return the `Collector`
-//     *
-//     * @example
-//     * // Accumulates Objects into a List
-//     * List<String> strs = (List<String>) Stream.of(strings)
-//     *     .collect(Collectors.toList(String.class));
-//     * List<String> strs = (List<String>) Stream.of(strings)
-//     *     .collect(Collectors.toList().cast(List<String>.class));
-//     */
-//    public static Collector toList(final Type elementType) {
-//        return Collector.of(Supplier.of(Type.forName('List<' + elementType + '>')), ListObjectConsumers.addToList(Function.identity()));
-//    }
-//
-//    /**
-//     * @description Returns a `Collector` that accumulates the values returned by `mapper`
-//     * into a new `List<Object>`.
-//     * <p>The result container can be cast to a specific type using {@link Collector.cast}.</p>
-//     *
-//     * @param mapper the function that returns values to accumulate
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * // Accumulates values returned by mapper into a List
-//     * List<Object> names = (List<Object>) Stream.of(people)
-//     *     .collect(Collectors.toList(getNameFunction));
-//     * List<String> names = (List<String>) Stream.of(people)
-//     *     .collect(Collectors.toList(getNameFunction).cast(List<String>.class));
-//     */
-//    public static Collector toList(final IFunction mapper) {
-//        return Collector.of(Supplier.of(List<Object>.class), ListObjectConsumers.addToList(mapper));
-//    }
-    // @end-group
-    //</editor-fold>
-
     //<editor-fold desc="Set<?> Collectors">
     // @start-group Set<?> Collectors
-    /**
-     * @description Returns a `Collector` that accumulates input arguments
-     * into a new `Set<Object>`.
-     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
-     * <p>{@link IEnumerable.collect(Collectors.toSet())} can be replaced with
-     * {@link IEnumerable.toSet()}</p>
-     *
-     * @return the `Collector`
-     *
-     * @example
-     * // Accumulates input arguments into a List
-     * Set<Object> ppl = (Set<Object>) Stream.of(people).collect(Collectors.toSet());
-     */
-    public static Collector toSet() {
-        return toSet(Function.identity());
-    }
-
-    public static Collector toSet(final IFunction mapper) {
-        return Collector.of(Supplier.of(Set<Object>.class), SetObjectConsumers.addToSet(mapper));
-    }
-
     /**
      * @description Returns a `Collector` that accumulates input arguments
      * into a new `Set<Boolean>`.
@@ -91,13 +27,26 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @return the `Collector`
      *
      * @example
-     * // Accumulates input arguments into a List
-     * Set<Boolean> bools = (Set<Boolean>) Stream.of(booleans).collect(Collectors.toBoolSet());
+     * // Accumulates input arguments into a Set
+     * Set<Boolean> bools = (Set<Boolean>) [ObjectEnumerable].of(booleans).collect(Collectors.toBoolSet());
      */
     public static Collector toBoolSet() {
         return toBoolSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Boolean>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Boolean> bools = (Set<Boolean>) [ObjectEnumerable].of(booleans).collect(Collectors.toBoolSet(mapper));
+     */
     public static Collector toBoolSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Boolean>.class), SetObjectConsumers.addToBoolSet(mapper));
     }
@@ -110,13 +59,26 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @return the `Collector`
      *
      * @example
-     * // Accumulates input arguments into a List
-     * Set<Boolean> ids = (Set<Boolean>) Stream.of(ids).collect(Collectors.toIdSet());
+     * // Accumulates input arguments into a Set
+     * Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet());
      */
     public static Collector toIdSet() {
         return toIdSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Id>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a Set
+     * Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet(mapper));
+     */
     public static Collector toIdSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Id>.class), SetObjectConsumers.addToIdSet(mapper));
     }
@@ -130,12 +92,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<String> strs = (Set<String>) Stream.of(strings).collect(Collectors.toStringSet());
+     * Set<String> strs = (Set<String>) [ObjectEnumerable].of(strings).collect(Collectors.toStringSet());
      */
     public static Collector toStringSet() {
         return toStringSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<String>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<String> strs = (Set<String>) [ObjectEnumerable].of(strings).collect(Collectors.toStringSet(mapper));
+     */
     public static Collector toStringSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<String>.class), SetObjectConsumers.addToStringSet(mapper));
     }
@@ -149,12 +124,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<Blob> blbs = (Set<Blob>) Stream.of(blobs).collect(Collectors.toBlobSet());
+     * Set<Blob> blbs = (Set<Blob>) [ObjectEnumerable].of(blobs).collect(Collectors.toBlobSet());
      */
     public static Collector toBlobSet() {
         return toBlobSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Blob>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Blob> blbs = (Set<Blob>) [ObjectEnumerable].of(blobs).collect(Collectors.toBlobSet(mapper));
+     */
     public static Collector toBlobSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Blob>.class), SetObjectConsumers.addToBlobSet(mapper));
     }
@@ -168,12 +156,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<Date> dts = (Set<Date>) Stream.of(dates).collect(Collectors.toDateSet());
+     * Set<Date> dts = (Set<Date>) [ObjectEnumerable].of(dates).collect(Collectors.toDateSet());
      */
     public static Collector toDateSet() {
         return toDateSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Date>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Date> dts = (Set<Date>) [ObjectEnumerable].of(dates).collect(Collectors.toDateSet(mapper));
+     */
     public static Collector toDateSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Date>.class), SetObjectConsumers.addToDateSet(mapper));
     }
@@ -187,12 +188,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<Datetime> dts = (Set<Datetime>) Stream.of(datetimes).collect(Collectors.toDatetimeSet());
+     * Set<Datetime> dts = (Set<Datetime>) [ObjectEnumerable].of(datetimes).collect(Collectors.toDatetimeSet());
      */
     public static Collector toDatetimeSet() {
         return toDatetimeSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Datetime>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Datetime> dts = (Set<Datetime>) [ObjectEnumerable].of(datetimes).collect(Collectors.toDatetimeSet(mapper));
+     */
     public static Collector toDatetimeSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Datetime>.class), SetObjectConsumers.addToDatetimeSet(mapper));
     }
@@ -206,12 +220,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<Time> tms = (Set<Time>) Stream.of(times).collect(Collectors.toTimeSet());
+     * Set<Time> tms = (Set<Time>) [ObjectEnumerable].of(times).collect(Collectors.toTimeSet());
      */
     public static Collector toTimeSet() {
         return toTimeSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Time>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Time> tms = (Set<Time>) [ObjectEnumerable].of(times).collect(Collectors.toTimeSet(mapper));
+     */
     public static Collector toTimeSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Time>.class), SetObjectConsumers.addToTimeSet(mapper));
     }
@@ -225,12 +252,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<Integer> ints = (Set<Integer>) Stream.of(integers).collect(Collectors.toIntSet());
+     * Set<Integer> ints = (Set<Integer>) [ObjectEnumerable].of(integers).collect(Collectors.toIntSet());
      */
     public static Collector toIntSet() {
         return toIntSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Integer>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Integer> ints = (Set<Integer>) [ObjectEnumerable].of(integers).collect(Collectors.toIntSet(mapper));
+     */
     public static Collector toIntSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Integer>.class), SetObjectConsumers.addToIntSet(mapper));
     }
@@ -244,12 +284,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<Long> ls = (Set<Long>) Stream.of(longs).collect(Collectors.toLongSet());
+     * Set<Long> ls = (Set<Long>) [ObjectEnumerable].of(longs).collect(Collectors.toLongSet());
      */
     public static Collector toLongSet() {
         return toLongSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Long>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Long> ls = (Set<Long>) [ObjectEnumerable].of(longs).collect(Collectors.toLongSet(mapper));
+     */
     public static Collector toLongSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Long>.class), SetObjectConsumers.addToLongSet(mapper));
     }
@@ -263,12 +316,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<Double> ds = (Set<Double>) Stream.of(doubles).collect(Collectors.toDoubleSet());
+     * Set<Double> ds = (Set<Double>) [ObjectEnumerable].of(doubles).collect(Collectors.toDoubleSet());
      */
     public static Collector toDoubleSet() {
         return toDoubleSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Double>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<Double> ds = (Set<Double>) [ObjectEnumerable].of(doubles).collect(Collectors.toDoubleSet(mapper));
+     */
     public static Collector toDoubleSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Double>.class), SetObjectConsumers.addToDoubleSet(mapper));
     }
@@ -282,14 +348,63 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Accumulates input arguments into a List
-     * Set<SObject> sObjects = (Set<SObject>) Stream.of(accounts).collect(Collectors.toSObjectSet());
+     * Set<SObject> sObjects = (Set<SObject>) [ObjectEnumerable].of(accounts).collect(Collectors.toSObjectSet());
      */
     public static Collector toSObjectSet() {
         return toSObjectSet(Function.identity());
     }
 
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<SObject>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a List
+     * Set<SObject> sObjects = (Set<SObject>) [ObjectEnumerable].of(accounts).collect(Collectors.toSObjectSet(mapper));
+     */
     public static Collector toSObjectSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<SObject>.class), SetObjectConsumers.addToSObjectSet(mapper));
+    }
+
+    /**
+     * @description Returns a `Collector` that accumulates input arguments
+     * into a new `Set<Object>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     * <p>{@link ObjectEnumerable.collect(Collectors.toObjectSet())} can be replaced with
+     * {@link ObjectEnumerable.toSet()}</p>
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a Set
+     * Set<Object> ppl = (Set<Object>) [ObjectEnumerable].of(people).collect(Collectors.toObjectSet());
+     */
+    public static Collector toObjectSet() {
+        return toObjectSet(Function.identity());
+    }
+
+    /**
+     * @description Returns a `Collector` that accumulates elements returned by `mapper` function
+     * into a new `Set<Object>`.
+     * <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+     * <p>{@link ObjectEnumerable.collect(Collectors.toObjectSet())} can be replaced with
+     * {@link ObjectEnumerable.toSet()}</p>
+     *
+     * @param mapper the mapping function
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates input arguments into a Set
+     * Set<Object> ppl = (Set<Object>) [ObjectEnumerable].of(people).collect(Collectors.toObjectSet(mapper));
+     */
+    public static Collector toObjectSet(final IFunction mapper) {
+        return Collector.of(Supplier.of(Set<Object>.class), SetObjectConsumers.addToSet(mapper));
     }
     // @end-group
     //</editor-fold>
@@ -303,7 +418,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Boolean, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByBoolMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByBoolMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -316,9 +431,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping function
-     * Map<Boolean, Object> personByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+     * Map<Boolean, Object> personByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getBoolProperty));
-     * Map<Boolean, Comparable> personByBoolProperty = (Map<Boolean, Comparable>) Stream.of(people)
+     * Map<Boolean, Comparable> personByBoolProperty = (Map<Boolean, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getBoolProperty).cast(Map<Boolean, Comparable>.class));
      */
     public static Collector toByBoolMap(final IFunction keyMapper) {
@@ -330,7 +445,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Boolean, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByBoolMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByBoolMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -344,9 +459,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+     * Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getBoolProperty, getStringProperty));
-     * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
+     * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getBoolProperty, getStringProperty).cast(Map<Boolean, String>.class));
      */
     public static Collector toByBoolMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -370,17 +485,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+     * Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(
      *         getBoolProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
+     * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(
      *         getBoolProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Boolean, String>.class));
      */
     public static Collector toByBoolMap(
@@ -410,11 +525,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
+     * Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(
      *         getBoolProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Boolean, String>.class)
      *     ));
      */
@@ -439,7 +554,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Id, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByIdMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByIdMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -452,9 +567,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Id, Object> personByIdProperty = (Map<Id, Object>) Stream.of(people)
+     * Map<Id, Object> personByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIdMap(getIdProperty));
-     * Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) Stream.of(people)
+     * Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getIdProperty).cast(Map<Id, Comparable>.class));
      */
     public static Collector toByIdMap(final IFunction keyMapper) {
@@ -466,7 +581,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Id, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByIdMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByIdMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -480,9 +595,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) Stream.of(people)
+     * Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIdMap(getIdProperty, getStringProperty));
-     * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
+     * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIdMap(getIdProperty, getStringProperty).cast(Map<Id, String>.class));
      */
     public static Collector toByIdMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -506,17 +621,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) Stream.of(people)
+     * Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIdMap(
      *         getIdProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
+     * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIdMap(
      *         getIdProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Id, String>.class));
      */
     public static Collector toByIdMap(
@@ -546,11 +661,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
+     * Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIdMap(
      *         getIdProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Id, String>.class)
      *     ));
      */
@@ -575,7 +690,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<String, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByStringMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByStringMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -588,9 +703,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<String, Object> personByStringProperty = (Map<String, Object>) Stream.of(people)
+     * Map<String, Object> personByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByStringMap(getStringProperty));
-     * Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) Stream.of(people)
+     * Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getStringProperty).cast(Map<String, Comparable>.class));
      */
     public static Collector toByStringMap(final IFunction keyMapper) {
@@ -602,7 +717,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<String, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByStringMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByStringMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -615,9 +730,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) Stream.of(people)
+     * Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByStringMap(getStringProperty, getStringProperty));
-     * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
+     * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByStringMap(getStringProperty, getStringProperty).cast(Map<String, String>.class));
      */
     public static Collector toByStringMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -641,17 +756,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) Stream.of(people)
+     * Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByStringMap(
      *         getStringProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
+     * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByStringMap(
      *         getStringProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<String, String>.class));
      */
     public static Collector toByStringMap(
@@ -681,11 +796,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
+     * Map<String, String> stringPropertyByStringProperty = (Map<String, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByStringMap(
      *         getStringProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<String, String>.class)
      *     ));
      */
@@ -710,7 +825,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Blob, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByBlobMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByBlobMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -723,9 +838,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Blob, Object> personByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+     * Map<Blob, Object> personByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBlobMap(getBlobProperty));
-     * Map<Blob, Comparable> personByBlobProperty = (Map<Blob, Comparable>) Stream.of(people)
+     * Map<Blob, Comparable> personByBlobProperty = (Map<Blob, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getBlobProperty).cast(Map<Blob, Comparable>.class));
      */
     public static Collector toByBlobMap(final IFunction keyMapper) {
@@ -737,7 +852,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Blob, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByBlobMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByBlobMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -751,9 +866,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+     * Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBlobMap(getBlobProperty, getStringProperty));
-     * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
+     * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBlobMap(getBlobProperty, getStringProperty).cast(Map<Blob, String>.class));
      */
     public static Collector toByBlobMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -777,17 +892,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+     * Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBlobMap(
      *         getBlobProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
+     * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBlobMap(
      *         getBlobProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Blob, String>.class));
      */
     public static Collector toByBlobMap(
@@ -817,11 +932,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
+     * Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBlobMap(
      *         getBlobProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Blob, String>.class)
      *     ));
      */
@@ -846,7 +961,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Date, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByDateMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByDateMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -859,9 +974,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Date, Object> personByDateProperty = (Map<Date, Object>) Stream.of(people)
+     * Map<Date, Object> personByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDateMap(getDateProperty));
-     * Map<Date, Comparable> personByDateProperty = (Map<Date, Comparable>) Stream.of(people)
+     * Map<Date, Comparable> personByDateProperty = (Map<Date, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getDateProperty).cast(Map<Date, Comparable>.class));
      */
     public static Collector toByDateMap(final IFunction keyMapper) {
@@ -873,7 +988,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Date, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByDateMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByDateMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -887,9 +1002,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) Stream.of(people)
+     * Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDateMap(getDateProperty, getStringProperty));
-     * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
+     * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDateMap(getDateProperty, getStringProperty).cast(Map<Date, String>.class));
      */
     public static Collector toByDateMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -913,17 +1028,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) Stream.of(people)
+     * Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDateMap(
      *         getDateProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
+     * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDateMap(
      *         getDateProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Date, String>.class));
      */
     public static Collector toByDateMap(
@@ -953,11 +1068,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
+     * Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDateMap(
      *         getDateProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Date, String>.class)
      *     ));
      */
@@ -979,7 +1094,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Datetime, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByDatetimeMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -992,9 +1107,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Datetime, Object> personByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+     * Map<Datetime, Object> personByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDatetimeMap(getDatetimeProperty));
-     * Map<Datetime, Comparable> personByDatetimeProperty = (Map<Datetime, Comparable>) Stream.of(people)
+     * Map<Datetime, Comparable> personByDatetimeProperty = (Map<Datetime, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getDatetimeProperty).cast(Map<Datetime, Comparable>.class));
      */
     public static Collector toByDatetimeMap(final IFunction keyMapper) {
@@ -1006,7 +1121,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Datetime, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByDatetimeMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1020,9 +1135,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+     * Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDatetimeMap(getDatetimeProperty, getStringProperty));
-     * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
+     * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDatetimeMap(getDatetimeProperty, getStringProperty)
      *         .cast(Map<Datetime, String>.class)
      *     );
@@ -1048,17 +1163,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+     * Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDatetimeMap(
      *         getDatetimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
+     * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDatetimeMap(
      *         getDatetimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Datetime, String>.class));
      */
     public static Collector toByDatetimeMap(
@@ -1088,11 +1203,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
+     * Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDatetimeMap(
      *         getDatetimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Datetime, String>.class)
      *     ));
      */
@@ -1114,7 +1229,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Time, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByTimeMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByTimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1127,9 +1242,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Time, Object> personByTimeProperty = (Map<Time, Object>) Stream.of(people)
+     * Map<Time, Object> personByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(getTimeProperty));
-     * Map<Time, Comparable> personByTimeProperty = (Map<Time, Comparable>) Stream.of(people)
+     * Map<Time, Comparable> personByTimeProperty = (Map<Time, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getTimeProperty).cast(Map<Time, Comparable>.class));
      */
     public static Collector toByTimeMap(final IFunction keyMapper) {
@@ -1141,7 +1256,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Time, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByTimeMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByTimeMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1155,9 +1270,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) Stream.of(people)
+     * Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(getTimeProperty, getStringProperty));
-     * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
+     * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(getTimeProperty, getStringProperty).cast(Map<Time, String>.class));
      */
     public static Collector toByTimeMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -1181,17 +1296,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) Stream.of(people)
+     * Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(
      *         getTimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
+     * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(
      *         getTimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Time, String>.class));
      */
     public static Collector toByTimeMap(
@@ -1221,11 +1336,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
+     * Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(
      *         getTimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Time, String>.class)
      *     ));
      */
@@ -1247,7 +1362,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Integer, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByIntMap(IToIntFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByIntMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1260,9 +1375,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Integer, Object> personByIntProperty = (Map<Integer, Object>) Stream.of(people)
+     * Map<Integer, Object> personByIntProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIntMap(getIntProperty));
-     * Map<Integer, Comparable> personByIntProperty = (Map<Integer, Comparable>) Stream.of(people)
+     * Map<Integer, Comparable> personByIntProperty = (Map<Integer, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIntMap(getIntProperty).cast(Map<Integer, Comparable>.class));
      */
     public static Collector toByIntMap(final IFunction keyMapper) {
@@ -1274,7 +1389,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Integer, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByIntMap(IToIntFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByIntMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1288,9 +1403,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Integer, Object> stringPropertyByIntProperty = (Map<Integer, Object>) Stream.of(people)
+     * Map<Integer, Object> stringPropertyByIntProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIntMap(getIntProperty, getStringProperty));
-     * Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream.of(people)
+     * Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIntMap(getIntProperty, getStringProperty).cast(Map<Integer, String>.class));
      */
     public static Collector toByIntMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -1314,17 +1429,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Integer, Object> stringPropertyByTimeProperty = (Map<Integer, Object>) Stream.of(people)
+     * Map<Integer, Object> stringPropertyByTimeProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIntMap(
      *         getIntProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Integer, String> stringPropertyByTimeProperty = (Map<Integer, String>) Stream.of(people)
+     * Map<Integer, String> stringPropertyByTimeProperty = (Map<Integer, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIntMap(
      *         getIntProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Integer, String>.class));
      */
     public static Collector toByIntMap(
@@ -1354,11 +1469,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream.of(people)
+     * Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIntMap(
      *         getIntProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Integer, String>.class)
      *     ));
      */
@@ -1380,7 +1495,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Long, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByLongMap(IToLongFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByLongMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1393,9 +1508,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Long, Object> personByLongProperty = (Map<Long, Object>) Stream.of(people)
+     * Map<Long, Object> personByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByLongMap(getLongProperty));
-     * Map<Long, Comparable> personByLongProperty = (Map<Long, Comparable>) Stream.of(people)
+     * Map<Long, Comparable> personByLongProperty = (Map<Long, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getLongProperty).cast(Map<Long, Comparable>.class));
      */
     public static Collector toByLongMap(final IFunction keyMapper) {
@@ -1407,7 +1522,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Long, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByLongMap(IToLongFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByLongMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1421,9 +1536,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) Stream.of(people)
+     * Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByLongMap(getLongProperty, getStringProperty));
-     * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
+     * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByLongMap(getLongProperty, getStringProperty).cast(Map<Long, String>.class));
      */
     public static Collector toByLongMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -1447,17 +1562,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) Stream.of(people)
+     * Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByLongMap(
      *         getLongProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
+     * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByLongMap(
      *         getLongProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Long, String>.class));
      */
     public static Collector toByLongMap(
@@ -1487,11 +1602,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
+     * Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByLongMap(
      *         getLongProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Long, String>.class)
      *     ));
      */
@@ -1513,7 +1628,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Double, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByDoubleMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1526,9 +1641,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Double, Object> personByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+     * Map<Double, Object> personByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDoubleMap(getDoubleProperty));
-     * Map<Double, Comparable> personByDoubleProperty = (Map<Double, Comparable>) Stream.of(people)
+     * Map<Double, Comparable> personByDoubleProperty = (Map<Double, Comparable>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByBoolMap(getDoubleProperty).cast(Map<Double, Comparable>.class));
      */
     public static Collector toByDoubleMap(final IFunction keyMapper) {
@@ -1540,7 +1655,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Double, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByDoubleMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      *
@@ -1554,9 +1669,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+     * Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDoubleMap(getDoubleProperty, getStringProperty));
-     * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
+     * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDoubleMap(getDoubleProperty, getStringProperty).cast(Map<Double, String>.class));
      */
     public static Collector toByDoubleMap(final IFunction keyMapper, final IFunction valueMapper) {
@@ -1580,17 +1695,17 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+     * Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDoubleMap(
      *         getDoubleProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
+     * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDoubleMap(
      *         getDoubleProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Double, String>.class));
      */
     public static Collector toByDoubleMap(
@@ -1620,11 +1735,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
+     * Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByDoubleMap(
      *         getDoubleProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Double, String>.class)
      *     ));
      */
@@ -1646,7 +1761,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Object, Object>` whose keys are values returned by `keyMapper`
      * and values are values of the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByObjectMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container values type can be cast to a specific type
      * using {@link Collector.cast}.</p>
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
@@ -1662,13 +1777,13 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by field
-     * Map<Object, Object> personByTimeProperty = (Map<Object, Object>) Stream.of(people)
-     *     .collect(Collectors.toMap(getTimeProperty));
-     * Map<Object, Comparable> personByTimeProperty = (Map<Object, Comparable>) Stream.of(people)
-     *     .collect(Collectors.toMap(getTimeProperty).cast(Map<Object, Comparable>.class));
+     * Map<Object, Object> personByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.toByObjectMap(getTimeProperty));
+     * Map<Object, Comparable> personByTimeProperty = (Map<Object, Comparable>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.toByObjectMap(getTimeProperty).cast(Map<Object, Comparable>.class));
      */
-    public static Collector toMap(final IFunction keyMapper) {
-        return toMap(keyMapper, Function.identity());
+    public static Collector toByObjectMap(final IFunction keyMapper) {
+        return toByObjectMap(keyMapper, Function.identity());
     }
 
     /**
@@ -1676,7 +1791,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * into a `Map<Object, Object>` whose keys and values are the result of
      * applying `keyMapper` and `valueMapper` mapping functions to the input arguments.
      * If the mapped keys might have duplicates,
-     * use {@link Collectors.toMap(IFunction, IFunction, IBinaryOperator)} instead.
+     * use {@link Collectors.toByObjectMap(IFunction, IFunction, IBiOperator)} instead.
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Map()` collectors
      * such as {@link Collectors.toByIdMap}, {@link Collectors.toByStringMap}, etc.</p>
@@ -1691,13 +1806,13 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) Stream.of(people)
-     *     .collect(Collectors.toMap(getTimeProperty, getStringProperty));
-     * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
-     *     .collect(Collectors.toMap(getTimeProperty, getStringProperty).cast(Map<Object, String>.class));
+     * Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.toByObjectMap(getTimeProperty, getStringProperty));
+     * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.toByObjectMap(getTimeProperty, getStringProperty).cast(Map<Object, String>.class));
      */
-    public static Collector toMap(final IFunction keyMapper, final IFunction valueMapper) {
-        return toMap(keyMapper, valueMapper, null);
+    public static Collector toByObjectMap(final IFunction keyMapper, final IFunction valueMapper) {
+        return toByObjectMap(keyMapper, valueMapper, null);
     }
 
     /**
@@ -1718,25 +1833,25 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) Stream.of(people)
+     * Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(
      *         getTimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ));
-     * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
+     * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByTimeMap(
      *         getTimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right()
+     *         BiOperator.right()
      *     ).cast(Map<Object, String>.class));
      */
-    public static Collector toMap(
+    public static Collector toByObjectMap(
         final IFunction keyMapper,
         final IFunction valueMapper,
         final IBiOperator merger
     ) {
-        return toMap(keyMapper, valueMapper, merger, Supplier.of(Map<Object, Object>.class));
+        return toByObjectMap(keyMapper, valueMapper, merger, Supplier.of(Map<Object, Object>.class));
     }
 
     /**
@@ -1758,15 +1873,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Maps values by keys provided by mapping functions
-     * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
-     *     .collect(Collectors.toMap(
+     * Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.toByObjectMap(
      *         getTimeProperty,
      *         getStringProperty,
-     *         BinaryOperator.right(),
+     *         BiOperator.right(),
      *         Supplier.of(Map<Object, String>.class)
      *     ));
      */
-    public static Collector toMap(
+    public static Collector toByObjectMap(
         final IFunction keyMapper,
         final IFunction valueMapper,
         final IBiOperator merger,
@@ -1797,9 +1912,10 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Boolean, List<Object>> personsByBoolProperty = (Map<Boolean, List<Object>>) Stream.of(people)
+     * Map<Boolean, List<Object>> personsByBoolProperty = (Map<Boolean, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBool(getBoolProperty));
-     * Map<Boolean, List<Comparable>> personsByBoolProperty = (Map<Boolean, List<Comparable>>) Stream.of(people)
+     * Map<Boolean, List<Comparable>> personsByBoolProperty = (Map<Boolean, List<Comparable>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBool(getBoolProperty).cast(Map<Boolean, List<Comparable>>.class));
      */
     public static Collector groupingByBool(final IFunction classifier) {
@@ -1822,15 +1938,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Boolean, Object> personsByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+     * Map<Boolean, Object> personsByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBool(
      *         getBoolProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) Stream.of(people)
+     * Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBool(
      *         getBoolProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Boolean, Set<Object>>.class));
      */
     public static Collector groupingByBool(final IFunction classifier, final ICollector downstream) {
@@ -1856,11 +1972,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) Stream.of(people)
+     * Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBool(
      *         getBoolProperty,
      *         Supplier.of(Map<Boolean, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByBool(
@@ -1893,9 +2009,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Id, List<Object>> personsByIdProperty = (Map<Id, List<Object>>) Stream.of(people)
+     * Map<Id, List<Object>> personsByIdProperty = (Map<Id, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingById(getIdProperty));
-     * Map<Id, List<Comparable>> personsByIdProperty = (Map<Id, List<Comparable>>) Stream.of(people)
+     * Map<Id, List<Comparable>> personsByIdProperty = (Map<Id, List<Comparable>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingById(getIdProperty).cast(Map<Id, List<Comparable>>.class));
      */
     public static Collector groupingById(final IFunction classifier) {
@@ -1918,15 +2034,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Id, Object> personsByIdProperty = (Map<Id, Object>) Stream.of(people)
+     * Map<Id, Object> personsByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingById(
      *         getIdProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) Stream.of(people)
+     * Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingById(
      *         getIdProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Id, Set<Object>>.class));
      */
     public static Collector groupingById(final IFunction classifier, final ICollector downstream) {
@@ -1952,11 +2068,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) Stream.of(people)
+     * Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingById(
      *         getIdProperty,
      *         Supplier.of(Map<Id, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingById(
@@ -1989,9 +2105,10 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<String, List<Object>> personsByStringProperty = (Map<String, List<Object>>) Stream.of(people)
+     * Map<String, List<Object>> personsByStringProperty = (Map<String, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByString(getStringProperty));
-     * Map<String, List<Comparable>> personsByStringProperty = (Map<String, List<Comparable>>) Stream.of(people)
+     * Map<String, List<Comparable>> personsByStringProperty = (Map<String, List<Comparable>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByString(getStringProperty).cast(Map<String, List<Comparable>>.class));
      */
     public static Collector groupingByString(final IFunction classifier) {
@@ -2014,15 +2131,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<String, Object> personsByStringProperty = (Map<String, Object>) Stream.of(people)
+     * Map<String, Object> personsByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByString(
      *         getStringProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) Stream.of(people)
+     * Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByString(
      *         getStringProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<String, Set<Object>>.class));
      */
     public static Collector groupingByString(final IFunction classifier, final ICollector downstream) {
@@ -2048,11 +2165,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) Stream.of(people)
+     * Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByString(
      *         getStringProperty,
      *         Supplier.of(Map<String, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByString(
@@ -2085,9 +2202,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Blob, List<Object>> personsByBlobProperty = (Map<Blob, List<Object>>) Stream.of(people)
+     * Map<Blob, List<Object>> personsByBlobProperty = (Map<Blob, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBlob(getBlobProperty));
-     * Map<Blob, List<Comparable>> personsByBlobProperty = (Map<Blob, List<Comparable>>) Stream.of(people)
+     * Map<Blob, List<Comparable>> personsByBlobProperty = (Map<Blob, List<Comparable>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBlob(getBlobProperty).cast(Map<Blob, List<Comparable>>.class));
      */
     public static Collector groupingByBlob(final IFunction classifier) {
@@ -2110,15 +2227,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Blob, Object> personsByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+     * Map<Blob, Object> personsByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBlob(
      *         getBlobProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) Stream.of(people)
+     * Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBlob(
      *         getBlobProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Blob, Set<Object>>.class));
      */
     public static Collector groupingByBlob(final IFunction classifier, final ICollector downstream) {
@@ -2144,11 +2261,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) Stream.of(people)
+     * Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByBlob(
      *         getBlobProperty,
      *         Supplier.of(Map<Blob, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByBlob(
@@ -2181,9 +2298,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Date, List<Object>> personsByDateProperty = (Map<Date, List<Object>>) Stream.of(people)
+     * Map<Date, List<Object>> personsByDateProperty = (Map<Date, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDate(getDateProperty));
-     * Map<Date, List<Comparable>> personsByDateProperty = (Map<Date, List<Comparable>>) Stream.of(people)
+     * Map<Date, List<Comparable>> personsByDateProperty = (Map<Date, List<Comparable>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDate(getDateProperty).cast(Map<Date, List<Comparable>>.class));
      */
     public static Collector groupingByDate(final IFunction classifier) {
@@ -2206,15 +2323,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Date, Object> personsByDateProperty = (Map<Date, Object>) Stream.of(people)
+     * Map<Date, Object> personsByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDate(
      *         getDateProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) Stream.of(people)
+     * Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDate(
      *         getDateProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Date, Set<Object>>.class));
      */
     public static Collector groupingByDate(final IFunction classifier, final ICollector downstream) {
@@ -2240,11 +2357,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) Stream.of(people)
+     * Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDate(
      *         getDateProperty,
      *         Supplier.of(Map<Date, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByDate(
@@ -2277,9 +2394,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Datetime, List<Object>> personsByDatetimeProperty = (Map<Datetime, List<Object>>) Stream.of(people)
+     * Map<Datetime, List<Object>> personsByDatetimeProperty = (Map<Datetime, List<Object>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDatetime(getDatetimeProperty));
-     * Map<Datetime, List<Comparable>> personsByDatetimeProperty = (Map<Datetime, List<Comparable>>) Stream.of(people)
+     * Map<Datetime, List<Comparable>> personsByDatetimeProperty = (Map<Datetime, List<Comparable>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDatetime(getDatetimeProperty).cast(Map<Datetime, List<Comparable>>.class));
      */
     public static Collector groupingByDatetime(final IFunction classifier) {
@@ -2302,15 +2421,16 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Datetime, Object> personsByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+     * Map<Datetime, Object> personsByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDatetime(
      *         getDatetimeProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>) Stream.of(people)
+     * Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDatetime(
      *         getDatetimeProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Datetime, Set<Object>>.class));
      */
     public static Collector groupingByDatetime(final IFunction classifier, final ICollector downstream) {
@@ -2336,11 +2456,12 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>) Stream.of(people)
+     * Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDatetime(
      *         getDatetimeProperty,
      *         Supplier.of(Map<Datetime, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByDatetime(
@@ -2373,9 +2494,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Time, List<Object>> personsByTimeProperty = (Map<Time, List<Object>>) Stream.of(people)
+     * Map<Time, List<Object>> personsByTimeProperty = (Map<Time, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByTime(getTimeProperty));
-     * Map<Time, List<Comparable>> personsByTimeProperty = (Map<Time, List<Comparable>>) Stream.of(people)
+     * Map<Time, List<Comparable>> personsByTimeProperty = (Map<Time, List<Comparable>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByTime(getTimeProperty).cast(Map<Time, List<Comparable>>.class));
      */
     public static Collector groupingByTime(final IFunction classifier) {
@@ -2398,15 +2519,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Time, Object> personsByTimeProperty = (Map<Time, Object>) Stream.of(people)
+     * Map<Time, Object> personsByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByTime(
      *         getTimeProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) Stream.of(people)
+     * Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByTime(
      *         getTimeProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Time, Set<Object>>.class));
      */
     public static Collector groupingByTime(final IFunction classifier, final ICollector downstream) {
@@ -2432,11 +2553,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) Stream.of(people)
+     * Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByTime(
      *         getTimeProperty,
      *         Supplier.of(Map<Time, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByTime(
@@ -2469,9 +2590,10 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Integer, List<Object>> personsByIntProperty = (Map<Integer, List<Object>>) Stream.of(people)
+     * Map<Integer, List<Object>> personsByIntProperty = (Map<Integer, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByInt(getIntProperty));
-     * Map<Integer, List<Comparable>> personsByIntProperty = (Map<Integer, List<Comparable>>) Stream.of(people)
+     * Map<Integer, List<Comparable>> personsByIntProperty = (Map<Integer, List<Comparable>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByInt(getIntProperty).cast(Map<Integer, List<Comparable>>.class));
      */
     public static Collector groupingByInt(final IFunction classifier) {
@@ -2494,15 +2616,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Integer, Object> personsByIntProperty = (Map<Integer, Object>) Stream.of(people)
+     * Map<Integer, Object> personsByIntProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByInt(
      *         getIntProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Integer, Set<Object>> personsByTimeProperty = (Map<Integer, Set<Object>>) Stream.of(people)
+     * Map<Integer, Set<Object>> personsByTimeProperty = (Map<Integer, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByInt(
      *         getIntProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Integer, Set<Object>>.class));
      */
     public static Collector groupingByInt(final IFunction classifier, final ICollector downstream) {
@@ -2528,11 +2650,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Integer, Set<Object>> personsByIntProperty = (Map<Integer, Set<Object>>) Stream.of(people)
+     * Map<Integer, Set<Object>> personsByIntProperty = (Map<Integer, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByInt(
      *         getIntProperty,
      *         Supplier.of(Map<Integer, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByInt(
@@ -2565,9 +2687,9 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Long, List<Object>> personsByLongProperty = (Map<Long, List<Object>>) Stream.of(people)
+     * Map<Long, List<Object>> personsByLongProperty = (Map<Long, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByLong(getLongProperty));
-     * Map<Long, List<Comparable>> personsByLongProperty = (Map<Long, List<Comparable>>) Stream.of(people)
+     * Map<Long, List<Comparable>> personsByLongProperty = (Map<Long, List<Comparable>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByLong(getLongProperty).cast(Map<Long, List<Comparable>>.class));
      */
     public static Collector groupingByLong(final IFunction classifier) {
@@ -2590,15 +2712,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Long, Object> personsByLongProperty = (Map<Long, Object>) Stream.of(people)
+     * Map<Long, Object> personsByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByLong(
      *         getLongProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) Stream.of(people)
+     * Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByLong(
      *         getLongProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Long, Set<Object>>.class));
      */
     public static Collector groupingByLong(final IFunction classifier, final ICollector downstream) {
@@ -2624,11 +2746,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) Stream.of(people)
+     * Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByLong(
      *         getLongProperty,
      *         Supplier.of(Map<Long, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByLong(
@@ -2661,9 +2783,10 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Double, List<Object>> personsByDoubleProperty = (Map<Double, List<Object>>) Stream.of(people)
+     * Map<Double, List<Object>> personsByDoubleProperty = (Map<Double, List<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDouble(getDoubleProperty));
-     * Map<Double, List<Comparable>> personsByDoubleProperty = (Map<Double, List<Comparable>>) Stream.of(people)
+     * Map<Double, List<Comparable>> personsByDoubleProperty = (Map<Double, List<Comparable>>)
+     *     [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDouble(getDoubleProperty).cast(Map<Double, List<Comparable>>.class));
      */
     public static Collector groupingByDouble(final IFunction classifier) {
@@ -2686,15 +2809,15 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Double, Object> personsByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+     * Map<Double, Object> personsByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDouble(
      *         getDoubleProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) Stream.of(people)
+     * Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDouble(
      *         getDoubleProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Double, Set<Object>>.class));
      */
     public static Collector groupingByDouble(final IFunction classifier, final ICollector downstream) {
@@ -2720,11 +2843,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) Stream.of(people)
+     * Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.groupingByDouble(
      *         getDoubleProperty,
      *         Supplier.of(Map<Double, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
     public static Collector groupingByDouble(
@@ -2760,13 +2883,14 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Object, List<Object>> personsByTimeProperty = (Map<Object, List<Object>>) Stream.of(people)
-     *     .collect(Collectors.groupingBy(getTimeProperty));
-     * Map<Object, List<Comparable>> personsByTimeProperty = (Map<Object, List<Comparable>>) Stream.of(people)
-     *     .collect(Collectors.groupingBy(getTimeProperty).cast(Map<Object, List<Comparable>>.class));
+     * Map<Object, List<Object>> personsByTimeProperty = (Map<Object, List<Object>>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.groupingByObject(getTimeProperty));
+     * Map<Object, List<Comparable>> personsByTimeProperty = (Map<Object, List<Comparable>>)
+     *     [ObjectEnumerable].of(people)
+     *     .collect(Collectors.groupingByObject(getTimeProperty).cast(Map<Object, List<Comparable>>.class));
      */
-    public static Collector groupingBy(final IFunction classifier) {
-        return groupingBy(classifier, toList());
+    public static Collector groupingByObject(final IFunction classifier) {
+        return groupingByObject(classifier, toList());
     }
 
     /**
@@ -2788,19 +2912,19 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Object, Object> personsByTimeProperty = (Map<Object, Object>) Stream.of(people)
-     *     .collect(Collectors.groupingBy(
+     * Map<Object, Object> personsByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.groupingByObject(
      *         getTimeProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
-     * Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) Stream.of(people)
-     *     .collect(Collectors.groupingBy(
+     * Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.groupingByObject(
      *         getTimeProperty,
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ).cast(Map<Object, Set<Object>>.class));
      */
-    public static Collector groupingBy(final IFunction classifier, final ICollector downstream) {
-        return groupingBy(classifier, Supplier.of(Map<Object, Object>.class), downstream);
+    public static Collector groupingByObject(final IFunction classifier, final ICollector downstream) {
+        return groupingByObject(classifier, Supplier.of(Map<Object, Object>.class), downstream);
     }
 
     /**
@@ -2822,14 +2946,14 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Group values by keys provided by function
-     * Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) Stream.of(people)
-     *     .collect(Collectors.groupingBy(
+     * Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.groupingByObject(
      *         getTimeProperty,
      *         Supplier.of(Map<Object, Set<Object>>.class),
-     *         Collectors.toSet()
+     *         Collectors.toObjectSet()
      *     ));
      */
-    public static Collector groupingBy(
+    public static Collector groupingByObject(
         final IFunction classifier,
         final ISupplier mapSupplier,
         final ICollector downstream
@@ -2861,10 +2985,10 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * Map<Boolean, Object> personsPartitionedByPredicate = (Map<Boolean, Object>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.partitioningBy(predicate));
      * Map<Boolean, List<Comparable>> personsPartitionedByPredicate = (Map<Boolean, List<Comparable>>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.partitioningBy(predicate).cast(Map<Boolean, List<Comparable>>.class));
      */
     public static Collector partitioningBy(final IPredicate predicate) {
@@ -2886,7 +3010,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * Map<Boolean, Set<String>> personNamesPartitionedByPredicate = (Map<Boolean, Set<String>>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.partitioningBy(
      *             predicate,
      *             Collectors.toStringSet(getStringProperty)
@@ -2895,10 +3019,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
     public static Collector partitioningBy(final IPredicate predicate, final ICollector downstream) {
         return Collector.of(
             Supplier.of(Map<Boolean, Object>.class),
-            MapObjectConsumers.putToObjectsByBoolMap(
-                downstream,
-                Function.compose(predicate)
-            ),
+            MapObjectConsumers.putToObjectsByBoolMap(downstream, Function.compose(predicate)),
             downstream.finisher()
         );
     }
@@ -2913,7 +3034,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @return the `Collector`
      *
      * @example
-     * String concatenatedStrings = (String) Stream.of(strings).collect(Collectors.joining());
+     * String concatenatedStrings = (String) [ObjectEnumerable].of(strings).collect(Collectors.joining());
      */
     public static Collector joining() {
         return joining('');
@@ -2930,7 +3051,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `delimiter` is null
      *
      * @example
-     * String concatenatedStrings = (String) Stream.of(strings).collect(Collectors.joining('; '));
+     * String concatenatedStrings = (String) [ObjectEnumerable].of(strings).collect(Collectors.joining('; '));
      */
     public static Collector joining(final String delimiter) {
         return joining(delimiter, '', '');
@@ -2949,19 +3070,36 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `delimiter`, `prefix` or `suffix` is null
      *
      * @example
-     * String concatenatedStrings = (String) Stream.of(strings)
+     * String concatenatedStrings = (String) [ObjectEnumerable].of(strings)
      *     .collect(Collectors.joining('; ', 'prefix', 'suffix'));
      */
     public static Collector joining(final String delimiter, final String prefix, final String suffix) {
         return joining(Function.identity(), delimiter, prefix, suffix);
     }
 
+    /**
+     * @description Returns a `Collector` that concatenates String elements returned by `mapper` function,
+     * separated by `delimiter`.
+     *
+     * @param mapper the mapping function
+     * @param delimiter the delimiter between each element
+     * @param prefix the prefix
+     * @param suffix the suffix
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper`, `delimiter`, `prefix` or `suffix` is null
+     *
+     * @example
+     * String concatenatedNames = (String) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.joining(getNameFunction, '; ', 'prefix', 'suffix'));
+     */
     public static Collector joining(
         final IFunction mapper,
-        final String delimiter, 
-        final String prefix, 
-        final String suffix)
-    {
+        final String delimiter,
+        final String prefix,
+        final String suffix
+    ) {
         return Collector.of(
             CollectorSuppliers.joiningString(),
             ListObjectConsumers.joining(mapper, delimiter, prefix),
@@ -2976,7 +3114,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
      * of values returned by `mapper`.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param mapper the function extracting the Integer value to average
      *
@@ -2985,7 +3123,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Double averageOfIntProperties = (Double) Stream.of(people)
+     * Double averageOfIntProperties = (Double) [ObjectEnumerable].of(people)
      *     .collect(Collectors.averagingInt(getIntProperty));
      */
     public static Collector averagingInt(final IFunction mapper) {
@@ -3003,7 +3141,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @return the `Collector`
      *
      * @example
-     * Integer numberOfPeople = (Integer) Stream.of(people).collect(Collectors.counting());
+     * Integer numberOfPeople = (Integer) [ObjectEnumerable].of(people).collect(Collectors.counting());
      */
     public static Collector counting() {
         return summingInt(Function.constant(1));
@@ -3012,7 +3150,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of values returned by `mapper`.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param mapper the function extracting the Integer value to sum
      *
@@ -3021,14 +3159,14 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Integer sumOfIntProperties = (Integer) Stream.of(people)
+     * Integer sumOfIntProperties = (Integer) [ObjectEnumerable].of(people)
      *     .collect(Collectors.summingInt(getIntProperty));
      */
     public static Collector summingInt(final IFunction mapper) {
         return Collector.of(
             CollectorSuppliers.averagingInt(),
-            ListObjectConsumers.summingInt(mapper),
-            IterableFunctions.get(0)
+            ListObjectConsumers.averagingInt(mapper),
+            CollectorFunctions.summing()
         );
     }
     // @end-group
@@ -3039,7 +3177,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
      * of values returned by `mapper`.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param mapper the function extracting the Long value to average
      *
@@ -3048,7 +3186,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Double averageOfLongProperties = (Double) Stream.of(people)
+     * Double averageOfLongProperties = (Double) [ObjectEnumerable].of(people)
      *     .collect(Collectors.averagingLong(getLongProperty));
      */
     public static Collector averagingLong(final IFunction mapper) {
@@ -3062,7 +3200,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of values returned by `mapper`.
-     * If no elements are present, the result is 0.
+     * If no elements are present, the result is null.
      *
      * @param mapper the function extracting the Long value to sum
      *
@@ -3071,69 +3209,19 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Long sumOfLongProperties = (Long) Stream.of(people)
+     * Long sumOfLongProperties = (Long) [ObjectEnumerable].of(people)
      *     .collect(Collectors.summingLong(getLongProperty));
      */
     public static Collector summingLong(final IFunction mapper) {
         return Collector.of(
             CollectorSuppliers.averagingLong(),
-            ListObjectConsumers.summingLong(mapper),
-            IterableFunctions.get(0)
+            ListObjectConsumers.averagingLong(mapper),
+            CollectorFunctions.summing()
         );
     }
     // @end-group
     //</editor-fold>
-//
-//    //<editor-fold desc="Double Collectors">
-//    // @start-group Double Collectors
-//    /**
-//     * @description Returns a `Collector` that returns the arithmetic mean
-//     * of values returned by `mapper`.
-//     * If no elements are present, the result is 0.
-//     *
-//     * @param mapper the function extracting the Double value to average
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * Double averageOfDoubleProperties = (Double) Stream.of(people)
-//     *     .collect(Collectors.averagingDouble(getDoubleProperty));
-//     */
-//    public static Collector averagingDouble(final IFunction mapper) {
-//        return Collector.of(
-//                CollectorBaseSuppliers.averagingDouble(),
-//                ListObjectConsumers.averagingDouble(mapper),
-//                CollectorBaseFunctions.averagingDouble()
-//        );
-//    }
-//
-//    /**
-//     * @description Returns a `Collector` that returns the arithmetic sum
-//     * of values returned by `mapper`.
-//     * If no elements are present, the result is 0.
-//     *
-//     * @param mapper the function extracting the Double value to sum
-//     *
-//     * @return the `Collector`
-//     *
-//     * @throws NullPointerException if `mapper` is null
-//     *
-//     * @example
-//     * Double sumOfDoubleProperties = (Double) Stream.of(people)
-//     *     .collect(Collectors.summingDouble(getDoubleProperty));
-//     */
-//    public static Collector summingDouble(final IFunction mapper) {
-//        return Collector.of(
-//            CollectorBaseSuppliers.summingDouble(),
-//            ListObjectConsumers.summingDouble(mapper),
-//            CollectorBaseFunctions.summingDouble()
-//        );
-//    }
-//    // @end-group
-//    //</editor-fold>
-//
+
     //<editor-fold desc="Intermediate Collectors">
     // @start-group Intermediate Collectors
     /**
@@ -3148,11 +3236,11 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Get people matched by predicate
-     * List<Object> filteredPeople = (List<Object>) Stream.of(people)
+     * List<Object> filteredPeople = (List<Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.filtering(predicate));
      * // Group people matched by predicate
      * Map<String, List<Comparable>> filteredPeopleByStringProperty =
-     *     (Map<String, List<Comparable>>) Stream.of(people)
+     *     (Map<String, List<Comparable>>) [ObjectEnumerable].of(people)
      *        .collect(
      *             Collectors.groupingByString(
      *                 getStringProperty,
@@ -3176,7 +3264,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * // Get people String properties matched by predicate
-     * List<String> filteredStringProperties = (List<String>) Stream.of(people)
+     * List<String> filteredStringProperties = (List<String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.filtering(
      *         predicate,
      *         Collectors.toList(getStringProperty)
@@ -3202,7 +3290,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * List<String> accountNames = (List<String>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.mapping(getStringProperty).cast(List<String>.class));
      */
     public static Collector mapping(final IFunction mapper) {
@@ -3222,7 +3310,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * Map<String, Set<String>> otherStringPropertiesByStringProperty = (Map<String, Set<String>>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.groupingByString(
      *             getStringProperty,
      *             Collectors.mapping(
@@ -3251,10 +3339,10 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `mapper` or `downstream` is null
      *
      * @example
-     * List<String> flattenedStringProperties = (List<String>) Stream.of(people)
+     * List<String> flattenedStringProperties = (List<String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.flatMapping(getStringListProperty).cast(List<String>.class));
      * Map<String, List<String>> flattenedStringPropertiesByOtherStringProperty
-     *     = (Map<String, List<String>>) Stream.of(people)
+     *     = (Map<String, List<String>>) [ObjectEnumerable].of(people)
      *         .collect(Collectors.groupingByString(
      *             getOtherStringProperty,
      *             Collectors.flatMapping(getStringListProperty)
@@ -3277,13 +3365,13 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `mapper` or `downstream` is null
      *
      * @example
-     * Set<String> contacts = (Set<String>) Stream.of(people)
+     * Set<String> contacts = (Set<String>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.flatMapping(
      *         getStringListProperty,
      *         Collectors.toStringSet()
      *     ));
      * Map<String, Set<String>> flattenedStringPropertiesByOtherStringProperty
-     *    = (Map<String, Set<String>>) Stream.of(people)
+     *    = (Map<String, Set<String>>) [ObjectEnumerable].of(people)
      *         .collect(Collectors.groupingByString(
      *             getOtherStringProperty,
      *             Collectors.flatMapping(
@@ -3311,7 +3399,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `accumulator` is null
      *
      * @example
-     * Person personWithSummedIntProperties = (Person) Stream.of(people)
+     * Person personWithSummedIntProperties = (Person) [ObjectEnumerable].of(people)
      *     .collect(Collectors.reducing(
      *         new Person(IntProperty = 0),
      *         sumIntPropertyReducer
@@ -3338,7 +3426,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      * @throws NullPointerException if `mapper` or `accumulator` is null
      *
      * @example
-     * Person personWithSummedIntProperties = (Person) Stream.of(people)
+     * Person personWithSummedIntProperties = (Person) [ObjectEnumerable].of(people)
      *     .collect(Collectors.reducing(
      *         new Person(IntProperty = 0),
      *         Function.identity(),
@@ -3370,19 +3458,19 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.groupingByString(
      *             getStringProperty,
-     *             Collectors.reducing(BinaryOperator.maxBy(Comparer.comparing(getIntProperty)))
+     *             Collectors.reducing(BiOperator.maxBy(Comparer.comparing(getIntProperty)))
      *         ));
      * Person personWithMaxIntProperty = (Person)
      *     optionalPersonWithMaxIntPropertyByStringProperty.get('SomePropertyValues').get();
      */
     public static Collector reducing(final IBiOperator accumulator) {
         return Collector.of(
-                Supplier.of(List<Object>.class),
-                ListObjectConsumers.reducingOptional(accumulator),
-                CollectorFunctions.reducingOptional()
+            Supplier.of(List<Object>.class),
+            ListObjectConsumers.reducingOptional(accumulator),
+            CollectorFunctions.reducingOptional()
         );
     }
 
@@ -3399,7 +3487,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.groupingByString(
      *             getStringProperty,
      *             Collectors.maximizing(Comparer.comparing(getIntProperty))
@@ -3424,7 +3512,7 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
      *
      * @example
      * Map<String, Object> optionalPersonWithMinIntPropertyByStringProperty = (Map<String, Object>)
-     *     Stream.of(people)
+     *     [ObjectEnumerable].of(people)
      *         .collect(Collectors.groupingByString(
      *             getStringProperty,
      *             Collectors.minimizing(Comparer.comparing(getIntProperty))
@@ -3439,5 +3527,5 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
     //</editor-fold>
 
     //</editor-fold>
-    
+
 }

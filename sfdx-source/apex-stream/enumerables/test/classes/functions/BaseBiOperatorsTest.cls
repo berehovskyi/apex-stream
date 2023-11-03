@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
 private class BaseBiOperatorsTest {
 
     private static final List<Integer> INTS = AsTestData.generateInts();
@@ -19,6 +19,7 @@ private class BaseBiOperatorsTest {
      * @see BaseBiOperators.min
      */
     @IsTest
+    @SuppressWarnings('PMD.CognitiveComplexity')
     static void min() {
         // When
         BiOperator min = BaseBiOperators.min();
@@ -48,6 +49,7 @@ private class BaseBiOperatorsTest {
      * @see BaseBiOperators.max
      */
     @IsTest
+    @SuppressWarnings('PMD.CognitiveComplexity')
     static void max() {
         // When
         BiOperator max = BaseBiOperators.max();

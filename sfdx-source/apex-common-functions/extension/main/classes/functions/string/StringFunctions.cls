@@ -8,9 +8,11 @@
  *
  * @group Functional Built-In Classes
  */
+@SuppressWarnings('PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount')
 public virtual inherited sharing class StringFunctions {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected StringFunctions() {}
 
     //<editor-fold desc="String Functions">
@@ -29,7 +31,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.abbreviate
      */
     public static Function abbreviate(final Integer maxWidth) {
-        Validate.notNull(maxWidth);
         return new Abbreviate(maxWidth);
     }
 
@@ -49,8 +50,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.abbreviate
      */
     public static Function abbreviate(final Integer maxWidth, final Integer offset) {
-        Validate.notNull(maxWidth);
-        Validate.notNull(offset);
         return new AbbreviateOffset(maxWidth, offset);
     }
 
@@ -64,7 +63,6 @@ public virtual inherited sharing class StringFunctions {
      * @throws NullPointerException if `suffix` is null
      */
     public static Function append(final String suffix) {
-        Validate.notNull(suffix);
         return new Append(suffix);
     }
 
@@ -95,7 +93,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.center
      */
     public static Function center(final Integer size) {
-        Validate.notNull(size);
         return new Center(size);
     }
 
@@ -115,8 +112,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.center
      */
     public static Function center(final Integer size, final String padStr) {
-        Validate.notNull(size);
-        Validate.notNull(padStr);
         return new CenterPad(size, padStr);
     }
 
@@ -145,7 +140,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.difference
      */
     public static Function difference(final String str) {
-        Validate.notNull(str);
         return new Difference(str);
     }
 
@@ -259,7 +253,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.format
      */
     public static Function format(final List<Object> arguments) {
-        Validate.notNull(arguments);
         return new StringFormat(arguments);
     }
 
@@ -288,7 +281,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.left
      */
     public static Function left(final Integer length) {
-        Validate.notNull(length);
         return new Left(length);
     }
 
@@ -305,7 +297,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.leftPad
      */
     public static Function leftPad(final Integer length) {
-        Validate.notNull(length);
         return new LeftPad(length);
     }
 
@@ -323,8 +314,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.leftPad
      */
     public static Function leftPad(final Integer length, final String padStr) {
-        Validate.notNull(length);
-        Validate.notNull(padStr);
         return new LeftPadPad(length, padStr);
     }
 
@@ -343,8 +332,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.mid
      */
     public static Function mid(final Integer startIndex, final Integer length) {
-        Validate.notNull(startIndex);
-        Validate.notNull(length);
         return new Mid(startIndex, length);
     }
 
@@ -370,7 +357,6 @@ public virtual inherited sharing class StringFunctions {
      * @throws NullPointerException if `prefix` is null
      */
     public static Function prepend(final String prefix) {
-        Validate.notNull(prefix);
         return new Prepend(prefix);
     }
 
@@ -387,7 +373,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.remove
      */
     public static Function remove(final String substring) {
-        Validate.notNull(substring);
         return new Remove(substring);
     }
 
@@ -404,7 +389,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.removeEnd
      */
     public static Function removeEnd(final String substring) {
-        Validate.notNull(substring);
         return new RemoveEnd(substring);
     }
 
@@ -421,7 +405,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.removeEndIgnoreCase
      */
     public static Function removeEndIgnoreCase(final String substring) {
-        Validate.notNull(substring);
         return new RemoveEndIgnoreCase(substring);
     }
 
@@ -438,7 +421,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.removeStart
      */
     public static Function removeStart(final String substring) {
-        Validate.notNull(substring);
         return new RemoveStart(substring);
     }
 
@@ -455,7 +437,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.removeStartIgnoreCase
      */
     public static Function removeStartIgnoreCase(final String substring) {
-        Validate.notNull(substring);
         return new RemoveStartIgnoreCase(substring);
     }
 
@@ -472,7 +453,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.repeat
      */
     public static Function repeat(final Integer numTimes) {
-        Validate.notNull(numTimes);
         return new Repeat(numTimes);
     }
 
@@ -491,8 +471,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.repeat
      */
     public static Function repeat(final String separator, final Integer numTimes) {
-        Validate.notNull(separator);
-        Validate.notNull(numTimes);
         return new RepeatSeparator(separator, numTimes);
     }
 
@@ -511,8 +489,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.replace
      */
     public static Function replace(final String target, final String replacement) {
-        Validate.notNull(target);
-        Validate.notNull(replacement);
         return new Replace(target, replacement);
     }
 
@@ -530,8 +506,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.replaceAll
      */
     public static Function replaceAll(final String regExp, final String replacement) {
-        Validate.notNull(regExp);
-        Validate.notNull(replacement);
         return new ReplaceAll(regExp, replacement);
     }
 
@@ -549,8 +523,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.replaceAll
      */
     public static Function replaceFirst(final String regExp, final String replacement) {
-        Validate.notNull(regExp);
-        Validate.notNull(replacement);
         return new ReplaceFirst(regExp, replacement);
     }
 
@@ -578,7 +550,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.right
      */
     public static Function right(final Integer length) {
-        Validate.notNull(length);
         return new Right(length);
     }
 
@@ -595,7 +566,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.rightPad
      */
     public static Function rightPad(final Integer length) {
-        Validate.notNull(length);
         return new RightPad(length);
     }
 
@@ -613,8 +583,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.rightPad
      */
     public static Function rightPad(final Integer length, final String padStr) {
-        Validate.notNull(length);
-        Validate.notNull(padStr);
         return new RightPadPad(length, padStr);
     }
 
@@ -632,7 +600,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.split
      */
     public static Function split(final String regExp) {
-        Validate.notNull(regExp);
         return new Split(regExp);
     }
 
@@ -651,8 +618,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.split
      */
     public static Function split(final String regExp, final Integer lim) {
-        Validate.notNull(regExp);
-        Validate.notNull(lim);
         return new SplitLim(regExp, lim);
     }
 
@@ -709,7 +674,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substring
      */
     public static Function substring(final Integer startIndex) {
-        Validate.notNull(startIndex);
         return new Substring(startIndex);
     }
 
@@ -728,8 +692,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substring
      */
     public static Function substring(final Integer startIndex, final Integer endIndex) {
-        Validate.notNull(startIndex);
-        Validate.notNull(endIndex);
         return new SubstringEndIndex(startIndex, endIndex);
     }
 
@@ -746,7 +708,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substringAfter
      */
     public static Function substringAfter(final String separator) {
-        Validate.notNull(separator);
         return new SubstringAfter(separator);
     }
 
@@ -763,7 +724,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substringAfterLast
      */
     public static Function substringAfterLast(final String separator) {
-        Validate.notNull(separator);
         return new SubstringAfterLast(separator);
     }
 
@@ -780,7 +740,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substringBefore
      */
     public static Function substringBefore(final String separator) {
-        Validate.notNull(separator);
         return new SubstringBefore(separator);
     }
 
@@ -797,7 +756,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substringBeforeLast
      */
     public static Function substringBeforeLast(final String separator) {
-        Validate.notNull(separator);
         return new SubstringBeforeLast(separator);
     }
 
@@ -814,7 +772,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substringBetween
      */
     public static Function substringBetween(final String tag) {
-        Validate.notNull(tag);
         return new SubstringBetween(tag);
     }
 
@@ -832,8 +789,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.substringBetween
      */
     public static Function substringBetween(final String open, final String close) {
-        Validate.notNull(open);
-        Validate.notNull(close);
         return new SubstringBetweenOpenClose(open, close);
     }
 
@@ -865,7 +820,7 @@ public virtual inherited sharing class StringFunctions {
      * @description Returns a `Function` that converts all of the characters in the string input argument
      * to lowercase using the rules of the specified `locale`.
      *
-     * @param locale 
+     * @param locale the locale
      *
      * @return the `Function`
      *
@@ -874,7 +829,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.toLowerCase
      */
     public static Function toLowerCase(final String locale) {
-        Validate.notNull(locale);
         return new ToLowerCaseLocale(locale);
     }
 
@@ -894,7 +848,7 @@ public virtual inherited sharing class StringFunctions {
      * @description Returns a `Function` that converts all of the characters in the string input argument
      * to uppercase using the rules of the specified `locale`.
      *
-     * @param locale 
+     * @param locale the locale
      *
      * @return the `Function`
      *
@@ -903,7 +857,6 @@ public virtual inherited sharing class StringFunctions {
      * @see String.toUpperCase
      */
     public static Function toUpperCase(final String locale) {
-        Validate.notNull(locale);
         return new ToUpperCaseLocale(locale);
     }
 
@@ -1088,20 +1041,22 @@ public virtual inherited sharing class StringFunctions {
     // @start-group Lambdas
     private class Abbreviate extends Function {
         private final Integer maxWidth;
-        private Abbreviate(Integer maxWidth) { this.maxWidth = maxWidth; }
+        private Abbreviate(Integer maxWidth) { Validate.notNull(maxWidth); this.maxWidth = maxWidth; }
         public override Object apply(Object o) { return ((String) o).abbreviate(maxWidth); }
     }
 
     private class AbbreviateOffset extends Function {
         private final Integer maxWidth;
         private final Integer offset;
-        private AbbreviateOffset(Integer maxWidth, Integer offset) { this.maxWidth = maxWidth; this.offset = offset; }
+        private AbbreviateOffset(Integer maxWidth, Integer offset) {
+            Validate.notNull(maxWidth); Validate.notNull(offset); this.maxWidth = maxWidth; this.offset = offset;
+        }
         public override Object apply(Object o) { return ((String) o).abbreviate(maxWidth, offset); }
     }
 
     private class Append extends Function {
         private final String suffix;
-        private Append(String suffix) { this.suffix = suffix; }
+        private Append(String suffix) { Validate.notNull(suffix); this.suffix = suffix; }
         public override Object apply(Object o) { return ((String) o) + suffix; }
     }
 
@@ -1111,14 +1066,16 @@ public virtual inherited sharing class StringFunctions {
 
     private class Center extends Function {
         private final Integer size;
-        private Center(Integer size) { this.size = size; }
+        private Center(Integer size) { Validate.notNull(size); this.size = size; }
         public override Object apply(Object o) { return ((String) o).center(size); }
     }
 
     private class CenterPad extends Function {
         private final Integer size;
         private final String padStr;
-        private CenterPad(Integer size, String padStr) { this.size = size; this.padStr = padStr; }
+        private CenterPad(Integer size, String padStr) {
+            Validate.notNull(size); Validate.notNull(padStr); this.size = size; this.padStr = padStr;
+        }
         public override Object apply(Object o) { return ((String) o).center(size, padStr); }
     }
 
@@ -1128,7 +1085,7 @@ public virtual inherited sharing class StringFunctions {
 
     private class Difference extends Function {
         private final String str;
-        private Difference(String str) { this.str = str; }
+        private Difference(String str) { Validate.notNull(str); this.str = str; }
         public override Object apply(Object o) { return ((String) o).difference(str); }
     }
 
@@ -1166,7 +1123,7 @@ public virtual inherited sharing class StringFunctions {
 
     private class StringFormat extends Function {
         private final List<Object> arguments;
-        private StringFormat(List<Object> arguments) { this.arguments = arguments; }
+        private StringFormat(List<Object> arguments) { Validate.notNull(arguments); this.arguments = arguments; }
         public override Object apply(Object o) { return String.format((String) o, arguments); }
     }
 
@@ -1176,27 +1133,31 @@ public virtual inherited sharing class StringFunctions {
 
     private class Left extends Function {
         private final Integer len;
-        private Left(Integer len) { this.len = len; }
+        private Left(Integer len) { Validate.notNull(len); this.len = len; }
         public override Object apply(Object o) { return ((String) o).left(len); }
     }
 
     private class LeftPad extends Function {
         private final Integer len;
-        private LeftPad(Integer len) { this.len = len; }
+        private LeftPad(Integer len) { Validate.notNull(len); this.len = len; }
         public override Object apply(Object o) { return ((String) o).leftPad(len); }
     }
 
     private class LeftPadPad extends Function {
         private final Integer len;
         private final String padStr;
-        private LeftPadPad(Integer len, String padStr) { this.len = len; this.padStr = padStr; }
+        private LeftPadPad(Integer len, String padStr) {
+            Validate.notNull(len); Validate.notNull(padStr); this.len = len; this.padStr = padStr;
+        }
         public override Object apply(Object o) { return ((String) o).leftPad(len, padStr); }
     }
 
     private class Mid extends Function {
         private final Integer pos;
         private final Integer len;
-        private Mid(Integer pos, Integer len) { this.pos = pos; this.len = len; }
+        private Mid(Integer pos, Integer len) {
+            Validate.notNull(pos); Validate.notNull(len); this.pos = pos; this.len = len;
+        }
         public override Object apply(Object o) { return ((String) o).mid(pos, len); }
     }
 
@@ -1206,43 +1167,43 @@ public virtual inherited sharing class StringFunctions {
 
     private class Prepend extends Function {
         private final String prefix;
-        private Prepend(String prefix) { this.prefix = prefix; }
+        private Prepend(String prefix) { Validate.notNull(prefix); this.prefix = prefix; }
         public override Object apply(Object o) { return prefix + ((String) o); }
     }
 
     private class Remove extends Function {
         private final String toRemove;
-        private Remove(String toRemove) { this.toRemove = toRemove; }
+        private Remove(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
         public override Object apply(Object o) { return ((String) o).remove(toRemove); }
     }
 
     private class RemoveEnd extends Function {
         private final String toRemove;
-        private RemoveEnd(String toRemove) { this.toRemove = toRemove; }
+        private RemoveEnd(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
         public override Object apply(Object o) { return ((String) o).removeEnd(toRemove); }
     }
 
     private class RemoveEndIgnoreCase extends Function {
         private final String toRemove;
-        private RemoveEndIgnoreCase(String toRemove) { this.toRemove = toRemove; }
+        private RemoveEndIgnoreCase(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
         public override Object apply(Object o) { return ((String) o).removeEndIgnoreCase(toRemove); }
     }
 
     private class RemoveStart extends Function {
         private final String toRemove;
-        private RemoveStart(String toRemove) { this.toRemove = toRemove; }
+        private RemoveStart(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
         public override Object apply(Object o) { return ((String) o).removeStart(toRemove); }
     }
 
     private class RemoveStartIgnoreCase extends Function {
         private final String toRemove;
-        private RemoveStartIgnoreCase(String toRemove) { this.toRemove = toRemove; }
+        private RemoveStartIgnoreCase(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
         public override Object apply(Object o) { return ((String) o).removeStartIgnoreCase(toRemove); }
     }
 
     private class Repeat extends Function {
         private final Integer numTimes;
-        private Repeat(Integer numTimes) { this.numTimes = numTimes; }
+        private Repeat(Integer numTimes) { Validate.notNull(numTimes); this.numTimes = numTimes; }
         public override Object apply(Object o) { return ((String) o).repeat(numTimes); }
     }
 
@@ -1250,7 +1211,7 @@ public virtual inherited sharing class StringFunctions {
         private final String separator;
         private final Integer numTimes;
         private RepeatSeparator(String separator, Integer numTimes) {
-            this.separator = separator;
+            Validate.notNull(separator); Validate.notNull(numTimes); this.separator = separator;
             this.numTimes = numTimes;
         }
         public override Object apply(Object o) { return ((String) o).repeat(separator, numTimes); }
@@ -1259,21 +1220,30 @@ public virtual inherited sharing class StringFunctions {
     private class Replace extends Function {
         private final String target;
         private final String replacement;
-        private Replace(String target, String replacement) { this.target = target; this.replacement = replacement; }
+        private Replace(String target, String replacement) {
+            Validate.notNull(target); Validate.notNull(replacement); this.target = target;
+            this.replacement = replacement;
+        }
         public override Object apply(Object o) { return ((String) o).replace(target, replacement); }
     }
 
     private class ReplaceAll extends Function {
         private final String regex;
         private final String replacement;
-        private ReplaceAll(String regex, String replacement) { this.regex = regex; this.replacement = replacement; }
+        private ReplaceAll(String regex, String replacement) {
+            Validate.notNull(regex); Validate.notNull(replacement); this.regex = regex;
+            this.replacement = replacement;
+        }
         public override Object apply(Object o) { return ((String) o).replaceAll(regex, replacement); }
     }
 
     private class ReplaceFirst extends Function {
         private final String regex;
         private final String replacement;
-        private ReplaceFirst(String regex, String replacement) { this.regex = regex; this.replacement = replacement; }
+        private ReplaceFirst(String regex, String replacement) {
+            Validate.notNull(regex); Validate.notNull(replacement); this.regex = regex;
+            this.replacement = replacement;
+        }
         public override Object apply(Object o) { return ((String) o).replaceFirst(regex, replacement); }
     }
 
@@ -1283,33 +1253,37 @@ public virtual inherited sharing class StringFunctions {
 
     private class Right extends Function {
         private final Integer len;
-        private Right(Integer len) { this.len = len; }
+        private Right(Integer len) { Validate.notNull(len); this.len = len; }
         public override Object apply(Object o) { return ((String) o).right(len); }
     }
 
     private class RightPad extends Function {
         private final Integer len;
-        private RightPad(Integer len) { this.len = len; }
+        private RightPad(Integer len) { Validate.notNull(len); this.len = len; }
         public override Object apply(Object o) { return ((String) o).rightPad(len); }
     }
 
     private class RightPadPad extends Function {
         private final Integer len;
         private final String padStr;
-        private RightPadPad(Integer len, String padStr) { this.len = len; this.padStr = padStr; }
+        private RightPadPad(Integer len, String padStr) {
+            Validate.notNull(len); Validate.notNull(padStr); this.len = len; this.padStr = padStr;
+        }
         public override Object apply(Object o) { return ((String) o).rightPad(len, padStr); }
     }
 
     private class Split extends Function {
         private final String regex;
-        private Split(String regex) { this.regex = regex; }
+        private Split(String regex) { Validate.notNull(regex); this.regex = regex; }
         public override Object apply(Object o) { return((String) o).split(regex); }
     }
 
     private class SplitLim extends Function {
         private final String regex;
         private final Integer lim;
-        private SplitLim(String regex, Integer lim) { this.regex = regex; this.lim = lim; }
+        private SplitLim(String regex, Integer lim) {
+            Validate.notNull(regex); Validate.notNull(lim); this.regex = regex; this.lim = lim;
+        }
         public override Object apply(Object o) { return ((String) o).split(regex, lim); }
     }
 
@@ -1327,7 +1301,7 @@ public virtual inherited sharing class StringFunctions {
 
     private class Substring extends Function {
         private final Integer startIndex;
-        private Substring(Integer start) { this.startIndex = start; }
+        private Substring(Integer start) { Validate.notNull(start); this.startIndex = start; }
         public override Object apply(Object o) { return ((String) o).substring(startIndex); }
     }
 
@@ -1335,6 +1309,8 @@ public virtual inherited sharing class StringFunctions {
         private final Integer startIndex;
         private final Integer endIndex;
         private SubstringEndIndex(Integer startIndex, Integer endIndex) {
+            Validate.notNull(startIndex);
+            Validate.notNull(endIndex);
             this.startIndex = startIndex;
             this.endIndex = endIndex;
         }
@@ -1343,38 +1319,40 @@ public virtual inherited sharing class StringFunctions {
 
     private class SubstringAfter extends Function {
         private final String separator;
-        private SubstringAfter(String separator) { this.separator = separator; }
+        private SubstringAfter(String separator) { Validate.notNull(separator); this.separator = separator; }
         public override Object apply(Object o) { return ((String) o).substringAfter(separator); }
     }
 
     private class SubstringAfterLast extends Function {
         private final String separator;
-        private SubstringAfterLast(String separator) { this.separator = separator; }
+        private SubstringAfterLast(String separator) { Validate.notNull(separator); this.separator = separator; }
         public override Object apply(Object o) { return ((String) o).substringAfterLast(separator); }
     }
 
     private class SubstringBefore extends Function {
         private final String separator;
-        private SubstringBefore(String separator) { this.separator = separator; }
+        private SubstringBefore(String separator) { Validate.notNull(separator); this.separator = separator; }
         public override Object apply(Object o) { return ((String) o).substringBefore(separator); }
     }
 
     private class SubstringBeforeLast extends Function {
         private final String separator;
-        private SubstringBeforeLast(String separator) { this.separator = separator; }
+        private SubstringBeforeLast(String separator) { Validate.notNull(separator); this.separator = separator; }
         public override Object apply(Object o) { return ((String) o).substringBeforeLast(separator); }
     }
 
     private class SubstringBetween extends Function {
         private final String tag;
-        private SubstringBetween(String tag) { this.tag = tag; }
+        private SubstringBetween(String tag) { Validate.notNull(tag); this.tag = tag; }
         public override Object apply(Object o) { return ((String) o).substringBetween(tag); }
     }
 
     private class SubstringBetweenOpenClose extends Function {
         private final String open;
         private final String close;
-        private SubstringBetweenOpenClose(String open, String close) { this.open = open; this.close = close; }
+        private SubstringBetweenOpenClose(String open, String close) {
+            Validate.notNull(open); Validate.notNull(close); this.open = open; this.close = close;
+        }
         public override Object apply(Object o) { return ((String) o).substringBetween(open, close); }
     }
 
@@ -1388,7 +1366,7 @@ public virtual inherited sharing class StringFunctions {
 
     private class ToLowerCaseLocale extends Function {
         private final String locale;
-        private ToLowerCaseLocale(String locale) { this.locale = locale; }
+        private ToLowerCaseLocale(String locale) { Validate.notNull(locale); this.locale = locale; }
         public override Object apply(Object o) { return ((String) o).toLowerCase(locale); }
     }
 
@@ -1400,7 +1378,7 @@ public virtual inherited sharing class StringFunctions {
 
     private class ToUpperCaseLocale extends Function {
         private final String locale;
-        private ToUpperCaseLocale(String locale) { this.locale = locale; }
+        private ToUpperCaseLocale(String locale) { Validate.notNull(locale); this.locale = locale; }
         public override Object apply(Object o) { return ((String) o).toUpperCase(locale); }
     }
 

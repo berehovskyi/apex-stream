@@ -3,7 +3,7 @@
  *
  * @author Oleh Berehovskyi
  *
- * @group Optionals
+ * @group Functional Abstract Classes
  */
 public virtual inherited sharing class Optional implements IOptional {
 

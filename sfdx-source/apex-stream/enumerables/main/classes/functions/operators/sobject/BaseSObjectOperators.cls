@@ -1,12 +1,19 @@
 /**
- * @description
+ * @description Provides base implementations of {@link Operator}
+ * and related utilities that are used by {@link ISObjectEnumerable}.
+ *
  * @author Oleh Berehovskyi
+ *
+ * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BaseSObjectOperators {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected BaseSObjectOperators() {}
 
+    //<editor-fold desc="Built-Ins">
+    // @start-group Built-Ins
     /**
      * @description Returns a `Operator` that gets sobject
      * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
@@ -24,9 +31,9 @@ public virtual inherited sharing class BaseSObjectOperators {
      * @see SObject.getSObject
      *
      * @example
-     * Operators.getSObject('Parent');
-     * Operators.getSObject('Parent.Parent');
-     * Operators.getSObject('Parent?.Parent');
+     * BaseSObjectOperators.getSObject('Parent');
+     * BaseSObjectOperators.getSObject('Parent.Parent');
+     * BaseSObjectOperators.getSObject('Parent?.Parent');
      */
     public static Operator getSObject(final String fieldName) {
         Validate.notBlank(fieldName);
@@ -47,13 +54,15 @@ public virtual inherited sharing class BaseSObjectOperators {
      * @see SObject.getSObject
      *
      * @example
-     * Operators.getSObject(Account.ParentId);
+     * BaseSObjectOperators.getSObject(Account.ParentId);
      */
     public static Operator getSObject(final SObjectField field) {
-        Validate.notNull(field);
         return new GetSObjectFieldOperator(field);
     }
+    // @end-group
+    //</editor-fold>
 
+    //<editor-fold desc="Lambdas">
     private class GetSObjectFieldNameOperator extends Operator {
         private final String fieldName;
         private GetSObjectFieldNameOperator(String fieldName) { this.fieldName = fieldName; }
@@ -83,8 +92,12 @@ public virtual inherited sharing class BaseSObjectOperators {
 
     private class GetSObjectFieldOperator extends Operator {
         private final SObjectField field;
-        private GetSObjectFieldOperator(SObjectField field) { this.field = field; }
+        private GetSObjectFieldOperator(SObjectField field) {
+            Validate.notNull(field);
+            this.field = field;
+        }
         public override Object apply(Object obj) { return ((SObject) obj).getSObject(field); }
     }
+    //</editor-fold>
 
 }

@@ -61,7 +61,6 @@ public abstract inherited sharing class Operator implements IOperator {
      * @throws NullPointerException if `operators` is null or some element is null
      */
     public static Operator compose(final List<IOperator> operators) {
-        Validate.noNullElements(operators);
         return new Compose(operators);
     }
 
@@ -95,7 +94,6 @@ public abstract inherited sharing class Operator implements IOperator {
      * @throws NullPointerException if `consumer` is null
      */
     public static Operator compose(final IConsumer consumer) {
-        Validate.notNull(consumer);
         return new ForConsumer(consumer);
     }
 
@@ -109,7 +107,6 @@ public abstract inherited sharing class Operator implements IOperator {
      * @throws NullPointerException if `supplier` is null
      */
     public static Operator compose(final ISupplier supplier) {
-        Validate.notNull(supplier);
         return new ForSupplier(supplier);
     }
 
@@ -125,12 +122,7 @@ public abstract inherited sharing class Operator implements IOperator {
      *
      * @throws NullPointerException if `operator` or `merger` is null
      */
-    public static Operator combine(
-        final IOperator operator,
-        final IBiOperator merger
-    ) {
-        Validate.notNull(operator);
-        Validate.notNull(merger);
+    public static Operator combine(final IOperator operator, final IBiOperator merger) {
         return new Combine(operator, merger);
     }
     // @end-group
@@ -144,7 +136,10 @@ public abstract inherited sharing class Operator implements IOperator {
 
     private class Compose extends Operator {
         private final List<IOperator> operators;
-        private Compose(List<IOperator> operators) { this.operators = operators; }
+        private Compose(List<IOperator> operators) {
+            Validate.noNullElements(operators);
+            this.operators = operators;
+        }
         public override Object apply(Object o) {
             Object result = o;
             for (IOperator operator : operators) {
@@ -162,27 +157,35 @@ public abstract inherited sharing class Operator implements IOperator {
 
     private class ForConsumer extends Operator {
         private final IConsumer consumer;
-        private ForConsumer(IConsumer consumer) { this.consumer = consumer; }
-        public override Object apply(Object obj) {
-            consumer.accept(obj);
-            return obj;
+        private ForConsumer(IConsumer consumer) {
+            Validate.notNull(consumer);
+            this.consumer = consumer;
+        }
+        public override Object apply(Object o) {
+            consumer.accept(o);
+            return o;
         }
     }
 
     private class ForSupplier extends Operator {
         private final ISupplier supplier;
-        private ForSupplier(ISupplier supplier) { this.supplier = supplier; }
-        public override Object apply(Object sObj) { return supplier.get(); }
+        private ForSupplier(ISupplier supplier) {
+            Validate.notNull(supplier);
+            this.supplier = supplier;
+        }
+        public override Object apply(Object o) { return supplier.get(); }
     }
 
     private class Combine extends Operator {
         private final IOperator valueMapper;
         private final IBiOperator merger;
         private Combine(IOperator valueMapper, IBiOperator merger) {
+            Validate.notNull(valueMapper);
+            Validate.notNull(merger);
             this.valueMapper = valueMapper;
             this.merger = merger;
         }
-        public override Object apply(Object obj) { return merger.apply(obj, valueMapper.apply(obj)); }
+        public override Object apply(Object o) { return merger.apply(o, valueMapper.apply(o)); }
     }
     // @end-group
     //</editor-fold>

@@ -296,6 +296,7 @@ private class AsTestCommons {
     }
 
     public class DoNothingConsumer extends Consumer {
+        @SuppressWarnings('PMD.EmptyStatementBlock')
         public override void accept(Object o) {}
     }
     public class SetNameConsumer extends Consumer {
@@ -349,7 +350,7 @@ private class AsTestCommons {
     }
     public class IncrementSupplier extends Supplier {
         private Integer n0;
-        private Integer dn;
+        private final Integer dn;
         public IncrementSupplier(Integer fromInt, Integer step) {
             n0 = fromInt;
             dn = step;

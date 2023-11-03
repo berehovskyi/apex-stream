@@ -11,6 +11,7 @@
 public virtual inherited sharing class SObjectBiConsumers {
 
     @TestVisible
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     protected SObjectBiConsumers() {}
 
     //<editor-fold desc="Built-Ins">
@@ -36,9 +37,9 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.set('NumberOfEmployees', someFunction);
-     * BiConsumers.set('Parent.NumberOfEmployees', someFunction);
-     * BiConsumers.set('Parent?.NumberOfEmployees', someFunction);
+     * SObjectBiConsumers.set('NumberOfEmployees', someFunction);
+     * SObjectBiConsumers.set('Parent.NumberOfEmployees', someFunction);
+     * SObjectBiConsumers.set('Parent?.NumberOfEmployees', someFunction);
      */
     public static BiConsumer set(final String fieldName, final IFunction mapper) {
         Validate.notNull(fieldName);
@@ -63,11 +64,9 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.set(Account.NumberOfEmployees, someFunction);
+     * SObjectBiConsumers.set(Account.NumberOfEmployees, someFunction);
      */
     public static BiConsumer set(final SObjectField field, final IFunction mapper) {
-        Validate.notNull(field);
-        Validate.notNull(mapper);
         return new SetByField(field, mapper);
     }
 
@@ -90,9 +89,9 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.set('NumberOfEmployees', 100);
-     * BiConsumers.set('Parent.NumberOfEmployees', 100);
-     * BiConsumers.set('Parent?.NumberOfEmployees', 100);
+     * SObjectBiConsumers.set('NumberOfEmployees', 100);
+     * SObjectBiConsumers.set('Parent.NumberOfEmployees', 100);
+     * SObjectBiConsumers.set('Parent?.NumberOfEmployees', 100);
      */
     public static BiConsumer set(final String fieldName, final Object value) {
         return set(fieldName, Function.constant(value));
@@ -112,7 +111,7 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.set(Account.NumberOfEmployees, 100);
+     * SObjectBiConsumers.set(Account.NumberOfEmployees, 100);
      */
     public static BiConsumer set(final SObjectField field, final Object value) {
         return set(field, Function.constant(value));
@@ -139,9 +138,9 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.setSObject('Parent', someOperator);
-     * BiConsumers.setSObject('Parent.Parent', someOperator);
-     * BiConsumers.setSObject('Parent?.Parent', someOperator);
+     * SObjectBiConsumers.setSObject('Parent', someOperator);
+     * SObjectBiConsumers.setSObject('Parent.Parent', someOperator);
+     * SObjectBiConsumers.setSObject('Parent?.Parent', someOperator);
      */
     public static BiConsumer setSObject(final String fieldName, final IOperator operator) {
         Validate.notNull(fieldName);
@@ -166,11 +165,9 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.setSObject(Account.ParentId, someOperator);
+     * SObjectBiConsumers.setSObject(Account.ParentId, someOperator);
      */
     public static BiConsumer setSObject(final SObjectField field, final IOperator operator) {
-        Validate.notNull(field);
-        Validate.notNull(operator);
         return new SetSObjectByField(field, operator);
     }
 
@@ -193,9 +190,9 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.setSObject('Parent', someAccount);
-     * BiConsumers.setSObject('Parent.Parent', someAccount);
-     * BiConsumers.setSObject('Parent?.Parent', someAccount);
+     * SObjectBiConsumers.setSObject('Parent', someAccount);
+     * SObjectBiConsumers.setSObject('Parent.Parent', someAccount);
+     * SObjectBiConsumers.setSObject('Parent?.Parent', someAccount);
      */
     public static BiConsumer setSObject(final String fieldName, final SObject value) {
         return setSObject(fieldName, Operator.constant(value));
@@ -215,7 +212,7 @@ public virtual inherited sharing class SObjectBiConsumers {
      * @see BiOperator.combine
      *
      * @example
-     * BiConsumers.setSObject(Account.ParentId, someAccount);
+     * SObjectBiConsumers.setSObject(Account.ParentId, someAccount);
      */
     public static BiConsumer setSObject(final SObjectField field, final SObject value) {
         return setSObject(field, Operator.constant(value));
@@ -234,13 +231,34 @@ public virtual inherited sharing class SObjectBiConsumers {
         }
     }
 
-    private class SetFieldName extends BiConsumer {
-        protected final String fieldName;
-        private final IFunction mapper;
-        private SetFieldName(String fieldName, IFunction mapper) {
-            this.fieldName = fieldName;
+    private abstract class ComposedBiConsumer extends BiConsumer {
+        protected final IFunction mapper;
+        protected ComposedBiConsumer(IFunction mapper) {
+            Validate.notNull(mapper);
             this.mapper = mapper;
         }
+    }
+
+    private abstract class FieldNameComposedBiConsumer extends ComposedBiConsumer {
+        protected final String fieldName;
+        protected FieldNameComposedBiConsumer(String fieldName, IFunction mapper) {
+            super(mapper);
+            Validate.notNull(fieldName);
+            this.fieldName = fieldName;
+        }
+    }
+
+    private abstract class FieldComposedBiConsumer extends ComposedBiConsumer {
+        protected final SObjectField field;
+        protected FieldComposedBiConsumer(SObjectField field, IFunction mapper) {
+            super(mapper);
+            Validate.notNull(field);
+            this.field = field;
+        }
+    }
+
+    private class SetFieldName extends FieldNameComposedBiConsumer {
+        private SetFieldName(String fieldName, IFunction mapper) { super(fieldName, mapper); }
         public override void accept(Object src, Object target) {
             ((SObject) target).put(fieldName, mapper.apply(src));
         }
@@ -268,13 +286,8 @@ public virtual inherited sharing class SObjectBiConsumers {
         }
     }
 
-    private class SetByField extends BiConsumer {
-        private final SObjectField field;
-        private final IFunction mapper;
-        private SetByField(SObjectField field, IFunction mapper) {
-            this.field = field;
-            this.mapper = mapper;
-        }
+    private class SetByField extends FieldComposedBiConsumer {
+        private SetByField(SObjectField field, IFunction mapper) { super(field, mapper); }
         public override void accept(Object src, Object target) {
             ((SObject) target).put(field, mapper.apply(src));
         }
@@ -318,6 +331,8 @@ public virtual inherited sharing class SObjectBiConsumers {
         private final SObjectField field;
         private final IOperator operator;
         private SetSObjectByField(SObjectField field, IOperator operator) {
+            Validate.notNull(field);
+            Validate.notNull(operator);
             this.field = field;
             this.operator = operator;
         }

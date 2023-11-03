@@ -97,6 +97,7 @@ private class StringFunctionsTest {
      * @see StringFunctions.parseDatetime
      */
     @IsTest
+    @SuppressWarnings('PMD.NcssMethodCount')
     static void stringFunctions() {
         // Given
         List<Object> format = new List<Object>{ 'test' };
