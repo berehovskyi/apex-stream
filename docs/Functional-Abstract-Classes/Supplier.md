@@ -1,19 +1,22 @@
-# Supplier
+# abstract Supplier
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides default and static methods of [ISupplier](/docs/Functional-Interfaces/ISupplier.md) functional interface.
+Provides default and static methods of
+[ISupplier](/docs/Functional-Interfaces/ISupplier.md) functional interface.
+
+
+**Implemented types**
+
+[ISupplier](/docs/Functional-Interfaces/ISupplier.md)
 
 
 **See** [ISupplier](/docs/Functional-Interfaces/ISupplier.md)
 
 
 **See** [Collector](/docs/Functional-Abstract-Classes/Collector.md)
-
-
-**See** [SObjectCollector](/docs/Functional-Abstract-Classes/SObjectCollector.md)
 
 
 **Author** Oleh Berehovskyi
@@ -23,35 +26,33 @@ Provides default and static methods of [ISupplier](/docs/Functional-Interfaces/I
 
 ## Methods
 ### Function
-##### `get()`
+##### `public Object get()`
 ---
 ### Static Methods
-##### `static of(Type t)`
+##### `public static Supplier of(Type t)`
 
 Returns a `Supplier` that returns a new instance of the given type.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`t`|Type of the new instance to create|
 
-###### Return
+###### Returns
 
-**Type**
-
-Supplier
-
-**Description**
-
-the `Supplier`
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `t` is null|
 
 
-**See** Type.newInstance
+**See** [Type.newInstance](Type.newInstance)
 
 ###### Example
 ```apex
@@ -59,24 +60,22 @@ ISupplier of = Supplier.of(List<Account>.class);
 List<Account> accounts = (List<Account>) of.get(); // new List<Account>()
 ```
 
-##### `static constant(Object o)`
+
+##### `public static Supplier constant(Object o)`
 
 Returns a stateful `Supplier` that returns a reference of the `o` object.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`o`|the Object|
 
-###### Return
+###### Returns
 
-**Type**
-
-Supplier
-
-**Description**
-
-the `Supplier`
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
 
 ###### Example
 ```apex
@@ -86,24 +85,22 @@ constant.get(); // 'a'
 constant.get(); // 'a'
 ```
 
-##### `static repeat(Iterable<Object> iterable)`
+
+##### `public static Supplier repeat(Iterable<Object> iterable)`
 
 Returns a `Supplier` that infinitely returns the elements in order.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`iterable`|the iterable|
 
-###### Return
+###### Returns
 
-**Type**
-
-Supplier
-
-**Description**
-
-the `Supplier`
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
 
 ###### Example
 ```apex
@@ -114,100 +111,5 @@ repeat.get(); // 'c'
 repeat.get(); // 'a'
 ```
 
-##### `static compose(IIntSupplier supplier)`
-
-Returns a composed `Supplier` of the `IIntSupplier`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`supplier`|the int supplier|
-
-###### Return
-
-**Type**
-
-Supplier
-
-**Description**
-
-the composed `Supplier`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `consumer` is null|
-
-##### `static compose(ILongSupplier supplier)`
-
-Returns a composed `Supplier` of the `ILongSupplier`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`supplier`|the Long supplier|
-
-###### Return
-
-**Type**
-
-Supplier
-
-**Description**
-
-the composed `Supplier`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `consumer` is null|
-
-##### `static compose(IDoubleSupplier supplier)`
-
-Returns a composed `Supplier` of the `IDoubleSupplier`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`supplier`|the Double supplier|
-
-###### Return
-
-**Type**
-
-Supplier
-
-**Description**
-
-the composed `Supplier`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `consumer` is null|
-
-##### `static compose(ISObjectSupplier supplier)`
-
-Returns a composed `Supplier` of the `ISObjectSupplier`.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`supplier`|the SObject supplier|
-
-###### Return
-
-**Type**
-
-Supplier
-
-**Description**
-
-the composed `Supplier`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `consumer` is null|
 
 ---

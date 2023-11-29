@@ -789,7 +789,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @example
      * LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .isEmpty(); // false
-     * LongSequence.of(new List<Long>()))
+     * LongSequence.of(new List<Long>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {

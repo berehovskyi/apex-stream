@@ -1463,7 +1463,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
      * SObjectSequence.of(accounts)
      *     .isEmpty(); // false
-     * SObjectSequence.of(new List<Account>()))
+     * SObjectSequence.of(new List<Account>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {

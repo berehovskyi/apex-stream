@@ -1,10 +1,11 @@
-# StringSuppliers
+# virtual StringSuppliers
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of `String` [Supplier](/docs/Functional-Abstract-Classes/Supplier.md) and related utilities.
+Provides common implementations of `String` [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
+and related utilities.
 
 
 **See** [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
@@ -17,19 +18,15 @@ Provides common implementations of `String` [Supplier](/docs/Functional-Abstract
 
 ## Methods
 ### Built-Ins
-##### `static uuid()`
+##### `public static Supplier uuid()`
 
 Returns a `Supplier` that returns the next uuid.
 
-###### Return
+###### Returns
 
-**Type**
-
-Supplier
-
-**Description**
-
-the `Supplier`
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
 
 ###### Example
 ```apex
@@ -38,26 +35,25 @@ uuid.get(); // '563581af-5560-a1fd-2291-2b03582bf000'
 uuid.get(); // '57b0a848-68e6-2eb8-96ce-2ec0691f51b8'
 ```
 
-##### `static autonumber(String format)`
+
+##### `public static Supplier autonumber(String format)`
 
 Returns a `Supplier` that returns the string in autonumber format.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`format`|autonumber format|
 
-###### Return
+###### Returns
 
-**Type**
-
-Supplier
-
-**Description**
-
-the `Supplier`
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalArgumentException`|if `format` does not match '\\S*\\{\\d+\\}' pattern|
@@ -69,5 +65,6 @@ autonumber.get(); // 'A-0000'
 autonumber.get(); // 'A-0001'
 autonumber.get(); // 'A-0002'
 ```
+
 
 ---

@@ -1,10 +1,16 @@
-# BiPredicate
+# abstract BiPredicate
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides default and static methods of [IBiPredicate](/docs/Functional-Interfaces/IBiPredicate.md) functional interface.
+Provides default and static methods of
+[IBiPredicate](/docs/Functional-Interfaces/IBiPredicate.md) functional interface.
+
+
+**Implemented types**
+
+[IBiPredicate](/docs/Functional-Interfaces/IBiPredicate.md)
 
 
 **See** [IBiPredicate](/docs/Functional-Interfaces/IBiPredicate.md)
@@ -17,33 +23,27 @@ Provides default and static methods of [IBiPredicate](/docs/Functional-Interface
 
 ## Methods
 ### Function
-##### `test(Object o1, Object o2)`
-###### Parameters
-|Param|Description|
-|---|---|
-
+##### `public Boolean test(Object o1, Object o2)`
 ---
 ### Default Methods
-##### `orElse(IBiPredicate other)`
+##### `public virtual BiPredicate orElse(IBiPredicate other)`
 
 Returns a composed `BiPredicate` that applies short-circuiting logical `OR` operator to `this` `IBiPredicate` and `other` in that order.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`other`|the other `IBiPredicate`|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the composed `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the composed `BiPredicate`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
@@ -53,26 +53,25 @@ the composed `BiPredicate`
 someBiPredicate1.orElse(someBiPredicate2);
 ```
 
-##### `andAlso(IBiPredicate other)`
+
+##### `public virtual BiPredicate andAlso(IBiPredicate other)`
 
 Returns a composed `BiPredicate` that applies short-circuiting logical `AND` operator to `this` `IPredicate` and `other` in that order.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`other`|the other `IBiPredicate`|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the composed `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the composed `BiPredicate`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null|
@@ -82,47 +81,43 @@ the composed `BiPredicate`
 someBiPredicate1.andAlso(someBiPredicate2);
 ```
 
-##### `negate()`
+
+##### `public virtual BiPredicate negate()`
 
 Returns a `BiPredicate` that applies logical `NOT` operator to `this` `IBiPredicate`.
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the negated `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the negated `BiPredicate`|
 
 ###### Example
 ```apex
 someBiPredicate.negate();
 ```
 
+
 ---
 ### Static Methods
-##### `static some(List<IBiPredicate> predicates)`
+##### `public static BiPredicate some(List<IBiPredicate> predicates)`
 
 Returns a composed `BiPredicate` that applies sequentially short-circuiting logical `OR` operator to `predicates` in the same order as the order of the input list.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IBiPredicate`|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the composed `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the composed `BiPredicate`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
@@ -132,26 +127,25 @@ the composed `BiPredicate`
 BiPredicate.some(someBiPredicates);
 ```
 
-##### `static every(List<IBiPredicate> predicates)`
+
+##### `public static BiPredicate every(List<IBiPredicate> predicates)`
 
 Returns a composed `BiPredicate` that applies sequentially short-circuiting logical `AND` operator to `predicates` in the same order as the order of the input list.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicates`|the list of`IBiPredicate`|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the composed `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the composed `BiPredicate`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `other` is null or some of the list element is null|
@@ -161,51 +155,48 @@ the composed `BiPredicate`
 BiPredicate.every(someBiPredicates);
 ```
 
-##### `static negate(IBiPredicate predicate)`
+
+##### `public static BiPredicate negate(IBiPredicate predicate)`
 
 Returns a `BiPredicate` that applies logical `NOT` operator to `predicate`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicate`|the `IBiPredicate`|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the negated `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the negated `BiPredicate`|
 
 ###### Example
 ```apex
 BiPredicate.negate(someBiPredicate);
 ```
 
-##### `static some(IPredicate left, IPredicate right)`
+
+##### `public static BiPredicate some(IPredicate left, IPredicate right)`
 
 Returns a composed `BiPredicate` that applies short-circuiting logical `OR` operator to `left` `IPredicate` and `right` in that order applied to the first and the second input arguments respectively.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`left`|the predicate applied to the first input argument|
 |`right`|the predicate applied to the second input argument|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the composed `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the composed `BiPredicate`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -215,27 +206,26 @@ the composed `BiPredicate`
 BiPredicate.some(somePredicate1, somePredicate2);
 ```
 
-##### `static every(IPredicate left, IPredicate right)`
+
+##### `public static BiPredicate every(IPredicate left, IPredicate right)`
 
 Returns a composed `BiPredicate` that applies short-circuiting logical `AND` operator to `left` `IPredicate` and `right` in that order applied to the first and the second input arguments respectively.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`left`|the predicate applied to the first input argument|
 |`right`|the predicate applied to the second input argument|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-the composed `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|the composed `BiPredicate`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `left` or `right` is null|
@@ -245,26 +235,25 @@ the composed `BiPredicate`
 BiPredicate.every(somePredicate1, somePredicate2);
 ```
 
-##### `static always(Boolean value)`
+
+##### `public static BiPredicate always(Boolean value)`
 
 Returns a `BiPredicate` that always evaluates to the Boolean `value` (`true` or `false`).
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`value`|the evaluated value|
 
-###### Return
+###### Returns
 
-**Type**
-
-BiPredicate
-
-**Description**
-
-predicate the `BiPredicate`
+|Type|Description|
+|---|---|
+|`BiPredicate`|predicate the `BiPredicate`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `value` is null|
@@ -273,5 +262,6 @@ predicate the `BiPredicate`
 ```apex
 BiPredicate.always(true);
 ```
+
 
 ---

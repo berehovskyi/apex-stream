@@ -789,7 +789,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * @example
      * IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .isEmpty(); // false
-     * IntSequence.of(new List<Integer>()))
+     * IntSequence.of(new List<Integer>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {

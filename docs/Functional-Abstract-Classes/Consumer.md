@@ -1,16 +1,19 @@
-# Consumer
+# abstract Consumer
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides default and static methods of [IConsumer](/docs/Functional-Interfaces/IConsumer.md) functional interface.
+Provides default and static methods of
+[IConsumer](/docs/Functional-Interfaces/IConsumer.md) functional interface.
+
+
+**Implemented types**
+
+[IConsumer](/docs/Functional-Interfaces/IConsumer.md)
 
 
 **See** [IConsumer](/docs/Functional-Interfaces/IConsumer.md)
-
-
-**See** IObjectIterable.forEach
 
 
 **Author** Oleh Berehovskyi
@@ -20,59 +23,51 @@ Provides default and static methods of [IConsumer](/docs/Functional-Interfaces/I
 
 ## Methods
 ### Function
-##### `accept(Object o)`
-###### Parameters
-|Param|Description|
-|---|---|
-
+##### `public void accept(Object o)`
 ---
 ### Default Methods
-##### `andThen(IConsumer after)`
+##### `public virtual Consumer andThen(IConsumer after)`
 
 Returns a composed `Consumer` that executes `this` operation first, then the `after` operation in that order.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-###### Return
+###### Returns
 
-**Type**
-
-Consumer
-
-**Description**
-
-the composed `Consumer`
+|Type|Description|
+|---|---|
+|`Consumer`|the composed `Consumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
 ---
 ### Static Methods
-##### `static compose(List<IConsumer> consumers)`
+##### `public static Consumer compose(List<IConsumer> consumers)`
 
 Returns a composed `Consumer` that sequentially executes the operations in the same order as the order of the consumers input list.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`consumers`|the operations to sequentially perform|
 
-###### Return
+###### Returns
 
-**Type**
-
-Consumer
-
-**Description**
-
-the composed `Consumer`
+|Type|Description|
+|---|---|
+|`Consumer`|the composed `Consumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `consumers` is null or some element is null|

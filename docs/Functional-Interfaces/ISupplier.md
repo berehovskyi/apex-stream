@@ -1,6 +1,6 @@
 # ISupplier
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
@@ -13,18 +13,14 @@ A function that takes no arguments and returns an `Object` value.
 **Group** Functional Interfaces
 
 ## Methods
-### `get()`
+### `public Object get()`
 
 Return an instance of `Object` type. The returned object may or may not be a new instance, depending on the implementation.
 
-#### Return
+#### Returns
 
-**Type**
-
-Object
-
-**Description**
-
-the result of `Object` type
+|Type|Description|
+|---|---|
+|`Object`|the result of `Object` type|
 
 ---

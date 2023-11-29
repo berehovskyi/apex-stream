@@ -979,7 +979,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @example
      * [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .isEmpty(); // false
-     * [ObjectEnumerable].of(new List<String>()))
+     * [ObjectEnumerable].of(new List<String>())
      *     .isEmpty(); // true
      */
     public abstract Boolean isEmpty();

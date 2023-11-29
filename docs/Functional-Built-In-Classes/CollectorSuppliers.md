@@ -1,10 +1,18 @@
-# CollectorSuppliers
+# virtual CollectorSuppliers
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/Supplier.md) and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
+Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
+and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
+
+
+**Inheritance**
+
+[BaseCollectorSuppliers](/docs/Functional-Built-In-Classes/BaseCollectorSuppliers.md)
+ > 
+CollectorSuppliers
 
 
 **See** [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
@@ -20,23 +28,78 @@ Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/
 
 ## Methods
 ### Built-Ins
-##### `static box(Object identity)`
+##### `public static Supplier joiningString()`
+
+Returns a `Supplier` that returns a list container to track joining String.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
+
+
+**See** [Collectors.joining](Collectors.joining)
+
+##### `public static Supplier averagingInt()`
+
+Returns a `Supplier` that returns a list container to track Integer averaging.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
+
+
+**See** [Collectors.averagingInt](Collectors.averagingInt)
+
+##### `public static Supplier averagingLong()`
+
+Returns a `Supplier` that returns a list container to track Long averaging.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
+
+
+**See** [Collectors.averagingLong](Collectors.averagingLong)
+
+##### `public static Supplier box(Object identity)`
 
 Returns a `Supplier` that returns a list container to track `identity` mutation.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
-|`identity`|the tracked Object|
+|`identity`|the tracked SObject|
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
 
-Supplier
 
-**Description**
+**See** [Collectors.reducing](Collectors.reducing)
 
-the `Supplier`
+##### `public static Supplier averagingDouble()`
+
+*Inherited*
+
+
+Returns a `Supplier` that returns a list container to track Double averaging.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
+
+
+**See** [BaseCollectors.averagingDouble](BaseCollectors.averagingDouble)
 
 ---

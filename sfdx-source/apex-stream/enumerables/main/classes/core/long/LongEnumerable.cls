@@ -661,7 +661,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @example
      * [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .isEmpty(); // false
-     * [LongEnumerable].of(new List<Long>()))
+     * [LongEnumerable].of(new List<Long>())
      *     .isEmpty(); // true
      */
     public abstract Boolean isEmpty();

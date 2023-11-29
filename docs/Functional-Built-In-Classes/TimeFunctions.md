@@ -1,10 +1,11 @@
-# TimeFunctions
+# virtual TimeFunctions
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of `Time` [Function](/docs/Functional-Abstract-Classes/Function.md) and related utilities.
+Provides common implementations of `Time` [Function](/docs/Functional-Abstract-Classes/Function.md)
+and related utilities.
 
 
 **See** [Function](/docs/Functional-Abstract-Classes/Function.md)
@@ -17,112 +18,104 @@ Provides common implementations of `Time` [Function](/docs/Functional-Abstract-C
 
 ## Methods
 ### Date Functions
-##### `static addHours(Integer hours)`
+##### `public static Function addHours(Integer hours)`
 
 Returns a `Function` that adds `hours` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`hours`|the number of additional hours|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `hours` is null|
 
 
-**See** Time.addHours
+**See** [Time.addHours](Time.addHours)
 
-##### `static addMilliseconds(Integer milliseconds)`
+##### `public static Function addMilliseconds(Integer milliseconds)`
 
 Returns a `Function` that adds `milliseconds` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`milliseconds`|the number of additional milliseconds|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `milliseconds` is null|
 
 
-**See** Time.addMilliseconds
+**See** [Time.addMilliseconds](Time.addMilliseconds)
 
-##### `static addMinutes(Integer minutes)`
+##### `public static Function addMinutes(Integer minutes)`
 
 Returns a `Function` that adds `minutes` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`minutes`|the number of additional minutes|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `minutes` is null|
 
 
-**See** Time.addMinutes
+**See** [Time.addMinutes](Time.addMinutes)
 
-##### `static addSeconds(Integer seconds)`
+##### `public static Function addSeconds(Integer seconds)`
 
 Returns a `Function` that adds `seconds` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`seconds`|the number of additional seconds|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `seconds` is null|
 
 
-**See** Time.addMinutes
+**See** [Time.addMinutes](Time.addMinutes)
 
 ---

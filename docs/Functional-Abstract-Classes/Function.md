@@ -1,16 +1,19 @@
-# Function
+# abstract Function
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides default and static methods of [IFunction](/docs/Functional-Interfaces/IFunction.md) functional interface.
+Provides default and static methods of
+[IFunction](/docs/Functional-Interfaces/IFunction.md) functional interface.
+
+
+**Implemented types**
+
+[IFunction](/docs/Functional-Interfaces/IFunction.md)
 
 
 **See** [IFunction](/docs/Functional-Interfaces/IFunction.md)
-
-
-**See** IObjectIterable.mapTo
 
 
 **Author** Oleh Berehovskyi
@@ -20,166 +23,145 @@ Provides default and static methods of [IFunction](/docs/Functional-Interfaces/I
 
 ## Methods
 ### Function
-##### `apply(Object o)`
-###### Parameters
-|Param|Description|
-|---|---|
-
+##### `public Object apply(Object o)`
 ---
 ### Default Methods
-##### `andThen(IFunction after)`
+##### `public virtual Function andThen(IFunction after)`
 
 Returns a composed `Function` that executes `this` operation first, then the `after` operation in that order.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`after`|the operation to perform after this operation|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the composed `Function`
+|Type|Description|
+|---|---|
+|`Function`|the composed `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `after` is null|
 
-##### `compose(IFunction before)`
+##### `public virtual Function compose(IFunction before)`
 
 Returns a composed `Function` that executes `before` operation first, then the `this` operation in that order.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`before`|the operation to perform before this operation|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the composed `Function`
+|Type|Description|
+|---|---|
+|`Function`|the composed `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `before` is null|
 
 ---
 ### Static Methods
-##### `static compose(List<IFunction> functions)`
+##### `public static Function compose(List<IFunction> functions)`
 
 Returns a composed `Function` that sequentially executes the operations in the same order as the order of the consumers input list.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`functions`|the functions to sequentially perform|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the composed `Function`
+|Type|Description|
+|---|---|
+|`Function`|the composed `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `operators` is null or some element is null|
 
-##### `static identity()`
+##### `public static Function identity()`
 
 Returns a `Function` that always returns the input argument.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
-Function
-
-**Description**
-
-the `Function`
-
-##### `static constant(Object value)`
+##### `public static Function constant(Object value)`
 
 Returns a `Function` that always returns the `value`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`value`|the value|
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
-Function
-
-**Description**
-
-the `Function`
-
-##### `static compose(IPredicate predicate)`
+##### `public static Function compose(IPredicate predicate)`
 
 Returns a composed `Function` of the `predicate`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicate`|the predicate|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
 
-##### `static compose(ISObjectFunction function)`
+##### `public static Function compose(ISupplier supplier)`
 
-Returns a composed `Function` of the `ISObjectFunction`.
+Returns a composed `SObjectFunction` of the `supplier`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
-|`function`|the function|
+|`supplier`|the supplier|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `SObjectFunction`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `function` is null|
+|`NullPointerException`|if `supplier` is null|
 
 ---

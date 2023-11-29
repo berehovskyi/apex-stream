@@ -766,7 +766,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @example
      * DoubleSequence.of(new List<Double>{ 0.1, 0.2, 0.3 })
      *     .isEmpty(); // false
-     * DoubleSequence.of(new List<Double>()))
+     * DoubleSequence.of(new List<Double>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {

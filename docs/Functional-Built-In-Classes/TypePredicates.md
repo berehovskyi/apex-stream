@@ -1,10 +1,11 @@
-# TypePredicates
+# virtual TypePredicates
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of [Predicate](/docs/Functional-Abstract-Classes/Predicate.md) and related utilities that are used for type checking.
+Provides common implementations of [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
+and related utilities that are used for type checking.
 
 
 **See** [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
@@ -17,172 +18,124 @@ Provides common implementations of [Predicate](/docs/Functional-Abstract-Classes
 
 ## Methods
 ### Built-Ins
-##### `static isInstanceOfBool()`
+##### `public static Predicate isInstanceOfBool()`
 
 Returns a `Predicate` that tests the input object if it is of Boolean type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfId()`
+##### `public static Predicate isInstanceOfId()`
 
 Returns a `Predicate` that tests the input object if it is of Id type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfString()`
+##### `public static Predicate isInstanceOfString()`
 
 Returns a `Predicate` that tests the input object if it is of String type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfBlob()`
+##### `public static Predicate isInstanceOfBlob()`
 
 Returns a `Predicate` that tests the input object if it is of Blob type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfDate()`
+##### `public static Predicate isInstanceOfDate()`
 
 Returns a `Predicate` that tests the input object if it is of Date type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfDatetime()`
+##### `public static Predicate isInstanceOfDatetime()`
 
 Returns a `Predicate` that tests the input object if it is of Datetime type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfTime()`
+##### `public static Predicate isInstanceOfTime()`
 
 Returns a `Predicate` that tests the input object if it is of Time type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfInt()`
+##### `public static Predicate isInstanceOfInt()`
 
 Returns a `Predicate` that tests the input object if it is of Integer type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfLong()`
+##### `public static Predicate isInstanceOfLong()`
 
 Returns a `Predicate` that tests the input object if it is of Long type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfDouble()`
+##### `public static Predicate isInstanceOfDouble()`
 
 Returns a `Predicate` that tests the input object if it is of Double type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfSObject()`
+##### `public static Predicate isInstanceOfSObject()`
 
 Returns a `Predicate` that tests the input object if it is of SObject type.
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
-Predicate
-
-**Description**
-
-the `Predicate`
-
-##### `static isInstanceOfComparable()`
+##### `public static Predicate isInstanceOfComparable()`
 
 Returns a `Predicate` that tests the input object if it is of Comparable type.
 
-###### Return
+###### Returns
 
-**Type**
-
-Predicate
-
-**Description**
-
-the `Predicate`
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
 
 ---

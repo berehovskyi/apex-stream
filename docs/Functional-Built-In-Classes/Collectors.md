@@ -1,10 +1,20 @@
-# Collectors
+# virtual Collectors
 
-`APIVERSION: 57`
+`SUPPRESSWARNINGS`
+
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of [Collector](/docs/Functional-Abstract-Classes/Collector.md) and related utilities.
+Provides common implementations of [Collector](/docs/Functional-Abstract-Classes/Collector.md)
+and related utilities.
+
+
+**Inheritance**
+
+[BaseCollectors](/docs/Functional-Built-In-Classes/BaseCollectors.md)
+ > 
+Collectors
 
 
 **See** [Collector](/docs/Functional-Abstract-Classes/Collector.md)
@@ -16,327 +26,507 @@ Provides common implementations of [Collector](/docs/Functional-Abstract-Classes
 **Group** Functional Built-In Classes
 
 ## Methods
-### List<?> Collectors
-##### `static toList()`
-
-Returns a `Collector` that accumulates SObject input arguments into a new `List<Object>`. <p>The result container can be cast to a specific `Type`.</p> <p>IObjectIterable.collect(Collectors.toList()) can be replaced with IObjectIterable.toList()</p>
-
-###### Return
-
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
-
-###### Example
-```apex
-// Accumulates Objects into a List
-List<Object> strs = (List<Object>) Stream.of(strings)
-    .collect(Collectors.toList());
-List<String> strs = (List<String>) Stream.of(strings)
-    .collect(Collectors.toList().cast(List<String>.class));
-```
-
-##### `static toList(IFunction mapper)`
-
-Returns a `Collector` that accumulates the values returned by `mapper` into a new `List<Object>`. <p>The result container can be cast to a specific type using Collector.cast.</p>
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the function that returns values to accumulate|
-
-###### Return
-
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `mapper` is null|
-
-###### Example
-```apex
-// Accumulates values returned by mapper into a List
-List<Object> names = (List<Object>) Stream.of(people)
-    .collect(Collectors.toList(getNameFunction));
-List<String> names = (List<String>) Stream.of(people)
-    .collect(Collectors.toList(getNameFunction).cast(List<String>.class));
-```
-
----
 ### Set<?> Collectors
-##### `static toSet()`
-
-Returns a `Collector` that accumulates input arguments into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p> <p>IObjectIterable.collect(Collectors.toSet()) can be replaced with IObjectIterable.toSet()</p>
-
-###### Return
-
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
-
-###### Example
-```apex
-// Accumulates input arguments into a List
-Set<Object> ppl = (Set<Object>) Stream.of(people).collect(Collectors.toSet());
-```
-
-##### `static toBoolSet()`
+##### `public static Collector toBoolSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Boolean>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
-Collector
+###### Example
+```apex
+// Accumulates input arguments into a Set
+Set<Boolean> bools = (Set<Boolean>) [ObjectEnumerable].of(booleans).collect(Collectors.toBoolSet());
+```
 
-**Description**
 
-the `Collector`
+##### `public static Collector toBoolSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Boolean>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Boolean> bools = (Set<Boolean>) Stream.of(booleans).collect(Collectors.toBoolSet());
+Set<Boolean> bools = (Set<Boolean>) [ObjectEnumerable].of(booleans).collect(Collectors.toBoolSet(mapper));
 ```
 
-##### `static toIdSet()`
+
+##### `public static Collector toIdSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Id>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
-// Accumulates input arguments into a List
-Set<Boolean> ids = (Set<Boolean>) Stream.of(ids).collect(Collectors.toIdSet());
+// Accumulates input arguments into a Set
+Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet());
 ```
 
-##### `static toStringSet()`
+
+##### `public static Collector toIdSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Id>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a Set
+Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet(mapper));
+```
+
+
+##### `public static Collector toStringSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<String>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<String> strs = (Set<String>) Stream.of(strings).collect(Collectors.toStringSet());
+Set<String> strs = (Set<String>) [ObjectEnumerable].of(strings).collect(Collectors.toStringSet());
 ```
 
-##### `static toBlobSet()`
+
+##### `public static Collector toStringSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<String>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<String> strs = (Set<String>) [ObjectEnumerable].of(strings).collect(Collectors.toStringSet(mapper));
+```
+
+
+##### `public static Collector toBlobSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Blob>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Blob> blbs = (Set<Blob>) Stream.of(blobs).collect(Collectors.toBlobSet());
+Set<Blob> blbs = (Set<Blob>) [ObjectEnumerable].of(blobs).collect(Collectors.toBlobSet());
 ```
 
-##### `static toDateSet()`
+
+##### `public static Collector toBlobSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Blob>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<Blob> blbs = (Set<Blob>) [ObjectEnumerable].of(blobs).collect(Collectors.toBlobSet(mapper));
+```
+
+
+##### `public static Collector toDateSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Date>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Date> dts = (Set<Date>) Stream.of(dates).collect(Collectors.toDateSet());
+Set<Date> dts = (Set<Date>) [ObjectEnumerable].of(dates).collect(Collectors.toDateSet());
 ```
 
-##### `static toDatetimeSet()`
+
+##### `public static Collector toDateSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Date>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<Date> dts = (Set<Date>) [ObjectEnumerable].of(dates).collect(Collectors.toDateSet(mapper));
+```
+
+
+##### `public static Collector toDatetimeSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Datetime>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Datetime> dts = (Set<Datetime>) Stream.of(datetimes).collect(Collectors.toDatetimeSet());
+Set<Datetime> dts = (Set<Datetime>) [ObjectEnumerable].of(datetimes).collect(Collectors.toDatetimeSet());
 ```
 
-##### `static toTimeSet()`
+
+##### `public static Collector toDatetimeSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Datetime>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<Datetime> dts = (Set<Datetime>) [ObjectEnumerable].of(datetimes).collect(Collectors.toDatetimeSet(mapper));
+```
+
+
+##### `public static Collector toTimeSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Time>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Time> tms = (Set<Time>) Stream.of(times).collect(Collectors.toTimeSet());
+Set<Time> tms = (Set<Time>) [ObjectEnumerable].of(times).collect(Collectors.toTimeSet());
 ```
 
-##### `static toIntSet()`
+
+##### `public static Collector toTimeSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Time>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<Time> tms = (Set<Time>) [ObjectEnumerable].of(times).collect(Collectors.toTimeSet(mapper));
+```
+
+
+##### `public static Collector toIntSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Integer>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Integer> ints = (Set<Integer>) Stream.of(integers).collect(Collectors.toIntSet());
+Set<Integer> ints = (Set<Integer>) [ObjectEnumerable].of(integers).collect(Collectors.toIntSet());
 ```
 
-##### `static toLongSet()`
+
+##### `public static Collector toIntSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Integer>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<Integer> ints = (Set<Integer>) [ObjectEnumerable].of(integers).collect(Collectors.toIntSet(mapper));
+```
+
+
+##### `public static Collector toLongSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Long>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Long> ls = (Set<Long>) Stream.of(longs).collect(Collectors.toLongSet());
+Set<Long> ls = (Set<Long>) [ObjectEnumerable].of(longs).collect(Collectors.toLongSet());
 ```
 
-##### `static toDoubleSet()`
+
+##### `public static Collector toLongSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Long>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<Long> ls = (Set<Long>) [ObjectEnumerable].of(longs).collect(Collectors.toLongSet(mapper));
+```
+
+
+##### `public static Collector toDoubleSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<Double>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<Double> ds = (Set<Double>) Stream.of(doubles).collect(Collectors.toDoubleSet());
+Set<Double> ds = (Set<Double>) [ObjectEnumerable].of(doubles).collect(Collectors.toDoubleSet());
 ```
 
-##### `static toSObjectSet()`
+
+##### `public static Collector toDoubleSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Double>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<Double> ds = (Set<Double>) [ObjectEnumerable].of(doubles).collect(Collectors.toDoubleSet(mapper));
+```
+
+
+##### `public static Collector toSObjectSet()`
 
 Returns a `Collector` that accumulates input arguments into a new `Set<SObject>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
 // Accumulates input arguments into a List
-Set<SObject> sObjects = (Set<SObject>) Stream.of(accounts).collect(Collectors.toSObjectSet());
+Set<SObject> sObjects = (Set<SObject>) [ObjectEnumerable].of(accounts).collect(Collectors.toSObjectSet());
 ```
+
+
+##### `public static Collector toSObjectSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<SObject>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a List
+Set<SObject> sObjects = (Set<SObject>) [ObjectEnumerable].of(accounts).collect(Collectors.toSObjectSet(mapper));
+```
+
+
+##### `public static Collector toObjectSet()`
+
+Returns a `Collector` that accumulates input arguments into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p> <p>[ObjectEnumerable.collect(Collectors.toObjectSet())](ObjectEnumerable.collect(Collectors.toObjectSet())) can be replaced with [ObjectEnumerable.toSet()](ObjectEnumerable.toSet())</p>
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a Set
+Set<Object> ppl = (Set<Object>) [ObjectEnumerable].of(people).collect(Collectors.toObjectSet());
+```
+
+
+##### `public static Collector toObjectSet(IFunction mapper)`
+
+Returns a `Collector` that accumulates elements returned by `mapper` function into a new `Set<Object>`. <p>The result container <strong>cannot</strong> be cast to a specific `Type`.</p> <p>[ObjectEnumerable.collect(Collectors.toObjectSet())](ObjectEnumerable.collect(Collectors.toObjectSet())) can be replaced with [ObjectEnumerable.toSet()](ObjectEnumerable.toSet())</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates input arguments into a Set
+Set<Object> ppl = (Set<Object>) [ObjectEnumerable].of(people).collect(Collectors.toObjectSet(mapper));
+```
+
 
 ---
 ### Map<Boolean, Object> Collectors
-##### `static toByBoolMap(IFunction keyMapper)`
+##### `public static Collector toByBoolMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByBoolMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByBoolMap(IFunction, IFunction, IBiOperator)](Collectors.toByBoolMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -345,33 +535,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping function
-Map<Boolean, Object> personByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+Map<Boolean, Object> personByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getBoolProperty));
-Map<Boolean, Comparable> personByBoolProperty = (Map<Boolean, Comparable>) Stream.of(people)
+Map<Boolean, Comparable> personByBoolProperty = (Map<Boolean, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getBoolProperty).cast(Map<Boolean, Comparable>.class));
 ```
 
-##### `static toByBoolMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByBoolMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByBoolMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByBoolMap(IFunction, IFunction, IBiOperator)](Collectors.toByBoolMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -380,34 +569,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getBoolProperty, getStringProperty));
-Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
+Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getBoolProperty, getStringProperty).cast(Map<Boolean, String>.class));
 ```
 
-##### `static toByBoolMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByBoolMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -415,25 +603,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+Map<Boolean, Object> stringPropertyByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(
         getBoolProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
+Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(
         getBoolProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Boolean, String>.class));
 ```
 
-##### `static toByBoolMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByBoolMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -441,17 +631,14 @@ Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` wh
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Boolean, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -459,37 +646,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) Stream.of(people)
+Map<Boolean, String> stringPropertyByBoolProperty = (Map<Boolean, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(
         getBoolProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Boolean, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Id, Object> Collectors
-##### `static toByIdMap(IFunction keyMapper)`
+##### `public static Collector toByIdMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByIdMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByIdMap(IFunction, IFunction, IBiOperator)](Collectors.toByIdMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -498,33 +684,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Id, Object> personByIdProperty = (Map<Id, Object>) Stream.of(people)
+Map<Id, Object> personByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIdMap(getIdProperty));
-Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) Stream.of(people)
+Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getIdProperty).cast(Map<Id, Comparable>.class));
 ```
 
-##### `static toByIdMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByIdMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByIdMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByIdMap(IFunction, IFunction, IBiOperator)](Collectors.toByIdMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -533,34 +718,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) Stream.of(people)
+Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIdMap(getIdProperty, getStringProperty));
-Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
+Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIdMap(getIdProperty, getStringProperty).cast(Map<Id, String>.class));
 ```
 
-##### `static toByIdMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByIdMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -568,25 +752,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) Stream.of(people)
+Map<Id, Object> stringPropertyByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIdMap(
         getIdProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
+Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIdMap(
         getIdProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Id, String>.class));
 ```
 
-##### `static toByIdMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByIdMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -594,17 +780,14 @@ Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose k
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Id, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -612,37 +795,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) Stream.of(people)
+Map<Id, String> stringPropertyByIdProperty = (Map<Id, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIdMap(
         getIdProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Id, String>.class)
     ));
 ```
 
+
 ---
 ### Map<String, Object> Collectors
-##### `static toByStringMap(IFunction keyMapper)`
+##### `public static Collector toByStringMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByStringMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByStringMap(IFunction, IFunction, IBiOperator)](Collectors.toByStringMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -651,33 +833,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<String, Object> personByStringProperty = (Map<String, Object>) Stream.of(people)
+Map<String, Object> personByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByStringMap(getStringProperty));
-Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) Stream.of(people)
+Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getStringProperty).cast(Map<String, Comparable>.class));
 ```
 
-##### `static toByStringMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByStringMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByStringMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByStringMap(IFunction, IFunction, IBiOperator)](Collectors.toByStringMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -685,34 +866,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) Stream.of(people)
+Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByStringMap(getStringProperty, getStringProperty));
-Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
+Map<String, String> stringPropertyByStringProperty = (Map<String, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByStringMap(getStringProperty, getStringProperty).cast(Map<String, String>.class));
 ```
 
-##### `static toByStringMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByStringMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -720,25 +900,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) Stream.of(people)
+Map<String, Object> stringPropertyByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByStringMap(
         getStringProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
+Map<String, String> stringPropertyByStringProperty = (Map<String, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByStringMap(
         getStringProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<String, String>.class));
 ```
 
-##### `static toByStringMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByStringMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<String, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -746,17 +928,14 @@ Returns a `Collector` that accumulates elements into a `Map<String, Object>` who
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<String, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -764,37 +943,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<String, String> stringPropertyByStringProperty = (Map<String, String>) Stream.of(people)
+Map<String, String> stringPropertyByStringProperty = (Map<String, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByStringMap(
         getStringProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<String, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Blob, Object> Collectors
-##### `static toByBlobMap(IFunction keyMapper)`
+##### `public static Collector toByBlobMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByBlobMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByBlobMap(IFunction, IFunction, IBiOperator)](Collectors.toByBlobMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -803,33 +981,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Blob, Object> personByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+Map<Blob, Object> personByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBlobMap(getBlobProperty));
-Map<Blob, Comparable> personByBlobProperty = (Map<Blob, Comparable>) Stream.of(people)
+Map<Blob, Comparable> personByBlobProperty = (Map<Blob, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getBlobProperty).cast(Map<Blob, Comparable>.class));
 ```
 
-##### `static toByBlobMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByBlobMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByBlobMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByBlobMap(IFunction, IFunction, IBiOperator)](Collectors.toByBlobMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -838,34 +1015,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBlobMap(getBlobProperty, getStringProperty));
-Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
+Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBlobMap(getBlobProperty, getStringProperty).cast(Map<Blob, String>.class));
 ```
 
-##### `static toByBlobMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByBlobMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -873,25 +1049,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+Map<Blob, Object> stringPropertyByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBlobMap(
         getBlobProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
+Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBlobMap(
         getBlobProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Blob, String>.class));
 ```
 
-##### `static toByBlobMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByBlobMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -899,17 +1077,14 @@ Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Blob, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -917,37 +1092,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) Stream.of(people)
+Map<Blob, String> stringPropertyByBlobProperty = (Map<Blob, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBlobMap(
         getBlobProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Blob, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Date, Object> Collectors
-##### `static toByDateMap(IFunction keyMapper)`
+##### `public static Collector toByDateMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByDateMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByDateMap(IFunction, IFunction, IBiOperator)](Collectors.toByDateMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -956,33 +1130,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Date, Object> personByDateProperty = (Map<Date, Object>) Stream.of(people)
+Map<Date, Object> personByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDateMap(getDateProperty));
-Map<Date, Comparable> personByDateProperty = (Map<Date, Comparable>) Stream.of(people)
+Map<Date, Comparable> personByDateProperty = (Map<Date, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getDateProperty).cast(Map<Date, Comparable>.class));
 ```
 
-##### `static toByDateMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByDateMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDateMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByDateMap(IFunction, IFunction, IBiOperator)](Collectors.toByDateMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -991,34 +1164,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) Stream.of(people)
+Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDateMap(getDateProperty, getStringProperty));
-Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
+Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDateMap(getDateProperty, getStringProperty).cast(Map<Date, String>.class));
 ```
 
-##### `static toByDateMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDateMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -1026,25 +1198,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) Stream.of(people)
+Map<Date, Object> stringPropertyByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDateMap(
         getDateProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
+Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDateMap(
         getDateProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Date, String>.class));
 ```
 
-##### `static toByDateMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDateMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -1052,17 +1226,14 @@ Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Date, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -1070,37 +1241,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) Stream.of(people)
+Map<Date, String> stringPropertyByDateProperty = (Map<Date, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDateMap(
         getDateProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Date, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Datetime, Object> Collectors
-##### `static toByDatetimeMap(IFunction keyMapper)`
+##### `public static Collector toByDatetimeMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByDatetimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)](Collectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1109,33 +1279,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Datetime, Object> personByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+Map<Datetime, Object> personByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDatetimeMap(getDatetimeProperty));
-Map<Datetime, Comparable> personByDatetimeProperty = (Map<Datetime, Comparable>) Stream.of(people)
+Map<Datetime, Comparable> personByDatetimeProperty = (Map<Datetime, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getDatetimeProperty).cast(Map<Datetime, Comparable>.class));
 ```
 
-##### `static toByDatetimeMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByDatetimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDatetimeMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)](Collectors.toByDatetimeMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1144,36 +1313,35 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDatetimeMap(getDatetimeProperty, getStringProperty));
-Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
+Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDatetimeMap(getDatetimeProperty, getStringProperty)
         .cast(Map<Datetime, String>.class)
     );
 ```
 
-##### `static toByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -1181,25 +1349,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+Map<Datetime, Object> stringPropertyByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDatetimeMap(
         getDatetimeProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
+Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDatetimeMap(
         getDatetimeProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Datetime, String>.class));
 ```
 
-##### `static toByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDatetimeMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -1207,17 +1377,14 @@ Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` w
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Datetime, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -1225,37 +1392,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) Stream.of(people)
+Map<Datetime, String> stringPropertyByDatetimeProperty = (Map<Datetime, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDatetimeMap(
         getDatetimeProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Datetime, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Time, Object> Collectors
-##### `static toByTimeMap(IFunction keyMapper)`
+##### `public static Collector toByTimeMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByTimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByTimeMap(IFunction, IFunction, IBiOperator)](Collectors.toByTimeMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1264,33 +1430,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Time, Object> personByTimeProperty = (Map<Time, Object>) Stream.of(people)
+Map<Time, Object> personByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(getTimeProperty));
-Map<Time, Comparable> personByTimeProperty = (Map<Time, Comparable>) Stream.of(people)
+Map<Time, Comparable> personByTimeProperty = (Map<Time, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getTimeProperty).cast(Map<Time, Comparable>.class));
 ```
 
-##### `static toByTimeMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByTimeMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByTimeMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByTimeMap(IFunction, IFunction, IBiOperator)](Collectors.toByTimeMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1299,34 +1464,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) Stream.of(people)
+Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(getTimeProperty, getStringProperty));
-Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
+Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(getTimeProperty, getStringProperty).cast(Map<Time, String>.class));
 ```
 
-##### `static toByTimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByTimeMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -1334,25 +1498,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) Stream.of(people)
+Map<Time, Object> stringPropertyByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(
         getTimeProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
+Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(
         getTimeProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Time, String>.class));
 ```
 
-##### `static toByTimeMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByTimeMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -1360,17 +1526,14 @@ Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Time, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -1378,37 +1541,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) Stream.of(people)
+Map<Time, String> stringPropertyByTimeProperty = (Map<Time, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(
         getTimeProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Time, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Integer, Object> Collectors
-##### `static toByIntMap(IToIntFunction keyMapper)`
+##### `public static Collector toByIntMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByIntMap(IToIntFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByIntMap(IFunction, IFunction, IBiOperator)](Collectors.toByIntMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1417,33 +1579,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Integer, Object> personByIntProperty = (Map<Integer, Object>) Stream.of(people)
+Map<Integer, Object> personByIntProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIntMap(getIntProperty));
-Map<Integer, Comparable> personByIntProperty = (Map<Integer, Comparable>) Stream.of(people)
+Map<Integer, Comparable> personByIntProperty = (Map<Integer, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIntMap(getIntProperty).cast(Map<Integer, Comparable>.class));
 ```
 
-##### `static toByIntMap(IToIntFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByIntMap(IToIntFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByIntMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByIntMap(IFunction, IFunction, IBiOperator)](Collectors.toByIntMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1452,34 +1613,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Integer, Object> stringPropertyByIntProperty = (Map<Integer, Object>) Stream.of(people)
+Map<Integer, Object> stringPropertyByIntProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIntMap(getIntProperty, getStringProperty));
-Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream.of(people)
+Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIntMap(getIntProperty, getStringProperty).cast(Map<Integer, String>.class));
 ```
 
-##### `static toByIntMap(IToIntFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByIntMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -1487,25 +1647,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Integer, Object> stringPropertyByTimeProperty = (Map<Integer, Object>) Stream.of(people)
+Map<Integer, Object> stringPropertyByTimeProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIntMap(
         getIntProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Integer, String> stringPropertyByTimeProperty = (Map<Integer, String>) Stream.of(people)
+Map<Integer, String> stringPropertyByTimeProperty = (Map<Integer, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIntMap(
         getIntProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Integer, String>.class));
 ```
 
-##### `static toByIntMap(IToIntFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByIntMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -1513,17 +1675,14 @@ Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` wh
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Integer, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -1531,37 +1690,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) Stream.of(people)
+Map<Integer, String> stringPropertyByIntProperty = (Map<Integer, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIntMap(
         getIntProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Integer, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Long, Object> Collectors
-##### `static toByLongMap(IToLongFunction keyMapper)`
+##### `public static Collector toByLongMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByLongMap(IToLongFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByLongMap(IFunction, IFunction, IBiOperator)](Collectors.toByLongMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1570,33 +1728,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Long, Object> personByLongProperty = (Map<Long, Object>) Stream.of(people)
+Map<Long, Object> personByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByLongMap(getLongProperty));
-Map<Long, Comparable> personByLongProperty = (Map<Long, Comparable>) Stream.of(people)
+Map<Long, Comparable> personByLongProperty = (Map<Long, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getLongProperty).cast(Map<Long, Comparable>.class));
 ```
 
-##### `static toByLongMap(IToLongFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByLongMap(IToLongFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByLongMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByLongMap(IFunction, IFunction, IBiOperator)](Collectors.toByLongMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1605,34 +1762,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) Stream.of(people)
+Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByLongMap(getLongProperty, getStringProperty));
-Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
+Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByLongMap(getLongProperty, getStringProperty).cast(Map<Long, String>.class));
 ```
 
-##### `static toByLongMap(IToLongFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByLongMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -1640,25 +1796,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) Stream.of(people)
+Map<Long, Object> stringPropertyByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByLongMap(
         getLongProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
+Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByLongMap(
         getLongProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Long, String>.class));
 ```
 
-##### `static toByLongMap(IToLongFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByLongMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -1666,17 +1824,14 @@ Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Long, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -1684,37 +1839,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) Stream.of(people)
+Map<Long, String> stringPropertyByLongProperty = (Map<Long, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByLongMap(
         getLongProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Long, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Double, Object> Collectors
-##### `static toByDoubleMap(IToDoubleFunction keyMapper)`
+##### `public static Collector toByDoubleMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByDoubleMap(IFunction, IFunction, IBiOperator)](Collectors.toByDoubleMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1723,33 +1877,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Double, Object> personByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+Map<Double, Object> personByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDoubleMap(getDoubleProperty));
-Map<Double, Comparable> personByDoubleProperty = (Map<Double, Comparable>) Stream.of(people)
+Map<Double, Comparable> personByDoubleProperty = (Map<Double, Comparable>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByBoolMap(getDoubleProperty).cast(Map<Double, Comparable>.class));
 ```
 
-##### `static toByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toByDoubleMap(IToDoubleFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDoubleMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByDoubleMap(IFunction, IFunction, IBiOperator)](Collectors.toByDoubleMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1758,34 +1911,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDoubleMap(getDoubleProperty, getStringProperty));
-Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
+Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDoubleMap(getDoubleProperty, getStringProperty).cast(Map<Double, String>.class));
 ```
 
-##### `static toByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDoubleMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -1793,25 +1945,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+Map<Double, Object> stringPropertyByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDoubleMap(
         getDoubleProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
+Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDoubleMap(
         getDoubleProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Double, String>.class));
 ```
 
-##### `static toByDoubleMap(IToDoubleFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByDoubleMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Double, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -1819,17 +1973,14 @@ Returns a `Collector` that accumulates elements into a `Map<Double, Object>` who
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Double, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -1837,37 +1988,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) Stream.of(people)
+Map<Double, String> stringPropertyByDoubleProperty = (Map<Double, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByDoubleMap(
         getDoubleProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Double, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Object, Object> Collectors
-##### `static toMap(IFunction keyMapper)`
+##### `public static Collector toByObjectMap(IFunction keyMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use Collectors.toMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container values type can be cast to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collectors.toByIdMap, Collectors.toByStringMap, etc.</p>
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys are values returned by `keyMapper` and values are values of the input arguments. If the mapped keys might have duplicates, use [Collectors.toByObjectMap(IFunction, IFunction, IBiOperator)](Collectors.toByObjectMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as [Collectors.toByIdMap](Collectors.toByIdMap), [Collectors.toByStringMap](Collectors.toByStringMap), etc.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1876,33 +2026,32 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by field
-Map<Object, Object> personByTimeProperty = (Map<Object, Object>) Stream.of(people)
-    .collect(Collectors.toMap(getTimeProperty));
-Map<Object, Comparable> personByTimeProperty = (Map<Object, Comparable>) Stream.of(people)
-    .collect(Collectors.toMap(getTimeProperty).cast(Map<Object, Comparable>.class));
+Map<Object, Object> personByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
+    .collect(Collectors.toByObjectMap(getTimeProperty));
+Map<Object, Comparable> personByTimeProperty = (Map<Object, Comparable>) [ObjectEnumerable].of(people)
+    .collect(Collectors.toByObjectMap(getTimeProperty).cast(Map<Object, Comparable>.class));
 ```
 
-##### `static toMap(IFunction keyMapper, IFunction valueMapper)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use Collectors.toMap(IFunction, IFunction, IBinaryOperator) instead. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collectors.toByIdMap, Collectors.toByStringMap, etc.</p>
+##### `public static Collector toByObjectMap(IFunction keyMapper, IFunction valueMapper)`
+
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. If the mapped keys might have duplicates, use [Collectors.toByObjectMap(IFunction, IFunction, IBiOperator)](Collectors.toByObjectMap(IFunction, IFunction, IBiOperator)) instead. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as [Collectors.toByIdMap](Collectors.toByIdMap), [Collectors.toByStringMap](Collectors.toByStringMap), etc.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`IllegalStateException`|if mapped keys contain duplicates|
@@ -1911,34 +2060,33 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) Stream.of(people)
-    .collect(Collectors.toMap(getTimeProperty, getStringProperty));
-Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
-    .collect(Collectors.toMap(getTimeProperty, getStringProperty).cast(Map<Object, String>.class));
+Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
+    .collect(Collectors.toByObjectMap(getTimeProperty, getStringProperty));
+Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) [ObjectEnumerable].of(people)
+    .collect(Collectors.toByObjectMap(getTimeProperty, getStringProperty).cast(Map<Object, String>.class));
 ```
 
-##### `static toMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as Collectors.toByIdMap, Collectors.toByStringMap, etc.</p>
+##### `public static Collector toByObjectMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger)`
+
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Map()` collectors such as [Collectors.toByIdMap](Collectors.toByIdMap), [Collectors.toByStringMap](Collectors.toByStringMap), etc.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
 |`valueMapper`|the function that returns values|
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
@@ -1946,25 +2094,27 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) Stream.of(people)
+Map<Object, Object> stringPropertyByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(
         getTimeProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ));
-Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
+Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByTimeMap(
         getTimeProperty,
         getStringProperty,
-        BinaryOperator.right()
+        BiOperator.right()
     ).cast(Map<Object, String>.class));
 ```
 
-##### `static toMap(IFunction keyMapper, IFunction valueMapper, IBinaryOperator merger, ISupplier mapSupplier)`
 
-Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector toByObjectMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger, ISupplier mapSupplier)`
+
+Returns a `Collector` that accumulates elements into a `Map<Object, Object>` whose keys and values are the result of applying `keyMapper` and `valueMapper` mapping functions to the input arguments. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`keyMapper`|the field value to accumulate as key|
@@ -1972,17 +2122,14 @@ Returns a `Collector` that accumulates elements into a `Map<Object, Object>` who
 |`merger`|the merge function to resolve collisions between values associated with the same key|
 |`mapSupplier`|the function that returns a `Map<Object, ?>` into which the results are inserted|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `keyMapper`, `valueMapper` or `mapSupplier` is null|
@@ -1990,37 +2137,36 @@ the `Collector`
 ###### Example
 ```apex
 // Maps values by keys provided by mapping functions
-Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) Stream.of(people)
-    .collect(Collectors.toMap(
+Map<Object, String> stringPropertyByTimeProperty = (Map<Object, String>) [ObjectEnumerable].of(people)
+    .collect(Collectors.toByObjectMap(
         getTimeProperty,
         getStringProperty,
-        BinaryOperator.right(),
+        BiOperator.right(),
         Supplier.of(Map<Object, String>.class)
     ));
 ```
 
+
 ---
 ### Map<Boolean, ?> Collectors
-##### `static groupingByBool(IFunction classifier)`
+##### `public static Collector groupingByBool(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Boolean, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2028,33 +2174,33 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Boolean, List<Object>> personsByBoolProperty = (Map<Boolean, List<Object>>) Stream.of(people)
+Map<Boolean, List<Object>> personsByBoolProperty = (Map<Boolean, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBool(getBoolProperty));
-Map<Boolean, List<Comparable>> personsByBoolProperty = (Map<Boolean, List<Comparable>>) Stream.of(people)
+Map<Boolean, List<Comparable>> personsByBoolProperty = (Map<Boolean, List<Comparable>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBool(getBoolProperty).cast(Map<Boolean, List<Comparable>>.class));
 ```
 
-##### `static groupingByBool(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByBool(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2062,40 +2208,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Boolean, Object> personsByBoolProperty = (Map<Boolean, Object>) Stream.of(people)
+Map<Boolean, Object> personsByBoolProperty = (Map<Boolean, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBool(
         getBoolProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) Stream.of(people)
+Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBool(
         getBoolProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Boolean, Set<Object>>.class));
 ```
 
-##### `static groupingByBool(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByBool(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Boolean, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2103,36 +2248,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) Stream.of(people)
+Map<Boolean, Set<Object>> personsByBoolProperty = (Map<Boolean, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBool(
         getBoolProperty,
         Supplier.of(Map<Boolean, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Id, ?> Collectors
-##### `static groupingById(IFunction classifier)`
+##### `public static Collector groupingById(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Id, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2140,33 +2284,32 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Id, List<Object>> personsByIdProperty = (Map<Id, List<Object>>) Stream.of(people)
+Map<Id, List<Object>> personsByIdProperty = (Map<Id, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingById(getIdProperty));
-Map<Id, List<Comparable>> personsByIdProperty = (Map<Id, List<Comparable>>) Stream.of(people)
+Map<Id, List<Comparable>> personsByIdProperty = (Map<Id, List<Comparable>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingById(getIdProperty).cast(Map<Id, List<Comparable>>.class));
 ```
 
-##### `static groupingById(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingById(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2174,40 +2317,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Id, Object> personsByIdProperty = (Map<Id, Object>) Stream.of(people)
+Map<Id, Object> personsByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingById(
         getIdProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) Stream.of(people)
+Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingById(
         getIdProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Id, Set<Object>>.class));
 ```
 
-##### `static groupingById(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingById(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Id, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2215,36 +2357,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) Stream.of(people)
+Map<Id, Set<Object>> personsByIdProperty = (Map<Id, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingById(
         getIdProperty,
         Supplier.of(Map<Id, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<String, ?> Collectors
-##### `static groupingByString(IFunction classifier)`
+##### `public static Collector groupingByString(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<String, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<String, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2252,33 +2393,33 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<String, List<Object>> personsByStringProperty = (Map<String, List<Object>>) Stream.of(people)
+Map<String, List<Object>> personsByStringProperty = (Map<String, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByString(getStringProperty));
-Map<String, List<Comparable>> personsByStringProperty = (Map<String, List<Comparable>>) Stream.of(people)
+Map<String, List<Comparable>> personsByStringProperty = (Map<String, List<Comparable>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByString(getStringProperty).cast(Map<String, List<Comparable>>.class));
 ```
 
-##### `static groupingByString(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByString(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2286,40 +2427,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<String, Object> personsByStringProperty = (Map<String, Object>) Stream.of(people)
+Map<String, Object> personsByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByString(
         getStringProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) Stream.of(people)
+Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByString(
         getStringProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<String, Set<Object>>.class));
 ```
 
-##### `static groupingByString(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByString(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<String, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2327,36 +2467,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) Stream.of(people)
+Map<String, Set<Object>> personsByStringProperty = (Map<String, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByString(
         getStringProperty,
         Supplier.of(Map<String, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Blob, ?> Collectors
-##### `static groupingByBlob(IFunction classifier)`
+##### `public static Collector groupingByBlob(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Blob, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2364,33 +2503,32 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Blob, List<Object>> personsByBlobProperty = (Map<Blob, List<Object>>) Stream.of(people)
+Map<Blob, List<Object>> personsByBlobProperty = (Map<Blob, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBlob(getBlobProperty));
-Map<Blob, List<Comparable>> personsByBlobProperty = (Map<Blob, List<Comparable>>) Stream.of(people)
+Map<Blob, List<Comparable>> personsByBlobProperty = (Map<Blob, List<Comparable>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBlob(getBlobProperty).cast(Map<Blob, List<Comparable>>.class));
 ```
 
-##### `static groupingByBlob(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByBlob(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2398,40 +2536,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Blob, Object> personsByBlobProperty = (Map<Blob, Object>) Stream.of(people)
+Map<Blob, Object> personsByBlobProperty = (Map<Blob, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBlob(
         getBlobProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) Stream.of(people)
+Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBlob(
         getBlobProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Blob, Set<Object>>.class));
 ```
 
-##### `static groupingByBlob(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByBlob(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Blob, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2439,36 +2576,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) Stream.of(people)
+Map<Blob, Set<Object>> personsByBlobProperty = (Map<Blob, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByBlob(
         getBlobProperty,
         Supplier.of(Map<Blob, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Date, ?> Collectors
-##### `static groupingByDate(IFunction classifier)`
+##### `public static Collector groupingByDate(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Date, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2476,33 +2612,32 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Date, List<Object>> personsByDateProperty = (Map<Date, List<Object>>) Stream.of(people)
+Map<Date, List<Object>> personsByDateProperty = (Map<Date, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDate(getDateProperty));
-Map<Date, List<Comparable>> personsByDateProperty = (Map<Date, List<Comparable>>) Stream.of(people)
+Map<Date, List<Comparable>> personsByDateProperty = (Map<Date, List<Comparable>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDate(getDateProperty).cast(Map<Date, List<Comparable>>.class));
 ```
 
-##### `static groupingByDate(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByDate(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2510,40 +2645,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Date, Object> personsByDateProperty = (Map<Date, Object>) Stream.of(people)
+Map<Date, Object> personsByDateProperty = (Map<Date, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDate(
         getDateProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) Stream.of(people)
+Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDate(
         getDateProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Date, Set<Object>>.class));
 ```
 
-##### `static groupingByDate(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByDate(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Date, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2551,36 +2685,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) Stream.of(people)
+Map<Date, Set<Object>> personsByDateProperty = (Map<Date, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDate(
         getDateProperty,
         Supplier.of(Map<Date, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Datetime, ?> Collectors
-##### `static groupingByDatetime(IFunction classifier)`
+##### `public static Collector groupingByDatetime(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Datetime, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2588,33 +2721,34 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Datetime, List<Object>> personsByDatetimeProperty = (Map<Datetime, List<Object>>) Stream.of(people)
+Map<Datetime, List<Object>> personsByDatetimeProperty = (Map<Datetime, List<Object>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDatetime(getDatetimeProperty));
-Map<Datetime, List<Comparable>> personsByDatetimeProperty = (Map<Datetime, List<Comparable>>) Stream.of(people)
+Map<Datetime, List<Comparable>> personsByDatetimeProperty = (Map<Datetime, List<Comparable>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDatetime(getDatetimeProperty).cast(Map<Datetime, List<Comparable>>.class));
 ```
 
-##### `static groupingByDatetime(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByDatetime(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2622,40 +2756,40 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Datetime, Object> personsByDatetimeProperty = (Map<Datetime, Object>) Stream.of(people)
+Map<Datetime, Object> personsByDatetimeProperty = (Map<Datetime, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDatetime(
         getDatetimeProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>) Stream.of(people)
+Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDatetime(
         getDatetimeProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Datetime, Set<Object>>.class));
 ```
 
-##### `static groupingByDatetime(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByDatetime(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Datetime, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2663,36 +2797,36 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>) Stream.of(people)
+Map<Datetime, Set<Object>> personsByDatetimeProperty = (Map<Datetime, Set<Object>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDatetime(
         getDatetimeProperty,
         Supplier.of(Map<Datetime, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Time, ?> Collectors
-##### `static groupingByTime(IFunction classifier)`
+##### `public static Collector groupingByTime(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Time, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2700,33 +2834,32 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Time, List<Object>> personsByTimeProperty = (Map<Time, List<Object>>) Stream.of(people)
+Map<Time, List<Object>> personsByTimeProperty = (Map<Time, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByTime(getTimeProperty));
-Map<Time, List<Comparable>> personsByTimeProperty = (Map<Time, List<Comparable>>) Stream.of(people)
+Map<Time, List<Comparable>> personsByTimeProperty = (Map<Time, List<Comparable>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByTime(getTimeProperty).cast(Map<Time, List<Comparable>>.class));
 ```
 
-##### `static groupingByTime(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByTime(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2734,40 +2867,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Time, Object> personsByTimeProperty = (Map<Time, Object>) Stream.of(people)
+Map<Time, Object> personsByTimeProperty = (Map<Time, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByTime(
         getTimeProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) Stream.of(people)
+Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByTime(
         getTimeProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Time, Set<Object>>.class));
 ```
 
-##### `static groupingByTime(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByTime(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Time, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2775,36 +2907,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) Stream.of(people)
+Map<Time, Set<Object>> personsByTimeProperty = (Map<Time, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByTime(
         getTimeProperty,
         Supplier.of(Map<Time, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Integer, ?> Collectors
-##### `static groupingByInt(IToIntFunction classifier)`
+##### `public static Collector groupingByInt(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Integer, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2812,33 +2943,33 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Integer, List<Object>> personsByIntProperty = (Map<Integer, List<Object>>) Stream.of(people)
+Map<Integer, List<Object>> personsByIntProperty = (Map<Integer, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByInt(getIntProperty));
-Map<Integer, List<Comparable>> personsByIntProperty = (Map<Integer, List<Comparable>>) Stream.of(people)
+Map<Integer, List<Comparable>> personsByIntProperty = (Map<Integer, List<Comparable>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByInt(getIntProperty).cast(Map<Integer, List<Comparable>>.class));
 ```
 
-##### `static groupingByInt(IToIntFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByInt(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2846,40 +2977,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Integer, Object> personsByIntProperty = (Map<Integer, Object>) Stream.of(people)
+Map<Integer, Object> personsByIntProperty = (Map<Integer, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByInt(
         getIntProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Integer, Set<Object>> personsByTimeProperty = (Map<Integer, Set<Object>>) Stream.of(people)
+Map<Integer, Set<Object>> personsByTimeProperty = (Map<Integer, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByInt(
         getIntProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Integer, Set<Object>>.class));
 ```
 
-##### `static groupingByInt(IToIntFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByInt(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Integer, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2887,36 +3017,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Integer, Set<Object>> personsByIntProperty = (Map<Integer, Set<Object>>) Stream.of(people)
+Map<Integer, Set<Object>> personsByIntProperty = (Map<Integer, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByInt(
         getIntProperty,
         Supplier.of(Map<Integer, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Long, ?> Collectors
-##### `static groupingByLong(IToLongFunction classifier)`
+##### `public static Collector groupingByLong(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Long, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -2924,33 +3053,32 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Long, List<Object>> personsByLongProperty = (Map<Long, List<Object>>) Stream.of(people)
+Map<Long, List<Object>> personsByLongProperty = (Map<Long, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByLong(getLongProperty));
-Map<Long, List<Comparable>> personsByLongProperty = (Map<Long, List<Comparable>>) Stream.of(people)
+Map<Long, List<Comparable>> personsByLongProperty = (Map<Long, List<Comparable>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByLong(getLongProperty).cast(Map<Long, List<Comparable>>.class));
 ```
 
-##### `static groupingByLong(IToLongFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByLong(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -2958,40 +3086,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Long, Object> personsByLongProperty = (Map<Long, Object>) Stream.of(people)
+Map<Long, Object> personsByLongProperty = (Map<Long, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByLong(
         getLongProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) Stream.of(people)
+Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByLong(
         getLongProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Long, Set<Object>>.class));
 ```
 
-##### `static groupingByLong(IToLongFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByLong(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Long, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -2999,36 +3126,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) Stream.of(people)
+Map<Long, Set<Object>> personsByLongProperty = (Map<Long, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByLong(
         getLongProperty,
         Supplier.of(Map<Long, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Grouping By Map<Double, ?> Collectors
-##### `static groupingByDouble(IToDoubleFunction classifier)`
+##### `public static Collector groupingByDouble(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Double, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -3036,33 +3162,33 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Double, List<Object>> personsByDoubleProperty = (Map<Double, List<Object>>) Stream.of(people)
+Map<Double, List<Object>> personsByDoubleProperty = (Map<Double, List<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDouble(getDoubleProperty));
-Map<Double, List<Comparable>> personsByDoubleProperty = (Map<Double, List<Comparable>>) Stream.of(people)
+Map<Double, List<Comparable>> personsByDoubleProperty = (Map<Double, List<Comparable>>)
+    [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDouble(getDoubleProperty).cast(Map<Double, List<Comparable>>.class));
 ```
 
-##### `static groupingByDouble(IToDoubleFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByDouble(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -3070,40 +3196,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Double, Object> personsByDoubleProperty = (Map<Double, Object>) Stream.of(people)
+Map<Double, Object> personsByDoubleProperty = (Map<Double, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDouble(
         getDoubleProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) Stream.of(people)
+Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDouble(
         getDoubleProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Double, Set<Object>>.class));
 ```
 
-##### `static groupingByDouble(IToDoubleFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByDouble(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Double, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -3111,34 +3236,33 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) Stream.of(people)
+Map<Double, Set<Object>> personsByDoubleProperty = (Map<Double, Set<Object>>) [ObjectEnumerable].of(people)
     .collect(Collectors.groupingByDouble(
         getDoubleProperty,
         Supplier.of(Map<Double, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
-##### `static groupingBy(IFunction classifier)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as Collectors.groupingById, Collectors.groupingByString, etc.</p>
+##### `public static Collector groupingByObject(IFunction classifier)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier`, and returns the results in a `Map<Object, List<Object>>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as [Collectors.groupingById](Collectors.groupingById), [Collectors.groupingByString](Collectors.groupingByString), etc.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` is null|
@@ -3146,33 +3270,33 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Object, List<Object>> personsByTimeProperty = (Map<Object, List<Object>>) Stream.of(people)
-    .collect(Collectors.groupingBy(getTimeProperty));
-Map<Object, List<Comparable>> personsByTimeProperty = (Map<Object, List<Comparable>>) Stream.of(people)
-    .collect(Collectors.groupingBy(getTimeProperty).cast(Map<Object, List<Comparable>>.class));
+Map<Object, List<Object>> personsByTimeProperty = (Map<Object, List<Object>>) [ObjectEnumerable].of(people)
+    .collect(Collectors.groupingByObject(getTimeProperty));
+Map<Object, List<Comparable>> personsByTimeProperty = (Map<Object, List<Comparable>>)
+    [ObjectEnumerable].of(people)
+    .collect(Collectors.groupingByObject(getTimeProperty).cast(Map<Object, List<Comparable>>.class));
 ```
 
-##### `static groupingBy(IFunction classifier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using Collector.cast.</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as Collectors.groupingById, Collectors.groupingByString, etc.</p>
+##### `public static Collector groupingByObject(IFunction classifier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p> <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as [Collectors.groupingById](Collectors.groupingById), [Collectors.groupingByString](Collectors.groupingByString), etc.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier` or `downstream` is null|
@@ -3180,40 +3304,39 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Object, Object> personsByTimeProperty = (Map<Object, Object>) Stream.of(people)
-    .collect(Collectors.groupingBy(
+Map<Object, Object> personsByTimeProperty = (Map<Object, Object>) [ObjectEnumerable].of(people)
+    .collect(Collectors.groupingByObject(
         getTimeProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
-Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) Stream.of(people)
-    .collect(Collectors.groupingBy(
+Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) [ObjectEnumerable].of(people)
+    .collect(Collectors.groupingByObject(
         getTimeProperty,
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ).cast(Map<Object, Set<Object>>.class));
 ```
 
-##### `static groupingBy(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
 
-Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector groupingByObject(IFunction classifier, ISupplier mapSupplier, ICollector downstream)`
+
+Returns a `Collector` that performs grouping operation according to the `classifier` and then performing a reduction operation on the values associated with a given key using the specified `downstream` Collector. The Map container is created by `mapSupplier`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`classifier`|the function that returns keys|
 |`mapSupplier`|the supplier that returns a `Map<Object, ?>` container into which the results will be inserted|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `classifier`, `mapSupplier` or `downstream` is null|
@@ -3221,36 +3344,35 @@ the `Collector`
 ###### Example
 ```apex
 // Group values by keys provided by function
-Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) Stream.of(people)
-    .collect(Collectors.groupingBy(
+Map<Object, Set<Object>> personsByTimeProperty = (Map<Object, Set<Object>>) [ObjectEnumerable].of(people)
+    .collect(Collectors.groupingByObject(
         getTimeProperty,
         Supplier.of(Map<Object, Set<Object>>.class),
-        Collectors.toSet()
+        Collectors.toObjectSet()
     ));
 ```
 
+
 ---
 ### Partitioning By Collectors
-##### `static partitioningBy(IPredicate predicate)`
+##### `public static Collector partitioningBy(IPredicate predicate)`
 
-Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicate`|the predicate that classifies input arguments (true or false)|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
@@ -3258,34 +3380,33 @@ the `Collector`
 ###### Example
 ```apex
 Map<Boolean, Object> personsPartitionedByPredicate = (Map<Boolean, Object>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.partitioningBy(predicate));
 Map<Boolean, List<Comparable>> personsPartitionedByPredicate = (Map<Boolean, List<Comparable>>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.partitioningBy(predicate).cast(Map<Boolean, List<Comparable>>.class));
 ```
 
-##### `static partitioningBy(IPredicate predicate, ICollector downstream)`
 
-Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be cast to a specific type using Collector.cast.</p>
+##### `public static Collector partitioningBy(IPredicate predicate, ICollector downstream)`
+
+Returns a `Collector` that partitions the SObject input arguments according to `predicate` and organizes them into a `Map<Boolean, Object>`. <p>The result container values type can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicate`|the predicate that classifies input arguments (true or false)|
 |`downstream`|the downstream reduction collector|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` or `downstream` is null|
@@ -3293,322 +3414,279 @@ the `Collector`
 ###### Example
 ```apex
 Map<Boolean, Set<String>> personNamesPartitionedByPredicate = (Map<Boolean, Set<String>>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.partitioningBy(
             predicate,
             Collectors.toStringSet(getStringProperty)
         ).cast(Map<Boolean, Set<String>>.class));
 ```
 
+
 ---
 ### Joining
-##### `static joining()`
+##### `public static Collector joining()`
 
 Returns a `Collector` that concatenates String input arguments.
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
-String concatenatedStrings = (String) Stream.of(strings).collect(Collectors.joining());
+String concatenatedStrings = (String) [ObjectEnumerable].of(strings).collect(Collectors.joining());
 ```
 
-##### `static joining(String delimiter)`
+
+##### `public static Collector joining(String delimiter)`
 
 Returns a `Collector` that concatenates String input arguments, separated by `delimiter`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`delimiter`|the delimiter between each element|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `delimiter` is null|
 
 ###### Example
 ```apex
-String concatenatedStrings = (String) Stream.of(strings).collect(Collectors.joining('; '));
+String concatenatedStrings = (String) [ObjectEnumerable].of(strings).collect(Collectors.joining('; '));
 ```
 
-##### `static joining(String delimiter, String prefix, String suffix)`
+
+##### `public static Collector joining(String delimiter, String prefix, String suffix)`
 
 Returns a `Collector` that concatenates String input arguments, separated by `delimiter`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`delimiter`|the delimiter between each element|
 |`prefix`|the prefix|
 |`suffix`|the suffix|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `delimiter`, `prefix` or `suffix` is null|
 
 ###### Example
 ```apex
-String concatenatedStrings = (String) Stream.of(strings)
+String concatenatedStrings = (String) [ObjectEnumerable].of(strings)
     .collect(Collectors.joining('; ', 'prefix', 'suffix'));
 ```
 
----
-### Int Collectors
-##### `static averagingInt(IToIntFunction mapper)`
 
-Returns a `Collector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is 0.
+##### `public static Collector joining(IFunction mapper, String delimiter, String prefix, String suffix)`
+
+Returns a `Collector` that concatenates String elements returned by `mapper` function, separated by `delimiter`.
 
 ###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
+|`delimiter`|the delimiter between each element|
+|`prefix`|the prefix|
+|`suffix`|the suffix|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper`, `delimiter`, `prefix` or `suffix` is null|
+
+###### Example
+```apex
+String concatenatedNames = (String) [ObjectEnumerable].of(people)
+    .collect(Collectors.joining(getNameFunction, '; ', 'prefix', 'suffix'));
+```
+
+
+---
+### Int Collectors
+##### `public static Collector averagingInt(IFunction mapper)`
+
+Returns a `Collector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is null.
+
+###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Integer value to average|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
-Double averageOfIntProperties = (Double) Stream.of(people)
+Double averageOfIntProperties = (Double) [ObjectEnumerable].of(people)
     .collect(Collectors.averagingInt(getIntProperty));
 ```
 
-##### `static counting()`
+
+##### `public static Collector counting()`
 
 Returns a `Collector` that counts the number of input elements. If no elements are present, the result is 0.
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Example
 ```apex
-Integer numberOfPeople = (Integer) Stream.of(people).collect(Collectors.counting());
+Integer numberOfPeople = (Integer) [ObjectEnumerable].of(people).collect(Collectors.counting());
 ```
 
-##### `static summingInt(IToIntFunction mapper)`
 
-Returns a `Collector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is 0.
+##### `public static Collector summingInt(IFunction mapper)`
+
+Returns a `Collector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is null.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Integer value to sum|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
-Integer sumOfIntProperties = (Integer) Stream.of(people)
+Integer sumOfIntProperties = (Integer) [ObjectEnumerable].of(people)
     .collect(Collectors.summingInt(getIntProperty));
 ```
 
+
 ---
 ### Long Collectors
-##### `static averagingLong(IToLongFunction mapper)`
+##### `public static Collector averagingLong(IFunction mapper)`
 
-Returns a `Collector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is 0.
+Returns a `Collector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is null.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Long value to average|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
-Double averageOfLongProperties = (Double) Stream.of(people)
+Double averageOfLongProperties = (Double) [ObjectEnumerable].of(people)
     .collect(Collectors.averagingLong(getLongProperty));
 ```
 
-##### `static summingLong(IToLongFunction mapper)`
 
-Returns a `Collector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is 0.
+##### `public static Collector summingLong(IFunction mapper)`
+
+Returns a `Collector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is null.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function extracting the Long value to sum|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
-Long sumOfLongProperties = (Long) Stream.of(people)
+Long sumOfLongProperties = (Long) [ObjectEnumerable].of(people)
     .collect(Collectors.summingLong(getLongProperty));
 ```
 
----
-### Double Collectors
-##### `static averagingDouble(IToDoubleFunction mapper)`
-
-Returns a `Collector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is 0.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the function extracting the Double value to average|
-
-###### Return
-
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `mapper` is null|
-
-###### Example
-```apex
-Double averageOfDoubleProperties = (Double) Stream.of(people)
-    .collect(Collectors.averagingDouble(getDoubleProperty));
-```
-
-##### `static summingDouble(IToDoubleFunction mapper)`
-
-Returns a `Collector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is 0.
-
-###### Parameters
-|Param|Description|
-|---|---|
-|`mapper`|the function extracting the Double value to sum|
-
-###### Return
-
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
-
-###### Throws
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `mapper` is null|
-
-###### Example
-```apex
-Double sumOfDoubleProperties = (Double) Stream.of(people)
-    .collect(Collectors.summingDouble(getDoubleProperty));
-```
 
 ---
 ### Intermediate Collectors
-##### `static filtering(IPredicate predicate)`
+##### `public static Collector filtering(IPredicate predicate)`
 
 Adapts a `Collector` to one accepting elements by applying `predicate` to each input element and only accumulating if it returns true.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicate`|the predicate to test input arguments|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
@@ -3616,11 +3694,11 @@ the `Collector`
 ###### Example
 ```apex
 // Get people matched by predicate
-List<Object> filteredPeople = (List<Object>) Stream.of(people)
+List<Object> filteredPeople = (List<Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.filtering(predicate));
 // Group people matched by predicate
 Map<String, List<Comparable>> filteredPeopleByStringProperty =
-    (Map<String, List<Comparable>>) Stream.of(people)
+    (Map<String, List<Comparable>>) [ObjectEnumerable].of(people)
        .collect(
             Collectors.groupingByString(
                 getStringProperty,
@@ -3628,27 +3706,26 @@ Map<String, List<Comparable>> filteredPeopleByStringProperty =
        ).cast(Map<String, List<Comparable>>.class));
 ```
 
-##### `static filtering(IPredicate predicate, ICollector downstream)`
+
+##### `public static Collector filtering(IPredicate predicate, ICollector downstream)`
 
 Adapts a `Collector` to one accepting elements by applying `predicate` to each input element and only accumulating if it returns true.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`predicate`|the predicate to test input arguments|
 |`downstream`|the collector that accumulates only matched values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `predicate` is null|
@@ -3656,33 +3733,32 @@ the `Collector`
 ###### Example
 ```apex
 // Get people String properties matched by predicate
-List<String> filteredStringProperties = (List<String>) Stream.of(people)
+List<String> filteredStringProperties = (List<String>) [ObjectEnumerable].of(people)
     .collect(Collectors.filtering(
         predicate,
         Collectors.toList(getStringProperty)
     ).cast(List<String>.class));
 ```
 
-##### `static mapping(IFunction mapper)`
+
+##### `public static Collector mapping(IFunction mapper)`
 
 Adapts a `Collector` to one accepting elements by applying `mapper` function to each input element before accumulation.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function to return the value to accumulate|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` is null|
@@ -3690,31 +3766,30 @@ the `Collector`
 ###### Example
 ```apex
 List<String> accountNames = (List<String>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.mapping(getStringProperty).cast(List<String>.class));
 ```
 
-##### `static mapping(IFunction mapper, ICollector downstream)`
+
+##### `public static Collector mapping(IFunction mapper, ICollector downstream)`
 
 Adapts a `Collector` to one accepting elements by applying `mapper` function to each input element before accumulation.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function to return the value to accumulate|
 |`downstream`|the collector which accepts mapped values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `downstream` is null|
@@ -3722,7 +3797,7 @@ the `Collector`
 ###### Example
 ```apex
 Map<String, Set<String>> otherStringPropertiesByStringProperty = (Map<String, Set<String>>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.groupingByString(
             getStringProperty,
             Collectors.mapping(
@@ -3732,76 +3807,74 @@ Map<String, Set<String>> otherStringPropertiesByStringProperty = (Map<String, Se
         ).cast(Map<String, Set<String>>.class));
 ```
 
-##### `static flatMapping(IFunction mapper)`
+
+##### `public static Collector flatMapping(IFunction mapper)`
 
 Adapts a `Collector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable created by applying the specified `mapper` function to each element before accumulation.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function which must produce `Iterable<Object>`|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `downstream` is null|
 
 ###### Example
 ```apex
-List<String> flattenedStringProperties = (List<String>) Stream.of(people)
+List<String> flattenedStringProperties = (List<String>) [ObjectEnumerable].of(people)
     .collect(Collectors.flatMapping(getStringListProperty).cast(List<String>.class));
 Map<String, List<String>> flattenedStringPropertiesByOtherStringProperty
-    = (Map<String, List<String>>) Stream.of(people)
+    = (Map<String, List<String>>) [ObjectEnumerable].of(people)
         .collect(Collectors.groupingByString(
             getOtherStringProperty,
             Collectors.flatMapping(getStringListProperty)
         ).cast(Map<String, List<String>>.class));
 ```
 
-##### `static flatMapping(IFunction mapper, ICollector downstream)`
+
+##### `public static Collector flatMapping(IFunction mapper, ICollector downstream)`
 
 Adapts a `Collector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable created by applying the specified `mapper` function to each element before accumulation.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`mapper`|the function which must produce `Iterable<Object>`|
 |`downstream`|the collector which accepts mapped values|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `downstream` is null|
 
 ###### Example
 ```apex
-Set<String> contacts = (Set<String>) Stream.of(people)
+Set<String> contacts = (Set<String>) [ObjectEnumerable].of(people)
     .collect(Collectors.flatMapping(
         getStringListProperty,
         Collectors.toStringSet()
     ));
 Map<String, Set<String>> flattenedStringPropertiesByOtherStringProperty
-   = (Map<String, Set<String>>) Stream.of(people)
+   = (Map<String, Set<String>>) [ObjectEnumerable].of(people)
         .collect(Collectors.groupingByString(
             getOtherStringProperty,
             Collectors.flatMapping(
@@ -3810,69 +3883,67 @@ Map<String, Set<String>> flattenedStringPropertiesByOtherStringProperty
         )).cast(Map<String, Set<String>>.class));
 ```
 
-##### `static reducing(Object identity, IBinaryOperator accumulator)`
+
+##### `public static Collector reducing(Object identity, IBiOperator accumulator)`
 
 Returns a `Collector` which performs a reduction of its input elements under `accumulator` using `identity`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`identity`|the identity value for the reduction|
 |`accumulator`|the input arguments reducer|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
 
 ###### Example
 ```apex
-Person personWithSummedIntProperties = (Person) Stream.of(people)
+Person personWithSummedIntProperties = (Person) [ObjectEnumerable].of(people)
     .collect(Collectors.reducing(
         new Person(IntProperty = 0),
         sumIntPropertyReducer
      ));
 ```
 
-##### `static reducing(Object identity, IFunction mapper, IBinaryOperator accumulator)`
+
+##### `public static Collector reducing(Object identity, IFunction mapper, IBiOperator accumulator)`
 
 Returns a `Collector` which performs a reduction of its input elements under `mapper` function and `accumulator`.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`identity`|the identity value for the reduction|
 |`mapper`|the function to return the value to accumulate|
 |`accumulator`|the input arguments reducer|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `mapper` or `accumulator` is null|
 
 ###### Example
 ```apex
-Person personWithSummedIntProperties = (Person) Stream.of(people)
+Person personWithSummedIntProperties = (Person) [ObjectEnumerable].of(people)
     .collect(Collectors.reducing(
         new Person(IntProperty = 0),
         Function.identity(),
@@ -3880,28 +3951,27 @@ Person personWithSummedIntProperties = (Person) Stream.of(people)
      ));
 ```
 
+
 ---
 ### Optional Collectors
-##### `static reducing(IBinaryOperator accumulator)`
+##### `public static Collector reducing(IBiOperator accumulator)`
 
 Returns a `Collector` which performs a reduction of its input elements under `accumulator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`accumulator`|the input arguments reducer|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
@@ -3909,85 +3979,244 @@ the `Collector`
 ###### Example
 ```apex
 Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.groupingByString(
             getStringProperty,
-            Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(getIntProperty)))
+            Collectors.reducing(BiOperator.maxBy(Comparer.comparing(getIntProperty)))
         ));
 Person personWithMaxIntProperty = (Person)
     optionalPersonWithMaxIntPropertyByStringProperty.get('SomePropertyValues').get();
 ```
 
-##### `static maximizing(IComparator comparator)`
 
-Returns a `Collector` which produces the maximal element according to `comparator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
+##### `public static Collector maximizing(IComparer comparer)`
+
+Returns a `Collector` which produces the maximal element according to `comparer`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
-|`comparator`|the comparator|
+|`comparer`|the comparer|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `comparator` is null|
+|`NullPointerException`|if `comparer` is null|
 
 ###### Example
 ```apex
 Map<String, Object> optionalPersonWithMaxIntPropertyByStringProperty = (Map<String, Object>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.groupingByString(
             getStringProperty,
-            Collectors.maximizing(Comparator.comparing(getIntProperty))
+            Collectors.maximizing(Comparer.comparing(getIntProperty))
         ));
 Person personWithMaxIntProperty = (Person)
     optionalPersonWithMaxIntPropertyByStringProperty.get('SomePropertyValues').get();
 ```
 
-##### `static minimizing(IComparator comparator)`
 
-Returns a `Collector` which produces the minimal element according to `comparator`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
+##### `public static Collector minimizing(IComparer comparer)`
+
+Returns a `Collector` which produces the minimal element according to `comparer`. The result is described as an `Optional`. <p>The result container <strong>cannot</strong> be cast to a specific `Optional`.</p>
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
-|`comparator`|the comparator|
+|`comparer`|the comparer|
 
-###### Return
+###### Returns
 
-**Type**
-
-Collector
-
-**Description**
-
-the `Collector`
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `comparator` is null|
+|`NullPointerException`|if `comparer` is null|
 
 ###### Example
 ```apex
 Map<String, Object> optionalPersonWithMinIntPropertyByStringProperty = (Map<String, Object>)
-    Stream.of(people)
+    [ObjectEnumerable].of(people)
         .collect(Collectors.groupingByString(
             getStringProperty,
-            Collectors.minimizing(Comparator.comparing(getIntProperty))
+            Collectors.minimizing(Comparer.comparing(getIntProperty))
         ));
 Person personWithMaxIntProperty = (Person)
     optionalPersonWithMinIntPropertyByStringProperty.get('SomePropertyValues').get();
 ```
+
+
+---
+### Built-Ins
+##### `public static Collector toList()`
+
+*Inherited*
+
+
+Returns a `Collector` that accumulates input arguments into a new `List<Object>`. <p>The result container can be cast to a specific type using [Collector.cast](Collector.cast).</p> <p>[IEnumerable.collect(BaseCollectors.toList())](IEnumerable.collect(BaseCollectors.toList())) can be replaced with [IEnumerable.toList()](IEnumerable.toList())</p>
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Example
+```apex
+// Accumulates SObjects into a List
+List<Object> people = (List<Object>) [ObjectEnumerable].of(persons)
+    .collect(BaseCollectors.toList());
+List<Account> accs = (List<Account>) [SObjectEnumerable].of(accounts)
+    .collect(BaseCollectors.toList().cast(List<Account>.class));
+```
+
+
+##### `public static Collector toList(Type elementType)`
+
+*Inherited*
+
+
+Returns a `Collector` that accumulates `T` input arguments into a new `List<T>`. <p>The result container can be cast to a specific `Type`.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`elementType`|the type of the element|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `elementType` is null|
+
+###### Example
+```apex
+// Accumulates Objects into a String List
+List<String> strs = (List<String>) [ObjectEnumerable].of(strings)
+    .collect(BaseCollectors.toList(String.class));
+// is equivalent to
+List<String> strs = (List<String>) [ObjectEnumerable].of(strings)
+    .collect(BaseCollectors.toList().cast(List<String>.class));
+```
+
+
+##### `public static Collector toList(IFunction mapper)`
+
+*Inherited*
+
+
+Returns a `Collector` that accumulates the values returned by `mapper` into a new `List<Object>`. <p>The result container can be cast to a specific type using [Collector.cast](Collector.cast).</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the function that returns values to accumulate|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+###### Example
+```apex
+// Accumulates values returned by mapper into a List
+List<Object> names = (List<Object>) [ObjectEnumerable].of(people)
+    .collect(BaseCollectors.toList(getNameFunction));
+List<String> names = (List<String>) [ObjectEnumerable].of(people)
+    .collect(BaseCollectors.toList(getNameFunction).cast(List<String>.class));
+```
+
+
+##### `public static Collector averagingDouble(IFunction mapper)`
+
+*Inherited*
+
+
+Returns a `Collector` that returns the arithmetic mean of values returned by `mapper`. If no elements are present, the result is null.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the function extracting the Double value to average|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+###### Example
+```apex
+Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
+    .collect(BaseCollectors.averagingLong(Functions.get('BillingLatitude')));
+```
+
+
+##### `public static Collector summingDouble(IFunction mapper)`
+
+*Inherited*
+
+
+Returns a `Collector` that returns the arithmetic sum of values returned by `mapper`. If no elements are present, the result is 0.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`mapper`|the function extracting the Long value to sum|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Collector`|the `Collector`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
+###### Example
+```apex
+Long sumOfBillingLatitude = (Long) [SObjectEnumerable].of(accounts)
+    .collect(BaseCollectors.summingDouble(Functions.get('BillingLatitude')));
+```
+
 
 ---

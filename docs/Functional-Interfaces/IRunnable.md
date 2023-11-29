@@ -1,6 +1,6 @@
 # IRunnable
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
@@ -13,7 +13,7 @@ A function that takes no arguments and returns nothing.
 **Group** Functional Interfaces
 
 ## Methods
-### `run()`
+### `public void run()`
 
 Executes the method.
 

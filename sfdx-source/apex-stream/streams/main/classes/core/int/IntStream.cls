@@ -881,7 +881,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable {
      * @example
      * IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .isEmpty(); // false
-     * IntStream.of(new List<Integer>()))
+     * IntStream.of(new List<Integer>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {

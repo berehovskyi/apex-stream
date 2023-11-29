@@ -666,7 +666,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @example
      * [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3 })
      *     .isEmpty(); // false
-     * [DoubleEnumerable].of(new List<Double>()))
+     * [DoubleEnumerable].of(new List<Double>())
      *     .isEmpty(); // true
      */
     public abstract Boolean isEmpty();

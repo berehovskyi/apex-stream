@@ -1,10 +1,11 @@
-# DatetimeFunctions
+# virtual DatetimeFunctions
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of `Datetime` [Function](/docs/Functional-Abstract-Classes/Function.md) and related utilities.
+Provides common implementations of `Datetime` [Function](/docs/Functional-Abstract-Classes/Function.md)
+and related utilities.
 
 
 **See** [Function](/docs/Functional-Abstract-Classes/Function.md)
@@ -17,351 +18,309 @@ Provides common implementations of `Datetime` [Function](/docs/Functional-Abstra
 
 ## Methods
 ### Date Functions
-##### `static addDays(Integer days)`
+##### `public static Function addDays(Integer days)`
 
 Returns a `Function` that adds `days` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`days`|the number of additional days|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `days` is null|
 
 
-**See** Datetime.addDays
+**See** [Datetime.addDays](Datetime.addDays)
 
-##### `static addHours(Integer hours)`
+##### `public static Function addHours(Integer hours)`
 
 Returns a `Function` that adds `hours` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`hours`|the number of additional hours|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `hours` is null|
 
 
-**See** Datetime.addHours
+**See** [Datetime.addHours](Datetime.addHours)
 
-##### `static addMinutes(Integer minutes)`
+##### `public static Function addMinutes(Integer minutes)`
 
 Returns a `Function` that adds `minutes` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`minutes`|the number of additional minutes|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `minutes` is null|
 
 
-**See** Datetime.addMinutes
+**See** [Datetime.addMinutes](Datetime.addMinutes)
 
-##### `static addMonths(Integer months)`
+##### `public static Function addMonths(Integer months)`
 
 Returns a `Function` that adds `months` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`months`|the number of additional months|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `months` is null|
 
 
-**See** Datetime.addMonths
+**See** [Datetime.addMonths](Datetime.addMonths)
 
-##### `static addSeconds(Integer seconds)`
+##### `public static Function addSeconds(Integer seconds)`
 
 Returns a `Function` that adds `seconds` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`seconds`|the number of additional seconds|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `seconds` is null|
 
 
-**See** Datetime.addSeconds
+**See** [Datetime.addSeconds](Datetime.addSeconds)
 
-##### `static addYears(Integer years)`
+##### `public static Function addYears(Integer years)`
 
 Returns a `Function` that adds `years` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`years`|the number of additional years|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `years` is null|
 
 
-**See** Datetime.addYears
+**See** [Datetime.addYears](Datetime.addYears)
 
-##### `static getDate()`
+##### `public static Function getDate()`
 
 Returns a `Function` that returns the date component of a datetime input argument in the local time zone of the context user.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Datetime.date
+**See** [Datetime.date](Datetime.date)
 
-##### `static dateGmt()`
+##### `public static Function dateGmt()`
 
 Returns a `Function` that returns the date component of a datetime input argument in the GMT time zone.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Datetime.dateGmt
+**See** [Datetime.dateGmt](Datetime.dateGmt)
 
-##### `static format()`
+##### `public static Function format()`
 
 Returns a `Function` that returns the datetime as a string using the locale of the context user.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Datetime.format
+**See** [Datetime.format](Datetime.format)
 
-##### `static format(String dateformat)`
+##### `public static Function format(String dateformat)`
 
 Returns a `Function` that returns the datetime for the local time zone as a string using the supplied Java simple `dateformat`. If the time zone cannot be determined, GMT is used.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`dateformat`|the date format|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `dateformat` is null|
 
 
-**See** Datetime.format
+**See** [Datetime.format](Datetime.format)
 
-##### `static format(String dateformat, String timezone)`
+##### `public static Function format(String dateformat, String timezone)`
 
 Returns a `Function` that returns the datetime for the specified time zone as a string using the supplied Java simple `dateformat`. If the time zone cannot be determined, GMT is used.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`dateformat`|the date format|
 |`timezone`|the time zone|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `dateformat` or `timezone` is null|
 
 
-**See** Datetime.format
+**See** [Datetime.format](Datetime.format)
 
-##### `static formatGmt(String dateformat)`
+##### `public static Function formatGmt(String dateformat)`
 
 Returns a `Function` that returns the datetime as a string using the supplied Java simple `dateformat` and the GMT time zone.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`dateformat`|the date format|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `dateformat` is null|
 
 
-**See** Datetime.formatGmt
+**See** [Datetime.formatGmt](Datetime.formatGmt)
 
-##### `static formatLong()`
-##### `static getTime()`
+##### `public static Function formatLong()`
+##### `public static Function getTime()`
 
 Returns a `Function` that returns the time component of a datetime input argument in the local time zone of the context user.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Datetime.time
+**See** [Datetime.time](Datetime.time)
 
-##### `static timeGmt()`
+##### `public static Function timeGmt()`
 
 Returns a `Function` that returns the time component of a datetime input argument in the GMT time zone.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Datetime.timeGmt
+**See** [Datetime.timeGmt](Datetime.timeGmt)
 
-##### `static stringValueOfGmt()`
+##### `public static Function stringValueOfGmt()`
 
 Returns a `Function` that returns the string that represents the specified datetime in the standard “yyyy-MM-dd HH:mm:ss” format for the GMT time zone.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** String.valueOfGmt
+**See** [String.valueOfGmt](String.valueOfGmt)
 
 ---

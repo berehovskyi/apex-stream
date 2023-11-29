@@ -1,10 +1,11 @@
-# DateFunctions
+# virtual DateFunctions
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of `Date` [Function](/docs/Functional-Abstract-Classes/Function.md) and related utilities.
+Provides common implementations of `Date` [Function](/docs/Functional-Abstract-Classes/Function.md)
+and related utilities.
 
 
 **See** [Function](/docs/Functional-Abstract-Classes/Function.md)
@@ -17,136 +18,118 @@ Provides common implementations of `Date` [Function](/docs/Functional-Abstract-C
 
 ## Methods
 ### Date Functions
-##### `static addDays(Integer days)`
+##### `public static Function addDays(Integer days)`
 
 Returns a `Function` that adds `days` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`days`|the number of additional days|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `days` is null|
 
 
-**See** Date.addDays
+**See** [Date.addDays](Date.addDays)
 
-##### `static addMonths(Integer months)`
+##### `public static Function addMonths(Integer months)`
 
 Returns a `Function` that adds `months` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`months`|the number of additional months|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `months` is null|
 
 
-**See** Date.addMonths
+**See** [Date.addMonths](Date.addMonths)
 
-##### `static addYears(Integer years)`
+##### `public static Function addYears(Integer years)`
 
 Returns a `Function` that adds `years` to an input argument.
 
 ###### Parameters
+
 |Param|Description|
 |---|---|
 |`years`|the number of additional years|
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `years` is null|
 
 
-**See** Date.addYears
+**See** [Date.addYears](Date.addYears)
 
-##### `static format()`
+##### `public static Function format()`
 
 Returns a `Function` that returns the date as a string using the locale of the context user.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Date.format
+**See** [Date.format](Date.format)
 
-##### `static toStartOfMonth()`
+##### `public static Function toStartOfMonth()`
 
 Returns a `Function` that returns the first day of the month for an input argument.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Date.toStartOfMonth
+**See** [Date.toStartOfMonth](Date.toStartOfMonth)
 
-##### `static toStartOfWeek()`
+##### `public static Function toStartOfWeek()`
 
 Returns a `Function` that returns the first day of the week for an input argument.
 
-###### Return
+###### Returns
 
-**Type**
-
-Function
-
-**Description**
-
-the `Function`
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
 
 
-**See** Date.toStartOfWeek
+**See** [Date.toStartOfWeek](Date.toStartOfWeek)
 
 ---

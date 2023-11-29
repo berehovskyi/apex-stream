@@ -1,10 +1,11 @@
-# SetObjectConsumers
+# virtual SetObjectConsumers
 
-`APIVERSION: 57`
+`APIVERSION: 58`
 
 `STATUS: ACTIVE`
 
-Provides common implementations of `Set<T> - T` [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md) and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
+Provides common implementations of `Set<T> - T` [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
+and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
 
 
 **See** [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
@@ -19,269 +20,305 @@ Provides common implementations of `Set<T> - T` [BiConsumer](/docs/Functional-Ab
 **Group** Functional Built-In Classes
 
 ## Methods
-### Add To Set<?> BiConsumers
-##### `static addToSet()`
+### Built-Ins
+##### `public static BiConsumer addToSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Object>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toSet
+**See** [Collectors.toObjectSet](Collectors.toObjectSet)
 
-##### `static addToBoolSet()`
+##### `public static BiConsumer addToBoolSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Boolean>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toBoolSet
+**See** [Collectors.toBoolSet](Collectors.toBoolSet)
 
-##### `static addToIdSet()`
+##### `public static BiConsumer addToIdSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Id>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toIdSet
+**See** [Collectors.toIdSet](Collectors.toIdSet)
 
-##### `static addToStringSet()`
+##### `public static BiConsumer addToStringSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<String>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toStringSet
+**See** [Collectors.toStringSet](Collectors.toStringSet)
 
-##### `static addToBlobSet()`
+##### `public static BiConsumer addToBlobSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Blob>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toBlobSet
+**See** [Collectors.toBlobSet](Collectors.toBlobSet)
 
-##### `static addToDateSet()`
+##### `public static BiConsumer addToDateSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Date>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toDateSet
+**See** [Collectors.toDateSet](Collectors.toDateSet)
 
-##### `static addToDatetimeSet()`
+##### `public static BiConsumer addToDatetimeSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Datetime>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toDatetimeSet
+**See** [Collectors.toDatetimeSet](Collectors.toDatetimeSet)
 
-##### `static addToTimeSet()`
+##### `public static BiConsumer addToTimeSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Time>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toTimeSet
+**See** [Collectors.toTimeSet](Collectors.toTimeSet)
 
-##### `static addToIntSet()`
+##### `public static BiConsumer addToIntSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Integer>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toIntSet
+**See** [Collectors.toIntSet](Collectors.toIntSet)
 
-##### `static addToLongSet()`
+##### `public static BiConsumer addToLongSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Long>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toLongSet
+**See** [Collectors.toLongSet](Collectors.toLongSet)
 
-##### `static addToDoubleSet()`
+##### `public static BiConsumer addToDoubleSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<Double>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toDoubleSet
+**See** [Collectors.toDoubleSet](Collectors.toDoubleSet)
 
-##### `static addToSObjectSet()`
+##### `public static BiConsumer addToSObjectSet(IFunction mapper)`
 
 Returns a `BiConsumer` that casts the first input argument to the `Set<SObject>` and adds the second input argument to it.
 
-###### Return
+###### Parameters
 
-**Type**
+|Param|Description|
+|---|---|
+|`mapper`|the mapping function|
 
-BiConsumer
+###### Returns
 
-**Description**
-
-the `BiConsumer`
+|Type|Description|
+|---|---|
+|`BiConsumer`|the `BiConsumer`|
 
 ###### Throws
+
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if the first input argument is null|
 
 
-**See** Collectors.toSObjectSet
+**See** [Collectors.toSObjectSet](Collectors.toSObjectSet)
 
 ---

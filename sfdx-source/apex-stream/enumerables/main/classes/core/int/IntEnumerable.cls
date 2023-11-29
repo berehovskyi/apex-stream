@@ -661,7 +661,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @example
      * [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
      *     .isEmpty(); // false
-     * [IntEnumerable].of(new List<Integer>()))
+     * [IntEnumerable].of(new List<Integer>())
      *     .isEmpty(); // true
      */
     public abstract Boolean isEmpty();

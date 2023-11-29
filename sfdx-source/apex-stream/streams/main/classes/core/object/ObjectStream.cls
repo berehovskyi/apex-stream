@@ -1124,7 +1124,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      * @example
      * ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .isEmpty(); // false
-     * ObjectStream.of(new List<String>()))
+     * ObjectStream.of(new List<String>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
