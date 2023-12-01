@@ -36,7 +36,7 @@ sf package install -p 04t1t000003HVUeAAO -o me@example.com -r -w 10
 
 ## Key Features
 
-- Iterables with implementations:
+- Enumerables with implementations:
     - Streams (`SObjectStream`, `ObjectStream` and primitive `DoubleStream`, `IntStream`, `LongStream`)
     - Sequences (`SObjectSequence`, `ObjectSequence` and primitive `DoubleSequence`, `IntSequence`, `LongSequence`)
 - Functional Interfaces
@@ -44,14 +44,13 @@ sf package install -p 04t1t000003HVUeAAO -o me@example.com -r -w 10
     - inherited abstract methods
     - default methods
 - Functional Built-In Classes with common Functional Abstract Classes implementations
-- Collectors (`SObjectCollector`, `Collector`) with common built-ins (`SObjectCollectors`, `Collectors`)
-- Optionals (`OptionalSObject`, `Optional` and primitive `OptionalDouble`, `OptionalInt`, `OptionalLong`)
-- Utils (`Lists`, `Iterators`, `Validate`)
+- Collectors (`Collector`) with common built-ins (`SObjectCollectors`, `Collectors`)
+- Optionals
 
 ## Introduction
 
-**Apex Stream Framework** is built on custom `Iterables` that allows processing a sequence of elements supporting sequential aggregate operations,
-providing a convenient declarative API. 2 types implement `Iterable` - `Stream` and `Sequence`.
+**Apex Stream Framework** is built on custom `Iterables` (hereinafter - `Enumerables`) that allows processing a sequence of elements supporting sequential aggregate operations,
+providing a convenient declarative API. 2 types implement `Enumerable` - `Stream` and `Sequence`.
 
 `Stream` is lazy. Computation on the source data is only performed when the terminal operation is initiated,
 and source elements are consumed only as needed. Also, a `Stream` can be operated on
@@ -65,7 +64,7 @@ There are a reference and primitive specializations of `Streams` and `Sequences`
 - Reference: `ObjectStream`, `SObjectStream`, `ObjectSequence`, `SObjectSequence`
 - Primitive: `IntStream`, `LongStream`, `DoubleStream`, `IntStream`, `LongStream`, `DoubleStream`
 
-`Iterables` are operated by `functions`.
+`Enumerables` are operated by `functions`.
 
 In terms of Apex Stream Framework, `function` is an instance of `Functional Interface` or `Functional Abstract Class`.
 
@@ -77,13 +76,13 @@ but may or may not contain `final`, `virtual`, or `static` methods to make funct
 **Apex Stream Framework** contains most of the **built-in** functions, common implementations of `functions`
 so you don't have to recreate them every time you need them.
 
-`Iterable` operations are composed of a chain, which consists of:
+`Enumerable` operations are composed of a chain, which consists of:
 
-- A **Source** which might be an iterable (such as list or set, an iterator, a generator function, etc).
-- Zero or more **intermediate** operations that transform an iterable into another iterable.
+- A **Source** which might be an enumerable (such as list or set, an iterator, a generator function, etc.).
+- Zero or more **intermediate** operations that transform an enumerable into another enumerable.
 - A **terminal** operation that produces a result.
 
-Operations on iterables **don't** change the source (but can mutate its elements).
+Operations on enumerables **don't** change the source (but can mutate its elements).
 
 ## Get Started
 
@@ -99,17 +98,17 @@ but all of them are also valid for `Sequences`, except for **infinite** `Streams
 Create a `Stream` depending on the input argument type:
 
 ```apex
-ISObjectIterable accountStream = Stream.of(new List<Account>{ acc1, acc2, acc3 });
-ISObjectIterable triggerNewStream = Stream.of(Trigger.new);
-IIntIterable intStream = Stream.of(new Set<Integer>{ 1, 2, 3, -5, 42 });
+SObjectEnumerable accountStream = Stream.of(new List<Account>{ acc1, acc2, acc3 });
+SObjectEnumerable triggerNewStream = Stream.of(Trigger.new);
+IntEnumerable intStream = Stream.of(new Set<Integer>{ 1, 2, 3, -5, 42 });
 ```
 
 Create a `Stream` explicitly specifying its type:
 
 ```apex
-ISObjectIterable accountStream = SObjectStream.of(new List<Account>{ acc1, acc2, acc3 });
-ISObjectIterable triggerNewStream = SObjectStream.of(Trigger.new);
-IIntIterable intStream = IntStream.of(new Set<Integer>{ 1, 2, 3, -5, 42 });
+SObjectEnumerable accountStream = SObjectStream.of(new List<Account>{ acc1, acc2, acc3 });
+SObjectEnumerable triggerNewStream = SObjectStream.of(Trigger.new);
+IntEnumerable intStream = IntStream.of(new Set<Integer>{ 1, 2, 3, -5, 42 });
 ```
 
 - ### Empty Stream
@@ -117,7 +116,7 @@ IIntIterable intStream = IntStream.of(new Set<Integer>{ 1, 2, 3, -5, 42 });
 Create a `Stream` with no elements:
 
 ```apex
-ISObjectIterable emptySObjectStream = SObjectStream.empty();
+SObjectEnumerable emptySObjectStream = SObjectStream.empty();
 ```
 
 - ### Infinite Stream[*](#note)
@@ -125,7 +124,7 @@ ISObjectIterable emptySObjectStream = SObjectStream.empty();
 Create an infinite `Stream` by passing `Supplier` to a `generate` method:
 
 ```apex
-IDoubleIterable infiniteRandomStream = Stream.generate(DoubleSuppliers.random());
+DoubleEnumerable infiniteRandomStream = Stream.generate(DoubleSuppliers.random());
 
 Iterator<Double> streamIterator = infiniteRandomStream.iterator();
 
@@ -138,15 +137,15 @@ streamIterator.next(); // 0.5196704529392165
 To prevent hitting the CPU time limit, an infinite stream can be limited:
 
 ```apex
-IDoubleIterable firstTenRandomStream = Stream.generate(DoubleSuppliers.random()).lim(10);
+DoubleEnumerable firstTenRandomStream = Stream.generate(DoubleSuppliers.random()).lim(10);
 ```
 
-Another way to create an infinite stream is passing an `UnaryOperator` and a `seed` to an `iterate` method.
-A `Stream` is produced by iterative application of `UnaryOperator` to an initial element `seed`,
+Another way to create an infinite stream is passing an `Operator` and a `seed` to an `iterate` method.
+A `Stream` is produced by iterative application of `Operator` to an initial element `seed`,
 producing a `Stream` consisting of `seed`, `operator(seed)`, `operator(operator(seed))`, etc:
 
 ```apex
-IIntIterable incrementalStream = Stream.iterate(5, IntUnaryOperators.increment());
+IntEnumerable incrementalStream = Stream.iterate(5, IntOperators.increment());
 
 Iterator<Integer> streamIterator = incrementalStream.iterator();
 
@@ -164,31 +163,31 @@ The simplest way to concat two streams is by using the static `concat` method,
 or instance `append`, `prepend` methods:
 
 ```apex
-ISObjectIterable accountStream1 = Stream.of(new List<Account>{ acc1, acc2, acc3 });
-ISObjectIterable accountStream2 = Stream.of(new List<Account>{ acc4, acc5, acc6 });
+SObjectEnumerable accountStream1 = Stream.of(new List<Account>{ acc1, acc2, acc3 });
+SObjectEnumerable accountStream2 = Stream.of(new List<Account>{ acc4, acc5, acc6 });
 
-ISObjectIterable mergedStream = Stream.concat(accountStream1, accountStream2); // [acc1, acc2, acc3, acc4, acc5, acc6]
-ISObjectIterable mergedStream1 = accountStream1.append(accountStream2); // [acc1, acc2, acc3, acc4, acc5, acc6]
-ISObjectIterable mergedStream2 = accountStream1.prepend(accountStream2); // [acc4, acc5, acc6, acc1, acc2, acc3]
+SObjectEnumerable mergedStream = Stream.concat(accountStream1, accountStream2); // [acc1, acc2, acc3, acc4, acc5, acc6]
+SObjectEnumerable mergedStream1 = accountStream1.append(accountStream2); // [acc1, acc2, acc3, acc4, acc5, acc6]
+SObjectEnumerable mergedStream2 = accountStream1.prepend(accountStream2); // [acc4, acc5, acc6, acc1, acc2, acc3]
 ```
 
 To concat multiple streams, use the static `concat` method that takes a list of streams:
 
 ```apex
-ISObjectIterable mergedStream = Stream.concat(
-    new List<ISObjectIterable>(accountStream1, accountStream2, accountStream3)
+SObjectEnumerable mergedStream = Stream.concat(
+    new List<ISObjectEnumerable>(accountStream1, accountStream2, accountStream3)
 );
 ```
 
 - ### Zipping
 
-A `zip` operation takes an element from each `Iterable` and combines them by `BinaryOperator`:
+A `zip` operation takes an element from each `Iterable` and combines them by `BiOperator`:
 
 ```apex
 List<Integer> ints1 = new List<Integer>{ 5, 3, 9, 7, 5, 9, 3, 7 };
 List<Integer> ints2 = new List<Integer>{ 8, 3, 6, 4, 4, 9, 1, 0 };
 
-IIntIterable zippedStream = Stream.zip(ints1, ints2, IntBinaryOperators.sum());
+IntEnumerable zippedStream = Stream.zip(ints1, ints2, IntBiOperators.sum());
 zippedStream.toList(); // [13, 6, 15, 11, 9, 18, 4, 7]
 ```
 
@@ -198,13 +197,13 @@ to filter elements before zipping.
 Get all `Account` records from `Trigger.new` list on update if `Rating` field has changed:
 
 ```apex
-ISObjectIterable newAccountStreamWithChangedRating = Stream.zip(
+SObjectEnumerable newAccountStreamWithChangedRating = Stream.zip(
     Trigger.old, // The first argument is considered as left
     Trigger.new,  // The second argument is considered as right
     // Checks if oldAccount[i].Rating != newAccount[i].Rating
     SObjectBiPredicates.areEqual(Account.Rating).negate(),
     // Always return the right argument i.e elements from Trigger.new in this case
-    SObjectBinaryOperator.right()
+    BiOperator.right()
 );
 ```
 
@@ -217,8 +216,7 @@ until a terminal operation is invoked.*
 
 - ### Set Operations
 
-**Set operations
-** produce a result iterable that is based on the presence or absence of equivalent elements within the same or separate iterables.
+**Set operations** produce a result iterable that is based on the presence or absence of equivalent elements within the same or separate iterables.
 
 A `union` operation returns the set union, which means unique elements
 that appear in *either* of two iterables.
@@ -248,8 +246,9 @@ based on `Share` records' composite keys:
 
 ```apex
 // Implement function that returns a UserOrGroupId-AccountId composite key
-class CompositeKeyFunction implements ISObjectFunction {
-    public Object apply(SObject sObj) {
+class CompositeKeyFunction implements IFunction {
+    public Object apply(Object o) {
+        SObject sObj = (SObject) o;
         return sObj.get(AccountShare.UserOrGroupId) + sObj.get(AccountShare.AccountId);
     }
 }
@@ -269,7 +268,7 @@ A `filter` operation picks only elements that satisfy a `predicate`.
 Get accounts with `AnnualRevenue` greater than `10000`:
 
 ```apex
-ISObjectIterable accountStreamWithAnnualRevenueGreaterThan10k = Stream.of(accounts)
+SObjectEnumerable accountStreamWithAnnualRevenueGreaterThan10k = Stream.of(accounts)
     .filter(SObjectPredicates.isGreater(Account.AnnualRevenue, 10000));
 ```
 
@@ -277,7 +276,7 @@ Get accounts with `AnnualRevenue` greater than `1000000` and with `Rating` == `H
 using function composition:
 
 ```apex
-ISObjectIterable filteredAccountStream = Stream.of(accounts)
+SObjectEnumerable filteredAccountStream = Stream.of(accounts)
     .filter(
         SObjectPredicates.isGreater(Account.AnnualRevenue, 10000)
             .andAlso(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
@@ -292,14 +291,14 @@ instead of using `for`, `for-each`, and `while` loops. A `forEach` is expected t
 Set `Rating` to `Hot` for each account:
 
 ```apex
-ISObjectIterable mutatedAccountStream = Stream.of(accounts)
+SObjectEnumerable mutatedAccountStream = Stream.of(accounts)
     .forEach(SObjectConsumers.set(Account.Rating, 'Hot'));
 ```
 
 Set `Rating` to `Hot` and set `AnnualRevenue` to `0` for each account using function composition:
 
 ```apex
-ISObjectIterable mutatedAccountStream = Stream.of(accounts)
+SObjectEnumerable mutatedAccountStream = Stream.of(accounts)
     .forEach(
         SObjectConsumers.set(Account.Rating, 'Hot')
             .andThen(SObjectConsumers.set(Account.AnnualRevenue, 0))
@@ -314,14 +313,14 @@ and collects these new elements into a new stream.
 Create a stream of parent `Accounts` from the contact stream:
 
 ```apex
-ISObjectIterable accountStream = Stream.of(contacts)
-    .mapTo(SObjectUnaryOperators.getSObject('Account'));
+SObjectEnumerable accountStream = Stream.of(contacts)
+    .mapTo(SObjectOperators.getSObject('Account'));
 ```
 
 Create a `DoubleStream` from `Account.AnnualRevenue` values:
 
 ```apex
-IDoubleIterable revenueStream = Stream.of(accounts)
+DoubleEnumerable revenueStream = Stream.of(accounts)
     .mapToDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue));
 ```
 
@@ -331,7 +330,7 @@ and collects these new *inner* elements into a new stream.
 Create a stream of related child contacts from the account stream:
 
 ```apex
-ISObjectIterable contactStream = Stream.of(accounts)
+SObjectEnumerable contactStream = Stream.of(accounts)
     .flatMapTo(SObjectFunctions.getSObjects('Contacts'));
 ```
 
@@ -376,21 +375,21 @@ A `sort` operation returns a sorted stream considering the sort order and `Compa
 Sort accounts according to default order:
 
 ```apex
-ISObjectIterable sortedAccountStream = Stream.of(accounts)
+SObjectEnumerable sortedAccountStream = Stream.of(accounts)
     .sort();
 ```
 
 Sort accounts according to order:
 
 ```apex
-ISObjectIterable sortedDescAccountStream = Stream.of(accounts)
+SObjectEnumerable sortedDescAccountStream = Stream.of(accounts)
     .sort(SortOrder.DESCENDING);
 ```
 
 Sort accounts by `Name`:
 
 ```apex
-ISObjectIterable sortedAccountStream = Stream.of(accounts)
+SObjectEnumerable sortedAccountStream = Stream.of(accounts)
     .sort(Account.Name);
 ```
 
@@ -399,11 +398,11 @@ by `NumberOfEmployees` considering `nulls` greater than any value and then sort
 by `AnnualRevenue` in descending order:
 
 ```apex
-ISObjectIterable sortedAccountStream = Stream.of(accounts)
+SObjectEnumerable sortedAccountStream = Stream.of(accounts)
     .sort(
-        SObjectComparator.comparing(Account.Rating)
-            .thenComparingInt(SObjectToIntFunctions.get(Account.NumberOfEmployees).nullsLast())
-            .thenComparingDouble(SObjectToDoubleFunctions.get(Account.AnnualRevenue).reversed())
+        Comparer.comparing(SObjectFunctions.get(Account.Rating))
+            .thenComparing(SObjectFunctions.get(Account.NumberOfEmployees).nullsLast())
+            .thenComparing(SObjectFunctions.get(Account.AnnualRevenue).reversed())
     );
 ```
 
@@ -433,7 +432,7 @@ Boolean isEveryAccountHot = Stream.of(accounts)
 Find a first `Warm` account:
 
 ```apex
-OptionalSObject optionalWarmAccount = Stream.of(accounts)
+Optional optionalWarmAccount = Stream.of(accounts)
     .find(Account.Rating, 'Warm');
 ```
 
@@ -457,7 +456,7 @@ Calculate a factorial of `n` (up to 20):
 
 ```apex
 Long factorial(Long n) {
-    return LongStream.range(1, n).reduce(1, LongBinaryOperators.product());
+    return LongStream.range(1, n).reduce(1, LongBiOperators.product());
 }
 
 factorial(20L); // 2432902008176640000
@@ -467,8 +466,8 @@ factorial(20L); // 2432902008176640000
 according to the default order as [Optional](#optional):
 
 ```apex
-Integer maxInt = Stream.of(integers)
-    .max()  // returns an OptionalInt
+Integer maxInt = (Integer) Stream.of(integers)
+    .max()  // returns an Optional
     .get(); // returns a value if present or throws NoSuchElementException otherwise
 ```
 
@@ -478,7 +477,7 @@ a comparator and returns a result as [Optional](#optional).
 Find an optional account with a max `AnnualRevenue`:
 
 ```apex
-OptionalSObject optionalAccountWithMaxAnnualRevenue = Stream.of(accounts)
+Optional optionalAccountWithMaxAnnualRevenue = Stream.of(accounts)
     .max(Account.AnnualRevenue);
 ```
 
@@ -521,7 +520,7 @@ Collect accounts to List:
 
 ```apex
 List<Account> sumOfAnnualRevenue = (List<Account>) Stream.of(accounts)
-    .collect(SObjectCollectors.toList());
+    .collect(Collectors.toList(Account.class));
 // The same as
 List<Account> sumOfAnnualRevenue = Stream.of(accounts).toList();
 ```
@@ -530,7 +529,7 @@ Group accounts by `Rating`:
 
 ```apex
 Map<Object, List<Account>> accountsByRating = (Map<Object, List<Account>>) Stream.of(accounts)
-    .collect(SObjectCollectors.groupingBy(Account.Rating));
+    .collect(SObjectCollectors.groupingByObject(Account.Rating));
 ```
 
 Type interference is "broken" in Apex for `Set` and `Map` keys:
@@ -539,16 +538,14 @@ Type interference is "broken" in Apex for `Set` and `Map` keys:
 List<Object> o = new List<String>{ 'foo', 'bar' };
 List<String> asStrings = (List<String>) o; // Works
 
-Set<Object> o = new Set<String>{ 'foo', 'bar' };
-Set<String> asStrings = (Set<String>) o; // Illegal assignment from Set<String> to Set<Object>
+Set<Object> o = new Set<String>{ 'foo', 'bar' }; // Illegal assignment from Set<String> to Set<Object>
 ```
 
 ```apex
 Map<String, Object> o = new Map<String, String>{ 'foo' => 'bar' };
 Map<String, String> asStrings = (Map<String, String>) o; // Works
 
-Map<Object, Object> o = new Map<String, String>{ 'foo' => 'bar' };
-Map<String, String> asStrings = (Map<String, String>) o; // Illegal assignment from Map<String,String> to Map<Object,Object>
+Map<Object, Object> o = new Map<String, String>{ 'foo' => 'bar' }; // Illegal assignment from Map<String,String> to Map<Object,Object>
 ```
 
 This is why we should explicitly set a specific collecting function according to an
@@ -587,14 +584,14 @@ Account acc = (Account) sObj; // Should be cast explicitly
 
 To make `accountByRating` castable to `Map<String, Account>` it is possible either
 
-- to specify the type of `Supplier` and `BinaryOperator` explicitly:
+- to specify the type of `Supplier` and `BiOperator` explicitly:
 
 ```apex
-Map<Id, Account> accountByRating = (Map<Id, Account>) Stream.of(accounts)
+Map<Id, Account> accountByParentId = (Map<Id, Account>) Stream.of(accounts)
     .collect(
-        SObjectCollector.of(
+        Collector.of(
             Supplier.of(Map<Id, Account>.class),
-            MapSObjectConsumers.putToSObjectByIdMap(
+            MapObjectConsumers.putToObjectByIdMap(
                 SObjectFunctions.get(Account.ParentId), // key mapping function
                 SObjectFunction.identity() // value mapping function
             )
@@ -605,8 +602,8 @@ Map<Id, Account> accountByRating = (Map<Id, Account>) Stream.of(accounts)
 - or to use `cast` function:
 
 ```apex
-Map<Id, SObject> accountByRating = (Map<Id, SObject>) Stream.of(accounts)
-    .collect(SObjectCollectors.mapById(Account.ParentId).cast(Map<Id, SObject>.class));
+Map<Id, Account> accountByParentId = (Map<Id, Account>) Stream.of(accounts)
+    .collect(SObjectCollectors.mapById(Account.ParentId).cast(Map<Id, Account>.class));
 ```
 
 Collectors also allow the reusing of complex collection strategies
@@ -616,7 +613,7 @@ using *downstream* collectors.
 Classify account names by `BillingCountry` and by `BillingCity` cascading two collectors together:
 
 ```apex
-ISObjectCollector groupNamesByBillingCityDownstreamCollector
+ICollector groupNamesByBillingCityDownstreamCollector
     = SObjectCollectors.groupingByString(Account.BillingCity, Account.Name);
 
 Map<String, Map<String, List<String>>> accountNamesByCityByCountry =
@@ -646,16 +643,16 @@ Few `Collector` functions such as `reducing`, `maximizing`, `minimizing`,
 Classify accounts with max `AnnualRevenue` per `BillingCountry`:
 
 ```apex
-ISObjectBinaryOperator accumulator = SObjectBinaryOperator.maxBy(Account.AnnualRevenue);
-ISObjectCollector maximizeAnnualRevenueDownstreamCollector = SObjectCollectors.reducing(accumulator);
+IBiOperator accumulator = BiOperator.maxBy(SObjectFunctions.get(Account.AnnualRevenue));
+ICollector maximizeAnnualRevenueDownstreamCollector = Collectors.reducing(accumulator);
 Map<String, Object> optionalAccountWithMaxRevenueByCity = (Map<String, Object>) Stream.of(accounts)
     .collect(SObjectCollectors.groupingByString(
         SObjectFunctions.get(Account.BillingCity),
         maximizeAnnualRevenueDownstreamCollector
-    )); // Cannot be cast to Map<String, OptionalSObject>
+    )); // Cannot be cast to Map<String, Optional>
 
-OptionalSObject optionalAccount = (OptionalSObject) optionalAccountWithMaxRevenueByCity.get('London');
-Account acc = optionalAccount.get();
+Optional optionalAccount = (Optional) optionalAccountWithMaxRevenueByCity.get('London');
+Account acc = (Account) optionalAccount.get();
 ```
 
 - ### Fast Collecting
@@ -696,16 +693,16 @@ An `Optional` is a container that may or may not contain a non-null value.
 To create an empty `Optional`:
 
 ```apex
-OptionalSObject optionalAccount = OptionalSObject.empty();
+Optional emptyOptional = Optional.empty();
 ```
 
 To create an `Optional` from account:
 
 ```apex
 // Throws NPE if account is null
-OptionalSObject optionalAccount = OptionalSObject.of(account);
+Optional optionalAccount = Optional.of(account);
 // Does not throw NPE if account is null
-OptionalSObject optionalAccount = OptionalSObject.ofNullable(account);
+Optional optionalAccount = Optional.ofNullable(account);
 ```
 
 To check if `Optional` contains a value, use `isPresent` or `isEmpty` methods:
@@ -736,7 +733,7 @@ Account acc = (Account) optionalAccount.orElse(new Account());
 `orElseGet` is similar to `orElse` but returns a value from a provided `Supplier`:
 
 ```apex
-Account acc = (Account) optionalAccount.orElseGet(SObjectSupplier.of(Account.SObjectType)); 
+Account acc = (Account) optionalAccount.orElseGet(SObjectSuppliers.of(Account.SObjectType)); 
 ```
 
 ## Examples
@@ -764,11 +761,11 @@ Create and relate `contacts` to parent `accounts` and set the `Descripton` field
 ```apex
 List<Contact> contacts = Stream.of(accounts)
     .mapTo(
-        SObjectUnaryOperators.newSObject(
+        SObjectOperators.newSObject(
             Contact.SObjectType,
             Contact.AccountId,
             SObjectFunction.get(Account.Id)
-        ).andThen(SObjectUnaryOperators.set(Contact.Description, 'Some Description'))
+        ).andThen(SObjectOperators.set(Contact.Description, 'Some Description'))
     )
     .toList();
 ```
@@ -814,7 +811,7 @@ List<String> result = (List<String>) Stream.of(input)
 
 And more!
 
-Find more examples [here](/sfdx-source/apex-stream/test/classes).
+Find more examples [here](/sfdx-source/apex-stream/streams/test/classes).
 
 ## Documentation
 

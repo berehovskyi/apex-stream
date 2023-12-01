@@ -983,8 +983,8 @@ private class SObjectCollectorsTest {
         Map<Boolean, Object> actual4 = (Map<Boolean, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByBool(AfTestConsts.DO_NOT_CALL, AfTestConsts.LAST_NAME));
         Map<Boolean, Object> actual5 = (Map<Boolean, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByBool(keyMapper, downstream));
         Map<Boolean, List<String>> actual6 = (Map<Boolean, List<String>>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByBool(keyMapper, Supplier.of(Map<Boolean, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Boolean, Map<Boolean, List<String>>> actual7 = (Map<Boolean, Map<Boolean, List<String>>>) Stream.of(CONTACTS)
-            .collect(SObjectCollectors.groupingByBool(keyMapper, SObjectCollectors.groupingByBool(AfTestConsts.Contact.HasOptedOutOfEmail, AfTestConsts.Contact.LastName)).cast(Map<Boolean, Map<Boolean, List<String>>>.class));
+        Map<Boolean, Map<Boolean, List<String>>> actual7 = (Map<Boolean, Map<Boolean, List<String>>>)
+            AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByBool(keyMapper, SObjectCollectors.groupingByBool(AfTestConsts.Contact.HasOptedOutOfEmail, AfTestConsts.Contact.LastName)).cast(Map<Boolean, Map<Boolean, List<String>>>.class));
         Map<Boolean, Object> actual8 = (Map<Boolean, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByBool(keyMapper, SObjectCollectors.groupingByBool(AfTestConsts.HAS_OPTED_OUT_OF_EMAIL, AfTestConsts.LAST_NAME)));
         // Then
         Map<Boolean, List<Contact>> expected = new Map<Boolean, List<Contact>>{
@@ -1034,8 +1034,8 @@ private class SObjectCollectorsTest {
         Map<Id, Object> actual4 = (Map<Id, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingById(AfTestConsts.ACCOUNT_ID, AfTestConsts.LAST_NAME));
         Map<Id, Object> actual5 = (Map<Id, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingById(keyMapper, downstream));
         Map<Id, List<String>> actual6 = (Map<Id, List<String>>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingById(keyMapper, Supplier.of(Map<Id, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Id, Map<Id, List<String>>> actual7 = (Map<Id, Map<Id, List<String>>>) Stream.of(CONTACTS)
-            .collect(SObjectCollectors.groupingById(keyMapper, SObjectCollectors.groupingById(AfTestConsts.Contact.Id, AfTestConsts.Contact.LastName)).cast(Map<Id, Map<Id, List<String>>>.class));
+        Map<Id, Map<Id, List<String>>> actual7 = (Map<Id, Map<Id, List<String>>>)
+            AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingById(keyMapper, SObjectCollectors.groupingById(AfTestConsts.Contact.Id, AfTestConsts.Contact.LastName)).cast(Map<Id, Map<Id, List<String>>>.class));
         Map<Id, Object> actual8 = (Map<Id, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingById(keyMapper, SObjectCollectors.groupingById(AfTestConsts.ID, AfTestConsts.LAST_NAME)));
         // Then
         Map<Id, List<Contact>> expected = new Map<Id, List<Contact>>{
@@ -1080,8 +1080,8 @@ private class SObjectCollectorsTest {
         Map<String, Object> actual4 = (Map<String, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByString(AfTestConsts.OTHER_COUNTRY, AfTestConsts.LAST_NAME));
         Map<String, Object> actual5 = (Map<String, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByString(keyMapper, downstream));
         Map<String, List<String>> actual6 = (Map<String, List<String>>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByString(keyMapper, Supplier.of(Map<String, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<String, Map<String, List<String>>> actual7 = (Map<String, Map<String, List<String>>>) Stream.of(CONTACTS)
-            .collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Contact.OtherCity, AfTestConsts.Contact.LastName)).cast(Map<String, Map<String, List<String>>>.class));
+        Map<String, Map<String, List<String>>> actual7 = (Map<String, Map<String, List<String>>>)
+            AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Contact.OtherCity, AfTestConsts.Contact.LastName)).cast(Map<String, Map<String, List<String>>>.class));
         Map<String, Object> actual8 = (Map<String, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.OTHER_CITY, AfTestConsts.LAST_NAME)));
         // Then
         Map<String, List<Contact>> expected = new Map<String, List<Contact>>{
@@ -1131,8 +1131,8 @@ private class SObjectCollectorsTest {
         Map<Blob, Object> actual4 = (Map<Blob, Object>) AfTestCommons.collect(ATTACHMENTS, SObjectCollectors.groupingByBlob(AfTestConsts.BODY, AfTestConsts.NAME));
         Map<Blob, Object> actual5 = (Map<Blob, Object>) AfTestCommons.collect(ATTACHMENTS, SObjectCollectors.groupingByBlob(keyMapper, downstream));
         Map<Blob, List<String>> actual6 = (Map<Blob, List<String>>) AfTestCommons.collect(ATTACHMENTS, SObjectCollectors.groupingByBlob(keyMapper, Supplier.of(Map<Blob, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Blob, Map<String, List<String>>> actual7 = (Map<Blob, Map<String, List<String>>>) Stream.of(ATTACHMENTS)
-            .collect(SObjectCollectors.groupingByBlob(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Attachment.ContentType, AfTestConsts.Attachment.Name)).cast(Map<Blob, Map<String, List<String>>>.class));
+        Map<Blob, Map<String, List<String>>> actual7 = (Map<Blob, Map<String, List<String>>>)
+            AfTestCommons.collect(ATTACHMENTS, SObjectCollectors.groupingByBlob(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Attachment.ContentType, AfTestConsts.Attachment.Name)).cast(Map<Blob, Map<String, List<String>>>.class));
         Map<Blob, Object> actual8 = (Map<Blob, Object>) AfTestCommons.collect(ATTACHMENTS, SObjectCollectors.groupingByBlob(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.CONTENT_TYPE, AfTestConsts.NAME)));
         // Then
         Map<Blob, List<Attachment>> expected = new Map<Blob, List<Attachment>>{
@@ -1188,8 +1188,8 @@ private class SObjectCollectorsTest {
         Map<Date, Object> actual4 = (Map<Date, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByDate(AfTestConsts.BIRTHDATE, AfTestConsts.LAST_NAME));
         Map<Date, Object> actual5 = (Map<Date, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByDate(keyMapper, downstream));
         Map<Date, List<String>> actual6 = (Map<Date, List<String>>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByDate(keyMapper, Supplier.of(Map<Date, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Date, Map<String, List<String>>> actual7 = (Map<Date, Map<String, List<String>>>) Stream.of(CONTACTS)
-            .collect(SObjectCollectors.groupingByDate(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Contact.Department, AfTestConsts.Contact.LastName)).cast(Map<Date, Map<String, List<String>>>.class));
+        Map<Date, Map<String, List<String>>> actual7 = (Map<Date, Map<String, List<String>>>)
+            AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByDate(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Contact.Department, AfTestConsts.Contact.LastName)).cast(Map<Date, Map<String, List<String>>>.class));
         Map<Date, Object> actual8 = (Map<Date, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.groupingByDate(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.DEPARTMENT, AfTestConsts.LAST_NAME)));
         // Then
         Map<Date, List<Contact>> expected = new Map<Date, List<Contact>>{
@@ -1239,8 +1239,8 @@ private class SObjectCollectorsTest {
         Map<Datetime, Object> actual4 = (Map<Datetime, Object>) AfTestCommons.collect(EVENTS, SObjectCollectors.groupingByDatetime(AfTestConsts.ACTIVITY_DATE_TIME, AfTestConsts.DESCRIPTION));
         Map<Datetime, Object> actual5 = (Map<Datetime, Object>) AfTestCommons.collect(EVENTS, SObjectCollectors.groupingByDatetime(keyMapper, downstream));
         Map<Datetime, List<String>> actual6 = (Map<Datetime, List<String>>) AfTestCommons.collect(EVENTS, SObjectCollectors.groupingByDatetime(keyMapper, Supplier.of(Map<Datetime, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Datetime, Map<String, List<String>>> actual7 = (Map<Datetime, Map<String, List<String>>>) Stream.of(EVENTS)
-            .collect(SObjectCollectors.groupingByDatetime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Event.Type, AfTestConsts.Event.Description)).cast(Map<Datetime, Map<String, List<String>>>.class));
+        Map<Datetime, Map<String, List<String>>> actual7 = (Map<Datetime, Map<String, List<String>>>)
+            AfTestCommons.collect(EVENTS, SObjectCollectors.groupingByDatetime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Event.Type, AfTestConsts.Event.Description)).cast(Map<Datetime, Map<String, List<String>>>.class));
         Map<Datetime, Object> actual8 = (Map<Datetime, Object>) AfTestCommons.collect(EVENTS, SObjectCollectors.groupingByDatetime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.TYPE, AfTestConsts.DESCRIPTION)));
         // Then
         Map<Datetime, List<Event>> expected = new Map<Datetime, List<Event>>{
@@ -1290,8 +1290,8 @@ private class SObjectCollectorsTest {
         Map<Time, Object> actual4 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.MONDAY_START_TIME, AfTestConsts.ID));
         Map<Time, Object> actual5 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, downstream));
         Map<Time, List<Id>> actual6 = (Map<Time, List<Id>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, Supplier.of(Map<Time, List<Id>>.class), downstream.cast(List<Id>.class)));
-        Map<Time, Map<String, List<Id>>> actual7 = (Map<Time, Map<String, List<Id>>>) Stream.of(SLOTS)
-            .collect(SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.BusinessHours.Name, AfTestConsts.BusinessHours.Id)).cast(Map<Time, Map<String, List<Id>>>.class));
+        Map<Time, Map<String, List<Id>>> actual7 = (Map<Time, Map<String, List<Id>>>)
+            AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.BusinessHours.Name, AfTestConsts.BusinessHours.Id)).cast(Map<Time, Map<String, List<Id>>>.class));
         Map<Time, Object> actual8 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.NAME, AfTestConsts.ID)));
         // Then
         Map<Time, List<BusinessHours>> expected = new Map<Time, List<BusinessHours>>{
@@ -1346,8 +1346,8 @@ private class SObjectCollectorsTest {
         Map<Integer, Object> actual4 = (Map<Integer, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByInt(AfTestConsts.NUMBER_OF_EMPLOYEES, AfTestConsts.NAME));
         Map<Integer, Object> actual5 = (Map<Integer, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByInt(keyMapper, downstream));
         Map<Integer, List<String>> actual6 = (Map<Integer, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByInt(keyMapper, Supplier.of(Map<Integer, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Integer, Map<String, List<String>>> actual7 = (Map<Integer, Map<String, List<String>>>) Stream.of(ACCOUNTS)
-            .collect(SObjectCollectors.groupingByInt(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.Type, AfTestConsts.Account.Name)).cast(Map<Integer, Map<String, List<String>>>.class));
+        Map<Integer, Map<String, List<String>>> actual7 = (Map<Integer, Map<String, List<String>>>)
+            AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByInt(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.Type, AfTestConsts.Account.Name)).cast(Map<Integer, Map<String, List<String>>>.class));
         Map<Integer, Object> actual8 = (Map<Integer, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByInt(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.TYPE, AfTestConsts.NAME)));
         // Then
         Map<Integer, List<Account>> expected = new Map<Integer, List<Account>>{
@@ -1402,8 +1402,8 @@ private class SObjectCollectorsTest {
         Map<Long, Object> actual4 = (Map<Long, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByLong(AfTestConsts.NUMBER_OF_EMPLOYEES, AfTestConsts.NAME));
         Map<Long, Object> actual5 = (Map<Long, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByLong(keyMapper, downstream));
         Map<Long, List<String>> actual6 = (Map<Long, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByLong(keyMapper, Supplier.of(Map<Long, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Long, Map<String, List<String>>> actual7 = (Map<Long, Map<String, List<String>>>) Stream.of(ACCOUNTS)
-            .collect(SObjectCollectors.groupingByLong(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.Type, AfTestConsts.Account.Name)).cast(Map<Long, Map<String, List<String>>>.class));
+        Map<Long, Map<String, List<String>>> actual7 = (Map<Long, Map<String, List<String>>>)
+            AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByLong(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.Type, AfTestConsts.Account.Name)).cast(Map<Long, Map<String, List<String>>>.class));
         Map<Long, Object> actual8 = (Map<Long, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByLong(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.TYPE, AfTestConsts.NAME)));
         // Then
         Map<Long, List<Account>> expected = new Map<Long, List<Account>>{
@@ -1458,8 +1458,8 @@ private class SObjectCollectorsTest {
         Map<Double, Object> actual4 = (Map<Double, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByDouble(AfTestConsts.BILLING_LATITUDE, AfTestConsts.NAME));
         Map<Double, Object> actual5 = (Map<Double, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByDouble(keyMapper, downstream));
         Map<Double, List<String>> actual6 = (Map<Double, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByDouble(keyMapper, Supplier.of(Map<Double, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Double, Map<String, List<String>>> actual7 = (Map<Double, Map<String, List<String>>>) Stream.of(ACCOUNTS)
-            .collect(SObjectCollectors.groupingByDouble(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.BillingCountry, AfTestConsts.Account.Name)).cast(Map<Double, Map<String, List<String>>>.class));
+        Map<Double, Map<String, List<String>>> actual7 = (Map<Double, Map<String, List<String>>>)
+            AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByDouble(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.BillingCountry, AfTestConsts.Account.Name)).cast(Map<Double, Map<String, List<String>>>.class));
         Map<Double, Object> actual8 = (Map<Double, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByDouble(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.BILLING_COUNTRY, AfTestConsts.NAME)));
         // Then
         Map<Double, List<Account>> expected = new Map<Double, List<Account>>{
@@ -1514,8 +1514,8 @@ private class SObjectCollectorsTest {
         Map<Object, Object> actual4 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(AfTestConsts.BILLING_LATITUDE, AfTestConsts.NAME));
         Map<Object, Object> actual5 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper, downstream));
         Map<Object, List<String>> actual6 = (Map<Object, List<String>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper, Supplier.of(Map<Object, List<String>>.class), downstream.cast(List<String>.class)));
-        Map<Object, Map<String, List<String>>> actual7 = (Map<Object, Map<String, List<String>>>) Stream.of(ACCOUNTS)
-            .collect(SObjectCollectors.groupingByObject(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.BillingCountry, AfTestConsts.Account.Name)).cast(Map<Object, Map<String, List<String>>>.class));
+        Map<Object, Map<String, List<String>>> actual7 = (Map<Object, Map<String, List<String>>>)
+            AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.Account.BillingCountry, AfTestConsts.Account.Name)).cast(Map<Object, Map<String, List<String>>>.class));
         Map<Object, Object> actual8 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByObject(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.BILLING_COUNTRY, AfTestConsts.NAME)));
         // Then
         Map<Object, List<Account>> expected = new Map<Object, List<Account>>{
@@ -1557,8 +1557,8 @@ private class SObjectCollectorsTest {
         Map<Boolean, List<Contact>> actual1 = (Map<Boolean, List<Contact>>) AfTestCommons.collect(CONTACTS, SObjectCollectors.partitioningBy(AfTestConsts.OTHER_COUNTRY, AfTestConsts.UK).cast(Map<Boolean, List<Contact>>.class));
         Map<Boolean, List<Contact>> actual2 = (Map<Boolean, List<Contact>>) AfTestCommons.collect(CONTACTS, SObjectCollectors.partitioningBy(predicate).cast(Map<Boolean, List<Contact>>.class));
         Map<Boolean, List<String>> actual3 = (Map<Boolean, List<String>>) AfTestCommons.collect(CONTACTS, SObjectCollectors.partitioningBy(predicate, downstream).cast(Map<Boolean, List<String>>.class));
-        Map<Boolean, Map<String, List<String>>> actual4 = (Map<Boolean, Map<String, List<String>>>) Stream.of(CONTACTS)
-            .collect(SObjectCollectors.partitioningBy(predicate, SObjectCollectors.groupingByString(AfTestConsts.Contact.OtherCity, AfTestConsts.Contact.LastName)).cast(Map<Boolean, Map<String, List<String>>>.class));
+        Map<Boolean, Map<String, List<String>>> actual4 = (Map<Boolean, Map<String, List<String>>>)
+            AfTestCommons.collect(CONTACTS, SObjectCollectors.partitioningBy(predicate, SObjectCollectors.groupingByString(AfTestConsts.Contact.OtherCity, AfTestConsts.Contact.LastName)).cast(Map<Boolean, Map<String, List<String>>>.class));
         Map<Boolean, Object> actual5 = (Map<Boolean, Object>) AfTestCommons.collect(CONTACTS, SObjectCollectors.partitioningBy(predicate, SObjectCollectors.groupingByString(AfTestConsts.OTHER_CITY, AfTestConsts.LAST_NAME)));
         // Then
         Map<Boolean, List<SObject>> expected = new Map<Boolean, List<SObject>>{
@@ -1818,8 +1818,7 @@ private class SObjectCollectorsTest {
         List<Id> actual2 = (List<Id>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.mapping(AfTestConsts.ID).cast(List<Id>.class));
         List<Id> actual3 = (List<Id>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.mapping(AfTestConsts.Account.Id).cast(List<Id>.class));
         Set<Id> actual4 = (Set<Id>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.mapping(mapper, Collector.of(Supplier.of(Set<Id>.class), SetObjectConsumers.addToIdSet(Function.identity()))));
-        Map<String, List<Id>> actual5 = (Map<String, List<Id>>) Stream.of(ACCOUNTS)
-            .collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.mapping(mapper)).cast(Map<String, List<Id>>.class));
+        Map<String, List<Id>> actual5 = (Map<String, List<Id>>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.mapping(mapper)).cast(Map<String, List<Id>>.class));
         // Then
         List<Id> expected = new List<Id>{
             ACCOUNTS[0].Id,
@@ -1877,8 +1876,7 @@ private class SObjectCollectorsTest {
         List<Contact> actual2 = (List<Contact>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(AfTestConsts.CONTACTS).cast(List<Contact>.class));
         List<Contact> actual3 = (List<Contact>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(AfTestConsts.Contact.AccountId).cast(List<Contact>.class));
         Set<SObject> actual4 = (Set<SObject>) AfTestCommons.collect(accounts, SObjectCollectors.flatMapping(mapper, Collector.of(Supplier.of(Set<SObject>.class), SetObjectConsumers.addToSObjectSet(Function.identity()))));
-        Map<String, List<Contact>> actual5 = (Map<String, List<Contact>>) Stream.of(accounts)
-            .collect(SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.flatMapping(mapper)).cast(Map<String, List<Contact>>.class));
+        Map<String, List<Contact>> actual5 = (Map<String, List<Contact>>) AfTestCommons.collect(accounts, SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.flatMapping(mapper)).cast(Map<String, List<Contact>>.class));
         // Then
         List<SObject> expected = new List<SObject>();
         for (Account acc : accounts) {
@@ -1887,7 +1885,7 @@ private class SObjectCollectorsTest {
                 expected.addAll(children);
             }
         }
-        Assert.areEqual(ObjectStream.of(expected).toList(), actual);
+        Assert.areEqual(expected, (List<SObject>) AfTestCommons.deepClone(actual, List<SObject>.class));
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
         Assert.areEqual(expected, actual3);
@@ -1926,7 +1924,7 @@ private class SObjectCollectorsTest {
         IOptional actual = (Optional) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.reducing(accumulator));
         Account actual1 = (Account) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.reducing(new Account(NumberOfEmployees = 0), sumIntFieldReducer));
         Map<String, Object> actual2 = (Map<String, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.reducing(accumulator)));
-        IOptional actual3 = (Optional) Stream.of(new List<Account>()).collect(SObjectCollectors.reducing(accumulator));
+        IOptional actual3 = (Optional) AfTestCommons.collect(new List<Account>(), SObjectCollectors.reducing(accumulator));
         // Then
         Assert.areEqual(ACCOUNTS[8], actual.get());
         Account expected2 = new Account(NumberOfEmployees =

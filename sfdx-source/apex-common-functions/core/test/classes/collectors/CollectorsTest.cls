@@ -56,7 +56,7 @@ private class CollectorsTest {
         List<Contact> actual10 = (List<Contact>) AfTestCommons.collect(CONTACTS, Collectors.toList().cast(List<SObject>.class));
         List<Object> actual11 = (List<Object>) AfTestCommons.collect(MIX, Collectors.toList());
         List<Comparable> actual12 = (List<Comparable>) AfTestCommons.collect(COMPARABLES, Collectors.toList().cast(List<Comparable>.class));
-        List<String> actual13 = (List<String>) AfTestCommons.collect(STRINGS, Collectors.toList(StringFunctions.toUpperCase()).cast(List<String>.class));
+        List<String> actual13 = (List<String>) AfTestCommons.collect(STRINGS, Collectors.toList(new AfTestCommons.ToUpperCaseFunction()).cast(List<String>.class));
         // Then
         Assert.areEqual(BOOLS, actual);
         Assert.areEqual(IDS, actual1);
@@ -1109,8 +1109,8 @@ private class CollectorsTest {
         IFunction keyMapper = new AfTestCommons.GetActiveFunction();
         // When
         List<String> actual = (List<String>) AfTestCommons.collect(PEOPLE, Collectors.mapping(mapper).cast(List<String>.class));
-        Map<Boolean, List<String>> actual1 = (Map<Boolean, List<String>>) Stream.of(PEOPLE)
-            .collect(Collectors.groupingByBool(keyMapper, Collectors.mapping(mapper)).cast(Map<Boolean, List<String>>.class));
+        Map<Boolean, List<String>> actual1 = (Map<Boolean, List<String>>)
+            AfTestCommons.collect(PEOPLE, Collectors.groupingByBool(keyMapper, Collectors.mapping(mapper)).cast(Map<Boolean, List<String>>.class));
         // Then
         List<String> expected = new List<String>{
             PEOPLE[0].getName(),

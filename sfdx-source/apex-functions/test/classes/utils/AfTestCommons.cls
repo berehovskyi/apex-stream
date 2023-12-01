@@ -40,6 +40,9 @@ private class AfTestCommons {
         public SetActiveConsumer(Boolean isActive) { this.isActive = isActive; }
         public override void accept(Object o) { ((AfPerson) o).setActive(isActive); }
     }
+    public class ToUpperCaseFunction extends Function {
+        public override Object apply(Object o) { return ((String) o).toUpperCase(); }
+    }
     public class GetIdFunction extends Function {
         public override Object apply(Object o) { return ((AfPerson) o).getAutoId(); }
     }
