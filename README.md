@@ -28,17 +28,49 @@ Install dependencies first:
 sf package install -p 04t1t000003HVTRAA4 -o me@example.com -r -w 5
 ```
 
-Install the Apex Stream Unlocked Package:
+Install the Apex Stream. The framework consists of several Unlocked Packages:
+
+- Apex Functions (required):
 
 ```sh
-sf package install -p 04t1t000003HVUeAAO -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3KoAAI -o me@example.com -r -w 10
+```
+
+- Apex Enumerables (required):
+
+```sh
+sf package install -p 04t1t000003f3KKAAY -o me@example.com -r -w 10
+```
+
+- Apex Streams (required):
+
+```sh
+sf package install -p 04t1t000003f3KUAAY -o me@example.com -r -w 10
+```
+
+- Apex Sequences (recommended):
+
+```sh
+sf package install -p 04t1t000003f3KPAAY -o me@example.com -r -w 10
+```
+
+- Apex Common Functions Core (recommended):
+
+```sh
+sf package install -p 04t1t000003f3KtAAI -o me@example.com -r -w 10
+```
+
+- Apex Common Functions Extension (optional):
+
+```sh
+sf package install -p 04t1t000003f3KyAAI -o me@example.com -r -w 10
 ```
 
 ## Key Features
 
 - Enumerables with implementations:
-    - Streams (`SObjectStream`, `ObjectStream` and primitive `DoubleStream`, `IntStream`, `LongStream`)
-    - Sequences (`SObjectSequence`, `ObjectSequence` and primitive `DoubleSequence`, `IntSequence`, `LongSequence`)
+    - Streams (`SObjectStream`, `ObjectStream` and number `DoubleStream`, `IntStream`, `LongStream`)
+    - Sequences (`SObjectSequence`, `ObjectSequence` and number `DoubleSequence`, `IntSequence`, `LongSequence`)
 - Functional Interfaces
 - Functional Abstract Classes with
     - inherited abstract methods
