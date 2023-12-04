@@ -1,6 +1,6 @@
 # virtual BaseSObjectPredicates
 
-`APIVERSION: 58`
+`APIVERSION: 59`
 
 `STATUS: ACTIVE`
 

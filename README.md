@@ -33,37 +33,37 @@ Install the Apex Stream. The framework consists of several Unlocked Packages:
 - Apex Functions (required):
 
 ```sh
-sf package install -p 04t1t000003f3KoAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3L8AAI -o me@example.com -r -w 10
 ```
 
 - Apex Enumerables (required):
 
 ```sh
-sf package install -p 04t1t000003f3KKAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3LDAAY -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
 
 ```sh
-sf package install -p 04t1t000003f3KUAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3LNAAY -o me@example.com -r -w 10
 ```
 
 - Apex Sequences (recommended):
 
 ```sh
-sf package install -p 04t1t000003f3KPAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3LIAAY -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Core (recommended):
 
 ```sh
-sf package install -p 04t1t000003f3KtAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3LSAAY -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Extension (optional):
 
 ```sh
-sf package install -p 04t1t000003f3KyAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3LXAAY -o me@example.com -r -w 10
 ```
 
 ## Key Features

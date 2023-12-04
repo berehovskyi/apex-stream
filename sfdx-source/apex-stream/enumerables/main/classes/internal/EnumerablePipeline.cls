@@ -5,10 +5,9 @@ public inherited sharing class EnumerablePipeline {
 
     public static List<Object> sort(final List<Object> objects, final IComparer comparer) {
         Validate.notNull(objects);
-        Validate.notNull(comparer);
-        final List<ObjectComparable> comparables = wrap(objects, comparer);
-        comparables.sort();
-        return unwrap(comparables, objects);
+        final List<Object> result = objects.clone();
+        result.sort(new ObjectComparator(comparer));
+        return result;
     }
 
     public static List<Object> toList(final Iterable<Object> iterable) {
@@ -51,31 +50,10 @@ public inherited sharing class EnumerablePipeline {
         return result;
     }
 
-    private static List<ObjectComparable> wrap(final List<Object> objects, final IComparer comparer) {
-        final List<ObjectComparable> comparables = new List<ObjectComparable>();
-        for (Integer i = 0, size = objects.size(); i < size; i++) {
-            comparables.add(new ObjectComparable(objects[i], comparer));
-        }
-        return comparables;
-    }
-
-    private static List<Object> unwrap(final List<ObjectComparable> comparables, final List<Object> objects) {
-        final List<Object> results = objects.clone();
-        results.clear(); // To keep it possible to cast the result
-        for (Integer i = 0, size = comparables.size(); i < size; i++) {
-            results.add(comparables[i].o);
-        }
-        return results;
-    }
-
-    private class ObjectComparable implements Comparable {
-        public final Object o;
-        private final IComparer comparer;
-        private ObjectComparable(Object o, IComparer comparer) {
-            this.o = o;
-            this.comparer = comparer;
-        }
-        public Integer compareTo(Object that) { return comparer.compare(o, ((ObjectComparable) that).o); }
+    private class ObjectComparator implements Comparator<Object> {
+        private final IComparer comp;
+        private ObjectComparator(IComparer comp) { Validate.notNull(comp); this.comp = comp; }
+        public Integer compare(Object o1, Object o2) { return comp.compare(o1, o2); }
     }
 
 }

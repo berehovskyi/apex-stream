@@ -1,6 +1,6 @@
 # virtual BaseSObjectFunctions
 
-`APIVERSION: 58`
+`APIVERSION: 59`
 
 `STATUS: ACTIVE`
 

@@ -1,6 +1,6 @@
 # virtual IntOperators
 
-`APIVERSION: 58`
+`APIVERSION: 59`
 
 `STATUS: ACTIVE`
 

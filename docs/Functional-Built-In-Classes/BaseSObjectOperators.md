@@ -1,6 +1,6 @@
 # virtual BaseSObjectOperators
 
-`APIVERSION: 58`
+`APIVERSION: 59`
 
 `STATUS: ACTIVE`
 
