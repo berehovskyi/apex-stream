@@ -39,7 +39,7 @@ sf package install -p 04t1t000003f3L8AAI -o me@example.com -r -w 10
 - Apex Enumerables (required):
 
 ```sh
-sf package install -p 04t1t000003f3LDAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3MBAAY -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
