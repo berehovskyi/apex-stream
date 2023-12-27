@@ -72,21 +72,15 @@ public virtual inherited sharing class BaseSObjectOperators {
     private class GetSObjectFieldPathSafeOperator extends Operator {
         private final List<String> path;
         private GetSObjectFieldPathSafeOperator(String fieldName) { path = fieldName.split('\\.'); }
-        public override Object apply(Object root) {
-            SObject sObj = (SObject) root;
-            for (Integer i = 0, size = path.size(); i < size; i++) {
-                String fieldName = path[i];
-                if (fieldName.endsWith('?')) { // Safe Navigation
-                    fieldName = fieldName.removeEnd('?');
-                    sObj = sObj.getSObject(fieldName);
-                    if (sObj == null) {
-                        return sObj;
-                    }
-                } else {
-                    sObj = sObj.getSObject(fieldName);
-                }
-            }
-            return sObj;
+        public override Object apply(Object obj) { return getSObject((SObject) obj, 0); }
+        private SObject getSObject(SObject sObj, Integer i) {
+            if (i >= path.size()) { return sObj; }
+            String fieldName = path[i];
+            Boolean isSafeNavigation = fieldName.endsWith('?'); // Safe Navigation
+            if (isSafeNavigation) { fieldName = fieldName.removeEnd('?'); }
+            sObj = sObj.getSObject(fieldName);
+            if (isSafeNavigation && sObj == null) { return null; }
+            return getSObject(sObj, ++i);
         }
     }
 
