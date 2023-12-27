@@ -7,6 +7,8 @@ public inherited sharing class MapIterator implements Iterator<Object> {
     private final IFunction mapper;
 
     public MapIterator(final Iterator<Object> iterator, final IFunction mapper) {
+        Validate.notNull(iterator);
+        Validate.notNull(mapper);
         this.iterator = iterator;
         this.mapper = mapper;
     }

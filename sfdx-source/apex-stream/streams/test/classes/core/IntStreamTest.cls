@@ -933,4 +933,24 @@ private class IntStreamTest {
         Assert.isTrue(((IntStream) stm1).isOperated);
     }
 
+    /**
+     * @see IntStream.run
+     */
+    @IsTest
+    private static void run() {
+        // Given
+        List<Integer> input = new List<Integer>{ 5, 1, 3, -3, 7, 9, 0, 7 };
+        List<Integer> clone = input.clone();
+        IntStream stm = (IntStream) IntStream.of(clone);
+        IRunnable stm1 = (IRunnable) IntStream.of(clone);
+        // When
+        stm.run();
+        stm1.run();
+        // Then
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((IntStream) stm).isOperated);
+        Assert.isTrue(((IntStream) stm1).isOperated);
+    }
+
+
 }

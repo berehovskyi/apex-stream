@@ -18,7 +18,7 @@
             "path": "sfdx-source/apex-stream/enumerables",
             "package": "apex-stream-enumerables",
             "versionName": "ver 3.1",
-            "versionNumber": "3.1.0.NEXT",
+            "versionNumber": "3.1.1.NEXT",
             "default": true,
             "versionDescription": "",
             "dependencies": [
@@ -35,8 +35,8 @@
         {
             "path": "sfdx-source/apex-stream/streams",
             "package": "apex-stream-streams",
-            "versionName": "ver 1.1",
-            "versionNumber": "1.1.0.NEXT",
+            "versionName": "ver 1.2",
+            "versionNumber": "1.2.0.NEXT",
             "default": false,
             "versionDescription": "",
             "dependencies": [
@@ -50,7 +50,7 @@
                 },
                 {
                     "package": "apex-stream-enumerables",
-                    "versionNumber": "3.1.0.LATEST"
+                    "versionNumber": "3.1.1.LATEST"
                 }
             ]
         },
@@ -72,7 +72,7 @@
                 },
                 {
                     "package": "apex-stream-enumerables",
-                    "versionNumber": "3.1.0.LATEST"
+                    "versionNumber": "3.1.1.LATEST"
                 }
             ]
         },
@@ -94,7 +94,7 @@
                 },
                 {
                     "package": "apex-stream-enumerables",
-                    "versionNumber": "3.1.0.LATEST"
+                    "versionNumber": "3.1.1.LATEST"
                 }
             ]
         },
@@ -116,7 +116,7 @@
                 },
                 {
                     "package": "apex-stream-enumerables",
-                    "versionNumber": "3.1.0.LATEST"
+                    "versionNumber": "3.1.1.LATEST"
                 }
             ]
         }
@@ -133,8 +133,8 @@
         "apex-common-functions-core": "0Ho1t000000sXyHCAU",
         "apex-common-functions-extension": "0Ho1t000000sXyMCAU",
         "apex-functions@1.1.0-1-main": "04t1t000003f3L8AAI",
-        "apex-stream-enumerables@3.1.0-2-main": "04t1t000003f3MBAAY",
-        "apex-stream-streams@1.1.0-1-main": "04t1t000003f3LNAAY",
+        "apex-stream-enumerables@3.1.1-1-main": "04t1t000003f3MuAAI",
+        "apex-stream-streams@1.2.0-1-main": "04t1t000003f3MzAAI",
         "apex-stream-sequences@1.1.0-1-main": "04t1t000003f3LIAAY",
         "apex-common-functions-core@1.1.0-1-main": "04t1t000003f3LSAAY",
         "apex-common-functions-extension@1.1.0-1-main": "04t1t000003f3LXAAY"

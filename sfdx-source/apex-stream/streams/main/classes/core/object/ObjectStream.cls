@@ -51,7 +51,7 @@
 @SuppressWarnings(
     'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount'
 )
-public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
+public virtual inherited sharing class ObjectStream extends ObjectEnumerable implements IRunnable {
 
     private final transient Iterator<Object> iterator;
 
@@ -1159,6 +1159,23 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable {
      */
     public virtual override Set<Object> toSet() {
         return StreamPipeline.toObjectSet(iterator());
+    }
+
+    /**
+     * @description Advances the iterator to its end.
+     * <p>Terminal Operation.</p>
+     *
+     * @example
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * IRunnable strStream = (IRunnable) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .forEach(new DebugConsumer());
+     * // the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+     * strStream.run(); // prints 'foo', 'bar', 'baz'
+     */
+    public void run() {
+        StreamPipeline.run(iterator());
     }
     // @end-group
     //</editor-fold>

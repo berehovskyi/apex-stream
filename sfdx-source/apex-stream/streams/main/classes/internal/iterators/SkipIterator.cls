@@ -8,6 +8,9 @@ public inherited sharing class SkipIterator implements Iterator<Object> {
     private Integer skipped = 0;
 
     public SkipIterator(final Iterator<Object> iterator, final Integer n) {
+        Validate.notNull(iterator);
+        Validate.notNull(n);
+        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         this.iterator = iterator;
         this.n = n;
     }

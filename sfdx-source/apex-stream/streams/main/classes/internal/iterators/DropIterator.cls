@@ -7,6 +7,8 @@ public inherited sharing class DropIterator extends BaseIterator {
     private final IPredicate predicate;
 
     public DropIterator(final Iterator<Object> iterator, final IPredicate predicate) {
+        Validate.notNull(iterator);
+        Validate.notNull(predicate);
         this.iterator = iterator;
         this.predicate = predicate;
     }

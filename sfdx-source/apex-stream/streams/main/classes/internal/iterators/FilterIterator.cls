@@ -9,6 +9,8 @@ public virtual inherited sharing class FilterIterator implements Iterator<Object
     protected Object next;
 
     public FilterIterator(final Iterator<Object> iterator, final IPredicate predicate) {
+        Validate.notNull(iterator);
+        Validate.notNull(predicate);
         this.iterator = iterator;
         this.predicate = predicate;
     }

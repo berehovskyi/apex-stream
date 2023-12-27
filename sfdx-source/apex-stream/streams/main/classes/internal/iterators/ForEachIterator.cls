@@ -7,6 +7,8 @@ public inherited sharing class ForEachIterator implements Iterator<Object> {
     private final IConsumer consumer;
 
     public ForEachIterator(final Iterator<Object> iterator, final IConsumer consumer) {
+        Validate.notNull(iterator);
+        Validate.notNull(consumer);
         this.iterator = iterator;
         this.consumer = consumer;
     }

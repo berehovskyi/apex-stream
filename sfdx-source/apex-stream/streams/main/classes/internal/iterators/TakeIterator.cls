@@ -9,6 +9,8 @@ public inherited sharing class TakeIterator implements Iterator<Object> {
     private Object next;
 
     public TakeIterator(final Iterator<Object> iterator, final IPredicate predicate) {
+        Validate.notNull(iterator);
+        Validate.notNull(predicate);
         this.iterator = iterator;
         this.predicate = predicate;
     }

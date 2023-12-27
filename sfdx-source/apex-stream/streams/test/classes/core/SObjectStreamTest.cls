@@ -1793,4 +1793,40 @@ private class SObjectStreamTest {
         Assert.isTrue(((SObjectStream) accStm2).isOperated);
     }
 
+    /**
+     * @see SObjectStream.run
+     */
+    @IsTest
+    static void run() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 100);
+        Account acc1 = new Account(Name = 'Test Acc1', NumberOfEmployees = 200);
+        Account acc2 = new Account(Name = 'Test Acc2', NumberOfEmployees = 200);
+        Account acc3 = new Account(Name = 'Test Acc3', NumberOfEmployees = 400);
+        Account acc4 = new Account(Name = 'Test Acc4');
+        List<Account> input = new List<Account>{ acc, acc1, acc2, acc3, acc4 };
+        List<Account> clone = AsTestCommons.deepClone(input);
+        List<Account> clone1 = AsTestCommons.deepClone(input);
+        String fieldName = AsTestConsts.NAME;
+        String value = 'New Name';
+        SObjectStream accStm = (SObjectStream) SObjectStream.of(clone).forEach(fieldName, value);
+        IRunnable accStm1 = (IRunnable) SObjectStream.of(clone1).forEach(fieldName, value);
+        for (Integer i = 0, size = input.size(); i < size; i++) {
+            Assert.areEqual(input[i].Name, clone[i].Name);
+            Assert.areEqual(input[i].Name, clone1[i].Name);
+        }
+        // When
+        accStm.run();
+        accStm1.run();
+        // Then
+        for (Integer i = 0, size = input.size(); i < size; i++) {
+            Assert.areEqual(value, clone[i].Name);
+            Assert.areEqual(value, clone1[i].Name);
+        }
+        Assert.areNotEqual(input, clone, Label.AS_ErrorMessage_InputNotMutated);
+        Assert.areNotEqual(input, clone1, Label.AS_ErrorMessage_InputNotMutated);
+        Assert.isTrue(((SObjectStream) accStm).isOperated);
+        Assert.isTrue(((SObjectStream) accStm1).isOperated);
+    }
+
 }

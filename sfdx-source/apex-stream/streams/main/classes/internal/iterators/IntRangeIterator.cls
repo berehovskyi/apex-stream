@@ -8,6 +8,8 @@ public inherited sharing class IntRangeIterator implements Iterator<Integer> {
     private Boolean hasNext;
 
     public IntRangeIterator(final Integer startInclusive, final Integer endInclusive) {
+        Validate.notNull(startInclusive);
+        Validate.notNull(endInclusive);
         this.endInclusive = endInclusive;
         current = startInclusive;
         hasNext = current <= endInclusive;

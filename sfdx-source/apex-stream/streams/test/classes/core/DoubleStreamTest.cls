@@ -885,4 +885,23 @@ private class DoubleStreamTest {
         Assert.isTrue(((DoubleStream) stm1).isOperated);
     }
 
+    /**
+     * @see IntStream.run
+     */
+    @IsTest
+    private static void run() {
+        // Given
+        List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
+        List<Double> clone = input.clone();
+        DoubleStream stm = (DoubleStream) DoubleStream.of(clone);
+        IRunnable stm1 = (IRunnable) DoubleStream.of(clone);
+        // When
+        stm.run();
+        stm1.run();
+        // Then
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((DoubleStream) stm).isOperated);
+        Assert.isTrue(((DoubleStream) stm1).isOperated);
+    }
+
 }

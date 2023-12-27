@@ -8,6 +8,8 @@ public inherited sharing class LongRangeIterator implements Iterator<Long> {
     private Boolean hasNext;
 
     public LongRangeIterator(final Long startInclusive, final Long endInclusive) {
+        Validate.notNull(startInclusive);
+        Validate.notNull(endInclusive);
         this.endInclusive = endInclusive;
         current = startInclusive;
         hasNext = current <= endInclusive;

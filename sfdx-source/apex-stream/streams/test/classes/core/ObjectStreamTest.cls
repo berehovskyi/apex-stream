@@ -1117,4 +1117,38 @@ private class ObjectStreamTest {
         Assert.isTrue(((ObjectStream) stm1).isOperated);
     }
 
+    /**
+     * @see ObjectStream.run
+     */
+    @IsTest
+    private static void run() {
+        // Given
+        AsPerson john = new AsPerson('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
+        AsPerson jake = new AsPerson('Jake', 33, Date.newInstance(1991, 2, 3), 1L, true);
+        AsPerson sam = new AsPerson('Sam', 16, Date.newInstance(2005, 2, 3), 2L, false);
+        AsPerson lucy = new AsPerson('Lucy', 25, Date.newInstance(1991, 2, 3), 3L, true);
+        List<AsPerson> input = new List<AsPerson>{ john, jake, sam, lucy };
+        List<AsPerson> clone = (List<AsPerson>) AsTestCommons.deepClone(input, List<AsPerson>.class);
+        List<AsPerson> clone1 = (List<AsPerson>) AsTestCommons.deepClone(input, List<AsPerson>.class);
+        Long value = 0L;
+        ObjectStream stm = (ObjectStream) ObjectStream.of(clone).forEach(new AsTestCommons.SetAutoId(value));
+        IRunnable stm1 = (IRunnable) ObjectStream.of(clone1).forEach(new AsTestCommons.SetAutoId(value));
+        for (Integer i = 0, size = input.size(); i < size; i++) {
+            Assert.areEqual(input[i].getAutoId(), clone[i].getAutoId());
+            Assert.areEqual(input[i].getAutoId(), clone1[i].getAutoId());
+        }
+        // When
+        stm.run();
+        stm1.run();
+        // Then
+        for (Integer i = 0, size = input.size(); i < size; i++) {
+            Assert.areEqual(value, clone[i].getAutoId());
+            Assert.areEqual(value, clone1[i].getAutoId());
+        }
+        Assert.areNotEqual(input, clone, Label.AS_ErrorMessage_InputNotMutated);
+        Assert.areNotEqual(input, clone1, Label.AS_ErrorMessage_InputNotMutated);
+        Assert.isTrue(((ObjectStream) stm).isOperated);
+        Assert.isTrue(((ObjectStream) stm1).isOperated);
+    }
+
 }

@@ -5,38 +5,23 @@
 public inherited sharing class StreamPipeline {
 
     public static Iterator<Integer> rangeInt(final Integer fromInt, final Integer toInt) {
-        Validate.notNull(fromInt);
-        Validate.notNull(toInt);
         return new IntRangeIterator(fromInt, toInt);
     }
 
     public static Iterator<Long> rangeLong(final Long fromLong, final Long toLong) {
-        Validate.notNull(fromLong);
-        Validate.notNull(toLong);
         return new LongRangeIterator(fromLong, toLong);
     }
 
     public static Iterator<Object> generate(final ISupplier supplier) {
-        Validate.notNull(supplier);
         return new SupplierGenerator(supplier);
-    }    
+    }
     
     public static Iterator<Object> iterate(final Object seed, final IOperator operator) {
-        Validate.notNull(operator);
         return new ReduceGenerator(seed, operator);
     }
 
     public static Iterator<Object> concat(final List<Iterable<Object>> iterables, final Type elementType) {
-        Validate.noNullElements(iterables);
-        Validate.notNull(elementType);
-        final List<Iterator<Object>> result = (List<Iterator<Object>>)
-            Type.forName('List<Iterator<' + elementType + '>>').newInstance();
-        final Iterator<Iterable<Object>> iterator = iterables.iterator();
-        while (iterator.hasNext()) {
-            final Iterable<Object> iterable = iterator.next();
-            result.add(iterable.iterator());
-        }
-        return new ConcatIterator(result);
+        return new ConcatIterator(iterables, elementType);
     }
 
     public static Iterator<Object> zip(
@@ -44,10 +29,7 @@ public inherited sharing class StreamPipeline {
         final Iterable<Object> iterable2,
         final IBiOperator combiner
     ) {
-        Validate.notNull(iterable1);
-        Validate.notNull(iterable2);
-        Validate.notNull(combiner);
-        return new ZipIterator(iterable1.iterator(), iterable2.iterator(), null, combiner);
+        return new ZipIterator(iterable1, iterable2, combiner);
     }
 
     public static Iterator<Object> zip(
@@ -56,57 +38,38 @@ public inherited sharing class StreamPipeline {
         final IBiPredicate predicate,
         final IBiOperator combiner
     ) {
-        Validate.notNull(iterable1);
-        Validate.notNull(iterable2);
-        Validate.notNull(predicate);
-        Validate.notNull(combiner);
-        return new ZipIterator(iterable1.iterator(), iterable2.iterator(), predicate, combiner);
+        return new ZipIterator(iterable1, iterable2, predicate, combiner);
     }
 
     public static Iterator<Object> filter(final Iterator<Object> source, final IPredicate predicate) {
-        Validate.notNull(source);
-        Validate.notNull(predicate);
         return new FilterIterator(source, predicate);
     }
 
     public static Iterator<Object> take(final Iterator<Object> source, final IPredicate predicate) {
-        Validate.notNull(source);
-        Validate.notNull(predicate);
         return new TakeIterator(source, predicate);
     }
 
     public static Iterator<Object> drop(final Iterator<Object> source, final IPredicate predicate) {
-        Validate.notNull(source);
-        Validate.notNull(predicate);
         return new DropIterator(source, predicate);
     }
 
     public static Iterator<Object> mapTo(final Iterator<Object> source, final IFunction mapper) {
-        Validate.notNull(source);
-        Validate.notNull(mapper);
         return new MapIterator(source, mapper);
     }
 
     public static Iterator<Object> flatMapTo(final Iterator<Object> source, final IFunction mapper) {
-        Validate.notNull(source);
-        Validate.notNull(mapper);
         return new FlatMapIterator(source, mapper);
     }
 
     public static Iterator<Object> forEach(final Iterator<Object> source, final IConsumer consumer) {
-        Validate.notNull(source);
-        Validate.notNull(consumer);
         return new ForEachIterator(source, consumer);
     }
 
     public static Iterator<Object> distinct(final Iterator<Object> source) {
-        Validate.notNull(source);
-        return new DistinctIterator(source, null);
+        return new DistinctIterator(source);
     }
 
     public static Iterator<Object> distinct(final Iterator<Object> source, final IFunction classifier) {
-        Validate.notNull(source);
-        Validate.notNull(classifier);
         return new DistinctIterator(source, classifier);
     }
 
@@ -118,27 +81,18 @@ public inherited sharing class StreamPipeline {
     }
     
     public static Iterator<Object> sort(final Iterator<Object> source, final SortOrder order) {
-        Validate.notNull(order);
         return sort(source, Comparer.defaultOrder().order(order));
     }
 
     public static Iterator<Object> sort(final Iterator<Object> source, final IComparer comparer) {
-        Validate.notNull(source);
-        Validate.notNull(comparer);
         return new SortIterator(source, comparer);
     }
 
     public static Iterator<Object> lim(final Iterator<Object> source, final Integer lim) {
-        Validate.notNull(source);
-        Validate.notNull(lim);
-        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         return new LimitIterator(source, lim);
     }
 
     public static Iterator<Object> skip(final Iterator<Object> source, final Integer n) {
-        Validate.notNull(source);
-        Validate.notNull(n);
-        Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
         return new SkipIterator(source, n);
     }
 
@@ -452,6 +406,12 @@ public inherited sharing class StreamPipeline {
             result.get(predicate.test(o)).add(o);
         }
         return result;
+    }
+
+    public static void run(final Iterator<Object> iterator) {
+        while (iterator.hasNext()) {
+            iterator.next();
+        }
     }
 
 }

@@ -929,4 +929,23 @@ private class LongStreamTest {
         Assert.isTrue(((LongStream) stm1).isOperated);
     }
 
+    /**
+     * @see LongStream.run
+     */
+    @IsTest
+    private static void run() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        LongStream stm = (LongStream) LongStream.of(clone);
+        IRunnable stm1 = (IRunnable) LongStream.of(clone);
+        // When
+        stm.run();
+        stm1.run();
+        // Then
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((LongStream) stm).isOperated);
+        Assert.isTrue(((LongStream) stm1).isOperated);
+    }
+
 }

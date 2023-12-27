@@ -20,7 +20,7 @@
  *         .sum();
  */
 @SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
-public virtual inherited sharing class LongStream extends LongEnumerable {
+public virtual inherited sharing class LongStream extends LongEnumerable implements IRunnable {
 
     private final transient Iterator<Long> iterator;
 
@@ -254,7 +254,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @example
      * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
      * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-     * List<Long> concat = LongSequence.concat(longs1, longs2)
+     * List<Long> concat = LongStream.concat(longs1, longs2)
      *     .toList();
      * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
@@ -274,7 +274,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @example
      * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
      * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-     * List<Long> concat = LongSequence.concat(new List<Iterable<Long>>{ longs1, longs2 })
+     * List<Long> concat = LongStream.concat(new List<Iterable<Long>>{ longs1, longs2 })
      *     .toList();
      * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
      */
@@ -300,7 +300,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * }
      * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
      * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-     * List<Long> zip = LongSequence.zip(longs1, longs2, new SumBiOperator())
+     * List<Long> zip = LongStream.zip(longs1, longs2, new SumBiOperator())
      *     .toList();
      * // [13L, 6L, 15L, 11L, 9L, 18L, 4L, 7L]
      */
@@ -325,7 +325,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @example
      * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
      * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-     * List<Long> append = LongSequence.of(longs1)
+     * List<Long> append = LongStream.of(longs1)
      *     .append(longs2)
      *     .toList();
      * // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
@@ -347,7 +347,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @example
      * List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
      * List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-     * List<Long> append = LongSequence.of(longs1)
+     * List<Long> append = LongStream.of(longs1)
      *     .prepend(longs2)
      *     .toList();
      * // [8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L, 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L]
@@ -371,7 +371,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
+     * List<Long> filtered = LongStream.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
      *     .filter(BasePredicates.isEqual(5L))
      *     .toList(); // [5L, 5L]
      */
@@ -390,7 +390,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+     * List<Long> firstFiltered = LongStream.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
      *     .take(BasePredicates.isEqual(0L))
      *     .toList(); // [0L, 0L]
      */
@@ -410,7 +410,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+     * List<Long> rest = LongStream.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
      *     .drop(BasePredicates.isEqual(0L))
      *     .toList(); // [1L, 1L, 5L]
      */
@@ -435,7 +435,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      *     public MultiplyLongOperator(Long l) { this.l = l; }
      *     public override Object apply(Object j) { return (Long) j * l; }
      * }
-     * List<Long> doubledLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Long> doubledLongs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .mapTo(new MultiplyLongOperator(2))
      *     .toList(); // [0L, 10L, 2L, -20L]
      */
@@ -460,7 +460,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      *     public MultiplyIntFunction(Integer i) { this.i = i; }
      *     public override Object apply(Object j) { return (Long) j * i; }
      * }
-     * List<Integer> doubledInts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Integer> doubledInts = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .mapToLong(new MultiplyIntFunction(2))
      *     .toList(); // [0, 10, 2, -20]
      */
@@ -485,7 +485,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      *     public MultiplyDoubleFunction(Double d) { this.d = d; }
      *     public override Object apply(Object j) { return (Long) j * d; }
      * }
-     * List<Double> doubledDoubles = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Double> doubledDoubles = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .mapToDouble(new MultiplyDoubleFunction(2))
      *     .toList(); // [0.0, 10.0, 2.0, -20.0]
      */
@@ -508,7 +508,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class CreateAccountFunction extends Function {
      *     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
      * }
-     * List<Account> accounts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Account> accounts = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .mapToSObject(new CreateAccountFunction())
      *     .toList(); //
      * [
@@ -537,7 +537,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class ToStringFunction extends Function {
      *     public override Object apply(Object i) { return String.valueOf(i); }
      * }
-     * List<String> strings = (List<String>) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<String> strings = (List<String>) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .mapToObject(new ToStringFunction())
      *     .toList(String.class); // ['0', '5', '1', '10']
      */
@@ -563,7 +563,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      *     public MultiplyLongFunction(Long l) { this.l = l; }
      *     public override Object apply(Object o) { return new List<Long>{ ((Long) o) * l }; }
      * }
-     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .flatMapTo(new MultiplyLongFunction(2L))
      *     .toList(); // [0L, 10L, 2L, -20L]
      */
@@ -586,7 +586,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class DebugConsumer extends Consumer {
      *     public override void accept(Object o) { System.debug(o); }
      * }
-     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
      *     .toList(); // [0L, 5L, 1L, -10L ]
      */
@@ -601,7 +601,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the `LongEnumerable`
      *
      * @example
-     * List<Long> distinct = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 5L })
+     * List<Long> distinct = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 5L })
      *     .distinct()
      *     .toList(); // [0L, 5L, 1L, -10L]
      */
@@ -616,7 +616,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the `LongEnumerable`
      *
      * @example
-     * List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
+     * List<Long> sorted = LongStream.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
      *     .sort()
      *     .toList(); // [null, -10L, 0L, 1L, 5L]
      */
@@ -635,7 +635,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `order` is null
      *
      * @example
-     * List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
+     * List<Long> sorted = LongStream.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
      *     .sort(SortOrder.DESCENDING)
      *     .toList(); // [5L, 1L, 0L, -10L, null]
      */
@@ -655,7 +655,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `lim` is null
      *
      * @example
-     * List<Long> first3Longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Long> first3Longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .lim(3)
      *     .toList(); // [0L, 5L, 1L]
      */
@@ -676,7 +676,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @throws NullPointerException if `n` is null
      *
      * @example
-     * List<Long> restLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Long> restLongs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
      *     .toList(); // [5L, 1L, -10L]
      */
@@ -707,8 +707,8 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class ProductBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (Long) o1 * (Long) o2; }
      * }
-     * Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, new SumBiOperator()); // -4L
-     * Long factorialOfN = LongSequence.range(1, n).reduce(1, new ProductBiOperator());
+     * Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, new SumBiOperator()); // -4L
+     * Long factorialOfN = LongStream.range(1, n).reduce(1, new ProductBiOperator());
      */
     public virtual override Long reduce(final Long identity, final IBiOperator accumulator) {
         return (Long) StreamPipeline.reduce(iterator(), (Object) identity, accumulator);
@@ -730,7 +730,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class SumBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
      * }
-     * Long sum = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Long sum = (Long) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .reduce(new SumBiOperator())
      *     .get(); // -4L
      */
@@ -754,7 +754,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      *     public override void accept(Object container, Object o) { ((Set<Long>) container).add((Long) o); }
      * }
      * Set<Long> longs = (Set<Long>)
-     *     LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 5L, 0L })
+     *     LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L, 5L, 0L })
      *     .collect(Collector.of(Supplier.of(Set<Long>.class), new AddToLongSetBiConsumer()));
      * // [0L, 5L, 1L, -10L]
      */
@@ -777,7 +777,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class IsEvenPredicate extends Predicate {
      *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
      * }
-     * Long firstEvenLong = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Long firstEvenLong = (Long) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .find(new IsEvenPredicate())
      *     .get(); // 0L
      */
@@ -800,7 +800,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class IsEvenPredicate extends Predicate {
      *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
      * }
-     * Boolean isEveryLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Boolean isEveryLongEven = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .every(new IsEvenPredicate()); // false
      */
     public virtual override Boolean every(final IPredicate predicate) {
@@ -822,7 +822,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * public class IsEvenPredicate extends Predicate {
      *     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
      * }
-     * Boolean isSomeLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Boolean isSomeLongEven = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .some(new IsEvenPredicate()); // true
      */
     public virtual override Boolean some(final IPredicate predicate) {
@@ -836,7 +836,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the sum of elements
      * 
      * @example
-     * Long sum = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Long sum = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .sum(); // -4L
      */
     public virtual override Long sum() {
@@ -851,7 +851,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the arithmetic mean of elements
      * 
      * @example
-     * Double avg = (Double) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Double avg = (Double) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .avg()
      *     .get(); // 1.0
      */
@@ -866,7 +866,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the count of elements
      * 
      * @example
-     * Integer count = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Integer count = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .count(); // 4
      */
     public virtual override Integer count() {
@@ -880,9 +880,9 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return `true` or `false`
      * 
      * @example
-     * LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .isEmpty(); // false
-     * LongSequence.of(new List<Long>())
+     * LongStream.of(new List<Long>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
@@ -896,7 +896,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the `List<Long>` containing the stream elements
      *
      * @example
-     * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
      *     .toList(); // [5L, 1L, -10L]
      */
@@ -911,12 +911,29 @@ public virtual inherited sharing class LongStream extends LongEnumerable {
      * @return the `Set<Long>` containing the stream elements
      *
      * @example
-     * SSet<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * SSet<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
      *     .toSet(); // [5L, 1L, -10L, 0L]
      */
     public virtual override Set<Long> toSet() {
         return StreamPipeline.toLongSet(iterator());
+    }
+
+    /**
+     * @description Advances the iterator to its end.
+     * <p>Terminal Operation.</p>
+     *
+     * @example
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * IRunnable longStream = (IRunnable) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .forEach(new DebugConsumer());
+     * // the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+     * longStream.run(); // prints 0, 5, 1, -10
+     */
+    public void run() {
+        StreamPipeline.run(iterator());
     }
     // @end-group
     //</editor-fold>

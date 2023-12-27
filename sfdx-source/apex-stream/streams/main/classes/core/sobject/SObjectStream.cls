@@ -50,7 +50,7 @@
 @SuppressWarnings(
     'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount'
 )
-public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
+public virtual inherited sharing class SObjectStream extends SObjectEnumerable implements IRunnable {
 
     private final transient Iterator<SObject> iterator;
 
@@ -235,7 +235,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'fred'),
      *     new Account(Name = 'foo')
      * };
-     * List<Account> concat = SObjectSequence.concat(accounts1, accounts2)
+     * List<Account> concat = SObjectStream.concat(accounts1, accounts2)
      *     .toList(); //
      * [
      *   { Name: 'foo' },
@@ -270,7 +270,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'fred'),
      *     new Account(Name = 'foo')
      * };
-     * List<Account> concat = SObjectSequence.concat(final List<Iterable<SObject>>{ accounts1, accounts2 })
+     * List<Account> concat = SObjectStream.concat(final List<Iterable<SObject>>{ accounts1, accounts2 })
      *     .toList(); //
      * [
      *   { Name: 'foo' },
@@ -308,7 +308,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'bar', NumberOfEmployees = 100),
      *     new Account(Name = 'baz', NumberOfEmployees = 600)
      * };
-     * SObjectSequence.zip(
+     * SObjectStream.zip(
      *     triggerOld,
      *     triggerNew,
      *     BiOperator.minBy(Comparator.comparing(BaseSObjectFunctions.get(Account.AnnualRevenue)))
@@ -365,7 +365,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'bar', NumberOfEmployees = 100),
      *     new Account(Name = 'baz', NumberOfEmployees = 600)
      * };
-     * SObjectSequence.zip(
+     * SObjectStream.zip(
      *     triggerOld,
      *     triggerNew,
      *     new ContainsAnyBiPredicate('Name', 'a'),
@@ -406,7 +406,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'fred'),
      *     new Account(Name = 'foo')
      * };
-     * List<Account> append = SObjectSequence.of(accounts1)
+     * List<Account> append = SObjectStream.of(accounts1)
      *     .append(accounts2)
      *     .toList(); //
      * [
@@ -443,7 +443,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'fred'),
      *     new Account(Name = 'foo')
      * };
-     * List<Account> prepend = SObjectSequence.of(accounts1)
+     * List<Account> prepend = SObjectStream.of(accounts1)
      *     .prepend(accounts2)
      *     .toList(); //
      * [
@@ -490,7 +490,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'bar', NumberOfEmployees = 200),
      *     new Account(Name = 'baz', NumberOfEmployees = 300)
      * };
-     * List<Account> filtered = SObjectSequence.of(accounts)
+     * List<Account> filtered = SObjectStream.of(accounts)
      *     .filter(new ContainsPredicate('Name', 'a'))
      *     .toList(); //
      * [
@@ -529,7 +529,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'baz', NumberOfEmployees = 300),
      *     new Account(Name = 'foo', NumberOfEmployees = 100)
      * };
-     * List<Account> firstMatched = SObjectSequence.of(accounts)
+     * List<Account> firstMatched = SObjectStream.of(accounts)
      *     .take(new ContainsPredicate('Name', 'a'))
      *     .toList(); //
      * [
@@ -569,7 +569,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'baz', NumberOfEmployees = 300),
      *     new Account(Name = 'foo', NumberOfEmployees = 100)
      * };
-     * List<Account> rest = SObjectSequence.of(accounts)
+     * List<Account> rest = SObjectStream.of(accounts)
      *     .drop(new ContainsPredicate('Name', 'a'))
      *     .toList(); //
      * [
@@ -605,7 +605,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Id = '001000000000002AAA', Name = 'bar');
      * Account acc3 = new Account(Id = '001000000000003AAA', Name = 'baz');
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Contact> contacts = SObjectSequence.of(accounts)
+     * List<Contact> contacts = SObjectStream.of(accounts)
      *     .mapTo(new MapToContactOperator())
      *     .toList(); //
      * [
@@ -641,7 +641,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new OpportunityLineItem(Quantity = 20, UnitPrice = 2000),
      *     new OpportunityLineItem(Quantity = 50, UnitPrice = 1000)
      * };
-     * List<Integer> totalPrices = SObjectSequence.of(items)
+     * List<Integer> totalPrices = SObjectStream.of(items)
      *     .mapToInt(new TotalPriceFunction())
      *     .toList(); // [10000, 40000, 5000]
      */
@@ -672,7 +672,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new OpportunityLineItem(Quantity = 2000, UnitPrice = 200000),
      *     new OpportunityLineItem(Quantity = 5000, UnitPrice = 100000)
      * };
-     * List<Long> totalPrices = SObjectSequence.of(items)
+     * List<Long> totalPrices = SObjectStream.of(items)
      *     .mapToLong(new TotalPriceFunction())
      *     .toList(); // [100000000, 400000000, 500000000]
      */
@@ -722,7 +722,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *   Double newYorkLat = 40.7128;
      *   Double newYorkLon = -74.0060;
      *   List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     *   List<Double> haversineDistancesFromNyInKms = SObjectSequence.of(accounts)
+     *   List<Double> haversineDistancesFromNyInKms = SObjectStream.of(accounts)
      *       .mapToDouble(new HaversineDistanceFunction(newYorkLat, newYorkLon))
      *       .toList(); // [4129.0861, 5570.2221, 5837.2409]
      */
@@ -756,7 +756,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'Foo'),
      *     new Account(Name = 'bar')
      * };
-     * List<String> normalizedNames = (List<String>) SObjectSequence.of(accounts)
+     * List<String> normalizedNames = (List<String>) SObjectStream.of(accounts)
      *     .mapToObject(new GetFieldValueToLowerCaseFunction('Name'))
      *     .toList(String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
      */
@@ -782,7 +782,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *         Account acc = ((Account) o);
      *         String payload = acc?.Payload__c;
      *         if (String.isBlank(payload)) { return null; }
-     *         return SObjectSequence.of((List<Contact>) JSON.deserialize(payload, List<Contact>.class))
+     *         return SObjectStream.of((List<Contact>) JSON.deserialize(payload, List<Contact>.class))
      *             .forEach(Contact.AccountId, acc.Id);
      *     }
      * }
@@ -801,7 +801,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     Name = 'baz'
      * );
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Contact> contacts = SObjectSequence.of(accounts)
+     * List<Contact> contacts = SObjectStream.of(accounts)
      *     .flatMapTo(new MapPayloadToContacts())
      *     .toList(); //
      * [
@@ -832,7 +832,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *         Account acc = ((Account) o);
      *         List<Account> childAccounts = acc?.ChildAccounts;
      *         if (childAccounts?.isEmpty() != false) { return null; }
-     *         return SObjectSequence.of(childAccounts).mapToInt(Account.NumberOfEmployees);
+     *         return SObjectStream.of(childAccounts).mapToInt(Account.NumberOfEmployees);
      *     }
      * }
      * Account acc1 = new Account(NumberOfEmployees = 100);
@@ -848,7 +848,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * );
      * Account parentAcc3 = new Account(Name = 'baz');
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
-     * List<Integer> numberOfEmployees = SObjectSequence.of(parentAccounts)
+     * List<Integer> numberOfEmployees = SObjectStream.of(parentAccounts)
      *     .flatMapToInt(new MapToNumberOfEmployees())
      *     .toList(); // [100, 200, 500]
      */
@@ -874,7 +874,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *         Account acc = ((Account) o);
      *         List<Account> childAccounts = acc?.ChildAccounts;
      *         if (childAccounts?.isEmpty() != false) { return null; }
-     *         return SObjectSequence.of(childAccounts).mapToLong(Account.NumberOfEmployees);
+     *         return SObjectStream.of(childAccounts).mapToLong(Account.NumberOfEmployees);
      *     }
      * }
      * Account acc1 = new Account(NumberOfEmployees = 100);
@@ -890,7 +890,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * );
      * Account parentAcc3 = new Account(Name = 'baz');
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
-     * List<Long> numberOfEmployees = SObjectSequence.of(parentAccounts)
+     * List<Long> numberOfEmployees = SObjectStream.of(parentAccounts)
      *     .flatMapToLong(new MapToNumberOfEmployees())
      *     .toList(); // [100, 200, 500]
      */
@@ -916,7 +916,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *         Account acc = ((Account) o);
      *         List<Account> childAccounts = acc?.ChildAccounts;
      *         if (childAccounts?.isEmpty() != false) { return null; }
-     *         return SObjectSequence.of(childAccounts).mapToDouble(Account.AnnualRevenue);
+     *         return SObjectStream.of(childAccounts).mapToDouble(Account.AnnualRevenue);
      *     }
      * }
      * Account acc1 = new Account(AnnualRevenue = 10.8);
@@ -932,7 +932,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * );
      * Account parentAcc3 = new Account(Name = 'baz');
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
-     * List<Double> annualRevenues = SObjectSequence.of(parentAccounts)
+     * List<Double> annualRevenues = SObjectStream.of(parentAccounts)
      *     .flatMapToDouble(new MapToAnnualRevenue())
      *     .toList(); // [10.8, 5.5, 6.0]
      */
@@ -958,7 +958,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *         Account acc = ((Account) o);
      *         List<Account> childAccounts = acc?.ChildAccounts;
      *         if (childAccounts?.isEmpty() != false) { return null; }
-     *         return SObjectSequence.of(childAccounts).mapToObject(Account.Name);
+     *         return SObjectStream.of(childAccounts).mapToObject(Account.Name);
      *     }
      * }
      * Account acc1 = new Account(Name = 'qux');
@@ -974,7 +974,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * );
      * Account parentAcc3 = new Account(Name = 'baz');
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
-     * List<String> names = (List<String>) SObjectSequence.of(parentAccounts)
+     * List<String> names = (List<String>) SObjectStream.of(parentAccounts)
      *     .flatMapToObject(new MapToName())
      *     .toList(String.class); // ['qux', fred', 'thud']
      */
@@ -1013,7 +1013,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(AnnualRevenue = 200);
      * Account acc3 = new Account(AnnualRevenue = 500);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Account> processedAccounts = SObjectSequence.of(accounts)
+     * List<Account> processedAccounts = SObjectStream.of(accounts)
      *     .forEach(new SetRatingConsumer())
      *     .toList(); //
      * [
@@ -1040,7 +1040,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'foo'),
      *     new Account(Name = 'bar')
      * };
-     * List<Account> distinct = SObjectSequence.of(accounts)
+     * List<Account> distinct = SObjectStream.of(accounts)
      *     .distinct()
      *     .toList(); //
      * [
@@ -1077,7 +1077,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'Foo'),
      *     new Account(Name = 'bar')
      * };
-     * List<Account> distinct = SObjectSequence.of(accounts)
+     * List<Account> distinct = SObjectStream.of(accounts)
      *     .distinct(new GetFieldValueToLowerCaseFunction('Name'))
      *     .toList(); //
      * [
@@ -1101,7 +1101,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Name = 'bar', AnnualRevenue = 200);
      * Account acc3 = new Account(Name = 'baz', AnnualRevenue = 500);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Account> sortedAccounts = SObjectSequence.of(accounts)
+     * List<Account> sortedAccounts = SObjectStream.of(accounts)
      *     .sort()
      *     .toList(); //
      * [
@@ -1146,7 +1146,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc5 = new Account(Name = 'bar', AnnualRevenue = 800);
      * Account acc6 = new Account(Name = 'baz', AnnualRevenue = 100);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3, acc4, acc5, acc6 };
-     * List<Account> sortedAccounts = SObjectSequence.of(accounts)
+     * List<Account> sortedAccounts = SObjectStream.of(accounts)
      *     .sort(new NameAndThenAnnualRevenueComparer())
      *     .toList(); //
      * [
@@ -1178,7 +1178,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Name = 'bar');
      * Account acc3 = new Account(Name = 'baz');
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Account> first2 = SObjectSequence.of(accounts)
+     * List<Account> first2 = SObjectStream.of(accounts)
      *     .lim(2)
      *     .toList(); //
      * [
@@ -1207,7 +1207,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Name = 'bar');
      * Account acc3 = new Account(Name = 'baz');
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Account> rest = SObjectSequence.of(accounts)
+     * List<Account> rest = SObjectStream.of(accounts)
      *     .skip(1)
      *     .toList(); //
      * [
@@ -1249,7 +1249,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc3 = new Account(Name = 'baz', AnnualRevenue = 500);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
      * Account identity = new Account(Name = 'total', AnnualRevenue = 0);
-     * Account total = (Account) SObjectSequence.of(accounts)
+     * Account total = (Account) SObjectStream.of(accounts)
      *     .reduce(identity, new AnnualRevenueAccumulator()); // { Name: 'total', AnnualRevenue: 800 }
      */
     public virtual override SObject reduce(final SObject identity, final IBiOperator accumulator) {
@@ -1282,7 +1282,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Name = 'bar', AnnualRevenue = 200);
      * Account acc3 = new Account(Name = 'baz', AnnualRevenue = 500);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * Account total = (Account) SObjectSequence.of(accounts)
+     * Account total = (Account) SObjectStream.of(accounts)
      *     .reduce(new AccountAccumulator())
      *     .get(); // { Name: 'foo;bar;baz', AnnualRevenue: 800 }
      */
@@ -1317,7 +1317,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc4 = new Account(Name = 'qux', NumberOfEmployees = 100);
      * Account acc5 = new Account(Name = 'bar', NumberOfEmployees = 300);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3, acc4, acc5 };
-     * Set<String> names = (Set<String>) SObjectSequence.of(accounts)
+     * Set<String> names = (Set<String>) SObjectStream.of(accounts)
      *     .collect(Collector.of(Supplier.of(Set<String>.class), new AddToStringSetBiConsumer('Name')));
      * // ['foo', 'bar', 'baz', 'qux']
      * // Cascaded operation
@@ -1362,7 +1362,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * // the Collector implementing the cascaded group-by operation.
      * ICollector groupByNumberOfEmployeesCollector = Collector.of(mapSupplier, accumulator);
      * Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>>)
-     *     SObjectSequence.of(accounts)
+     *     SObjectStream.of(accounts)
      *     .collect(groupByNumberOfEmployeesCollector); //
      * {
      *   100: ['foo', 'qux'],
@@ -1371,7 +1371,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * }
      * // The same result can be obtained by using built-in Collectors
      * Map<Integer, List<String>> namesByNumberOfEmployees1 = (Map<Integer, List<String>>)
-     *     SObjectSequence.of(accounts)
+     *     SObjectStream.of(accounts)
      *     .collect(
      *         SObjectCollectors.groupingByInt('NumberOfEmployees', 'Name')
      *             .cast(Map<Integer, List<String>>.class)
@@ -1409,7 +1409,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'bar', NumberOfEmployees = 200),
      *     new Account(Name = 'baz', NumberOfEmployees = 300)
      * };
-     * Account firstFound = (Account) SObjectSequence.of(accounts)
+     * Account firstFound = (Account) SObjectStream.of(accounts)
      *     .find(new ContainsPredicate('Name', 'a'))
      *     .get(); // { Name: 'bar', NumberOfEmployees: 200 }
      */
@@ -1445,7 +1445,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'bar', NumberOfEmployees = 200),
      *     new Account(Name = 'baz', NumberOfEmployees = 300)
      * };
-     * Boolean doesEveryAccountNameContainA = SObjectSequence.of(accounts)
+     * Boolean doesEveryAccountNameContainA = SObjectStream.of(accounts)
      *     .every(new ContainsPredicate('Name', 'a')); // false
      */
     public virtual override Boolean every(final IPredicate predicate) {
@@ -1480,7 +1480,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      *     new Account(Name = 'bar', NumberOfEmployees = 200),
      *     new Account(Name = 'baz', NumberOfEmployees = 300)
      * };
-     * Boolean doesSomeAccountNameContainA = SObjectSequence.of(accounts)
+     * Boolean doesSomeAccountNameContainA = SObjectStream.of(accounts)
      *     .some(new ContainsPredicate('Name', 'a')); // true
      */
     public virtual override Boolean some(final IPredicate predicate) {
@@ -1498,7 +1498,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Name = 'bar', NumberOfEmployees = 200);
      * Account acc3 = new Account(Name = 'baz', NumberOfEmployees = 300);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * Integer count = SObjectSequence.of(accounts)
+     * Integer count = SObjectStream.of(accounts)
      *     .count(); // 3
      */
     public virtual override Integer count() {
@@ -1516,9 +1516,9 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Name = 'bar', NumberOfEmployees = 200);
      * Account acc3 = new Account(Name = 'baz', NumberOfEmployees = 300);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * SObjectSequence.of(accounts)
+     * SObjectStream.of(accounts)
      *     .isEmpty(); // false
-     * SObjectSequence.of(new List<Account>())
+     * SObjectStream.of(new List<Account>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {
@@ -1536,7 +1536,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      * Account acc2 = new Account(Name = 'bar', NumberOfEmployees = 200);
      * Account acc3 = new Account(Name = 'baz', NumberOfEmployees = 300);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Account> accounts1 = SObjectSequence.of(accounts)
+     * List<Account> accounts1 = SObjectStream.of(accounts)
      *     .skip(1)
      *     .toList(); //
      * [
@@ -1757,6 +1757,30 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable {
      */
     public virtual override Map<Boolean, List<SObject>> partition(final IPredicate predicate) {
         return (Map<Boolean, List<SObject>>) StreamPipeline.partition(iterator(), predicate, SObject.class);
+    }
+
+    /**
+     * @description Advances the iterator to its end.
+     * <p>Terminal Operation.</p>
+     * 
+     * @example
+     * Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
+     * Account acc2 = new Account(Name = 'bar', AnnualRevenue = 200);
+     * Account acc3 = new Account(Name = 'baz', AnnualRevenue = 500);
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * IRunnable accStream = (IRunnable) SObjectStream.of(accounts)
+     *     .forEach(Account.AnnualRevenue, 0);
+     * // the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+     * accStream.run();
+     * // 
+     * [
+     *   { Name: 'foo', AnnualRevenue: 0 },
+     *   { Name: 'bar', AnnualRevenue: 0 },
+     *   { Name: 'baz', AnnualRevenue: 0 }
+     * ]
+     */
+    public void run() {
+        StreamPipeline.run(iterator());
     }
     // @end-group
     //</editor-fold>

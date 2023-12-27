@@ -8,6 +8,8 @@ public virtual inherited sharing class SortIterator extends BaseIterator {
     private Iterator<Object> sortIterator;
 
     public SortIterator(final Iterator<Object> iterator, final IComparer comparer) {
+        Validate.notNull(iterator);
+        Validate.notNull(comparer);
         this.iterator = iterator;
         this.comparer = comparer;
     }

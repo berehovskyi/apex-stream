@@ -8,6 +8,9 @@ public inherited sharing class LimitIterator implements Iterator<Object> {
     private Integer i = 0;
 
     public LimitIterator(final Iterator<Object> iterator, final Integer lim) {
+        Validate.notNull(iterator);
+        Validate.notNull(lim);
+        Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
         this.iterator = iterator;
         this.lim = lim;
     }

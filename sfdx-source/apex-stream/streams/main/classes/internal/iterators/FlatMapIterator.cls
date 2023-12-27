@@ -8,6 +8,8 @@ public inherited sharing class FlatMapIterator extends BaseIterator {
     private Iterator<Object> innerIterator;
 
     public FlatMapIterator(final Iterator<Object> iterator, final IFunction mapper) {
+        Validate.notNull(iterator);
+        Validate.notNull(mapper);
         this.iterator = iterator;
         this.mapper = mapper;
     }

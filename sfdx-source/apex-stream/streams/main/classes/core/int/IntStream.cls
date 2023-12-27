@@ -20,7 +20,7 @@
  *         .sum();
  */
 @SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
-public virtual inherited sharing class IntStream extends IntEnumerable {
+public virtual inherited sharing class IntStream extends IntEnumerable implements IRunnable {
 
     private final transient Iterator<Integer> iterator;
 
@@ -916,6 +916,23 @@ public virtual inherited sharing class IntStream extends IntEnumerable {
      */
     public virtual override Set<Integer> toSet() {
         return StreamPipeline.toIntSet(iterator());
+    }
+
+    /**
+     * @description Advances the iterator to its end.
+     * <p>Terminal Operation.</p>
+     *
+     * @example
+     * public class DebugConsumer extends Consumer {
+     *     public override void accept(Object o) { System.debug(o); }
+     * }
+     * IRunnable intStream = (IRunnable) IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .forEach(new DebugConsumer());
+     * // the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+     * intStream.run(); // prints 0, 5, 1, -10
+     */
+    public void run() {
+        StreamPipeline.run(iterator());
     }
     // @end-group
     //</editor-fold>

@@ -6,6 +6,7 @@ public inherited sharing class SupplierGenerator implements Iterator<Object> {
     private final ISupplier supplier;
 
     public SupplierGenerator(final ISupplier supplier) {
+        Validate.notNull(supplier);
         this.supplier = supplier;
     }
 
