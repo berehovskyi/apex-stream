@@ -27,7 +27,7 @@ public virtual inherited sharing class StringSuppliers {
      * uuid.get(); // '57b0a848-68e6-2eb8-96ce-2ec0691f51b8'
      */
     public static Supplier uuid() {
-        return new Uuid();
+        return new UuidSupplier();
     }
 
     /**
@@ -36,9 +36,9 @@ public virtual inherited sharing class StringSuppliers {
      * @param format autonumber format
      *
      * @return the `Supplier`
-     * 
+     *
      * @throws IllegalArgumentException if `format` does not match '\\S*\\{\\d+\\}' pattern
-     * 
+     *
      * @example
      * ISupplier autonumber = StringSuppliers.autonumber('A-{0000}');
      * autonumber.get(); // 'A-0000'
@@ -53,24 +53,8 @@ public virtual inherited sharing class StringSuppliers {
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-    private class Uuid extends Supplier {
-        private final String pattern = '{0}-{1}-{2}-{3}-{4}';
-        private final String algorithmName = 'MD5';
-        public override Object get() {
-            String hex = randomHex();
-            return String.format(pattern, new List<String>{
-                hex.substring(0, 8),
-                hex.substring(8, 12),
-                hex.substring(12, 16),
-                hex.substring(16, 20),
-                hex.substring(20)
-            });
-        }
-        private String randomHex() {
-            return EncodingUtil.convertToHex(
-                Crypto.generateDigest(algorithmName, Blob.valueOf(Crypto.getRandomLong().format()))
-            );
-        }
+    private class UuidSupplier extends Supplier {
+        public override Object get() { return UUID.randomUUID().toString(); }
     }
 
     private class AutoNumber extends Supplier {
