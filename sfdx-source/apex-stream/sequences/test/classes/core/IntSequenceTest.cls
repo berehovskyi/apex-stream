@@ -161,11 +161,11 @@ private class IntSequenceTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 3, 9, 7, 5, 9, 3, 7 };
         List<Integer> input1 = new List<Integer>{ 8, 3, 6, 4, 4, 9, 1, 0 };
-        IntEnumerable seq = IntSequence.of(input).union((Iterable<Integer>) input1);
+        IntEnumerable seq = IntSequence.of(input).union(input1);
         IntEnumerable seq1 = IntSequence.of(input).union(IntSequence.of(input1));
-        IntEnumerable seq2 = IntSequence.of(input).intersect((Iterable<Integer>) input1);
+        IntEnumerable seq2 = IntSequence.of(input).intersect(input1);
         IntEnumerable seq3 = IntSequence.of(input).intersect(IntSequence.of(input1));
-        IIntEnumerable seq4 = IntSequence.of(input).except((Iterable<Integer>) input1);
+        IIntEnumerable seq4 = IntSequence.of(input).except(input1);
         IIntEnumerable seq5 = IntSequence.of(input).except(IntSequence.of(input1));
         // When
         List<Integer> actual = seq.toList();

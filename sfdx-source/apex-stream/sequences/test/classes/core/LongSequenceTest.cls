@@ -161,11 +161,11 @@ private class LongSequenceTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
         List<Long> input1 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-        LongEnumerable seq = LongSequence.of(input).union((Iterable<Long>) input1);
+        LongEnumerable seq = LongSequence.of(input).union(input1);
         LongEnumerable seq1 = LongSequence.of(input).union(LongSequence.of(input1));
-        LongEnumerable seq2 = LongSequence.of(input).intersect((Iterable<Long>) input1);
+        LongEnumerable seq2 = LongSequence.of(input).intersect(input1);
         LongEnumerable seq3 = LongSequence.of(input).intersect(LongSequence.of(input1));
-        ILongEnumerable seq4 = LongSequence.of(input).except((Iterable<Long>) input1);
+        ILongEnumerable seq4 = LongSequence.of(input).except(input1);
         ILongEnumerable seq5 = LongSequence.of(input).except(LongSequence.of(input1));
         // When
         List<Long> actual = seq.toList();

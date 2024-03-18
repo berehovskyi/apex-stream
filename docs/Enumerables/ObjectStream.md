@@ -2,7 +2,7 @@
 
 `SUPPRESSWARNINGS`
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 
@@ -149,62 +149,6 @@ ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people));
 ```
 
 
-##### `public static ObjectEnumerable of(List<Object> objects)`
-
-Returns a `ObjectEnumerable` created from `List<Object>`.
-
-###### Parameters
-
-|Param|Description|
-|---|---|
-|`objects`|the list|
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`ObjectEnumerable`|the new `ObjectEnumerable`|
-
-###### Throws
-
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `objects` is null|
-
-###### Example
-```apex
-ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people));
-```
-
-
-##### `public static ObjectEnumerable of(Set<Object> objects)`
-
-Returns a `ObjectEnumerable` created from `Set<Object>`.
-
-###### Parameters
-
-|Param|Description|
-|---|---|
-|`objects`|the set|
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`ObjectEnumerable`|the new `ObjectEnumerable`|
-
-###### Throws
-
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `objects` is null|
-
-###### Example
-```apex
-ObjectEnumerable peopleStream = ObjectStream.of(new Set<Object>(people));
-```
-
-
 ##### `public static ObjectEnumerable ofNullable(Iterable<Object> iterable)`
 
 Returns a `ObjectEnumerable` created from `Iterable<Object>` if non-null, otherwise returns an empty `ObjectEnumerable`.
@@ -225,51 +169,6 @@ Returns a `ObjectEnumerable` created from `Iterable<Object>` if non-null, otherw
 ```apex
 ObjectEnumerable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
 ObjectEnumerable emptyStream = ObjectStream.ofNullable(null);
-```
-
-
-##### `public static ObjectEnumerable ofNullable(List<Object> objects)`
-
-Returns a `ObjectEnumerable` created from `objects` if non-null, otherwise returns an empty `ObjectEnumerable`.
-
-###### Parameters
-
-|Param|Description|
-|---|---|
-|`objects`|the list|
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`ObjectEnumerable`|the new `ObjectEnumerable` if `objects` is non-null, otherwise an empty `ObjectEnumerable`|
-
-###### Example
-```apex
-ObjectEnumerable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
-ObjectEnumerable emptyStream = ObjectStream.ofNullable((List<Object>) null);
-```
-
-
-##### `public static ObjectEnumerable ofNullable(Set<Object> objects)`
-
-Returns a `ObjectEnumerable` created from `objects` if non-null, otherwise returns an empty `ObjectEnumerable`.
-
-###### Parameters
-
-|Param|Description|
-|---|---|
-|`objects`|the set|
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`ObjectEnumerable`|the new `ObjectEnumerable` if `objects` is non-null, otherwise an empty `ObjectEnumerable`|
-
-###### Example
-```apex
-ObjectEnumerable peopleStream = ObjectStream.ofNullable(new Set<Object>(people));
 ```
 
 

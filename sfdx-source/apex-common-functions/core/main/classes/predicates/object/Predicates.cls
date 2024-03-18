@@ -276,7 +276,7 @@ public virtual inherited sharing class Predicates extends BasePredicates {
      *
      * @example
      * Predicates.isNotIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
-     * Predicates.isNotIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * Predicates.isNotIn(getNameFunc, new Set<String>{ 'John', 'Jim' });
      * Predicates.isNotIn(getNameFunc, nameStream);
      */
     public static Predicate isNotIn(final IFunction function, final Iterable<Object> container) {
@@ -297,7 +297,7 @@ public virtual inherited sharing class Predicates extends BasePredicates {
      *
      * @example
      * Predicates.isNotIn(new List<Object>{ 'John', 'Jim' });
-     * Predicates.isNotIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * Predicates.isNotIn(new Set<String>{ 'John', 'Jim' });
      * Predicates.isNotIn(nameStream);
      */
     public static Predicate isNotIn(final Iterable<Object> container) {

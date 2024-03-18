@@ -2,7 +2,7 @@
 
 `SUPPRESSWARNINGS`
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 
@@ -1028,7 +1028,7 @@ Returns a `Predicate` that tests the input SObject if the the value of the `fiel
 ###### Example
 ```apex
 SObjectPredicates.isIn('Name', new List<Object>{ 'John', 'Jim' });
-SObjectPredicates.isIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicates.isIn('Parent?.Name', new Set<String>{ 'John', 'Jim' });
 SObjectPredicates.isIn('Parent.Name', nameStream);
 ```
 

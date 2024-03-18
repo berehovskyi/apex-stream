@@ -92,7 +92,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *
      * @example
      * IntEnumerable intStream = IntStream.of(new List<Integer>{ 0, 5, 1, -10 });
-     * IntEnumerable intStream = IntStream.of((Iterable<Integer>) new Set<Integer>{ 0, 5, 1, -10 });
+     * IntEnumerable intStream = IntStream.of(new Set<Integer>{ 0, 5, 1, -10 });
      */
     public static IntEnumerable of(final Iterable<Integer> integers) {
         Validate.notNull(integers);
@@ -217,7 +217,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `supplier` or `supplier` is null
-     * 
+     *
      * @example
      * public class IsLessPredicate extends Predicate {
      *     private final Integer d;
@@ -293,7 +293,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
-     * 
+     *
      * @example
      * public class SumBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (Integer) o1 + (Integer) o2; }
@@ -453,7 +453,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MultiplyLongFunction extends Function {
      *     private final Long l;
@@ -478,7 +478,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MultiplyDoubleFunction extends Function {
      *     private final Double d;
@@ -503,7 +503,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class CreateAccountFunction extends Function {
      *     public override Object apply(Object i) { return new Account(AnnualRevenue = (Integer) i); }
@@ -532,7 +532,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class ToStringFunction extends Function {
      *     public override Object apply(Object i) { return String.valueOf(i); }
@@ -581,13 +581,13 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
-     * 
+     *
      * @example
      * public class DebugConsumer extends Consumer {
      *     public override void accept(Object o) { System.debug(o); }
      * }
      * List<Integer> ints = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10 
+     *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
      *     .toList(); // [0, 5, 1, -10 ]
      */
     public virtual override IntEnumerable forEach(final IConsumer consumer) {
@@ -833,7 +833,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * <p>Terminal Operation.</p>
      *
      * @return the sum of elements
-     * 
+     *
      * @example
      * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .sum(); // -4
@@ -848,7 +848,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * <p>Terminal Operation.</p>
      *
      * @return the arithmetic mean of elements
-     * 
+     *
      * @example
      * Double avg = (Double) IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .avg()
@@ -863,7 +863,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .count(); // 4
@@ -877,7 +877,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
      *     .isEmpty(); // false

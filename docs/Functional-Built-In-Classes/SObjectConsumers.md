@@ -1,6 +1,6 @@
 # virtual SObjectConsumers
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 

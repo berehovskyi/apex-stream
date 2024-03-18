@@ -125,7 +125,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * SObjectEnumerable accStream = SObjectStream.of(new List<Account>(accounts));
-     * SObjectEnumerable accStream = SObjectStream.of((Iterable<Account>) new Set<Account>(accounts));
+     * SObjectEnumerable accStream = SObjectStream.of(new Set<Account>(accounts));
      * SObjectEnumerable accStream = SObjectStream.of(stream1);
      */
     public static SObjectEnumerable of(final Iterable<SObject> iterable) {
@@ -144,7 +144,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * SObjectEnumerable accStream = SObjectStream.ofNullable(new List<Account>(accounts));
-     * SObjectEnumerable accStream = SObjectStream.ofNullable((Iterable<Account>) new Set<Account>(accounts));
+     * SObjectEnumerable accStream = SObjectStream.ofNullable(new Set<Account>(accounts));
      * SObjectEnumerable accStream = SObjectStream.ofNullable(stream1);
      */
     public static SObjectEnumerable ofNullable(final Iterable<SObject> iterable) {
@@ -345,9 +345,9 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * public class ContainsAnyBiPredicate extends BiPredicate {
      *     private final String fieldName;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) { 
-     *         this.fieldName = fieldName; 
-     *         this.s = s; 
+     *     public ContainsPredicate(String fieldName, String s) {
+     *         this.fieldName = fieldName;
+     *         this.s = s;
      *     }
      *     public override Boolean test(Object o1, Object o2) {
      *         String value1 = (String) ((Account) o1).get(fieldName);
@@ -478,7 +478,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -517,7 +517,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -557,7 +557,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -909,7 +909,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MapToAnnualRevenue extends Function {
      *     public override Object apply(Object o) {
@@ -1130,9 +1130,9 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *         Account acc1 = (Account) o1;
      *         Account acc2 = (Account) o2;
      *         Integer nameComparison = acc1.Name.compareTo(acc2.Name);
-     *         return nameComparison != 0 
+     *         return nameComparison != 0
      *             ? nameComparison
-     *             : acc1.AnnualRevenue > acc2.AnnualRevenue 
+     *             : acc1.AnnualRevenue > acc2.AnnualRevenue
      *                 ? 1
      *                 : acc1.AnnualRevenue == acc2.AnnualRevenue
      *                     ? 0
@@ -1397,7 +1397,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -1433,7 +1433,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -1468,7 +1468,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -1598,19 +1598,6 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
     public virtual override Set<Object> toSet(final IFunction mapper) {
         return StreamPipeline.toObjectSet(iterator(), mapper);
     }
-
-//    /**
-//     * @description Accumulates `Id` elements into a `Set<Id>`.
-//     * <p>Terminal Operation.</p>
-//     *
-//     * @return the `Set<Id>` containing the stream elements field values
-//     *
-//     * @example
-//     * Set<Id> accountIds = SObjectStream.of(accounts).toIdSet();
-//     */
-//    public virtual override Set<Id> toIdSet() {
-//        return toIdSet('Id');
-//    }
 
     /**
      * @description Accumulates `Id` elements returned by `mapper` into a `Set<Id>`.
@@ -1762,7 +1749,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
     /**
      * @description Advances the iterator to its end.
      * <p>Terminal Operation.</p>
-     * 
+     *
      * @example
      * Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
      * Account acc2 = new Account(Name = 'bar', AnnualRevenue = 200);
@@ -1772,7 +1759,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     .forEach(Account.AnnualRevenue, 0);
      * // the `forEach` intermediate operation will not be performed until a terminal operation is initiated
      * accStream.run();
-     * // 
+     * //
      * [
      *   { Name: 'foo', AnnualRevenue: 0 },
      *   { Name: 'bar', AnnualRevenue: 0 },

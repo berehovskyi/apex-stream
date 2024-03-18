@@ -29,7 +29,7 @@ private class SObjectStreamTest {
         SObjectEnumerable accStm2 = SObjectStream.ofNullable(input);
         SObjectEnumerable accStm3 = SObjectStream.ofNullable(new Set<SObject>(input));
         ISObjectEnumerable accStm4 = SObjectStream.ofNullable(input1);
-        ISObjectEnumerable accStm5 = SObjectStream.ofNullable((Iterable<Account>) input2);
+        ISObjectEnumerable accStm5 = SObjectStream.ofNullable(input2);
         ISObjectEnumerable accStm6 = SObjectStream.of(input.iterator());
         // When
         List<Account> actual = accStm.toList();
@@ -58,7 +58,7 @@ private class SObjectStreamTest {
         Assert.isTrue(((SObjectStream) accStm5).isOperated);
         Assert.isTrue(((SObjectStream) accStm6).isOperated);
     }
-    
+
     /**
      * @see SObjectStream.generate
      */
@@ -258,11 +258,11 @@ private class SObjectStreamTest {
         IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
-        SObjectEnumerable stm = SObjectStream.of(input).union((Iterable<SObject>) input1);
+        SObjectEnumerable stm = SObjectStream.of(input).union(input1);
         SObjectEnumerable stm1 = SObjectStream.of(input).union(SObjectStream.of(input1));
-        SObjectEnumerable stm2 = SObjectStream.of(input).union((Iterable<Account>) input1, getName);
-        ISObjectEnumerable stm3 = SObjectStream.of(input).union((Iterable<Account>) input1, fieldName);
-        ISObjectEnumerable stm4 = SObjectStream.of(input).union((Iterable<SObject>) input1, field);
+        SObjectEnumerable stm2 = SObjectStream.of(input).union(input1, getName);
+        ISObjectEnumerable stm3 = SObjectStream.of(input).union(input1, fieldName);
+        ISObjectEnumerable stm4 = SObjectStream.of(input).union(input1, field);
         // When
         List<Account> actual = stm.toList();
         List<Account> actual1 = stm1.toList();
@@ -304,11 +304,11 @@ private class SObjectStreamTest {
         IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
-        SObjectEnumerable stm = SObjectStream.of(input).intersect((Iterable<Object>) input1);
+        SObjectEnumerable stm = SObjectStream.of(input).intersect(input1);
         SObjectEnumerable stm1 = SObjectStream.of(input).intersect(SObjectStream.of(input1));
-        SObjectEnumerable stm2 = SObjectStream.of(input).intersect((Iterable<Account>) input1, getName);
-        ISObjectEnumerable stm3 = SObjectStream.of(input).intersect((Iterable<Account>) input1, fieldName);
-        ISObjectEnumerable stm4 = SObjectStream.of(input).intersect((Iterable<SObject>) input1, field);
+        SObjectEnumerable stm2 = SObjectStream.of(input).intersect(input1, getName);
+        ISObjectEnumerable stm3 = SObjectStream.of(input).intersect(input1, fieldName);
+        ISObjectEnumerable stm4 = SObjectStream.of(input).intersect(input1, field);
         // When
         List<Account> actual = stm.toList();
         List<Account> actual1 = stm1.toList();
@@ -350,11 +350,11 @@ private class SObjectStreamTest {
         IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
-        SObjectEnumerable stm = SObjectStream.of(input).except((Iterable<Object>) input1);
+        SObjectEnumerable stm = SObjectStream.of(input).except(input1);
         SObjectEnumerable stm1 = SObjectStream.of(input).except(SObjectStream.of(input1));
-        SObjectEnumerable stm2 = SObjectStream.of(input).except((Iterable<Account>) input1, getName);
-        ISObjectEnumerable stm3 = SObjectStream.of(input).except((Iterable<Account>) input1, fieldName);
-        ISObjectEnumerable stm4 = SObjectStream.of(input).except((Iterable<SObject>) input1, field);
+        SObjectEnumerable stm2 = SObjectStream.of(input).except(input1, getName);
+        ISObjectEnumerable stm3 = SObjectStream.of(input).except(input1, fieldName);
+        ISObjectEnumerable stm4 = SObjectStream.of(input).except(input1, field);
         // When
         List<Account> actual = stm.toList();
         List<Account> actual1 = stm1.toList();
@@ -1104,7 +1104,7 @@ private class SObjectStreamTest {
     @IsTest
     private static void reduce() {
         // Given
-        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200); 
+        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200);
         Account acc1 = new Account(Name = 'Test Acc1', NumberOfEmployees = 100);
         Account acc2 = new Account(Name = 'Test Acc2', NumberOfEmployees = 0);
         Account acc3 = new Account(Name = 'Test Acc3', NumberOfEmployees = 400);

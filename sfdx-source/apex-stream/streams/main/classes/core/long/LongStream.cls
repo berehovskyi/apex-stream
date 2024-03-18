@@ -92,7 +92,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *
      * @example
      * LongEnumerable longStream = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 });
-     * LongEnumerable longStream = LongStream.of((Iterable<Long>) new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longStream = LongStream.of(new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable of(final Iterable<Long> longs) {
         Validate.notNull(longs);
@@ -217,7 +217,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `supplier` or `supplier` is null
-     * 
+     *
      * @example
      * public class IsLessPredicate extends Predicate {
      *     private final Long d;
@@ -293,7 +293,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
-     * 
+     *
      * @example
      * public class SumBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
@@ -453,7 +453,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MultiplyIntFunction extends Function {
      *     private final Integer i;
@@ -478,7 +478,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MultiplyDoubleFunction extends Function {
      *     private final Double d;
@@ -503,7 +503,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class CreateAccountFunction extends Function {
      *     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
@@ -532,7 +532,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class ToStringFunction extends Function {
      *     public override Object apply(Object i) { return String.valueOf(i); }
@@ -834,7 +834,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * <p>Terminal Operation.</p>
      *
      * @return the sum of elements
-     * 
+     *
      * @example
      * Long sum = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .sum(); // -4L
@@ -849,7 +849,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * <p>Terminal Operation.</p>
      *
      * @return the arithmetic mean of elements
-     * 
+     *
      * @example
      * Double avg = (Double) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .avg()
@@ -864,7 +864,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .count(); // 4
@@ -878,7 +878,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .isEmpty(); // false

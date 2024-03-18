@@ -27,7 +27,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param iterable the other iterable
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -48,7 +48,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param iterable the other iterable
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -70,7 +70,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param iterable the other iterable
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -93,7 +93,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param classifier the classifier function
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `classifier` is null
      *
      * @example
@@ -118,7 +118,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param iterable the other iterable
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -141,7 +141,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param classifier the classifier function
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `classifier` is null
      *
      * @example
@@ -157,7 +157,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      */
     public virtual ObjectEnumerable intersect(final Iterable<Object> iterable, final IFunction classifier) {
         return (ObjectEnumerable) distinct(classifier).filter(BasePredicates.isIn(
-            classifier, (Iterable<Object>) EnumerablePipeline.toObjectSet(iterable, classifier)
+            classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ));
     }
 
@@ -168,7 +168,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param iterable the other iterable
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -195,7 +195,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param classifier the classifier function
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `classifier` is null
      *
      * @example
@@ -215,7 +215,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      */
     public virtual ObjectEnumerable except(final Iterable<Object> iterable, final IFunction classifier) {
         return (ObjectEnumerable) distinct(classifier).filter(BasePredicates.isIn(
-            classifier, (Iterable<Object>) EnumerablePipeline.toObjectSet(iterable, classifier)
+            classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ).negate());
     }
 
@@ -241,9 +241,9 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param classifier the classifier function
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `classifier` is null
-     * 
+     *
      * @example
      * public class ToLowerCaseOperator extends Operator {
      *     public override Object apply(Object o) { return ((String) o).toLowerCase(); }
@@ -263,9 +263,9 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param predicate the predicate
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `predicate` is null
-     * 
+     *
      * @example
      * public class ContainsPredicate extends Predicate {
      *     private final String s;
@@ -287,9 +287,9 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param predicate the predicate
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `predicate` is null
-     * 
+     *
      * @example
      * public class ContainsPredicate extends Predicate {
      *     private final String s;
@@ -311,7 +311,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param predicate the predicate
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
@@ -463,7 +463,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param mapper the mapping function which must produce `Iterable<Object>`
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
@@ -486,9 +486,9 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param mapper the mapping function which must produce `Iterable<Integer>`
      *
      * @return the new `IntEnumerable`
-     * 
+     *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class LengthFunction extends Function {
      *     public override Object apply(Object o) { return new List<Integer>{ ((String) o).length() }; }
@@ -552,7 +552,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param mapper the mapping function which must produce `Iterable<SObject>`
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
@@ -631,9 +631,9 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param comparer the comparer
      *
      * @return the new `ObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `comparer` is null
-     * 
+     *
      * @example
      * public class SecondLetterComparer extends Comparer {
      *     public override Integer compare(Object o1, Object o2) {
@@ -910,7 +910,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param comparer the comparer
      *
      * @return the `Optional` Object
-     * 
+     *
      * @throws NullPointerException if `comparer` is null
      *
      * @example
@@ -918,7 +918,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      *    public override Integer compare(Object o1, Object o2) {
      *        Integer len1 = o1 == null ? -1 : ((String) o1).length();
      *        Integer len2 = o2 == null ? -1 : ((String) o2).length();
-     *        return len1 > len2 ? 1 : len1 == len2 ? 0 : -1; 
+     *        return len1 > len2 ? 1 : len1 == len2 ? 0 : -1;
      *    }
      * }
      * String maxLen = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', null })
@@ -936,7 +936,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param comparer comparer the comparer
      *
      * @return the `Optional` Object
-     * 
+     *
      * @throws NullPointerException if `comparer` is null
      *
      * @example
@@ -944,7 +944,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      *    public override Integer compare(Object o1, Object o2) {
      *        Integer len1 = o1 == null ? -1 : ((String) o1).length();
      *        Integer len2 = o2 == null ? -1 : ((String) o2).length();
-     *        return len1 > len2 ? 1 : len1 == len2 ? 0 : -1; 
+     *        return len1 > len2 ? 1 : len1 == len2 ? 0 : -1;
      *    }
      * }
      * String minLen = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz', 'quux', 'a', null })
@@ -1004,9 +1004,9 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * @param elementType the element type argument of List
      *
      * @return the `List<Object>` containing the iterable elements that can be cast to `List<T>`
-     * 
+     *
      * @throws NullPointerException if `elementType` is null
-     * 
+     *
      * @example
      * List<String> strings = (List<String>.class)
      *     [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz', 'qux' })

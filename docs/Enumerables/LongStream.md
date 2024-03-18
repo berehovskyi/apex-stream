@@ -2,7 +2,7 @@
 
 `SUPPRESSWARNINGS`
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 
@@ -117,7 +117,7 @@ Returns a `LongEnumerable` created from `longs`.
 ###### Example
 ```apex
 LongEnumerable longStream = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 });
-LongEnumerable longStream = LongStream.of((Iterable<Long>) new Set<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longStream = LongStream.of(new Set<Long>{ 0, 5L, 1L, -10 });
 ```
 
 

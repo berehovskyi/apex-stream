@@ -1,6 +1,6 @@
 # virtual Predicates
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 
@@ -347,7 +347,7 @@ Returns a `Predicate` that tests the input object if the result returned by the 
 ###### Example
 ```apex
 Predicates.isNotIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
-Predicates.isNotIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+Predicates.isNotIn(getNameFunc, new Set<String>{ 'John', 'Jim' });
 Predicates.isNotIn(getNameFunc, nameStream);
 ```
 

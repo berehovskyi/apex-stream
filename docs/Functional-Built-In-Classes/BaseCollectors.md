@@ -1,6 +1,6 @@
 # virtual BaseCollectors
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 

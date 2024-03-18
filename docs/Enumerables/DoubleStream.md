@@ -2,7 +2,7 @@
 
 `SUPPRESSWARNINGS`
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 
@@ -117,7 +117,7 @@ Returns a `DoubleEnumerable` created from `doubles`.
 ###### Example
 ```apex
 DoubleEnumerable doubleStream = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI });
-DoubleEnumerable doubleStream = DoubleStream.of((Iterable<Double>) new Set<Double>{ 0.1, 5, 1.5, Math.PI });
+DoubleEnumerable doubleStream = DoubleStream.of(new Set<Double>{ 0.1, 5, 1.5, Math.PI });
 ```
 
 

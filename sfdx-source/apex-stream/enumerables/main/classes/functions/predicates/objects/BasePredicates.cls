@@ -103,7 +103,7 @@ public virtual inherited sharing class BasePredicates {
      *
      * @example
      * BasePredicates.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
-     * BasePredicates.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * BasePredicates.isIn(getNameFunc, new Set<String>{ 'John', 'Jim' });
      * BasePredicates.isIn(getNameFunc, nameEnumerable);
      */
     public static Predicate isIn(final IFunction function, final Iterable<Object> container) {
@@ -124,7 +124,7 @@ public virtual inherited sharing class BasePredicates {
      *
      * @example
      * BasePredicates.isIn(new List<Object>{ 'John', 'Jim' });
-     * BasePredicates.isIn((Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * BasePredicates.isIn(new Set<String>{ 'John', 'Jim' });
      * BasePredicates.isIn(nameEnumerable);
      */
     public static Predicate isIn(final Iterable<Object> container) {

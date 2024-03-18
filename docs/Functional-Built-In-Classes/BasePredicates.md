@@ -1,6 +1,6 @@
 # virtual BasePredicates
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 
@@ -139,7 +139,7 @@ Returns a `Predicate` that tests the input object if the result returned by the 
 ###### Example
 ```apex
 BasePredicates.isIn(getNameFunc, new List<Object>{ 'John', 'Jim' });
-BasePredicates.isIn(getNameFunc, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+BasePredicates.isIn(getNameFunc, new Set<String>{ 'John', 'Jim' });
 BasePredicates.isIn(getNameFunc, nameEnumerable);
 ```
 

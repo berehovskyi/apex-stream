@@ -56,7 +56,7 @@ private class DoubleStreamTest {
         Assert.isTrue(((DoubleStream) stm5).isOperated);
         Assert.isTrue(((DoubleStream) stm6).isOperated);
     }
-    
+
     /**
      * @see DoubleStream.generate
      */
@@ -178,11 +178,11 @@ private class DoubleStreamTest {
         // Given
         List<Double> input = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
         List<Double> input1 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-        DoubleEnumerable stm = DoubleStream.of(input).union((Iterable<Double>) input1);
+        DoubleEnumerable stm = DoubleStream.of(input).union(input1);
         DoubleEnumerable stm1 = DoubleStream.of(input).union(DoubleStream.of(input1));
-        DoubleEnumerable stm2 = DoubleStream.of(input).intersect((Iterable<Double>) input1);
+        DoubleEnumerable stm2 = DoubleStream.of(input).intersect(input1);
         DoubleEnumerable stm3 = DoubleStream.of(input).intersect(DoubleStream.of(input1));
-        IDoubleEnumerable stm4 = DoubleStream.of(input).except((Iterable<Double>) input1);
+        IDoubleEnumerable stm4 = DoubleStream.of(input).except(input1);
         IDoubleEnumerable stm5 = DoubleStream.of(input).except(DoubleStream.of(input1));
         // When
         List<Double> actual = stm.toList();

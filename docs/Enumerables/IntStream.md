@@ -2,7 +2,7 @@
 
 `SUPPRESSWARNINGS`
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 
@@ -117,7 +117,7 @@ Returns a `IntEnumerable` created from `integers`.
 ###### Example
 ```apex
 IntEnumerable intStream = IntStream.of(new List<Integer>{ 0, 5, 1, -10 });
-IntEnumerable intStream = IntStream.of((Iterable<Integer>) new Set<Integer>{ 0, 5, 1, -10 });
+IntEnumerable intStream = IntStream.of(new Set<Integer>{ 0, 5, 1, -10 });
 ```
 
 

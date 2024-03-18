@@ -27,7 +27,7 @@ private class IntStreamTest {
         IntEnumerable stm2 = IntStream.ofNullable(input);
         IntEnumerable stm3 = IntStream.ofNullable(new Set<Integer>(input));
         IIntEnumerable stm4 = IntStream.ofNullable(input1);
-        IIntEnumerable stm5 = IntStream.ofNullable((Iterable<Integer>) input2);
+        IIntEnumerable stm5 = IntStream.ofNullable(input2);
         IIntEnumerable stm6 = IntStream.of(input.iterator());
         // When
         List<Integer> actual = stm.toList();
@@ -93,7 +93,7 @@ private class IntStreamTest {
         }
         Assert.areEqual(0, actual3.size());
     }
-    
+
     /**
      * @see IntStream.generate
      */
@@ -218,7 +218,7 @@ private class IntStreamTest {
         Assert.isTrue(((IntStream) stm).isOperated);
         Assert.isTrue(((IntStream) stm1).isOperated);
     }
-    
+
 
     /**
      * @see IntEnumerable.union
@@ -230,11 +230,11 @@ private class IntStreamTest {
         // Given
         List<Integer> input = new List<Integer>{ 5, 3, 9, 7, 5, 9, 3, 7 };
         List<Integer> input1 = new List<Integer>{ 8, 3, 6, 4, 4, 9, 1, 0 };
-        IntEnumerable stm = IntStream.of(input).union((Iterable<Integer>) input1);
+        IntEnumerable stm = IntStream.of(input).union(input1);
         IntEnumerable stm1 = IntStream.of(input).union(IntStream.of(input1));
-        IntEnumerable stm2 = IntStream.of(input).intersect((Iterable<Integer>) input1);
+        IntEnumerable stm2 = IntStream.of(input).intersect(input1);
         IntEnumerable stm3 = IntStream.of(input).intersect(IntStream.of(input1));
-        IIntEnumerable stm4 = IntStream.of(input).except((Iterable<Integer>) input1);
+        IIntEnumerable stm4 = IntStream.of(input).except(input1);
         IIntEnumerable stm5 = IntStream.of(input).except(IntStream.of(input1));
         // When
         List<Integer> actual = stm.toList();
@@ -474,7 +474,7 @@ private class IntStreamTest {
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((IntStream) stm).isOperated);
         Assert.isTrue(((IntStream) stm1).isOperated);
-        
+
     }
 
     /**
@@ -670,7 +670,7 @@ private class IntStreamTest {
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((IntStream) stm).isOperated);
         Assert.isTrue(((IntStream) stm1).isOperated);
-        
+
     }
 
     /**

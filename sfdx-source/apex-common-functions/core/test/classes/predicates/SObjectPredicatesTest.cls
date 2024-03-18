@@ -12,7 +12,7 @@ private class SObjectPredicatesTest {
     static {
         new SObjectPredicates();
     }
-    
+
     /**
      * @see SObjectPredicates.isCompared
      */
@@ -363,8 +363,8 @@ private class SObjectPredicatesTest {
         IPredicate notNullPredicate = SObjectPredicates.isNotNull();
         IPredicate accEqualPredicate = SObjectPredicates.isEqual(INPUT[2]);
         IPredicate accNotEqualPredicate = SObjectPredicates.isNotEqual(INPUT[2]);
-        IPredicate accInPredicate = SObjectPredicates.isIn((Iterable<Account>) subset);
-        IPredicate accNotInPredicate = SObjectPredicates.isNotIn((Iterable<Account>) subset);
+        IPredicate accInPredicate = SObjectPredicates.isIn(subset);
+        IPredicate accNotInPredicate = SObjectPredicates.isNotIn(subset);
         // When
         for (Account acc : INPUT) {
             Assert.areEqual(acc == null, nullPredicate.test(acc));
@@ -375,5 +375,5 @@ private class SObjectPredicatesTest {
             Assert.areEqual(!subset.contains(acc), accNotInPredicate.test(acc));
         }
     }
-    
+
 }

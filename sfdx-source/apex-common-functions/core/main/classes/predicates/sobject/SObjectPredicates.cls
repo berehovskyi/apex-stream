@@ -804,7 +804,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *
      * @example
      * SObjectPredicates.isIn('Name', new List<Object>{ 'John', 'Jim' });
-     * SObjectPredicates.isIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicates.isIn('Parent?.Name', new Set<String>{ 'John', 'Jim' });
      * SObjectPredicates.isIn('Parent.Name', nameStream);
      */
     public static Predicate isIn(final String fieldName, final Iterable<Object> container) {
@@ -826,7 +826,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *
      * @example
      * SObjectPredicates.isIn(Account.Name, new List<Object>{ 'John', 'Jim' });
-     * SObjectPredicates.isIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicates.isIn(Account.Name, new Set<String>{ 'John', 'Jim' });
      * SObjectPredicates.isIn(Account.Name, nameStream);
      */
     public static Predicate isIn(final SObjectField field, final Iterable<Object> container) {
@@ -856,7 +856,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *
      * @example
      * SObjectPredicates.isNotIn('Name', new List<Object>{ 'John', 'Jim' });
-     * SObjectPredicates.isNotIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicates.isNotIn('Parent?.Name', new Set<String>{ 'John', 'Jim' });
      * SObjectPredicates.isNotIn('Parent.Name', nameStream);
      */
     public static Predicate isNotIn(final String fieldName, final Iterable<Object> container) {
@@ -878,7 +878,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *
      * @example
      * SObjectPredicates.isNotIn(Account.Name, new List<Object>{ 'John', 'Jim' });
-     * SObjectPredicates.isNotIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+     * SObjectPredicates.isNotIn(Account.Name, new Set<String>{ 'John', 'Jim' });
      * SObjectPredicates.isNotIn(Account.Name, nameStream);
      */
     public static Predicate isNotIn(final SObjectField field, final Iterable<Object> container) {

@@ -124,11 +124,11 @@ private class DoubleSequenceTest {
         // Given
         List<Double> input = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
         List<Double> input1 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-        DoubleEnumerable seq = DoubleSequence.of(input).union((Iterable<Double>) input1);
+        DoubleEnumerable seq = DoubleSequence.of(input).union(input1);
         DoubleEnumerable seq1 = DoubleSequence.of(input).union(DoubleSequence.of(input1));
-        DoubleEnumerable seq2 = DoubleSequence.of(input).intersect((Iterable<Double>) input1);
+        DoubleEnumerable seq2 = DoubleSequence.of(input).intersect(input1);
         DoubleEnumerable seq3 = DoubleSequence.of(input).intersect(DoubleSequence.of(input1));
-        IDoubleEnumerable seq4 = DoubleSequence.of(input).except((Iterable<Double>) input1);
+        IDoubleEnumerable seq4 = DoubleSequence.of(input).except(input1);
         IDoubleEnumerable seq5 = DoubleSequence.of(input).except(DoubleSequence.of(input1));
         // When
         List<Double> actual = seq.toList();
@@ -323,7 +323,7 @@ private class DoubleSequenceTest {
         Assert.areEqual(expected, actual1);
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
-    
+
     /**
      * @see DoubleSequence.flatMapTo
      */

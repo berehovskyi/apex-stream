@@ -93,7 +93,7 @@ private class LongStreamTest {
         }
         Assert.areEqual(0, actual3.size());
     }
-    
+
     /**
      * @see LongStream.generate
      */
@@ -229,11 +229,11 @@ private class LongStreamTest {
         // Given
         List<Long> input = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
         List<Long> input1 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-        LongEnumerable stm = LongStream.of(input).union((Iterable<Long>) input1);
+        LongEnumerable stm = LongStream.of(input).union(input1);
         LongEnumerable stm1 = LongStream.of(input).union(LongStream.of(input1));
-        LongEnumerable stm2 = LongStream.of(input).intersect((Iterable<Long>) input1);
+        LongEnumerable stm2 = LongStream.of(input).intersect(input1);
         LongEnumerable stm3 = LongStream.of(input).intersect(LongStream.of(input1));
-        ILongEnumerable stm4 = LongStream.of(input).except((Iterable<Long>) input1);
+        ILongEnumerable stm4 = LongStream.of(input).except(input1);
         ILongEnumerable stm5 = LongStream.of(input).except(LongStream.of(input1));
         // When
         List<Long> actual = stm.toList();

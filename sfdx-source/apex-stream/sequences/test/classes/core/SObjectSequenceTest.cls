@@ -167,11 +167,11 @@ private class SObjectSequenceTest {
         IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
-        SObjectEnumerable seq = SObjectSequence.of(input).union((Iterable<SObject>) input1);
+        SObjectEnumerable seq = SObjectSequence.of(input).union(input1);
         SObjectEnumerable seq1 = SObjectSequence.of(input).union(SObjectSequence.of(input1));
-        SObjectEnumerable seq2 = SObjectSequence.of(input).union((Iterable<Account>) input1, getName);
-        ISObjectEnumerable seq3 = SObjectSequence.of(input).union((Iterable<Account>) input1, fieldName);
-        ISObjectEnumerable seq4 = SObjectSequence.of(input).union((Iterable<SObject>) input1, field);
+        SObjectEnumerable seq2 = SObjectSequence.of(input).union(input1, getName);
+        ISObjectEnumerable seq3 = SObjectSequence.of(input).union(input1, fieldName);
+        ISObjectEnumerable seq4 = SObjectSequence.of(input).union(input1, field);
         // When
         List<Account> actual = seq.toList();
         List<Account> actual1 = seq1.toList();
@@ -208,11 +208,11 @@ private class SObjectSequenceTest {
         IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
-        SObjectEnumerable seq = SObjectSequence.of(input).intersect((Iterable<Object>) input1);
+        SObjectEnumerable seq = SObjectSequence.of(input).intersect(input1);
         SObjectEnumerable seq1 = SObjectSequence.of(input).intersect(SObjectSequence.of(input1));
-        SObjectEnumerable seq2 = SObjectSequence.of(input).intersect((Iterable<Account>) input1, getName);
-        ISObjectEnumerable seq3 = SObjectSequence.of(input).intersect((Iterable<Account>) input1, fieldName);
-        ISObjectEnumerable seq4 = SObjectSequence.of(input).intersect((Iterable<SObject>) input1, field);
+        SObjectEnumerable seq2 = SObjectSequence.of(input).intersect(input1, getName);
+        ISObjectEnumerable seq3 = SObjectSequence.of(input).intersect(input1, fieldName);
+        ISObjectEnumerable seq4 = SObjectSequence.of(input).intersect(input1, field);
         // When
         List<Account> actual = seq.toList();
         List<Account> actual1 = seq1.toList();
@@ -249,11 +249,11 @@ private class SObjectSequenceTest {
         IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
-        SObjectEnumerable seq = SObjectSequence.of(input).except((Iterable<Object>) input1);
+        SObjectEnumerable seq = SObjectSequence.of(input).except(input1);
         SObjectEnumerable seq1 = SObjectSequence.of(input).except(SObjectSequence.of(input1));
-        SObjectEnumerable seq2 = SObjectSequence.of(input).except((Iterable<Account>) input1, getName);
-        ISObjectEnumerable seq3 = SObjectSequence.of(input).except((Iterable<Account>) input1, fieldName);
-        ISObjectEnumerable seq4 = SObjectSequence.of(input).except((Iterable<SObject>) input1, field);
+        SObjectEnumerable seq2 = SObjectSequence.of(input).except(input1, getName);
+        ISObjectEnumerable seq3 = SObjectSequence.of(input).except(input1, fieldName);
+        ISObjectEnumerable seq4 = SObjectSequence.of(input).except(input1, field);
         // When
         List<Account> actual = seq.toList();
         List<Account> actual1 = seq1.toList();

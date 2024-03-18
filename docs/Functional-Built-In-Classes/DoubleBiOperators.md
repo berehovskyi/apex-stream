@@ -1,6 +1,6 @@
 # virtual DoubleBiOperators
 
-`APIVERSION: 59`
+`APIVERSION: 60`
 
 `STATUS: ACTIVE`
 

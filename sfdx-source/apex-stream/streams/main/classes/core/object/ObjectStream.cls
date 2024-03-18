@@ -130,38 +130,6 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
     }
 
     /**
-     * @description Returns a `ObjectEnumerable` created from `List<Object>`.
-     *
-     * @param objects the list
-     *
-     * @return the new `ObjectEnumerable`
-     *
-     * @throws NullPointerException if `objects` is null
-     *
-     * @example
-     * ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people));
-     */
-    public static ObjectEnumerable of(final List<Object> objects) {
-        return of((Iterable<Object>) objects);
-    }
-
-    /**
-     * @description Returns a `ObjectEnumerable` created from `Set<Object>`.
-     *
-     * @param objects the set
-     *
-     * @return the new `ObjectEnumerable`
-     *
-     * @throws NullPointerException if `objects` is null
-     *
-     * @example
-     * ObjectEnumerable peopleStream = ObjectStream.of(new Set<Object>(people));
-     */
-    public static ObjectEnumerable of(final Set<Object> objects) {
-        return of((Iterable<Object>) objects);
-    }
-
-    /**
      * @description Returns a `ObjectEnumerable` created from `Iterable<Object>` if non-null,
      * otherwise returns an empty `ObjectEnumerable`.
      *
@@ -177,39 +145,6 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
     public static ObjectEnumerable ofNullable(final Iterable<Object> iterable) {
         if (iterable == null) { return empty(); }
         return new ObjectStream(iterable.iterator());
-    }
-
-    /**
-     * @description Returns a `ObjectEnumerable` created from `objects` if non-null,
-     * otherwise returns an empty `ObjectEnumerable`.
-     *
-     * @param objects the list
-     *
-     * @return the new `ObjectEnumerable` if `objects` is non-null,
-     * otherwise an empty `ObjectEnumerable`
-     *
-     * @example
-     * ObjectEnumerable peopleStream = ObjectStream.ofNullable(new List<Person>(people));
-     * ObjectEnumerable emptyStream = ObjectStream.ofNullable((List<Object>) null);
-     */
-    public static ObjectEnumerable ofNullable(final List<Object> objects) {
-        return ofNullable((Iterable<Object>) objects);
-    }
-
-    /**
-     * @description Returns a `ObjectEnumerable` created from `objects` if non-null,
-     * otherwise returns an empty `ObjectEnumerable`.
-     *
-     * @param objects the set
-     *
-     * @return the new `ObjectEnumerable` if `objects` is non-null,
-     * otherwise an empty `ObjectEnumerable`
-     *
-     * @example
-     * ObjectEnumerable peopleStream = ObjectStream.ofNullable(new Set<Object>(people));
-     */
-    public static ObjectEnumerable ofNullable(final Set<Object> objects) {
-        return ofNullable((Iterable<Object>) objects);
     }
 
     /**
@@ -323,7 +258,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
-     * 
+     *
      * @example
      * public class ConcatBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (String) o1 + '-' + (String) o2; }
@@ -355,7 +290,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *
      * @throws NullPointerException if `iterable1`, `iterable2`,
      * `predicate` or `combiner` is null
-     * 
+     *
      * @example
      * public class ContainsAnyBiPredicate extends BiPredicate {
      *     private final String s;
@@ -912,7 +847,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * @return the `Object` result of the reduction
      *
      * @throws NullPointerException if `accumulator` is null
-     * 
+     *
      * @example
      * public class ConcatenateBiOperator extends BiOperator {
      *     private final String separator;
@@ -1106,7 +1041,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .count(); // 3
@@ -1120,7 +1055,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .isEmpty(); // false

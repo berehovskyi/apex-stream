@@ -25,7 +25,7 @@ or install as an Unlocked Package using the CLI:
 Install dependencies first:
 
 ```sh
-sf package install -p 04t1t000003HVTRAA4 -o me@example.com -r -w 5
+sf package install -p 04t1t000003f3UVAAY -o me@example.com -r -w 5
 ```
 
 Install the Apex Stream. The framework consists of several Unlocked Packages:
@@ -33,37 +33,37 @@ Install the Apex Stream. The framework consists of several Unlocked Packages:
 - Apex Functions (required):
 
 ```sh
-sf package install -p 04t1t000003f3L8AAI -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3UaAAI -o me@example.com -r -w 10
 ```
 
 - Apex Enumerables (required):
 
 ```sh
-sf package install -p 04t1t000003f3MBAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3UfAAI -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
 
 ```sh
-sf package install -p 04t1t000003f3LNAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3V4AAI -o me@example.com -r -w 10
 ```
 
 - Apex Sequences (recommended):
 
 ```sh
-sf package install -p 04t1t000003f3LIAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3UkAAI -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Core (recommended):
 
 ```sh
-sf package install -p 04t1t000003f3LSAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3UpAAI -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Extension (optional):
 
 ```sh
-sf package install -p 04t1t000003f3LXAAY -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3UuAAI -o me@example.com -r -w 10
 ```
 
 ## Key Features
@@ -402,7 +402,7 @@ List<Account> accountsForTheSecondPage = Stream.of(accounts)
 
 - ### Sorting
 
-A `sort` operation returns a sorted stream considering the sort order and `Comparator` function.
+A `sort` operation returns a sorted stream considering the sort order and `Comparer` function.
 
 Sort accounts according to default order:
 
@@ -504,7 +504,7 @@ Integer maxInt = (Integer) Stream.of(integers)
 ```
 
 On a reference stream, search reduction is operated according to
-a comparator and returns a result as [Optional](#optional).
+a comparer and returns a result as [Optional](#optional).
 
 Find an optional account with a max `AnnualRevenue`:
 
