@@ -10,6 +10,43 @@ Inspired by [Java Stream API](https://docs.oracle.com/en/java/javase/18/docs/api
 slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable) and
 [js Array.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
 
+## Table of Contents
+<details>
+  <summary>Click to expand!</summary>
+
+- [Apex Stream Framework](#apex-stream-framework)
+  * [Installation](#installation)
+    + [Dependencies](#dependencies)
+  * [Modules and Key Features](#modules-and-key-features)
+  * [Introduction](#introduction)
+  * [Get Started](#get-started)
+    + [Note](#note)
+  * [Stream Sources](#stream-sources)
+    + [Stream of Iterable](#stream-of-iterable)
+    + [Empty Stream](#empty-stream)
+    + [Infinite Stream](#infinite-stream)
+  * [Merging Streams](#merging-streams)
+    + [Concatenation](#concatenation)
+    + [Zipping](#zipping)
+  * [Intermediate Operations](#intermediate-operations)
+    + [Set Operations](#set-operations)
+    + [Filtering](#filtering)
+    + [Iterating](#iterating)
+    + [Mapping](#mapping)
+    + [Limit and Skip](#limit-and-skip)
+    + [Sorting](#sorting)
+  * [Terminal Operations](#terminal-operations)
+    + [Matching](#matching)
+    + [Reduction](#reduction)
+    + [Collecting](#collecting)
+    + [Fast Collecting](#fast-collecting)
+    + [Run](#run)
+  * [Optional](#optional)
+  * [Examples](#examples)
+  * [Documentation](#documentation)
+  * [User Guide (in development)](#user-guide-in-development)
+</details>
+
 ## Installation
 
 <a href="https://githubsfdeploy.herokuapp.com?owner=berehovskyi&repo=apex-stream&ref=main">
@@ -39,7 +76,7 @@ sf package install -p 04t1t000003f3UaAAI -o me@example.com -r -w 10
 - Apex Enumerables (required):
 
 ```sh
-sf package install -p 04t1t000003f3UfAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000003f3VdAAI -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
@@ -66,23 +103,32 @@ sf package install -p 04t1t000003f3UpAAI -o me@example.com -r -w 10
 sf package install -p 04t1t000003f3UuAAI -o me@example.com -r -w 10
 ```
 
-## Key Features
+## Modules and Key Features
 
-- Enumerables with implementations:
+- Apex Functions:
+  - Functional Interfaces
+  - Functional Abstract Classes with
+    - inherited abstract methods
+    - default and static methods for functional composition
+
+- Apex Enumerables:
+  - Enumerables with implementations:
     - Streams (`SObjectStream`, `ObjectStream` and number `DoubleStream`, `IntStream`, `LongStream`)
     - Sequences (`SObjectSequence`, `ObjectSequence` and number `DoubleSequence`, `IntSequence`, `LongSequence`)
-- Functional Interfaces
-- Functional Abstract Classes with
-    - inherited abstract methods
-    - default methods
-- Functional Built-In Classes with common Functional Abstract Classes implementations
-- Collectors (`Collector`) with common built-ins (`SObjectCollectors`, `Collectors`)
-- Optionals
+  - Base Functional Built-In Classes
+  - Optionals 
+
+- Apex Common Functions:
+  - Functional Built-in Classes with common Functional Abstract Classes implementations
+  - Built-in Collectors (`SObjectCollectors`, `Collectors`)
 
 ## Introduction
 
-**Apex Stream Framework** is built on custom `Iterables` (hereinafter - `Enumerables`) that allows processing a sequence of elements supporting sequential aggregate operations,
-providing a convenient declarative API. 2 types implement `Enumerable` - `Stream` and `Sequence`.
+**Apex Stream Framework** is built on custom `Iterables` (hereinafter - `Enumerables`) that allows processing
+a sequence of elements supporting sequential aggregate operations,
+providing a convenient declarative API. 
+
+There are `2` implementations of `Enumerable` - `Stream` and `Sequence`.
 
 `Stream` is lazy. Computation on the source data is only performed when the terminal operation is initiated,
 and source elements are consumed only as needed. Also, a `Stream` can be operated on
@@ -174,7 +220,7 @@ DoubleEnumerable firstTenRandomStream = Stream.generate(DoubleSuppliers.random()
 
 Another way to create an infinite stream is passing an `Operator` and a `seed` to an `iterate` method.
 A `Stream` is produced by iterative application of `Operator` to an initial element `seed`,
-producing a `Stream` consisting of `seed`, `operator(seed)`, `operator(operator(seed))`, etc:
+producing a `Stream` consisting of `seed`, `operator(seed)`, `operator(operator(seed))`, etc.:
 
 ```apex
 IntEnumerable incrementalStream = Stream.iterate(5, IntOperators.increment());
@@ -248,7 +294,8 @@ until a terminal operation is invoked.*
 
 - ### Set Operations
 
-**Set operations** produce a result iterable that is based on the presence or absence of equivalent elements within the same or separate iterables.
+**Set operations** produce a result iterable that is based on the presence or absence of equivalent elements
+within the same or separate iterables.
 
 A `union` operation returns the set union, which means unique elements
 that appear in *either* of two iterables.
@@ -568,16 +615,17 @@ Type interference is "broken" in Apex for `Set` and `Map` keys:
 
 ```apex
 List<Object> o = new List<String>{ 'foo', 'bar' };
-List<String> asStrings = (List<String>) o; // Works
+List<String> asStrings = (List<String>) o; // Valid cast
 
 Set<Object> o = new Set<String>{ 'foo', 'bar' }; // Illegal assignment from Set<String> to Set<Object>
 ```
 
 ```apex
 Map<String, Object> o = new Map<String, String>{ 'foo' => 'bar' };
-Map<String, String> asStrings = (Map<String, String>) o; // Works
+Map<String, String> asStrings = (Map<String, String>) o; // Valid cast
 
-Map<Object, Object> o = new Map<String, String>{ 'foo' => 'bar' }; // Illegal assignment from Map<String,String> to Map<Object,Object>
+// Illegal assignment from Map<String,String> to Map<Object,Object>
+Map<Object, Object> o = new Map<String, String>{ 'foo' => 'bar' };
 ```
 
 This is why we should explicitly set a specific collecting function according to an
@@ -709,13 +757,26 @@ Set<Object> accountIds = Stream.of(contact).toSet(Contact.AccountId);
 // Or
 Set<Id> accountIds = Stream.of(contact).toIdSet(Contact.AccountId);
 // Or
-List<Id> accountIds = (List<Id>) Stream.of(contact).toList(Contact.AccountId, List<Id>.class);
+List<Id> accountIds = (List<Id>) Stream.of(contact).toList(Contact.AccountId, Id.class);
 ```
 
 Group accounts by `Rating`:
 
 ```apex
 Map<String, List<Account>> accountsByRating = Stream.of(accounts).groupByString(Account.Rating);
+```
+
+- ### Run
+
+`Streams` implement `IRunnable` to apply a terminal operation to the `Stream`.
+
+```apex
+// The accounts are not mutated until a terminal operation is invoked
+SObjectStream accountStream = (SObjectStream) Stream.of(accounts)
+    .forEach(SObjectConsumers.set(Account.Rating, 'Hot'));
+
+// Applies the terminal operation to mutate accounts
+accountStream.run();
 ```
 
 ## Optional
@@ -838,7 +899,7 @@ List<String> result = (List<String>) Stream.of(input)
     .sort()
     .skip(1)
     .lim(2)
-    .toList(List<String>.class); // ['BAR', 'BAZ']
+    .toList(String.class); // ['BAR', 'BAZ']
 ```
 
 And more!
