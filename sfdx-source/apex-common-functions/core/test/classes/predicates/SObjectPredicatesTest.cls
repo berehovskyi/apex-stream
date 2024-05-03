@@ -376,4 +376,104 @@ private class SObjectPredicatesTest {
         }
     }
 
+    /**
+     * @see SObjectPredicates.includes
+     */
+    @IsTest
+    static void includes() {
+        // Given
+        Account acc1 = new Account(Name = 'foo');
+        Account acc2 = new Account(Name = 'bar');
+        Account acc3 = new Account(Name = 'baz');
+        Account acc4 = new Account(Name = 'thud');
+        Account acc5 = new Account(Name = 'foo;bar');
+        Account acc6 = new Account(Name = 'foo;baz');
+        Account acc7 = new Account(Name = 'baz;bar');
+        Account acc8 = new Account(Name = 'for;bar;baz');
+        Account acc9 = new Account(Name = 'thud;baz');
+        Account acc10 = new Account(Name = '');
+        Account acc11 = new Account();
+        List<Account> input = new List<Account>{ acc1, acc2, acc3, acc4, acc5, acc6, acc7, acc8, acc9, acc10, acc11 };
+        List<String> expectedValues = new List<String>{ 'foo;bar', 'baz' };
+        List<String> expectedValues1 = new List<String>{ '' };
+        SObjectField accNameField = AfTestConsts.Account.Name;
+        String nameFieldName = 'Name';
+        // When
+        IFunction getNameFunction = SObjectFunctions.get(accNameField);
+        IPredicate includesPredicate = SObjectPredicates.includes(getNameFunction, expectedValues);
+        IPredicate includesPredicate1 = SObjectPredicates.includes(nameFieldName, expectedValues);
+        IPredicate includesPredicate2 = SObjectPredicates.includes(accNameField, expectedValues);
+        IPredicate includesEmptyPredicate = SObjectPredicates.includes(getNameFunction, expectedValues1);
+        // Then
+        for (Account acc : input) {
+            String name = (String) acc.get(nameFieldName);
+            Boolean expected = false;
+            if (name != null) {
+                Set<String> actualValues = new Set<String>(name.split(';'));
+                for (String value : expectedValues) {
+                    if (String.isBlank(name)) { break; }
+                    if (actualValues.containsAll(new Set<String>(value.split(';')))) {
+                        expected = true;
+                        break;
+                    }
+                }
+            }
+            Boolean expected1 = name == '';
+            Assert.areEqual(expected, includesPredicate.test(acc));
+            Assert.areEqual(expected, includesPredicate1.test(acc));
+            Assert.areEqual(expected, includesPredicate2.test(acc));
+            Assert.areEqual(expected1, includesEmptyPredicate.test(acc));
+        }
+    }
+
+    /**
+     * @see SObjectPredicates.excludes
+     */
+    @IsTest
+    static void excludes() {
+        // Given
+        Account acc1 = new Account(Name = 'foo');
+        Account acc2 = new Account(Name = 'bar');
+        Account acc3 = new Account(Name = 'baz');
+        Account acc4 = new Account(Name = 'thud');
+        Account acc5 = new Account(Name = 'foo;bar');
+        Account acc6 = new Account(Name = 'foo;baz');
+        Account acc7 = new Account(Name = 'baz;bar');
+        Account acc8 = new Account(Name = 'for;bar;baz');
+        Account acc9 = new Account(Name = 'thud;baz');
+        Account acc10 = new Account(Name = '');
+        Account acc11 = new Account();
+        List<Account> input = new List<Account>{ acc1, acc2, acc3, acc4, acc5, acc6, acc7, acc8, acc9, acc10, acc11 };
+        List<String> expectedValues = new List<String>{ 'foo;bar', 'baz' };
+        List<String> expectedValues1 = new List<String>{ '' };
+        SObjectField accNameField = AfTestConsts.Account.Name;
+        String nameFieldName = 'Name';
+        // When
+        IFunction getNameFunction = SObjectFunctions.get(accNameField);
+        IPredicate excludesPredicate = SObjectPredicates.excludes(getNameFunction, expectedValues);
+        IPredicate excludesPredicate1 = SObjectPredicates.excludes(nameFieldName, expectedValues);
+        IPredicate excludesPredicate2 = SObjectPredicates.excludes(accNameField, expectedValues);
+        IPredicate excludesEmptyPredicate = SObjectPredicates.excludes(getNameFunction, expectedValues1);
+        // Then
+        for (Account acc : input) {
+            String name = (String) acc.get(nameFieldName);
+            Boolean expected = true;
+            if (name != null) {
+                Set<String> actualValues = new Set<String>(name.split(';'));
+                for (String value : expectedValues) {
+                    if (String.isBlank(name)) { break; }
+                    if (actualValues.containsAll(new Set<String>(value.split(';')))) {
+                        expected = false;
+                        break;
+                    }
+                }
+            }
+            Boolean expected1 = name != '';
+            Assert.areEqual(expected, excludesPredicate.test(acc));
+            Assert.areEqual(expected, excludesPredicate1.test(acc));
+            Assert.areEqual(expected, excludesPredicate2.test(acc));
+            Assert.areEqual(expected1, excludesEmptyPredicate.test(acc));
+        }
+    }
+
 }

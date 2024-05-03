@@ -388,38 +388,38 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     //<editor-fold desc="<=">
     /**
-    * @description Returns a `Predicate` that tests if the value of
-    * the `fieldName` is less than or equal to the result returned by the `function`.
-    * Cross-reference fields and safe navigation are supported.
-    * <p><strong>Note: </strong></p>
-    * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
-    * comparison of all primitive types and considers a non-null value as always greater than
-    * a null value.</p>
-    *
-    * @param fieldName the value of which is considered the left argument of comparison.
-    * @param function the function whose application result is considered as the right argument of comparison.
-    *
-    * @return the `Predicate`
-    *
-    * @throws IllegalArgumentException if `fieldName` is blank
-    * @throws NullPointerException if `fieldName` is null
-    * @throws NullPointerException if `function` is null
-    * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
-    * reference navigation
-    * @throws SObjectException if provided invalid `fieldName`
-    *
-    * @see Comparer.defaultOrder
-    *
-    * @example
-    * SObjectPredicates.isLessOrEqual(
-    *     'NumberOfEmployees',
-    *      Functions.get('OtherIntField__c')
-    * );
-    * SObjectPredicates.isLessOrEqual(
-    *     'Parent?.NumberOfEmployees',
-    *     Function.constant(100)
-    * );
-    */
+     * @description Returns a `Predicate` that tests if the value of
+     * the `fieldName` is less than or equal to the result returned by the `function`.
+     * Cross-reference fields and safe navigation are supported.
+     * <p><strong>Note: </strong></p>
+     * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
+     * comparison of all primitive types and considers a non-null value as always greater than
+     * a null value.</p>
+     *
+     * @param fieldName the value of which is considered the left argument of comparison.
+     * @param function the function whose application result is considered as the right argument of comparison.
+     *
+     * @return the `Predicate`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `function` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see Comparer.defaultOrder
+     *
+     * @example
+     * SObjectPredicates.isLessOrEqual(
+     *     'NumberOfEmployees',
+     *      Functions.get('OtherIntField__c')
+     * );
+     * SObjectPredicates.isLessOrEqual(
+     *     'Parent?.NumberOfEmployees',
+     *     Function.constant(100)
+     * );
+     */
     public static Predicate isLessOrEqual(final String fieldName, final IFunction function) {
         return isLess(fieldName, function).orElse(isEqual(fieldName, function));
     }
@@ -883,6 +883,130 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      */
     public static Predicate isNotIn(final SObjectField field, final Iterable<Object> container) {
         return isIn(field, container).negate();
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="INCLUDES">
+    /**
+     * @description Returns a `Predicate` that tests the input SObject if the string value of
+     * the `fieldName` fully matches any element of the `container`.
+     * Each element of the `container` should be represented as a subset and the subset elements
+     * should be separated by `;`. Cross-reference fields and safe
+     * navigation are supported.
+     *
+     * @param fieldName the value of which is tested
+     * @param container the iterable against which the value is tested
+     *
+     * @return the `Predicate`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `container` is null or `container` contains null element
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @example
+     * Account acc = new Account(Name = 'AAA;BBB');
+     * SObjectPredicates.includes('Name', new List<String>{ 'AAA' }).test(person); // false
+     * SObjectPredicates.includes('Name', new Set<String>{ 'AAA;BBB' }).test(person); // true
+     * SObjectPredicates.includes('Name', new Set<String>{ 'BBB;CCC' }).test(person); // false
+     * SObjectPredicates.includes('Name', new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // true
+     * SObjectPredicates.includes('Name', new List<String>{ 'AAA;BBB;CCC' }).test(person); // false
+     * // it is also possible
+     * SObjectPredicates.includes('Parent?.Name', new List<String>{ 'AAA' });
+     */
+    public static Predicate includes(final String fieldName, final Iterable<String> container) {
+        return includes(BaseSObjectFunctions.get(fieldName), container);
+    }
+
+    /**
+     * @description Returns a `Predicate` that tests the input SObject if the string value of
+     * the `field` fully matches any element of the `container`.
+     * Each element of the `container` should be represented as a subset and the subset elements
+     * should be separated by `;`.
+     *
+     * @param field the value of which is tested
+     * @param container the iterable against which the value is tested
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if `field`, `container` is null, or `container` contains null element
+     *
+     * @see List.contains
+     *
+     * @example
+     * Account acc = new Account(Name = 'AAA;BBB');
+     * SObjectPredicates.includes(Account.Name, new List<String>{ 'AAA' }).test(person); // false
+     * SObjectPredicates.includes(Account.Name, new Set<String>{ 'AAA;BBB' }).test(person); // true
+     * SObjectPredicates.includes(Account.Name, new Set<String>{ 'BBB;CCC' }).test(person); // false
+     * SObjectPredicates.includes(Account.Name, new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // true
+     * SObjectPredicates.includes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test(person); // false
+     */
+    public static Predicate includes(final SObjectField field, final Iterable<String> container) {
+        return includes(BaseSObjectFunctions.get(field), container);
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="EXCLUDES">
+    /**
+     * @description Returns a `Predicate` that tests the input SObject if the string value of
+     * the `fieldName` does not match every element of the `container`.
+     * Each element of the `container` should be represented as a subset and the subset elements
+     * should be separated by `;`. Cross-reference fields and safe
+     * navigation are supported.
+     *
+     * @param fieldName the value of which is tested
+     * @param container the iterable against which the value is tested
+     *
+     * @return the `Predicate`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `container` is null or `container` contains null element
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @example
+     * Account acc = new Account(Name = 'AAA;BBB');
+     * SObjectPredicates.excludes('Name', new List<String>{ 'AAA' }).test(person); // true
+     * SObjectPredicates.excludes('Name', new Set<String>{ 'AAA;BBB' }).test(person); // false
+     * SObjectPredicates.excludes('Name', new Set<String>{ 'BBB;CCC' }).test(person); // true
+     * SObjectPredicates.excludes('Name', new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // false
+     * SObjectPredicates.excludes('Name', new List<String>{ 'AAA;BBB;CCC' }).test(person); // true
+     * // it is also possible
+     * SObjectPredicates.excludes('Parent?.Name', new List<String>{ 'AAA' });
+     */
+    public static Predicate excludes(final String fieldName, final Iterable<String> container) {
+        return excludes(BaseSObjectFunctions.get(fieldName), container);
+    }
+
+    /**
+     * @description Returns a `Predicate` that tests the input SObject if the string value of
+     * the `field` does not match every element of the `container`.
+     * Each element of the `container` should be represented as a subset and the subset elements
+     * should be separated by `;`.
+     *
+     * @param field the value of which is tested
+     * @param container the iterable against which the value is tested
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if `field`, `container` is null, or `container` contains null element
+     *
+     * @see List.contains
+     *
+     * @example
+     * Account acc = new Account(Name = 'AAA;BBB');
+     * SObjectPredicates.excludes(Account.Name, new List<String>{ 'AAA' }).test(person); // true
+     * SObjectPredicates.excludes(Account.Name, new Set<String>{ 'AAA;BBB' }).test(person); // false
+     * SObjectPredicates.excludes(Account.Name, new Set<String>{ 'BBB;CCC' }).test(person); // true
+     * SObjectPredicates.excludes(Account.Name, new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // false
+     * SObjectPredicates.excludes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test(person); // true
+     */
+    public static Predicate excludes(final SObjectField field, final Iterable<String> container) {
+        return excludes(BaseSObjectFunctions.get(field), container);
     }
     //</editor-fold>
 

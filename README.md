@@ -94,7 +94,7 @@ sf package install -p 04t1t000003f3UkAAI -o me@example.com -r -w 10
 - Apex Common Functions Core (recommended):
 
 ```sh
-sf package install -p 04t1t000003f3UpAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000003nQzXAAU -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Extension (optional):

@@ -12,7 +12,7 @@ private class PredicatesTest {
     static {
         new Predicates();
     }
-    
+
     /**
      * @see Predicates.isGreater
      * @see Predicates.isGreaterOrEqual

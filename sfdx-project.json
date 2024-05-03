@@ -80,7 +80,7 @@
             "path": "sfdx-source/apex-common-functions/core",
             "package": "apex-common-functions-core",
             "versionName": "ver 1.1",
-            "versionNumber": "1.1.1.NEXT",
+            "versionNumber": "1.1.2.NEXT",
             "default": false,
             "versionDescription": "",
             "dependencies": [
@@ -137,7 +137,7 @@
         "apex-stream-enumerables@latest": "04t1t000003f3VdAAI",
         "apex-stream-streams@latest": "04t1t000003f3V4AAI",
         "apex-stream-sequences@latest": "04t1t000003f3UkAAI",
-        "apex-common-functions-core@latest": "04t1t000003f3UpAAI",
+        "apex-common-functions-core@latest": "04t1t000003nQzXAAU",
         "apex-common-functions-extension@latest": "04t1t000003f3UuAAI"
     }
 }
