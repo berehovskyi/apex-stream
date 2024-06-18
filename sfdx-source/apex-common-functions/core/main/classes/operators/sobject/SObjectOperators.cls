@@ -490,7 +490,7 @@ public virtual inherited sharing class SObjectOperators extends BaseSObjectOpera
             );
         }
         private String findChildRelationshipName(final SObjectField field) {
-            return EnumerablePipeline.findRelationshipField(field);
+            return SObjectEnumerableSupport.findRelationshipField(field);
         }
     }
     // @end-group

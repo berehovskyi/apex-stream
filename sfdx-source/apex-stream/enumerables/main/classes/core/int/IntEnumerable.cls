@@ -27,7 +27,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @param iterable the other iterable
      *
      * @return the new `IntEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -48,7 +48,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @param iterable the other iterable
      *
      * @return the new `IntEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -70,7 +70,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @param iterable the other iterable
      *
      * @return the new `IntEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -91,7 +91,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @param iterable the other iterable
      *
      * @return the new `IntIterable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -102,7 +102,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .toList(); // [3, 9]
      */
     public virtual IntEnumerable intersect(final Iterable<Integer> iterable) {
-        return (IntEnumerable) distinct().filter(BasePredicates.isIn(iterable));
+        return (IntEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -112,7 +112,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @param iterable the other iterable
      *
      * @return the new `IntIterable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -123,7 +123,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .toList(); // [5, 7]
      */
     public virtual IntEnumerable except(final Iterable<Integer> iterable) {
-        return (IntEnumerable) distinct().filter(BasePredicates.isIn(iterable).negate());
+        return (IntEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -203,7 +203,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .toList(); // [0, 0, 1, 1, 5]
      */
     public virtual IntEnumerable withoutNulls() {
-        return filter(BasePredicates.isNotNull());
+        return filter(EnumerableSupport.isNotNull());
     }
 
     /**
@@ -332,7 +332,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @param mapper the mapping function which must produce `Iterable<Integer>`
      *
      * @return the new `IntEnumerable`
-     * 
+     *
      *  @throws NullPointerException if `mapper` is null
      *
      * @example
@@ -363,7 +363,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     public override void accept(Object o) { System.debug(o); }
      * }
      * List<Integer> ints = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
-     *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10 
+     *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
      *     .toList(); // [0, 5, 1, -10 ]
      */
     public abstract IntEnumerable forEach(final IConsumer consumer);
@@ -388,7 +388,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @param order the sort order
      *
      * @return the `IntEnumerable`
-     * 
+     *
      * @throws NullPointerException if `order` is null
      *
      * @example
@@ -597,7 +597,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .get(); // 5
      */
     public virtual Optional max() {
-        return reduce(BaseBiOperators.max());
+        return reduce(EnumerableSupport.max());
     }
 
     /**
@@ -612,7 +612,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .get(); // -10
      */
     public virtual Optional min() {
-        return reduce(BaseBiOperators.min());
+        return reduce(EnumerableSupport.min());
     }
 
     /**
@@ -645,7 +645,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
      *     .count(); // 4

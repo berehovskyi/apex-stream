@@ -36,20 +36,6 @@ public inherited sharing class EnumerablePipeline {
         return result;
     }
 
-    public static String findRelationshipField(final SObjectField field) {
-        final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-        Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
-        String result;
-        for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
-            if (relationship.getField() == field) {
-                result = relationship.getRelationshipName();
-                break;
-            }
-        }
-        Validate.isNotNull(result);
-        return result;
-    }
-
     private class ObjectComparator implements Comparator<Object> {
         private final IComparer comp;
         private ObjectComparator(IComparer comp) { Validate.notNull(comp); this.comp = comp; }

@@ -130,7 +130,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['foo']
      */
     public virtual ObjectEnumerable intersect(final Iterable<Object> iterable) {
-        return (ObjectEnumerable) distinct().filter(BasePredicates.isIn(iterable));
+        return (ObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -156,7 +156,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['foo']
      */
     public virtual ObjectEnumerable intersect(final Iterable<Object> iterable, final IFunction classifier) {
-        return (ObjectEnumerable) distinct(classifier).filter(BasePredicates.isIn(
+        return (ObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ));
     }
@@ -184,7 +184,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['qux', 'fred']
      */
     public virtual ObjectEnumerable except(final Iterable<Object> iterable) {
-        return (ObjectEnumerable) distinct().filter(BasePredicates.isIn(iterable).negate());
+        return (ObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -214,7 +214,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['qux', 'fred']
      */
     public virtual ObjectEnumerable except(final Iterable<Object> iterable, final IFunction classifier) {
-        return (ObjectEnumerable) distinct(classifier).filter(BasePredicates.isIn(
+        return (ObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ).negate());
     }
@@ -340,7 +340,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      *     .toList(String.class); // ['foo', 'bar', 'baz']
      */
     public virtual ObjectEnumerable withoutNulls() {
-        return filter(BasePredicates.isNotNull());
+        return filter(EnumerableSupport.isNotNull());
     }
 
     /**
@@ -1014,7 +1014,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      *     .toList(String.class); // ['bar', 'baz', 'qux']
      */
     public virtual List<Object> toList(final Type elementType) {
-        return (List<Object>) collect(BaseCollectors.toList(elementType));
+        return (List<Object>) collect(EnumerableSupport.toList(elementType));
     }
 
     /**

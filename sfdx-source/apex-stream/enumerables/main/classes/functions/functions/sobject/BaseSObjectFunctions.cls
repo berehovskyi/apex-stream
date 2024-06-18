@@ -107,7 +107,7 @@ public virtual inherited sharing class BaseSObjectFunctions {
      * BaseSObjectFunctions.getSObjects(Contact.AccountId);
      */
     public static Function getSObjects(final SObjectField field) {
-        final String relationshipField = EnumerablePipeline.findRelationshipField(field);
+        final String relationshipField = SObjectEnumerableSupport.findRelationshipField(field);
         // Since UnexpectedException is thrown if SObject doesn't have
         // related sObjects returned using SObjectField navigation such as
         // acc.getSObjects(Contact.AccountId)

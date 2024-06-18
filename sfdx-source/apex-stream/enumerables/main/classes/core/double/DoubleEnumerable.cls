@@ -27,7 +27,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param iterable the other iterable
      *
      * @return the new `DoubleEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -48,7 +48,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param iterable the other iterable
      *
      * @return the new `DoubleEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -70,7 +70,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param iterable the other iterable
      *
      * @return the new `DoubleIterable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -92,9 +92,9 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param iterable the other iterable
      *
      * @return the new `DoubleIterable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
-     * 
+     *
      * @example
      * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
      * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
@@ -103,7 +103,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .toList(); // [3.0, 9.0]
      */
     public virtual DoubleEnumerable intersect(final Iterable<Double> iterable) {
-        return (DoubleEnumerable) distinct().filter(BasePredicates.isIn(iterable));
+        return (DoubleEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -113,19 +113,19 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param iterable the other iterable
      *
      * @return the new `DoubleEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
      * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
      * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-     * // doublesIterable1 = instance from  
+     * // doublesIterable1 = instance from
      * List<Double> diff = [DoubleEnumerable].of(doubles1)
      *     .except(doubles2)
      *     .toList(); // [5.0, 7.0]
      */
     public virtual DoubleEnumerable except(final Iterable<Double> iterable) {
-        return (DoubleEnumerable) distinct().filter(BasePredicates.isIn(iterable).negate());
+        return (DoubleEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -205,7 +205,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .toList(); // [0.1, 5, 1.5, 5]
      */
     public virtual DoubleEnumerable withoutNulls() {
-        return filter(BasePredicates.isNotNull());
+        return filter(EnumerableSupport.isNotNull());
     }
 
     /**
@@ -241,7 +241,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class RoundToIntFunction extends Function {
      *     public override Object apply(Object x) { return Math.round((Double) x); }
@@ -292,9 +292,9 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .mapToSObject(new CreateAccountFunction())
      *     .toList(); //
      * [
-     *   { AnnualRevenue: 5.5 }, 
-     *   { AnnualRevenue: 0.01 }, 
-     *   { AnnualRevenue: 1.0 }, 
+     *   { AnnualRevenue: 5.5 },
+     *   { AnnualRevenue: 0.01 },
+     *   { AnnualRevenue: 1.0 },
      *   { AnnualRevenue: 3 }
      * ]
      */
@@ -310,7 +310,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class ToStringFunction extends Function {
      *     public override Object apply(Object d) { return String.valueOf(d); }
@@ -330,9 +330,9 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param mapper the mapping function which must produce `Iterable<Double>`
      *
      * @return the new `DoubleEnumerable`
-     * 
+     *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MultiplyDoubleFunction extends Function {
      *     private final Double d;
@@ -386,9 +386,9 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param order the sort order
      *
      * @return the new `DoubleEnumerable`
-     * 
+     *
      * @throws NullPointerException if `order` is null
-     * 
+     *
      * @example
      * List<Double> sorted = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
      *     .sort(SortOrder.DESCENDING)
@@ -482,7 +482,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @return the `Object` result of the collection
      *
      * @throws NullPointerException if `collector` is null
-     * 
+     *
      * @example
      * public class AddToDoubleSetBiConsumer extends BiConsumer {
      *     public override void accept(Object container, Object o) { ((Set<Double>) container).add((Double) o); }
@@ -569,7 +569,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @param predicate the predicate
      *
      * @return `true` or `false`
-     * 
+     *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
@@ -590,14 +590,14 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * <p>Terminal Operation.</p>
      *
      * @return the `Optional` Double
-     * 
-     * @example 
+     *
+     * @example
      * Double max = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
      *     .max()
      *     .get(); // 5.5
      */
     public virtual Optional max() {
-        return reduce(BaseBiOperators.max());
+        return reduce(EnumerableSupport.max());
     }
 
     /**
@@ -612,7 +612,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .get(); // -8.99
      */
     public virtual Optional min() {
-        return reduce(BaseBiOperators.min());
+        return reduce(EnumerableSupport.min());
     }
 
     /**
@@ -620,13 +620,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * <p>Terminal Operation.</p>
      *
      * @return the sum of elements
-     * 
+     *
      * @example
      * Double sum = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9 })
      *     .sum(); // 3.7
      */
     public virtual Double sum() {
-        return (Double) collect(BaseCollectors.summingDouble(Function.identity()));
+        return (Double) collect(EnumerableSupport.summingDouble(Function.identity()));
     }
 
     /**
@@ -634,7 +634,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * <p>Terminal Operation.</p>
      *
      * @return the `Optional` Double describing the result
-     * 
+     *
      * @example
      * Double avg = (Double)
      *     [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.3 })
@@ -642,7 +642,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .get(); // 0.4
      */
     public virtual Optional avg() {
-        return Optional.ofNullable((Double) collect(BaseCollectors.averagingDouble(Function.identity())));
+        return Optional.ofNullable((Double) collect(EnumerableSupport.averagingDouble(Function.identity())));
     }
 
     /**
@@ -650,7 +650,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.3 })
      *     .count(); // 10
@@ -662,7 +662,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3 })
      *     .isEmpty(); // false

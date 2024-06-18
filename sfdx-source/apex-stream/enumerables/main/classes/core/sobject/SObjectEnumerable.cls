@@ -29,7 +29,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param iterable the other iterable
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -65,7 +65,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param iterable the other iterable
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -102,7 +102,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param iterable the other iterable
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -139,7 +139,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param classifier the classifier function
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `classifier` is null
      *
      * @example
@@ -181,7 +181,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param fieldName the field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `iterable` or `fieldName` is null
      *
@@ -208,7 +208,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable union(final Iterable<SObject> iterable, final String fieldName) {
-        return union(iterable, BaseSObjectFunctions.get(fieldName));
+        return union(iterable, SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -219,7 +219,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param field the field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `field` is null
      *
      * @example
@@ -245,7 +245,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable union(final Iterable<SObject> iterable, final SObjectField field) {
-        return union(iterable, BaseSObjectFunctions.get(field));
+        return union(iterable, SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -255,7 +255,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param iterable the other iterable
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -277,7 +277,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable) {
-        return (SObjectEnumerable) distinct().filter(BasePredicates.isIn(iterable));
+        return (SObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -289,9 +289,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param classifier the classifier function
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `classifier` is null
-     * 
+     *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
      *     private final String fieldName;
@@ -316,7 +316,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable, final IFunction classifier) {
-        return (SObjectEnumerable) distinct(classifier).filter(BasePredicates.isIn(
+        return (SObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ));
     }
@@ -330,10 +330,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param fieldName the field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `iterable` or `fieldName` is null
-     * 
+     *
      * @example
      * List<Account> accounts1 = new List<Account>{
      *     new Account(Name = 'foo', NumberOfEmployees = 100),
@@ -353,7 +353,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable, final String fieldName) {
-        return intersect(iterable, BaseSObjectFunctions.get(fieldName));
+        return intersect(iterable, SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -365,9 +365,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param field the field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `field` is null
-     * 
+     *
      * @example
      * List<Account> accounts1 = new List<Account>{
      *     new Account(Name = 'foo', NumberOfEmployees = 100),
@@ -387,7 +387,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable, final SObjectField field) {
-        return intersect(iterable, BaseSObjectFunctions.get(field));
+        return intersect(iterable, SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -398,9 +398,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param iterable the other iterable
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
-     * 
+     *
      * @example
      * List<Account> accounts1 = new List<Account>{
      *     new Account(Name = 'foo'),
@@ -428,7 +428,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable except(final Iterable<SObject> iterable) {
-        return (SObjectEnumerable) distinct().filter(BasePredicates.isIn(iterable).negate());
+        return (SObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -440,9 +440,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param classifier the classifier function
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `classifier` is null
-     * 
+     *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
      *     private final String fieldName;
@@ -475,7 +475,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable except(final Iterable<SObject> iterable, final IFunction classifier) {
-        return (SObjectEnumerable) distinct(classifier).filter(BasePredicates.isIn(
+        return (SObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ).negate());
     }
@@ -489,7 +489,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param fieldName the field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `iterable` or `fieldName` is null
      *
@@ -520,7 +520,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable except(final Iterable<SObject> iterable, final String fieldName) {
-        return except(iterable, BaseSObjectFunctions.get(fieldName));
+        return except(iterable, SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -532,7 +532,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param field the field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` or `field` is null
      *
      * @example
@@ -562,7 +562,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable except(final Iterable<SObject> iterable, final SObjectField field) {
-        return except(iterable, BaseSObjectFunctions.get(field));
+        return except(iterable, SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -655,7 +655,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable distinct(final String fieldName) {
-        return distinct(BaseSObjectFunctions.get(fieldName));
+        return distinct(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -687,7 +687,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable distinct(final SObjectField field) {
-        return distinct(BaseSObjectFunctions.get(field));
+        return distinct(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -706,7 +706,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -762,13 +762,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      * List<Contact> contactsWithHotRatingAccount = [SObjectEnumerable].of(contacts)
      *     .filter('Account?.Rating', 'Hot')
-     *     .toList(); // 
+     *     .toList(); //
      * [
      *   { LastName: 'baz', Account: acc3 }
      * ]
      */
     public virtual SObjectEnumerable filter(final String fieldName, final Object value) {
-        return filter(BaseSObjectPredicates.isEqual(fieldName, value));
+        return filter(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -797,7 +797,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable filter(final SObjectField field, final Object value) {
-        return filter(BaseSObjectPredicates.isEqual(field, value));
+        return filter(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -816,7 +816,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -873,14 +873,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      * List<Contact> firstContactsWithHotRatingAccount = [SObjectEnumerable].of(contacts)
      *     .take('Account?.Rating', 'Hot')
-     *     .toList(); // 
+     *     .toList(); //
      * [
      *   { LastName: 'foo', Account: acc1 },
      *   { LastName: 'bar', Account: acc2 },
      * ]
      */
     public virtual SObjectEnumerable take(final String fieldName, final Object value) {
-        return take(BaseSObjectPredicates.isEqual(fieldName, value));
+        return take(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -910,7 +910,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable take(final SObjectField field, final Object value) {
-        return take(BaseSObjectPredicates.isEqual(field, value));
+        return take(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -929,7 +929,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -985,7 +985,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      * List<Contact> restContacts = [SObjectEnumerable].of(contacts)
      *     .drop('Account?.Rating', 'Hot')
-     *     .toList(); // 
+     *     .toList(); //
      * [
      *   { LastName: 'baz', Account: acc3 },
      *   { LastName: 'qux', Account: acc4 },
@@ -993,7 +993,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable drop(final String fieldName, final Object value) {
-        return drop(BaseSObjectPredicates.isEqual(fieldName, value));
+        return drop(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -1023,7 +1023,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable drop(final SObjectField field, final Object value) {
-        return drop(BaseSObjectPredicates.isEqual(field, value));
+        return drop(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -1031,7 +1031,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * <p>Stateful Intermediate Operation.</p>
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Hot');
      * Account acc2 = new Account(Name = 'bar', Rating = 'Warm');
@@ -1047,7 +1047,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable withoutNulls() {
-        return filter(BasePredicates.isNotNull());
+        return filter(EnumerableSupport.isNotNull());
     }
 
     /**
@@ -1126,7 +1126,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable mapTo(final String fieldName) {
-        return mapTo(BaseSObjectOperators.getSObject(fieldName));
+        return mapTo(SObjectEnumerableSupport.getSObject(fieldName));
     }
 
     /**
@@ -1158,7 +1158,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable mapTo(final SObjectField field) {
-        return mapTo(BaseSObjectOperators.getSObject(field));
+        return mapTo(SObjectEnumerableSupport.getSObject(field));
     }
 
     /**
@@ -1217,7 +1217,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(); // [1000, 5000, null]
      */
     public virtual IntEnumerable mapToInt(final String fieldName) {
-        return mapToInt(BaseSObjectFunctions.get(fieldName));
+        return mapToInt(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -1241,7 +1241,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(); // [100, 200, 300]
      */
     public virtual IntEnumerable mapToInt(final SObjectField field) {
-        return mapToInt(BaseSObjectFunctions.get(field));
+        return mapToInt(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1300,7 +1300,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(); // [1000, 5000, null]
      */
     public virtual LongEnumerable mapToLong(final String fieldName) {
-        return mapToLong(BaseSObjectFunctions.get(fieldName));
+        return mapToLong(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -1324,7 +1324,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(); // [100, 200, 300]
      */
     public virtual LongEnumerable mapToLong(final SObjectField field) {
-        return mapToLong(BaseSObjectFunctions.get(field));
+        return mapToLong(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1402,7 +1402,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(); // [159.5, 350.1, null]
      */
     public virtual DoubleEnumerable mapToDouble(final String fieldName) {
-        return mapToDouble(BaseSObjectFunctions.get(fieldName));
+        return mapToDouble(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -1426,7 +1426,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(); // [10.8, 5.5, 6.0]
      */
     public virtual DoubleEnumerable mapToDouble(final SObjectField field) {
-        return mapToDouble(BaseSObjectFunctions.get(field));
+        return mapToDouble(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1488,7 +1488,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(String.class); // ['qux', 'fred', null]
      */
     public virtual ObjectEnumerable mapToObject(final String fieldName) {
-        return mapToObject(BaseSObjectFunctions.get(fieldName));
+        return mapToObject(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -1512,7 +1512,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(String.class); // ['foo', 'bar', 'baz']
      */
     public virtual ObjectEnumerable mapToObject(final SObjectField field) {
-        return mapToObject(BaseSObjectFunctions.get(field));
+        return mapToObject(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1572,7 +1572,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param fieldName the child relationship field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
      *
@@ -1594,7 +1594,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable flatMapTo(final String fieldName) {
-        return flatMapTo(BaseSObjectFunctions.getSObjects(fieldName));
+        return flatMapTo(SObjectEnumerableSupport.getSObjects(fieldName));
     }
 
     /**
@@ -1606,7 +1606,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param field the child relationship field
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `field` is null
      *
      * @example
@@ -1627,7 +1627,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable flatMapTo(final SObjectField field) {
-        return flatMapTo(BaseSObjectFunctions.getSObjects(field));
+        return flatMapTo(SObjectEnumerableSupport.getSObjects(field));
     }
 
     /**
@@ -1871,7 +1871,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable forEach(final String fieldName, final Object value) {
-        return forEach(BaseSObjectConsumers.set(fieldName, value));
+        return forEach(SObjectEnumerableSupport.set(fieldName, value));
     }
 
     /**
@@ -1901,7 +1901,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable forEach(final SObjectField field, final Object value) {
-        return forEach(BaseSObjectConsumers.set(field, value));
+        return forEach(SObjectEnumerableSupport.set(field, value));
     }
 
     /**
@@ -1943,9 +1943,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *         Account acc1 = (Account) o1;
      *         Account acc2 = (Account) o2;
      *         Integer nameComparison = acc1.Name.compareTo(acc2.Name);
-     *         return nameComparison != 0 
+     *         return nameComparison != 0
      *             ? nameComparison
-     *             : acc1.AnnualRevenue > acc2.AnnualRevenue 
+     *             : acc1.AnnualRevenue > acc2.AnnualRevenue
      *                 ? 1
      *                 : acc1.AnnualRevenue == acc2.AnnualRevenue
      *                     ? 0
@@ -1981,9 +1981,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param order the sort order
      *
      * @return the new `SObjectEnumerable`
-     * 
+     *
      * @throws NullPointerException if `order` is null
-     * 
+     *
      * @example
      * Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
      * Account acc2 = new Account(Name = 'bar', AnnualRevenue = 200);
@@ -2035,7 +2035,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable sort(final String fieldName) {
-        return sort(Comparer.comparing(BaseSObjectFunctions.get(fieldName)));
+        return sort(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)));
     }
 
     /**
@@ -2073,7 +2073,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable sort(final String fieldName, final SortOrder order) {
-        return sort(Comparer.comparing(BaseSObjectFunctions.get(fieldName)).order(order));
+        return sort(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)).order(order));
     }
 
     /**
@@ -2108,7 +2108,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable sort(final SObjectField field) {
-        return sort(Comparer.comparing(BaseSObjectFunctions.get(field)));
+        return sort(Comparer.comparing(SObjectEnumerableSupport.get(field)));
     }
 
     /**
@@ -2144,7 +2144,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable sort(final SObjectField field, final SortOrder order) {
-        return sort(Comparer.comparing(BaseSObjectFunctions.get(field)).order(order));
+        return sort(Comparer.comparing(SObjectEnumerableSupport.get(field)).order(order));
     }
 
     /**
@@ -2370,7 +2370,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -2422,7 +2422,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .get(); // { LastName: 'baz', Account: acc3 }
      */
     public virtual Optional find(final String fieldName, final Object value) {
-        return find(BaseSObjectPredicates.isEqual(fieldName, value));
+        return find(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -2448,7 +2448,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .get(); // { Name: 'baz', Rating: 'Hot' }
      */
     public virtual Optional find(final SObjectField field, final Object value) {
-        return find(BaseSObjectPredicates.isEqual(field, value));
+        return find(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2467,7 +2467,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -2516,7 +2516,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .every('Account?.Rating', 'Hot'); // false
      */
     public virtual Boolean every(final String fieldName, final Object value) {
-        return every(BaseSObjectPredicates.isEqual(fieldName, value));
+        return every(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -2541,7 +2541,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .every(Account.Rating, 'Hot'); // false
      */
     public virtual Boolean every(final SObjectField field, final Object value) {
-        return every(BaseSObjectPredicates.isEqual(field, value));
+        return every(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2560,7 +2560,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -2609,7 +2609,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .every('Account?.Rating', 'Hot'); // true
      */
     public virtual Boolean some(final String fieldName, final Object value) {
-        return some(BaseSObjectPredicates.isEqual(fieldName, value));
+        return some(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -2634,7 +2634,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .every(Account.Rating, 'Hot'); // true
      */
     public virtual Boolean some(final SObjectField field, final Object value) {
-        return some(BaseSObjectPredicates.isEqual(field, value));
+        return some(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2653,7 +2653,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -2704,7 +2704,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .none('Account?.Rating', 'Hot'); // false
      */
     public virtual Boolean none(final String fieldName, final Object value) {
-        return none(BaseSObjectPredicates.isEqual(fieldName, value));
+        return none(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -2729,7 +2729,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .none(Account.Rating, 'Hot'); // false
      */
     public virtual Boolean none(final SObjectField field, final Object value) {
-        return none(BaseSObjectPredicates.isEqual(field, value));
+        return none(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2749,9 +2749,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *         Account acc1 = (Account) o1;
      *         Account acc2 = (Account) o2;
      *         Integer nameComparison = acc1.Name.compareTo(acc2.Name);
-     *         return nameComparison != 0 
+     *         return nameComparison != 0
      *             ? nameComparison
-     *             : acc1.AnnualRevenue > acc2.AnnualRevenue 
+     *             : acc1.AnnualRevenue > acc2.AnnualRevenue
      *                 ? 1
      *                 : acc1.AnnualRevenue == acc2.AnnualRevenue
      *                     ? 0
@@ -2798,7 +2798,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .get(); // { Name: 'fred', AnnualRevenue: 800 }
      */
     public virtual Optional max(final String fieldName) {
-        return max(Comparer.comparing(BaseSObjectFunctions.get(fieldName)));
+        return max(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)));
     }
 
     /**
@@ -2825,7 +2825,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .get(); // { Name: 'fred', AnnualRevenue: 800 }
      */
     public virtual Optional max(final SObjectField field) {
-        return max(Comparer.comparing(BaseSObjectFunctions.get(field)));
+        return max(Comparer.comparing(SObjectEnumerableSupport.get(field)));
     }
 
     /**
@@ -2845,9 +2845,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *         Account acc1 = (Account) o1;
      *         Account acc2 = (Account) o2;
      *         Integer nameComparison = acc1.Name.compareTo(acc2.Name);
-     *         return nameComparison != 0 
+     *         return nameComparison != 0
      *             ? nameComparison
-     *             : acc1.AnnualRevenue > acc2.AnnualRevenue 
+     *             : acc1.AnnualRevenue > acc2.AnnualRevenue
      *                 ? 1
      *                 : acc1.AnnualRevenue == acc2.AnnualRevenue
      *                     ? 0
@@ -2894,7 +2894,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .get(); // { Name: 'fred', AnnualRevenue: 800 }
      */
     public virtual Optional min(final String fieldName) {
-        return min(Comparer.comparing(BaseSObjectFunctions.get(fieldName)));
+        return min(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)));
     }
 
     /**
@@ -2921,7 +2921,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .get(); // { Name: 'fred', AnnualRevenue: 800 }
      */
     public virtual Optional min(final SObjectField field) {
-        return min(Comparer.comparing(BaseSObjectFunctions.get(field)));
+        return min(Comparer.comparing(SObjectEnumerableSupport.get(field)));
     }
 
     /**
@@ -2978,7 +2978,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .sum('Parent?.NumberOfEmployees'); // 9000.0
      */
     public virtual Double sum(final String fieldName) {
-        return sum(BaseSObjectFunctions.get(fieldName));
+        return sum(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -3000,7 +3000,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .sum(Account.NumberOfEmployees); // 600.0
      */
     public virtual Double sum(final SObjectField field) {
-        return sum(BaseSObjectFunctions.get(field));
+        return sum(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3058,7 +3058,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .avg('Parent?.NumberOfEmployees'); // 3000.0
      */
     public virtual Optional avg(final String fieldName) {
-        return avg(BaseSObjectFunctions.get(fieldName));
+        return avg(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -3080,7 +3080,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .avg(Account.NumberOfEmployees); // 200.0
      */
     public virtual Optional avg(final SObjectField field) {
-        return avg(BaseSObjectFunctions.get(field));
+        return avg(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3145,7 +3145,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param mapper the mapping function
      *
      * @return the `List<Object>` containing the collected elements
-     * 
+     *
      * @throws NullPointerException if `mapper` is null
      *
      * @example
@@ -3178,7 +3178,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param fieldName the field
      *
      * @return the `List<Object>` containing the collected elements
-     * 
+     *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
      *
@@ -3205,7 +3205,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param field the field
      *
      * @return the `List<Object>` containing the collected elements
-     * 
+     *
      * @throws NullPointerException if `field` is null
      *
      * @example
@@ -3232,7 +3232,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @param elementType thr type of the element
      *
      * @return the `List<Object>` containing the collected elements, which can be cast to `List<T>`
-     * 
+     *
      * @throws NullPointerException if `mapper` or `elementType` is null
      *
      * @example
@@ -3281,7 +3281,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList('Name', String.class); // ['foo', 'Bar', 'baz', 'Foo', 'bar']
      */
     public virtual List<Object> toList(final String fieldName, final Type elementType) {
-        return toList(BaseSObjectFunctions.get(fieldName), elementType);
+        return toList(SObjectEnumerableSupport.get(fieldName), elementType);
     }
 
     /**
@@ -3308,7 +3308,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(Account.Name, String.class); // ['foo', 'Bar', 'baz', 'Foo', 'bar']
      */
     public virtual List<Object> toList(final SObjectField field, final Type elementType) {
-        return toList(BaseSObjectFunctions.get(field), elementType);
+        return toList(SObjectEnumerableSupport.get(field), elementType);
     }
 
     /**
@@ -3387,7 +3387,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toSet('Name'); // ['foo', 'bar', 'baz']
      */
     public virtual Set<Object> toSet(final String fieldName) {
-        return toSet(BaseSObjectFunctions.get(fieldName));
+        return toSet(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -3413,13 +3413,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toSet(Account.Name); // [ 'foo', 'bar', 'baz']
      */
     public virtual Set<Object> toSet(final SObjectField field) {
-        return toSet(BaseSObjectFunctions.get(field));
+        return toSet(SObjectEnumerableSupport.get(field));
     }
 
     /**
      * @description Accumulates `Id` elements into a `Set<Id>`.
      * <p>Terminal Operation.</p>
-     * <p>Unlike `new Map<Id, SObject>(sobjects).keySet()` mapping approach this one 
+     * <p>Unlike `new Map<Id, SObject>(sobjects).keySet()` mapping approach this one
      * doesn't throw ListException if some of the element has nullish Id.</p>
      *
      * @return the `Set<Id>` containing the enumerable element field values
@@ -3505,7 +3505,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ['005000000000004AAA', '005000000000005AAA', null]
      */
     public virtual Set<Id> toIdSet(final String fieldName) {
-        return toIdSet(BaseSObjectFunctions.get(fieldName));
+        return toIdSet(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -3529,7 +3529,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ['005000000000001AAA', '005000000000002AAA', '005000000000003AAA']
      */
     public virtual Set<Id> toIdSet(final SObjectField field) {
-        return toIdSet(BaseSObjectFunctions.get(field));
+        return toIdSet(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3547,8 +3547,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String childRelField;
      *     private final String fieldName;
      *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
-     *         this.childRelField = childRelField; 
-     *         this.fieldName = fieldName; 
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -3601,7 +3601,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toStringSet('Parent?.Name'); // ['qux', 'fred', null]
      */
     public virtual Set<String> toStringSet(final String fieldName) {
-        return toStringSet(BaseSObjectFunctions.get(fieldName));
+        return toStringSet(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -3624,18 +3624,18 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toStringSet(Account.Name); // ['foo', 'bar', 'baz']
      */
     public virtual Set<String> toStringSet(final SObjectField field) {
-        return toStringSet(BaseSObjectFunctions.get(field));
+        return toStringSet(SObjectEnumerableSupport.get(field));
     }
 
     /**
      * @description Accumulates elements into a `Map<Id, SObject>`.
      * <p>Terminal Operation.</p>
      * <p><strong>Note: </strong></p>
-     * <p>Unlike `new Map<Id, SObject>(sobjects)` mapping approach this one 
+     * <p>Unlike `new Map<Id, SObject>(sobjects)` mapping approach this one
      * doesn't throw ListException if some of the element has nullish Id.</p>
      *
      * @return the `Map<Id, SObject>` containing the collected elements
-     * 
+     *
      * @throws IllegalStateException if mapped keys contain duplicates
      *
      * @example
@@ -3748,7 +3748,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<Id, SObject> toByIdMap(final String fieldName, final Type valueType) {
-        return toByIdMap(BaseSObjectFunctions.get(fieldName), valueType);
+        return toByIdMap(SObjectEnumerableSupport.get(fieldName), valueType);
     }
 
     /**
@@ -3778,7 +3778,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<Id, SObject> toByIdMap(final SObjectField field, final Type valueType) {
-        return toByIdMap(BaseSObjectFunctions.get(field), valueType);
+        return toByIdMap(SObjectEnumerableSupport.get(field), valueType);
     }
 
     /**
@@ -3799,8 +3799,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String childRelField;
      *     private final String fieldName;
      *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
-     *         this.childRelField = childRelField; 
-     *         this.fieldName = fieldName; 
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -3876,7 +3876,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<String, SObject> toByStringMap(final String fieldName, final Type valueType) {
-        return toByStringMap(BaseSObjectFunctions.get(fieldName), valueType);
+        return toByStringMap(SObjectEnumerableSupport.get(fieldName), valueType);
     }
 
     /**
@@ -3906,7 +3906,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<String, SObject> toByStringMap(final SObjectField field, final Type valueType) {
-        return toByStringMap(BaseSObjectFunctions.get(field), valueType);
+        return toByStringMap(SObjectEnumerableSupport.get(field), valueType);
     }
 
     /**
@@ -4007,7 +4007,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<Id, List<SObject>> groupById(final String fieldName) {
-        return groupById(BaseSObjectFunctions.get(fieldName));
+        return groupById(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -4037,7 +4037,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<Id, List<SObject>> groupById(final SObjectField field) {
-        return groupById(BaseSObjectFunctions.get(field));
+        return groupById(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -4056,8 +4056,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String childRelField;
      *     private final String fieldName;
      *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
-     *         this.childRelField = childRelField; 
-     *         this.fieldName = fieldName; 
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -4133,7 +4133,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<String, List<SObject>> groupByString(final String fieldName) {
-        return groupByString(BaseSObjectFunctions.get(fieldName));
+        return groupByString(SObjectEnumerableSupport.get(fieldName));
     }
 
     /**
@@ -4160,7 +4160,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<String, List<SObject>> groupByString(final SObjectField field) {
-        return groupByString(BaseSObjectFunctions.get(field));
+        return groupByString(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -4178,7 +4178,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -4231,7 +4231,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<Boolean, List<SObject>> partition(final String fieldName, final Object value) {
-        return partition(BaseSObjectPredicates.isEqual(fieldName, value));
+        return partition(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
@@ -4258,7 +4258,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * }
      */
     public virtual Map<Boolean, List<SObject>> partition(final SObjectField field, final Object value) {
-        return partition(BaseSObjectPredicates.isEqual(field, value));
+        return partition(SObjectEnumerableSupport.isEqual(field, value));
     }
     //</editor-fold>
 

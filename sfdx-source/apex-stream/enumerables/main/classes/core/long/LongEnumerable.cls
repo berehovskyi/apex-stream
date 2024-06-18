@@ -27,7 +27,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @param iterable the other iterable
      *
      * @return the new `LongEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -48,7 +48,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @param iterable the other iterable
      *
      * @return the new `LongEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -70,7 +70,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @param iterable the other iterable
      *
      * @return the new `LongEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -91,7 +91,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @param iterable the other iterable
      *
      * @return the new `LongEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -102,7 +102,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .toList(); // [3L, 9L]
      */
     public virtual LongEnumerable intersect(final Iterable<Long> iterable) {
-        return (LongEnumerable) distinct().filter(BasePredicates.isIn(iterable));
+        return (LongEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -112,7 +112,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @param iterable the other iterable
      *
      * @return the new `LongEnumerable`
-     * 
+     *
      * @throws NullPointerException if `iterable` is null
      *
      * @example
@@ -123,7 +123,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .toList(); // [5L, 7L]
      */
     public virtual LongEnumerable except(final Iterable<Long> iterable) {
-        return (LongEnumerable) distinct().filter(BasePredicates.isIn(iterable).negate());
+        return (LongEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -203,7 +203,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .toList(); // [0L, 0L, 1L, 1L, 5L]
      */
     public virtual LongEnumerable withoutNulls() {
-        return filter(BasePredicates.isNotNull());
+        return filter(EnumerableSupport.isNotNull());
     }
 
     /**
@@ -332,7 +332,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @param mapper the mapping function which must produce `Iterable<Long>`
      *
      * @return the new `LongEnumerable`
-     * 
+     *
      *  @throws NullPointerException if `mapper` is null
      *
      * @example
@@ -388,7 +388,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @param order the sort order
      *
      * @return the `LongEnumerable`
-     * 
+     *
      * @throws NullPointerException if `order` is null
      *
      * @example
@@ -597,7 +597,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .get(); // 5L
      */
     public virtual Optional max() {
-        return reduce(BaseBiOperators.max());
+        return reduce(EnumerableSupport.max());
     }
 
     /**
@@ -612,7 +612,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .get(); // -10L
      */
     public virtual Optional min() {
-        return reduce(BaseBiOperators.min());
+        return reduce(EnumerableSupport.min());
     }
 
     /**
