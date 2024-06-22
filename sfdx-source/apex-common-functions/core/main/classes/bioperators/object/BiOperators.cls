@@ -6,11 +6,11 @@
  *
  * @group Functional Built-In Classes
  */
-public virtual inherited sharing class BaseBiOperators {
+public virtual inherited sharing class BiOperators {
 
     @TestVisible
     @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected BaseBiOperators() {}
+    protected BiOperators() {}
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -20,7 +20,7 @@ public virtual inherited sharing class BaseBiOperators {
      * @return the `BiOperator`
      * 
      * @example
-     * BaseBiOperators.min().apply(2, 5); // 2
+     * BiOperators.min().apply(2, 5); // 2
      */
     public static BiOperator min() {
         return new Min();
@@ -32,7 +32,7 @@ public virtual inherited sharing class BaseBiOperators {
      * @return the `BiOperator`
      * 
      * @example
-     * BaseBiOperators.max().apply(2, 5); // 5
+     * BiOperators.max().apply(2, 5); // 5
      */
     public static BiOperator max() {
         return new Max();

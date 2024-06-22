@@ -18,7 +18,7 @@ private class TimeFunctionsTest {
     static {
         new TimeFunctions();
     }
-    
+
     /**
      * @see TimeFunctions.addHours
      * @see TimeFunctions.addMilliseconds
@@ -26,6 +26,7 @@ private class TimeFunctionsTest {
      * @see TimeFunctions.addSeconds
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void timeFunctions() {
         // Given
         Integer inc = 1;
@@ -37,5 +38,5 @@ private class TimeFunctionsTest {
             Assert.areEqual(t.addSeconds(inc), TimeFunctions.addSeconds(inc).apply(t));
         }
     }
-    
+
 }

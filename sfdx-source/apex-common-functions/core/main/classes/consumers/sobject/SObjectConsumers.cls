@@ -8,7 +8,7 @@
  *
  * @group Functional Built-In Classes
  */
-public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsumers {
+public virtual inherited sharing class SObjectConsumers {
 
     @TestVisible
     @SuppressWarnings('PMD.EmptyStatementBlock')
@@ -94,6 +94,105 @@ public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsu
     }
 
     /**
+     * @description Returns a `Consumer` that sets the value returned by
+     * the `mapper` for the specified `fieldName`.
+     * Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field name to set a value
+     * @param mapper applied to the input argument
+     *
+     * @return the `Consumer`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapper` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * SObjectConsumers.set('NumberOfEmployees', someFunction);
+     * SObjectConsumers.set('Parent.NumberOfEmployees', someFunction);
+     * SObjectConsumers.set('Parent?.NumberOfEmployees', someFunction);
+     */
+    public static Consumer set(final String fieldName, final IFunction mapper) {
+        return new SetConsumer(fieldName, mapper);
+    }
+
+    /**
+     * @description Returns a `Consumer` that sets the value returned by
+     * the `mapper` for the specified `field`.
+     *
+     * @param field the field to set a value
+     * @param mapper applied to the input argument
+     *
+     * @return the `Consumer`
+     *
+     * @throws NullPointerException if `field` or `mapper` is null
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * ObjectConsumers.set(Account.NumberOfEmployees, someFunction);
+     */
+    public static Consumer set(final SObjectField field, final IFunction mapper) {
+        return new SetFieldConsumer(field, mapper);
+    }
+
+    /**
+     * @description Returns a `Consumer` that sets the `value`
+     * for the specified `fieldName`.
+     * Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field name to set a value
+     * @param value the value to set
+     *
+     * @return the `Consumer`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * SObjectConsumers.set('NumberOfEmployees', 100);
+     * SObjectConsumers.set('Parent.NumberOfEmployees', 100);
+     * SObjectConsumers.set('Parent?.NumberOfEmployees', (Object) null);
+     */
+    public static Consumer set(final String fieldName, final Object value) {
+        return set(fieldName, Function.constant(value));
+    }
+
+    /**
+     * @description Returns a `Consumer` that sets the `value`
+     * for the specified `field`.
+     *
+     * @param field the field to set a value
+     * @param value the value to set
+     *
+     * @return the `Consumer`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * SObjectConsumers.set(Account.NumberOfEmployees, 100);
+     * SObjectConsumers.set(Account.NumberOfEmployees, (Object) null);
+     */
+    public static Consumer set(final SObjectField field, final Object value) {
+        return set(field, Function.constant(value));
+    }
+
+    /**
      * @description Returns a `Consumer` that sets SObject the value returned by
      * the `operator` for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
@@ -118,13 +217,7 @@ public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsu
      * SObjectConsumers.setSObject('Parent?.Parent', someOperator);
      */
     public static Consumer setSObject(final String fieldName, final IOperator operator) {
-        Validate.notBlank(fieldName);
-        Validate.notNull(operator);
-        if (!fieldName.contains('.')) { return new SetSObjectFieldName(fieldName, operator); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) {
-            return new SetSObjectFieldPathSafe(fieldName, operator);
-        }
-        return new SetSObjectFieldPath(fieldName, operator);
+        return new SetSObjectConsumer(fieldName, operator);
     }
 
     /**
@@ -144,7 +237,7 @@ public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsu
      * SObjectConsumers.setSObject(Account.ParentId, someOperator);
      */
     public static Consumer setSObject(final SObjectField field, final IOperator operator) {
-        return new SetSObjectField(field, operator);
+        return new SetSObjectFieldConsumer(field, operator);
     }
 
     /**
@@ -250,10 +343,66 @@ public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsu
         }
     }
 
-    private class SetSObjectFieldName extends Consumer {
+    private class SetByFieldName extends Consumer {
+        private final String fieldName;
+        private final IFunction mapper;
+        private SetByFieldName(String fieldName, IFunction mapper) {
+            this.fieldName = fieldName;
+            this.mapper = mapper;
+        }
+        public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(((SObject) obj))); }
+    }
+
+    private class SetByFieldPath extends SObjectPathConsumer {
+        private final IFunction mapper;
+        private SetByFieldPath(String fieldName, IFunction mapper) {
+            super(fieldName);
+            this.mapper = mapper;
+        }
+        public override void accept(Object obj) {
+            ((SObject) operator.apply((SObject) obj)).put(xRefFieldName, mapper.apply(((SObject) obj)));
+        }
+    }
+
+    private class SetByFieldPathSafe extends SObjectPathConsumer {
+        private final IFunction mapper;
+        private SetByFieldPathSafe(String fieldName, IFunction mapper) {
+            super(fieldName);
+            this.mapper = mapper;
+        }
+        public override void accept(Object obj) {
+            ((SObject) operator.apply((SObject) obj))?.put(xRefFieldName, mapper.apply((SObject) obj));
+        }
+    }
+
+    private class SetConsumer extends Consumer {
+        private final IConsumer consumer;
+        private SetConsumer(String fieldName, IFunction mapper) {
+            Validate.notBlank(fieldName);
+            Validate.notNull(mapper);
+            if (!CsfSupport.isXRefField(fieldName)) { consumer = new SetByFieldName(fieldName, mapper); }
+            else if (CsfSupport.isSafePath(fieldName)) { consumer = new SetByFieldPathSafe(fieldName, mapper); }
+            else { consumer = new SetByFieldPath(fieldName, mapper); }
+        }
+        public override void accept(Object obj) { consumer.accept((SObject) obj); }
+    }
+
+    private class SetFieldConsumer extends Consumer {
+        private final SObjectField field;
+        private final IFunction mapper;
+        private SetFieldConsumer(SObjectField field, IFunction mapper) {
+            Validate.notNull(field);
+            Validate.notNull(mapper);
+            this.field = field;
+            this.mapper = mapper;
+        }
+        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply((SObject) obj)); }
+    }
+
+    private class SetSObjectByFieldName extends Consumer {
         protected final String fieldName;
         private final IOperator mapper;
-        private SetSObjectFieldName(String fieldName, IOperator mapper) {
+        private SetSObjectByFieldName(String fieldName, IOperator mapper) {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
@@ -262,9 +411,9 @@ public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsu
         }
     }
 
-    private class SetSObjectFieldPath extends SObjectPathConsumer {
+    private class SetSObjectByFieldPath extends SObjectPathConsumer {
         private final IOperator mapper;
-        private SetSObjectFieldPath(String fieldName, IOperator mapper) {
+        private SetSObjectByFieldPath(String fieldName, IOperator mapper) {
             super(fieldName);
             this.mapper = mapper;
         }
@@ -274,9 +423,9 @@ public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsu
         }
     }
 
-    private class SetSObjectFieldPathSafe extends SObjectPathConsumer {
+    private class SetSObjectByFieldPathSafe extends SObjectPathConsumer {
         private final IOperator mapper;
-        private SetSObjectFieldPathSafe(String fieldName, IOperator mapper) {
+        private SetSObjectByFieldPathSafe(String fieldName, IOperator mapper) {
             super(fieldName);
             this.mapper = mapper;
         }
@@ -286,10 +435,24 @@ public virtual inherited sharing class SObjectConsumers extends BaseSObjectConsu
         }
     }
 
-    private class SetSObjectField extends Consumer {
+    private class SetSObjectConsumer extends Consumer {
+        private final IConsumer consumer;
+        private SetSObjectConsumer(String fieldName, IOperator operator) {
+            Validate.notBlank(fieldName);
+            Validate.notNull(operator);
+            if (!CsfSupport.isXRefField(fieldName)) { consumer = new SetSObjectByFieldName(fieldName, operator); }
+            else if (CsfSupport.isSafePath(fieldName)) {
+                consumer = new SetSObjectByFieldPathSafe(fieldName, operator);
+            }
+            else { consumer = new SetSObjectByFieldPath(fieldName, operator); }
+        }
+        public override void accept(Object obj) { consumer.accept((SObject) obj); }
+    }
+
+    private class SetSObjectFieldConsumer extends Consumer {
         private final SObjectField field;
         private final IOperator operator;
-        private SetSObjectField(SObjectField field, IOperator operator) {
+        private SetSObjectFieldConsumer(SObjectField field, IOperator operator) {
             Validate.notNull(field);
             Validate.notNull(operator);
             this.field = field;

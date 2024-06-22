@@ -367,7 +367,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @example
      * List<Double> filtered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-     *     .filter(BasePredicates.isEqual(5))
+     *     .filter(Predicates.isEqual(5))
      *     .toList(); // [5, 5]
      */
     public virtual override DoubleEnumerable filter(final IPredicate predicate) {
@@ -386,7 +386,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @example
      * List<Double> firstFiltered = DoubleStream.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .filter(BasePredicates.isEqual(0.1))
+     *     .filter(Predicates.isEqual(0.1))
      *     .toList(); // [0.1, 0.1]
      */
     public virtual override DoubleEnumerable take(final IPredicate predicate) {
@@ -406,7 +406,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @example
      * List<Double> rest = DoubleStream.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .drop(BasePredicates.isEqual(0.1))
+     *     .drop(Predicates.isEqual(0.1))
      *     .toList(); // [5, 1.5, Math.PI]
      */
     public virtual override DoubleEnumerable drop(final IPredicate predicate) {
@@ -698,7 +698,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .reduce((Double) 0.0, new SumBiOperator());
      * Double max = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-     *     .reduce((Double) 0.0, BaseBiOperators.max()); // 5.5
+     *     .reduce((Double) 0.0, BiOperators.max()); // 5.5
      */
     public virtual override Double reduce(final Double identity, final IBiOperator accumulator) {
         return (Double) StreamPipeline.reduce(iterator(), (Object) identity, accumulator);
@@ -724,7 +724,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *     .reduce(new SumBiOperator())
      *     .get();
      * Double max = (Double) DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-     *     .reduce(BaseBiOperators.max())
+     *     .reduce(BiOperators.max())
      *     .get(); // 5.5
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {

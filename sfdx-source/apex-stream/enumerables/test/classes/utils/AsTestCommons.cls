@@ -21,6 +21,7 @@ private class AsTestCommons {
     public static Object deepClone(Object objects, Type t) {
         return JSON.deserialize(JSON.serialize(objects, false), t);
     }
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     public static Object collect(final List<Object> source, final ICollector collector) {
         Validate.notNull(source);
         Validate.notNull(collector);
@@ -32,7 +33,7 @@ private class AsTestCommons {
         }
         return finisher == null ? container : finisher.apply(container);
     }
-    
+
     public class ToUpperCaseFunction extends Function {
         public override Object apply(Object o) { return ((String) o).toUpperCase(); }
     }
@@ -120,8 +121,8 @@ private class AsTestCommons {
         private final IFunction iterableMapper;
         private final IFunction valueMapper;
         public GetFieldsLength(String relationshipFieldName, String fieldName) {
-            iterableMapper = BaseSObjectFunctions.getSObjects(relationshipFieldName);
-            valueMapper = BaseSObjectFunctions.get(fieldName);
+            iterableMapper = SObjectEnumerableSupport.getSObjects(relationshipFieldName);
+            valueMapper = SObjectEnumerableSupport.get(fieldName);
         }
         public override Object apply(Object sObj) {
             List<SObject> children = (List<SObject>) iterableMapper.apply((SObject) sObj);
@@ -138,8 +139,8 @@ private class AsTestCommons {
         private final IFunction mapper1;
         private final IFunction mapper2;
         public GetDoublePair(String fieldName1, String fieldName2) {
-            mapper1 = BaseSObjectFunctions.get(fieldName1);
-            mapper2 = BaseSObjectFunctions.get(fieldName2);
+            mapper1 = SObjectEnumerableSupport.get(fieldName1);
+            mapper2 = SObjectEnumerableSupport.get(fieldName2);
         }
         public override Object apply(Object sObj) {
             return new List<Double>{ (Double) mapper1.apply((SObject) sObj), (Double) mapper2.apply((SObject) sObj) };
@@ -149,8 +150,8 @@ private class AsTestCommons {
         private final IFunction mapper1;
         private final IFunction mapper2;
         public GetPair(String fieldName1, String fieldName2) {
-            mapper1 = BaseSObjectFunctions.get(fieldName1);
-            mapper2 = BaseSObjectFunctions.get(fieldName2);
+            mapper1 = SObjectEnumerableSupport.get(fieldName1);
+            mapper2 = SObjectEnumerableSupport.get(fieldName2);
         }
         public override Object apply(Object sObj) {
             return new List<Object>{ mapper1.apply((SObject) sObj), mapper2.apply((SObject) sObj) };
@@ -383,7 +384,6 @@ private class AsTestCommons {
     public class Concat extends BiOperator {
         public override Object apply(Object o1, Object o2) { return ((String) o1) + ((String) o2); }
     }
-
     public class AddToIdSet extends BiConsumer {
         private final IFunction mapper;
         public AddToIdSet() { this(Function.identity()); }
@@ -528,7 +528,7 @@ private class AsTestCommons {
     public abstract class ComparisonPredicate extends Predicate {
         protected final Predicate predicate;
         protected ComparisonPredicate(IFunction left, IFunction right, Integer comparisonResult) {
-            this.predicate = BasePredicates.isCompared(left, right, Comparer.defaultOrder(), comparisonResult);
+            this.predicate = new EnumerableSupport.ComparerPredicate(left, right, Comparer.defaultOrder(), comparisonResult);
         }
         protected ComparisonPredicate(Object value, Integer comparisonResult) {
             this(Function.identity(), Function.constant(value), comparisonResult);
@@ -536,6 +536,7 @@ private class AsTestCommons {
         public override Boolean test(Object o) { return predicate.test(o); }
     }
 
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     private static Object mergeValue(
         final IBiOperator merger,
         final Object key,

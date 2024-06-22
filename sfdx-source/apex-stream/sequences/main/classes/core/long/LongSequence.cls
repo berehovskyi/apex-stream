@@ -197,7 +197,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
-     * 
+     *
      * @example
      * public class SumBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
@@ -278,7 +278,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *
      * @example
      * List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-     *     .filter(BasePredicates.isEqual(5L))
+     *     .filter(Predicates.isEqual(5L))
      *     .toList(); // [5L, 5L]
      */
     public virtual override LongEnumerable filter(final IPredicate predicate) {
@@ -297,7 +297,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *
      * @example
      * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .take(BasePredicates.isEqual(0L))
+     *     .take(Predicates.isEqual(0L))
      *     .toList(); // [0L, 0L]
      */
     public virtual override LongEnumerable take(final IPredicate predicate) {
@@ -317,7 +317,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *
      * @example
      * List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .drop(BasePredicates.isEqual(0L))
+     *     .drop(Predicates.isEqual(0L))
      *     .toList(); // [1L, 1L, 5L]
      */
     public virtual override LongEnumerable drop(final IPredicate predicate) {
@@ -359,7 +359,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MultiplyIntFunction extends Function {
      *     private final Integer i;
@@ -384,7 +384,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MultiplyDoubleFunction extends Function {
      *     private final Double d;
@@ -409,7 +409,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class CreateAccountFunction extends Function {
      *     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
@@ -438,7 +438,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class ToStringFunction extends Function {
      *     public override Object apply(Object i) { return String.valueOf(i); }
@@ -487,7 +487,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @return this `LongEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
-     * 
+     *
      * @example
      * public class DebugConsumer extends Consumer {
      *     public override void accept(Object o) { System.debug(o); }
@@ -741,7 +741,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the sum of elements
-     * 
+     *
      * @example
      * Long sum = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .sum(); // -4L
@@ -756,7 +756,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the arithmetic mean of elements
-     * 
+     *
      * @example
      * Double avg = (Double) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .avg()
@@ -771,7 +771,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .count(); // 4
@@ -785,7 +785,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .isEmpty(); // false

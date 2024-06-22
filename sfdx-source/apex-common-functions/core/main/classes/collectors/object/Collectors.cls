@@ -9,13 +9,87 @@
  * @group Functional Built-In Classes
  */
 @SuppressWarnings('PMD')
-public virtual inherited sharing class Collectors extends BaseCollectors {
+public virtual inherited sharing class Collectors {
 
     @TestVisible
     @SuppressWarnings('PMD.EmptyStatementBlock')
     protected Collectors() {}
 
     //<editor-fold desc="Built-Ins">
+
+    //<editor-fold desc="List<?> Collectors">
+    // @start-group List<?> Collectors
+    /**
+     * @description Returns a `Collector` that accumulates input arguments
+     * into a new `List<Object>`.
+     * <p>The result container can be cast to a specific type using {@link Collector.cast}.</p>
+     * <p>{@link IEnumerable.collect(Collectors.toList())} can be replaced with
+     * {@link IEnumerable.toList()}</p>
+     *
+     * @return the `Collector`
+     *
+     * @example
+     * // Accumulates SObjects into a List
+     * List<Object> people = (List<Object>) [ObjectEnumerable].of(persons)
+     *     .collect(Collectors.toList());
+     * List<Account> accs = (List<Account>) [SObjectEnumerable].of(accounts)
+     *     .collect(Collectors.toList().cast(List<Account>.class));
+     */
+    public static Collector toList() {
+        return toList(Function.identity());
+    }
+
+    /**
+     * @description Returns a `Collector` that accumulates `T` input arguments
+     * into a new `List<T>`.
+     * <p>The result container can be cast to a specific `Type`.</p>
+     *
+     * @param elementType the type of the element
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `elementType` is null
+     *
+     * @example
+     * // Accumulates Objects into a String List
+     * List<String> strs = (List<String>) [ObjectEnumerable].of(strings)
+     *     .collect(Collectors.toList(String.class));
+     * // is equivalent to
+     * List<String> strs = (List<String>) [ObjectEnumerable].of(strings)
+     *     .collect(Collectors.toList().cast(List<String>.class));
+     */
+    public static Collector toList(final Type elementType) {
+        Validate.notNull(elementType);
+        return Collector.of(
+            Supplier.of(Type.forName('List<' + elementType + '>')),
+            ListObjectConsumers.addToList(Function.identity())
+        );
+    }
+
+    /**
+     * @description Returns a `Collector` that accumulates the values returned by `mapper`
+     * into a new `List<Object>`.
+     * <p>The result container can be cast to a specific type using {@link Collector.cast}.</p>
+     *
+     * @param mapper the function that returns values to accumulate
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * // Accumulates values returned by mapper into a List
+     * List<Object> names = (List<Object>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.toList(getNameFunction));
+     * List<String> names = (List<String>) [ObjectEnumerable].of(people)
+     *     .collect(Collectors.toList(getNameFunction).cast(List<String>.class));
+     */
+    public static Collector toList(final IFunction mapper) {
+        Validate.notNull(mapper);
+        return Collector.of(Supplier.of(List<Object>.class), ListObjectConsumers.addToList(mapper));
+    }
+    // @end-group
+    //</editor-fold>
 
     //<editor-fold desc="Set<?> Collectors">
     // @start-group Set<?> Collectors
@@ -3217,6 +3291,56 @@ public virtual inherited sharing class Collectors extends BaseCollectors {
             CollectorSuppliers.averagingLong(),
             ListObjectConsumers.averagingLong(mapper),
             CollectorFunctions.summing()
+        );
+    }
+    // @end-group
+    //</editor-fold>
+
+    //<editor-fold desc="Double Collectors">
+    // @start-group Double Collectors
+    /**
+         * @description Returns a `Collector` that returns the arithmetic mean
+         * of values returned by `mapper`.
+         * If no elements are present, the result is null.
+         *
+         * @param mapper the function extracting the Double value to average
+         *
+         * @return the `Collector`
+         *
+         * @throws NullPointerException if `mapper` is null
+         *
+         * @example
+         * Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
+         *     .collect(Collectors.averagingLong(Functions.get('BillingLatitude')));
+         */
+    public static Collector averagingDouble(final IFunction mapper) {
+        return Collector.of(
+            CollectorSuppliers.averagingDouble(),
+            ListObjectConsumers.averagingDouble(mapper),
+            CollectorFunctions.averagingDouble()
+        );
+    }
+
+    /**
+     * @description Returns a `Collector` that returns the arithmetic sum
+     * of values returned by `mapper`.
+     * If no elements are present, the result is 0.
+     *
+     * @param mapper the function extracting the Long value to sum
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * Long sumOfBillingLatitude = (Long) [SObjectEnumerable].of(accounts)
+     *     .collect(Collectors.summingDouble(Functions.get('BillingLatitude')));
+     */
+    public static Collector summingDouble(final IFunction mapper) {
+        return Collector.of(
+            CollectorSuppliers.averagingDouble(),
+            ListObjectConsumers.averagingDouble(mapper),
+            CollectorFunctions.summingDouble()
         );
     }
     // @end-group

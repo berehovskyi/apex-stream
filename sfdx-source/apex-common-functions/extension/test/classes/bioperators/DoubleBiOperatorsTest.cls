@@ -20,6 +20,7 @@ private class DoubleBiOperatorsTest {
      * @see DoubleBiOperators.sum
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs, PMD.OneDeclarationPerLine')
     static void operators() {
         // When
         IBiOperator min = DoubleBiOperators.min();
@@ -38,5 +39,5 @@ private class DoubleBiOperatorsTest {
             Assert.areEqual(Math.sqrt(Math.pow(src, 2) + Math.pow(d, 2)), euclid.apply(src, d));
         }
     }
-    
+
 }

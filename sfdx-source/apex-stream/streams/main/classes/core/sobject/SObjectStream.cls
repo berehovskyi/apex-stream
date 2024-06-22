@@ -311,7 +311,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * SObjectStream.zip(
      *     triggerOld,
      *     triggerNew,
-     *     BiOperator.minBy(Comparator.comparing(BaseSObjectFunctions.get(Account.AnnualRevenue)))
+     *     BiOperator.minBy(Comparator.comparing(SObjectFunctions.get(Account.AnnualRevenue)))
      * ).toList(); //
      * [
      *   { Name: 'foo', NumberOfEmployees: 100 },
@@ -369,7 +369,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     triggerOld,
      *     triggerNew,
      *     new ContainsAnyBiPredicate('Name', 'a'),
-     *     BiOperator.minBy(BaseSObjectFunctions.get(Account.AnnualRevenue))
+     *     BiOperator.minBy(SObjectFunctions.get(Account.AnnualRevenue))
      * ).toList(); //
      * [
      *   { Name: 'bar', NumberOfEmployees: 100 },

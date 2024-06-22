@@ -8,7 +8,7 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount')
 public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     @TestVisible
@@ -50,7 +50,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * );
      */
     public static Predicate isGreater(final String fieldName, final IFunction function) {
-        return isGreater(BaseSObjectFunctions.get(fieldName), function);
+        return isGreater(SObjectFunctions.get(fieldName), function);
     }
 
     /**
@@ -81,7 +81,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *     );
      */
     public static Predicate isGreater(final SObjectField field, final IFunction function) {
-        return isGreater(BaseSObjectFunctions.get(field), function);
+        return isGreater(SObjectFunctions.get(field), function);
     }
 
     /**
@@ -111,7 +111,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isGreater('Parent?.NumberOfEmployees', 100);
      */
     public static Predicate isGreater(final String fieldName, final Object value) {
-        return isGreater(BaseSObjectFunctions.get(fieldName), Function.constant(value));
+        return isGreater(SObjectFunctions.get(fieldName), Function.constant(value));
     }
 
     /**
@@ -135,7 +135,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isGreater(Account.NumberOfEmployees, 100);
      */
     public static Predicate isGreater(final SObjectField field, final Object value) {
-        return isGreater(BaseSObjectFunctions.get(field), Function.constant(value));
+        return isGreater(SObjectFunctions.get(field), Function.constant(value));
     }
     //</editor-fold>
 
@@ -295,7 +295,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * );
      */
     public static Predicate isLess(final String fieldName, final IFunction function) {
-        return isLess(BaseSObjectFunctions.get(fieldName), function);
+        return isLess(SObjectFunctions.get(fieldName), function);
     }
 
     /**
@@ -328,7 +328,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * );
      */
     public static Predicate isLess(final SObjectField field, final IFunction function) {
-        return isLess(BaseSObjectFunctions.get(field), function);
+        return isLess(SObjectFunctions.get(field), function);
     }
 
     /**
@@ -358,7 +358,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLess('Parent?.NumberOfEmployees', 100);
      */
     public static Predicate isLess(final String fieldName, final Object value) {
-        return isLess(BaseSObjectFunctions.get(fieldName), Function.constant(value));
+        return isLess(SObjectFunctions.get(fieldName), Function.constant(value));
     }
 
     /**
@@ -382,7 +382,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLess(Account.NumberOfEmployees, 100);
      */
     public static Predicate isLess(final SObjectField field, final Object value) {
-        return isLess(BaseSObjectFunctions.get(field), Function.constant(value));
+        return isLess(SObjectFunctions.get(field), Function.constant(value));
     }
     //</editor-fold>
 
@@ -542,7 +542,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * );
      */
     public static Predicate isEqual(final String fieldName, final IFunction function) {
-        return isEqual(BaseSObjectFunctions.get(fieldName), function);
+        return isEqual(SObjectFunctions.get(fieldName), function);
     }
 
     /**
@@ -570,7 +570,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * );
      */
     public static Predicate isEqual(final SObjectField field, final IFunction function) {
-        return isEqual(BaseSObjectFunctions.get(field), function);
+        return isEqual(SObjectFunctions.get(field), function);
     }
 
     /**
@@ -596,7 +596,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isEqual('Parent?.NumberOfEmployees', 100);
      */
     public static Predicate isEqual(final String fieldName, final Object value) {
-        return isEqual(BaseSObjectFunctions.get(fieldName), Function.constant(value));
+        return isEqual(SObjectFunctions.get(fieldName), Function.constant(value));
     }
 
     /**
@@ -617,7 +617,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isEqual(Account.NumberOfEmployees, 100);
      */
     public static Predicate isEqual(final SObjectField field, final Object value) {
-        return isEqual(BaseSObjectFunctions.get(field), Function.constant(value));
+        return isEqual(SObjectFunctions.get(field), Function.constant(value));
     }
     //</editor-fold>
 
@@ -757,7 +757,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLike('Parent?.Name', '%a_e');
      */
     public static Predicate isLike(final String fieldName, final String likeString) {
-        return isLike(BaseSObjectFunctions.get(fieldName), likeString);
+        return isLike(SObjectFunctions.get(fieldName), likeString);
     }
 
     /**
@@ -778,7 +778,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLike(Account.Name, '%a_e');
      */
     public static Predicate isLike(final SObjectField field, final String likeString) {
-        return isLike(BaseSObjectFunctions.get(field), likeString);
+        return isLike(SObjectFunctions.get(field), likeString);
     }
     //</editor-fold>
 
@@ -808,7 +808,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isIn('Parent.Name', nameStream);
      */
     public static Predicate isIn(final String fieldName, final Iterable<Object> container) {
-        return isIn(BaseSObjectFunctions.get(fieldName), container);
+        return isIn(SObjectFunctions.get(fieldName), container);
     }
 
     /**
@@ -830,7 +830,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isIn(Account.Name, nameStream);
      */
     public static Predicate isIn(final SObjectField field, final Iterable<Object> container) {
-        return isIn(BaseSObjectFunctions.get(field), container);
+        return isIn(SObjectFunctions.get(field), container);
     }
     //</editor-fold>
 
@@ -917,7 +917,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.includes('Parent?.Name', new List<String>{ 'AAA' });
      */
     public static Predicate includes(final String fieldName, final Iterable<String> container) {
-        return includes(BaseSObjectFunctions.get(fieldName), container);
+        return includes(SObjectFunctions.get(fieldName), container);
     }
 
     /**
@@ -944,7 +944,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.includes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test(person); // false
      */
     public static Predicate includes(final SObjectField field, final Iterable<String> container) {
-        return includes(BaseSObjectFunctions.get(field), container);
+        return includes(SObjectFunctions.get(field), container);
     }
     //</editor-fold>
 
@@ -979,7 +979,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.excludes('Parent?.Name', new List<String>{ 'AAA' });
      */
     public static Predicate excludes(final String fieldName, final Iterable<String> container) {
-        return excludes(BaseSObjectFunctions.get(fieldName), container);
+        return excludes(SObjectFunctions.get(fieldName), container);
     }
 
     /**
@@ -1006,7 +1006,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.excludes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test(person); // true
      */
     public static Predicate excludes(final SObjectField field, final Iterable<String> container) {
-        return excludes(BaseSObjectFunctions.get(field), container);
+        return excludes(SObjectFunctions.get(field), container);
     }
     //</editor-fold>
 

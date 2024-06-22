@@ -1,7 +1,7 @@
 /**
  * @description Provides common implementations of `Map<T, Object> - T` {@link BiConsumer}
  * and related utilities that are used by {@link Collectors}.
- * 
+ *
  * @see BiConsumer
  * @see Collectors
  *
@@ -506,6 +506,7 @@ public virtual inherited sharing class MapObjectConsumers {
 
     //<editor-fold desc="Private Methods">
     // @start-group Private Methods
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     private static Object mergeValue(
         final IBiOperator merger,
         final Object key,

@@ -10,7 +10,7 @@
  * @group Functional Built-In Classes
  */
 @SuppressWarnings('PMD.CognitiveComplexity')
-public virtual inherited sharing class CollectorFunctions extends BaseCollectorFunctions {
+public virtual inherited sharing class CollectorFunctions {
 
     @TestVisible
     @SuppressWarnings('PMD.EmptyStatementBlock')
@@ -47,6 +47,17 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
     }
 
     /**
+     * @description Returns a `Function` that returns the final result of Double summing.
+     *
+     * @return the `Function`
+     *
+     * @see Collectors.averagingDouble
+     */
+    public static Function summingDouble() {
+        return new SummingDoubleFinisher();
+    }
+
+    /**
      * @description Returns a `Function` that returns the final result of Integer averaging.
      *
      * @return the `Function`
@@ -66,6 +77,17 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
      */
     public static Function averagingLong() {
         return new AveragingLongFinisher();
+    }
+
+    /**
+     * @description Returns a `Function` that returns the final result of Double averaging.
+     *
+     * @return the `Function`
+     *
+     * @see Collectors.averagingDouble
+     */
+    public static Function averagingDouble() {
+        return new AveragingDoubleFinisher();
     }
 
     /**
@@ -397,11 +419,27 @@ public virtual inherited sharing class CollectorFunctions extends BaseCollectorF
         }
     }
 
+    private class SummingDoubleFinisher extends Function {
+        public override Object apply(Object o) {
+            final List<Double> doubles = (List<Double>) o;
+            if (doubles[2] == 0) { return null; }
+            return doubles[0] + doubles[1];
+        }
+    }
+
     private class AveragingLongFinisher extends Function {
         public override Object apply(Object o) {
             final List<Long> longs = (List<Long>) o;
             if (longs[0] == 0) { return null; }
             return longs[1] / (Double) longs[0];
+        }
+    }
+
+    private class AveragingDoubleFinisher extends Function {
+        public override Object apply(Object o) {
+            final List<Double> doubles = (List<Double>) o;
+            if (doubles[2] == 0) { return null; }
+            return (doubles[0] + doubles[1]) / doubles[2];
         }
     }
 

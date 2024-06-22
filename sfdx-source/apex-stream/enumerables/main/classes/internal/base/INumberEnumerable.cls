@@ -3,8 +3,9 @@
  * A sequence of `T` elements supporting aggregate operations for number types.
  * This interface is parameterized to accommodate various data types and extends the `Iterable<T>` interface
  * to enrich the standard iteration capabilities with additional collection operations.
- * It is crucial to keep the API version of this class as is and it is not recommended to extend or implement
- * this interface in custom code outside of the framework scope.
+ * It is crucial to keep the API version of this class as is.
+ * <p><strong>Note: </strong></p>
+ * <p>This is an internal class and should not be referenced outside of this package.</p>
  *
  * @see IIntEnumerable
  * @see ILongEnumerable

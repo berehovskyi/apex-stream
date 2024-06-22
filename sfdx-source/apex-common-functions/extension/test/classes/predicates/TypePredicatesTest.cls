@@ -10,7 +10,7 @@ private class TypePredicatesTest {
     static {
         new TypePredicates();
     }
-    
+
     /**
      * @see TypePredicates.isInstanceOfBool
      * @see TypePredicates.isInstanceOfId
@@ -26,6 +26,7 @@ private class TypePredicatesTest {
      * @see TypePredicates.isInstanceOfComparable
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void typePredicate() {
         // Given
         Boolean b = true;
@@ -72,5 +73,5 @@ private class TypePredicatesTest {
             Assert.areEqual(o instanceof Comparable, isInstanceOfComparable.test(o));
         }
     }
-    
+
 }

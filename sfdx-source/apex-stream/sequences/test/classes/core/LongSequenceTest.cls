@@ -607,7 +607,7 @@ private class LongSequenceTest {
         ILongEnumerable seq1 = LongSequence.of(clone);
         // When
         Boolean actual = seq.some(new AsTestCommons.IsLessPredicate(0L));
-        Boolean actual1 = seq1.some(BasePredicates.isEqual(0L));
+        Boolean actual1 = seq1.some(EnumerableSupport.isEqual(0L));
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);

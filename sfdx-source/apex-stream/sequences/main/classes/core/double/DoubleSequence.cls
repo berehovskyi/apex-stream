@@ -200,7 +200,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
-     * 
+     *
      * @example
      * public class SumBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
@@ -281,7 +281,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *
      * @example
      * List<Double> filtered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-     *     .filter(BasePredicates.isEqual(5))
+     *     .filter(Predicates.isEqual(5))
      *     .toList(); // [5, 5]
      */
     public virtual override DoubleEnumerable filter(final IPredicate predicate) {
@@ -300,7 +300,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *
      * @example
      * List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .filter(BasePredicates.isEqual(0.1))
+     *     .filter(Predicates.isEqual(0.1))
      *     .toList(); // [0.1, 0.1]
      */
     public virtual override DoubleEnumerable take(final IPredicate predicate) {
@@ -320,7 +320,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *
      * @example
      * List<Double> rest = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .drop(BasePredicates.isEqual(0.1))
+     *     .drop(Predicates.isEqual(0.1))
      *     .toList(); // [5, 1.5, Math.PI]
      */
     public virtual override DoubleEnumerable drop(final IPredicate predicate) {
@@ -362,7 +362,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class RoundToIntFunction extends Function {
      *     public override Object apply(Object x) { return Math.round((Double) x); }
@@ -385,7 +385,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class RoundToLongFunction extends Function {
      *     public override Object apply(Object x) { return Math.roundToLong((Double) x); }
@@ -408,7 +408,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class CreateAccountFunction extends Function {
      *     public override Object apply(Object d) { return new Account(AnnualRevenue = (Double) d); }
@@ -417,9 +417,9 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *     .mapToSObject(new CreateAccountFunction())
      *     .toList(); //
      * [
-     *   { AnnualRevenue: 5.5 }, 
-     *   { AnnualRevenue: 0.01 }, 
-     *   { AnnualRevenue: 1.0 }, 
+     *   { AnnualRevenue: 5.5 },
+     *   { AnnualRevenue: 0.01 },
+     *   { AnnualRevenue: 1.0 },
      *   { AnnualRevenue: 3 }
      * ]
      */
@@ -437,7 +437,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class ToStringFunction extends Function {
      *     public override Object apply(Object d) { return String.valueOf(d); }
@@ -486,7 +486,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @return this `DoubleEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
-     * 
+     *
      * @example
      * public class DebugConsumer extends Consumer {
      *     public override void accept(Object o) { System.debug(o); }
@@ -613,7 +613,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
      *     .reduce((Double) 0.0, new SumBiOperator());
      * Double max = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-     *     .reduce((Double) 0.0, BaseBiOperators.max()); // 5.5
+     *     .reduce((Double) 0.0, BiOperators.max()); // 5.5
      */
     public virtual override Double reduce(final Double identity, final IBiOperator accumulator) {
         return (Double) SequencePipeline.reduce(doubles, identity, accumulator);
@@ -639,7 +639,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *     .reduce(new SumBiOperator())
      *     .get();
      * Double max = (Double) DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-     *     .reduce(BaseBiOperators.max())
+     *     .reduce(BiOperators.max())
      *     .get(); // 5.5
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
@@ -748,7 +748,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = DoubleSequence.of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.3 })
      *     .count(); // 10
@@ -762,7 +762,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * DoubleSequence.of(new List<Double>{ 0.1, 0.2, 0.3 })
      *     .isEmpty(); // false

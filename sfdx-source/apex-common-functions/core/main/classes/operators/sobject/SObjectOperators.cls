@@ -9,7 +9,7 @@
  * @group Functional Built-In Classes
  */
 @SuppressWarnings('PMD.CognitiveComplexity')
-public virtual inherited sharing class SObjectOperators extends BaseSObjectOperators {
+public virtual inherited sharing class SObjectOperators {
 
     @TestVisible
     @SuppressWarnings('PMD.EmptyStatementBlock')
@@ -17,6 +17,50 @@ public virtual inherited sharing class SObjectOperators extends BaseSObjectOpera
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
+    /**
+     * @description Returns a `Operator` that gets sobject
+     * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field to get a value
+     *
+     * @return the `Operator`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.getSObject
+     *
+     * @example
+     * SObjectOperators.getSObject('Parent');
+     * SObjectOperators.getSObject('Parent.Parent');
+     * SObjectOperators.getSObject('Parent?.Parent');
+     */
+    public static Operator getSObject(final String fieldName) {
+        return new GetSObjectOperator(fieldName);
+    }
+
+    /**
+     * @description Returns a `Operator` that gets sobject
+     * for the specified `field`.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `Operator`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see SObject.getSObject
+     *
+     * @example
+     * SObjectOperators.getSObject(Account.ParentId);
+     */
+    public static Operator getSObject(final SObjectField field) {
+        return new GetSObjectFieldOperator(field);
+    }
+
     /**
      * @description Returns a `Operator` that sets the value returned by
      * the `mapper` for the specified `fieldName` and returns a mutated argument.
@@ -457,6 +501,46 @@ public virtual inherited sharing class SObjectOperators extends BaseSObjectOpera
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
+    private class GetSObjectByFieldName extends Operator {
+        private final String fieldName;
+        private GetSObjectByFieldName(String fieldName) { this.fieldName = fieldName; }
+        public override Object apply(Object obj) { return ((SObject) obj).getSObject(fieldName); }
+    }
+
+    private class GetSObjectByFieldPathSafe extends Operator {
+        private final List<String> path;
+        private GetSObjectByFieldPathSafe(String fieldName) { path = fieldName.split('\\.'); }
+        public override Object apply(Object obj) { return getSObject((SObject) obj, 0); }
+        private SObject getSObject(SObject sObj, Integer i) {
+            if (i >= path.size()) { return sObj; }
+            String fieldName = path[i];
+            Boolean isSafeNavigation = fieldName.endsWith('?'); // Safe Navigation
+            if (isSafeNavigation) { fieldName = fieldName.removeEnd('?'); }
+            sObj = sObj.getSObject(fieldName);
+            if (isSafeNavigation && sObj == null) { return null; }
+            return getSObject(sObj, ++i);
+        }
+    }
+
+    private class GetSObjectOperator extends Operator {
+        private final IFunction mapper;
+        private GetSObjectOperator(String fieldName) {
+            Validate.notBlank(fieldName);
+            if (!fieldName.containsAny('?.')) { mapper = new GetSObjectByFieldName(fieldName); }
+            else { mapper = new GetSObjectByFieldPathSafe(fieldName); }
+        }
+        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+    }
+
+    private class GetSObjectFieldOperator extends Operator {
+        private final SObjectField field;
+        private GetSObjectFieldOperator(SObjectField field) {
+            Validate.notNull(field);
+            this.field = field;
+        }
+        public override Object apply(Object obj) { return ((SObject) obj).getSObject(field); }
+    }
+
     private class SetSObjectsByFieldNameOperator extends Operator {
         private final String placeholder = '\'{\'"totalSize": {0}, "done": true, "records": {1}\'}\'';
         private final String fieldName;
@@ -490,7 +574,7 @@ public virtual inherited sharing class SObjectOperators extends BaseSObjectOpera
             );
         }
         private String findChildRelationshipName(final SObjectField field) {
-            return SObjectEnumerableSupport.findRelationshipField(field);
+            return CsfSupport.findRelationshipField(field);
         }
     }
     // @end-group

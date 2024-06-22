@@ -44,8 +44,8 @@ public virtual inherited sharing class SObjectBiConsumers {
     public static BiConsumer set(final String fieldName, final IFunction mapper) {
         Validate.notNull(fieldName);
         Validate.notNull(mapper);
-        if (!fieldName.contains('.')) { return new SetFieldName(fieldName, mapper); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) { return new SetFieldPathSafe(fieldName, mapper); }
+        if (!CsfSupport.isXRefField(fieldName)) { return new SetFieldName(fieldName, mapper); }
+        if (CsfSupport.isSafePath(fieldName)) { return new SetFieldPathSafe(fieldName, mapper); }
         return new SetFieldPath(fieldName, mapper);
     }
 
@@ -145,8 +145,8 @@ public virtual inherited sharing class SObjectBiConsumers {
     public static BiConsumer setSObject(final String fieldName, final IOperator operator) {
         Validate.notNull(fieldName);
         Validate.notNull(operator);
-        if (!fieldName.contains('.')) { return new SetSObjectByFieldName(fieldName, operator); }
-        if (fieldName.substringBeforeLast('.').endsWith('?')) { return new SetSObjectByPathSafe(fieldName, operator); }
+        if (!CsfSupport.isXRefField(fieldName)) { return new SetSObjectByFieldName(fieldName, operator); }
+        if (CsfSupport.isSafePath(fieldName)) { return new SetSObjectByPathSafe(fieldName, operator); }
         return new SetSObjectByPath(fieldName, operator);
     }
 
@@ -300,7 +300,7 @@ public virtual inherited sharing class SObjectBiConsumers {
             this.fieldName = fieldName;
             this.operator = operator;
         }
-        public override void accept(Object src, Object target) { 
+        public override void accept(Object src, Object target) {
             ((SObject) target).putSObject(fieldName, (SObject) operator.apply(src));
         }
     }
@@ -336,7 +336,7 @@ public virtual inherited sharing class SObjectBiConsumers {
             this.field = field;
             this.operator = operator;
         }
-        public override void accept(Object src, Object target) { 
+        public override void accept(Object src, Object target) {
             ((SObject) target).putSObject(field, (SObject) operator.apply(src));
         }
     }

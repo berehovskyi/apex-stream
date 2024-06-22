@@ -16,6 +16,7 @@ private class StringSuppliersTest {
      * @see StringSuppliers.autonumber
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void default() {
         // Given
         ISupplier uuidSupp = StringSuppliers.uuid();
@@ -50,5 +51,5 @@ private class StringSuppliersTest {
         Assert.areEqual('A-10--N9', actual10);
         Assert.areEqual('A-11--N9', actual11);
     }
-    
+
 }

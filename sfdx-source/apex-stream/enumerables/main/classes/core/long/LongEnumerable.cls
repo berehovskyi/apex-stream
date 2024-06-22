@@ -151,7 +151,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *
      * @example
      * List<Long> filtered = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-     *     .filter(BasePredicates.isEqual(5L))
+     *     .filter(Predicates.isEqual(5L))
      *     .toList(); // [5L, 5L]
      */
     public abstract LongEnumerable filter(final IPredicate predicate);
@@ -168,7 +168,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *
      * @example
      * List<Long> firstFiltered = [LongEnumerable].of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .take(BasePredicates.isEqual(0L))
+     *     .take(Predicates.isEqual(0L))
      *     .toList(); // [0L, 0L]
      */
     public abstract LongEnumerable take(final IPredicate predicate);
@@ -186,7 +186,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *
      * @example
      * List<Long> rest = [LongEnumerable].of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .drop(BasePredicates.isEqual(0L))
+     *     .drop(Predicates.isEqual(0L))
      *     .toList(); // [1L, 1L, 5L]
      */
     public abstract LongEnumerable drop(final IPredicate predicate);

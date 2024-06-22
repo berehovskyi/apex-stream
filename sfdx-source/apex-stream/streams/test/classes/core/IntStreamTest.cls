@@ -727,7 +727,7 @@ private class IntStreamTest {
         IIntEnumerable stm1 = IntStream.of(clone);
         // When
         Boolean actual = stm.some(new AsTestCommons.IsLessPredicate(0));
-        Boolean actual1 = stm1.some(BasePredicates.isEqual(0));
+        Boolean actual1 = stm1.some(EnumerableSupport.isEqual(0));
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);

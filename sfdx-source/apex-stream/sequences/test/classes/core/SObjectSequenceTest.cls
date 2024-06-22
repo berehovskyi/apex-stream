@@ -100,10 +100,10 @@ private class SObjectSequenceTest {
         Account newAcc3 = new Account(Name = 'Test Acc3', NumberOfEmployees = 400);
         List<Account> oldList = new List<Account>{ oldAcc, oldAcc1, oldAcc2, oldAcc3 };
         List<Account> newList = new List<Account>{ newAcc, newAcc1, newAcc2, newAcc3 };
-        IBiOperator maxNumber = BiOperator.maxBy(Comparer.comparing(BaseSObjectFunctions.get(AsTestConsts.NUMBER_OF_EMPLOYEES)));
+        IBiOperator maxNumber = BiOperator.maxBy(Comparer.comparing(SObjectEnumerableSupport.get(AsTestConsts.NUMBER_OF_EMPLOYEES)));
         ISObjectEnumerable oldAccsSteam = SObjectSequence.of(oldList);
         ISObjectEnumerable newAccsSteam = SObjectSequence.of(newList);
-        IBiPredicate numOfEmployeesIsChanged = new AsTestCommons.ComparisonBiPredicate(BaseSObjectFunctions.get(AsTestConsts.NUMBER_OF_EMPLOYEES), BaseSObjectFunctions.get(AsTestConsts.NUMBER_OF_EMPLOYEES), 0).negate();
+        IBiPredicate numOfEmployeesIsChanged = new AsTestCommons.ComparisonBiPredicate(SObjectEnumerableSupport.get(AsTestConsts.NUMBER_OF_EMPLOYEES), SObjectEnumerableSupport.get(AsTestConsts.NUMBER_OF_EMPLOYEES), 0).negate();
         IBiOperator getNewAcc = BiOperator.right();
         SObjectEnumerable accSeq = SObjectSequence.zip(oldAccsSteam, newAccsSteam, maxNumber);
         ISObjectEnumerable accSeq1 = SObjectSequence.zip(oldAccsSteam, newAccsSteam, numOfEmployeesIsChanged, getNewAcc);
@@ -164,7 +164,7 @@ private class SObjectSequenceTest {
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
         List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc, acc2 };
-        IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
+        IFunction getName = SObjectEnumerableSupport.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
         SObjectEnumerable seq = SObjectSequence.of(input).union(input1);
@@ -205,7 +205,7 @@ private class SObjectSequenceTest {
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
         List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc, acc2 };
-        IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
+        IFunction getName = SObjectEnumerableSupport.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
         SObjectEnumerable seq = SObjectSequence.of(input).intersect(input1);
@@ -246,7 +246,7 @@ private class SObjectSequenceTest {
         Account acc9 = new Account(Name = 'Test Acc9');
         List<Account> input = new List<Account>{ acc5, acc3, acc9, acc7, acc5, acc9, acc3, acc7 };
         List<Account> input1 = new List<Account>{ acc8, acc3, acc6, acc4, acc4, acc9, acc1, acc, acc2 };
-        IFunction getName = BaseSObjectFunctions.get(AsTestConsts.NAME);
+        IFunction getName = SObjectEnumerableSupport.get(AsTestConsts.NAME);
         String fieldName = AsTestConsts.NAME;
         SObjectField field = AsTestConsts.Account.Name;
         SObjectEnumerable seq = SObjectSequence.of(input).except(input1);
@@ -284,8 +284,8 @@ private class SObjectSequenceTest {
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         Integer value = 200;
-        IPredicate isFieldEqual = BaseSObjectPredicates.isEqual(fieldName, value);
-        IPredicate isFieldEqual1 = BaseSObjectPredicates.isEqual(field, value);
+        IPredicate isFieldEqual = SObjectEnumerableSupport.isEqual(fieldName, value);
+        IPredicate isFieldEqual1 = SObjectEnumerableSupport.isEqual(field, value);
         SObjectEnumerable accSeq = SObjectSequence.of(input).filter(fieldName, value);
         SObjectEnumerable accSeq1 = SObjectSequence.of(input).filter(field, value);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(input).filter(isFieldEqual);
@@ -318,8 +318,8 @@ private class SObjectSequenceTest {
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         Integer value = 200;
-        IPredicate isFieldEqual = BaseSObjectPredicates.isEqual(fieldName, value);
-        IPredicate isFieldEqual1 = BaseSObjectPredicates.isEqual(field, value);
+        IPredicate isFieldEqual = SObjectEnumerableSupport.isEqual(fieldName, value);
+        IPredicate isFieldEqual1 = SObjectEnumerableSupport.isEqual(field, value);
         SObjectEnumerable accSeq = SObjectSequence.of(input).take(fieldName, value);
         SObjectEnumerable accSeq1 = SObjectSequence.of(input).take(field, value);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(input).take(isFieldEqual);
@@ -352,8 +352,8 @@ private class SObjectSequenceTest {
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         Integer value = 200;
-        IPredicate isFieldEqual = BaseSObjectPredicates.isEqual(fieldName, value);
-        IPredicate isFieldEqual1 = BaseSObjectPredicates.isEqual(field, value);
+        IPredicate isFieldEqual = SObjectEnumerableSupport.isEqual(fieldName, value);
+        IPredicate isFieldEqual1 = SObjectEnumerableSupport.isEqual(field, value);
         SObjectEnumerable accSeq = SObjectSequence.of(input).drop(fieldName, value);
         SObjectEnumerable accSeq1 = SObjectSequence.of(input).drop(field, value);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(input).drop(isFieldEqual);
@@ -420,15 +420,15 @@ private class SObjectSequenceTest {
         SObjectField field1 = AsTestConsts.Account.ParentId;
         String value = 'Value';
         IFunction getConstFunction = Function.constant(value);
-        IFunction getIdByRightFunction = BaseSObjectFunctions.get(AsTestConsts.ID);
-        IFunction getAccountIdByRightFunction = BaseSObjectFunctions.get(Account.Id);
-        IFunction getAccNameByRightFunction = BaseSObjectFunctions.get(AsTestConsts.Account.Name);
+        IFunction getIdByRightFunction = SObjectEnumerableSupport.get(AsTestConsts.ID);
+        IFunction getAccountIdByRightFunction = SObjectEnumerableSupport.get(Account.Id);
+        IFunction getAccNameByRightFunction = SObjectEnumerableSupport.get(AsTestConsts.Account.Name);
         BiConsumer setIdByFunctionBiConsumer = new AsTestCommons.SetBiConsumer(AsTestConsts.ACCOUNT_ID, getIdByRightFunction);
         BiConsumer setDescriptionByFunctionBiConsumer = new AsTestCommons.SetBiConsumer(field, getAccNameByRightFunction);
         IBiConsumer biCons = setIdByFunctionBiConsumer.andThen(setDescriptionByFunctionBiConsumer);
         IBiOperator biOp = BiOperator.combine(biCons);
         Operator createNewContactOperator = Operator.combine(Operator.compose(new AsTestCommons.SObjectSupplier(Contact.SObjectType)), biOp);
-        Operator setDepartmentByConstFunction = Operator.compose(BaseSObjectConsumers.set(AsTestConsts.Contact.Department, getConstFunction));
+        Operator setDepartmentByConstFunction = Operator.compose(SObjectEnumerableSupport.set(AsTestConsts.Contact.Department, getConstFunction));
         IOperator op = createNewContactOperator.andThen(setDepartmentByConstFunction);
         IOperator createNewContactFromAccount = Operator.combine(
             Operator.compose(new AsTestCommons.SObjectSupplier(Contact.SObjectType)),
@@ -471,7 +471,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IFunction getNumOfEmployeesAsInt = BaseSObjectFunctions.get(field);
+        IFunction getNumOfEmployeesAsInt = SObjectEnumerableSupport.get(field);
         IntEnumerable intSeq = SObjectSequence.of(clone).mapToInt(getNumOfEmployeesAsInt);
         IntEnumerable intSeq1 = SObjectSequence.of(clone).mapToInt(fieldName);
         IIntEnumerable intSeq2 = SObjectSequence.of(clone).mapToInt(field);
@@ -502,7 +502,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IFunction getNumOfEmployeesAsLong = BaseSObjectFunctions.get(field);
+        IFunction getNumOfEmployeesAsLong = SObjectEnumerableSupport.get(field);
         LongEnumerable longSeq = SObjectSequence.of(clone).mapToLong(getNumOfEmployeesAsLong);
         LongEnumerable longSeq1 = SObjectSequence.of(clone).mapToLong(fieldName);
         ILongEnumerable longSeq2 = SObjectSequence.of(clone).mapToLong(field);
@@ -533,7 +533,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.AnnualRevenue;
         String fieldName = AsTestConsts.ANNUAL_REVENUE;
-        IFunction getNumOfEmployeesAsDouble = BaseSObjectFunctions.get(field);
+        IFunction getNumOfEmployeesAsDouble = SObjectEnumerableSupport.get(field);
         DoubleEnumerable doubleSeq = SObjectSequence.of(clone).mapToDouble(getNumOfEmployeesAsDouble);
         DoubleEnumerable doubleSeq1 = SObjectSequence.of(clone).mapToDouble(fieldName);
         IDoubleEnumerable doubleSeq2 = SObjectSequence.of(clone).mapToDouble(field);
@@ -568,7 +568,7 @@ private class SObjectSequenceTest {
         List<Contact> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Contact.Birthdate;
         String fieldName = AsTestConsts.BIRTHDATE;
-        IFunction getBirthday = BaseSObjectFunctions.get(field);
+        IFunction getBirthday = SObjectEnumerableSupport.get(field);
         IObjectEnumerable objSeq = SObjectSequence.of(clone).mapToObject(getBirthday);
         IObjectEnumerable objSeq1 = SObjectSequence.of(clone).mapToObject(fieldName);
         ObjectEnumerable objSeq2 = SObjectSequence.of(clone).mapToObject(field);
@@ -594,7 +594,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Contact.AccountId;
         String fieldName = AsTestConsts.CONTACTS;
-        IFunction getContacts = BaseSObjectFunctions.getSObjects(field);
+        IFunction getContacts = SObjectEnumerableSupport.getSObjects(field);
         SObjectEnumerable conSeq = SObjectSequence.of(clone).flatMapTo(getContacts);
         SObjectEnumerable conSeq1 = SObjectSequence.of(clone).flatMapTo(fieldName);
         ISObjectEnumerable conSeq2 = SObjectSequence.of(clone).flatMapTo(field);
@@ -758,7 +758,7 @@ private class SObjectSequenceTest {
         SObjectField field = AsTestConsts.Account.Name;
         String fieldName = AsTestConsts.NAME;
         String value = 'New Name';
-        IConsumer setNewName = BaseSObjectConsumers.set(fieldName, value);
+        IConsumer setNewName = SObjectEnumerableSupport.set(fieldName, value);
         SObjectEnumerable accSeq = SObjectSequence.of(clone).forEach(setNewName);
         SObjectEnumerable accSeq1 = SObjectSequence.of(clone1).forEach(fieldName, value);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(clone2).forEach(field, value);
@@ -792,7 +792,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IFunction getNumOfEmployees = BaseSObjectFunctions.get(field);
+        IFunction getNumOfEmployees = SObjectEnumerableSupport.get(field);
         SObjectEnumerable accSeq = SObjectSequence.of(clone).distinct();
         SObjectEnumerable accSeq1 = SObjectSequence.of(clone).withoutNulls().distinct(getNumOfEmployees);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(clone).withoutNulls().distinct(fieldName);
@@ -827,7 +827,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IComparer fieldComparer = Comparer.comparing(BaseSObjectFunctions.get(field));
+        IComparer fieldComparer = Comparer.comparing(SObjectEnumerableSupport.get(field));
         SObjectEnumerable accSeq = SObjectSequence.of(clone).sort();
         SObjectEnumerable accSeq1 = SObjectSequence.of(clone).sort(SortOrder.ASCENDING);
         SObjectEnumerable accSeq2 = SObjectSequence.of(clone).sort(fieldComparer);
@@ -945,7 +945,7 @@ private class SObjectSequenceTest {
         List<Account> input = new List<Account>{ acc1, acc, acc2, acc3, acc4, acc2 };
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
-        IComparer fieldComparer = Comparer.comparing(BaseSObjectFunctions.get(field));
+        IComparer fieldComparer = Comparer.comparing(SObjectEnumerableSupport.get(field));
         IBiOperator maxBy = BiOperator.maxBy(fieldComparer);
         SObjectEnumerable accSeq = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq1 = SObjectSequence.of(clone);
@@ -1009,7 +1009,7 @@ private class SObjectSequenceTest {
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
         Integer value = 0;
         Integer value1 = 500;
-        IPredicate isFieldEqualPredicate = BaseSObjectPredicates.isEqual(field, 0);
+        IPredicate isFieldEqualPredicate = SObjectEnumerableSupport.isEqual(field, 0);
         ISObjectEnumerable accSeq = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq1 = SObjectSequence.of(clone);
         SObjectEnumerable accSeq2 = SObjectSequence.of(clone);
@@ -1043,7 +1043,7 @@ private class SObjectSequenceTest {
         String value = 'T';
         Boolean value1 = false;
         String value2 = 'Finance';
-        IPredicate isLastNameStartsWith = Predicate.compose(BaseSObjectFunctions.get(AsTestConsts.Contact.LastName), new AsTestCommons.StartsWithPredicate(value));
+        IPredicate isLastNameStartsWith = Predicate.compose(SObjectEnumerableSupport.get(AsTestConsts.Contact.LastName), new AsTestCommons.StartsWithPredicate(value));
         ISObjectEnumerable accSeq = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq1 = SObjectSequence.of(clone);
         SObjectEnumerable accSeq2 = SObjectSequence.of(clone);
@@ -1074,7 +1074,7 @@ private class SObjectSequenceTest {
         String value = 'A';
         Boolean value1 = true;
         String value2 = 'HR';
-        IPredicate isLastNameStartsWith = Predicate.compose(BaseSObjectFunctions.get(AsTestConsts.Contact.LastName), new AsTestCommons.StartsWithPredicate(value));
+        IPredicate isLastNameStartsWith = Predicate.compose(SObjectEnumerableSupport.get(AsTestConsts.Contact.LastName), new AsTestCommons.StartsWithPredicate(value));
         ISObjectEnumerable accSeq = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq1 = SObjectSequence.of(clone);
         SObjectEnumerable accSeq2 = SObjectSequence.of(clone);
@@ -1105,7 +1105,7 @@ private class SObjectSequenceTest {
         String value = 'A';
         Boolean value1 = true;
         String value2 = 'HR';
-        IPredicate isLastNameStartsWith = Predicate.compose(BaseSObjectFunctions.get(AsTestConsts.Contact.LastName), new AsTestCommons.StartsWithPredicate(value));
+        IPredicate isLastNameStartsWith = Predicate.compose(SObjectEnumerableSupport.get(AsTestConsts.Contact.LastName), new AsTestCommons.StartsWithPredicate(value));
         ISObjectEnumerable accSeq = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq1 = SObjectSequence.of(clone);
         SObjectEnumerable accSeq2 = SObjectSequence.of(clone);
@@ -1135,7 +1135,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IComparer fieldComparer = Comparer.comparing(BaseSObjectFunctions.get(field));
+        IComparer fieldComparer = Comparer.comparing(SObjectEnumerableSupport.get(field));
         ISObjectEnumerable accSeq = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq1 = SObjectSequence.of(clone);
         SObjectEnumerable accSeq2 = SObjectSequence.of(clone);
@@ -1165,7 +1165,7 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IComparer fieldComparer = Comparer.comparing(BaseSObjectFunctions.get(field));
+        IComparer fieldComparer = Comparer.comparing(SObjectEnumerableSupport.get(field));
         ISObjectEnumerable accSeq = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq1 = SObjectSequence.of(clone);
         SObjectEnumerable accSeq2 = SObjectSequence.of(clone);
@@ -1195,8 +1195,8 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IFunction getAsDouble = BaseSObjectFunctions.get(fieldName);
-        IPredicate hasFieldValue = BasePredicates.isEqual(BaseSObjectFunctions.get(field), Function.constant(null)).negate();
+        IFunction getAsDouble = SObjectEnumerableSupport.get(fieldName);
+        IPredicate hasFieldValue = EnumerableSupport.isEqual(SObjectEnumerableSupport.get(field), Function.constant(null)).negate();
         SObjectEnumerable accSeq = SObjectSequence.of(clone).filter(hasFieldValue);
         SObjectEnumerable accSeq1 = SObjectSequence.of(clone).filter(hasFieldValue);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(clone).filter(hasFieldValue);
@@ -1227,8 +1227,8 @@ private class SObjectSequenceTest {
         List<Account> clone = AsTestCommons.deepClone(input);
         SObjectField field = AsTestConsts.Account.NumberOfEmployees;
         String fieldName = AsTestConsts.NUMBER_OF_EMPLOYEES;
-        IFunction getAsDouble = BaseSObjectFunctions.get(fieldName);
-        IPredicate hasFieldValue = BasePredicates.isEqual(getAsDouble, Function.constant(null)).negate();
+        IFunction getAsDouble = SObjectEnumerableSupport.get(fieldName);
+        IPredicate hasFieldValue = EnumerableSupport.isEqual(getAsDouble, Function.constant(null)).negate();
         SObjectEnumerable accSeq = SObjectSequence.of(clone).filter(hasFieldValue);
         SObjectEnumerable accSeq1 = SObjectSequence.of(clone).filter(hasFieldValue);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(clone).filter(hasFieldValue);
@@ -1320,16 +1320,16 @@ private class SObjectSequenceTest {
         ISObjectEnumerable accSeq6 = SObjectSequence.of(clone).withoutNulls();
         // When
         List<Account> actual = accSeq.toList();
-        List<Integer> actual1 = (List<Integer>) accSeq1.toList(BaseSObjectFunctions.get('NumberOfEmployees'), Integer.class);
+        List<Integer> actual1 = (List<Integer>) accSeq1.toList(SObjectEnumerableSupport.get('NumberOfEmployees'), Integer.class);
         List<Integer> actual2 = (List<Integer>) accSeq2.toList('NumberOfEmployees', Integer.class);
         List<Integer> actual3 = (List<Integer>) accSeq3.toList(Account.NumberOfEmployees, Integer.class);
-        List<Object> actual4 = accSeq4.toList(BaseSObjectFunctions.get('NumberOfEmployees'));
+        List<Object> actual4 = accSeq4.toList(SObjectEnumerableSupport.get('NumberOfEmployees'));
         List<Object> actual5 = accSeq5.toList('NumberOfEmployees');
         List<Object> actual6 = accSeq6.toList(Account.NumberOfEmployees);
         // Then
         List<Integer> expected = (List<Integer>) SObjectSequence.of(clone)
             .withoutNulls()
-            .collect(BaseCollectors.toList(BaseSObjectFunctions.get(Account.NumberOfEmployees)).cast(List<Integer>.class));
+            .collect(EnumerableSupport.toList(SObjectEnumerableSupport.get(Account.NumberOfEmployees)).cast(List<Integer>.class));
         Assert.areEqual(input, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
@@ -1370,26 +1370,26 @@ private class SObjectSequenceTest {
         // When
         Set<SObject> actual = accSeq.toSet();
         Set<Id> actual1 = accSeq1.toIdSet();
-        Set<Id> actual2 = accSeq2.toIdSet(BaseSObjectFunctions.get('Id'));
+        Set<Id> actual2 = accSeq2.toIdSet(SObjectEnumerableSupport.get('Id'));
         Set<Id> actual3 = accSeq3.toIdSet('Id');
         Set<Id> actual4 = accSeq4.toIdSet(Account.Id);
-        Set<String> actual5 = accSeq5.toStringSet(BaseSObjectFunctions.get('Name'));
+        Set<String> actual5 = accSeq5.toStringSet(SObjectEnumerableSupport.get('Name'));
         Set<String> actual6 = accSeq6.toStringSet('Name');
         Set<String> actual7 = accSeq7.toStringSet(Account.Name);
-        Set<Object> actual8 = (Set<Object>) accSeq8.toSet(BaseSObjectFunctions.get('Name'));
+        Set<Object> actual8 = (Set<Object>) accSeq8.toSet(SObjectEnumerableSupport.get('Name'));
         Set<Object> actual9 = (Set<Object>) accSeq9.toSet('Name');
         Set<Object> actual10 = (Set<Object>) accSeq10.toSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectSequence.of(clone)
             .withoutNulls()
-            .collect(Collector.of(Supplier.of(Set<Id>.class), new AsTestCommons.AddToIdSet(BaseSObjectFunctions.get(Account.Id))));
+            .collect(Collector.of(Supplier.of(Set<Id>.class), new AsTestCommons.AddToIdSet(SObjectEnumerableSupport.get(Account.Id))));
         Set<String> expected2 = (Set<String>) SObjectSequence.of(clone)
             .withoutNulls()
-            .collect(Collector.of(Supplier.of(Set<String>.class), new AsTestCommons.AddToStringSet(BaseSObjectFunctions.get(Account.Name))));
+            .collect(Collector.of(Supplier.of(Set<String>.class), new AsTestCommons.AddToStringSet(SObjectEnumerableSupport.get(Account.Name))));
         Set<Object> expected3 = (Set<Object>) SObjectSequence.of(clone)
             .withoutNulls()
-            .collect(Collector.of(Supplier.of(Set<Object>.class), new AsTestCommons.AddToSet(BaseSObjectFunctions.get(Account.Name))));
+            .collect(Collector.of(Supplier.of(Set<Object>.class), new AsTestCommons.AddToSet(SObjectEnumerableSupport.get(Account.Name))));
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected1, actual1);
         Assert.areEqual(expected1, actual2);
@@ -1429,10 +1429,10 @@ private class SObjectSequenceTest {
         ISObjectEnumerable accSeq6 = SObjectSequence.of(clone);
         // When
         Map<Id, SObject> actual = accSeq.toMap();
-        Map<Id, Account> actual1 = (Map<Id, Account>) accSeq1.toByIdMap(BaseSObjectFunctions.get('Id'), Account.class);
+        Map<Id, Account> actual1 = (Map<Id, Account>) accSeq1.toByIdMap(SObjectEnumerableSupport.get('Id'), Account.class);
         Map<Id, Account> actual2 = (Map<Id, Account>) accSeq2.toByIdMap('Id', Account.class);
         Map<Id, Account> actual3 = (Map<Id, Account>) accSeq3.toByIdMap(Account.Id, Account.class);
-        Map<String, Account> actual4 = (Map<String, Account>) accSeq4.toByStringMap(BaseSObjectFunctions.get('Name'), Account.class);
+        Map<String, Account> actual4 = (Map<String, Account>) accSeq4.toByStringMap(SObjectEnumerableSupport.get('Name'), Account.class);
         Map<String, Account> actual5 = (Map<String, Account>) accSeq5.toByStringMap('Name', Account.class);
         Map<String, Account> actual6 = (Map<String, Account>) accSeq6.toByStringMap(Account.Name, Account.class);
         // Then
@@ -1441,14 +1441,14 @@ private class SObjectSequenceTest {
             .collect(
                 Collector.of(
                     Supplier.of(Map<Id, Account>.class),
-                    new AsTestCommons.PutToObjectByIdMap(BaseSObjectFunctions.get(Account.Id), Function.identity(), null)
+                    new AsTestCommons.PutToObjectByIdMap(SObjectEnumerableSupport.get(Account.Id), Function.identity(), null)
                 ).cast(Map<Id, Account>.class)
             );
         Map<String, Account> expected2 = (Map<String, Account>) SObjectSequence.of(clone)
             .collect(
                 Collector.of(
                     Supplier.of(Map<String, Account>.class),
-                    new AsTestCommons.PutToObjectByStringMap(BaseSObjectFunctions.get(Account.Name), Function.identity(), null)
+                    new AsTestCommons.PutToObjectByStringMap(SObjectEnumerableSupport.get(Account.Name), Function.identity(), null)
                 ).cast(Map<String, Account>.class)
             );
         Assert.areEqual(expected, actual);
@@ -1485,10 +1485,10 @@ private class SObjectSequenceTest {
         SObjectEnumerable accSeq4 = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq5 = SObjectSequence.of(clone);
         // When
-        Map<Id, List<Account>> actual = accSeq.groupById(BaseSObjectFunctions.get('ParentId'));
+        Map<Id, List<Account>> actual = accSeq.groupById(SObjectEnumerableSupport.get('ParentId'));
         Map<Id, List<Account>> actual2 = accSeq1.groupById('ParentId');
         Map<Id, List<Account>> actual3 = accSeq2.groupById(Account.ParentId);
-        Map<String, List<Account>> actual4 = accSeq3.groupByString(BaseSObjectFunctions.get('Rating'));
+        Map<String, List<Account>> actual4 = accSeq3.groupByString(SObjectEnumerableSupport.get('Rating'));
         Map<String, List<Account>> actual5 = accSeq4.groupByString('Rating');
         Map<String, List<Account>> actual6 = accSeq5.groupByString(Account.Rating);
         // Then
@@ -1496,7 +1496,7 @@ private class SObjectSequenceTest {
             .collect(
                 Collector.of(
                     Supplier.of(Map<Id, List<Account>>.class),
-                    new AsTestCommons.PutToObjectsByIdMap(BaseCollectors.toList(), BaseSObjectFunctions.get(Account.ParentId)),
+                    new AsTestCommons.PutToObjectsByIdMap(EnumerableSupport.toList(), SObjectEnumerableSupport.get(Account.ParentId)),
                     new AsTestCommons.GroupByIdFinisher(null)
                 ).cast(Map<Id, List<Account>>.class)
             );
@@ -1504,7 +1504,7 @@ private class SObjectSequenceTest {
             .collect(
                 Collector.of(
                     Supplier.of(Map<String, List<Account>>.class),
-                    new AsTestCommons.PutToObjectsByStringMap(BaseCollectors.toList(), BaseSObjectFunctions.get(Account.Rating)),
+                    new AsTestCommons.PutToObjectsByStringMap(EnumerableSupport.toList(), SObjectEnumerableSupport.get(Account.Rating)),
                     new AsTestCommons.GroupByStringFinisher(null)
                 ).cast(Map<String, List<Account>>.class)
             );
@@ -1531,7 +1531,7 @@ private class SObjectSequenceTest {
         Account acc4 = new Account(Id = (Id) idGenerator.get(), Name = 'Test Acc4');
         List<Account> input = new List<Account>{ acc1, acc, acc2, acc3, acc4 };
         List<Account> clone = AsTestCommons.deepClone(input);
-        IPredicate predicate = BasePredicates.isCompared(BaseSObjectFunctions.get(Account.NumberOfEmployees), Function.constant(150), Comparer.defaultOrder(), 1);
+        IPredicate predicate = new EnumerableSupport.ComparerPredicate(SObjectEnumerableSupport.get(Account.NumberOfEmployees), Function.constant(150), Comparer.defaultOrder(), 1);
         SObjectEnumerable accSeq = SObjectSequence.of(clone);
         SObjectEnumerable accSeq1 = SObjectSequence.of(clone);
         ISObjectEnumerable accSeq2 = SObjectSequence.of(clone);
@@ -1544,7 +1544,7 @@ private class SObjectSequenceTest {
             .collect(
                 Collector.of(
                     Supplier.of(Map<Boolean, Object>.class),
-                    new AsTestCommons.PutToObjectsByBoolMap(BaseCollectors.toList(), Function.compose(predicate)),
+                    new AsTestCommons.PutToObjectsByBoolMap(EnumerableSupport.toList(), Function.compose(predicate)),
                     null
                 ).cast(Map<Boolean, List<Account>>.class)
             );

@@ -249,7 +249,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * SObjectSequence.zip(
      *     triggerOld,
      *     triggerNew,
-     *     BiOperator.minBy(Comparator.comparing(BaseSObjectFunctions.get(Account.AnnualRevenue)))
+     *     BiOperator.minBy(Comparator.comparing(SObjectFunctions.get(Account.AnnualRevenue)))
      * ).toList(); //
      * [
      *   { Name: 'foo', NumberOfEmployees: 100 },
@@ -285,9 +285,9 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * public class ContainsAnyBiPredicate extends BiPredicate {
      *     private final String fieldName;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) { 
-     *         this.fieldName = fieldName; 
-     *         this.s = s; 
+     *     public ContainsPredicate(String fieldName, String s) {
+     *         this.fieldName = fieldName;
+     *         this.s = s;
      *     }
      *     public override Boolean test(Object o1, Object o2) {
      *         String value1 = (String) ((Account) o1).get(fieldName);
@@ -309,7 +309,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     triggerOld,
      *     triggerNew,
      *     new ContainsAnyBiPredicate('Name', 'a'),
-     *     BiOperator.minBy(BaseSObjectFunctions.get(Account.AnnualRevenue))
+     *     BiOperator.minBy(SObjectFunctions.get(Account.AnnualRevenue))
      * ).toList(); //
      * [
      *   { Name: 'bar', NumberOfEmployees: 100 },
@@ -420,7 +420,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -459,7 +459,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -499,7 +499,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -809,7 +809,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MapToNumberOfEmployees extends Function {
      *     public override Object apply(Object o) {
@@ -851,7 +851,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MapToAnnualRevenue extends Function {
      *     public override Object apply(Object o) {
@@ -893,7 +893,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
-     * 
+     *
      * @example
      * public class MapToName extends Function {
      *     public override Object apply(Object o) {
@@ -1075,9 +1075,9 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *         Account acc1 = (Account) o1;
      *         Account acc2 = (Account) o2;
      *         Integer nameComparison = acc1.Name.compareTo(acc2.Name);
-     *         return nameComparison != 0 
+     *         return nameComparison != 0
      *             ? nameComparison
-     *             : acc1.AnnualRevenue > acc2.AnnualRevenue 
+     *             : acc1.AnnualRevenue > acc2.AnnualRevenue
      *                 ? 1
      *                 : acc1.AnnualRevenue == acc2.AnnualRevenue
      *                     ? 0
@@ -1342,7 +1342,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -1378,7 +1378,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -1413,7 +1413,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
@@ -1437,7 +1437,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Account acc1 = new Account(Name = 'foo', NumberOfEmployees = 100);
      * Account acc2 = new Account(Name = 'bar', NumberOfEmployees = 200);
@@ -1455,7 +1455,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * Account acc1 = new Account(Name = 'foo', NumberOfEmployees = 100);
      * Account acc2 = new Account(Name = 'bar', NumberOfEmployees = 200);
@@ -1639,8 +1639,8 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String childRelField;
      *     private final String fieldName;
      *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
-     *         this.childRelField = childRelField; 
-     *         this.fieldName = fieldName; 
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -1692,7 +1692,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * }
      */
     public virtual override Map<Id, SObject> toMap() {
-        return toByIdMap(BaseSObjectFunctions.get('Id'), SObject.class);
+        return toByIdMap(SObjectEnumerableSupport.get('Id'), SObject.class);
     }
 
     /**
@@ -1770,8 +1770,8 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String childRelField;
      *     private final String fieldName;
      *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
-     *         this.childRelField = childRelField; 
-     *         this.fieldName = fieldName; 
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -1888,8 +1888,8 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String childRelField;
      *     private final String fieldName;
      *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
-     *         this.childRelField = childRelField; 
-     *         this.fieldName = fieldName; 
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -1949,7 +1949,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     private final String fieldName;
      *     private final String s;
      *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName; 
+     *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {

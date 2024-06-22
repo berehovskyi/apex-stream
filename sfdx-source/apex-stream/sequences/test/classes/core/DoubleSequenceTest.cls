@@ -483,8 +483,8 @@ private class DoubleSequenceTest {
         IDoubleEnumerable seq2 = DoubleSequence.of(cloneWithNulls);
         Double seed = 10;
         // When
-        Double actual = seq.reduce(seed, BaseBiOperators.max());
-        Double actual1 = (Double) seq1.reduce(BaseBiOperators.max()).get();
+        Double actual = seq.reduce(seed, EnumerableSupport.max());
+        Double actual1 = (Double) seq1.reduce(EnumerableSupport.max()).get();
         Exception exc1;
         try {
             seq2.reduce(new AsTestCommons.SumDoubleBiOperator());
@@ -570,7 +570,7 @@ private class DoubleSequenceTest {
         IDoubleEnumerable seq1 = DoubleSequence.of(clone);
         // When
         Boolean actual = seq.some(new AsTestCommons.IsLessPredicate(0));
-        Boolean actual1 = seq1.some(BasePredicates.isEqual(0));
+        Boolean actual1 = seq1.some(EnumerableSupport.isEqual(0));
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);

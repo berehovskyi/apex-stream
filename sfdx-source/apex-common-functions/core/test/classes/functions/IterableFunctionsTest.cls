@@ -15,6 +15,7 @@ private class IterableFunctionsTest {
      * @see  IterableFunctions.get
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void get() {
         // Given
         List<Object> iter = new List<String>{ '1', '2', '3' };
@@ -37,5 +38,5 @@ private class IterableFunctionsTest {
         Assert.areEqual(iter1.iterator().next(), actual1);
         Assert.areEqual(IndexOutOfBoundsException.class.getName(), exc.getTypeName());
     }
-    
+
 }

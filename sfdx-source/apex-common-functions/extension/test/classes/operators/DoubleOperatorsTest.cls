@@ -43,6 +43,7 @@ private class DoubleOperatorsTest {
      * @see DoubleOperators.tanh
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void doubleUnaryOperators() {
         // Given
         List<Double> trig = new List<Double>{ 0.0, 0.5, -0.2 };

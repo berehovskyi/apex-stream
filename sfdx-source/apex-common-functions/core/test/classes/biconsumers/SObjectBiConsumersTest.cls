@@ -4,15 +4,17 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
+@SuppressWarnings(
+    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
+)
 private class SObjectBiConsumersTest {
 
     private static final List<Contact> INPUT = AfTestData.generateContacts();
-    
+
     static {
         new SObjectBiConsumers();
     }
-    
+
     /**
      * @see SObjectBiConsumers.set
      */
@@ -141,5 +143,5 @@ private class SObjectBiConsumersTest {
             }
         }
     }
-    
+
 }

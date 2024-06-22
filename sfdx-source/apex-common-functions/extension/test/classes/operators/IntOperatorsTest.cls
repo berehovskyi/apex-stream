@@ -26,6 +26,7 @@ private class IntOperatorsTest {
      * @see IntOperators.subtract
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void intUnaryOperators() {
         // Given
         Integer inc = 10;
@@ -45,5 +46,5 @@ private class IntOperatorsTest {
             Assert.areEqual(i - inc, IntOperators.subtract(inc).apply(i));
         }
     }
-    
+
 }

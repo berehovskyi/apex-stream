@@ -1,38 +1,197 @@
 /**
- * @description Utility methods for and manipulating SObject enumerables.
+ * @description Utility methods to simplify and standardize common SObject enumerable manipulations.
+ * <p><strong>Note: </strong></p>
+ * <p>This is an internal class and should not be referenced outside of this package.</p>
  *
  * @author Oleh Berehovskyi
  */
 public inherited sharing class SObjectEnumerableSupport {
 
+    /**
+     * @description Returns a `Consumer` that sets the value returned by
+     * the `mapper` for the specified `fieldName`.
+     * Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field name to set a value
+     * @param mapper applied to the input argument
+     *
+     * @return the `Consumer`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `mapper` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * SObjectEnumerableSupport.set('NumberOfEmployees', someFunction);
+     * SObjectEnumerableSupport.set('Parent.NumberOfEmployees', someFunction);
+     * SObjectEnumerableSupport.set('Parent?.NumberOfEmployees', someFunction);
+     */
     public static Consumer set(final String fieldName, final IFunction mapper) {
         return new SetFieldConsumer(fieldName, mapper);
     }
 
+    /**
+     * @description Returns a `Consumer` that sets the value returned by
+     * the `mapper` for the specified `field`.
+     *
+     * @param field the field to set a value
+     * @param mapper applied to the input argument
+     *
+     * @return the `Consumer`
+     *
+     * @throws NullPointerException if `field` or `mapper` is null
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * SObjectEnumerableSupport.set(Account.NumberOfEmployees, someFunction);
+     */
     public static Consumer set(final SObjectField field, final IFunction mapper) {
         return new SetField(field, mapper);
     }
 
+    /**
+     * @description Returns a `Consumer` that sets the `value`
+     * for the specified `fieldName`.
+     * Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field name to set a value
+     * @param value the value to set
+     *
+     * @return the `Consumer`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * SObjectEnumerableSupport.set('NumberOfEmployees', 100);
+     * SObjectEnumerableSupport.set('Parent.NumberOfEmployees', 100);
+     * SObjectEnumerableSupport.set('Parent?.NumberOfEmployees', (Object) null);
+     */
     public static Consumer set(final String fieldName, final Object value) {
         return set(fieldName, Function.constant(value));
     }
 
+    /**
+     * @description Returns a `Consumer` that sets the `value`
+     * for the specified `field`.
+     *
+     * @param field the field to set a value
+     * @param value the value to set
+     *
+     * @return the `Consumer`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.put
+     *
+     * @example
+     * SObjectEnumerableSupport.set(Account.NumberOfEmployees, 100);
+     * SObjectEnumerableSupport.set(Account.NumberOfEmployees, (Object) null);
+     */
     public static Consumer set(final SObjectField field, final Object value) {
         return set(field, Function.constant(value));
     }
 
+        /**
+     * @description Returns a `Function` that gets a value for
+     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field to get a value
+     *
+     * @return the `Function`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.get
+     *
+     * @example
+     * SObjectEnumerableSupport.get('Name');
+     * SObjectEnumerableSupport.get('Parent.Name');
+     * SObjectEnumerableSupport.get('Parent?.Name');
+     */
     public static Function get(final String fieldName) {
         return new GetFunction(fieldName);
     }
 
+    /**
+     * @description Returns a `Function` that gets a value for
+     * the specified `field`.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `Function`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see SObject.get
+     *
+     * @example
+     * SObjectEnumerableSupport.get(Account.Name);
+     */
     public static Function get(final SObjectField field) {
         return new GetByFieldFunction(field);
     }
 
+    /**
+     * @description Returns a `Function` that gets children sobjects for
+     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field to get a value
+     *
+     * @return the `Function`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.getSObjects
+     *
+     * @example
+     * SObjectEnumerableSupport.getSObjects('Contacts');
+     * SObjectEnumerableSupport.getSObjects('Parent.Contacts');
+     * SObjectEnumerableSupport.getSObjects('Parent?.Contacts');
+     */
     public static Function getSObjects(final String fieldName) {
         return new GetSObjectsFunction(fieldName);
     }
 
+    /**
+     * @description Returns a `Function` that gets children sobjects for
+     * the specified `field`. Cross-reference fields and safe navigation are supported.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `Function`
+     *
+     * @throws NullPointerException if `field` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     *
+     * @see SObject.getSObjects
+     *
+     * @example
+     * SObjectEnumerableSupport.getSObjects(Contact.AccountId);
+     */
     public static Function getSObjects(final SObjectField field) {
         final String relationshipField = findRelationshipField(field);
         // Since UnexpectedException is thrown if SObject doesn't have
@@ -41,10 +200,46 @@ public inherited sharing class SObjectEnumerableSupport {
         return getSObjects(relationshipField);
     }
 
+    /**
+     * @description Returns a `Operator` that gets sobject
+     * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the field to get a value
+     *
+     * @return the `Operator`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see SObject.getSObject
+     *
+     * @example
+     * SObjectEnumerableSupport.getSObject('Parent');
+     * SObjectEnumerableSupport.getSObject('Parent.Parent');
+     * SObjectEnumerableSupport.getSObject('Parent?.Parent');
+     */
     public static Operator getSObject(final String fieldName) {
         return new GetSObjectOperator(fieldName);
     }
 
+    /**
+     * @description Returns a `Operator` that gets sobject
+     * for the specified `field`.
+     *
+     * @param field the field to get a value
+     *
+     * @return the `Operator`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see SObject.getSObject
+     *
+     * @example
+     * SObjectEnumerableSupport.getSObject(Account.ParentId);
+     */
     public static Operator getSObject(final SObjectField field) {
         return new GetSObjectFieldOperator(field);
     }

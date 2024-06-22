@@ -28,6 +28,7 @@ private class DateFunctionsTest {
      * @see DateFunctions.toStartOfWeek
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void dateFunctions() {
         // Given
         Integer inc = 1;
@@ -41,5 +42,5 @@ private class DateFunctionsTest {
             Assert.areEqual(d.toStartOfWeek(), DateFunctions.toStartOfWeek().apply(d));
         }
     }
-    
+
 }

@@ -20,6 +20,7 @@ private class LongBiOperatorsTest {
      * @see LongBiOperators.product
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void operators() {
         // When
         IBiOperator min = LongBiOperators.min();
@@ -35,5 +36,5 @@ private class LongBiOperatorsTest {
             Assert.areEqual(src * l, product.apply(src, l));
         }
     }
-    
+
 }

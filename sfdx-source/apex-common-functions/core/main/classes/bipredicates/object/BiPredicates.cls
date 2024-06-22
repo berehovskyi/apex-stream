@@ -37,13 +37,14 @@ public virtual inherited sharing class BiPredicates {
      * @example
      * BiPredicates.isCompared(func1, func2, Comparer.defaultOrder(), 1);
      */
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static BiPredicate isCompared(
         final IFunction left,
         final IFunction right,
         final IComparer comparer,
         final Integer result
     ) {
-        return new Compared(left, right, comparer, result);
+        return new ComparerBiPredicate(left, right, comparer, result);
     }
 
     /**
@@ -291,12 +292,13 @@ public virtual inherited sharing class BiPredicates {
 
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
-    private class Compared extends BiPredicate {
+    private class ComparerBiPredicate extends BiPredicate {
         private final IFunction left;
         private final IFunction right;
         private final IComparer comparer;
         private final Integer comparisonResult;
-        private Compared(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
+        @SuppressWarnings('PMD.ExcessiveParameterList')
+        private ComparerBiPredicate(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
             Validate.notNull(left);
             Validate.notNull(right);
             Validate.notNull(comparer);

@@ -33,7 +33,7 @@ private class StringFunctionsTest {
     static {
         new StringFunctions();
     }
-    
+
     /**
      * @see StringFunctions.abbreviate
      * @see StringFunctions.append
@@ -97,7 +97,7 @@ private class StringFunctionsTest {
      * @see StringFunctions.parseDatetime
      */
     @IsTest
-    @SuppressWarnings('PMD.NcssMethodCount')
+    @SuppressWarnings('PMD.NcssMethodCount, PMD.ApexUnitTestClassShouldHaveRunAs')
     static void stringFunctions() {
         // Given
         List<Object> format = new List<Object>{ 'test' };
@@ -196,5 +196,5 @@ private class StringFunctionsTest {
             Assert.areEqual(Datetime.parse(str), StringFunctions.parseDatetime().apply(str));
         }
     }
-    
+
 }

@@ -26,6 +26,7 @@ private class LongOperatorsTest {
      * @see LongOperators.subtract
      */
     @IsTest
+    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void longUnaryOperators() {
         // Given
         Long inc = 10L;
@@ -45,5 +46,5 @@ private class LongOperatorsTest {
             Assert.areEqual(l - inc, LongOperators.subtract(inc).apply(l));
         }
     }
-    
+
 }

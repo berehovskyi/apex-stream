@@ -14,7 +14,7 @@ private class StreamTest {
     private static final List<AsPerson> PEOPLE = AsTestData.generatePersons();
     private static final List<String> STRINGS = AsTestData.generateStrings();
     private static final List<Comparable> COMPARABLES = AsTestData.generateComparables();
-    
+
     static {
         new Stream();
     }
@@ -107,7 +107,7 @@ private class StreamTest {
         IIntEnumerable stream5 = Stream.iterate(0, new AsTestCommons.IsLessPredicate(10), new AsTestCommons.AddIntOp(1));
         ILongEnumerable stream6 = Stream.iterate(0L, new AsTestCommons.IsLessPredicate(10L), new AsTestCommons.AddLongOp(1));
         IDoubleEnumerable stream7 = Stream.iterate((Double) 0.0, new AsTestCommons.IsLessPredicate((Double) 10.0), new AsTestCommons.AddDoubleOp(1));
-        ISObjectEnumerable stream8 = Stream.iterate(new Account(), new AsTestCommons.IsLessPredicate(BaseSObjectFunctions.get('Name'), Function.constant(null)), Operator.identity());
+        ISObjectEnumerable stream8 = Stream.iterate(new Account(), new AsTestCommons.IsLessPredicate(SObjectEnumerableSupport.get('Name'), Function.constant(null)), Operator.identity());
         IObjectEnumerable stream9 = Stream.iterate('', new AsTestCommons.IsLessPredicate('aaaaaa'), Operator.constant('a'));
         // Then
         Assert.isTrue(stream0 instanceof IntStream);

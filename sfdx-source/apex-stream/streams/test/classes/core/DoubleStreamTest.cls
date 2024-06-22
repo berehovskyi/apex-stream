@@ -582,8 +582,8 @@ private class DoubleStreamTest {
         IDoubleEnumerable stm2 = DoubleStream.of(cloneWithNulls);
         Double seed = 10;
         // When
-        Double actual = stm.reduce(seed, BaseBiOperators.max());
-        Double actual1 = (Double) stm1.reduce(BaseBiOperators.max()).get();
+        Double actual = stm.reduce(seed, EnumerableSupport.max());
+        Double actual1 = (Double) stm1.reduce(EnumerableSupport.max()).get();
         Exception exc1;
         try {
             stm2.reduce(new AsTestCommons.SumDoubleBiOperator());
@@ -678,7 +678,7 @@ private class DoubleStreamTest {
         IDoubleEnumerable stm1 = DoubleStream.of(clone);
         // When
         Boolean actual = stm.some(new AsTestCommons.IsLessPredicate(0));
-        Boolean actual1 = stm1.some(BasePredicates.isEqual(0));
+        Boolean actual1 = stm1.some(EnumerableSupport.isEqual(0));
         // Then
         Assert.areEqual(true, actual);
         Assert.areEqual(false, actual1);

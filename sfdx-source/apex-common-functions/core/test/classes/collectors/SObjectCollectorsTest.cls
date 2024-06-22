@@ -5,7 +5,7 @@
  */
 @IsTest(IsParallel = true)
 @SuppressWarnings(
-    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.NcssTypeCount, PMD.CyclomaticComplexity'
+    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.NcssTypeCount, PMD.CyclomaticComplexity'
 )
 private class SObjectCollectorsTest {
 

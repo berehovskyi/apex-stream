@@ -9,12 +9,12 @@
  *
  * @group Functional Built-In Classes
  */
-public virtual inherited sharing class CollectorSuppliers extends BaseCollectorSuppliers {
+public virtual inherited sharing class CollectorSuppliers {
 
     @TestVisible
     @SuppressWarnings('PMD.EmptyStatementBlock')
     protected CollectorSuppliers() {}
-    
+
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
@@ -51,6 +51,17 @@ public virtual inherited sharing class CollectorSuppliers extends BaseCollectorS
     }
 
     /**
+     * @description Returns a `Supplier` that returns a list container to track Double averaging.
+     *
+     * @return the `Supplier`
+     *
+     * @see Collectors.averagingDouble
+     */
+    public static Supplier averagingDouble() {
+        return new AveragingDoubleSupplier();
+    }
+
+    /**
      * @description Returns a `Supplier` that returns a list container to track `identity`
      * mutation.
      *
@@ -80,6 +91,10 @@ public virtual inherited sharing class CollectorSuppliers extends BaseCollectorS
         public override Object get() { return new List<Long>{ 0L, 0L }; }
     }
 
+    private class AveragingDoubleSupplier extends Supplier {
+        public override Object get() { return new List<Double>{ 0, 0, 0, 0 }; }
+    }
+
     private class BoxSupplier extends Supplier {
         private final Object identity;
         public BoxSupplier(Object identity) { this.identity = identity; }
@@ -87,5 +102,5 @@ public virtual inherited sharing class CollectorSuppliers extends BaseCollectorS
     }
     // @end-group
     //</editor-fold>
-    
+
 }
