@@ -203,16 +203,16 @@ private class AsTestData {
         Contact con4 = new Contact(Id = conId4, AccountId = acc4.Id, FirstName = 'Test FirstName4', LastName = 'Test Name4',
             HasOptedOutOfEmail = false, Birthdate = d3);
         Contact con5 = new Contact(Id = conId5, AccountId = accId5, LastName = 'Test Name5', Department = AsTestConsts.FINANCE);
-        Asset as11 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId0, InstallDate = Date.today());
-        Asset as12 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId0, InstallDate = Date.today());
-        Asset as21 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId1, InstallDate = Date.today().addDays(-1));
-        Asset as22 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId1, InstallDate = Date.today().addDays(-1));
-        Asset as31 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId2, InstallDate = Date.today());
-        Asset as32 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId2, InstallDate = Date.today().addDays(-1));
-        Asset as41 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId3);
-        Asset as42 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId3, InstallDate = Date.today().addDays(-1));
-        Asset as5 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId4);
-        Asset as6 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId5, InstallDate = Date.today().addDays(-1));
+        Event as11 = new Event(Id = generateId(Event.SObjectType), WhoId = conId0, ActivityDate = Date.today());
+        Event as12 = new Event(Id = generateId(Event.SObjectType), WhoId = conId0, ActivityDate = Date.today());
+        Event as21 = new Event(Id = generateId(Event.SObjectType), WhoId = conId1, ActivityDate = Date.today().addDays(-1));
+        Event as22 = new Event(Id = generateId(Event.SObjectType), WhoId = conId1, ActivityDate = Date.today().addDays(-1));
+        Event as31 = new Event(Id = generateId(Event.SObjectType), WhoId = conId2, ActivityDate = Date.today());
+        Event as32 = new Event(Id = generateId(Event.SObjectType), WhoId = conId2, ActivityDate = Date.today().addDays(-1));
+        Event as41 = new Event(Id = generateId(Event.SObjectType), WhoId = conId3);
+        Event as42 = new Event(Id = generateId(Event.SObjectType), WhoId = conId3, ActivityDate = Date.today().addDays(-1));
+        Event as5 = new Event(Id = generateId(Event.SObjectType), WhoId = conId4);
+        Event as6 = new Event(Id = generateId(Event.SObjectType), WhoId = conId5, ActivityDate = Date.today().addDays(-1));
         con.putSObject('Account', acc);
         con1.putSObject('Account', acc1);
         con2.putSObject('Account', acc2);
@@ -221,12 +221,12 @@ private class AsTestData {
         if (relateEachToAccount) {
             con5.putSObject('Account', acc5);
         }
-        con = (Contact) setSObjects(con, Asset.ContactId, new List<Asset>{ as11, as12 });
-        con1 = (Contact) setSObjects(con1, Asset.ContactId, new List<Asset>{ as21, as22 });
-        con2 = (Contact) setSObjects(con2, Asset.ContactId, new List<Asset>{ as31, as32 });
-        con3 = (Contact) setSObjects(con3, Asset.ContactId, new List<Asset>{ as41, as42 });
-        con4 = (Contact) setSObjects(con4, Asset.ContactId, new List<Asset>{ as5 });
-        con5 = (Contact) setSObjects(con5, Asset.ContactId, new List<Asset>{ as6 });
+        con = (Contact) setSObjects(con, Event.WhoId, new List<Event>{ as11, as12 });
+        con1 = (Contact) setSObjects(con1, Event.WhoId, new List<Event>{ as21, as22 });
+        con2 = (Contact) setSObjects(con2, Event.WhoId, new List<Event>{ as31, as32 });
+        con3 = (Contact) setSObjects(con3, Event.WhoId, new List<Event>{ as41, as42 });
+        con4 = (Contact) setSObjects(con4, Event.WhoId, new List<Event>{ as5 });
+        con5 = (Contact) setSObjects(con5, Event.WhoId, new List<Event>{ as6 });
         return new List<Contact>{ con, con1, con2, con3, con4, con5 };
     }
     public static List<Contact> generateContacts1() {

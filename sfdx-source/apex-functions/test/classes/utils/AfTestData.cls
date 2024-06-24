@@ -202,16 +202,16 @@ private class AfTestData {
         Contact con4 = new Contact(Id = conId4, AccountId = acc4.Id, FirstName = 'Test FirstName4', LastName = 'Test Name4',
             HasOptedOutOfEmail = false, Birthdate = d3);
         Contact con5 = new Contact(Id = conId5, AccountId = accId5, LastName = 'Test Name5', Department = AfTestConsts.FINANCE);
-        Asset as11 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId0, InstallDate = Date.today());
-        Asset as12 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId0, InstallDate = Date.today());
-        Asset as21 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId1, InstallDate = Date.today().addDays(-1));
-        Asset as22 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId1, InstallDate = Date.today().addDays(-1));
-        Asset as31 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId2, InstallDate = Date.today());
-        Asset as32 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId2, InstallDate = Date.today().addDays(-1));
-        Asset as41 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId3);
-        Asset as42 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId3, InstallDate = Date.today().addDays(-1));
-        Asset as5 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId4);
-        Asset as6 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId5, InstallDate = Date.today().addDays(-1));
+        Event ev11 = new Event(Id = generateId(Event.SObjectType), WhoId = conId0, ActivityDate = Date.today());
+        Event ev12 = new Event(Id = generateId(Event.SObjectType), WhoId = conId0, ActivityDate = Date.today());
+        Event ev21 = new Event(Id = generateId(Event.SObjectType), WhoId = conId1, ActivityDate = Date.today().addDays(-1));
+        Event ev22 = new Event(Id = generateId(Event.SObjectType), WhoId = conId1, ActivityDate = Date.today().addDays(-1));
+        Event ev31 = new Event(Id = generateId(Event.SObjectType), WhoId = conId2, ActivityDate = Date.today());
+        Event ev32 = new Event(Id = generateId(Event.SObjectType), WhoId = conId2, ActivityDate = Date.today().addDays(-1));
+        Event ev41 = new Event(Id = generateId(Event.SObjectType), WhoId = conId3);
+        Event ev42 = new Event(Id = generateId(Event.SObjectType), WhoId = conId3, ActivityDate = Date.today().addDays(-1));
+        Event ev5 = new Event(Id = generateId(Event.SObjectType), WhoId = conId4);
+        Event ev6 = new Event(Id = generateId(Event.SObjectType), WhoId = conId5, ActivityDate = Date.today().addDays(-1));
         con.putSObject('Account', acc);
         con1.putSObject('Account', acc1);
         con2.putSObject('Account', acc2);
@@ -220,12 +220,12 @@ private class AfTestData {
         if (relateEachToAccount) {
             con5.putSObject('Account', acc5);
         }
-        con = (Contact) setSObjects(con, Asset.ContactId, new List<Asset>{ as11, as12 });
-        con1 = (Contact) setSObjects(con1, Asset.ContactId, new List<Asset>{ as21, as22 });
-        con2 = (Contact) setSObjects(con2, Asset.ContactId, new List<Asset>{ as31, as32 });
-        con3 = (Contact) setSObjects(con3, Asset.ContactId, new List<Asset>{ as41, as42 });
-        con4 = (Contact) setSObjects(con4, Asset.ContactId, new List<Asset>{ as5 });
-        con5 = (Contact) setSObjects(con5, Asset.ContactId, new List<Asset>{ as6 });
+        con = (Contact) setSObjects(con, Event.WhoId, new List<Event>{ ev11, ev12 });
+        con1 = (Contact) setSObjects(con1, Event.WhoId, new List<Event>{ ev21, ev22 });
+        con2 = (Contact) setSObjects(con2, Event.WhoId, new List<Event>{ ev31, ev32 });
+        con3 = (Contact) setSObjects(con3, Event.WhoId, new List<Event>{ ev41, ev42 });
+        con4 = (Contact) setSObjects(con4, Event.WhoId, new List<Event>{ ev5 });
+        con5 = (Contact) setSObjects(con5, Event.WhoId, new List<Event>{ ev6 });
         return new List<Contact>{ con, con1, con2, con3, con4, con5 };
     }
     public static List<Contact> generateContacts1() {
@@ -274,24 +274,24 @@ private class AfTestData {
         Contact con4 = new Contact(Id = conId4, AccountId = accId4, LastName = 'Test Name4', Department = 'HR', DoNotCall = true);
         Contact con5 = new Contact(Id = conId5, AccountId = accId5, LastName = 'Test Name5', Department = 'Finance');
         Contact con6 = new Contact(LastName = 'Test Name6', Department = null, DoNotCall = true);
-        Asset as11 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId0, InstallDate = Date.today());
-        Asset as12 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId0, InstallDate = Date.today());
-        Asset as21 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId1, InstallDate = Date.today().addDays(-1));
-        Asset as22 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId1, InstallDate = Date.today().addDays(-1));
-        Asset as31 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId2, InstallDate = Date.today());
-        Asset as32 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId2, InstallDate = Date.today().addDays(-1));
-        Asset as41 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId3);
-        Asset as42 = new Asset(Id = generateId(Asset.SObjectType), ContactId = conId3, InstallDate = Date.today().addDays(-1));
+        Event ev11 = new Event(Id = generateId(Event.SObjectType), WhoId = conId0, ActivityDate = Date.today());
+        Event ev12 = new Event(Id = generateId(Event.SObjectType), WhoId = conId0, ActivityDate = Date.today());
+        Event ev21 = new Event(Id = generateId(Event.SObjectType), WhoId = conId1, ActivityDate = Date.today().addDays(-1));
+        Event ev22 = new Event(Id = generateId(Event.SObjectType), WhoId = conId1, ActivityDate = Date.today().addDays(-1));
+        Event ev31 = new Event(Id = generateId(Event.SObjectType), WhoId = conId2, ActivityDate = Date.today());
+        Event ev32 = new Event(Id = generateId(Event.SObjectType), WhoId = conId2, ActivityDate = Date.today().addDays(-1));
+        Event ev41 = new Event(Id = generateId(Event.SObjectType), WhoId = conId3);
+        Event ev42 = new Event(Id = generateId(Event.SObjectType), WhoId = conId3, ActivityDate = Date.today().addDays(-1));
         con.putSObject('Account', acc);
         con1.putSObject('Account', acc1);
         con2.putSObject('Account', acc2);
         con3.putSObject('Account', acc3);
         con4.putSObject('Account', acc4);
         con5.putSObject('Account', acc5);
-        con = (Contact) setSObjects(con, Asset.ContactId, new List<Asset>{ as11, as12 });
-        con1 = (Contact) setSObjects(con1, Asset.ContactId, new List<Asset>{ as21, as22 });
-        con2 = (Contact) setSObjects(con2, Asset.ContactId, new List<Asset>{ as31, as32 });
-        con3 = (Contact) setSObjects(con3, Asset.ContactId, new List<Asset>{ as41, as42 });
+        con = (Contact) setSObjects(con, Event.WhoId, new List<Event>{ ev11, ev12 });
+        con1 = (Contact) setSObjects(con1, Event.WhoId, new List<Event>{ ev21, ev22 });
+        con2 = (Contact) setSObjects(con2, Event.WhoId, new List<Event>{ ev31, ev32 });
+        con3 = (Contact) setSObjects(con3, Event.WhoId, new List<Event>{ ev41, ev42 });
 
         return new List<Contact>{ con, con1, con2, con3, con4, con5, con6 };
     }

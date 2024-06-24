@@ -5,8 +5,8 @@
 @SuppressWarnings('PMD.ExcessiveParameterList')
 public class AsPerson implements Comparable {
     private String name;
-    private Integer age;
-    private Date someDate;
+    private final Integer age;
+    private final Date someDate;
     private Long autoId;
     private Boolean isActive;
     private Double probability;
@@ -25,15 +25,6 @@ public class AsPerson implements Comparable {
     }
     public Integer getAge() {
         return age;
-    }
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-    public Date getSomeDate() {
-        return someDate;
-    }
-    public void setSomeDate(Date someDate) {
-        this.someDate = someDate;
     }
     public Long getAutoId() {
         return autoId;

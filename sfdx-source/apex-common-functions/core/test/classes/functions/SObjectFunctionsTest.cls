@@ -45,8 +45,8 @@ private class SObjectFunctionsTest {
     @IsTest
     static void getSObjects() {
         // Given
-        String fieldName = 'Assets';
-        SObjectField field = Asset.ContactId;
+        String fieldName = 'Events';
+        SObjectField field = Event.WhoId;
         String accountContactsSafe = 'Account?.Contacts';
         String accountContacts = 'Account.Contacts';
         // When

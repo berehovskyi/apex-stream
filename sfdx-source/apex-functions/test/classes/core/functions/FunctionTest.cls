@@ -21,20 +21,20 @@ private class FunctionTest {
     static void default_sobject() {
         // Given
         Object constant = 42;
-        String fieldName = 'Assets';
+        String fieldName = 'Events';
         SObjectField field = Contact.AccountId;
         SObjectType accSObjectType = Account.SObjectType;
         // When
         IFunction identity = Function.identity();
         IFunction get42 = Function.constant(constant);
-        IFunction hasAssets = Function.compose(new AfTestCommons.HasSObjectsPredicate(fieldName));
+        IFunction hasEvents = Function.compose(new AfTestCommons.HasSObjectsPredicate(fieldName));
         IFunction getParent = new AfTestCommons.GetSObjectOperator(field);
         IFunction generateAccId = Function.compose(new AfTestCommons.IdSupplier(accSObjectType));
         // Then
         for (Contact con : CONTACTS) {
             Assert.areEqual(con, identity.apply(con));
             Assert.areEqual(constant, get42.apply(con));
-            Assert.areEqual(!(con.getSObjects(fieldName)).isEmpty(), hasAssets.apply(con));
+            Assert.areEqual(!(con.getSObjects(fieldName)).isEmpty(), hasEvents.apply(con));
             Assert.areEqual(con.getSObject(field), getParent.apply(con));
             Assert.areEqual(accSObjectType, ((Id) generateAccId.apply(con)).getSobjectType());
         }

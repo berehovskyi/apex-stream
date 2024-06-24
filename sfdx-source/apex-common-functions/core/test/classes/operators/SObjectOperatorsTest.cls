@@ -141,27 +141,27 @@ private class SObjectOperatorsTest {
     @IsTest
     static void setSObjects() {
         // Given
-        List<Asset> children = new List<Asset>{
-                new Asset(Id = AfTestData.generateId(Asset.SObjectType)),
-                new Asset(Id = AfTestData.generateId(Asset.SObjectType))
+        List<Event> children = new List<Event>{
+            new Event(Id = AfTestData.generateId(Event.SObjectType)),
+            new Event(Id = AfTestData.generateId(Event.SObjectType))
         };
-        List<Asset> children1 = new List<Asset>();
-        SObjectField assetContactIdField = Asset.ContactId;
-        String assetsFieldName = 'Assets';
+        List<Event> children1 = new List<Event>();
+        SObjectField eventContactIdField = Event.WhoId;
+        String eventsFieldName = 'Events';
         // When
-        IOperator setSObjectsOperator = SObjectOperators.setSObjects(assetContactIdField, Function.constant(children));
-        IOperator setSObjectsOperator1 = SObjectOperators.setSObjects(assetsFieldName, Function.constant(children));
-        IOperator setSObjectsOperator2 = SObjectOperators.setSObjects(assetContactIdField, children);
-        IOperator setSObjectsOperator3 = SObjectOperators.setSObjects(assetsFieldName, children);
-        IOperator setSObjectsOperator4 = SObjectOperators.setSObjects(assetsFieldName, children1);
+        IOperator setSObjectsOperator = SObjectOperators.setSObjects(eventContactIdField, Function.constant(children));
+        IOperator setSObjectsOperator1 = SObjectOperators.setSObjects(eventsFieldName, Function.constant(children));
+        IOperator setSObjectsOperator2 = SObjectOperators.setSObjects(eventContactIdField, children);
+        IOperator setSObjectsOperator3 = SObjectOperators.setSObjects(eventsFieldName, children);
+        IOperator setSObjectsOperator4 = SObjectOperators.setSObjects(eventsFieldName, children1);
         // Then
         for (Contact con : INPUT) {
-            Assert.areEqual(children, ((SObject) setSObjectsOperator.apply(AfTestCommons.deepClone(con))).getSObjects(assetsFieldName));
-            Assert.areEqual(children, ((SObject) setSObjectsOperator1.apply(AfTestCommons.deepClone(con))).getSObjects(assetContactIdField));
-            Assert.areEqual(children, ((SObject) setSObjectsOperator2.apply(AfTestCommons.deepClone(con))).getSObjects(assetsFieldName));
+            Assert.areEqual(children, ((SObject) setSObjectsOperator.apply(AfTestCommons.deepClone(con))).getSObjects(eventsFieldName));
+            Assert.areEqual(children, ((SObject) setSObjectsOperator1.apply(AfTestCommons.deepClone(con))).getSObjects(eventContactIdField));
+            Assert.areEqual(children, ((SObject) setSObjectsOperator2.apply(AfTestCommons.deepClone(con))).getSObjects(eventsFieldName));
             Contact actual = (Contact) setSObjectsOperator3.apply(AfTestCommons.deepClone(con));
-            Assert.areEqual(children, actual.getSObjects(assetContactIdField));
-            Assert.areEqual(null, ((SObject) setSObjectsOperator4.apply(AfTestCommons.deepClone(actual))).getSObjects(assetsFieldName));
+            Assert.areEqual(children, actual.getSObjects(eventContactIdField));
+            Assert.areEqual(null, ((SObject) setSObjectsOperator4.apply(AfTestCommons.deepClone(actual))).getSObjects(eventsFieldName));
         }
     }
 
