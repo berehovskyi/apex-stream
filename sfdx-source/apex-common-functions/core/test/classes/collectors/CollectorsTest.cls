@@ -341,29 +341,29 @@ private class CollectorsTest {
         List<Object> input = new List<Object>(SLOTS);
         input.add(input[0]);
         input.add(input[1]);
-        IFunction endTimeFunction = SObjectFunctions.get(AfTestConsts.BusinessHours.MondayEndTime);
-        IFunction startTimeFunction = SObjectFunctions.get(AfTestConsts.BusinessHours.MondayStartTime);
+        IFunction endTimeFunction = SObjectFunctions.get(AfTestConsts.ContactEmail.EndTime);
+        IFunction startTimeFunction = SObjectFunctions.get(AfTestConsts.ContactEmail.StartTime);
         IBiOperator right = BiOperator.right();
         // When
-        Map<Time, BusinessHours> actual = (Map<Time, BusinessHours>) AfTestCommons.collect(SLOTS, Collectors.toByTimeMap(startTimeFunction).cast(Map<Time, BusinessHours>.class));
+        Map<Time, ContactPointEmail> actual = (Map<Time, ContactPointEmail>) AfTestCommons.collect(SLOTS, Collectors.toByTimeMap(startTimeFunction).cast(Map<Time, ContactPointEmail>.class));
         Map<Time, Time> actual1 = (Map<Time, Time>) AfTestCommons.collect(SLOTS, Collectors.toByTimeMap(startTimeFunction, endTimeFunction).cast(Map<Time, Time>.class));
         Map<Time, Time> actual2 = (Map<Time, Time>) AfTestCommons.collect(input, Collectors.toByTimeMap(startTimeFunction, endTimeFunction, right).cast(Map<Time, Time>.class));
 
         // Then
-        Map<Time, BusinessHours> expected = new Map<Time, BusinessHours>{
-            ((BusinessHours) SLOTS[0]).MondayStartTime => (BusinessHours) SLOTS[0],
-            ((BusinessHours) SLOTS[1]).MondayStartTime => (BusinessHours) SLOTS[1],
-            ((BusinessHours) SLOTS[2]).MondayStartTime => (BusinessHours) SLOTS[2],
-            ((BusinessHours) SLOTS[3]).MondayStartTime => (BusinessHours) SLOTS[3],
-            ((BusinessHours) SLOTS[4]).MondayStartTime => (BusinessHours) SLOTS[4]
+        Map<Time, ContactPointEmail> expected = new Map<Time, ContactPointEmail>{
+            ((ContactPointEmail) SLOTS[0]).BestTimeToContactStartTime => (ContactPointEmail) SLOTS[0],
+            ((ContactPointEmail) SLOTS[1]).BestTimeToContactStartTime => (ContactPointEmail) SLOTS[1],
+            ((ContactPointEmail) SLOTS[2]).BestTimeToContactStartTime => (ContactPointEmail) SLOTS[2],
+            ((ContactPointEmail) SLOTS[3]).BestTimeToContactStartTime => (ContactPointEmail) SLOTS[3],
+            ((ContactPointEmail) SLOTS[4]).BestTimeToContactStartTime => (ContactPointEmail) SLOTS[4]
         };
         Assert.areEqual(expected, actual);
         Map<Time, Time> expected1 = new Map<Time, Time>{
-            ((BusinessHours) SLOTS[0]).MondayStartTime => ((BusinessHours) SLOTS[0]).MondayEndTime,
-            ((BusinessHours) SLOTS[1]).MondayStartTime => ((BusinessHours) SLOTS[1]).MondayEndTime,
-            ((BusinessHours) SLOTS[2]).MondayStartTime => ((BusinessHours) SLOTS[2]).MondayEndTime,
-            ((BusinessHours) SLOTS[3]).MondayStartTime => ((BusinessHours) SLOTS[3]).MondayEndTime,
-            ((BusinessHours) SLOTS[4]).MondayStartTime => ((BusinessHours) SLOTS[4]).MondayEndTime
+            ((ContactPointEmail) SLOTS[0]).BestTimeToContactStartTime => ((ContactPointEmail) SLOTS[0]).BestTimeToContactEndTime,
+            ((ContactPointEmail) SLOTS[1]).BestTimeToContactStartTime => ((ContactPointEmail) SLOTS[1]).BestTimeToContactEndTime,
+            ((ContactPointEmail) SLOTS[2]).BestTimeToContactStartTime => ((ContactPointEmail) SLOTS[2]).BestTimeToContactEndTime,
+            ((ContactPointEmail) SLOTS[3]).BestTimeToContactStartTime => ((ContactPointEmail) SLOTS[3]).BestTimeToContactEndTime,
+            ((ContactPointEmail) SLOTS[4]).BestTimeToContactStartTime => ((ContactPointEmail) SLOTS[4]).BestTimeToContactEndTime
         };
         Assert.areEqual(expected1, actual1);
         Assert.areEqual(expected1, actual2);
@@ -750,36 +750,36 @@ private class CollectorsTest {
     @IsTest
     static void groupingByTime() {
         // Given
-        ((BusinessHours) SLOTS[2]).MondayStartTime = ((BusinessHours) SLOTS[0]).MondayStartTime;
-        ((BusinessHours) SLOTS[3]).MondayStartTime = ((BusinessHours) SLOTS[1]).MondayStartTime;
-        ((BusinessHours) SLOTS[4]).MondayStartTime = ((BusinessHours) SLOTS[0]).MondayStartTime;
-        IFunction keyMapper = SObjectFunctions.get(AfTestConsts.BusinessHours.MondayStartTime);
-        IFunction idFunction = SObjectFunctions.get(AfTestConsts.BusinessHours.Id);
-        IFunction typeFunction = SObjectFunctions.get(AfTestConsts.BusinessHours.Name);
+        ((ContactPointEmail) SLOTS[2]).BestTimeToContactStartTime = ((ContactPointEmail) SLOTS[0]).BestTimeToContactStartTime;
+        ((ContactPointEmail) SLOTS[3]).BestTimeToContactStartTime = ((ContactPointEmail) SLOTS[1]).BestTimeToContactStartTime;
+        ((ContactPointEmail) SLOTS[4]).BestTimeToContactStartTime = ((ContactPointEmail) SLOTS[0]).BestTimeToContactStartTime;
+        IFunction keyMapper = SObjectFunctions.get(AfTestConsts.ContactEmail.StartTime);
+        IFunction idFunction = SObjectFunctions.get(AfTestConsts.ContactEmail.Id);
+        IFunction typeFunction = SObjectFunctions.get(AfTestConsts.ContactEmail.Address);
         Collector downstream = Collectors.toList(idFunction);
         // When
         Map<Time, List<SObject>> actual = (Map<Time, List<SObject>>) AfTestCommons.collect(SLOTS, Collectors.groupingByTime(keyMapper).cast(Map<Time, List<SObject>>.class));
         Map<Time, Object> actual1 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, Collectors.groupingByTime(keyMapper, downstream));
         Map<Time, Object> actual2 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, Collectors.groupingByTime(keyMapper, Collectors.groupingByString(typeFunction, downstream)));
         // Then
-        Map<Time, List<BusinessHours>> expected = new Map<Time, List<BusinessHours>>{
-            ((BusinessHours) SLOTS[0]).MondayStartTime => new List<BusinessHours>{ (BusinessHours) SLOTS[0], (BusinessHours) SLOTS[2], (BusinessHours) SLOTS[4] },
-            ((BusinessHours) SLOTS[1]).MondayStartTime => new List<BusinessHours>{ (BusinessHours) SLOTS[1], (BusinessHours) SLOTS[3] }
+        Map<Time, List<ContactPointEmail>> expected = new Map<Time, List<ContactPointEmail>>{
+            ((ContactPointEmail) SLOTS[0]).BestTimeToContactStartTime => new List<ContactPointEmail>{ (ContactPointEmail) SLOTS[0], (ContactPointEmail) SLOTS[2], (ContactPointEmail) SLOTS[4] },
+            ((ContactPointEmail) SLOTS[1]).BestTimeToContactStartTime => new List<ContactPointEmail>{ (ContactPointEmail) SLOTS[1], (ContactPointEmail) SLOTS[3] }
         };
         Assert.areEqual(expected, actual);
         Map<Time, List<Id>> expected1 = new Map<Time, List<Id>>{
-            ((BusinessHours) SLOTS[0]).MondayStartTime => new List<String>{ ((BusinessHours) SLOTS[0]).Id, ((BusinessHours) SLOTS[2]).Id, ((BusinessHours) SLOTS[4]).Id },
-            ((BusinessHours) SLOTS[1]).MondayStartTime => new List<String>{ ((BusinessHours) SLOTS[1]).Id, ((BusinessHours) SLOTS[3]).Id }
+            ((ContactPointEmail) SLOTS[0]).BestTimeToContactStartTime => new List<String>{ ((ContactPointEmail) SLOTS[0]).Id, ((ContactPointEmail) SLOTS[2]).Id, ((ContactPointEmail) SLOTS[4]).Id },
+            ((ContactPointEmail) SLOTS[1]).BestTimeToContactStartTime => new List<String>{ ((ContactPointEmail) SLOTS[1]).Id, ((ContactPointEmail) SLOTS[3]).Id }
         };
         Assert.areEqual(expected1, actual1);
         Map<Time, Map<String, List<Id>>> expected2 = new Map<Time, Map<String, List<Id>>>{
-            ((BusinessHours) SLOTS[0]).MondayStartTime => new Map<String, List<String>>{
-                AfTestConsts.NORMAL => new List<String>{ ((BusinessHours) SLOTS[0]).Id, ((BusinessHours) SLOTS[2]).Id },
-                AfTestConsts.EXTENDED => new List<String>{ ((BusinessHours) SLOTS[4]).Id }
+            ((ContactPointEmail) SLOTS[0]).BestTimeToContactStartTime => new Map<String, List<String>>{
+                AfTestConsts.NORMAL => new List<String>{ ((ContactPointEmail) SLOTS[0]).Id, ((ContactPointEmail) SLOTS[2]).Id },
+                AfTestConsts.EXTENDED => new List<String>{ ((ContactPointEmail) SLOTS[4]).Id }
             },
-            ((BusinessHours) SLOTS[1]).MondayStartTime => new Map<String, List<String>>{
-                AfTestConsts.NORMAL => new List<String>{ ((BusinessHours) SLOTS[1]).Id },
-                AfTestConsts.EXTENDED => new List<String>{ ((BusinessHours) SLOTS[3]).Id }
+            ((ContactPointEmail) SLOTS[1]).BestTimeToContactStartTime => new Map<String, List<String>>{
+                AfTestConsts.NORMAL => new List<String>{ ((ContactPointEmail) SLOTS[1]).Id },
+                AfTestConsts.EXTENDED => new List<String>{ ((ContactPointEmail) SLOTS[3]).Id }
             }
         };
         Assert.areEqual(expected2, actual2);

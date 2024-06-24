@@ -10,7 +10,7 @@ private class AfTestConsts {
     public static final ContactSObject Contact = new ContactSObject();
     public static final AttachmentSObject Attachment = new AttachmentSObject();
     public static final EventSObject Event = new EventSObject();
-    public static final BusinessHoursSObject BusinessHours = new BusinessHoursSObject();
+    public static final ContactPointEmailSObject ContactEmail = new ContactPointEmailSObject();
 
     public static final String NAME = 'Name';
     public static final String DO_NOT_CALL = 'DoNotCall';
@@ -21,7 +21,8 @@ private class AfTestConsts {
     public static final String BIRTHDATE = 'Birthdate';
     public static final String ACTIVITY_DATE_TIME = 'ActivityDateTime';
     public static final String START_TIME = 'StartTime';
-    public static final String MONDAY_START_TIME = 'MondayStartTime';
+    public static final String EMAIL_ADDRESS = 'EmailAddress';
+    public static final String BEST_START_TIME = 'BestTimeToContactStartTime';
     public static final String NUMBER_OF_EMPLOYEES = 'NumberOfEmployees';
     public static final String BILLING_LATITUDE = 'BillingLatitude';
     public static final String BILLING_LONGITUDE = 'BillingLongitude';
@@ -29,7 +30,7 @@ private class AfTestConsts {
     public static final String FIRST_NAME = 'FirstName';
     public static final String DESCRIPTION = 'Description';
     public static final String END_TIME = 'EndTime';
-    public static final String MONDAY_END_TIME = 'MondayEndTime';
+    public static final String BEST_END_TIME = 'BestTimeToContactEndTime';
     public static final String DUPLICATE_KEY = 'Duplicate key';
     public static final String HAS_OPTED_OUT_OF_EMAIL = 'HasOptedOutOfEmail';
     public static final String OTHER_COUNTRY = 'OtherCountry';
@@ -114,14 +115,14 @@ private class AfTestConsts {
             this.SOBJECT_NAME = 'Event';
         }
     }
-    public class BusinessHoursSObject extends SObjectTypeConstants {
-        public final SObjectField Id = Schema.BusinessHours.Id;
-        public final SObjectField MondayStartTime = Schema.BusinessHours.MondayStartTime;
-        public final SObjectField MondayEndTime = Schema.BusinessHours.MondayEndTime;
-        public final SObjectField Name = Schema.BusinessHours.Name;
-        public BusinessHoursSObject() {
-            this.SOBJECT_TYPE = Schema.BusinessHours.SObjectType;
-            this.SOBJECT_NAME = 'BusinessHours';
+    public class ContactPointEmailSObject extends SObjectTypeConstants {
+        public final SObjectField Id = Schema.ContactPointEmail.Id;
+        public final SObjectField StartTime = Schema.ContactPointEmail.BestTimeToContactStartTime;
+        public final SObjectField EndTime = Schema.ContactPointEmail.BestTimeToContactEndTime;
+        public final SObjectField Address = Schema.ContactPointEmail.EmailAddress;
+        public ContactPointEmailSObject() {
+            this.SOBJECT_TYPE = Schema.ContactPointEmail.SObjectType;
+            this.SOBJECT_NAME = 'ContactPointEmail';
         }
     }
 

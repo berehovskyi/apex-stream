@@ -14,7 +14,7 @@ private class SObjectCollectorsTest {
     private static final List<Contact> CONTACTS = DATA.get(Contact.SObjectType);
     private static final List<Attachment> ATTACHMENTS = DATA.get(Attachment.SObjectType);
     private static final List<Event> EVENTS = DATA.get(Event.SObjectType);
-    private static final List<BusinessHours> SLOTS = DATA.get(BusinessHours.SObjectType);
+    private static final List<ContactPointEmail> SLOTS = DATA.get(ContactPointEmail.SObjectType);
 
     static {
         new SObjectCollectors();
@@ -243,20 +243,20 @@ private class SObjectCollectorsTest {
     @IsTest
     static void toTimeSet() {
         // Given
-        ICollector toTimeSetCollector = SObjectCollectors.toTimeSet(SObjectFunctions.get(AfTestConsts.MONDAY_START_TIME));
-        ICollector toTimeSetCollector1 = SObjectCollectors.toTimeSet(AfTestConsts.MONDAY_START_TIME);
-        ICollector toTimeSetCollector2 = SObjectCollectors.toTimeSet(AfTestConsts.BusinessHours.MondayStartTime);
+        ICollector toTimeSetCollector = SObjectCollectors.toTimeSet(SObjectFunctions.get(AfTestConsts.BEST_START_TIME));
+        ICollector toTimeSetCollector1 = SObjectCollectors.toTimeSet(AfTestConsts.BEST_START_TIME);
+        ICollector toTimeSetCollector2 = SObjectCollectors.toTimeSet(AfTestConsts.ContactEmail.StartTime);
         // When
         Set<Time> actual = (Set<Time>) AfTestCommons.collect(SLOTS, toTimeSetCollector);
         Set<Time> actual1 = (Set<Time>) AfTestCommons.collect(SLOTS, toTimeSetCollector1);
         Set<Time> actual2 = (Set<Time>) AfTestCommons.collect(SLOTS, toTimeSetCollector2);
         // Then
         Set<Time> expected = new Set<Time>{
-            (Time) SLOTS[0].get(AfTestConsts.MONDAY_START_TIME),
-            (Time) SLOTS[1].get(AfTestConsts.MONDAY_START_TIME),
-            (Time) SLOTS[2].get(AfTestConsts.MONDAY_START_TIME),
-            (Time) SLOTS[3].get(AfTestConsts.MONDAY_START_TIME),
-            (Time) SLOTS[4].get(AfTestConsts.MONDAY_START_TIME)
+            (Time) SLOTS[0].get(AfTestConsts.BEST_START_TIME),
+            (Time) SLOTS[1].get(AfTestConsts.BEST_START_TIME),
+            (Time) SLOTS[2].get(AfTestConsts.BEST_START_TIME),
+            (Time) SLOTS[3].get(AfTestConsts.BEST_START_TIME),
+            (Time) SLOTS[4].get(AfTestConsts.BEST_START_TIME)
         };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
@@ -713,31 +713,31 @@ private class SObjectCollectorsTest {
     @IsTest
     static void toByTimeMap() {
         // Given
-        IFunction keyMapper = SObjectFunctions.get(AfTestConsts.BusinessHours.MondayStartTime);
+        IFunction keyMapper = SObjectFunctions.get(AfTestConsts.ContactEmail.StartTime);
         IFunction valueMapper = Function.identity();
         IBiOperator mergeFunction = BiOperator.right();
         // When
-        Map<Time, SObject> actual = (Map<Time, SObject>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.MONDAY_START_TIME));
-        Map<Time, BusinessHours> actual1 = (Map<Time, BusinessHours>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.BusinessHours.MondayStartTime).cast(Map<Time, BusinessHours>.class));
+        Map<Time, SObject> actual = (Map<Time, SObject>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.BEST_START_TIME));
+        Map<Time, ContactPointEmail> actual1 = (Map<Time, ContactPointEmail>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.ContactEmail.StartTime).cast(Map<Time, ContactPointEmail>.class));
         Map<Time, SObject> actual2 = (Map<Time, SObject>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(keyMapper).cast(Map<Time, SObject>.class));
         Map<Time, Object> actual3 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(keyMapper, valueMapper));
         Map<Time, Object> actual4 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(keyMapper, valueMapper, mergeFunction));
-        Map<Time, Time> actual5 = (Map<Time, Time>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.MONDAY_START_TIME, AfTestConsts.MONDAY_END_TIME).cast(Map<Time, Time>.class));
-        Map<Time, Time> actual6 = (Map<Time, Time>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.BusinessHours.MondayStartTime, AfTestConsts.BusinessHours.MondayEndTime).cast(Map<Time, Time>.class));
+        Map<Time, Time> actual5 = (Map<Time, Time>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.BEST_START_TIME, AfTestConsts.BEST_END_TIME).cast(Map<Time, Time>.class));
+        Map<Time, Time> actual6 = (Map<Time, Time>) AfTestCommons.collect(SLOTS, SObjectCollectors.toByTimeMap(AfTestConsts.ContactEmail.StartTime, AfTestConsts.ContactEmail.EndTime).cast(Map<Time, Time>.class));
         try {
-            List<BusinessHours> input = new List<BusinessHours>(SLOTS);
+            List<ContactPointEmail> input = new List<ContactPointEmail>(SLOTS);
             input.add(input[0]);
-            AfTestCommons.collect(input, SObjectCollectors.toByTimeMap(AfTestConsts.MONDAY_START_TIME));
+            AfTestCommons.collect(input, SObjectCollectors.toByTimeMap(AfTestConsts.BEST_START_TIME));
         } catch (Exception exc) {
             Assert.isTrue(exc.getMessage().contains(AfTestConsts.DUPLICATE_KEY));
         }
         // Then
-        Map<Time, BusinessHours> expected = new Map<Time, BusinessHours>{
-            (Time) SLOTS[0].get(AfTestConsts.MONDAY_START_TIME) => SLOTS[0],
-            (Time) SLOTS[1].get(AfTestConsts.MONDAY_START_TIME) => SLOTS[1],
-            (Time) SLOTS[2].get(AfTestConsts.MONDAY_START_TIME) => SLOTS[2],
-            (Time) SLOTS[3].get(AfTestConsts.MONDAY_START_TIME) => SLOTS[3],
-            (Time) SLOTS[4].get(AfTestConsts.MONDAY_START_TIME) => SLOTS[4]
+        Map<Time, ContactPointEmail> expected = new Map<Time, ContactPointEmail>{
+            (Time) SLOTS[0].get(AfTestConsts.BEST_START_TIME) => SLOTS[0],
+            (Time) SLOTS[1].get(AfTestConsts.BEST_START_TIME) => SLOTS[1],
+            (Time) SLOTS[2].get(AfTestConsts.BEST_START_TIME) => SLOTS[2],
+            (Time) SLOTS[3].get(AfTestConsts.BEST_START_TIME) => SLOTS[3],
+            (Time) SLOTS[4].get(AfTestConsts.BEST_START_TIME) => SLOTS[4]
         };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
@@ -745,11 +745,11 @@ private class SObjectCollectorsTest {
         Assert.areEqual(expected, actual3);
         Assert.areEqual(expected, actual4);
         Map<Time, Time> expected2 = new Map<Time, Time>{
-            (Time) SLOTS[0].get(AfTestConsts.MONDAY_START_TIME) => (Time) SLOTS[0].get(AfTestConsts.MONDAY_END_TIME),
-            (Time) SLOTS[1].get(AfTestConsts.MONDAY_START_TIME) => (Time) SLOTS[1].get(AfTestConsts.MONDAY_END_TIME),
-            (Time) SLOTS[2].get(AfTestConsts.MONDAY_START_TIME) => (Time) SLOTS[2].get(AfTestConsts.MONDAY_END_TIME),
-            (Time) SLOTS[3].get(AfTestConsts.MONDAY_START_TIME) => (Time) SLOTS[3].get(AfTestConsts.MONDAY_END_TIME),
-            (Time) SLOTS[4].get(AfTestConsts.MONDAY_START_TIME) => (Time) SLOTS[4].get(AfTestConsts.MONDAY_END_TIME)
+            (Time) SLOTS[0].get(AfTestConsts.BEST_START_TIME) => (Time) SLOTS[0].get(AfTestConsts.BEST_END_TIME),
+            (Time) SLOTS[1].get(AfTestConsts.BEST_START_TIME) => (Time) SLOTS[1].get(AfTestConsts.BEST_END_TIME),
+            (Time) SLOTS[2].get(AfTestConsts.BEST_START_TIME) => (Time) SLOTS[2].get(AfTestConsts.BEST_END_TIME),
+            (Time) SLOTS[3].get(AfTestConsts.BEST_START_TIME) => (Time) SLOTS[3].get(AfTestConsts.BEST_END_TIME),
+            (Time) SLOTS[4].get(AfTestConsts.BEST_START_TIME) => (Time) SLOTS[4].get(AfTestConsts.BEST_END_TIME)
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
@@ -1275,36 +1275,36 @@ private class SObjectCollectorsTest {
     @IsTest
     static void groupingByTime() {
         // Given
-        SLOTS[0].MondayStartTime = SLOTS[0].MondayStartTime;
-        SLOTS[1].MondayStartTime = SLOTS[1].MondayStartTime;
-        SLOTS[2].MondayStartTime = SLOTS[0].MondayStartTime;
-        SLOTS[3].MondayStartTime = SLOTS[1].MondayStartTime;
-        SLOTS[4].MondayStartTime = null;
-        IFunction keyMapper = SObjectFunctions.get(AfTestConsts.BusinessHours.MondayStartTime);
-        Collector downstream = SObjectCollectors.toList(AfTestConsts.BusinessHours.Id);
+        SLOTS[0].BestTimeToContactStartTime = SLOTS[0].BestTimeToContactStartTime;
+        SLOTS[1].BestTimeToContactStartTime = SLOTS[1].BestTimeToContactStartTime;
+        SLOTS[2].BestTimeToContactStartTime = SLOTS[0].BestTimeToContactStartTime;
+        SLOTS[3].BestTimeToContactStartTime = SLOTS[1].BestTimeToContactStartTime;
+        SLOTS[4].BestTimeToContactStartTime = null;
+        IFunction keyMapper = SObjectFunctions.get(AfTestConsts.ContactEmail.StartTime);
+        Collector downstream = SObjectCollectors.toList(AfTestConsts.ContactEmail.Id);
         // When
-        Map<Time, List<BusinessHours>> actual = (Map<Time, List<BusinessHours>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.BusinessHours.MondayStartTime));
-        Map<Time, List<BusinessHours>> actual1 = (Map<Time, List<BusinessHours>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.MONDAY_START_TIME));
+        Map<Time, List<ContactPointEmail>> actual = (Map<Time, List<ContactPointEmail>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.ContactEmail.StartTime));
+        Map<Time, List<ContactPointEmail>> actual1 = (Map<Time, List<ContactPointEmail>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.BEST_START_TIME));
         Map<Time, List<SObject>> actual2 = (Map<Time, List<SObject>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper).cast(Map<Time, List<SObject>>.class));
-        Map<Time, List<Id>> actual3 = (Map<Time, List<Id>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.BusinessHours.MondayStartTime, AfTestConsts.BusinessHours.Id).cast(Map<Time, List<Id>>.class));
-        Map<Time, Object> actual4 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.MONDAY_START_TIME, AfTestConsts.ID));
+        Map<Time, List<Id>> actual3 = (Map<Time, List<Id>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.ContactEmail.StartTime, AfTestConsts.ContactEmail.Id).cast(Map<Time, List<Id>>.class));
+        Map<Time, Object> actual4 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(AfTestConsts.BEST_START_TIME, AfTestConsts.ID));
         Map<Time, Object> actual5 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, downstream));
         Map<Time, List<Id>> actual6 = (Map<Time, List<Id>>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, Supplier.of(Map<Time, List<Id>>.class), downstream.cast(List<Id>.class)));
         Map<Time, Map<String, List<Id>>> actual7 = (Map<Time, Map<String, List<Id>>>)
-            AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.BusinessHours.Name, AfTestConsts.BusinessHours.Id)).cast(Map<Time, Map<String, List<Id>>>.class));
-        Map<Time, Object> actual8 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.NAME, AfTestConsts.ID)));
+            AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.ContactEmail.Address, AfTestConsts.ContactEmail.Id)).cast(Map<Time, Map<String, List<Id>>>.class));
+        Map<Time, Object> actual8 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, SObjectCollectors.groupingByTime(keyMapper, SObjectCollectors.groupingByString(AfTestConsts.EMAIL_ADDRESS, AfTestConsts.ID)));
         // Then
-        Map<Time, List<BusinessHours>> expected = new Map<Time, List<BusinessHours>>{
-            SLOTS[0].MondayStartTime => new List<BusinessHours>{ SLOTS[0], SLOTS[2] },
-            SLOTS[1].MondayStartTime => new List<BusinessHours>{ SLOTS[1], SLOTS[3] },
-            null => new List<BusinessHours>{ SLOTS[4] }
+        Map<Time, List<ContactPointEmail>> expected = new Map<Time, List<ContactPointEmail>>{
+            SLOTS[0].BestTimeToContactStartTime => new List<ContactPointEmail>{ SLOTS[0], SLOTS[2] },
+            SLOTS[1].BestTimeToContactStartTime => new List<ContactPointEmail>{ SLOTS[1], SLOTS[3] },
+            null => new List<ContactPointEmail>{ SLOTS[4] }
         };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
         Map<Time, List<Id>> expected1 = new Map<Time, List<Id>>{
-            SLOTS[0].MondayStartTime => new List<Id>{ (Id) SLOTS[0].get(AfTestConsts.ID), (Id) SLOTS[2].get(AfTestConsts.ID) },
-            SLOTS[1].MondayStartTime => new List<Id>{ (Id) SLOTS[1].get(AfTestConsts.ID), (Id) SLOTS[3].get(AfTestConsts.ID) },
+            SLOTS[0].BestTimeToContactStartTime => new List<Id>{ (Id) SLOTS[0].get(AfTestConsts.ID), (Id) SLOTS[2].get(AfTestConsts.ID) },
+            SLOTS[1].BestTimeToContactStartTime => new List<Id>{ (Id) SLOTS[1].get(AfTestConsts.ID), (Id) SLOTS[3].get(AfTestConsts.ID) },
             null => new List<Id>{ (Id) SLOTS[4].get(AfTestConsts.ID) }
         };
         Assert.areEqual(expected1, actual3);
@@ -1312,8 +1312,8 @@ private class SObjectCollectorsTest {
         Assert.areEqual(expected1, actual5);
         Assert.areEqual(expected1, actual6);
         Map<Time, Map<String, List<Id>>> expected2 = new Map<Time, Map<String, List<Id>>>{
-            SLOTS[0].MondayStartTime => new Map<String, List<Id>>{ AfTestConsts.NORMAL => new List<Id>{ (Id) SLOTS[0].get(AfTestConsts.ID) }, AfTestConsts.EXTENDED => new List<Id>{ (Id) SLOTS[2].get(AfTestConsts.ID) } },
-            SLOTS[1].MondayStartTime => new Map<String, List<Id>>{ AfTestConsts.NORMAL => new List<Id>{ (Id) SLOTS[1].get(AfTestConsts.ID) }, AfTestConsts.EXTENDED => new List<Id>{ (Id) SLOTS[3].get(AfTestConsts.ID) } },
+            SLOTS[0].BestTimeToContactStartTime => new Map<String, List<Id>>{ AfTestConsts.NORMAL => new List<Id>{ (Id) SLOTS[0].get(AfTestConsts.ID) }, AfTestConsts.EXTENDED => new List<Id>{ (Id) SLOTS[2].get(AfTestConsts.ID) } },
+            SLOTS[1].BestTimeToContactStartTime => new Map<String, List<Id>>{ AfTestConsts.NORMAL => new List<Id>{ (Id) SLOTS[1].get(AfTestConsts.ID) }, AfTestConsts.EXTENDED => new List<Id>{ (Id) SLOTS[3].get(AfTestConsts.ID) } },
             null => new Map<String, List<Id>>{ null => new List<Id>{ (Id) SLOTS[4].get(AfTestConsts.ID) } }
         };
         Assert.areEqual(expected2, actual7);

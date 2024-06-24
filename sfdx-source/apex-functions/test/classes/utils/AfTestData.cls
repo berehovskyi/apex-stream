@@ -314,14 +314,14 @@ private class AfTestData {
         Event ev4 = new Event(Description = 'Test Name4', Type = AfTestConsts.EMAIL);
         return new List<Event>{ ev, ev1, ev2, ev3, ev4 };
     }
-    public static List<BusinessHours> generateHours() {
+    public static List<ContactPointEmail> generateHours() {
         List<Time> ts = generateTimes();
-        BusinessHours slot = new BusinessHours(MondayStartTime = ts[0], MondayEndTime = ts[0].addMinutes(15), Name = AfTestConsts.NORMAL);
-        BusinessHours slot1 = new BusinessHours(MondayStartTime = ts[1], MondayEndTime = ts[1].addMinutes(15), Name = AfTestConsts.NORMAL);
-        BusinessHours slot2 = new BusinessHours(MondayStartTime = ts[2], MondayEndTime = ts[2].addMinutes(15), Name = AfTestConsts.NORMAL);
-        BusinessHours slot3 = new BusinessHours(MondayStartTime = ts[3], MondayEndTime = ts[3].addMinutes(15), Name = AfTestConsts.EXTENDED);
-        BusinessHours slot4 = new BusinessHours(Name = AfTestConsts.EXTENDED);
-        return new List<BusinessHours>{ slot, slot1, slot2, slot3, slot4 };
+        ContactPointEmail slot = new ContactPointEmail(BestTimeToContactStartTime = ts[0], BestTimeToContactEndTime = ts[0].addMinutes(15), EmailAddress = AfTestConsts.NORMAL);
+        ContactPointEmail slot1 = new ContactPointEmail(BestTimeToContactStartTime = ts[1], BestTimeToContactEndTime = ts[1].addMinutes(15), EmailAddress = AfTestConsts.NORMAL);
+        ContactPointEmail slot2 = new ContactPointEmail(BestTimeToContactStartTime = ts[2], BestTimeToContactEndTime = ts[2].addMinutes(15), EmailAddress = AfTestConsts.NORMAL);
+        ContactPointEmail slot3 = new ContactPointEmail(BestTimeToContactStartTime = ts[3], BestTimeToContactEndTime = ts[3].addMinutes(15), EmailAddress = AfTestConsts.EXTENDED);
+        ContactPointEmail slot4 = new ContactPointEmail(EmailAddress = AfTestConsts.EXTENDED);
+        return new List<ContactPointEmail>{ slot, slot1, slot2, slot3, slot4 };
     }
     public static List<Comparable> generateComparables() {
         AfPerson john = new AfPerson('John', 31, Date.newInstance(1990, 1, 2), 1L, true);
@@ -435,12 +435,12 @@ private class AfTestData {
         Time t1 = Time.newInstance(16, 0, 0, 0);
         Time t2 = Time.newInstance(17, 0, 0, 0);
         Time t3 = Time.newInstance(18, 0, 0, 0);
-        BusinessHours slot = new BusinessHours(MondayStartTime = t0, MondayEndTime = t0.addMinutes(15), Name = AfTestConsts.NORMAL);
-        BusinessHours slot1 = new BusinessHours(MondayStartTime = t1, MondayEndTime = t1.addMinutes(15), Name = AfTestConsts.NORMAL);
-        BusinessHours slot2 = new BusinessHours(MondayStartTime = t2, MondayEndTime = t2.addMinutes(15), Name = AfTestConsts.EXTENDED);
-        BusinessHours slot3 = new BusinessHours(Name = AfTestConsts.EXTENDED);
-        BusinessHours slot4 = new BusinessHours(MondayStartTime = t3, MondayEndTime = t3.addMinutes(15));
-        sobjectsByTypes.put(BusinessHours.SObjectType, new List<BusinessHours>{ slot, slot1, slot2, slot3, slot4 });
+        ContactPointEmail slot = new ContactPointEmail(BestTimeToContactStartTime = t0, BestTimeToContactEndTime = t0.addMinutes(15), EmailAddress = AfTestConsts.NORMAL);
+        ContactPointEmail slot1 = new ContactPointEmail(BestTimeToContactStartTime = t1, BestTimeToContactEndTime = t1.addMinutes(15), EmailAddress = AfTestConsts.NORMAL);
+        ContactPointEmail slot2 = new ContactPointEmail(BestTimeToContactStartTime = t2, BestTimeToContactEndTime = t2.addMinutes(15), EmailAddress = AfTestConsts.EXTENDED);
+        ContactPointEmail slot3 = new ContactPointEmail(EmailAddress = AfTestConsts.EXTENDED);
+        ContactPointEmail slot4 = new ContactPointEmail(BestTimeToContactStartTime = t3, BestTimeToContactEndTime = t3.addMinutes(15));
+        sobjectsByTypes.put(ContactPointEmail.SObjectType, new List<ContactPointEmail>{ slot, slot1, slot2, slot3, slot4 });
         return sobjectsByTypes;
     }
 
