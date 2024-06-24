@@ -70,37 +70,37 @@ Install the Apex Stream. The framework consists of several Unlocked Packages:
 - Apex Functions (required):
 
 ```sh
-sf package install -p 04t1t000003f3UaAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000000koUvAAI -o me@example.com -r -w 10
 ```
 
 - Apex Enumerables (required):
 
 ```sh
-sf package install -p 04t1t000003f3VdAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000000koV0AAI -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
 
 ```sh
-sf package install -p 04t1t000003f3V4AAI -o me@example.com -r -w 10
+sf package install -p 04t1t000000koV5AAI -o me@example.com -r -w 10
 ```
 
 - Apex Sequences (recommended):
 
 ```sh
-sf package install -p 04t1t000003f3UkAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000000koVAAAY -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Core (recommended):
 
 ```sh
-sf package install -p 04t1t000003nQzXAAU -o me@example.com -r -w 10
+sf package install -p 04t1t000000koVFAAY -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Extension (optional):
 
 ```sh
-sf package install -p 04t1t000003f3UuAAI -o me@example.com -r -w 10
+sf package install -p 04t1t000000koVKAAY -o me@example.com -r -w 10
 ```
 
 ## Modules and Key Features
@@ -115,7 +115,6 @@ sf package install -p 04t1t000003f3UuAAI -o me@example.com -r -w 10
   - Enumerables with implementations:
     - Streams (`SObjectStream`, `ObjectStream` and number `DoubleStream`, `IntStream`, `LongStream`)
     - Sequences (`SObjectSequence`, `ObjectSequence` and number `DoubleSequence`, `IntSequence`, `LongSequence`)
-  - Base Functional Built-In Classes
   - Optionals 
 
 - Apex Common Functions:
