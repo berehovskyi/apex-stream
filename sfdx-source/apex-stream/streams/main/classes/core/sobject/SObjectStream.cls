@@ -376,6 +376,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *   { Name: 'baz', NumberOfEmployees: 300 }
      * ]
      */
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static SObjectEnumerable zip(
         final Iterable<SObject> iterable1,
         final Iterable<SObject> iterable2,

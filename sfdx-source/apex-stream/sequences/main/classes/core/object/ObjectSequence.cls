@@ -42,7 +42,9 @@
  *         .mapToDouble(getAnnualRevenueToDoubleFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount, PMD.ExcessiveClassLength')
+@SuppressWarnings(
+    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount, PMD.ExcessiveClassLength'
+)
 public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
 
     private final List<Object> objects;
@@ -204,7 +206,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
-     * 
+     *
      * @example
      * public class ConcatBiOperator extends BiOperator {
      *     public override Object apply(Object o1, Object o2) { return (String) o1 + '-' + (String) o2; }
@@ -236,7 +238,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *
      * @throws NullPointerException if `iterable1`, `iterable2`,
      * `predicate` or `combiner` is null
-     * 
+     *
      * @example
      * public class ContainsAnyBiPredicate extends BiPredicate {
      *     private final String s;
@@ -259,6 +261,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *     .toList(String.class);
      * // ['bar-fred', 'baz-foo']
      */
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static ObjectEnumerable zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,
@@ -794,7 +797,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @return the `Object` result of the reduction
      *
      * @throws NullPointerException if `accumulator` is null
-     * 
+     *
      * @example
      * public class ConcatenateBiOperator extends BiOperator {
      *     private final String separator;
@@ -988,7 +991,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
-     * 
+     *
      * @example
      * Integer count = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .count(); // 3
@@ -1002,7 +1005,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
-     * 
+     *
      * @example
      * ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .isEmpty(); // false

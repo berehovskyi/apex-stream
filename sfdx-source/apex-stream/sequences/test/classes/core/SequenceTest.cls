@@ -4,7 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
+@SuppressWarnings(
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
+)
 private class SequenceTest {
 
     private static final List<Integer> INTS = AsTestData.generateInts();
@@ -14,10 +16,6 @@ private class SequenceTest {
     private static final List<AsPerson> PEOPLE = AsTestData.generatePersons();
     private static final List<String> STRINGS = AsTestData.generateStrings();
     private static final List<Comparable> COMPARABLES = AsTestData.generateComparables();
-    
-    static {
-        new Sequence();
-    }
 
     /**
      * @see Sequence.of

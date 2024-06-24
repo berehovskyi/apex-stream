@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
 private class DoubleOperatorsTest {
 
     private static final List<Double> INPUT = AfTestData.generateDoubles();

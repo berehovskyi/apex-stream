@@ -4,7 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
+@SuppressWarnings(
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
+)
 private class IntStreamTest {
 
     /**
@@ -61,6 +63,7 @@ private class IntStreamTest {
      * @see IntStream.range
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void range() {
         // Given
         Integer fromI = 0;
@@ -413,6 +416,7 @@ private class IntStreamTest {
      * @see IntStream.mapToSObject
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void mapToSObject() {
         // Given
         List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };

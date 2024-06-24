@@ -15,9 +15,6 @@
 @SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
 public inherited sharing class Stream {
 
-    @TestVisible
-    private Stream() {}
-
     /**
      * @description Returns a `ObjectEnumerable` created from `List<Object>`.
      *

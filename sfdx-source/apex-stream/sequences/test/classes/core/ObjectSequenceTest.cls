@@ -4,7 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
+@SuppressWarnings(
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
+)
 private class ObjectSequenceTest {
 
     /**
@@ -518,6 +520,7 @@ private class ObjectSequenceTest {
      * @see ObjectSequence.forEach
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void forEach() {
         // Given
         AsPerson john = new AsPerson('John', 31, Date.newInstance(1990, 1, 2), 0L, true);

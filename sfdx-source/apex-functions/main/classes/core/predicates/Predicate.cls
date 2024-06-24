@@ -1,5 +1,5 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IPredicate} functional interface.
  *
  * @see IPredicate
@@ -165,6 +165,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
             Validate.noNullElements(predicates);
             this.predicates = predicates;
         }
+        @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
                 if (!predicates[i].test(o)) { return false; }
@@ -179,6 +180,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
             Validate.noNullElements(predicates);
             this.predicates = predicates;
         }
+        @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
                 if (predicates[i].test(o)) { return true; }

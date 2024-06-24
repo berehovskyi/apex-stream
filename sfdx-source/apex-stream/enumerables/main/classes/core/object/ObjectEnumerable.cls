@@ -5,7 +5,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings('PMD.ExcessivePublicCount, PMD.ExcessiveClassLength')
+@SuppressWarnings('PMD.ExcessivePublicCount, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength')
 public abstract inherited sharing class ObjectEnumerable implements IObjectEnumerable {
 
     //<editor-fold desc="Iterator">

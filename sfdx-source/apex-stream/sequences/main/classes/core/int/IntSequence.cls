@@ -19,7 +19,7 @@
  *         .mapToInt(getAnnualRevenueToIntFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class IntSequence extends IntEnumerable {
 
     private final List<Integer> integers;

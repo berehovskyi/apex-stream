@@ -1,7 +1,13 @@
 /**
+ * @description Manages evaluation of sequence pipelines.
+ * <p><strong>Note: </strong></p>
+ * <p>This is an internal class and should not be referenced outside of this package.</p>
+ *
  * @author Oleh Berehovskyi
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings(
+    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount, PMD.OneDeclarationPerLine'
+)
 public inherited sharing class SequencePipeline {
 
     public static List<Integer> rangeInt(final Integer fromInt, final Integer toInt) {
@@ -33,6 +39,7 @@ public inherited sharing class SequencePipeline {
         return result;
     }
 
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static List<Object> zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,
@@ -159,7 +166,7 @@ public inherited sharing class SequencePipeline {
         result.addAll(sorted);
         return result;
     }
-    
+
     public static List<Object> distinct(
         final List<Object> source,
         final IFunction classifier,

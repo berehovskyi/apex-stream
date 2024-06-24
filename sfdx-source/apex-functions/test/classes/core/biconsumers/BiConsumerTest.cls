@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
 private class BiConsumerTest {
 
     private static final List<Contact> CONTACTS = AfTestData.generateContacts();
@@ -34,7 +34,7 @@ private class BiConsumerTest {
             SObject target = new Contact();
             consumer.accept(src, target);
             Assert.areEqual(expected, target);
-            
+
             SObject src1 = AfTestCommons.deepClone(con);
             SObject target1 = new Contact();
             consumer1.accept(src1, target1);
@@ -68,7 +68,7 @@ private class BiConsumerTest {
             AfPerson expectedO2 = (AfPerson) AfTestCommons.deepClone(person, AfPerson.class);
             expectedO1.setName(expectedO2.getName());
             expectedO2.setAge(expectedO1.getAge());
-            
+
             AfPerson o1 = (AfPerson) AfTestCommons.deepClone(sam, AfPerson.class);
             AfPerson o2 = (AfPerson) AfTestCommons.deepClone(person, AfPerson.class);
             consumer.accept(o1, o2);
@@ -88,5 +88,5 @@ private class BiConsumerTest {
             Assert.areEqual(expectedO2, o6);
         }
     }
-    
+
 }

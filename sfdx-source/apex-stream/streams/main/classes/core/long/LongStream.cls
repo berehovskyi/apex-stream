@@ -19,7 +19,7 @@
  *         .mapToLong(getAnnualRevenueToLongFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class LongStream extends LongEnumerable implements IRunnable {
 
     private final transient Iterator<Long> iterator;

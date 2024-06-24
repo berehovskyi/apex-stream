@@ -19,7 +19,7 @@
  *         .mapToInt(getAnnualRevenueToIntFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class IntStream extends IntEnumerable implements IRunnable {
 
     private final transient Iterator<Integer> iterator;

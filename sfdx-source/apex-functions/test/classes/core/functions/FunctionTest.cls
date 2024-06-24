@@ -1,10 +1,10 @@
 /**
  * @see Function
- * 
+ *
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
 private class FunctionTest {
 
     private static final List<Contact> CONTACTS = AfTestData.generateContacts();

@@ -4,7 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
+@SuppressWarnings(
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
+)
 private class DoubleStreamTest {
 
     /**
@@ -366,6 +368,7 @@ private class DoubleStreamTest {
      * @see DoubleStream.mapToSObject
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void mapToSObject() {
         // Given
         List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };

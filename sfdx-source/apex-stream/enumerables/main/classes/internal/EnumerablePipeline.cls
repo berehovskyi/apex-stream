@@ -7,32 +7,32 @@
  */
 public inherited sharing class EnumerablePipeline {
 
-    public static List<Object> sort(final List<Object> objects, final IComparer comparer) {
-        Validate.notNull(objects);
-        final List<Object> result = objects.clone();
+    public static List<Object> sort(final List<Object> source, final IComparer comparer) {
+        Validate.notNull(source);
+        final List<Object> result = source.clone();
         result.sort(new ObjectComparator(comparer));
         return result;
     }
 
-    public static List<Object> toList(final Iterable<Object> iterable) {
-        return toList(iterable, Object.class);
+    public static List<Object> toList(final Iterable<Object> source) {
+        return toList(source, Object.class);
     }
 
-    public static List<Object> toList(final Iterable<Object> src, final Type elementType) {
-        Validate.notNull(src);
+    public static List<Object> toList(final Iterable<Object> source, final Type elementType) {
+        Validate.notNull(source);
         Validate.notNull(elementType);
         final List<Object> result = (List<Object>) Type.forName('List<' + elementType + '>').newInstance();
-        for (Object o : src) {
+        for (Object o : source) {
             result.add(o);
         }
         return result;
     }
 
-    public static Set<Object> toObjectSet(final Iterable<Object> src, final IFunction mapper) {
-        Validate.notNull(src);
+    public static Set<Object> toObjectSet(final Iterable<Object> source, final IFunction mapper) {
+        Validate.notNull(source);
         Validate.notNull(mapper);
         final Set<Object> result = new Set<Object>();
-        for (Object o : src) {
+        for (Object o : source) {
             result.add(mapper.apply(o));
         }
         return result;

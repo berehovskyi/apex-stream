@@ -1,10 +1,10 @@
 /**
  * @see Consumer
- * 
+ *
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
 private class ConsumerTest {
 
     private static final List<Contact> CONTACTS = AfTestData.generateContacts2();
@@ -31,13 +31,13 @@ private class ConsumerTest {
             SObject cloneToConsume = AfTestCommons.deepClone(con);
             setDescFromDepartment.accept(cloneToConsume);
             Assert.areEqual(clone, cloneToConsume);
-            
+
             SObject clone1 = AfTestCommons.deepClone(con);
             clone1.put(AfTestConsts.DO_NOT_CALL, constant);
             SObject cloneToConsume1 = AfTestCommons.deepClone(con);
             setDoNotCall.accept(cloneToConsume1);
             Assert.areEqual(clone1, cloneToConsume1);
-            
+
             SObject clone2 = AfTestCommons.deepClone(con);
             clone2.put(Contact.Description, clone2.get(Contact.Department));
             clone2.put(AfTestConsts.DO_NOT_CALL, constant);

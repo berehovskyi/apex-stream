@@ -5,10 +5,10 @@
  */
 @IsTest(IsParallel = true)
 @TestVisible
+@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts, PMD.ApexUnitTestClassShouldHaveRunAs')
 private class DoubleEnumerableTest {
 
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts')
     private static void coverage() {
         // Given
         List<Double> input = new List<Double>();

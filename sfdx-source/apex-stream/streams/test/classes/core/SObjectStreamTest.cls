@@ -5,7 +5,7 @@
  */
 @IsTest(IsParallel = true)
 @SuppressWarnings(
-    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
 )
 private class SObjectStreamTest {
 
@@ -63,6 +63,7 @@ private class SObjectStreamTest {
      * @see SObjectStream.generate
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void generate() {
         // Given
         ISupplier accSupplier = new AsTestCommons.TestAccountSupplier();
@@ -90,6 +91,7 @@ private class SObjectStreamTest {
      * @see SObjectStream.iterate
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void iterate() {
         // Given
         Integer numOfEmployees = 0;
@@ -520,6 +522,7 @@ private class SObjectStreamTest {
      * @see SObjectStream.mapTo
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void mapTo() {
         // Given
         Account acc = new Account(Id = AsTestData.generateId(Account.SObjectType), Name = 'Test Acc', NumberOfEmployees = 200);
@@ -891,6 +894,7 @@ private class SObjectStreamTest {
      * @see SObjectStream.forEach
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void forEach() {
         // Given
         Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200);
@@ -1797,6 +1801,7 @@ private class SObjectStreamTest {
      * @see SObjectStream.run
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     static void run() {
         // Given
         Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 100);

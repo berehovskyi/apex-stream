@@ -4,6 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
 private class ObjectEnumerableTest {
 
     @IsTest

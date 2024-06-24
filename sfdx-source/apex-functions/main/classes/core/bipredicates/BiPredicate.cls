@@ -1,7 +1,7 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IBiPredicate} functional interface.
- * 
+ *
  * @see IBiPredicate
  *
  * @author Oleh Berehovskyi
@@ -185,6 +185,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
             Validate.noNullElements(predicates);
             this.predicates = predicates;
         }
+        @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o1, Object o2) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
                 if (predicates[i].test(o1, o2)) { return true; }
@@ -211,6 +212,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
             Validate.noNullElements(predicates);
             this.predicates = predicates;
         }
+        @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o1, Object o2) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
                 if (!predicates[i].test(o1, o2)) { return false; }

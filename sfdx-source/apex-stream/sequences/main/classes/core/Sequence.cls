@@ -15,9 +15,6 @@
 @SuppressWarnings('PMD.CognitiveComplexity')
 public inherited sharing class Sequence {
 
-    @TestVisible
-    private Sequence() {}
-
     /**
      * @description Returns a `ObjectSequence` created from `List<Object>`.
      *

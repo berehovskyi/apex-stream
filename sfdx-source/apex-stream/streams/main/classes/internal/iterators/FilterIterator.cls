@@ -5,7 +5,7 @@ public virtual inherited sharing class FilterIterator implements Iterator<Object
 
     protected final Iterator<Object> iterator;
     private final IPredicate predicate;
-    protected Boolean hasNext = false, hasNextEvaluated = false;
+    protected Boolean hasNext = false, hasNextEvaluated = false; // NOPMD
     protected Object next;
 
     public FilterIterator(final Iterator<Object> iterator, final IPredicate predicate) {

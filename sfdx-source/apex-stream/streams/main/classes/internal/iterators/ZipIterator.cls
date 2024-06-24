@@ -7,7 +7,7 @@ public inherited sharing class ZipIterator implements Iterator<Object> {
     private final Iterator<Object> iterator2;
     private final IBiPredicate predicate;
     private final IBiOperator combiner;
-    private Boolean hasNext = false, hasNextEvaluated = false;
+    private Boolean hasNext = false, hasNextEvaluated = false; // NOPMD
     private Object next1;
     private Object next2;
 
@@ -24,6 +24,7 @@ public inherited sharing class ZipIterator implements Iterator<Object> {
         this.combiner = combiner;
     }
 
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public ZipIterator(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,

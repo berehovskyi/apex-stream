@@ -6,8 +6,8 @@
 public class AfPerson implements Comparable {
     private String name;
     private Integer age;
-    private Date someDate;
-    private Long autoId;
+    private final Date someDate;
+    private final Long autoId;
     private Boolean isActive;
     private Double probability;
     public AfPerson(String name, Integer age, Date someDate, Long longNumber, Boolean isActive) {
@@ -29,17 +29,8 @@ public class AfPerson implements Comparable {
     public void setAge(Integer age) {
         this.age = age;
     }
-    public Date getSomeDate() {
-        return someDate;
-    }
-    public void setSomeDate(Date someDate) {
-        this.someDate = someDate;
-    }
     public Long getAutoId() {
         return autoId;
-    }
-    public void setAutoId(Long autoId) {
-        this.autoId = autoId;
     }
     public Boolean isActive() {
         return isActive;

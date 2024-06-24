@@ -19,7 +19,7 @@
  *         .mapToLong(getAnnualRevenueToLongFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class LongSequence extends LongEnumerable {
 
     private final List<Long> longs;

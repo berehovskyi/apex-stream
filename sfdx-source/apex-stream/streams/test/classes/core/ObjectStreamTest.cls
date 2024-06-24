@@ -4,7 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
+@SuppressWarnings(
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
+)
 private class ObjectStreamTest {
 
     /**
@@ -56,11 +58,12 @@ private class ObjectStreamTest {
         Assert.isTrue(((ObjectStream) stm5).isOperated);
         Assert.isTrue(((ObjectStream) stm6).isOperated);
     }
-    
+
     /**
      * @see ObjectStream.generate
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void generate() {
         // Given
         ISupplier idSupplier = new AsTestCommons.IdSupplier(Account.SObjectType);
@@ -629,6 +632,7 @@ private class ObjectStreamTest {
      * @see ObjectStream.forEach
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void forEach() {
         // Given
         AsPerson john = new AsPerson('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
@@ -1121,6 +1125,7 @@ private class ObjectStreamTest {
      * @see ObjectStream.run
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void run() {
         // Given
         AsPerson john = new AsPerson('John', 31, Date.newInstance(1990, 1, 2), 0L, true);

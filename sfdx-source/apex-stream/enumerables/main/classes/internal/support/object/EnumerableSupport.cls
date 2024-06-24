@@ -347,9 +347,9 @@ public inherited sharing class EnumerableSupport {
             this.container = toSet(container);
         }
         public override Boolean test(Object o) { return container.contains(function.apply(o)); }
-        private Set<Object> toSet(Iterable<Object> src) {
+        private Set<Object> toSet(Iterable<Object> source) {
             final Set<Object> dest = new Set<Object>();
-            for (Object o : src) {
+            for (Object o : source) {
                 dest.add(o);
             }
             return dest;

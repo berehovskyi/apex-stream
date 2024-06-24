@@ -41,7 +41,7 @@
  * // of the two areas, π / 4. Multiply the result by 4 to estimate π.
  * Double approxPi = 4 * n / (Double) s;
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class DoubleStream extends DoubleEnumerable implements IRunnable {
 
     private final transient Iterator<Double> iterator;

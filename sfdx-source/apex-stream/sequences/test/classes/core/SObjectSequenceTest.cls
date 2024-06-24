@@ -5,7 +5,7 @@
  */
 @IsTest(IsParallel = true)
 @SuppressWarnings(
-    'PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
 )
 private class SObjectSequenceTest {
 
@@ -400,6 +400,7 @@ private class SObjectSequenceTest {
      * @see SObjectSequence.mapTo
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void mapTo() {
         // Given
         Account acc = new Account(Id = AsTestData.generateId(Account.SObjectType), Name = 'Test Acc', NumberOfEmployees = 200);
@@ -744,6 +745,7 @@ private class SObjectSequenceTest {
      * @see SObjectSequence.forEach
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void forEach() {
         // Given
         Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200);

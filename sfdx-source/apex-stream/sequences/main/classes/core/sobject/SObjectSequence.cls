@@ -316,6 +316,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *   { Name: 'baz', NumberOfEmployees: 300 }
      * ]
      */
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static SObjectEnumerable zip(
         final Iterable<SObject> iterable1,
         final Iterable<SObject> iterable2,

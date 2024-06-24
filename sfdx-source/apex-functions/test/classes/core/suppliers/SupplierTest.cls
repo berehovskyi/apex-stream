@@ -4,9 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
 private class SupplierTest {
-    
+
     /**
      * @see Supplier.of
      * @see Supplier.constant
@@ -75,5 +75,5 @@ private class SupplierTest {
         Assert.areEqual(values[3], actual6);
         Assert.areEqual(values[0], actual7);
     }
-    
+
 }

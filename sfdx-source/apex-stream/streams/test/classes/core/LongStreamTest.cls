@@ -4,7 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity')
+@SuppressWarnings(
+    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
+)
 private class LongStreamTest {
 
     /**
@@ -61,6 +63,7 @@ private class LongStreamTest {
      * @see LongStream.range
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void range() {
         // Given
         Long fromI = 0L;
@@ -412,6 +415,7 @@ private class LongStreamTest {
      * @see LongStream.mapToSObject
      */
     @IsTest
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     private static void mapToSObject() {
         // Given
         List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L -3L, 4L, -6L, 0L, 4L };

@@ -37,25 +37,16 @@ private class AfTestData {
     public static List<Integer> generateInts1() {
         return new List<Integer>{ 200, 100, 0, 400, 3000 };
     }
-    public static List<Integer> generateInts2() {
-        return new List<Integer>{ 0, -4, -5, 10, 13, -1, 4, -9, 1, 13 };
-    }
     public static List<Long> generateLongs() {
         return new List<Long>{ 1L, 2L, 3L, 4, 4L, 6L, -10L, -3L, 2154L, 0L, -4L, -0L, 323L, 55L, 2147483648L };
     }
     public static List<Long> generateLongs1() {
         return new List<Long>{ 200L, 100L, 0L, 400L, 3000L };
     }
-    public static List<Long> generateLongs2() {
-        return new List<Long>{ 0L, -4L, -5L, 10, 13, -1L, 42L, -9L, 1L, 13L };
-    }
     public static List<Double> generateDoubles() {
         return new List<Double>{ -5.5, 0, 1.0, 3, 8.99, Math.PI, 10.001, Math.E };
     }
     public static List<Double> generateDoubles1() {
-        return new List<Double>{ 28.635308, 77.22496, 38.952101, 30.87415, 67.451453 };
-    }
-    public static List<Double> generateDoubles2() {
         return new List<Double>{ 28.635308, 77.22496, 38.952101, 30.87415, 67.451453 };
     }
     public static List<Object> generateMix() {
@@ -393,7 +384,7 @@ private class AfTestData {
     public static SObject setSObjects(SObject parent, SObjectField childRelField, List<SObject> children) {
         return (SObject) new AfTestCommons.SetSObjectsByFieldNameOperator(childRelField, Function.constant(children)).apply(parent);
     }
-    
+
     public static Map<SObjectType, List<SObject>> generateSObjects() {
         Map<SObjectType, List<SObject>> sobjectsByTypes = new Map<SObjectType, List<SObject>>();
         Account acc = new Account(Id = AfTestData.generateId(Account.SObjectType), Name = 'Test Acc', Type = 'Customer', NumberOfEmployees = 200, BillingLatitude = 45.45, BillingCountry = AfTestConsts.FRANCE);

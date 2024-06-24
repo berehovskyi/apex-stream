@@ -4,7 +4,7 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexDoc, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
 private class PredicateTest {
 
     private static final List<Account> ACCOUNTS = AfTestData.generateAccounts();
@@ -186,17 +186,17 @@ private class PredicateTest {
             Assert.areEqual(person.isActive(), activePredicate.test(person));
             Assert.areEqual(person.getAge() >= value && person.isActive(), adultActivePredicate.test(person));
             Assert.areEqual(
-                person.getAge() >= value && person.isActive(), 
+                person.getAge() >= value && person.isActive(),
                 adultPredicate.andAlso(activePredicate).test(person)
             );
             Assert.areEqual(person.getAge() >= value || person.isActive(), adultOrActivePredicate.test(person));
             Assert.areEqual(!(person.getAge() >= value), notAdultPredicate.test(person));
             Assert.areEqual(
-                person.getAge() >= value && person.isActive() || person.getName().startsWith(j), 
+                person.getAge() >= value && person.isActive() || person.getName().startsWith(j),
                 adultActiveOrWithNameStartsWithJPredicate.test(person)
             );
             Assert.areEqual(
-                person.getAge() >= value && (person.isActive() || person.getName().startsWith(j)), 
+                person.getAge() >= value && (person.isActive() || person.getName().startsWith(j)),
                 adultActiveWithNameStartsWithJPredicate.test(person)
             );
         }
@@ -217,7 +217,7 @@ private class PredicateTest {
         // Then
         for (AfPerson person : PEOPLE) {
             Assert.areEqual(
-                person.getAge() >= value || person.isActive(), 
+                person.getAge() >= value || person.isActive(),
                 Predicate.some(new List<IPredicate>{ adultPredicate, activePredicate }).test(person)
             );
         }
@@ -238,7 +238,7 @@ private class PredicateTest {
         // Then
         for (AfPerson person : PEOPLE) {
             Assert.areEqual(
-                person.getAge() >= value && person.isActive(), 
+                person.getAge() >= value && person.isActive(),
                 Predicate.every(new List<IPredicate>{ adultPredicate, activePredicate }).test(person)
             );
         }

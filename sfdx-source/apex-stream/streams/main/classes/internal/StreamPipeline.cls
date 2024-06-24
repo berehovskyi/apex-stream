@@ -1,4 +1,8 @@
 /**
+ * @description Manages evaluation of stream pipelines.
+ * <p><strong>Note: </strong></p>
+ * <p>This is an internal class and should not be referenced outside of this package.</p>
+ *
  * @author Oleh Berehovskyi
  */
 @SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
@@ -15,7 +19,7 @@ public inherited sharing class StreamPipeline {
     public static Iterator<Object> generate(final ISupplier supplier) {
         return new SupplierGenerator(supplier);
     }
-    
+
     public static Iterator<Object> iterate(final Object seed, final IOperator operator) {
         return new ReduceGenerator(seed, operator);
     }
@@ -32,6 +36,7 @@ public inherited sharing class StreamPipeline {
         return new ZipIterator(iterable1, iterable2, combiner);
     }
 
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static Iterator<Object> zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,
@@ -79,7 +84,7 @@ public inherited sharing class StreamPipeline {
         clone.sort();
         return clone.iterator();
     }
-    
+
     public static Iterator<Object> sort(final Iterator<Object> source, final SortOrder order) {
         return sort(source, Comparer.defaultOrder().order(order));
     }

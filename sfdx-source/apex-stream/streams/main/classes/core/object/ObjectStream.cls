@@ -313,6 +313,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *     .toList(String.class);
      * // ['bar-fred', 'baz-foo']
      */
+    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static ObjectEnumerable zip(
             final Iterable<Object> iterable1,
             final Iterable<Object> iterable2,

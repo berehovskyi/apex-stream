@@ -4,7 +4,7 @@
 public abstract inherited sharing class BaseIterator implements Iterator<Object> {
 
     protected Object next;
-    protected Boolean hasNext = false, isInit = false;
+    protected Boolean hasNext = false, isInit = false; // NOPMD
 
     public Boolean hasNext() {
         if (!isInit) {

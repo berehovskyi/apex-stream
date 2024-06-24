@@ -12,6 +12,7 @@ private class AfTestCommons {
     public static Object deepClone(Object objects, Type t) {
         return JSON.deserialize(JSON.serialize(objects, false), t);
     }
+    @SuppressWarnings('PMD.OneDeclarationPerLine')
     public static Object collect(final List<Object> source, final ICollector collector) {
         Validate.notNull(source);
         Validate.notNull(collector);

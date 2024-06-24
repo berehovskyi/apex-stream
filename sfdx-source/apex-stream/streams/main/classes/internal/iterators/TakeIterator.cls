@@ -5,7 +5,7 @@ public inherited sharing class TakeIterator implements Iterator<Object> {
 
     private final Iterator<Object> iterator;
     private final IPredicate predicate;
-    private Boolean hasNext = false, hasNextEvaluated = false, isNextCached = false;
+    private Boolean hasNext = false, hasNextEvaluated = false, isNextCached = false; // NOPMD
     private Object next;
 
     public TakeIterator(final Iterator<Object> iterator, final IPredicate predicate) {
