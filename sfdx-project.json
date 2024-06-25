@@ -125,11 +125,11 @@
         "apex-common-functions-core": "0Ho1t000000sXyHCAU",
         "apex-common-functions-extension": "0Ho1t000000sXyMCAU",
         "apex-validate@latest": "04t1t000003f3UVAAY",
-        "apex-functions@latest": "04t1t000000koUvAAI",
-        "apex-stream-enumerables@latest": "04t1t000000koV0AAI",
-        "apex-stream-streams@latest": "04t1t000000koV5AAI",
-        "apex-stream-sequences@latest": "04t1t000000koVAAAY",
-        "apex-common-functions-core@latest": "04t1t000000koVFAAY",
-        "apex-common-functions-extension@latest": "04t1t000000koVKAAY"
+        "apex-functions@latest": "04t1t000000koVUAAY",
+        "apex-stream-enumerables@latest": "04t1t000000koVZAAY",
+        "apex-stream-streams@latest": "04t1t000000koVeAAI",
+        "apex-stream-sequences@latest": "04t1t000000koVjAAI",
+        "apex-common-functions-core@latest": "04t1t000000koVyAAI",
+        "apex-common-functions-extension@latest": "04t1t000000koWNAAY"
     }
 }

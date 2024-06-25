@@ -9,9 +9,9 @@
 )
 private class BiOperatorsTest {
 
-    private static final List<Integer> INTS = AsTestData.generateInts();
-    private static final List<Long> LONGS = AsTestData.generateLongs();
-    private static final List<Double> DOUBLES = AsTestData.generateDoubles();
+    private static final List<Integer> INTS = AfTestData.generateInts();
+    private static final List<Long> LONGS = AfTestData.generateLongs();
+    private static final List<Double> DOUBLES = AfTestData.generateDoubles();
 
     static {
         new BiOperators();

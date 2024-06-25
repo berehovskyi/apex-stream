@@ -515,7 +515,7 @@ public virtual inherited sharing class MapObjectConsumers {
     ) {
         Validate.state(
             merger != null,
-            Label.AS_ErrorMessage_DuplicateKey,
+            Label.ACF_ErrorMessage_DuplicateKey,
             new List<Object>{ key, oldValue, newValue }
         );
         return merger.apply(oldValue, newValue);
