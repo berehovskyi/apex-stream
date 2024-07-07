@@ -159,6 +159,9 @@ private class AfTestCommons {
             return seed;
         }
     }
+    public class SumDoubleBiOperator extends BiOperator {
+        public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
+    }
     public class GroupByStringFinisherFunction extends Function {
         private final IFunction finisher;
         public GroupByStringFinisherFunction(IFunction finisher) { this.finisher = finisher; }
