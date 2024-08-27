@@ -593,50 +593,45 @@ public virtual inherited sharing class Predicates {
         }
     }
 
-    private class ContainsPredicate extends Predicate {
+    private abstract class IterablePredicate extends Predicate {
         private final IFunction function;
-        private final Set<Object> container;
-        private ContainsPredicate(IFunction function, Iterable<Object> container) {
+        private final Iterable<Object> container;
+        private Set<Object> elements;
+        protected IterablePredicate(IFunction function, Iterable<Object> container) {
             Validate.notNull(function);
             Validate.notNull(container);
             this.function = function;
-            this.container = toSet(container);
+            this.container = container;
         }
-        public override Boolean test(Object o) { return container.contains(function.apply(o)); }
-        private Set<Object> toSet(Iterable<Object> src) {
+        protected Set<Object> toSet(Iterable<Object> source) {
             final Set<Object> dest = new Set<Object>();
-            for (Object o : src) {
+            for (Object o : source) {
                 dest.add(o);
             }
             return dest;
         }
     }
 
-    private class IncludesPredicate extends Predicate {
-        private final IFunction function;
-        private final Set<String> container;
-        private IncludesPredicate(IFunction function, Iterable<String> container) {
-            Validate.notNull(function);
-            Validate.notNull(container);
-            this.function = function;
-            this.container = toStringSet(container);
-        }
+    private class ContainsPredicate extends IterablePredicate {
+        private ContainsPredicate(IFunction function, Iterable<Object> container) { super(function, container); }
         public override Boolean test(Object o) {
-            String value = (String) function.apply(o);
+            if (elements == null) { elements = toSet(container); }
+            return elements.contains(function.apply(o));
+        }
+    }
+
+    private class IncludesPredicate extends IterablePredicate {
+        private IncludesPredicate(IFunction function, Iterable<String> container) { super(function, container); }
+        public override Boolean test(Object o) {
+            final String value = (String) function.apply(o);
             if (value == null) { return false; }
-            Set<String> values = split(value.trim());
-            for (String element : container) {
-                if (values.containsAll(split(element))) { return true; }
+            final Set<String> values = split(value.trim());
+            if (elements == null) { elements = toSet(container); }
+            for (Object element : elements) {
+                Validate.notNull(element);
+                if (values.containsAll(split((String) element))) { return true; }
             }
             return false;
-        }
-        private Set<String> toStringSet(Iterable<String> src) {
-            final Set<String> dest = new Set<String>();
-            for (String str : src) {
-                Validate.notNull(str);
-                dest.add(str);
-            }
-            return dest;
         }
         private Set<String> split(String value) { return new Set<String>(value.split(';')); }
     }

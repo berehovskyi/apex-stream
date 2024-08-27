@@ -4,7 +4,7 @@
             "path": "sfdx-source/apex-functions",
             "package": "apex-functions",
             "versionName": "ver 1.1",
-            "versionNumber": "1.1.2.NEXT",
+            "versionNumber": "1.1.3.NEXT",
             "default": false,
             "versionDescription": "",
             "dependencies": [
@@ -28,7 +28,7 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.2.LATEST"
+                    "versionNumber": "1.1.3.LATEST"
                 }
             ]
         },
@@ -46,7 +46,7 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.2.LATEST"
+                    "versionNumber": "1.1.3.LATEST"
                 },
                 {
                     "package": "apex-stream-enumerables",
@@ -68,7 +68,7 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.2.LATEST"
+                    "versionNumber": "1.1.3.LATEST"
                 },
                 {
                     "package": "apex-stream-enumerables",
@@ -80,7 +80,7 @@
             "path": "sfdx-source/apex-common-functions/core",
             "package": "apex-common-functions-core",
             "versionName": "ver 1.2",
-            "versionNumber": "1.2.0.NEXT",
+            "versionNumber": "1.2.1.NEXT",
             "default": false,
             "versionDescription": "",
             "dependencies": [
@@ -90,7 +90,7 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.2.LATEST"
+                    "versionNumber": "1.1.3.LATEST"
                 }
             ]
         },
@@ -108,7 +108,7 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.2.LATEST"
+                    "versionNumber": "1.1.3.LATEST"
                 }
             ]
         }
@@ -125,11 +125,11 @@
         "apex-common-functions-core": "0Ho1t000000sXyHCAU",
         "apex-common-functions-extension": "0Ho1t000000sXyMCAU",
         "apex-validate@latest": "04t1t000003f3UVAAY",
-        "apex-functions@latest": "04t1t000000koVUAAY",
+        "apex-functions@latest": "04tJ5000000D4RjIAK",
         "apex-stream-enumerables@latest": "04t1t000000koVZAAY",
         "apex-stream-streams@latest": "04t1t000000koVeAAI",
         "apex-stream-sequences@latest": "04t1t000000koVjAAI",
-        "apex-common-functions-core@latest": "04t1t000000koVyAAI",
+        "apex-common-functions-core@latest": "04tJ5000000D4RoIAK",
         "apex-common-functions-extension@latest": "04t1t000000koWNAAY"
     }
 }
