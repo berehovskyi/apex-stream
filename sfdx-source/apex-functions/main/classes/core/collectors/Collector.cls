@@ -1,7 +1,7 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link ICollector} functional interface.
- * 
+ *
  * @see ICollector
  *
  * @author Oleh Berehovskyi
@@ -94,13 +94,13 @@ public abstract inherited sharing class Collector implements ICollector {
                 accumulator.downstream.accumulator(),
                 accumulator.downstream.finisher()
             );
-            accumulator = (BiConsumer) accumulator.downstream?.accumulator();
+            accumulator = (BiConsumer) accumulator.downstream.accumulator();
         }
         return new CollectorOf(Supplier.of(t), this.accumulator(), this.finisher());
     }
     // @end-group
     //</editor-fold>
-    
+
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class CollectorOf extends Collector {

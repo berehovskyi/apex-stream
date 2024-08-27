@@ -1,6 +1,6 @@
 /**
  * @see Comparer
- * 
+ *
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
@@ -179,12 +179,12 @@ private class ComparerTest {
             Integer value3 = (Integer) acc.get(fieldName1);
             Integer value4 = (Integer) other.get(fieldName1);
             Integer value5 = (Integer) other1.get(fieldName1);
-            Integer expected = Comparer.compareObjects(value, value1, true) == 0
-                ? Comparer.compareObjects(value4, value3)
-                : Comparer.compareObjects(value, value1, true);
-            Integer expected1 = Comparer.compareObjects(value, value2, true) == 0
-                ? Comparer.compareObjects(value5, value3)
-                : Comparer.compareObjects(value, value2, true);
+            Integer expected = Comparer.compareNullable(value, value1, true) == 0
+                ? Comparer.compareNullable(value4, value3)
+                : Comparer.compareNullable(value, value1, true);
+            Integer expected1 = Comparer.compareNullable(value, value2, true) == 0
+                ? Comparer.compareNullable(value5, value3)
+                : Comparer.compareNullable(value, value2, true);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
@@ -214,12 +214,12 @@ private class ComparerTest {
             String value3 = (String) acc.get(fieldName1);
             String value4 = (String) other.get(fieldName1);
             String value5 = (String) other1.get(fieldName1);
-            Integer expected = Comparer.compareObjects(value, value1) == 0
-                ? Comparer.compareObjects(value3, value4)
-                : Comparer.compareObjects(value, value1);
-            Integer expected1 = Comparer.compareObjects(value, value2) == 0
-                ? Comparer.compareObjects(value3, value5)
-                : Comparer.compareObjects(value, value2);
+            Integer expected = Comparer.compareNullable(value, value1) == 0
+                ? Comparer.compareNullable(value3, value4)
+                : Comparer.compareNullable(value, value1);
+            Integer expected1 = Comparer.compareNullable(value, value2) == 0
+                ? Comparer.compareNullable(value3, value5)
+                : Comparer.compareNullable(value, value2);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
@@ -256,14 +256,14 @@ private class ComparerTest {
             String value5 = (String) other1.get(fieldName1);
             Integer expected = (acc == null || other == null)
                 ? Comparer.compareNulls(acc, other)
-                : Comparer.compareObjects(value, value1) == 0
-                    ? Comparer.compareObjects(value3, value4)
-                    : Comparer.compareObjects(value1, value);
+                : Comparer.compareNullable(value, value1) == 0
+                    ? Comparer.compareNullable(value3, value4)
+                    : Comparer.compareNullable(value1, value);
             Integer expected1 = (acc == null || other1 == null)
                 ? Comparer.compareNulls(acc, other1)
-                : Comparer.compareObjects(value, value2) == 0
-                    ? Comparer.compareObjects(value3, value5)
-                    : Comparer.compareObjects(value2, value);
+                : Comparer.compareNullable(value, value2) == 0
+                    ? Comparer.compareNullable(value3, value5)
+                    : Comparer.compareNullable(value2, value);
             Assert.areEqual(expected, comparing.compare(acc, other));
             Assert.areEqual(expected1, comparing.compare(acc, other1));
         }
@@ -366,6 +366,42 @@ private class ComparerTest {
     }
 
     /**
+     * @see Comparer.nonAntisymmetricOrder
+     */
+    @IsTest
+    static void nonAntisymmetricOrdering() {
+        // Given
+        Id id1 = AfTestData.generateId(Account.SObjectType);
+        AfPerson tom = new AfPerson('Tom', 20, Date.newInstance(1990, 1, 2), 2L, true);
+        // When
+        IComparer nasComparer = Comparer.nonAntisymmetricOrder();
+        // Then
+        Assert.areEqual(null, nasComparer.compare(null, 1));
+        Assert.areEqual(0, nasComparer.compare(null, null));
+        Assert.areEqual(null, nasComparer.compare(1, null));
+        Assert.areEqual(1, nasComparer.compare(id1, null));
+        Assert.areEqual(1, nasComparer.compare('a', null));
+        Assert.areEqual(null, nasComparer.compare(Blob.valueOf('a'), null));
+        Assert.areEqual(null, nasComparer.compare(Date.today(), null));
+        Assert.areEqual(null, nasComparer.compare(Datetime.now(), null));
+        Assert.areEqual(null, nasComparer.compare(Time.newInstance(21, 0, 0, 0), null));
+        Assert.areEqual(null, nasComparer.compare(1, null));
+        Assert.areEqual(null, nasComparer.compare(1L, null));
+        Assert.areEqual(null, nasComparer.compare((Double) 1.0, null));
+        Assert.areEqual(null, nasComparer.compare(new Account(Name = 'a'), null));
+        Assert.areEqual(null, nasComparer.compare(tom, null));
+        Assert.areEqual(null, nasComparer.compare(null, Blob.valueOf('a')));
+        Assert.areEqual(null, nasComparer.compare(null, Date.today()));
+        Assert.areEqual(null, nasComparer.compare(null, Datetime.now()));
+        Assert.areEqual(null, nasComparer.compare(null, Time.newInstance(21, 0, 0, 0)));
+        Assert.areEqual(null, nasComparer.compare(null, 1));
+        Assert.areEqual(null, nasComparer.compare(null, 1L));
+        Assert.areEqual(null, nasComparer.compare(null, (Double) 1.0));
+        Assert.areEqual(null, nasComparer.compare(null, new Account(Name = 'a')));
+        Assert.areEqual(null, nasComparer.compare(null, tom));
+    }
+
+    /**
      * @see Comparer.nullsFirst
      * @see Comparer.nullsLast
      */
@@ -427,12 +463,12 @@ private class ComparerTest {
             Integer value3 = person.getAge();
             Integer value4 = other.getAge();
             Integer value5 = other1.getAge();
-            Integer expected = Comparer.compareObjects(value, value1, true) == 0
-                ? Comparer.compareObjects(value4, value3)
-                : Comparer.compareObjects(value, value1, true);
-            Integer expected1 = Comparer.compareObjects(value, value2, true) == 0
-                ? Comparer.compareObjects(value5, value3)
-                : Comparer.compareObjects(value, value2, true);
+            Integer expected = Comparer.compareNullable(value, value1, true) == 0
+                ? Comparer.compareNullable(value4, value3)
+                : Comparer.compareNullable(value, value1, true);
+            Integer expected1 = Comparer.compareNullable(value, value2, true) == 0
+                ? Comparer.compareNullable(value5, value3)
+                : Comparer.compareNullable(value, value2, true);
             Assert.areEqual(expected, comparing.compare(person, other));
             Assert.areEqual(expected1, comparing.compare(person, other1));
         }
@@ -460,12 +496,12 @@ private class ComparerTest {
             Integer value3 = person.getAge();
             Integer value4 = other.getAge();
             Integer value5 = other1.getAge();
-            Integer expected = Comparer.compareObjects(value, value1) == 0
-                ? Comparer.compareObjects(value3, value4)
-                : Comparer.compareObjects(value, value1);
-            Integer expected1 = Comparer.compareObjects(value, value2) == 0
-                ? Comparer.compareObjects(value3, value5)
-                : Comparer.compareObjects(value, value2);
+            Integer expected = Comparer.compareNullable(value, value1) == 0
+                ? Comparer.compareNullable(value3, value4)
+                : Comparer.compareNullable(value, value1);
+            Integer expected1 = Comparer.compareNullable(value, value2) == 0
+                ? Comparer.compareNullable(value3, value5)
+                : Comparer.compareNullable(value, value2);
             Assert.areEqual(expected, comparing.compare(person, other));
             Assert.areEqual(expected1, comparing.compare(person, other1));
         }
@@ -500,14 +536,14 @@ private class ComparerTest {
             Integer value5 = other1.getAge();
             Integer expected = (person == null || other == null)
                 ? Comparer.compareNulls(person, other)
-                : Comparer.compareObjects(value, value1) == 0
-                    ? Comparer.compareObjects(value3, value4)
-                    : Comparer.compareObjects(value1, value);
+                : Comparer.compareNullable(value, value1) == 0
+                    ? Comparer.compareNullable(value3, value4)
+                    : Comparer.compareNullable(value1, value);
             Integer expected1 = (person == null || other1 == null)
                 ? Comparer.compareNulls(person, other1)
-                : Comparer.compareObjects(value, value2) == 0
-                    ? Comparer.compareObjects(value3, value5)
-                    : Comparer.compareObjects(value2, value);
+                : Comparer.compareNullable(value, value2) == 0
+                    ? Comparer.compareNullable(value3, value5)
+                    : Comparer.compareNullable(value2, value);
             Assert.areEqual(expected, comparing.compare(person, other));
             Assert.areEqual(expected1, comparing.compare(person, other1));
         }
@@ -515,7 +551,8 @@ private class ComparerTest {
 
     /**
      * @see Comparer.compareNulls
-     * @see Comparer.compareObjects
+     * @see Comparer.compareNullable
+     * @see Comparer.compareNullableNonAntisymmetric
      */
     @IsTest
     static void default() {
@@ -528,21 +565,43 @@ private class ComparerTest {
         Assert.areEqual(-1, Comparer.compareNulls(null, 1));
         Assert.areEqual(0, Comparer.compareNulls(null, null));
         Assert.areEqual(1, Comparer.compareNulls(1, null));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(true, false));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(id2, id1));
-        Assert.areEqual(1, Comparer.compareNonNullObjects('b', 'a'));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(Blob.valueOf('a'), Blob.valueOf('b')));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(Date.today().addDays(1), Date.today()));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(Datetime.now().addDays(1), Datetime.now()));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(Time.newInstance(22, 0, 0, 0), Time.newInstance(21, 0, 0, 0)));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(1, 0));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(1L, 0L));
-        Assert.areEqual(1, Comparer.compareNonNullObjects((Double) 1.0, (Double) 0.0));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(new Account(Name = 'b'), new Account(Name = 'a')));
-        Assert.areEqual(1, Comparer.compareNonNullObjects(tom, frank));
-        Assert.areEqual(-1, Comparer.compareNonNullObjects(1, 'a'));
-        Assert.areEqual(1, Comparer.compareNonNullObjects('a', 1));
-        Assert.areEqual(0, Comparer.compareNonNullObjects('1', 1));
+        Assert.areEqual(1, Comparer.compareNullable(true, false));
+        Assert.areEqual(1, Comparer.compareNullable(id2, id1));
+        Assert.areEqual(1, Comparer.compareNullable('b', 'a'));
+        Assert.areEqual(1, Comparer.compareNullable(Blob.valueOf('a'), Blob.valueOf('b')));
+        Assert.areEqual(1, Comparer.compareNullable(Date.today().addDays(1), Date.today()));
+        Assert.areEqual(1, Comparer.compareNullable(Datetime.now().addDays(1), Datetime.now()));
+        Assert.areEqual(1, Comparer.compareNullable(Time.newInstance(22, 0, 0, 0), Time.newInstance(21, 0, 0, 0)));
+        Assert.areEqual(1, Comparer.compareNullable(1, 0));
+        Assert.areEqual(1, Comparer.compareNullable(1L, 0L));
+        Assert.areEqual(1, Comparer.compareNullable((Double) 1.0, (Double) 0.0));
+        Assert.areEqual(1, Comparer.compareNullable(new Account(Name = 'b'), new Account(Name = 'a')));
+        Assert.areEqual(1, Comparer.compareNullable(tom, frank));
+        Assert.areEqual(-1, Comparer.compareNullable(1, 'a'));
+        Assert.areEqual(1, Comparer.compareNullable('a', 1));
+        Assert.areEqual(0, Comparer.compareNullable('1', 1));
+        Assert.areEqual(-1, Comparer.compareNullableNonAntisymmetric(null, 'a'));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric('a', null));
+        Assert.areEqual(0, Comparer.compareNullableNonAntisymmetric(null, null));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(id2, id1));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(id1, null));
+        Assert.areEqual(null, Comparer.compareNullableNonAntisymmetric(null, 1));
+        Assert.areEqual(null, Comparer.compareNullableNonAntisymmetric(1, null));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(true, false));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(id2, id1));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric('b', 'a'));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(Blob.valueOf('a'), Blob.valueOf('b')));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(Date.today().addDays(1), Date.today()));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(Datetime.now().addDays(1), Datetime.now()));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(Time.newInstance(22, 0, 0, 0), Time.newInstance(21, 0, 0, 0)));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(1, 0));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(1L, 0L));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric((Double) 1.0, (Double) 0.0));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(new Account(Name = 'b'), new Account(Name = 'a')));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric(tom, frank));
+        Assert.areEqual(-1, Comparer.compareNullableNonAntisymmetric(1, 'a'));
+        Assert.areEqual(1, Comparer.compareNullableNonAntisymmetric('a', 1));
+        Assert.areEqual(0, Comparer.compareNullableNonAntisymmetric('1', 1));
     }
 
 }

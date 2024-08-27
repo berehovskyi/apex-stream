@@ -1,5 +1,5 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IComparer} functional interface.
  *
  * @see IComparer
@@ -149,11 +149,48 @@ public abstract inherited sharing class Comparer implements IComparer {
     //<editor-fold desc="Ordering">
     /**
      * @description Returns a comparer that imposes the default ordering.
+     * Considers a non-null value as always greater than a null value.
      *
      * @return the `Comparer`
+     *
+     * @example
+     * IComparer defaultComparer = Comparer.defaultOrder();
+     * defaultComparer.compare(1, 0); // 1
+     * defaultComparer.compare(0, 1); // -1
+     * defaultComparer.compare(1, 1); // 0
+     * defaultComparer.compare(1, null); // 1
+     * defaultComparer.compare(null, 1); // -1
+     * defaultComparer.compare('foo', null); // 1
+     * defaultComparer.compare(null, 'foo'); // -1
      */
     public static Comparer defaultOrder() {
         return new DefaultOrder();
+    }
+
+    /**
+     * @description Returns a comparer that imposes the non-antisymmetric ordering.
+     * <p><strong>Note: </strong></p>
+     * <p>This comparer violates the `IComparer` contract
+     * and cannot be used in `List.sort` or derived sorting methods.</p>
+     * <p>Can be used for comparing nullable values the way it's designed in Apex.</p>
+     * <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta
+     * /apexcode/langCon_apex_expressions_operators_understanding.htm">Expression Operators</a>
+     *
+     * @return the `Comparer`
+     *
+     * @example
+     * IComparer nasComparer = Comparer.nonAntisymmetricOrder();
+     * nasComparer.compare(1, 0); // 1
+     * nasComparer.compare(0, 1); // -1
+     * nasComparer.compare(1, 1); // 0
+     * nasComparer.compare(1, null); // null
+     * nasComparer.compare(null, 1); // null
+     * // but
+     * nasComparer.compare('foo', null); // 1
+     * nasComparer.compare(null, 'foo'); // -1
+     */
+    public static Comparer nonAntisymmetricOrder() {
+        return new NonAntisymmetricOrder();
     }
 
     /**
@@ -200,8 +237,8 @@ public abstract inherited sharing class Comparer implements IComparer {
     /**
      * @description Compares the two nullable objects considering that at least one of them is null.
      *
-     * @param o1 the first boolean to compare
-     * @param o2 the second boolean to compare
+     * @param o1 the first object to compare
+     * @param o2 the second object to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
      *
      * @return `-1` if the first input arguments is less than the second one,
@@ -215,15 +252,35 @@ public abstract inherited sharing class Comparer implements IComparer {
      * @description Compares the two nullable objects considering that at least one of them is null.
      * Considers a non-null value as always greater than a null value.
      *
-     * @param o1 the first boolean to compare
-     * @param o2 the second boolean to compare
+     * @param o1 the first object to compare
+     * @param o2 the second object to compare
      *
-     * @return `-1` if the first input arguments is less than the second one,
+     * @return `-1` if the first input argument is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
     @TestVisible
     private static Integer compareNulls(Object o1, Object o2) {
         return compareNulls(o1, o2, false);
+    }
+
+    /**
+     * @description Compares the two nullable objects considering that at least one of them is null.
+     * This method is a non antisymmetric version of null comparison.
+     * Considers a non-null `String` od `Id` value as always greater than a null value.
+     *
+     * @param o1 the first object to compare
+     * @param o2 the second object to compare
+     *
+     * @return `-1` if the first input argument is `String` or `Id` and is less than the second one,
+     * `0` if they're equal,
+     * `1` if the first input argument is `String` or `Id` and is greater than the second one,
+     * `null` if some of the input arguments is null and another one is not `String` nor `Id`
+     */
+    private static Integer compareNullsNonAntisymmetric(Object o1, Object o2) {
+        if (o1 == o2) { return 0; }
+        if (o1 instanceof Id || o2 instanceof Id) { return compareUnequalIds((Id) o1, (Id) o2); }
+        if (o1 instanceof String || o2 instanceof String) { return compareUnequalStrings((String) o1, (String) o2); }
+        return null;
     }
 
     /**
@@ -234,7 +291,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      * @param str1 the first string to compare
      * @param str2 the second string to compare
      *
-     * @return `-1` if the first input arguments is less than the second one,
+     * @return `-1` if the first input argument is less than the second one,
      * `0` if they're equal, and `1` otherwise
      */
     private static Integer compareStrings(String str1, String str2) {
@@ -242,22 +299,44 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     /**
-     * @description Compares the two non-null Objects identifying its types first.
+     * @description Compares the two nullable Objects identifying its types first.
      * Supports all primitive types as well as comparable type.
      *
      * @param value1 the first object to compare
      * @param value2 the second object to compare
      * @param isNullGreater the boolean determines if null value is greater than any other value
      *
-     * @return `-1` if the first input arguments is less than the second one,
+     * @return `-1` if the first input argument is less than the second one,
      * `0` if they're equal, and `1` otherwise
      *
      * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
      * and is not comparable.
      */
     @TestVisible
-    private static Integer compareObjects(Object value1, Object value2, Boolean isNullGreater) {
+    private static Integer compareNullable(Object value1, Object value2, Boolean isNullGreater) {
         if (value1 == null || value2 == null) { return compareNulls(value1, value2, isNullGreater); }
+        return compareNonNullObjects(value1, value2);
+    }
+
+    /**
+     * @description Compares two Objects considering their nullability and type, using a non-antisymmetric approach.
+     * If one of the objects is null, it compares them with a special handling that ensures non-null values
+     * are not inherently considered greater or less than null.
+     *
+     * @param value1 the first object to compare
+     * @param value2 the second object to compare
+     *
+     * @return `-1` if the first input argument is less than the second one,
+     * `0` if they're equal,
+     * `1` if the first input argument is greater than the second one,
+     * `null` if some of the input arguments is null and another one is not `String` nor `Id`
+     *
+     * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
+     * and is not comparable.
+     */
+    @TestVisible
+    private static Integer compareNullableNonAntisymmetric(Object value1, Object value2) {
+        if (value1 == null || value2 == null) { return compareNullsNonAntisymmetric(value1, value2); }
         return compareNonNullObjects(value1, value2);
     }
 
@@ -269,15 +348,15 @@ public abstract inherited sharing class Comparer implements IComparer {
      * @param value1 the first object to compare
      * @param value2 the second object to compare
      *
-     * @return `-1` if the first input arguments is less than the second one,
+     * @return `-1` if the first input argument is less than the second one,
      * `0` if they're equal, and `1` otherwise
      *
      * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
      * and is not comparable.
      */
     @TestVisible
-    private static Integer compareObjects(Object value1, Object value2) {
-        return compareObjects(value1, value2, false);
+    private static Integer compareNullable(Object value1, Object value2) {
+        return compareNullable(value1, value2, false);
     }
     // @end-group
     //</editor-fold>
@@ -339,18 +418,18 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     /**
-    * @description Compares the two non-null objects identifying its types first.
-    * Supports all primitive types and comparable type.
-    *
-    * @param value1 the first object to compare
-    * @param value2 the second object to compare
-    *
-    * @return `-1` if the first input arguments is less than the second one,
-    * `0` if they're equal, and `1` otherwise
-    *
-    * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
-    * and is not comparable.
-    */
+     * @description Compares the two non-null objects identifying its types first.
+     * Supports all primitive types and comparable type.
+     *
+     * @param value1 the first object to compare
+     * @param value2 the second object to compare
+     *
+     * @return `-1` if the first input argument is less than the second one,
+     * `0` if they're equal, and `1` otherwise
+     *
+     * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
+     * and is not comparable.
+     */
     @TestVisible
     @SuppressWarnings(
         'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssMethodCount, PMD.StdCyclomaticComplexity'
@@ -416,7 +495,11 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     private class DefaultOrder extends Comparer {
-        public override Integer compare(Object o1, Object o2) { return compareObjects(o1, o2); }
+        public override Integer compare(Object o1, Object o2) { return compareNullable(o1, o2); }
+    }
+
+    private class NonAntisymmetricOrder extends Comparer {
+        public override Integer compare(Object o1, Object o2) { return compareNullableNonAntisymmetric(o1, o2); }
     }
 
     private class ReverseOrder extends Comparer {
