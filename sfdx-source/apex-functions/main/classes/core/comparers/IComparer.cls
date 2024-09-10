@@ -7,7 +7,7 @@
  *
  * @group Functional Interfaces
  */
-public interface IComparer {
+public interface IComparer extends System.Comparator<Object> {
 
     /**
      * @description Compares the two arguments.

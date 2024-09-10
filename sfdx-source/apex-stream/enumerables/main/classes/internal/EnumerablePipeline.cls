@@ -10,7 +10,7 @@ public inherited sharing class EnumerablePipeline {
     public static List<Object> sort(final List<Object> source, final IComparer comparer) {
         Validate.notNull(source);
         final List<Object> result = source.clone();
-        result.sort(new ObjectComparator(comparer));
+        result.sort(comparer);
         return result;
     }
 
@@ -36,12 +36,6 @@ public inherited sharing class EnumerablePipeline {
             result.add(mapper.apply(o));
         }
         return result;
-    }
-
-    private class ObjectComparator implements System.Comparator<Object> {
-        private final IComparer comp;
-        private ObjectComparator(IComparer comp) { Validate.notNull(comp); this.comp = comp; }
-        public Integer compare(Object o1, Object o2) { return comp.compare(o1, o2); }
     }
 
 }
