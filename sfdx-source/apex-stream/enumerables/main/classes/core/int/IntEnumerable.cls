@@ -81,7 +81,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .toList(); // [5, 3, 9, 7, 8, 6, 4, 1, 0]
      */
     public virtual IntEnumerable union(final Iterable<Integer> iterable) {
-        return (IntEnumerable) append(iterable).distinct();
+        return append(iterable).distinct();
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .toList(); // [3, 9]
      */
     public virtual IntEnumerable intersect(final Iterable<Integer> iterable) {
-        return (IntEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
+        return distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -123,7 +123,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      *     .toList(); // [5, 7]
      */
     public virtual IntEnumerable except(final Iterable<Integer> iterable) {
-        return (IntEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
+        return distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**

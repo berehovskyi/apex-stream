@@ -1,6 +1,6 @@
 # IFunction
 
-`APIVERSION: 60`
+`APIVERSION: 61`
 
 `STATUS: ACTIVE`
 
@@ -15,7 +15,7 @@ An entity that takes one argument of `Object` type and returns an `Object` value
 ## Methods
 ### `public Object apply(Object o)`
 
-Applies the function to the input argument. <p>Contract: The type of an input argument and of the returned value may be different.</p>
+Applies the function to the input argument. <p>Contract: The type of input argument and of the returned value may be different.</p>
 
 #### Parameters
 

@@ -1288,7 +1288,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     .get(); // { Name: 'foo;bar;baz', AnnualRevenue: 800 }
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((SObject) StreamPipeline.reduce(iterator(), accumulator));
+        return Optional.ofNullable(StreamPipeline.reduce(iterator(), accumulator));
     }
 
     /**
@@ -1415,7 +1415,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     .get(); // { Name: 'bar', NumberOfEmployees: 200 }
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((SObject) StreamPipeline.find(iterator(), predicate));
+        return Optional.ofNullable(StreamPipeline.find(iterator(), predicate));
     }
 
     /**

@@ -81,7 +81,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .toList(); // [5L, 3L, 9L, 7L, 8L, 6L, 4L, 1L, 0L]
      */
     public virtual LongEnumerable union(final Iterable<Long> iterable) {
-        return (LongEnumerable) append(iterable).distinct();
+        return append(iterable).distinct();
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .toList(); // [3L, 9L]
      */
     public virtual LongEnumerable intersect(final Iterable<Long> iterable) {
-        return (LongEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
+        return distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -123,7 +123,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .toList(); // [5L, 7L]
      */
     public virtual LongEnumerable except(final Iterable<Long> iterable) {
-        return (LongEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
+        return distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**

@@ -735,7 +735,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *     .get(); // -4L
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((Long) StreamPipeline.reduce(iterator(), accumulator));
+        return Optional.ofNullable(StreamPipeline.reduce(iterator(), accumulator));
     }
 
     /**
@@ -782,7 +782,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *     .get(); // 0L
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((Long) StreamPipeline.find(iterator(), predicate));
+        return Optional.ofNullable(StreamPipeline.find(iterator(), predicate));
     }
 
     /**
@@ -856,7 +856,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *     .get(); // 1.0
      */
     public virtual override Optional avg() {
-        return Optional.of((Double) StreamPipeline.avgLong(iterator(), true));
+        return Optional.of(StreamPipeline.avgLong(iterator(), true));
     }
 
     /**

@@ -1125,7 +1125,7 @@ private class SObjectStreamTest {
         ISObjectEnumerable accStm3 = SObjectStream.of(clone);
         // When
         SObject actual = accStm.reduce(seed, maxBy);
-        SObject actual1 = (SObject) accStm1.reduce(seed, maxBy);
+        SObject actual1 = accStm1.reduce(seed, maxBy);
         SObject actual2 = (SObject) accStm2.reduce(maxBy).get();
         SObject actual3 = (SObject) accStm3.reduce(maxBy).get();
         // Then

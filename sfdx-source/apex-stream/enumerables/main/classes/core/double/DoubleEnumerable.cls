@@ -82,7 +82,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * // [5.0, 3.0, 9.0, 7.0, 8.0, 6.0, 4.0, 1.0, 0.0]
      */
     public virtual DoubleEnumerable union(final Iterable<Double> iterable) {
-        return (DoubleEnumerable) append(iterable).distinct();
+        return append(iterable).distinct();
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .toList(); // [3.0, 9.0]
      */
     public virtual DoubleEnumerable intersect(final Iterable<Double> iterable) {
-        return (DoubleEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
+        return distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -125,7 +125,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .toList(); // [5.0, 7.0]
      */
     public virtual DoubleEnumerable except(final Iterable<Double> iterable) {
-        return (DoubleEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
+        return distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -642,7 +642,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .get(); // 0.4
      */
     public virtual Optional avg() {
-        return Optional.ofNullable((Double) collect(EnumerableSupport.averagingDouble(Function.identity())));
+        return Optional.ofNullable(collect(EnumerableSupport.averagingDouble(Function.identity())));
     }
 
     /**

@@ -955,7 +955,7 @@ private class SObjectSequenceTest {
         ISObjectEnumerable accSeq3 = SObjectSequence.of(clone);
         // When
         SObject actual = accSeq.reduce(seed, maxBy);
-        SObject actual1 = (SObject) accSeq1.reduce(seed, maxBy);
+        SObject actual1 = accSeq1.reduce(seed, maxBy);
         SObject actual2 = (SObject) accSeq2.reduce(maxBy).get();
         SObject actual3 = (SObject) accSeq3.reduce(maxBy).get();
         // Then

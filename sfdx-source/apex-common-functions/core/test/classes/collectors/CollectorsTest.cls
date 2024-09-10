@@ -125,7 +125,7 @@ private class CollectorsTest {
         Assert.areEqual(new Set<Double>{ (Double) DOUBLES[0], (Double) DOUBLES[1], (Double) DOUBLES[2], (Double) DOUBLES[3], (Double) DOUBLES[4] }, actual9);
         Assert.areEqual(new Set<SObject>{ (SObject) CONTACTS[0], (SObject) CONTACTS[1], (SObject) CONTACTS[2], (SObject) CONTACTS[3], (SObject) CONTACTS[4] }, actual10);
         Assert.areEqual(new Set<Object>(MIX), actual11);
-        Assert.areEqual(new Set<Object>{ (Object) COMPARABLES[0], (Object) COMPARABLES[1], (Object) COMPARABLES[2], (Object) COMPARABLES[3] }, actual12);
+        Assert.areEqual(new Set<Object>{ COMPARABLES[0], COMPARABLES[1], COMPARABLES[2], COMPARABLES[3] }, actual12);
     }
 
     /**

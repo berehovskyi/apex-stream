@@ -1110,7 +1110,7 @@ private class ObjectStreamTest {
         ObjectEnumerable stm = ObjectStream.of(clone);
         IObjectEnumerable stm1 = ObjectStream.of(clone);
         // When
-        Set<Object> actual = (Set<Object>) stm.toSet();
+        Set<Object> actual = stm.toSet();
         Set<Object> actual1 = (Set<Object>) stm1.toSet();
         // Then
         Set<Object> expected = new Set<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };

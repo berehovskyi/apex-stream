@@ -267,16 +267,12 @@ public virtual inherited sharing class SObjectFunctions {
 
     private class GetByFieldPath extends SObjectPathFunction {
         private GetByFieldPath(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj)).get(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).get(xRefFieldName); }
     }
 
     private class GetByFieldPathSafe extends SObjectPathFunction {
         private GetByFieldPathSafe(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj))?.get(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.get(xRefFieldName); }
     }
 
     private class GetFunction extends Function {
@@ -287,7 +283,7 @@ public virtual inherited sharing class SObjectFunctions {
             else if (CsfSupport.isSafePath(fieldName)) { mapper = new GetByFieldPathSafe(fieldName); }
             else { mapper = new GetByFieldPath(fieldName); }
         }
-        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+        public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetFieldFunction extends Function {
@@ -307,16 +303,12 @@ public virtual inherited sharing class SObjectFunctions {
 
     private class GetSObjectsByFieldPath extends SObjectPathFunction {
         private GetSObjectsByFieldPath(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj)).getSObjects(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsByFieldPathSafe extends SObjectPathFunction {
         private GetSObjectsByFieldPathSafe(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj))?.getSObjects(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsFunction extends Function {
@@ -327,7 +319,7 @@ public virtual inherited sharing class SObjectFunctions {
             else if (CsfSupport.isSafePath(fieldName)) { mapper = new GetSObjectsByFieldPathSafe(fieldName); }
             else { mapper = new GetSObjectsByFieldPath(fieldName); }
         }
-        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+        public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetPopulatedFieldsAsMap extends Function {
@@ -349,7 +341,7 @@ public virtual inherited sharing class SObjectFunctions {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
-        public override Object apply(Object obj) { return ((SObject) obj).put(fieldName, mapper.apply((SObject) obj)); }
+        public override Object apply(Object obj) { return ((SObject) obj).put(fieldName, mapper.apply(obj)); }
     }
 
     private class PutFieldPath extends SObjectPathFunction {
@@ -359,7 +351,7 @@ public virtual inherited sharing class SObjectFunctions {
             this.mapper = mapper;
         }
         public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj)).put(xRefFieldName, mapper.apply((SObject) obj));
+            return ((SObject) operator.apply(obj)).put(xRefFieldName, mapper.apply(obj));
         }
     }
 
@@ -370,7 +362,7 @@ public virtual inherited sharing class SObjectFunctions {
             this.mapper = mapper;
         }
         public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj))?.put(xRefFieldName, mapper.apply((SObject) obj));
+            return ((SObject) operator.apply(obj))?.put(xRefFieldName, mapper.apply(obj));
         }
     }
 
@@ -383,7 +375,7 @@ public virtual inherited sharing class SObjectFunctions {
             else if (CsfSupport.isSafePath(fieldName)) { this.mapper = new PutFieldPathSafe(fieldName, mapper); }
             else { this.mapper = new PutFieldPath(fieldName, mapper); }
         }
-        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+        public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class PutFieldFunction extends Function {
@@ -395,7 +387,7 @@ public virtual inherited sharing class SObjectFunctions {
             this.field = field;
             this.mapper = mapper;
         }
-        public override Object apply(Object obj) { return ((SObject) obj).put(field, mapper.apply(((SObject) obj))); }
+        public override Object apply(Object obj) { return ((SObject) obj).put(field, mapper.apply(obj)); }
     }
     // @end-group
     //</editor-fold>

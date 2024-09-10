@@ -82,7 +82,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['foo', 'bar', 'baz', 'qux', 'fred']
      */
     public virtual ObjectEnumerable union(final Iterable<Object> iterable) {
-        return (ObjectEnumerable) append(iterable).distinct();
+        return append(iterable).distinct();
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['foo', 'Bar', 'baz', 'qux', 'fred']
      */
     public virtual ObjectEnumerable union(final Iterable<Object> iterable, final IFunction classifier) {
-        return (ObjectEnumerable) append(iterable).distinct(classifier);
+        return append(iterable).distinct(classifier);
     }
 
     /**
@@ -130,7 +130,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['foo']
      */
     public virtual ObjectEnumerable intersect(final Iterable<Object> iterable) {
-        return (ObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
+        return distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -156,7 +156,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['foo']
      */
     public virtual ObjectEnumerable intersect(final Iterable<Object> iterable, final IFunction classifier) {
-        return (ObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
+        return distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ));
     }
@@ -184,7 +184,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['qux', 'fred']
      */
     public virtual ObjectEnumerable except(final Iterable<Object> iterable) {
-        return (ObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
+        return distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -214,7 +214,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['qux', 'fred']
      */
     public virtual ObjectEnumerable except(final Iterable<Object> iterable, final IFunction classifier) {
-        return (ObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
+        return distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ).negate());
     }

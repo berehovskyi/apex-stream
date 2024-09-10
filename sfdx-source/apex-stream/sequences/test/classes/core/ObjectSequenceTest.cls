@@ -957,7 +957,7 @@ private class ObjectSequenceTest {
         ObjectEnumerable seq = ObjectSequence.of(clone);
         IObjectEnumerable seq1 = ObjectSequence.of(clone);
         // When
-        Set<Object> actual = (Set<Object>) seq.toSet();
+        Set<Object> actual = seq.toSet();
         Set<Object> actual1 = (Set<Object>) seq1.toSet();
         // Then
         Set<Object> expected = new Set<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };

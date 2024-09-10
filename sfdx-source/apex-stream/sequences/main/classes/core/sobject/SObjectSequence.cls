@@ -1233,7 +1233,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     .get(); // { Name: 'foo;bar;baz', AnnualRevenue: 800 }
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((SObject) SequencePipeline.reduce(sObjects, accumulator));
+        return Optional.ofNullable(SequencePipeline.reduce(sObjects, accumulator));
     }
 
     /**
@@ -1360,7 +1360,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     .get(); // { Name: 'bar', NumberOfEmployees: 200 }
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((SObject) SequencePipeline.find(sObjects, predicate));
+        return Optional.ofNullable(SequencePipeline.find(sObjects, predicate));
     }
 
     /**

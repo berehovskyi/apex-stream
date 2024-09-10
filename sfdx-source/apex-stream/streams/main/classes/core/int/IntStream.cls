@@ -735,7 +735,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *     .get(); // -4
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((Integer) StreamPipeline.reduce(iterator(), accumulator));
+        return Optional.ofNullable(StreamPipeline.reduce(iterator(), accumulator));
     }
 
     /**
@@ -781,7 +781,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *     .get(); // 0
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((Integer) StreamPipeline.find(iterator(), predicate));
+        return Optional.ofNullable(StreamPipeline.find(iterator(), predicate));
     }
 
     /**
@@ -855,7 +855,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *     .get(); // -1.0
      */
     public virtual override Optional avg() {
-        return Optional.of((Double) StreamPipeline.avgInt(iterator(), true));
+        return Optional.of(StreamPipeline.avgInt(iterator(), true));
     }
 
     /**

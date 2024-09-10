@@ -728,7 +728,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *     .get(); // 5.5
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((Double) StreamPipeline.reduce(iterator(), accumulator));
+        return Optional.ofNullable(StreamPipeline.reduce(iterator(), accumulator));
     }
 
     /**
@@ -777,7 +777,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *     .get(); // 5.5
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((Double) StreamPipeline.find(iterator(), predicate));
+        return Optional.ofNullable(StreamPipeline.find(iterator(), predicate));
     }
 
     /**

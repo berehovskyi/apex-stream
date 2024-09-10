@@ -1,6 +1,6 @@
 # IComparer
 
-`APIVERSION: 60`
+`APIVERSION: 61`
 
 `STATUS: ACTIVE`
 
@@ -8,6 +8,10 @@ A function that takes two arguments of `Object` type and returns
 an `Integer` value, which represents a comparison result. Typically, is used
 for sorting. Permits comparison of null arguments.
 
+
+**Extended types**
+
+[System.Comparator]()
 
 **Author** Oleh Berehovskyi
 

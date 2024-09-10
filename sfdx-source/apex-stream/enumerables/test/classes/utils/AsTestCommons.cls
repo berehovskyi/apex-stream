@@ -125,7 +125,7 @@ private class AsTestCommons {
             valueMapper = SObjectEnumerableSupport.get(fieldName);
         }
         public override Object apply(Object sObj) {
-            List<SObject> children = (List<SObject>) iterableMapper.apply((SObject) sObj);
+            List<SObject> children = (List<SObject>) iterableMapper.apply(sObj);
             List<Integer> results = new List<Integer>();
             if (children != null) {
                 for (SObject child : children) {
@@ -143,7 +143,7 @@ private class AsTestCommons {
             mapper2 = SObjectEnumerableSupport.get(fieldName2);
         }
         public override Object apply(Object sObj) {
-            return new List<Double>{ (Double) mapper1.apply((SObject) sObj), (Double) mapper2.apply((SObject) sObj) };
+            return new List<Double>{ (Double) mapper1.apply(sObj), (Double) mapper2.apply(sObj) };
         }
     }
     public class GetPair extends Function {
@@ -154,7 +154,7 @@ private class AsTestCommons {
             mapper2 = SObjectEnumerableSupport.get(fieldName2);
         }
         public override Object apply(Object sObj) {
-            return new List<Object>{ mapper1.apply((SObject) sObj), mapper2.apply((SObject) sObj) };
+            return new List<Object>{ mapper1.apply(sObj), mapper2.apply(sObj) };
         }
     }
     public class GroupByIdFinisher extends Function {

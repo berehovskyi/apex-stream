@@ -643,7 +643,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *     .get(); // 5.5
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((Double) SequencePipeline.reduce(doubles, accumulator));
+        return Optional.ofNullable(SequencePipeline.reduce(doubles, accumulator));
     }
 
     /**
@@ -692,7 +692,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *     .get(); // 5.5
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((Double) SequencePipeline.find(doubles, predicate));
+        return Optional.ofNullable(SequencePipeline.find(doubles, predicate));
     }
 
     /**

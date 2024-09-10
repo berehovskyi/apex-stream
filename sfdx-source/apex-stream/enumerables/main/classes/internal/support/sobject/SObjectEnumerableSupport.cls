@@ -253,6 +253,7 @@ public inherited sharing class SObjectEnumerableSupport {
     }
 
     public static String findRelationshipField(final SObjectField field) {
+        Validate.isNotNull(field);
         final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
         Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
         String result;
@@ -292,7 +293,7 @@ public inherited sharing class SObjectEnumerableSupport {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj)).put(xRefFieldName, mapper.apply(((SObject) obj)));
+            ((SObject) operator.apply(obj)).put(xRefFieldName, mapper.apply(((SObject) obj)));
         }
     }
 
@@ -303,7 +304,7 @@ public inherited sharing class SObjectEnumerableSupport {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj))?.put(xRefFieldName, mapper.apply((SObject) obj));
+            ((SObject) operator.apply(obj))?.put(xRefFieldName, mapper.apply(obj));
         }
     }
 
@@ -316,7 +317,7 @@ public inherited sharing class SObjectEnumerableSupport {
             this.field = field;
             this.mapper = mapper;
         }
-        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply((SObject) obj)); }
+        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply(obj)); }
     }
 
     private class SetFieldConsumer extends Consumer {
@@ -329,7 +330,7 @@ public inherited sharing class SObjectEnumerableSupport {
                 consumer = new SetFieldPathSafe(fieldName, mapper);
             } else { consumer = new SetFieldPath(fieldName, mapper); }
         }
-        public override void accept(Object obj) { consumer.accept((SObject) obj); }
+        public override void accept(Object obj) { consumer.accept(obj); }
     }
 
     private abstract class SObjectPathFunction extends Function {
@@ -349,29 +350,24 @@ public inherited sharing class SObjectEnumerableSupport {
 
     private class GetFieldPathFunction extends SObjectPathFunction {
         private GetFieldPathFunction(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj)).get(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).get(xRefFieldName); }
     }
 
     private class GetFieldPathSafeFunction extends SObjectPathFunction {
         private GetFieldPathSafeFunction(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj))?.get(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.get(xRefFieldName); }
     }
 
     private class GetFunction extends Function {
         private final IFunction mapper;
         private GetFunction(String fieldName) {
             Validate.notBlank(fieldName);
-            if (!fieldName.contains('.')) {
-                mapper = new GetFieldNameFunction(fieldName);
-            } else if (fieldName.substringBeforeLast('.').endsWith('?')) {
+            if (!fieldName.contains('.')) { mapper = new GetFieldNameFunction(fieldName); }
+            else if (fieldName.substringBeforeLast('.').endsWith('?')) {
                 mapper = new GetFieldPathSafeFunction(fieldName);
             } else { mapper = new GetFieldPathFunction(fieldName); }
         }
-        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+        public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetByFieldFunction extends Function {
@@ -391,16 +387,12 @@ public inherited sharing class SObjectEnumerableSupport {
 
     private class GetSObjectsFieldPathFunction extends SObjectPathFunction {
         private GetSObjectsFieldPathFunction(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj)).getSObjects(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsFieldPathSafeFunction extends SObjectPathFunction {
         private GetSObjectsFieldPathSafeFunction(String fieldName) { super(fieldName); }
-        public override Object apply(Object obj) {
-            return ((SObject) operator.apply((SObject) obj))?.getSObjects(xRefFieldName);
-        }
+        public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsFunction extends Function {
@@ -412,7 +404,7 @@ public inherited sharing class SObjectEnumerableSupport {
                 mapper = new GetSObjectsFieldPathSafeFunction(fieldName);
             } else { mapper = new GetSObjectsFieldPathFunction(fieldName); }
         }
-        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+        public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetSObjectFieldNameOperator extends Operator {
@@ -443,7 +435,7 @@ public inherited sharing class SObjectEnumerableSupport {
             if (!fieldName.containsAny('?.')) { mapper = new GetSObjectFieldNameOperator(fieldName); }
             else { mapper = new GetSObjectFieldPathSafeOperator(fieldName); }
         }
-        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+        public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetSObjectFieldOperator extends Operator {

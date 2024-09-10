@@ -529,7 +529,7 @@ public virtual inherited sharing class SObjectOperators {
             if (!fieldName.containsAny('?.')) { mapper = new GetSObjectByFieldName(fieldName); }
             else { mapper = new GetSObjectByFieldPathSafe(fieldName); }
         }
-        public override Object apply(Object obj) { return mapper.apply((SObject) obj); }
+        public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetSObjectFieldOperator extends Operator {

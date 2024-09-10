@@ -128,7 +128,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable union(final Iterable<SObject> iterable) {
-        return (SObjectEnumerable) append(iterable).distinct();
+        return append(iterable).distinct();
     }
 
     /**
@@ -170,7 +170,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable union(final Iterable<SObject> iterable, final IFunction classifier) {
-        return (SObjectEnumerable) append(iterable).distinct(classifier);
+        return append(iterable).distinct(classifier);
     }
 
     /**
@@ -277,7 +277,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable) {
-        return (SObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable));
+        return distinct().filter(EnumerableSupport.isIn(iterable));
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable, final IFunction classifier) {
-        return (SObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
+        return distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ));
     }
@@ -428,7 +428,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable except(final Iterable<SObject> iterable) {
-        return (SObjectEnumerable) distinct().filter(EnumerableSupport.isIn(iterable).negate());
+        return distinct().filter(EnumerableSupport.isIn(iterable).negate());
     }
 
     /**
@@ -475,7 +475,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable except(final Iterable<SObject> iterable, final IFunction classifier) {
-        return (SObjectEnumerable) distinct(classifier).filter(EnumerableSupport.isIn(
+        return distinct(classifier).filter(EnumerableSupport.isIn(
             classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
         ).negate());
     }

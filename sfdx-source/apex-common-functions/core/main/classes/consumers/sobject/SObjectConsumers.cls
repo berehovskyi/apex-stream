@@ -350,7 +350,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
-        public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(((SObject) obj))); }
+        public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(obj)); }
     }
 
     private class SetByFieldPath extends SObjectPathConsumer {
@@ -360,7 +360,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj)).put(xRefFieldName, mapper.apply(((SObject) obj)));
+            ((SObject) operator.apply(obj)).put(xRefFieldName, mapper.apply(obj));
         }
     }
 
@@ -371,7 +371,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj))?.put(xRefFieldName, mapper.apply((SObject) obj));
+            ((SObject) operator.apply(obj))?.put(xRefFieldName, mapper.apply(obj));
         }
     }
 
@@ -384,7 +384,7 @@ public virtual inherited sharing class SObjectConsumers {
             else if (CsfSupport.isSafePath(fieldName)) { consumer = new SetByFieldPathSafe(fieldName, mapper); }
             else { consumer = new SetByFieldPath(fieldName, mapper); }
         }
-        public override void accept(Object obj) { consumer.accept((SObject) obj); }
+        public override void accept(Object obj) { consumer.accept(obj); }
     }
 
     private class SetFieldConsumer extends Consumer {
@@ -396,7 +396,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.field = field;
             this.mapper = mapper;
         }
-        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply((SObject) obj)); }
+        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply(obj)); }
     }
 
     private class SetSObjectByFieldName extends Consumer {
@@ -406,9 +406,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
-        public override void accept(Object obj) {
-            ((SObject) obj).putSObject(fieldName, (SObject) this.mapper.apply((SObject) obj));
-        }
+        public override void accept(Object obj) { ((SObject) obj).putSObject(fieldName, (SObject) mapper.apply(obj)); }
     }
 
     private class SetSObjectByFieldPath extends SObjectPathConsumer {
@@ -418,8 +416,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj))
-                .putSObject(xRefFieldName, (SObject) this.mapper.apply((SObject) obj));
+            ((SObject) operator.apply(obj)).putSObject(xRefFieldName, (SObject) mapper.apply(obj));
         }
     }
 
@@ -430,8 +427,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
-            ((SObject) operator.apply((SObject) obj))
-                ?.putSObject(xRefFieldName, (SObject) this.mapper.apply((SObject) obj));
+            ((SObject) operator.apply(obj))?.putSObject(xRefFieldName, (SObject) mapper.apply(obj));
         }
     }
 
@@ -446,7 +442,7 @@ public virtual inherited sharing class SObjectConsumers {
             }
             else { consumer = new SetSObjectByFieldPath(fieldName, operator); }
         }
-        public override void accept(Object obj) { consumer.accept((SObject) obj); }
+        public override void accept(Object obj) { consumer.accept(obj); }
     }
 
     private class SetSObjectFieldConsumer extends Consumer {
@@ -458,9 +454,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.field = field;
             this.operator = operator;
         }
-        public override void accept(Object obj) {
-            ((SObject) obj).putSObject(field, (SObject) operator.apply((SObject) obj));
-        }
+        public override void accept(Object obj) { ((SObject) obj).putSObject(field, (SObject) operator.apply(obj)); }
     }
     // @end-group
     //</editor-fold>

@@ -642,7 +642,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      *     .get(); // -4
      */
     public override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((Integer) SequencePipeline.reduce(integers, accumulator));
+        return Optional.ofNullable(SequencePipeline.reduce(integers, accumulator));
     }
 
     /**
@@ -689,7 +689,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      *     .get(); // 0
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((Integer) SequencePipeline.find(integers, predicate));
+        return Optional.ofNullable(SequencePipeline.find(integers, predicate));
     }
 
     /**

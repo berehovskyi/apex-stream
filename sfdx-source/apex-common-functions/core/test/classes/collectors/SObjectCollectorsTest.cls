@@ -1885,7 +1885,7 @@ private class SObjectCollectorsTest {
                 expected.addAll(children);
             }
         }
-        Assert.areEqual(expected, (List<SObject>) AfTestCommons.deepClone(actual, List<SObject>.class));
+        Assert.areEqual(expected, AfTestCommons.deepClone(actual, List<SObject>.class));
         Assert.areEqual(expected, actual1);
         Assert.areEqual(expected, actual2);
         Assert.areEqual(expected, actual3);

@@ -9,7 +9,7 @@ public interface IFunction {
 
     /**
      * @description Applies the function to the input argument.
-     * <p>Contract: The type of an input argument and of the returned value may be different.</p>
+     * <p>Contract: The type of input argument and of the returned value may be different.</p>
      *
      * @param o the input argument of `Object` type
      *

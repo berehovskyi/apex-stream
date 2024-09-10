@@ -271,7 +271,7 @@ public virtual inherited sharing class SObjectBiConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object src, Object target) {
-            ((SObject) operator.apply((SObject) target)).put(xRefFieldName, mapper.apply(src));
+            ((SObject) operator.apply(target)).put(xRefFieldName, mapper.apply(src));
         }
     }
 
@@ -282,7 +282,7 @@ public virtual inherited sharing class SObjectBiConsumers {
             this.mapper = mapper;
         }
         public override void accept(Object src, Object target) {
-            ((SObject) operator.apply((SObject) target))?.put(xRefFieldName, mapper.apply(src));
+            ((SObject) operator.apply(target))?.put(xRefFieldName, mapper.apply(src));
         }
     }
 

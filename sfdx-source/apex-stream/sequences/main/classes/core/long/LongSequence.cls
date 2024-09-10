@@ -642,7 +642,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *     .get(); // -4L
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
-        return Optional.ofNullable((Long) SequencePipeline.reduce(longs, accumulator));
+        return Optional.ofNullable(SequencePipeline.reduce(longs, accumulator));
     }
 
     /**
@@ -689,7 +689,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *     .get(); // 0L
      */
     public virtual override Optional find(final IPredicate predicate) {
-        return Optional.ofNullable((Long) SequencePipeline.find(longs, predicate));
+        return Optional.ofNullable(SequencePipeline.find(longs, predicate));
     }
 
     /**

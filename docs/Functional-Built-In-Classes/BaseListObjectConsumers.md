@@ -1,6 +1,6 @@
 # virtual BaseListObjectConsumers
 
-`APIVERSION: 60`
+`APIVERSION: 61`
 
 `STATUS: ACTIVE`
 
