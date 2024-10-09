@@ -1,0 +1,11 @@
+{
+    "name": "apex-stream",
+    "description": "Apex Stream is a framework for processing sequences of elements that takes advantage of the functional programming paradigm",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/berehovskyi/apex-stream.git"
+    },
+    "dependencies": {
+        "@salesforce/cli": "^2.60.13"
+    }
+}

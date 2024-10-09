@@ -1,0 +1,43 @@
+name: "Validate Push and Pull Request"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: "pnpm"
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+  test:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Create Auth File
+        run: echo ${{ secrets.SF_DEV_HUB_AUTH_URL }} > authFile
+      - name: Authorize DevHub
+        run: sf org login sfdx-url -f authFile -d
+      - name: Create Scratch Org
+        run: sf org create scratch -e developer -d -a TestOrg -y 1 -w 30
+      - name: Deploy Metadata
+        run: sf project deploy start -o TestOrg -w 20
+      - name: Run Apex Tests
+        run: sf apex run test -o TestOrg -l RunLocalTests -w 20
+      - name: Delete Scratch Org
+        if: always()
+        run: sf org delete -o TestOrg -p
+      - name: Delete Auth File
+        if: always()
+        run: rm authFile
