@@ -1,0 +1,42 @@
+name: "Validate Push and Pull Request"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Install Global Dependencies
+        run: npm i -g @salesforce/cli
+      - name: Create Auth File
+        run: echo ${{ secrets.SF_DEV_HUB_AUTH_URL }} > authFile
+      - name: Authorize DevHub
+        run: sf org login sfdx-url -f authFile -d
+      - name: Create Scratch Org
+        id: create_scratch_org
+        run: sf org create scratch -e developer -d -a TestOrg -y 1 -w 30
+      - name: Install Dependencies
+        run: sf package install -p apex-validate@latest -o TestOrg -w 10
+      - name: Deploy Metadata
+        run: sf project deploy start -o TestOrg -w 20
+      - name: Run Apex Tests
+        run: sf apex run test -o TestOrg -l RunLocalTests -w 20
+      - name: Delete Scratch Org
+        if: steps.create_scratch_org.outcome == 'success'
+        run: sf org delete scratch -o TestOrg -p
+      - name: Delete Auth File
+        if: always()
+        run: rm authFile
