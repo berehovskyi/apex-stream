@@ -17,6 +17,11 @@ a primitive specialization of [ObjectStream](/docs/Enumerables/ObjectStream.md).
 DoubleStream
 
 
+**Implemented types**
+
+[IRunnable](/docs/Functional-Interfaces/IRunnable.md)
+
+
 **See** [SObjectStream](/docs/Enumerables/SObjectStream.md)
 
 
@@ -297,7 +302,7 @@ Returns lazily concatenated `DoubleEnumerable` whose elements are all the elemen
 ```apex
 List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
 List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-List<Double> concat = DoubleSequence.concat(doubles1, doubles2)
+List<Double> concat = DoubleStream.concat(doubles1, doubles2)
     .toList();
 // [5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
 ```
@@ -329,7 +334,7 @@ Returns lazily concatenated `List<Iterable<Double>>`.
 ```apex
 List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
 List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-List<Double> concat = DoubleSequence.concat(new List<Iterable<Double>>{ doubles1, doubles2 })
+List<Double> concat = DoubleStream.concat(new List<Iterable<Double>>{ doubles1, doubles2 })
     .toList();
 // [5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
 ```
@@ -366,7 +371,7 @@ public class SumBiOperator extends BiOperator {
 }
 List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
 List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-List<Double> zip = DoubleSequence.zip(doubles1, doubles2, new SumBiOperator())
+List<Double> zip = DoubleStream.zip(doubles1, doubles2, new SumBiOperator())
     .toList();
 // [13.0, 6.0, 15.0, 11.0, 9.0, 18.0, 4.0, 7.0]
 ```
@@ -398,7 +403,7 @@ Returns new `DoubleEnumerable` by appending `iterable` to the current stream.
 ```apex
 List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
 List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-List<Double> append = DoubleSequence.of(doubles1)
+List<Double> append = DoubleStream.of(doubles1)
     .append(doubles2)
     .toList();
 // [5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
@@ -431,7 +436,7 @@ Returns new `DoubleEnumerable` by prepending `iterable` to the current stream.
 ```apex
 List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
 List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-List<Double> prepend = DoubleSequence.of(doubles1)
+List<Double> prepend = DoubleStream.of(doubles1)
     .prepend(doubles2)
     .toList();
 // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
@@ -464,8 +469,8 @@ Returns a `DoubleEnumerable` with elements that match `predicate`. <p>Stateless 
 
 ###### Example
 ```apex
-List<Double> filtered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-    .filter(BasePredicates.isEqual(5))
+List<Double> filtered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
+    .filter(Predicates.isEqual(5))
     .toList(); // [5, 5]
 ```
 
@@ -494,8 +499,8 @@ Returns a `DoubleEnumerable` which takes elements while elements match `predicat
 
 ###### Example
 ```apex
-List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-    .filter(BasePredicates.isEqual(0.1))
+List<Double> firstFiltered = DoubleStream.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
+    .filter(Predicates.isEqual(0.1))
     .toList(); // [0.1, 0.1]
 ```
 
@@ -524,8 +529,8 @@ Returns a `DoubleEnumerable` which drops elements while elements match `predicat
 
 ###### Example
 ```apex
-List<Double> rest = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-    .drop(BasePredicates.isEqual(0.1))
+List<Double> rest = DoubleStream.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
+    .drop(Predicates.isEqual(0.1))
     .toList(); // [5, 1.5, Math.PI]
 ```
 
@@ -559,7 +564,7 @@ public class MultiplyDoubleOperator extends Operator {
     public MultiplyDoubleOperator(Double d) { this.d = d; }
     public override Object apply(Object j) { return (Double) j * d; }
 }
-List<Double> doubledDoubles = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+List<Double> doubledDoubles = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
     .mapTo(new MultiplyDoubleOperator(2))
     .toList(); // [11, 0.02, 2.0, 6.0]
 ```
@@ -592,7 +597,7 @@ Returns a `IntEnumerable` with elements returned by `mapper` function, applied t
 public class RoundToIntFunction extends Function {
     public override Object apply(Object x) { return Math.round((Double) x); }
 }
-List<Integer> ints = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+List<Integer> ints = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
     .mapToInt(new RoundToIntFunction())
     .toList(); // [6, 0, 1, 3, -9, -6, 4, 4]
 ```
@@ -625,7 +630,7 @@ Returns a `LongEnumerable` with elements returned by `mapper` function, applied 
 public class RoundToLongFunction extends Function {
     public override Object apply(Object x) { return Math.roundToLong((Double) x); }
 }
-List<Long> longs = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+List<Long> longs = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
     .mapToLong(new RoundToLongFunction())
     .toList(); // [6L, 0L, 1L, 3L, -9L, -6L, 4L, 4L]
 ```
@@ -658,7 +663,7 @@ Returns a `SObjectEnumerable` with elements returned by `mapper` function, appli
 public class CreateAccountFunction extends Function {
     public override Object apply(Object d) { return new Account(AnnualRevenue = (Double) d); }
 }
-List<Account> accounts = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+List<Account> accounts = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
     .mapToSObject(new CreateAccountFunction())
     .toList(); //
 [
@@ -697,7 +702,7 @@ Returns a `ObjectEnumerable` with elements returned by `mapper` function, applie
 public class ToStringFunction extends Function {
     public override Object apply(Object d) { return String.valueOf(d); }
 }
-List<String> strings = (List<String>) DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+List<String> strings = (List<String>) DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
     .mapToObject(new ToStringFunction())
     .toList(String.class); // ['5.5', '0.01', '1.0', '3']
 ```
@@ -732,7 +737,7 @@ public class MultiplyDoubleFunction extends Function {
     public MultiplyDoubleFunction(Double d) { this.d = d; }
     public override Object apply(Object o) { return new List<Double>{ ((Double) o) * d }; }
 }
-List<Double> doubles = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+List<Double> doubles = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
     .flatMapTo(new MultiplyDoubleFunction(2))
     .toList(); // [11, 0.02, 2.0, 6.0]
 ```
@@ -765,7 +770,7 @@ Returns a `DoubleEnumerable` after performing `consumer` action on each element.
 public class DebugConsumer extends Consumer {
     public override void accept(Object o) { System.debug(o); }
 }
-List<Double> doubles = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+List<Double> doubles = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
     .forEach(new DebugConsumer()) // prints 5.5, 0.01, 1.0, 3
     .toList(); // [5.5, 0.01, 1.0, 3]
 ```
@@ -783,7 +788,7 @@ Returns a `DoubleEnumerable` with distinct elements. <p>Stateful Intermediate Op
 
 ###### Example
 ```apex
-List<Double> distinct = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
+List<Double> distinct = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
     .distinct()
     .toList(); // [0.1, 5, 1.5, Math.PI]
 ```
@@ -801,7 +806,7 @@ Returns a `DoubleEnumerable` with sorted elements in ascending order. <p>Statefu
 
 ###### Example
 ```apex
-List<Double> sorted = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
+List<Double> sorted = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
     .sort()
     .toList(); // [null, -8.99, -6, 0.01, 1.0, 3, 4.01, 4.01, 5.5]
 ```
@@ -831,7 +836,7 @@ Returns a new `DoubleEnumerable` with sorted elements considering `order`. <p>St
 
 ###### Example
 ```apex
-List<Double> sorted = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
+List<Double> sorted = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
     .sort(SortOrder.DESCENDING)
     .toList(); // [5.5, 4.01, 4.01, 3, 1.0, 0.01, -6, -8.99, null]
 ```
@@ -862,7 +867,7 @@ Returns a `DoubleEnumerable` with first `lim` elements. <p>Short-circuiting Stat
 
 ###### Example
 ```apex
-List<Double> first3Doubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+List<Double> first3Doubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .lim(3)
     .toList(); // [0.1, 5, 1.5]
 ```
@@ -893,7 +898,7 @@ Returns a new `DoubleEnumerable` that skips first `n` elements and returns remai
 
 ###### Example
 ```apex
-List<Double> restDoubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+List<Double> restDoubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .skip(1)
     .toList(); // [5, 1.5, Math.PI]
 ```
@@ -929,10 +934,10 @@ Performs a reduction on `Double` elements, using `identity` value and an associa
 public class SumBiOperator extends BiOperator {
     public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
 }
-Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .reduce((Double) 0.0, new SumBiOperator());
-Double max = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-    .reduce((Double) 0.0, BaseBiOperators.max()); // 5.5
+Double max = DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+    .reduce((Double) 0.0, BiOperators.max()); // 5.5
 ```
 
 
@@ -963,11 +968,11 @@ Performs a reduction on `Double` elements, using `identity` value and associativ
 public class SumBiOperator extends BiOperator {
     public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
 }
-Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+Double naiveSum = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .reduce(new SumBiOperator())
     .get();
-Double max = (Double) DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-    .reduce(BaseBiOperators.max())
+Double max = (Double) DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+    .reduce(BiOperators.max())
     .get(); // 5.5
 ```
 
@@ -1000,7 +1005,7 @@ public class AddToDoubleSetBiConsumer extends BiConsumer {
     public override void accept(Object container, Object o) { ((Set<Double>) container).add((Double) o); }
 }
 Set<Double> doubles = (Set<Double>)
-    DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+    DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
     .collect(Collector.of(Supplier.of(Set<Double>.class), new AddToDoubleSetBiConsumer()));
 // [5.5, 0.01, 1.0, 3, -8.99, -6, 4.01]
 ```
@@ -1035,7 +1040,7 @@ public class IsGreaterPredicate extends Predicate {
     public IsGreaterPredicate(Double d) { this.d = d; }
     public override Boolean test(Object o) { return (Double) o > d; }
 }
-Double firstGreaterThan4Double = DoubleSequence.of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+Double firstGreaterThan4Double = DoubleStream.of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
     .find(new IsGreaterPredicate(4))
     .get(); // 5.5
 ```
@@ -1070,7 +1075,7 @@ public class IsGreaterPredicate extends Predicate {
     public IsGreaterPredicate(Double d) { this.d = d; }
     public override Boolean test(Object o) { return (Double) o > d; }
 }
-Boolean isEveryDoublePositive = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+Boolean isEveryDoublePositive = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .every(new IsGreaterPredicate(0)); // true
 ```
 
@@ -1104,7 +1109,7 @@ public class IsGreaterPredicate extends Predicate {
     public IsGreaterPredicate(Double d) { this.d = d; }
     public override Boolean test(Object o) { return (Double) o > d; }
 }
-Boolean isSomeDoubleGreaterThan6 = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+Boolean isSomeDoubleGreaterThan6 = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .some(new IsGreaterPredicate(6)); // false
 ```
 
@@ -1121,7 +1126,7 @@ Returns the count of elements. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-Integer count = DoubleSequence.of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.3 })
+Integer count = DoubleStream.of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.3 })
     .count(); // 10
 ```
 
@@ -1138,9 +1143,9 @@ Returns whether the count of elements is 0. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-DoubleSequence.of(new List<Double>{ 0.1, 0.2, 0.3 })
+DoubleStream.of(new List<Double>{ 0.1, 0.2, 0.3 })
     .isEmpty(); // false
-DoubleSequence.of(new List<Double>())
+DoubleStream.of(new List<Double>())
     .isEmpty(); // true
 ```
 
@@ -1157,7 +1162,7 @@ Accumulates elements into a `List<Double>`. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-List<Double> doubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+List<Double> doubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
     .skip(1)
     .toList(); // [5, 1.5, Math.PI]
 ```
@@ -1175,9 +1180,25 @@ Accumulates elements into a `Set<Double>`. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-Set<Double> doubles = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 5 })
+Set<Double> doubles = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 5 })
     .skip(1)
     .toSet(); // [5, 1.5, Math.PI]
+```
+
+
+##### `public void run()`
+
+Advances the iterator to its end. <p>Terminal Operation.</p>
+
+###### Example
+```apex
+public class DebugConsumer extends Consumer {
+    public override void accept(Object o) { System.debug(o); }
+}
+IRunnable doubleStream = (IRunnable) DoubleStream.of(new List<Double>{ 5.5, 0.01, 1.0, 3 })
+    .forEach(new DebugConsumer());
+// the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+doubleStream.run(); // prints 5.5, 0.01, 1.0, 3
 ```
 
 

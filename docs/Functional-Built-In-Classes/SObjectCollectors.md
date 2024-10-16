@@ -12,8 +12,6 @@ and related utilities.
 
 **Inheritance**
 
-[BaseCollectors](/docs/Functional-Built-In-Classes/BaseCollectors.md)
- > 
 [Collectors](/docs/Functional-Built-In-Classes/Collectors.md)
  > 
 SObjectCollectors

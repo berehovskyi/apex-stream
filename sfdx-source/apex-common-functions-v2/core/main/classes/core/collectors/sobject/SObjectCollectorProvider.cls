@@ -3,6 +3,8 @@
  *
  * @see CollectorProvider
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * List<Account> accounts = new List<Account>{
  *     new Account(Name = 'John Doe', AnnualRevenue = 1000000, Industry = 'Technology', BillingCity = 'Los Angeles'),

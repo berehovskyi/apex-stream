@@ -22,7 +22,7 @@ private class SObjectDefaultComparerPredicateBuildTest {
     @IsTest
     static void isGreater() {
         // When
-        IPredicate majorAccPredicate = PRED.is(SObjectFunctions.get(NUM_OF_EMPLOYEES_FIELD_NAME)).gt().val(Function.constant(VALUE));
+        IPredicate majorAccPredicate = PRED.is(new SObjectFunctionProvider().get(NUM_OF_EMPLOYEES_FIELD_NAME)).gt().val(Function.constant(VALUE));
         IPredicate majorAccPredicate1 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).gt().val(Function.constant(VALUE));
         IPredicate majorAccPredicate2 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).gt().val(Function.constant(VALUE));
         IPredicate majorAccPredicate3 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).gt().var(VALUE);
@@ -54,7 +54,7 @@ private class SObjectDefaultComparerPredicateBuildTest {
     @IsTest
     static void isGreaterOrEqual() {
         // When
-        IPredicate majorAccPredicate = PRED.is(SObjectFunctions.get(NUM_OF_EMPLOYEES_FIELD_NAME)).ge().val(Function.constant(VALUE));
+        IPredicate majorAccPredicate = PRED.is(new SObjectFunctionProvider().get(NUM_OF_EMPLOYEES_FIELD_NAME)).ge().val(Function.constant(VALUE));
         IPredicate majorAccPredicate1 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).ge().val(Function.constant(VALUE));
         IPredicate majorAccPredicate2 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).ge().val(Function.constant(VALUE));
         IPredicate majorAccPredicate3 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).ge().var(VALUE);
@@ -86,15 +86,15 @@ private class SObjectDefaultComparerPredicateBuildTest {
     @IsTest
     static void isEqual() {
         // When
-        IPredicate majorAccPredicate = PRED.is(SObjectFunctions.get(NUM_OF_EMPLOYEES_FIELD_NAME)).eq().val(Function.constant(VALUE));
+        IPredicate majorAccPredicate = PRED.is(new SObjectFunctionProvider().get(NUM_OF_EMPLOYEES_FIELD_NAME)).eq().val(Function.constant(VALUE));
         IPredicate majorAccPredicate1 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).eq().val(Function.constant(VALUE));
         IPredicate majorAccPredicate2 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).eq().val(Function.constant(VALUE));
         IPredicate majorAccPredicate3 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).eq().var(VALUE);
         IPredicate majorAccPredicate4 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).eq().var(VALUE);
         IPredicate nameGTTypePredicate = PRED.is(NAME_FIELD_NAME).eq().val(TYPE_FIELD_NAME);
         IPredicate nameGTTypePredicate1 = PRED.is(ACC_NAME_FIELD).eq().val(ACC_TYPE_FIELD);
-        IPredicate hasNoParentPredicate = PRED.is(SObjectOperators.getSObject(PARENT_FIELD_NAME)).eq().val(Operator.constant(null));
-        IPredicate parentIsIdentityPredicate = PRED.is(Function.identity()).eq().val(SObjectOperators.getSObject(PARENT_FIELD_NAME));
+        IPredicate hasNoParentPredicate = PRED.is(new SObjectFunctionProvider().getSObject(PARENT_FIELD_NAME)).eq().val(Operator.constant(null));
+        IPredicate parentIsIdentityPredicate = PRED.is(Function.identity()).eq().val(new SObjectFunctionProvider().getSObject(PARENT_FIELD_NAME));
         // Then
         for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(NUM_OF_EMPLOYEES_FIELD_NAME));
@@ -119,15 +119,15 @@ private class SObjectDefaultComparerPredicateBuildTest {
     @IsTest
     static void isNotEqual() {
         // When
-        IPredicate accPredicate = PRED.is(SObjectFunctions.get(NUM_OF_EMPLOYEES_FIELD_NAME)).ne().val(Function.constant(VALUE));
+        IPredicate accPredicate = PRED.is(new SObjectFunctionProvider().get(NUM_OF_EMPLOYEES_FIELD_NAME)).ne().val(Function.constant(VALUE));
         IPredicate accPredicate1 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).ne().val(Function.constant(VALUE));
         IPredicate accPredicate2 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).ne().val(Function.constant(VALUE));
         IPredicate accPredicate3 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).ne().var(VALUE);
         IPredicate accPredicate4 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).ne().var(VALUE);
         IPredicate nameGTTypePredicate = PRED.is(NAME_FIELD_NAME).ne().val(TYPE_FIELD_NAME);
         IPredicate nameGTTypePredicate1 = PRED.is(ACC_NAME_FIELD).ne().val(ACC_TYPE_FIELD);
-        IPredicate hasParentPredicate = PRED.is(SObjectOperators.getSObject(PARENT_FIELD_NAME)).ne().val(Operator.constant(null));
-        IPredicate parentIsNotIdentityPredicate = PRED.is(Function.identity()).ne().val(SObjectOperators.getSObject(PARENT_FIELD_NAME));
+        IPredicate hasParentPredicate = PRED.is(new SObjectFunctionProvider().getSObject(PARENT_FIELD_NAME)).ne().val(Operator.constant(null));
+        IPredicate parentIsNotIdentityPredicate = PRED.is(Function.identity()).ne().val(new SObjectFunctionProvider().getSObject(PARENT_FIELD_NAME));
         // Then
         for (Account acc : INPUT) {
             Integer numOfEmployees = ((Integer) acc.get(NUM_OF_EMPLOYEES_FIELD_NAME));
@@ -152,7 +152,7 @@ private class SObjectDefaultComparerPredicateBuildTest {
     @IsTest
     static void isLess() {
         // When
-        IPredicate minorAccPredicate = PRED.is(SObjectFunctions.get(NUM_OF_EMPLOYEES_FIELD_NAME)).lt().val(Function.constant(VALUE));
+        IPredicate minorAccPredicate = PRED.is(new SObjectFunctionProvider().get(NUM_OF_EMPLOYEES_FIELD_NAME)).lt().val(Function.constant(VALUE));
         IPredicate minorAccPredicate1 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).lt().val(Function.constant(VALUE));
         IPredicate minorAccPredicate2 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).lt().val(Function.constant(VALUE));
         IPredicate minorAccPredicate3 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).lt().var(VALUE);
@@ -184,7 +184,7 @@ private class SObjectDefaultComparerPredicateBuildTest {
     @IsTest
     static void isLessOrEqual() {
         // When
-        IPredicate minorAccPredicate = PRED.is(SObjectFunctions.get(NUM_OF_EMPLOYEES_FIELD_NAME)).le().val(Function.constant(VALUE));
+        IPredicate minorAccPredicate = PRED.is(new SObjectFunctionProvider().get(NUM_OF_EMPLOYEES_FIELD_NAME)).le().val(Function.constant(VALUE));
         IPredicate minorAccPredicate1 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).le().val(Function.constant(VALUE));
         IPredicate minorAccPredicate2 = PRED.is(ACC_NUM_OF_EMPLOYEES_FIELD).le().val(Function.constant(VALUE));
         IPredicate minorAccPredicate3 = PRED.is(NUM_OF_EMPLOYEES_FIELD_NAME).le().var(VALUE);

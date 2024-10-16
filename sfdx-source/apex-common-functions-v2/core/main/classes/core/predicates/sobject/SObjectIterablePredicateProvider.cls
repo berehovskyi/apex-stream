@@ -4,6 +4,8 @@
  * This builder allows you to create predicates for checking if an object is in or not in a given collection,
  * as well as if a string is included in or excluded from a iterable of strings.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IPredicate isNameInPredicate = new SObjectIterablePredicateProvider()
  *     .is(Account.Name)

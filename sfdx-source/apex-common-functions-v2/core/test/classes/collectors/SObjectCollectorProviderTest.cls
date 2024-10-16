@@ -19,7 +19,7 @@ private class SObjectCollectorProviderTest {
     static void toList() {
         // Given
         ICollector toListCollector = COL.toList();
-        ICollector toNameListCollector = COL.toList().val(SObjectFunctions.get(AfTestConsts.NAME));
+        ICollector toNameListCollector = COL.toList().val(new SObjectFunctionProvider().get(AfTestConsts.NAME));
         ICollector toNameListCollector1 = COL.toList().val(AfTestConsts.NAME).cast(List<String>.class);
         ICollector toNameListCollector2 = COL.toList().of(String.class).val(AfTestConsts.Account.Name);
         // When
@@ -388,7 +388,7 @@ private class SObjectCollectorProviderTest {
         IFunction keyMapper = new SObjectFunctionProvider().get(AfTestConsts.Contact.DoNotCall);
         IFunction valueMapper = Function.identity();
         IBiOperator mergeFunction = BiOperator.right();
-        IFunction getParentAccFunction = SObjectOperators.getSObject(AfTestConsts.Contact.AccountId);
+        IFunction getParentAccFunction = new SObjectFunctionProvider().getSObject(AfTestConsts.Contact.AccountId);
         // When
         Map<Boolean, Contact> actual = (Map<Boolean, Contact>) AfTestCommons.collect(input, COL.toByBoolMap().of(Contact.class).key(AfTestConsts.DO_NOT_CALL));
         Map<Boolean, Contact> actual1 = (Map<Boolean, Contact>) AfTestCommons.collect(input, COL.toByBoolMap().key(AfTestConsts.Contact.DoNotCall).cast(Map<Boolean, Contact>.class));
@@ -440,7 +440,7 @@ private class SObjectCollectorProviderTest {
         IOperator valueMapper1 = Operator.identity();
         IBiOperator mergeFunction = BiOperator.right();
         IBiOperator mergeFunction1 = BiOperator.right();
-        IFunction getParentAccFunction = SObjectOperators.getSObject(AfTestConsts.Contact.AccountId);
+        IFunction getParentAccFunction = new SObjectFunctionProvider().getSObject(AfTestConsts.Contact.AccountId);
         Collector toMapCollector = COL.toByIdMap().of(SObject.class).key('Id');
         // When
         Map<Id, Contact> actual = (Map<Id, Contact>) AfTestCommons.collect(CONTACTS, COL.toByIdMap().of(Contact.class).key(AfTestConsts.ACCOUNT_ID));
@@ -505,7 +505,7 @@ private class SObjectCollectorProviderTest {
         IFunction keyMapper = new SObjectFunctionProvider().get(AfTestConsts.Contact.FirstName);
         IFunction valueMapper = Function.identity();
         IBiOperator mergeFunction = BiOperator.right();
-        IFunction getParentAccFunction = SObjectOperators.getSObject(AfTestConsts.Contact.AccountId);
+        IFunction getParentAccFunction = new SObjectFunctionProvider().getSObject(AfTestConsts.Contact.AccountId);
         // When
         Map<String, Contact> actual = (Map<String, Contact>) AfTestCommons.collect(CONTACTS, COL.toByStringMap().of(Contact.class).key(AfTestConsts.FIRST_NAME));
         Map<String, Contact> actual1 = (Map<String, Contact>) AfTestCommons.collect(CONTACTS, COL.toByStringMap().key(AfTestConsts.Contact.FirstName).cast(Map<String, Contact>.class));

@@ -4,6 +4,8 @@
  * inequality, and relational comparisons between two SObjects with the ability to use fields, constants,
  * or functions as comparands.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IBiPredicate areNamesEqBiPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
  *     .isL(Account.Name)

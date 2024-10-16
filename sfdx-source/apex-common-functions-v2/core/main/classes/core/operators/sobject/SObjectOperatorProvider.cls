@@ -2,6 +2,8 @@
  * @description Provides a fluent interface for building operators that operate on SObjects, allowing you
  * to set fields, and perform other operations on SObjects.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IOperator setJohnDoeNameOperator = new SObjectOperatorProvider()
  *     .set('Name')

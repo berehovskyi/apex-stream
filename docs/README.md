@@ -1,370 +1,4 @@
 # Classes
-
-## Functional Built-In Classes
-
-### [BaseBiOperators](/docs/Functional-Built-In-Classes/BaseBiOperators.md)
-
-Provides base implementations of [BiOperator](/docs/Functional-Abstract-Classes/BiOperator.md)
-and related utilities that are used by [IEnumerable](IEnumerable).
-
-
-
-### [BaseCollectorFunctions](/docs/Functional-Built-In-Classes/BaseCollectorFunctions.md)
-
-Provides base implementations of [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities that are used by [IEnumerable](IEnumerable).
-
-
-
-### [BaseCollectorSuppliers](/docs/Functional-Built-In-Classes/BaseCollectorSuppliers.md)
-
-Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
-and related utilities that are used by [IEnumerable](IEnumerable).
-
-
-
-### [BaseCollectors](/docs/Functional-Built-In-Classes/BaseCollectors.md)
-
-Provides base implementations of [Collector](/docs/Functional-Abstract-Classes/Collector.md)
-and related utilities that are used by [IEnumerable](IEnumerable).
-
-
-
-### [BaseListObjectConsumers](/docs/Functional-Built-In-Classes/BaseListObjectConsumers.md)
-
-Provides base implementations of `List<T> - T` [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
-and related utilities that are used by [IEnumerable](IEnumerable).
-
-
-
-### [BasePredicates](/docs/Functional-Built-In-Classes/BasePredicates.md)
-
-Provides base implementations of [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
-and related utilities that are used by [IEnumerable](IEnumerable).
-
-
-
-### [BaseSObjectConsumers](/docs/Functional-Built-In-Classes/BaseSObjectConsumers.md)
-
-Provides base implementations of [Consumer](/docs/Functional-Abstract-Classes/Consumer.md)
-and related utilities that are used by [ISObjectEnumerable](/docs/Enumerables/ISObjectEnumerable.md).
-
-
-
-### [BaseSObjectFunctions](/docs/Functional-Built-In-Classes/BaseSObjectFunctions.md)
-
-Provides base implementations of [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities that are used by [ISObjectEnumerable](/docs/Enumerables/ISObjectEnumerable.md).
-
-
-
-### [BaseSObjectOperators](/docs/Functional-Built-In-Classes/BaseSObjectOperators.md)
-
-Provides base implementations of [Operator](/docs/Functional-Abstract-Classes/Operator.md)
-and related utilities that are used by [ISObjectEnumerable](/docs/Enumerables/ISObjectEnumerable.md).
-
-
-
-### [BaseSObjectPredicates](/docs/Functional-Built-In-Classes/BaseSObjectPredicates.md)
-
-Provides base implementations of [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
-and related utilities that are used by [ISObjectEnumerable](/docs/Enumerables/ISObjectEnumerable.md).
-
-
-
-### [BiConsumers](/docs/Functional-Built-In-Classes/BiConsumers.md)
-
-Provides common implementations of [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
-and related utilities.
-
-
-
-### [BiPredicates](/docs/Functional-Built-In-Classes/BiPredicates.md)
-
-Provides common implementations of [BiPredicate](/docs/Functional-Abstract-Classes/BiPredicate.md)
-and related utilities.
-
-
-
-### [CollectorFunctions](/docs/Functional-Built-In-Classes/CollectorFunctions.md)
-
-Provides common implementations of [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
-
-
-
-### [CollectorSuppliers](/docs/Functional-Built-In-Classes/CollectorSuppliers.md)
-
-Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
-and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
-
-
-
-### [Collectors](/docs/Functional-Built-In-Classes/Collectors.md)
-
-Provides common implementations of [Collector](/docs/Functional-Abstract-Classes/Collector.md)
-and related utilities.
-
-
-
-### [DateFunctions](/docs/Functional-Built-In-Classes/DateFunctions.md)
-
-Provides common implementations of `Date` [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities.
-
-
-
-### [DatetimeFunctions](/docs/Functional-Built-In-Classes/DatetimeFunctions.md)
-
-Provides common implementations of `Datetime` [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities.
-
-
-
-### [DoubleBiOperators](/docs/Functional-Built-In-Classes/DoubleBiOperators.md)
-
-Provides common implementations of Double [BiOperator](/docs/Functional-Abstract-Classes/BiOperator.md)
-and related utilities.
-
-
-
-### [DoubleOperators](/docs/Functional-Built-In-Classes/DoubleOperators.md)
-
-Provides common implementations of Double [Operator](/docs/Functional-Abstract-Classes/Operator.md)
-and related utilities.
-
-
-
-### [IdSuppliers](/docs/Functional-Built-In-Classes/IdSuppliers.md)
-
-Provides common implementations of `Id` [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
-and related utilities.
-
-
-
-### [IntBiOperators](/docs/Functional-Built-In-Classes/IntBiOperators.md)
-
-Provides common implementations of Integer [BiOperator](/docs/Functional-Abstract-Classes/BiOperator.md)
-and related utilities.
-
-
-
-### [IntOperators](/docs/Functional-Built-In-Classes/IntOperators.md)
-
-Provides common implementations of Integer [Operator](/docs/Functional-Abstract-Classes/Operator.md)
-and related utilities.
-
-
-
-### [IterableFunctions](/docs/Functional-Built-In-Classes/IterableFunctions.md)
-
-Provides common implementations of [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
-
-
-
-### [ListObjectConsumers](/docs/Functional-Built-In-Classes/ListObjectConsumers.md)
-
-Provides common implementations of `List<T> - Object` [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
-and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
-
-
-
-### [LongBiOperators](/docs/Functional-Built-In-Classes/LongBiOperators.md)
-
-Provides common implementations of Long [BiOperator](/docs/Functional-Abstract-Classes/BiOperator.md)
-and related utilities.
-
-
-
-### [LongOperators](/docs/Functional-Built-In-Classes/LongOperators.md)
-
-Provides common implementations of Long [Operator](/docs/Functional-Abstract-Classes/Operator.md)
-and related utilities.
-
-
-
-### [MapObjectConsumers](/docs/Functional-Built-In-Classes/MapObjectConsumers.md)
-
-Provides common implementations of `Map<T, Object> - T` [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
-and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
-
-
-
-### [Predicates](/docs/Functional-Built-In-Classes/Predicates.md)
-
-Provides common implementations of [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
-and related utilities.
-
-
-
-### [SObjectBiConsumers](/docs/Functional-Built-In-Classes/SObjectBiConsumers.md)
-
-Provides common implementations of [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
-and related utilities.
-
-
-
-### [SObjectBiPredicates](/docs/Functional-Built-In-Classes/SObjectBiPredicates.md)
-
-Provides common implementations of [BiPredicate](/docs/Functional-Abstract-Classes/BiPredicate.md)
-and related utilities.
-
-
-
-### [SObjectCollectors](/docs/Functional-Built-In-Classes/SObjectCollectors.md)
-
-Provides common implementations of SObject [Collector](/docs/Functional-Abstract-Classes/Collector.md)
-and related utilities.
-
-
-
-### [SObjectConsumers](/docs/Functional-Built-In-Classes/SObjectConsumers.md)
-
-Provides common implementations of [Consumer](/docs/Functional-Abstract-Classes/Consumer.md)
-and related utilities.
-
-
-
-### [SObjectFunctions](/docs/Functional-Built-In-Classes/SObjectFunctions.md)
-
-Provides common implementations of [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities.
-
-
-
-### [SObjectOperators](/docs/Functional-Built-In-Classes/SObjectOperators.md)
-
-Provides common implementations of [Operator](/docs/Functional-Abstract-Classes/Operator.md)
-and related utilities.
-
-
-
-### [SObjectPredicates](/docs/Functional-Built-In-Classes/SObjectPredicates.md)
-
-Provides common implementations of [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
-and related utilities.
-
-
-
-### [SObjectSuppliers](/docs/Functional-Built-In-Classes/SObjectSuppliers.md)
-
-Provides common implementations of `SObject` [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
-and related utilities.
-
-
-
-### [SetObjectConsumers](/docs/Functional-Built-In-Classes/SetObjectConsumers.md)
-
-Provides common implementations of `Set<T> - T` [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
-and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
-
-
-
-### [StringFunctions](/docs/Functional-Built-In-Classes/StringFunctions.md)
-
-Provides common implementations of `String` [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities.
-
-
-
-### [StringSuppliers](/docs/Functional-Built-In-Classes/StringSuppliers.md)
-
-Provides common implementations of `String` [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
-and related utilities.
-
-
-
-### [TimeFunctions](/docs/Functional-Built-In-Classes/TimeFunctions.md)
-
-Provides common implementations of `Time` [Function](/docs/Functional-Abstract-Classes/Function.md)
-and related utilities.
-
-
-
-### [TypePredicates](/docs/Functional-Built-In-Classes/TypePredicates.md)
-
-Provides common implementations of [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
-and related utilities that are used for type checking.
-
-
-## Functional Abstract Classes
-
-### [BiConsumer](/docs/Functional-Abstract-Classes/BiConsumer.md)
-
-Provides default and static methods of
-[IBiConsumer](/docs/Functional-Interfaces/IBiConsumer.md) functional interface.
-
-
-
-### [BiOperator](/docs/Functional-Abstract-Classes/BiOperator.md)
-
-Provides default and static methods of
-[IBiOperator](/docs/Functional-Interfaces/IBiOperator.md) functional interface.
-
-
-
-### [BiPredicate](/docs/Functional-Abstract-Classes/BiPredicate.md)
-
-Provides default and static methods of
-[IBiPredicate](/docs/Functional-Interfaces/IBiPredicate.md) functional interface.
-
-
-
-### [Collector](/docs/Functional-Abstract-Classes/Collector.md)
-
-Provides default and static methods of
-[ICollector](/docs/Functional-Interfaces/ICollector.md) functional interface.
-
-
-
-### [Comparer](/docs/Functional-Abstract-Classes/Comparer.md)
-
-Provides default and static methods of
-[IComparer](/docs/Functional-Interfaces/IComparer.md) functional interface.
-
-
-
-### [Consumer](/docs/Functional-Abstract-Classes/Consumer.md)
-
-Provides default and static methods of
-[IConsumer](/docs/Functional-Interfaces/IConsumer.md) functional interface.
-
-
-
-### [Function](/docs/Functional-Abstract-Classes/Function.md)
-
-Provides default and static methods of
-[IFunction](/docs/Functional-Interfaces/IFunction.md) functional interface.
-
-
-
-### [Operator](/docs/Functional-Abstract-Classes/Operator.md)
-
-Provides default and static methods of
-[IOperator](/docs/Functional-Interfaces/IOperator.md) functional interface.
-
-
-
-### [Optional](/docs/Functional-Abstract-Classes/Optional.md)
-
-A container which may or may not contain a non-null `Object` value.
-
-
-
-### [Predicate](/docs/Functional-Abstract-Classes/Predicate.md)
-
-Provides default and static methods of
-[IPredicate](/docs/Functional-Interfaces/IPredicate.md) functional interface.
-
-
-
-### [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
-
-Provides default and static methods of
-[ISupplier](/docs/Functional-Interfaces/ISupplier.md) functional interface.
-
-
 ## Enumerables
 
 ### [DoubleEnumerable](/docs/Enumerables/DoubleEnumerable.md)
@@ -470,7 +104,8 @@ A sequence of `Object` elements supporting aggregate operations.
 Sequence operations are composed of sequence chain. A sequence chain consists of:
 <ul>
     <li>A Source (which might be an iterable (such as list or set)).</li>
-    <li>Zero or more Intermediate Operations (which transform a sequence &hellip;
+    <li>Zero or more Intermediate Operations (which transform a sequence...</li>
+</ul>
 
 
 ### [ObjectStream](/docs/Enumerables/ObjectStream.md)
@@ -479,7 +114,8 @@ A sequence of `Object` elements supporting aggregate operations.
 Stream operations are composed of stream chain. A stream chain consists of:
 <ul>
     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
-    <li>Zero or more Intermediate Opera&hellip;
+    <li>Zero or more Intermediate Opera...</li>
+</ul>
 
 
 ### [SObjectEnumerable](/docs/Enumerables/SObjectEnumerable.md)
@@ -494,8 +130,8 @@ A sequence of `SObject` elements supporting aggregate operations.
 Sequence operations are composed of sequence chain. A sequence chain consists of:
 <ul>
     <li>A Source (which might be an iterable (such as list or set)).</li>
-    <li>Zero or more Intermediate Operations (which transform a sequence&hellip;
-
+    <li>Zero or more Intermediate Operations (which transform a sequence...</li>
+</ul>
 
 ### [SObjectStream](/docs/Enumerables/SObjectStream.md)
 
@@ -503,7 +139,8 @@ A sequence of `SObject` elements supporting aggregate operations.
 Stream operations are composed of stream chain. A stream chain consists of:
 <ul>
     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
-    <li>Zero or more Intermediate Oper&hellip;
+    <li>Zero or more Intermediate Oper...</li>
+</ul>
 
 
 ### [Sequence](/docs/Enumerables/Sequence.md)
@@ -604,6 +241,205 @@ A function that takes no arguments and returns nothing.
 ### [ISupplier](/docs/Functional-Interfaces/ISupplier.md)
 
 A function that takes no arguments and returns an `Object` value.
+
+
+## Functional Built-In Class V2 Aliases
+
+### [IdSup](/docs/Functional-Built-In-Class-V2-Aliases/IdSup.md)
+
+An alias for [IdSupplierProvider](/docs/Functional-Built-In-Classes-V2/IdSupplierProvider.md).
+
+
+
+### [SApxBiPred](/docs/Functional-Built-In-Class-V2-Aliases/SApxBiPred.md)
+
+An alias for [SObjectApexComparerBiPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectApexComparerBiPredicateProvider.md).
+
+
+
+### [SApxPred](/docs/Functional-Built-In-Class-V2-Aliases/SApxPred.md)
+
+An alias for [SObjectApexComparerPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectApexComparerPredicateProvider.md).
+
+
+
+### [SCol](/docs/Functional-Built-In-Class-V2-Aliases/SCol.md)
+
+An alias for [SObjectCollectorProvider](/docs/Functional-Built-In-Classes-V2/SObjectCollectorProvider.md).
+
+
+
+### [SCon](/docs/Functional-Built-In-Class-V2-Aliases/SCon.md)
+
+An alias for [SObjectConsumerProvider](/docs/Functional-Built-In-Classes-V2/SObjectConsumerProvider.md).
+
+
+
+### [SDefBiPred](/docs/Functional-Built-In-Class-V2-Aliases/SDefBiPred.md)
+
+An alias for [SObjectDefaultComparerPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectDefaultComparerPredicateProvider.md).
+
+
+
+### [SDefPred](/docs/Functional-Built-In-Class-V2-Aliases/SDefPred.md)
+
+An alias for [SObjectDefaultComparerPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectDefaultComparerPredicateProvider.md).
+
+
+
+### [SFn](/docs/Functional-Built-In-Class-V2-Aliases/SFn.md)
+
+An alias for [SObjectFunctionProvider](/docs/Functional-Built-In-Classes-V2/SObjectFunctionProvider.md).
+
+
+
+### [SIterPred](/docs/Functional-Built-In-Class-V2-Aliases/SIterPred.md)
+
+An alias for [SObjectIterablePredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectIterablePredicateProvider.md).
+
+
+
+### [SOp](/docs/Functional-Built-In-Class-V2-Aliases/SOp.md)
+
+An alias for [SObjectOperatorProvider](/docs/Functional-Built-In-Classes-V2/SObjectOperatorProvider.md).
+
+
+
+### [SStrPred](/docs/Functional-Built-In-Class-V2-Aliases/SStrPred.md)
+
+An alias for [SObjectStringPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectStringPredicateProvider.md).
+
+
+
+### [SSup](/docs/Functional-Built-In-Class-V2-Aliases/SSup.md)
+
+An alias for [SObjectSupplierProvider](/docs/Functional-Built-In-Classes-V2/SObjectSupplierProvider.md).
+
+
+
+### [StrSup](/docs/Functional-Built-In-Class-V2-Aliases/StrSup.md)
+
+An alias for [StringSupplierProvider](/docs/Functional-Built-In-Classes-V2/StringSupplierProvider.md).
+
+
+## Functional Built-In Classes V2
+
+### [IdSupplierProvider](/docs/Functional-Built-In-Classes-V2/IdSupplierProvider.md)
+
+A provider class that supplies `Supplier` instances for generating sequential `Id` values
+for a given `SObjectType`. Each supplier generated by this class returns a new, unique Id value
+for the specified SObject type, following Salesforce's 15-character Id format.
+
+
+
+### [SObjectApexComparerBiPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectApexComparerBiPredicateProvider.md)
+
+Provides a fluent interface for building bi-predicates
+that uses a non-antisymmetric comparer for comparing two SObjects.
+<p><strong>Note: </strong></p>
+<p>Bi-predicates built with this builder may return `false` when comparing a non-null value with a null value,
+aligning with Apex's native behavio&hellip;
+
+
+### [SObjectApexComparerPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectApexComparerPredicateProvider.md)
+
+Provides a fluent interface for building predicates
+that uses a non-antisymmetric comparer for SObject comparisons.
+<p><strong>Note: </strong></p>
+<p>Predicates built with this builder may return `false` when comparing a non-null value with a null value,
+aligning with Apex's native behavior for cer&hellip;
+
+
+### [SObjectCollectorProvider](/docs/Functional-Built-In-Classes-V2/SObjectCollectorProvider.md)
+
+`CollectorProvider` for `SObject` instances.
+
+
+
+### [SObjectComparerBiPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectComparerBiPredicateProvider.md)
+
+Provides a fluent interface for building bi-predicates that compare two SObjects
+using a comparer and currying. This builder allows you to create bi-predicates for equality,
+inequality, and relational comparisons between two SObjects with the ability to use fields, constants,
+or functions as compar&hellip;
+
+
+### [SObjectComparerPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectComparerPredicateProvider.md)
+
+Provides a fluent interface for building predicates that compare SObjects
+using a comparer and currying. This builder allows you to create predicates for equality,
+inequality, and relational comparisons with the ability to use fields, constants, or functions as comparands.
+
+
+
+### [SObjectConsumerProvider](/docs/Functional-Built-In-Classes-V2/SObjectConsumerProvider.md)
+
+Provides a fluent interface for building consumers that operate on SObjects, allowing you
+to set fields, add errors, and perform other operations on SObjects.
+
+
+
+### [SObjectDefComparerBiPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectDefComparerBiPredicateProvider.md)
+
+Provides a fluent interface for building bi-predicates
+that uses the default comparer for comparing two SObjects.
+<p><strong>Note: </strong></p>
+<p>Bi-predicates built with this builder consider a non-null value as always greater than a null value.</p>
+
+
+
+### [SObjectDefaultComparerPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectDefaultComparerPredicateProvider.md)
+
+Provides a fluent interface for building predicates
+that uses the default comparer for SObject comparisons.
+<p><strong>Note: </strong></p>
+<p>Predicates built with this builder consider a non-null value as always greater than a null value.</p>
+
+
+
+### [SObjectFunctionProvider](/docs/Functional-Built-In-Classes-V2/SObjectFunctionProvider.md)
+
+A provider class that offers various functions for retrieving values from SObjects,
+supporting cross-reference fields, safe navigation, and complex field paths.
+This class acts as a factory for different types of functions that can be applied to SObjects.
+
+
+
+### [SObjectIterablePredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectIterablePredicateProvider.md)
+
+Provides a fluent interface for building predicates
+that operate on iterable collections using currying.
+This builder allows you to create predicates for checking if an object is in or not in a given collection,
+as well as if a string is included in or excluded from a iterable of strings.
+
+
+
+### [SObjectOperatorProvider](/docs/Functional-Built-In-Classes-V2/SObjectOperatorProvider.md)
+
+Provides a fluent interface for building operators that operate on SObjects, allowing you
+to set fields, and perform other operations on SObjects.
+
+
+
+### [SObjectStringPredicateProvider](/docs/Functional-Built-In-Classes-V2/SObjectStringPredicateProvider.md)
+
+Provides a fluent interface for building string-related predicates
+that operate on SObject fields using currying. This builder allows you to create predicates
+for checking various string conditions such as whether a string is blank, contains a value, starts with a value, etc.
+
+
+
+### [SObjectSupplierProvider](/docs/Functional-Built-In-Classes-V2/SObjectSupplierProvider.md)
+
+A provider class that supplies various `Supplier` instances capable of creating new `SObject` instances.
+This class serves as a factory for generating suppliers that can instantiate specific SObject types.
+The `Supplier` interface returned by the methods of this class allows for flexible creation o&hellip;
+
+
+### [StringSupplierProvider](/docs/Functional-Built-In-Classes-V2/StringSupplierProvider.md)
+
+A provider class that supplies `Supplier` instances for generating various types of strings.
+This includes generating unique UUIDs and creating strings in a customizable autonumber format.
 
 
 ## Enums

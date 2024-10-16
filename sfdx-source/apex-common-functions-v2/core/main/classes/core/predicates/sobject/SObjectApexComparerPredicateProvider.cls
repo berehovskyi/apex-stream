@@ -9,6 +9,8 @@
  * @see Comparer
  * @see SObjectComparerPredicateProvider
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IPredicate isRevenueLt10KPredicate = new SObjectApexComparerPredicateProvider()
  *     .is(Account.AnnualRevenue)

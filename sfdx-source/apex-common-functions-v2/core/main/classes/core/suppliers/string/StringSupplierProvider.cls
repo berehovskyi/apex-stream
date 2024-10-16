@@ -2,6 +2,8 @@
  * @description A provider class that supplies `Supplier` instances for generating various types of strings.
  * This includes generating unique UUIDs and creating strings in a customizable autonumber format.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * ISupplier uuidSupplier = new StringSupplierProvider().uuid();
  * uuidSupplier.get(); // '563581af-5560-a1fd-2291-2b03582bf000'

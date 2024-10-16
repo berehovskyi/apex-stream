@@ -8,13 +8,6 @@ Provides common implementations of [Supplier](/docs/Functional-Abstract-Classes/
 and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
 
 
-**Inheritance**
-
-[BaseCollectorSuppliers](/docs/Functional-Built-In-Classes/BaseCollectorSuppliers.md)
- > 
-CollectorSuppliers
-
-
 **See** [Supplier](/docs/Functional-Abstract-Classes/Supplier.md)
 
 
@@ -67,6 +60,19 @@ Returns a `Supplier` that returns a list container to track Long averaging.
 
 **See** [Collectors.averagingLong](Collectors.averagingLong)
 
+##### `public static Supplier averagingDouble()`
+
+Returns a `Supplier` that returns a list container to track Double averaging.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
+
+
+**See** [Collectors.averagingDouble](Collectors.averagingDouble)
+
 ##### `public static Supplier box(Object identity)`
 
 Returns a `Supplier` that returns a list container to track `identity` mutation.
@@ -85,21 +91,5 @@ Returns a `Supplier` that returns a list container to track `identity` mutation.
 
 
 **See** [Collectors.reducing](Collectors.reducing)
-
-##### `public static Supplier averagingDouble()`
-
-*Inherited*
-
-
-Returns a `Supplier` that returns a list container to track Double averaging.
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`Supplier`|the `Supplier`|
-
-
-**See** [BaseCollectors.averagingDouble](BaseCollectors.averagingDouble)
 
 ---

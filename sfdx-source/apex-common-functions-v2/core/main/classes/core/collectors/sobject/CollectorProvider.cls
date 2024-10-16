@@ -4,6 +4,8 @@
  * The `CollectorProvider` allows specifying the type of values to be collected and offers
  * methods to create collectors for different data structures.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * List<Account> accounts = new List<Account>{
  *     new Account(Name = 'John Doe', AnnualRevenue = 1000000, Industry = 'Technology', BillingCity = 'Los Angeles'),

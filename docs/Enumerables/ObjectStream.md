@@ -46,6 +46,11 @@ but are implemented in different ways.</p>
 ObjectStream
 
 
+**Implemented types**
+
+[IRunnable](/docs/Functional-Interfaces/IRunnable.md)
+
+
 **See** [SObjectStream](/docs/Enumerables/SObjectStream.md)
 
 
@@ -354,6 +359,8 @@ List<String> zip = ObjectStream.zip(strs1, strs2, new ConcatBiOperator())
 
 
 ##### `public static ObjectEnumerable zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBiOperator combiner)`
+
+`SUPPRESSWARNINGS`
 
 Returns a combined `ObjectEnumerable` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
@@ -1428,6 +1435,22 @@ Accumulates elements into a `Set<Object>`. <p>Terminal Operation.</p>
 Set<Object> strings = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz', 'qux', 'foo', 'bar' })
     .skip(1)
     .toSet(); // ['bar', 'baz', 'qux']
+```
+
+
+##### `public void run()`
+
+Advances the iterator to its end. <p>Terminal Operation.</p>
+
+###### Example
+```apex
+public class DebugConsumer extends Consumer {
+    public override void accept(Object o) { System.debug(o); }
+}
+IRunnable strStream = (IRunnable) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+    .forEach(new DebugConsumer());
+// the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+strStream.run(); // prints 'foo', 'bar', 'baz'
 ```
 
 

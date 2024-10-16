@@ -6,6 +6,8 @@
  * aligning with Apex's native behavior for certain comparison operations.</p>
  * <p>If compared values are strings or ids, a non-null value is always greater than a null value.</p>
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IBiPredicate areRevenuesLtBiPredicate = new SObjectApexComparerBiPredicateProvider()
  *     .isL(Account.AnnualRevenue)

@@ -5,6 +5,8 @@
  * The `Supplier` interface returned by the methods of this class allows for flexible creation of SObject instances
  * based on the given SObjectType.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * ISupplier accSupplier = new SObjectSupplierProvider().of(Account.SObjectType);
  * accSupplier.get(); // Account {}

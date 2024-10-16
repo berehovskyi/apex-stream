@@ -382,7 +382,7 @@ Returns a `IntEnumerable` with elements that match `predicate`. <p>Stateless Int
 ###### Example
 ```apex
 List<Integer> filtered = IntSequence.of(new List<Integer>{ 0, 5, 1, 1, 5 })
-    .filter(BasePredicates.isEqual(5))
+    .filter(Predicates.isEqual(5))
     .toList(); // [5, 5]
 ```
 
@@ -412,7 +412,7 @@ Returns a `IntEnumerable` which takes elements while elements match `predicate`.
 ###### Example
 ```apex
 List<Integer> firstFiltered = IntSequence.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .take(BasePredicates.isEqual(0))
+    .take(Predicates.isEqual(0))
     .toList(); // [0, 0]
 ```
 
@@ -442,7 +442,7 @@ Returns a `IntEnumerable` which drops elements while elements match `predicate`,
 ###### Example
 ```apex
 List<Integer> rest = IntSequence.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .drop(BasePredicates.isEqual(0))
+    .drop(Predicates.isEqual(0))
     .toList(); // [1, 1, 5]
 ```
 

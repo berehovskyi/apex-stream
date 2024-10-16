@@ -3,6 +3,8 @@
  * using a comparer and currying. This builder allows you to create predicates for equality,
  * inequality, and relational comparisons with the ability to use fields, constants, or functions as comparands.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IPredicate isNameJohnPredicate = new SObjectComparerPredicateProvider(Comparer.defaultOrder())
  *     .is(Account.Name)

@@ -4,6 +4,8 @@
  * <p><strong>Note: </strong></p>
  * <p>Bi-predicates built with this builder consider a non-null value as always greater than a null value.</p>
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IBiPredicate isLeftRevenueLtRightBiPredicate = new SObjectDefComparerBiPredicateProvider()
  *     .isL(Account.AnnualRevenue)

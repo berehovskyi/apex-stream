@@ -205,13 +205,50 @@ Returns a `Comparer` that compares extracted by the `keyExtractor` keys.
 
 ##### `public static Comparer defaultOrder()`
 
-Returns a comparer that imposes the default ordering.
+Returns a comparer that imposes the default ordering. Considers a non-null value as always greater than a null value.
 
 ###### Returns
 
 |Type|Description|
 |---|---|
 |`Comparer`|the `Comparer`|
+
+###### Example
+```apex
+IComparer defaultComparer = Comparer.defaultOrder();
+defaultComparer.compare(1, 0); // 1
+defaultComparer.compare(0, 1); // -1
+defaultComparer.compare(1, 1); // 0
+defaultComparer.compare(1, null); // 1
+defaultComparer.compare(null, 1); // -1
+defaultComparer.compare('foo', null); // 1
+defaultComparer.compare(null, 'foo'); // -1
+```
+
+
+##### `public static Comparer nonAntisymmetricOrder()`
+
+Returns a comparer that imposes the non-antisymmetric ordering. <p><strong>Note: </strong></p> <p>This comparer violates the `IComparer` contract and cannot be used in `List.sort` or derived sorting methods.</p> <p>Can be used for comparing nullable values the way it's designed in Apex.</p> <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta /apexcode/langCon_apex_expressions_operators_understanding.htm">Expression Operators</a>
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Comparer`|the `Comparer`|
+
+###### Example
+```apex
+IComparer nasComparer = Comparer.nonAntisymmetricOrder();
+nasComparer.compare(1, 0); // 1
+nasComparer.compare(0, 1); // -1
+nasComparer.compare(1, 1); // 0
+nasComparer.compare(1, null); // null
+nasComparer.compare(null, 1); // null
+// but
+nasComparer.compare('foo', null); // 1
+nasComparer.compare(null, 'foo'); // -1
+```
+
 
 ##### `public static Comparer reverseOrder()`
 
