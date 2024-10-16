@@ -17,6 +17,11 @@ a primitive specialization of [ObjectStream](/docs/Enumerables/ObjectStream.md).
 IntStream
 
 
+**Implemented types**
+
+[IRunnable](/docs/Functional-Interfaces/IRunnable.md)
+
+
 **See** [SObjectStream](/docs/Enumerables/SObjectStream.md)
 
 
@@ -503,7 +508,7 @@ Returns a `IntEnumerable` with elements that match `predicate`. <p>Stateless Int
 ###### Example
 ```apex
 List<Integer> filtered = IntStream.of(new List<Integer>{ 0, 5, 1, 1, 5 })
-    .filter(BasePredicates.isEqual(5))
+    .filter(Predicates.isEqual(5))
     .toList(); // [5, 5]
 ```
 
@@ -533,7 +538,7 @@ Returns a `IntEnumerable` which takes elements while elements match `predicate`.
 ###### Example
 ```apex
 List<Integer> firstFiltered = IntStream.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .take(BasePredicates.isEqual(0))
+    .take(Predicates.isEqual(0))
     .toList(); // [0, 0]
 ```
 
@@ -563,7 +568,7 @@ Returns a `IntEnumerable` which drops elements while elements match `predicate`,
 ###### Example
 ```apex
 List<Integer> rest = IntStream.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .drop(BasePredicates.isEqual(0))
+    .drop(Predicates.isEqual(0))
     .toList(); // [1, 1, 5]
 ```
 
@@ -1247,6 +1252,22 @@ Accumulates elements into a `Set<Integer>`. <p>Terminal Operation.</p>
 Set<Integer> ints = IntStream.of(new List<Integer>{ 0, 5, 1, -10, 0, 5 })
     .skip(1)
     .toSet(); // [5, 1, -10, 0]
+```
+
+
+##### `public void run()`
+
+Advances the iterator to its end. <p>Terminal Operation.</p>
+
+###### Example
+```apex
+public class DebugConsumer extends Consumer {
+    public override void accept(Object o) { System.debug(o); }
+}
+IRunnable intStream = (IRunnable) IntStream.of(new List<Integer>{ 0, 5, 1, -10 })
+    .forEach(new DebugConsumer());
+// the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+intStream.run(); // prints 0, 5, 1, -10
 ```
 
 

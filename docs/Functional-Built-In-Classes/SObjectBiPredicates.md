@@ -390,6 +390,8 @@ SObjectBiPredicates.isLessOrEqual('Parent?.NumberOfEmployees');
 *Inherited*
 
 
+`SUPPRESSWARNINGS`
+
 Returns a `BiPredicate` that tests if the result of comparing the values returned by the applied `left` and `right` functions applied to the first and the second input arguments respectively by the `comparer` is equal to the expected `result`.
 
 ###### Parameters

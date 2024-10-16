@@ -382,7 +382,7 @@ Returns a `LongEnumerable` with elements that match `predicate`. <p>Stateless In
 ###### Example
 ```apex
 List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-    .filter(BasePredicates.isEqual(5L))
+    .filter(Predicates.isEqual(5L))
     .toList(); // [5L, 5L]
 ```
 
@@ -412,7 +412,7 @@ Returns a `LongEnumerable` which takes elements while elements match `predicate`
 ###### Example
 ```apex
 List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .take(BasePredicates.isEqual(0L))
+    .take(Predicates.isEqual(0L))
     .toList(); // [0L, 0L]
 ```
 
@@ -442,7 +442,7 @@ Returns a `LongEnumerable` which drops elements while elements match `predicate`
 ###### Example
 ```apex
 List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .drop(BasePredicates.isEqual(0L))
+    .drop(Predicates.isEqual(0L))
     .toList(); // [1L, 1L, 5L]
 ```
 

@@ -11,7 +11,7 @@ for sorting. Permits comparison of null arguments.
 
 **Extended types**
 
-[System.Comparator]()
+[System.Comparator<Object>](System.Comparator<Object>)
 
 **Author** Oleh Berehovskyi
 

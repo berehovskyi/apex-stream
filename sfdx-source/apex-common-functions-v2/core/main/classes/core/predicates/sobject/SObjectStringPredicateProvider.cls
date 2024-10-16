@@ -3,6 +3,8 @@
  * that operate on SObject fields using currying. This builder allows you to create predicates
  * for checking various string conditions such as whether a string is blank, contains a value, starts with a value, etc.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IPredicate isNameBlank = new SObjectStringPredicateProvider()
  *     .is(Account.Name)

@@ -3,15 +3,15 @@
  * supporting cross-reference fields, safe navigation, and complex field paths.
  * This class acts as a factory for different types of functions that can be applied to SObjects.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IFunction nameFunction = new SObjectFunctionProvider().get('Name');
  * nameFunction.apply(new Account(Name = 'John Doe')); // John Doe
- *
  * IFunction contactsFunction = new SObjectFunctionProvider().getSObjects('Contacts');
  * contactsFunction.apply(
  *     new Account(Id = '001000000000001AAA', Contacts = new List<Contact>{ new Contact(LastName = 'Doe') })
  * ); // [{ LastName: 'Doe' }]
- *
  * IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType)
  *    .val(Contact.LastName).to(Lead.LastName)
  *    .val('Email').to('Email')

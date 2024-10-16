@@ -7,6 +7,8 @@
  * @see SObjectComparerPredicateProvider
  * @see Comparer
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IPredicate isRevenueLt10KPredicate = new SObjectDefaultComparerPredicateProvider()
  *     .is(Account.AnnualRevenue)

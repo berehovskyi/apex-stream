@@ -315,7 +315,7 @@ List<Account> triggerNew = new List<Account>{
 SObjectSequence.zip(
     triggerOld,
     triggerNew,
-    BiOperator.minBy(Comparator.comparing(BaseSObjectFunctions.get(Account.AnnualRevenue)))
+    BiOperator.minBy(Comparator.comparing(SObjectFunctions.get(Account.AnnualRevenue)))
 ).toList(); //
 [
   { Name: 'foo', NumberOfEmployees: 100 },
@@ -326,6 +326,8 @@ SObjectSequence.zip(
 
 
 ##### `public static SObjectEnumerable zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, IBiPredicate predicate, IBiOperator combiner)`
+
+`SUPPRESSWARNINGS`
 
 Returns a combined `SObjectEnumerable` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
@@ -379,7 +381,7 @@ SObjectSequence.zip(
     triggerOld,
     triggerNew,
     new ContainsAnyBiPredicate('Name', 'a'),
-    BiOperator.minBy(BaseSObjectFunctions.get(Account.AnnualRevenue))
+    BiOperator.minBy(SObjectFunctions.get(Account.AnnualRevenue))
 ).toList(); //
 [
   { Name: 'bar', NumberOfEmployees: 100 },

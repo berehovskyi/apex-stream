@@ -17,6 +17,11 @@ a primitive specialization of [ObjectStream](/docs/Enumerables/ObjectStream.md).
 LongStream
 
 
+**Implemented types**
+
+[IRunnable](/docs/Functional-Interfaces/IRunnable.md)
+
+
 **See** [SObjectStream](/docs/Enumerables/SObjectStream.md)
 
 
@@ -335,7 +340,7 @@ Returns lazily concatenated `LongEnumerable` whose elements are all the elements
 ```apex
 List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
 List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-List<Long> concat = LongSequence.concat(longs1, longs2)
+List<Long> concat = LongStream.concat(longs1, longs2)
     .toList();
 // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
 ```
@@ -367,7 +372,7 @@ Returns lazily concatenated `List<Iterable<Long>>`.
 ```apex
 List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
 List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-List<Long> concat = LongSequence.concat(new List<Iterable<Long>>{ longs1, longs2 })
+List<Long> concat = LongStream.concat(new List<Iterable<Long>>{ longs1, longs2 })
     .toList();
 // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
 ```
@@ -404,7 +409,7 @@ public class SumBiOperator extends BiOperator {
 }
 List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
 List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-List<Long> zip = LongSequence.zip(longs1, longs2, new SumBiOperator())
+List<Long> zip = LongStream.zip(longs1, longs2, new SumBiOperator())
     .toList();
 // [13L, 6L, 15L, 11L, 9L, 18L, 4L, 7L]
 ```
@@ -436,7 +441,7 @@ Returns new `LongEnumerable` by appending `iterable` to the current stream.
 ```apex
 List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
 List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-List<Long> append = LongSequence.of(longs1)
+List<Long> append = LongStream.of(longs1)
     .append(longs2)
     .toList();
 // [5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L, 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L]
@@ -469,7 +474,7 @@ Returns new `LongEnumerable` by prepending `iterable` to the current stream.
 ```apex
 List<Long> longs1 = new List<Long>{ 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L };
 List<Long> longs2 = new List<Long>{ 8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L };
-List<Long> append = LongSequence.of(longs1)
+List<Long> append = LongStream.of(longs1)
     .prepend(longs2)
     .toList();
 // [8L, 3L, 6L, 4L, 4L, 9L, 1L, 0L, 5L, 3L, 9L, 7L, 5L, 9L, 3L, 7L]
@@ -502,8 +507,8 @@ Returns a `LongEnumerable` with elements that match `predicate`. <p>Stateless In
 
 ###### Example
 ```apex
-List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-    .filter(BasePredicates.isEqual(5L))
+List<Long> filtered = LongStream.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
+    .filter(Predicates.isEqual(5L))
     .toList(); // [5L, 5L]
 ```
 
@@ -532,8 +537,8 @@ Returns a `LongEnumerable` which takes elements while elements match `predicate`
 
 ###### Example
 ```apex
-List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .take(BasePredicates.isEqual(0L))
+List<Long> firstFiltered = LongStream.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+    .take(Predicates.isEqual(0L))
     .toList(); // [0L, 0L]
 ```
 
@@ -562,8 +567,8 @@ Returns a `LongEnumerable` which drops elements while elements match `predicate`
 
 ###### Example
 ```apex
-List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .drop(BasePredicates.isEqual(0L))
+List<Long> rest = LongStream.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
+    .drop(Predicates.isEqual(0L))
     .toList(); // [1L, 1L, 5L]
 ```
 
@@ -597,7 +602,7 @@ public class MultiplyLongOperator extends Operator {
     public MultiplyLongOperator(Long l) { this.l = l; }
     public override Object apply(Object j) { return (Long) j * l; }
 }
-List<Long> doubledLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Long> doubledLongs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .mapTo(new MultiplyLongOperator(2))
     .toList(); // [0L, 10L, 2L, -20L]
 ```
@@ -632,7 +637,7 @@ public class MultiplyIntFunction extends Function {
     public MultiplyIntFunction(Integer i) { this.i = i; }
     public override Object apply(Object j) { return (Long) j * i; }
 }
-List<Integer> doubledInts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Integer> doubledInts = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .mapToLong(new MultiplyIntFunction(2))
     .toList(); // [0, 10, 2, -20]
 ```
@@ -667,7 +672,7 @@ public class MultiplyDoubleFunction extends Function {
     public MultiplyDoubleFunction(Double d) { this.d = d; }
     public override Object apply(Object j) { return (Long) j * d; }
 }
-List<Double> doubledDoubles = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Double> doubledDoubles = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .mapToDouble(new MultiplyDoubleFunction(2))
     .toList(); // [0.0, 10.0, 2.0, -20.0]
 ```
@@ -700,7 +705,7 @@ Returns a `SObjectEnumerable` with elements returned by `mapper` function, appli
 public class CreateAccountFunction extends Function {
     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
 }
-List<Account> accounts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Account> accounts = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .mapToSObject(new CreateAccountFunction())
     .toList(); //
 [
@@ -739,7 +744,7 @@ Returns a `ObjectEnumerable` with elements returned by `mapper` function, applie
 public class ToStringFunction extends Function {
     public override Object apply(Object i) { return String.valueOf(i); }
 }
-List<String> strings = (List<String>) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<String> strings = (List<String>) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .mapToObject(new ToStringFunction())
     .toList(String.class); // ['0', '5', '1', '10']
 ```
@@ -774,7 +779,7 @@ public class MultiplyLongFunction extends Function {
     public MultiplyLongFunction(Long l) { this.l = l; }
     public override Object apply(Object o) { return new List<Long>{ ((Long) o) * l }; }
 }
-List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .flatMapTo(new MultiplyLongFunction(2L))
     .toList(); // [0L, 10L, 2L, -20L]
 ```
@@ -807,7 +812,7 @@ Returns a `LongEnumerable` after performing `consumer` action on each element. <
 public class DebugConsumer extends Consumer {
     public override void accept(Object o) { System.debug(o); }
 }
-List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
     .toList(); // [0L, 5L, 1L, -10L ]
 ```
@@ -825,7 +830,7 @@ Returns a `LongEnumerable` with distinct elements. <p>Stateful Intermediate Oper
 
 ###### Example
 ```apex
-List<Long> distinct = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 5L })
+List<Long> distinct = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 5L })
     .distinct()
     .toList(); // [0L, 5L, 1L, -10L]
 ```
@@ -843,7 +848,7 @@ Returns a `LongEnumerable` with sorted elements in ascending order. <p>Stateful 
 
 ###### Example
 ```apex
-List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
+List<Long> sorted = LongStream.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
     .sort()
     .toList(); // [null, -10L, 0L, 1L, 5L]
 ```
@@ -873,7 +878,7 @@ Returns a `LongEnumerable` with sorted elements considering `order`. <p>Stateful
 
 ###### Example
 ```apex
-List<Long> sorted = LongSequence.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
+List<Long> sorted = LongStream.of(new List<Long>{ 0L, 5L, null, 1L, -10L })
     .sort(SortOrder.DESCENDING)
     .toList(); // [5L, 1L, 0L, -10L, null]
 ```
@@ -904,7 +909,7 @@ Returns a `LongEnumerable` with first `lim` elements. <p>Short-circuiting Statef
 
 ###### Example
 ```apex
-List<Long> first3Longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Long> first3Longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .lim(3)
     .toList(); // [0L, 5L, 1L]
 ```
@@ -935,7 +940,7 @@ Returns a new `LongEnumerable` that skips first `n` elements and returns remaini
 
 ###### Example
 ```apex
-List<Long> restLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Long> restLongs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .skip(1)
     .toList(); // [5L, 1L, -10L]
 ```
@@ -974,8 +979,8 @@ public class SumBiOperator extends BiOperator {
 public class ProductBiOperator extends BiOperator {
     public override Object apply(Object o1, Object o2) { return (Long) o1 * (Long) o2; }
 }
-Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, new SumBiOperator()); // -4L
-Long factorialOfN = LongSequence.range(1, n).reduce(1, new ProductBiOperator());
+Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).reduce(0L, new SumBiOperator()); // -4L
+Long factorialOfN = LongStream.range(1, n).reduce(1, new ProductBiOperator());
 ```
 
 
@@ -1006,7 +1011,7 @@ Performs a reduction on `Long` elements, using `identity` value and associative 
 public class SumBiOperator extends BiOperator {
     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
 }
-Long sum = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+Long sum = (Long) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .reduce(new SumBiOperator())
     .get(); // -4L
 ```
@@ -1040,7 +1045,7 @@ public class AddToLongSetBiConsumer extends BiConsumer {
     public override void accept(Object container, Object o) { ((Set<Long>) container).add((Long) o); }
 }
 Set<Long> longs = (Set<Long>)
-    LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L, 5L, 0L })
+    LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L, 5L, 0L })
     .collect(Collector.of(Supplier.of(Set<Long>.class), new AddToLongSetBiConsumer()));
 // [0L, 5L, 1L, -10L]
 ```
@@ -1073,7 +1078,7 @@ Returns an `Optional` Long describing the first element that matches `predicate`
 public class IsEvenPredicate extends Predicate {
     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
 }
-Long firstEvenLong = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+Long firstEvenLong = (Long) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .find(new IsEvenPredicate())
     .get(); // 0L
 ```
@@ -1106,7 +1111,7 @@ Returns whether all elements match `predicate`. If `LongEnumerable` is empty the
 public class IsEvenPredicate extends Predicate {
     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
 }
-Boolean isEveryLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+Boolean isEveryLongEven = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .every(new IsEvenPredicate()); // false
 ```
 
@@ -1138,7 +1143,7 @@ Returns whether some element matches `predicate`. If `LongEnumerable` is empty t
 public class IsEvenPredicate extends Predicate {
     public override Boolean test(Object o) { return Math.mod((Long) o, 2) == 0; }
 }
-Boolean isSomeLongEven = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+Boolean isSomeLongEven = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .some(new IsEvenPredicate()); // true
 ```
 
@@ -1155,7 +1160,7 @@ Returns the sum of elements. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-Long sum = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+Long sum = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .sum(); // -4L
 ```
 
@@ -1172,7 +1177,7 @@ Returns `Optional` Double describing the arithmetic mean of elements of this str
 
 ###### Example
 ```apex
-Double avg = (Double) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+Double avg = (Double) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .avg()
     .get(); // 1.0
 ```
@@ -1190,7 +1195,7 @@ Returns the count of elements. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-Integer count = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+Integer count = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .count(); // 4
 ```
 
@@ -1207,9 +1212,9 @@ Returns whether the count of elements is 0. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .isEmpty(); // false
-LongSequence.of(new List<Long>())
+LongStream.of(new List<Long>())
     .isEmpty(); // true
 ```
 
@@ -1226,7 +1231,7 @@ Accumulates elements into a `List<Long>`. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .skip(1)
     .toList(); // [5L, 1L, -10L]
 ```
@@ -1244,9 +1249,25 @@ Accumulates elements into a `Set<Long>`. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-SSet<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
+SSet<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .skip(1)
     .toSet(); // [5L, 1L, -10L, 0L]
+```
+
+
+##### `public void run()`
+
+Advances the iterator to its end. <p>Terminal Operation.</p>
+
+###### Example
+```apex
+public class DebugConsumer extends Consumer {
+    public override void accept(Object o) { System.debug(o); }
+}
+IRunnable longStream = (IRunnable) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
+    .forEach(new DebugConsumer());
+// the `forEach` intermediate operation will not be performed until a terminal operation is initiated
+longStream.run(); // prints 0, 5, 1, -10
 ```
 
 

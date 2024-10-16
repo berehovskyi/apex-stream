@@ -10,13 +10,6 @@ Provides common implementations of [Operator](/docs/Functional-Abstract-Classes/
 and related utilities.
 
 
-**Inheritance**
-
-[BaseSObjectOperators](/docs/Functional-Built-In-Classes/BaseSObjectOperators.md)
- > 
-SObjectOperators
-
-
 **See** [Operator](/docs/Functional-Abstract-Classes/Operator.md)
 
 
@@ -27,6 +20,73 @@ SObjectOperators
 
 ## Methods
 ### Built-Ins
+##### `public static Operator getSObject(String fieldName)`
+
+Returns a `Operator` that gets sobject for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`fieldName`|the field to get a value|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Operator`|the `Operator`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
+|`SObjectException`|if provided invalid `fieldName`|
+
+
+**See** [SObject.getSObject](SObject.getSObject)
+
+###### Example
+```apex
+SObjectOperators.getSObject('Parent');
+SObjectOperators.getSObject('Parent.Parent');
+SObjectOperators.getSObject('Parent?.Parent');
+```
+
+
+##### `public static Operator getSObject(SObjectField field)`
+
+Returns a `Operator` that gets sobject for the specified `field`.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`field`|the field to get a value|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Operator`|the `Operator`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field` is null|
+
+
+**See** [SObject.getSObject](SObject.getSObject)
+
+###### Example
+```apex
+SObjectOperators.getSObject(Account.ParentId);
+```
+
+
 ##### `public static Operator set(String fieldName, IFunction mapper)`
 
 Returns a `Operator` that sets the value returned by the `mapper` for the specified `fieldName` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
@@ -606,79 +666,6 @@ Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperat
 ###### Example
 ```apex
 SObjectOperators.newSObject(Account.SObjectType, Account.Id, someAccId);
-```
-
-
-##### `public static Operator getSObject(String fieldName)`
-
-*Inherited*
-
-
-Returns a `Operator` that gets sobject for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
-
-###### Parameters
-
-|Param|Description|
-|---|---|
-|`fieldName`|the field to get a value|
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`Operator`|the `Operator`|
-
-###### Throws
-
-|Exception|Description|
-|---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
-|`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
-
-
-**See** [SObject.getSObject](SObject.getSObject)
-
-###### Example
-```apex
-BaseSObjectOperators.getSObject('Parent');
-BaseSObjectOperators.getSObject('Parent.Parent');
-BaseSObjectOperators.getSObject('Parent?.Parent');
-```
-
-
-##### `public static Operator getSObject(SObjectField field)`
-
-*Inherited*
-
-
-Returns a `Operator` that gets sobject for the specified `field`.
-
-###### Parameters
-
-|Param|Description|
-|---|---|
-|`field`|the field to get a value|
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`Operator`|the `Operator`|
-
-###### Throws
-
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `field` is null|
-
-
-**See** [SObject.getSObject](SObject.getSObject)
-
-###### Example
-```apex
-BaseSObjectOperators.getSObject(Account.ParentId);
 ```
 
 

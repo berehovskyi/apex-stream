@@ -12,8 +12,6 @@ and related utilities.
 
 **Inheritance**
 
-[BasePredicates](/docs/Functional-Built-In-Classes/BasePredicates.md)
- > 
 [Predicates](/docs/Functional-Built-In-Classes/Predicates.md)
  > 
 SObjectPredicates
@@ -1062,7 +1060,7 @@ Returns a `Predicate` that tests the input SObject if the the value of the `fiel
 ###### Example
 ```apex
 SObjectPredicates.isIn(Account.Name, new List<Object>{ 'John', 'Jim' });
-SObjectPredicates.isIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicates.isIn(Account.Name, new Set<String>{ 'John', 'Jim' });
 SObjectPredicates.isIn(Account.Name, nameStream);
 ```
 
@@ -1100,7 +1098,7 @@ Returns a `Predicate` that tests the input SObject if the the value of the `fiel
 ###### Example
 ```apex
 SObjectPredicates.isNotIn('Name', new List<Object>{ 'John', 'Jim' });
-SObjectPredicates.isNotIn('Parent?.Name', (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicates.isNotIn('Parent?.Name', new Set<String>{ 'John', 'Jim' });
 SObjectPredicates.isNotIn('Parent.Name', nameStream);
 ```
 
@@ -1134,8 +1132,162 @@ Returns a `Predicate` that tests the input SObject if the the value of the `fiel
 ###### Example
 ```apex
 SObjectPredicates.isNotIn(Account.Name, new List<Object>{ 'John', 'Jim' });
-SObjectPredicates.isNotIn(Account.Name, (Iterable<Object>) new Set<String>{ 'John', 'Jim' });
+SObjectPredicates.isNotIn(Account.Name, new Set<String>{ 'John', 'Jim' });
 SObjectPredicates.isNotIn(Account.Name, nameStream);
+```
+
+
+##### `public static Predicate includes(String fieldName, Iterable<String> container)`
+
+Returns a `Predicate` that tests the input SObject if the string value of the `fieldName` fully matches any element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`. Cross-reference fields and safe navigation are supported.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`fieldName`|the value of which is tested|
+|`container`|the iterable against which the value is tested|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `container` is null or `container` contains null element|
+|`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
+|`SObjectException`|if provided invalid `fieldName`|
+
+###### Example
+```apex
+Account acc = new Account(Name = 'AAA;BBB');
+SObjectPredicates.includes('Name', new List<String>{ 'AAA' }).test(person); // false
+SObjectPredicates.includes('Name', new Set<String>{ 'AAA;BBB' }).test(person); // true
+SObjectPredicates.includes('Name', new Set<String>{ 'BBB;CCC' }).test(person); // false
+SObjectPredicates.includes('Name', new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // true
+SObjectPredicates.includes('Name', new List<String>{ 'AAA;BBB;CCC' }).test(person); // false
+// it is also possible
+SObjectPredicates.includes('Parent?.Name', new List<String>{ 'AAA' });
+```
+
+
+##### `public static Predicate includes(SObjectField field, Iterable<String> container)`
+
+Returns a `Predicate` that tests the input SObject if the string value of the `field` fully matches any element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`field`|the value of which is tested|
+|`container`|the iterable against which the value is tested|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field`, `container` is null, or `container` contains null element|
+
+
+**See** [List.contains](List.contains)
+
+###### Example
+```apex
+Account acc = new Account(Name = 'AAA;BBB');
+SObjectPredicates.includes(Account.Name, new List<String>{ 'AAA' }).test(person); // false
+SObjectPredicates.includes(Account.Name, new Set<String>{ 'AAA;BBB' }).test(person); // true
+SObjectPredicates.includes(Account.Name, new Set<String>{ 'BBB;CCC' }).test(person); // false
+SObjectPredicates.includes(Account.Name, new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // true
+SObjectPredicates.includes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test(person); // false
+```
+
+
+##### `public static Predicate excludes(String fieldName, Iterable<String> container)`
+
+Returns a `Predicate` that tests the input SObject if the string value of the `fieldName` does not match every element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`. Cross-reference fields and safe navigation are supported.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`fieldName`|the value of which is tested|
+|`container`|the iterable against which the value is tested|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `fieldName` is blank|
+|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `container` is null or `container` contains null element|
+|`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
+|`SObjectException`|if provided invalid `fieldName`|
+
+###### Example
+```apex
+Account acc = new Account(Name = 'AAA;BBB');
+SObjectPredicates.excludes('Name', new List<String>{ 'AAA' }).test(person); // true
+SObjectPredicates.excludes('Name', new Set<String>{ 'AAA;BBB' }).test(person); // false
+SObjectPredicates.excludes('Name', new Set<String>{ 'BBB;CCC' }).test(person); // true
+SObjectPredicates.excludes('Name', new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // false
+SObjectPredicates.excludes('Name', new List<String>{ 'AAA;BBB;CCC' }).test(person); // true
+// it is also possible
+SObjectPredicates.excludes('Parent?.Name', new List<String>{ 'AAA' });
+```
+
+
+##### `public static Predicate excludes(SObjectField field, Iterable<String> container)`
+
+Returns a `Predicate` that tests the input SObject if the string value of the `field` does not match every element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`field`|the value of which is tested|
+|`container`|the iterable against which the value is tested|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `field`, `container` is null, or `container` contains null element|
+
+
+**See** [List.contains](List.contains)
+
+###### Example
+```apex
+Account acc = new Account(Name = 'AAA;BBB');
+SObjectPredicates.excludes(Account.Name, new List<String>{ 'AAA' }).test(person); // true
+SObjectPredicates.excludes(Account.Name, new Set<String>{ 'AAA;BBB' }).test(person); // false
+SObjectPredicates.excludes(Account.Name, new Set<String>{ 'BBB;CCC' }).test(person); // true
+SObjectPredicates.excludes(Account.Name, new Set<String>{ 'AAA;CCC', 'BBB' }).test(person); // false
+SObjectPredicates.excludes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test(person); // true
 ```
 
 
@@ -1143,6 +1295,8 @@ SObjectPredicates.isNotIn(Account.Name, nameStream);
 
 *Inherited*
 
+
+`SUPPRESSWARNINGS`
 
 Returns a `Predicate` that tests if the result of comparing the values returned by the applied `left` and `right` functions by the `comparer` is equal to the expected `result`.
 
@@ -1169,7 +1323,7 @@ Returns a `Predicate` that tests if the result of comparing the values returned 
 
 ###### Example
 ```apex
-BasePredicates.isCompared(
+Predicates.isCompared(
     func1,
     func2,
     Comparer.defaultOrder(),
@@ -1178,12 +1332,18 @@ BasePredicates.isCompared(
 ```
 
 
-##### `public static Predicate isNull()`
+##### `public static Predicate isNull(IFunction left)`
 
 *Inherited*
 
 
-Returns a `Predicate` that tests the input object if it is not null.
+Returns a `Predicate` that tests the result returned by the `function` if it is null.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`left`|the function whose application result is tested|
 
 ###### Returns
 
@@ -1193,8 +1353,53 @@ Returns a `Predicate` that tests the input object if it is not null.
 
 ###### Example
 ```apex
-BasePredicates.isNull().test(null); // true;
-BasePredicates.isNull().test(1); // false;
+Predicates.isNull(func1);
+```
+
+
+##### `public static Predicate isNull()`
+
+*Inherited*
+
+
+Returns a `Predicate` that tests the input object if it is null.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
+
+###### Example
+```apex
+Predicates.isNull().test(null); // true;
+Predicates.isNull().test(1); // false;
+```
+
+
+##### `public static Predicate isNotNull(IFunction left)`
+
+*Inherited*
+
+
+Returns a `Predicate` that tests the result returned by the `function` if it is not null.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`left`|the function whose application result is tested|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Predicate`|the `Predicate`|
+
+###### Example
+```apex
+Predicates.isNull().test(null); // true;
+Predicates.isNull().test(1); // false;
 ```
 
 
@@ -1213,8 +1418,8 @@ Returns a `Predicate` that tests the input object if it is not null.
 
 ###### Example
 ```apex
-BasePredicates.isNotNull().test(null); // false
-BasePredicates.isNotNull().test(1); // true
+Predicates.isNotNull().test(null); // false
+Predicates.isNotNull().test(1); // true
 ```
 
 

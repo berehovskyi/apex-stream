@@ -10,13 +10,6 @@ Provides common implementations of [Function](/docs/Functional-Abstract-Classes/
 and related utilities that are used by [Collectors](/docs/Functional-Built-In-Classes/Collectors.md).
 
 
-**Inheritance**
-
-[BaseCollectorFunctions](/docs/Functional-Built-In-Classes/BaseCollectorFunctions.md)
- > 
-CollectorFunctions
-
-
 **See** [Function](/docs/Functional-Abstract-Classes/Function.md)
 
 
@@ -71,6 +64,19 @@ Returns a `Function` that returns the final result of summing.
 
 **See** [Collectors.summingLong](Collectors.summingLong)
 
+##### `public static Function summingDouble()`
+
+Returns a `Function` that returns the final result of Double summing.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
+
+
+**See** [Collectors.averagingDouble](Collectors.averagingDouble)
+
 ##### `public static Function averagingInt()`
 
 Returns a `Function` that returns the final result of Integer averaging.
@@ -96,6 +102,19 @@ Returns a `Function` that returns the final result of Long averaging.
 
 
 **See** [Collectors.averagingLong](Collectors.averagingLong)
+
+##### `public static Function averagingDouble()`
+
+Returns a `Function` that returns the final result of Double averaging.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
+
+
+**See** [Collectors.averagingDouble](Collectors.averagingDouble)
 
 ##### `public static Function groupByBool(IFunction finisher)`
 
@@ -318,37 +337,5 @@ Returns a `Function` that returns the final result of SObject reducing as `Optio
 
 
 **See** [Collectors.reducing](Collectors.reducing)
-
-##### `public static Function averagingDouble()`
-
-*Inherited*
-
-
-Returns a `Function` that returns the final result of Double averaging.
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`Function`|the `Function`|
-
-
-**See** [BaseCollectors.averagingDouble](BaseCollectors.averagingDouble)
-
-##### `public static Function summingDouble()`
-
-*Inherited*
-
-
-Returns a `Function` that returns the final result of Double summing.
-
-###### Returns
-
-|Type|Description|
-|---|---|
-|`Function`|the `Function`|
-
-
-**See** [BaseCollectors.averagingDouble](BaseCollectors.averagingDouble)
 
 ---

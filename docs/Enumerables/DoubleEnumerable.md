@@ -237,7 +237,7 @@ Returns a `DoubleEnumerable` with elements that match `predicate`. <p>Stateless 
 #### Example
 ```apex
 List<Double> filtered = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-    .filter(BasePredicates.isEqual(5))
+    .filter(Predicates.isEqual(5))
     .toList(); // [5, 5]
 ```
 
@@ -267,7 +267,7 @@ Returns a `DoubleEnumerable` which takes elements while elements match `predicat
 #### Example
 ```apex
 List<Double> firstFiltered = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-    .filter(BasePredicates.isEqual(0.1))
+    .filter(Predicates.isEqual(0.1))
     .toList(); // [0.1, 0.1]
 ```
 
@@ -297,7 +297,7 @@ Returns a `DoubleEnumerable` which drops elements while elements match `predicat
 #### Example
 ```apex
 List<Double> rest = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-    .drop(BasePredicates.isEqual(0.1))
+    .drop(Predicates.isEqual(0.1))
     .toList(); // [5, 1.5, Math.PI]
 ```
 
@@ -697,7 +697,7 @@ Performs a reduction on `Double` elements, using `identity` value and an associa
 #### Example
 ```apex
 Double max = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-    .reduce((Double) 0.0, BaseBiOperators.max()); // 5.5
+    .reduce((Double) 0.0, BiOperators.max()); // 5.5
 ```
 
 
@@ -726,7 +726,7 @@ Performs a reduction on `Double` elements, using `identity` value and associativ
 #### Example
 ```apex
 Double max = (Double) [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-    .reduce(BaseBiOperators.max())
+    .reduce(BiOperators.max())
     .get(); // 5.5
 ```
 

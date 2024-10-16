@@ -287,6 +287,8 @@ List<String> zip = ObjectSequence.zip(strs1, strs2, new ConcatBiOperator())
 
 ##### `public static ObjectEnumerable zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBiOperator combiner)`
 
+`SUPPRESSWARNINGS`
+
 Returns a combined `ObjectEnumerable` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
 ###### Parameters

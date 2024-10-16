@@ -2,6 +2,8 @@
  * @description Provides a fluent interface for building consumers that operate on SObjects, allowing you
  * to set fields, add errors, and perform other operations on SObjects.
  *
+ * @group Functional Built-In Classes V2
+ *
  * @example
  * IConsumer setJohnDoeNameConsumer = new SObjectConsumerProvider()
  *     .set('Name')
