@@ -70,7 +70,7 @@ Install the Apex Stream. The framework consists of several Unlocked Packages:
 - Apex Functions (required):
 
 ```sh
-sf package install -p 04tJ5000000D4SIIA0 -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D4WFIA0 -o me@example.com -r -w 10
 ```
 
 - Apex Enumerables (required):
@@ -101,6 +101,12 @@ sf package install -p 04tJ5000000D4ScIAK -o me@example.com -r -w 10
 
 ```sh
 sf package install -p 04t1t000000koWNAAY -o me@example.com -r -w 10
+```
+
+- 🚨 New: Apex Common Functions V2 (pilot):
+
+```sh
+sf package install -p 04tJ5000000D4WKIA0 -o me@example.com -r -w 10
 ```
 
 ## Modules and Key Features
