@@ -127,6 +127,8 @@ sf package install -p 04tJ5000000D4WKIA0 -o me@example.com -r -w 10
   - Functional Built-in Classes with common Functional Abstract Classes implementations
   - Built-in Collectors (`SObjectCollectors`, `Collectors`)
 
+- Apex Common Functions V2 (Pilot): [Full details](releasenotes/v3.3.0.md)
+
 ## Introduction
 
 **Apex Stream Framework** is built on custom `Iterables` (hereinafter - `Enumerables`) that allows processing
@@ -362,7 +364,7 @@ using function composition:
 ```apex
 SObjectEnumerable filteredAccountStream = Stream.of(accounts)
     .filter(
-        SObjectPredicates.isGreater(Account.AnnualRevenue, 10000)
+        SObjectPredicates.isGreater(Account.AnnualRevenue, 1000000)
             .andAlso(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
     );
 ```
