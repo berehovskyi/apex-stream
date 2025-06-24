@@ -4,7 +4,7 @@
             "path": "sfdx-source/apex-functions",
             "package": "apex-functions",
             "versionName": "ver 1.1",
-            "versionNumber": "1.1.5.NEXT",
+            "versionNumber": "1.1.6.NEXT",
             "default": false,
             "versionDescription": "",
             "dependencies": [
@@ -18,7 +18,7 @@
             "path": "sfdx-source/apex-stream/enumerables",
             "package": "apex-stream-enumerables",
             "versionName": "ver 3.2",
-            "versionNumber": "3.2.1.NEXT",
+            "versionNumber": "3.2.2.NEXT",
             "default": true,
             "versionDescription": "",
             "dependencies": [
@@ -28,13 +28,57 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.5.LATEST"
+                    "versionNumber": "1.1.6.LATEST"
                 }
             ]
         },
         {
             "path": "sfdx-source/apex-stream/streams",
             "package": "apex-stream-streams",
+            "versionName": "ver 1.2",
+            "versionNumber": "1.2.4.NEXT",
+            "default": false,
+            "versionDescription": "",
+            "dependencies": [
+                {
+                    "package": "apex-validate",
+                    "versionNumber": "2.0.0.LATEST"
+                },
+                {
+                    "package": "apex-functions",
+                    "versionNumber": "1.1.6.LATEST"
+                },
+                {
+                    "package": "apex-stream-enumerables",
+                    "versionNumber": "3.2.2.LATEST"
+                }
+            ]
+        },
+        {
+            "path": "sfdx-source/apex-stream/sequences",
+            "package": "apex-stream-sequences",
+            "versionName": "ver 1.1",
+            "versionNumber": "1.1.4.NEXT",
+            "default": false,
+            "versionDescription": "",
+            "dependencies": [
+                {
+                    "package": "apex-validate",
+                    "versionNumber": "2.0.0.LATEST"
+                },
+                {
+                    "package": "apex-functions",
+                    "versionNumber": "1.1.6.LATEST"
+                },
+                {
+                    "package": "apex-stream-enumerables",
+                    "versionNumber": "3.2.2.LATEST"
+                }
+            ]
+        },
+        {
+            "path": "sfdx-source/apex-common-functions/core",
+            "package": "apex-common-functions-core",
             "versionName": "ver 1.2",
             "versionNumber": "1.2.3.NEXT",
             "default": false,
@@ -46,51 +90,7 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.5.LATEST"
-                },
-                {
-                    "package": "apex-stream-enumerables",
-                    "versionNumber": "3.2.1.LATEST"
-                }
-            ]
-        },
-        {
-            "path": "sfdx-source/apex-stream/sequences",
-            "package": "apex-stream-sequences",
-            "versionName": "ver 1.1",
-            "versionNumber": "1.1.3.NEXT",
-            "default": false,
-            "versionDescription": "",
-            "dependencies": [
-                {
-                    "package": "apex-validate",
-                    "versionNumber": "2.0.0.LATEST"
-                },
-                {
-                    "package": "apex-functions",
-                    "versionNumber": "1.1.5.LATEST"
-                },
-                {
-                    "package": "apex-stream-enumerables",
-                    "versionNumber": "3.2.1.LATEST"
-                }
-            ]
-        },
-        {
-            "path": "sfdx-source/apex-common-functions/core",
-            "package": "apex-common-functions-core",
-            "versionName": "ver 1.2",
-            "versionNumber": "1.2.2.NEXT",
-            "default": false,
-            "versionDescription": "",
-            "dependencies": [
-                {
-                    "package": "apex-validate",
-                    "versionNumber": "2.0.0.LATEST"
-                },
-                {
-                    "package": "apex-functions",
-                    "versionNumber": "1.1.5.LATEST"
+                    "versionNumber": "1.1.6.LATEST"
                 }
             ]
         },
@@ -98,7 +98,7 @@
             "path": "sfdx-source/apex-common-functions/extension",
             "package": "apex-common-functions-extension",
             "versionName": "ver 1.2",
-            "versionNumber": "1.2.0.NEXT",
+            "versionNumber": "1.2.1.NEXT",
             "default": false,
             "versionDescription": "",
             "dependencies": [
@@ -108,7 +108,7 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.5.LATEST"
+                    "versionNumber": "1.1.6.LATEST"
                 }
             ]
         },
@@ -116,7 +116,7 @@
             "path": "sfdx-source/apex-common-functions-v2",
             "package": "apex-common-functions-v2",
             "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
+            "versionNumber": "0.1.1.NEXT",
             "default": false,
             "versionDescription": "",
             "dependencies": [
@@ -126,14 +126,13 @@
                 },
                 {
                     "package": "apex-functions",
-                    "versionNumber": "1.1.5.LATEST"
+                    "versionNumber": "1.1.6.LATEST"
                 }
             ]
         }
     ],
     "name": "apex-stream",
     "namespace": "",
-    "pushPackageDirectoriesSequentially": true,
     "packageAliases": {
         "apex-validate": "0Ho1t000000CajuCAC",
         "apex-functions": "0Ho1t000000sXyCCAU",
@@ -144,12 +143,12 @@
         "apex-common-functions-extension": "0Ho1t000000sXyMCAU",
         "apex-common-functions-v2": "0HoJ5000000000BKAQ",
         "apex-validate@latest": "04t1t000003f3UVAAY",
-        "apex-functions@latest": "04tJ5000000D4WFIA0",
-        "apex-stream-enumerables@latest": "04tJ5000000D4SNIA0",
-        "apex-stream-streams@latest": "04tJ5000000D4SSIA0",
-        "apex-stream-sequences@latest": "04tJ5000000D4SXIA0",
-        "apex-common-functions-core@latest": "04tJ5000000D4ScIAK",
-        "apex-common-functions-extension@latest": "04t1t000000koWNAAY",
-        "apex-common-functions-v2@latest": "04tJ5000000D4WKIA0"
+        "apex-functions@latest": "04tJ5000000D5u7IAC",
+        "apex-stream-enumerables@latest": "04tJ5000000D5uCIAS",
+        "apex-stream-streams@latest": "04tJ5000000D5uHIAS",
+        "apex-stream-sequences@latest": "04tJ5000000D5uMIAS",
+        "apex-common-functions-core@latest": "04tJ5000000D5uRIAS",
+        "apex-common-functions-extension@latest": "04tJ5000000D5uWIAS",
+        "apex-common-functions-v2@latest": "04tJ5000000D7cbIAC"
     }
 }

@@ -70,43 +70,43 @@ Install the Apex Stream. The framework consists of several Unlocked Packages:
 - Apex Functions (required):
 
 ```sh
-sf package install -p 04tJ5000000D4WFIA0 -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D5u7IAC -o me@example.com -r -w 10
 ```
 
 - Apex Enumerables (required):
 
 ```sh
-sf package install -p 04tJ5000000D4SNIA0 -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D5uCIAS -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
 
 ```sh
-sf package install -p 04tJ5000000D4SSIA0 -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D5uHIAS -o me@example.com -r -w 10
 ```
 
 - Apex Sequences (recommended):
 
 ```sh
-sf package install -p 04tJ5000000D4SXIA0 -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D5uMIAS -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Core (recommended):
 
 ```sh
-sf package install -p 04tJ5000000D4ScIAK -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D5uRIAS -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Extension (optional):
 
 ```sh
-sf package install -p 04t1t000000koWNAAY -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D5uWIAS -o me@example.com -r -w 10
 ```
 
-- 🚨 New: Apex Common Functions V2 (pilot):
+- 🚨 New: Apex Common Functions V2 (beta):
 
 ```sh
-sf package install -p 04tJ5000000D4WKIA0 -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D7cbIAC -o me@example.com -r -w 10
 ```
 
 ## Modules and Key Features
