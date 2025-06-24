@@ -229,10 +229,11 @@ Creates a predicate that checks if the mapped string value contains the specifie
 |`NullPointerException`|if `value` is null|
 
 ###### Example
+
 ```apex
 IPredicate isNameContainingJohnIgnoreCase = new SObjectStringPredicateProvider()
     .is(Account.Name)
-    .containingIc('john');
+    .iContaining('john');
 isNameContainingJohnIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
 ```
 
@@ -291,10 +292,11 @@ Creates a predicate that checks if the mapped string value starts with the speci
 |`NullPointerException`|if `value` is null|
 
 ###### Example
+
 ```apex
 IPredicate isNameStartingWithJohnIgnoreCase = new SObjectStringPredicateProvider()
     .is(Account.Name)
-    .startingWithIc('john');
+    .iStartingWith('john');
 isNameStartingWithJohnIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
 ```
 
@@ -353,10 +355,11 @@ Creates a predicate that checks if the mapped string value ends with the specifi
 |`NullPointerException`|if `value` is null|
 
 ###### Example
+
 ```apex
 IPredicate isNameEndingWithDoeIgnoreCase = new SObjectStringPredicateProvider()
     .is(Account.Name)
-    .endingWithIc('doe');
+    .iEndingWith('doe');
 isNameEndingWithDoeIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
 ```
 
