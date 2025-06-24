@@ -397,6 +397,7 @@ private class SObjectCollectorProviderTest {
         Map<Boolean, Account> actual4 = (Map<Boolean, Account>) AfTestCommons.collect(CONTACTS, COL.toByBoolMap().merger(mergeFunction).key(keyMapper).val(getParentAccFunction).cast(Map<Boolean, Account>.class));
         Map<Boolean, String> actual5 = (Map<Boolean, String>) AfTestCommons.collect(input, COL.toByBoolMap().key(AfTestConsts.DO_NOT_CALL).val(AfTestConsts.LAST_NAME).cast(Map<Boolean, String>.class));
         Map<Boolean, String> actual6 = (Map<Boolean, String>) AfTestCommons.collect(input, COL.toByBoolMap().of(Supplier.of(Map<Boolean, String>.class)).key(AfTestConsts.Contact.DoNotCall).val(AfTestConsts.Contact.LastName));
+        Map<Boolean, Object> actual7 = (Map<Boolean, Object>) AfTestCommons.collect(input, COL.toByBoolMap().key(keyMapper).val(AfTestConsts.Contact.LastName));
         try {
             List<Contact> input1 = new List<Contact>(CONTACTS);
             input1.add(input1[0]);
@@ -427,12 +428,14 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
      * @see CollectorProvider.toByIdMap
      */
     @IsTest
+    @SuppressWarnings('PMD.NcssMethodCount')
     static void toByIdMap() {
         // Given
         IFunction keyMapper = new SObjectFunctionProvider().get(AfTestConsts.Contact.AccountId);
@@ -461,6 +464,7 @@ private class SObjectCollectorProviderTest {
         }
         Map<Id, SObject> actual9 = (Map<Id, SObject>) AfTestCommons.collect(ACCOUNTS, toMapCollector);
         Map<Id, Account> actual10 = (Map<Id, Account>) AfTestCommons.collect(ACCOUNTS, toMapCollector.cast(Map<Id, Account>.class));
+        Map<Id, Object> actual11 = (Map<Id, Object>) AfTestCommons.collect(CONTACTS, COL.toByIdMap().key(keyMapper).val(AfTestConsts.Contact.LastName));
         // Then
         Map<Id, Contact> expected = new Map<Id, Contact>{
             (Id) CONTACTS[0].get(AfTestConsts.ACCOUNT_ID) => CONTACTS[0],
@@ -492,6 +496,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual11);
         Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual9);
         Assert.areEqual(new Map<Id, Account>(ACCOUNTS), actual10);
     }
@@ -514,6 +519,7 @@ private class SObjectCollectorProviderTest {
         Map<String, Object> actual4 = (Map<String, Object>) AfTestCommons.collect(CONTACTS, COL.toByStringMap().merger(mergeFunction).key(keyMapper).val(getParentAccFunction));
         Map<String, String> actual5 = (Map<String, String>) AfTestCommons.collect(CONTACTS, COL.toByStringMap().key(AfTestConsts.FIRST_NAME).val(AfTestConsts.LAST_NAME).cast(Map<String, String>.class));
         Map<String, String> actual6 = (Map<String, String>) AfTestCommons.collect(CONTACTS, COL.toByStringMap().of(Supplier.of(Map<String, String>.class)).key(AfTestConsts.Contact.FirstName).val(AfTestConsts.Contact.LastName));
+        Map<String, Object> actual7 = (Map<String, Object>) AfTestCommons.collect(CONTACTS, COL.toByStringMap().key(keyMapper).val(AfTestConsts.LAST_NAME));
         try {
             List<Contact> input = new List<Contact>(CONTACTS);
             input.add(input[0]);
@@ -550,6 +556,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -569,6 +576,7 @@ private class SObjectCollectorProviderTest {
         Map<Blob, Object> actual4 = (Map<Blob, Object>) AfTestCommons.collect(ATTACHMENTS, COL.toByBlobMap().merger(mergeFunction).key(keyMapper).val(valueMapper));
         Map<Blob, String> actual5 = (Map<Blob, String>) AfTestCommons.collect(ATTACHMENTS, COL.toByBlobMap().key(AfTestConsts.BODY).val(AfTestConsts.NAME).cast(Map<Blob, String>.class));
         Map<Blob, String> actual6 = (Map<Blob, String>) AfTestCommons.collect(ATTACHMENTS, COL.toByBlobMap().of(Supplier.of(Map<Blob, String>.class)).key(AfTestConsts.Attachment.Body).val(AfTestConsts.Attachment.Name));
+        Map<Blob, Object> actual7 = (Map<Blob, Object>) AfTestCommons.collect(ATTACHMENTS, COL.toByBlobMap().key(keyMapper).val(AfTestConsts.Attachment.Name));
         try {
             List<Attachment> input = new List<Attachment>(ATTACHMENTS);
             input.add(input[0]);
@@ -600,6 +608,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -619,6 +628,7 @@ private class SObjectCollectorProviderTest {
         Map<Date, Object> actual4 = (Map<Date, Object>) AfTestCommons.collect(CONTACTS, COL.toByDateMap().merger(mergeFunction).key(keyMapper).val(valueMapper));
         Map<Date, String> actual5 = (Map<Date, String>) AfTestCommons.collect(CONTACTS, COL.toByDateMap().key(AfTestConsts.BIRTHDATE).val(AfTestConsts.LAST_NAME).cast(Map<Date, String>.class));
         Map<Date, String> actual6 = (Map<Date, String>) AfTestCommons.collect(CONTACTS, COL.toByDateMap().of(Supplier.of(Map<Date, String>.class)).key(AfTestConsts.Contact.Birthdate).val(AfTestConsts.Contact.LastName));
+        Map<Date, Object> actual7 = (Map<Date, Object>) AfTestCommons.collect(CONTACTS, COL.toByDateMap().key(keyMapper).val(AfTestConsts.Contact.LastName));
         try {
             List<Contact> input = new List<Contact>(CONTACTS);
             input.add(input[0]);
@@ -648,6 +658,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -667,6 +678,7 @@ private class SObjectCollectorProviderTest {
         Map<Datetime, Object> actual4 = (Map<Datetime, Object>) AfTestCommons.collect(EVENTS, COL.toByDatetimeMap().merger(mergeFunction).key(keyMapper).val(valueMapper));
         Map<Datetime, String> actual5 = (Map<Datetime, String>) AfTestCommons.collect(EVENTS, COL.toByDatetimeMap().key(AfTestConsts.ACTIVITY_DATE_TIME).val(AfTestConsts.DESCRIPTION).cast(Map<Datetime, String>.class));
         Map<Datetime, String> actual6 = (Map<Datetime, String>) AfTestCommons.collect(EVENTS, COL.toByDatetimeMap().of(Supplier.of(Map<Datetime, String>.class)).key(AfTestConsts.Event.ActivityDateTime).val(AfTestConsts.Event.Description));
+        Map<Datetime, Object> actual7 = (Map<Datetime, Object>) AfTestCommons.collect(EVENTS, COL.toByDatetimeMap().key(keyMapper).val(AfTestConsts.Event.Description));
         try {
             List<Event> input = new List<Event>(EVENTS);
             input.add(input[0]);
@@ -696,6 +708,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -715,6 +728,7 @@ private class SObjectCollectorProviderTest {
         Map<Time, Object> actual4 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, COL.toByTimeMap().merger(mergeFunction).key(keyMapper).val(valueMapper));
         Map<Time, Time> actual5 = (Map<Time, Time>) AfTestCommons.collect(SLOTS, COL.toByTimeMap().key(AfTestConsts.BEST_START_TIME).val(AfTestConsts.BEST_END_TIME).cast(Map<Time, Time>.class));
         Map<Time, Time> actual6 = (Map<Time, Time>) AfTestCommons.collect(SLOTS, COL.toByTimeMap().of(Supplier.of(Map<Time, Time>.class)).key(AfTestConsts.ContactEmail.StartTime).val(AfTestConsts.ContactEmail.EndTime));
+        Map<Time, Object> actual7 = (Map<Time, Object>) AfTestCommons.collect(SLOTS, COL.toByTimeMap().key(keyMapper).val(AfTestConsts.ContactEmail.EndTime));
         try {
             List<ContactPointEmail> input = new List<ContactPointEmail>(SLOTS);
             input.add(input[0]);
@@ -744,6 +758,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -763,6 +778,7 @@ private class SObjectCollectorProviderTest {
         Map<Integer, Object> actual4 = (Map<Integer, Object>) AfTestCommons.collect(ACCOUNTS, COL.toByIntMap().merger(mergeFunction).key(keyMapper).val(valueMapper));
         Map<Integer, String> actual5 = (Map<Integer, String>) AfTestCommons.collect(ACCOUNTS, COL.toByIntMap().key(AfTestConsts.NUMBER_OF_EMPLOYEES).val(AfTestConsts.NAME).cast(Map<Integer, String>.class));
         Map<Integer, String> actual6 = (Map<Integer, String>) AfTestCommons.collect(ACCOUNTS, COL.toByIntMap().of(Supplier.of(Map<Integer, String>.class)).key(AfTestConsts.Account.NumberOfEmployees).val(AfTestConsts.Account.Name));
+        Map<Integer, Object> actual7 = (Map<Integer, Object>) AfTestCommons.collect(ACCOUNTS, COL.toByIntMap().key(keyMapper).val(AfTestConsts.Account.Name));
         try {
             List<Account> input = new List<Account>(ACCOUNTS);
             input.add(input[0]);
@@ -802,6 +818,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -821,6 +838,7 @@ private class SObjectCollectorProviderTest {
         Map<Long, Object> actual4 = (Map<Long, Object>) AfTestCommons.collect(ACCOUNTS, COL.toByLongMap().merger(mergeFunction).key(keyMapper).val(valueMapper));
         Map<Long, String> actual5 = (Map<Long, String>) AfTestCommons.collect(ACCOUNTS, COL.toByLongMap().key(AfTestConsts.NUMBER_OF_EMPLOYEES).val(AfTestConsts.NAME).cast(Map<Long, String>.class));
         Map<Long, String> actual6 = (Map<Long, String>) AfTestCommons.collect(ACCOUNTS, COL.toByLongMap().of(Supplier.of(Map<Long, String>.class)).key(AfTestConsts.Account.NumberOfEmployees).val(AfTestConsts.Account.Name));
+        Map<Long, Object> actual7 = (Map<Long, Object>) AfTestCommons.collect(ACCOUNTS, COL.toByLongMap().key(keyMapper).val(AfTestConsts.Account.Name));
         // Then
         Map<Long, Account> expected = new Map<Long, Account>{
             (Long) ACCOUNTS[0].get(AfTestConsts.NUMBER_OF_EMPLOYEES) => ACCOUNTS[0],
@@ -853,6 +871,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -872,6 +891,7 @@ private class SObjectCollectorProviderTest {
         Map<Double, Object> actual4 = (Map<Double, Object>) AfTestCommons.collect(ACCOUNTS, COL.toByDoubleMap().merger(mergeFunction).key(keyMapper).val(valueMapper));
         Map<Double, String> actual5 = (Map<Double, String>) AfTestCommons.collect(ACCOUNTS, COL.toByDoubleMap().key(AfTestConsts.BILLING_LATITUDE).val(AfTestConsts.NAME).cast(Map<Double, String>.class));
         Map<Double, String> actual6 = (Map<Double, String>) AfTestCommons.collect(ACCOUNTS, COL.toByDoubleMap().of(Supplier.of(Map<Double, String>.class)).key(AfTestConsts.Account.BillingLatitude).val(AfTestConsts.Account.Name));
+        Map<Double, Object> actual7 = (Map<Double, Object>) AfTestCommons.collect(ACCOUNTS, COL.toByDoubleMap().key(keyMapper).val(AfTestConsts.Account.Name));
         // Then
         Map<Double, Account> expected = new Map<Double, Account>{
             (Double) ACCOUNTS[0].get(AfTestConsts.Account.BillingLatitude) => ACCOUNTS[0],
@@ -904,6 +924,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual7);
     }
 
     /**
@@ -925,6 +946,7 @@ private class SObjectCollectorProviderTest {
         Map<Object, String> actual5 = (Map<Object, String>) AfTestCommons.collect(ACCOUNTS, COL.toByObjectMap().key(AfTestConsts.NUMBER_OF_EMPLOYEES).val(AfTestConsts.NAME).cast(Map<Object, String>.class));
         Map<Object, String> actual6 = (Map<Object, String>) AfTestCommons.collect(ACCOUNTS, COL.toByObjectMap().of(Supplier.of(Map<Object, String>.class)).key(AfTestConsts.Account.NumberOfEmployees).val(AfTestConsts.Account.Name));
         Map<Object, String> actual7 = (Map<Object, String>) AfTestCommons.collect(ACCOUNTS, COL.toByObjectMap().of(String.class).key().val(AfTestConsts.NAME));
+        Map<Object, Object> actual8 = (Map<Object, Object>) AfTestCommons.collect(ACCOUNTS, COL.toByObjectMap().key(keyMapper).val(AfTestConsts.Account.Name));
         // Then
         Map<Object, Account> expected = new Map<Object, Account>{
             ACCOUNTS[0].get(AfTestConsts.NUMBER_OF_EMPLOYEES) => ACCOUNTS[0],
@@ -957,6 +979,7 @@ private class SObjectCollectorProviderTest {
         };
         Assert.areEqual(expected2, actual5);
         Assert.areEqual(expected2, actual6);
+        Assert.areEqual(expected2, actual8);
         Map<Object, String> expected3 = new Map<Object, String>{
             ACCOUNTS[0] => (String) ACCOUNTS[0].get(AfTestConsts.Account.Name),
             ACCOUNTS[1] => (String) ACCOUNTS[1].get(AfTestConsts.Account.Name),

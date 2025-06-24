@@ -1,6 +1,6 @@
 /**
  * @description Provides a fluent interface for building consumers that operate on SObjects, allowing you
- * to set fields, add errors, and perform other operations on SObjects.
+ * to mutate SObjects: set fields, add errors, and perform other operations.
  *
  * @group Functional Built-In Classes V2
  *

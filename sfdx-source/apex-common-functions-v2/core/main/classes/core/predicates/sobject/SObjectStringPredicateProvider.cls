@@ -133,7 +133,8 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
         }
 
         /**
-         * @description Creates a predicate that checks if the mapped string value contains the specified value.
+         * @description Creates a predicate that checks if the mapped string value contains the specified value,
+         * respecting case.
          *
          * @param value the string value to check for
          *
@@ -164,15 +165,16 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
          * @example
          * IPredicate isNameContainingJohnIgnoreCase = new SObjectStringPredicateProvider()
          *     .is(Account.Name)
-         *     .containingIc('john');
+         *     .iContaining('john');
          * isNameContainingJohnIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
          */
-        public virtual Predicate containingIc(final String value) {
-            return negate ? new ContainsIcPredicate(mapper, value).negate() : new ContainsIcPredicate(mapper, value);
+        public virtual Predicate iContaining(final String value) {
+            return negate ? new IContainsPredicate(mapper, value).negate() : new IContainsPredicate(mapper, value);
         }
 
         /**
-         * @description Creates a predicate that checks if the mapped string value starts with the specified value.
+         * @description Creates a predicate that checks if the mapped string value starts with the specified value,
+         * respecting case.
          *
          * @param value the string value to check for at the start
          *
@@ -204,15 +206,16 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
          * @example
          * IPredicate isNameStartingWithJohnIgnoreCase = new SObjectStringPredicateProvider()
          *     .is(Account.Name)
-         *     .startingWithIc('john');
+         *     .iStartingWith('john');
          * isNameStartingWithJohnIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
          */
-        public virtual Predicate startingWithIc(final String value) {
-            return negate ? new StartsIcPredicate(mapper, value).negate() : new StartsIcPredicate(mapper, value);
+        public virtual Predicate iStartingWith(final String value) {
+            return negate ? new IStartsPredicate(mapper, value).negate() : new IStartsPredicate(mapper, value);
         }
 
         /**
-         * @description Creates a predicate that checks if the mapped string value ends with the specified value.
+         * @description Creates a predicate that checks if the mapped string value ends with the specified value,
+         * respecting case.
          *
          * @param value the string value to check for at the end
          *
@@ -244,21 +247,22 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
          * @example
          * IPredicate isNameEndingWithDoeIgnoreCase = new SObjectStringPredicateProvider()
          *     .is(Account.Name)
-         *     .endingWithIc('doe');
+         *     .iEndingWith('doe');
          * isNameEndingWithDoeIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
          */
-        public virtual Predicate endingWithIc(final String value) {
-            return negate ? new EndsWithIcPredicate(mapper, value).negate() : new EndsWithIcPredicate(mapper, value);
+        public virtual Predicate iEndingWith(final String value) {
+            return negate ? new IEndsWithPredicate(mapper, value).negate() : new IEndsWithPredicate(mapper, value);
         }
 
         /**
-         * @description Creates a predicate that checks if the mapped string value matches a given pattern (`LIKE`).
+         * @description Creates a predicate that checks if the mapped string value matches a given pattern (`LIKE`),
+         * respecting case.
          *
-         * @param likeString the pattern to match against
+         * @param pattern the pattern to match against
          *
          * @return a predicate that returns true if the mapped string value matches the pattern
          *
-         * @throws NullPointerException if `likeString` is null
+         * @throws NullPointerException if `pattern` is null
          *
          * @example
          * IPredicate isNameLikePattern = new SObjectStringPredicateProvider()
@@ -266,8 +270,28 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
          *     .likex('%Doe');
          * isNameLikePattern.test(new Account(Name = 'John Doe')); // true
          */
-        public virtual Predicate likex(final String likeString) {
-            return negate ? new LikePredicate(mapper, likeString).negate() : new LikePredicate(mapper, likeString);
+        public virtual Predicate likex(final String pattern) {
+            return negate ? new LikePredicate(mapper, pattern, false).negate() : new LikePredicate(mapper, pattern, false);
+        }
+
+        /**
+         * @description Creates a predicate that checks if the mapped string value matches a given pattern (`LIKE`),
+         * ignoring case.
+         *
+         * @param pattern the pattern to match against
+         *
+         * @return a predicate that returns true if the mapped string value matches the pattern
+         *
+         * @throws NullPointerException if `pattern` is null
+         *
+         * @example
+         * IPredicate isNameLikePattern = new SObjectStringPredicateProvider()
+         *     .is(Account.Name)
+         *     .iLike('%doe');
+         * isNameLikePattern.test(new Account(Name = 'John Doe')); // true
+         */
+        public virtual Predicate iLike(final String pattern) {
+            return negate ? new LikePredicate(mapper, pattern, true).negate() : new LikePredicate(mapper, pattern, true);
         }
     }
 
@@ -283,69 +307,52 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
 
     private class BlankPredicate extends StringPredicate {
         private BlankPredicate(IFunction mapper) { super(mapper, ''); }
-        public override Boolean test(Object o) {
-            return String.isBlank((String) mapper.apply(o));
-        }
+        public override Boolean test(Object o) { return String.isBlank((String) mapper.apply(o)); }
     }
 
     private class EmptyPredicate extends StringPredicate {
         private EmptyPredicate(IFunction mapper) { super(mapper, ''); }
-        public override Boolean test(Object o) {
-            return String.isEmpty((String) mapper.apply(o));
-        }
+        public override Boolean test(Object o) { return String.isEmpty((String) mapper.apply(o)); }
     }
 
     private class ContainsPredicate extends StringPredicate {
         private ContainsPredicate(IFunction mapper, String value) { super(mapper, value); }
-        public override Boolean test(Object o) {
-            return ((String) mapper.apply(o)).contains(value);
-        }
+        public override Boolean test(Object o) { return ((String) mapper.apply(o)).contains(value); }
     }
 
-    private class ContainsIcPredicate extends StringPredicate {
-        private ContainsIcPredicate(IFunction mapper, String value) { super(mapper, value); }
-        public override Boolean test(Object o) {
-            return ((String) mapper.apply(o)).containsIgnoreCase(value);
-        }
+    private class IContainsPredicate extends StringPredicate {
+        private IContainsPredicate(IFunction mapper, String value) { super(mapper, value); }
+        public override Boolean test(Object o) { return ((String) mapper.apply(o)).containsIgnoreCase(value); }
     }
 
     private class StartsWithPredicate extends StringPredicate {
         private StartsWithPredicate(IFunction mapper, String value) { super(mapper, value); }
-        public override Boolean test(Object o) {
-            return ((String) mapper.apply(o)).startsWith(value);
-        }
+        public override Boolean test(Object o) { return ((String) mapper.apply(o)).startsWith(value); }
     }
 
-    private class StartsIcPredicate extends StringPredicate {
-        private StartsIcPredicate(IFunction mapper, String value) { super(mapper, value); }
-        public override Boolean test(Object o) {
-            return ((String) mapper.apply(o)).startsWithIgnoreCase(value);
-        }
+    private class IStartsPredicate extends StringPredicate {
+        private IStartsPredicate(IFunction mapper, String value) { super(mapper, value); }
+        public override Boolean test(Object o) { return ((String) mapper.apply(o)).startsWithIgnoreCase(value); }
     }
 
     private class EndsWithPredicate extends StringPredicate {
         private EndsWithPredicate(IFunction mapper, String value) { super(mapper, value); }
-        public override Boolean test(Object o) {
-            return ((String) mapper.apply(o)).endsWith(value);
-        }
+        public override Boolean test(Object o) { return ((String) mapper.apply(o)).endsWith(value); }
     }
 
-    private class EndsWithIcPredicate extends StringPredicate {
-        private EndsWithIcPredicate(IFunction mapper, String value) { super(mapper, value); }
-        public override Boolean test(Object o) {
-            return ((String) mapper.apply(o)).endsWithIgnoreCase(value);
-        }
+    private class IEndsWithPredicate extends StringPredicate {
+        private IEndsWithPredicate(IFunction mapper, String value) { super(mapper, value); }
+        public override Boolean test(Object o) { return ((String) mapper.apply(o)).endsWithIgnoreCase(value); }
     }
 
-    private class LikePredicate extends StringPredicate {
-        private LikePredicate(IFunction function, String likeString) {
+    private virtual class LikePredicate extends StringPredicate {
+        protected LikePredicate(IFunction function, String likeString, Boolean ignoreCase) {
             super(
                 function,
-                '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1').replace('%', '.*?').replace('_', '.{1}?') + '$'
+                (ignoreCase ? '(?i)' : '')
+                + '^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1').replace('%', '.*?').replace('_', '.{1}?') + '$'
             );
         }
-        public override Boolean test(Object o) {
-            return Pattern.matches(value, (String) mapper.apply(o));
-        }
+        public override Boolean test(Object o) { return Pattern.matches(value, (String) mapper.apply(o)); }
     }
 }

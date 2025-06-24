@@ -1279,7 +1279,8 @@ public virtual inherited sharing class CollectorProvider {
      * };
      * ICollector namesCollector = new CollectorProvider(Account.class)
      *     .mapping()
-     *     .val('Name');
+     *     .val('Name')
+     *     .cast(List<String>.class);
      * List<String> names = (List<String>) [SObjectEnumerable].of(accounts)
      *     .collect(namesCollector); // ['Account A', 'Account B']
      */
@@ -1437,28 +1438,28 @@ public virtual inherited sharing class CollectorProvider {
         return new SetValueMappingCollector(setType(valueType), accumulator);
     }
 
+    private static Type setType(Type valueType) {
+        return Type.forName('Set<' + valueType + '>');
+    }
+
+    private static Type listType(Type valueType) {
+        return Type.forName('List<' + valueType + '>');
+    }
+
+    private static Type mapType(Type keyType, Type valueType) {
+        return Type.forName('Map<' + keyType + ', ' + valueType + '>');
+    }
+
+    private static Type groupType(Type keyType, Type valueType) {
+        return Type.forName('Map<' + keyType + ', List<' + valueType + '>>');
+    }
+
     private MapKeyMapping toMap(Type keyType, PutToMapBiConsumer accumulator) {
         return new MapKeyMapping(keyType, valueType, accumulator);
     }
 
     private GroupKeyMapping groupingBy(Type keyType, PutToDownstreamMap accumulator, GroupFinisher finisher) {
         return new GroupKeyMapping(keyType, valueType, accumulator, finisher);
-    }
-
-    private static Type setType(final Type valueType) {
-        return Type.forName('Set<' + valueType + '>');
-    }
-
-    private static Type listType(final Type valueType) {
-        return Type.forName('List<' + valueType + '>');
-    }
-
-    private static Type mapType(final Type keyType, final Type valueType) {
-        return Type.forName('Map<' + keyType + ', ' + valueType + '>');
-    }
-
-    private static Type groupType(final Type keyType, final Type valueType) {
-        return Type.forName('Map<' + keyType + ', List<' + valueType + '>>');
     }
 
     @SuppressWarnings('PMD.ExcessiveParameterList')
@@ -1503,7 +1504,8 @@ public virtual inherited sharing class CollectorProvider {
          * };
          * ICollector namesCollector = new CollectorProvider(Account.class)
          *     .mapping()
-         *     .val(new SObjectFunctionProvider().get(Account.Name));
+         *     .val(new SObjectFunctionProvider().get(Account.Name))
+         *     .cast(List<String>.class);
          * List<String> names = (List<String>) [SObjectEnumerable].of(accounts)
          *     .collect(namesCollector); // ['Account A', 'Account B']
          */
@@ -1547,7 +1549,8 @@ public virtual inherited sharing class CollectorProvider {
          * };
          * ICollector lastNameCollector = new CollectorProvider(Contact.class)
          *     .mapping()
-         *     .val('LastName');
+         *     .val('LastName')
+         *     .cast(List<String>.class);
          * List<String> lastNames = (List<String>) [SObjectEnumerable].of(contacts)
          *     .collect(lastNameCollector); // ['Doe', 'Smith']
          */
@@ -1569,7 +1572,8 @@ public virtual inherited sharing class CollectorProvider {
          * };
          * ICollector emailCollector = new CollectorProvider(Contact.class)
          *     .mapping()
-         *     .val(Contact.Email);
+         *     .val(Contact.Email)
+         *     .cast(List<String>.class);
          * List<String> emails = (List<String>) [SObjectEnumerable].of(contacts)
          *     .collect(emailCollector); // ['john.doe@example.com', 'jane.smith@example.com']
          */
@@ -1917,67 +1921,6 @@ public virtual inherited sharing class CollectorProvider {
             return super.val(mapper);
         }
 
-        /**
-         * @description Specifies the field name to extract values from SObjects.
-         * Cross-reference fields and safe navigation are supported.
-         *
-         * @param fieldName the field name to extract
-         *
-         * @return the `Collector` with the specified field mapping
-         *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
-         *
-         * @example
-         * List<Account> accounts = new List<Account>{
-         *     new Account(Name = 'John Doe', Parent = new Account(Name = 'Judy Roe')),
-         *     new Account(Name = 'Jane Smith')
-         * };
-         * ICollector nameToListCollector = new CollectorProvider(Account.class)
-         *     .toList()
-         *     .of(String.class)
-         *     .val('Name');
-         * List<String> names = (List<String>) [SObjectEnumerable].of(accounts)
-         *     .collect(nameToListCollector); // ['John Doe', 'Jane Smith']
-         *
-         * ICollector parentNameToListCollector = new CollectorProvider(Account.class)
-         *     .toList()
-         *     .of(String.class)
-         *     .val('Parent?.Name');
-         * List<String> parentNames = (List<String>) [SObjectEnumerable].of(accounts)
-         *     .collect(parentNameToListCollector); // ['Judy Roe', null]
-         */
-        public virtual override Collector val(final String fieldName) {
-            overrideSupplierIfDefault();
-            return super.val(fieldName);
-        }
-
-        /**
-         * @description Collects the values from the specified field name.
-         *
-         * @param field the field name to extract values from
-         *
-         * @return the `Collector` that collects the field values
-         *
-         * @throws NullPointerException if `field` is null
-         *
-         * @example
-         * List<Account> accounts = new List<Account>{
-         *     new Account(Name = 'John Doe'),
-         *     new Account(Name = 'Jane Smith')
-         * };
-         * ICollector nameToListCollector = new CollectorProvider(Account.class)
-         *     .toList()
-         *     .of(String.class)
-         *     .val(Account.Name);
-         * List<String> names = (List<String>) [SObjectEnumerable].of(accounts)
-         *     .collect(nameToListCollector); // ['John Doe', 'Jane Smith']
-         */
-        public virtual override Collector val(final SObjectField field) {
-            overrideSupplierIfDefault();
-            return super.val(field);
-        }
-
         protected void overrideSupplierIfDefault() {
             if (isDefaultSupplier) { sup = Supplier.of(listType(valueType ?? Object.class)); }
         }
@@ -1988,10 +1931,12 @@ public virtual inherited sharing class CollectorProvider {
      * Allows setting custom suppliers, mergers, and key/value mapping functions.
      */
     public virtual class MapKeyMapping {
-        protected final PutToMapBiConsumer accumulator;
         protected final Type keyType;
+        protected final PutToMapBiConsumer accumulator;
         protected ISupplier sup;
         protected IBiOperator merger;
+        protected Boolean isDefaultSupplier = true;
+        protected Type valueType;
         protected MapKeyMapping(Type keyType, Type valueType, PutToMapBiConsumer accumulator) {
             this.keyType = keyType;
             this.sup = Supplier.of(mapType(keyType, valueType));
@@ -2026,6 +1971,7 @@ public virtual inherited sharing class CollectorProvider {
          */
         public virtual MapKeyMapping of(final ISupplier supplier) {
             this.sup = supplier;
+            isDefaultSupplier = false;
             return this;
         }
 
@@ -2052,6 +1998,7 @@ public virtual inherited sharing class CollectorProvider {
          *     .collect(nameByIndustryCollector); // { 'Technology' => 'Company A', 'Finance' => 'Company B' }
          */
         public virtual MapKeyMapping of(final Type valueType) {
+            this.valueType = valueType;
             return of(Supplier.of(mapType(keyType, valueType)));
         }
 
@@ -2099,13 +2046,14 @@ public virtual inherited sharing class CollectorProvider {
          * IFunction industryMapper = new SObjectFunctionProvider().get(Account.Industry);
          * ICollector nameByIndustryCollector = new CollectorProvider(Account.class)
          *     .toByStringMap()
+         *     .of(String.class)
          *     .key(industryMapper)
          *     .val(Account.Name);
          * Map<String, String> nameByIndustry = (Map<String, String>) [SObjectEnumerable].of(accounts)
          *     .collect(nameByIndustryCollector); // { 'Technology' => 'Company A', 'Finance' => 'Company B' }
          */
         public virtual MapValueMappingCollector key(final IFunction keyMapper) {
-            return new MapValueMappingCollector(sup, keyMapper, accumulator, merger);
+            return new MapValueMappingCollector(sup, isDefaultSupplier, keyType, valueType, keyMapper, accumulator, merger);
         }
 
         /**
@@ -2197,13 +2145,27 @@ public virtual inherited sharing class CollectorProvider {
      * This collector throws IllegalStateException if mapped keys contain duplicates and no merger is specified.
      */
     public virtual class MapValueMappingCollector extends SObjectValueMappingCollector {
-        protected final ISupplier sup;
+        protected final Type keyType;
         protected final IFunction keyMapper;
         protected final PutToMapBiConsumer accumulator;
         protected final IBiOperator merger;
+        protected ISupplier sup;
+        protected Boolean isDefaultSupplier;
+        protected Type valueType;
         @SuppressWarnings('PMD.ExcessiveParameterList')
-        protected MapValueMappingCollector(ISupplier sup, IFunction key, PutToMapBiConsumer acc, IBiOperator merger) {
+        protected MapValueMappingCollector(
+            ISupplier sup,
+            Boolean isDefaultSupplier,
+            Type keyType,
+            Type valueType,
+            IFunction key,
+            PutToMapBiConsumer acc,
+            IBiOperator merger
+        ) {
             this.sup = sup;
+            this.isDefaultSupplier = isDefaultSupplier;
+            this.keyType = keyType;
+            this.valueType = valueType;
             keyMapper = key;
             accumulator = acc;
             this.merger = merger;
@@ -2261,7 +2223,12 @@ public virtual inherited sharing class CollectorProvider {
          *     .collect(lastNameByEmailCollector); // { 'john@example.com' => 'Doe', 'jane@example.com' => 'Smith' }
          */
         public virtual override Collector val(final IFunction valueMapper) {
+            overrideSupplierIfDefault();
             return Collector.of(sup, accumulator.key(keyMapper).val(valueMapper).merger(merger));
+        }
+
+        private void overrideSupplierIfDefault() {
+            if (isDefaultSupplier) { sup = Supplier.of(mapType(keyType, valueType ?? Object.class)); }
         }
     }
 
@@ -2376,7 +2343,7 @@ public virtual inherited sharing class CollectorProvider {
          */
         public virtual GroupMapValueMappingCollector key(final IFunction keyMapper) {
             return new GroupMapValueMappingCollector(
-                sup, isDefaultSupplier, keyType, this.valueType, keyMapper, accumulator, downstream, finisher
+                sup, isDefaultSupplier, keyType, valueType, keyMapper, accumulator, downstream, finisher
             );
         }
 
@@ -3532,9 +3499,9 @@ public virtual inherited sharing class CollectorProvider {
          * @return the `Collector` that performs the folding operation with the specified accumulator
          *
          * @example
-         * public class SumDoubleFieldReducer extends BiOperator {
+         * public class SumDoubleFieldFolder extends BiOperator {
          *     private final String fieldName;
-         *     public SumDoubleFieldReducer(String fieldName) { this.fieldName = fieldName; }
+         *     public SumDoubleFieldFolder(String fieldName) { this.fieldName = fieldName; }
          *     public override Object apply(Object seed, Object o) {
          *         ((SObject) seed).put(
          *             fieldName,
@@ -3550,7 +3517,7 @@ public virtual inherited sharing class CollectorProvider {
          * Account seed = new Account(Name = 'Account A', AnnualRevenue = 0);
          * ICollector sumCollector = new CollectorProvider(Account.class)
          *     .folding(seed)
-         *     .acc(new SumDoubleFieldReducer('AnnualRevenue'));
+         *     .acc(new SumDoubleFieldFolder('AnnualRevenue'));
          * Account sum = (Account) [SObjectEnumerable].of(accounts)
          *     .collect(sumCollector); // { Name: 'Account A', AnnualRevenue: 1500000.0 }
          */

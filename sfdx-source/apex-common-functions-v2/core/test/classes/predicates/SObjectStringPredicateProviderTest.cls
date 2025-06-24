@@ -96,7 +96,7 @@ private class SObjectStringPredicateProviderTest {
     }
 
     /**
-     * @see SObjectStringPredicateProvider.StringOperator.containingIc
+     * @see SObjectStringPredicateProvider.StringOperator.iContaining
      */
     @IsTest
     static void containingIc() {
@@ -106,12 +106,12 @@ private class SObjectStringPredicateProviderTest {
         IFunction getNameFunction = new SObjectFunctionProvider().get(accNameField);
         String value = 'Test';
         // When
-        IPredicate nameContainsIgnoreCaseTestPredicate = PRED.is(getNameFunction).containingIc(value);
-        IPredicate nameContainsIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).containingIc(value);
-        IPredicate nameContainsIgnoreCaseTestPredicate2 = PRED.is(accNameField).containingIc(value);
-        IPredicate nameNotContainsIgnoreCaseTestPredicate = PRED.is(getNameFunction).notx().containingIc(value);
-        IPredicate nameNotContainsIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).notx().containingIc(value);
-        IPredicate nameNotContainsIgnoreCaseTestPredicate2 = PRED.is(accNameField).notx().containingIc(value);
+        IPredicate nameContainsIgnoreCaseTestPredicate = PRED.is(getNameFunction).iContaining(value);
+        IPredicate nameContainsIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).iContaining(value);
+        IPredicate nameContainsIgnoreCaseTestPredicate2 = PRED.is(accNameField).iContaining(value);
+        IPredicate nameNotContainsIgnoreCaseTestPredicate = PRED.is(getNameFunction).notx().iContaining(value);
+        IPredicate nameNotContainsIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).notx().iContaining(value);
+        IPredicate nameNotContainsIgnoreCaseTestPredicate2 = PRED.is(accNameField).notx().iContaining(value);
         // Then
         for (Account acc : INPUT) {
             String name = ((String) acc.get(accNameField));
@@ -156,7 +156,7 @@ private class SObjectStringPredicateProviderTest {
     }
 
     /**
-     * @see SObjectStringPredicateProvider.StringOperator.startingWithIc
+     * @see SObjectStringPredicateProvider.StringOperator.iStartingWith
      */
     @IsTest
     static void startingWithIc() {
@@ -166,12 +166,12 @@ private class SObjectStringPredicateProviderTest {
         IFunction getNameFunction = new SObjectFunctionProvider().get(accNameField);
         String value = 'Test';
         // When
-        IPredicate nameStartsWithIgnoreCaseTestPredicate = PRED.is(getNameFunction).startingWithIc(value);
-        IPredicate nameStartsWithIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).startingWithIc(value);
-        IPredicate nameStartsWithIgnoreCaseTestPredicate2 = PRED.is(accNameField).startingWithIc(value);
-        IPredicate nameNotStartsWithIgnoreCaseTestPredicate = PRED.is(getNameFunction).notx().startingWithIc(value);
-        IPredicate nameNotStartsWithIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).notx().startingWithIc(value);
-        IPredicate nameNotStartsWithIgnoreCaseTestPredicate2 = PRED.is(accNameField).notx().startingWithIc(value);
+        IPredicate nameStartsWithIgnoreCaseTestPredicate = PRED.is(getNameFunction).iStartingWith(value);
+        IPredicate nameStartsWithIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).iStartingWith(value);
+        IPredicate nameStartsWithIgnoreCaseTestPredicate2 = PRED.is(accNameField).iStartingWith(value);
+        IPredicate nameNotStartsWithIgnoreCaseTestPredicate = PRED.is(getNameFunction).notx().iStartingWith(value);
+        IPredicate nameNotStartsWithIgnoreCaseTestPredicate1 = PRED.is(nameFieldName).notx().iStartingWith(value);
+        IPredicate nameNotStartsWithIgnoreCaseTestPredicate2 = PRED.is(accNameField).notx().iStartingWith(value);
         // Then
         for (Account acc : INPUT) {
             String name = ((String) acc.get(accNameField));
@@ -216,7 +216,7 @@ private class SObjectStringPredicateProviderTest {
     }
 
     /**
-     * @see SObjectStringPredicateProvider.StringOperator.endingWithIc
+     * @see SObjectStringPredicateProvider.StringOperator.iEndingWith
      */
     @IsTest
     static void endingWithIc() {
@@ -226,12 +226,12 @@ private class SObjectStringPredicateProviderTest {
         IFunction getNameFunction = new SObjectFunctionProvider().get(accNameField);
         String value = 'Test';
         // When
-        IPredicate nameEndsWithIcTestPredicate = PRED.is(getNameFunction).endingWithIc(value);
-        IPredicate nameEndsWithIcTestPredicate1 = PRED.is(nameFieldName).endingWithIc(value);
-        IPredicate nameEndsWithIcTestPredicate2 = PRED.is(accNameField).endingWithIc(value);
-        IPredicate nameNotEndsWithIcTestPredicate = PRED.is(getNameFunction).notx().endingWithIc(value);
-        IPredicate nameNotEndsWithIcTestPredicate1 = PRED.is(nameFieldName).notx().endingWithIc(value);
-        IPredicate nameNotEndsWithIcTestPredicate2 = PRED.is(accNameField).notx().endingWithIc(value);
+        IPredicate nameEndsWithIcTestPredicate = PRED.is(getNameFunction).iEndingWith(value);
+        IPredicate nameEndsWithIcTestPredicate1 = PRED.is(nameFieldName).iEndingWith(value);
+        IPredicate nameEndsWithIcTestPredicate2 = PRED.is(accNameField).iEndingWith(value);
+        IPredicate nameNotEndsWithIcTestPredicate = PRED.is(getNameFunction).notx().iEndingWith(value);
+        IPredicate nameNotEndsWithIcTestPredicate1 = PRED.is(nameFieldName).notx().iEndingWith(value);
+        IPredicate nameNotEndsWithIcTestPredicate2 = PRED.is(accNameField).notx().iEndingWith(value);
         // Then
         for (Account acc : INPUT) {
             String name = ((String) acc.get(accNameField));
@@ -264,6 +264,38 @@ private class SObjectStringPredicateProviderTest {
             String name = ((String) acc.get(accNameField));
             String name1 = ((String) acc.get(nameFieldName));
             Boolean isLikeName = Pattern.matches(
+                '^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
+                    .replace('%', '.*?').replace('_', '.{1}?') + '$', name
+            );
+            Boolean isLikeName1 = Pattern.matches(
+                '^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
+                    .replace('%', '.*?').replace('_', '.{1}?') + '$', name1
+            );
+            Assert.areEqual(isLikeName, nameLikePredicate.test(acc));
+            Assert.areEqual(isLikeName1, nameLikePredicate1.test(acc));
+            Assert.areEqual(isLikeName, nameLikePredicate2.test(acc));
+        }
+    }
+
+    /**
+     * @see SObjectStringPredicateProvider.StringOperator.iLike
+     */
+    @IsTest
+    static void iLike() {
+        // Given
+        String likeString = 'T%';
+        SObjectField accNameField = AfTestConsts.Account.Name;
+        String nameFieldName = 'Name';
+        IFunction getNameFunction = new SObjectFunctionProvider().get(accNameField);
+        // When
+        IPredicate nameILikePredicate = PRED.is(getNameFunction).iLike(likeString);
+        IPredicate nameILikePredicate1 = PRED.is(nameFieldName).iLike(likeString);
+        IPredicate nameILikePredicate2 = PRED.is(accNameField).iLike(likeString);
+        // Then
+        for (Account acc : INPUT) {
+            String name = ((String) acc.get(accNameField));
+            String name1 = ((String) acc.get(nameFieldName));
+            Boolean isLikeName = Pattern.matches(
                 '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
                     .replace('%', '.*?').replace('_', '.{1}?') + '$', name
             );
@@ -271,9 +303,9 @@ private class SObjectStringPredicateProviderTest {
                 '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
                     .replace('%', '.*?').replace('_', '.{1}?') + '$', name1
             );
-            Assert.areEqual(isLikeName, nameLikePredicate.test(acc));
-            Assert.areEqual(isLikeName1, nameLikePredicate1.test(acc));
-            Assert.areEqual(isLikeName, nameLikePredicate2.test(acc));
+            Assert.areEqual(isLikeName, nameILikePredicate.test(acc));
+            Assert.areEqual(isLikeName1, nameILikePredicate1.test(acc));
+            Assert.areEqual(isLikeName, nameILikePredicate2.test(acc));
         }
     }
 }
