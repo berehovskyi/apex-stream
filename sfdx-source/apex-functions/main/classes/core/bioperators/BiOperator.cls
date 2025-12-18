@@ -1,5 +1,5 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IBiOperator} functional interface.
  *
  * @see IBiOperator
@@ -10,9 +10,16 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class BiOperator implements IBiOperator {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Applies the function to the two input arguments.
+     *
+     * @param o1 the first input argument of `T` type
+     * @param o2 the second input argument of `T` type
+     *
+     * @return the result of `T` type
+     */
     public abstract Object apply(Object o1, Object o2);
     // @end-group
     //</editor-fold>
@@ -99,10 +106,12 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class GetLeftArg extends BiOperator {
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return o1; }
     }
 
     private class GetRightArg extends BiOperator {
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return o2; }
     }
 
@@ -112,6 +121,7 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
             Validate.notNull(comparer);
             this.comparer = comparer;
         }
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return comparer.compare(o1, o2) <= 0 ? o1 : o2; }
     }
 
@@ -121,6 +131,7 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
             Validate.notNull(comparer);
             this.comparer = comparer;
         }
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return comparer.compare(o1, o2) >= 0 ? o1 : o2; }
     }
 
@@ -140,5 +151,4 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
     }
     // @end-group
     //</editor-fold>
-
 }

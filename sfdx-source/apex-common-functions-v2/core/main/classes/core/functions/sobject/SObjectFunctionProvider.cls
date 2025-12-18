@@ -292,8 +292,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
     public virtual class ChainableMapSObjectFunction extends Function {
         protected final ISupplier identitySupplier;
         protected final List<IFunction> valueMappers = new List<IFunction>();
-        protected final List<SObjectConsumerProvider.SetFieldValueBase> destConsumers
-            = new List<SObjectConsumerProvider.SetFieldValueBase>();
+        protected final List<SObjectConsumerProvider.SetFieldValueBase> destConsumers = new List<SObjectConsumerProvider.SetFieldValueBase>();
         protected ChainableMapSObjectFunction(ISupplier identitySupplier) {
             Validate.notNull(identitySupplier);
             this.identitySupplier = identitySupplier;
@@ -302,6 +301,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
         @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Object apply(Object o) {
             SObject identity = (SObject) identitySupplier.get();
+            // prettier-ignore
             if (valueMappers.isEmpty()) { return identity; }
             for (Integer i = 0, size = valueMappers.size(); i < size; i++) {
                 destConsumers[i].var(valueMappers[i].apply(o)).accept(identity);
@@ -452,28 +452,36 @@ public virtual inherited sharing class SObjectFunctionProvider {
 
     private class GetByFieldName extends Function {
         private final String fieldName;
+        // prettier-ignore
         private GetByFieldName(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).get(fieldName); }
     }
 
     private class GetByFieldPath extends SObjectPathFunction {
+        // prettier-ignore
         private GetByFieldPath(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o)).get(xRefFieldName); }
     }
 
     private class GetByFieldPathSafe extends SObjectPathFunction {
+        // prettier-ignore
         private GetByFieldPathSafe(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o))?.get(xRefFieldName); }
     }
 
     private class GetFunction extends Function {
         private final IFunction function;
+        // prettier-ignore
         private GetFunction(String fieldName) {
             Validate.notBlank(fieldName);
             if (!AcfSupport.isXRefField(fieldName)) { function = new GetByFieldName(fieldName); }
             else if (AcfSupport.isSafePath(fieldName)) { function = new GetByFieldPathSafe(fieldName); }
             else { function = new GetByFieldPath(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object o) { return function.apply(o); }
     }
 
@@ -483,16 +491,19 @@ public virtual inherited sharing class SObjectFunctionProvider {
             Validate.notNull(field);
             this.field = field;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).get(field); }
     }
 
     private class GetSObjectFunction extends Function {
         private final IFunction function;
+        // prettier-ignore
         private GetSObjectFunction(String fieldName) {
             Validate.notBlank(fieldName);
             if (!fieldName.containsAny('?.')) { function = new GetSObjectByFieldName(fieldName); }
             else { function = new GetSObjectByFieldPathSafe(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object o) { return function.apply(o); }
     }
 
@@ -502,58 +513,75 @@ public virtual inherited sharing class SObjectFunctionProvider {
             Validate.notNull(field);
             this.field = field;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).getSObject(field); }
     }
 
     private class GetSObjectsByFieldName extends Function {
         private final String fieldName;
+        // prettier-ignore
         private GetSObjectsByFieldName(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).getSObjects(fieldName); }
     }
 
     private class GetSObjectsByFieldPath extends SObjectPathFunction {
+        // prettier-ignore
         private GetSObjectsByFieldPath(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o)).getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsByFieldPathSafe extends SObjectPathFunction {
+        // prettier-ignore
         private GetSObjectsByFieldPathSafe(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o))?.getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsFunction extends Function {
         private final IFunction function;
+        // prettier-ignore
         private GetSObjectsFunction(String fieldName) {
             Validate.notBlank(fieldName);
             if (!AcfSupport.isXRefField(fieldName)) { function = new GetSObjectsByFieldName(fieldName); }
             else if (AcfSupport.isSafePath(fieldName)) { function = new GetSObjectsByFieldPathSafe(fieldName); }
             else { function = new GetSObjectsByFieldPath(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object o) { return function.apply(o); }
     }
 
     private class GetPopulatedFieldsAsMap extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).getPopulatedFieldsAsMap(); }
     }
 
     private class GetQuickActionName extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).getQuickActionName(); }
     }
 
     private class GetSObjectType extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).getSObjectType(); }
     }
 
     private class GetSObjectByFieldName extends Function {
         private final String fieldName;
+        // prettier-ignore
         private GetSObjectByFieldName(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((SObject) o).getSObject(fieldName); }
     }
 
     private class GetSObjectByFieldPathSafe extends Function {
         private final List<String> path;
+        // prettier-ignore
         private GetSObjectByFieldPathSafe(String fieldName) { path = fieldName.split('\\.'); }
+        // prettier-ignore
         public override Object apply(Object o) { return getSObject((SObject) o, 0); }
+        // prettier-ignore
         private SObject getSObject(SObject sObj, Integer i) {
             if (i >= path.size()) { return sObj; }
             String fieldName = path[i];

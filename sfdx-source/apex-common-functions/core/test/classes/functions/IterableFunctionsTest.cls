@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class IterableFunctionsTest {
-
     static {
         new IterableFunctions();
     }
@@ -38,5 +37,4 @@ private class IterableFunctionsTest {
         Assert.areEqual(iter1.iterator().next(), actual1);
         Assert.areEqual(IndexOutOfBoundsException.class.getName(), exc.getTypeName());
     }
-
 }

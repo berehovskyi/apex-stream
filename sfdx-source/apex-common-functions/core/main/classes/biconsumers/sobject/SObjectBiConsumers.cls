@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class SObjectBiConsumers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SObjectBiConsumers() {}
+    protected SObjectBiConsumers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -44,7 +43,9 @@ public virtual inherited sharing class SObjectBiConsumers {
     public static BiConsumer set(final String fieldName, final IFunction mapper) {
         Validate.notNull(fieldName);
         Validate.notNull(mapper);
+        // prettier-ignore
         if (!CsfSupport.isXRefField(fieldName)) { return new SetFieldName(fieldName, mapper); }
+        // prettier-ignore
         if (CsfSupport.isSafePath(fieldName)) { return new SetFieldPathSafe(fieldName, mapper); }
         return new SetFieldPath(fieldName, mapper);
     }
@@ -145,7 +146,9 @@ public virtual inherited sharing class SObjectBiConsumers {
     public static BiConsumer setSObject(final String fieldName, final IOperator operator) {
         Validate.notNull(fieldName);
         Validate.notNull(operator);
+        // prettier-ignore
         if (!CsfSupport.isXRefField(fieldName)) { return new SetSObjectByFieldName(fieldName, operator); }
+        // prettier-ignore
         if (CsfSupport.isSafePath(fieldName)) { return new SetSObjectByPathSafe(fieldName, operator); }
         return new SetSObjectByPath(fieldName, operator);
     }
@@ -258,10 +261,10 @@ public virtual inherited sharing class SObjectBiConsumers {
     }
 
     private class SetFieldName extends FieldNameComposedBiConsumer {
+        // prettier-ignore
         private SetFieldName(String fieldName, IFunction mapper) { super(fieldName, mapper); }
-        public override void accept(Object src, Object target) {
-            ((SObject) target).put(fieldName, mapper.apply(src));
-        }
+        // prettier-ignore
+        public override void accept(Object src, Object target) { ((SObject) target).put(fieldName, mapper.apply(src)); }
     }
 
     private class SetFieldPath extends SObjectByPathBiConsumer {
@@ -287,10 +290,10 @@ public virtual inherited sharing class SObjectBiConsumers {
     }
 
     private class SetByField extends FieldComposedBiConsumer {
+        // prettier-ignore
         private SetByField(SObjectField field, IFunction mapper) { super(field, mapper); }
-        public override void accept(Object src, Object target) {
-            ((SObject) target).put(field, mapper.apply(src));
-        }
+        // prettier-ignore
+        public override void accept(Object src, Object target) { ((SObject) target).put(field, mapper.apply(src)); }
     }
 
     private class SetSObjectByFieldName extends BiConsumer {
@@ -312,7 +315,7 @@ public virtual inherited sharing class SObjectBiConsumers {
             this.mapper = operator;
         }
         public override void accept(Object src, Object target) {
-            ((SObject) operator.apply(target)).putSObject(xRefFieldName, (SObject) this.mapper.apply(src));
+            ((SObject) operator.apply(target)).putSObject(xRefFieldName, (SObject) mapper.apply(src));
         }
     }
 
@@ -323,7 +326,7 @@ public virtual inherited sharing class SObjectBiConsumers {
             this.mapper = operator;
         }
         public override void accept(Object src, Object target) {
-            ((SObject) operator.apply(target))?.putSObject(xRefFieldName, (SObject) this.mapper.apply(src));
+            ((SObject) operator.apply(target))?.putSObject(xRefFieldName, (SObject) mapper.apply(src));
         }
     }
 
@@ -342,5 +345,4 @@ public virtual inherited sharing class SObjectBiConsumers {
     }
     // @end-group
     //</editor-fold>
-
 }

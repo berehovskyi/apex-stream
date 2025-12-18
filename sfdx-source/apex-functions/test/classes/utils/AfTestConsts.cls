@@ -1,11 +1,11 @@
+// prettier-ignore
 /**
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ExcessivePublicCount, PMD.FieldNamingConventions')
+@SuppressWarnings('PMD.ApexDoc, PMD.FieldNamingConventions')
 private class AfTestConsts {
-
     public static final AccountSObject Account = new AccountSObject();
     public static final ContactSObject Contact = new ContactSObject();
     public static final AttachmentSObject Attachment = new AttachmentSObject();
@@ -125,5 +125,4 @@ private class AfTestConsts {
             this.SOBJECT_NAME = 'ContactPointEmail';
         }
     }
-
 }

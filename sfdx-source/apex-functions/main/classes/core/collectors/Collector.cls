@@ -9,13 +9,28 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Collector implements ICollector {
-
     //<editor-fold desc="Functions">
     // @start-group Functions
+    /**
+     * @description Returns a `ISupplier` that creates and returns a new mutable result `container`.
+     *
+     * @return the `ISupplier`
+     */
     public abstract ISupplier supplier();
 
+    /**
+     * @description Returns a `IBiConsumer` that incorporates a new data element
+     * into a result `container`.
+     *
+     * @return the `IBiConsumer`
+     */
     public abstract IBiConsumer accumulator();
 
+    /**
+     * @description Returns a `IFunction` that performs an optional final transform on the `container`.
+     *
+     * @return the `IFunction`
+     */
     public abstract IFunction finisher();
     // @end-group
     //</editor-fold>
@@ -88,6 +103,7 @@ public abstract inherited sharing class Collector implements ICollector {
         String typeName = String.valueOf(t);
         while (accumulator?.downstream != null) {
             typeName = typeName.substringAfter(',').substringBeforeLast('>');
+            // prettier-ignore
             if (!typeName.startsWith('Map') && !typeName.startsWith('List') && !typeName.startsWith('Set')) { break; }
             accumulator.downstream = new CollectorOf(
                 Supplier.of(Type.forName(typeName)),
@@ -114,11 +130,13 @@ public abstract inherited sharing class Collector implements ICollector {
             this.accumulator = accumulator;
             this.finisher = finisher;
         }
+        // prettier-ignore
         public override ISupplier supplier() { return supplier; }
+        // prettier-ignore
         public override IBiConsumer accumulator() { return accumulator; }
+        // prettier-ignore
         public override IFunction finisher() { return finisher; }
     }
     // @end-group
     //</editor-fold>
-
 }

@@ -2,7 +2,7 @@
  * @see SObjectCollectorProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CyclomaticComplexity, PMD.NcssTypeCount')
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class SObjectCollectorProviderTest {
     private static final Map<SObjectType, List<SObject>> DATA = AfTestData.generateSObjects();
     private static final List<Account> ACCOUNTS = DATA.get(Account.SObjectType);

@@ -14,7 +14,6 @@
  * @group Enumerables
  */
 public interface IEnumerable<T> extends Iterable<T> {
-
     //<editor-fold desc="Sources">
     /**
      * @description Returns a new `IEnumerable<T>` from the current
@@ -416,5 +415,4 @@ public interface IEnumerable<T> extends Iterable<T> {
      */
     Set<T> toSet();
     //</editor-fold>
-
 }

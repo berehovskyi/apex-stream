@@ -8,7 +8,6 @@
  * @group Functional Interfaces
  */
 public interface ICollector {
-
     /**
      * @description Returns a `ISupplier` that creates and returns a new mutable result `container`.
      *
@@ -30,5 +29,4 @@ public interface ICollector {
      * @return the `IFunction`
      */
     IFunction finisher();
-
 }

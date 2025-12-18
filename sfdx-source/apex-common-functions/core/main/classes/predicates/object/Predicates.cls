@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class Predicates {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected Predicates() {}
+    protected Predicates() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -557,12 +556,7 @@ public virtual inherited sharing class Predicates {
         private final IComparer comparer;
         private final Integer comparisonResult;
         @SuppressWarnings('PMD.ExcessiveParameterList')
-        private ComparerPredicate(
-            IFunction left,
-            IFunction right,
-            IComparer comparer,
-            Integer comparisonResult
-        ) {
+        private ComparerPredicate(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
             Validate.notNull(left);
             Validate.notNull(right);
             Validate.notNull(comparer);
@@ -573,7 +567,7 @@ public virtual inherited sharing class Predicates {
             this.comparisonResult = comparisonResult;
         }
         public override Boolean test(Object obj) {
-            return comparer.compare(this.left.apply(obj), right.apply(obj)) == comparisonResult;
+            return comparer.compare(left.apply(obj), right.apply(obj)) == comparisonResult;
         }
     }
 
@@ -584,13 +578,13 @@ public virtual inherited sharing class Predicates {
             Validate.notNull(function);
             Validate.notNull(likeString);
             this.function = function;
-            regex = '(?i)^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1')
-                .replace('%', '.*?')
-                .replace('_', '.{1}?') + '$';
+            regex =
+                '(?i)^' +
+                likeString.replaceAll('([^\\w%_ ])', '\\\\$1').replace('%', '.*?').replace('_', '.{1}?') +
+                '$';
         }
-        public override Boolean test(Object obj) {
-            return Pattern.matches(regex, (String) function.apply(obj));
-        }
+        // prettier-ignore
+        public override Boolean test(Object obj) { return Pattern.matches(regex, (String) function.apply(obj)); }
     }
 
     private abstract class IterablePredicate extends Predicate {
@@ -613,29 +607,35 @@ public virtual inherited sharing class Predicates {
     }
 
     private class ContainsPredicate extends IterablePredicate {
+        // prettier-ignore
         private ContainsPredicate(IFunction function, Iterable<Object> container) { super(function, container); }
         public override Boolean test(Object o) {
+            // prettier-ignore
             if (elements == null) { elements = toSet(container); }
             return elements.contains(function.apply(o));
         }
     }
 
     private class IncludesPredicate extends IterablePredicate {
+        // prettier-ignore
         private IncludesPredicate(IFunction function, Iterable<String> container) { super(function, container); }
         public override Boolean test(Object o) {
             final String value = (String) function.apply(o);
+            // prettier-ignore
             if (value == null) { return false; }
             final Set<String> values = split(value.trim());
+            // prettier-ignore
             if (elements == null) { elements = toSet(container); }
             for (Object element : elements) {
                 Validate.notNull(element);
+                // prettier-ignore
                 if (values.containsAll(split((String) element))) { return true; }
             }
             return false;
         }
+        // prettier-ignore
         private Set<String> split(String value) { return new Set<String>(value.split(';')); }
     }
     // @end-group
     //</editor-fold>
-
 }

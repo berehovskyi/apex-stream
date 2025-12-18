@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class BiOperatorTest {
-
     private static final List<AfPerson> PEOPLE = AfTestData.generatePersons();
     private static final List<Account> ACCOUNTS = AfTestData.generateAccounts();
 
@@ -18,7 +17,6 @@ private class BiOperatorTest {
      * @see BiOperator.combine
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // When
         IComparer comp = Comparer.comparing(new AfTestCommons.GetFieldFunction(Account.NumberOfEmployees));
@@ -102,5 +100,4 @@ private class BiOperatorTest {
             Assert.areEqual(expected1, actual1);
         }
     }
-
 }

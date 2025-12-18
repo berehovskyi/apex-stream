@@ -1,5 +1,5 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IConsumer} functional interface.
  *
  * @see IConsumer
@@ -9,9 +9,14 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Consumer implements IConsumer {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Performs the operation on the input argument. The method is expected to operate
+     * via side-effects.
+     *
+     * @param o the input argument of `Object` type
+     */
     public abstract void accept(Object o);
     // @end-group
     //</editor-fold>
@@ -61,10 +66,11 @@ public abstract inherited sharing class Consumer implements IConsumer {
             this.consumers = consumers;
         }
         public override void accept(Object o) {
-            for (IConsumer consumer : consumers) { consumer.accept(o); }
+            for (IConsumer consumer : consumers) {
+                consumer.accept(o);
+            }
         }
     }
     // @end-group
     //</editor-fold>
-
 }

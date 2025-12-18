@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions, PMD.NcssMethodCount')
 private class ComparerTest {
-
     private static final List<Account> ACCOUNTS = AfTestData.generateAccounts();
     private static final List<AfPerson> PEOPLE = AfTestData.generateSimilarPeople();
 

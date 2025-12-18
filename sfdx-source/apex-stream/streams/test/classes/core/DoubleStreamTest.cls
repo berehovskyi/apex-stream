@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class DoubleStreamTest {
-
     /**
      * @see DoubleStream.of
      * @see DoubleStream.ofNullable
@@ -380,7 +377,7 @@ private class DoubleStreamTest {
         List<Account> actual1 = (List<Account>) stm1.toList();
         // Then
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
-        for (Integer i = 0, size = input.size(); i < size; i++ ) {
+        for (Integer i = 0, size = input.size(); i < size; i++) {
             Assert.areEqual(Math.abs(clone[i]), actual[i].AnnualRevenue);
             Assert.areEqual(Math.abs(clone[i]), actual1[i].AnnualRevenue);
         }
@@ -906,5 +903,4 @@ private class DoubleStreamTest {
         Assert.isTrue(((DoubleStream) stm).isOperated);
         Assert.isTrue(((DoubleStream) stm1).isOperated);
     }
-
 }

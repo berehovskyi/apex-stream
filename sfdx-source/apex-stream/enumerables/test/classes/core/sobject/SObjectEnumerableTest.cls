@@ -4,11 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexUnitTestClassShouldHaveAsserts, PMD.NcssMethodCount')
 private class SObjectEnumerableTest {
-
     @IsTest
-    @SuppressWarnings('PMD.NcssMethodCount')
     private static void coverage() {
         // Given
         List<SObject> input = new List<SObject>();
@@ -152,7 +150,6 @@ private class SObjectEnumerableTest {
         enumerable.partition(field, null);
     }
 
-    @SuppressWarnings('PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
     private class TestSObjectEnumerable extends SObjectEnumerable {
         public override Iterator<SObject> iterator() { return null; }
         public override SObjectEnumerable append(Iterable<SObject> iterable) { return this; }
@@ -198,5 +195,4 @@ private class SObjectEnumerableTest {
         public override Map<String, List<SObject>> groupByString(IFunction keyMapper) { return null; }
         public override Map<Boolean, List<SObject>> partition(IPredicate predicate) { return null; }
     }
-
 }

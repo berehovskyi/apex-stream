@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class StreamTest {
-
     private static final List<Integer> INTS = AsTestData.generateInts();
     private static final List<Long> LONGS = AsTestData.generateLongs();
     private static final List<Double> DOUBLES = AsTestData.generateDoubles();
@@ -119,5 +116,4 @@ private class StreamTest {
         Assert.isTrue(stream8 instanceof SObjectStream);
         Assert.isTrue(stream9 instanceof ObjectStream);
     }
-
 }

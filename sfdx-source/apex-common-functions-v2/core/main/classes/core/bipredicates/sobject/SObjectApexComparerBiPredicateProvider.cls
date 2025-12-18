@@ -22,8 +22,7 @@
  *     new Account(AnnualRevenue = null)
  * ); // false
  */
-public virtual inherited sharing class SObjectApexComparerBiPredicateProvider
-    extends SObjectComparerBiPredicateProvider {
+public virtual inherited sharing class SObjectApexComparerBiPredicateProvider extends SObjectComparerBiPredicateProvider {
     /**
      * @description Creates a new instance of `SObjectApexComparerBiPredicateProvider` using
      * the non-antisymmetric comparer.

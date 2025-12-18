@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class DoubleOperatorsTest {
-
     private static final List<Double> INPUT = AfTestData.generateDoubles();
 
     static {
@@ -86,5 +85,4 @@ private class DoubleOperatorsTest {
             Assert.areEqual(Math.sqrt(d), DoubleOperators.sqrt().apply(d));
         }
     }
-
 }

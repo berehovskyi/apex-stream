@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class IntOperators {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected IntOperators() {}
+    protected IntOperators() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -159,53 +158,57 @@ public virtual inherited sharing class IntOperators {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Abs extends Operator {
+        // prettier-ignore
         public override Object apply(Object i) { return Math.abs((Integer) i); }
     }
 
     private class Add extends Operator {
         private final Integer i;
+        // prettier-ignore
         private Add(Integer i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return (Integer) j + i; }
     }
 
     private class Min extends Operator {
         private final Integer i;
+        // prettier-ignore
         private Min(Integer i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.min((Integer) j, i); }
     }
 
     private class Max extends Operator {
         private final Integer i;
+        // prettier-ignore
         private Max(Integer i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.max((Integer) j, i); }
     }
 
     private class Mod extends Operator {
         private final Integer i;
-        private Mod(Integer i) {
-            Validate.notNull(i);
-            Validate.isTrue(i != 0);
-            this.i = i;
-        }
+        // prettier-ignore
+        private Mod(Integer i) { Validate.notNull(i); Validate.isTrue(i != 0); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.mod((Integer) j, i); }
     }
 
     private class Multiply extends Operator {
         private final Integer i;
+        // prettier-ignore
         private Multiply(Integer i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return (Integer) j * i; }
     }
 
     private class Divide extends Operator {
         private final Integer i;
-        private Divide(Integer i) {
-            Validate.notNull(i);
-            Validate.isTrue(i != 0);
-            this.i = i;
-        }
+        // prettier-ignore
+        private Divide(Integer i) { Validate.notNull(i); Validate.isTrue(i != 0); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return (Integer) j / i; }
     }
     // @end-group
     //</editor-fold>
-
 }

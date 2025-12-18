@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectOperatorsTest {
-
     private static final List<Contact> INPUT = AfTestData.generateContacts2();
 
     static {
@@ -164,5 +161,4 @@ private class SObjectOperatorsTest {
             Assert.areEqual(null, ((SObject) setSObjectsOperator4.apply(AfTestCommons.deepClone(actual))).getSObjects(eventsFieldName));
         }
     }
-
 }

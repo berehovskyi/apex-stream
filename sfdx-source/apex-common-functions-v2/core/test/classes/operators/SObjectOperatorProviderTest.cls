@@ -2,7 +2,7 @@
  * @see SObjectOperatorProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectOperatorProviderTest {
     private static final List<Contact> INPUT = AfTestData.generateContacts2();
     private static final SObjectOperatorProvider OP = new SObjectOperatorProvider();

@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class ReduceGenerator implements Iterator<Object> {
-
     private final IOperator operator;
     private Object next;
 
@@ -17,6 +17,7 @@ public inherited sharing class ReduceGenerator implements Iterator<Object> {
     }
 
     public Object next() {
+        // prettier-ignore
         if (!hasNext()) { throw new NoSuchElementException(); }
         return computeNext();
     }
@@ -26,5 +27,4 @@ public inherited sharing class ReduceGenerator implements Iterator<Object> {
         next = operator.apply(next);
         return prev;
     }
-
 }

@@ -38,14 +38,10 @@ public virtual inherited sharing class IdSupplierProvider {
         private final String placeholder = '000000000000';
         private IdOfTypeSupplier(SObjectType sObjectType) {
             Validate.notNull(sObjectType);
-            keyPrefix = sObjectType.getDescribe().getKeyPrefix();
+            keyPrefix = sObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix();
         }
         public override Object get() {
-            return Id.valueOf(
-                keyPrefix
-                + placeholder.substring(0, 12 - String.valueOf(i).length())
-                + i++
-            );
+            return Id.valueOf(keyPrefix + placeholder.substring(0, 12 - String.valueOf(i).length()) + i++);
         }
     }
 }

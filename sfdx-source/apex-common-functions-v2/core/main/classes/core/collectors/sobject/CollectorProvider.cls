@@ -92,7 +92,6 @@
  * //    }
  * // }
  */
-@SuppressWarnings('PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount, PMD.NcssTypeCount')
 public virtual inherited sharing class CollectorProvider {
     protected final Type valueType;
 
@@ -1462,7 +1461,6 @@ public virtual inherited sharing class CollectorProvider {
         return new GroupKeyMapping(keyType, valueType, accumulator, finisher);
     }
 
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     private static Object mergeValue(
         final IBiOperator merger,
         final Object key,
@@ -1596,10 +1594,10 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-        * @description Provides a supplier that supplies a new result container.
-        *
-        * @return a supplier function that provides a result container
-        */
+         * @description Provides a supplier that supplies a new result container.
+         *
+         * @return a supplier function that provides a result container
+         */
         public virtual override ISupplier supplier() {
             return downstream.supplier();
         }
@@ -1643,12 +1641,13 @@ public virtual inherited sharing class CollectorProvider {
     }
 
     /**
-    * @description Collector that maps elements using a specified function and
-    * collects the results using a downstream collector.
-    */
+     * @description Collector that maps elements using a specified function and
+     * collects the results using a downstream collector.
+     */
     public virtual class MappingCollector extends BaseMappingCollector {
-        protected MappingCollector(IFunction mapper, ICollector downstream) { super(mapper, downstream); }
-
+        protected MappingCollector(IFunction mapper, ICollector downstream) {
+            super(mapper, downstream);
+        }
         protected virtual override IBiConsumer accumulator(Object mapper, IBiConsumer accumulator) {
             return new MappingBiConsumer((IFunction) mapper, accumulator);
         }
@@ -1922,6 +1921,7 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         protected void overrideSupplierIfDefault() {
+            // prettier-ignore
             if (isDefaultSupplier) { sup = Supplier.of(listType(valueType ?? Object.class)); }
         }
     }
@@ -2053,7 +2053,15 @@ public virtual inherited sharing class CollectorProvider {
          *     .collect(nameByIndustryCollector); // { 'Technology' => 'Company A', 'Finance' => 'Company B' }
          */
         public virtual MapValueMappingCollector key(final IFunction keyMapper) {
-            return new MapValueMappingCollector(sup, isDefaultSupplier, keyType, valueType, keyMapper, accumulator, merger);
+            return new MapValueMappingCollector(
+                sup,
+                isDefaultSupplier,
+                keyType,
+                valueType,
+                keyMapper,
+                accumulator,
+                merger
+            );
         }
 
         /**
@@ -2152,7 +2160,6 @@ public virtual inherited sharing class CollectorProvider {
         protected ISupplier sup;
         protected Boolean isDefaultSupplier;
         protected Type valueType;
-        @SuppressWarnings('PMD.ExcessiveParameterList')
         protected MapValueMappingCollector(
             ISupplier sup,
             Boolean isDefaultSupplier,
@@ -2228,6 +2235,7 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         private void overrideSupplierIfDefault() {
+            // prettier-ignore
             if (isDefaultSupplier) { sup = Supplier.of(mapType(keyType, valueType ?? Object.class)); }
         }
     }
@@ -2244,7 +2252,6 @@ public virtual inherited sharing class CollectorProvider {
         protected Type valueType;
         protected Boolean isDefaultSupplier = true;
         protected ISupplier sup;
-        @SuppressWarnings('PMD.ExcessiveParameterList')
         protected GroupKeyMapping(Type keyType, Type valueType, PutToDownstreamMap acc, GroupFinisher finisher) {
             this.keyType = keyType;
             sup = Supplier.of(groupType(keyType, valueType));
@@ -2343,7 +2350,14 @@ public virtual inherited sharing class CollectorProvider {
          */
         public virtual GroupMapValueMappingCollector key(final IFunction keyMapper) {
             return new GroupMapValueMappingCollector(
-                sup, isDefaultSupplier, keyType, valueType, keyMapper, accumulator, downstream, finisher
+                sup,
+                isDefaultSupplier,
+                keyType,
+                valueType,
+                keyMapper,
+                accumulator,
+                downstream,
+                finisher
             );
         }
 
@@ -2468,7 +2482,6 @@ public virtual inherited sharing class CollectorProvider {
         protected final ListValueMappingCollector downstream;
         protected Boolean isDefaultSupplier;
         protected ISupplier sup;
-        @SuppressWarnings('PMD.ExcessiveParameterList')
         protected GroupMapValueMappingCollector(
             ISupplier supplier,
             Boolean isDefaultSupplier,
@@ -2638,6 +2651,7 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         private void overrideSupplierIfDefault() {
+            // prettier-ignore
             if (isDefaultSupplier) { sup = Supplier.of(mapType(keyType, valueType ?? Object.class)); }
         }
     }
@@ -2877,7 +2891,6 @@ public virtual inherited sharing class CollectorProvider {
      * @description Collector that partitions SObjects into two groups based on a boolean predicate.
      */
     public virtual class PartitionValueMappingCollector extends GroupMapValueMappingCollector {
-        @SuppressWarnings('PMD.ExcessiveParameterList')
         protected PartitionValueMappingCollector(
             Boolean isDefaultSupplier,
             Type valueType,
@@ -3055,11 +3068,15 @@ public virtual inherited sharing class CollectorProvider {
          * // 'DoeSmith'
          */
         public virtual override Collector val(final IFunction mapper) {
-            return new Mapping().val(mapper).to(Collector.of(
-                new JoiningStringSupplier(),
-                new JoiningStringBiConsumer(delimiter, prefix),
-                new AppendFinisher(suffix)
-            ));
+            return new Mapping()
+                .val(mapper)
+                .to(
+                    Collector.of(
+                        new JoiningStringSupplier(),
+                        new JoiningStringBiConsumer(delimiter, prefix),
+                        new AppendFinisher(suffix)
+                    )
+                );
         }
     }
 
@@ -3102,7 +3119,7 @@ public virtual inherited sharing class CollectorProvider {
      * @description Inits the configuration that calculates the average of `Integer` values.
      */
     public virtual class AverageIntMapping extends NumericMapping {
-        public AverageIntMapping() {
+        private AverageIntMapping() {
             super(new AveragingIntSupplier(), new AveragingIntBiConsumer(), new AveragingIntFinisher());
         }
     }
@@ -3111,7 +3128,7 @@ public virtual inherited sharing class CollectorProvider {
      * @description Inits the configuration that sums up `Integer` values.
      */
     public virtual class SumIntMapping extends NumericMapping {
-        public SumIntMapping() {
+        private SumIntMapping() {
             super(new AveragingIntSupplier(), new AveragingIntBiConsumer(), new SummingFinisher());
         }
     }
@@ -3120,7 +3137,7 @@ public virtual inherited sharing class CollectorProvider {
      * @description Inits the configuration that calculates the average of `Long` values.
      */
     public virtual class AverageLongMapping extends NumericMapping {
-        public AverageLongMapping() {
+        private AverageLongMapping() {
             super(new AveragingLongSupplier(), new AveragingLongBiConsumer(), new AveragingLongFinisher());
         }
     }
@@ -3129,7 +3146,7 @@ public virtual inherited sharing class CollectorProvider {
      * @description Inits the configuration that sums up `Long` values.
      */
     public virtual class SumLongMapping extends NumericMapping {
-        public SumLongMapping() {
+        private SumLongMapping() {
             super(new AveragingLongSupplier(), new AveragingLongBiConsumer(), new SummingFinisher());
         }
     }
@@ -3138,7 +3155,7 @@ public virtual inherited sharing class CollectorProvider {
      * @description Inits the configuration that calculates the average of `Double` values.
      */
     public virtual class AverageDoubleMapping extends NumericMapping {
-        public AverageDoubleMapping() {
+        private AverageDoubleMapping() {
             super(new AveragingDoubleSupplier(), new AveragingDoubleBiConsumer(), new AveragingDoubleFinisher());
         }
     }
@@ -3147,7 +3164,7 @@ public virtual inherited sharing class CollectorProvider {
      * @description Creates a collector that sums up `Double` values.
      */
     public virtual class SumDoubleMapping extends NumericMapping {
-        public SumDoubleMapping() {
+        private SumDoubleMapping() {
             super(new AveragingDoubleSupplier(), new AveragingDoubleBiConsumer(), new SummingDoubleFinisher());
         }
     }
@@ -3158,8 +3175,9 @@ public virtual inherited sharing class CollectorProvider {
      */
     public virtual class Filtering {
         protected final Type valueType;
-        protected Filtering(Type valueType) { this.valueType = valueType; }
-
+        protected Filtering(Type valueType) {
+            this.valueType = valueType;
+        }
         /**
          * @description Specifies a custom predicate to filter the elements.
          *
@@ -3247,7 +3265,9 @@ public virtual inherited sharing class CollectorProvider {
      * It delegates to a downstream collector after applying the filter condition.
      */
     public virtual class FilterMappingCollector extends BaseMappingCollector {
-        protected FilterMappingCollector(IPredicate predicate, ICollector downstream) { super(predicate, downstream); }
+        protected FilterMappingCollector(IPredicate predicate, ICollector downstream) {
+            super(predicate, downstream);
+        }
 
         protected virtual override IBiConsumer accumulator(Object predicate, IBiConsumer accumulator) {
             return new FilteringBiConsumer((IPredicate) predicate, accumulator);
@@ -3383,7 +3403,9 @@ public virtual inherited sharing class CollectorProvider {
      * collects the results using a downstream collector.
      */
     public virtual class FlatMappingCollector extends BaseMappingCollector {
-        protected FlatMappingCollector(IFunction mapper, ICollector downstream) { super(mapper, downstream); }
+        protected FlatMappingCollector(IFunction mapper, ICollector downstream) {
+            super(mapper, downstream);
+        }
 
         protected virtual override IBiConsumer accumulator(Object mapper, IBiConsumer accumulator) {
             return new FlatMappingBiConsumer((IFunction) mapper, accumulator);
@@ -3396,8 +3418,9 @@ public virtual inherited sharing class CollectorProvider {
      */
     public virtual class Folding {
         protected final Object identity;
-        protected Folding(final Object identity) { this.identity = identity; }
-
+        protected Folding(final Object identity) {
+            this.identity = identity;
+        }
         /**
          * @description Specifies a mapping function to apply to each element before the fold operation.
          *
@@ -3692,54 +3715,67 @@ public virtual inherited sharing class CollectorProvider {
     }
 
     private class AddToListBiConsumer extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((List<Object>) container).add(o); }
     }
 
     private class AddToBoolSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Boolean>) container).add((Boolean) o); }
     }
 
     private class AddToIdSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Id>) container).add((Id) o); }
     }
 
     private class AddToStringSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<String>) container).add((String) o); }
     }
 
     private class AddToBlobSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Blob>) container).add((Blob) o); }
     }
 
     private class AddToDateSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Date>) container).add((Date) o); }
     }
 
     private class AddToDatetimeSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Datetime>) container).add((Datetime) o); }
     }
 
     private class AddToTimeSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Time>) container).add((Time) o); }
     }
 
     private class AddToIntSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Integer>) container).add((Integer) o); }
     }
 
     private class AddToLongSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Long>) container).add((Long) o); }
     }
 
     private class AddToDoubleSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Double>) container).add((Double) o); }
     }
 
     private class AddToSObjectSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<SObject>) container).add((SObject) o); }
     }
 
     private class AddToObjectSet extends BiConsumer {
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Object>) container).add(o); }
     }
 
@@ -3782,6 +3818,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Boolean, Object> m = ((Map<Boolean, Object>) container);
             final Boolean key = (Boolean) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3792,6 +3829,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Id, Object> m = ((Map<Id, Object>) container);
             final Id key = (Id) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3802,6 +3840,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<String, Object> m = ((Map<String, Object>) container);
             final String key = (String) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3812,6 +3851,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Blob, Object> m = ((Map<Blob, Object>) container);
             final Blob key = (Blob) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3822,6 +3862,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Date, Object> m = ((Map<Date, Object>) container);
             final Date key = (Date) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3832,6 +3873,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Datetime, Object> m = ((Map<Datetime, Object>) container);
             final Datetime key = (Datetime) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3842,6 +3884,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Time, Object> m = ((Map<Time, Object>) container);
             final Time key = (Time) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3852,6 +3895,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Integer, Object> m = ((Map<Integer, Object>) container);
             final Integer key = (Integer) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3862,6 +3906,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Long, Object> m = ((Map<Long, Object>) container);
             final Long key = (Long) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3872,6 +3917,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Double, Object> m = ((Map<Double, Object>) container);
             final Double key = (Double) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3882,6 +3928,7 @@ public virtual inherited sharing class CollectorProvider {
             final Map<Object, Object> m = ((Map<Object, Object>) container);
             final Object key = keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -3891,6 +3938,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Boolean, Object> m = (Map<Boolean, Object>) container;
             final Boolean key = (Boolean) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3900,6 +3948,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Id, Object> m = (Map<Id, Object>) container;
             final Id key = (Id) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3909,6 +3958,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<String, Object> m = (Map<String, Object>) container;
             final String key = (String) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3918,6 +3968,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Blob, Object> m = (Map<Blob, Object>) container;
             final Blob key = (Blob) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3927,6 +3978,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Date, Object> m = (Map<Date, Object>) container;
             final Date key = (Date) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3936,6 +3988,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Datetime, Object> m = (Map<Datetime, Object>) container;
             final Datetime key = (Datetime) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3945,6 +3998,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Time, Object> m = (Map<Time, Object>) container;
             final Time key = (Time) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3954,6 +4008,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Integer, Object> m = (Map<Integer, Object>) container;
             final Integer key = (Integer) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3963,6 +4018,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Long, Object> m = (Map<Long, Object>) container;
             final Long key = (Long) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3972,6 +4028,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Double, Object> m = (Map<Double, Object>) container;
             final Double key = (Double) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3981,6 +4038,7 @@ public virtual inherited sharing class CollectorProvider {
         public override void accept(Object container, Object o) {
             final Map<Object, Object> m = (Map<Object, Object>) container;
             final Object key = classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -3996,122 +4054,161 @@ public virtual inherited sharing class CollectorProvider {
 
     private class GroupByBoolFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Boolean, Object> m = ((Map<Boolean, Object>) o);
-            for (Boolean k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Boolean k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByIdFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Id, Object> m = ((Map<Id, Object>) o);
-            for (Id k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Id k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByStringFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<String, Object> m = ((Map<String, Object>) o);
-            for (String k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (String k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByBlobFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Blob, Object> m = ((Map<Blob, Object>) o);
-            for (Blob k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Blob k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByDateFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Date, Object> m = ((Map<Date, Object>) o);
-            for (Date k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Date k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByDatetimeFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Datetime, Object> m = ((Map<Datetime, Object>) o);
-            for (Datetime k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Datetime k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByTimeFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Time, Object> m = ((Map<Time, Object>) o);
-            for (Time k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Time k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByIntFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Integer, Object> m = ((Map<Integer, Object>) o);
-            for (Integer k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Integer k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByLongFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Long, Object> m = ((Map<Long, Object>) o);
-            for (Long k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Long k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByDoubleFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Double, Object> m = ((Map<Double, Object>) o);
-            for (Double k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Double k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class GroupByObjectFinisher extends GroupFinisher {
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Object, Object> m = ((Map<Object, Object>) o);
-            for (Object k : m.keySet()) { m.put(k, finisher.apply(m.get(k))); }
+            for (Object k : m.keySet()) {
+                m.put(k, finisher.apply(m.get(k)));
+            }
             return m;
         }
     }
 
     private class JoiningStringSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<String>{ '' }; }
     }
 
     private class AveragingIntSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<Integer>{ 0, 0 }; }
     }
 
     private class AveragingLongSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<Long>{ 0L, 0L }; }
     }
 
     private class AveragingDoubleSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<Double>{ 0, 0, 0, 0 }; }
     }
 
     private class BoxSupplier extends Supplier {
         private final Object identity;
+        // prettier-ignore
         private BoxSupplier(Object identity) { this.identity = identity; }
+        // prettier-ignore
         public override Object get() { return new List<Object>{ identity }; }
     }
 
@@ -4156,13 +4253,16 @@ public virtual inherited sharing class CollectorProvider {
 
     private class AppendFinisher extends Function {
         private final String suffix;
+        // prettier-ignore
         private AppendFinisher(String suffix) { Validate.notNull(suffix); this.suffix = suffix; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((List<String>) o)[0] + suffix; }
     }
 
     private class AveragingIntFinisher extends Function {
         public override Object apply(Object o) {
             final List<Integer> integers = (List<Integer>) o;
+            // prettier-ignore
             if (integers[0] == 0) { return null; }
             return integers[1] / (Double) integers[0];
         }
@@ -4171,6 +4271,7 @@ public virtual inherited sharing class CollectorProvider {
     private class SummingFinisher extends Function {
         public override Object apply(Object o) {
             final List<Object> objects = (List<Object>) o;
+            // prettier-ignore
             if (objects[0] == 0) { return null; }
             return objects[1];
         }
@@ -4179,6 +4280,7 @@ public virtual inherited sharing class CollectorProvider {
     private class SummingDoubleFinisher extends Function {
         public override Object apply(Object o) {
             final List<Double> doubles = (List<Double>) o;
+            // prettier-ignore
             if (doubles[2] == 0) { return null; }
             return doubles[0] + doubles[1];
         }
@@ -4187,6 +4289,7 @@ public virtual inherited sharing class CollectorProvider {
     private class AveragingLongFinisher extends Function {
         public override Object apply(Object o) {
             final List<Long> longs = (List<Long>) o;
+            // prettier-ignore
             if (longs[0] == 0) { return null; }
             return longs[1] / (Double) longs[0];
         }
@@ -4195,6 +4298,7 @@ public virtual inherited sharing class CollectorProvider {
     private class AveragingDoubleFinisher extends Function {
         public override Object apply(Object o) {
             final List<Double> doubles = (List<Double>) o;
+            // prettier-ignore
             if (doubles[2] == 0) { return null; }
             return (doubles[0] + doubles[1]) / doubles[2];
         }
@@ -4202,9 +4306,7 @@ public virtual inherited sharing class CollectorProvider {
 
     private class ReducingFinisher extends Function {
         public override Object apply(Object o) {
-            return ((List<Object>) o).isEmpty()
-                ? Optional.empty()
-                : Optional.ofNullable(((List<Object>) o)[0]);
+            return ((List<Object>) o).isEmpty() ? Optional.empty() : Optional.ofNullable(((List<Object>) o)[0]);
         }
     }
 
@@ -4221,6 +4323,7 @@ public virtual inherited sharing class CollectorProvider {
             Integer i = 0;
             while (iterator.hasNext()) {
                 final Object current = iterator.next();
+                // prettier-ignore
                 if (i == index) { return current; }
                 i++;
             }
@@ -4249,6 +4352,7 @@ public virtual inherited sharing class CollectorProvider {
             this.accumulator = accumulator;
         }
         public override void accept(Object container, Object o) {
+            // prettier-ignore
             if (predicate.test(o)) { accumulator.accept(container, o); }
         }
     }
@@ -4285,14 +4389,18 @@ public virtual inherited sharing class CollectorProvider {
     }
 
     private class MappingBiConsumer extends ComposedBiConsumer {
+        // prettier-ignore
         private MappingBiConsumer(IFunction mapper, IBiConsumer accumulator) { super(mapper, accumulator); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { accumulator.accept(container, mapper.apply(o)); }
     }
 
     private class FlatMappingBiConsumer extends ComposedBiConsumer {
+        // prettier-ignore
         private FlatMappingBiConsumer(IFunction mapper, IBiConsumer accumulator) { super(mapper, accumulator); }
         public override void accept(Object container, Object o) {
             final Iterable<Object> result = (Iterable<Object>) mapper.apply(o);
+            // prettier-ignore
             if (result == null) { return; }
             final Iterator<Object> iterator = result.iterator();
             while (iterator.hasNext()) {

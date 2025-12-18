@@ -42,11 +42,7 @@
  *         .mapToDouble(getAnnualRevenueToDoubleFunction)
  *         .sum();
  */
-@SuppressWarnings(
-    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount, PMD.ExcessiveClassLength'
-)
 public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
-
     private final List<Object> objects;
 
     protected ObjectSequence() {
@@ -121,6 +117,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * ObjectEnumerable emptyPeopleSeq = ObjectSequence.ofNullable((List<Object>) null);
      */
     public static ObjectEnumerable ofNullable(final List<Object> objects) {
+        // prettier-ignore
         if (objects == null) { return empty(); }
         return new ObjectSequence(objects);
     }
@@ -139,6 +136,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * ObjectEnumerable emptySeq = ObjectSequence.ofNullable((Set<Object>) null);
      */
     public static ObjectEnumerable ofNullable(final Set<Object> objects) {
+        // prettier-ignore
         if (objects == null) { return empty(); }
         return new ObjectSequence(new List<Object>(objects));
     }
@@ -1047,5 +1045,4 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     }
     // @end-group
     //</editor-fold>
-
 }

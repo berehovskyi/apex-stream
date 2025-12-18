@@ -2,6 +2,7 @@
  * @see IdSupplierProvider
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc')
 private class IdSupplierProviderTest {
     private static final IdSupplierProvider SUP = new IdSupplierProvider();
 
@@ -9,7 +10,6 @@ private class IdSupplierProviderTest {
      * @see IdSupplierProvider.of
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void default() {
         // Given
         SObjectType sObjectType = Account.SObjectType;

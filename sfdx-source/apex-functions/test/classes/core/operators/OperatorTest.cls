@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class OperatorTest {
-
     private static final List<Contact> CONTACTS = AfTestData.generateContacts2();
     private static final List<Integer> INTS = AfTestData.generateInts();
 
@@ -18,7 +17,6 @@ private class OperatorTest {
      * @see Operator.combine
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         Object value = 'Value';
@@ -103,5 +101,4 @@ private class OperatorTest {
             Assert.areEqual((((Integer) o) + 1) * factor, operator2.apply(o));
         }
     }
-
 }

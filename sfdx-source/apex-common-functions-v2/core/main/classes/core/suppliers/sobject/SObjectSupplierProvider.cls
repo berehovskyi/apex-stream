@@ -38,6 +38,7 @@ public virtual inherited sharing class SObjectSupplierProvider {
             Validate.notNull(t);
             this.t = t;
         }
+        // prettier-ignore
         public override Object get() { return t.newSObject(); }
     }
 }

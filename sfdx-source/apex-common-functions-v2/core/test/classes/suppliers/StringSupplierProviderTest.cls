@@ -2,6 +2,7 @@
  * @see StringSupplierProvider
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc')
 private class StringSupplierProviderTest {
     private static final StringSupplierProvider SUP = new StringSupplierProvider();
 
@@ -10,7 +11,6 @@ private class StringSupplierProviderTest {
      * @see StringSupplierProvider.autonumber
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void default() {
         // Given
         ISupplier uuidSupp = SUP.uuid();

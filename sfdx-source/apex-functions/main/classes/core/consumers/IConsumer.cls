@@ -6,7 +6,6 @@
  * @group Functional Interfaces
  */
 public interface IConsumer {
-
     /**
      * @description Performs the operation on the input argument. The method is expected to operate
      * via side-effects.
@@ -14,5 +13,4 @@ public interface IConsumer {
      * @param o the input argument of `Object` type
      */
     void accept(Object o);
-
 }

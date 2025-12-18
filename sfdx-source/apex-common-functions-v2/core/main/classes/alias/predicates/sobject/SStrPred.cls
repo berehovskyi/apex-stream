@@ -3,4 +3,5 @@
  *
  * @group Functional Built-In Class V2 Aliases
  */
-public inherited sharing class SStrPred extends SObjectStringPredicateProvider {}
+public inherited sharing class SStrPred extends SObjectStringPredicateProvider {
+}

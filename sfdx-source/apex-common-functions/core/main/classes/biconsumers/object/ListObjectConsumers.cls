@@ -10,10 +10,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class ListObjectConsumers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected ListObjectConsumers() {}
+    protected ListObjectConsumers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -215,6 +214,7 @@ public virtual inherited sharing class ListObjectConsumers {
             Validate.notNull(mapper);
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((List<Object>) container).add(mapper.apply(o)); }
     }
 
@@ -258,6 +258,7 @@ public virtual inherited sharing class ListObjectConsumers {
     }
 
     private class AveragingInt extends Operating {
+        // prettier-ignore
         private AveragingInt(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             final List<Integer> integers = (List<Integer>) container;
@@ -267,6 +268,7 @@ public virtual inherited sharing class ListObjectConsumers {
     }
 
     private class AveragingLong extends Operating {
+        // prettier-ignore
         private AveragingLong(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             final List<Long> integers = (List<Long>) container;
@@ -317,5 +319,4 @@ public virtual inherited sharing class ListObjectConsumers {
     }
     // @end-group
     //</editor-fold>
-
 }

@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class LongOperatorsTest {
-
     private static final List<Long> INPUT = AfTestData.generateLongs();
 
     static {
@@ -46,5 +45,4 @@ private class LongOperatorsTest {
             Assert.areEqual(l - inc, LongOperators.subtract(inc).apply(l));
         }
     }
-
 }

@@ -7,10 +7,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BiOperators {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected BiOperators() {}
+    protected BiOperators() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -18,7 +17,7 @@ public virtual inherited sharing class BiOperators {
      * @description Returns a `BiOperator` that return a lesser input argument.
      *
      * @return the `BiOperator`
-     * 
+     *
      * @example
      * BiOperators.min().apply(2, 5); // 2
      */
@@ -30,7 +29,7 @@ public virtual inherited sharing class BiOperators {
      * @description Returns a `BiOperator` that return a greater input argument.
      *
      * @return the `BiOperator`
-     * 
+     *
      * @example
      * BiOperators.max().apply(2, 5); // 5
      */
@@ -43,13 +42,14 @@ public virtual inherited sharing class BiOperators {
     //<editor-fold desc="Lambdas">
     private class Min extends BiOperator {
         private final IComparer comp = Comparer.defaultOrder();
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return comp.compare(o1, o2) != 1 ? o1 : o2; }
     }
 
     private class Max extends BiOperator {
         private final IComparer comp = Comparer.defaultOrder();
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return comp.compare(o1, o2) == 1 ? o1 : o2; }
     }
     //</editor-fold>
-
 }

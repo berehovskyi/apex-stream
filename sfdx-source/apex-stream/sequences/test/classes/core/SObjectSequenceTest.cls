@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
-)
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class SObjectSequenceTest {
-
     /**
      * @see SObjectSequence.of
      * @see SObjectSequence.ofNullable
@@ -1559,5 +1556,4 @@ private class SObjectSequenceTest {
         Assert.areEqual(expected1, actual2);
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
-
 }

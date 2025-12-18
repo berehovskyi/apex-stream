@@ -8,12 +8,10 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD')
 public virtual inherited sharing class Collectors {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected Collectors() {}
+    protected Collectors() {
+    }
 
     //<editor-fold desc="Built-Ins">
 
@@ -613,10 +611,7 @@ public virtual inherited sharing class Collectors {
         final IBiOperator merger,
         final ISupplier mapSupplier
     ) {
-        return Collector.of(
-            mapSupplier,
-            MapObjectConsumers.putToObjectByBoolMap(keyMapper, valueMapper, merger)
-        );
+        return Collector.of(mapSupplier, MapObjectConsumers.putToObjectByBoolMap(keyMapper, valueMapper, merger));
     }
     // @end-group
     //</editor-fold>
@@ -749,10 +744,7 @@ public virtual inherited sharing class Collectors {
         final IBiOperator merger,
         final ISupplier mapSupplier
     ) {
-        return Collector.of(
-            mapSupplier,
-            MapObjectConsumers.putToObjectByIdMap(keyMapper, valueMapper, merger)
-        );
+        return Collector.of(mapSupplier, MapObjectConsumers.putToObjectByIdMap(keyMapper, valueMapper, merger));
     }
     // @end-group
     //</editor-fold>
@@ -884,10 +876,7 @@ public virtual inherited sharing class Collectors {
         final IBiOperator merger,
         final ISupplier mapSupplier
     ) {
-        return Collector.of(
-            mapSupplier,
-            MapObjectConsumers.putToObjectByStringMap(keyMapper, valueMapper, merger)
-        );
+        return Collector.of(mapSupplier, MapObjectConsumers.putToObjectByStringMap(keyMapper, valueMapper, merger));
     }
     // @end-group
     //</editor-fold>
@@ -1020,10 +1009,7 @@ public virtual inherited sharing class Collectors {
         final IBiOperator merger,
         final ISupplier mapSupplier
     ) {
-        return Collector.of(
-            mapSupplier,
-            MapObjectConsumers.putToObjectByBlobMap(keyMapper, valueMapper, merger)
-        );
+        return Collector.of(mapSupplier, MapObjectConsumers.putToObjectByBlobMap(keyMapper, valueMapper, merger));
     }
     // @end-group
     //</editor-fold>
@@ -3299,20 +3285,20 @@ public virtual inherited sharing class Collectors {
     //<editor-fold desc="Double Collectors">
     // @start-group Double Collectors
     /**
-         * @description Returns a `Collector` that returns the arithmetic mean
-         * of values returned by `mapper`.
-         * If no elements are present, the result is null.
-         *
-         * @param mapper the function extracting the Double value to average
-         *
-         * @return the `Collector`
-         *
-         * @throws NullPointerException if `mapper` is null
-         *
-         * @example
-         * Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
-         *     .collect(Collectors.averagingLong(Functions.get('BillingLatitude')));
-         */
+     * @description Returns a `Collector` that returns the arithmetic mean
+     * of values returned by `mapper`.
+     * If no elements are present, the result is null.
+     *
+     * @param mapper the function extracting the Double value to average
+     *
+     * @return the `Collector`
+     *
+     * @throws NullPointerException if `mapper` is null
+     *
+     * @example
+     * Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
+     *     .collect(Collectors.averagingLong(Functions.get('BillingLatitude')));
+     */
     public static Collector averagingDouble(final IFunction mapper) {
         return Collector.of(
             CollectorSuppliers.averagingDouble(),
@@ -3651,5 +3637,4 @@ public virtual inherited sharing class Collectors {
     //</editor-fold>
 
     //</editor-fold>
-
 }

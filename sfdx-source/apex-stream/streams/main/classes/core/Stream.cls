@@ -12,9 +12,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessivePublicCount')
 public inherited sharing class Stream {
-
     /**
      * @description Returns a `ObjectEnumerable` created from `List<Object>`.
      *
@@ -513,5 +511,4 @@ public inherited sharing class Stream {
     public static DoubleEnumerable iterate(final Double seed, final IPredicate predicate, final IOperator operator) {
         return DoubleStream.iterate(seed, predicate, operator);
     }
-
 }

@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class ConcatIterator extends BaseIterator {
-
     private final List<Iterator<Object>> iterators;
     private final Integer count;
     private Integer index = 0;
@@ -10,8 +10,10 @@ public inherited sharing class ConcatIterator extends BaseIterator {
     public ConcatIterator(final List<Iterable<Object>> iterables, final Type elementType) {
         Validate.noNullElements(iterables);
         Validate.notNull(elementType);
-        final List<Iterator<Object>> iterators = (List<Iterator<Object>>)
-            Type.forName('List<Iterator<' + elementType + '>>').newInstance();
+        final List<Iterator<Object>> iterators = (List<Iterator<Object>>) Type.forName(
+                'List<Iterator<' + elementType + '>>'
+            )
+            .newInstance();
         final Iterator<Iterable<Object>> iterator = iterables.iterator();
         while (iterator.hasNext()) {
             iterators.add(iterator.next().iterator());
@@ -32,5 +34,4 @@ public inherited sharing class ConcatIterator extends BaseIterator {
         }
         hasNext = false;
     }
-
 }

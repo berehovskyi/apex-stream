@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class LimitIterator implements Iterator<Object> {
-
     private final Iterator<Object> iterator;
     private final Integer lim;
     private Integer i = 0;
@@ -20,6 +20,7 @@ public inherited sharing class LimitIterator implements Iterator<Object> {
     }
 
     public Object next() {
+        // prettier-ignore
         if (!hasNext()) { throw new NoSuchElementException(); }
         return computeNext();
     }
@@ -28,5 +29,4 @@ public inherited sharing class LimitIterator implements Iterator<Object> {
         i++;
         return iterator.next();
     }
-
 }

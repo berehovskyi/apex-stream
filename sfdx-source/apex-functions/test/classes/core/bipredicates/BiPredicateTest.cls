@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class BiPredicateTest {
-
     private static final List<AfPerson> PEOPLE = AfTestData.generatePersons();
     private static final List<Account> ACCOUNTS = AfTestData.generateAccounts();
     private static final Account ACCOUNT_DELTA = new Account(Type = AfTestConsts.PARTNER, NumberOfEmployees = 100, BillingLatitude = -50.45);
@@ -21,7 +20,6 @@ private class BiPredicateTest {
      * @see BiPredicate.always
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         SObjectField accNumOfEmployeesField = Account.NumberOfEmployees;
@@ -49,7 +47,6 @@ private class BiPredicateTest {
      * @see BiPredicate.some
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void some_sobject() {
         // Given
         Integer value = 100;
@@ -86,7 +83,6 @@ private class BiPredicateTest {
      * @see BiPredicate.every
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void every_sobject() {
         // Given
         Integer value = 100;
@@ -121,7 +117,6 @@ private class BiPredicateTest {
      * @see BiPredicate.negate
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void negate_sobject() {
         // Given
         SObjectField accNumOfEmployeesField = Account.NumberOfEmployees;
@@ -245,5 +240,4 @@ private class BiPredicateTest {
             Assert.areEqual(!isDecreasedAge, notAgeIsNotGreaterBiPredicate.test(person, PERSON_DELTA));
         }
     }
-
 }

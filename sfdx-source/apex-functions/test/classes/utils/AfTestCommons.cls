@@ -1,11 +1,11 @@
+// prettier-ignore
 /**
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ExcessivePublicCount, PMD.CognitiveComplexity')
+@SuppressWarnings('PMD.ApexDoc')
 private class AfTestCommons {
-
     public static SObject deepClone(SObject sObj) {
         return sObj.clone(true, true, true, true);
     }
@@ -204,7 +204,7 @@ private class AfTestCommons {
         private Integer i = 0;
         private final String keyPrefix;
         private final String placeholder = '000000000000';
-        public IdSupplier(SObjectType sObjectType) { this.keyPrefix = sObjectType.getDescribe().getKeyPrefix(); }
+        public IdSupplier(SObjectType sObjectType) { this.keyPrefix = sObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix(); }
         public override Object get() {
             return Id.valueOf(
                 keyPrefix
@@ -345,9 +345,7 @@ private class AfTestCommons {
             return result;
         }
     }
-    @SuppressWarnings('PMD.EmptyStatementBlock')
     public class DoNothingRunnable implements IRunnable {
         public void run() {}
     }
-
 }

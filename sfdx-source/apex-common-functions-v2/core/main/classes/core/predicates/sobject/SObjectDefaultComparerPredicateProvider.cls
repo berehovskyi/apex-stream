@@ -17,8 +17,7 @@
  * isRevenueLt10KPredicate.test(new Account(AnnualRevenue = 5000)); // true
  * isRevenueLt10KPredicate.test(new Account(AnnualRevenue = null)); // true
  */
-public virtual inherited sharing class SObjectDefaultComparerPredicateProvider
-    extends SObjectComparerPredicateProvider {
+public virtual inherited sharing class SObjectDefaultComparerPredicateProvider extends SObjectComparerPredicateProvider {
     /**
      * @description Creates a new instance of `SObjectDefaultComparerPredicateProvider` using
      * the default comparer.

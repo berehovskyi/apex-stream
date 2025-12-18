@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class MapIterator implements Iterator<Object> {
-
     private final Iterator<Object> iterator;
     private final IFunction mapper;
 
@@ -20,5 +20,4 @@ public inherited sharing class MapIterator implements Iterator<Object> {
     public Object next() {
         return mapper.apply(iterator.next());
     }
-
 }

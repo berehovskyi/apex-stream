@@ -4,11 +4,9 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexUnitTestClassShouldHaveAsserts, PMD.NcssMethodCount')
 private class ObjectEnumerableTest {
-
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts')
     private static void coverage() {
         // Given
         List<Object> input = new List<Object>();
@@ -61,7 +59,6 @@ private class ObjectEnumerableTest {
         enumerable.toSet();
     }
 
-    @SuppressWarnings('PMD.ExcessivePublicCount')
     private class TestObjectEnumerable extends ObjectEnumerable {
         public override Iterator<Object> iterator() { return null; }
         public override ObjectEnumerable append(Iterable<Object> iterable) { return this; }
@@ -97,5 +94,4 @@ private class ObjectEnumerableTest {
         public override List<Object> toList() { return null; }
         public override Set<Object> toSet() { return null; }
     }
-
 }

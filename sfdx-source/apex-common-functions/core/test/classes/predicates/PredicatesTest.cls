@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs, PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class PredicatesTest {
-
     private static final List<Object> INPUT = new List<Object>{ 5, 1, 3, 8, -3, 4, null, -6, 0, 4 };
 
     static {
@@ -68,5 +67,4 @@ private class PredicatesTest {
             Assert.areEqual(!subList.contains(i), notInInput1Predicate1.test(i));
         }
     }
-
 }

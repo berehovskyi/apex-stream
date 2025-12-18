@@ -8,12 +8,10 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount')
 public virtual inherited sharing class SObjectPredicates extends Predicates {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SObjectPredicates() {}
+    protected SObjectPredicates() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -1012,5 +1010,4 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     // @end-group
     //</editor-fold>
-
 }

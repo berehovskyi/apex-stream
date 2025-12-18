@@ -9,9 +9,16 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class BiPredicate implements IBiPredicate {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Returns the result of applying this predicate to input.
+     *
+     * @param o1 the first input argument of `Object` type
+     * @param o2 the second input argument of `Object` type
+     *
+     * @return `true` if the input satisfies the predicate, `false` otherwise
+     */
     public abstract Boolean test(Object o1, Object o2);
     // @end-group
     //</editor-fold>
@@ -181,13 +188,14 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
     // @start-group Lambdas
     private class Some extends BiPredicate {
         private final List<IBiPredicate> predicates;
-        public Some(List<IBiPredicate> predicates) {
+        private Some(List<IBiPredicate> predicates) {
             Validate.noNullElements(predicates);
             this.predicates = predicates;
         }
         @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o1, Object o2) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
+                // prettier-ignore
                 if (predicates[i].test(o1, o2)) { return true; }
             }
             return false;
@@ -197,24 +205,26 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
     private class SomePredicate extends BiPredicate {
         private final IPredicate left;
         private final IPredicate right;
-        public SomePredicate(IPredicate left, IPredicate right) {
+        private SomePredicate(IPredicate left, IPredicate right) {
             Validate.notNull(left);
             Validate.notNull(right);
             this.left = left;
             this.right = right;
         }
+        // prettier-ignore
         public override Boolean test(Object o1, Object o2) { return left.test(o1) || right.test(o2); }
     }
 
     private class Every extends BiPredicate {
         private final List<IBiPredicate> predicates;
-        public Every(List<IBiPredicate> predicates) {
+        private Every(List<IBiPredicate> predicates) {
             Validate.noNullElements(predicates);
             this.predicates = predicates;
         }
         @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o1, Object o2) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
+                // prettier-ignore
                 if (!predicates[i].test(o1, o2)) { return false; }
             }
             return true;
@@ -224,21 +234,23 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
     private class EveryPredicate extends BiPredicate {
         private final IPredicate left;
         private final IPredicate right;
-        public EveryPredicate(IPredicate left, IPredicate right) {
+        private EveryPredicate(IPredicate left, IPredicate right) {
             Validate.notNull(left);
             Validate.notNull(right);
             this.left = left;
             this.right = right;
         }
+        // prettier-ignore
         public override Boolean test(Object o1, Object o2) { return left.test(o1) && right.test(o2); }
     }
 
     private class Negate extends BiPredicate {
         private final IBiPredicate predicate;
-        public Negate(IBiPredicate predicate) {
+        private Negate(IBiPredicate predicate) {
             Validate.notNull(predicate);
             this.predicate = predicate;
         }
+        // prettier-ignore
         public override Boolean test(Object o1, Object o2) { return !predicate.test(o1, o2); }
     }
 
@@ -248,9 +260,9 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
             Validate.notNull(value);
             this.value = value;
         }
+        // prettier-ignore
         public override Boolean test(Object o1, Object o2) { return value; }
     }
     // @end-group
     //</editor-fold>
-
 }

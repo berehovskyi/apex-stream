@@ -92,6 +92,9 @@
  * // }
  */
 public virtual inherited sharing class SObjectCollectorProvider extends CollectorProvider {
+    /**
+     * @description Initializes a new instance of the `SObjectCollectorProvider` class with the SObject value type.
+     */
     public SObjectCollectorProvider() {
         super(SObject.class);
     }

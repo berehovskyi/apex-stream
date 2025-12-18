@@ -10,11 +10,18 @@
  *
  * @group Functional Abstract Classes
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.StdCyclomaticComplexity')
 public abstract inherited sharing class Comparer implements IComparer {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Compares the two arguments.
+     *
+     * @param o1 the first input argument of `Object` type
+     * @param o2 the second input argument of `Object` type
+     *
+     * @return `-1` if `o1` is less than `o2`, `0` if they're equal,
+     * and `1` otherwise
+     */
     public abstract Integer compare(Object o1, Object o2);
     // @end-group
     //</editor-fold>
@@ -277,8 +284,11 @@ public abstract inherited sharing class Comparer implements IComparer {
      * `null` if some of the input arguments is null and another one is not `String` nor `Id`
      */
     private static Integer compareNullsNonAntisymmetric(Object o1, Object o2) {
+        // prettier-ignore
         if (o1 == o2) { return 0; }
+        // prettier-ignore
         if (o1 instanceof Id || o2 instanceof Id) { return compareUnequalIds((Id) o1, (Id) o2); }
+        // prettier-ignore
         if (o1 instanceof String || o2 instanceof String) { return compareUnequalStrings((String) o1, (String) o2); }
         return null;
     }
@@ -314,6 +324,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      */
     @TestVisible
     private static Integer compareNullable(Object value1, Object value2, Boolean isNullGreater) {
+        // prettier-ignore
         if (value1 == null || value2 == null) { return compareNulls(value1, value2, isNullGreater); }
         return compareNonNullObjects(value1, value2);
     }
@@ -336,6 +347,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      */
     @TestVisible
     private static Integer compareNullableNonAntisymmetric(Object value1, Object value2) {
+        // prettier-ignore
         if (value1 == null || value2 == null) { return compareNullsNonAntisymmetric(value1, value2); }
         return compareNonNullObjects(value1, value2);
     }
@@ -438,7 +450,9 @@ public abstract inherited sharing class Comparer implements IComparer {
         if (value1 instanceof Comparable && value2 instanceof Comparable) {
             return compareComparables((Comparable) value1, (Comparable) value2);
         }
+        // prettier-ignore
         if (value1 == value2) { return 0; }
+        // prettier-ignore
         if (value1 instanceof SObject && !(value1 instanceof List<SObject>)
             && value2 instanceof SObject && !(value2 instanceof List<SObject>)) {
             return compareUnequalSObjects((SObject) value1, (SObject) value2);
@@ -495,16 +509,20 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     private class DefaultOrder extends Comparer {
+        // prettier-ignore
         public override Integer compare(Object o1, Object o2) { return compareNullable(o1, o2); }
     }
 
     private class NonAntisymmetricOrder extends Comparer {
+        // prettier-ignore
         public override Integer compare(Object o1, Object o2) { return compareNullableNonAntisymmetric(o1, o2); }
     }
 
     private class ReverseOrder extends Comparer {
         private final IComparer comparer;
+        // prettier-ignore
         private ReverseOrder(IComparer comparer) { this.comparer = comparer; }
+        // prettier-ignore
         public override Integer compare(Object o1, Object o2) { return comparer.compare(o2, o1); }
     }
 
@@ -516,12 +534,14 @@ public abstract inherited sharing class Comparer implements IComparer {
             this.comp = comparer;
         }
         public override Integer compare(Object o1, Object o2) {
+            // prettier-ignore
             if (o1 == null || o2 == null) { return compareNulls(o1, o2, !nullsFirst); }
             return comp.compare(o1, o2);
         }
         public override Comparer thenComparing(IComparer other) {
             return new NullsOrder(nullsFirst, comp.thenComparing(other));
         }
+        // prettier-ignore
         public override Comparer reversed() { return new NullsOrder(!nullsFirst, comp.reversed()); }
     }
 
@@ -541,5 +561,4 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
     // @end-group
     //</editor-fold>
-
 }

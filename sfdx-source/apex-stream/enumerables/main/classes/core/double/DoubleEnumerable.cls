@@ -5,9 +5,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings('PMD.ExcessivePublicCount')
 public abstract inherited sharing class DoubleEnumerable implements IDoubleEnumerable {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -697,5 +695,4 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      */
     public abstract Set<Double> toSet();
     //</editor-fold>
-
 }

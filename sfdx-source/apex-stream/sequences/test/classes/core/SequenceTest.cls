@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class SequenceTest {
-
     private static final List<Integer> INTS = AsTestData.generateInts();
     private static final List<Long> LONGS = AsTestData.generateLongs();
     private static final List<Double> DOUBLES = AsTestData.generateDoubles();
@@ -90,5 +87,4 @@ private class SequenceTest {
         Assert.isTrue(stream12 instanceof ObjectSequence);
         Assert.isTrue(stream13 instanceof ObjectSequence);
     }
-
 }

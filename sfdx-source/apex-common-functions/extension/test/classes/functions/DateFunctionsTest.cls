@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class DateFunctionsTest {
-
     // Given
     private static final List<Date> DATES = new List<Date>{
         Date.newInstance(2020, 2, 2),
@@ -42,5 +41,4 @@ private class DateFunctionsTest {
             Assert.areEqual(d.toStartOfWeek(), DateFunctions.toStartOfWeek().apply(d));
         }
     }
-
 }

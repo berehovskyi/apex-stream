@@ -1,8 +1,9 @@
+// prettier-ignore
 /**
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ExcessiveParameterList')
+@SuppressWarnings('PMD.ApexDoc')
 public class AsPerson implements Comparable {
     private String name;
     private final Integer age;
@@ -46,12 +47,12 @@ public class AsPerson implements Comparable {
     }
     public Integer compareTo(Object o) {
         AsPerson that = (AsPerson) o;
-        if (autoId == that.autoId) return 0;
-        if (autoId > that.autoId) return 1;
+        if (autoId == that.autoId) { return 0; }
+        if (autoId > that.autoId) { return 1; }
         return -1;
     }
     public Boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof AsPerson)) return false;
+        if (obj == null || !(obj instanceof AsPerson)) { return false; }
         AsPerson that = (AsPerson) obj;
         return this.name == that.name
             && (this.age == that.age)

@@ -5,11 +5,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings(
-    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount'
-)
 public abstract inherited sharing class SObjectEnumerable implements ISObjectEnumerable {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -316,9 +312,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable, final IFunction classifier) {
-        return distinct(classifier).filter(EnumerableSupport.isIn(
-            classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
-        ));
+        return distinct(classifier)
+            .filter(EnumerableSupport.isIn(classifier, EnumerablePipeline.toObjectSet(iterable, classifier)));
     }
 
     /**
@@ -475,9 +470,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * ]
      */
     public virtual SObjectEnumerable except(final Iterable<SObject> iterable, final IFunction classifier) {
-        return distinct(classifier).filter(EnumerableSupport.isIn(
-            classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
-        ).negate());
+        return distinct(classifier)
+            .filter(EnumerableSupport.isIn(classifier, EnumerablePipeline.toObjectSet(iterable, classifier)).negate());
     }
 
     /**
@@ -4261,5 +4255,4 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
         return partition(SObjectEnumerableSupport.isEqual(field, value));
     }
     //</editor-fold>
-
 }

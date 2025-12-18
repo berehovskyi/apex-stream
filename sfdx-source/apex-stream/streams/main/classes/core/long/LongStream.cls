@@ -19,15 +19,19 @@
  *         .mapToLong(getAnnualRevenueToLongFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class LongStream extends LongEnumerable implements IRunnable {
-
     private final transient Iterator<Long> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
      */
-    public Boolean isOperated { get { return isOperated; } protected set; } {
+    public Boolean isOperated {
+        get {
+            return isOperated;
+        }
+        protected set;
+    }
+    {
         isOperated = false;
     }
 
@@ -112,6 +116,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * LongEnumerable longStream = LongStream.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final Iterable<Long> longs) {
+        // prettier-ignore
         if (longs == null) { return empty(); }
         return new LongStream(longs.iterator());
     }
@@ -937,5 +942,4 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
     }
     // @end-group
     //</editor-fold>
-
 }

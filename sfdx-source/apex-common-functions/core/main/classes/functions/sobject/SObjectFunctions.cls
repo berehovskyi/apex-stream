@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class SObjectFunctions {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SObjectFunctions() {}
+    protected SObjectFunctions() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -261,17 +260,23 @@ public virtual inherited sharing class SObjectFunctions {
 
     private class GetByFieldName extends Function {
         private final String fieldName;
+        // prettier-ignore
         private GetByFieldName(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).get(fieldName); }
     }
 
     private class GetByFieldPath extends SObjectPathFunction {
+        // prettier-ignore
         private GetByFieldPath(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).get(xRefFieldName); }
     }
 
     private class GetByFieldPathSafe extends SObjectPathFunction {
+        // prettier-ignore
         private GetByFieldPathSafe(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.get(xRefFieldName); }
     }
 
@@ -279,10 +284,14 @@ public virtual inherited sharing class SObjectFunctions {
         private final IFunction mapper;
         private GetFunction(String fieldName) {
             Validate.notBlank(fieldName);
+            // prettier-ignore
             if (!CsfSupport.isXRefField(fieldName)) { mapper = new GetByFieldName(fieldName); }
+            // prettier-ignore
             else if (CsfSupport.isSafePath(fieldName)) { mapper = new GetByFieldPathSafe(fieldName); }
+            // prettier-ignore
             else { mapper = new GetByFieldPath(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
@@ -292,22 +301,29 @@ public virtual inherited sharing class SObjectFunctions {
             Validate.notNull(field);
             this.field = field;
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).get(field); }
     }
 
     private class GetSObjectsByFieldName extends Function {
         private final String fieldName;
+        // prettier-ignore
         private GetSObjectsByFieldName(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getSObjects(fieldName); }
     }
 
     private class GetSObjectsByFieldPath extends SObjectPathFunction {
+        // prettier-ignore
         private GetSObjectsByFieldPath(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsByFieldPathSafe extends SObjectPathFunction {
+        // prettier-ignore
         private GetSObjectsByFieldPathSafe(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.getSObjects(xRefFieldName); }
     }
 
@@ -315,22 +331,29 @@ public virtual inherited sharing class SObjectFunctions {
         private final IFunction mapper;
         private GetSObjectsFunction(String fieldName) {
             Validate.notBlank(fieldName);
+            // prettier-ignore
             if (!CsfSupport.isXRefField(fieldName)) { mapper = new GetSObjectsByFieldName(fieldName); }
+            // prettier-ignore
             else if (CsfSupport.isSafePath(fieldName)) { mapper = new GetSObjectsByFieldPathSafe(fieldName); }
+            // prettier-ignore
             else { mapper = new GetSObjectsByFieldPath(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetPopulatedFieldsAsMap extends Function {
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getPopulatedFieldsAsMap(); }
     }
 
     private class GetQuickActionName extends Function {
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getQuickActionName(); }
     }
 
     private class GetSObjectType extends Function {
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getSObjectType(); }
     }
 
@@ -341,6 +364,7 @@ public virtual inherited sharing class SObjectFunctions {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).put(fieldName, mapper.apply(obj)); }
     }
 
@@ -371,10 +395,14 @@ public virtual inherited sharing class SObjectFunctions {
         private PutFunction(String fieldName, IFunction mapper) {
             Validate.notBlank(fieldName);
             Validate.notNull(mapper);
+            // prettier-ignore
             if (!CsfSupport.isXRefField(fieldName)) { this.mapper = new PutFieldName(fieldName, mapper); }
+            // prettier-ignore
             else if (CsfSupport.isSafePath(fieldName)) { this.mapper = new PutFieldPathSafe(fieldName, mapper); }
+            // prettier-ignore
             else { this.mapper = new PutFieldPath(fieldName, mapper); }
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
@@ -387,9 +415,9 @@ public virtual inherited sharing class SObjectFunctions {
             this.field = field;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).put(field, mapper.apply(obj)); }
     }
     // @end-group
     //</editor-fold>
-
 }

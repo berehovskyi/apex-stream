@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class LongSequenceTest {
-
     /**
      * @see LongSequence.of
      * @see LongSequence.ofNullable
@@ -83,7 +80,7 @@ private class LongSequenceTest {
             Assert.areEqual(i, actual[i]);
         }
         Assert.areEqual(toI1 - fromI1 + 1, actual1.size());
-        for (Integer i = 0, size = actual1.size(); i < size; i++)  {
+        for (Integer i = 0, size = actual1.size(); i < size; i++) {
             Assert.areEqual(i + fromI1, actual1[i]);
         }
         Assert.areEqual(toI1 - fromI2 + 1, actual2.size());
@@ -339,7 +336,7 @@ private class LongSequenceTest {
         List<Account> actual1 = (List<Account>) seq1.toList();
         // Then
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
-        for (Integer i = 0, size = input.size(); i < size; i++ ) {
+        for (Integer i = 0, size = input.size(); i < size; i++) {
             Assert.areEqual(Math.abs(clone[i]), actual[i].NumberOfEmployees);
             Assert.areEqual(Math.abs(clone[i]), actual1[i].NumberOfEmployees);
         }

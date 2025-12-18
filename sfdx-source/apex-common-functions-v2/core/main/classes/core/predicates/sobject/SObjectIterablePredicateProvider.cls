@@ -213,15 +213,19 @@ public virtual inherited sharing class SObjectIterablePredicateProvider {
     }
 
     private class ContainsPredicate extends IterablePredicate {
+        // prettier-ignore
         private ContainsPredicate(IFunction mapper, Iterable<Object> container) { super(mapper, container); }
         public override Boolean test(Object o) {
+            // prettier-ignore
             if (elements == null) { elements = toSet(container); }
             return elements.contains(mapper.apply(o));
         }
     }
 
     private class IncludesPredicate extends IterablePredicate {
+        // prettier-ignore
         private IncludesPredicate(IFunction mapper, Iterable<String> container) { super(mapper, container); }
+        // prettier-ignore
         public override Boolean test(Object o) {
             final String value = (String) mapper.apply(o);
             if (value == null) { return false; }
@@ -233,6 +237,7 @@ public virtual inherited sharing class SObjectIterablePredicateProvider {
             }
             return false;
         }
+        // prettier-ignore
         private Set<String> split(String value) { return new Set<String>(value.split(';')); }
     }
 }

@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class FunctionTest {
-
     private static final List<Contact> CONTACTS = AfTestData.generateContacts();
     private static final List<String> STRINGS = AfTestData.generateStrings();
 
@@ -17,7 +16,6 @@ private class FunctionTest {
      * @see Function.compose
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         Object constant = 42;
@@ -71,5 +69,4 @@ private class FunctionTest {
             Assert.areEqual(str.capitalize().abbreviate(maxWidth), capitalizeAndAbbreviate2.apply(str));
         }
     }
-
 }

@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class BiConsumerTest {
-
     private static final List<Contact> CONTACTS = AfTestData.generateContacts();
     private static final List<AfPerson> PEOPLE = AfTestData.generatePersons();
 
@@ -15,7 +14,6 @@ private class BiConsumerTest {
      * @see BiConsumer.compose
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         Object constant = true;
@@ -88,5 +86,4 @@ private class BiConsumerTest {
             Assert.areEqual(expectedO2, o6);
         }
     }
-
 }

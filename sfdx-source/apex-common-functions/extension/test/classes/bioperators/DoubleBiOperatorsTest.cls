@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class DoubleBiOperatorsTest {
-
     private static final List<Double> INPUT = AfTestData.generateDoubles();
 
     static {
@@ -39,5 +38,4 @@ private class DoubleBiOperatorsTest {
             Assert.areEqual(Math.sqrt(Math.pow(src, 2) + Math.pow(d, 2)), euclid.apply(src, d));
         }
     }
-
 }

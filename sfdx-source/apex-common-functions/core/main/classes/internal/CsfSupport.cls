@@ -6,7 +6,6 @@
  * @author Oleh Berehovskyi
  */
 public inherited sharing class CsfSupport {
-
     /**
      * @description Finds the relationship name for a given SObject field that is a reference field.
      *
@@ -61,5 +60,4 @@ public inherited sharing class CsfSupport {
         Validate.notBlank(fieldName);
         return fieldName.substringBeforeLast('.').endsWith('?');
     }
-
 }

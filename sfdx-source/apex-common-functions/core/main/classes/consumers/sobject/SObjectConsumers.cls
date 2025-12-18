@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class SObjectConsumers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SObjectConsumers() {}
+    protected SObjectConsumers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -301,6 +300,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.fieldName = fieldName;
             this.message = message;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).addError(fieldName, message); }
     }
 
@@ -313,6 +313,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.field = field;
             this.message = message;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).addError(field, message); }
     }
 
@@ -322,6 +323,7 @@ public virtual inherited sharing class SObjectConsumers {
             Validate.notBlank(message);
             this.message = message;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).addError(message); }
     }
 
@@ -331,6 +333,7 @@ public virtual inherited sharing class SObjectConsumers {
             Validate.notNull(exc);
             this.exc = exc;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).addError(exc); }
     }
 
@@ -350,6 +353,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(obj)); }
     }
 
@@ -380,10 +384,14 @@ public virtual inherited sharing class SObjectConsumers {
         private SetConsumer(String fieldName, IFunction mapper) {
             Validate.notBlank(fieldName);
             Validate.notNull(mapper);
+            // prettier-ignore
             if (!CsfSupport.isXRefField(fieldName)) { consumer = new SetByFieldName(fieldName, mapper); }
+            // prettier-ignore
             else if (CsfSupport.isSafePath(fieldName)) { consumer = new SetByFieldPathSafe(fieldName, mapper); }
+            // prettier-ignore
             else { consumer = new SetByFieldPath(fieldName, mapper); }
         }
+        // prettier-ignore
         public override void accept(Object obj) { consumer.accept(obj); }
     }
 
@@ -396,6 +404,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.field = field;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply(obj)); }
     }
 
@@ -406,6 +415,7 @@ public virtual inherited sharing class SObjectConsumers {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).putSObject(fieldName, (SObject) mapper.apply(obj)); }
     }
 
@@ -436,12 +446,15 @@ public virtual inherited sharing class SObjectConsumers {
         private SetSObjectConsumer(String fieldName, IOperator operator) {
             Validate.notBlank(fieldName);
             Validate.notNull(operator);
+            // prettier-ignore
             if (!CsfSupport.isXRefField(fieldName)) { consumer = new SetSObjectByFieldName(fieldName, operator); }
             else if (CsfSupport.isSafePath(fieldName)) {
                 consumer = new SetSObjectByFieldPathSafe(fieldName, operator);
             }
+            // prettier-ignore
             else { consumer = new SetSObjectByFieldPath(fieldName, operator); }
         }
+        // prettier-ignore
         public override void accept(Object obj) { consumer.accept(obj); }
     }
 
@@ -454,9 +467,9 @@ public virtual inherited sharing class SObjectConsumers {
             this.field = field;
             this.operator = operator;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).putSObject(field, (SObject) operator.apply(obj)); }
     }
     // @end-group
     //</editor-fold>
-
 }

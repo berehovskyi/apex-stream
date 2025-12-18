@@ -10,10 +10,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class CollectorSuppliers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected CollectorSuppliers() {}
+    protected CollectorSuppliers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -80,27 +79,32 @@ public virtual inherited sharing class CollectorSuppliers {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class JoiningStringSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<String>{ '' }; }
     }
 
     private class AveragingIntSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<Integer>{ 0, 0 }; }
     }
 
     private class AveragingLongSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<Long>{ 0L, 0L }; }
     }
 
     private class AveragingDoubleSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<Double>{ 0, 0, 0, 0 }; }
     }
 
     private class BoxSupplier extends Supplier {
         private final Object identity;
-        public BoxSupplier(Object identity) { this.identity = identity; }
+        // prettier-ignore
+        private BoxSupplier(Object identity) { this.identity = identity; }
+        // prettier-ignore
         public override Object get() { return new List<Object>{ identity }; }
     }
     // @end-group
     //</editor-fold>
-
 }

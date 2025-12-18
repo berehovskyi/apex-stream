@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class StringFunctionsTest {
-
     // Given
     private static final List<String> STRINGS = new List<String>{
         'publisher ', 'sustain', 'Triangle', ' activity', 'Invite', ' back ', 'Shop', 'stu mble'
@@ -196,5 +195,4 @@ private class StringFunctionsTest {
             Assert.areEqual(Datetime.parse(str), StringFunctions.parseDatetime().apply(str));
         }
     }
-
 }

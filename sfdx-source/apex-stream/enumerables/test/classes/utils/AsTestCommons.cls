@@ -1,11 +1,11 @@
+// prettier-ignore
 /**
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ExcessivePublicCount, PMD.CognitiveComplexity')
+@SuppressWarnings('PMD.ApexDoc')
 private class AsTestCommons {
-
     public static SObject deepClone(SObject sObj) {
         return sObj.clone(true, true, true, true);
     }
@@ -297,7 +297,6 @@ private class AsTestCommons {
     }
 
     public class DoNothingConsumer extends Consumer {
-        @SuppressWarnings('PMD.EmptyStatementBlock')
         public override void accept(Object o) {}
     }
     public class SetNameConsumer extends Consumer {
@@ -321,7 +320,7 @@ private class AsTestCommons {
         private final String keyPrefix;
         private final String placeholder = '000000000000';
         public IdSupplier(SObjectType sObjectType) {
-            this.keyPrefix = sObjectType.getDescribe().getKeyPrefix();
+            this.keyPrefix = sObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix();
         }
         public override Object get() {
             return Id.valueOf(
@@ -536,13 +535,12 @@ private class AsTestCommons {
         public override Boolean test(Object o) { return predicate.test(o); }
     }
 
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     private static Object mergeValue(
         final IBiOperator merger,
         final Object key,
         final Object oldValue,
-        final Object newValue)
-    {
+        final Object newValue
+    ) {
         Validate.state(
             merger != null,
             Label.AS_ErrorMessage_DuplicateKey,
@@ -550,5 +548,4 @@ private class AsTestCommons {
         );
         return merger.apply(oldValue, newValue);
     }
-
 }

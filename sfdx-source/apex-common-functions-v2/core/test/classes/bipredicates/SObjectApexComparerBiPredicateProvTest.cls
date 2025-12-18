@@ -2,7 +2,7 @@
  * @see SObjectApexComparerBiPredicateProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectApexComparerBiPredicateProvTest {
     private static final List<Account> INPUT = AfTestData.generateAccounts();
     private static final Account DELTA = new Account(Type = AfTestConsts.PARTNER, NumberOfEmployees = 100, BillingLatitude = -50.45);

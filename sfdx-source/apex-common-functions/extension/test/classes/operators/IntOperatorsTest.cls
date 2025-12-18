@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class IntOperatorsTest {
-
     private static final List<Integer> INPUT = AfTestData.generateInts();
 
     static {
@@ -46,5 +45,4 @@ private class IntOperatorsTest {
             Assert.areEqual(i - inc, IntOperators.subtract(inc).apply(i));
         }
     }
-
 }

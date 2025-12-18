@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class BiOperatorsTest {
-
     private static final List<Integer> INTS = AfTestData.generateInts();
     private static final List<Long> LONGS = AfTestData.generateLongs();
     private static final List<Double> DOUBLES = AfTestData.generateDoubles();
@@ -76,5 +73,4 @@ private class BiOperatorsTest {
             Assert.areEqual(Math.max(src, d), max1.apply(src, d));
         }
     }
-
 }

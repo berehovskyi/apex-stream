@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class ConsumerTest {
-
     private static final List<Contact> CONTACTS = AfTestData.generateContacts2();
     private static final List<AfPerson> PEOPLE = AfTestData.generatePersons();
 
@@ -15,7 +14,6 @@ private class ConsumerTest {
      * @see Consumer.compose
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         Object constant = true;
@@ -89,5 +87,4 @@ private class ConsumerTest {
             Assert.areEqual(clone2, cloneToConsume3);
         }
     }
-
 }

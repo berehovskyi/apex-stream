@@ -6,7 +6,6 @@
  * @author Oleh Berehovskyi
  */
 public inherited sharing class EnumerableSupport {
-
     /**
      * @description Returns a `BiOperator` that return a lesser input argument.
      *
@@ -267,6 +266,7 @@ public inherited sharing class EnumerableSupport {
             Validate.notNull(mapper);
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((List<Object>) container).add(mapper.apply(o)); }
     }
 
@@ -285,17 +285,20 @@ public inherited sharing class EnumerableSupport {
 
     private class MinBiOperator extends BiOperator {
         private final IComparer comp = Comparer.defaultOrder();
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return comp.compare(o1, o2) != 1 ? o1 : o2; }
     }
 
     private class MaxBiOperator extends BiOperator {
         private final IComparer comp = Comparer.defaultOrder();
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return comp.compare(o1, o2) == 1 ? o1 : o2; }
     }
 
     private class AveragingDoubleFinisher extends Function {
         public override Object apply(Object o) {
             final List<Double> doubles = (List<Double>) o;
+            // prettier-ignore
             if (doubles[2] == 0) { return null; }
             return (doubles[0] + doubles[1]) / doubles[2];
         }
@@ -304,6 +307,7 @@ public inherited sharing class EnumerableSupport {
     private class SummingDoubleFinisher extends Function {
         public override Object apply(Object o) {
             final List<Double> doubles = (List<Double>) o;
+            // prettier-ignore
             if (doubles[2] == 0) { return null; }
             return doubles[0] + doubles[1];
         }
@@ -316,13 +320,7 @@ public inherited sharing class EnumerableSupport {
         private final IComparer comparer;
         private final Integer comparisonResult;
         @TestVisible
-        @SuppressWarnings('PMD.ExcessiveParameterList')
-        private ComparerPredicate(
-            IFunction left,
-            IFunction right,
-            IComparer comparer,
-            Integer comparisonResult
-        ) {
+        private ComparerPredicate(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
             Validate.notNull(left);
             Validate.notNull(right);
             Validate.notNull(comparer);
@@ -346,6 +344,7 @@ public inherited sharing class EnumerableSupport {
             this.function = function;
             this.container = toSet(container);
         }
+        // prettier-ignore
         public override Boolean test(Object o) { return container.contains(function.apply(o)); }
         private Set<Object> toSet(Iterable<Object> source) {
             final Set<Object> dest = new Set<Object>();
@@ -357,8 +356,8 @@ public inherited sharing class EnumerableSupport {
     }
 
     private class AveragingDoubleSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return new List<Double>{ 0, 0, 0, 0 }; }
     }
     //</editor-fold>
-
 }

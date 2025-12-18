@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class DatetimeFunctionsTest {
-
     // Given
     private static final List<Datetime> DATETIMES = new List<Datetime>{
         Datetime.newInstance(2020, 2, 2),
@@ -62,5 +61,4 @@ private class DatetimeFunctionsTest {
             Assert.areEqual(String.valueOfGmt(dt), DatetimeFunctions.stringValueOfGmt().apply(dt));
         }
     }
-
 }

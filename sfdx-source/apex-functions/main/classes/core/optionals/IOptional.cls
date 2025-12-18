@@ -2,18 +2,17 @@
  * @description A container which may or may not contain a value.
  *
  * @author Oleh Berehovskyi
- * 
+ *
  * @group Functional Interfaces
  */
 public interface IOptional {
-
     /**
      * @description Returns `value` if a value is present,
      * otherwise throws `NoSuchElementException`.
      *
      * @return the non-null `value`
      */
-     Object get();
+    Object get();
 
     /**
      * @description Returns `true` if a value is present, otherwise `false`.
@@ -21,14 +20,14 @@ public interface IOptional {
      * @return `true` or `false`
      */
     Boolean isPresent();
-    
+
     /**
      * @description Returns `true` if a value is not present, otherwise `false`.
      *
      * @return `true` or `false`
      */
     Boolean isEmpty();
-    
+
     /**
      * @description If a value is present, performs `consumer` action with `value`,
      * otherwise does nothing.
@@ -45,7 +44,7 @@ public interface IOptional {
      * @param action the runnable action
      */
     void ifPresentOrElse(IConsumer consumer, IRunnable action);
-    
+
     /**
      * @description Returns an `IOptional` describing the value,
      * if `value` matches `predicate`, otherwise returns an empty `IOptional`.
@@ -55,7 +54,7 @@ public interface IOptional {
      * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional filter(IPredicate predicate);
-    
+
     /**
      * @description Returns an `IOptional` describing the result of applying the
      * `mapper` function to the value if the value is present,
@@ -66,7 +65,7 @@ public interface IOptional {
      * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional mapTo(IFunction mapper);
-    
+
     /**
      * @description Returns an `IOptional` the result of applying the
      * `mapper` function to the value if the value is present,
@@ -77,7 +76,7 @@ public interface IOptional {
      * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional flatMapTo(IFunction mapper);
-    
+
     /**
      * @description Returns an `IOptional` describing the value if the value is present,
      * otherwise returns `IOptional` produced by the supplying function.
@@ -87,7 +86,7 @@ public interface IOptional {
      * @return the nullable `IOptional` or an empty `IOptional`
      */
     IOptional orGet(ISupplier supplier);
-    
+
     /**
      * @description Returns a value if the value is present,
      * otherwise returns the fallback `other` Object. May be null.
@@ -97,7 +96,7 @@ public interface IOptional {
      * @return the `Object`
      */
     Object orElse(Object other);
-    
+
     /**
      * @description Returns a value if the value is present,
      * otherwise returns the value provided by `supplier`.
@@ -107,7 +106,7 @@ public interface IOptional {
      * @return the `Object`
      */
     Object orElseGet(ISupplier supplier);
-    
+
     /**
      * @description Returns a value if the value is present,
      * otherwise throws an Exception provided by `exceptionSupplier`.
@@ -119,5 +118,4 @@ public interface IOptional {
      * @throws Exception if no value is present
      */
     Object orElseThrow(ISupplier exceptionSupplier);
-
 }

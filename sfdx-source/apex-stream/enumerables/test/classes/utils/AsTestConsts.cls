@@ -1,11 +1,11 @@
+// prettier-ignore
 /**
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ExcessivePublicCount, PMD.FieldNamingConventions')
+@SuppressWarnings('PMD.ApexDoc, PMD.FieldNamingConventions')
 private class AsTestConsts {
-
     public static final AccountSObject Account = new AccountSObject();
     public static final ContactSObject Contact = new ContactSObject();
 
@@ -64,5 +64,4 @@ private class AsTestConsts {
             this.SOBJECT_NAME = 'Contact';
         }
     }
-
 }

@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class LongBiOperators {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected LongBiOperators() {}
+    protected LongBiOperators() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -65,27 +64,26 @@ public virtual inherited sharing class LongBiOperators {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Sum extends BiOperator {
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
     }
 
     private class Product extends BiOperator {
+        // prettier-ignore
         public override Object apply(Object l1, Object l2) { return (Long) l1 * (Long) l2; }
     }
 
     private class Min extends BiOperator {
         final IComparer comp = Comparer.defaultOrder();
-        public override Object apply(Object l1, Object l2) {
-            return comp.compare((Long) l1, (Long) l2) != 1 ? l1 : l2;
-        }
+        // prettier-ignore
+        public override Object apply(Object l1, Object l2) { return comp.compare((Long) l1, (Long) l2) != 1 ? l1 : l2; }
     }
 
     private class Max extends BiOperator {
         final IComparer comp = Comparer.defaultOrder();
-        public override Object apply(Object l1, Object l2) {
-            return comp.compare((Long) l1, (Long) l2) == 1 ? l1 : l2;
-        }
+        // prettier-ignore
+        public override Object apply(Object l1, Object l2) { return comp.compare((Long) l1, (Long) l2) == 1 ? l1 : l2; }
     }
     // @end-group
     //</editor-fold>
-
 }

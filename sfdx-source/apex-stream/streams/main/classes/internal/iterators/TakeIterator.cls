@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class TakeIterator implements Iterator<Object> {
-
     private final Iterator<Object> iterator;
     private final IPredicate predicate;
     private Boolean hasNext = false, hasNextEvaluated = false, isNextCached = false; // NOPMD
@@ -16,14 +16,17 @@ public inherited sharing class TakeIterator implements Iterator<Object> {
     }
 
     public Boolean hasNext() {
+        // prettier-ignore
         if (hasNextEvaluated) { return hasNext; }
         hasNext = iterator.hasNext();
         hasNextEvaluated = true;
+        // prettier-ignore
         if (hasNext) { isNextCached = testNext(); }
         return hasNext;
     }
 
     public Object next() {
+        // prettier-ignore
         if (hasNextEvaluated && !hasNext) { throw new NoSuchElementException(); }
         hasNextEvaluated = false;
         if (isNextCached) {
@@ -41,5 +44,4 @@ public inherited sharing class TakeIterator implements Iterator<Object> {
         next = iterator.next();
         return (hasNext = predicate.test(next));
     }
-
 }

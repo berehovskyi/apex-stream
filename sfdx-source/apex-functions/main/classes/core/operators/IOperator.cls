@@ -6,7 +6,6 @@
  * @group Functional Interfaces
  */
 public interface IOperator extends IFunction {
-
     /**
      * @description Applies the function to the input argument.
      * <p>Contract: The type of input argument and of the returned value must be the same.</p>
@@ -16,5 +15,4 @@ public interface IOperator extends IFunction {
      * @return the result
      */
     Object apply(Object o);
-
 }

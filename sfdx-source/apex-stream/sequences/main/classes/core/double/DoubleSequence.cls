@@ -41,9 +41,7 @@
  * // of the two areas, π / 4. Multiply the result by 4 to estimate π.
  * Double approxPi = 4 * n / (Double) s;
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
-
     private final List<Double> doubles;
 
     protected DoubleSequence() {
@@ -116,6 +114,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new List<Double>{ 0, 5L, 1L, -10 });
      */
     public static DoubleEnumerable ofNullable(final List<Double> doubles) {
+        // prettier-ignore
         if (doubles == null) { return empty(); }
         return new DoubleSequence(doubles);
     }
@@ -133,6 +132,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0, 5, 1, -10 });
      */
     public static DoubleEnumerable ofNullable(final Set<Double> doubles) {
+        // prettier-ignore
         if (doubles == null) { return empty(); }
         return new DoubleSequence(new List<Double>(doubles));
     }
@@ -804,5 +804,4 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
     }
     // @end-group
     //</editor-fold>
-
 }

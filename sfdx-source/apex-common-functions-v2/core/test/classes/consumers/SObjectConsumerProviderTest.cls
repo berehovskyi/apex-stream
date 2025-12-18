@@ -2,7 +2,7 @@
  * @see SObjectConsumerProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class SObjectConsumerProviderTest {
     private static final List<Contact> INPUT = AfTestData.generateContacts2();
     private static final SObjectConsumerProvider CON = new SObjectConsumerProvider();

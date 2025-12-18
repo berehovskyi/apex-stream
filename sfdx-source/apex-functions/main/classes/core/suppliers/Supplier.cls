@@ -1,5 +1,5 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link ISupplier} functional interface.
  *
  * @see ISupplier
@@ -10,9 +10,14 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Supplier implements ISupplier {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Return an instance of `Object` type.
+     * The returned object may or may not be a new instance, depending on the implementation.
+     *
+     * @return the result of `Object` type
+     */
     public abstract Object get();
     // @end-group
     //</editor-fold>
@@ -29,7 +34,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
      * @throws NullPointerException if `t` is null
      *
      * @see Type.newInstance
-     * 
+     *
      * @example
      * ISupplier of = Supplier.of(List<Account>.class);
      * List<Account> accounts = (List<Account>) of.get(); // new List<Account>()
@@ -44,8 +49,8 @@ public abstract inherited sharing class Supplier implements ISupplier {
      * @param o the Object
      *
      * @return the `Supplier`
-     * 
-     * @example 
+     *
+     * @example
      * ISupplier constant = Supplier.constant('a');
      * constant.get(); // 'a'
      * constant.get(); // 'a'
@@ -61,7 +66,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
      * @param iterable the iterable
      *
      * @return the `Supplier`
-     * 
+     *
      * @example
      * ISupplier repeat = Supplier.repeat(new List<Object>{ 'a', 'b', 'c' });
      * repeat.get(); // 'a'
@@ -84,25 +89,29 @@ public abstract inherited sharing class Supplier implements ISupplier {
             Validate.notNull(t);
             this.t = t;
         }
+        // prettier-ignore
         public override Object get() { return t.newInstance(); }
     }
 
     private class Constant extends Supplier {
         private final Object identity;
-        public Constant(Object identity) { this.identity = identity; }
+        // prettier-ignore
+        private Constant(Object identity) { this.identity = identity; }
+        // prettier-ignore
         public override Object get() { return identity; }
     }
 
     private class Repeat extends Supplier {
         private final Iterable<Object> iterable;
         private Iterator<Object> iterator;
+        // prettier-ignore
         private Repeat(Iterable<Object> iterable) { this.iterable = iterable; }
         public override Object get() {
+            // prettier-ignore
             if (iterator?.hasNext() != true) { iterator = iterable.iterator(); }
             return iterator.next();
         }
     }
     // @end-group
     //</editor-fold>
-
 }
