@@ -2,7 +2,7 @@
  * @see SObjectDefaultComparerPredicateProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectDefaultComparerPredicateBuildTest {
     private static final List<Account> INPUT = AfTestData.generateAccounts();
     private static final SObjectComparerPredicateProvider PRED = new SObjectDefaultComparerPredicateProvider();

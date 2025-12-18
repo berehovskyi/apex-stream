@@ -10,17 +10,16 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class SetObjectConsumers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SetObjectConsumers() {}
+    protected SetObjectConsumers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Object>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -36,7 +35,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Boolean>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -52,7 +51,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Id>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -68,7 +67,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<String>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -84,7 +83,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Blob>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -100,7 +99,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Date>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -116,7 +115,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Datetime>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -132,7 +131,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Time>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -148,7 +147,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Integer>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -164,7 +163,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Long>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -180,7 +179,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<Double>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -196,7 +195,7 @@ public virtual inherited sharing class SetObjectConsumers {
     /**
      * @description Returns a `BiConsumer` that casts the first input argument to
      * the `Set<SObject>` and adds the second input argument to it.
-     * 
+     *
      * @param mapper the mapping function
      *
      * @return the `BiConsumer`
@@ -222,11 +221,14 @@ public virtual inherited sharing class SetObjectConsumers {
     }
 
     private class AddToObjectSet extends AddToSet {
+        // prettier-ignore
         private AddToObjectSet(IFunction mapper) { super(mapper); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Object>) container).add(mapper.apply(o)); }
     }
 
     private class AddToBoolSet extends AddToSet {
+        // prettier-ignore
         private AddToBoolSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             ((Set<Boolean>) container).add((Boolean) mapper.apply(o));
@@ -234,11 +236,14 @@ public virtual inherited sharing class SetObjectConsumers {
     }
 
     private class AddToIdSet extends AddToSet {
+        // prettier-ignore
         private AddToIdSet(IFunction mapper) { super(mapper); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Id>) container).add((Id) mapper.apply(o)); }
     }
 
     private class AddToStringSet extends AddToSet {
+        // prettier-ignore
         private AddToStringSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             ((Set<String>) container).add((String) mapper.apply(o));
@@ -246,16 +251,21 @@ public virtual inherited sharing class SetObjectConsumers {
     }
 
     private class AddToBlobSet extends AddToSet {
+        // prettier-ignore
         private AddToBlobSet(IFunction mapper) { super(mapper); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Blob>) container).add((Blob) mapper.apply(o)); }
     }
 
     private class AddToDateSet extends AddToSet {
+        // prettier-ignore
         private AddToDateSet(IFunction mapper) { super(mapper); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Date>) container).add((Date) mapper.apply(o)); }
     }
 
     private class AddToDatetimeSet extends AddToSet {
+        // prettier-ignore
         private AddToDatetimeSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             ((Set<Datetime>) container).add((Datetime) mapper.apply(o));
@@ -263,11 +273,14 @@ public virtual inherited sharing class SetObjectConsumers {
     }
 
     private class AddToTimeSet extends AddToSet {
+        // prettier-ignore
         private AddToTimeSet(IFunction mapper) { super(mapper); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Time>) container).add((Time) mapper.apply(o)); }
     }
 
     private class AddToIntSet extends AddToSet {
+        // prettier-ignore
         private AddToIntSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             ((Set<Integer>) container).add((Integer) mapper.apply(o));
@@ -275,11 +288,14 @@ public virtual inherited sharing class SetObjectConsumers {
     }
 
     private class AddToLongSet extends AddToSet {
+        // prettier-ignore
         private AddToLongSet(IFunction mapper) { super(mapper); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { ((Set<Long>) container).add((Long) mapper.apply(o)); }
     }
 
     private class AddToDoubleSet extends AddToSet {
+        // prettier-ignore
         private AddToDoubleSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             ((Set<Double>) container).add((Double) mapper.apply(o));
@@ -287,6 +303,7 @@ public virtual inherited sharing class SetObjectConsumers {
     }
 
     private class AddToSObjectSet extends AddToSet {
+        // prettier-ignore
         private AddToSObjectSet(IFunction mapper) { super(mapper); }
         public override void accept(Object container, Object o) {
             ((Set<SObject>) container).add((SObject) mapper.apply(o));
@@ -294,5 +311,4 @@ public virtual inherited sharing class SetObjectConsumers {
     }
     // @end-group
     //</editor-fold>
-
 }

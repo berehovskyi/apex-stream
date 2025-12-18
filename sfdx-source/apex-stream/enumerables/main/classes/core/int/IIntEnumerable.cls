@@ -11,7 +11,6 @@
  * @group Enumerables
  */
 public interface IIntEnumerable extends INumberEnumerable<Integer> {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -81,5 +80,4 @@ public interface IIntEnumerable extends INumberEnumerable<Integer> {
      */
     Integer reduce(Integer identity, IBiOperator accumulator);
     //</editor-fold>
-
 }

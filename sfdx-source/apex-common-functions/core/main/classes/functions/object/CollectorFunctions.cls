@@ -9,12 +9,10 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD.CognitiveComplexity')
 public virtual inherited sharing class CollectorFunctions {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected CollectorFunctions() {}
+    protected CollectorFunctions() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -262,12 +260,16 @@ public virtual inherited sharing class CollectorFunctions {
     // @start-group Lambdas
     private abstract class GroupFinisher extends Function {
         protected final IFunction finisher;
-        protected GroupFinisher(IFunction finisher) { this.finisher = finisher; }
+        protected GroupFinisher(IFunction finisher) {
+            this.finisher = finisher;
+        }
     }
 
     private class GroupByBoolFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByBoolFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Boolean, Object> m = ((Map<Boolean, Object>) o);
             for (Boolean k : m.keySet()) {
@@ -278,8 +280,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByIdFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByIdFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Id, Object> m = ((Map<Id, Object>) o);
             for (Id k : m.keySet()) {
@@ -290,8 +294,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByStringFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByStringFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<String, Object> m = ((Map<String, Object>) o);
             for (String k : m.keySet()) {
@@ -302,8 +308,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByBlobFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByBlobFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Blob, Object> m = ((Map<Blob, Object>) o);
             for (Blob k : m.keySet()) {
@@ -314,8 +322,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByDateFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByDateFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Date, Object> m = ((Map<Date, Object>) o);
             for (Date k : m.keySet()) {
@@ -326,8 +336,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByDatetimeFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByDatetimeFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Datetime, Object> m = ((Map<Datetime, Object>) o);
             for (Datetime k : m.keySet()) {
@@ -338,8 +350,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByTimeFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByTimeFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Time, Object> m = ((Map<Time, Object>) o);
             for (Time k : m.keySet()) {
@@ -350,8 +364,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByIntFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByIntFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Integer, Object> m = ((Map<Integer, Object>) o);
             for (Integer k : m.keySet()) {
@@ -362,8 +378,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByLongFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByLongFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Long, Object> m = ((Map<Long, Object>) o);
             for (Long k : m.keySet()) {
@@ -374,8 +392,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByDoubleFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByDoubleFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Double, Object> m = ((Map<Double, Object>) o);
             for (Double k : m.keySet()) {
@@ -386,8 +406,10 @@ public virtual inherited sharing class CollectorFunctions {
     }
 
     private class GroupByObjectFinisher extends GroupFinisher {
+        // prettier-ignore
         private GroupByObjectFinisher(IFunction finisher) { super(finisher); }
         public override Object apply(Object o) {
+            // prettier-ignore
             if (finisher == null) { return o; }
             final Map<Object, Object> m = ((Map<Object, Object>) o);
             for (Object k : m.keySet()) {
@@ -399,13 +421,16 @@ public virtual inherited sharing class CollectorFunctions {
 
     private class AppendFinisher extends Function {
         private final String suffix;
+        // prettier-ignore
         private AppendFinisher(String suffix) { this.suffix = suffix; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((List<String>) o)[0] + suffix; }
     }
 
     private class AveragingIntFinisher extends Function {
         public override Object apply(Object o) {
             final List<Integer> integers = (List<Integer>) o;
+            // prettier-ignore
             if (integers[0] == 0) { return null; }
             return integers[1] / (Double) integers[0];
         }
@@ -414,6 +439,7 @@ public virtual inherited sharing class CollectorFunctions {
     private class SummingFinisher extends Function {
         public override Object apply(Object o) {
             final List<Object> objects = (List<Object>) o;
+            // prettier-ignore
             if (objects[0] == 0) { return null; }
             return objects[1];
         }
@@ -422,6 +448,7 @@ public virtual inherited sharing class CollectorFunctions {
     private class SummingDoubleFinisher extends Function {
         public override Object apply(Object o) {
             final List<Double> doubles = (List<Double>) o;
+            // prettier-ignore
             if (doubles[2] == 0) { return null; }
             return doubles[0] + doubles[1];
         }
@@ -430,6 +457,7 @@ public virtual inherited sharing class CollectorFunctions {
     private class AveragingLongFinisher extends Function {
         public override Object apply(Object o) {
             final List<Long> longs = (List<Long>) o;
+            // prettier-ignore
             if (longs[0] == 0) { return null; }
             return longs[1] / (Double) longs[0];
         }
@@ -438,6 +466,7 @@ public virtual inherited sharing class CollectorFunctions {
     private class AveragingDoubleFinisher extends Function {
         public override Object apply(Object o) {
             final List<Double> doubles = (List<Double>) o;
+            // prettier-ignore
             if (doubles[2] == 0) { return null; }
             return (doubles[0] + doubles[1]) / doubles[2];
         }
@@ -445,12 +474,9 @@ public virtual inherited sharing class CollectorFunctions {
 
     private class ReducingOptionalFinisher extends Function {
         public override Object apply(Object o) {
-            return ((List<Object>) o).isEmpty()
-                ? Optional.empty()
-                : Optional.ofNullable(((List<Object>) o)[0]);
+            return ((List<Object>) o).isEmpty() ? Optional.empty() : Optional.ofNullable(((List<Object>) o)[0]);
         }
     }
     // @end-group
     //</editor-fold>
-
 }

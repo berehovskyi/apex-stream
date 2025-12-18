@@ -8,12 +8,10 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD.CognitiveComplexity')
 public virtual inherited sharing class SObjectOperators {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SObjectOperators() {}
+    protected SObjectOperators() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -411,11 +409,7 @@ public virtual inherited sharing class SObjectOperators {
      * SObjectOperators.newSObject(Account.SObjectType, 'Id', Functions.get('AccountId'));
      * SObjectOperators.newSObject(Account.SObjectType, 'Id', Functions.get('Account.ParentId'));
      */
-    public static Operator newSObject(
-        final SObjectType sObjectType,
-        final String fieldName,
-        final IFunction mapper
-    ) {
+    public static Operator newSObject(final SObjectType sObjectType, final String fieldName, final IFunction mapper) {
         return newSObject(sObjectType, BiOperator.combine(SObjectBiConsumers.set(fieldName, mapper)));
     }
 
@@ -437,11 +431,7 @@ public virtual inherited sharing class SObjectOperators {
      * @example
      * SObjectOperators.newSObject(Account.SObjectType, Account.Id, Functions.get('AccountId'));
      */
-    public static Operator newSObject(
-        final SObjectType sObjectType,
-        final SObjectField field,
-        final IFunction mapper
-    ) {
+    public static Operator newSObject(final SObjectType sObjectType, final SObjectField field, final IFunction mapper) {
         return newSObject(sObjectType, BiOperator.combine(SObjectBiConsumers.set(field, mapper)));
     }
 
@@ -465,11 +455,7 @@ public virtual inherited sharing class SObjectOperators {
      * @example
      * SObjectOperators.newSObject(Account.SObjectType, 'Id', someAccId);
      */
-    public static Operator newSObject(
-        final SObjectType sObjectType,
-        final String fieldName,
-        final Object value
-    ) {
+    public static Operator newSObject(final SObjectType sObjectType, final String fieldName, final Object value) {
         return newSObject(sObjectType, fieldName, Function.constant(value));
     }
 
@@ -489,11 +475,7 @@ public virtual inherited sharing class SObjectOperators {
      * @example
      * SObjectOperators.newSObject(Account.SObjectType, Account.Id, someAccId);
      */
-    public static Operator newSObject(
-        final SObjectType sObjectType,
-        final SObjectField field,
-        final Object value
-    ) {
+    public static Operator newSObject(final SObjectType sObjectType, final SObjectField field, final Object value) {
         return newSObject(sObjectType, field, Function.constant(value));
     }
     // @end-group
@@ -503,20 +485,27 @@ public virtual inherited sharing class SObjectOperators {
     // @start-group Lambdas
     private class GetSObjectByFieldName extends Operator {
         private final String fieldName;
+        // prettier-ignore
         private GetSObjectByFieldName(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getSObject(fieldName); }
     }
 
     private class GetSObjectByFieldPathSafe extends Operator {
         private final List<String> path;
+        // prettier-ignore
         private GetSObjectByFieldPathSafe(String fieldName) { path = fieldName.split('\\.'); }
+        // prettier-ignore
         public override Object apply(Object obj) { return getSObject((SObject) obj, 0); }
         private SObject getSObject(SObject sObj, Integer i) {
+            // prettier-ignore
             if (i >= path.size()) { return sObj; }
             String fieldName = path[i];
             Boolean isSafeNavigation = fieldName.endsWith('?'); // Safe Navigation
+            // prettier-ignore
             if (isSafeNavigation) { fieldName = fieldName.removeEnd('?'); }
             sObj = sObj.getSObject(fieldName);
+            // prettier-ignore
             if (isSafeNavigation && sObj == null) { return null; }
             return getSObject(sObj, ++i);
         }
@@ -526,9 +515,12 @@ public virtual inherited sharing class SObjectOperators {
         private final IFunction mapper;
         private GetSObjectOperator(String fieldName) {
             Validate.notBlank(fieldName);
+            // prettier-ignore
             if (!fieldName.containsAny('?.')) { mapper = new GetSObjectByFieldName(fieldName); }
+            // prettier-ignore
             else { mapper = new GetSObjectByFieldPathSafe(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
@@ -538,6 +530,7 @@ public virtual inherited sharing class SObjectOperators {
             Validate.notNull(field);
             this.field = field;
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getSObject(field); }
     }
 
@@ -545,13 +538,13 @@ public virtual inherited sharing class SObjectOperators {
         private final String placeholder = '\'{\'"totalSize": {0}, "done": true, "records": {1}\'}\'';
         private final String fieldName;
         private final IFunction mapper;
-        public SetSObjectsByFieldNameOperator(String fieldName, IFunction mapper) {
+        private SetSObjectsByFieldNameOperator(String fieldName, IFunction mapper) {
             Validate.notBlank(fieldName);
             Validate.notNull(mapper);
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
-        public SetSObjectsByFieldNameOperator(SObjectField field, IFunction mapper) {
+        private SetSObjectsByFieldNameOperator(SObjectField field, IFunction mapper) {
             Validate.notNull(field);
             Validate.notNull(mapper);
             this.fieldName = findChildRelationshipName(field);
@@ -579,5 +572,4 @@ public virtual inherited sharing class SObjectOperators {
     }
     // @end-group
     //</editor-fold>
-
 }

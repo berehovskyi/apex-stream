@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class LongOperators {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected LongOperators() {}
+    protected LongOperators() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -159,53 +158,57 @@ public virtual inherited sharing class LongOperators {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Abs extends Operator {
+        // prettier-ignore
         public override Object apply(Object l) { return Math.abs((Long) l); }
     }
 
     private class Add extends Operator {
         private final Long l;
+        // prettier-ignore
         private Add(Long l) { Validate.notNull(l); this.l = l; }
+        // prettier-ignore
         public override Object apply(Object j) { return (Long) j + l; }
     }
 
     private class Min extends Operator {
         private final Long l;
+        // prettier-ignore
         private Min(Long l) { this.l = l; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.min((Long) j, l); }
     }
 
     private class Max extends Operator {
         private final Long l;
+        // prettier-ignore
         private Max(Long l) { this.l = l; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.max((Long) j, l); }
     }
 
     private class Mod extends Operator {
         private final Long l;
-        private Mod(Long l) {
-            Validate.notNull(l);
-            Validate.isTrue(l != 0);
-            this.l = l;
-        }
+        // prettier-ignore
+        private Mod(Long l) { Validate.notNull(l); Validate.isTrue(l != 0); this.l = l; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.mod((Long) j, l); }
     }
 
     private class Multiply extends Operator {
         private final Long l;
+        // prettier-ignore
         private Multiply(Long l) { Validate.notNull(l); this.l = l; }
+        // prettier-ignore
         public override Object apply(Object j) { return (Long) j * l; }
     }
 
     private class Divide extends Operator {
         private final Long l;
-        private Divide(Long l) {
-            Validate.notNull(l);
-            Validate.isTrue(l != 0);
-            this.l = l;
-        }
+        // prettier-ignore
+        private Divide(Long l) { Validate.notNull(l); Validate.isTrue(l != 0); this.l = l; }
+        // prettier-ignore
         public override Object apply(Object j) { return (Long) j / l; }
     }
     // @end-group
     //</editor-fold>
-
 }

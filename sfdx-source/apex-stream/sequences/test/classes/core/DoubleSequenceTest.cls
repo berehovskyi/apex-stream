@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class DoubleSequenceTest {
-
     /**
      * @see DoubleSequence.of
      * @see DoubleSequence.ofNullable
@@ -301,7 +298,7 @@ private class DoubleSequenceTest {
         List<Account> actual1 = (List<Account>) seq1.toList();
         // Then
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
-        for (Integer i = 0, size = input.size(); i < size; i++ ) {
+        for (Integer i = 0, size = input.size(); i < size; i++) {
             Assert.areEqual(Math.abs(clone[i]), actual[i].AnnualRevenue);
             Assert.areEqual(Math.abs(clone[i]), actual1[i].AnnualRevenue);
         }
@@ -757,5 +754,4 @@ private class DoubleSequenceTest {
         Assert.areEqual(expected, actual1);
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
-
 }

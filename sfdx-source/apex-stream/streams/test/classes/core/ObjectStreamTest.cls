@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class ObjectStreamTest {
-
     /**
      * @see ObjectStream.of
      * @see ObjectStream.ofNullable
@@ -570,16 +567,16 @@ private class ObjectStreamTest {
     private static void flatMapToDouble() {
         // Given
         List<List<Double>> input = new List<List<Double>>{
-                new List<Double>{},
-                null,
-                new List<Double>{ 1.1 },
-                new List<Double>{ 0, Math.PI }
+            new List<Double>{},
+            null,
+            new List<Double>{ 1.1 },
+            new List<Double>{ 0, Math.PI }
         };
         List<List<Double>> clone = new List<List<Double>>{
-                new List<Double>{},
-                null,
-                new List<Double>{ 1.1 },
-                new List<Double>{ 0, Math.PI }
+            new List<Double>{},
+            null,
+            new List<Double>{ 1.1 },
+            new List<Double>{ 0, Math.PI }
         };
         DoubleEnumerable stm = ObjectStream.of(clone).flatMapToDouble(Function.identity());
         IDoubleEnumerable stm1 = ObjectStream.of(clone).flatMapToDouble(Function.identity());
@@ -603,16 +600,16 @@ private class ObjectStreamTest {
         // Given
         List<Account> accounts = AsTestData.generateAccounts1();
         List<List<Account>> input = new List<List<Account>>{
-                new List<Account>{},
-                null,
-                new List<Account>{ accounts[1] },
-                new List<Account>{ accounts[0], accounts[2] }
+            new List<Account>{},
+            null,
+            new List<Account>{ accounts[1] },
+            new List<Account>{ accounts[0], accounts[2] }
         };
         List<List<Account>> clone = new List<List<Account>>{
-                new List<Account>{},
-                null,
-                new List<Account>{ accounts[1] },
-                new List<Account>{ accounts[0], accounts[2] }
+            new List<Account>{},
+            null,
+            new List<Account>{ accounts[1] },
+            new List<Account>{ accounts[0], accounts[2] }
         };
         SObjectEnumerable stm = ObjectStream.of(clone).flatMapToSObject(Function.identity());
         ISObjectEnumerable stm1 = ObjectStream.of(clone).flatMapToSObject(Function.identity());
@@ -666,7 +663,7 @@ private class ObjectStreamTest {
         AsPerson john = new AsPerson('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         AsPerson jake = new AsPerson('Jake', 33, Date.newInstance(1991, 2, 3), 0L, true);
         List<Object> input = new List<Object>{ john, jake, 'foo', 1, 'foo', jake };
-        List<Object> clone =  AsTestCommons.deepClone(input);
+        List<Object> clone = AsTestCommons.deepClone(input);
         ObjectEnumerable stm = ObjectStream.of(clone).distinct();
         IObjectEnumerable stm1 = ObjectStream.of(input).filter(new AsTestCommons.IsInstanceOfComparablePredicate()).distinct(new AsTestCommons.GetIdFunction());
         // When

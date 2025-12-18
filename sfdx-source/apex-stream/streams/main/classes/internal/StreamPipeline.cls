@@ -5,9 +5,8 @@
  *
  * @author Oleh Berehovskyi
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class StreamPipeline {
-
     public static Iterator<Integer> rangeInt(final Integer fromInt, final Integer toInt) {
         return new IntRangeIterator(fromInt, toInt);
     }
@@ -336,8 +335,8 @@ public inherited sharing class StreamPipeline {
         Validate.notNull(iterator);
         Validate.notNull(keyMapper);
         Validate.notNull(valueType);
-        final Map<String, Object> result = (Map<String, Object>)
-            Type.forName('Map<String, ' + valueType + '>').newInstance();
+        final Map<String, Object> result = (Map<String, Object>) Type.forName('Map<String, ' + valueType + '>')
+            .newInstance();
         while (iterator.hasNext()) {
             final Object v = iterator.next();
             final String k = (String) keyMapper.apply(v);
@@ -358,8 +357,10 @@ public inherited sharing class StreamPipeline {
     ) {
         Validate.notNull(iterator);
         Validate.notNull(keyMapper);
-        final Map<Id, List<Object>> result = (Map<Id, List<Object>>)
-            Type.forName('Map<Id, List<' + listElementType + '>>').newInstance();
+        final Map<Id, List<Object>> result = (Map<Id, List<Object>>) Type.forName(
+                'Map<Id, List<' + listElementType + '>>'
+            )
+            .newInstance();
         while (iterator.hasNext()) {
             final Object v = iterator.next();
             final Id k = (Id) keyMapper.apply(v);
@@ -380,8 +381,10 @@ public inherited sharing class StreamPipeline {
     ) {
         Validate.notNull(iterator);
         Validate.notNull(keyMapper);
-        final Map<String, List<Object>> result = (Map<String, List<Object>>)
-            Type.forName('Map<String, List<' + listElementType + '>>').newInstance();
+        final Map<String, List<Object>> result = (Map<String, List<Object>>) Type.forName(
+                'Map<String, List<' + listElementType + '>>'
+            )
+            .newInstance();
         while (iterator.hasNext()) {
             final Object v = iterator.next();
             final String k = (String) keyMapper.apply(v);
@@ -402,8 +405,10 @@ public inherited sharing class StreamPipeline {
     ) {
         Validate.notNull(iterator);
         Validate.notNull(predicate);
-        final Map<Boolean, List<Object>> result = (Map<Boolean, List<Object>>)
-            Type.forName('Map<Boolean, List<' + listElementType + '>>').newInstance();
+        final Map<Boolean, List<Object>> result = (Map<Boolean, List<Object>>) Type.forName(
+                'Map<Boolean, List<' + listElementType + '>>'
+            )
+            .newInstance();
         result.put(true, (List<Object>) Type.forName('List<' + listElementType + '>').newInstance());
         result.put(false, (List<Object>) Type.forName('List<' + listElementType + '>').newInstance());
         while (iterator.hasNext()) {
@@ -418,5 +423,4 @@ public inherited sharing class StreamPipeline {
             iterator.next();
         }
     }
-
 }

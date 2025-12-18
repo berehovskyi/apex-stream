@@ -11,7 +11,6 @@
  * @group Enumerables
  */
 public interface ISObjectEnumerable extends IEnumerable<SObject> {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -498,7 +497,7 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      * @return the `SObject` result of the reduction
      */
     SObject reduce(SObject identity, IBiOperator accumulator);
-    
+
     /**
      * @description Returns an `Optional` describing the first element
      * which has `value` of `fieldName`.
@@ -1028,5 +1027,4 @@ public interface ISObjectEnumerable extends IEnumerable<SObject> {
      */
     Map<Boolean, List<SObject>> partition(SObjectField field, Object value);
     //</editor-fold>
-
 }

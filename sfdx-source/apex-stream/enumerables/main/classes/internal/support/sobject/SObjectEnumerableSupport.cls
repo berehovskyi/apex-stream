@@ -6,7 +6,6 @@
  * @author Oleh Berehovskyi
  */
 public inherited sharing class SObjectEnumerableSupport {
-
     /**
      * @description Returns a `Consumer` that sets the value returned by
      * the `mapper` for the specified `fieldName`.
@@ -106,7 +105,7 @@ public inherited sharing class SObjectEnumerableSupport {
         return set(field, Function.constant(value));
     }
 
-        /**
+    /**
      * @description Returns a `Function` that gets a value for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
      *
@@ -244,14 +243,63 @@ public inherited sharing class SObjectEnumerableSupport {
         return new GetSObjectFieldOperator(field);
     }
 
+    /**
+     * @description Returns a `Predicate` that tests the input SObject if the value of
+     * the `fieldName` is equal to the `value`, comparing object value equality
+     * not reference equality. Cross-reference fields and safe navigation are supported.
+     *
+     * @param fieldName the value of which is considered the left argument of comparison
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
+     * reference navigation
+     * @throws SObjectException if provided invalid `fieldName`
+     *
+     * @see Comparer.defaultOrder
+     *
+     * @example
+     * SObjectEnumerableSupport.isEqual('NumberOfEmployees', 100);
+     * SObjectEnumerableSupport.isEqual('Parent?.NumberOfEmployees', 100);
+     */
     public static Predicate isEqual(final String fieldName, final Object value) {
         return EnumerableSupport.isEqual(get(fieldName), Function.constant(value));
     }
 
+    /**
+     * @description Returns a `Predicate` that tests the input SObject if the value of
+     * the `field` is equal to the `value`, comparing object value equality
+     * not reference equality.
+     *
+     * @param field the value of which is considered the left argument of comparison
+     * @param value the right argument of comparison
+     *
+     * @return the `Predicate`
+     *
+     * @throws NullPointerException if `field` is null
+     *
+     * @see Comparer.defaultOrder
+     *
+     * @example
+     * SObjectEnumerableSupport.isEqual(Account.NumberOfEmployees, 100);
+     */
     public static Predicate isEqual(final SObjectField field, final Object value) {
         return EnumerableSupport.isEqual(get(field), Function.constant(value));
     }
 
+    /**
+     * @description Finds the relationship name for a given SObject field that is a reference field.
+     *
+     * @param field The SObjectField to find the relationship name for. This field must be a reference field.
+     *
+     * @return The relationship name of the given SObject field.
+     *
+     * @throws IllegalArgumentException if the provided field is not a reference field.
+     * @throws NullPointerException if no relationship name is found for the provided field.
+     */
     public static String findRelationshipField(final SObjectField field) {
         Validate.isNotNull(field);
         final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
@@ -283,6 +331,7 @@ public inherited sharing class SObjectEnumerableSupport {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(((SObject) obj))); }
     }
 
@@ -317,11 +366,13 @@ public inherited sharing class SObjectEnumerableSupport {
             this.field = field;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply(obj)); }
     }
 
     private class SetFieldConsumer extends Consumer {
         private final IConsumer consumer;
+        // prettier-ignore
         private SetFieldConsumer(String fieldName, IFunction mapper) {
             Validate.notBlank(fieldName);
             Validate.notNull(mapper);
@@ -330,6 +381,7 @@ public inherited sharing class SObjectEnumerableSupport {
                 consumer = new SetFieldPathSafe(fieldName, mapper);
             } else { consumer = new SetFieldPath(fieldName, mapper); }
         }
+        // prettier-ignore
         public override void accept(Object obj) { consumer.accept(obj); }
     }
 
@@ -344,22 +396,29 @@ public inherited sharing class SObjectEnumerableSupport {
 
     private class GetFieldNameFunction extends Function {
         private final String fieldName;
+        // prettier-ignore
         private GetFieldNameFunction(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).get(fieldName); }
     }
 
     private class GetFieldPathFunction extends SObjectPathFunction {
+        // prettier-ignore
         private GetFieldPathFunction(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).get(xRefFieldName); }
     }
 
     private class GetFieldPathSafeFunction extends SObjectPathFunction {
+        // prettier-ignore
         private GetFieldPathSafeFunction(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.get(xRefFieldName); }
     }
 
     private class GetFunction extends Function {
         private final IFunction mapper;
+        // prettier-ignore
         private GetFunction(String fieldName) {
             Validate.notBlank(fieldName);
             if (!fieldName.contains('.')) { mapper = new GetFieldNameFunction(fieldName); }
@@ -367,6 +426,7 @@ public inherited sharing class SObjectEnumerableSupport {
                 mapper = new GetFieldPathSafeFunction(fieldName);
             } else { mapper = new GetFieldPathFunction(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
@@ -376,27 +436,35 @@ public inherited sharing class SObjectEnumerableSupport {
             Validate.notNull(field);
             this.field = field;
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).get(field); }
     }
 
     private class GetSObjectsFieldNameFunction extends Function {
         private final String fieldName;
+        // prettier-ignore
         private GetSObjectsFieldNameFunction(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getSObjects(fieldName); }
     }
 
     private class GetSObjectsFieldPathFunction extends SObjectPathFunction {
+        // prettier-ignore
         private GetSObjectsFieldPathFunction(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsFieldPathSafeFunction extends SObjectPathFunction {
+        // prettier-ignore
         private GetSObjectsFieldPathSafeFunction(String fieldName) { super(fieldName); }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsFunction extends Function {
         private final IFunction mapper;
+        // prettier-ignore
         private GetSObjectsFunction(String fieldName) {
             Validate.notBlank(fieldName);
             if (!fieldName.contains('.')) { mapper = new GetSObjectsFieldNameFunction(fieldName); }
@@ -404,19 +472,25 @@ public inherited sharing class SObjectEnumerableSupport {
                 mapper = new GetSObjectsFieldPathSafeFunction(fieldName);
             } else { mapper = new GetSObjectsFieldPathFunction(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetSObjectFieldNameOperator extends Operator {
         private final String fieldName;
+        // prettier-ignore
         private GetSObjectFieldNameOperator(String fieldName) { this.fieldName = fieldName; }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getSObject(fieldName); }
     }
 
     private class GetSObjectFieldPathSafeOperator extends Operator {
         private final List<String> path;
+        // prettier-ignore
         private GetSObjectFieldPathSafeOperator(String fieldName) { path = fieldName.split('\\.'); }
+        // prettier-ignore
         public override Object apply(Object obj) { return getSObject((SObject) obj, 0); }
+        // prettier-ignore
         private SObject getSObject(SObject sObj, Integer i) {
             if (i >= path.size()) { return sObj; }
             String fieldName = path[i];
@@ -430,11 +504,13 @@ public inherited sharing class SObjectEnumerableSupport {
 
     private class GetSObjectOperator extends Operator {
         private final IFunction mapper;
+        // prettier-ignore
         private GetSObjectOperator(String fieldName) {
             Validate.notBlank(fieldName);
             if (!fieldName.containsAny('?.')) { mapper = new GetSObjectFieldNameOperator(fieldName); }
             else { mapper = new GetSObjectFieldPathSafeOperator(fieldName); }
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
@@ -444,7 +520,7 @@ public inherited sharing class SObjectEnumerableSupport {
             Validate.notNull(field);
             this.field = field;
         }
+        // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) obj).getSObject(field); }
     }
-
 }

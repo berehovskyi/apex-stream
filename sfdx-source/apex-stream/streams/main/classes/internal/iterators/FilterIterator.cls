@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public virtual inherited sharing class FilterIterator implements Iterator<Object> {
-
     protected final Iterator<Object> iterator;
     private final IPredicate predicate;
     protected Boolean hasNext = false, hasNextEvaluated = false; // NOPMD
@@ -24,7 +24,9 @@ public virtual inherited sharing class FilterIterator implements Iterator<Object
     }
 
     public Object next() {
+        // prettier-ignore
         if (!hasNextEvaluated) { hasNext = hasNext(); }
+        // prettier-ignore
         if (!hasNext) { throw new NoSuchElementException(); }
         hasNextEvaluated = false;
         return next;
@@ -40,5 +42,4 @@ public virtual inherited sharing class FilterIterator implements Iterator<Object
         }
         hasNext = false;
     }
-
 }

@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectBiPredicatesTest {
-
     private static final List<Account> INPUT = AfTestData.generateAccounts();
     private static final Account DELTA = new Account(Type = AfTestConsts.PARTNER, NumberOfEmployees = 100, BillingLatitude = -50.45);
 
@@ -160,5 +157,4 @@ private class SObjectBiPredicatesTest {
             Assert.areEqual(isIncreasedNum, numOfEmployeesIsLessOrEqualBiPredicate2.test(acc, DELTA));
         }
     }
-
 }

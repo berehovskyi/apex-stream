@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class StringSuppliersTest {
-
     static {
         new StringSuppliers();
     }
@@ -51,5 +50,4 @@ private class StringSuppliersTest {
         Assert.areEqual('A-10--N9', actual10);
         Assert.areEqual('A-11--N9', actual11);
     }
-
 }

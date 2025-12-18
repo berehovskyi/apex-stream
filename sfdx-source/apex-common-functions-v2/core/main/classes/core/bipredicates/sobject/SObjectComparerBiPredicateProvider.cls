@@ -92,23 +92,23 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
     }
 
     /**
-    * @description Creates a `ComparisonOperator` for comparing the left value of two SObjects using a constant value,
-    * with support for currying to build complex comparisons.
-    *
-    * @param left the constant value to be used for comparison
-    *
-    * @return a `ComparisonOperator` for further specification of the comparison operation
-    *
-    * @example
-    * IBiPredicate isRightRevenueLt1MBiPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
-    *     .isLVar(1000000)
-    *     .gt()
-    *     .rVal('AnnualRevenue');
-    * isRightRevenueLt1MBiPredicate.test(
-    *     new Account(),
-    *     new Account(AnnualRevenue = 500000)
-    * ); // true
-    */
+     * @description Creates a `ComparisonOperator` for comparing the left value of two SObjects using a constant value,
+     * with support for currying to build complex comparisons.
+     *
+     * @param left the constant value to be used for comparison
+     *
+     * @return a `ComparisonOperator` for further specification of the comparison operation
+     *
+     * @example
+     * IBiPredicate isRightRevenueLt1MBiPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
+     *     .isLVar(1000000)
+     *     .gt()
+     *     .rVal('AnnualRevenue');
+     * isRightRevenueLt1MBiPredicate.test(
+     *     new Account(),
+     *     new Account(AnnualRevenue = 500000)
+     * ); // true
+     */
     public virtual ComparisonOperator isLVar(final Object left) {
         return isL(Function.constant(left));
     }
@@ -243,7 +243,6 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
         public virtual RightComparand ne() {
             return new RightComparand(left, comparer, interpreter.ne());
         }
-
 
         /**
          * @description Specifies that the comparison should check if the left value is greater than (`>`)

@@ -1,7 +1,7 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IFunction} functional interface.
- * 
+ *
  * @see IFunction
  *
  * @author Oleh Berehovskyi
@@ -9,9 +9,15 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Function implements IFunction {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Applies the function to the input argument.
+     *
+     * @param o the input argument of `Object` type
+     *
+     * @return the result
+     */
     public abstract Object apply(Object o);
     // @end-group
     //</editor-fold>
@@ -115,6 +121,7 @@ public abstract inherited sharing class Function implements IFunction {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Identity extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return o; }
     }
 
@@ -139,12 +146,15 @@ public abstract inherited sharing class Function implements IFunction {
             Validate.notNull(predicate);
             this.predicate = predicate;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return predicate.test(o); }
     }
-    
+
     private class Constant extends Function {
         private final Object value;
+        // prettier-ignore
         private Constant(Object value) { this.value = value; }
+        // prettier-ignore
         public override Object apply(Object o) { return value; }
     }
 
@@ -154,9 +164,9 @@ public abstract inherited sharing class Function implements IFunction {
             Validate.notNull(supplier);
             this.supplier = supplier;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return supplier.get(); }
     }
     // @end-group
     //</editor-fold>
-
 }

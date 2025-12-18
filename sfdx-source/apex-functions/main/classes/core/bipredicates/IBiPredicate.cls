@@ -7,7 +7,6 @@
  * @group Functional Interfaces
  */
 public interface IBiPredicate {
-
     /**
      * @description Returns the result of applying this predicate to input.
      * <p>Contract:</p>
@@ -23,5 +22,4 @@ public interface IBiPredicate {
      * @return `true` if the input satisfies the predicate, `false` otherwise
      */
     Boolean test(Object o1, Object o2);
-
 }

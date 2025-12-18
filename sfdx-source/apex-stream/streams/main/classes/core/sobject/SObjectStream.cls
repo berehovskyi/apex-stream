@@ -47,17 +47,19 @@
  *         .mapToDouble(Account.AnnualRevenue)
  *         .sum();
  */
-@SuppressWarnings(
-    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount'
-)
 public virtual inherited sharing class SObjectStream extends SObjectEnumerable implements IRunnable {
-
     private final transient Iterator<SObject> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
      */
-    public Boolean isOperated { get { return isOperated; } protected set; } {
+    public Boolean isOperated {
+        get {
+            return isOperated;
+        }
+        protected set;
+    }
+    {
         isOperated = false;
     }
 
@@ -148,6 +150,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * SObjectEnumerable accStream = SObjectStream.ofNullable(stream1);
      */
     public static SObjectEnumerable ofNullable(final Iterable<SObject> iterable) {
+        // prettier-ignore
         if (iterable == null) { return empty(); }
         return new SObjectStream(iterable.iterator());
     }
@@ -376,7 +379,6 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *   { Name: 'baz', NumberOfEmployees: 300 }
      * ]
      */
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static SObjectEnumerable zip(
         final Iterable<SObject> iterable1,
         final Iterable<SObject> iterable2,
@@ -1772,5 +1774,4 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
     }
     // @end-group
     //</editor-fold>
-
 }

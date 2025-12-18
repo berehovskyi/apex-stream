@@ -7,7 +7,6 @@
  * @group Functional Interfaces
  */
 public interface IBiFunction {
-
     /**
      * @description Applies the function to the two input arguments.
      *
@@ -17,5 +16,4 @@ public interface IBiFunction {
      * @return the result
      */
     Object apply(Object o1, Object o2);
-
 }

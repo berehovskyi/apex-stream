@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class IdSuppliersTest {
-
     static {
         new IdSuppliers();
     }
@@ -25,5 +24,4 @@ private class IdSuppliersTest {
         // Then
         Assert.areEqual(sObjectType, actual.getSobjectType());
     }
-
 }

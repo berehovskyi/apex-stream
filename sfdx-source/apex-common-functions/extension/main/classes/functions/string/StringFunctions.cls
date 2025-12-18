@@ -3,17 +3,15 @@
  * and related utilities.
  *
  * @see Function
- * 
+ *
  * @author Oleh Berehovskyi
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount')
 public virtual inherited sharing class StringFunctions {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected StringFunctions() {}
+    protected StringFunctions() {
+    }
 
     //<editor-fold desc="String Functions">
     // @start-group String Functions
@@ -1041,267 +1039,339 @@ public virtual inherited sharing class StringFunctions {
     // @start-group Lambdas
     private class Abbreviate extends Function {
         private final Integer maxWidth;
+        // prettier-ignore
         private Abbreviate(Integer maxWidth) { Validate.notNull(maxWidth); this.maxWidth = maxWidth; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).abbreviate(maxWidth); }
     }
 
     private class AbbreviateOffset extends Function {
         private final Integer maxWidth;
         private final Integer offset;
+        // prettier-ignore
         private AbbreviateOffset(Integer maxWidth, Integer offset) {
             Validate.notNull(maxWidth); Validate.notNull(offset); this.maxWidth = maxWidth; this.offset = offset;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).abbreviate(maxWidth, offset); }
     }
 
     private class Append extends Function {
         private final String suffix;
+        // prettier-ignore
         private Append(String suffix) { Validate.notNull(suffix); this.suffix = suffix; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o) + suffix; }
     }
 
     private class Capitalize extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).capitalize(); }
     }
 
     private class Center extends Function {
         private final Integer size;
+        // prettier-ignore
         private Center(Integer size) { Validate.notNull(size); this.size = size; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).center(size); }
     }
 
     private class CenterPad extends Function {
         private final Integer size;
         private final String padStr;
+        // prettier-ignore
         private CenterPad(Integer size, String padStr) {
             Validate.notNull(size); Validate.notNull(padStr); this.size = size; this.padStr = padStr;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).center(size, padStr); }
     }
 
     private class DeleteWhitespace extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).deleteWhitespace(); }
     }
 
     private class Difference extends Function {
         private final String str;
+        // prettier-ignore
         private Difference(String str) { Validate.notNull(str); this.str = str; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).difference(str); }
     }
 
     private class EscapeCsv extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).escapeCsv(); }
     }
 
     private class EscapeEcmaScript extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).escapeEcmaScript(); }
     }
 
     private class EscapeHtml3 extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).escapeHtml3(); }
     }
 
     private class EscapeHtml4 extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).escapeHtml4(); }
     }
 
     private class EscapeJava extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).escapeJava(); }
     }
 
     private class EscapeSingleQuotes extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return String.escapeSingleQuotes((String) o); }
     }
 
     private class EscapeUnicode extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).escapeUnicode(); }
     }
 
     private class EscapeXml extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).escapeXml(); }
     }
 
     private class StringFormat extends Function {
         private final List<Object> arguments;
+        // prettier-ignore
         private StringFormat(List<Object> arguments) { Validate.notNull(arguments); this.arguments = arguments; }
+        // prettier-ignore
         public override Object apply(Object o) { return String.format((String) o, arguments); }
     }
 
     private class GetChars extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).getChars(); }
     }
 
     private class Left extends Function {
         private final Integer len;
+        // prettier-ignore
         private Left(Integer len) { Validate.notNull(len); this.len = len; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).left(len); }
     }
 
     private class LeftPad extends Function {
         private final Integer len;
+        // prettier-ignore
         private LeftPad(Integer len) { Validate.notNull(len); this.len = len; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).leftPad(len); }
     }
 
     private class LeftPadPad extends Function {
         private final Integer len;
         private final String padStr;
+        // prettier-ignore
         private LeftPadPad(Integer len, String padStr) {
             Validate.notNull(len); Validate.notNull(padStr); this.len = len; this.padStr = padStr;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).leftPad(len, padStr); }
     }
 
     private class Mid extends Function {
         private final Integer pos;
         private final Integer len;
+        // prettier-ignore
         private Mid(Integer pos, Integer len) {
             Validate.notNull(pos); Validate.notNull(len); this.pos = pos; this.len = len;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).mid(pos, len); }
     }
 
     private class NormalizeSpace extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).normalizeSpace(); }
     }
 
     private class Prepend extends Function {
         private final String prefix;
+        // prettier-ignore
         private Prepend(String prefix) { Validate.notNull(prefix); this.prefix = prefix; }
+        // prettier-ignore
         public override Object apply(Object o) { return prefix + ((String) o); }
     }
 
     private class Remove extends Function {
         private final String toRemove;
+        // prettier-ignore
         private Remove(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).remove(toRemove); }
     }
 
     private class RemoveEnd extends Function {
         private final String toRemove;
+        // prettier-ignore
         private RemoveEnd(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).removeEnd(toRemove); }
     }
 
     private class RemoveEndIgnoreCase extends Function {
         private final String toRemove;
+        // prettier-ignore
         private RemoveEndIgnoreCase(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).removeEndIgnoreCase(toRemove); }
     }
 
     private class RemoveStart extends Function {
         private final String toRemove;
+        // prettier-ignore
         private RemoveStart(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).removeStart(toRemove); }
     }
 
     private class RemoveStartIgnoreCase extends Function {
         private final String toRemove;
+        // prettier-ignore
         private RemoveStartIgnoreCase(String toRemove) { Validate.notNull(toRemove); this.toRemove = toRemove; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).removeStartIgnoreCase(toRemove); }
     }
 
     private class Repeat extends Function {
         private final Integer numTimes;
+        // prettier-ignore
         private Repeat(Integer numTimes) { Validate.notNull(numTimes); this.numTimes = numTimes; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).repeat(numTimes); }
     }
 
     private class RepeatSeparator extends Function {
         private final String separator;
         private final Integer numTimes;
+        // prettier-ignore
         private RepeatSeparator(String separator, Integer numTimes) {
-            Validate.notNull(separator); Validate.notNull(numTimes); this.separator = separator;
-            this.numTimes = numTimes;
+            Validate.notNull(separator); Validate.notNull(numTimes);
+            this.separator = separator; this.numTimes = numTimes;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).repeat(separator, numTimes); }
     }
 
     private class Replace extends Function {
         private final String target;
         private final String replacement;
+        // prettier-ignore
         private Replace(String target, String replacement) {
-            Validate.notNull(target); Validate.notNull(replacement); this.target = target;
-            this.replacement = replacement;
+            Validate.notNull(target); Validate.notNull(replacement);
+            this.target = target; this.replacement = replacement;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).replace(target, replacement); }
     }
 
     private class ReplaceAll extends Function {
         private final String regex;
         private final String replacement;
+        // prettier-ignore
         private ReplaceAll(String regex, String replacement) {
-            Validate.notNull(regex); Validate.notNull(replacement); this.regex = regex;
-            this.replacement = replacement;
+            Validate.notNull(regex); Validate.notNull(replacement);
+            this.regex = regex; this.replacement = replacement;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).replaceAll(regex, replacement); }
     }
 
     private class ReplaceFirst extends Function {
         private final String regex;
         private final String replacement;
+        // prettier-ignore
         private ReplaceFirst(String regex, String replacement) {
-            Validate.notNull(regex); Validate.notNull(replacement); this.regex = regex;
-            this.replacement = replacement;
+            Validate.notNull(regex); Validate.notNull(replacement);
+            this.regex = regex; this.replacement = replacement;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).replaceFirst(regex, replacement); }
     }
 
     private class Reverse extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).reverse(); }
     }
 
     private class Right extends Function {
         private final Integer len;
+        // prettier-ignore
         private Right(Integer len) { Validate.notNull(len); this.len = len; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).right(len); }
     }
 
     private class RightPad extends Function {
         private final Integer len;
+        // prettier-ignore
         private RightPad(Integer len) { Validate.notNull(len); this.len = len; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).rightPad(len); }
     }
 
     private class RightPadPad extends Function {
         private final Integer len;
         private final String padStr;
+        // prettier-ignore
         private RightPadPad(Integer len, String padStr) {
             Validate.notNull(len); Validate.notNull(padStr); this.len = len; this.padStr = padStr;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).rightPad(len, padStr); }
     }
 
     private class Split extends Function {
         private final String regex;
+        // prettier-ignore
         private Split(String regex) { Validate.notNull(regex); this.regex = regex; }
+        // prettier-ignore
         public override Object apply(Object o) { return((String) o).split(regex); }
     }
 
     private class SplitLim extends Function {
         private final String regex;
         private final Integer lim;
+        // prettier-ignore
         private SplitLim(String regex, Integer lim) {
             Validate.notNull(regex); Validate.notNull(lim); this.regex = regex; this.lim = lim;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).split(regex, lim); }
     }
 
     private class SplitByCharacterType extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).splitByCharacterType(); }
     }
 
     private class SplitByCharacterTypeCamelCase extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).splitByCharacterTypeCamelCase(); }
     }
 
     private class StripHtmlTags extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).stripHtmlTags(); }
     }
 
     private class Substring extends Function {
         private final Integer startIndex;
+        // prettier-ignore
         private Substring(Integer start) { Validate.notNull(start); this.startIndex = start; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substring(startIndex); }
     }
 
@@ -1314,134 +1384,166 @@ public virtual inherited sharing class StringFunctions {
             this.startIndex = startIndex;
             this.endIndex = endIndex;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substring(startIndex, endIndex); }
     }
 
     private class SubstringAfter extends Function {
         private final String separator;
+        // prettier-ignore
         private SubstringAfter(String separator) { Validate.notNull(separator); this.separator = separator; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substringAfter(separator); }
     }
 
     private class SubstringAfterLast extends Function {
         private final String separator;
+        // prettier-ignore
         private SubstringAfterLast(String separator) { Validate.notNull(separator); this.separator = separator; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substringAfterLast(separator); }
     }
 
     private class SubstringBefore extends Function {
         private final String separator;
+        // prettier-ignore
         private SubstringBefore(String separator) { Validate.notNull(separator); this.separator = separator; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substringBefore(separator); }
     }
 
     private class SubstringBeforeLast extends Function {
         private final String separator;
+        // prettier-ignore
         private SubstringBeforeLast(String separator) { Validate.notNull(separator); this.separator = separator; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substringBeforeLast(separator); }
     }
 
     private class SubstringBetween extends Function {
         private final String tag;
+        // prettier-ignore
         private SubstringBetween(String tag) { Validate.notNull(tag); this.tag = tag; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substringBetween(tag); }
     }
 
     private class SubstringBetweenOpenClose extends Function {
         private final String open;
         private final String close;
+        // prettier-ignore
         private SubstringBetweenOpenClose(String open, String close) {
             Validate.notNull(open); Validate.notNull(close); this.open = open; this.close = close;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).substringBetween(open, close); }
     }
 
     private class SwapCase extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).swapCase(); }
     }
 
     private class ToLowerCase extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).toLowerCase(); }
     }
 
     private class ToLowerCaseLocale extends Function {
         private final String locale;
+        // prettier-ignore
         private ToLowerCaseLocale(String locale) { Validate.notNull(locale); this.locale = locale; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).toLowerCase(locale); }
     }
 
     private class ToUpperCase extends Function {
-        public override Object apply(Object o) {
-            return ((String) o).toUpperCase();
-        }
+        // prettier-ignore
+        public override Object apply(Object o) { return ((String) o).toUpperCase(); }
     }
 
     private class ToUpperCaseLocale extends Function {
         private final String locale;
+        // prettier-ignore
         private ToUpperCaseLocale(String locale) { Validate.notNull(locale); this.locale = locale; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).toUpperCase(locale); }
     }
 
     private class Trim extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).trim(); }
     }
 
     private class Uncapitalize extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).uncapitalize(); }
     }
 
     private class UnescapeCsv extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).unescapeCsv(); }
     }
 
     private class UnescapeEcmaScript extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).unescapeEcmaScript(); }
     }
 
     private class UnescapeHtml3 extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).unescapeHtml3(); }
     }
 
     private class UnescapeHtml4 extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).unescapeHtml4(); }
     }
 
     private class UnescapeJava extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).unescapeJava(); }
     }
 
     private class UnescapeUnicode extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).unescapeUnicode(); }
     }
 
     private class UnescapeXml extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((String) o).unescapeXml(); }
     }
 
     private class StringValueOf extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return String.valueOf(o); }
     }
 
     private class DateValueOf extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return Date.valueOf((String) o); }
     }
 
     private class DatetimeValueOf extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return Datetime.valueOf((String) o); }
     }
 
     private class DatetimeValueOfGmt extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return Datetime.valueOfGmt((String) o); }
     }
 
     private class ParseDate extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return Date.parse((String) o); }
     }
 
     private class ParseDatetime extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return Datetime.parse((String) o); }
     }
     // @end-group
     //</editor-fold>
-
 }

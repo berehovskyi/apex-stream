@@ -3,16 +3,15 @@
  * and related utilities.
  *
  * @see Function
- * 
+ *
  * @author Oleh Berehovskyi
  *
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class DatetimeFunctions {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected DatetimeFunctions() {}
+    protected DatetimeFunctions() {
+    }
 
     //<editor-fold desc="Date Functions">
     // @start-group Date Functions
@@ -194,6 +193,14 @@ public virtual inherited sharing class DatetimeFunctions {
         return new FormatGmt(dateformat);
     }
 
+    /**
+     * @description Returns a `Function` that returns the datetime in long date format
+     * using the locale of the context user.
+     *
+     * @return the `Function`
+     *
+     * @see Datetime.formatLong
+     */
     public static Function formatLong() {
         return new FormatLong();
     }
@@ -240,53 +247,70 @@ public virtual inherited sharing class DatetimeFunctions {
     // @start-group Lambdas
     private class AddDays extends Function {
         private final Integer days;
+        // prettier-ignore
         private AddDays(Integer days) { Validate.notNull(days); this.days = days; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addDays(days); }
     }
 
     private class AddHours extends Function {
         private final Integer hours;
+        // prettier-ignore
         private AddHours(Integer hours) { Validate.notNull(hours); this.hours = hours; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addHours(hours); }
     }
 
     private class AddMinutes extends Function {
         private final Integer minutes;
+        // prettier-ignore
         private AddMinutes(Integer minutes) { Validate.notNull(minutes); this.minutes = minutes; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addMinutes(minutes); }
     }
 
     private class AddMonths extends Function {
         private final Integer months;
+        // prettier-ignore
         private AddMonths(Integer months) { Validate.notNull(months); this.months = months; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addMonths(months); }
     }
 
     private class AddSeconds extends Function {
         private final Integer seconds;
+        // prettier-ignore
         private AddSeconds(Integer seconds) { Validate.notNull(seconds); this.seconds = seconds; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addSeconds(seconds); }
     }
 
     private class AddYears extends Function {
         private final Integer years;
+        // prettier-ignore
         private AddYears(Integer years) { Validate.notNull(years); this.years = years; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addYears(years); }
     }
 
     private class Dat extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).date(); }
     }
 
     private class DateGmt extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).dateGmt(); }
     }
 
     private class Format extends Function {
         private final String dateformat;
         private final String timezone;
+        // prettier-ignore
         private Format(String dateformat) { this(dateformat, null); }
+        // prettier-ignore
         private Format(String dateformat, String timezone) { this.dateformat = dateformat; this.timezone = timezone; }
+        // prettier-ignore
         public override Object apply(Object o) {
             if (dateformat == null) { return ((Datetime) o).format(); }
             if (timezone == null) { return ((Datetime) o).format(dateformat); }
@@ -296,26 +320,31 @@ public virtual inherited sharing class DatetimeFunctions {
 
     private class FormatGmt extends Function {
         private final String dateformat;
+        // prettier-ignore
         private FormatGmt(String dateformat) { Validate.notNull(dateformat); this.dateformat = dateformat; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).formatGmt(dateformat); }
     }
 
     private class FormatLong extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).formatLong(); }
     }
 
     private class Tm extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).time(); }
     }
 
     private class TimeGmt extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).timeGmt(); }
     }
 
     private class StringValueOfGmt extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return String.valueOfGmt((Datetime) o); }
     }
     // @end-group
     //</editor-fold>
-
 }

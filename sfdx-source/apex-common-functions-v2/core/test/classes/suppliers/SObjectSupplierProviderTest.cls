@@ -2,6 +2,7 @@
  * @see SObjectSupplierProvider
  */
 @IsTest(IsParallel = true)
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectSupplierProviderTest {
     private static final SObjectSupplierProvider SUP = new SObjectSupplierProvider();
 
@@ -9,7 +10,6 @@ private class SObjectSupplierProviderTest {
      * @see SObjectSupplierProvider.of
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void of() {
         // Given
         ISupplier accSupplier = SUP.of(Account.SObjectType);

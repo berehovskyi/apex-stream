@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class IntBiOperatorsTest {
-
     private static final List<Integer> INPUT = AfTestData.generateInts();
 
     static {
@@ -36,5 +35,4 @@ private class IntBiOperatorsTest {
             Assert.areEqual(src * i, product.apply(src, i));
         }
     }
-
 }

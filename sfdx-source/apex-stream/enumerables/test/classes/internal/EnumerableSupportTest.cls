@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc')
 private class EnumerableSupportTest {
-
     private static final List<Boolean> BOOLS = AsTestData.generateBools();
     private static final List<Id> IDS = AsTestData.generateIds();
     private static final List<Blob> BLOBS = AsTestData.generateBlobs();
@@ -239,5 +238,4 @@ private class EnumerableSupportTest {
             Assert.areEqual(o != null, isNullPredicate1.test(o));
         }
     }
-
 }

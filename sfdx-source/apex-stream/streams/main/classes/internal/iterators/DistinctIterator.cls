@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class DistinctIterator extends BaseIterator {
-
     private final Iterator<Object> iterator;
     private final IFunction classifier;
     private final Set<Object> results = new Set<Object>();
@@ -23,8 +23,8 @@ public inherited sharing class DistinctIterator extends BaseIterator {
         while (hasNext = iterator.hasNext()) {
             next = iterator.next();
             final Object result = classifier == null ? next : classifier.apply(next);
+            // prettier-ignore
             if (results.add(result)) { return; }
         }
     }
-
 }

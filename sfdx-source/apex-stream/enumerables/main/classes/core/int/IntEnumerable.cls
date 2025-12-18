@@ -5,9 +5,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings('PMD.ExcessivePublicCount')
 public abstract inherited sharing class IntEnumerable implements IIntEnumerable {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -692,5 +690,4 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      */
     public abstract Set<Integer> toSet();
     //</editor-fold>
-
 }

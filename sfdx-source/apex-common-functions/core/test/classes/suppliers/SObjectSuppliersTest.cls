@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectSuppliersTest {
-
     static {
         new SObjectSuppliers();
     }
@@ -24,5 +23,4 @@ private class SObjectSuppliersTest {
         // Then
         Assert.areEqual(new Account(), actual);
     }
-
 }

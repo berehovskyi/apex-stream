@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class LongBiOperatorsTest {
-
     private static final List<Long> INPUT = AfTestData.generateLongs();
 
     static {
@@ -36,5 +35,4 @@ private class LongBiOperatorsTest {
             Assert.areEqual(src * l, product.apply(src, l));
         }
     }
-
 }

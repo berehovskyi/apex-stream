@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class TimeFunctionsTest {
-
     // Given
     private static final List<Time> TIMES = new List<Time>{
         Time.newInstance(10, 10, 10, 10),
@@ -38,5 +37,4 @@ private class TimeFunctionsTest {
             Assert.areEqual(t.addSeconds(inc), TimeFunctions.addSeconds(inc).apply(t));
         }
     }
-
 }

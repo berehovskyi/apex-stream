@@ -4,7 +4,6 @@
  * <p>This is an internal class and should not be referenced outside of this package.</p>
  */
 public inherited sharing class AcfSupport {
-
     /**
      * @description Finds the relationship name for a given SObject field that is a reference field.
      *

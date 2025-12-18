@@ -5,8 +5,8 @@
  *
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class EnumerablePipeline {
-
     public static List<Object> sort(final List<Object> source, final IComparer comparer) {
         Validate.notNull(source);
         final List<Object> result = source.clone();
@@ -37,5 +37,4 @@ public inherited sharing class EnumerablePipeline {
         }
         return result;
     }
-
 }

@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BiConsumers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected BiConsumers() {}
+    protected BiConsumers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -86,20 +85,24 @@ public virtual inherited sharing class BiConsumers {
             this.accumulator = accumulator;
         }
         public override void accept(Object container, Object o) {
+            // prettier-ignore
             if (predicate.test(o)) { accumulator.accept(container, o); }
         }
     }
 
     private class Mapping extends Operating {
+        // prettier-ignore
         private Mapping(IFunction mapper, IBiConsumer accumulator) { super(mapper, accumulator); }
+        // prettier-ignore
         public override void accept(Object container, Object o) { accumulator.accept(container, mapper.apply(o)); }
     }
 
+    // prettier-ignore
     private class FlatMapping extends Operating {
         private FlatMapping(IFunction mapper, IBiConsumer accumulator) { super(mapper, accumulator); }
         public override void accept(Object container, Object o) {
             final Iterable<Object> result = (Iterable<Object>) mapper.apply(o);
-            if (result == null) { return; } 
+            if (result == null) { return; }
             final Iterator<Object> iterator = result.iterator();
             while (iterator.hasNext()) {
                 this.accumulator.accept(container, iterator.next());
@@ -108,5 +111,4 @@ public virtual inherited sharing class BiConsumers {
     }
     // @end-group
     //</editor-fold>
-
 }

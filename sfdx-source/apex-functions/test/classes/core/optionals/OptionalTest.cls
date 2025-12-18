@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class OptionalTest {
-
     /**
      * @see Optional.of
      * @see Optional.ofNullable
@@ -84,5 +83,4 @@ private class OptionalTest {
             Assert.areEqual(NullPointerException.class.getName(), exc.getTypeName());
         }
     }
-
 }

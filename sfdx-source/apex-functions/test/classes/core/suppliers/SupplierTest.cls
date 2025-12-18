@@ -4,16 +4,14 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class SupplierTest {
-
     /**
      * @see Supplier.of
      * @see Supplier.constant
      * @see Supplier.repeat
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         Account acc = new Account(Name = 'Test');
@@ -75,5 +73,4 @@ private class SupplierTest {
         Assert.areEqual(values[3], actual6);
         Assert.areEqual(values[0], actual7);
     }
-
 }

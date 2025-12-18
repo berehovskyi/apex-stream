@@ -4,14 +4,12 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class CollectorTest {
-
     /**
      * @see Collector.of
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         ISupplier stringListSupplier = Supplier.of(List<Object>.class);
@@ -61,5 +59,4 @@ private class CollectorTest {
         Assert.areEqual(putToNameByAgeMapBiConsumer, groupStringNamesByAgeCollector.accumulator());
         Assert.areEqual(groupByStringFinisherFunction, groupStringNamesByAgeCollector.finisher());
     }
-
 }

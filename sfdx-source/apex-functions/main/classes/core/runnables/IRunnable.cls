@@ -6,10 +6,8 @@
  * @group Functional Interfaces
  */
 public interface IRunnable {
-
     /**
      * @description Executes the method.
      */
     void run();
-
 }

@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - 'ci/**'
+  #     - 'ci/**'
   pull_request:
     branches:
       - main
@@ -75,9 +75,8 @@ jobs:
           mapfile -t files < "${{ steps.diff.outputs.path }}"
 
           echo "Prettier checking ${#files[@]} file(s):"
-          printf ' - %s\n' "${files[@]}"
 
-          npx prettier --check  --ignore-unknown -- "${files[@]}"
+          npx prettier --list-different  --ignore-unknown -- "${files[@]}"
 
       - name: Analyze Code
         if: steps.diff.outputs.count != '0'

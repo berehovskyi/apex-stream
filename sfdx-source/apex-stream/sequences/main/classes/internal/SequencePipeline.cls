@@ -5,11 +5,8 @@
  *
  * @author Oleh Berehovskyi
  */
-@SuppressWarnings(
-    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount, PMD.OneDeclarationPerLine'
-)
+@SuppressWarnings('PMD.ApexDoc, PMD.OneDeclarationPerLine')
 public inherited sharing class SequencePipeline {
-
     public static List<Integer> rangeInt(final Integer fromInt, final Integer toInt) {
         Validate.notNull(fromInt);
         Validate.notNull(toInt);
@@ -39,7 +36,6 @@ public inherited sharing class SequencePipeline {
         return result;
     }
 
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static List<Object> zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,
@@ -90,7 +86,7 @@ public inherited sharing class SequencePipeline {
         Validate.notNull(predicate);
         Validate.notNull(result);
         for (Integer i = 0, size = source.size(); i < size; i++) {
-            final Object element =  source[i];
+            final Object element = source[i];
             if (predicate.test(element)) {
                 result.add(element);
             }
@@ -204,7 +200,9 @@ public inherited sharing class SequencePipeline {
         Validate.notNull(lim);
         Validate.notNull(result);
         Validate.isTrue(lim >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ lim });
+        // prettier-ignore
         if (lim == 0) { return result; }
+        // prettier-ignore
         if (lim >= source.size()) { return source; }
         for (Integer i = 0; i < lim; i++) {
             result.add(source[i]);
@@ -217,12 +215,13 @@ public inherited sharing class SequencePipeline {
         Validate.notNull(n);
         Validate.notNull(result);
         Validate.isTrue(n >= 0, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ n });
+        // prettier-ignore
         if (n == 0) { return source; }
+        // prettier-ignore
         if (n >= source.size()) { return result; }
         for (Integer i = 0, size = source.size(); i < size; i++) {
-            if (i >= n) {
-                result.add(source[i]);
-            }
+            // prettier-ignore
+            if (i >= n) { result.add(source[i]); }
         }
         return result;
     }
@@ -263,9 +262,8 @@ public inherited sharing class SequencePipeline {
         Validate.notNull(source);
         Validate.notNull(predicate);
         for (Integer i = 0, size = source.size(); i < size; i++) {
-            if (predicate.test(source[i])) {
-                return source[i];
-            }
+            // prettier-ignore
+            if (predicate.test(source[i])) { return source[i]; }
         }
         return null;
     }
@@ -279,9 +277,8 @@ public inherited sharing class SequencePipeline {
         final Boolean isEvery = (kind == 1); // every
         for (Integer i = 0, size = source.size(); i < size; i++) {
             final Boolean isMatched = predicate.test(source[i]);
-            if (isMatched ^ isEvery) {
-                return isSome && isMatched;
-            }
+            // prettier-ignore
+            if (isMatched ^ isEvery) { return isSome && isMatched; }
         }
         return !isSome;
     }
@@ -292,9 +289,8 @@ public inherited sharing class SequencePipeline {
         for (Integer size = source.size(); i < size; i++) {
             sum += source[i];
         }
-        if (doAvg) {
-            return i == 0 ? null : (Double) sum / i;
-        }
+        // prettier-ignore
+        if (doAvg) { return i == 0 ? null : (Double) sum / i; }
         return i == 0 ? null : sum;
     }
 
@@ -304,9 +300,8 @@ public inherited sharing class SequencePipeline {
         for (Integer size = source.size(); i < size; i++) {
             sum += source[i];
         }
-        if (doAvg) {
-            return i == 0 ? null : (Double) sum / i;
-        }
+        // prettier-ignore
+        if (doAvg) { return i == 0 ? null : (Double) sum / i; }
         return i == 0 ? null : sum;
     }
 
@@ -359,8 +354,7 @@ public inherited sharing class SequencePipeline {
         Validate.notNull(source);
         Validate.notNull(keyMapper);
         Validate.notNull(valueType);
-        final Map<Id, Object> result = (Map<Id, Object>)
-            Type.forName('Map<Id, ' + valueType + '>').newInstance();
+        final Map<Id, Object> result = (Map<Id, Object>) Type.forName('Map<Id, ' + valueType + '>').newInstance();
         for (Integer i = 0, size = source.size(); i < size; i++) {
             final Object v = source[i];
             final Id k = (Id) keyMapper.apply(v);
@@ -382,8 +376,8 @@ public inherited sharing class SequencePipeline {
         Validate.notNull(source);
         Validate.notNull(keyMapper);
         Validate.notNull(valueType);
-        final Map<String, Object> result = (Map<String, Object>)
-            Type.forName('Map<String, ' + valueType + '>').newInstance();
+        final Map<String, Object> result = (Map<String, Object>) Type.forName('Map<String, ' + valueType + '>')
+            .newInstance();
         for (Integer i = 0, size = source.size(); i < size; i++) {
             final Object v = source[i];
             final String k = (String) keyMapper.apply(v);
@@ -404,8 +398,10 @@ public inherited sharing class SequencePipeline {
     ) {
         Validate.notNull(source);
         Validate.notNull(keyMapper);
-        final Map<Id, List<Object>> result = (Map<Id, List<Object>>)
-            Type.forName('Map<Id, List<' + listElementType + '>>').newInstance();
+        final Map<Id, List<Object>> result = (Map<Id, List<Object>>) Type.forName(
+                'Map<Id, List<' + listElementType + '>>'
+            )
+            .newInstance();
         for (Integer i = 0, size = source.size(); i < size; i++) {
             final Object v = source[i];
             final Id k = (Id) keyMapper.apply(v);
@@ -426,8 +422,10 @@ public inherited sharing class SequencePipeline {
     ) {
         Validate.notNull(source);
         Validate.notNull(keyMapper);
-        final Map<String, List<Object>> result = (Map<String, List<Object>>)
-            Type.forName('Map<String, List<' + listElementType + '>>').newInstance();
+        final Map<String, List<Object>> result = (Map<String, List<Object>>) Type.forName(
+                'Map<String, List<' + listElementType + '>>'
+            )
+            .newInstance();
         for (Integer i = 0, size = source.size(); i < size; i++) {
             final Object v = source[i];
             final String k = (String) keyMapper.apply(v);
@@ -449,8 +447,10 @@ public inherited sharing class SequencePipeline {
         Validate.notNull(source);
         Validate.notNull(predicate);
         Validate.notNull(listElementType);
-        final Map<Boolean, List<Object>> result = (Map<Boolean, List<Object>>)
-            Type.forName('Map<Boolean, List<' + listElementType + '>>').newInstance();
+        final Map<Boolean, List<Object>> result = (Map<Boolean, List<Object>>) Type.forName(
+                'Map<Boolean, List<' + listElementType + '>>'
+            )
+            .newInstance();
         result.put(true, (List<Object>) Type.forName('List<' + listElementType + '>').newInstance());
         result.put(false, (List<Object>) Type.forName('List<' + listElementType + '>').newInstance());
         for (Integer i = 0, size = source.size(); i < size; i++) {
@@ -459,5 +459,4 @@ public inherited sharing class SequencePipeline {
         }
         return result;
     }
-
 }

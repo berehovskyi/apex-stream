@@ -9,9 +9,15 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Predicate implements IPredicate {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Returns the result of applying this predicate to input.
+     *
+     * @param o the input argument of `Object` type
+     *
+     * @return `true` if the input satisfies the predicate, `false` otherwise
+     */
     public abstract Boolean test(Object o);
     // @end-group
     //</editor-fold>
@@ -168,6 +174,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
         @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
+                // prettier-ignore
                 if (!predicates[i].test(o)) { return false; }
             }
             return true;
@@ -183,6 +190,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
         @SuppressWarnings('PMD.OneDeclarationPerLine')
         public override Boolean test(Object o) {
             for (Integer i = 0, size = predicates.size(); i < size; i++) {
+                // prettier-ignore
                 if (predicates[i].test(o)) { return true; }
             }
             return false;
@@ -195,6 +203,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
             Validate.notNull(predicate);
             this.predicate = predicate;
         }
+        // prettier-ignore
         public override Boolean test(Object o) { return !predicate.test(o); }
     }
 
@@ -204,6 +213,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
             Validate.notNull(value);
             this.value = value;
         }
+        // prettier-ignore
         public override Boolean test(Object o) { return value; }
     }
 
@@ -216,9 +226,9 @@ public abstract inherited sharing class Predicate implements IPredicate {
             this.function = function;
             this.predicate = predicate;
         }
+        // prettier-ignore
         public override Boolean test(Object o) { return predicate.test(function.apply(o)); }
     }
     // @end-group
     //</editor-fold>
-
 }

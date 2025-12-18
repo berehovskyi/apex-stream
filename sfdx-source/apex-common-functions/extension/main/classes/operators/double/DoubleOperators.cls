@@ -8,12 +8,10 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD.ExcessivePublicCount')
 public virtual inherited sharing class DoubleOperators {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected DoubleOperators() {}
+    protected DoubleOperators() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -337,117 +335,147 @@ public virtual inherited sharing class DoubleOperators {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Abs extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.abs((Double) x); }
     }
 
     private class Acos extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.acos((Double) x); }
     }
 
     private class Add extends Operator {
         private final Double i;
+        // prettier-ignore
         private Add(Double i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object x) { return (Double) x + i; }
     }
 
     private class Asin extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.asin((Double) x); }
     }
 
     private class Atan extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.atan((Double) x); }
     }
 
     private class Cbrt extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.cbrt((Double) x); }
     }
 
     private class Ceil extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.ceil((Double) x); }
     }
 
     private class Cos extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.cos((Double) x); }
     }
 
     private class Cosh extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.cosh((Double) x); }
     }
 
     private class Exp extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.exp((Double) x); }
     }
 
     private class Floor extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.floor((Double) x); }
     }
 
     private class Ln extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.log((Double) x); }
     }
 
     private class Log extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.log10((Double) x); }
     }
 
     private class Min extends Operator {
         private final Double i;
+        // prettier-ignore
         private Min(Double i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.min((Double) j, (Double) i); }
     }
 
     private class Max extends Operator {
         private final Double i;
+        // prettier-ignore
         private Max(Double i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object j) { return Math.max((Double) j, (Double) i); }
     }
 
     private class Multiply extends Operator {
         private final Double i;
+        // prettier-ignore
         private Multiply(Double i) { Validate.notNull(i); this.i = i; }
+        // prettier-ignore
         public override Object apply(Object x) { return (Double) x * i; }
     }
 
     private class Pow extends Operator {
         private final Double exp;
+        // prettier-ignore
         private Pow(Double exp) { Validate.notNull(exp); this.exp = exp; }
+        // prettier-ignore
         public override Object apply(Object x) { return Math.pow((Double) x, exp); }
     }
 
     private class Rint extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.rint((Double) x); }
     }
 
     private class Signum extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.signum((Double) x); }
     }
 
     private class Sin extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.sin((Double) x); }
     }
 
     private class Sinh extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.sinh((Double) x); }
     }
 
     private class Sqrt extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.sqrt((Double) x); }
     }
 
     private class Tan extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.tan((Double) x); }
     }
 
     private class Tanh extends Operator {
+        // prettier-ignore
         public override Object apply(Object x) { return Math.tanh((Double) x); }
     }
 
     private class Divide extends Operator {
         private final Double d;
+        // prettier-ignore
         private Divide(Double d) { Validate.notNull(d); this.d = d; }
+        // prettier-ignore
         public override Object apply(Object x) { return (Double) x / d; }
     }
     // @end-group
     //</editor-fold>
-
 }

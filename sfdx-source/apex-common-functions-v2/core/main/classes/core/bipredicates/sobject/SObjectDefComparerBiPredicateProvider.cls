@@ -20,8 +20,7 @@
  *     new Account(AnnualRevenue = null)
  * ); // true
  */
-public virtual inherited sharing class SObjectDefComparerBiPredicateProvider
-    extends SObjectComparerBiPredicateProvider {
+public virtual inherited sharing class SObjectDefComparerBiPredicateProvider extends SObjectComparerBiPredicateProvider {
     /**
      * @description Creates a new instance of `SObjectDefComparerBiPredicateProvider` using
      * the default comparer.

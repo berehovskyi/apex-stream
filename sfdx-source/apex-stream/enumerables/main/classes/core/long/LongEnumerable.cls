@@ -5,9 +5,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings('PMD.ExcessivePublicCount')
 public abstract inherited sharing class LongEnumerable implements ILongEnumerable {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -692,5 +690,4 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      */
     public abstract Set<Long> toSet();
     //</editor-fold>
-
 }

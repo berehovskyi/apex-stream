@@ -1,7 +1,7 @@
 /**
  * @description Provides common implementations of {@link Function}
  * and related utilities that are used by {@link Collectors}.
- * 
+ *
  * @see Function
  * @see Collectors
  *
@@ -10,10 +10,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class IterableFunctions {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected IterableFunctions() {}
+    protected IterableFunctions() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -48,6 +47,7 @@ public virtual inherited sharing class IterableFunctions {
             Integer i = 0;
             while (iterator.hasNext()) {
                 Object current = iterator.next();
+                // prettier-ignore
                 if (i == index) { return current; }
                 i++;
             }
@@ -58,5 +58,4 @@ public virtual inherited sharing class IterableFunctions {
     }
     // @end-group
     //</editor-fold>
-
 }

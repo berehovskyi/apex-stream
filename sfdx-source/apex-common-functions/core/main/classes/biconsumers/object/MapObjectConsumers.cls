@@ -11,10 +11,9 @@
  */
 @SuppressWarnings('PMD.CognitiveComplexity')
 public virtual inherited sharing class MapObjectConsumers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected MapObjectConsumers() {}
+    protected MapObjectConsumers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -556,6 +555,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Boolean, Object> m = ((Map<Boolean, Object>) container);
             final Boolean key = (Boolean) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -569,6 +569,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Id, Object> m = ((Map<Id, Object>) container);
             final Id key = (Id) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -582,6 +583,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<String, Object> m = ((Map<String, Object>) container);
             final String key = (String) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -595,6 +597,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Blob, Object> m = ((Map<Blob, Object>) container);
             final Blob key = (Blob) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -608,6 +611,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Date, Object> m = ((Map<Date, Object>) container);
             final Date key = (Date) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -621,6 +625,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Datetime, Object> m = ((Map<Datetime, Object>) container);
             final Datetime key = (Datetime) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -634,6 +639,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Time, Object> m = ((Map<Time, Object>) container);
             final Time key = (Time) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -647,6 +653,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Integer, Object> m = ((Map<Integer, Object>) container);
             final Integer key = (Integer) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -660,6 +667,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Long, Object> m = ((Map<Long, Object>) container);
             final Long key = (Long) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -673,6 +681,7 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Double, Object> m = ((Map<Double, Object>) container);
             final Double key = (Double) keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
@@ -686,56 +695,67 @@ public virtual inherited sharing class MapObjectConsumers {
             final Map<Object, Object> m = ((Map<Object, Object>) container);
             final Object key = keyMapper.apply(o);
             Object newValue = valueMapper.apply(o);
+            // prettier-ignore
             if (m.containsKey(key)) { newValue = mergeValue(merger, key, m.get(key), newValue); }
             m.put(key, newValue);
         }
     }
 
     private class PutToObjectsByBoolMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByBoolMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Boolean, Object> m = (Map<Boolean, Object>) container;
             final Boolean key = (Boolean) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByIdMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByIdMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Id, Object> m = (Map<Id, Object>) container;
             final Id key = (Id) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByStringMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByStringMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<String, Object> m = (Map<String, Object>) container;
             final String key = (String) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByBlobMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByBlobMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Blob, Object> m = (Map<Blob, Object>) container;
             final Blob key = (Blob) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByDateMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByDateMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Date, Object> m = (Map<Date, Object>) container;
             final Date key = (Date) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
@@ -748,61 +768,71 @@ public virtual inherited sharing class MapObjectConsumers {
         public override void accept(Object container, Object o) {
             final Map<Datetime, Object> m = (Map<Datetime, Object>) container;
             final Datetime key = (Datetime) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByTimeMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByTimeMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Time, Object> m = (Map<Time, Object>) container;
             final Time key = (Time) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByIntMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByIntMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Integer, Object> m = (Map<Integer, Object>) container;
             final Integer key = (Integer) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByLongMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByLongMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Long, Object> m = (Map<Long, Object>) container;
             final Long key = (Long) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByDoubleMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByDoubleMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Double, Object> m = (Map<Double, Object>) container;
             final Double key = (Double) classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
 
     private class PutToObjectsByObjectMap extends PutToDownstreamMap {
+        // prettier-ignore
         private PutToObjectsByObjectMap(ICollector downstream, IFunction classifier) { super(downstream, classifier); }
         public override void accept(Object container, Object o) {
             final Map<Object, Object> m = (Map<Object, Object>) container;
             final Object key = classifier.apply(o);
+            // prettier-ignore
             if (!m.containsKey(key)) { m.put(key, downstream.supplier().get()); }
             downstream.accumulator().accept(m.get(key), o);
         }
     }
     // @end-group
     //</editor-fold>
-
 }

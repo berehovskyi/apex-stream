@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class TypePredicates {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected TypePredicates() {}
+    protected TypePredicates() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -141,53 +140,64 @@ public virtual inherited sharing class TypePredicates {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class IsInstanceOfBoolean extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Boolean; }
     }
 
     private class IsInstanceOfBlob extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Blob; }
     }
 
     private class IsInstanceOfId extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Id; }
     }
 
     private class IsInstanceOfString extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof String; }
     }
 
     private class IsInstanceOfDate extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Date; }
     }
 
     private class IsInstanceOfDatetime extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Datetime; }
     }
 
     private class IsInstanceOfTime extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Time; }
     }
 
     private class IsInstanceOfInt extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Integer; }
     }
 
     private class IsInstanceOfLong extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Long; }
     }
 
     private class IsInstanceOfDouble extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Double; }
     }
 
     private class IsInstanceOfSObject extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof SObject && !(o instanceof List<SObject>); }
     }
 
     private class IsInstanceOfComparable extends Predicate {
+        // prettier-ignore
         public override Boolean test(Object o) { return o instanceof Comparable; }
     }
     // @end-group
     //</editor-fold>
-
 }

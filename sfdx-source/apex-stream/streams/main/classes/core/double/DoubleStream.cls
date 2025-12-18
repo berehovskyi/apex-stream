@@ -41,15 +41,19 @@
  * // of the two areas, π / 4. Multiply the result by 4 to estimate π.
  * Double approxPi = 4 * n / (Double) s;
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class DoubleStream extends DoubleEnumerable implements IRunnable {
-
     private final transient Iterator<Double> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
      */
-    public Boolean isOperated { get { return isOperated; } protected set; } {
+    public Boolean isOperated {
+        get {
+            return isOperated;
+        }
+        protected set;
+    }
+    {
         isOperated = false;
     }
 
@@ -134,6 +138,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * DoubleEnumerable doubleStream = DoubleStream.ofNullable(new List<Double>{ 0.1, 5, 1.5, Math.PI });
      */
     public static DoubleEnumerable ofNullable(final Iterable<Double> doubles) {
+        // prettier-ignore
         if (doubles == null) { return empty(); }
         return new DoubleStream(doubles.iterator());
     }
@@ -906,5 +911,4 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
     }
     // @end-group
     //</editor-fold>
-
 }

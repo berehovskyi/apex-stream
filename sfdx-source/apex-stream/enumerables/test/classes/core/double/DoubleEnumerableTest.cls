@@ -5,9 +5,8 @@
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexUnitTestClassShouldHaveAsserts')
 private class DoubleEnumerableTest {
-
     @IsTest
     private static void coverage() {
         // Given
@@ -54,7 +53,6 @@ private class DoubleEnumerableTest {
     }
 
     @TestVisible
-    @SuppressWarnings('PMD.ExcessivePublicCount')
     private class TestDoubleEnumerable extends DoubleEnumerable {
         public override Iterator<Double> iterator() { return null; }
         public override DoubleEnumerable append(Iterable<Double> iterable) { return this; }
@@ -85,5 +83,4 @@ private class DoubleEnumerableTest {
         public override List<Double> toList() { return null; }
         public override Set<Double> toSet() { return null; }
     }
-
 }

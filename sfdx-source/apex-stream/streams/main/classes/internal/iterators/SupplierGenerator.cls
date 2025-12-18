@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class SupplierGenerator implements Iterator<Object> {
-
     private final ISupplier supplier;
 
     public SupplierGenerator(final ISupplier supplier) {
@@ -15,6 +15,7 @@ public inherited sharing class SupplierGenerator implements Iterator<Object> {
     }
 
     public Object next() {
+        // prettier-ignore
         if (!hasNext()) { throw new NoSuchElementException(); }
         return computeNext();
     }
@@ -22,5 +23,4 @@ public inherited sharing class SupplierGenerator implements Iterator<Object> {
     public Object computeNext() {
         return supplier.get();
     }
-
 }

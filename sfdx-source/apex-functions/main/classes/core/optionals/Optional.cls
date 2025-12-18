@@ -6,7 +6,6 @@
  * @group Functional Abstract Classes
  */
 public virtual inherited sharing class Optional implements IOptional {
-
     private static final Optional EMPTY = new Optional(null);
     private final Object value;
 
@@ -214,16 +213,21 @@ public virtual inherited sharing class Optional implements IOptional {
      */
     public virtual Object orElseThrow(final ISupplier exceptionSupplier) {
         Validate.notNull(exceptionSupplier);
+        // prettier-ignore
         if (value != null) { return value; }
         throw (Exception) exceptionSupplier.get();
     }
 
     private void requireNonNullValue() {
+        // prettier-ignore
         if (value == null) { throw new NoSuchElementException(Label.AF_ErrorMessage_NoValuePresent); }
     }
 
+    @SuppressWarnings('PMD.ApexDoc')
     public virtual Boolean equals(Object obj) {
+        // prettier-ignore
         if (obj == null) { return false; }
+        // prettier-ignore
         if (!(obj instanceof Optional)) { return false; }
         Object a = this.orElse(null);
         Object b = ((Optional) obj).orElse(null);
@@ -233,5 +237,4 @@ public virtual inherited sharing class Optional implements IOptional {
     public virtual override Integer hashCode() {
         return value != null ? System.hashCode(value) : 0;
     }
-
 }

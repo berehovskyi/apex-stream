@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.NcssTypeCount, PMD.CyclomaticComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class SObjectCollectorsTest {
-
     private static final Map<SObjectType, List<SObject>> DATA = AfTestData.generateSObjects();
     private static final List<Account> ACCOUNTS = DATA.get(Account.SObjectType);
     private static final List<Contact> CONTACTS = DATA.get(Contact.SObjectType);
@@ -1981,5 +1978,4 @@ private class SObjectCollectorsTest {
         };
         Assert.areEqual(expected, actual6);
     }
-
 }

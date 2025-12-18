@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class SObjectSuppliers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SObjectSuppliers() {}
+    protected SObjectSuppliers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -42,9 +41,9 @@ public virtual inherited sharing class SObjectSuppliers {
             Validate.notNull(t);
             this.t = t;
         }
+        // prettier-ignore
         public override Object get() { return t.newSObject(); }
     }
     // @end-group
     //</editor-fold>
-
 }

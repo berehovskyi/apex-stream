@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage')
+@SuppressWarnings('PMD.ApexDoc')
 private class TypePredicatesTest {
-
     static {
         new TypePredicates();
     }
@@ -73,5 +72,4 @@ private class TypePredicatesTest {
             Assert.areEqual(o instanceof Comparable, isInstanceOfComparable.test(o));
         }
     }
-
 }

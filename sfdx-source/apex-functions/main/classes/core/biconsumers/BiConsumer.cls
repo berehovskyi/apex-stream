@@ -1,5 +1,5 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IBiConsumer} functional interface.
  *
  * @see IBiConsumer
@@ -10,7 +10,6 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class BiConsumer implements IBiConsumer {
-
     /**
      * @description Downstream collector.
      */
@@ -18,6 +17,13 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
 
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Performs the operation on the two input arguments. The method is expected to operate
+     * via side-effects.
+     *
+     * @param o1 the first input argument of `Object` type
+     * @param o2 the second input argument of `Object` type
+     */
     public abstract void accept(Object o1, Object o2);
     // @end-group
     //</editor-fold>
@@ -81,10 +87,11 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
             this.consumers = consumers;
         }
         public override void accept(Object o1, Object o2) {
-            for (IBiConsumer consumer : consumers) { consumer.accept(o1, o2); }
+            for (IBiConsumer consumer : consumers) {
+                consumer.accept(o1, o2);
+            }
         }
     }
     // @end-group
     //</editor-fold>
-
 }

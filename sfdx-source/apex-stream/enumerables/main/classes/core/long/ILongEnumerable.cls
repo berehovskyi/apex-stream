@@ -11,7 +11,6 @@
  * @group Enumerables
  */
 public interface ILongEnumerable extends INumberEnumerable<Long> {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -81,5 +80,4 @@ public interface ILongEnumerable extends INumberEnumerable<Long> {
      */
     Long reduce(Long identity, IBiOperator accumulator);
     //</editor-fold>
-
 }

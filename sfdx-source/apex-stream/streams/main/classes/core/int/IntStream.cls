@@ -19,15 +19,19 @@
  *         .mapToInt(getAnnualRevenueToIntFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class IntStream extends IntEnumerable implements IRunnable {
-
     private final transient Iterator<Integer> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
      */
-    public Boolean isOperated { get { return isOperated; } protected set; } {
+    public Boolean isOperated {
+        get {
+            return isOperated;
+        }
+        protected set;
+    }
+    {
         isOperated = false;
     }
 
@@ -112,6 +116,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * IntEnumerable intStream = IntStream.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
      */
     public static IntEnumerable ofNullable(final Iterable<Integer> integers) {
+        // prettier-ignore
         if (integers == null) { return empty(); }
         return new IntStream(integers.iterator());
     }
@@ -936,5 +941,4 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
     }
     // @end-group
     //</editor-fold>
-
 }

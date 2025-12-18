@@ -271,7 +271,9 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
          * isNameLikePattern.test(new Account(Name = 'John Doe')); // true
          */
         public virtual Predicate likex(final String pattern) {
-            return negate ? new LikePredicate(mapper, pattern, false).negate() : new LikePredicate(mapper, pattern, false);
+            return negate
+                ? new LikePredicate(mapper, pattern, false).negate()
+                : new LikePredicate(mapper, pattern, false);
         }
 
         /**
@@ -291,7 +293,9 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
          * isNameLikePattern.test(new Account(Name = 'John Doe')); // true
          */
         public virtual Predicate iLike(final String pattern) {
-            return negate ? new LikePredicate(mapper, pattern, true).negate() : new LikePredicate(mapper, pattern, true);
+            return negate
+                ? new LikePredicate(mapper, pattern, true).negate()
+                : new LikePredicate(mapper, pattern, true);
         }
     }
 
@@ -306,42 +310,58 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
     }
 
     private class BlankPredicate extends StringPredicate {
+        // prettier-ignore
         private BlankPredicate(IFunction mapper) { super(mapper, ''); }
+        // prettier-ignore
         public override Boolean test(Object o) { return String.isBlank((String) mapper.apply(o)); }
     }
 
     private class EmptyPredicate extends StringPredicate {
+        // prettier-ignore
         private EmptyPredicate(IFunction mapper) { super(mapper, ''); }
+        // prettier-ignore
         public override Boolean test(Object o) { return String.isEmpty((String) mapper.apply(o)); }
     }
 
     private class ContainsPredicate extends StringPredicate {
+        // prettier-ignore
         private ContainsPredicate(IFunction mapper, String value) { super(mapper, value); }
+        // prettier-ignore
         public override Boolean test(Object o) { return ((String) mapper.apply(o)).contains(value); }
     }
 
     private class IContainsPredicate extends StringPredicate {
+        // prettier-ignore
         private IContainsPredicate(IFunction mapper, String value) { super(mapper, value); }
+        // prettier-ignore
         public override Boolean test(Object o) { return ((String) mapper.apply(o)).containsIgnoreCase(value); }
     }
 
     private class StartsWithPredicate extends StringPredicate {
+        // prettier-ignore
         private StartsWithPredicate(IFunction mapper, String value) { super(mapper, value); }
+        // prettier-ignore
         public override Boolean test(Object o) { return ((String) mapper.apply(o)).startsWith(value); }
     }
 
     private class IStartsPredicate extends StringPredicate {
+        // prettier-ignore
         private IStartsPredicate(IFunction mapper, String value) { super(mapper, value); }
+        // prettier-ignore
         public override Boolean test(Object o) { return ((String) mapper.apply(o)).startsWithIgnoreCase(value); }
     }
 
     private class EndsWithPredicate extends StringPredicate {
+        // prettier-ignore
         private EndsWithPredicate(IFunction mapper, String value) { super(mapper, value); }
+        // prettier-ignore
         public override Boolean test(Object o) { return ((String) mapper.apply(o)).endsWith(value); }
     }
 
     private class IEndsWithPredicate extends StringPredicate {
+        // prettier-ignore
         private IEndsWithPredicate(IFunction mapper, String value) { super(mapper, value); }
+        // prettier-ignore
         public override Boolean test(Object o) { return ((String) mapper.apply(o)).endsWithIgnoreCase(value); }
     }
 
@@ -349,10 +369,13 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
         protected LikePredicate(IFunction function, String likeString, Boolean ignoreCase) {
             super(
                 function,
-                (ignoreCase ? '(?i)' : '')
-                + '^' + likeString.replaceAll('([^\\w%_ ])', '\\\\$1').replace('%', '.*?').replace('_', '.{1}?') + '$'
+                (ignoreCase ? '(?i)' : '') +
+                    '^' +
+                    likeString.replaceAll('([^\\w%_ ])', '\\\\$1').replace('%', '.*?').replace('_', '.{1}?') +
+                    '$'
             );
         }
+        // prettier-ignore
         public override Boolean test(Object o) { return Pattern.matches(value, (String) mapper.apply(o)); }
     }
 }

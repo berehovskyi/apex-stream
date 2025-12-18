@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.NcssTypeCount'
-)
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class SObjectStreamTest {
-
     /**
      * @see SObjectStream.of
      * @see SObjectStream.ofNullable
@@ -1833,5 +1830,4 @@ private class SObjectStreamTest {
         Assert.isTrue(((SObjectStream) accStm).isOperated);
         Assert.isTrue(((SObjectStream) accStm1).isOperated);
     }
-
 }

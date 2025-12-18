@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class DoubleBiOperators {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected DoubleBiOperators() {}
+    protected DoubleBiOperators() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -89,10 +88,12 @@ public virtual inherited sharing class DoubleBiOperators {
     }
 
     private class Sum extends BiOperator {
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
     }
 
     private class Product extends BiOperator {
+        // prettier-ignore
         public override Object apply(Object o1, Object o2) { return (Double) o1 * (Double) o2; }
     }
 
@@ -111,5 +112,4 @@ public virtual inherited sharing class DoubleBiOperators {
     }
     // @end-group
     //</editor-fold>
-
 }

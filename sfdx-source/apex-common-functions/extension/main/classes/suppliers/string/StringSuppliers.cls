@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class StringSuppliers {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected StringSuppliers() {}
+    protected StringSuppliers() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -54,6 +53,7 @@ public virtual inherited sharing class StringSuppliers {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class UuidSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return UUID.randomUUID().toString(); }
     }
 
@@ -80,9 +80,10 @@ public virtual inherited sharing class StringSuppliers {
             this.displayLength = displayNumber.length();
             this.i = Integer.valueOf(displayNumber);
         }
-        public override Object get() { return prefix + String.valueOf(i++).leftPad(displayLength, zero) + suffix; }
+        public override Object get() {
+            return prefix + String.valueOf(i++).leftPad(displayLength, zero) + suffix;
+        }
     }
     // @end-group
     //</editor-fold>
-
 }

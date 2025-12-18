@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class ZipIterator implements Iterator<Object> {
-
     private final Iterator<Object> iterator1;
     private final Iterator<Object> iterator2;
     private final IBiPredicate predicate;
@@ -11,11 +11,7 @@ public inherited sharing class ZipIterator implements Iterator<Object> {
     private Object next1;
     private Object next2;
 
-    public ZipIterator(
-        final Iterable<Object> iterable1,
-        final Iterable<Object> iterable2,
-        final IBiOperator combiner
-    ) {
+    public ZipIterator(final Iterable<Object> iterable1, final Iterable<Object> iterable2, final IBiOperator combiner) {
         Validate.notNull(iterable1);
         Validate.notNull(iterable2);
         Validate.notNull(combiner);
@@ -24,7 +20,6 @@ public inherited sharing class ZipIterator implements Iterator<Object> {
         this.combiner = combiner;
     }
 
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public ZipIterator(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,
@@ -50,7 +45,9 @@ public inherited sharing class ZipIterator implements Iterator<Object> {
     }
 
     public Object next() {
+        // prettier-ignore
         if (!hasNextEvaluated) { hasNext = hasNext(); }
+        // prettier-ignore
         if (!hasNext) { throw new NoSuchElementException(); }
         hasNextEvaluated = false;
         return combiner.apply(next1, next2);
@@ -67,5 +64,4 @@ public inherited sharing class ZipIterator implements Iterator<Object> {
         }
         hasNext = false;
     }
-
 }

@@ -19,9 +19,7 @@
  *         .mapToLong(getAnnualRevenueToLongFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class LongSequence extends LongEnumerable {
-
     private final List<Long> longs;
 
     protected LongSequence() {
@@ -95,6 +93,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * LongEnumerable longSeq = LongSequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final List<Long> longs) {
+        // prettier-ignore
         if (longs == null) { return empty(); }
         return new LongSequence(longs);
     }
@@ -112,6 +111,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * LongEnumerable longSeq = LongSequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final Set<Long> longs) {
+        // prettier-ignore
         if (longs == null) { return empty(); }
         return new LongSequence(new List<Long>(longs));
     }
@@ -213,9 +213,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
         final Iterable<Long> iterable2,
         final IBiOperator combiner
     ) {
-        return new LongSequence(
-            (List<Long>) SequencePipeline.zip(iterable1, iterable2, combiner, new List<Long>())
-        );
+        return new LongSequence((List<Long>) SequencePipeline.zip(iterable1, iterable2, combiner, new List<Long>()));
     }
 
     /**
@@ -827,5 +825,4 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
     }
     // @end-group
     //</editor-fold>
-
 }

@@ -3,16 +3,15 @@
  * and related utilities.
  *
  * @see Function
- * 
+ *
  * @author Oleh Berehovskyi
  *
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class DateFunctions {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected DateFunctions() {}
+    protected DateFunctions() {
+    }
 
     //<editor-fold desc="Date Functions">
     // @start-group Date Functions
@@ -101,34 +100,42 @@ public virtual inherited sharing class DateFunctions {
     // @start-group Lambdas
     private class AddDays extends Function {
         private final Integer days;
+        // prettier-ignore
         private AddDays(Integer days) { Validate.notNull(days); this.days = days; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).addDays(days); }
     }
 
     private class AddMonths extends Function {
         private final Integer months;
+        // prettier-ignore
         private AddMonths(Integer months) { Validate.notNull(months); this.months = months; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).addMonths(months); }
     }
 
     private class AddYears extends Function {
         private final Integer years;
+        // prettier-ignore
         private AddYears(Integer years) { Validate.notNull(years); this.years = years; }
+        // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).addYears(years); }
     }
 
     private class Format extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).format(); }
     }
 
     private class ToStartOfMonth extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).toStartOfMonth(); }
     }
 
     private class ToStartOfWeek extends Function {
+        // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).toStartOfWeek(); }
     }
     // @end-group
     //</editor-fold>
-
 }

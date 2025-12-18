@@ -2,7 +2,7 @@
  * @see SObjectIterablePredicateProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectIterablePredicateProviderTest {
     private static final List<Account> INPUT = AfTestData.generateAccounts();
     private static final SObjectIterablePredicateProvider PRED = new SObjectIterablePredicateProvider();

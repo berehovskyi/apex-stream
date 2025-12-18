@@ -19,8 +19,7 @@
  * isRevenueLt10KPredicate.test(new Account(AnnualRevenue = 5000)); // true
  * isRevenueLt10KPredicate.test(new Account(AnnualRevenue = null)); // false
  */
-public virtual inherited sharing class SObjectApexComparerPredicateProvider
-    extends SObjectComparerPredicateProvider {
+public virtual inherited sharing class SObjectApexComparerPredicateProvider extends SObjectComparerPredicateProvider {
     /**
      * @description Creates a new instance of `SObjectApexComparerPredicateProvider` using
      * the non-antisymmetric comparer.

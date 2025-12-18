@@ -48,6 +48,7 @@ public virtual inherited sharing class StringSupplierProvider {
     }
 
     private class UuidSupplier extends Supplier {
+        // prettier-ignore
         public override Object get() { return UUID.randomUUID().toString(); }
     }
 
@@ -74,6 +75,7 @@ public virtual inherited sharing class StringSupplierProvider {
             displayLength = displayNumber.length();
             i = Integer.valueOf(displayNumber);
         }
+        // prettier-ignore
         public override Object get() { return prefix + String.valueOf(i++).leftPad(displayLength, zero) + suffix; }
     }
 }

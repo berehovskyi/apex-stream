@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity, PMD.CyclomaticComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectPredicatesTest {
-
     private static final List<Account> INPUT = AfTestData.generateAccounts();
 
     static {
@@ -477,5 +474,4 @@ private class SObjectPredicatesTest {
             Assert.areEqual(expected1, excludesEmptyPredicate.test(acc));
         }
     }
-
 }

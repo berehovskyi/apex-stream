@@ -48,17 +48,19 @@
  *         .mapToDouble(getAnnualRevenueToDoubleFunction)
  *         .sum();
  */
-@SuppressWarnings(
-    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount'
-)
 public virtual inherited sharing class ObjectStream extends ObjectEnumerable implements IRunnable {
-
     private final transient Iterator<Object> iterator;
 
     /**
      * @description A flag defining whether this stream has been linked or consumed.
      */
-    public Boolean isOperated { get { return isOperated; } protected set; } {
+    public Boolean isOperated {
+        get {
+            return isOperated;
+        }
+        protected set;
+    }
+    {
         isOperated = false;
     }
 
@@ -143,6 +145,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * ObjectEnumerable emptyStream = ObjectStream.ofNullable(null);
      */
     public static ObjectEnumerable ofNullable(final Iterable<Object> iterable) {
+        // prettier-ignore
         if (iterable == null) { return empty(); }
         return new ObjectStream(iterable.iterator());
     }
@@ -313,12 +316,11 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *     .toList(String.class);
      * // ['bar-fred', 'baz-foo']
      */
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static ObjectEnumerable zip(
-            final Iterable<Object> iterable1,
-            final Iterable<Object> iterable2,
-            final IBiPredicate predicate,
-            final IBiOperator combiner
+        final Iterable<Object> iterable1,
+        final Iterable<Object> iterable2,
+        final IBiPredicate predicate,
+        final IBiOperator combiner
     ) {
         return new ObjectStream(StreamPipeline.zip(iterable1, iterable2, predicate, combiner));
     }
@@ -1115,5 +1117,4 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
     }
     // @end-group
     //</editor-fold>
-
 }

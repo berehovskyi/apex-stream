@@ -6,7 +6,6 @@
  * @group Functional Interfaces
  */
 public interface IBiConsumer {
-
     /**
      * @description Performs the operation on the two input arguments. The method is expected to operate
      * via side-effects.
@@ -15,5 +14,4 @@ public interface IBiConsumer {
      * @param o2 the second input argument of `Object` type
      */
     void accept(Object o1, Object o2);
-
 }

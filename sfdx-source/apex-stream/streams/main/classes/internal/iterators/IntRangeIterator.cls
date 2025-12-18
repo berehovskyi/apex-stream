@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class IntRangeIterator implements Iterator<Integer> {
-
     private final Integer endInclusive;
     private Integer current;
     private Boolean hasNext;
@@ -26,5 +26,4 @@ public inherited sharing class IntRangeIterator implements Iterator<Integer> {
         }
         return current++;
     }
-
 }

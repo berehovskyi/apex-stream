@@ -8,7 +8,6 @@
  * @group Functional Interfaces
  */
 public interface IComparer extends System.Comparator<Object> {
-
     /**
      * @description Compares the two arguments.
      * <p>Contract:</p>
@@ -32,5 +31,4 @@ public interface IComparer extends System.Comparator<Object> {
      * and `1` otherwise
      */
     Integer compare(Object o1, Object o2);
-
 }

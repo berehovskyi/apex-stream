@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class SkipIterator implements Iterator<Object> {
-
     private final Iterator<Object> iterator;
     private final Integer n;
     private Integer skipped = 0;
@@ -17,6 +17,7 @@ public inherited sharing class SkipIterator implements Iterator<Object> {
 
     public Boolean hasNext() {
         while (skipped < n) {
+            // prettier-ignore
             if (!iterator.hasNext()) { return false; }
             iterator.next();
             skipped++;
@@ -25,6 +26,7 @@ public inherited sharing class SkipIterator implements Iterator<Object> {
     }
 
     public Object next() {
+        // prettier-ignore
         if (!hasNext()) { throw new NoSuchElementException(); }
         return computeNext();
     }
@@ -32,5 +34,4 @@ public inherited sharing class SkipIterator implements Iterator<Object> {
     public Object computeNext() {
         return iterator.next();
     }
-
 }

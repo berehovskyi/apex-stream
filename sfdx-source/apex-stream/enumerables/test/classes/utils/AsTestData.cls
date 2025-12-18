@@ -1,11 +1,11 @@
+// prettier-ignore
 /**
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class AsTestData {
-
     private static Integer count = 0;
     public static Id generateId(SObjectType sObjType) {
         String keyPrefix = sObjType.getDescribe().getKeyPrefix();
@@ -267,5 +267,4 @@ private class AsTestData {
     public static SObject setSObjects(SObject parent, SObjectField childRelField, List<SObject> children) {
         return (SObject) new AsTestCommons.SetSObjectsByFieldNameOperator(childRelField, Function.constant(children)).apply(parent);
     }
-
 }

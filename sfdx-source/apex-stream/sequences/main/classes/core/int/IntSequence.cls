@@ -19,9 +19,7 @@
  *         .mapToInt(getAnnualRevenueToIntFunction)
  *         .sum();
  */
-@SuppressWarnings('PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessivePublicCount')
 public virtual inherited sharing class IntSequence extends IntEnumerable {
-
     private final List<Integer> integers;
 
     protected IntSequence() {
@@ -95,6 +93,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * IntEnumerable intSeq = IntSequence.ofNullable(new List<Integer>{ 0, 5, 1, -10 });
      */
     public static IntEnumerable ofNullable(final List<Integer> integers) {
+        // prettier-ignore
         if (integers == null) { return empty(); }
         return new IntSequence(integers);
     }
@@ -112,6 +111,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * IntEnumerable intSeq = IntSequence.ofNullable(new Set<Integer>{ 0, 5, 1, -10 });
      */
     public static IntEnumerable ofNullable(final Set<Integer> integers) {
+        // prettier-ignore
         if (integers == null) { return empty(); }
         return new IntSequence(new List<Integer>(integers));
     }
@@ -827,5 +827,4 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
     }
     // @end-group
     //</editor-fold>
-
 }

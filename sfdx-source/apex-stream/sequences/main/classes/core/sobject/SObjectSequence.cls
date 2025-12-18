@@ -42,11 +42,7 @@
  *         .mapToDouble(Account.AnnualRevenue)
  *         .sum();
  */
-@SuppressWarnings(
-    'PMD.CognitiveComplexity, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength, PMD.ExcessivePublicCount'
-)
 public virtual inherited sharing class SObjectSequence extends SObjectEnumerable {
-
     private final List<SObject> sObjects;
 
     protected SObjectSequence() {
@@ -120,6 +116,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * SObjectEnumerable accSeq = SObjectSequence.ofNullable(new List<Account>(accounts));
      */
     public static SObjectEnumerable ofNullable(final List<SObject> sObjects) {
+        // prettier-ignore
         if (sObjects == null) { return empty(); }
         return new SObjectSequence(sObjects);
     }
@@ -137,6 +134,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * SObjectEnumerable accSeq = SObjectSequence.ofNullable(new Set<SObject>(sObjects));
      */
     public static SObjectEnumerable ofNullable(final Set<SObject> sObjects) {
+        // prettier-ignore
         if (sObjects == null) { return empty(); }
         return new SObjectSequence(new List<SObject>(sObjects));
     }
@@ -1973,5 +1971,4 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
     }
     // @end-group
     //</editor-fold>
-
 }

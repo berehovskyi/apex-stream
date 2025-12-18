@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class SObjectEnumerableSupportTest {
-
     private static final List<Contact> INPUT = AsTestData.generateContacts();
     private static final List<Contact> INPUT1 = AsTestData.generateContacts(false);
     private static final List<Account> INPUT2 = AsTestData.generateAccounts();
@@ -217,5 +216,4 @@ private class SObjectEnumerableSupportTest {
             Assert.areEqual(parent == acc, parentIsIdentityPredicate.test(acc));
         }
     }
-
 }

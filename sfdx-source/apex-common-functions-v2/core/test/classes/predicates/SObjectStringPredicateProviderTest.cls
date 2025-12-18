@@ -2,7 +2,7 @@
  * @see SObjectStringPredicateProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectStringPredicateProviderTest {
     private static final List<Account> INPUT = AfTestData.generateAccounts();
     private static final SObjectStringPredicateProvider PRED = new SObjectStringPredicateProvider();
@@ -259,6 +259,7 @@ private class SObjectStringPredicateProviderTest {
         IPredicate nameLikePredicate = PRED.is(getNameFunction).likex(likeString);
         IPredicate nameLikePredicate1 = PRED.is(nameFieldName).likex(likeString);
         IPredicate nameLikePredicate2 = PRED.is(accNameField).likex(likeString);
+        IPredicate nameNotLikePredicate = PRED.is(accNameField).notx().likex(likeString);
         // Then
         for (Account acc : INPUT) {
             String name = ((String) acc.get(accNameField));
@@ -274,6 +275,7 @@ private class SObjectStringPredicateProviderTest {
             Assert.areEqual(isLikeName, nameLikePredicate.test(acc));
             Assert.areEqual(isLikeName1, nameLikePredicate1.test(acc));
             Assert.areEqual(isLikeName, nameLikePredicate2.test(acc));
+            Assert.areEqual(!isLikeName, nameNotLikePredicate.test(acc));
         }
     }
 
@@ -291,6 +293,7 @@ private class SObjectStringPredicateProviderTest {
         IPredicate nameILikePredicate = PRED.is(getNameFunction).iLike(likeString);
         IPredicate nameILikePredicate1 = PRED.is(nameFieldName).iLike(likeString);
         IPredicate nameILikePredicate2 = PRED.is(accNameField).iLike(likeString);
+        IPredicate nameNotILikePredicate = PRED.is(accNameField).notx().iLike(likeString);
         // Then
         for (Account acc : INPUT) {
             String name = ((String) acc.get(accNameField));
@@ -306,6 +309,7 @@ private class SObjectStringPredicateProviderTest {
             Assert.areEqual(isLikeName, nameILikePredicate.test(acc));
             Assert.areEqual(isLikeName1, nameILikePredicate1.test(acc));
             Assert.areEqual(isLikeName, nameILikePredicate2.test(acc));
+            Assert.areEqual(!isLikeName, nameNotILikePredicate.test(acc));
         }
     }
 }

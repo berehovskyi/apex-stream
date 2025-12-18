@@ -11,7 +11,6 @@
  * @group Enumerables
  */
 public interface IObjectEnumerable extends IEnumerable<Object> {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -139,5 +138,4 @@ public interface IObjectEnumerable extends IEnumerable<Object> {
      */
     List<Object> toList(Type elementType);
     //</editor-fold>
-
 }

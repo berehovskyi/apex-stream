@@ -2,7 +2,7 @@
  * @see SObjectFunctionProvider
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectFunctionProviderTest {
     private static final List<Contact> INPUT = AfTestData.generateContacts();
     private static final SObjectFunctionProvider FN = new SObjectFunctionProvider();

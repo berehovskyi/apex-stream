@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class CollectorsTest {
-
     private static final List<Boolean> BOOLS = AfTestData.generateBools();
     private static final List<Id> IDS = AfTestData.generateIds();
     private static final List<Blob> BLOBS = AfTestData.generateBlobs();
@@ -1197,5 +1194,4 @@ private class CollectorsTest {
         };
         Assert.areEqual(expected1, actual1);
     }
-
 }

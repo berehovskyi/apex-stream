@@ -1,11 +1,11 @@
+// prettier-ignore
 /**
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
 @TestVisible
-@SuppressWarnings('PMD.ExcessivePublicCount')
+@SuppressWarnings('PMD.ApexDoc, PMD.NcssMethodCount')
 private class AfTestData {
-
     private static Integer count = 0;
     public static Id generateId(SObjectType sObjType) {
         String keyPrefix = sObjType.getDescribe().getKeyPrefix();
@@ -443,5 +443,4 @@ private class AfTestData {
         sobjectsByTypes.put(ContactPointEmail.SObjectType, new List<ContactPointEmail>{ slot, slot1, slot2, slot3, slot4 });
         return sobjectsByTypes;
     }
-
 }

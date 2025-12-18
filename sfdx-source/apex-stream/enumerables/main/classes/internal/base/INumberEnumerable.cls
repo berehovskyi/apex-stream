@@ -16,7 +16,6 @@
  * @group Enumerables
  */
 public interface INumberEnumerable<T> extends Iterable<T> {
-
     //<editor-fold desc="Sources">
     /**
      * @description Returns a new `INumberEnumerable<T>` from the current
@@ -372,5 +371,4 @@ public interface INumberEnumerable<T> extends Iterable<T> {
      * @return the Set<T> containing the iterable elements
      */
     Set<T> toSet();
-
 }

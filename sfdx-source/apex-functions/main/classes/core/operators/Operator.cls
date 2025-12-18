@@ -1,5 +1,5 @@
 /**
- * @description Provides default and static methods of 
+ * @description Provides default and static methods of
  * {@link IOperator} functional interface.
  *
  * @see IOperator
@@ -9,9 +9,15 @@
  * @group Functional Abstract Classes
  */
 public abstract inherited sharing class Operator implements IOperator {
-
     //<editor-fold desc="Function">
     // @start-group Function
+    /**
+     * @description Applies the function to the input argument.
+     *
+     * @param o the input argument of `Object` type
+     *
+     * @return the result
+     */
     public abstract Object apply(Object o);
     // @end-group
     //</editor-fold>
@@ -131,6 +137,7 @@ public abstract inherited sharing class Operator implements IOperator {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class Identity extends Operator {
+        // prettier-ignore
         public override Object apply(Object o) { return o; }
     }
 
@@ -151,7 +158,9 @@ public abstract inherited sharing class Operator implements IOperator {
 
     private class Constant extends Operator {
         private final Object value;
+        // prettier-ignore
         private Constant(Object value) { this.value = value; }
+        // prettier-ignore
         public override Object apply(Object o) { return value; }
     }
 
@@ -173,6 +182,7 @@ public abstract inherited sharing class Operator implements IOperator {
             Validate.notNull(supplier);
             this.supplier = supplier;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return supplier.get(); }
     }
 
@@ -185,9 +195,9 @@ public abstract inherited sharing class Operator implements IOperator {
             this.valueMapper = valueMapper;
             this.merger = merger;
         }
+        // prettier-ignore
         public override Object apply(Object o) { return merger.apply(o, valueMapper.apply(o)); }
     }
     // @end-group
     //</editor-fold>
-
 }

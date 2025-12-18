@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.CognitiveComplexity, PMD.ApexUnitTestClassShouldHaveRunAs'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class SObjectFunctionsTest {
-
     private static final List<Contact> INPUT = AfTestData.generateContacts();
 
     static {
@@ -106,5 +103,4 @@ private class SObjectFunctionsTest {
             Assert.areEqual(con.getSObjectType(), SObjectFunctions.getSObjectType().apply(con));
         }
     }
-
 }

@@ -8,13 +8,11 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD')
 public virtual inherited sharing class SObjectCollectors extends Collectors {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected SObjectCollectors() {}
-    
+    protected SObjectCollectors() {
+    }
+
     //<editor-fold desc="Built-Ins">
 
     //<editor-fold desc="List<?> Collectors">
@@ -674,7 +672,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByBoolMap('DoNotCall').cast(Map<Boolean, Contact>.class));
      */
     public static Collector toByBoolMap(final String keyFieldName) {
-        return toByBoolMap(SObjectFunctions.get(keyFieldName), Function.identity(), null, Supplier.of(Map<Boolean, SObject>.class));
+        return toByBoolMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Boolean, SObject>.class)
+        );
     }
 
     /**
@@ -701,7 +704,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByBoolMap(Contact.DoNotCall).cast(Map<Boolean, Contact>.class));
      */
     public static Collector toByBoolMap(final SObjectField keyField) {
-        return toByBoolMap(SObjectFunctions.get(keyField), Function.identity(), null, Supplier.of(Map<Boolean, SObject>.class));
+        return toByBoolMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Boolean, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -796,7 +804,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByIdMap('AccountId').cast(Map<Id, Contact>.class));
      */
     public static Collector toByIdMap(final String keyFieldName) {
-        return toByIdMap(SObjectFunctions.get(keyFieldName), Function.identity(), null, Supplier.of(Map<Id, SObject>.class));
+        return toByIdMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Id, SObject>.class)
+        );
     }
 
     /**
@@ -823,7 +836,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByIdMap(Contact.AccountId).cast(Map<Id, Contact>.class));
      */
     public static Collector toByIdMap(final SObjectField keyField) {
-        return toByIdMap(SObjectFunctions.get(keyField), Function.identity(), null, Supplier.of(Map<Id, SObject>.class));
+        return toByIdMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Id, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -919,7 +937,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByStringMap('FirstName').cast(Map<String, Contact>.class));
      */
     public static Collector toByStringMap(final String keyFieldName) {
-        return toByStringMap(SObjectFunctions.get(keyFieldName), Function.identity(), null, Supplier.of(Map<String, SObject>.class));
+        return toByStringMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<String, SObject>.class)
+        );
     }
 
     /**
@@ -946,7 +969,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByStringMap(Contact.FirstName).cast(Map<String, Contact>.class));
      */
     public static Collector toByStringMap(final SObjectField keyField) {
-        return toByStringMap(SObjectFunctions.get(keyField), Function.identity(), null, Supplier.of(Map<String, SObject>.class));
+        return toByStringMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<String, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1041,7 +1069,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByBlobMap('Body').cast(Map<Blob, Attachment>.class));
      */
     public static Collector toByBlobMap(final String keyFieldName) {
-        return toByBlobMap(SObjectFunctions.get(keyFieldName), Function.identity(), null, Supplier.of(Map<Blob, SObject>.class));
+        return toByBlobMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Blob, SObject>.class)
+        );
     }
 
     /**
@@ -1068,7 +1101,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByBlobMap(Attachment.Body).cast(Map<Blob, Attachment>.class));
      */
     public static Collector toByBlobMap(final SObjectField keyField) {
-        return toByBlobMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Blob, SObject>.class));
+        return toByBlobMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Blob, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1164,7 +1202,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByDateMap('Birthdate').cast(Map<Date, Contact>.class));
      */
     public static Collector toByDateMap(final String keyFieldName) {
-        return toByDateMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Date, SObject>.class));
+        return toByDateMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Date, SObject>.class)
+        );
     }
 
     /**
@@ -1191,7 +1234,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByDateMap(Contact.Birthdate).cast(Map<Date, Contact>.class));
      */
     public static Collector toByDateMap(final SObjectField keyField) {
-        return toByDateMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Date, SObject>.class));
+        return toByDateMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Date, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1286,7 +1334,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByDatetimeMap('ActivityDateTime').cast(Map<Datetime, Event>.class));
      */
     public static Collector toByDatetimeMap(final String keyFieldName) {
-        return toByDatetimeMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Datetime, SObject>.class));
+        return toByDatetimeMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Datetime, SObject>.class)
+        );
     }
 
     /**
@@ -1313,7 +1366,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByDatetimeMap(Event.ActivityDateTime).cast(Map<Datetime, Event>.class));
      */
     public static Collector toByDatetimeMap(final SObjectField keyField) {
-        return toByDatetimeMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Datetime, SObject>.class));
+        return toByDatetimeMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Datetime, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1408,7 +1466,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByTimeMap('StartTime').cast(Map<Time, TimeSlot>.class));
      */
     public static Collector toByTimeMap(final String keyFieldName) {
-        return toByTimeMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Time, SObject>.class));
+        return toByTimeMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Time, SObject>.class)
+        );
     }
 
     /**
@@ -1435,7 +1498,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByTimeMap(TimeSlot.StartTime).cast(Map<Time, TimeSlot>.class));
      */
     public static Collector toByTimeMap(final SObjectField keyField) {
-        return toByTimeMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Time, SObject>.class));
+        return toByTimeMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Time, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1530,7 +1598,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByIntMap('NumberOfEmployees').cast(Map<Integer, Account>.class));
      */
     public static Collector toByIntMap(final String keyFieldName) {
-        return toByIntMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Integer, SObject>.class));
+        return toByIntMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Integer, SObject>.class)
+        );
     }
 
     /**
@@ -1557,7 +1630,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByIntMap(Account.NumberOfEmployees).cast(Map<Integer, Account>.class));
      */
     public static Collector toByIntMap(final SObjectField keyField) {
-        return toByIntMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Integer, SObject>.class));
+        return toByIntMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Integer, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1652,7 +1730,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByLongMap('NumberOfEmployees').cast(Map<Long, Account>.class));
      */
     public static Collector toByLongMap(final String keyFieldName) {
-        return toByLongMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Long, SObject>.class));
+        return toByLongMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Long, SObject>.class)
+        );
     }
 
     /**
@@ -1679,7 +1762,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByLongMap(Account.NumberOfEmployees).cast(Map<Long, Account>.class));
      */
     public static Collector toByLongMap(final SObjectField keyField) {
-        return toByLongMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Long, SObject>.class));
+        return toByLongMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Long, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1774,7 +1862,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByDoubleMap('BillingLatitude').cast(Map<Double, Account>.class));
      */
     public static Collector toByDoubleMap(final String keyFieldName) {
-        return toByDoubleMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Double, SObject>.class));
+        return toByDoubleMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Double, SObject>.class)
+        );
     }
 
     /**
@@ -1801,7 +1894,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByDoubleMap(Account.BillingLatitude).cast(Map<Double, Account>.class));
      */
     public static Collector toByDoubleMap(final SObjectField keyField) {
-        return toByDoubleMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Double, SObject>.class));
+        return toByDoubleMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Double, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -1905,7 +2003,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByObjectMap('Birthdate').cast(Map<Double, Contact>.class));
      */
     public static Collector toByObjectMap(final String keyFieldName) {
-        return toByObjectMap(SObjectFunctions.get(keyFieldName), Function.identity(),null, Supplier.of(Map<Object, SObject>.class));
+        return toByObjectMap(
+            SObjectFunctions.get(keyFieldName),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Object, SObject>.class)
+        );
     }
 
     /**
@@ -1935,7 +2038,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     .collect(SObjectCollectors.toByObjectMap(Contact.Birthdate).cast(Map<Object, Contact>.class));
      */
     public static Collector toByObjectMap(final SObjectField keyField) {
-        return toByObjectMap(SObjectFunctions.get(keyField), Function.identity(),null, Supplier.of(Map<Object, SObject>.class));
+        return toByObjectMap(
+            SObjectFunctions.get(keyField),
+            Function.identity(),
+            null,
+            Supplier.of(Map<Object, SObject>.class)
+        );
     }
     // @end-group
     //</editor-fold>
@@ -3193,7 +3301,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
-     * 
+     *
      * @example
      * Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees =
      *     (Map<Boolean, List<Account>>) [SObjectEnumerable].of(contacts)
@@ -3222,7 +3330,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @return the `Collector`
      *
      * @throws NullPointerException if `field` is null
-     * 
+     *
      * @see SObjectPredicates.isEqual
      *
      * @example
@@ -3649,7 +3757,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
-     * 
+     *
      * @see SObjectPredicates.isEqual
      *
      * @example
@@ -3679,7 +3787,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * @return the `Collector`
      *
      * @throws NullPointerException if `field` is null
-     * 
+     *
      * @example
      * // Get accounts with hot Rating
      * List<Account> accountsHavingMoreThan100Employees = (List<Account>) [SObjectEnumerable].of(accounts)
@@ -3921,5 +4029,4 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     //</editor-fold>
 
     //</editor-fold>
-    
 }

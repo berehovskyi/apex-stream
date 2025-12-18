@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class BiPredicatesTest {
-
     private static final List<AfPerson> INPUT = AfTestData.generatePersons();
     private static final AfPerson CHANGE = new AfPerson('Sam', 15, Date.newInstance(1990, 1, 2), 5L, true);
     private static final IFunction GET_AGE_FUNCTION = new AfTestCommons.GetAgeFunction();
@@ -118,5 +115,4 @@ private class BiPredicatesTest {
             Assert.areEqual(isLessOrEqual, isLessOrEqualBiPredicate.test(person, CHANGE));
         }
     }
-
 }

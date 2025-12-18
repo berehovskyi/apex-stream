@@ -1,8 +1,8 @@
 /**
  * @author Oleh Berehovskyi
  */
+@SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class FlatMapIterator extends BaseIterator {
-
     private final Iterator<Object> iterator;
     private final IFunction mapper;
     private Iterator<Object> innerIterator;
@@ -24,6 +24,7 @@ public inherited sharing class FlatMapIterator extends BaseIterator {
             if (hasInnerNext()) {
                 final Object o = iterator.next();
                 final Iterable<Object> result = (Iterable<Object>) mapper.apply(o);
+                // prettier-ignore
                 if (result != null) { innerIterator = result.iterator(); }
             }
             if (!hasInnerNext()) {
@@ -34,9 +35,8 @@ public inherited sharing class FlatMapIterator extends BaseIterator {
         }
         hasNext = false;
     }
-    
+
     private Boolean hasInnerNext() {
         return innerIterator == null || !innerIterator.hasNext();
     }
-    
 }

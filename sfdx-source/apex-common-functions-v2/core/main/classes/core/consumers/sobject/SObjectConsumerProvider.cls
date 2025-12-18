@@ -162,8 +162,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.message = message;
         }
 
+        // prettier-ignore
         public virtual override void accept(Object o) { ((SObject) o).addError(message, escape); }
-
         /**
          * @description Specifies whether to escape the error message.
          *
@@ -243,8 +243,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.exc = exc;
         }
 
+        // prettier-ignore
         public virtual override void accept(Object o) { ((SObject) o).addError(exc, escape); }
-
         /**
          * @description Sets whether the error message should be escaped when attached to the `SObject`.
          *
@@ -267,6 +267,9 @@ public virtual inherited sharing class SObjectConsumerProvider {
         }
     }
 
+    /**
+     * @description An abstract class that provides a base implementation for setting a field value.
+     */
     public abstract class SetFieldValueBase {
         protected abstract Consumer val(final IFunction mapper);
 
@@ -534,6 +537,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.message = message;
             this.escape = escape;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) o).addError(fieldName, message, escape); }
     }
 
@@ -547,17 +551,20 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.message = message;
             this.escape = escape;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) o).addError(field, message, escape); }
     }
 
     private class SetConsumer extends Consumer {
         private final IConsumer consumer;
+        // prettier-ignore
         private SetConsumer(String fieldName, IFunction mapper) {
             Validate.notNull(mapper);
             if (!AcfSupport.isXRefField(fieldName)) { consumer = new SetByFieldName(fieldName, mapper); }
             else if (AcfSupport.isSafePath(fieldName)) { consumer = new SetByFieldPathSafe(fieldName, mapper); }
             else { consumer = new SetByFieldPath(fieldName, mapper); }
         }
+        // prettier-ignore
         public override void accept(Object o) { consumer.accept(o); }
     }
 
@@ -569,6 +576,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.field = field;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) o).put(field, mapper.apply(o)); }
     }
 
@@ -588,6 +596,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) o).put(fieldName, mapper.apply(o)); }
     }
 
@@ -597,6 +606,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
             super(fieldName);
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) operator.apply(o)).put(xRefFieldName, mapper.apply(o)); }
     }
 
@@ -606,19 +616,20 @@ public virtual inherited sharing class SObjectConsumerProvider {
             super(fieldName);
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) operator.apply(o))?.put(xRefFieldName, mapper.apply(o)); }
     }
 
     private class SetSObjectConsumer extends Consumer {
         private final IConsumer consumer;
+        // prettier-ignore
         private SetSObjectConsumer(String fieldName, IFunction mapper) {
             Validate.notNull(mapper);
             if (!AcfSupport.isXRefField(fieldName)) { consumer = new SetSObjectByFieldName(fieldName, mapper); }
-            else if (AcfSupport.isSafePath(fieldName)) {
-                consumer = new SetSObjectByFieldPathSafe(fieldName, mapper);
-            }
+            else if (AcfSupport.isSafePath(fieldName)) { consumer = new SetSObjectByFieldPathSafe(fieldName, mapper); }
             else { consumer = new SetSObjectByFieldPath(fieldName, mapper); }
         }
+        // prettier-ignore
         public override void accept(Object o) { consumer.accept(o); }
     }
 
@@ -630,6 +641,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.field = field;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) o).putSObject(field, (SObject) mapper.apply(o)); }
     }
 
@@ -640,6 +652,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
             this.fieldName = fieldName;
             this.mapper = mapper;
         }
+        // prettier-ignore
         public override void accept(Object o) { ((SObject) o).putSObject(fieldName, (SObject) mapper.apply(o)); }
     }
 

@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.MethodNamingConventions')
 private class PredicateTest {
-
     private static final List<Account> ACCOUNTS = AfTestData.generateAccounts();
     private static final List<AfPerson> PEOPLE = AfTestData.generatePersons2();
 
@@ -17,7 +16,6 @@ private class PredicateTest {
      * @see Predicate.always
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void default_sobject() {
         // Given
         Integer value = 100;
@@ -65,7 +63,6 @@ private class PredicateTest {
      * @see Predicate.some
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void some_sobject() {
         // Given
         Integer value = 100;
@@ -89,7 +86,6 @@ private class PredicateTest {
      * @see Predicate.every
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void every_sobject() {
         // Given
         Integer value = 100;
@@ -113,7 +109,6 @@ private class PredicateTest {
      * @see Predicate.negate
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void negate_sobject() {
         // Given
         Integer value = 100;
@@ -131,7 +126,6 @@ private class PredicateTest {
      * @see Predicate.compose
      */
     @IsTest
-    @SuppressWarnings('PMD.MethodNamingConventions')
     static void compose_sobject() {
         // Given
         String value = 'T';
@@ -276,5 +270,4 @@ private class PredicateTest {
             Assert.areEqual(person.getAge() > value, agePredicate.test(person));
         }
     }
-
 }

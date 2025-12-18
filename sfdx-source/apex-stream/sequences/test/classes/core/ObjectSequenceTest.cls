@@ -4,11 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings(
-    'PMD.ApexAssertionsShouldIncludeMessage, PMD.ApexUnitTestClassShouldHaveRunAs, PMD.CognitiveComplexity'
-)
+@SuppressWarnings('PMD.ApexDoc')
 private class ObjectSequenceTest {
-
     /**
      * @see ObjectSequence.of
      * @see ObjectSequence.ofNullable
@@ -552,7 +549,7 @@ private class ObjectSequenceTest {
         AsPerson john = new AsPerson('John', 31, Date.newInstance(1990, 1, 2), 0L, true);
         AsPerson jake = new AsPerson('Jake', 33, Date.newInstance(1991, 2, 3), 0L, true);
         List<Object> input = new List<Object>{ john, jake, 'foo', 1, 'foo', jake };
-        List<Object> clone =  AsTestCommons.deepClone(input);
+        List<Object> clone = AsTestCommons.deepClone(input);
         ObjectEnumerable seq = ObjectSequence.of(clone).distinct();
         IObjectEnumerable seq1 = ObjectSequence.of(input).filter(new AsTestCommons.IsInstanceOfComparablePredicate()).distinct(new AsTestCommons.GetIdFunction());
         // When
@@ -965,5 +962,4 @@ private class ObjectSequenceTest {
         Assert.areEqual(expected, actual1);
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
-
 }

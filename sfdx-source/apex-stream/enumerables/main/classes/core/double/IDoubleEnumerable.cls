@@ -11,7 +11,6 @@
  * @group Enumerables
  */
 public interface IDoubleEnumerable extends INumberEnumerable<Double> {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -81,5 +80,4 @@ public interface IDoubleEnumerable extends INumberEnumerable<Double> {
      */
     Double reduce(Double identity, IBiOperator accumulator);
     //</editor-fold>
-
 }

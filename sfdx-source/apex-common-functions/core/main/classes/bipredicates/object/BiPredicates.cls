@@ -9,10 +9,9 @@
  * @group Functional Built-In Classes
  */
 public virtual inherited sharing class BiPredicates {
-
     @TestVisible
-    @SuppressWarnings('PMD.EmptyStatementBlock')
-    protected BiPredicates() {}
+    protected BiPredicates() {
+    }
 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
@@ -314,5 +313,4 @@ public virtual inherited sharing class BiPredicates {
     }
     // @end-group
     //</editor-fold>
-
 }

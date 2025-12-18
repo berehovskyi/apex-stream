@@ -4,9 +4,8 @@
  * @author Oleh Berehovskyi
  */
 @IsTest(IsParallel = true)
-@SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts, PMD.ApexUnitTestClassShouldHaveRunAs')
+@SuppressWarnings('PMD.ApexDoc, PMD.ApexUnitTestClassShouldHaveAsserts')
 private class LongEnumerableTest {
-
     @IsTest
     private static void coverage() {
         // Given
@@ -52,7 +51,6 @@ private class LongEnumerableTest {
         enumerable.toSet();
     }
 
-    @SuppressWarnings('PMD.ExcessivePublicCount')
     private class TestLongEnumerable extends LongEnumerable {
         public override Iterator<Long> iterator() { return null; }
         public override LongEnumerable append(Iterable<Long> iterable) { return this; }
@@ -85,5 +83,4 @@ private class LongEnumerableTest {
         public override List<Long> toList() { return null; }
         public override Set<Long> toSet() { return null; }
     }
-
 }

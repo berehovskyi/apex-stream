@@ -5,9 +5,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings('PMD.ExcessivePublicCount, PMD.CyclomaticComplexity, PMD.ExcessiveClassLength')
 public abstract inherited sharing class ObjectEnumerable implements IObjectEnumerable {
-
     //<editor-fold desc="Iterator">
     /**
      * @description Returns an instance of an iterator for this enumerable.
@@ -156,9 +154,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['foo']
      */
     public virtual ObjectEnumerable intersect(final Iterable<Object> iterable, final IFunction classifier) {
-        return distinct(classifier).filter(EnumerableSupport.isIn(
-            classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
-        ));
+        return distinct(classifier)
+            .filter(EnumerableSupport.isIn(classifier, EnumerablePipeline.toObjectSet(iterable, classifier)));
     }
 
     /**
@@ -214,9 +211,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * // ['qux', 'fred']
      */
     public virtual ObjectEnumerable except(final Iterable<Object> iterable, final IFunction classifier) {
-        return distinct(classifier).filter(EnumerableSupport.isIn(
-            classifier, EnumerablePipeline.toObjectSet(iterable, classifier)
-        ).negate());
+        return distinct(classifier)
+            .filter(EnumerableSupport.isIn(classifier, EnumerablePipeline.toObjectSet(iterable, classifier)).negate());
     }
 
     /**
@@ -1030,5 +1026,4 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      */
     public abstract Set<Object> toSet();
     //</editor-fold>
-
 }

@@ -1,8 +1,10 @@
+// prettier-ignore
 /**
  * @description Defines the comparison results (e.g., equal, not equal, greater, less).
  * <p><strong>Note: </strong></p>
  * <p>This is an internal class and should not be referenced outside of this package.</p>
  */
+@SuppressWarnings('PMD.ApexDoc')
 public virtual inherited sharing class ComparisonInterpreter {
     public virtual Set<Integer> eq() { return new Set<Integer>{ 0 }; }
     public virtual Set<Integer> ne() { return new Set<Integer>{ -1, 1 }; }

@@ -12,9 +12,7 @@
  *
  * @group Enumerables
  */
-@SuppressWarnings('PMD.CognitiveComplexity')
 public inherited sharing class Sequence {
-
     /**
      * @description Returns a `ObjectSequence` created from `List<Object>`.
      *
@@ -334,5 +332,4 @@ public inherited sharing class Sequence {
     public static DoubleEnumerable ofNullable(final Set<Double> doubles) {
         return DoubleSequence.ofNullable(doubles);
     }
-
 }
