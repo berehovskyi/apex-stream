@@ -11,40 +11,43 @@ slightly influenced by [C# Linq.Enumerable](https://docs.microsoft.com/en-us/dot
 [js Array.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
 
 ## Table of Contents
+
 <details>
   <summary>Click to expand!</summary>
 
 - [Apex Stream Framework](#apex-stream-framework)
-  * [Installation](#installation)
-    + [Dependencies](#dependencies)
-  * [Modules and Key Features](#modules-and-key-features)
-  * [Introduction](#introduction)
-  * [Get Started](#get-started)
-    + [Note](#note)
-  * [Stream Sources](#stream-sources)
-    + [Stream of Iterable](#stream-of-iterable)
-    + [Empty Stream](#empty-stream)
-    + [Infinite Stream](#infinite-stream)
-  * [Merging Streams](#merging-streams)
-    + [Concatenation](#concatenation)
-    + [Zipping](#zipping)
-  * [Intermediate Operations](#intermediate-operations)
-    + [Set Operations](#set-operations)
-    + [Filtering](#filtering)
-    + [Iterating](#iterating)
-    + [Mapping](#mapping)
-    + [Limit and Skip](#limit-and-skip)
-    + [Sorting](#sorting)
-  * [Terminal Operations](#terminal-operations)
-    + [Matching](#matching)
-    + [Reduction](#reduction)
-    + [Collecting](#collecting)
-    + [Fast Collecting](#fast-collecting)
-    + [Run](#run)
-  * [Optional](#optional)
-  * [Examples](#examples)
-  * [Documentation](#documentation)
-  * [User Guide (in development)](#user-guide-in-development)
+    - [Installation](#installation)
+        - [Dependencies](#dependencies)
+    - [Modules and Key Features](#modules-and-key-features)
+    - [Introduction](#introduction)
+    - [Get Started](#get-started)
+        - [Note](#note)
+    - [Stream Sources](#stream-sources)
+        - [Stream of Iterable](#stream-of-iterable)
+        - [Empty Stream](#empty-stream)
+        - [Infinite Stream](#infinite-stream)
+    - [Merging Streams](#merging-streams)
+        - [Concatenation](#concatenation)
+        - [Zipping](#zipping)
+    - [Intermediate Operations](#intermediate-operations)
+        - [Set Operations](#set-operations)
+        - [Filtering](#filtering)
+        - [Iterating](#iterating)
+        - [Mapping](#mapping)
+        - [Limit and Skip](#limit-and-skip)
+        - [Sorting](#sorting)
+    - [Terminal Operations](#terminal-operations)
+        - [Matching](#matching)
+        - [Reduction](#reduction)
+        - [Collecting](#collecting)
+        - [Fast Collecting](#fast-collecting)
+        - [Run](#run)
+    - [Optional](#optional)
+    - [Examples](#examples)
+    - [Documentation](#documentation)
+    - [User Guide (in development)](#user-guide-in-development)
+
+<!-- prettier-ignore -->
 </details>
 
 ## Installation
@@ -112,20 +115,20 @@ sf package install -p 04tJ5000000D7cbIAC -o me@example.com -r -w 10
 ## Modules and Key Features
 
 - Apex Functions:
-  - Functional Interfaces
-  - Functional Abstract Classes with
-    - inherited abstract methods
-    - default and static methods for functional composition
+    - Functional Interfaces
+    - Functional Abstract Classes with
+        - inherited abstract methods
+        - default and static methods for functional composition
 
 - Apex Enumerables:
-  - Enumerables with implementations:
-    - Streams (`SObjectStream`, `ObjectStream` and number `DoubleStream`, `IntStream`, `LongStream`)
-    - Sequences (`SObjectSequence`, `ObjectSequence` and number `DoubleSequence`, `IntSequence`, `LongSequence`)
-  - Optionals 
+    - Enumerables with implementations:
+        - Streams (`SObjectStream`, `ObjectStream` and number `DoubleStream`, `IntStream`, `LongStream`)
+        - Sequences (`SObjectSequence`, `ObjectSequence` and number `DoubleSequence`, `IntSequence`, `LongSequence`)
+    - Optionals
 
 - Apex Common Functions:
-  - Functional Built-in Classes with common Functional Abstract Classes implementations
-  - Built-in Collectors (`SObjectCollectors`, `Collectors`)
+    - Functional Built-in Classes with common Functional Abstract Classes implementations
+    - Built-in Collectors (`SObjectCollectors`, `Collectors`)
 
 - Apex Common Functions V2 (Pilot): [Full details](releasenotes/v3.3.0.md)
 
@@ -133,7 +136,7 @@ sf package install -p 04tJ5000000D7cbIAC -o me@example.com -r -w 10
 
 **Apex Stream Framework** is built on custom `Iterables` (hereinafter - `Enumerables`) that allows processing
 a sequence of elements supporting sequential aggregate operations,
-providing a convenient declarative API. 
+providing a convenient declarative API.
 
 There are `2` implementations of `Enumerable` - `Stream` and `Sequence`.
 
@@ -153,9 +156,9 @@ There are a reference and primitive specializations of `Streams` and `Sequences`
 
 In terms of Apex Stream Framework, `function` is an instance of `Functional Interface` or `Functional Abstract Class`.
 
-A `Functional Interface` is an interface that contains only one *single* `abstract` method.
+A `Functional Interface` is an interface that contains only one _single_ `abstract` method.
 
-A `Functional Abstract Class` is an `abstract` class that contains only one *single* `abstract` method,
+A `Functional Abstract Class` is an `abstract` class that contains only one _single_ `abstract` method,
 but may or may not contain `final`, `virtual`, or `static` methods to make functional composition possible.
 
 **Apex Stream Framework** contains most of the **built-in** functions, common implementations of `functions`
@@ -204,7 +207,7 @@ Create a `Stream` with no elements:
 SObjectEnumerable emptySObjectStream = SObjectStream.empty();
 ```
 
-- ### Infinite Stream[*](#note)
+- ### Infinite Stream[\*](#note)
 
 Create an infinite `Stream` by passing `Supplier` to a `generate` method:
 
@@ -296,8 +299,8 @@ SObjectEnumerable newAccountStreamWithChangedRating = Stream.zip(
 
 **Intermediate Operation** transforms a stream into another stream.
 
-*Please note that, unlike for `Sequence`, for `Stream` an intermediate operation is not invoked
-until a terminal operation is invoked.*
+_Please note that, unlike for `Sequence`, for `Stream` an intermediate operation is not invoked
+until a terminal operation is invoked._
 
 - ### Set Operations
 
@@ -305,13 +308,13 @@ until a terminal operation is invoked.*
 within the same or separate iterables.
 
 A `union` operation returns the set union, which means unique elements
-that appear in *either* of two iterables.
+that appear in _either_ of two iterables.
 
 An `intersect` operation returns the set intersection, which means unique elements
-that appear *in each* of two iterables.
+that appear _in each_ of two iterables.
 
 An `except` operation returns the set difference, which means the elements of one iterable
-that *does not appear* in the second iterable.
+that _does not appear_ in the second iterable.
 
 A `distinct` operation returns an iterable without duplicates.
 
@@ -411,7 +414,7 @@ DoubleEnumerable revenueStream = Stream.of(accounts)
 ```
 
 A `flatMapTo` operation converts elements by applying a function that returns an `Iterable` to them
-and collects these new *inner* elements into a new stream.
+and collects these new _inner_ elements into a new stream.
 
 Create a stream of related child contacts from the account stream:
 
@@ -494,19 +497,19 @@ SObjectEnumerable sortedAccountStream = Stream.of(accounts)
 
 ## Terminal Operations
 
-**Terminal Operations** produces a stream result and can be invoked only *once*.
+**Terminal Operations** produces a stream result and can be invoked only _once_.
 
 - ### Matching
 
 `find`, `every`, `some`, and `none` operations validate elements according to a predicate.
 
-A `find` operation returns the *first* element that matches a predicate as [Optional](#optional).
+A `find` operation returns the _first_ element that matches a predicate as [Optional](#optional).
 
-An `every` operation checks if *all* elements match a predicate.
+An `every` operation checks if _all_ elements match a predicate.
 
-An `some` operation checks if *some* element matches a predicate.
+An `some` operation checks if _some_ element matches a predicate.
 
-A `none` operation checks if *no* elements match a predicate.
+A `none` operation checks if _no_ elements match a predicate.
 
 Check if all accounts have `Hot` `Rating`:
 
@@ -567,7 +570,7 @@ Optional optionalAccountWithMaxAnnualRevenue = Stream.of(accounts)
     .max(Account.AnnualRevenue);
 ```
 
-`sum`, `avg` operations on a primitive stream calculate an arithmetic *sum* and *mean*.
+`sum`, `avg` operations on a primitive stream calculate an arithmetic _sum_ and _mean_.
 
 Calculate the sum of elements of the stream:
 
@@ -695,7 +698,7 @@ Map<Id, Account> accountByParentId = (Map<Id, Account>) Stream.of(accounts)
 
 Collectors also allow the reusing of complex collection strategies
 and composition of collect operations such as multiple-level grouping or partitioning by
-using *downstream* collectors.
+using _downstream_ collectors.
 
 Classify account names by `BillingCountry` and by `BillingCity` cascading two collectors together:
 
@@ -710,7 +713,7 @@ Map<String, Map<String, List<String>>> accountNamesByCityByCountry =
             groupNamesByBillingCityDownstreamCollector
         ).cast(Map<String, Map<String, List<String>>>.class));
 
-/* The result json structure: 
+/* The result json structure:
 {
   'US' : {
     'New York' : ['Behance', 'Spotify'],
@@ -821,19 +824,19 @@ optionalAccount.ifPresent(SObjectConsumers.addError('Error Message'));
 `get` method returns a value if present, otherwise throws `NoSuchElementException`:
 
 ```apex
-Account acc = (Account) optionalAccount.get(); 
+Account acc = (Account) optionalAccount.get();
 ```
 
 To return a default value if `Optional` is empty, otherwise, return value, use `orElse` method:
 
 ```apex
-Account acc = (Account) optionalAccount.orElse(new Account()); 
+Account acc = (Account) optionalAccount.orElse(new Account());
 ```
 
 `orElseGet` is similar to `orElse` but returns a value from a provided `Supplier`:
 
 ```apex
-Account acc = (Account) optionalAccount.orElseGet(SObjectSuppliers.of(Account.SObjectType)); 
+Account acc = (Account) optionalAccount.orElseGet(SObjectSuppliers.of(Account.SObjectType));
 ```
 
 ## Examples
@@ -920,4 +923,3 @@ Find more examples [here](/sfdx-source/apex-stream/streams/test/classes).
 ## User Guide (in development)
 
 If you want to know more, take a look at the [User Guide](https://github.com/berehovskyi/apex-stream/wiki) for a brief introduction to the Apex Stream Framework.
-
