@@ -1,0 +1,17 @@
+{
+    "devDependencies": {
+        "@prettier/plugin-xml": "^3.4.2",
+        "prettier": "^3.7.4",
+        "prettier-plugin-apex": "^2.2.6"
+    },
+    "scripts": {
+        "prettier:apex:check": "prettier --plugin=prettier-plugin-apex --check \"**/*.{trigger,cls}\"",
+        "prettier:apex:diff": "prettier --plugin=prettier-plugin-apex --list-different \"**/*.{trigger,cls}\"",
+        "prettier:apex:fix": "prettier --plugin=prettier-plugin-apex --write \"**/*.{trigger,cls}\"",
+        "prettier:check": "prettier --check .",
+        "prettier:diff": "prettier --list-different .",
+        "prettier:fix": "prettier --write .",
+        "sfca:check": "sf code-analyzer run --config-file ./code-analyzer.yml --workspace .",
+        "sfca:check:detail": "sf code-analyzer run --config-file ./code-analyzer.yml --workspace . --view detail"
+    }
+}
