@@ -8,7 +8,7 @@
 public abstract inherited sharing class SObjectEnumerable implements ISObjectEnumerable {
     //<editor-fold desc="Iterator">
     /**
-     * @description Returns an instance of an iterator for this enumerable.
+     * @description Returns an iterator for this enumerable.
      * <p>Terminal Operation.</p>
      *
      * @return the iterator
@@ -93,7 +93,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `SObjectEnumerable` as a set union
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -129,7 +130,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set union
-     * of the current and another iterables according to `classifier`.
+     * of the current and another `iterable` according to `classifier`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      * @param classifier the classifier function
@@ -170,8 +172,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` as a set intersection
-     * of the current and another iterables according to `fieldName`.
+     * @description Returns a new `SObjectEnumerable` as a set union
+     * of the current and another `iterable` according to `fieldName`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      * @param fieldName the field
@@ -208,8 +211,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` as a set intersection
-     * of the current and another iterables according to `field`.
+     * @description Returns a new `SObjectEnumerable` as a set union
+     * of the current and another `iterable` according to `field`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      * @param field the field
@@ -246,7 +250,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set intersection
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -278,7 +283,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set intersection
-     * of the current and another iterables according to `classifier`.
+     * of the current and another `iterable` according to `classifier`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
@@ -305,7 +310,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     new Account(Name = 'Foo')
      * };
      * List<Account> union = [SObjectEnumerable].of(accounts1)
-     *     .intersect(accounts2, new GetFieldValueFunction('Name'))
+     *     .intersect(accounts2, new GetFieldValueToLowerCaseFunction('Name'))
      *     .toList(); //
      * [
      *   { Name: 'foo' }
@@ -318,7 +323,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set intersection
-     * of the current and another iterables according to `fieldName`.
+     * of the current and another `iterable` according to `fieldName`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
@@ -353,7 +358,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set intersection
-     * of the current and another iterables according to `field`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
@@ -387,7 +392,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set difference
-     * of the current and another iterables.
+     * of the current and another `iterable`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
@@ -428,7 +433,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set difference
-     * of the current and another iterables according to `classifier` function.
+     * of the current and another `iterable` according to `classifier` function.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
@@ -462,7 +467,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { Name: 'baz' }
      * ]
      * List<Account> except1 = [SObjectEnumerable].of(accounts2)
-     *     .except(accounts1)
+     *     .except(accounts1, new GetFieldValueToLowerCaseFunction('Name'))
      *     .toList(); //
      * [
      *   { Name: 'qux' },
@@ -476,7 +481,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set difference
-     * of the current and another iterables according to `fieldName`.
+     * of the current and another `iterable` according to `fieldName`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
@@ -519,7 +524,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set difference
-     * of the current and another iterables according to `field`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
@@ -560,10 +565,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a `SObjectEnumerable` with distinct elements.
+     * @description Returns a new `SObjectEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `SObjectEnumerable`
+     * @return the new `SObjectEnumerable`
      *
      * @example
      * List<Account> accounts = new List<Account>{
@@ -620,9 +625,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable distinct(final IFunction classifier);
 
     /**
-     * @description Returns a new `SObjectEnumerable` with distinct `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with distinct elements
      * according to `fieldName`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param fieldName the field
      *
@@ -653,9 +658,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with distinct `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with distinct elements
      * according to `field`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param field the field
      *
@@ -723,12 +728,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable filter(final IPredicate predicate);
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements
-     * that have field's value.
-     * <p>Intermediate Operation.</p>
+     * @description Returns a new `SObjectEnumerable` with elements
+     * that have `fieldName` `value`.
+     * <p>Stateless Intermediate Operation.</p>
      *
      * @param fieldName the field
-     * @param value the value
+     * @param value the satisfying value
      *
      * @return the new `SObjectEnumerable`
      *
@@ -766,12 +771,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements
-     * that have field's value.
-     * <p>Intermediate Operation.</p>
+     * @description Returns a new `SObjectEnumerable` with elements
+     * that have `field` `value`.
+     * <p>Stateless Intermediate Operation.</p>
      *
      * @param field the field
-     * @param value the value
+     * @param value the satisfying value
      *
      * @return the new `SObjectEnumerable`
      *
@@ -833,7 +838,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable take(final IPredicate predicate);
 
     /**
-     * @description Returns a new `SObjectEnumerable` that takes `SObject` elements
+     * @description Returns a new `SObjectEnumerable` that takes elements
      * while `fieldName` equals to `value`.
      * <p>Intermediate Operation.</p>
      *
@@ -878,7 +883,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` that takes `SObject` elements
+     * @description Returns a new `SObjectEnumerable` that takes elements
      * while `field` equals to `value`.
      * <p>Intermediate Operation.</p>
      *
@@ -909,7 +914,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` that drops elements
-     * while `predicate` returns `true`.
+     * while `predicate` returns `true`, then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the predicate
@@ -945,8 +950,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable drop(final IPredicate predicate);
 
     /**
-     * @description Returns a new `SObjectEnumerable` that drops `SObject` elements
-     * while `fieldName` equals to `value`.
+     * @description Returns a new `SObjectEnumerable` that drops elements
+     * while `fieldName` equals to `value`, then takes the rest.
      * <p>Intermediate Operation.</p>
      *
      * @param fieldName the field
@@ -991,8 +996,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` that drops `SObject` elements
-     * while `field` equals to `value`.
+     * @description Returns a new `SObjectEnumerable` that drops elements
+     * while `field` equals to `value`, then takes the rest.
      * <p>Intermediate Operation.</p>
      *
      * @param field the field
@@ -1081,7 +1086,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable mapTo(final IOperator mapper);
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with elements
      * according to `fieldName`.
      * <p>Intermediate Operation.</p>
      *
@@ -1124,7 +1129,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with elements
      * according to `field`.
      * <p>Intermediate Operation.</p>
      *
@@ -1160,7 +1165,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * applied to the elements of this enumerable.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
      * @return the `IntEnumerable`
      *
@@ -1185,7 +1190,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract IntEnumerable mapToInt(final IFunction mapper);
 
     /**
-     * @description Returns a new `IntEnumerable` with `Integer` elements
+     * @description Returns a new `IntEnumerable` with elements
      * according to `fieldName`.
      * <p>Intermediate Operation.</p>
      *
@@ -1215,7 +1220,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `IntEnumerable` with `Integer` elements
+     * @description Returns a new `IntEnumerable` with elements
      * according to `field`.
      * <p>Intermediate Operation.</p>
      *
@@ -1243,7 +1248,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * applied to the elements of this enumerable.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
      * @return the `LongEnumerable`
      *
@@ -1268,7 +1273,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract LongEnumerable mapToLong(final IFunction mapper);
 
     /**
-     * @description Returns a new `LongEnumerable` with `Long` elements
+     * @description Returns a new `LongEnumerable` with elements
      * according to `fieldName`.
      * <p>Intermediate Operation.</p>
      *
@@ -1286,10 +1291,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Account acc2 = new Account(Name = 'bar', NumberOfEmployees = 200, Parent = parent2);
      * Account acc3 = new Account(Name = 'baz', NumberOfEmployees = 300);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Long> numberOfEmployees = [SObjectEnumerable].acc1(accounts)
+     * List<Long> numberOfEmployees = [SObjectEnumerable].of(accounts)
      *     .mapToLong('NumberOfEmployees')
      *     .toList(); // [100, 200, 300]
-     * List<Long> parentNumberOfEmployees = [SObjectEnumerable].of(contacts)
+     * List<Long> parentNumberOfEmployees = [SObjectEnumerable].of(accounts)
      *     .mapToLong('Parent?.NumberOfEmployees')
      *     .toList(); // [1000, 5000, null]
      */
@@ -1298,7 +1303,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `LongEnumerable` with `Long` elements
+     * @description Returns a new `LongEnumerable` with elements
      * according to `field`.
      * <p>Intermediate Operation.</p>
      *
@@ -1313,7 +1318,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Account acc2 = new Account(Name = 'bar', NumberOfEmployees = 200);
      * Account acc3 = new Account(Name = 'baz', NumberOfEmployees = 300);
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
-     * List<Long> numberOfEmployees = [SObjectEnumerable].acc1(accounts)
+     * List<Long> numberOfEmployees = [SObjectEnumerable].of(accounts)
      *     .mapToLong(Account.NumberOfEmployees)
      *     .toList(); // [100, 200, 300]
      */
@@ -1326,7 +1331,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * applied to the elements of this enumerable.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
      * @return the `DoubleEnumerable`
      *
@@ -1370,7 +1375,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract DoubleEnumerable mapToDouble(final IFunction mapper);
 
     /**
-     * @description Returns a new `DoubleEnumerable` with `Double` elements
+     * @description Returns a new `DoubleEnumerable` with elements
      * according to `fieldName`.
      * <p>Intermediate Operation.</p>
      *
@@ -1400,13 +1405,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `DoubleEnumerable` with `Double` elements
+     * @description Returns a new `DoubleEnumerable` with elements
      * according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param field the field
      *
-     * @return the new `field`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `field` is null
      *
@@ -1428,7 +1433,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * applied to the elements of this enumerable.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
      * @return the `ObjectEnumerable`
      *
@@ -1456,7 +1461,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract ObjectEnumerable mapToObject(final IFunction mapper);
 
     /**
-     * @description Returns a new `ObjectEnumerable` with `Object` elements
+     * @description Returns a new `ObjectEnumerable` with elements
      * according to `fieldName`.
      * <p>Intermediate Operation.</p>
      *
@@ -1486,7 +1491,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `ObjectEnumerable` with `Object` elements
+     * @description Returns a new `ObjectEnumerable` with elements
      * according to `field`.
      * <p>Intermediate Operation.</p>
      *
@@ -1510,7 +1515,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements as a result of
+     * @description Returns a new `SObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -1558,7 +1563,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable flatMapTo(final IFunction mapper);
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements as a result of
+     * @description Returns a new `SObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable
      * according to child relationship `fieldName`.
      * <p>Intermediate Operation.</p>
@@ -1592,7 +1597,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements as a result of
+     * @description Returns a new `SObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable
      * according to child relationship `field`.
      * <p>Intermediate Operation.</p>
@@ -1625,14 +1630,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `IntEnumerable` with `Integer` elements as a result of
+     * @description Returns a new `IntEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Integer>`
      *
-     * @return the new `SObjectEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -1665,7 +1670,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract IntEnumerable flatMapToInt(final IFunction mapper);
 
     /**
-     * @description Returns a new `LongEnumerable` with `Long` elements as a result of
+     * @description Returns a new `LongEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -1705,7 +1710,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract LongEnumerable flatMapToLong(final IFunction mapper);
 
     /**
-     * @description Returns a new `DoubleEnumerable` with `Double` elements as a result of
+     * @description Returns a new `DoubleEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -1745,7 +1750,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract DoubleEnumerable flatMapToDouble(final IFunction mapper);
 
     /**
-     * @description Returns a new `ObjectEnumerable` with `Object` elements as a result of
+     * @description Returns a new `ObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -1780,18 +1785,18 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
      * List<String> names = (List<String>) [SObjectEnumerable].of(parentAccounts)
      *     .flatMapToObject(new MapToName())
-     *     .toList(String.class); // ['qux', fred', 'thud']
+     *     .toList(String.class); // ['qux', 'fred', 'thud']
      */
     public abstract ObjectEnumerable flatMapToObject(final IFunction mapper);
 
     /**
      * @description Returns a `SObjectEnumerable` after performing `consumer` action on each element.
-     * <p>Intermediate Operation.</p>
+     * <p>Intermediate Interfering Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return this `SObjectEnumerable`
+     * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
@@ -1827,14 +1832,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable forEach(final IConsumer consumer);
 
     /**
-     * @description Returns a new `SObjectEnumerable` after setting `value` for `fieldName`
-     * on each `SObject` element.
-     * <p>Intermediate Operation.</p>
+     * @description Returns a `SObjectEnumerable` after setting `value` for `fieldName`
+     * on each element.
+     * <p>Intermediate Interfering Operation.</p>
      *
      * @param fieldName the field
      * @param value the value
      *
-     * @return the new `SObjectEnumerable`
+     * @return the `SObjectEnumerable`
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -1859,8 +1864,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .mapTo('Parent')
      *     .toList(); //
      * [
-     *   { Name: 'qux', AnnualRevenue: 100 },
-     *   { Name: 'fred', AnnualRevenue: 200 },
+     *   { Name: 'qux', AnnualRevenue: 0 },
+     *   { Name: 'fred', AnnualRevenue: 0 },
      *   null
      * ]
      */
@@ -1869,14 +1874,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` after setting `value` for `field`
-     * on each `SObject` element.
-     * <p>Intermediate Operation.</p>
+     * @description Returns a `SObjectEnumerable` after setting `value` for `field`
+     * on each element.
+     * <p>Intermediate Interfering Operation.</p>
      *
      * @param field the field
      * @param value the value
      *
-     * @return the new `SObjectEnumerable`
+     * @return the `SObjectEnumerable`
      *
      * @throws NullPointerException if `field` is null
      *
@@ -1923,7 +1928,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     /**
      * @description Returns a new `SObjectEnumerable` with sorted elements
      * according to `comparer`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param comparer the comparer
      *
@@ -1968,9 +1973,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable sort(final IComparer comparer);
 
     /**
-     * @description Returns a new `SObjectEnumerable` with sorted `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with sorted elements
      * considering `order`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param order the sort order
      *
@@ -1997,9 +2002,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with sorted `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with sorted elements
      * according to `fieldName`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param fieldName the field
      *
@@ -2033,9 +2038,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with sorted `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with sorted elements
      * taken from `fieldName` values considering `order`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param fieldName the field
      * @param order the sort order
@@ -2071,9 +2076,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with sorted `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with sorted elements
      * according to `field`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param field the field
      *
@@ -2106,9 +2111,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns a new `SObjectEnumerable` with sorted `SObject` elements
+     * @description Returns a new `SObjectEnumerable` with sorted elements
      * taken from `field` values considering `order`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param field the field
      * @param order the sort order
@@ -2147,7 +2152,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @param lim the number of elements to limit
      *
-     * @return the `SObjectEnumerable`
+     * @return the new `SObjectEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
@@ -2168,13 +2173,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable lim(final Integer lim);
 
     /**
-     * @description Returns a new `SObjectEnumerable` that skips first `n` elements
-     * and returns remaining elements.
+     * @description Returns a new `SObjectEnumerable` consisting of the remaining elements
+     * of this enumerable after discarding the first `n` elements of the enumerable.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @param n the number of elements to skip
+     * @param n the number of leading elements to skip
      *
-     * @return the `SObjectEnumerable`
+     * @return the new `SObjectEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
@@ -2197,7 +2202,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     //<editor-fold desc="Terminal Operations">
     /**
-     * @description Performs a reduction on `SObject` elements,
+     * @description Performs a reduction on elements,
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
@@ -2228,7 +2233,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObject reduce(final SObject identity, final IBiOperator accumulator);
 
     /**
-     * @description Performs a reduction on `SObject` elements,
+     * @description Performs a reduction on elements,
      * using `identity` value and associative `accumulator` function, and returns
      * an `Optional` SObject describing the reduced value.
      * <p>Terminal Operation.</p>
@@ -2446,13 +2451,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns whether all elements match `predicate`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * @description Returns whether all elements of this enumerable match `predicate`.
+     * If the enumerable is empty then `true` is returned and the predicate is not evaluated
+     * (vacuous truth).
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return `true` or `false`
+     * @return `true` if all elements match the predicate, `false` otherwise
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -2479,14 +2485,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Boolean every(final IPredicate predicate);
 
     /**
-     * @description Returns whether all `SObject` elements have `field` `value`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * @description Returns whether all elements of this enumerable have `fieldName` `value`.
+     * If the enumerable is empty then `true` is returned (vacuous truth).
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param fieldName the field
-     * @param value the field value
+     * @param value the satisfying value
      *
-     * @return `true` or `false`
+     * @return `true` if all elements match the predicate, `false` otherwise
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -2514,14 +2520,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns whether all `SObject` elements have `field` `value`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * @description Returns whether all elements of this enumerable have `field` `value`.
+     * If the enumerable is empty then `true` is returned (vacuous truth).
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param field the field
-     * @param value the field value
+     * @param value the satisfying value
      *
-     * @return `true` or `false`
+     * @return `true` if all elements match the predicate, `false` otherwise
      *
      * @throws NullPointerException if `field` is null
      *
@@ -2539,13 +2545,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns whether some element matches `predicate`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * @description Returns whether some element of this enumerable matches `predicate`.
+     * If the enumerable is empty then `false` is returned and the predicate is not evaluated.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return `true` or `false`
+     * @return `true` if some element matches the predicate, `false` otherwise
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -2572,14 +2578,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Boolean some(final IPredicate predicate);
 
     /**
-     * @description Returns whether some `SObject` element has `field` `value`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * @description Returns whether some element of this enumerable has `fieldName` `value`.
+     * If the enumerable is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param fieldName the field
-     * @param value the field value
+     * @param value the satisfying value
      *
-     * @return `true` or `false`
+     * @return `true` if some element matches the predicate, `false` otherwise
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -2598,23 +2604,23 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     new Contact(LastName = 'fred')
      * };
      * Boolean isSomeAccountWithHotRating = [SObjectEnumerable].of(accounts)
-     *     .every('Rating', 'Hot'); // true
+     *     .some('Rating', 'Hot'); // true
      * Boolean isSomeContactWithHotRatingAccount = [SObjectEnumerable].of(contacts)
-     *     .every('Account?.Rating', 'Hot'); // true
+     *     .some('Account?.Rating', 'Hot'); // true
      */
     public virtual Boolean some(final String fieldName, final Object value) {
         return some(SObjectEnumerableSupport.isEqual(fieldName, value));
     }
 
     /**
-     * @description Returns whether some `SObject` element has `field` `value`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * @description Returns whether some element of this enumerable has `field` `value`.
+     * If the enumerable is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param field the field
-     * @param value the field value
+     * @param value the satisfying value
      *
-     * @return `true` or `false`
+     * @return `true` if some element matches the predicate, `false` otherwise
      *
      * @throws NullPointerException if `field` is null
      *
@@ -2625,20 +2631,20 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Account acc4 = new Account(Name = 'qux');
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3, acc4 };
      * Boolean isSomeAccountWithHotRating = [SObjectEnumerable].of(accounts)
-     *     .every(Account.Rating, 'Hot'); // true
+     *     .some(Account.Rating, 'Hot'); // true
      */
     public virtual Boolean some(final SObjectField field, final Object value) {
         return some(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
-     * @description Returns whether no `SObject` elements match `predicate`.
-     * If `SObjectEnumerable` is empty then `true` is returned.
+     * @description Returns whether no elements of this enumerable match `predicate`.
+     * If the enumerable is empty then `true` is returned and the predicate is not evaluated.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return `true` or `false`
+     * @return `true` if no elements match the predicate, `false` otherwise
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -2667,14 +2673,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns whether no `SObject` elements have `field` `value`.
-     * If `SObjectEnumerable` is empty then `true` is returned.
+     * @description Returns whether no elements of this enumerable have `fieldName` `value`.
+     * If the enumerable is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param fieldName the field
-     * @param value the field value
+     * @param value the satisfying value
      *
-     * @return `true` or `false`
+     * @return `true` if no elements match the predicate, `false` otherwise
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -2702,14 +2708,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns whether no `SObject` elements have `field` `value`.
-     * If `SObjectEnumerable` is empty then `true` is returned.
+     * @description Returns whether no elements of this enumerable have `field` `value`.
+     * If the enumerable is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param field the field
-     * @param value the field value
+     * @param value the satisfying value
      *
-     * @return `true` or `false`
+     * @return `true` if no elements match the predicate, `false` otherwise
      *
      * @throws NullPointerException if `field` is null
      *
@@ -2727,7 +2733,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns an `Optional` describing the maximum `SObject` element
+     * @description Returns an `Optional` describing the maximum element
      * according to `comparer`.
      * <p>Terminal Operation.</p>
      *
@@ -2768,7 +2774,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns an `Optional` SObject describing the maximum `SObject` element
+     * @description Returns an `Optional` SObject describing the maximum element
      * according to `fieldName`.
      * <p>Terminal Operation.</p>
      *
@@ -2796,7 +2802,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns an `Optional` describing the maximum `SObject` element
+     * @description Returns an `Optional` describing the maximum element
      * according to `field`.
      * <p>Terminal Operation.</p>
      *
@@ -2823,7 +2829,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns an `Optional` describing the minimum `SObject` element
+     * @description Returns an `Optional` describing the minimum element
      * according to `comparer`.
      * <p>Terminal Operation.</p>
      *
@@ -2864,7 +2870,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns an `Optional` describing the minimum `SObject` element
+     * @description Returns an `Optional` describing the minimum element
      * according to `fieldName`.
      * <p>Terminal Operation.</p>
      *
@@ -2892,7 +2898,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns an `Optional` describing the minimum `SObject` element
+     * @description Returns an `Optional` describing the minimum element
      * according to `field`.
      * <p>Terminal Operation.</p>
      *
@@ -2948,7 +2954,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns the arithmetic sum of field values of `SObject` elements.
+     * @description Returns the arithmetic sum of field values of elements.
      * <p>Terminal Operation.</p>
      *
      * @param fieldName the field to sum values
@@ -2976,7 +2982,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns the arithmetic sum of field values of `SObject` elements.
+     * @description Returns the arithmetic sum of field values of elements.
      * <p>Terminal Operation.</p>
      *
      * @param field the field to sum values
@@ -3028,12 +3034,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns the arithmetic mean of field values of `SObject` elements.
+     * @description Returns the arithmetic mean of the values of `fieldName`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field to sum values
+     * @param fieldName the field to calculate the average
      *
-     * @return the arithmetic mean of field values
+     * @return the `Optional` containing the result
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -3056,12 +3062,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns the arithmetic mean of field values of `SObject` elements.
+     * @description Returns the arithmetic mean of the values of `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param field the field to sum values
+     * @param field the field to calculate the average
      *
-     * @return field arithmetic mean of field values
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `field` is null
      *
@@ -3078,7 +3084,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns the count of elements.
+     * @description Returns the count of elements in this enumerable.
      * <p>Terminal Operation.</p>
      *
      * @return the count of elements
@@ -3094,10 +3100,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Integer count();
 
     /**
-     * @description Returns whether the count of elements is 0.
+     * @description Returns whether the count of elements in this enumerable is `0`.
      * <p>Terminal Operation.</p>
      *
-     * @return `true` or `false`
+     * @return `true` if the count of elements is `0`, `false` otherwise
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', NumberOfEmployees = 100);
@@ -3106,7 +3112,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
      * [SObjectEnumerable].of(accounts)
      *     .isEmpty(); // false
-     * [SObjectEnumerable].of(new List<Account>()))
+     * [SObjectEnumerable].of(new List<Account>())
      *     .isEmpty(); // true
      */
     public abstract Boolean isEmpty();
@@ -3115,7 +3121,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @description Accumulates elements into a `List<SObject>`.
      * <p>Terminal Operation.</p>
      *
-     * @return the `List<SObject>` containing the enumerable elements
+     * @return the `List<SObject>` containing the elements
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', NumberOfEmployees = 100);
@@ -3127,7 +3133,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toList(); //
      * [
      *   { Name: 'bar', NumberOfEmployees: 200 },
-     *   { Name: 'baz', NumberOfEmployees: 200 }
+     *   { Name: 'baz', NumberOfEmployees: 300 }
      * ]
      */
     public abstract List<SObject> toList();
@@ -3165,7 +3171,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `Object` elements into a `List<Object>`
+     * @description Accumulates elements into a `List<Object>`
      * according to `fieldName`.
      * <p>Terminal Operation.</p>
      *
@@ -3192,7 +3198,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `Object` elements into a `List<Object>`
+     * @description Accumulates elements into a `List<Object>`
      * according to `field`.
      * <p>Terminal Operation.</p>
      *
@@ -3218,12 +3224,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `T` elements into a `List<Object>`
-     * according to `field`.
+     * @description Accumulates elements into a `List<?>` using `mapper`
+     * and `elementType`.
      * <p>Terminal Operation.</p>
      *
      * @param mapper the field
-     * @param elementType thr type of the element
+     * @param elementType the type of the elements
      *
      * @return the `List<Object>` containing the collected elements, which can be cast to `List<T>`
      *
@@ -3251,17 +3257,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract List<Object> toList(final IFunction mapper, final Type elementType);
 
     /**
-     * @description Accumulates `T` elements into a `List<Object>`
-     * according to `fieldName`.
+     * @description Accumulates elements into a `List<?>`
+     * according to `fieldName` and `elementType`.
      * <p>Terminal Operation.</p>
      *
      * @param fieldName the field
-     * @param elementType the type of the element
+     * @param elementType the type of the elements
      *
      * @return the `List<Object>` containing the collected elements, which can be cast to `List<T>`
      *
      * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null or `elementType` is null
+     * @throws NullPointerException if `fieldName` or `elementType` is null
      *
      * @example
      * List<Account> accounts = new List<Account>{
@@ -3279,12 +3285,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `Object` elements into a `List<Object>`
-     * according to `field`.
+     * @description Accumulates elements into a `List<?>`
+     * according to `field` and `elementType`.
      * <p>Terminal Operation.</p>
      *
      * @param field the field
-     * @param elementType the type of the element
+     * @param elementType the type of the elements
      *
      * @return the `List<Object>` containing the collected elements, which can be cast to `List<T>`
      *
@@ -3306,7 +3312,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates elements into a `Set<SObject>` cannot be cast.
+     * @description Accumulates elements into a `Set<SObject>`.
      * <p>Terminal Operation.</p>
      *
      * @return the `Set<SObject>` containing the enumerable elements
@@ -3317,7 +3323,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     new Account(Name = 'bar'),
      *     new Account(Name = 'baz')
      * };
-     * Set<SObject> sobjects = [ObjectEnumerable].of(accounts)
+     * Set<SObject> sobjects = [SObjectEnumerable].of(accounts)
      *     .skip(1)
      *     .toSet(); //
      * [
@@ -3328,12 +3334,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Set<SObject> toSet();
 
     /**
-     * @description Accumulates elements returned by `mapper` into a `List<Object>`.
+     * @description Accumulates elements returned by `mapper` into a `Set<Object>`.
      * <p>Terminal Operation.</p>
      *
      * @param mapper the mapping function
      *
-     * @return the `List<Object>` containing the collected elements
+     * @return the `Set<Object>` containing the collected elements
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -3358,13 +3364,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Set<Object> toSet(final IFunction mapper);
 
     /**
-     * @description Accumulates `Object` elements into a `Set<Object>`
+     * @description Accumulates elements into a `Set<Object>`
      * according to `fieldName`.
      * <p>Terminal Operation.</p>
      *
      * @param fieldName the field
      *
-     * @return the `Set<Object>` containing the collected elements field values
+     * @return the `Set<Object>` containing the collected field values
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -3385,13 +3391,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `Object` elements into a `Set<Object>`
+     * @description Accumulates elements into a `Set<Object>`
      * according to `field`.
      * <p>Terminal Operation.</p>
      *
      * @param field the field
      *
-     * @return the `Set<Object>` containing the collected elements field values
+     * @return the `Set<Object>` containing the collected field values
      *
      * @throws NullPointerException if `field` is null
      *
@@ -3414,7 +3420,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @description Accumulates `Id` elements into a `Set<Id>`.
      * <p>Terminal Operation.</p>
      * <p>Unlike `new Map<Id, SObject>(sobjects).keySet()` mapping approach this one
-     * doesn't throw ListException if some of the element has nullish Id.</p>
+     * doesn't throw `ListException` if some of the element has nullish `Id`.</p>
      *
      * @return the `Set<Id>` containing the enumerable element field values
      *
@@ -3433,7 +3439,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates elements returned by `mapper` into a `Set<Id>`.
+     * @description Accumulates `Id` elements returned by `mapper` into a `Set<Id>`.
      * <p>Terminal Operation.</p>
      *
      * @param mapper the mapping function
@@ -3605,7 +3611,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @param field the field
      *
-     * @return the `Set<String>`containing the collected elements field values
+     * @return the `Set<String>` containing the collected elements field values
      *
      * @throws NullPointerException if `field` is null
      *
@@ -3626,7 +3632,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * <p>Terminal Operation.</p>
      * <p><strong>Note: </strong></p>
      * <p>Unlike `new Map<Id, SObject>(sobjects)` mapping approach this one
-     * doesn't throw ListException if some of the element has nullish Id.</p>
+     * doesn't throw `ListException` if some of the element has nullish `Id`.</p>
      *
      * @return the `Map<Id, SObject>` containing the collected elements
      *
@@ -3637,29 +3643,29 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Account acc2 = new Account(Id = '001000000000002AAA', Name = 'bar');
      * Account acc3 = new Account(Id = '001000000000003AAA', Name = 'baz');
      * Account acc4 = new Account(Name = 'qux');
-     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3, acc4 };
      * Map<Id, SObject> accountById = [SObjectEnumerable].of(accounts)
      *     .toMap(); //
      * {
-     *   '005000000000001AAA': { Id: '001000000000001AAA', Name = 'foo' },
+     *   '001000000000001AAA': { Id: '001000000000001AAA', Name = 'foo' },
      *   '001000000000002AAA': { Id: '001000000000002AAA', Name = 'bar' },
      *   '001000000000003AAA': { Id: '001000000000003AAA', Name = 'baz' },
-     *    null: { Name: 'foo' }
+     *    null: { Name: 'qux' }
      * }
      */
     public abstract Map<Id, SObject> toMap();
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `valueType`
+     * @description Accumulates elements into a `Map<Id, ? extends SObject>` of specific `valueType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
      * @param keyMapper the mapping function producing keys
      * @param valueType the value type
      *
-     * @return the `Map<Id, SObject>` containing the collected elements
+     * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `Map<Id, T>`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `Map<Id, T>`
+     * @throws IllegalStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueType` is null
      *
      * @example
@@ -3705,7 +3711,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Map<Id, SObject> toByIdMap(final IFunction keyMapper, final Type valueType);
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
+     * @description Accumulates elements into a `Map<Id, SObject>`
      * whose keys are `fieldName` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -3746,7 +3752,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<Id, SObject>`
+     * @description Accumulates elements into a `Map<Id, SObject>`
      * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -3776,16 +3782,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specific `valueType`
+     * @description Accumulates elements into a `Map<String, ? extends SObject>` of specific `valueType`
      * whose keys are produced by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
      * @param keyMapper the mapping function producing keys
      * @param valueType the value type
      *
-     * @return the `Map<Id, SObject>` containing the collected elements
+     * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `Map<String, T>`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `Map<String, T>`
+     * @throws IllegalStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueType` is null
      *
      * @example
@@ -3833,7 +3839,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Map<String, SObject> toByStringMap(final IFunction keyMapper, final Type valueType);
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
+     * @description Accumulates elements into a `Map<String, SObject>`
      * whose keys are `fieldName` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -3864,8 +3870,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Map<String, Account> accountByParentName = (Map<String, Account>) [SObjectEnumerable].of(accounts)
      *     .toByStringMap('Parent?.Name', Account.SObject); //
      * {
-     *   'foo': { Name: 'foo' },
-     *   'bar': { Name: 'bar' },
+     *   'qux': { Name: 'foo' },
+     *   'fred': { Name: 'bar' },
      *    null: { Name: 'baz' }
      * }
      */
@@ -3874,7 +3880,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Accumulates `SObject` elements into a `Map<String, SObject>`
+     * @description Accumulates elements into a `Map<String, SObject>`
      * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -3904,7 +3910,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
+     * @description Groups elements into a `Map<Id, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -3963,7 +3969,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Map<Id, List<SObject>> groupById(final IFunction keyMapper);
 
     /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
+     * @description Groups elements into a `Map<Id, List<SObject>>`
      * whose keys are `fieldName` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -3990,7 +3996,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   ],
      *   '005000000000002AAA': [{ Name: 'bar', OwnerId: '005000000000002AAA' }]
      * }
-     * Map<Id, Account> accountsByParentOwnerId = (Map<Id, Account>) [SObjectEnumerable].of(accounts)
+     * Map<Id, List<Account>> accountsByParentOwnerId = (Map<Id, List<Account>>) [SObjectEnumerable].of(accounts)
      *     .groupById('Parent?.OwnerId'); //
      * {
      *   '005000000000004AAA': [
@@ -4005,7 +4011,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Groups `SObject` elements into a `Map<Id, List<SObject>>`
+     * @description Groups elements into a `Map<Id, List<SObject>>`
      * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -4021,7 +4027,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Account acc3 = new Account(Name = 'baz', OwnerId = '005000000000001AAA');
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
      * Map<Id, List<Account>> accountsByOwnerId = [SObjectEnumerable].of(accounts)
-     *     .groupById('OwnerId'); //
+     *     .groupById(Account.OwnerId); //
      * {
      *   '005000000000001AAA': [
      *     { Name: 'foo', OwnerId: '005000000000001AAA' },
@@ -4035,7 +4041,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
+     * @description Groups elements into a `Map<String, List<SObject>>`
      * whose keys are values returned by `keyMapper` and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -4095,7 +4101,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Map<String, List<SObject>> groupByString(final IFunction keyMapper);
 
     /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
+     * @description Groups elements into a `Map<String, List<SObject>>`
      * whose keys are `fieldName` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -4131,7 +4137,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Groups `SObject` elements into a `Map<String, List<SObject>>`
+     * @description Groups elements into a `Map<String, List<SObject>>`
      * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
@@ -4158,12 +4164,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Partition `SObject` elements by `predicate`.
+     * @description Partitions elements by `predicate`.
      * <p>Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return the `Map<Boolean, List<SObject>>` containing the enumerable elements
+     * @return the `Map<Boolean, List<SObject>>` containing the elements
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -4193,13 +4199,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Map<Boolean, List<SObject>> partition(final IPredicate predicate);
 
     /**
-     * @description Partition `SObject` elements by `fieldName` having `value`.
+     * @description Partitions elements by `fieldName` having `value`.
      * <p>Terminal Operation.</p>
      *
      * @param fieldName the field
      * @param value the satisfying value
      *
-     * @return the `Map<Boolean, List<SObject>>` containing the enumerable elements
+     * @return the `Map<Boolean, List<SObject>>` containing the elements
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -4212,13 +4218,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Account acc3 = new Account(Name = 'baz', Rating = 'Hot');
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating = [SObjectEnumerable].of(accounts)
-     *     .partition('Rating', 'Hot')); //
+     *     .partition('Rating', 'Hot'); //
      * {
      *   true: [{ Name: 'foo', Rating: 'Hot' }, { Name: 'baz', Rating: 'Hot' }],
      *   false: [{ Name: 'bar', Rating: 'Warm' }]
      * }
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotParentRating = [SObjectEnumerable].of(accounts)
-     *     .partition('Parent?.Rating', 'Hot')); //
+     *     .partition('Parent?.Rating', 'Hot'); //
      * {
      *   true: [{ Name: 'foo', Rating: 'Hot' }],
      *   false: [{ Name: 'bar', Rating: 'Warm' }, { Name: 'baz', Rating: 'Hot' }]
@@ -4229,13 +4235,13 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Partition `SObject` elements by `field` having `value`.
+     * @description Partitions elements by `field` having `value`.
      * <p>Terminal Operation.</p>
      *
      * @param field the field
      * @param value the satisfying value
      *
-     * @return the `Map<Boolean, List<SObject>>` containing the enumerable elements
+     * @return the `Map<Boolean, List<SObject>>` containing the elements
      *
      * @throws NullPointerException if `field` is null
      *
@@ -4245,7 +4251,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Account acc3 = new Account(Name = 'baz', Rating = 'Hot');
      * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
      * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating = [SObjectEnumerable].of(accounts)
-     *     .partition(Account.Rating, 'Hot')); //
+     *     .partition(Account.Rating, 'Hot'); //
      * {
      *   true: [{ Name: 'foo', Rating: 'Hot' }, { Name: 'baz', Rating: 'Hot' }],
      *   false: [{ Name: 'bar', Rating: 'Warm' }]

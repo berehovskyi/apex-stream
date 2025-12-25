@@ -63,7 +63,8 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `IntEnumerable` as a set union
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -83,12 +84,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     }
 
     /**
-     * @description Returns a new `IntIterable` as a set intersection
-     * of the current and another iterables.
+     * @description Returns a new `IntEnumerable` as a set intersection
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
-     * @return the new `IntIterable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
@@ -104,12 +106,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     }
 
     /**
-     * @description Returns a new `IntIterable` as a set difference
-     * of the current and another iterables.
+     * @description Returns a new `IntEnumerable` as a set difference
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
-     * @return the new `IntIterable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
@@ -125,10 +128,10 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     }
 
     /**
-     * @description Returns a `IntEnumerable` with distinct elements.
+     * @description Returns a new `IntEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @example
      * List<Integer> distinct = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10, 0, 5 })
@@ -138,12 +141,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable distinct();
 
     /**
-     * @description Returns a `IntEnumerable` with elements that match `predicate`.
+     * @description Returns a new `IntEnumerable` with elements
+     * that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -155,12 +159,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable filter(final IPredicate predicate);
 
     /**
-     * @description Returns a `IntEnumerable` which takes elements while elements match `predicate`.
+     * @description Returns a new `IntEnumerable` that takes elements
+     * while `predicate` returns `true`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -172,13 +177,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable take(final IPredicate predicate);
 
     /**
-     * @description Returns a `IntEnumerable` which drops elements while elements match `predicate`,
-     * then takes the rest.
+     * @description Returns a new `IntEnumerable` that drops elements
+     * while `predicate` returns `true`, then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -193,7 +198,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @description Returns a new `IntEnumerable` without null elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @example
      * List<Integer> withoutNulls = [IntEnumerable].of(new List<Integer>{ 0, 0, null, 1, 1, null, 5 })
@@ -205,13 +210,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     }
 
     /**
-     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `IntEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -228,13 +233,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable mapTo(final IOperator mapper);
 
     /**
-     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `LongEnumerable` with elements
+     * returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -251,13 +256,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract LongEnumerable mapToLong(final IFunction mapper);
 
     /**
-     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `DoubleEnumerable` with elements
+     * returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -274,13 +279,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract DoubleEnumerable mapToDouble(final IFunction mapper);
 
     /**
-     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `SObjectEnumerable` with elements
+     * returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
-     * @return the `SObjectEnumerable`
+     * @return the new `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -301,13 +306,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract SObjectEnumerable mapToSObject(final IFunction mapper);
 
     /**
-     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `ObjectEnumerable` with elements
+     * returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless mapping function
      *
-     * @return the `ObjectEnumerable`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -322,7 +327,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract ObjectEnumerable mapToObject(final IFunction mapper);
 
     /**
-     * @description Returns a new `IntEnumerable` with `Integer` elements as a result of
+     * @description Returns a new `IntEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -346,13 +351,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable flatMapTo(final IFunction mapper);
 
     /**
-     * @description Returns a `IntEnumerable` after performing `consumer` action on each element.
+     * @description Returns an `IntEnumerable` after performing the `consumer` action
+     * on each element.
      * <p>Intermediate Operation.</p>
      *
-     * @param consumer the non-interfering, stateless action to be performed on each element.
-     * Expected to operate via side effects.
+     * @param consumer the non-interfering, stateless action
      *
-     * @return this `IntEnumerable`
+     * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
@@ -367,10 +372,10 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable forEach(final IConsumer consumer);
 
     /**
-     * @description Returns a `IntEnumerable` with sorted elements in ascending order.
+     * @description Returns a new `IntEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @example
      * List<Integer> sorted = [IntEnumerable].of(new List<Integer>{ 0, 5, null, 1, -10 })
@@ -380,12 +385,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable sort();
 
     /**
-     * @description Returns a `IntEnumerable` with sorted elements considering `order`.
+     * @description Returns a new `IntEnumerable` with sorted elements
+     * considering `order`.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param order the sort order
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `order` is null
      *
@@ -397,12 +403,12 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable sort(final SortOrder order);
 
     /**
-     * @description Returns a `IntEnumerable` with first `lim` elements.
+     * @description Returns a new `IntEnumerable` with the first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
@@ -415,13 +421,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract IntEnumerable lim(final Integer lim);
 
     /**
-     * @description Returns a new `IntEnumerable` that skips first `n` elements
-     * and returns remaining elements.
+     * @description Returns a new `IntEnumerable` that skips the first `n` elements
+     * and returns the remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
@@ -436,11 +442,11 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
 
     //<editor-fold desc="Terminal Operations">
     /**
-     * @description Performs a reduction on `Integer` elements,
-     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * @description Performs a reduction on elements,
+     * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the identity value for the `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Integer` result of the reduction
@@ -483,7 +489,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * to a container using `collector`.
      * <p>Terminal Operation.</p>
      *
-     * @param collector the function that returns a mutable result container
+     * @param collector the collector
      *
      * @return the `Object` result of the collection
      *
@@ -501,13 +507,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract Object collect(final ICollector collector);
 
     /**
-     * @description Returns an `Optional` Integer describing the first element
+     * @description Returns an `Optional` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return the `Optional` Integer
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -523,7 +529,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `IntEnumerable` is empty then `false` is returned.
+     * If `IntEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -584,10 +590,10 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     }
 
     /**
-     * @description Returns an `Optional` Integer describing the maximum element.
+     * @description Returns an `Optional` describing the maximum element.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Integer
+     * @return the `Optional` containing the result
      *
      * @example
      * Integer max = (Integer) [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
@@ -599,10 +605,10 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     }
 
     /**
-     * @description Returns an `Optional` Integer describing the minimum element.
+     * @description Returns an `Optional` describing the minimum element.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Integer
+     * @return the `Optional` containing the result
      *
      * @example
      * Integer min = (Integer) [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
@@ -614,10 +620,10 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     }
 
     /**
-     * @description Returns the arithmetic sum of elements.
+     * @description Returns the arithmetic sum of values.
      * <p>Terminal Operation.</p>
      *
-     * @return the sum of elements
+     * @return the sum of values
      *
      * @example
      * Integer sum = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
@@ -626,10 +632,10 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract Integer sum();
 
     /**
-     * @description Returns the arithmetic mean of of elements.
+     * @description Returns the arithmetic mean of values.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Double describing the result
+     * @return the `Optional` containing the result
      *
      * @example
      * Double avg = (Double) [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
@@ -651,7 +657,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
     public abstract Integer count();
 
     /**
-     * @description Returns whether the count of elements is 0.
+     * @description Returns whether the count of elements is `0`.
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
@@ -668,7 +674,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @description Accumulates elements into a `List<Integer>`.
      * <p>Terminal Operation.</p>
      *
-     * @return the `List<Integer>` containing the enumerable elements
+     * @return the `List<Integer>` containing the collected elements
      *
      * @example
      * List<Integer> ints = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
@@ -681,7 +687,7 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @description Accumulates elements into a `Set<Integer>`.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Set<Integer>` containing the enumerable elements
+     * @return the `Set<Integer>` containing the collected elements
      *
      * @example
      * Set<Integer> ints = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10, 0, 5 })

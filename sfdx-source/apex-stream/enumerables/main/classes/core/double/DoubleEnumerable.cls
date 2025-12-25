@@ -55,19 +55,20 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * List<Double> prepend = [DoubleEnumerable].of(doubles1)
      *     .prepend(doubles2)
      *     .toList();
-     * // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
+     * // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0]
      */
     public abstract DoubleEnumerable prepend(final Iterable<Double> iterable);
     //</editor-fold>
 
     //<editor-fold desc="Intermediate Operations">
     /**
-     * @description Returns a new `DoubleIterable` as a set union
-     * of the current and another iterables.
+     * @description Returns a new `DoubleEnumerable` as a set union
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
-     * @return the new `DoubleIterable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
@@ -84,12 +85,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     }
 
     /**
-     * @description Returns a new `DoubleIterable` as a set intersection
-     * of the current and another iterables.
+     * @description Returns a new `DoubleEnumerable` as a set intersection
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
-     * @return the new `DoubleIterable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `iterable` is null
      *
@@ -106,7 +108,8 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
 
     /**
      * @description Returns a new `DoubleEnumerable` as a set difference
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -117,7 +120,6 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @example
      * List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
      * List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-     * // doublesIterable1 = instance from
      * List<Double> diff = [DoubleEnumerable].of(doubles1)
      *     .except(doubles2)
      *     .toList(); // [5.0, 7.0]
@@ -127,10 +129,10 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     }
 
     /**
-     * @description Returns a `DoubleEnumerable` with distinct elements.
+     * @description Returns a new `DoubleEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @example
      * List<Double> distinct = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
@@ -140,12 +142,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable distinct();
 
     /**
-     * @description Returns a `DoubleEnumerable` with elements that match `predicate`.
+     * @description Returns a new `DoubleEnumerable` with elements
+     * that match `predicate`.
      * <p>Stateless Intermediate Operation.</p>
      *
-     * @param predicate the non-interfering, stateless predicate
+     * @param predicate the predicate
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -157,30 +160,31 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable filter(final IPredicate predicate);
 
     /**
-     * @description Returns a `DoubleEnumerable` which takes elements while elements match `predicate`.
+     * @description Returns a new `DoubleEnumerable` that takes elements
+     * while `predicate` returns `true`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
-     * @param predicate the non-interfering, stateless predicate
+     * @param predicate the predicate
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
      * @example
      * List<Double> firstFiltered = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .filter(Predicates.isEqual(0.1))
+     *     .take(Predicates.isEqual(0.1))
      *     .toList(); // [0.1, 0.1]
      */
     public abstract DoubleEnumerable take(final IPredicate predicate);
 
     /**
-     * @description Returns a `DoubleEnumerable` which drops elements while elements match `predicate`,
-     * then takes the rest.
-     * <p>Stateful Intermediate Operation.</p>
+     * @description Returns a new `DoubleEnumerable` that drops elements
+     * while `predicate` returns `true`, then takes the rest.
+     * <p>Intermediate Operation.</p>
      *
-     * @param predicate the non-interfering, stateless predicate
+     * @param predicate the predicate
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -192,10 +196,10 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable drop(final IPredicate predicate);
 
     /**
-     * @description Returns a new DoubleEnumerable` without null elements.
+     * @description Returns a new `DoubleEnumerable` without null elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @example
      * List<Double> withoutNulls = [DoubleEnumerable].of(new List<Double>{ 0.1, null, 5, 1.5, null, 5 })
@@ -207,13 +211,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     }
 
     /**
-     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `DoubleEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the mapping function
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -230,13 +234,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable mapTo(final IOperator mapper);
 
     /**
-     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `IIntEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the mapping function
      *
-     * @return the `IntEnumerable`
+     * @return the new `IIntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -251,13 +255,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract IntEnumerable mapToInt(final IFunction mapper);
 
     /**
-     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `ILongEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the mapping function
      *
-     * @return the `LongEnumerable`
+     * @return the new `ILongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -272,13 +276,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract LongEnumerable mapToLong(final IFunction mapper);
 
     /**
-     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `ISObjectEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the mapping operator
      *
-     * @return the `SObjectEnumerable`
+     * @return the new `ISObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -299,13 +303,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract SObjectEnumerable mapToSObject(final IFunction mapper);
 
     /**
-     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `IObjectEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the mapping function
      *
-     * @return the `ObjectEnumerable`
+     * @return the new `IObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -320,7 +324,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract ObjectEnumerable mapToObject(final IFunction mapper);
 
     /**
-     * @description Returns a new `DoubleEnumerable` with `Double` elements as a result of
+     * @description Returns a new `DoubleEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -344,13 +348,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable flatMapTo(final IFunction mapper);
 
     /**
-     * @description Returns a `DoubleEnumerable` after performing `consumer` action on each element.
+     * @description Returns a `DoubleEnumerable` after performing the `consumer` action
+     * on each element.
      * <p>Intermediate Operation.</p>
      *
-     * @param consumer the non-interfering, stateless action to be performed on each element.
-     * Expected to operate via side effects.
+     * @param consumer the action
      *
-     * @return this `DoubleEnumerable`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
@@ -365,10 +369,10 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable forEach(final IConsumer consumer);
 
     /**
-     * @description Returns a `DoubleEnumerable` with sorted elements in ascending order.
+     * @description Returns a new `DoubleEnumerable` with sorted elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @example
      * List<Double> sorted = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, null, -8.99, -6, 4.01, 4.01 })
@@ -378,7 +382,8 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable sort();
 
     /**
-     * @description Returns a new `DoubleEnumerable` with sorted elements considering `order`.
+     * @description Returns a new `DoubleEnumerable` with sorted elements
+     * considering `order`.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param order the sort order
@@ -395,12 +400,12 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable sort(final SortOrder order);
 
     /**
-     * @description Returns a `DoubleEnumerable` with first `lim` elements.
+     * @description Returns a new `DoubleEnumerable` with the first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
@@ -413,13 +418,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract DoubleEnumerable lim(final Integer lim);
 
     /**
-     * @description Returns a new `DoubleEnumerable` that skips first `n` elements
-     * and returns remaining elements.
+     * @description Returns a new `DoubleEnumerable` that skips the first `n` elements
+     * and returns the remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
@@ -434,7 +439,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
 
     //<editor-fold desc="Terminal Operations">
     /**
-     * @description Performs a reduction on `Double` elements,
+     * @description Performs a reduction on elements,
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
@@ -452,14 +457,14 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract Double reduce(final Double identity, final IBiOperator accumulator);
 
     /**
-     * @description Performs a reduction on `Double` elements,
-     * using `identity` value and associative `accumulator` function, and returns
-     * an `Optional` Double describing the reduced value.
+     * @description Performs a reduction on elements,
+     * using an associative `accumulator` function, and returns
+     * an `Optional` describing the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param operator the associative, non-interfering, stateless accumulation function
+     * @param accumulator the associative, non-interfering, stateless accumulation function
      *
-     * @return the `Optional` Double result of the reduction
+     * @return the `Optional` result of the reduction
      *
      * @throws NullPointerException if `accumulator` is null
      *
@@ -468,14 +473,14 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     .reduce(BiOperators.max())
      *     .get(); // 5.5
      */
-    public abstract Optional reduce(final IBiOperator operator);
+    public abstract Optional reduce(final IBiOperator accumulator);
 
     /**
      * @description Performs a mutable reduction operation on elements, collecting elements
      * to a container using `collector`.
      * <p>Terminal Operation.</p>
      *
-     * @param collector the function that returns a mutable result container
+     * @param collector the collector
      *
      * @return the `Object` result of the collection
      *
@@ -493,13 +498,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract Object collect(final ICollector collector);
 
     /**
-     * @description Returns an `Optional` Double describing the first element
+     * @description Returns an `Optional` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return the `Optional` Double
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -509,7 +514,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     public IsGreaterPredicate(Double d) { this.d = d; }
      *     public override Boolean test(Object o) { return (Double) o > d; }
      * }
-     * Double firstGreaterThan4Double = [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+     * Double firstGreaterThan4Double = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5, -8.99, -6, 4.01 })
      *     .find(new IsGreaterPredicate(4))
      *     .get(); // 5.5
      */
@@ -517,7 +522,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `DoubleEnumerable` is empty then `false` is returned.
+     * If `DoubleEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -577,20 +582,20 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *     public override Boolean test(Object o) { return (Double) o > d; }
      * }
      * Boolean isNoneDoubleGreaterThan6 = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-     *     .none(new IsGreaterPredicate(6)); // false
+     *     .none(new IsGreaterPredicate(6)); // true
      */
     public virtual Boolean none(final IPredicate predicate) {
         return !some(predicate);
     }
 
     /**
-     * @description Returns an `Optional` Double describing the maximum element.
+     * @description Returns an `Optional` describing the maximum element.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Double
+     * @return the `Optional` containing the result
      *
      * @example
-     * Double max = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+     * Double max = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5, -8.99, -6, 4.01 })
      *     .max()
      *     .get(); // 5.5
      */
@@ -599,13 +604,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     }
 
     /**
-     * @description Returns an `Optional` Double describing the minimum element.
+     * @description Returns an `Optional` describing the minimum element.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Double
+     * @return the `Optional` containing the result
      *
      * @example
-     * Double min = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+     * Double min = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5, -8.99, -6, 4.01 })
      *     .min()
      *     .get(); // -8.99
      */
@@ -614,10 +619,10 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     }
 
     /**
-     * @description Returns the arithmetic sum of elements.
+     * @description Returns the arithmetic sum of values.
      * <p>Terminal Operation.</p>
      *
-     * @return the sum of elements
+     * @return the sum of values
      *
      * @example
      * Double sum = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0.6, 0.7, 0.8, 0.9 })
@@ -628,10 +633,10 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     }
 
     /**
-     * @description Returns the arithmetic mean of of elements.
+     * @description Returns the arithmetic mean of values.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Double describing the result
+     * @return the `Optional` containing the result
      *
      * @example
      * Double avg = (Double)
@@ -656,7 +661,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
     public abstract Integer count();
 
     /**
-     * @description Returns whether the count of elements is 0.
+     * @description Returns whether the count of elements is `0`.
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
@@ -673,7 +678,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @description Accumulates elements into a `List<Double>`.
      * <p>Terminal Operation.</p>
      *
-     * @return the `List<Double>` containing the enumerable elements
+     * @return the `List<Double>` containing the iterable elements
      *
      * @example
      * List<Double> doubles = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
@@ -686,7 +691,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @description Accumulates elements into a `Set<Double>`.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Set<Double>` containing the enumerable elements
+     * @return the `Set<Double>` containing the iterable elements
      *
      * @example
      * Set<Double> doubles = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 5 })

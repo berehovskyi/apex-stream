@@ -63,7 +63,8 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `LongEnumerable` as a set union
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -84,7 +85,8 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
 
     /**
      * @description Returns a new `LongEnumerable` as a set intersection
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -105,7 +107,8 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
 
     /**
      * @description Returns a new `LongEnumerable` as a set difference
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -125,10 +128,10 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     }
 
     /**
-     * @description Returns a `LongEnumerable` with distinct elements.
+     * @description Returns a new `LongEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @example
      * List<Long> distinct = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 5L })
@@ -138,12 +141,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable distinct();
 
     /**
-     * @description Returns a `LongEnumerable` with elements that match `predicate`.
-     * <p>Stateless Intermediate Operation.</p>
+     * @description Returns a new `LongEnumerable` with elements
+     * that match `predicate`.
+     * <p>Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -155,12 +159,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable filter(final IPredicate predicate);
 
     /**
-     * @description Returns a `LongEnumerable` which takes elements while elements match `predicate`.
+     * @description Returns a new `LongEnumerable` that takes elements
+     * while `predicate` returns `true`.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -172,13 +177,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable take(final IPredicate predicate);
 
     /**
-     * @description Returns a `LongEnumerable` which drops elements while elements match `predicate`,
-     * then takes the rest.
+     * @description Returns a new `LongEnumerable` that drops elements
+     * while `predicate` returns `true`, then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the non-interfering, stateless predicate
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -193,7 +198,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @description Returns a new `LongEnumerable` without null elements.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @example
      * List<Long> withoutNulls = [LongEnumerable].of(new List<Long>{ 0L, 0L, null, 1L, 1L, null, 5L })
@@ -205,13 +210,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     }
 
     /**
-     * @description Returns a `LongEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `LongEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -228,13 +233,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable mapTo(final IOperator mapper);
 
     /**
-     * @description Returns a `IntEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `IntEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
-     * @return the `IntEnumerable`
+     * @return the new `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -245,19 +250,19 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     public override Object apply(Object j) { return (Long) j * i; }
      * }
      * List<Integer> doubledInts = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
-     *     .mapToLong(new MultiplyIntFunction(2))
+     *     .mapToInt(new MultiplyIntFunction(2))
      *     .toList(); // [0, 10, 2, -20]
      */
     public abstract IntEnumerable mapToInt(final IFunction mapper);
 
     /**
-     * @description Returns a `DoubleEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `DoubleEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
-     * @return the `DoubleEnumerable`
+     * @return the new `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -274,13 +279,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract DoubleEnumerable mapToDouble(final IFunction mapper);
 
     /**
-     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `SObjectEnumerable` with elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
      * @param mapper the non-interfering, stateless operator
      *
-     * @return the `SObjectEnumerable`
+     * @return the new `SObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -288,7 +293,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * public class CreateAccountFunction extends Function {
      *     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
      * }
-     * List<Account> accounts = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<Account> accounts = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, 10L })
      *     .mapToSObject(new CreateAccountFunction())
      *     .toList(); //
      * [
@@ -301,13 +306,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract SObjectEnumerable mapToSObject(final IFunction mapper);
 
     /**
-     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a new `ObjectEnumerable` with `Object` elements
+     * returned by `mapper`.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the non-interfering, stateless function
      *
-     * @return the `ObjectEnumerable`
+     * @return the new `ObjectEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -315,14 +320,14 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * public class ToStringFunction extends Function {
      *     public override Object apply(Object i) { return String.valueOf(i); }
      * }
-     * List<String> strings = (List<String>) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * List<String> strings = (List<String>) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, 10L })
      *     .mapToObject(new ToStringFunction())
      *     .toList(String.class); // ['0', '5', '1', '10']
      */
     public abstract ObjectEnumerable mapToObject(final IFunction mapper);
 
     /**
-     * @description Returns a new `LongEnumerable` with `Long` elements as a result of
+     * @description Returns a new `LongEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -346,13 +351,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable flatMapTo(final IFunction mapper);
 
     /**
-     * @description Returns a `LongEnumerable` after performing `consumer` action on each element.
+     * @description Returns an `LongEnumerable` after performing the `consumer` action
+     * on each element.
      * <p>Intermediate Operation.</p>
      *
-     * @param consumer the non-interfering, stateless action to be performed on each element.
-     * Expected to operate via side effects.
+     * @param consumer the the non-interfering, stateless action
      *
-     * @return this `LongEnumerable`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
@@ -362,15 +367,15 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * }
      * List<Long> longs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
-     *     .toList(); // [0L, 5L, 1L, -10L ]
+     *     .toList(); // [0L, 5L, 1L, -10L]
      */
     public abstract LongEnumerable forEach(final IConsumer consumer);
 
     /**
-     * @description Returns a `LongEnumerable` with sorted elements in ascending order.
+     * @description Returns a new `LongEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @example
      * List<Long> sorted = [LongEnumerable].of(new List<Long>{ 0L, 5L, null, 1L, -10L })
@@ -380,12 +385,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable sort();
 
     /**
-     * @description Returns a `LongEnumerable` with sorted elements considering `order`.
+     * @description Returns a new `LongEnumerable` with sorted elements
+     * considering `order`.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param order the sort order
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws NullPointerException if `order` is null
      *
@@ -397,12 +403,12 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable sort(final SortOrder order);
 
     /**
-     * @description Returns a `LongEnumerable` with first `lim` elements.
+     * @description Returns a new `LongEnumerable` with the first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws IllegalStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
@@ -415,13 +421,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract LongEnumerable lim(final Integer lim);
 
     /**
-     * @description Returns a new `LongEnumerable` that skips first `n` elements
-     * and returns remaining elements.
+     * @description Returns a new `LongEnumerable` that skips the first `n` elements
+     * and returns the remaining elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param n the number of elements to skip
      *
-     * @return the `LongEnumerable`
+     * @return the new `LongEnumerable`
      *
      * @throws IllegalStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
@@ -457,14 +463,14 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract Long reduce(final Long identity, final IBiOperator accumulator);
 
     /**
-     * @description Performs a reduction on `Long` elements,
-     * using `identity` value and associative `accumulator` function, and returns
-     * an `Optional` Long describing the reduced value.
+     * @description Performs a reduction on elements,
+     * using an associative `accumulator` function, and returns
+     * an `Optional` describing the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param operator the associative, non-interfering, stateless accumulation function
+     * @param accumulator the associative, non-interfering, stateless accumulation function
      *
-     * @return the `Long` Long result of the reduction
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `accumulator` is null
      *
@@ -483,7 +489,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * to a container using `collector`.
      * <p>Terminal Operation.</p>
      *
-     * @param collector the function that returns a mutable result container
+     * @param collector the collector
      *
      * @return the `Object` result of the collection
      *
@@ -501,13 +507,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract Object collect(final ICollector collector);
 
     /**
-     * @description Returns an `Optional` Long describing the first element
+     * @description Returns an `Optional` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return the `Optional` Long
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -523,7 +529,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `LongEnumerable` is empty then `false` is returned.
+     * If `LongEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -584,10 +590,10 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     }
 
     /**
-     * @description Returns an `Optional` Long describing the maximum element.
+     * @description Returns an `Optional` describing the maximum element.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Long
+     * @return the `Optional` containing the result
      *
      * @example
      * Long max = (Long) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
@@ -599,10 +605,10 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     }
 
     /**
-     * @description Returns an `Optional` Long describing the minimum element.
+     * @description Returns an `Optional` describing the minimum element.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Long
+     * @return the `Optional` containing the result
      *
      * @example
      * Long min = (Long) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
@@ -614,10 +620,10 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     }
 
     /**
-     * @description Returns the arithmetic sum of elements.
+     * @description Returns the arithmetic sum of values.
      * <p>Terminal Operation.</p>
      *
-     * @return the sum of elements
+     * @return the sum of values
      *
      * @example
      * Long sum = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
@@ -626,15 +632,15 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract Long sum();
 
     /**
-     * @description Returns the arithmetic mean of of elements.
+     * @description Returns the arithmetic mean of values.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Optional` Double describing the result
+     * @return the `Optional` containing the result
      *
      * @example
      * Double avg = (Double) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .avg()
-     *     .get(); // 1.0
+     *     .get(); // -1.0
      */
     public abstract Optional avg();
 
@@ -651,7 +657,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
     public abstract Integer count();
 
     /**
-     * @description Returns whether the count of elements is 0.
+     * @description Returns whether the count of elements is `0`.
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
@@ -668,7 +674,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @description Accumulates elements into a `List<Long>`.
      * <p>Terminal Operation.</p>
      *
-     * @return the `List<Long>` containing the enumerable elements
+     * @return the `List<Long>` containing the collected elements
      *
      * @example
      * List<Long> longs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
@@ -681,12 +687,12 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @description Accumulates elements into a `Set<Long>`.
      * <p>Terminal Operation.</p>
      *
-     * @return the `Set<Long>` containing the enumerable elements
+     * @return the `Set<Long>` containing the collected elements
      *
      * @example
      * Set<Long> longs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
-     *     .toSet(); // [5L, 1L, -10L, 0L]
+     *     .toSet(); // [5L, 1L, -10L]
      */
     public abstract Set<Long> toSet();
     //</editor-fold>
