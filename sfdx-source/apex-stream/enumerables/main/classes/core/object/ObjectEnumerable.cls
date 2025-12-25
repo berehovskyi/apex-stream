@@ -63,7 +63,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     //<editor-fold desc="Intermediate Operations">
     /**
      * @description Returns a new `ObjectEnumerable` as a set union
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -85,7 +86,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns a new `ObjectEnumerable` as a set union
-     * of the current and another iterables according to `classifier`.
+     * of the current and another `iterable` according to `classifier`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      * @param classifier the classifier function
@@ -111,7 +113,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns a new `ObjectEnumerable` as a set intersection
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -133,7 +136,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns a new `ObjectEnumerable` as a set intersection
-     * of the current and another iterables according to `classifier`.
+     * of the current and another `iterable` according to `classifier`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      * @param classifier the classifier function
@@ -160,7 +164,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns a new `ObjectEnumerable` as a set difference
-     * of the current and another iterables.
+     * of the current and another `iterable`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      *
@@ -186,7 +191,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns a new `ObjectEnumerable` as a set difference
-     * of the current and another iterables according to `classifier`.
+     * of the current and another `iterable` according to `classifier`.
+     * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
      * @param classifier the classifier function
@@ -216,7 +222,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     }
 
     /**
-     * @description Returns a `ObjectEnumerable` with distinct elements.
+     * @description Returns an `ObjectEnumerable` with distinct elements.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @return the `ObjectEnumerable`
@@ -231,7 +237,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns a new `ObjectEnumerable` with distinct elements
-     * according to `classifier` function.
+     * according to the `classifier` function.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param classifier the classifier function
@@ -301,7 +307,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns a new `ObjectEnumerable` that drops elements
-     * while `predicate` returns `true`.
+     * while `predicate` returns `true`, then takes the rest.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param predicate the predicate
@@ -340,11 +346,10 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     }
 
     /**
-     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns an `ObjectEnumerable` with elements returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the the non-interfering, stateless function
      *
      * @return the `ObjectEnumerable`
      *
@@ -362,13 +367,12 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract ObjectEnumerable mapTo(final IOperator mapper);
 
     /**
-     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns an `IntEnumerable` with elements returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the the non-interfering, stateless function
      *
-     * @return the `ObjectEnumerable`
+     * @return the `IntEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -383,13 +387,12 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract IntEnumerable mapToInt(final IFunction mapper);
 
     /**
-     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a `LongEnumerable` with elements returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the the non-interfering, stateless function
      *
-     * @return the `ObjectEnumerable`
+     * @return the `LongEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -404,13 +407,12 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract LongEnumerable mapToLong(final IFunction mapper);
 
     /**
-     * @description Returns a `ObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns a `DoubleEnumerable` with elements returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the the non-interfering, stateless function
      *
-     * @return the `ObjectEnumerable`
+     * @return the `DoubleEnumerable`
      *
      * @throws NullPointerException if `mapper` is null
      *
@@ -425,11 +427,10 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract DoubleEnumerable mapToDouble(final IFunction mapper);
 
     /**
-     * @description Returns a `SObjectEnumerable` with elements returned by `mapper` function,
-     * applied to the elements of this enumerable.
+     * @description Returns an `SObjectEnumerable` with elements returned by the `mapper` function.
      * <p>Intermediate Operation.</p>
      *
-     * @param mapper the non-interfering, stateless operator
+     * @param mapper the the non-interfering, stateless function
      *
      * @return the `SObjectEnumerable`
      *
@@ -451,7 +452,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract SObjectEnumerable mapToSObject(final IFunction mapper);
 
     /**
-     * @description Returns a new `ObjectEnumerable` with `Object` elements as a result of
+     * @description Returns a new `ObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -474,7 +475,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract ObjectEnumerable flatMapTo(final IFunction mapper);
 
     /**
-     * @description Returns a new `IntEnumerable` with `Integer` elements as a result of
+     * @description Returns a new `IntEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -496,7 +497,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract IntEnumerable flatMapToInt(final IFunction mapper);
 
     /**
-     * @description Returns a new `LongEnumerable` with `Long` elements as a result of
+     * @description Returns a new `LongEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -518,7 +519,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract LongEnumerable flatMapToLong(final IFunction mapper);
 
     /**
-     * @description Returns a new `DoubleEnumerable` with `Double` elements as a result of
+     * @description Returns a new `DoubleEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -540,7 +541,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract DoubleEnumerable flatMapToDouble(final IFunction mapper);
 
     /**
-     * @description Returns a new `SObjectEnumerable` with `SObject` elements as a result of
+     * @description Returns a new `SObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
      * <p>Intermediate Operation.</p>
@@ -567,13 +568,14 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract SObjectEnumerable flatMapToSObject(final IFunction mapper);
 
     /**
-     * @description Returns a `ObjectEnumerable` after performing `consumer` action on each element.
-     * <p>Intermediate Operation.</p>
+     * @description Returns an `ObjectEnumerable` after performing the `consumer` action
+     * on each element.
+     * <p>Intermediate Interfering Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return this `ObjectEnumerable`
+     * @return the `ObjectEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
@@ -588,7 +590,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract ObjectEnumerable forEach(final IConsumer consumer);
 
     /**
-     * @description Returns a `ObjectEnumerable` with sorted elements in ascending order.
+     * @description Returns an `ObjectEnumerable` with sorted elements in ascending order.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @return the `ObjectEnumerable`
@@ -622,7 +624,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     /**
      * @description Returns a new `ObjectEnumerable` with sorted elements
      * according to `comparer`.
-     * <p>Intermediate Operation.</p>
+     * <p>Stateful Intermediate Operation.</p>
      *
      * @param comparer the comparer
      *
@@ -649,7 +651,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract ObjectEnumerable sort(final IComparer comparer);
 
     /**
-     * @description Returns a `ObjectEnumerable` with first `lim` elements.
+     * @description Returns an `ObjectEnumerable` with the first `lim` elements.
      * <p>Short-circuiting Stateful Intermediate Operation.</p>
      *
      * @param lim the number of elements to limit
@@ -688,11 +690,11 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     //<editor-fold desc="Terminal Operations">
     /**
-     * @description Performs a reduction on `Object` elements,
-     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * @description Performs a reduction on elements,
+     * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the identity value for the `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Object` result of the reduction
@@ -715,14 +717,14 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract Object reduce(final Object identity, final IBiOperator accumulator);
 
     /**
-     * @description Performs a reduction on `Object` elements,
-     * using `identity` value and associative `accumulator` function, and returns
-     * an `Optional` Object describing the reduced value.
+     * @description Performs a reduction on elements,
+     * using an associative `accumulator` function, and returns
+     * an `Optional` describing the reduced value.
      * <p>Terminal Operation.</p>
      *
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
-     * @return the `Optional` Object result of the reduction
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `accumulator` is null
      *
@@ -809,13 +811,13 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract Object collect(final ICollector collector);
 
     /**
-     * @description Returns an `Optional` Object describing the first element
+     * @description Returns an `Optional` describing the first element
      * that matches `predicate`.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
      *
-     * @return the `Optional` Object
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `predicate` is null
      *
@@ -833,7 +835,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `ObjectEnumerable` is empty then `false` is returned.
+     * If `ObjectEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -900,12 +902,13 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     }
 
     /**
-     * @description Returns an `Optional` Object describing the maximum element according to `comparer`.
+     * @description Returns an `Optional` describing the maximum element
+     * according to `comparer`.
      * <p>Terminal Operation.</p>
      *
      * @param comparer the comparer
      *
-     * @return the `Optional` Object
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `comparer` is null
      *
@@ -926,12 +929,13 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     }
 
     /**
-     * @description Returns an `Optional` Object describing the minimum element according to `comparer`.
+     * @description Returns an `Optional` describing the minimum element
+     * according to `comparer`.
      * <p>Terminal Operation.</p>
      *
-     * @param comparer comparer the comparer
+     * @param comparer the comparer
      *
-     * @return the `Optional` Object
+     * @return the `Optional` containing the result
      *
      * @throws NullPointerException if `comparer` is null
      *
@@ -967,7 +971,7 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract Integer count();
 
     /**
-     * @description Returns whether the count of elements is 0.
+     * @description Returns whether the count of elements is `0`.
      * <p>Terminal Operation.</p>
      *
      * @return `true` or `false`
@@ -994,12 +998,12 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     public abstract List<Object> toList();
 
     /**
-     * @description Accumulates `Object` elements into a `List<T>` so it can be cast.
+     * @description Accumulates elements into a `List<?>` according to `elementType`.
      * <p>Terminal Operation.</p>
      *
-     * @param elementType the element type argument of List
+     * @param elementType the element type argument of a list
      *
-     * @return the `List<Object>` containing the iterable elements that can be cast to `List<T>`
+     * @return the `List<Object>` containing the enumerable elements, which can be cast to `List<T>`
      *
      * @throws NullPointerException if `elementType` is null
      *
@@ -1014,7 +1018,8 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
     }
 
     /**
-     * @description Accumulates elements into a `Set<Object>` cannot be cast.
+     * @description Accumulates elements into a `Set<Object>`.
+     * The result cannot be cast to `Set<T>`.
      * <p>Terminal Operation.</p>
      *
      * @return the `Set<Object>` containing the enumerable elements
