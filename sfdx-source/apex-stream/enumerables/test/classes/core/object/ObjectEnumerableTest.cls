@@ -83,6 +83,7 @@ private class ObjectEnumerableTest {
         public override ObjectEnumerable sort(IComparer comparer) { return this; }
         public override ObjectEnumerable lim(Integer lim) { return this; }
         public override ObjectEnumerable skip(Integer n) { return this; }
+        public override Object fold(Object identity, IBiOperator accumulator) { return null; }
         public override Object reduce(Object identity, IBiOperator accumulator) { return null; }
         public override Optional reduce(IBiOperator accumulator) { return null; }
         public override Object collect(ICollector collector) { return null; }

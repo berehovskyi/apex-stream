@@ -461,7 +461,30 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Long` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * Long sum = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
+     *     .fold(0L, new SumBiOperator()); // -4L
+     */
+    public abstract Long fold(final Long identity, final IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on `Long` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Long` result of the reduction

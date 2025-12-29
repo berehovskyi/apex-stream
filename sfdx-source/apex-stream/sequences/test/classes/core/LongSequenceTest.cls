@@ -507,6 +507,25 @@ private class LongSequenceTest {
     }
 
     /**
+     * @see LongSequence.fold
+     */
+    @IsTest
+    private static void fold() {
+        // Given
+        List<Long> input = new List<Long>{ 5L, 1L, 3L, 8L, -3L, 4L, -6L, 0L, 4L };
+        List<Long> clone = input.clone();
+        LongEnumerable seq = LongSequence.of(clone);
+        Long seed = 10;
+        // When
+        Long actual = seq.fold(seed, new AsTestCommons.SumLongBiOperator());
+        // Then
+        Long expected = 26;
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(10, seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+    }
+
+    /**
      * @see LongSequence.reduce
      */
     @IsTest

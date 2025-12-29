@@ -568,6 +568,26 @@ private class DoubleStreamTest {
     }
 
     /**
+     * @see DoubleStream.fold
+     */
+    @IsTest
+    private static void fold() {
+        // Given
+        List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
+        List<Double> clone = input.clone();
+        DoubleEnumerable stm = DoubleStream.of(clone);
+        Double seed = 10;
+        // When
+        Double actual = stm.fold(seed, EnumerableSupport.max());
+        // Then
+        Double expected = 10;
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(10, seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((DoubleStream) stm).isOperated);
+    }
+
+    /**
      * @see DoubleStream.reduce
      */
     @IsTest

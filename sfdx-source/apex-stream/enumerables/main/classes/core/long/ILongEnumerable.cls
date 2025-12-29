@@ -253,7 +253,21 @@ public interface ILongEnumerable extends Iterable<Long> {
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Long` result of the reduction
+     */
+    Long fold(Long identity, IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on `Long` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Long` result of the reduction

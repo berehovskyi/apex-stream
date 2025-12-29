@@ -694,7 +694,36 @@ public abstract inherited sharing class ObjectEnumerable implements IObjectEnume
      * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for the `accumulator`
+     * @param identity the initial value for the `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Object` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * public class ConcatenateBiOperator extends BiOperator {
+     *     private final String separator;
+     *     public ConcatenateBiOperator(String separator) { this.separator = separator; }
+     *     public override Object apply(Object o1, Object o2) {
+     *         return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+     *     }
+     * }
+     * String concatenated = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .fold('', new ConcatenateBiOperator('-')); // 'foo-bar-baz'
+     * String concatenated1 = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
+     *     .fold('seed', new ConcatenateBiOperator(';')); // 'seed;foo;bar;baz'
+     */
+    public abstract Object fold(final Object identity, final IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on elements,
+     * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for the `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Object` result of the reduction

@@ -255,7 +255,21 @@ public interface IDoubleEnumerable extends Iterable<Double> {
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Double` result of the reduction
+     */
+    Double fold(Double identity, IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Double` result of the reduction

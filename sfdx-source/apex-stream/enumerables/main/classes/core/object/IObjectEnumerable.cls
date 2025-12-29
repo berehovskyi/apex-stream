@@ -359,7 +359,21 @@ public interface IObjectEnumerable extends Iterable<Object> {
      * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for the `accumulator`
+     * @param identity the initial value for the `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Object` result of the reduction
+     */
+    Object fold(Object identity, IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on elements,
+     * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for the `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Object` result of the reduction

@@ -713,7 +713,35 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Long` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+     * }
+     * public class ProductBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Long) o1 * (Long) o2; }
+     * }
+     * Long sum = LongStream.of(new List<Long>{ 0, 5L, 1L, -10 }).fold(0L, new SumBiOperator()); // -4L
+     * Long factorialOfN = LongStream.range(1, n).fold(1, new ProductBiOperator());
+     */
+    public virtual override Long fold(final Long identity, final IBiOperator accumulator) {
+        return (Long) StreamPipeline.fold(iterator(), (Object) identity, accumulator);
+    }
+
+    /**
+     * @description Performs a reduction on `Long` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Long` result of the reduction
@@ -731,7 +759,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * Long factorialOfN = LongStream.range(1, n).reduce(1, new ProductBiOperator());
      */
     public virtual override Long reduce(final Long identity, final IBiOperator accumulator) {
-        return (Long) StreamPipeline.reduce(iterator(), (Object) identity, accumulator);
+        return (Long) StreamPipeline.fold(iterator(), (Object) identity, accumulator);
     }
 
     /**

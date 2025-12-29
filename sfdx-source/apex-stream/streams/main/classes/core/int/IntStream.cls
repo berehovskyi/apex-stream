@@ -713,7 +713,35 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Integer` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Integer) o1 + (Integer) o2; }
+     * }
+     * public class ProductBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Integer) o1 * (Integer) o2; }
+     * }
+     * Integer sum = IntStream.of(new List<Integer>{ 0, 5, 1, -10 }).fold(0, new SumBiOperator()); // -4
+     * Integer factorialOfN = IntStream.range(1, n).fold(1, new ProductBiOperator());
+     */
+    public virtual override Integer fold(final Integer identity, final IBiOperator accumulator) {
+        return (Integer) StreamPipeline.fold(iterator(), (Object) identity, accumulator);
+    }
+
+    /**
+     * @description Performs a reduction on `Integer` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Integer` result of the reduction
@@ -731,7 +759,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * Integer factorialOfN = IntStream.range(1, n).reduce(1, new ProductBiOperator());
      */
     public virtual override Integer reduce(final Integer identity, final IBiOperator accumulator) {
-        return (Integer) StreamPipeline.reduce(iterator(), (Object) identity, accumulator);
+        return (Integer) StreamPipeline.fold(iterator(), (Object) identity, accumulator);
     }
 
     /**

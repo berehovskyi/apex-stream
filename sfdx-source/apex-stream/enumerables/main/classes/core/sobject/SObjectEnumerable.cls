@@ -2206,7 +2206,40 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `SObject` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * public class AnnualRevenueAccumulator extends BiOperator {
+     *     public override Object apply (Object o1, Object o2) {
+     *         Account result = ((Account) o1);
+     *         Account acc = ((Account) o2);
+     *         result.AnnualRevenue += acc.AnnualRevenue;
+     *         return result;
+     *     }
+     * }
+     * Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
+     * Account acc2 = new Account(Name = 'bar', AnnualRevenue = 200);
+     * Account acc3 = new Account(Name = 'baz', AnnualRevenue = 500);
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Account identity = new Account(Name = 'total', AnnualRevenue = 0);
+     * Account total = (Account) [SObjectEnumerable].of(accounts)
+     *     .fold(identity, new AnnualRevenueAccumulator()); // { Name: 'total', AnnualRevenue: 800 }
+     */
+    public abstract SObject fold(final SObject identity, final IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `SObject` result of the reduction

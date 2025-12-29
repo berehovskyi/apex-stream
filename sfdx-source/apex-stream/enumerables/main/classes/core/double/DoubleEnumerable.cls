@@ -458,7 +458,27 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Double` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * Double max = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+     *     .fold((Double) 0.0, BiOperators.max()); // 5.5
+     */
+    public abstract Double fold(final Double identity, final IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Double` result of the reduction

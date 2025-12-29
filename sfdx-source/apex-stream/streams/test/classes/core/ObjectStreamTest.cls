@@ -797,6 +797,26 @@ private class ObjectStreamTest {
     }
 
     /**
+     * @see ObjectStream.fold
+     */
+    @IsTest
+    private static void fold() {
+        // Given
+        List<String> input = new List<String>{ 'foo', 'bar', 'baz', 'lorem' };
+        List<String> clone = (List<String>) AsTestCommons.deepClone(input, List<String>.class);
+        ObjectEnumerable stm = ObjectStream.of(clone);
+        String seed = 'seed';
+        // When
+        String actual = (String) stm.fold(seed, new AsTestCommons.Concat());
+        // Then
+        String expected = 'seedfoobarbazlorem';
+        Assert.areEqual(expected, actual);
+        Assert.areEqual('seed', seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((ObjectStream) stm).isOperated);
+    }
+
+    /**
      * @see ObjectStream.reduce
      */
     @IsTest
