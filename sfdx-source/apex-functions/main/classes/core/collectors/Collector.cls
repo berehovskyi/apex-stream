@@ -76,15 +76,15 @@ public abstract inherited sharing class Collector implements ICollector {
      * and returns a new `Collector` according to a given container type.
      * <p>Supports casting list type for methods:</p>
      * <ul>
-     *     <li>{@link #toList()}</li>
-     *     <li>{@link #toList(IFunction)}</li>
+     *     <li>toList()</li>
+     *     <li>toList(IFunction)</li>
      * </ul>
      * <p>Supports casting map value type (but not map key type) for methods:</p>
      * <ul>
-     *     <li>{@link #toBy<T>map(IFunction)}</li>
-     *     <li>{@link #groupingBy<T>(IFunction)}</li>
-     *     <li>{@link #partitioningBy(IPredicate)}</li>
-     *     <li>{@link #partitioningBy(IPredicate, ICollector)}</li>
+     *     <li>toBy&lt;T&gt;map(IFunction)</li>
+     *     <li>groupingBy&lt;T&gt;(IFunction)</li>
+     *     <li>partitioningBy(IPredicate)</li>
+     *     <li>partitioningBy(IPredicate, ICollector)</li>
      * </ul>
      *
      * @param t the Type to cast the result container to

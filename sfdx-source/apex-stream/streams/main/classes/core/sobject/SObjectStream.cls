@@ -1,28 +1,22 @@
 /**
  * @description A sequence of `SObject` elements supporting aggregate operations.
  * Stream operations are composed of stream chain. A stream chain consists of:
- * <ul>
- *     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
- *     <li>Zero or more Intermediate Operations (which transform a stream into another stream,
- *     such as {@link SObjectStream.filter(IPredicate))}.</li>
- *     <li>A Terminal Operation (which produces a result such as
- *     {@link SObjectStream.count()} or {@link SObjectStream.collect(ICollector)}).</li>
- * </ul>
+ * - A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).
+ * - Zero or more Intermediate Operations (which transform a stream into another stream,
+ * such as {@link SObjectStream.filter(IPredicate)}).
+ * - A Terminal Operation (which produces a result such as
+ * {@link SObjectStream.count()} or {@link SObjectStream.collect(ICollector)}).
  * <p>Streams are <strong>lazy</strong>:</p>
- * <ul>
- *     <li>Intermediate operations describe how a stream is processed without performing any action.</li>
- *     <li>Computation is only performed when the terminal operation is initiated,
- * and source elements are consumed only as needed.</li>
- * </ul>
+ * - Intermediate operations describe how a stream is processed without performing any action.
+ * - Computation is only performed when the terminal operation is initiated,
+ * and source elements are consumed only as needed.
  * <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p>
  * <p>A stream should be operated on (invoking an intermediate or terminal stream operation)
  * only <strong>once</strong>.
  * A stream throws {@link IllegalStateException} if it detects that the stream is being reused.</p>
  * <p>Contract:</p>
- * <ul>
- *     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>
- *     <li>Should be stateless in most cases.</li>
- * </ul>
+ * - Must be non-interfering (do not modify the stream source but may mutate its elements).
+ * - Should be stateless in most cases.
  * <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>,
  * i.e. do not support `spliterator()`.</p>
  * <p>There are primitive specializations for {@link IntStream}, {@link LongStream},
@@ -192,7 +186,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      */
     public static SObjectEnumerable iterate(final SObject seed, final IOperator operator) {
         return new SObjectStream((Iterator<SObject>) StreamPipeline.iterate(seed, operator));
@@ -209,7 +203,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      */
     public static SObjectEnumerable iterate(final SObject seed, final IPredicate predicate, final IOperator operator) {
         return iterate(seed, operator).take(predicate);
@@ -254,7 +248,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
     }
 
     /**
-     * @description Returns lazily concatenated `List<Iterable<SObject>>`.
+     * @description Returns lazily concatenated `SObjectEnumerable` from `iterables`.
      *
      * @param iterables the list of `Iterable<SObject>`
      *
@@ -273,7 +267,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     new Account(Name = 'fred'),
      *     new Account(Name = 'foo')
      * };
-     * List<Account> concat = SObjectStream.concat(final List<Iterable<SObject>>{ accounts1, accounts2 })
+     * List<Account> concat = SObjectStream.concat(new List<Iterable<SObject>>{ accounts1, accounts2 })
      *     .toList(); //
      * [
      *   { Name: 'foo' },
@@ -301,6 +295,11 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      *
      * @example
+     * public class GetFunction extends Function {
+     *     private final SObjectField field;
+     *     public GetFunction(SObjectField field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((SObject) o).get(field); }
+     * }
      * List<Account> triggerOld = new List<Account>{
      *     new Account(Name = 'foo', NumberOfEmployees = 100),
      *     new Account(Name = 'bar', NumberOfEmployees = 200),
@@ -314,7 +313,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * SObjectStream.zip(
      *     triggerOld,
      *     triggerNew,
-     *     BiOperator.minBy(Comparator.comparing(SObjectFunctions.get(Account.AnnualRevenue)))
+     *     BiOperator.minBy(Comparator.comparing(new GetFunction(Account.AnnualRevenue)))
      * ).toList(); //
      * [
      *   { Name: 'foo', NumberOfEmployees: 100 },
@@ -358,6 +357,11 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *         return value1.contains(s) || value2.contains(s);
      *     }
      * }
+     * public class GetFunction extends Function {
+     *     private final SObjectField field;
+     *     public GetFunction(SObjectField field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((SObject) o).get(field); }
+     * }
      * List<Account> triggerOld = new List<Account>{
      *     new Account(Name = 'foo', NumberOfEmployees = 100),
      *     new Account(Name = 'bar', NumberOfEmployees = 200),
@@ -372,7 +376,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     triggerOld,
      *     triggerNew,
      *     new ContainsAnyBiPredicate('Name', 'a'),
-     *     BiOperator.minBy(SObjectFunctions.get(Account.AnnualRevenue))
+     *     BiOperator.minBy(new GetFunction(Account.AnnualRevenue))
      * ).toList(); //
      * [
      *   { Name: 'bar', NumberOfEmployees: 100 },
@@ -646,7 +650,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * };
      * List<Integer> totalPrices = SObjectStream.of(items)
      *     .mapToInt(new TotalPriceFunction())
-     *     .toList(); // [10000, 40000, 5000]
+     *     .toList(); // [10000, 40000, 50000]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
         return IntStream.of((Iterator<Integer>) StreamPipeline.mapTo(iterator(), mapper));
@@ -979,7 +983,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
      * List<String> names = (List<String>) SObjectStream.of(parentAccounts)
      *     .flatMapToObject(new MapToName())
-     *     .toList(String.class); // ['qux', fred', 'thud']
+     *     .toList(String.class); // ['qux', 'fred', 'thud']
      */
     public virtual override ObjectEnumerable flatMapToObject(final IFunction mapper) {
         return ObjectStream.of(StreamPipeline.flatMapTo(iterator(), mapper));
@@ -1422,7 +1426,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * If `SObjectEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -1544,7 +1548,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *     .toList(); //
      * [
      *   { Name: 'bar', NumberOfEmployees: 200 },
-     *   { Name: 'baz', NumberOfEmployees: 200 }
+     *   { Name: 'baz', NumberOfEmployees: 300 }
      * ]
      */
     public virtual override List<SObject> toList() {
@@ -1563,8 +1567,22 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `field` or `listType` is null
      *
      * @example
-     * List<String> accountNames = (List<String>) SObjectStream.of(accounts)
-     *     .toList(SObjectFunctions.get('Name'), String.class);
+     * public class GetFieldValueToLowerCaseFunction extends Function {
+     *     private final String fieldName;
+     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     public override Object apply(Object o) {
+     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *     }
+     * }
+     * List<Account> accounts = new List<Account>{
+     *     new Account(Name = 'foo'),
+     *     new Account(Name = 'Bar'),
+     *     new Account(Name = 'baz'),
+     *     new Account(Name = 'Foo'),
+     *     new Account(Name = 'bar')
+     * };
+     * List<String> normalizedNames = (List<String>) SObjectStream.of(accounts)
+     *     .toList(new GetFieldValueToLowerCaseFunction('Name'), String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
      */
     public virtual override List<Object> toList(final IFunction mapper, final Type elementType) {
         return StreamPipeline.toList(iterator(), mapper, elementType);
@@ -1577,9 +1595,18 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @return the `Set<SObject>` containing the stream elements
      *
      * @example
-     * Set<SObject> accountsWithHotRating = SObjectStream.of(accounts)
-     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
-     *     .toSet();
+     * List<Account> accounts = new List<Account>{
+     *     new Account(Name = 'foo'),
+     *     new Account(Name = 'bar'),
+     *     new Account(Name = 'baz')
+     * };
+     * Set<SObject> sobjects = SObjectStream.of(accounts)
+     *     .skip(1)
+     *     .toSet(); //
+     * [
+     *   { Name: 'bar' },
+     *   { Name: 'baz' }
+     * ]
      */
     public virtual override Set<SObject> toSet() {
         return StreamPipeline.toSObjectSet(iterator());
@@ -1596,7 +1623,22 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<Object> createdDates = SObjectStream.of(accounts).toSet(SObjectFunctions.get('CreatedDate'));
+     * public class GetFieldValueToLowerCaseFunction extends Function {
+     *     private final String fieldName;
+     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     public override Object apply(Object o) {
+     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *     }
+     * }
+     * List<Account> accounts = new List<Account>{
+     *     new Account(Name = 'foo'),
+     *     new Account(Name = 'Bar'),
+     *     new Account(Name = 'baz'),
+     *     new Account(Name = 'Foo'),
+     *     new Account(Name = 'bar')
+     * };
+     * Set<Object> normalizedNames = SObjectStream.of(accounts)
+     *     .toSet(new GetFieldValueToLowerCaseFunction('Name')); // ['foo', 'bar', 'baz']
      */
     public virtual override Set<Object> toSet(final IFunction mapper) {
         return StreamPipeline.toObjectSet(iterator(), mapper);
@@ -1613,7 +1655,32 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<Id> accountIds = SObjectStream.of(contacts).toIdSet(SObjectFunctions.get('AccountId'));
+     * public class GetChildrenIdOfTheLatestFunction extends Function {
+     *     private final String childRelField;
+     *     public GetChildrenIdOfTheLatestFunction(String childRelField) { this.childRelField = childRelField; }
+     *     public override Object apply(Object o) {
+     *         SObject sObj = (Account) o;
+     *         List<SObject> children = sObj.getSObjects(childRelField);
+     *         if (children?.isEmpty() != false) {
+     *             return null;
+     *         }
+     *         return SObjectStream.of(children)
+     *             .sort('CreatedDate')
+     *             .toList()
+     *             [0]
+     *             .Id;
+     *     }
+     * }
+     * Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+     * Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+     * Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+     * Account acc1 = new Account(Name = 'foo', Contacts = new List<Contact>{ con1, con2 }); // pseudo assignment
+     * Account acc2 = new Account(Name = 'bar', Contacts = new List<Contact>{ con3 });
+     * Account acc3 = new Account(Name = 'baz');
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Set<Id> contactIds = SObjectStream.of(accounts)
+     *     .toIdSet(new GetChildrenIdOfTheLatestFunction('Contacts')); //
+     * ['003000000000002AAA', '003000000000003AAA', null]
      */
     public virtual override Set<Id> toIdSet(final IFunction mapper) {
         return StreamPipeline.toIdSet(iterator(), mapper);
@@ -1630,7 +1697,36 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Set<String> accountNames = SObjectStream.of(accounts).toStringSet(SObjectFunctions.get('Name'));
+     * public class GetChildrenFieldOfTheLatestFunction extends Function {
+     *     private final String childRelField;
+     *     private final String fieldName;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
+     *     }
+     *     public override Object apply(Object o) {
+     *         SObject sObj = (Account) o;
+     *         List<SObject> children = sObj.getSObjects(childRelField);
+     *         if (children?.isEmpty() != false) {
+     *             return null;
+     *         }
+     *         return SObjectStream.of(children)
+     *             .sort('CreatedDate')
+     *             .toList()
+     *             [0]
+     *             .get(fieldName);
+     *     }
+     * }
+     * Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+     * Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+     * Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+     * Account acc1 = new Account(Name = 'foo', Contacts = new List<Contact>{ con1, con2 }); // pseudo assignment
+     * Account acc2 = new Account(Name = 'bar', Contacts = new List<Contact>{ con3 });
+     * Account acc3 = new Account(Name = 'baz');
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Set<String> contactLastNames = SObjectStream.of(accounts)
+     *     .toStringSet(new GetChildrenFieldOfTheLatestFunction('Contacts', 'LastName')); //
+     * ['fred', 'thud', null]
      */
     public virtual override Set<String> toStringSet(final IFunction mapper) {
         return StreamPipeline.toStringSet(iterator(), mapper);
@@ -1643,9 +1739,19 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @return the `Map<Id, SObject>` containing the stream elements
      *
      * @example
-     * Map<Id, SObject> accountsWithHotRating = SObjectStream.of(accounts)
-     *     .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
-     *     .toMap();
+     * Account acc1 = new Account(Id = '001000000000001AAA', Name = 'foo');
+     * Account acc2 = new Account(Id = '001000000000002AAA', Name = 'bar');
+     * Account acc3 = new Account(Id = '001000000000003AAA', Name = 'baz');
+     * Account acc4 = new Account(Name = 'qux');
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3, acc4 };
+     * Map<Id, SObject> accountById = SObjectStream.of(accounts)
+     *     .toMap(); //
+     * {
+     *   '001000000000001AAA': { Id: '001000000000001AAA', Name: 'foo' },
+     *   '001000000000002AAA': { Id: '001000000000002AAA', Name: 'bar' },
+     *   '001000000000003AAA': { Id: '001000000000003AAA', Name: 'baz' },
+     *    null: { Name: 'qux' }
+     * }
      */
     public virtual override Map<Id, SObject> toMap() {
         return new Map<Id, SObject>((List<SObject>) StreamPipeline.toList(iterator(), SObject.class));
@@ -1665,8 +1771,44 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `keyMapper` or `mapType` is null
      *
      * @example
-     * Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectStream.of(contacts)
-     *     .toByIdMap(SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
+     * public class GetChildrenIdOfTheLatestFunction extends Function {
+     *     private final String childRelField;
+     *     public GetChildrenIdOfTheLatestFunction(String childRelField) { this.childRelField = childRelField; }
+     *     public override Object apply(Object o) {
+     *         SObject sObj = (Account) o;
+     *         List<SObject> children = sObj.getSObjects(childRelField);
+     *         if (children?.isEmpty() != false) {
+     *             return null;
+     *         }
+     *         return SObjectStream.of(children)
+     *             .sort('CreatedDate')
+     *             .toList()
+     *             [0]
+     *             .Id;
+     *     }
+     * }
+     * Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+     * Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+     * Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+     * Account acc1 = new Account(
+     *     Id = '001000000000001AAA',
+     *     Name = 'foo',
+     *     Contacts = new List<Contact>{ con1, con2 }
+     * ); // pseudo assignment
+     * Account acc2 = new Account(
+     *     Id = '001000000000002AAA',
+     *     Name = 'bar',
+     *     Contacts = new List<Contact>{ con3 }
+     * );
+     * Account acc3 = new Account(Id = '001000000000003AAA', Name = 'baz');
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Map<Id, Account> accountByLatestContactId = (Map<Id, Account>) SObjectStream.of(accounts)
+     *     .toByIdMap(new GetChildrenIdOfTheLatestFunction('Contacts'), Account.class); //
+     * {
+     *   '003000000000002AAA': { Id: '001000000000001AAA', Name: 'foo' },
+     *   '003000000000003AAA': { Id: '001000000000002AAA', Name: 'bar' },
+     *    null: { Id: '001000000000003AAA', Name: 'baz' }
+     * }
      */
     public virtual override Map<Id, SObject> toByIdMap(final IFunction keyMapper, final Type valueType) {
         return (Map<Id, SObject>) StreamPipeline.toByIdMap(iterator(), keyMapper, valueType);
@@ -1686,8 +1828,46 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `keyMapper` or `mapType` is null
      *
      * @example
-     * Map<String, Account> accountByName = (Map<String, Account>) SObjectStream.of(accounts)
-     *     .toByStringMap(SObjectFunctions.get('Name'), Map<String, Account>.class);
+     * public class GetChildrenFieldOfTheLatestFunction extends Function {
+     *     private final String childRelField;
+     *     private final String fieldName;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
+     *     }
+     *     public override Object apply(Object o) {
+     *         SObject sObj = (Account) o;
+     *         List<SObject> children = sObj.getSObjects(childRelField);
+     *         if (children?.isEmpty() != false) {
+     *             return null;
+     *         }
+     *         return SObjectStream.of(children)
+     *             .sort('CreatedDate')
+     *             .toList()
+     *             [0]
+     *             .get(fieldName);
+     *     }
+     * }
+     * Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+     * Contact con2 = new Contact(LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+     * Contact con3 = new Contact(LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+     * Account acc1 = new Account(
+     *     Name = 'foo',
+     *     Contacts = new List<Contact>{ con1, con2 }
+     * ); // pseudo assignment
+     * Account acc2 = new Account(
+     *     Name = 'bar',
+     *     Contacts = new List<Contact>{ con3 }
+     * );
+     * Account acc3 = new Account(Name = 'baz');
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Map<String, Account> accountByLatestContactLastName = (Map<String, Account>) SObjectStream.of(accounts)
+     *     .toByStringMap(new GetChildrenFieldOfTheLatestFunction('Contacts', 'LastName'), Account.class); //
+     * {
+     *   'fred': { Name: 'foo' },
+     *   'thud': { Name: 'bar' },
+     *    null: { Name: 'baz' }
+     * }
      */
     public virtual override Map<String, SObject> toByStringMap(final IFunction keyMapper, final Type valueType) {
         return (Map<String, SObject>) StreamPipeline.toByStringMap(iterator(), keyMapper, valueType);
@@ -1702,11 +1882,53 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @return the `Map<Id, List<SObject>>` containing the stream elements
      *
-     * @throws NullPointerException if `field` is null
+     * @throws NullPointerException if `keyMapper` is null
      *
      * @example
-     * Map<Id, List<Contact>> contactsByAccountId = SObjectStream.of(contacts)
-     *     .groupById(SObjectFunctions.get('AccountId'));
+     * public class GetChildrenIdOfTheLatestFunction extends Function {
+     *     private final String childRelField;
+     *     public GetChildrenIdOfTheLatestFunction(String childRelField) { this.childRelField = childRelField; }
+     *     public override Object apply(Object o) {
+     *         SObject sObj = (Account) o;
+     *         List<SObject> children = sObj.getSObjects(childRelField);
+     *         if (children?.isEmpty() != false) {
+     *             return null;
+     *         }
+     *         return SObjectStream.of(children)
+     *             .sort('CreatedDate')
+     *             .toList()
+     *             [0]
+     *             .Id;
+     *     }
+     * }
+     * Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+     * Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+     * Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+     * Account acc1 = new Account(
+     *     Id = '001000000000001AAA',
+     *     Name = 'foo',
+     *     Contacts = new List<Contact>{ con1, con2 }
+     * ); // pseudo assignment
+     * Account acc2 = new Account(
+     *     Id = '001000000000002AAA',
+     *     Name = 'bar',
+     *     Contacts = new List<Contact>{ con3 }
+     * );
+     * Account acc3 = new Account(
+     *     Id = '001000000000003AAA',
+     *     Name = 'baz',
+     *     Contacts = new List<Contact>{ con2, con3 }
+     * );
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Map<Id, List<Account>> accountsByLatestContactId = SObjectStream.of(accounts)
+     *     .groupById(new GetChildrenIdOfTheLatestFunction('Contacts')); //
+     * {
+     *   '003000000000002AAA': [{ Id: '001000000000001AAA', Name: 'foo' }],
+     *   '003000000000003AAA': [
+     *     { Id: '001000000000002AAA', Name: 'bar' },
+     *     { Id: '001000000000003AAA', Name: 'baz' }
+     *   ]
+     * }
      */
     public virtual override Map<Id, List<SObject>> groupById(final IFunction keyMapper) {
         return (Map<Id, List<SObject>>) StreamPipeline.groupById(iterator(), keyMapper, SObject.class);
@@ -1724,8 +1946,51 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
-     * Map<String, List<Account>> accountsByRating = SObjectStream.of(accounts)
-     *     .groupByString(SObjectFunctions.get('Rating'));
+     * public class GetChildrenFieldOfTheLatestFunction extends Function {
+     *     private final String childRelField;
+     *     private final String fieldName;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *         this.childRelField = childRelField;
+     *         this.fieldName = fieldName;
+     *     }
+     *     public override Object apply(Object o) {
+     *         SObject sObj = (Account) o;
+     *         List<SObject> children = sObj.getSObjects(childRelField);
+     *         if (children?.isEmpty() != false) {
+     *             return null;
+     *         }
+     *         return SObjectStream.of(children)
+     *             .sort('CreatedDate')
+     *             .toList()
+     *             [0]
+     *             .get(fieldName);
+     *     }
+     * }
+     * Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+     * Contact con2 = new Contact(LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+     * Contact con3 = new Contact(LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+     * Account acc1 = new Account(
+     *     Name = 'foo',
+     *     Contacts = new List<Contact>{ con1, con2 }
+     * ); // pseudo assignment
+     * Account acc2 = new Account(
+     *     Name = 'bar',
+     *     Contacts = new List<Contact>{ con3 }
+     * );
+     * Account acc3 = new Account(
+     *     Name = 'baz',
+     *     Contacts = new List<Contact>{ con2, con3 }
+     * );
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Map<String, List<Account>> accountsByLatestContactLastName = SObjectStream.of(accounts)
+     *     .groupByString(new GetChildrenFieldOfTheLatestFunction('Contacts', 'LastName')); //
+     * {
+     *   'fred': [{ Name: 'foo' }],
+     *   'thud': [
+     *     { Name: 'bar' },
+     *     { Name: 'baz' }
+     *   ]
+     * }
      */
     public virtual override Map<String, List<SObject>> groupByString(final IFunction keyMapper) {
         return (Map<String, List<SObject>>) StreamPipeline.groupByString(iterator(), keyMapper, SObject.class);
@@ -1742,8 +2007,27 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-     *     = SObjectStream.of(accounts).partition(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
+     * public class ContainsPredicate extends Predicate {
+     *     private final String fieldName;
+     *     private final String s;
+     *     public ContainsPredicate(String fieldName, String s) {
+     *         this.fieldName = fieldName;
+     *         this.s = s;
+     *     }
+     *     public override Boolean test(Object o) {
+     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *     }
+     * }
+     * Account acc1 = new Account(Name = 'foo', Rating = 'Hot');
+     * Account acc2 = new Account(Name = 'bar', Rating = 'Warm');
+     * Account acc3 = new Account(Name = 'baz', Rating = 'Cold');
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * Map<Boolean, List<Account>> accountsPartitionedByContainingAInName = SObjectStream.of(accounts)
+     *     .partition(new ContainsPredicate('Name', 'a')); //
+     * {
+     *   true: [{ Name: 'bar', Rating: 'Warm' }, { Name: 'baz', Rating: 'Cold' }],
+     *   false: [{ Name: 'foo', Rating: 'Hot' }]
+     * }
      */
     public virtual override Map<Boolean, List<SObject>> partition(final IPredicate predicate) {
         return (Map<Boolean, List<SObject>>) StreamPipeline.partition(iterator(), predicate, SObject.class);

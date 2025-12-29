@@ -16,12 +16,12 @@ public virtual inherited sharing class SObjectSuppliers {
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
-     * @description Returns a `SObjectSupplier` that returns a new `SObject` instance
+     * @description Returns a `Supplier` that returns a new `SObject` instance
      * of the given `sObjectType`.
      *
      * @param sObjectType SObjectType of the new instance to create
      *
-     * @return the `SObjectSupplier`
+     * @return the `Supplier`
      *
      * @throws NullPointerException if `sObjectType` is null
      *

@@ -16,7 +16,7 @@ public virtual inherited sharing class SObjectConsumers {
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
-     * @description Returns a `Consumer` that adds error to `fieldName`.
+     * @description Returns a `Consumer` that adds an error to `fieldName`.
      *
      * @param fieldName the field name to add an error
      * @param message the error message
@@ -38,7 +38,7 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     /**
-     * @description Returns a `Consumer` that adds error to `field`.
+     * @description Returns a `Consumer` that adds an error to `field`.
      *
      * @param field the field to add an error
      * @param message the error message
@@ -57,7 +57,7 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     /**
-     * @description Returns a `Consumer` that adds error to an input argument.
+     * @description Returns a `Consumer` that adds an error to an input argument.
      *
      * @param message the error message
      *
@@ -75,7 +75,7 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     /**
-     * @description Returns a `Consumer` that adds error to an input argument.
+     * @description Returns a `Consumer` that adds an error to an input argument.
      *
      * @param exc the exception to attach
      *
@@ -135,7 +135,7 @@ public virtual inherited sharing class SObjectConsumers {
      * @see SObject.put
      *
      * @example
-     * ObjectConsumers.set(Account.NumberOfEmployees, someFunction);
+     * SObjectConsumers.set(Account.NumberOfEmployees, someFunction);
      */
     public static Consumer set(final SObjectField field, final IFunction mapper) {
         return new SetFieldConsumer(field, mapper);
@@ -192,7 +192,7 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     /**
-     * @description Returns a `Consumer` that sets SObject the value returned by
+     * @description Returns a `Consumer` that sets the SObject value returned by
      * the `operator` for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -220,7 +220,7 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     /**
-     * @description Returns a `Consumer` that sets SObject the value returned by
+     * @description Returns a `Consumer` that sets the SObject value returned by
      * the `operator` for the specified `field`.
      *
      * @param field the field to set a value
@@ -240,7 +240,7 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     /**
-     * @description Returns a `Consumer` that sets SObject the `parent`
+     * @description Returns a `Consumer` that sets the SObject `parent`
      * for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -267,7 +267,7 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     /**
-     * @description Returns a `Consumer` that sets SObject the `parent`
+     * @description Returns a `Consumer` that sets the SObject `parent`
      * for the specified `field`.
      *
      * @param field the field to set a value

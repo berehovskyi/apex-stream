@@ -58,13 +58,13 @@ public abstract inherited sharing class Function implements IFunction {
     // @start-group Static Methods
     /**
      * @description Returns a composed `Function` that sequentially executes the operations
-     * in the same order as the order of the consumers input list.
+     * in the same order as the order of the functions input list.
      *
      * @param functions the functions to sequentially perform
      *
      * @return the composed `Function`
      *
-     * @throws NullPointerException if `operators` is null or some element is null
+     * @throws NullPointerException if `functions` is null or some element is null
      */
     public static Function compose(final List<IFunction> functions) {
         return new Compose(functions);
@@ -104,11 +104,11 @@ public abstract inherited sharing class Function implements IFunction {
     }
 
     /**
-     * @description Returns a composed `SObjectFunction` of the `supplier`.
+     * @description Returns a composed `Function` of the `supplier`.
      *
      * @param supplier the supplier
      *
-     * @return the `SObjectFunction`
+     * @return the `Function`
      *
      * @throws NullPointerException if `supplier` is null
      */

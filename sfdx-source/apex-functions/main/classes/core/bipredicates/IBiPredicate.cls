@@ -10,7 +10,7 @@ public interface IBiPredicate {
     /**
      * @description Returns the result of applying this predicate to input.
      * <p>Contract:</p>
-     * The method is expected to have the next properties:
+     * The method is expected to have the following properties:
      * <ul>
      *     <li>Does not cause any side effects.</li>
      *     <li>Does not return `null`.</li>

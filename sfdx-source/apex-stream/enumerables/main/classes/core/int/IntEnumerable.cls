@@ -152,8 +152,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> filtered = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, 1, 5 })
-     *     .filter(Predicates.isEqual(5))
+     *     .filter(new IsEqualPredicate(5))
      *     .toList(); // [5, 5]
      */
     public abstract IntEnumerable filter(final IPredicate predicate);
@@ -170,8 +175,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> firstFiltered = [IntEnumerable].of(new List<Integer>{ 0, 0, 1, 1, 5 })
-     *     .take(Predicates.isEqual(0))
+     *     .take(new IsEqualPredicate(0))
      *     .toList(); // [0, 0]
      */
     public abstract IntEnumerable take(final IPredicate predicate);
@@ -188,8 +198,13 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> rest = [IntEnumerable].of(new List<Integer>{ 0, 0, 1, 1, 5 })
-     *     .drop(Predicates.isEqual(0))
+     *     .drop(new IsEqualPredicate(0))
      *     .toList(); // [1, 1, 5]
      */
     public abstract IntEnumerable drop(final IPredicate predicate);

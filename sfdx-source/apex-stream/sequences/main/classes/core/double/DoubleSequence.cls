@@ -1,7 +1,6 @@
 /**
  * @description A sequence of `Double` elements supporting aggregate operations,
  * a primitive specialization of {@link ObjectSequence}.
- * <p><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method</a></p>
  *
  * @see SObjectSequence
  * @see ObjectSequence
@@ -58,7 +57,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @description Returns an internal iterator for the elements of this sequence.
      * <p>Terminal Operation.</p>
      *
-     * @return the internal `Iterator<Long>`
+     * @return the internal `Iterator<Double>`
      */
     public override Iterator<Double> iterator() {
         return doubles.iterator();
@@ -111,7 +110,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * otherwise an empty `DoubleEnumerable`
      *
      * @example
-     * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new List<Double>{ 0, 5L, 1L, -10 });
+     * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new List<Double>{ 0.0, 5.0, 1.0, -10.0 });
      */
     public static DoubleEnumerable ofNullable(final List<Double> doubles) {
         // prettier-ignore
@@ -129,7 +128,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * otherwise an empty `DoubleEnumerable`
      *
      * @example
-     * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0, 5, 1, -10 });
+     * DoubleEnumerable doubleSeq = DoubleSequence.ofNullable(new Set<Double>{ 0.0, 5.0, 1.0, -10.0 });
      */
     public static DoubleEnumerable ofNullable(final Set<Double> doubles) {
         // prettier-ignore
@@ -170,7 +169,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
     }
 
     /**
-     * @description Returns eagerly concatenates `List<Iterable<Double>>`.
+     * @description Returns eagerly concatenated `List<Iterable<Double>>`.
      *
      * @param iterables the list of `Iterable<Double>`
      *
@@ -259,7 +258,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * List<Double> prepend = DoubleSequence.of(doubles1)
      *     .prepend(doubles2)
      *     .toList();
-     * // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
+     * // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0]
      */
     public virtual override DoubleEnumerable prepend(final Iterable<Double> iterable) {
         return concat(iterable, this);
@@ -280,8 +279,13 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> filtered = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-     *     .filter(Predicates.isEqual(5))
+     *     .filter(new IsEqualPredicate(5))
      *     .toList(); // [5, 5]
      */
     public virtual override DoubleEnumerable filter(final IPredicate predicate) {
@@ -299,8 +303,13 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
-     * List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .filter(Predicates.isEqual(0.1))
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
+     * List<Double> firstFiltered = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5.0, 1.5, Math.PI })
+     *     .take(new IsEqualPredicate(0.1))
      *     .toList(); // [0.1, 0.1]
      */
     public virtual override DoubleEnumerable take(final IPredicate predicate) {
@@ -319,8 +328,13 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> rest = DoubleSequence.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .drop(Predicates.isEqual(0.1))
+     *     .drop(new IsEqualPredicate(0.1))
      *     .toList(); // [5, 1.5, Math.PI]
      */
     public virtual override DoubleEnumerable drop(final IPredicate predicate) {
@@ -687,7 +701,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *     public IsGreaterPredicate(Double d) { this.d = d; }
      *     public override Boolean test(Object o) { return (Double) o > d; }
      * }
-     * Double firstGreaterThan4Double = DoubleSequence.of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+     * Double firstGreaterThan4Double = DoubleSequence.of(new List<Double>{ 0.01, 1.0, 3.0, 5.5, -8.99, -6.0, 4.01 })
      *     .find(new IsGreaterPredicate(4))
      *     .get(); // 5.5
      */
@@ -697,7 +711,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `DoubleEnumerable` is empty then `false` is returned.
+     * If `DoubleEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate

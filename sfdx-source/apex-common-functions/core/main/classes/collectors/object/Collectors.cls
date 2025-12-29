@@ -132,7 +132,7 @@ public virtual inherited sharing class Collectors {
      *
      * @example
      * // Accumulates input arguments into a Set
-     * Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet());
+     * Set<Id> ids = (Set<Id>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet());
      */
     public static Collector toIdSet() {
         return toIdSet(Function.identity());
@@ -149,7 +149,7 @@ public virtual inherited sharing class Collectors {
      *
      * @example
      * // Accumulates input arguments into a Set
-     * Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet(mapper));
+     * Set<Id> ids = (Set<Id>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet(mapper));
      */
     public static Collector toIdSet(final IFunction mapper) {
         return Collector.of(Supplier.of(Set<Id>.class), SetObjectConsumers.addToIdSet(mapper));
@@ -639,7 +639,7 @@ public virtual inherited sharing class Collectors {
      * Map<Id, Object> personByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByIdMap(getIdProperty));
      * Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) [ObjectEnumerable].of(people)
-     *     .collect(Collectors.toByBoolMap(getIdProperty).cast(Map<Id, Comparable>.class));
+     *     .collect(Collectors.toByIdMap(getIdProperty).cast(Map<Id, Comparable>.class));
      */
     public static Collector toByIdMap(final IFunction keyMapper) {
         return toByIdMap(keyMapper, Function.identity());
@@ -772,7 +772,7 @@ public virtual inherited sharing class Collectors {
      * Map<String, Object> personByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
      *     .collect(Collectors.toByStringMap(getStringProperty));
      * Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) [ObjectEnumerable].of(people)
-     *     .collect(Collectors.toByBoolMap(getStringProperty).cast(Map<String, Comparable>.class));
+     *     .collect(Collectors.toByStringMap(getStringProperty).cast(Map<String, Comparable>.class));
      */
     public static Collector toByStringMap(final IFunction keyMapper) {
         return toByStringMap(keyMapper, Function.identity());

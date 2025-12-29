@@ -27,7 +27,7 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
     //<editor-fold desc="Static Methods">
     // @start-group Static Methods
     /**
-     * @description Returns a `BiOperator` that return the first input argument.
+     * @description Returns a `BiOperator` that returns the first input argument.
      *
      * @return the `BiOperator`
      */
@@ -36,7 +36,7 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
     }
 
     /**
-     * @description Returns a `BiOperator` that return the second input argument.
+     * @description Returns a `BiOperator` that returns the second input argument.
      *
      * @return the `BiOperator`
      */

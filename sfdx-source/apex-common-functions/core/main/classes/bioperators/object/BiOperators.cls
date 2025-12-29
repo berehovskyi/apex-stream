@@ -14,7 +14,7 @@ public virtual inherited sharing class BiOperators {
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
-     * @description Returns a `BiOperator` that return a lesser input argument.
+     * @description Returns a `BiOperator` that returns the lesser input argument.
      *
      * @return the `BiOperator`
      *
@@ -26,7 +26,7 @@ public virtual inherited sharing class BiOperators {
     }
 
     /**
-     * @description Returns a `BiOperator` that return a greater input argument.
+     * @description Returns a `BiOperator` that returns the greater input argument.
      *
      * @return the `BiOperator`
      *

@@ -156,7 +156,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *
      * @return the new `IntEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * public class FibonacciSupplier extends Supplier {
@@ -192,12 +192,12 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *
      * @return the new `IntEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * public class AddOperator extends Operator {
      *     private final Integer i;
-     *     public AddOperator(Integer d) { this.i = i; }
+     *     public AddOperator(Integer i) { this.i = i; }
      *     public override Object apply(Object j) { return (Integer) j + i; }
      * }
      * IntEnumerable incrementalStream = IntStream.iterate(0, new AddOperator(1));
@@ -221,7 +221,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *
      * @return the new `IntEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      *
      * @example
      * public class IsLessPredicate extends Predicate {
@@ -268,7 +268,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
     }
 
     /**
-     * @description Returns lazily concatenated `List<Iterable<Integer>>`.
+     * @description Returns lazily concatenated `IntEnumerable` from `iterables`.
      *
      * @param iterables the list of `Iterable<Integer>`
      *
@@ -376,8 +376,13 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> filtered = IntStream.of(new List<Integer>{ 0, 5, 1, 1, 5 })
-     *     .filter(Predicates.isEqual(5))
+     *     .filter(new IsEqualPredicate(5))
      *     .toList(); // [5, 5]
      */
     public virtual override IntEnumerable filter(final IPredicate predicate) {
@@ -395,8 +400,13 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> firstFiltered = IntStream.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-     *     .take(Predicates.isEqual(0))
+     *     .take(new IsEqualPredicate(0))
      *     .toList(); // [0, 0]
      */
     public virtual override IntEnumerable take(final IPredicate predicate) {
@@ -415,8 +425,13 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> rest = IntStream.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-     *     .drop(Predicates.isEqual(0))
+     *     .drop(new IsEqualPredicate(0))
      *     .toList(); // [1, 1, 5]
      */
     public virtual override IntEnumerable drop(final IPredicate predicate) {
@@ -791,7 +806,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `IntEnumerable` is empty then `false` is returned.
+     * If `IntEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate

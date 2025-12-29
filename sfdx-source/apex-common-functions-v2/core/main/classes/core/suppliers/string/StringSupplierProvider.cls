@@ -15,7 +15,7 @@
  */
 public virtual inherited sharing class StringSupplierProvider {
     /**
-     * @description Returns a `Supplier` that returns the next uuid.
+     * @description Returns a `Supplier` that returns the next UUID.
      *
      * @return the `Supplier`
      *

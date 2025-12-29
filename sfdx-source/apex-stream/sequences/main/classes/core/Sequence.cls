@@ -14,13 +14,13 @@
  */
 public inherited sharing class Sequence {
     /**
-     * @description Returns a `ObjectSequence` created from `List<Object>`.
+     * @description Returns a `ObjectEnumerable` created from `objects`.
      *
      * @param objects the list
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws NullPointerException if `iterable` is null
+     * @throws NullPointerException if `objects` is null
      *
      * @example
      * ObjectEnumerable peopleSeq = Sequence.of(new List<Person>(people));
@@ -68,10 +68,10 @@ public inherited sharing class Sequence {
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `iterator` is null
+     * @throws NullPointerException if `longs` is null
      *
      * @example
-     * LongEnumerable longSeq = Sequence.of(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = Sequence.of(new List<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable of(final List<Long> longs) {
         return LongSequence.of(longs);
@@ -94,7 +94,7 @@ public inherited sharing class Sequence {
     }
 
     /**
-     * @description Returns a `ObjectEnumerable` created from `Set<Object>`.
+     * @description Returns a `ObjectEnumerable` created from `objects`.
      *
      * @param objects the set
      *
@@ -148,10 +148,10 @@ public inherited sharing class Sequence {
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `iterator` is null
+     * @throws NullPointerException if `longs` is null
      *
      * @example
-     * LongEnumerable longSeq = Sequence.of(new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = Sequence.of(new Set<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable of(final Set<Long> longs) {
         return LongSequence.of(longs);
@@ -195,7 +195,7 @@ public inherited sharing class Sequence {
      *
      * @param sObjects the list
      *
-     * @return the new `SObjectEnumerable` if `iterable` is non-null,
+     * @return the new `SObjectEnumerable` if `sObjects` is non-null,
      * otherwise an empty `SObjectEnumerable`
      *
      * @example
@@ -231,7 +231,7 @@ public inherited sharing class Sequence {
      * otherwise an empty `LongEnumerable`
      *
      * @example
-     * LongEnumerable longSeq = Sequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = Sequence.ofNullable(new List<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable ofNullable(final List<Long> longs) {
         return LongSequence.ofNullable(longs);
@@ -305,13 +305,13 @@ public inherited sharing class Sequence {
      * @description Returns a `LongEnumerable` created from `longs` if non-null,
      * otherwise returns an empty `LongEnumerable`.
      *
-     * @param longs the list
+     * @param longs the set
      *
      * @return the new `LongEnumerable` if `longs` is non-null,
      * otherwise an empty `LongEnumerable`
      *
      * @example
-     * LongEnumerable longSeq = Sequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = Sequence.ofNullable(new Set<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable ofNullable(final Set<Long> longs) {
         return LongSequence.ofNullable(longs);

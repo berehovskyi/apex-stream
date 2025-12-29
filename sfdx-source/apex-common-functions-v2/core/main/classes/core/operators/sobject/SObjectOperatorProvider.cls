@@ -347,7 +347,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
     }
 
     /**
-     * @description Sets a SObject for a specific field name on the SObject.
+     * @description Sets an SObject for a specific field name on the SObject.
      * You can use this instance to assign a value using either a constant or a function, or another field.
      */
     public virtual class SetSObjectByName extends SetSObjectBase {
@@ -378,7 +378,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
     }
 
     /**
-     * @description Sets a SObject for a specific reference field on the SObject.
+     * @description Sets an SObject for a specific reference field on the SObject.
      * You can use this instance to assign a value using either a constant or a function, or another field.
      */
     public virtual class SetSObjectByField extends SetSObjectBase {
@@ -437,7 +437,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
          * IOperator setContactsOperator = new SObjectOperatorProvider()
          *     .setSObjects('Contacts')
          *     .val(Function.constant(
-         *         new List<Contact>{ new Contact(FirstName = 'John'), new Contact(FirstName = 'Jane') })
+         *         new List<Contact>{ new Contact(FirstName = 'John'), new Contact(FirstName = 'Jane') }
          *     ));
          * setContactsOperator.apply(new Account());
          * // Account { Contacts: [{ FirstName: 'John' }, { FirstName: 'Jane' }] }

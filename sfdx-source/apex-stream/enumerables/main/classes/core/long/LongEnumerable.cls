@@ -152,8 +152,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> filtered = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-     *     .filter(Predicates.isEqual(5L))
+     *     .filter(new IsEqualPredicate(5L))
      *     .toList(); // [5L, 5L]
      */
     public abstract LongEnumerable filter(final IPredicate predicate);
@@ -170,8 +175,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> firstFiltered = [LongEnumerable].of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .take(Predicates.isEqual(0L))
+     *     .take(new IsEqualPredicate(0L))
      *     .toList(); // [0L, 0L]
      */
     public abstract LongEnumerable take(final IPredicate predicate);
@@ -188,8 +198,13 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> rest = [LongEnumerable].of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .drop(Predicates.isEqual(0L))
+     *     .drop(new IsEqualPredicate(0L))
      *     .toList(); // [1L, 1L, 5L]
      */
     public abstract LongEnumerable drop(final IPredicate predicate);
@@ -482,7 +497,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *     .reduce(new SumBiOperator())
      *     .get(); // -4L
      */
-    public abstract Optional reduce(final IBiOperator operator);
+    public abstract Optional reduce(final IBiOperator accumulator);
 
     /**
      * @description Performs a mutable reduction operation on elements, collecting elements

@@ -16,8 +16,8 @@
  *    .val(Contact.LastName).to(Lead.LastName)
  *    .val('Email').to('Email')
  *    .var(someUserId).to('OwnerId');
- * mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe@example.com'));
- * // Lead { LastName: 'Doe', Email: 'john.doe@example.com', OwnerId: '005000000000000AAA' }
+ * mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe.example.com'));
+ * // Lead { LastName: 'Doe', Email: 'john.doe.example.com', OwnerId: '005000000000000AAA' }
  */
 public virtual inherited sharing class SObjectFunctionProvider {
     /**
@@ -75,10 +75,10 @@ public virtual inherited sharing class SObjectFunctionProvider {
     }
 
     /**
-     * @description Returns a `Function` that gets a single related sObject for the specified `fieldName`.
+     * @description Returns a `Function` that gets a single related SObject for the specified `fieldName`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get the related sObject
+     * @param fieldName the field to get the related SObject
      *
      * @return the `Function`
      *
@@ -98,9 +98,9 @@ public virtual inherited sharing class SObjectFunctionProvider {
     }
 
     /**
-     * @description Returns a `Function` that gets a single related sObject for the specified `field`.
+     * @description Returns a `Function` that gets a single related SObject for the specified `field`.
      *
-     * @param field the `SObjectField` to get the related sObject
+     * @param field the `SObjectField` to get the related SObject
      *
      * @return the `Function`
      *
@@ -117,7 +117,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
     }
 
     /**
-     * @description Returns a `Function` that gets children sobjects for
+     * @description Returns a `Function` that gets children SObjects for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
      *
      * @param fieldName the field to get a value
@@ -163,7 +163,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
     }
 
     /**
-     * @description Returns a `Function` that gets children sobjects for
+     * @description Returns a `Function` that gets children SObjects for
      * the specified `field`. Cross-reference fields and safe navigation are supported.
      *
      * @param field the field to get a value
@@ -255,8 +255,8 @@ public virtual inherited sharing class SObjectFunctionProvider {
      *    .val(Contact.LastName).to(Lead.LastName)
      *    .val('Email').to('Email')
      *    .var(someUserId).to('OwnerId');
-     * mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe@example.com'));
-     * // Lead { LastName: 'Doe', Email: 'john.doe@example.com', OwnerId: '005000000000000AAA' }
+     * mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe.example.com'));
+     * // Lead { LastName: 'Doe', Email: 'john.doe.example.com', OwnerId: '005000000000000AAA' }
      */
     public virtual ChainableMapSObjectFunction mapTo(final ISupplier identitySupplier) {
         return new ChainableMapSObjectFunction(identitySupplier);
@@ -277,8 +277,8 @@ public virtual inherited sharing class SObjectFunctionProvider {
      *    .val(Contact.LastName).to(Lead.LastName)
      *    .val('Email').to('Email')
      *    .var(someUserId).to('OwnerId');
-     * mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe@example.com'));
-     * // Lead { LastName: 'Doe', Email: 'john.doe@example.com', OwnerId: '005000000000000AAA' }
+     * mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe.example.com'));
+     * // Lead { LastName: 'Doe', Email: 'john.doe.example.com', OwnerId: '005000000000000AAA' }
      */
     public virtual ChainableMapSObjectFunction mapTo(final SObjectType destType) {
         return mapTo(new SObjectSupplierProvider().of(destType));
@@ -318,7 +318,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
          * @return the `MapSObjectValueMapper`
          *
          * @example
-         * IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType);
+         * IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType)
          *     .val(new SObjectFunctionProvider().get(Contact.LastName)).to(Lead.LastName);
          * mapToLead.apply(new Contact(LastName = 'Doe')); // Lead { LastName: 'Doe' }
          */
@@ -412,7 +412,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
          *
          * @example
          * IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType)
-         *     .val('LastName').to('LastName');
+         *     .val('LastName').to('LastName')
          *     .var(someUserId).to('OwnerId');
          * mapToLead.apply(new Contact(LastName = 'Doe'));
          * // Lead { LastName: 'Doe', OwnerId: '005000000000000AAA' }
