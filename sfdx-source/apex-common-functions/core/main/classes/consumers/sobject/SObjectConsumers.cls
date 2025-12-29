@@ -16,25 +16,25 @@ public virtual inherited sharing class SObjectConsumers {
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
-     * @description Returns a `Consumer` that adds an error to `fieldName`.
+     * @description Returns a `Consumer` that adds an error to `field`.
      *
-     * @param fieldName the field name to add an error
+     * @param field the field to add an error
      * @param message the error message
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `message` is null
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.addError
      *
      * @example
      * SObjectConsumers.addError('NumberOfEmployees', 'Error message');
      */
-    public static Consumer addError(final String fieldName, final String message) {
-        return new AddFieldNameError(fieldName, message);
+    public static Consumer addError(final String field, final String message) {
+        return new AddFieldNameError(field, message);
     }
 
     /**
@@ -94,20 +94,20 @@ public virtual inherited sharing class SObjectConsumers {
 
     /**
      * @description Returns a `Consumer` that sets the value returned by
-     * the `mapper` for the specified `fieldName`.
+     * the `mapper` for the specified `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param mapper applied to the input argument
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -116,8 +116,8 @@ public virtual inherited sharing class SObjectConsumers {
      * SObjectConsumers.set('Parent.NumberOfEmployees', someFunction);
      * SObjectConsumers.set('Parent?.NumberOfEmployees', someFunction);
      */
-    public static Consumer set(final String fieldName, final IFunction mapper) {
-        return new SetConsumer(fieldName, mapper);
+    public static Consumer set(final String field, final IFunction mapper) {
+        return new SetConsumer(field, mapper);
     }
 
     /**
@@ -130,7 +130,7 @@ public virtual inherited sharing class SObjectConsumers {
      * @return the `Consumer`
      *
      * @throws NullPointerException if `field` or `mapper` is null
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -143,19 +143,19 @@ public virtual inherited sharing class SObjectConsumers {
 
     /**
      * @description Returns a `Consumer` that sets the `value`
-     * for the specified `fieldName`.
+     * for the specified `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param value the value to set
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -164,8 +164,8 @@ public virtual inherited sharing class SObjectConsumers {
      * SObjectConsumers.set('Parent.NumberOfEmployees', 100);
      * SObjectConsumers.set('Parent?.NumberOfEmployees', (Object) null);
      */
-    public static Consumer set(final String fieldName, final Object value) {
-        return set(fieldName, Function.constant(value));
+    public static Consumer set(final String field, final Object value) {
+        return set(field, Function.constant(value));
     }
 
     /**
@@ -177,9 +177,9 @@ public virtual inherited sharing class SObjectConsumers {
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -193,20 +193,20 @@ public virtual inherited sharing class SObjectConsumers {
 
     /**
      * @description Returns a `Consumer` that sets the SObject value returned by
-     * the `operator` for the specified `fieldName`.
+     * the `operator` for the specified `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param operator applied to the input argument
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `operator` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.putSObject
      *
@@ -215,8 +215,8 @@ public virtual inherited sharing class SObjectConsumers {
      * SObjectConsumers.setSObject('Parent.Parent', someOperator);
      * SObjectConsumers.setSObject('Parent?.Parent', someOperator);
      */
-    public static Consumer setSObject(final String fieldName, final IOperator operator) {
-        return new SetSObjectConsumer(fieldName, operator);
+    public static Consumer setSObject(final String field, final IOperator operator) {
+        return new SetSObjectConsumer(field, operator);
     }
 
     /**
@@ -241,19 +241,19 @@ public virtual inherited sharing class SObjectConsumers {
 
     /**
      * @description Returns a `Consumer` that sets the SObject `parent`
-     * for the specified `fieldName`.
+     * for the specified `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param parent the value to set
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.putSObject
      *
@@ -262,8 +262,8 @@ public virtual inherited sharing class SObjectConsumers {
      * SObjectConsumers.setSObject('Parent.Parent', someAccount);
      * SObjectConsumers.setSObject('Parent?.Parent', (SObject) null);
      */
-    public static Consumer setSObject(final String fieldName, final SObject parent) {
-        return setSObject(fieldName, Operator.constant(parent));
+    public static Consumer setSObject(final String field, final SObject parent) {
+        return setSObject(field, Operator.constant(parent));
     }
 
     /**
@@ -292,16 +292,16 @@ public virtual inherited sharing class SObjectConsumers {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class AddFieldNameError extends Consumer {
-        private final String fieldName;
+        private final String field;
         private final String message;
-        private AddFieldNameError(String fieldName, String message) {
-            Validate.notBlank(fieldName);
+        private AddFieldNameError(String field, String message) {
+            Validate.notBlank(field);
             Validate.notNull(message);
-            this.fieldName = fieldName;
+            this.field = field;
             this.message = message;
         }
         // prettier-ignore
-        public override void accept(Object obj) { ((SObject) obj).addError(fieldName, message); }
+        public override void accept(Object obj) { ((SObject) obj).addError(field, message); }
     }
 
     private class AddFieldError extends Consumer {
@@ -340,27 +340,27 @@ public virtual inherited sharing class SObjectConsumers {
     private abstract class SObjectPathConsumer extends Consumer {
         protected final IOperator operator;
         protected final String xRefFieldName;
-        protected SObjectPathConsumer(String fieldName) {
-            xRefFieldName = fieldName.substringAfterLast('.');
-            operator = SObjectOperators.getSObject(fieldName.substringBeforeLast('.'));
+        protected SObjectPathConsumer(String field) {
+            xRefFieldName = field.substringAfterLast('.');
+            operator = SObjectOperators.getSObject(field.substringBeforeLast('.'));
         }
     }
 
     private class SetByFieldName extends Consumer {
-        private final String fieldName;
+        private final String field;
         private final IFunction mapper;
-        private SetByFieldName(String fieldName, IFunction mapper) {
-            this.fieldName = fieldName;
+        private SetByFieldName(String field, IFunction mapper) {
+            this.field = field;
             this.mapper = mapper;
         }
         // prettier-ignore
-        public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(obj)); }
+        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply(obj)); }
     }
 
     private class SetByFieldPath extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetByFieldPath(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetByFieldPath(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
@@ -370,8 +370,8 @@ public virtual inherited sharing class SObjectConsumers {
 
     private class SetByFieldPathSafe extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetByFieldPathSafe(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetByFieldPathSafe(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
@@ -381,15 +381,15 @@ public virtual inherited sharing class SObjectConsumers {
 
     private class SetConsumer extends Consumer {
         private final IConsumer consumer;
-        private SetConsumer(String fieldName, IFunction mapper) {
-            Validate.notBlank(fieldName);
+        private SetConsumer(String field, IFunction mapper) {
+            Validate.notBlank(field);
             Validate.notNull(mapper);
             // prettier-ignore
-            if (!CsfSupport.isXRefField(fieldName)) { consumer = new SetByFieldName(fieldName, mapper); }
+            if (!CsfSupport.isXRefField(field)) { consumer = new SetByFieldName(field, mapper); }
             // prettier-ignore
-            else if (CsfSupport.isSafePath(fieldName)) { consumer = new SetByFieldPathSafe(fieldName, mapper); }
+            else if (CsfSupport.isSafePath(field)) { consumer = new SetByFieldPathSafe(field, mapper); }
             // prettier-ignore
-            else { consumer = new SetByFieldPath(fieldName, mapper); }
+            else { consumer = new SetByFieldPath(field, mapper); }
         }
         // prettier-ignore
         public override void accept(Object obj) { consumer.accept(obj); }
@@ -409,20 +409,20 @@ public virtual inherited sharing class SObjectConsumers {
     }
 
     private class SetSObjectByFieldName extends Consumer {
-        protected final String fieldName;
+        protected final String field;
         private final IOperator mapper;
-        private SetSObjectByFieldName(String fieldName, IOperator mapper) {
-            this.fieldName = fieldName;
+        private SetSObjectByFieldName(String field, IOperator mapper) {
+            this.field = field;
             this.mapper = mapper;
         }
         // prettier-ignore
-        public override void accept(Object obj) { ((SObject) obj).putSObject(fieldName, (SObject) mapper.apply(obj)); }
+        public override void accept(Object obj) { ((SObject) obj).putSObject(field, (SObject) mapper.apply(obj)); }
     }
 
     private class SetSObjectByFieldPath extends SObjectPathConsumer {
         private final IOperator mapper;
-        private SetSObjectByFieldPath(String fieldName, IOperator mapper) {
-            super(fieldName);
+        private SetSObjectByFieldPath(String field, IOperator mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
@@ -432,8 +432,8 @@ public virtual inherited sharing class SObjectConsumers {
 
     private class SetSObjectByFieldPathSafe extends SObjectPathConsumer {
         private final IOperator mapper;
-        private SetSObjectByFieldPathSafe(String fieldName, IOperator mapper) {
-            super(fieldName);
+        private SetSObjectByFieldPathSafe(String field, IOperator mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
@@ -443,16 +443,14 @@ public virtual inherited sharing class SObjectConsumers {
 
     private class SetSObjectConsumer extends Consumer {
         private final IConsumer consumer;
-        private SetSObjectConsumer(String fieldName, IOperator operator) {
-            Validate.notBlank(fieldName);
+        private SetSObjectConsumer(String field, IOperator operator) {
+            Validate.notBlank(field);
             Validate.notNull(operator);
             // prettier-ignore
-            if (!CsfSupport.isXRefField(fieldName)) { consumer = new SetSObjectByFieldName(fieldName, operator); }
-            else if (CsfSupport.isSafePath(fieldName)) {
-                consumer = new SetSObjectByFieldPathSafe(fieldName, operator);
-            }
+            if (!CsfSupport.isXRefField(field)) { consumer = new SetSObjectByFieldName(field, operator); }
+            else if (CsfSupport.isSafePath(field)) { consumer = new SetSObjectByFieldPathSafe(field, operator); }
             // prettier-ignore
-            else { consumer = new SetSObjectByFieldPath(fieldName, operator); }
+            else { consumer = new SetSObjectByFieldPath(field, operator); }
         }
         // prettier-ignore
         public override void accept(Object obj) { consumer.accept(obj); }

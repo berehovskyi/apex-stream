@@ -19,24 +19,24 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc=">">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is greater than the result returned by the `function`.
+     * the `field` is greater than the result returned by the `function`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>` "greater than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param function the function whose application result is considered as the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -47,8 +47,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *     Function.constant(100)
      * );
      */
-    public static Predicate isGreater(final String fieldName, final IFunction function) {
-        return isGreater(SObjectFunctions.get(fieldName), function);
+    public static Predicate isGreater(final String field, final IFunction function) {
+        return isGreater(SObjectFunctions.get(field), function);
     }
 
     /**
@@ -84,23 +84,23 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is greater than the `value`.
+     * the `field` is greater than the `value`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>` "greater than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param value the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -108,8 +108,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isGreater('NumberOfEmployees', 100);
      * SObjectPredicates.isGreater('Parent?.NumberOfEmployees', 100);
      */
-    public static Predicate isGreater(final String fieldName, final Object value) {
-        return isGreater(SObjectFunctions.get(fieldName), Function.constant(value));
+    public static Predicate isGreater(final String field, final Object value) {
+        return isGreater(SObjectFunctions.get(field), Function.constant(value));
     }
 
     /**
@@ -140,24 +140,24 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc=">=">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is greater than or equal to the result returned by the `function`.
+     * the `field` is greater than or equal to the result returned by the `function`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param function the function whose application result is considered as the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -171,8 +171,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *     Function.constant(100)
      * );
      */
-    public static Predicate isGreaterOrEqual(final String fieldName, final IFunction function) {
-        return isGreater(fieldName, function).orElse(isEqual(fieldName, function));
+    public static Predicate isGreaterOrEqual(final String field, final IFunction function) {
+        return isGreater(field, function).orElse(isEqual(field, function));
     }
 
     /**
@@ -188,8 +188,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
      *
      * @see Comparer.defaultOrder
@@ -210,23 +210,23 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is greater than or equal to the `value`.
+     * the `field` is greater than or equal to the `value`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param value the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -234,8 +234,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isGreaterOrEqual('NumberOfEmployees', 100);
      * SObjectPredicates.isGreaterOrEqual('Parent?.NumberOfEmployees', 100);
      */
-    public static Predicate isGreaterOrEqual(final String fieldName, final Object value) {
-        return isGreater(fieldName, value).orElse(isEqual(fieldName, value));
+    public static Predicate isGreaterOrEqual(final String field, final Object value) {
+        return isGreater(field, value).orElse(isEqual(field, value));
     }
 
     /**
@@ -266,22 +266,22 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="<">
     /**
      * @description Returns a `SObjectPredicate` that tests if the value of
-     * the `fieldName` is less than the result returned by the `function`.
+     * the `field` is less than the result returned by the `function`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<` "less than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison.
+     * @param field the value of which is considered the left argument of comparison.
      * @param function the function whose application result is considered as the right argument of comparison.
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -292,8 +292,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *     Function.constant(100)
      * );
      */
-    public static Predicate isLess(final String fieldName, final IFunction function) {
-        return isLess(SObjectFunctions.get(fieldName), function);
+    public static Predicate isLess(final String field, final IFunction function) {
+        return isLess(SObjectFunctions.get(field), function);
     }
 
     /**
@@ -309,8 +309,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
      *
      * @see Comparer.defaultOrder
@@ -331,23 +331,23 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     /**
      * @description Returns a `Predicate` that tests if the value of
-     * the `fieldName` is less than the `value`.
+     * the `field` is less than the `value`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<` "less than" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison.
+     * @param field the value of which is considered the left argument of comparison.
      * @param value the right argument of comparison.
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -355,8 +355,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLess('NumberOfEmployees', 100);
      * SObjectPredicates.isLess('Parent?.NumberOfEmployees', 100);
      */
-    public static Predicate isLess(final String fieldName, final Object value) {
-        return isLess(SObjectFunctions.get(fieldName), Function.constant(value));
+    public static Predicate isLess(final String field, final Object value) {
+        return isLess(SObjectFunctions.get(field), Function.constant(value));
     }
 
     /**
@@ -387,24 +387,24 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="<=">
     /**
      * @description Returns a `Predicate` that tests if the value of
-     * the `fieldName` is less than or equal to the result returned by the `function`.
+     * the `field` is less than or equal to the result returned by the `function`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison.
+     * @param field the value of which is considered the left argument of comparison.
      * @param function the function whose application result is considered as the right argument of comparison.
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -418,8 +418,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *     Function.constant(100)
      * );
      */
-    public static Predicate isLessOrEqual(final String fieldName, final IFunction function) {
-        return isLess(fieldName, function).orElse(isEqual(fieldName, function));
+    public static Predicate isLessOrEqual(final String field, final IFunction function) {
+        return isLess(field, function).orElse(isEqual(field, function));
     }
 
     /**
@@ -455,23 +455,23 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     /**
      * @description Returns a `Predicate` that tests if the value of
-     * the `fieldName` is less than or equal to the `value`.
+     * the `field` is less than or equal to the `value`.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports
      * comparison of all primitive types and considers a non-null value as always greater than
      * a null value.</p>
      *
-     * @param fieldName the value of which is considered the left argument of comparison.
+     * @param field the value of which is considered the left argument of comparison.
      * @param value the right argument of comparison.
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -479,8 +479,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLessOrEqual('NumberOfEmployees', 100);
      * SObjectPredicates.isLessOrEqual('Parent?.NumberOfEmployees', 100);
      */
-    public static Predicate isLessOrEqual(final String fieldName, final Object value) {
-        return isLess(fieldName, value).orElse(isEqual(fieldName, value));
+    public static Predicate isLessOrEqual(final String field, final Object value) {
+        return isLess(field, value).orElse(isEqual(field, value));
     }
 
     /**
@@ -511,21 +511,21 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="==">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is equal to the result returned by the `function`,
+     * the `field` is equal to the result returned by the `function`,
      * comparing object value equality not reference equality.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param function the function whose application result is considered as the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -539,8 +539,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *     Function.constant(100)
      * );
      */
-    public static Predicate isEqual(final String fieldName, final IFunction function) {
-        return isEqual(SObjectFunctions.get(fieldName), function);
+    public static Predicate isEqual(final String field, final IFunction function) {
+        return isEqual(SObjectFunctions.get(field), function);
     }
 
     /**
@@ -573,19 +573,19 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is equal to the `value`, comparing object value equality
+     * the `field` is equal to the `value`, comparing object value equality
      * not reference equality. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param value the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -593,8 +593,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isEqual('NumberOfEmployees', 100);
      * SObjectPredicates.isEqual('Parent?.NumberOfEmployees', 100);
      */
-    public static Predicate isEqual(final String fieldName, final Object value) {
-        return isEqual(SObjectFunctions.get(fieldName), Function.constant(value));
+    public static Predicate isEqual(final String field, final Object value) {
+        return isEqual(SObjectFunctions.get(field), Function.constant(value));
     }
 
     /**
@@ -622,21 +622,21 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="!=">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is not equal to the result returned by the `function`,
+     * the `field` is not equal to the result returned by the `function`,
      * comparing object value equality not reference equality.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param function the function whose application result is considered as the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `function` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -650,8 +650,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      *     Function.constant(100)
      * );
      */
-    public static Predicate isNotEqual(final String fieldName, final IFunction function) {
-        return isEqual(fieldName, function).negate();
+    public static Predicate isNotEqual(final String field, final IFunction function) {
+        return isEqual(field, function).negate();
     }
 
     /**
@@ -684,19 +684,19 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is not equal to the `value`, comparing object value equality
+     * the `field` is not equal to the `value`, comparing object value equality
      * not reference equality. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param value the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -704,8 +704,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isNotEqual('NumberOfEmployees', 100);
      * SObjectPredicates.isNotEqual('Parent?.NumberOfEmployees', 100);
      */
-    public static Predicate isNotEqual(final String fieldName, final Object value) {
-        return isEqual(fieldName, value).negate();
+    public static Predicate isNotEqual(final String field, final Object value) {
+        return isEqual(field, value).negate();
     }
 
     /**
@@ -733,20 +733,20 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="LIKE">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the string value of
-     * the `fieldName` matches the `likeString` pattern. Supports the `%` and
+     * the `field` matches the `likeString` pattern. Supports the `%` and
      * the `_` wildcards and is case-insensitive. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the value of which is tested
-     * @param likeString the pattern that is tested to match the string value of the `fieldName`
+     * @param field the value of which is tested
+     * @param likeString the pattern that is tested to match the string value of the `field`
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `likeString` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -754,8 +754,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLike('Name', '%a_e');
      * SObjectPredicates.isLike('Parent?.Name', '%a_e');
      */
-    public static Predicate isLike(final String fieldName, final String likeString) {
-        return isLike(SObjectFunctions.get(fieldName), likeString);
+    public static Predicate isLike(final String field, final String likeString) {
+        return isLike(SObjectFunctions.get(field), likeString);
     }
 
     /**
@@ -783,20 +783,20 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="IN">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is contained in the `container`. Cross-reference fields and safe
+     * the `field` is contained in the `container`. Cross-reference fields and safe
      * navigation are supported.
      *
-     * @param fieldName the value of which is tested
+     * @param field the value of which is tested
      * @param container the iterable that checks for the presence of an element
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `container` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see List.contains
      *
@@ -805,8 +805,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isIn('Parent?.Name', new Set<String>{ 'John', 'Jim' });
      * SObjectPredicates.isIn('Parent.Name', nameStream);
      */
-    public static Predicate isIn(final String fieldName, final Iterable<Object> container) {
-        return isIn(SObjectFunctions.get(fieldName), container);
+    public static Predicate isIn(final String field, final Iterable<Object> container) {
+        return isIn(SObjectFunctions.get(field), container);
     }
 
     /**
@@ -835,20 +835,20 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="NOT IN">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is not contained in the `container`. Cross-reference fields and safe
+     * the `field` is not contained in the `container`. Cross-reference fields and safe
      * navigation are supported.
      *
-     * @param fieldName the value of which is tested
+     * @param field the value of which is tested
      * @param container the iterable that checks for the presence of an element
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `container` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see List.contains
      *
@@ -857,8 +857,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isNotIn('Parent?.Name', new Set<String>{ 'John', 'Jim' });
      * SObjectPredicates.isNotIn('Parent.Name', nameStream);
      */
-    public static Predicate isNotIn(final String fieldName, final Iterable<Object> container) {
-        return isIn(fieldName, container).negate();
+    public static Predicate isNotIn(final String field, final Iterable<Object> container) {
+        return isIn(field, container).negate();
     }
 
     /**
@@ -887,22 +887,22 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="INCLUDES">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the string value of
-     * the `fieldName` fully matches any element of the `container`.
+     * the `field` fully matches any element of the `container`.
      * Each element of the `container` should be represented as a subset and the subset elements
      * should be separated by `;`. Cross-reference fields and safe
      * navigation are supported.
      *
-     * @param fieldName the value of which is tested
+     * @param field the value of which is tested
      * @param container the iterable against which the value is tested
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `container` is null or `container` contains null element
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * Account acc = new Account(Name = 'AAA;BBB');
@@ -914,8 +914,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * // it is also possible
      * SObjectPredicates.includes('Parent?.Name', new List<String>{ 'AAA' });
      */
-    public static Predicate includes(final String fieldName, final Iterable<String> container) {
-        return includes(SObjectFunctions.get(fieldName), container);
+    public static Predicate includes(final String field, final Iterable<String> container) {
+        return includes(SObjectFunctions.get(field), container);
     }
 
     /**
@@ -949,22 +949,22 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     //<editor-fold desc="EXCLUDES">
     /**
      * @description Returns a `Predicate` that tests the input SObject if the string value of
-     * the `fieldName` does not match every element of the `container`.
+     * the `field` does not match every element of the `container`.
      * Each element of the `container` should be represented as a subset and the subset elements
      * should be separated by `;`. Cross-reference fields and safe
      * navigation are supported.
      *
-     * @param fieldName the value of which is tested
+     * @param field the value of which is tested
      * @param container the iterable against which the value is tested
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `container` is null or `container` contains null element
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * Account acc = new Account(Name = 'AAA;BBB');
@@ -976,8 +976,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * // it is also possible
      * SObjectPredicates.excludes('Parent?.Name', new List<String>{ 'AAA' });
      */
-    public static Predicate excludes(final String fieldName, final Iterable<String> container) {
-        return excludes(SObjectFunctions.get(fieldName), container);
+    public static Predicate excludes(final String field, final Iterable<String> container) {
+        return excludes(SObjectFunctions.get(field), container);
     }
 
     /**

@@ -345,15 +345,15 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsAnyBiPredicate extends BiPredicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o1, Object o2) {
-     *         String value1 = (String) ((Account) o1).get(fieldName);
-     *         String value2 = (String) ((Account) o2).get(fieldName);
+     *         String value1 = (String) ((Account) o1).get(field);
+     *         String value2 = (String) ((Account) o2).get(field);
      *         return value1.contains(s) || value2.contains(s);
      *     }
      * }
@@ -482,14 +482,14 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -521,14 +521,14 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -561,14 +561,14 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -750,10 +750,10 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *         return ((String) ((SObject) o).get(field))?.toLowerCase();
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -1073,9 +1073,9 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
      * }
      * List<Account> accounts = new List<Account>{
      *     new Account(Name = 'foo'),
@@ -1311,10 +1311,10 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @example
      * // Simple collecting
      * public class AddToStringSetBiConsumer extends BiConsumer {
-     *     private final String fieldName;
-     *     public AddToStringSetBiConsumer(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public AddToStringSetBiConsumer(String field) { this.field = field; }
      *     public override void accept(Object container, Object o) {
-     *         String value = (String) ((SObject) o).get(fieldName);
+     *         String value = (String) ((SObject) o).get(field);
      *         ((Set<String>) container).add(value);
      *     }
      * }
@@ -1329,17 +1329,17 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * // ['foo', 'bar', 'baz', 'qux']
      * // Cascaded operation
      * public class GetIntFieldFunction extends Function {
-     *     private final String fieldName;
-     *     public GetIntFieldFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetIntFieldFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return (Integer) ((SObject) o).get(fieldName);
+     *         return (Integer) ((SObject) o).get(field);
      *     }
      * }
      * public class AddToListBiConsumer extends BiConsumer {
-     *     private final String fieldName;
-     *     public AddToListBiConsumer(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public AddToListBiConsumer(String field) { this.field = field; }
      *     public override void accept(Object container, Object o) {
-     *         ((List<Object>) container).add(((SObject) o).get(fieldName));
+     *         ((List<Object>) container).add(((SObject) o).get(field));
      *     }
      * }
      * public class PutToObjectsByIntMap extends BiConsumer {
@@ -1401,14 +1401,14 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -1437,14 +1437,14 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -1472,14 +1472,14 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -1568,10 +1568,10 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *         return ((String) ((SObject) o).get(field))?.toLowerCase();
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -1624,10 +1624,10 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *         return ((String) ((SObject) o).get(field))?.toLowerCase();
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -1699,10 +1699,10 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @example
      * public class GetChildrenFieldOfTheLatestFunction extends Function {
      *     private final String childRelField;
-     *     private final String fieldName;
-     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *     private final String field;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
      *         this.childRelField = childRelField;
-     *         this.fieldName = fieldName;
+     *         this.field = field;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -1714,7 +1714,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *             .sort('CreatedDate')
      *             .toList()
      *             [0]
-     *             .get(fieldName);
+     *             .get(field);
      *     }
      * }
      * Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
@@ -1830,10 +1830,10 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @example
      * public class GetChildrenFieldOfTheLatestFunction extends Function {
      *     private final String childRelField;
-     *     private final String fieldName;
-     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *     private final String field;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
      *         this.childRelField = childRelField;
-     *         this.fieldName = fieldName;
+     *         this.field = field;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -1845,7 +1845,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *             .sort('CreatedDate')
      *             .toList()
      *             [0]
-     *             .get(fieldName);
+     *             .get(field);
      *     }
      * }
      * Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
@@ -1948,10 +1948,10 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @example
      * public class GetChildrenFieldOfTheLatestFunction extends Function {
      *     private final String childRelField;
-     *     private final String fieldName;
-     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *     private final String field;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
      *         this.childRelField = childRelField;
-     *         this.fieldName = fieldName;
+     *         this.field = field;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -1963,7 +1963,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *             .sort('CreatedDate')
      *             .toList()
      *             [0]
-     *             .get(fieldName);
+     *             .get(field);
      *     }
      * }
      * Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
@@ -2008,14 +2008,14 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * Account acc1 = new Account(Name = 'foo', Rating = 'Hot');

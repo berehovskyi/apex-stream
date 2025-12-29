@@ -103,17 +103,17 @@ public virtual inherited sharing class SObjectComparerPredicateProvider {
     }
 
     /**
-     * @description Creates a `ComparisonOperator` for comparing SObjects using the provided field name,
+     * @description Creates a `ComparisonOperator` for comparing SObjects using the provided field,
      * with support for currying to build complex comparisons.
      *
-     * @param left the field name of the SObject to be used for mapping
+     * @param left the field of the SObject to be used for mapping
      *
      * @return a `ComparisonOperator` for further specification of the comparison operation
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectComparerPredicateProvider builder = new SObjectComparerPredicateProvider(Comparer.defaultOrder());
@@ -386,12 +386,12 @@ public virtual inherited sharing class SObjectComparerPredicateProvider {
         }
 
         /**
-         * @description Specifies a field name to compare the left value against, creating a predicate
+         * @description Specifies a field to compare the left value against, creating a predicate
          * that evaluates the comparison.
          *
-         * @param right the field name to compare against
+         * @param right the field to compare against
          *
-         * @return a predicate that returns true if the comparison holds for the specified field name
+         * @return a predicate that returns true if the comparison holds for the specified field
          *
          * @throws IllegalArgumentException if `right` is blank
          * @throws NullPointerException if `right` is null

@@ -71,15 +71,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` as a set union
-     * of the current and another `iterable` according to `fieldName`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable union(Iterable<SObject> iterable, String fieldName);
+    ISObjectEnumerable union(Iterable<SObject> iterable, String field);
 
     /**
      * @description Returns a new `ISObjectEnumerable` as a set union
@@ -118,15 +118,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` as a set intersection
-     * of the current and another `iterable` according to `fieldName`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable intersect(Iterable<SObject> iterable, String fieldName);
+    ISObjectEnumerable intersect(Iterable<SObject> iterable, String field);
 
     /**
      * @description Returns a new `ISObjectEnumerable` as a set intersection
@@ -165,15 +165,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` as a set difference
-     * of the current and another `iterable` according to `fieldName`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable except(Iterable<SObject> iterable, String fieldName);
+    ISObjectEnumerable except(Iterable<SObject> iterable, String field);
 
     /**
      * @description Returns a new `ISObjectEnumerable` as a set difference
@@ -208,14 +208,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` with distinct elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable distinct(String fieldName);
+    ISObjectEnumerable distinct(String field);
 
     /**
      * @description Returns a new `ISObjectEnumerable` with distinct elements
@@ -241,15 +241,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` with elements
-     * that have `fieldName`'s value.
+     * that have `field`'s value.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable filter(String fieldName, Object value);
+    ISObjectEnumerable filter(String field, Object value);
 
     /**
      * @description Returns a new `ISObjectEnumerable` with elements
@@ -276,15 +276,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` that takes elements
-     * while `fieldName` equals `value`.
+     * while `field` equals `value`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable take(String fieldName, Object value);
+    ISObjectEnumerable take(String field, Object value);
 
     /**
      * @description Returns a new `ISObjectEnumerable` that takes elements
@@ -311,15 +311,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` that drops elements
-     * while `fieldName` equals `value`, then takes the rest.
+     * while `field` equals `value`, then takes the rest.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable drop(String fieldName, Object value);
+    ISObjectEnumerable drop(String field, Object value);
 
     /**
      * @description Returns a new `ISObjectEnumerable` that drops elements
@@ -354,14 +354,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the parent reference field
+     * @param field the parent reference field
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable mapTo(String fieldName);
+    ISObjectEnumerable mapTo(String field);
 
     /**
      * @description Returns a new `ISObjectEnumerable` with elements
@@ -387,14 +387,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `IIntEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `IIntEnumerable`
      */
-    IIntEnumerable mapToInt(String fieldName);
+    IIntEnumerable mapToInt(String field);
 
     /**
      * @description Returns a new `IIntEnumerable` with elements
@@ -420,14 +420,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ILongEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `ILongEnumerable`
      */
-    ILongEnumerable mapToLong(String fieldName);
+    ILongEnumerable mapToLong(String field);
 
     /**
      * @description Returns a new `ILongEnumerable` with elements
@@ -453,14 +453,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `IDoubleEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `IDoubleEnumerable`
      */
-    IDoubleEnumerable mapToDouble(String fieldName);
+    IDoubleEnumerable mapToDouble(String field);
 
     /**
      * @description Returns a new `IDoubleEnumerable` with elements
@@ -486,14 +486,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `IObjectEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `IObjectEnumerable`
      */
-    IObjectEnumerable mapToObject(String fieldName);
+    IObjectEnumerable mapToObject(String field);
 
     /**
      * @description Returns a new `IObjectEnumerable` with elements
@@ -521,14 +521,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
     /**
      * @description Returns a new `ISObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the child relationship field
+     * @param field the child relationship field
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable flatMapTo(String fieldName);
+    ISObjectEnumerable flatMapTo(String field);
 
     /**
      * @description Returns a new `ISObjectEnumerable` with elements as a result of
@@ -602,16 +602,16 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
     ISObjectEnumerable forEach(IConsumer consumer);
 
     /**
-     * @description Returns an `ISObjectEnumerable` after setting the `value` for `fieldName`
+     * @description Returns an `ISObjectEnumerable` after setting the `value` for `field`
      * on each element.
      * <p>Intermediate Interfering Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the value
      *
      * @return the `ISObjectEnumerable`
      */
-    ISObjectEnumerable forEach(String fieldName, Object value);
+    ISObjectEnumerable forEach(String field, Object value);
 
     /**
      * @description Returns an `ISObjectEnumerable` after setting the `value` for `field`
@@ -657,26 +657,26 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns a new `ISObjectEnumerable` with sorted elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable sort(String fieldName);
+    ISObjectEnumerable sort(String field);
 
     /**
      * @description Returns a new `ISObjectEnumerable` with sorted elements
-     * taken from `fieldName` values considering `order`.
+     * taken from `field` values considering `order`.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param order the sort order
      *
      * @return the new `ISObjectEnumerable`
      */
-    ISObjectEnumerable sort(String fieldName, SortOrder order);
+    ISObjectEnumerable sort(String field, SortOrder order);
 
     /**
      * @description Returns a new `ISObjectEnumerable` with sorted elements
@@ -772,15 +772,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns an `IOptional` describing the first element
-     * which has `value` of `fieldName`.
+     * which has `value` of `field`.
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return the `IOptional` containing the result
      */
-    IOptional find(String fieldName, Object value);
+    IOptional find(String field, Object value);
 
     /**
      * @description Returns an `IOptional` describing the first element
@@ -806,16 +806,16 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
     Boolean every(IPredicate predicate);
 
     /**
-     * @description Returns whether all elements have `fieldName` `value`.
+     * @description Returns whether all elements have `field` `value`.
      * If `ISObjectEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return `true` or `false`
      */
-    Boolean every(String fieldName, Object value);
+    Boolean every(String field, Object value);
 
     /**
      * @description Returns whether all elements have `field` `value`.
@@ -841,16 +841,16 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
     Boolean some(IPredicate predicate);
 
     /**
-     * @description Returns whether some element has `fieldName` `value`.
+     * @description Returns whether some element has `field` `value`.
      * If `ISObjectEnumerable` is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return `true` or `false`
      */
-    Boolean some(String fieldName, Object value);
+    Boolean some(String field, Object value);
 
     /**
      * @description Returns whether some element has `field` `value`.
@@ -876,16 +876,16 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
     Boolean none(IPredicate predicate);
 
     /**
-     * @description Returns whether no elements have `fieldName` `value`.
+     * @description Returns whether no elements have `field` `value`.
      * If `ISObjectEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return `true` or `false`
      */
-    Boolean none(String fieldName, Object value);
+    Boolean none(String field, Object value);
 
     /**
      * @description Returns whether no elements have `field` `value`.
@@ -912,14 +912,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns an `IOptional` describing the maximum element
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `IOptional` containing the result
      */
-    IOptional max(String fieldName);
+    IOptional max(String field);
 
     /**
      * @description Returns an `IOptional` describing the maximum element
@@ -945,14 +945,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Returns an `IOptional` describing the minimum element
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `IOptional` containing the result
      */
-    IOptional min(String fieldName);
+    IOptional min(String field);
 
     /**
      * @description Returns an `IOptional` describing the minimum element
@@ -979,11 +979,11 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
      * @description Returns the arithmetic sum of field values of elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field to sum the values
+     * @param field the field to sum the values
      *
      * @return the sum of field values
      */
-    Double sum(String fieldName);
+    Double sum(String field);
 
     /**
      * @description Returns the arithmetic sum of field values of elements.
@@ -1009,11 +1009,11 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
      * @description Returns the arithmetic mean of field values of elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field to calculate the average
+     * @param field the field to calculate the average
      *
      * @return the `IOptional` containing the result
      */
-    IOptional avg(String fieldName);
+    IOptional avg(String field);
 
     /**
      * @description Returns the arithmetic mean of field values of elements.
@@ -1061,14 +1061,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Accumulates elements into a `List<Object>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `List<Object>` containing the collected elements
      */
-    List<Object> toList(String fieldName);
+    List<Object> toList(String field);
 
     /**
      * @description Accumulates elements into a `List<Object>`
@@ -1094,15 +1094,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Accumulates elements into a `List<?>` of specific `elementType`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param elementType the result type
      *
      * @return the `List<Object>` containing the collected elements, which can be cast to `List<T>`
      */
-    List<Object> toList(String fieldName, Type elementType);
+    List<Object> toList(String field, Type elementType);
 
     /**
      * @description Accumulates elements into a `List<?>` of specific `elementType`
@@ -1136,14 +1136,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Accumulates elements into a `Set<Object>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Set<Object>` containing the collected elements
      */
-    Set<Object> toSet(String fieldName);
+    Set<Object> toSet(String field);
 
     /**
      * @description Accumulates elements into a `Set<Object>`
@@ -1176,14 +1176,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Accumulates `Id` elements into a `Set<Id>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Set<Id>` containing the collected elements
      */
-    Set<Id> toIdSet(String fieldName);
+    Set<Id> toIdSet(String field);
 
     /**
      * @description Accumulates `Id` elements into a `Set<Id>`
@@ -1208,14 +1208,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Accumulates `String` elements into a `Set<String>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Set<String>` containing the collected elements
      */
-    Set<String> toStringSet(String fieldName);
+    Set<String> toStringSet(String field);
 
     /**
      * @description Accumulates `String` elements into a `Set<String>`
@@ -1250,15 +1250,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Accumulates elements into a `Map<Id, ? extends SObject>` of specific `valueType`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param valueType the value type
      *
      * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `Map<Id, T>`
      */
-    Map<Id, SObject> toByIdMap(String fieldName, Type valueType);
+    Map<Id, SObject> toByIdMap(String field, Type valueType);
 
     /**
      * @description Accumulates elements into a `Map<Id, ? extends SObject>` of specific `valueType`
@@ -1286,15 +1286,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Accumulates elements into a `Map<String, ? extends SObject>` of specific `valueType`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param valueType the value type
      *
      * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `Map<String, T>`
      */
-    Map<String, SObject> toByStringMap(String fieldName, Type valueType);
+    Map<String, SObject> toByStringMap(String field, Type valueType);
 
     /**
      * @description Accumulates elements into a `Map<String, ? extends SObject>` of specific `valueType`
@@ -1321,14 +1321,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Groups elements into a `Map<Id, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Map<Id, List<SObject>>` containing the collected elements
      */
-    Map<Id, List<SObject>> groupById(String fieldName);
+    Map<Id, List<SObject>> groupById(String field);
 
     /**
      * @description Groups elements into a `Map<Id, List<SObject>>`
@@ -1354,14 +1354,14 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
 
     /**
      * @description Groups elements into a `Map<String, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Map<String, List<SObject>>` containing the collected elements
      */
-    Map<String, List<SObject>> groupByString(String fieldName);
+    Map<String, List<SObject>> groupByString(String field);
 
     /**
      * @description Groups elements into a `Map<String, List<SObject>>`
@@ -1385,15 +1385,15 @@ public interface ISObjectEnumerable extends Iterable<SObject> {
     Map<Boolean, List<SObject>> partition(IPredicate predicate);
 
     /**
-     * @description Partitions elements by `fieldName` having `value`.
+     * @description Partitions elements by `field` having `value`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return the `Map<Boolean, List<SObject>>` containing the collected elements
      */
-    Map<Boolean, List<SObject>> partition(String fieldName, Object value);
+    Map<Boolean, List<SObject>> partition(String field, Object value);
 
     /**
      * @description Partitions elements by `field` having `value`.

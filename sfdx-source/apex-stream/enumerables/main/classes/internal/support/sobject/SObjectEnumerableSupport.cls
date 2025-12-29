@@ -8,20 +8,20 @@
 public inherited sharing class SObjectEnumerableSupport {
     /**
      * @description Returns a `Consumer` that sets the value returned by
-     * the `mapper` for the specified `fieldName`.
+     * the `mapper` for the specified `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param mapper applied to the input argument
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -30,8 +30,8 @@ public inherited sharing class SObjectEnumerableSupport {
      * SObjectEnumerableSupport.set('Parent.NumberOfEmployees', someFunction);
      * SObjectEnumerableSupport.set('Parent?.NumberOfEmployees', someFunction);
      */
-    public static Consumer set(final String fieldName, final IFunction mapper) {
-        return new SetFieldConsumer(fieldName, mapper);
+    public static Consumer set(final String field, final IFunction mapper) {
+        return new SetFieldConsumer(field, mapper);
     }
 
     /**
@@ -44,7 +44,7 @@ public inherited sharing class SObjectEnumerableSupport {
      * @return the `Consumer`
      *
      * @throws NullPointerException if `field` or `mapper` is null
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -57,19 +57,19 @@ public inherited sharing class SObjectEnumerableSupport {
 
     /**
      * @description Returns a `Consumer` that sets the `value`
-     * for the specified `fieldName`.
+     * for the specified `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param value the value to set
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -78,8 +78,8 @@ public inherited sharing class SObjectEnumerableSupport {
      * SObjectEnumerableSupport.set('Parent.NumberOfEmployees', 100);
      * SObjectEnumerableSupport.set('Parent?.NumberOfEmployees', (Object) null);
      */
-    public static Consumer set(final String fieldName, final Object value) {
-        return set(fieldName, Function.constant(value));
+    public static Consumer set(final String field, final Object value) {
+        return set(field, Function.constant(value));
     }
 
     /**
@@ -91,9 +91,9 @@ public inherited sharing class SObjectEnumerableSupport {
      *
      * @return the `Consumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.put
      *
@@ -107,17 +107,17 @@ public inherited sharing class SObjectEnumerableSupport {
 
     /**
      * @description Returns a `Function` that gets a value for
-     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     * the specified `field`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param field the field to get a value
      *
      * @return the `Function`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.get
      *
@@ -126,8 +126,8 @@ public inherited sharing class SObjectEnumerableSupport {
      * SObjectEnumerableSupport.get('Parent.Name');
      * SObjectEnumerableSupport.get('Parent?.Name');
      */
-    public static Function get(final String fieldName) {
-        return new GetFunction(fieldName);
+    public static Function get(final String field) {
+        return new GetFunction(field);
     }
 
     /**
@@ -151,17 +151,17 @@ public inherited sharing class SObjectEnumerableSupport {
 
     /**
      * @description Returns a `Function` that gets children sobjects for
-     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     * the specified `field`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param field the field to get a value
      *
      * @return the `Function`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.getSObjects
      *
@@ -170,8 +170,8 @@ public inherited sharing class SObjectEnumerableSupport {
      * SObjectEnumerableSupport.getSObjects('Parent.Contacts');
      * SObjectEnumerableSupport.getSObjects('Parent?.Contacts');
      */
-    public static Function getSObjects(final String fieldName) {
-        return new GetSObjectsFunction(fieldName);
+    public static Function getSObjects(final String field) {
+        return new GetSObjectsFunction(field);
     }
 
     /**
@@ -201,17 +201,17 @@ public inherited sharing class SObjectEnumerableSupport {
 
     /**
      * @description Returns a `Operator` that gets sobject
-     * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     * for the specified `field`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param field the field to get a value
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.getSObject
      *
@@ -220,8 +220,8 @@ public inherited sharing class SObjectEnumerableSupport {
      * SObjectEnumerableSupport.getSObject('Parent.Parent');
      * SObjectEnumerableSupport.getSObject('Parent?.Parent');
      */
-    public static Operator getSObject(final String fieldName) {
-        return new GetSObjectOperator(fieldName);
+    public static Operator getSObject(final String field) {
+        return new GetSObjectOperator(field);
     }
 
     /**
@@ -245,19 +245,19 @@ public inherited sharing class SObjectEnumerableSupport {
 
     /**
      * @description Returns a `Predicate` that tests the input SObject if the value of
-     * the `fieldName` is equal to the `value`, comparing object value equality
+     * the `field` is equal to the `value`, comparing object value equality
      * not reference equality. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the value of which is considered the left argument of comparison
+     * @param field the value of which is considered the left argument of comparison
      * @param value the right argument of comparison
      *
      * @return the `Predicate`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see Comparer.defaultOrder
      *
@@ -265,8 +265,8 @@ public inherited sharing class SObjectEnumerableSupport {
      * SObjectEnumerableSupport.isEqual('NumberOfEmployees', 100);
      * SObjectEnumerableSupport.isEqual('Parent?.NumberOfEmployees', 100);
      */
-    public static Predicate isEqual(final String fieldName, final Object value) {
-        return EnumerableSupport.isEqual(get(fieldName), Function.constant(value));
+    public static Predicate isEqual(final String field, final Object value) {
+        return EnumerableSupport.isEqual(get(field), Function.constant(value));
     }
 
     /**
@@ -318,27 +318,27 @@ public inherited sharing class SObjectEnumerableSupport {
     private abstract class SObjectPathConsumer extends Consumer {
         protected final IOperator operator;
         protected final String xRefFieldName;
-        protected SObjectPathConsumer(String fieldName) {
-            xRefFieldName = fieldName.substringAfterLast('.');
-            operator = getSObject(fieldName.substringBeforeLast('.'));
+        protected SObjectPathConsumer(String field) {
+            xRefFieldName = field.substringAfterLast('.');
+            operator = getSObject(field.substringBeforeLast('.'));
         }
     }
 
     private class SetFieldName extends Consumer {
-        private final String fieldName;
+        private final String field;
         private final IFunction mapper;
-        private SetFieldName(String fieldName, IFunction mapper) {
-            this.fieldName = fieldName;
+        private SetFieldName(String field, IFunction mapper) {
+            this.field = field;
             this.mapper = mapper;
         }
         // prettier-ignore
-        public override void accept(Object obj) { ((SObject) obj).put(fieldName, mapper.apply(((SObject) obj))); }
+        public override void accept(Object obj) { ((SObject) obj).put(field, mapper.apply(((SObject) obj))); }
     }
 
     private class SetFieldPath extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetFieldPath(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetFieldPath(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
@@ -348,8 +348,8 @@ public inherited sharing class SObjectEnumerableSupport {
 
     private class SetFieldPathSafe extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetFieldPathSafe(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetFieldPathSafe(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object obj) {
@@ -373,13 +373,13 @@ public inherited sharing class SObjectEnumerableSupport {
     private class SetFieldConsumer extends Consumer {
         private final IConsumer consumer;
         // prettier-ignore
-        private SetFieldConsumer(String fieldName, IFunction mapper) {
-            Validate.notBlank(fieldName);
+        private SetFieldConsumer(String field, IFunction mapper) {
+            Validate.notBlank(field);
             Validate.notNull(mapper);
-            if (!fieldName.contains('.')) { consumer = new SetFieldName(fieldName, mapper); }
-            else if (fieldName.substringBeforeLast('.').endsWith('?')) {
-                consumer = new SetFieldPathSafe(fieldName, mapper);
-            } else { consumer = new SetFieldPath(fieldName, mapper); }
+            if (!field.contains('.')) { consumer = new SetFieldName(field, mapper); }
+            else if (field.substringBeforeLast('.').endsWith('?')) {
+                consumer = new SetFieldPathSafe(field, mapper);
+            } else { consumer = new SetFieldPath(field, mapper); }
         }
         // prettier-ignore
         public override void accept(Object obj) { consumer.accept(obj); }
@@ -388,30 +388,30 @@ public inherited sharing class SObjectEnumerableSupport {
     private abstract class SObjectPathFunction extends Function {
         protected final IOperator operator;
         protected final String xRefFieldName;
-        protected SObjectPathFunction(String fieldName) {
-            xRefFieldName = fieldName.substringAfterLast('.');
-            operator = getSObject(fieldName.substringBeforeLast('.'));
+        protected SObjectPathFunction(String field) {
+            xRefFieldName = field.substringAfterLast('.');
+            operator = getSObject(field.substringBeforeLast('.'));
         }
     }
 
     private class GetFieldNameFunction extends Function {
-        private final String fieldName;
+        private final String field;
         // prettier-ignore
-        private GetFieldNameFunction(String fieldName) { this.fieldName = fieldName; }
+        private GetFieldNameFunction(String field) { this.field = field; }
         // prettier-ignore
-        public override Object apply(Object obj) { return ((SObject) obj).get(fieldName); }
+        public override Object apply(Object obj) { return ((SObject) obj).get(field); }
     }
 
     private class GetFieldPathFunction extends SObjectPathFunction {
         // prettier-ignore
-        private GetFieldPathFunction(String fieldName) { super(fieldName); }
+        private GetFieldPathFunction(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).get(xRefFieldName); }
     }
 
     private class GetFieldPathSafeFunction extends SObjectPathFunction {
         // prettier-ignore
-        private GetFieldPathSafeFunction(String fieldName) { super(fieldName); }
+        private GetFieldPathSafeFunction(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.get(xRefFieldName); }
     }
@@ -419,12 +419,12 @@ public inherited sharing class SObjectEnumerableSupport {
     private class GetFunction extends Function {
         private final IFunction mapper;
         // prettier-ignore
-        private GetFunction(String fieldName) {
-            Validate.notBlank(fieldName);
-            if (!fieldName.contains('.')) { mapper = new GetFieldNameFunction(fieldName); }
-            else if (fieldName.substringBeforeLast('.').endsWith('?')) {
-                mapper = new GetFieldPathSafeFunction(fieldName);
-            } else { mapper = new GetFieldPathFunction(fieldName); }
+        private GetFunction(String field) {
+            Validate.notBlank(field);
+            if (!field.contains('.')) { mapper = new GetFieldNameFunction(field); }
+            else if (field.substringBeforeLast('.').endsWith('?')) {
+                mapper = new GetFieldPathSafeFunction(field);
+            } else { mapper = new GetFieldPathFunction(field); }
         }
         // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
@@ -441,23 +441,23 @@ public inherited sharing class SObjectEnumerableSupport {
     }
 
     private class GetSObjectsFieldNameFunction extends Function {
-        private final String fieldName;
+        private final String field;
         // prettier-ignore
-        private GetSObjectsFieldNameFunction(String fieldName) { this.fieldName = fieldName; }
+        private GetSObjectsFieldNameFunction(String field) { this.field = field; }
         // prettier-ignore
-        public override Object apply(Object obj) { return ((SObject) obj).getSObjects(fieldName); }
+        public override Object apply(Object obj) { return ((SObject) obj).getSObjects(field); }
     }
 
     private class GetSObjectsFieldPathFunction extends SObjectPathFunction {
         // prettier-ignore
-        private GetSObjectsFieldPathFunction(String fieldName) { super(fieldName); }
+        private GetSObjectsFieldPathFunction(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj)).getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsFieldPathSafeFunction extends SObjectPathFunction {
         // prettier-ignore
-        private GetSObjectsFieldPathSafeFunction(String fieldName) { super(fieldName); }
+        private GetSObjectsFieldPathSafeFunction(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object obj) { return ((SObject) operator.apply(obj))?.getSObjects(xRefFieldName); }
     }
@@ -465,38 +465,38 @@ public inherited sharing class SObjectEnumerableSupport {
     private class GetSObjectsFunction extends Function {
         private final IFunction mapper;
         // prettier-ignore
-        private GetSObjectsFunction(String fieldName) {
-            Validate.notBlank(fieldName);
-            if (!fieldName.contains('.')) { mapper = new GetSObjectsFieldNameFunction(fieldName); }
-            else if (fieldName.substringBeforeLast('.').endsWith('?')) {
-                mapper = new GetSObjectsFieldPathSafeFunction(fieldName);
-            } else { mapper = new GetSObjectsFieldPathFunction(fieldName); }
+        private GetSObjectsFunction(String field) {
+            Validate.notBlank(field);
+            if (!field.contains('.')) { mapper = new GetSObjectsFieldNameFunction(field); }
+            else if (field.substringBeforeLast('.').endsWith('?')) {
+                mapper = new GetSObjectsFieldPathSafeFunction(field);
+            } else { mapper = new GetSObjectsFieldPathFunction(field); }
         }
         // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
     }
 
     private class GetSObjectFieldNameOperator extends Operator {
-        private final String fieldName;
+        private final String field;
         // prettier-ignore
-        private GetSObjectFieldNameOperator(String fieldName) { this.fieldName = fieldName; }
+        private GetSObjectFieldNameOperator(String field) { this.field = field; }
         // prettier-ignore
-        public override Object apply(Object obj) { return ((SObject) obj).getSObject(fieldName); }
+        public override Object apply(Object obj) { return ((SObject) obj).getSObject(field); }
     }
 
     private class GetSObjectFieldPathSafeOperator extends Operator {
         private final List<String> path;
         // prettier-ignore
-        private GetSObjectFieldPathSafeOperator(String fieldName) { path = fieldName.split('\\.'); }
+        private GetSObjectFieldPathSafeOperator(String field) { path = field.split('\\.'); }
         // prettier-ignore
         public override Object apply(Object obj) { return getSObject((SObject) obj, 0); }
         // prettier-ignore
         private SObject getSObject(SObject sObj, Integer i) {
             if (i >= path.size()) { return sObj; }
-            String fieldName = path[i];
-            Boolean isSafeNavigation = fieldName.endsWith('?'); // Safe Navigation
-            if (isSafeNavigation) { fieldName = fieldName.removeEnd('?'); }
-            sObj = sObj.getSObject(fieldName);
+            String field = path[i];
+            Boolean isSafeNavigation = field.endsWith('?'); // Safe Navigation
+            if (isSafeNavigation) { field = field.removeEnd('?'); }
+            sObj = sObj.getSObject(field);
             if (isSafeNavigation && sObj == null) { return null; }
             return getSObject(sObj, ++i);
         }
@@ -505,10 +505,10 @@ public inherited sharing class SObjectEnumerableSupport {
     private class GetSObjectOperator extends Operator {
         private final IFunction mapper;
         // prettier-ignore
-        private GetSObjectOperator(String fieldName) {
-            Validate.notBlank(fieldName);
-            if (!fieldName.containsAny('?.')) { mapper = new GetSObjectFieldNameOperator(fieldName); }
-            else { mapper = new GetSObjectFieldPathSafeOperator(fieldName); }
+        private GetSObjectOperator(String field) {
+            Validate.notBlank(field);
+            if (!field.containsAny('?.')) { mapper = new GetSObjectFieldNameOperator(field); }
+            else { mapper = new GetSObjectFieldPathSafeOperator(field); }
         }
         // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }

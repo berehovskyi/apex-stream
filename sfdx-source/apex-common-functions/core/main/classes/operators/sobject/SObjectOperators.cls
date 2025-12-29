@@ -17,17 +17,17 @@ public virtual inherited sharing class SObjectOperators {
     // @start-group Built-Ins
     /**
      * @description Returns a `Operator` that gets the SObject
-     * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     * for the specified `field`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get the value
+     * @param field the field to get the value
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.getSObject
      *
@@ -36,8 +36,8 @@ public virtual inherited sharing class SObjectOperators {
      * SObjectOperators.getSObject('Parent.Parent');
      * SObjectOperators.getSObject('Parent?.Parent');
      */
-    public static Operator getSObject(final String fieldName) {
-        return new GetSObjectOperator(fieldName);
+    public static Operator getSObject(final String field) {
+        return new GetSObjectOperator(field);
     }
 
     /**
@@ -61,35 +61,35 @@ public virtual inherited sharing class SObjectOperators {
 
     /**
      * @description Returns a `Operator` that sets the value returned by
-     * the `mapper` for the specified `fieldName` and returns a mutated argument.
+     * the `mapper` for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param mapper applied to the input argument
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.set('NumberOfEmployees', someFunction);
      * SObjectOperators.set('Parent.NumberOfEmployees', someFunction);
      * SObjectOperators.set('Parent?.NumberOfEmployees', someFunction);
      */
-    public static Operator set(final String fieldName, final IFunction mapper) {
-        return Operator.compose(SObjectConsumers.set(fieldName, mapper));
+    public static Operator set(final String field, final IFunction mapper) {
+        return Operator.compose(SObjectConsumers.set(field, mapper));
     }
 
     /**
      * @description Returns a `Operator` that sets the value returned by
      * the `mapper` for the specified `field` and returns a mutated argument.
      *
-     * @param field the field name to set a value
+     * @param field the field to set a value
      * @param mapper applied to the input argument
      *
      * @return the `Operator`
@@ -106,34 +106,34 @@ public virtual inherited sharing class SObjectOperators {
 
     /**
      * @description Returns a `Operator` that sets the `value`
-     * for the specified `fieldName` and returns a mutated argument.
+     * for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param value the value to set
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.set('NumberOfEmployees', 100);
      * SObjectOperators.set('Parent.NumberOfEmployees', 100);
      * SObjectOperators.set('Parent?.NumberOfEmployees', (Object) null);
      */
-    public static Operator set(final String fieldName, final Object value) {
-        return set(fieldName, Function.constant(value));
+    public static Operator set(final String field, final Object value) {
+        return set(field, Function.constant(value));
     }
 
     /**
      * @description Returns a `Operator` that sets the `value`
      * for the specified `field` and returns a mutated argument.
      *
-     * @param field the field name to set a value
+     * @param field the field to set a value
      * @param value the value to set
      *
      * @return the `Operator`
@@ -141,7 +141,7 @@ public virtual inherited sharing class SObjectOperators {
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.set(Account.NumberOfEmployees, 100);
@@ -153,20 +153,20 @@ public virtual inherited sharing class SObjectOperators {
 
     /**
      * @description Returns a `Operator` that sets the SObject value returned by
-     * the `valueMapper` for the specified `fieldName` and returns a mutated argument.
+     * the `valueMapper` for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param valueMapper applied to the input argument
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `valueMapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObjectConsumers.setSObject
      *
@@ -175,8 +175,8 @@ public virtual inherited sharing class SObjectOperators {
      * SObjectOperators.setSObject('Parent.Parent', someOperator);
      * SObjectOperators.setSObject('Parent?.Parent', someOperator);
      */
-    public static Operator setSObject(final String fieldName, final IOperator valueMapper) {
-        return Operator.compose(SObjectConsumers.setSObject(fieldName, valueMapper));
+    public static Operator setSObject(final String field, final IOperator valueMapper) {
+        return Operator.compose(SObjectConsumers.setSObject(field, valueMapper));
     }
 
     /**
@@ -184,7 +184,7 @@ public virtual inherited sharing class SObjectOperators {
      * the `valueMapper` for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param field the field name to set a value
+     * @param field the field to set a value
      * @param valueMapper applied to the input argument
      *
      * @return the `Operator`
@@ -202,19 +202,19 @@ public virtual inherited sharing class SObjectOperators {
 
     /**
      * @description Returns a `Operator` that sets the SObject `parent`
-     * for the specified `fieldName` and returns a mutated argument.
+     * for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param parent the value to set
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObjectConsumers.setSObject
      *
@@ -223,8 +223,8 @@ public virtual inherited sharing class SObjectOperators {
      * SObjectOperators.setSObject('Parent.Parent', someAccount);
      * SObjectOperators.setSObject('Parent?.Parent', (SObject) null);
      */
-    public static Operator setSObject(final String fieldName, final SObject parent) {
-        return setSObject(fieldName, Operator.constant(parent));
+    public static Operator setSObject(final String field, final SObject parent) {
+        return setSObject(field, Operator.constant(parent));
     }
 
     /**
@@ -232,7 +232,7 @@ public virtual inherited sharing class SObjectOperators {
      * for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param field the field name to set a value
+     * @param field the field to set a value
      * @param parent the value to set
      *
      * @return the `Operator`
@@ -240,7 +240,7 @@ public virtual inherited sharing class SObjectOperators {
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObjectConsumers.setSObject
      *
@@ -254,30 +254,30 @@ public virtual inherited sharing class SObjectOperators {
 
     /**
      * @description Returns a `Operator` that sets the SObjects value returned by
-     * the `mapper` for the specified `fieldName` and returns a mutated argument.
+     * the `mapper` for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param mapper applied to the input argument
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.setSObjects('Contacts', someFunction);
      * SObjectOperators.setSObjects('Parent.Contacts', someFunction);
      * SObjectOperators.setSObjects('Parent?.Contacts', someFunction);
      */
-    public static Operator setSObjects(final String fieldName, final IFunction mapper) {
-        return new SetSObjectsByFieldNameOperator(fieldName, mapper);
+    public static Operator setSObjects(final String field, final IFunction mapper) {
+        return new SetSObjectsByFieldNameOperator(field, mapper);
     }
 
     /**
@@ -286,7 +286,7 @@ public virtual inherited sharing class SObjectOperators {
      * <p><strong>Note: </strong></p>
      * <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
      *
-     * @param field the field name to set a value
+     * @param field the field to set a value
      * @param mapper applied to the input argument
      *
      * @return the `Operator`
@@ -302,29 +302,29 @@ public virtual inherited sharing class SObjectOperators {
 
     /**
      * @description Returns a `Operator` that sets the SObjects `children`
-     * for the specified `fieldName` and returns a mutated argument.
+     * for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
      *
-     * @param fieldName the field name to set a value
+     * @param field the field to set a value
      * @param children the value to set
      *
      * @return the `Operator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.setSObjects('Contacts', someFunction);
      * SObjectOperators.setSObjects('Parent.Contacts', someFunction);
      * SObjectOperators.setSObjects('Parent?.Contacts', someFunction);
      */
-    public static Operator setSObjects(final String fieldName, final List<SObject> children) {
-        return setSObjects(fieldName, Function.constant(children));
+    public static Operator setSObjects(final String field, final List<SObject> children) {
+        return setSObjects(field, Function.constant(children));
     }
 
     /**
@@ -334,7 +334,7 @@ public virtual inherited sharing class SObjectOperators {
      * <p><strong>Note: </strong></p>
      * <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
      *
-     * @param field the field name to set a value
+     * @param field the field to set a value
      * @param children the value to set
      *
      * @return the `Operator`
@@ -342,7 +342,7 @@ public virtual inherited sharing class SObjectOperators {
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.setSObjects(Contact.AccountId, childrenContacts);
@@ -394,23 +394,23 @@ public virtual inherited sharing class SObjectOperators {
      * Cross-reference fields and safe navigation are supported.
      *
      * @param sObjectType the SObjectType of a new SObject to be returned
-     * @param fieldName target field name of a first input argument
+     * @param field target field of a first input argument
      * @param mapper the function applied to a second input argument
      *
      * @return the `Operator`
      *
-     * @throws NullPointerException if `sObjectType` or `fieldName`,
+     * @throws NullPointerException if `sObjectType` or `field`,
      * `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.newSObject(Account.SObjectType, 'Id', Functions.get('AccountId'));
      * SObjectOperators.newSObject(Account.SObjectType, 'Id', Functions.get('Account.ParentId'));
      */
-    public static Operator newSObject(final SObjectType sObjectType, final String fieldName, final IFunction mapper) {
-        return newSObject(sObjectType, BiOperator.combine(SObjectBiConsumers.set(fieldName, mapper)));
+    public static Operator newSObject(final SObjectType sObjectType, final String field, final IFunction mapper) {
+        return newSObject(sObjectType, BiOperator.combine(SObjectBiConsumers.set(field, mapper)));
     }
 
     /**
@@ -438,25 +438,25 @@ public virtual inherited sharing class SObjectOperators {
     /**
      * @description Returns a combined `Operator` of the
      * {@link SObjectOperators.newSObject} and the {@link SObjectBiConsumers.set}.
-     * Is typically used to create a new SObject and set the `value` for the `fieldName`.
+     * Is typically used to create a new SObject and set the `value` for the `field`.
      * Cross-reference fields and safe navigation are supported.
      *
      * @param sObjectType the SObjectType of a new SObject to be returned
-     * @param fieldName target field name of a first input argument
+     * @param field target field of a first input argument
      * @param value the value to set
      *
      * @return the `Operator`
      *
-     * @throws NullPointerException if `sObjectType` or `fieldName` is null
+     * @throws NullPointerException if `sObjectType` or `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * SObjectOperators.newSObject(Account.SObjectType, 'Id', someAccId);
      */
-    public static Operator newSObject(final SObjectType sObjectType, final String fieldName, final Object value) {
-        return newSObject(sObjectType, fieldName, Function.constant(value));
+    public static Operator newSObject(final SObjectType sObjectType, final String field, final Object value) {
+        return newSObject(sObjectType, field, Function.constant(value));
     }
 
     /**
@@ -470,7 +470,7 @@ public virtual inherited sharing class SObjectOperators {
      *
      * @return the `Operator`
      *
-     * @throws NullPointerException if `sObjectType` or `fieldName` is null
+     * @throws NullPointerException if `sObjectType` or `field` is null
      *
      * @example
      * SObjectOperators.newSObject(Account.SObjectType, Account.Id, someAccId);
@@ -484,27 +484,27 @@ public virtual inherited sharing class SObjectOperators {
     //<editor-fold desc="Lambdas">
     // @start-group Lambdas
     private class GetSObjectByFieldName extends Operator {
-        private final String fieldName;
+        private final String field;
         // prettier-ignore
-        private GetSObjectByFieldName(String fieldName) { this.fieldName = fieldName; }
+        private GetSObjectByFieldName(String field) { this.field = field; }
         // prettier-ignore
-        public override Object apply(Object obj) { return ((SObject) obj).getSObject(fieldName); }
+        public override Object apply(Object obj) { return ((SObject) obj).getSObject(field); }
     }
 
     private class GetSObjectByFieldPathSafe extends Operator {
         private final List<String> path;
         // prettier-ignore
-        private GetSObjectByFieldPathSafe(String fieldName) { path = fieldName.split('\\.'); }
+        private GetSObjectByFieldPathSafe(String field) { path = field.split('\\.'); }
         // prettier-ignore
         public override Object apply(Object obj) { return getSObject((SObject) obj, 0); }
         private SObject getSObject(SObject sObj, Integer i) {
             // prettier-ignore
             if (i >= path.size()) { return sObj; }
-            String fieldName = path[i];
-            Boolean isSafeNavigation = fieldName.endsWith('?'); // Safe Navigation
+            String field = path[i];
+            Boolean isSafeNavigation = field.endsWith('?'); // Safe Navigation
             // prettier-ignore
-            if (isSafeNavigation) { fieldName = fieldName.removeEnd('?'); }
-            sObj = sObj.getSObject(fieldName);
+            if (isSafeNavigation) { field = field.removeEnd('?'); }
+            sObj = sObj.getSObject(field);
             // prettier-ignore
             if (isSafeNavigation && sObj == null) { return null; }
             return getSObject(sObj, ++i);
@@ -513,12 +513,12 @@ public virtual inherited sharing class SObjectOperators {
 
     private class GetSObjectOperator extends Operator {
         private final IFunction mapper;
-        private GetSObjectOperator(String fieldName) {
-            Validate.notBlank(fieldName);
+        private GetSObjectOperator(String field) {
+            Validate.notBlank(field);
             // prettier-ignore
-            if (!fieldName.containsAny('?.')) { mapper = new GetSObjectByFieldName(fieldName); }
+            if (!field.containsAny('?.')) { mapper = new GetSObjectByFieldName(field); }
             // prettier-ignore
-            else { mapper = new GetSObjectByFieldPathSafe(fieldName); }
+            else { mapper = new GetSObjectByFieldPathSafe(field); }
         }
         // prettier-ignore
         public override Object apply(Object obj) { return mapper.apply(obj); }
@@ -536,18 +536,18 @@ public virtual inherited sharing class SObjectOperators {
 
     private class SetSObjectsByFieldNameOperator extends Operator {
         private final String placeholder = '\'{\'"totalSize": {0}, "done": true, "records": {1}\'}\'';
-        private final String fieldName;
+        private final String field;
         private final IFunction mapper;
-        private SetSObjectsByFieldNameOperator(String fieldName, IFunction mapper) {
-            Validate.notBlank(fieldName);
+        private SetSObjectsByFieldNameOperator(String field, IFunction mapper) {
+            Validate.notBlank(field);
             Validate.notNull(mapper);
-            this.fieldName = fieldName;
+            this.field = field;
             this.mapper = mapper;
         }
         private SetSObjectsByFieldNameOperator(SObjectField field, IFunction mapper) {
             Validate.notNull(field);
             Validate.notNull(mapper);
-            this.fieldName = findChildRelationshipName(field);
+            this.field = findChildRelationshipName(field);
             this.mapper = mapper;
         }
         public override Object apply(Object o) {
@@ -555,11 +555,11 @@ public virtual inherited sharing class SObjectOperators {
             final Map<String, Object> rawRecord = new Map<String, Object>(sObj.getPopulatedFieldsAsMap());
             final List<SObject> children = (List<SObject>) mapper.apply(sObj);
             if (children == null || children.isEmpty()) {
-                rawRecord.keySet().remove(fieldName);
+                rawRecord.keySet().remove(field);
             } else {
                 final List<Object> arguments = new List<Object>{ children.size(), JSON.serialize(children) };
                 final String fake = String.format(placeholder, arguments);
-                rawRecord.put(fieldName, JSON.deserializeUntyped(fake));
+                rawRecord.put(field, JSON.deserializeUntyped(fake));
             }
             return JSON.deserialize(
                 JSON.serialize(rawRecord),

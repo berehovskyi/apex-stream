@@ -142,9 +142,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
      * }
      * List<Account> accounts1 = new List<Account>{
      *     new Account(Name = 'foo'),
@@ -173,16 +173,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set union
-     * of the current and another `iterable` according to `fieldName`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `iterable` or `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `iterable` or `field` is null
      *
      * @example
      * List<Account> accounts1 = new List<Account>{
@@ -206,8 +206,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { Name: 'fred', NumberOfEmployees: 500 }
      * ]
      */
-    public virtual SObjectEnumerable union(final Iterable<SObject> iterable, final String fieldName) {
-        return union(iterable, SObjectEnumerableSupport.get(fieldName));
+    public virtual SObjectEnumerable union(final Iterable<SObject> iterable, final String field) {
+        return union(iterable, SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -295,9 +295,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
      * }
      * List<Account> accounts1 = new List<Account>{
      *     new Account(Name = 'foo'),
@@ -323,16 +323,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set intersection
-     * of the current and another `iterable` according to `fieldName`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `iterable` or `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `iterable` or `field` is null
      *
      * @example
      * List<Account> accounts1 = new List<Account>{
@@ -352,8 +352,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { Name: 'foo', NumberOfEmployees: 100 }
      * ]
      */
-    public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable, final String fieldName) {
-        return intersect(iterable, SObjectEnumerableSupport.get(fieldName));
+    public virtual SObjectEnumerable intersect(final Iterable<SObject> iterable, final String field) {
+        return intersect(iterable, SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -445,9 +445,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
      * }
      * List<Account> accounts1 = new List<Account>{
      *     new Account(Name = 'foo'),
@@ -481,16 +481,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` as a set difference
-     * of the current and another `iterable` according to `fieldName`.
+     * of the current and another `iterable` according to `field`.
      * <p>Intermediate Operation.</p>
      *
      * @param iterable the other iterable
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `iterable` or `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `iterable` or `field` is null
      *
      * @example
      * List<Account> accounts1 = new List<Account>{
@@ -518,8 +518,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { Name: 'fred', NumberOfEmployees: 500 }
      * ]
      */
-    public virtual SObjectEnumerable except(final Iterable<SObject> iterable, final String fieldName) {
-        return except(iterable, SObjectEnumerableSupport.get(fieldName));
+    public virtual SObjectEnumerable except(final Iterable<SObject> iterable, final String field) {
+        return except(iterable, SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -602,9 +602,9 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
      * }
      * List<Account> accounts = new List<Account>{
      *     new Account(Name = 'foo'),
@@ -626,15 +626,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` with distinct elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * List<Account> accounts = new List<Account>{
@@ -653,8 +653,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { Name: 'baz', NumberOfEmployees: 300 }
      * ]
      */
-    public virtual SObjectEnumerable distinct(final String fieldName) {
-        return distinct(SObjectEnumerableSupport.get(fieldName));
+    public virtual SObjectEnumerable distinct(final String field) {
+        return distinct(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -702,14 +702,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -729,16 +729,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` with elements
-     * that have `fieldName` `value`.
+     * that have `field` `value`.
      * <p>Stateless Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Cold');
@@ -766,8 +766,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { LastName: 'baz', Account: acc3 }
      * ]
      */
-    public virtual SObjectEnumerable filter(final String fieldName, final Object value) {
-        return filter(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual SObjectEnumerable filter(final String field, final Object value) {
+        return filter(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -812,14 +812,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -839,16 +839,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` that takes elements
-     * while `fieldName` equals to `value`.
+     * while `field` equals to `value`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the value
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Hot');
@@ -878,8 +878,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { LastName: 'bar', Account: acc2 },
      * ]
      */
-    public virtual SObjectEnumerable take(final String fieldName, final Object value) {
-        return take(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual SObjectEnumerable take(final String field, final Object value) {
+        return take(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -925,14 +925,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -951,16 +951,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` that drops elements
-     * while `fieldName` equals to `value`, then takes the rest.
+     * while `field` equals to `value`, then takes the rest.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the value
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Hot');
@@ -991,8 +991,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { LastName: 'fred' }
      * ]
      */
-    public virtual SObjectEnumerable drop(final String fieldName, final Object value) {
-        return drop(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual SObjectEnumerable drop(final String field, final Object value) {
+        return drop(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -1087,15 +1087,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the parent reference field
+     * @param field the parent reference field
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux');
@@ -1124,8 +1124,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   null
      * ]
      */
-    public virtual SObjectEnumerable mapTo(final String fieldName) {
-        return mapTo(SObjectEnumerableSupport.getSObject(fieldName));
+    public virtual SObjectEnumerable mapTo(final String field) {
+        return mapTo(SObjectEnumerableSupport.getSObject(field));
     }
 
     /**
@@ -1191,15 +1191,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `IntEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `IntEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', NumberOfEmployees = 1000);
@@ -1215,8 +1215,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .mapToInt('Parent?.NumberOfEmployees')
      *     .toList(); // [1000, 5000, null]
      */
-    public virtual IntEnumerable mapToInt(final String fieldName) {
-        return mapToInt(SObjectEnumerableSupport.get(fieldName));
+    public virtual IntEnumerable mapToInt(final String field) {
+        return mapToInt(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1274,15 +1274,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `LongEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `LongEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', NumberOfEmployees = 1000);
@@ -1298,8 +1298,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .mapToLong('Parent?.NumberOfEmployees')
      *     .toList(); // [1000, 5000, null]
      */
-    public virtual LongEnumerable mapToLong(final String fieldName) {
-        return mapToLong(SObjectEnumerableSupport.get(fieldName));
+    public virtual LongEnumerable mapToLong(final String field) {
+        return mapToLong(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1376,15 +1376,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `DoubleEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `DoubleEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', AnnualRevenue = 159.5);
@@ -1400,8 +1400,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .mapToDouble('Parent?.AnnualRevenue')
      *     .toList(); // [159.5, 350.1, null]
      */
-    public virtual DoubleEnumerable mapToDouble(final String fieldName) {
-        return mapToDouble(SObjectEnumerableSupport.get(fieldName));
+    public virtual DoubleEnumerable mapToDouble(final String field) {
+        return mapToDouble(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1441,10 +1441,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *         return ((String) ((SObject) o).get(field))?.toLowerCase();
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -1462,15 +1462,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `ObjectEnumerable` with elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux');
@@ -1486,8 +1486,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .mapToObject('Parent?.Name')
      *     .toList(String.class); // ['qux', 'fred', null]
      */
-    public virtual ObjectEnumerable mapToObject(final String fieldName) {
-        return mapToObject(SObjectEnumerableSupport.get(fieldName));
+    public virtual ObjectEnumerable mapToObject(final String field) {
+        return mapToObject(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -1565,15 +1565,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     /**
      * @description Returns a new `SObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable
-     * according to child relationship `fieldName`.
+     * according to child relationship `field`.
      * <p>Intermediate Operation.</p>
      *
-     * @param fieldName the child relationship field
+     * @param field the child relationship field
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Contact con1 = new Contact(LastName = 'qux');
@@ -1592,8 +1592,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { LastName: 'thud' }
      * ]
      */
-    public virtual SObjectEnumerable flatMapTo(final String fieldName) {
-        return flatMapTo(SObjectEnumerableSupport.getSObjects(fieldName));
+    public virtual SObjectEnumerable flatMapTo(final String field) {
+        return flatMapTo(SObjectEnumerableSupport.getSObjects(field));
     }
 
     /**
@@ -1832,17 +1832,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract SObjectEnumerable forEach(final IConsumer consumer);
 
     /**
-     * @description Returns a `SObjectEnumerable` after setting `value` for `fieldName`
+     * @description Returns a `SObjectEnumerable` after setting `value` for `field`
      * on each element.
      * <p>Intermediate Interfering Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the value
      *
      * @return the `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', AnnualRevenue = 1000);
@@ -1869,8 +1869,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   null
      * ]
      */
-    public virtual SObjectEnumerable forEach(final String fieldName, final Object value) {
-        return forEach(SObjectEnumerableSupport.set(fieldName, value));
+    public virtual SObjectEnumerable forEach(final String field, final Object value) {
+        return forEach(SObjectEnumerableSupport.set(field, value));
     }
 
     /**
@@ -2003,15 +2003,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns a new `SObjectEnumerable` with sorted elements
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
@@ -2033,22 +2033,22 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { Name: 'thud', AnnualRevenue: 100 }
      * ]
      */
-    public virtual SObjectEnumerable sort(final String fieldName) {
-        return sort(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)));
+    public virtual SObjectEnumerable sort(final String field) {
+        return sort(Comparer.comparing(SObjectEnumerableSupport.get(field)));
     }
 
     /**
      * @description Returns a new `SObjectEnumerable` with sorted elements
-     * taken from `fieldName` values considering `order`.
+     * taken from `field` values considering `order`.
      * <p>Stateful Intermediate Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param order the sort order
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `order` is null
      *
      * @example
@@ -2071,8 +2071,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   { Name: 'bar', AnnualRevenue: 200 }
      * ]
      */
-    public virtual SObjectEnumerable sort(final String fieldName, final SortOrder order) {
-        return sort(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)).order(order));
+    public virtual SObjectEnumerable sort(final String field, final SortOrder order) {
+        return sort(Comparer.comparing(SObjectEnumerableSupport.get(field)).order(order));
     }
 
     /**
@@ -2278,10 +2278,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @example
      * // Simple collecting
      * public class AddToStringSetBiConsumer extends BiConsumer {
-     *     private final String fieldName;
-     *     public AddToStringSetBiConsumer(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public AddToStringSetBiConsumer(String field) { this.field = field; }
      *     public override void accept(Object container, Object o) {
-     *         String value = (String) ((SObject) o).get(fieldName);
+     *         String value = (String) ((SObject) o).get(field);
      *         ((Set<String>) container).add(value);
      *     }
      * }
@@ -2296,17 +2296,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * // ['foo', 'bar', 'baz', 'qux']
      * // Cascaded operation
      * public class GetIntFieldFunction extends Function {
-     *     private final String fieldName;
-     *     public GetIntFieldFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetIntFieldFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return (Integer) ((SObject) o).get(fieldName);
+     *         return (Integer) ((SObject) o).get(field);
      *     }
      * }
      * public class AddToListBiConsumer extends BiConsumer {
-     *     private final String fieldName;
-     *     public AddToListBiConsumer(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public AddToListBiConsumer(String field) { this.field = field; }
      *     public override void accept(Object container, Object o) {
-     *         ((List<Object>) container).add(((SObject) o).get(fieldName));
+     *         ((List<Object>) container).add(((SObject) o).get(field));
      *     }
      * }
      * public class PutToObjectsByIntMap extends BiConsumer {
@@ -2366,14 +2366,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -2389,16 +2389,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns an `Optional` SObject describing the first element
-     * which has `value` of `fieldName`.
+     * which has `value` of `field`.
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the field value
      *
      * @return the `Optional`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Cold');
@@ -2420,8 +2420,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .find('Account?.Rating', 'Hot')
      *     .get(); // { LastName: 'baz', Account: acc3 }
      */
-    public virtual Optional find(final String fieldName, final Object value) {
-        return find(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual Optional find(final String field, final Object value) {
+        return find(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2464,14 +2464,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -2485,17 +2485,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Boolean every(final IPredicate predicate);
 
     /**
-     * @description Returns whether all elements of this enumerable have `fieldName` `value`.
+     * @description Returns whether all elements of this enumerable have `field` `value`.
      * If the enumerable is empty then `true` is returned (vacuous truth).
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return `true` if all elements match the predicate, `false` otherwise
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Cold');
@@ -2515,8 +2515,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Boolean isEveryContactWithHotRatingAccount = [SObjectEnumerable].of(contacts)
      *     .every('Account?.Rating', 'Hot'); // false
      */
-    public virtual Boolean every(final String fieldName, final Object value) {
-        return every(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual Boolean every(final String field, final Object value) {
+        return every(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2557,14 +2557,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -2578,17 +2578,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Boolean some(final IPredicate predicate);
 
     /**
-     * @description Returns whether some element of this enumerable has `fieldName` `value`.
+     * @description Returns whether some element of this enumerable has `field` `value`.
      * If the enumerable is empty then `false` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return `true` if some element matches the predicate, `false` otherwise
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Cold');
@@ -2608,8 +2608,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Boolean isSomeContactWithHotRatingAccount = [SObjectEnumerable].of(contacts)
      *     .some('Account?.Rating', 'Hot'); // true
      */
-    public virtual Boolean some(final String fieldName, final Object value) {
-        return some(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual Boolean some(final String field, final Object value) {
+        return some(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2650,14 +2650,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -2673,17 +2673,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns whether no elements of this enumerable have `fieldName` `value`.
+     * @description Returns whether no elements of this enumerable have `field` `value`.
      * If the enumerable is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return `true` if no elements match the predicate, `false` otherwise
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', Rating = 'Cold');
@@ -2703,8 +2703,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Boolean isNoneContactWithHotRatingAccount = [SObjectEnumerable].of(contacts)
      *     .none('Account?.Rating', 'Hot'); // false
      */
-    public virtual Boolean none(final String fieldName, final Object value) {
-        return none(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual Boolean none(final String field, final Object value) {
+        return none(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**
@@ -2775,15 +2775,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns an `Optional` SObject describing the maximum element
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Optional` SObject describing the result
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
@@ -2797,8 +2797,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .max('AnnualRevenue')
      *     .get(); // { Name: 'fred', AnnualRevenue: 800 }
      */
-    public virtual Optional max(final String fieldName) {
-        return max(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)));
+    public virtual Optional max(final String field) {
+        return max(Comparer.comparing(SObjectEnumerableSupport.get(field)));
     }
 
     /**
@@ -2871,15 +2871,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Returns an `Optional` describing the minimum element
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Optional` SObject describing the result
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
@@ -2893,8 +2893,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .min('AnnualRevenue')
      *     .get(); // { Name: 'fred', AnnualRevenue: 800 }
      */
-    public virtual Optional min(final String fieldName) {
-        return min(Comparer.comparing(SObjectEnumerableSupport.get(fieldName)));
+    public virtual Optional min(final String field) {
+        return min(Comparer.comparing(SObjectEnumerableSupport.get(field)));
     }
 
     /**
@@ -2957,12 +2957,12 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @description Returns the arithmetic sum of field values of elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field to sum values
+     * @param field the field to sum values
      *
      * @return the sum of field values
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', NumberOfEmployees = 1000);
@@ -2977,8 +2977,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Double sumOfParentNumberOfEmployees = [SObjectEnumerable].of(accounts)
      *     .sum('Parent?.NumberOfEmployees'); // 9000.0
      */
-    public virtual Double sum(final String fieldName) {
-        return sum(SObjectEnumerableSupport.get(fieldName));
+    public virtual Double sum(final String field) {
+        return sum(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3034,15 +3034,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     }
 
     /**
-     * @description Returns the arithmetic mean of the values of `fieldName`.
+     * @description Returns the arithmetic mean of the values of `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field to calculate the average
+     * @param field the field to calculate the average
      *
      * @return the `Optional` containing the result
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', NumberOfEmployees = 1000);
@@ -3057,8 +3057,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Double avgOfParentNumberOfEmployees = [SObjectEnumerable].of(accounts)
      *     .avg('Parent?.NumberOfEmployees'); // 3000.0
      */
-    public virtual Optional avg(final String fieldName) {
-        return avg(SObjectEnumerableSupport.get(fieldName));
+    public virtual Optional avg(final String field) {
+        return avg(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3150,10 +3150,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *         return ((String) ((SObject) o).get(field))?.toLowerCase();
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -3172,15 +3172,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Accumulates elements into a `List<Object>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `List<Object>` containing the collected elements
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * List<Account> accounts = new List<Account>{
@@ -3193,8 +3193,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * List<Object> accountNames = [SObjectEnumerable].of(accounts)
      *     .toList('Name'); // ['foo', 'Bar', 'baz', 'Foo', 'bar']
      */
-    public virtual List<Object> toList(final String fieldName) {
-        return toList(fieldName, Object.class);
+    public virtual List<Object> toList(final String field) {
+        return toList(field, Object.class);
     }
 
     /**
@@ -3237,10 +3237,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *         return ((String) ((SObject) o).get(field))?.toLowerCase();
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -3258,16 +3258,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Accumulates elements into a `List<?>`
-     * according to `fieldName` and `elementType`.
+     * according to `field` and `elementType`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param elementType the type of the elements
      *
      * @return the `List<Object>` containing the collected elements, which can be cast to `List<T>`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` or `elementType` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` or `elementType` is null
      *
      * @example
      * List<Account> accounts = new List<Account>{
@@ -3280,8 +3280,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * List<String> accountNames = (List<String>) [SObjectEnumerable].of(accounts)
      *     .toList('Name', String.class); // ['foo', 'Bar', 'baz', 'Foo', 'bar']
      */
-    public virtual List<Object> toList(final String fieldName, final Type elementType) {
-        return toList(SObjectEnumerableSupport.get(fieldName), elementType);
+    public virtual List<Object> toList(final String field, final Type elementType) {
+        return toList(SObjectEnumerableSupport.get(field), elementType);
     }
 
     /**
@@ -3345,10 +3345,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class GetFieldValueToLowerCaseFunction extends Function {
-     *     private final String fieldName;
-     *     public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
      *     public override Object apply(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+     *         return ((String) ((SObject) o).get(field))?.toLowerCase();
      *     }
      * }
      * List<Account> accounts = new List<Account>{
@@ -3365,15 +3365,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Accumulates elements into a `Set<Object>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Set<Object>` containing the collected field values
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * List<Account> accounts = new List<Account>{
@@ -3386,8 +3386,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Set<Object> names = [SObjectEnumerable].of(accounts)
      *     .toSet('Name'); // ['foo', 'bar', 'baz']
      */
-    public virtual Set<Object> toSet(final String fieldName) {
-        return toSet(SObjectEnumerableSupport.get(fieldName));
+    public virtual Set<Object> toSet(final String field) {
+        return toSet(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3480,15 +3480,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Accumulates `Id` elements into a `Set<Id>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Set<Id>` containing the collected elements field values
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', OwnerId = '005000000000004AAA');
@@ -3504,8 +3504,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *     .toIdSet('Parent?.OwnerId'); //
      * ['005000000000004AAA', '005000000000005AAA', null]
      */
-    public virtual Set<Id> toIdSet(final String fieldName) {
-        return toIdSet(SObjectEnumerableSupport.get(fieldName));
+    public virtual Set<Id> toIdSet(final String field) {
+        return toIdSet(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3545,10 +3545,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @example
      * public class GetChildrenFieldOfTheLatestFunction extends Function {
      *     private final String childRelField;
-     *     private final String fieldName;
-     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *     private final String field;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
      *         this.childRelField = childRelField;
-     *         this.fieldName = fieldName;
+     *         this.field = field;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -3560,7 +3560,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *             .sort('CreatedDate')
      *             .toList()
      *             [0]
-     *             .get(fieldName);
+     *             .get(field);
      *     }
      * }
      * Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
@@ -3578,15 +3578,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Accumulates `String` elements into a `Set<String>`
-     * according to `fieldName`.
+     * according to `field`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Set<String>` containing the collected elements field values
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux');
@@ -3600,8 +3600,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * Set<String> parentNames = [SObjectEnumerable].of(accounts)
      *     .toStringSet('Parent?.Name'); // ['qux', 'fred', null]
      */
-    public virtual Set<String> toStringSet(final String fieldName) {
-        return toStringSet(SObjectEnumerableSupport.get(fieldName));
+    public virtual Set<String> toStringSet(final String field) {
+        return toStringSet(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -3712,17 +3712,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Accumulates elements into a `Map<Id, SObject>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param valueType the value type
      *
      * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `Map<Id, T>`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws IllegalArgumentException if `field` is blank
      * @throws IllegalStateException if mapped keys contain duplicates
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `valueType` is null
      *
      * @example
@@ -3747,8 +3747,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *    null: { Name: 'baz' }
      * }
      */
-    public virtual Map<Id, SObject> toByIdMap(final String fieldName, final Type valueType) {
-        return toByIdMap(SObjectEnumerableSupport.get(fieldName), valueType);
+    public virtual Map<Id, SObject> toByIdMap(final String field, final Type valueType) {
+        return toByIdMap(SObjectEnumerableSupport.get(field), valueType);
     }
 
     /**
@@ -3797,10 +3797,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @example
      * public class GetChildrenFieldOfTheLatestFunction extends Function {
      *     private final String childRelField;
-     *     private final String fieldName;
-     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *     private final String field;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
      *         this.childRelField = childRelField;
-     *         this.fieldName = fieldName;
+     *         this.field = field;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -3812,7 +3812,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *             .sort('CreatedDate')
      *             .toList()
      *             [0]
-     *             .get(fieldName);
+     *             .get(field);
      *     }
      * }
      * Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
@@ -3840,17 +3840,17 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Accumulates elements into a `Map<String, SObject>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param valueType the value type
      *
      * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `Map<String, T>`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
+     * @throws IllegalArgumentException if `field` is blank
      * @throws IllegalStateException if mapped keys contain duplicates
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `valueType` is null
      *
      * @example
@@ -3875,8 +3875,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *    null: { Name: 'baz' }
      * }
      */
-    public virtual Map<String, SObject> toByStringMap(final String fieldName, final Type valueType) {
-        return toByStringMap(SObjectEnumerableSupport.get(fieldName), valueType);
+    public virtual Map<String, SObject> toByStringMap(final String field, final Type valueType) {
+        return toByStringMap(SObjectEnumerableSupport.get(field), valueType);
     }
 
     /**
@@ -3970,15 +3970,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Groups elements into a `Map<Id, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Map<Id, List<SObject>>` containing the enumerable elements
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux', OwnerId = '005000000000004AAA');
@@ -4006,8 +4006,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   '005000000000005AAA': [{ Name: 'bar', OwnerId: '005000000000002AAA' }]
      * }
      */
-    public virtual Map<Id, List<SObject>> groupById(final String fieldName) {
-        return groupById(SObjectEnumerableSupport.get(fieldName));
+    public virtual Map<Id, List<SObject>> groupById(final String field) {
+        return groupById(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -4054,10 +4054,10 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @example
      * public class GetChildrenFieldOfTheLatestFunction extends Function {
      *     private final String childRelField;
-     *     private final String fieldName;
-     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String fieldName) {
+     *     private final String field;
+     *     public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
      *         this.childRelField = childRelField;
-     *         this.fieldName = fieldName;
+     *         this.field = field;
      *     }
      *     public override Object apply(Object o) {
      *         SObject sObj = (Account) o;
@@ -4069,7 +4069,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *             .sort('CreatedDate')
      *             .toList()
      *             [0]
-     *             .get(fieldName);
+     *             .get(field);
      *     }
      * }
      * Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
@@ -4102,15 +4102,15 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
 
     /**
      * @description Groups elements into a `Map<String, List<SObject>>`
-     * whose keys are `fieldName` values and values are `SObject` elements.
+     * whose keys are `field` values and values are `SObject` elements.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      *
      * @return the `Map<String, List<SObject>>` containing the enumerable elements
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'qux');
@@ -4132,8 +4132,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   'fred': [{ Name: 'bar', Rating: 'Warm' }]
      * }
      */
-    public virtual Map<String, List<SObject>> groupByString(final String fieldName) {
-        return groupByString(SObjectEnumerableSupport.get(fieldName));
+    public virtual Map<String, List<SObject>> groupByString(final String field) {
+        return groupByString(SObjectEnumerableSupport.get(field));
     }
 
     /**
@@ -4175,14 +4175,14 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @example
      * public class ContainsPredicate extends Predicate {
-     *     private final String fieldName;
+     *     private final String field;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
-     *         this.fieldName = fieldName;
+     *     public ContainsPredicate(String field, String s) {
+     *         this.field = field;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o) {
-     *         return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+     *         return ((String) ((SObject) o).get(field))?.contains(s) == true;
      *     }
      * }
      * Account acc1 = new Account(Name = 'foo', Rating = 'Hot');
@@ -4199,16 +4199,16 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
     public abstract Map<Boolean, List<SObject>> partition(final IPredicate predicate);
 
     /**
-     * @description Partitions elements by `fieldName` having `value`.
+     * @description Partitions elements by `field` having `value`.
      * <p>Terminal Operation.</p>
      *
-     * @param fieldName the field
+     * @param field the field
      * @param value the satisfying value
      *
      * @return the `Map<Boolean, List<SObject>>` containing the elements
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Account parent1 = new Account(Name = 'Hot');
@@ -4230,8 +4230,8 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *   false: [{ Name: 'bar', Rating: 'Warm' }, { Name: 'baz', Rating: 'Hot' }]
      * }
      */
-    public virtual Map<Boolean, List<SObject>> partition(final String fieldName, final Object value) {
-        return partition(SObjectEnumerableSupport.isEqual(fieldName, value));
+    public virtual Map<Boolean, List<SObject>> partition(final String field, final Object value) {
+        return partition(SObjectEnumerableSupport.isEqual(field, value));
     }
 
     /**

@@ -115,16 +115,16 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
 
     /**
      * @description Creates a `ComparisonOperator` for comparing the left value of two SObjects
-     * using the provided field name, with support for currying to build complex comparisons.
+     * using the provided field, with support for currying to build complex comparisons.
      *
-     * @param left the field name of the SObject to be used for mapping
+     * @param left the field of the SObject to be used for mapping
      *
      * @return a `ComparisonOperator` for further specification of the comparison operation
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * IBiPredicate areNamesEqBiPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
@@ -411,17 +411,17 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
         }
 
         /**
-         * @description Specifies a field name to compare the left value against, creating a `BiPredicate`
+         * @description Specifies a field to compare the left value against, creating a `BiPredicate`
          * that evaluates the comparison.
          *
-         * @param right the field name to compare against
+         * @param right the field to compare against
          *
-         * @return a `BiPredicate` that returns true if the comparison holds for the specified field name
+         * @return a `BiPredicate` that returns true if the comparison holds for the specified field
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-reference navigation
-         * @throws SObjectException if provided invalid `fieldName`
+         * @throws SObjectException if provided invalid `field`
          *
          * @example
          * IBiPredicate isRevenueGtCfBiPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
