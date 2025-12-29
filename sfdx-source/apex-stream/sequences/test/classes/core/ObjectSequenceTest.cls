@@ -668,6 +668,25 @@ private class ObjectSequenceTest {
     }
 
     /**
+     * @see ObjectSequence.fold
+     */
+    @IsTest
+    private static void fold() {
+        // Given
+        List<String> input = new List<String>{ 'foo', 'bar', 'baz', 'lorem' };
+        List<String> clone = (List<String>) AsTestCommons.deepClone(input, List<String>.class);
+        ObjectEnumerable seq = ObjectSequence.of(clone);
+        String seed = 'seed';
+        // When
+        String actual = (String) seq.fold(seed, new AsTestCommons.Concat());
+        // Then
+        String expected = 'seedfoobarbazlorem';
+        Assert.areEqual(expected, actual);
+        Assert.areEqual('seed', seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+    }
+
+    /**
      * @see ObjectSequence.reduce
      */
     @IsTest

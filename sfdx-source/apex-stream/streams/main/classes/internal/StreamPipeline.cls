@@ -100,7 +100,7 @@ public inherited sharing class StreamPipeline {
         return new SkipIterator(source, n);
     }
 
-    public static Object reduce(final Iterator<Object> source, final Object identity, final IBiOperator accumulator) {
+    public static Object fold(final Iterator<Object> source, final Object identity, final IBiOperator accumulator) {
         Validate.notNull(source);
         Validate.notNull(accumulator);
         Object result = identity;

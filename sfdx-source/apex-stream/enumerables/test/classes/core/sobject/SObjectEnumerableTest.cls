@@ -174,6 +174,7 @@ private class SObjectEnumerableTest {
         public override SObjectEnumerable sort(IComparer comparer) { return this; }
         public override SObjectEnumerable lim(Integer lim) { return this; }
         public override SObjectEnumerable skip(Integer n) { return this; }
+        public override SObject fold(SObject identity, IBiOperator accumulator) { return null; }
         public override SObject reduce(SObject identity, IBiOperator accumulator) { return null; }
         public override Optional reduce(IBiOperator accumulator) { return null; }
         public override Object collect(ICollector collector) { return null; }

@@ -461,7 +461,30 @@ public abstract inherited sharing class IntEnumerable implements IIntEnumerable 
      * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for the `accumulator`
+     * @param identity the initial value for the `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Integer` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Integer) o1 + (Integer) o2; }
+     * }
+     * Integer sum = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
+     *     .fold(0, new SumBiOperator()); // -4
+     */
+    public abstract Integer fold(final Integer identity, final IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on elements,
+     * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for the `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Integer` result of the reduction

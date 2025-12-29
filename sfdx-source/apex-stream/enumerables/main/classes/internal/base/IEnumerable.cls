@@ -269,7 +269,30 @@ public interface IEnumerable<T> extends Iterable<T> {
      * </pre>
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for the `accumulator`
+     * @param identity the initial value for the `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the result of the reduction
+     */
+    T fold(T identity, IBiOperator accumulator);
+
+    /**
+     * @description Performs a reduction on elements,
+     * using the `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * This is equivalent to:
+     * <pre>
+     *     <code>T result = identity;
+     *     for (T element : this) {
+     *         result = accumulator.apply(result, element)
+     *     }
+     *     return result;
+     *     </code>
+     * </pre>
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for the `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the result of the reduction

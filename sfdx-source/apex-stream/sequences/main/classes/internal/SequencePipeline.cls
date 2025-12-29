@@ -226,7 +226,7 @@ public inherited sharing class SequencePipeline {
         return result;
     }
 
-    public static Object reduce(final List<Object> source, final Object identity, final IBiOperator accumulator) {
+    public static Object fold(final List<Object> source, final Object identity, final IBiOperator accumulator) {
         Validate.notNull(source);
         Validate.notNull(accumulator);
         Object result = identity;

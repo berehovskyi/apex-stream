@@ -70,6 +70,7 @@ private class LongEnumerableTest {
         public override LongEnumerable sort(SortOrder order) { return this; }
         public override LongEnumerable lim(Integer lim) { return this; }
         public override LongEnumerable skip(Integer n) { return this; }
+        public override Long fold(Long identity, IBiOperator accumulator) { return null; }
         public override Long reduce(Long identity, IBiOperator accumulator) { return null; }
         public override Optional reduce(IBiOperator operator) { return null; }
         public override Object collect(ICollector collector) { return null; }

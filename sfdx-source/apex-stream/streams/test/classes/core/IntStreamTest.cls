@@ -615,6 +615,26 @@ private class IntStreamTest {
     }
 
     /**
+     * @see IntStream.fold
+     */
+    @IsTest
+    private static void fold() {
+        // Given
+        List<Integer> input = new List<Integer>{ 5, 1, 3, 8, -3, 4, -6, 0, 4 };
+        List<Integer> clone = input.clone();
+        IntEnumerable stm = IntStream.of(clone);
+        Integer seed = 10;
+        // When
+        Integer actual = stm.fold(seed, new AsTestCommons.SumIntBiOperator());
+        // Then
+        Integer expected = 26;
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(10, seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((IntStream) stm).isOperated);
+    }
+
+    /**
      * @see IntStream.reduce
      */
     @IsTest

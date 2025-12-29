@@ -1100,6 +1100,31 @@ private class SObjectStreamTest {
     }
 
     /**
+     * @see SObjectStream.fold
+     */
+    @IsTest
+    private static void fold() {
+        // Given
+        Account acc = new Account(Name = 'Test Acc', NumberOfEmployees = 200);
+        Account acc1 = new Account(Name = 'Test Acc1', NumberOfEmployees = 100);
+        Account acc2 = new Account(Name = 'Test Acc2', NumberOfEmployees = 0);
+        Account acc3 = new Account(Name = 'Test Acc3', NumberOfEmployees = 400);
+        Account acc4 = new Account(Name = 'Test Acc4');
+        Account seed = new Account(Name = 'Identity', NumberOfEmployees = 0);
+        List<Account> input = new List<Account>{ acc1, acc, acc2, acc3, acc4, acc2 };
+        List<Account> clone = AsTestCommons.deepClone(input);
+        SObjectField field = AsTestConsts.Account.NumberOfEmployees;
+        IComparer fieldComparer = Comparer.comparing(SObjectEnumerableSupport.get(field));
+        IBiOperator maxBy = BiOperator.maxBy(fieldComparer);
+        SObjectEnumerable accStm = SObjectStream.of(clone);
+        // When
+        SObject actual = accStm.fold(seed, maxBy);
+        // Then
+        Assert.areEqual(acc3, actual);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+    }
+
+    /**
      * @see SObjectStream.reduce
      */
     @IsTest

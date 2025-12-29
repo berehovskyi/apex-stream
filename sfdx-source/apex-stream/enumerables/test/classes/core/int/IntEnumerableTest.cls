@@ -70,6 +70,7 @@ private class IntEnumerableTest {
         public override IntEnumerable sort(SortOrder order) { return this; }
         public override IntEnumerable lim(Integer lim) { return this; }
         public override IntEnumerable skip(Integer n) { return this; }
+        public override Integer fold(Integer identity, IBiOperator accumulator) { return null; }
         public override Integer reduce(Integer identity, IBiOperator accumulator) { return null; }
         public override Optional reduce(IBiOperator operator) { return null; }
         public override Object collect(ICollector collector) { return null; }

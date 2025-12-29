@@ -469,6 +469,25 @@ private class DoubleSequenceTest {
     }
 
     /**
+     * @see DoubleSequence.fold
+     */
+    @IsTest
+    private static void fold() {
+        // Given
+        List<Double> input = new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 };
+        List<Double> clone = input.clone();
+        DoubleEnumerable seq = DoubleSequence.of(clone);
+        Double seed = 10;
+        // When
+        Double actual = seq.fold(seed, EnumerableSupport.max());
+        // Then
+        Double expected = 10;
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(10, seed, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+    }
+
+    /**
      * @see DoubleSequence.reduce
      */
     @IsTest

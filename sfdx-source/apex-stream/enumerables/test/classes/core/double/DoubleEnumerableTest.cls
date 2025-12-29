@@ -72,6 +72,7 @@ private class DoubleEnumerableTest {
         public override DoubleEnumerable sort(SortOrder order) { return this; }
         public override DoubleEnumerable lim(Integer lim) { return this; }
         public override DoubleEnumerable skip(Integer n) { return this; }
+        public override Double fold(Double identity, IBiOperator accumulator) { return null; }
         public override Double reduce(Double identity, IBiOperator accumulator) { return null; }
         public override Optional reduce(IBiOperator operator) { return null; }
         public override Object collect(ICollector collector) { return null; }

@@ -613,7 +613,34 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * using `identity` value and an associative `accumulator` function, and returns the reduced value.
      * <p>Terminal Operation.</p>
      *
-     * @param identity the identity value for `accumulator`
+     * @param identity the initial value for `accumulator`
+     * @param accumulator the associative, non-interfering, stateless accumulation function
+     *
+     * @return the `Double` result of the reduction
+     *
+     * @throws NullPointerException if `accumulator` is null
+     *
+     * @example
+     * public class SumBiOperator extends BiOperator {
+     *     public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
+     * }
+     * Double naiveSum = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
+     *     .fold((Double) 0.0, new SumBiOperator());
+     * Double max = DoubleSequence.of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+     *     .fold((Double) 0.0, BiOperators.max()); // 5.5
+     */
+    public virtual override Double fold(final Double identity, final IBiOperator accumulator) {
+        return (Double) SequencePipeline.fold(doubles, identity, accumulator);
+    }
+
+    /**
+     * @description Performs a reduction on `Double` elements,
+     * using `identity` value and an associative `accumulator` function, and returns the reduced value.
+     * <p>Terminal Operation.</p>
+     *
+     * @deprecated Use {@link #fold()} instead
+     *
+     * @param identity the initial value for `accumulator`
      * @param accumulator the associative, non-interfering, stateless accumulation function
      *
      * @return the `Double` result of the reduction
@@ -630,7 +657,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *     .reduce((Double) 0.0, BiOperators.max()); // 5.5
      */
     public virtual override Double reduce(final Double identity, final IBiOperator accumulator) {
-        return (Double) SequencePipeline.reduce(doubles, identity, accumulator);
+        return (Double) SequencePipeline.fold(doubles, identity, accumulator);
     }
 
     /**
