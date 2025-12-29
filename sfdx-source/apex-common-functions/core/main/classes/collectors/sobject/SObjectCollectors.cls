@@ -18,27 +18,27 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     //<editor-fold desc="List<?> Collectors">
     // @start-group List<?> Collectors
     /**
-     * @description Returns a `Collector` that accumulates the values of `fieldName`
+     * @description Returns a `Collector` that accumulates the values of `field`
      * into a new `List<Object>`.
      * Cross-reference fields and safe navigation are supported.
      * <p>The result container can be cast to a specific type using {@link Collector.cast}.</p>
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a List
+     * // Accumulates values of field into a List
      * List<Object> accountNames = (List<Object>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toList('Name'));
      * List<String> parentAccountNames = (List<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toList('Parent?.Name').cast(List<String>.class));
      */
-    public static Collector toList(final String fieldName) {
-        return toList(SObjectFunctions.get(fieldName));
+    public static Collector toList(final String field) {
+        return toList(SObjectFunctions.get(field));
     }
 
     /**
@@ -68,26 +68,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     //<editor-fold desc="Set<?> Collectors">
     // @start-group Set<?> Collectors
     /**
-     * @description Returns a `Collector` that accumulates the Boolean values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Boolean values of `field`
      * into a new `Set<Boolean>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Boolean> doNotCalls = (Set<Boolean>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toBoolSet('DoNotCall'));
      * Set<Boolean> parentDoNotCalls = (Set<Boolean>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toBoolSet('Parent?.DoNotCall'));
      */
-    public static Collector toBoolSet(final String fieldName) {
-        return toBoolSet(SObjectFunctions.get(fieldName));
+    public static Collector toBoolSet(final String field) {
+        return toBoolSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -110,26 +110,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Boolean values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Boolean values of `field`
      * into a new `Set<Boolean>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Id> ids = (Set<Id>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIdSet('Id'));
      * Set<Id> parentOwnerIds = (Set<Id>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIdSet('Parent?.OwnerId'));
      */
-    public static Collector toIdSet(final String fieldName) {
-        return toIdSet(SObjectFunctions.get(fieldName));
+    public static Collector toIdSet(final String field) {
+        return toIdSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -152,26 +152,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the String values of `fieldName`
+     * @description Returns a `Collector` that accumulates the String values of `field`
      * into a new `Set<String>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<String> names = (Set<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toStringSet('Name'));
      * Set<String> parentNames = (Set<String>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toStringSet('Parent?.Name'));
      */
-    public static Collector toStringSet(final String fieldName) {
-        return toStringSet(SObjectFunctions.get(fieldName));
+    public static Collector toStringSet(final String field) {
+        return toStringSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -194,26 +194,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Blob values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Blob values of `field`
      * into a new `Set<Blob>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Blob> bodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toBlobSet('Body'));
      * Set<Blob> parentBodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
      *     .collect(SObjectCollectors.toBlobSet('Parent?.Body'));
      */
-    public static Collector toBlobSet(final String fieldName) {
-        return toBlobSet(SObjectFunctions.get(fieldName));
+    public static Collector toBlobSet(final String field) {
+        return toBlobSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -236,26 +236,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Date values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Date values of `field`
      * into a new `Set<Date>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Date> birthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toDateSet('Birthdate'));
      * Set<Date> parentBirthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toDateSet('Parent?.Birthdate'));
      */
-    public static Collector toDateSet(final String fieldName) {
-        return toDateSet(SObjectFunctions.get(fieldName));
+    public static Collector toDateSet(final String field) {
+        return toDateSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -278,26 +278,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Datetime values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Datetime values of `field`
      * into a new `Set<Datetime>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Datetime> activityDateTimes = (Set<Datetime>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toDatetimeSet('ActivityDateTime'));
      * Set<Datetime> activityDateTimes = (Set<Datetime>) [SObjectEnumerable].of(events)
      *     .collect(SObjectCollectors.toDatetimeSet('Parent?.ActivityDateTime'));
      */
-    public static Collector toDatetimeSet(final String fieldName) {
-        return toDatetimeSet(SObjectFunctions.get(fieldName));
+    public static Collector toDatetimeSet(final String field) {
+        return toDatetimeSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -339,26 +339,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Time values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Time values of `field`
      * into a new `Set<Time>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Time> startTimes = (Set<Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toTimeSet('StartTime'));
      * Set<Time> parentStartTimes = (Set<Time>) [SObjectEnumerable].of(slots)
      *     .collect(SObjectCollectors.toTimeSet('Parent?.StartTime'));
      */
-    public static Collector toTimeSet(final String fieldName) {
-        return toTimeSet(SObjectFunctions.get(fieldName));
+    public static Collector toTimeSet(final String field) {
+        return toTimeSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -381,26 +381,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Integer values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Integer values of `field`
      * into a new `Set<Integer>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Integer> numberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIntSet('NumberOfEmployees'));
      * Set<Integer> parentNumberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toIntSet('Parent?.NumberOfEmployees'));
      */
-    public static Collector toIntSet(final String fieldName) {
-        return toIntSet(SObjectFunctions.get(fieldName));
+    public static Collector toIntSet(final String field) {
+        return toIntSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -423,26 +423,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Long values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Long values of `field`
      * into a new `Set<Long>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Long> numberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toLongSet('NumberOfEmployees'));
      * Set<Long> parentNumberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toLongSet('Parent?.NumberOfEmployees'));
      */
-    public static Collector toLongSet(final String fieldName) {
-        return toLongSet(SObjectFunctions.get(fieldName));
+    public static Collector toLongSet(final String field) {
+        return toLongSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -465,26 +465,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Double values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Double values of `field`
      * into a new `Set<Double>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Double> billingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toDoubleSet('BillingLatitude'));
      * Set<Double> parentBillingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.toDoubleSet('Parent?.BillingLatitude'));
      */
-    public static Collector toDoubleSet(final String fieldName) {
-        return toDoubleSet(SObjectFunctions.get(fieldName));
+    public static Collector toDoubleSet(final String field) {
+        return toDoubleSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -507,29 +507,29 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that accumulates the Object values of `fieldName`
+     * @description Returns a `Collector` that accumulates the Object values of `field`
      * into a new `Set<Object>`.
      * Cross-reference fields and safe navigation are supported.
      * <p>The result container <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Set()` collectors
      * such as {@link SObjectCollectors.toIdSet}, {@link SObjectCollectors.toStringSet}, etc.</p>
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
-     * // Accumulates values of fieldName into a Set
+     * // Accumulates values of field into a Set
      * Set<Object> birthdates = (Set<Object>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toObjectSet('Birthdate'));
      * Set<Object> parentBirthdates = (Set<Object>) [SObjectEnumerable].of(contacts)
      *     .collect(SObjectCollectors.toObjectSet('Parent?.Birthdate'));
      */
-    public static Collector toObjectSet(final String fieldName) {
-        return toObjectSet(SObjectFunctions.get(fieldName));
+    public static Collector toObjectSet(final String field) {
+        return toObjectSet(SObjectFunctions.get(field));
     }
 
     /**
@@ -2113,15 +2113,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Boolean, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2129,9 +2129,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBool('DoNotCall'));
      */
-    public static Collector groupingByBool(final String fieldName) {
+    public static Collector groupingByBool(final String field) {
         return groupingByBool(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Boolean, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -2224,15 +2224,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Id, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2240,9 +2240,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingById('AccountId'));
      */
-    public static Collector groupingById(final String fieldName) {
+    public static Collector groupingById(final String field) {
         return groupingById(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Id, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -2335,15 +2335,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<String, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2351,9 +2351,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByString('OtherCity'));
      */
-    public static Collector groupingByString(final String fieldName) {
+    public static Collector groupingByString(final String field) {
         return groupingByString(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<String, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -2445,15 +2445,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Blob, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2461,9 +2461,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByBlob('Body'));
      */
-    public static Collector groupingByBlob(final String fieldName) {
+    public static Collector groupingByBlob(final String field) {
         return groupingByBlob(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Blob, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -2556,15 +2556,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Date, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2572,9 +2572,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByDate('Birthdate'));
      */
-    public static Collector groupingByDate(final String fieldName) {
+    public static Collector groupingByDate(final String field) {
         return groupingByDate(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Date, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -2667,15 +2667,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Datetime, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2683,9 +2683,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(events)
      *         .collect(SObjectCollectors.groupingByDatetime('ActivityDateTime'));
      */
-    public static Collector groupingByDatetime(final String fieldName) {
+    public static Collector groupingByDatetime(final String field) {
         return groupingByDatetime(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Datetime, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -2778,15 +2778,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Time, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2794,9 +2794,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(slots)
      *         .collect(SObjectCollectors.groupingByTime('StartTime'));
      */
-    public static Collector groupingByTime(final String fieldName) {
+    public static Collector groupingByTime(final String field) {
         return groupingByTime(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Time, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -2889,15 +2889,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Integer, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -2905,9 +2905,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByInt('NumberOfEmployees'));
      */
-    public static Collector groupingByInt(final String fieldName) {
+    public static Collector groupingByInt(final String field) {
         return groupingByInt(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Integer, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -3000,15 +3000,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Long, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -3016,9 +3016,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByLong('NumberOfEmployees'));
      */
-    public static Collector groupingByLong(final String fieldName) {
+    public static Collector groupingByLong(final String field) {
         return groupingByLong(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Long, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -3111,15 +3111,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Double, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -3127,9 +3127,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.groupingByDouble('BillingLatitude'));
      */
-    public static Collector groupingByDouble(final String fieldName) {
+    public static Collector groupingByDouble(final String field) {
         return groupingByDouble(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Double, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -3228,18 +3228,18 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Map<Object, ?> Collectors
     /**
      * @description Returns a `Collector` that performs grouping of SObject input arguments
-     * according to `fieldName`.
+     * according to `field`.
      * Cross-reference fields and safe navigation are supported.
      * <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `groupingBy<T>()` collectors
      * such as {@link SObjectCollectors.groupingById}, {@link SObjectCollectors.groupingByString}, etc.</p>
      *
-     * @param fieldName the field value to accumulate as key
+     * @param field the field value to accumulate as key
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * // Group values by keys provided by field
@@ -3247,9 +3247,9 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *     [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.groupingByObject('Birthdate'));
      */
-    public static Collector groupingByObject(final String fieldName) {
+    public static Collector groupingByObject(final String field) {
         return groupingByObject(
-            SObjectFunctions.get(fieldName),
+            SObjectFunctions.get(field),
             Supplier.of(Map<Object, List<SObject>>.class),
             toList(SObject.class)
         );
@@ -3290,30 +3290,30 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Partitioning By Collectors
     /**
      * @description Returns a `Collector` that partitions the SObject input arguments
-     * according to whether `fieldName` is equal to `value` and organizes them
+     * according to whether `field` is equal to `value` and organizes them
      * into a `Map<Boolean, List<SObject>>`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to test
+     * @param field the field value to test
      * @param value the expected value
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees =
      *     (Map<Boolean, List<Account>>) [SObjectEnumerable].of(contacts)
      *         .collect(SObjectCollectors.partitioningBy('OtherCountry', 'UK'));
      */
-    public static Collector partitioningBy(final String fieldName, final Object value) {
+    public static Collector partitioningBy(final String field, final Object value) {
         final ICollector downstream = toList(SObject.class);
         return Collector.of(
             Supplier.of(Map<Boolean, List<SObject>>.class),
             MapObjectConsumers.putToObjectsByBoolMap(
                 downstream,
-                Function.compose(SObjectPredicates.isEqual(fieldName, value))
+                Function.compose(SObjectPredicates.isEqual(field, value))
             ),
             downstream.finisher()
         );
@@ -3355,26 +3355,26 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     //<editor-fold desc="Joining">
     // @start-group Joining
     /**
-     * @description Returns a `Collector` that concatenates `fieldName` String values
+     * @description Returns a `Collector` that concatenates `field` String values
      * of the SObject input arguments.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field value to concatenate
+     * @param field the field value to concatenate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * String lastNames = (String) [SObjectEnumerable].of(contacts).collect(SObjectCollectors.joining('LastName'));
      */
-    public static Collector joining(final String fieldName) {
-        return joining(fieldName, '');
+    public static Collector joining(final String field) {
+        return joining(field, '');
     }
 
     /**
-     * @description Returns a `Collector` that concatenates `fieldName` String values
+     * @description Returns a `Collector` that concatenates `field` String values
      * of the SObject input arguments.
      *
      * @param field the field value to concatenate
@@ -3391,24 +3391,24 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that concatenates `fieldName` String values
+     * @description Returns a `Collector` that concatenates `field` String values
      * of the SObject input arguments, separated by the `delimiter`.
      *
-     * @param fieldName the field value to concatenate
+     * @param field the field value to concatenate
      * @param delimiter the delimiter between each element
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException `delimiter` is null
      *
      * @example
      * String lastNames = (String) [SObjectEnumerable].of(contacts)
      *      .collect(SObjectCollectors.joining('LastName', '; '));
      */
-    public static Collector joining(final String fieldName, final String delimiter) {
-        return joining(fieldName, delimiter, '', '');
+    public static Collector joining(final String field, final String delimiter) {
+        return joining(field, delimiter, '', '');
     }
 
     /**
@@ -3431,18 +3431,18 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Returns a `Collector` that concatenates `fieldName` String values
+     * @description Returns a `Collector` that concatenates `field` String values
      * of the SObject input arguments, separated by the `delimiter` with `prefix` and `suffix`.
      *
-     * @param fieldName the field value to concatenate
+     * @param field the field value to concatenate
      * @param delimiter the delimiter between each element
      * @param prefix the prefix
      * @param suffix the suffix
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `delimiter`, `prefix` or `suffix` is null
      *
      * @example
@@ -3450,12 +3450,12 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *      .collect(SObjectCollectors.joining('LastName', '; ', 'prefix', 'suffix'));
      */
     public static Collector joining(
-        final String fieldName,
+        final String field,
         final String delimiter,
         final String prefix,
         final String suffix
     ) {
-        return joining(SObjectFunctions.get(fieldName), delimiter, prefix, suffix);
+        return joining(SObjectFunctions.get(field), delimiter, prefix, suffix);
     }
 
     /**
@@ -3490,22 +3490,22 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Int Collectors
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
-     * of `fieldName` values.
+     * of `field` values.
      * If no elements are present, the result is 0.
      *
-     * @param fieldName the field value to average
+     * @param field the field value to average
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingInt('NumberOfEmployees'));
      */
-    public static Collector averagingInt(final String fieldName) {
-        return averagingInt(SObjectFunctions.get(fieldName));
+    public static Collector averagingInt(final String field) {
+        return averagingInt(SObjectFunctions.get(field));
     }
 
     /**
@@ -3542,22 +3542,22 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
-     * of `fieldName` values.
+     * of `field` values.
      * If no elements are present, the result is null.
      *
-     * @param fieldName the field value to sum
+     * @param field the field value to sum
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Integer sumOfNumberOfEmployees = (Integer) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingInt('NumberOfEmployees'));
      */
-    public static Collector summingInt(final String fieldName) {
-        return summingInt(SObjectFunctions.get(fieldName));
+    public static Collector summingInt(final String field) {
+        return summingInt(SObjectFunctions.get(field));
     }
 
     /**
@@ -3585,22 +3585,22 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Long Collectors
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
-     * of `fieldName` values.
+     * of `field` values.
      * If no elements are present, the result is null.
      *
-     * @param fieldName the field value to average
+     * @param field the field value to average
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingLong('NumberOfEmployees'));
      */
-    public static Collector averagingLong(final String fieldName) {
-        return averagingLong(SObjectFunctions.get(fieldName));
+    public static Collector averagingLong(final String field) {
+        return averagingLong(SObjectFunctions.get(field));
     }
 
     /**
@@ -3623,22 +3623,22 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
-     * of `fieldName` values.
+     * of `field` values.
      * If no elements are present, the result is null.
      *
-     * @param fieldName the field value to sum
+     * @param field the field value to sum
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Long sumOfNumberOfEmployees = (Long) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingLong('NumberOfEmployees'));
      */
-    public static Collector summingLong(final String fieldName) {
-        return summingLong(SObjectFunctions.get(fieldName));
+    public static Collector summingLong(final String field) {
+        return summingLong(SObjectFunctions.get(field));
     }
 
     /**
@@ -3666,22 +3666,22 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Double Collectors
     /**
      * @description Returns a `Collector` that returns the arithmetic mean
-     * of `fieldName` values.
+     * of `field` values.
      * If no elements are present, the result is null.
      *
-     * @param fieldName the field value to average
+     * @param field the field value to average
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.averagingDouble('BillingLatitude'));
      */
-    public static Collector averagingDouble(final String fieldName) {
-        return averagingDouble(SObjectFunctions.get(fieldName));
+    public static Collector averagingDouble(final String field) {
+        return averagingDouble(SObjectFunctions.get(field));
     }
 
     /**
@@ -3705,22 +3705,22 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
 
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
-     * of `fieldName` values.
+     * of `field` values.
      * If no elements are present, the result is null.
      *
-     * @param fieldName the field value to sum
+     * @param field the field value to sum
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Double sumOfBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(SObjectCollectors.summingDouble('BillingLatitude'));
      */
-    public static Collector summingDouble(final String fieldName) {
-        return summingDouble(SObjectFunctions.get(fieldName));
+    public static Collector summingDouble(final String field) {
+        return summingDouble(SObjectFunctions.get(field));
     }
 
     /**
@@ -3748,15 +3748,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Intermediate Collectors
     /**
      * @description Adapts a `Collector` to one accepting elements by testing of
-     * `fieldName` is equal to `value` to each input element and only accumulating if it is true.
+     * `field` is equal to `value` to each input element and only accumulating if it is true.
      *
-     * @param fieldName the field value to test input arguments
+     * @param field the field value to test input arguments
      * @param value the expected value
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @see SObjectPredicates.isEqual
      *
@@ -3773,8 +3773,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *                 SObjectCollectors.filtering('Rating', 'Hot')
      *        ).cast(Map<String, List<Account>>.class));
      */
-    public static Collector filtering(final String fieldName, final Object value) {
-        return filtering(SObjectPredicates.isEqual(fieldName, value), toList(SObject.class));
+    public static Collector filtering(final String field, final Object value) {
+        return filtering(SObjectPredicates.isEqual(field, value), toList(SObject.class));
     }
 
     /**
@@ -3806,23 +3806,23 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
 
     /**
-     * @description Adapts a `Collector` to one accepting `fieldName`
+     * @description Adapts a `Collector` to one accepting `field`
      * values to each input element before accumulation.
      *
-     * @param fieldName the field value to accumulate
+     * @param field the field value to accumulate
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * List<String> accountNames = (List<String>)
      *     [SObjectEnumerable].of(accounts)
      *         .collect(SObjectCollectors.mapping('Name').cast(List<String>.class));
      */
-    public static Collector mapping(final String fieldName) {
-        return mapping(SObjectFunctions.get(fieldName));
+    public static Collector mapping(final String field) {
+        return mapping(SObjectFunctions.get(field));
     }
 
     /**
@@ -3847,14 +3847,14 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     /**
      * @description Adapts a `Collector` to one accepting elements as a result of
      * replacing each input element with the contents of a mapped iterable according to
-     * child relationship `fieldName` before accumulation.
+     * child relationship `field` before accumulation.
      *
-     * @param fieldName the child relationship field
+     * @param field the child relationship field
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * List<Contact> contacts = (List<Contact>) [SObjectEnumerable].of(accounts)
@@ -3866,8 +3866,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *             SObjectCollectors.flatMapping('Contacts')
      *         ).cast(Map<String, List<Contact>>.class));
      */
-    public static Collector flatMapping(final String fieldName) {
-        return flatMapping(SObjectFunctions.getSObjects(fieldName));
+    public static Collector flatMapping(final String field) {
+        return flatMapping(SObjectFunctions.getSObjects(field));
     }
 
     /**
@@ -3927,15 +3927,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     // @start-group Optional Collectors
     /**
      * @description Returns a `Collector` which produces the maximal element
-     * according to `fieldName`, described as an `Optional` SObject .
+     * according to `field`, described as an `Optional` SObject .
      * <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
      *
-     * @param fieldName the field value to compare
+     * @param field the field value to compare
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Map<String, Object> accountOptionalWithMaxNumberOfEmployeesPerType = (Map<String, Object>)
@@ -3947,8 +3947,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * Account customerWithMaxNumberOfEmployees = (Account)
      *     ((Optional) accountOptionalWithMaxNumberOfEmployeesPerType).get('Customer').get();
      */
-    public static Collector maximizing(final String fieldName) {
-        return maximizing(Comparer.comparing(SObjectFunctions.get(fieldName)));
+    public static Collector maximizing(final String field) {
+        return maximizing(Comparer.comparing(SObjectFunctions.get(field)));
     }
 
     /**
@@ -3977,15 +3977,15 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
     }
     /**
      * @description Returns a `Collector` which produces the minimal element
-     * according to `fieldName`, described as an `Optional` SObject .
+     * according to `field`, described as an `Optional` SObject .
      * <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
      *
-     * @param fieldName the field value to compare
+     * @param field the field value to compare
      *
      * @return the `Collector`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * Map<String, Object> accountOptionalWithMinNumberOfEmployeesPerType = (Map<String, Object>)
@@ -3997,8 +3997,8 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * Account customerWithMinNumberOfEmployees = (Account)
      *     ((Optional) accountOptionalWithMinNumberOfEmployeesPerType).get('Customer').get();
      */
-    public static Collector minimizing(final String fieldName) {
-        return minimizing(Comparer.comparing(SObjectFunctions.get(fieldName)));
+    public static Collector minimizing(final String field) {
+        return minimizing(Comparer.comparing(SObjectFunctions.get(field)));
     }
 
     /**

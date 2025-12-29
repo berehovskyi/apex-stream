@@ -21,17 +21,17 @@ public virtual inherited sharing class SObjectBiConsumers {
      * to the first `SObject` input argument. Cross-reference fields and safe navigation are
      * supported.
      *
-     * @param fieldName the target field name of the second `SObject` input argument
+     * @param field the target field of the second `SObject` input argument
      * @param mapper the function applied to the first `SObject` input argument
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `mapper` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see BiOperator.combine
      *
@@ -40,14 +40,14 @@ public virtual inherited sharing class SObjectBiConsumers {
      * SObjectBiConsumers.set('Parent.NumberOfEmployees', someFunction);
      * SObjectBiConsumers.set('Parent?.NumberOfEmployees', someFunction);
      */
-    public static BiConsumer set(final String fieldName, final IFunction mapper) {
-        Validate.notNull(fieldName);
+    public static BiConsumer set(final String field, final IFunction mapper) {
+        Validate.notNull(field);
         Validate.notNull(mapper);
         // prettier-ignore
-        if (!CsfSupport.isXRefField(fieldName)) { return new SetFieldName(fieldName, mapper); }
+        if (!CsfSupport.isXRefField(field)) { return new SetFieldName(field, mapper); }
         // prettier-ignore
-        if (CsfSupport.isSafePath(fieldName)) { return new SetFieldPathSafe(fieldName, mapper); }
-        return new SetFieldPath(fieldName, mapper);
+        if (CsfSupport.isSafePath(field)) { return new SetFieldPathSafe(field, mapper); }
+        return new SetFieldPath(field, mapper);
     }
 
     /**
@@ -76,16 +76,16 @@ public virtual inherited sharing class SObjectBiConsumers {
      * the specified field for the second `SObject` input argument. Cross-reference fields and safe
      * navigation are supported.
      *
-     * @param fieldName the target field name of the second `SObject` input argument
+     * @param field the target field of the second `SObject` input argument
      * @param value the value to set for the second `SObject` input argument
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see BiOperator.combine
      *
@@ -94,8 +94,8 @@ public virtual inherited sharing class SObjectBiConsumers {
      * SObjectBiConsumers.set('Parent.NumberOfEmployees', 100);
      * SObjectBiConsumers.set('Parent?.NumberOfEmployees', 100);
      */
-    public static BiConsumer set(final String fieldName, final Object value) {
-        return set(fieldName, Function.constant(value));
+    public static BiConsumer set(final String field, final Object value) {
+        return set(field, Function.constant(value));
     }
 
     /**
@@ -124,17 +124,17 @@ public virtual inherited sharing class SObjectBiConsumers {
      * to the first `SObject` input argument. Cross-reference fields and safe navigation are
      * supported.
      *
-     * @param fieldName the target field name of the second `SObject` input argument
+     * @param field the target field of the second `SObject` input argument
      * @param operator the operator applied to the first `SObject` input argument
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `operator` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see BiOperator.combine
      *
@@ -143,14 +143,14 @@ public virtual inherited sharing class SObjectBiConsumers {
      * SObjectBiConsumers.setSObject('Parent.Parent', someOperator);
      * SObjectBiConsumers.setSObject('Parent?.Parent', someOperator);
      */
-    public static BiConsumer setSObject(final String fieldName, final IOperator operator) {
-        Validate.notNull(fieldName);
+    public static BiConsumer setSObject(final String field, final IOperator operator) {
+        Validate.notNull(field);
         Validate.notNull(operator);
         // prettier-ignore
-        if (!CsfSupport.isXRefField(fieldName)) { return new SetSObjectByFieldName(fieldName, operator); }
+        if (!CsfSupport.isXRefField(field)) { return new SetSObjectByFieldName(field, operator); }
         // prettier-ignore
-        if (CsfSupport.isSafePath(fieldName)) { return new SetSObjectByPathSafe(fieldName, operator); }
-        return new SetSObjectByPath(fieldName, operator);
+        if (CsfSupport.isSafePath(field)) { return new SetSObjectByPathSafe(field, operator); }
+        return new SetSObjectByPath(field, operator);
     }
 
     /**
@@ -179,16 +179,16 @@ public virtual inherited sharing class SObjectBiConsumers {
      * the `value` for the specified field for the second `SObject` input argument.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the target field name of the second `SObject` input argument
+     * @param field the target field of the second `SObject` input argument
      * @param value the value to set for the second `SObject` input argument
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see BiOperator.combine
      *
@@ -197,8 +197,8 @@ public virtual inherited sharing class SObjectBiConsumers {
      * SObjectBiConsumers.setSObject('Parent.Parent', someAccount);
      * SObjectBiConsumers.setSObject('Parent?.Parent', someAccount);
      */
-    public static BiConsumer setSObject(final String fieldName, final SObject value) {
-        return setSObject(fieldName, Operator.constant(value));
+    public static BiConsumer setSObject(final String field, final SObject value) {
+        return setSObject(field, Operator.constant(value));
     }
 
     /**
@@ -228,9 +228,9 @@ public virtual inherited sharing class SObjectBiConsumers {
     private abstract class SObjectByPathBiConsumer extends BiConsumer {
         protected final IOperator operator;
         protected final String xRefFieldName;
-        protected SObjectByPathBiConsumer(String fieldName) {
-            xRefFieldName = fieldName.substringAfterLast('.');
-            operator = SObjectOperators.getSObject(fieldName.substringBeforeLast('.'));
+        protected SObjectByPathBiConsumer(String field) {
+            xRefFieldName = field.substringAfterLast('.');
+            operator = SObjectOperators.getSObject(field.substringBeforeLast('.'));
         }
     }
 
@@ -243,11 +243,11 @@ public virtual inherited sharing class SObjectBiConsumers {
     }
 
     private abstract class FieldNameComposedBiConsumer extends ComposedBiConsumer {
-        protected final String fieldName;
-        protected FieldNameComposedBiConsumer(String fieldName, IFunction mapper) {
+        protected final String field;
+        protected FieldNameComposedBiConsumer(String field, IFunction mapper) {
             super(mapper);
-            Validate.notNull(fieldName);
-            this.fieldName = fieldName;
+            Validate.notNull(field);
+            this.field = field;
         }
     }
 
@@ -262,15 +262,15 @@ public virtual inherited sharing class SObjectBiConsumers {
 
     private class SetFieldName extends FieldNameComposedBiConsumer {
         // prettier-ignore
-        private SetFieldName(String fieldName, IFunction mapper) { super(fieldName, mapper); }
+        private SetFieldName(String field, IFunction mapper) { super(field, mapper); }
         // prettier-ignore
-        public override void accept(Object src, Object target) { ((SObject) target).put(fieldName, mapper.apply(src)); }
+        public override void accept(Object src, Object target) { ((SObject) target).put(field, mapper.apply(src)); }
     }
 
     private class SetFieldPath extends SObjectByPathBiConsumer {
         private final IFunction mapper;
-        private SetFieldPath(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetFieldPath(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object src, Object target) {
@@ -280,8 +280,8 @@ public virtual inherited sharing class SObjectBiConsumers {
 
     private class SetFieldPathSafe extends SObjectByPathBiConsumer {
         private final IFunction mapper;
-        private SetFieldPathSafe(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetFieldPathSafe(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object src, Object target) {
@@ -297,21 +297,21 @@ public virtual inherited sharing class SObjectBiConsumers {
     }
 
     private class SetSObjectByFieldName extends BiConsumer {
-        private final String fieldName;
+        private final String field;
         private final IOperator operator;
-        private SetSObjectByFieldName(String fieldName, IOperator operator) {
-            this.fieldName = fieldName;
+        private SetSObjectByFieldName(String field, IOperator operator) {
+            this.field = field;
             this.operator = operator;
         }
         public override void accept(Object src, Object target) {
-            ((SObject) target).putSObject(fieldName, (SObject) operator.apply(src));
+            ((SObject) target).putSObject(field, (SObject) operator.apply(src));
         }
     }
 
     private class SetSObjectByPath extends SObjectByPathBiConsumer {
         private final IOperator mapper;
-        private SetSObjectByPath(String fieldName, IOperator operator) {
-            super(fieldName);
+        private SetSObjectByPath(String field, IOperator operator) {
+            super(field);
             this.mapper = operator;
         }
         public override void accept(Object src, Object target) {
@@ -321,8 +321,8 @@ public virtual inherited sharing class SObjectBiConsumers {
 
     private class SetSObjectByPathSafe extends SObjectByPathBiConsumer {
         private final IOperator mapper;
-        private SetSObjectByPathSafe(String fieldName, IOperator operator) {
-            super(fieldName);
+        private SetSObjectByPathSafe(String field, IOperator operator) {
+            super(field);
             this.mapper = operator;
         }
         public override void accept(Object src, Object target) {

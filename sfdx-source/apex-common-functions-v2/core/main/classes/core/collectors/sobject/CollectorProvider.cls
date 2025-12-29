@@ -1325,12 +1325,12 @@ public virtual inherited sharing class CollectorProvider {
      *
      * @example
      * public class SumDoubleFieldReducer extends BiOperator {
-     *     private final String fieldName;
-     *     public SumDoubleFieldReducer(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public SumDoubleFieldReducer(String field) { this.field = field; }
      *     public override Object apply(Object seed, Object o) {
      *         ((SObject) seed).put(
-     *             fieldName,
-     *             (Double) ((SObject) seed).get(fieldName) + (Double) ((SObject) o).get(fieldName)
+     *             field,
+     *             (Double) ((SObject) seed).get(field) + (Double) ((SObject) o).get(field)
      *         );
      *         return seed;
      *     }
@@ -1360,12 +1360,12 @@ public virtual inherited sharing class CollectorProvider {
      *
      * @example
      * public class SumDoubleFieldReducer extends BiOperator {
-     *     private final String fieldName;
-     *     public SumDoubleFieldReducer(String fieldName) { this.fieldName = fieldName; }
+     *     private final String field;
+     *     public SumDoubleFieldReducer(String field) { this.field = field; }
      *     public override Object apply(Object seed, Object o) {
      *         ((SObject) seed).put(
-     *             fieldName,
-     *             (Double) ((SObject) seed).get(fieldName) + (Double) ((SObject) o).get(fieldName)
+     *             field,
+     *             (Double) ((SObject) seed).get(field) + (Double) ((SObject) o).get(field)
      *         );
      *         return seed;
      *     }
@@ -1533,10 +1533,10 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Specifies a field name to map SObject field values for collection.
+         * @description Specifies a field to map SObject field values for collection.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the SObject field to map
+         * @param field the name of the SObject field to map
          *
          * @return the `BaseMappingCollector` to map and collect the field values
          *
@@ -1552,8 +1552,8 @@ public virtual inherited sharing class CollectorProvider {
          * List<String> lastNames = (List<String>) [SObjectEnumerable].of(contacts)
          *     .collect(lastNameCollector); // ['Doe', 'Smith']
          */
-        public virtual BaseMappingCollector val(final String fieldName) {
-            return val(new SObjectFunctionProvider().get(fieldName));
+        public virtual BaseMappingCollector val(final String field) {
+            return val(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -1670,18 +1670,18 @@ public virtual inherited sharing class CollectorProvider {
         public abstract Collector val(final IFunction mapper);
 
         /**
-         * @description Specifies the field name to extract values from SObjects.
+         * @description Specifies the field to extract values from SObjects.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to extract
+         * @param field the field to extract
          *
          * @return the `Collector` with the specified field mapping
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          */
-        public virtual Collector val(final String fieldName) {
-            return val(new SObjectFunctionProvider().get(fieldName));
+        public virtual Collector val(final String field) {
+            return val(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -1715,18 +1715,18 @@ public virtual inherited sharing class CollectorProvider {
         public abstract Collector val(final IFunction mapper);
 
         /**
-         * @description Specifies the field name to extract values from SObjects.
+         * @description Specifies the field to extract values from SObjects.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to extract
+         * @param field the field to extract
          *
          * @return the `Collector` with the specified field mapping
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          */
-        public virtual Collector val(final String fieldName) {
-            return val(new SObjectFunctionProvider().get(fieldName));
+        public virtual Collector val(final String field) {
+            return val(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -2093,15 +2093,15 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Specifies the field name to extract the map key from SObjects.
+         * @description Specifies the field to extract the map key from SObjects.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to use as the map key
+         * @param field the field to use as the map key
          *
          * @return the `MapValueMappingCollector` for further configuration
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Account> accounts = new List<Account>{
@@ -2116,8 +2116,8 @@ public virtual inherited sharing class CollectorProvider {
          * Map<String, String> nameByIndustry = (Map<String, String>) [SObjectEnumerable].of(accounts)
          *     .collect(nameByIndustryCollector); // { 'Technology' => 'Company A', 'Finance' => 'Company B' }
          */
-        public virtual MapValueMappingCollector key(final String fieldName) {
-            return key(new SObjectFunctionProvider().get(fieldName));
+        public virtual MapValueMappingCollector key(final String field) {
+            return key(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -2389,15 +2389,15 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Specifies the field name to extract the group key from SObjects.
+         * @description Specifies the field to extract the group key from SObjects.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to use as the group key
+         * @param field the field to use as the group key
          *
          * @return the `GroupMapValueMappingCollector` for further configuration
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Account> accounts = new List<Account>{
@@ -2425,8 +2425,8 @@ public virtual inherited sharing class CollectorProvider {
          * //   'Finance' => ['Account B']
          * // }
          */
-        public virtual GroupMapValueMappingCollector key(final String fieldName) {
-            return key(new SObjectFunctionProvider().get(fieldName));
+        public virtual GroupMapValueMappingCollector key(final String field) {
+            return key(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -2587,15 +2587,15 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Specifies the field name to extract values from SObjects.
+         * @description Specifies the field to extract values from SObjects.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to extract values from
+         * @param field the field to extract values from
          *
          * @return the `Collector` with the specified field mapping
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Account> accounts = new List<Account>{
@@ -2614,10 +2614,8 @@ public virtual inherited sharing class CollectorProvider {
          * //   'Finance' => ['Account B']
          * // }
          */
-        public virtual Collector val(final String fieldName) {
-            return val(
-                valueType == null ? downstream.val(fieldName) : downstream.of(Supplier.of(valueType)).val(fieldName)
-            );
+        public virtual Collector val(final String field) {
+            return val(valueType == null ? downstream.val(field) : downstream.of(Supplier.of(valueType)).val(field));
         }
 
         /**
@@ -2627,7 +2625,7 @@ public virtual inherited sharing class CollectorProvider {
          *
          * @return the `Collector` with the specified field mapping
          *
-         * @throws NullPointerException if `fieldName` is null
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Account> accounts = new List<Account>{
@@ -2769,13 +2767,13 @@ public virtual inherited sharing class CollectorProvider {
          * those that match the field-value pair and those that don't.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to partition by
+         * @param field the field to partition by
          * @param value the value to match against for partitioning
          *
          * @return the `PartitionValueMappingCollector` for further configuration
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Account> accounts = new List<Account>{
@@ -2792,8 +2790,8 @@ public virtual inherited sharing class CollectorProvider {
          * //   false => [{ Industry: 'Finance', Name: 'Account B' }]
          * // }
          */
-        public virtual PartitionValueMappingCollector key(final String fieldName, final Object value) {
-            return key(new SObjectDefaultComparerPredicateProvider().is(fieldName).eq().var(value));
+        public virtual PartitionValueMappingCollector key(final String field, final Object value) {
+            return key(new SObjectDefaultComparerPredicateProvider().is(field).eq().var(value));
         }
 
         /**
@@ -2827,16 +2825,16 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Specifies the field name to partition elements into two groups:
+         * @description Specifies the field to partition elements into two groups:
          * those that match the field and those that don't. The default value to match is `true`.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to partition by
+         * @param field the field to partition by
          *
          * @return the `PartitionValueMappingCollector` for further configuration
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Contact> contacts = new List<Contact>{
@@ -2853,8 +2851,8 @@ public virtual inherited sharing class CollectorProvider {
          * //   false => [{ DoNotCall: false, LastName: 'Smith' }]
          * // }
          */
-        public virtual PartitionValueMappingCollector key(final String fieldName) {
-            return key(fieldName, true);
+        public virtual PartitionValueMappingCollector key(final String field) {
+            return key(field, true);
         }
 
         /**
@@ -3204,17 +3202,17 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Filters the elements based on the field name and value.
+         * @description Filters the elements based on the field and value.
          * The field is compared with the specified value, and only matching elements are collected.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to compare
+         * @param field the field to compare
          * @param value the value to compare against
          *
          * @return the `FilterMappingCollector` instance for chaining
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Contact> contacts = new List<Contact>{
@@ -3228,8 +3226,8 @@ public virtual inherited sharing class CollectorProvider {
          *     .collect(doNotCallContactsCollector);
          * // [{ DoNotCall: true, LastName: 'Doe' }]
          */
-        public virtual FilterMappingCollector when(final String fieldName, final Object value) {
-            return when(new SObjectDefaultComparerPredicateProvider().is(fieldName).eq().var(value));
+        public virtual FilterMappingCollector when(final String field, final Object value) {
+            return when(new SObjectDefaultComparerPredicateProvider().is(field).eq().var(value));
         }
 
         /**
@@ -3334,15 +3332,15 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Specifies a field name that maps to a collection of SObjects for flat-mapping and collection.
+         * @description Specifies a field that maps to a collection of SObjects for flat-mapping and collection.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the SObject relationship field to map
+         * @param field the name of the SObject relationship field to map
          *
          * @return the `FlatMappingCollector` to flat-map and collect the values
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * List<Account> accounts = new List<Account>{
@@ -3362,8 +3360,8 @@ public virtual inherited sharing class CollectorProvider {
          *     .collect(contactsCollector);
          * // [{ LastName: 'Doe'), { LastName: 'Smith' }, { LastName: 'Alex' }, { LastName: 'Miller' }]
          */
-        public virtual Collector val(final String fieldName) {
-            return val(new SObjectFunctionProvider().getSObjects(fieldName));
+        public virtual Collector val(final String field) {
+            return val(new SObjectFunctionProvider().getSObjects(field));
         }
 
         /**
@@ -3451,15 +3449,15 @@ public virtual inherited sharing class CollectorProvider {
         }
 
         /**
-         * @description Specifies a field name to map values from the elements during the fold operation.
+         * @description Specifies a field to map values from the elements during the fold operation.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the field name to extract values from the elements
+         * @param field the field to extract values from the elements
          *
          * @return the `FoldingMapping` instance for chaining
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * public class SumBiOperator extends BiOperator {
@@ -3479,8 +3477,8 @@ public virtual inherited sharing class CollectorProvider {
          * Double sum = (Double) [SObjectEnumerable].of(contacts)
          *     .collect(sumCollector); // 1500000.0
          */
-        public virtual FoldingMapping val(final String fieldName) {
-            return val(new SObjectFunctionProvider().get(fieldName));
+        public virtual FoldingMapping val(final String field) {
+            return val(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -3523,12 +3521,12 @@ public virtual inherited sharing class CollectorProvider {
          *
          * @example
          * public class SumDoubleFieldFolder extends BiOperator {
-         *     private final String fieldName;
-         *     public SumDoubleFieldFolder(String fieldName) { this.fieldName = fieldName; }
+         *     private final String field;
+         *     public SumDoubleFieldFolder(String field) { this.field = field; }
          *     public override Object apply(Object seed, Object o) {
          *         ((SObject) seed).put(
-         *             fieldName,
-         *             (Double) ((SObject) seed).get(fieldName) + (Double) ((SObject) o).get(fieldName)
+         *             field,
+         *             (Double) ((SObject) seed).get(field) + (Double) ((SObject) o).get(field)
          *         );
          *         return seed;
          *     }
@@ -3612,12 +3610,12 @@ public virtual inherited sharing class CollectorProvider {
          *
          * @example
          * public class SumDoubleFieldReducer extends BiOperator {
-         *     private final String fieldName;
-         *     public SumDoubleFieldReducer(String fieldName) { this.fieldName = fieldName; }
+         *     private final String field;
+         *     public SumDoubleFieldReducer(String field) { this.field = field; }
          *     public override Object apply(Object seed, Object o) {
          *         ((SObject) seed).put(
-         *             fieldName,
-         *             (Double) ((SObject) seed).get(fieldName) + (Double) ((SObject) o).get(fieldName)
+         *             field,
+         *             (Double) ((SObject) seed).get(field) + (Double) ((SObject) o).get(field)
          *         );
          *         return seed;
          *     }

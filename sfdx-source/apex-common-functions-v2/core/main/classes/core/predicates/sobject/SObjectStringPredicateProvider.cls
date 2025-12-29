@@ -32,13 +32,13 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
     }
 
     /**
-     * @description Creates an instance of `StringOperator` using the provided field name.
+     * @description Creates an instance of `StringOperator` using the provided field.
      *
-     * @param fieldName the field name of the SObject to be used for mapping
+     * @param field the field of the SObject to be used for mapping
      *
      * @return the `StringOperator`
      *
-     * @throws NullPointerException if `fieldName` is null
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * IPredicate isNameContainingJohn = new SObjectStringPredicateProvider()
@@ -50,8 +50,8 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
      *     .is('Parent?.Name')
      *     .containing('John');
      */
-    public virtual StringOperator is(final String fieldName) {
-        return is(new SObjectFunctionProvider().get(fieldName));
+    public virtual StringOperator is(final String field) {
+        return is(new SObjectFunctionProvider().get(field));
     }
 
     /**

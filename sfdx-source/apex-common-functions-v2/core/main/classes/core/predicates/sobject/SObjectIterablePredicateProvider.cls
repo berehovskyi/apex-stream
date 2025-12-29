@@ -49,17 +49,17 @@ public virtual inherited sharing class SObjectIterablePredicateProvider {
     }
 
     /**
-     * @description Creates an instance of `SObjectIterableOperator` using the provided field name.
+     * @description Creates an instance of `SObjectIterableOperator` using the provided field.
      *
-     * @param fieldName the field name of the SObject to be used for mapping
+     * @param field the field of the SObject to be used for mapping
      *
      * @return the `SObjectIterableOperator`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @example
      * IPredicate isNameInPredicate = new SObjectIterablePredicateProvider()
@@ -69,8 +69,8 @@ public virtual inherited sharing class SObjectIterablePredicateProvider {
      * // safe navigation
      * new SObjectIterablePredicateProvider().is('Parent?.Name').inx(new List<String>{ 'Sam', 'Frank' });
      */
-    public virtual SObjectIterableOperator is(final String fieldName) {
-        return is(new SObjectFunctionProvider().get(fieldName));
+    public virtual SObjectIterableOperator is(final String field) {
+        return is(new SObjectFunctionProvider().get(field));
     }
 
     /**

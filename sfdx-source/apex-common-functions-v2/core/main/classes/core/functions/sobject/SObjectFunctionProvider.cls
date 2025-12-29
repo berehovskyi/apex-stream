@@ -22,17 +22,17 @@
 public virtual inherited sharing class SObjectFunctionProvider {
     /**
      * @description Returns a `Function` that gets a value for
-     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     * the specified `field`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param field the field to get a value
      *
      * @return the `Function`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.get
      *
@@ -50,8 +50,8 @@ public virtual inherited sharing class SObjectFunctionProvider {
      * // but
      * safeParentNameFunction.apply(new Account()); // null
      */
-    public virtual Function get(final String fieldName) {
-        return new GetFunction(fieldName);
+    public virtual Function get(final String field) {
+        return new GetFunction(field);
     }
 
     /**
@@ -75,17 +75,17 @@ public virtual inherited sharing class SObjectFunctionProvider {
     }
 
     /**
-     * @description Returns a `Function` that gets a single related SObject for the specified `fieldName`.
+     * @description Returns a `Function` that gets a single related SObject for the specified `field`.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get the related SObject
+     * @param field the field to get the related SObject
      *
      * @return the `Function`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.getSObject
      *
@@ -93,8 +93,8 @@ public virtual inherited sharing class SObjectFunctionProvider {
      * IFunction accountFunction = new SObjectFunctionProvider().getSObject('Account');
      * accountFunction.apply(new Contact(Account = new Account(Name = 'John Doe'))); // Account { Name: 'John Doe' }
      */
-    public virtual Function getSObject(final String fieldName) {
-        return new GetSObjectFunction(fieldName);
+    public virtual Function getSObject(final String field) {
+        return new GetSObjectFunction(field);
     }
 
     /**
@@ -118,17 +118,17 @@ public virtual inherited sharing class SObjectFunctionProvider {
 
     /**
      * @description Returns a `Function` that gets children SObjects for
-     * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+     * the specified `field`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param field the field to get a value
      *
      * @return the `Function`
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `NullPointerException` occurs during unsafe cross-
      * reference navigation
-     * @throws SObjectException if provided invalid `fieldName`
+     * @throws SObjectException if provided invalid `field`
      *
      * @see SObject.getSObjects
      *
@@ -158,8 +158,8 @@ public virtual inherited sharing class SObjectFunctionProvider {
      * // but
      * safeParentContactsFunction.apply(new Account(Id = '001000000000001AAA')); // null
      */
-    public virtual Function getSObjects(final String fieldName) {
-        return new GetSObjectsFunction(fieldName);
+    public virtual Function getSObjects(final String field) {
+        return new GetSObjectsFunction(field);
     }
 
     /**
@@ -192,7 +192,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
 
     /**
      * @description Returns a `Function` that returns
-     * a map of populated field names and their corresponding values for an input argument.
+     * a map of populated fields and their corresponding values for an input argument.
      *
      * @return the `Function`
      *
@@ -328,10 +328,10 @@ public virtual inherited sharing class SObjectFunctionProvider {
 
         /**
          * @description Creates a `MapSObjectValueMapper` to map a value obtained from a field
-         * by specifying its `fieldName`, and mapping it to a field on the SObject.
+         * by specifying its `field`, and mapping it to a field on the SObject.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the field from which to retrieve the value
+         * @param field the name of the field from which to retrieve the value
          *
          * @return the `MapSObjectValueMapper`
          *
@@ -340,8 +340,8 @@ public virtual inherited sharing class SObjectFunctionProvider {
          *     .val('LastName').to('LastName');
          * mapToLead.apply(new Contact(LastName = 'Doe')); // Lead { LastName: 'Doe' }
          */
-        public virtual MapSObjectValueMapper val(final String fieldName) {
-            return val(new SObjectFunctionProvider().get(fieldName));
+        public virtual MapSObjectValueMapper val(final String field) {
+            return val(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -403,10 +403,10 @@ public virtual inherited sharing class SObjectFunctionProvider {
         }
 
         /**
-         * @description Maps the value provided by the function to the specified field name on the SObject.
+         * @description Maps the value provided by the function to the specified field on the SObject.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the field on the destination SObject where the value will be mapped
+         * @param field the name of the field on the destination SObject where the value will be mapped
          *
          * @return the `ChainableMapSObjectFunction`
          *
@@ -417,8 +417,8 @@ public virtual inherited sharing class SObjectFunctionProvider {
          * mapToLead.apply(new Contact(LastName = 'Doe'));
          * // Lead { LastName: 'Doe', OwnerId: '005000000000000AAA' }
          */
-        public virtual ChainableMapSObjectFunction to(final String fieldName) {
-            return chainableOperator.addMapping(mapper, new SObjectConsumerProvider().set(fieldName));
+        public virtual ChainableMapSObjectFunction to(final String field) {
+            return chainableOperator.addMapping(mapper, new SObjectConsumerProvider().set(field));
         }
 
         /**
@@ -444,30 +444,30 @@ public virtual inherited sharing class SObjectFunctionProvider {
     private abstract class SObjectPathFunction extends Function {
         protected final IFunction mapper;
         protected final String xRefFieldName;
-        protected SObjectPathFunction(String fieldName) {
-            xRefFieldName = fieldName.substringAfterLast('.');
-            mapper = new SObjectFunctionProvider().getSObject(fieldName.substringBeforeLast('.'));
+        protected SObjectPathFunction(String field) {
+            xRefFieldName = field.substringAfterLast('.');
+            mapper = new SObjectFunctionProvider().getSObject(field.substringBeforeLast('.'));
         }
     }
 
     private class GetByFieldName extends Function {
-        private final String fieldName;
+        private final String field;
         // prettier-ignore
-        private GetByFieldName(String fieldName) { this.fieldName = fieldName; }
+        private GetByFieldName(String field) { this.field = field; }
         // prettier-ignore
-        public override Object apply(Object o) { return ((SObject) o).get(fieldName); }
+        public override Object apply(Object o) { return ((SObject) o).get(field); }
     }
 
     private class GetByFieldPath extends SObjectPathFunction {
         // prettier-ignore
-        private GetByFieldPath(String fieldName) { super(fieldName); }
+        private GetByFieldPath(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o)).get(xRefFieldName); }
     }
 
     private class GetByFieldPathSafe extends SObjectPathFunction {
         // prettier-ignore
-        private GetByFieldPathSafe(String fieldName) { super(fieldName); }
+        private GetByFieldPathSafe(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o))?.get(xRefFieldName); }
     }
@@ -475,11 +475,11 @@ public virtual inherited sharing class SObjectFunctionProvider {
     private class GetFunction extends Function {
         private final IFunction function;
         // prettier-ignore
-        private GetFunction(String fieldName) {
-            Validate.notBlank(fieldName);
-            if (!AcfSupport.isXRefField(fieldName)) { function = new GetByFieldName(fieldName); }
-            else if (AcfSupport.isSafePath(fieldName)) { function = new GetByFieldPathSafe(fieldName); }
-            else { function = new GetByFieldPath(fieldName); }
+        private GetFunction(String field) {
+            Validate.notBlank(field);
+            if (!AcfSupport.isXRefField(field)) { function = new GetByFieldName(field); }
+            else if (AcfSupport.isSafePath(field)) { function = new GetByFieldPathSafe(field); }
+            else { function = new GetByFieldPath(field); }
         }
         // prettier-ignore
         public override Object apply(Object o) { return function.apply(o); }
@@ -498,10 +498,10 @@ public virtual inherited sharing class SObjectFunctionProvider {
     private class GetSObjectFunction extends Function {
         private final IFunction function;
         // prettier-ignore
-        private GetSObjectFunction(String fieldName) {
-            Validate.notBlank(fieldName);
-            if (!fieldName.containsAny('?.')) { function = new GetSObjectByFieldName(fieldName); }
-            else { function = new GetSObjectByFieldPathSafe(fieldName); }
+        private GetSObjectFunction(String field) {
+            Validate.notBlank(field);
+            if (!field.containsAny('?.')) { function = new GetSObjectByFieldName(field); }
+            else { function = new GetSObjectByFieldPathSafe(field); }
         }
         // prettier-ignore
         public override Object apply(Object o) { return function.apply(o); }
@@ -518,23 +518,23 @@ public virtual inherited sharing class SObjectFunctionProvider {
     }
 
     private class GetSObjectsByFieldName extends Function {
-        private final String fieldName;
+        private final String field;
         // prettier-ignore
-        private GetSObjectsByFieldName(String fieldName) { this.fieldName = fieldName; }
+        private GetSObjectsByFieldName(String field) { this.field = field; }
         // prettier-ignore
-        public override Object apply(Object o) { return ((SObject) o).getSObjects(fieldName); }
+        public override Object apply(Object o) { return ((SObject) o).getSObjects(field); }
     }
 
     private class GetSObjectsByFieldPath extends SObjectPathFunction {
         // prettier-ignore
-        private GetSObjectsByFieldPath(String fieldName) { super(fieldName); }
+        private GetSObjectsByFieldPath(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o)).getSObjects(xRefFieldName); }
     }
 
     private class GetSObjectsByFieldPathSafe extends SObjectPathFunction {
         // prettier-ignore
-        private GetSObjectsByFieldPathSafe(String fieldName) { super(fieldName); }
+        private GetSObjectsByFieldPathSafe(String field) { super(field); }
         // prettier-ignore
         public override Object apply(Object o) { return ((SObject) mapper.apply(o))?.getSObjects(xRefFieldName); }
     }
@@ -542,11 +542,11 @@ public virtual inherited sharing class SObjectFunctionProvider {
     private class GetSObjectsFunction extends Function {
         private final IFunction function;
         // prettier-ignore
-        private GetSObjectsFunction(String fieldName) {
-            Validate.notBlank(fieldName);
-            if (!AcfSupport.isXRefField(fieldName)) { function = new GetSObjectsByFieldName(fieldName); }
-            else if (AcfSupport.isSafePath(fieldName)) { function = new GetSObjectsByFieldPathSafe(fieldName); }
-            else { function = new GetSObjectsByFieldPath(fieldName); }
+        private GetSObjectsFunction(String field) {
+            Validate.notBlank(field);
+            if (!AcfSupport.isXRefField(field)) { function = new GetSObjectsByFieldName(field); }
+            else if (AcfSupport.isSafePath(field)) { function = new GetSObjectsByFieldPathSafe(field); }
+            else { function = new GetSObjectsByFieldPath(field); }
         }
         // prettier-ignore
         public override Object apply(Object o) { return function.apply(o); }
@@ -568,26 +568,26 @@ public virtual inherited sharing class SObjectFunctionProvider {
     }
 
     private class GetSObjectByFieldName extends Function {
-        private final String fieldName;
+        private final String field;
         // prettier-ignore
-        private GetSObjectByFieldName(String fieldName) { this.fieldName = fieldName; }
+        private GetSObjectByFieldName(String field) { this.field = field; }
         // prettier-ignore
-        public override Object apply(Object o) { return ((SObject) o).getSObject(fieldName); }
+        public override Object apply(Object o) { return ((SObject) o).getSObject(field); }
     }
 
     private class GetSObjectByFieldPathSafe extends Function {
         private final List<String> path;
         // prettier-ignore
-        private GetSObjectByFieldPathSafe(String fieldName) { path = fieldName.split('\\.'); }
+        private GetSObjectByFieldPathSafe(String field) { path = field.split('\\.'); }
         // prettier-ignore
         public override Object apply(Object o) { return getSObject((SObject) o, 0); }
         // prettier-ignore
         private SObject getSObject(SObject sObj, Integer i) {
             if (i >= path.size()) { return sObj; }
-            String fieldName = path[i];
-            Boolean isSafe = fieldName.endsWith('?'); // Safe Navigation
-            if (isSafe) { fieldName = fieldName.removeEnd('?'); }
-            sObj = sObj.getSObject(fieldName);
+            String field = path[i];
+            Boolean isSafe = field.endsWith('?'); // Safe Navigation
+            if (isSafe) { field = field.removeEnd('?'); }
+            sObj = sObj.getSObject(field);
             if (isSafe && sObj == null) { return null; }
             return getSObject(sObj, ++i);
         }

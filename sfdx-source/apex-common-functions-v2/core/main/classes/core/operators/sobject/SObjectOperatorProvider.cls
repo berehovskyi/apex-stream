@@ -12,15 +12,15 @@
  */
 public virtual inherited sharing class SObjectOperatorProvider {
     /**
-     * @description Returns a `SetByName` builder that sets the value for the specified `fieldName` on the SObject.
+     * @description Returns a `SetByName` builder that sets the value for the specified `field` on the SObject.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set the value for
+     * @param field the field to set the value for
      *
      * @return the `SetByName` instance to set the field value
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @see SObject.put
      *
@@ -36,8 +36,8 @@ public virtual inherited sharing class SObjectOperatorProvider {
      * setRevenueFromParentOperator.apply(new Account(Parent = new Account(AnnualRevenue = 5000)));
      * // { AnnualRevenue: 5000, Parent: { AnnualRevenue: 5000 } }
      */
-    public virtual SetByName set(final String fieldName) {
-        return new SetByName(fieldName);
+    public virtual SetByName set(final String field) {
+        return new SetByName(field);
     }
 
     /**
@@ -62,15 +62,15 @@ public virtual inherited sharing class SObjectOperatorProvider {
     }
 
     /**
-     * @description Returns a `SetSObjectByName` builder that sets a related SObject using the field name.
+     * @description Returns a `SetSObjectByName` builder that sets a related SObject using the field.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set the value for
+     * @param field the field to set the value for
      *
      * @return the `SetSObjectByName` instance to set the field value
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @see SObject.putSObject
      *
@@ -80,8 +80,8 @@ public virtual inherited sharing class SObjectOperatorProvider {
      *     .var(new Account(Name = 'Parent Account'));
      * setParentOperator.apply(new Account()); // { Parent: { Name: 'Parent Account' } }
      */
-    public virtual SetSObjectByName setSObject(final String fieldName) {
-        return new SetSObjectByName(fieldName);
+    public virtual SetSObjectByName setSObject(final String field) {
+        return new SetSObjectByName(field);
     }
 
     /**
@@ -111,12 +111,12 @@ public virtual inherited sharing class SObjectOperatorProvider {
      * <p><strong>Note: </strong></p>
      * <p>This valueMapper uses serialization / deserialization to set related children SObjects.</p>
      *
-     * @param fieldName the field name representing the related SObjects
+     * @param field the field representing the related SObjects
      *
      * @return the `SetSObjects` instance to set the field value
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @example
      * IOperator setContactsOperator = new SObjectOperatorProvider()
@@ -125,8 +125,8 @@ public virtual inherited sharing class SObjectOperatorProvider {
      * setContactsOperator.apply(new Account());
      * // Account { Contacts: [{ FirstName: 'John' }, { FirstName: 'Jane' }] }
      */
-    public virtual SetSObjects setSObjects(final String fieldName) {
-        return new SetSObjects(fieldName);
+    public virtual SetSObjects setSObjects(final String field) {
+        return new SetSObjects(field);
     }
 
     /**
@@ -155,17 +155,17 @@ public virtual inherited sharing class SObjectOperatorProvider {
         protected abstract Operator val(final IFunction mapper);
 
         /**
-         * @description Fetches a value from the provided field name
+         * @description Fetches a value from the provided field
          * and sets it to the target field defined in the previous step.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the field to fetch the value from
+         * @param field the name of the field to fetch the value from
          *
          * @return the `Operator` that applies the fetched value to the target field and returns the mutated argument
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
-         * @throws SObjectException if the provided `fieldName` is invalid
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
+         * @throws SObjectException if the provided `field` is invalid
          *
          * @example
          * IOperator setNameFromParentOperator = new SObjectOperatorProvider()
@@ -174,8 +174,8 @@ public virtual inherited sharing class SObjectOperatorProvider {
          * setNameFromParentOperator.apply(new Account(Parent = new Account(Name = 'ParentName')));
          * // { Name: 'ParentName', Parent: { Name: 'ParentName' } }
          */
-        public virtual Operator val(final String fieldName) {
-            return val(new SObjectFunctionProvider().get(fieldName));
+        public virtual Operator val(final String field) {
+            return val(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -218,14 +218,14 @@ public virtual inherited sharing class SObjectOperatorProvider {
     }
 
     /**
-     * @description Sets a field value for a specific field name on the SObject.
+     * @description Sets a field value for a specific field on the SObject.
      * You can use this instance to assign a value to a field using either a constant or a function, or another field.
      */
     public virtual class SetByName extends SetFieldValueBase {
-        private final String fieldName;
-        private SetByName(String fieldName) {
-            Validate.notBlank(fieldName);
-            this.fieldName = fieldName;
+        private final String field;
+        private SetByName(String field) {
+            Validate.notBlank(field);
+            this.field = field;
         }
 
         /**
@@ -244,7 +244,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
          * setFieldWithFunctionOperator.apply(new Account()); // { Name: 'Jane Doe' }
          */
         public virtual override Operator val(final IFunction mapper) {
-            return Operator.compose(new SObjectConsumerProvider().set(fieldName).val(mapper));
+            return Operator.compose(new SObjectConsumerProvider().set(field).val(mapper));
         }
     }
 
@@ -283,17 +283,17 @@ public virtual inherited sharing class SObjectOperatorProvider {
         protected abstract Operator val(final IFunction mapper);
 
         /**
-         * @description Fetches an SObject value from the provided field name
+         * @description Fetches an SObject value from the provided field
          * and sets it to the target field defined in the previous step.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the field to fetch the SObject value from
+         * @param field the name of the field to fetch the SObject value from
          *
          * @return the `Operator` that applies the fetched value to the target field and returns the mutated argument
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
-         * @throws SObjectException if the provided `fieldName` is invalid
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
+         * @throws SObjectException if the provided `field` is invalid
          *
          * @example
          * IOperator setParentFromGrandparentOperator = new SObjectOperatorProvider()
@@ -303,8 +303,8 @@ public virtual inherited sharing class SObjectOperatorProvider {
          *     new Account(Parent = new Account(Parent = new Account(Name = 'Grandparent')))
          * ); // { Parent: { Parent: { Name: 'Grandparent' } } }
          */
-        public virtual Operator val(final String fieldName) {
-            return val(new SObjectFunctionProvider().getSObject(fieldName));
+        public virtual Operator val(final String field) {
+            return val(new SObjectFunctionProvider().getSObject(field));
         }
 
         /**
@@ -347,18 +347,18 @@ public virtual inherited sharing class SObjectOperatorProvider {
     }
 
     /**
-     * @description Sets an SObject for a specific field name on the SObject.
+     * @description Sets an SObject for a specific field on the SObject.
      * You can use this instance to assign a value using either a constant or a function, or another field.
      */
     public virtual class SetSObjectByName extends SetSObjectBase {
-        protected final String fieldName;
-        protected SetSObjectByName(String fieldName) {
-            Validate.notBlank(fieldName);
-            this.fieldName = fieldName;
+        protected final String field;
+        protected SetSObjectByName(String field) {
+            Validate.notBlank(field);
+            this.field = field;
         }
 
         /**
-         * @description Sets the SObject value by applying the provided operator to the specified field name.
+         * @description Sets the SObject value by applying the provided operator to the specified field.
          *
          * @param mapper the operator used to map the SObject value to the field
          *
@@ -373,7 +373,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
          * setParentAccountOperator.apply(new Account()); // { Parent: { Name: 'Parent Account' } }
          */
         public virtual override Operator val(final IFunction mapper) {
-            return Operator.compose(new SObjectConsumerProvider().setSObject(fieldName).val(mapper));
+            return Operator.compose(new SObjectConsumerProvider().setSObject(field).val(mapper));
         }
     }
 
@@ -409,17 +409,17 @@ public virtual inherited sharing class SObjectOperatorProvider {
     }
 
     /**
-     * @description Sets related SObjects for a specific field name on the SObject.
+     * @description Sets related SObjects for a specific field on the SObject.
      * You can use this instance to assign a value using either a constant or a function, or another field.
      */
     public virtual class SetSObjects {
-        protected final String fieldName;
-        protected SetSObjects(String fieldName) {
-            Validate.notBlank(fieldName);
-            this.fieldName = fieldName;
+        protected final String field;
+        protected SetSObjects(String field) {
+            Validate.notBlank(field);
+            this.field = field;
         }
         protected SetSObjects(SObjectField field) {
-            this.fieldName = AcfSupport.findRelationshipField(field);
+            this.field = AcfSupport.findRelationshipField(field);
         }
 
         /**
@@ -443,20 +443,20 @@ public virtual inherited sharing class SObjectOperatorProvider {
          * // Account { Contacts: [{ FirstName: 'John' }, { FirstName: 'Jane' }] }
          */
         public virtual Operator val(final IFunction mapper) {
-            return new SetSObjectsByFieldNameOperator(fieldName, mapper);
+            return new SetSObjectsByFieldNameOperator(field, mapper);
         }
 
         /**
-         * @description Fetches a list of related SObject records from the provided field name
+         * @description Fetches a list of related SObject records from the provided field
          * and sets them to the target field defined in the previous step.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the field to fetch the related SObject records from
+         * @param field the name of the field to fetch the related SObject records from
          *
          * @return the `Operator` that applies the value to the target field and returns the mutated argument
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
          *
          * @example
          * IOperator setContactsOperator = new SObjectOperatorProvider()
@@ -470,8 +470,8 @@ public virtual inherited sharing class SObjectOperatorProvider {
          *     Contacts__r: [{ FirstName: 'John' }, { FirstName: 'Jane' }]
          * }
          */
-        public virtual Operator val(final String fieldName) {
-            return val(new SObjectFunctionProvider().getSObjects(fieldName));
+        public virtual Operator val(final String field) {
+            return val(new SObjectFunctionProvider().getSObjects(field));
         }
 
         /**
@@ -523,11 +523,11 @@ public virtual inherited sharing class SObjectOperatorProvider {
 
     private class SetSObjectsByFieldNameOperator extends Operator {
         private final String placeholder = '\'{\'"totalSize": {0}, "done": true, "records": {1}\'}\'';
-        private final String fieldName;
+        private final String field;
         private final IFunction mapper;
-        private SetSObjectsByFieldNameOperator(String fieldName, IFunction mapper) {
+        private SetSObjectsByFieldNameOperator(String field, IFunction mapper) {
             Validate.notNull(mapper);
-            this.fieldName = fieldName;
+            this.field = field;
             this.mapper = mapper;
         }
         public override Object apply(Object o) {
@@ -535,11 +535,11 @@ public virtual inherited sharing class SObjectOperatorProvider {
             final Map<String, Object> rawRecord = new Map<String, Object>(sObj.getPopulatedFieldsAsMap());
             final List<SObject> children = (List<SObject>) mapper.apply(sObj);
             if (children?.isEmpty() != false) {
-                rawRecord.keySet().remove(fieldName);
+                rawRecord.keySet().remove(field);
             } else {
                 final List<Object> arguments = new List<Object>{ children.size(), JSON.serialize(children) };
                 final String fake = String.format(placeholder, arguments);
-                rawRecord.put(fieldName, JSON.deserializeUntyped(fake));
+                rawRecord.put(field, JSON.deserializeUntyped(fake));
             }
             return JSON.deserialize(
                 JSON.serialize(rawRecord),

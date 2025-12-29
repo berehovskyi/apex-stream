@@ -30,33 +30,33 @@ public inherited sharing class AcfSupport {
     }
 
     /**
-     * @description Checks if the given field name is a cross-reference field.
+     * @description Checks if the given field is a cross-reference field.
      * A cross-reference field is identified by the presence of a dot ('.') in its name.
      *
-     * @param fieldName the field to check.
+     * @param field the field to check.
      *
-     * @return true if the field name contains a dot, indicating it is a cross-reference field; false otherwise.
+     * @return true if the field contains a dot, indicating it is a cross-reference field; false otherwise.
      *
-     * @throws IllegalArgumentException if the provided field name is blank.
+     * @throws IllegalArgumentException if the provided field is blank.
      */
-    public static Boolean isXRefField(String fieldName) {
-        Validate.notBlank(fieldName);
-        return fieldName.contains('.');
+    public static Boolean isXRefField(String field) {
+        Validate.notBlank(field);
+        return field.contains('.');
     }
 
     /**
-     * @description Checks if the given field name represents a safe path.
-     * A safe path is identified by a question mark ('?') immediately preceding the last dot ('.') in the field name.
+     * @description Checks if the given field represents a safe path.
+     * A safe path is identified by a question mark ('?') immediately preceding the last dot ('.') in the field.
      *
-     * @param fieldName the field to check.
+     * @param field the field to check.
      *
-     * @return true if the field name ends with a question mark before the last dot, indicating it is a safe path;
+     * @return true if the field ends with a question mark before the last dot, indicating it is a safe path;
      * false otherwise.
      *
-     * @throws IllegalArgumentException if the provided field name is blank.
+     * @throws IllegalArgumentException if the provided field is blank.
      */
-    public static Boolean isSafePath(String fieldName) {
-        Validate.notBlank(fieldName);
-        return fieldName.substringBeforeLast('.').endsWith('?');
+    public static Boolean isSafePath(String field) {
+        Validate.notBlank(field);
+        return field.substringBeforeLast('.').endsWith('?');
     }
 }

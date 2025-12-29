@@ -57,15 +57,15 @@ public virtual inherited sharing class SObjectConsumerProvider {
     }
 
     /**
-     * @description Returns a `SetByName` builder that sets the value for the specified `fieldName` on the SObject.
+     * @description Returns a `SetByName` builder that sets the value for the specified `field` on the SObject.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set the value for
+     * @param field the field to set the value for
      *
      * @return the `SetByName` builder to set the field value
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @see SObject.put
      *
@@ -81,8 +81,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
      * setRevenueFromParentConsumer.accept(new Account(Parent = new Account(AnnualRevenue = 5000)));
      * // { AnnualRevenue: 5000, Parent: { AnnualRevenue: 5000 } }
      */
-    public virtual SetByName set(final String fieldName) {
-        return new SetByName(fieldName);
+    public virtual SetByName set(final String field) {
+        return new SetByName(field);
     }
 
     /**
@@ -107,15 +107,15 @@ public virtual inherited sharing class SObjectConsumerProvider {
     }
 
     /**
-     * @description Returns a `SetSObjectByName` builder that sets a related SObject using the field name.
+     * @description Returns a `SetSObjectByName` builder that sets a related SObject using the field.
      * Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field name to set the value for
+     * @param field the field to set the value for
      *
      * @return the `SetSObjectByName` builder to set the field value
      *
-     * @throws IllegalArgumentException if `fieldName` is blank
-     * @throws NullPointerException if `fieldName` is null
+     * @throws IllegalArgumentException if `field` is blank
+     * @throws NullPointerException if `field` is null
      *
      * @see SObject.putSObject
      *
@@ -125,8 +125,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
      *     .var(new Account(Name = 'Parent Account'));
      * setParentConsumer.accept(new Account()); // { Parent: { Name: 'Parent Account' } }
      */
-    public virtual SetSObjectByName setSObject(final String fieldName) {
-        return new SetSObjectByName(fieldName);
+    public virtual SetSObjectByName setSObject(final String field) {
+        return new SetSObjectByName(field);
     }
 
     /**
@@ -189,13 +189,13 @@ public virtual inherited sharing class SObjectConsumerProvider {
         /**
          * @description Returns a `Consumer` that adds the error message to the specified field on the SObject.
          *
-         * @param fieldName the name of the field to add the error message to
+         * @param field the name of the field to add the error message to
          *
          * @return the `Consumer`
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
-         * @throws SObjectException if provided invalid `fieldName`
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
+         * @throws SObjectException if provided invalid `field`
          *
          * @example
          * IConsumer addErrorConsumer = new SObjectConsumerProvider()
@@ -203,8 +203,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
          *     .to('Name');
          * addErrorConsumer.accept(new Account());
          */
-        public virtual Consumer to(final String fieldName) {
-            return new AddFieldNameErrorConsumer(fieldName, message, escape);
+        public virtual Consumer to(final String field) {
+            return new AddFieldNameErrorConsumer(field, message, escape);
         }
 
         /**
@@ -274,17 +274,17 @@ public virtual inherited sharing class SObjectConsumerProvider {
         protected abstract Consumer val(final IFunction mapper);
 
         /**
-         * @description Fetches a value from the provided field name
+         * @description Fetches a value from the provided field
          * and sets it to the target field defined in the previous step.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the field to fetch the value from
+         * @param field the name of the field to fetch the value from
          *
          * @return the `Consumer` that applies the fetched value to the target field
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
-         * @throws SObjectException if the provided `fieldName` is invalid
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
+         * @throws SObjectException if the provided `field` is invalid
          *
          * @example
          * IConsumer setNameFromParentConsumer = new SObjectConsumerProvider()
@@ -293,8 +293,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
          * setNameFromParentConsumer.accept(new Account(Parent = new Account(Name = 'ParentName')));
          * // { Name: 'ParentName', Parent: { Name: 'ParentName' } }
          */
-        public virtual Consumer val(final String fieldName) {
-            return val(new SObjectFunctionProvider().get(fieldName));
+        public virtual Consumer val(final String field) {
+            return val(new SObjectFunctionProvider().get(field));
         }
 
         /**
@@ -337,14 +337,14 @@ public virtual inherited sharing class SObjectConsumerProvider {
     }
 
     /**
-     * @description Sets a field value for a specific field name on the SObject.
+     * @description Sets a field value for a specific field on the SObject.
      * You can use this instance to assign a value to a field using either a constant or a function, or another field.
      */
     public virtual class SetByName extends SetFieldValueBase {
-        protected final String fieldName;
-        protected SetByName(String fieldName) {
-            Validate.notBlank(fieldName);
-            this.fieldName = fieldName;
+        protected final String field;
+        protected SetByName(String field) {
+            Validate.notBlank(field);
+            this.field = field;
         }
 
         /**
@@ -363,7 +363,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
          * setFieldWithFunctionConsumer.accept(new Account()); // { Name: 'Jane Doe' }
          */
         public virtual override Consumer val(final IFunction mapper) {
-            return new SetConsumer(fieldName, mapper);
+            return new SetConsumer(field, mapper);
         }
     }
 
@@ -402,17 +402,17 @@ public virtual inherited sharing class SObjectConsumerProvider {
         protected abstract Consumer val(final IFunction mapper);
 
         /**
-         * @description Fetches an `SObject` value from the provided field name
+         * @description Fetches an `SObject` value from the provided field
          * and sets it to the target field defined in the previous step.
          * Cross-reference fields and safe navigation are supported.
          *
-         * @param fieldName the name of the field to fetch the `SObject` value from
+         * @param field the name of the field to fetch the `SObject` value from
          *
          * @return the `Consumer` that applies the fetched value to the target field
          *
-         * @throws IllegalArgumentException if `fieldName` is blank
-         * @throws NullPointerException if `fieldName` is null
-         * @throws SObjectException if the provided `fieldName` is invalid
+         * @throws IllegalArgumentException if `field` is blank
+         * @throws NullPointerException if `field` is null
+         * @throws SObjectException if the provided `field` is invalid
          *
          * @example
          * IConsumer setParentFromGrandparentConsumer = new SObjectConsumerProvider()
@@ -422,8 +422,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
          *     new Account(Parent = new Account(Parent = new Account(Name = 'Grandparent')))
          * ); // { Parent: { Parent: { Name: 'Grandparent' } } }
          */
-        public virtual Consumer val(final String fieldName) {
-            return val(new SObjectFunctionProvider().getSObject(fieldName));
+        public virtual Consumer val(final String field) {
+            return val(new SObjectFunctionProvider().getSObject(field));
         }
 
         /**
@@ -466,18 +466,18 @@ public virtual inherited sharing class SObjectConsumerProvider {
     }
 
     /**
-     * @description Sets a `SObject` for a specific field name on the SObject.
+     * @description Sets a `SObject` for a specific field on the SObject.
      * You can use this instance to assign a value using either a constant or a function, or another field.
      */
     public virtual class SetSObjectByName extends SetSObjectBase {
-        protected final String fieldName;
-        protected SetSObjectByName(String fieldName) {
-            Validate.notBlank(fieldName);
-            this.fieldName = fieldName;
+        protected final String field;
+        protected SetSObjectByName(String field) {
+            Validate.notBlank(field);
+            this.field = field;
         }
 
         /**
-         * @description Sets the `SObject` value by applying the provided function to the specified field name.
+         * @description Sets the `SObject` value by applying the provided function to the specified field.
          *
          * @param mapper the function used to map the `SObject` value to the field
          *
@@ -492,7 +492,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
          * setParentAccountConsumer.accept(new Account()); // { Parent: { Name: 'Parent Account' } }
          */
         public virtual override Consumer val(final IFunction mapper) {
-            return new SetSObjectConsumer(fieldName, mapper);
+            return new SetSObjectConsumer(field, mapper);
         }
     }
 
@@ -528,17 +528,17 @@ public virtual inherited sharing class SObjectConsumerProvider {
     }
 
     private class AddFieldNameErrorConsumer extends Consumer {
-        private final String fieldName;
+        private final String field;
         private final String message;
         private final Boolean escape;
-        private AddFieldNameErrorConsumer(String fieldName, String message, Boolean escape) {
-            Validate.notBlank(fieldName);
-            this.fieldName = fieldName;
+        private AddFieldNameErrorConsumer(String field, String message, Boolean escape) {
+            Validate.notBlank(field);
+            this.field = field;
             this.message = message;
             this.escape = escape;
         }
         // prettier-ignore
-        public override void accept(Object o) { ((SObject) o).addError(fieldName, message, escape); }
+        public override void accept(Object o) { ((SObject) o).addError(field, message, escape); }
     }
 
     private class AddFieldErrorConsumer extends Consumer {
@@ -558,11 +558,11 @@ public virtual inherited sharing class SObjectConsumerProvider {
     private class SetConsumer extends Consumer {
         private final IConsumer consumer;
         // prettier-ignore
-        private SetConsumer(String fieldName, IFunction mapper) {
+        private SetConsumer(String field, IFunction mapper) {
             Validate.notNull(mapper);
-            if (!AcfSupport.isXRefField(fieldName)) { consumer = new SetByFieldName(fieldName, mapper); }
-            else if (AcfSupport.isSafePath(fieldName)) { consumer = new SetByFieldPathSafe(fieldName, mapper); }
-            else { consumer = new SetByFieldPath(fieldName, mapper); }
+            if (!AcfSupport.isXRefField(field)) { consumer = new SetByFieldName(field, mapper); }
+            else if (AcfSupport.isSafePath(field)) { consumer = new SetByFieldPathSafe(field, mapper); }
+            else { consumer = new SetByFieldPath(field, mapper); }
         }
         // prettier-ignore
         public override void accept(Object o) { consumer.accept(o); }
@@ -583,27 +583,27 @@ public virtual inherited sharing class SObjectConsumerProvider {
     private abstract class SObjectPathConsumer extends Consumer {
         protected final IFunction operator;
         protected final String xRefFieldName;
-        protected SObjectPathConsumer(String fieldName) {
-            xRefFieldName = fieldName.substringAfterLast('.');
-            operator = new SObjectFunctionProvider().getSObject(fieldName.substringBeforeLast('.'));
+        protected SObjectPathConsumer(String field) {
+            xRefFieldName = field.substringAfterLast('.');
+            operator = new SObjectFunctionProvider().getSObject(field.substringBeforeLast('.'));
         }
     }
 
     private class SetByFieldName extends Consumer {
-        private final String fieldName;
+        private final String field;
         private final IFunction mapper;
-        private SetByFieldName(String fieldName, IFunction mapper) {
-            this.fieldName = fieldName;
+        private SetByFieldName(String field, IFunction mapper) {
+            this.field = field;
             this.mapper = mapper;
         }
         // prettier-ignore
-        public override void accept(Object o) { ((SObject) o).put(fieldName, mapper.apply(o)); }
+        public override void accept(Object o) { ((SObject) o).put(field, mapper.apply(o)); }
     }
 
     private class SetByFieldPath extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetByFieldPath(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetByFieldPath(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         // prettier-ignore
@@ -612,8 +612,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
 
     private class SetByFieldPathSafe extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetByFieldPathSafe(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetByFieldPathSafe(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         // prettier-ignore
@@ -623,11 +623,11 @@ public virtual inherited sharing class SObjectConsumerProvider {
     private class SetSObjectConsumer extends Consumer {
         private final IConsumer consumer;
         // prettier-ignore
-        private SetSObjectConsumer(String fieldName, IFunction mapper) {
+        private SetSObjectConsumer(String field, IFunction mapper) {
             Validate.notNull(mapper);
-            if (!AcfSupport.isXRefField(fieldName)) { consumer = new SetSObjectByFieldName(fieldName, mapper); }
-            else if (AcfSupport.isSafePath(fieldName)) { consumer = new SetSObjectByFieldPathSafe(fieldName, mapper); }
-            else { consumer = new SetSObjectByFieldPath(fieldName, mapper); }
+            if (!AcfSupport.isXRefField(field)) { consumer = new SetSObjectByFieldName(field, mapper); }
+            else if (AcfSupport.isSafePath(field)) { consumer = new SetSObjectByFieldPathSafe(field, mapper); }
+            else { consumer = new SetSObjectByFieldPath(field, mapper); }
         }
         // prettier-ignore
         public override void accept(Object o) { consumer.accept(o); }
@@ -646,20 +646,20 @@ public virtual inherited sharing class SObjectConsumerProvider {
     }
 
     private class SetSObjectByFieldName extends Consumer {
-        protected final String fieldName;
+        protected final String field;
         private final IFunction mapper;
-        private SetSObjectByFieldName(String fieldName, IFunction mapper) {
-            this.fieldName = fieldName;
+        private SetSObjectByFieldName(String field, IFunction mapper) {
+            this.field = field;
             this.mapper = mapper;
         }
         // prettier-ignore
-        public override void accept(Object o) { ((SObject) o).putSObject(fieldName, (SObject) mapper.apply(o)); }
+        public override void accept(Object o) { ((SObject) o).putSObject(field, (SObject) mapper.apply(o)); }
     }
 
     private class SetSObjectByFieldPath extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetSObjectByFieldPath(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetSObjectByFieldPath(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object o) {
@@ -669,8 +669,8 @@ public virtual inherited sharing class SObjectConsumerProvider {
 
     private class SetSObjectByFieldPathSafe extends SObjectPathConsumer {
         private final IFunction mapper;
-        private SetSObjectByFieldPathSafe(String fieldName, IFunction mapper) {
-            super(fieldName);
+        private SetSObjectByFieldPathSafe(String field, IFunction mapper) {
+            super(field);
             this.mapper = mapper;
         }
         public override void accept(Object o) {
