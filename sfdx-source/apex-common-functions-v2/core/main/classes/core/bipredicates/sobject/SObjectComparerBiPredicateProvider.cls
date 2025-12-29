@@ -153,11 +153,11 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
      * @throws NullPointerException if `left` is null
      *
      * @example
-     * IBiPredicate areNamesEqPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
+     * IBiPredicate areNamesEqBiPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
      *     .isL(Account.Name)
      *     .eq()
      *     .rVal(Account.Name);
-     * areNamesEqPredicate.test(new Account(Name = 'John'), new Account(Name = 'John')); // true
+     * areNamesEqBiPredicate.test(new Account(Name = 'John'), new Account(Name = 'John')); // true
      */
     public virtual ComparisonOperator isL(final SObjectField left) {
         return isL(new SObjectFunctionProvider().get(left));
@@ -198,7 +198,7 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
     }
 
     /**
-     * @description Represents the operations available for comparing an SObjects with another value or field,
+     * @description Represents the operations available for comparing an SObject with another SObject,
      * utilizing currying to support flexible and reusable comparisons.
      */
     public virtual class ComparisonOperator {

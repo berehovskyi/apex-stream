@@ -26,7 +26,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     // @start-group Default Methods
     /**
      * @description Returns a composed `Predicate` that applies short-circuiting logical
-     * OR} operator to `this` `IPredicate` and `other`
+     * OR operator to `this` `IPredicate` and `other`
      * in that order.
      *
      * @param other the other `Predicate`
@@ -44,7 +44,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
 
     /**
      * @description Returns a composed `Predicate` that applies short-circuiting logical
-     * AND} operator to `this` `IPredicate` and `other`
+     * AND operator to `this` `IPredicate` and `other`
      * in that order.
      *
      * @param other the other `Predicate`
@@ -85,7 +85,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
      *
      * @return the composed `Predicate`
      *
-     * @throws NullPointerException if `other` is null or some of the list element is null
+     * @throws NullPointerException if `predicates` is null or some of the list element is null
      *
      * @example
      * Predicate.some(somePredicates);
@@ -102,7 +102,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
      *
      * @return the composed `Predicate`
      *
-     * @throws NullPointerException if `other` is null or some of the list element is null
+     * @throws NullPointerException if `predicates` is null or some of the list element is null
      *
      * @example
      * Predicate.every(somePredicates);
@@ -132,7 +132,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
      *
      * @param value the evaluated value
      *
-     * @return predicate the `Predicate`
+     * @return the `Predicate`
      *
      * @throws NullPointerException if `value` is null
      *
@@ -148,7 +148,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
      * the `IPredicate`.
      *
      * @param mapper the function applied to the input argument
-     * @param predicate the predicate to the result returned by the `mapper`
+     * @param predicate the predicate applied to the result returned by the `mapper`
      *
      * @return the composed `Predicate`
      *

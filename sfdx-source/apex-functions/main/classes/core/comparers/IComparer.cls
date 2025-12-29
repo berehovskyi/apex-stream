@@ -11,16 +11,16 @@ public interface IComparer extends System.Comparator<Object> {
     /**
      * @description Compares the two arguments.
      * <p>Contract:</p>
-     * The method is expected to have the next properties:
+     * The method is expected to have the following properties:
      * <ul>
      *     <li>Does not cause any side effects.</li>
      *     <li>Does not return `null`.</li>
-     *     <li>(compare(x, y) == 0) == (x == y))}.</li>
+     *     <li>(compare(x, y) == 0) == (x == y).</li>
      * </ul>
-     * The method must have the next properties:
+     * The method must have the following properties:
      * <ul>
-     *     <li>`compare(x, y)) == -signum(compare(y, x))`.</li>
-     *     <li>Transitivity: if `(compare(x, y) > 0) && (compare(y, z) > 0)), then compare(x, z) > 0`.</li>
+     *     <li>`compare(x, y) == -signum(compare(y, x))`.</li>
+     *     <li>Transitivity: if `(compare(x, y) > 0) && (compare(y, z) > 0)`, then `compare(x, z) > 0`.</li>
      *     <li>If `compare(x, y) == 0`, then `signum(compare(x, z)) == signum(compare(y, z))`.</li>
      * </ul>
      *

@@ -37,7 +37,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      *
      * @return the `Comparer`
      *
-     * @throws NullPointerException if `keyExtractor` or `keyComparer` is null
+     * @throws NullPointerException if `other` is null
      */
     public virtual Comparer thenComparing(final IComparer other) {
         return new ThenComparing(this, other);
@@ -67,7 +67,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      *
      * @return the `Comparer`
      *
-     * @throws NullPointerException if `keyExtractor` or `keyComparer` is null
+     * @throws NullPointerException if `keyExtractor` is null
      */
     public virtual Comparer thenComparing(final IFunction keyExtractor) {
         return thenComparing(comparing(keyExtractor));
@@ -124,8 +124,8 @@ public abstract inherited sharing class Comparer implements IComparer {
     //<editor-fold desc="Static Methods">
     // @start-group Static Methods
     /**
-     * @description Returns a `Comparer` that compares extracted by
-     * the `keyExtractor` keys using the `keyComparer`.
+     * @description Returns a `Comparer` that compares keys extracted by
+     * the `keyExtractor` using the `keyComparer`.
      *
      * @param keyExtractor the function to extract the key to compare
      * @param keyComparer the comparer to compare keys
@@ -139,8 +139,8 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     /**
-     * @description Returns a `Comparer` that compares extracted by
-     * the `keyExtractor` keys.
+     * @description Returns a `Comparer` that compares keys extracted by
+     * the `keyExtractor`.
      *
      * @param keyExtractor the function to extract the key to compare
      *
@@ -246,7 +246,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      *
      * @param o1 the first object to compare
      * @param o2 the second object to compare
-     * @param isNullGreater the boolean determines if null value is greater than any other value
+     * @param isNullGreater the boolean that determines if null value is greater than any other value
      *
      * @return `-1` if the first input arguments is less than the second one,
      * `0` if they're equal, and `1` otherwise
@@ -273,7 +273,7 @@ public abstract inherited sharing class Comparer implements IComparer {
     /**
      * @description Compares the two nullable objects considering that at least one of them is null.
      * This method is a non antisymmetric version of null comparison.
-     * Considers a non-null `String` od `Id` value as always greater than a null value.
+     * Considers a non-null `String` or `Id` value as always greater than a null value.
      *
      * @param o1 the first object to compare
      * @param o2 the second object to compare
@@ -309,17 +309,17 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     /**
-     * @description Compares the two nullable Objects identifying its types first.
+     * @description Compares the two nullable Objects identifying their types first.
      * Supports all primitive types as well as comparable type.
      *
      * @param value1 the first object to compare
      * @param value2 the second object to compare
-     * @param isNullGreater the boolean determines if null value is greater than any other value
+     * @param isNullGreater the boolean that determines if null value is greater than any other value
      *
      * @return `-1` if the first input argument is less than the second one,
      * `0` if they're equal, and `1` otherwise
      *
-     * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
+     * @throws TypeException if types of comparing objects mismatch or if the type is a user-defined type
      * and is not comparable.
      */
     @TestVisible
@@ -342,7 +342,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      * `1` if the first input argument is greater than the second one,
      * `null` if some of the input arguments is null and another one is not `String` nor `Id`
      *
-     * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
+     * @throws TypeException if types of comparing objects mismatch or if the type is a user-defined type
      * and is not comparable.
      */
     @TestVisible
@@ -353,7 +353,7 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     /**
-     * @description Compares the two nullable Objects identifying its types first.
+     * @description Compares the two nullable Objects identifying their types first.
      * Supports all primitive types as well as comparable type.
      * Considers a non-null value as always greater than a null value.
      *
@@ -363,7 +363,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      * @return `-1` if the first input argument is less than the second one,
      * `0` if they're equal, and `1` otherwise
      *
-     * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
+     * @throws TypeException if types of comparing objects mismatch or if the type is a user-defined type
      * and is not comparable.
      */
     @TestVisible
@@ -430,7 +430,7 @@ public abstract inherited sharing class Comparer implements IComparer {
     }
 
     /**
-     * @description Compares the two non-null objects identifying its types first.
+     * @description Compares the two non-null objects identifying their types first.
      * Supports all primitive types and comparable type.
      *
      * @param value1 the first object to compare
@@ -439,7 +439,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      * @return `-1` if the first input argument is less than the second one,
      * `0` if they're equal, and `1` otherwise
      *
-     * @throws TypeException if types of comparing objects mismatch or if the type is user-defined type
+     * @throws TypeException if types of comparing objects mismatch or if the type is a user-defined type
      * and is not comparable.
      */
     @TestVisible

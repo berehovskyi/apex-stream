@@ -14,13 +14,13 @@
  */
 public inherited sharing class Stream {
     /**
-     * @description Returns a `ObjectEnumerable` created from `List<Object>`.
+     * @description Returns a `ObjectEnumerable` created from `objects`.
      *
      * @param objects the list
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws NullPointerException if `iterable` is null
+     * @throws NullPointerException if `objects` is null
      *
      * @example
      * ObjectEnumerable peopleStream = Stream.of(new List<Person>(people));
@@ -68,7 +68,7 @@ public inherited sharing class Stream {
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `iterator` is null
+     * @throws NullPointerException if `longs` is null
      *
      * @example
      * LongEnumerable longStream = Stream.of(new List<Long>{ 0, 5L, 1L, -10 });
@@ -94,7 +94,7 @@ public inherited sharing class Stream {
     }
 
     /**
-     * @description Returns a `ObjectEnumerable` created from `Set<Object>`.
+     * @description Returns a `ObjectEnumerable` created from `objects`.
      *
      * @param objects the set
      *
@@ -148,7 +148,7 @@ public inherited sharing class Stream {
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `iterator` is null
+     * @throws NullPointerException if `longs` is null
      *
      * @example
      * LongEnumerable longStream = Stream.of(new Set<Long>{ 0, 5L, 1L, -10 });
@@ -195,7 +195,7 @@ public inherited sharing class Stream {
      *
      * @param sObjects the list
      *
-     * @return the new `SObjectEnumerable` if `iterable` is non-null,
+     * @return the new `SObjectEnumerable` if `sObjects` is non-null,
      * otherwise an empty `SObjectEnumerable`
      *
      * @example
@@ -231,7 +231,7 @@ public inherited sharing class Stream {
      * otherwise an empty `LongEnumerable`
      *
      * @example
-     * LongEnumerable longStream = LongStream.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longStream = Stream.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final List<Long> longs) {
         return LongStream.ofNullable(longs);
@@ -275,7 +275,7 @@ public inherited sharing class Stream {
      *
      * @param sObjects the set
      *
-     * @return the new `SObjectEnumerable` if `iterable` is non-null,
+     * @return the new `SObjectEnumerable` if `sObjects` is non-null,
      * otherwise an empty `SObjectEnumerable`
      *
      * @example
@@ -311,7 +311,7 @@ public inherited sharing class Stream {
      * otherwise an empty `LongEnumerable`
      *
      * @example
-     * LongEnumerable longStream = LongStream.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longStream = Stream.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable ofNullable(final Set<Long> longs) {
         return LongStream.ofNullable(longs);
@@ -344,7 +344,7 @@ public inherited sharing class Stream {
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      */
     public static ObjectEnumerable iterate(final Object seed, final IOperator operator) {
         return ObjectStream.iterate(seed, operator);
@@ -361,7 +361,7 @@ public inherited sharing class Stream {
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      */
     public static SObjectEnumerable iterate(final SObject seed, final IOperator operator) {
         return SObjectStream.iterate(seed, operator);
@@ -378,7 +378,7 @@ public inherited sharing class Stream {
      *
      * @return the new `IntEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * IntEnumerable intIncrementalStream = Stream.iterate(0, IntUnaryOperators.add(1));
@@ -398,7 +398,7 @@ public inherited sharing class Stream {
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * LongEnumerable longIncrementalStream = Stream.iterate(0L, LongUnaryOperators.add(1L));
@@ -438,7 +438,7 @@ public inherited sharing class Stream {
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      */
     public static ObjectEnumerable iterate(final Object seed, final IPredicate predicate, final IOperator operator) {
         return ObjectStream.iterate(seed, predicate, operator);
@@ -455,7 +455,7 @@ public inherited sharing class Stream {
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      */
     public static SObjectEnumerable iterate(final SObject seed, final IPredicate predicate, final IOperator operator) {
         return SObjectStream.iterate(seed, predicate, operator);
@@ -472,7 +472,7 @@ public inherited sharing class Stream {
      *
      * @return the new `IntEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      */
     public static IntEnumerable iterate(final Integer seed, final IPredicate predicate, final IOperator operator) {
         return IntStream.iterate(seed, predicate, operator);
@@ -489,7 +489,7 @@ public inherited sharing class Stream {
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      */
     public static LongEnumerable iterate(final Long seed, final IPredicate predicate, final IOperator operator) {
         return LongStream.iterate(seed, predicate, operator);
@@ -506,7 +506,7 @@ public inherited sharing class Stream {
      *
      * @return the new `DoubleEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      */
     public static DoubleEnumerable iterate(final Double seed, final IPredicate predicate, final IOperator operator) {
         return DoubleStream.iterate(seed, predicate, operator);

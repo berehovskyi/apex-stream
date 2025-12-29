@@ -16,10 +16,10 @@ public virtual inherited sharing class SObjectFunctions {
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
-     * @description Returns a `Function` that gets a value for
+     * @description Returns a `Function` that gets the value for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param fieldName the field to get the value
      *
      * @return the `Function`
      *
@@ -41,10 +41,10 @@ public virtual inherited sharing class SObjectFunctions {
     }
 
     /**
-     * @description Returns a `Function` that gets a value for
+     * @description Returns a `Function` that gets the value for
      * the specified `field`.
      *
-     * @param field the field to get a value
+     * @param field the field to get the value
      *
      * @return the `Function`
      *
@@ -60,10 +60,10 @@ public virtual inherited sharing class SObjectFunctions {
     }
 
     /**
-     * @description Returns a `Function` that gets children sobjects for
+     * @description Returns a `Function` that gets child SObjects for
      * the specified `fieldName`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param fieldName the field to get the value
      *
      * @return the `Function`
      *
@@ -85,10 +85,10 @@ public virtual inherited sharing class SObjectFunctions {
     }
 
     /**
-     * @description Returns a `Function` that gets children sobjects for
+     * @description Returns a `Function` that gets child SObjects for
      * the specified `field`. Cross-reference fields and safe navigation are supported.
      *
-     * @param field the field to get a value
+     * @param field the field to get the value
      *
      * @return the `Function`
      *

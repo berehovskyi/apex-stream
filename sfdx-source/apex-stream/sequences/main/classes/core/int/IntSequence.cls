@@ -49,7 +49,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
     /**
      * @description Returns a `IntEnumerable` created from `integers` list.
      *
-     * @param integers the list of Longs
+     * @param integers the list of Integers
      *
      * @return the new `IntEnumerable`
      *
@@ -167,7 +167,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
     }
 
     /**
-     * @description Returns eagerly concatenates `List<Iterable<Integer>>`.
+     * @description Returns eagerly concatenated `List<Iterable<Integer>>`.
      *
      * @param iterables the list of `Iterable<Integer>`
      *
@@ -277,8 +277,13 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> filtered = IntSequence.of(new List<Integer>{ 0, 5, 1, 1, 5 })
-     *     .filter(Predicates.isEqual(5))
+     *     .filter(new IsEqualPredicate(5))
      *     .toList(); // [5, 5]
      */
     public virtual override IntEnumerable filter(final IPredicate predicate) {
@@ -296,8 +301,13 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> firstFiltered = IntSequence.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-     *     .take(Predicates.isEqual(0))
+     *     .take(new IsEqualPredicate(0))
      *     .toList(); // [0, 0]
      */
     public virtual override IntEnumerable take(final IPredicate predicate) {
@@ -316,8 +326,13 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Integer> rest = IntSequence.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-     *     .drop(Predicates.isEqual(0))
+     *     .drop(new IsEqualPredicate(0))
      *     .toList(); // [1, 1, 5]
      */
     public virtual override IntEnumerable drop(final IPredicate predicate) {
@@ -510,7 +525,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * @example
      * List<Integer> distinct = IntSequence.of(new List<Integer>{ 0, 5, 1, -10, 0, 5 })
      *     .distinct()
-     *     .toList(); // [0, 5, 1, -10];
+     *     .toList(); // [0, 5, 1, -10]
      */
     public virtual override IntEnumerable distinct() {
         return new IntSequence((List<Integer>) SequencePipeline.distinct(integers, new List<Integer>()));
@@ -694,7 +709,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `IntEnumerable` is empty then `false` is returned.
+     * If `IntEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate

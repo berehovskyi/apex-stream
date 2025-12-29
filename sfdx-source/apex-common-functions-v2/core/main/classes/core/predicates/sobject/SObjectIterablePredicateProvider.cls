@@ -2,7 +2,7 @@
  * @description Provides a fluent interface for building predicates
  * that operate on iterable collections using currying.
  * This builder allows you to create predicates for checking if an object is in or not in a given collection,
- * as well as if a string is included in or excluded from a iterable of strings.
+ * as well as if a string is included in or excluded from an iterable of strings.
  *
  * @group Functional Built-In Classes V2
  *

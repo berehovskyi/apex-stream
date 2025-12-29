@@ -56,7 +56,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `longs` is null
      *
      * @example
-     * LongEnumerable longSeq = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable of(final List<Long> longs) {
         Validate.notNull(longs);
@@ -73,7 +73,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `longs` is null
      *
      * @example
-     * LongEnumerable longSeq = LongSequence.of(new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.of(new Set<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable of(final Set<Long> longs) {
         Validate.notNull(longs);
@@ -90,7 +90,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * otherwise an empty `LongEnumerable`
      *
      * @example
-     * LongEnumerable longSeq = LongSequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.ofNullable(new List<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable ofNullable(final List<Long> longs) {
         // prettier-ignore
@@ -108,7 +108,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * otherwise an empty `LongEnumerable`
      *
      * @example
-     * LongEnumerable longSeq = LongSequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+     * LongEnumerable longSeq = LongSequence.ofNullable(new Set<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable ofNullable(final Set<Long> longs) {
         // prettier-ignore
@@ -167,7 +167,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
     }
 
     /**
-     * @description Returns eagerly concatenates `List<Iterable<Long>>`.
+     * @description Returns eagerly concatenated `List<Iterable<Long>>`.
      *
      * @param iterables the list of `Iterable<Long>`
      *
@@ -275,8 +275,13 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-     *     .filter(Predicates.isEqual(5L))
+     *     .filter(new IsEqualPredicate(5L))
      *     .toList(); // [5L, 5L]
      */
     public virtual override LongEnumerable filter(final IPredicate predicate) {
@@ -294,8 +299,13 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .take(Predicates.isEqual(0L))
+     *     .take(new IsEqualPredicate(0L))
      *     .toList(); // [0L, 0L]
      */
     public virtual override LongEnumerable take(final IPredicate predicate) {
@@ -314,8 +324,13 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .drop(Predicates.isEqual(0L))
+     *     .drop(new IsEqualPredicate(0L))
      *     .toList(); // [1L, 1L, 5L]
      */
     public virtual override LongEnumerable drop(final IPredicate predicate) {
@@ -365,7 +380,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *     public override Object apply(Object j) { return (Long) j * i; }
      * }
      * List<Integer> doubledInts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
-     *     .mapToLong(new MultiplyIntFunction(2))
+     *     .mapToInt(new MultiplyIntFunction(2))
      *     .toList(); // [0, 10, 2, -20]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
@@ -419,7 +434,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *   { AnnualRevenue: 0 },
      *   { AnnualRevenue: 5 },
      *   { AnnualRevenue: 1 },
-     *   { AnnualRevenue: 10 }
+     *   { AnnualRevenue: -10 }
      * ]
      */
     public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
@@ -443,7 +458,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * }
      * List<String> strings = (List<String>) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .mapToObject(new ToStringFunction())
-     *     .toList(String.class); // ['0', '5', '1', '10']
+     *     .toList(String.class); // ['0', '5', '1', '-10']
      */
     public virtual override ObjectEnumerable mapToObject(final IFunction mapper) {
         return ObjectSequence.of(SequencePipeline.mapTo(longs, mapper, new List<Object>()));
@@ -491,7 +506,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *     public override void accept(Object o) { System.debug(o); }
      * }
      * List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
-     *     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
+     *     .forEach(new DebugConsumer()) // prints 0L, 5L, 1L, -10L
      *     .toList(); // [0L, 5L, 1L, -10L ]
      */
     public virtual override LongEnumerable forEach(final IConsumer consumer) {
@@ -692,7 +707,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `LongEnumerable` is empty then `false` is returned.
+     * If `LongEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate

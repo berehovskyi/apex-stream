@@ -156,7 +156,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * public class FibonacciSupplier extends Supplier {
@@ -192,13 +192,13 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * public class AddOperator extends Operator {
-     *     private final Long i;
-     *     public AddOperator(Long d) { this.i = i; }
-     *     public override Object apply(Object j) { return (Long) j + i; }
+     *     private final Long l;
+     *     public AddOperator(Long l) { this.l = l; }
+     *     public override Object apply(Object j) { return (Long) j + l; }
      * }
      * LongEnumerable incrementalStream = LongStream.iterate(0L, new AddOperator(1L));
      * Iterator<Long> it = incrementalStream.iterator();
@@ -221,7 +221,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *
      * @return the new `LongEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      *
      * @example
      * public class IsLessPredicate extends Predicate {
@@ -268,7 +268,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
     }
 
     /**
-     * @description Returns lazily concatenated `List<Iterable<Long>>`.
+     * @description Returns lazily concatenated `LongEnumerable` from `iterables`.
      *
      * @param iterables the list of `Iterable<Long>`
      *
@@ -376,8 +376,13 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> filtered = LongStream.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-     *     .filter(Predicates.isEqual(5L))
+     *     .filter(new IsEqualPredicate(5L))
      *     .toList(); // [5L, 5L]
      */
     public virtual override LongEnumerable filter(final IPredicate predicate) {
@@ -395,8 +400,13 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> firstFiltered = LongStream.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .take(Predicates.isEqual(0L))
+     *     .take(new IsEqualPredicate(0L))
      *     .toList(); // [0L, 0L]
      */
     public virtual override LongEnumerable take(final IPredicate predicate) {
@@ -415,8 +425,13 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Long> rest = LongStream.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-     *     .drop(Predicates.isEqual(0L))
+     *     .drop(new IsEqualPredicate(0L))
      *     .toList(); // [1L, 1L, 5L]
      */
     public virtual override LongEnumerable drop(final IPredicate predicate) {
@@ -466,7 +481,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *     public override Object apply(Object j) { return (Long) j * i; }
      * }
      * List<Integer> doubledInts = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
-     *     .mapToLong(new MultiplyIntFunction(2))
+     *     .mapToInt(new MultiplyIntFunction(2))
      *     .toList(); // [0, 10, 2, -20]
      */
     public virtual override IntEnumerable mapToInt(final IFunction mapper) {
@@ -517,10 +532,10 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *     .mapToSObject(new CreateAccountFunction())
      *     .toList(); //
      * [
-     *   { AnnualRevenue: 0 },
-     *   { AnnualRevenue: 5 },
-     *   { AnnualRevenue: 1 },
-     *   { AnnualRevenue: 10 }
+     *   { AnnualRevenue: 0L },
+     *   { AnnualRevenue: 5L },
+     *   { AnnualRevenue: 1L },
+     *   { AnnualRevenue: -10L }
      * ]
      */
     public virtual override SObjectEnumerable mapToSObject(final IFunction mapper) {
@@ -544,7 +559,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * }
      * List<String> strings = (List<String>) LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .mapToObject(new ToStringFunction())
-     *     .toList(String.class); // ['0', '5', '1', '10']
+     *     .toList(String.class); // ['0', '5', '1', '-10']
      */
     public virtual override ObjectEnumerable mapToObject(final IFunction mapper) {
         return ObjectStream.of(StreamPipeline.mapTo(iterator(), mapper));
@@ -792,7 +807,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `LongEnumerable` is empty then `false` is returned.
+     * If `LongEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -916,7 +931,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @return the `Set<Long>` containing the stream elements
      *
      * @example
-     * SSet<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
+     * Set<Long> longs = LongStream.of(new List<Long>{ 0L, 5L, 1L, -10L })
      *     .skip(1)
      *     .toSet(); // [5L, 1L, -10L, 0L]
      */

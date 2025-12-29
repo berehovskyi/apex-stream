@@ -16,7 +16,7 @@ public virtual inherited sharing class SObjectBiPredicates extends BiPredicates 
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
-     * @description Returns a `BiPredicate` that tests the input sobjects if the value of
+     * @description Returns a `BiPredicate` that tests the input SObjects if the value of
      * the `field` of the first input argument is equal to the `field` of
      * the second input argument, comparing object value equality not reference equality.
      *
@@ -35,7 +35,7 @@ public virtual inherited sharing class SObjectBiPredicates extends BiPredicates 
     }
 
     /**
-     * @description Returns a `BiPredicate` that tests the input sobjects if the value of
+     * @description Returns a `BiPredicate` that tests the input SObjects if the value of
      * the `fieldName` of the first input argument is equal to the `fieldName` of
      * the second input argument, comparing object value equality not reference equality.
      * Cross-reference fields and safe navigation are supported.
@@ -60,7 +60,7 @@ public virtual inherited sharing class SObjectBiPredicates extends BiPredicates 
     }
 
     /**
-     * @description Returns a `BiPredicate` that tests the input sobjects if the value of
+     * @description Returns a `BiPredicate` that tests the input SObjects if the value of
      * the `field` of the first input argument is not equal to the `field` of
      * the second input argument, comparing object value equality not reference equality.
      *
@@ -79,7 +79,7 @@ public virtual inherited sharing class SObjectBiPredicates extends BiPredicates 
     }
 
     /**
-     * @description Returns a `BiPredicate` that tests the input sobjects if the value of
+     * @description Returns a `BiPredicate` that tests the input SObjects if the value of
      * the `fieldName` of the first input argument is not equal to the `fieldName` of
      * the second input argument, comparing object value equality not reference equality.
      * Cross-reference fields and safe navigation are supported.

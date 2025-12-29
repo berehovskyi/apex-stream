@@ -12,7 +12,7 @@
  */
 public virtual inherited sharing class SObjectConsumerProvider {
     /**
-     * @description Returns an `AddErrorMessageConsumer` that adds an error message to a field of a SObject.
+     * @description Returns an `AddErrorMessageConsumer` that adds an error message to a field of an SObject.
      *
      * @param message the error message to add
      *

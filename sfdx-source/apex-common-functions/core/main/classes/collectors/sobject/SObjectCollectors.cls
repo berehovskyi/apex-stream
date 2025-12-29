@@ -508,7 +508,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
 
     /**
      * @description Returns a `Collector` that accumulates the Object values of `fieldName`
-     * into a new `Set<Double>`.
+     * into a new `Set<Object>`.
      * Cross-reference fields and safe navigation are supported.
      * <p>The result container <strong>cannot</strong> be cast to a specific type.</p>
      * <p>To get a result container of a specific type use `to<T>Set()` collectors
@@ -577,7 +577,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      * Map<Id, SObject> sObjs = (Map<Id, SObject>) [SObjectEnumerable].of(sObjects)
      *     .collect(SObjectCollectors.toByIdMap());
      * Map<Id, Account> accs = (Map<Id, Account>) [SObjectEnumerable].of(accounts)
-     *     .collect(SObjectCollectors.toByIdMap().cast(Map<Id, Account));
+     *     .collect(SObjectCollectors.toByIdMap().cast(Map<Id, Account>.class));
      */
     public static Collector toByIdMap() {
         return toByIdMap('Id');

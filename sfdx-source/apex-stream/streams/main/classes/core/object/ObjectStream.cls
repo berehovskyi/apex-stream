@@ -1,29 +1,23 @@
 /**
  * @description A sequence of `Object` elements supporting aggregate operations.
  * Stream operations are composed of stream chain. A stream chain consists of:
- * <ul>
- *     <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
- *     <li>Zero or more Intermediate Operations (which transform a stream into another stream,
- *     such as {@link ObjectStream.filter(IPredicate))}.</li>
- *     <li>A Terminal Operation (which produces a result such as
- *     {@link ObjectStream.count()} or {@link ObjectStream.collect(ICollector)}).</li>
- * </ul>
+ * - A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).
+ * - Zero or more Intermediate Operations (which transform a stream into another stream,
+ * such as {@link ObjectStream.filter(IPredicate)}).
+ * - A Terminal Operation (which produces a result such as
+ * {@link ObjectStream.count()} or {@link ObjectStream.collect(ICollector)}).
  * <p>Streams are <strong>lazy</strong>:</p>
- * <ul>
- *     <li>Intermediate operations describe how a stream is processed without performing any action.</li>
- *     <li>Computation is only performed when the terminal operation is initiated,
- * and source elements are consumed only as needed.</li>
- * </ul>
+ * - Intermediate operations describe how a stream is processed without performing any action.
+ * - Computation is only performed when the terminal operation is initiated,
+ * and source elements are consumed only as needed.
  * <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p>
  * <p>A stream should be operated on (invoking an intermediate or terminal stream operation)
  * only <strong>once</strong>.
  * A stream throws {@link IllegalStateException} if it detects that the stream is being reused.</p>
  * <p>Intermediate operations describe how a stream is processed without performing any action.</p>
  * <p>Contract:</p>
- * <ul>
- *     <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>
- *     <li>Should be stateless in most cases.</li>
- * </ul>
+ * - Must be non-interfering (do not modify the stream source but may mutate its elements).
+ * - Should be stateless in most cases.
  * <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>,
  * i.e. do not support `spliterator()`.</p>
  * <p>There are primitive specializations for {@link IntStream}, {@link LongStream},
@@ -121,7 +115,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws NullPointerException if `objects` is null
+     * @throws NullPointerException if `iterable` is null
      *
      * @example
      * ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people));
@@ -184,7 +178,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      */
     public static ObjectEnumerable iterate(final Object seed, final IOperator operator) {
         return new ObjectStream(StreamPipeline.iterate(seed, operator));
@@ -201,7 +195,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *
      * @return the new `ObjectEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      */
     public static ObjectEnumerable iterate(final Object seed, final IPredicate predicate, final IOperator operator) {
         return iterate(seed, operator).take(predicate);
@@ -231,7 +225,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
     }
 
     /**
-     * @description Returns lazily concatenated `List<Iterable<Object>>`.
+     * @description Returns lazily concatenated `ObjectEnumerable` from `iterables`.
      *
      * @param iterables the list of `Iterable<Object>`
      *
@@ -360,10 +354,10 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * @example
      * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
      * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
-     * List<String> union = (List<String>) ObjectStream.of(strs1)
-     *     .union(strs2)
+     * List<String> prepend = (List<String>) ObjectStream.of(strs1)
+     *     .prepend(strs2)
      *     .toList(String.class);
-     * // ['foo', 'bar', 'baz', 'qux', 'fred']
+     * // ['qux', 'fred', 'foo', 'foo', 'bar', 'baz']
      */
     public virtual override ObjectEnumerable prepend(final Iterable<Object> iterable) {
         return concat(iterable, this);
@@ -442,7 +436,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * }
      * List<String> rest = (List<String>)
      *     ObjectStream.of(new List<String>{ 'bar', 'baz', 'foo' })
-     *     .take(new ContainsPredicate('a'))
+     *     .drop(new ContainsPredicate('a'))
      *     .toList(String.class); // ['foo']
      */
     public virtual override ObjectEnumerable drop(final IPredicate predicate) {
@@ -787,7 +781,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * }
      * List<String> sorted = (List<String>)
      *     ObjectStream.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
-     *     .sort(new SecondCharComparer())
+     *     .sort(new SecondLetterComparer())
      *     .toList(String.class); // ['Bar', 'baz', 'bar', 'foo', 'Foo']
      */
     public virtual override ObjectEnumerable sort(final IComparer comparer) {
@@ -808,7 +802,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * @example
      * List<String> first2 = (List<String>) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .lim(2)
-     *     .toList(String.class); // ['foo', 'baz']
+     *     .toList(String.class); // ['foo', 'bar']
      */
     public virtual override ObjectEnumerable lim(final Integer lim) {
         return new ObjectStream(StreamPipeline.lim(iterator(), lim));
@@ -893,7 +887,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *     .get(); // 'foo-bar-baz'
      * String concatenated1 = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .reduce(new ConcatenateBiOperator(';'))
-     *     .get(); // 'seed;foo;bar;baz'
+     *     .get(); // 'foo;bar;baz'
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
         return Optional.ofNullable(StreamPipeline.reduce(iterator(), accumulator));
@@ -993,7 +987,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `ObjectEnumerable` is empty then `false` is returned.
+     * If `ObjectEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate

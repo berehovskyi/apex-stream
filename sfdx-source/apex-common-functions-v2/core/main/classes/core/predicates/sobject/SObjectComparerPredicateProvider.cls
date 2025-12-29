@@ -116,7 +116,7 @@ public virtual inherited sharing class SObjectComparerPredicateProvider {
      * @throws SObjectException if provided invalid `fieldName`
      *
      * @example
-     * SObjectComparerPredicateProvider builder = new SObjectComparerPredicateProvider(Comparer.defaultOrder())
+     * SObjectComparerPredicateProvider builder = new SObjectComparerPredicateProvider(Comparer.defaultOrder());
      *
      * IPredicate isNameJohnPredicate = builder.is('Name').eq().var('John');
      * isNameJohnPredicate.test(new Account(Name = 'John')); // true
@@ -152,7 +152,7 @@ public virtual inherited sharing class SObjectComparerPredicateProvider {
     }
 
     /**
-     * @description Represents the operations available for comparing an SObjects with another value or field,
+     * @description Represents the operations available for comparing an SObject with another value or field,
      * utilizing currying to support flexible and reusable comparisons.
      */
     public virtual class ComparisonOperator {

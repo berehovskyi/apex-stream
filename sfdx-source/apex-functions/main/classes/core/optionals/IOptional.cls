@@ -67,7 +67,7 @@ public interface IOptional {
     IOptional mapTo(IFunction mapper);
 
     /**
-     * @description Returns an `IOptional` the result of applying the
+     * @description Returns an `IOptional` describing the result of applying the
      * `mapper` function to the value if the value is present,
      * otherwise returns an empty `IOptional`.
      *

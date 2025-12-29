@@ -16,10 +16,10 @@ public virtual inherited sharing class SObjectOperators {
     //<editor-fold desc="Built-Ins">
     // @start-group Built-Ins
     /**
-     * @description Returns a `Operator` that gets sobject
+     * @description Returns a `Operator` that gets the SObject
      * for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
      *
-     * @param fieldName the field to get a value
+     * @param fieldName the field to get the value
      *
      * @return the `Operator`
      *
@@ -41,10 +41,10 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that gets sobject
+     * @description Returns a `Operator` that gets the SObject
      * for the specified `field`.
      *
-     * @param field the field to get a value
+     * @param field the field to get the value
      *
      * @return the `Operator`
      *
@@ -152,7 +152,7 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets SObject the value returned by
+     * @description Returns a `Operator` that sets the SObject value returned by
      * the `valueMapper` for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -180,7 +180,7 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets SObject the value returned by
+     * @description Returns a `Operator` that sets the SObject value returned by
      * the `valueMapper` for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -201,7 +201,7 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets SObject the `parent`
+     * @description Returns a `Operator` that sets the SObject `parent`
      * for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -228,7 +228,7 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets SObject the `parent`
+     * @description Returns a `Operator` that sets the SObject `parent`
      * for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      *
@@ -253,7 +253,7 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets sobjects the value returned by
+     * @description Returns a `Operator` that sets the SObjects value returned by
      * the `mapper` for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
@@ -281,7 +281,7 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets sobjects the value returned by
+     * @description Returns a `Operator` that sets the SObjects value returned by
      * the `mapper` for the specified `field` and returns a mutated argument.
      * <p><strong>Note: </strong></p>
      * <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
@@ -301,7 +301,7 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets sobjects the `children`
+     * @description Returns a `Operator` that sets the SObjects `children`
      * for the specified `fieldName` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
@@ -328,8 +328,8 @@ public virtual inherited sharing class SObjectOperators {
     }
 
     /**
-     * @description Returns a `Operator` that sets sobjects the `children`
-     * the for the specified `field` and returns a mutated argument.
+     * @description Returns a `Operator` that sets the SObjects `children`
+     * for the specified `field` and returns a mutated argument.
      * Cross-reference fields and safe navigation are supported.
      * <p><strong>Note: </strong></p>
      * <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>

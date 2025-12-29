@@ -1,27 +1,21 @@
 /**
  * @description A sequence of `SObject` elements supporting aggregate operations.
  * Sequence operations are composed of sequence chain. A sequence chain consists of:
- * <ul>
- *     <li>A Source (which might be an iterable (such as list or set)).</li>
- *     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,
- *     such as {@link SObjectSequence.filter(IPredicate))}.</li>
- *     <li>A Terminal Operation (which produces a result such as
- *     {@link SObjectSequence.count()} or {@link SObjectSequence.collect(ICollector)}).</li>
- * </ul>
+ * - A Source (which might be an iterable (such as list or set)).
+ * - Zero or more Intermediate Operations (which transform a sequence into another sequence,
+ * such as {@link SObjectSequence.filter(IPredicate)}).
+ * - A Terminal Operation (which produces a result such as
+ * {@link SObjectSequence.count()} or {@link SObjectSequence.collect(ICollector)}).
  * <p>Sequences are <strong>eager</strong>:</p>
- * <ul>
- *     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>
- *     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li>
- * </ul>
+ * - Intermediate operations describe how a sequence is processed eagerly performing every action.
+ * - Computation is performed every time when the intermediate or the terminal operation is initiated.
  * <p>A sequence may not consume all elements. It may not be infinite.</p>
  * <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation)
  * <strong>multiple times</strong>.
  * <p>Contract:</p>
- * <ul>
- *     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li>
- * </ul>
+ * - Must be non-interfering (do not modify the sequence source but may mutate its elements).
  * <p>There are primitive specializations for {@link IntSequence}, {@link LongSequence},
- * and {@link DoubleSequence} and {@link ObjectSequence} for Object references.</p>
+ * {@link DoubleSequence}, and {@link ObjectSequence} for Object references.</p>
  * <p>Sequences and streams equally ensure the fulfillment of the set goals,
  * but are implemented in different ways.</p>
  *
@@ -187,7 +181,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
     }
 
     /**
-     * @description Returns eagerly concatenates `List<Iterable<SObject>>`.
+     * @description Returns eagerly concatenated `List<Iterable<SObject>>`.
      *
      * @param iterables the list of `Iterable<SObject>`
      *
@@ -206,7 +200,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     new Account(Name = 'fred'),
      *     new Account(Name = 'foo')
      * };
-     * List<Account> concat = SObjectSequence.concat(final List<Iterable<SObject>>{ accounts1, accounts2 })
+     * List<Account> concat = SObjectSequence.concat(new List<Iterable<SObject>>{ accounts1, accounts2 })
      *     .toList(); //
      * [
      *   { Name: 'foo' },
@@ -234,6 +228,11 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * @throws NullPointerException if `iterable1`, `iterable2` or `combiner` is null
      *
      * @example
+     * public class GetFunction extends Function {
+     *     private final SObjectField field;
+     *     public GetFunction(SObjectField field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((SObject) o).get(field); }
+     * }
      * List<Account> triggerOld = new List<Account>{
      *     new Account(Name = 'foo', NumberOfEmployees = 100),
      *     new Account(Name = 'bar', NumberOfEmployees = 200),
@@ -247,7 +246,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * SObjectSequence.zip(
      *     triggerOld,
      *     triggerNew,
-     *     BiOperator.minBy(Comparator.comparing(SObjectFunctions.get(Account.AnnualRevenue)))
+     *     BiOperator.minBy(Comparator.comparing(new GetFunction(Account.AnnualRevenue)))
      * ).toList(); //
      * [
      *   { Name: 'foo', NumberOfEmployees: 100 },
@@ -283,15 +282,20 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * public class ContainsAnyBiPredicate extends BiPredicate {
      *     private final String fieldName;
      *     private final String s;
-     *     public ContainsPredicate(String fieldName, String s) {
+     *     public ContainsAnyBiPredicate(String fieldName, String s) {
      *         this.fieldName = fieldName;
      *         this.s = s;
      *     }
      *     public override Boolean test(Object o1, Object o2) {
      *         String value1 = (String) ((Account) o1).get(fieldName);
      *         String value2 = (String) ((Account) o2).get(fieldName);
-     *         return value1.contains(s) || value2.contains(s);
+     *         return value1?.contains(s) == true || value2?.contains(s) == true;
      *     }
+     * }
+     * public class GetFunction extends Function {
+     *     private final SObjectField field;
+     *     public GetFunction(SObjectField field) { this.field = field; }
+     *     public override Object apply(Object o) { return ((SObject) o).get(field); }
      * }
      * List<Account> triggerOld = new List<Account>{
      *     new Account(Name = 'foo', NumberOfEmployees = 100),
@@ -307,7 +311,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     triggerOld,
      *     triggerNew,
      *     new ContainsAnyBiPredicate('Name', 'a'),
-     *     BiOperator.minBy(SObjectFunctions.get(Account.AnnualRevenue))
+     *     BiOperator.minBy(new GetFunction(Account.AnnualRevenue))
      * ).toList(); //
      * [
      *   { Name: 'bar', NumberOfEmployees: 100 },
@@ -615,7 +619,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * };
      * List<Long> totalPrices = SObjectSequence.of(items)
      *     .mapToLong(new TotalPriceFunction())
-     *     .toList(); // [100000000, 400000000, 500000000]
+     *     .toList(); // [100000000L, 400000000L, 500000000L]
      */
     public virtual override LongEnumerable mapToLong(final IFunction mapper) {
         return LongSequence.of((List<Long>) SequencePipeline.mapTo(sObjects, mapper, new List<Long>()));
@@ -833,7 +837,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
      * List<Long> numberOfEmployees = SObjectSequence.of(parentAccounts)
      *     .flatMapToLong(new MapToNumberOfEmployees())
-     *     .toList(); // [100, 200, 500]
+     *     .toList(); // [100L, 200L, 500L]
      */
     public virtual override LongEnumerable flatMapToLong(final IFunction mapper) {
         return LongSequence.of((List<Long>) SequencePipeline.flatMapTo(sObjects, mapper, new List<Long>()));
@@ -917,7 +921,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
      * List<String> names = (List<String>) SObjectSequence.of(parentAccounts)
      *     .flatMapToObject(new MapToName())
-     *     .toList(String.class); // ['qux', fred', 'thud']
+     *     .toList(String.class); // ['qux', 'fred', 'thud']
      */
     public virtual override ObjectEnumerable flatMapToObject(final IFunction mapper) {
         return ObjectSequence.of(SequencePipeline.flatMapTo(sObjects, mapper, new List<Object>()));
@@ -1363,7 +1367,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `SObjectEnumerable` is empty then `false` is returned.
+     * If `SObjectEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -1485,7 +1489,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     .toList(); //
      * [
      *   { Name: 'bar', NumberOfEmployees: 200 },
-     *   { Name: 'baz', NumberOfEmployees: 200 }
+     *   { Name: 'baz', NumberOfEmployees: 300 }
      * ]
      */
     public virtual override List<SObject> toList() {
@@ -1518,8 +1522,8 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     new Account(Name = 'Foo'),
      *     new Account(Name = 'bar')
      * };
-     * List<Object> normalizedNames = SObjectSequence.of(accounts)
-     *     .toList(new GetFieldValueToLowerCaseFunction('Name')); // ['foo', 'bar', 'baz', 'foo', 'bar']
+     * List<String> normalizedNames = (List<String>) SObjectSequence.of(accounts)
+     *     .toList(new GetFieldValueToLowerCaseFunction('Name'), String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
      */
     public virtual override List<Object> toList(final IFunction mapper, final Type elementType) {
         return SequencePipeline.toList(sObjects, mapper, elementType);
@@ -1537,7 +1541,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *     new Account(Name = 'bar'),
      *     new Account(Name = 'baz')
      * };
-     * Set<SObject> sobjects = [ObjectEnumerable].of(accounts)
+     * Set<SObject> sobjects = SObjectSequence.of(accounts)
      *     .skip(1)
      *     .toSet(); //
      * [
@@ -1680,14 +1684,14 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * Account acc2 = new Account(Id = '001000000000002AAA', Name = 'bar');
      * Account acc3 = new Account(Id = '001000000000003AAA', Name = 'baz');
      * Account acc4 = new Account(Name = 'qux');
-     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+     * List<Account> accounts = new List<Account>{ acc1, acc2, acc3, acc4 };
      * Map<Id, SObject> accountById = SObjectSequence.of(accounts)
      *     .toMap(); //
      * {
-     *   '005000000000001AAA': { Id: '001000000000001AAA', Name: 'foo' },
+     *   '001000000000001AAA': { Id: '001000000000001AAA', Name: 'foo' },
      *   '001000000000002AAA': { Id: '001000000000002AAA', Name: 'bar' },
      *   '001000000000003AAA': { Id: '001000000000003AAA', Name: 'baz' },
-     *    null: { Name: 'foo' }
+     *    null: { Name: 'qux' }
      * }
      */
     public virtual override Map<Id, SObject> toMap() {

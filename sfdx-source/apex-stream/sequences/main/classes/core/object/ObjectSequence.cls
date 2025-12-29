@@ -1,27 +1,21 @@
 /**
  * @description A sequence of `Object` elements supporting aggregate operations.
  * Sequence operations are composed of sequence chain. A sequence chain consists of:
- * <ul>
- *     <li>A Source (which might be an iterable (such as list or set)).</li>
- *     <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,
- *     such as {@link ObjectSequence.filter(IPredicate))}.</li>
- *     <li>A Terminal Operation (which produces a result such as
- *     {@link ObjectSequence.count()} or {@link ObjectSequence.collect(ICollector)}).</li>
- * </ul>
+ * - A Source (which might be an iterable (such as list or set)).
+ * - Zero or more Intermediate Operations (which transform a sequence into another sequence,
+ * such as {@link ObjectSequence.filter(IPredicate)}).
+ * - A Terminal Operation (which produces a result such as
+ * {@link ObjectSequence.count()} or {@link ObjectSequence.collect(ICollector)}).
  * <p>Sequences are <strong>eager</strong>:</p>
- * <ul>
- *     <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>
- *     <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li>
- * </ul>
+ * - Intermediate operations describe how a sequence is processed eagerly performing every action.
+ * - Computation is performed every time when the intermediate or the terminal operation is initiated.
  * <p>A sequence may not consume all elements. It may not be infinite.</p>
  * <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation)
  * <strong>multiple times</strong>.
  * <p>Contract:</p>
- * <ul>
- *     <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li>
- * </ul>
+ * - Must be non-interfering (do not modify the sequence source but may mutate its elements).
  * <p>There are primitive specializations for {@link IntSequence}, {@link LongSequence},
- * and {@link DoubleSequence} and {@link SObjectSequence} for SObject references.</p>
+ * {@link DoubleSequence}, and {@link SObjectSequence} for SObject references.</p>
  * <p>Sequences and streams equally ensure the fulfillment of the set goals,
  * but are implemented in different ways.</p>
  *
@@ -174,7 +168,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns eagerly concatenates `List<Iterable<Object>>`.
+     * @description Returns eagerly concatenated `List<Iterable<Object>>`.
      *
      * @param iterables the list of `Iterable<Object>`
      *
@@ -185,7 +179,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @example
      * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
      * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
-     * List<String> concat = (List<String>) ObjectSequence.concat(new List<Iterable<Object>>{ strs1, strs2 })
+     * List<String> concat = (List<String>) ObjectSequence.concat(new List<Iterable<Object>> { strs1, strs2 })
      *     .toList(String.class);
      * // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
      */
@@ -305,9 +299,9 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
      * List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
      * List<String> union = (List<String>) ObjectSequence.of(strs1)
-     *     .union(strs2)
+     *     .prepend(strs2)
      *     .toList(String.class);
-     * // ['foo', 'bar', 'baz', 'qux', 'fred']
+     * // ['qux', 'fred', 'foo', 'foo', 'bar', 'baz']
      */
     public virtual override ObjectEnumerable prepend(final Iterable<Object> iterable) {
         return concat(iterable, this);
@@ -386,7 +380,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * }
      * List<String> rest = (List<String>)
      *     ObjectSequence.of(new List<String>{ 'bar', 'baz', 'foo' })
-     *     .take(new ContainsPredicate('a'))
+     *     .drop(new ContainsPredicate('a'))
      *     .toList(String.class); // ['foo']
      */
     public virtual override ObjectEnumerable drop(final IPredicate predicate) {
@@ -631,13 +625,13 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
     }
 
     /**
-     * @description Returns a `SObjectEnumerable` after performing `consumer` action on each element.
+     * @description Returns a `ObjectEnumerable` after performing `consumer` action on each element.
      * <p>Stateful Intermediate Operation.</p>
      *
      * @param consumer the non-interfering, stateless action to be performed on each element.
      * Expected to operate via side effects.
      *
-     * @return this `SObjectEnumerable`
+     * @return this `ObjectEnumerable`
      *
      * @throws NullPointerException if `consumer` is null
      *
@@ -732,7 +726,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * }
      * List<String> sorted = (List<String>)
      *     ObjectSequence.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
-     *     .sort(new SecondCharComparer())
+     *     .sort(new SecondLetterComparer())
      *     .toList(String.class); // ['Bar', 'baz', 'bar', 'foo', 'Foo']
      */
     public virtual override ObjectEnumerable sort(final IComparer comparer) {
@@ -753,7 +747,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @example
      * List<String> first2 = (List<String>) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .lim(2)
-     *     .toList(String.class); // ['foo', 'baz']
+     *     .toList(String.class); // ['foo', 'bar']
      */
     public virtual override ObjectEnumerable lim(final Integer lim) {
         return new ObjectSequence(SequencePipeline.lim(objects, lim, new List<Object>()));
@@ -838,7 +832,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *     .get(); // 'foo-bar-baz'
      * String concatenated1 = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .reduce(new ConcatenateBiOperator(';'))
-     *     .get(); // 'seed;foo;bar;baz'
+     *     .get(); // 'foo;bar;baz'
      */
     public virtual override Optional reduce(final IBiOperator accumulator) {
         return Optional.ofNullable(SequencePipeline.reduce(objects, accumulator));
@@ -888,7 +882,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * // the Collector implementing the downstream reduction.
      * ICollector downstreamCollector = Collector.of(Supplier.of(Set<String>.class), new AddToStringSetBiConsumer());
      * // the function that folds an element into a result container.
-     * IBiConsumer accumulator = new PutToObjectsByIntMap(downstreamCollector, new LengthFunction());
+     * IBiConsumer accumulator = new PutToObjectsByIntMap(downstreamCollector, classificationFunction);
      * // the Collector implementing the cascaded group-by operation.
      * ICollector groupByLengthCollector = Collector.of(mapSupplier, accumulator);
      * Map<Integer, Set<String>> stringsByLength = (Map<Integer, Set<String>>)
@@ -938,7 +932,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `ObjectEnumerable` is empty then `false` is returned.
+     * If `ObjectEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate
@@ -1007,7 +1001,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @example
      * ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
      *     .isEmpty(); // false
-     * ObjectSequence.of(new List<String>()))
+     * ObjectSequence.of(new List<String>())
      *     .isEmpty(); // true
      */
     public virtual override Boolean isEmpty() {

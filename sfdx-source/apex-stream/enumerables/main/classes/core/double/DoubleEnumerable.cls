@@ -153,8 +153,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> filtered = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-     *     .filter(Predicates.isEqual(5))
+     *     .filter(new IsEqualPredicate(5))
      *     .toList(); // [5, 5]
      */
     public abstract DoubleEnumerable filter(final IPredicate predicate);
@@ -171,8 +176,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> firstFiltered = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .take(Predicates.isEqual(0.1))
+     *     .take(new IsEqualPredicate(0.1))
      *     .toList(); // [0.1, 0.1]
      */
     public abstract DoubleEnumerable take(final IPredicate predicate);
@@ -189,8 +199,13 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> rest = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .drop(Predicates.isEqual(0.1))
+     *     .drop(new IsEqualPredicate(0.1))
      *     .toList(); // [5, 1.5, Math.PI]
      */
     public abstract DoubleEnumerable drop(final IPredicate predicate);

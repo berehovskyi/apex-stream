@@ -143,7 +143,7 @@ public virtual inherited sharing class Optional implements IOptional {
     }
 
     /**
-     * @description Returns an `Optional` the result of applying the
+     * @description Returns an `Optional` describing the result of applying the
      * `mapper` function to the value if the value is present,
      * otherwise returns an empty `Optional`.
      *
@@ -193,7 +193,7 @@ public virtual inherited sharing class Optional implements IOptional {
      *
      * @return the `Object`
      *
-     * @throws NullPointerException if `mapper` is null
+     * @throws NullPointerException if `supplier` is null
      */
     public virtual Object orElseGet(final ISupplier supplier) {
         Validate.notNull(supplier);

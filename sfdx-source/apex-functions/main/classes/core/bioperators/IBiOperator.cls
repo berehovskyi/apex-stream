@@ -1,6 +1,6 @@
 /**
  * @description An entity that takes two arguments of `Object` type and returns an `Object`
- * value. The types of the arguments and the of returned value <strong>must</strong> be the same.
+ * value. The types of the arguments and of the returned value <strong>must</strong> be the same.
  *
  * @author Oleh Berehovskyi
  *
@@ -10,7 +10,7 @@ public interface IBiOperator extends IBiFunction {
     /**
      * @description Applies the function to the two input arguments.
      * <p>Contract:</p>
-     * The method is expected to have the next properties:
+     * The method is expected to have the following properties:
      * <ul>
      *     <li>The arguments and the returned value must be of the same type.</li>
      * </ul>

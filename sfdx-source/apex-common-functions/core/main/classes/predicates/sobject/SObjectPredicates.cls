@@ -176,7 +176,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     }
 
     /**
-     * @description Returns a `Predicate` that tests the input SObject  if the value of
+     * @description Returns a `Predicate` that tests the input SObject if the value of
      * the `field` is greater than or equal to the result returned by the `function`.
      * <p><strong>Note: </strong></p>
      * <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports
@@ -276,7 +276,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * @param fieldName the value of which is considered the left argument of comparison.
      * @param function the function whose application result is considered as the right argument of comparison.
      *
-     * @return the `SObjectPredicate`
+     * @return the `Predicate`
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -289,7 +289,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * SObjectPredicates.isLess('NumberOfEmployees', SObjectFunctions.get('OtherIntField__c'));
      * SObjectPredicates.isLess(
      *     'Parent?.NumberOfEmployees',
-     *     SObjectFunction.constant(100)
+     *     Function.constant(100)
      * );
      */
     public static Predicate isLess(final String fieldName, final IFunction function) {
@@ -307,7 +307,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * @param field the value of which is considered the left argument of comparison.
      * @param function the function whose application result is considered as the right argument of comparison.
      *
-     * @return the `SObjectPredicate`
+     * @return the `Predicate`
      *
      * @throws IllegalArgumentException if `fieldName` is blank
      * @throws NullPointerException if `fieldName` is null
@@ -322,7 +322,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * );
      * SObjectPredicates.isLess(
      *     Account.NumberOfEmployees,
-     *     SObjectFunction.constant(100)
+     *     Function.constant(100)
      * );
      */
     public static Predicate isLess(final SObjectField field, final IFunction function) {
@@ -641,11 +641,11 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * @see Comparer.defaultOrder
      *
      * @example
-     * SObjectPredicates.isEqual(
+     * SObjectPredicates.isNotEqual(
      *     'NumberOfEmployees',
      *      Functions.get('OtherIntField__c')
      * );
-     * SObjectPredicates.isEqual(
+     * SObjectPredicates.isNotEqual(
      *     'Parent?.NumberOfEmployees',
      *     Function.constant(100)
      * );
@@ -669,11 +669,11 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * @see Comparer.defaultOrder
      *
      * @example
-     * SObjectPredicates.isEqual(
+     * SObjectPredicates.isNotEqual(
      *     Account.NumberOfEmployees,
      *     Functions.get('OtherIntField__c')
      * );
-     * SObjectPredicates.isEqual(
+     * SObjectPredicates.isNotEqual(
      *     Account.NumberOfEmployees,
      *     Function.constant(100)
      * );
@@ -701,8 +701,8 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * @see Comparer.defaultOrder
      *
      * @example
-     * SObjectPredicates.isEqual('NumberOfEmployees', 100);
-     * SObjectPredicates.isEqual('Parent?.NumberOfEmployees', 100);
+     * SObjectPredicates.isNotEqual('NumberOfEmployees', 100);
+     * SObjectPredicates.isNotEqual('Parent?.NumberOfEmployees', 100);
      */
     public static Predicate isNotEqual(final String fieldName, final Object value) {
         return isEqual(fieldName, value).negate();
@@ -723,7 +723,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
      * @see Comparer.defaultOrder
      *
      * @example
-     * SObjectPredicates.isEqual(Account.NumberOfEmployees, 100);
+     * SObjectPredicates.isNotEqual(Account.NumberOfEmployees, 100);
      */
     public static Predicate isNotEqual(final SObjectField field, final Object value) {
         return isEqual(field, value).negate();
@@ -782,7 +782,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     //<editor-fold desc="IN">
     /**
-     * @description Returns a `Predicate` that tests the input SObject if the the value of
+     * @description Returns a `Predicate` that tests the input SObject if the value of
      * the `fieldName` is contained in the `container`. Cross-reference fields and safe
      * navigation are supported.
      *
@@ -810,7 +810,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     }
 
     /**
-     * @description Returns a `Predicate` that tests the input SObject if the the value of
+     * @description Returns a `Predicate` that tests the input SObject if the value of
      * the `field` is contained in the `container`.
      *
      * @param field the value of which is tested
@@ -834,7 +834,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
 
     //<editor-fold desc="NOT IN">
     /**
-     * @description Returns a `Predicate` that tests the input SObject if the the value of
+     * @description Returns a `Predicate` that tests the input SObject if the value of
      * the `fieldName` is not contained in the `container`. Cross-reference fields and safe
      * navigation are supported.
      *
@@ -862,7 +862,7 @@ public virtual inherited sharing class SObjectPredicates extends Predicates {
     }
 
     /**
-     * @description Returns a `Predicate` that tests the input SObject if the the value of
+     * @description Returns a `Predicate` that tests the input SObject if the value of
      * the `field` is not contained in the `container`.
      *
      * @param field the value of which is tested

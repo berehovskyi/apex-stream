@@ -58,7 +58,7 @@ public abstract inherited sharing class Operator implements IOperator {
     // @start-group Static Methods
     /**
      * @description Returns a composed `Operator` that sequentially executes the operations
-     * in the same order as the order of the consumers input list.
+     * in the same order as the order of the operators input list.
      *
      * @param operators the operations to sequentially perform
      *

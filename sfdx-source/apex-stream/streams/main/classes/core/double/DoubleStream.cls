@@ -160,7 +160,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @return the new `DoubleEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * public class RandomDoubleSupplier extends Supplier {
@@ -187,7 +187,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @return the new `DoubleEnumerable`
      *
-     * @throws NullPointerException if `supplier` is null
+     * @throws NullPointerException if `operator` is null
      *
      * @example
      * public class AddOperator extends Operator {
@@ -216,7 +216,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @return the new `DoubleEnumerable`
      *
-     * @throws NullPointerException if `supplier` or `supplier` is null
+     * @throws NullPointerException if `predicate` or `operator` is null
      *
      * @example
      * public class IsLessPredicate extends Predicate {
@@ -263,7 +263,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
     }
 
     /**
-     * @description Returns lazily concatenated `List<Iterable<Double>>`.
+     * @description Returns lazily concatenated `DoubleEnumerable` from `iterables`.
      *
      * @param iterables the list of `Iterable<Double>`
      *
@@ -350,7 +350,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * List<Double> prepend = DoubleStream.of(doubles1)
      *     .prepend(doubles2)
      *     .toList();
-     * // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
+     * // [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0]
      */
     public virtual override DoubleEnumerable prepend(final Iterable<Double> iterable) {
         return concat(iterable, this);
@@ -371,8 +371,13 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> filtered = DoubleStream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-     *     .filter(Predicates.isEqual(5))
+     *     .filter(new IsEqualPredicate(5))
      *     .toList(); // [5, 5]
      */
     public virtual override DoubleEnumerable filter(final IPredicate predicate) {
@@ -390,8 +395,13 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> firstFiltered = DoubleStream.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .filter(Predicates.isEqual(0.1))
+     *     .take(new IsEqualPredicate(0.1))
      *     .toList(); // [0.1, 0.1]
      */
     public virtual override DoubleEnumerable take(final IPredicate predicate) {
@@ -410,9 +420,14 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * @throws NullPointerException if `predicate` is null
      *
      * @example
+     * public class IsEqualPredicate extends Predicate {
+     *     private final Object value;
+     *     public IsEqualPredicate(Object value) { this.value = value; }
+     *     public override Boolean test(Object o) { return o == value; }
+     * }
      * List<Double> rest = DoubleStream.of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-     *     .drop(Predicates.isEqual(0.1))
-     *     .toList(); // [5, 1.5, Math.PI]
+     *     .drop(new IsEqualPredicate(0.1))
+     *     .toList(); // [5.0, 1.5, Math.PI]
      */
     public virtual override DoubleEnumerable drop(final IPredicate predicate) {
         return new DoubleStream((Iterator<Double>) StreamPipeline.drop(iterator(), predicate));
@@ -777,7 +792,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *     public IsGreaterPredicate(Double d) { this.d = d; }
      *     public override Boolean test(Object o) { return (Double) o > d; }
      * }
-     * Double firstGreaterThan4Double = DoubleStream.of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+     * Double firstGreaterThan4Double = (Double) DoubleStream.of(new List<Double>{ 0.01, 1.0, 3, 5.5, -8.99, -6, 4.01 })
      *     .find(new IsGreaterPredicate(4))
      *     .get(); // 5.5
      */
@@ -787,7 +802,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
 
     /**
      * @description Returns whether all elements match `predicate`.
-     * If `DoubleEnumerable` is empty then `false` is returned.
+     * If `DoubleEnumerable` is empty then `true` is returned.
      * <p>Short-circuiting Terminal Operation.</p>
      *
      * @param predicate the predicate

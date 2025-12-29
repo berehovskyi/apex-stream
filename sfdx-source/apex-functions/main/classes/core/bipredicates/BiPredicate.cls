@@ -45,7 +45,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
 
     /**
      * @description Returns a composed `BiPredicate` that applies short-circuiting logical
-     * `AND` operator to `this` `IPredicate` and `other`
+     * `AND` operator to `this` `IBiPredicate` and `other`
      * in that order.
      *
      * @param other the other `IBiPredicate`
@@ -86,7 +86,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
      *
      * @return the composed `BiPredicate`
      *
-     * @throws NullPointerException if `other` is null or some of the list element is null
+     * @throws NullPointerException if `predicates` is null or some of the list element is null
      *
      * @example
      * BiPredicate.some(someBiPredicates);
@@ -103,7 +103,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
      *
      * @return the composed `BiPredicate`
      *
-     * @throws NullPointerException if `other` is null or some of the list element is null
+     * @throws NullPointerException if `predicates` is null or some of the list element is null
      *
      * @example
      * BiPredicate.every(someBiPredicates);
@@ -171,7 +171,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
      *
      * @param value the evaluated value
      *
-     * @return predicate the `BiPredicate`
+     * @return the `BiPredicate`
      *
      * @throws NullPointerException if `value` is null
      *
