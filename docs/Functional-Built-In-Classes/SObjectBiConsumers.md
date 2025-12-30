@@ -1,6 +1,6 @@
 # virtual SObjectBiConsumers
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -18,7 +18,7 @@ and related utilities.
 
 ## Methods
 ### Built-Ins
-##### `public static BiConsumer set(String fieldName, IFunction mapper)`
+##### `public static BiConsumer set(String field, IFunction mapper)`
 
 Returns a `BiConsumer` that sets for the specified field for the second `SObject` input argument a result returned by the `mapper` applied to the first `SObject` input argument. Cross-reference fields and safe navigation are supported.
 
@@ -26,7 +26,7 @@ Returns a `BiConsumer` that sets for the specified field for the second `SObject
 
 |Param|Description|
 |---|---|
-|`fieldName`|the target field name of the second `SObject` input argument|
+|`field`|the target field of the second `SObject` input argument|
 |`mapper`|the function applied to the first `SObject` input argument|
 
 ###### Returns
@@ -39,11 +39,11 @@ Returns a `BiConsumer` that sets for the specified field for the second `SObject
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [BiOperator.combine](BiOperator.combine)
@@ -88,7 +88,7 @@ SObjectBiConsumers.set(Account.NumberOfEmployees, someFunction);
 ```
 
 
-##### `public static BiConsumer set(String fieldName, Object value)`
+##### `public static BiConsumer set(String field, Object value)`
 
 Returns a `BiConsumer` that sets the `value` for the specified field for the second `SObject` input argument. Cross-reference fields and safe navigation are supported.
 
@@ -96,7 +96,7 @@ Returns a `BiConsumer` that sets the `value` for the specified field for the sec
 
 |Param|Description|
 |---|---|
-|`fieldName`|the target field name of the second `SObject` input argument|
+|`field`|the target field of the second `SObject` input argument|
 |`value`|the value to set for the second `SObject` input argument|
 
 ###### Returns
@@ -109,10 +109,10 @@ Returns a `BiConsumer` that sets the `value` for the specified field for the sec
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [BiOperator.combine](BiOperator.combine)
@@ -157,7 +157,7 @@ SObjectBiConsumers.set(Account.NumberOfEmployees, 100);
 ```
 
 
-##### `public static BiConsumer setSObject(String fieldName, IOperator operator)`
+##### `public static BiConsumer setSObject(String field, IOperator operator)`
 
 Returns a `BiConsumer` that sets `SObject` for the specified field for the second `SObject` input argument a result returned by the `mapper` applied to the first `SObject` input argument. Cross-reference fields and safe navigation are supported.
 
@@ -165,7 +165,7 @@ Returns a `BiConsumer` that sets `SObject` for the specified field for the secon
 
 |Param|Description|
 |---|---|
-|`fieldName`|the target field name of the second `SObject` input argument|
+|`field`|the target field of the second `SObject` input argument|
 |`operator`|the operator applied to the first `SObject` input argument|
 
 ###### Returns
@@ -178,11 +178,11 @@ Returns a `BiConsumer` that sets `SObject` for the specified field for the secon
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `operator` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [BiOperator.combine](BiOperator.combine)
@@ -227,7 +227,7 @@ SObjectBiConsumers.setSObject(Account.ParentId, someOperator);
 ```
 
 
-##### `public static BiConsumer setSObject(String fieldName, SObject value)`
+##### `public static BiConsumer setSObject(String field, SObject value)`
 
 Returns a `BiConsumer` that sets `SObject` the `value` for the specified field for the second `SObject` input argument. Cross-reference fields and safe navigation are supported.
 
@@ -235,7 +235,7 @@ Returns a `BiConsumer` that sets `SObject` the `value` for the specified field f
 
 |Param|Description|
 |---|---|
-|`fieldName`|the target field name of the second `SObject` input argument|
+|`field`|the target field of the second `SObject` input argument|
 |`value`|the value to set for the second `SObject` input argument|
 
 ###### Returns
@@ -248,10 +248,10 @@ Returns a `BiConsumer` that sets `SObject` the `value` for the specified field f
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [BiOperator.combine](BiOperator.combine)

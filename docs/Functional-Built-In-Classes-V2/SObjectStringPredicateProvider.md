@@ -1,6 +1,6 @@
 # virtual SObjectStringPredicateProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -43,15 +43,15 @@ isNameContainingJohn.test(new Account(Name = 'John Doe')); // true
 ```
 
 
-### `public virtual StringOperator is(String fieldName)`
+### `public virtual StringOperator is(String field)`
 
-Creates an instance of `StringOperator` using the provided field name.
+Creates an instance of `StringOperator` using the provided field.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name of the SObject to be used for mapping|
+|`field`|the field of the SObject to be used for mapping|
 
 #### Returns
 
@@ -63,7 +63,7 @@ Creates an instance of `StringOperator` using the provided field name.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `fieldName` is null|
+|`NullPointerException`|if `field` is null|
 
 #### Example
 ```apex
@@ -177,7 +177,7 @@ isNameEmpty.test(new Account(Name = '')); // true
 
 ##### `public virtual Predicate containing(String value)`
 
-Creates a predicate that checks if the mapped string value contains the specified value.
+Creates a predicate that checks if the mapped string value contains the specified value, respecting case.
 
 ###### Parameters
 
@@ -206,7 +206,7 @@ isNameContainingJohn.test(new Account(Name = 'John Doe')); // true
 ```
 
 
-##### `public virtual Predicate containingIc(String value)`
+##### `public virtual Predicate iContaining(String value)`
 
 Creates a predicate that checks if the mapped string value contains the specified value, ignoring case.
 
@@ -229,7 +229,6 @@ Creates a predicate that checks if the mapped string value contains the specifie
 |`NullPointerException`|if `value` is null|
 
 ###### Example
-
 ```apex
 IPredicate isNameContainingJohnIgnoreCase = new SObjectStringPredicateProvider()
     .is(Account.Name)
@@ -240,7 +239,7 @@ isNameContainingJohnIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
 
 ##### `public virtual Predicate startingWith(String value)`
 
-Creates a predicate that checks if the mapped string value starts with the specified value.
+Creates a predicate that checks if the mapped string value starts with the specified value, respecting case.
 
 ###### Parameters
 
@@ -269,7 +268,7 @@ isNameStartingWithJohn.test(new Account(Name = 'John Doe')); // true
 ```
 
 
-##### `public virtual Predicate startingWithIc(String value)`
+##### `public virtual Predicate iStartingWith(String value)`
 
 Creates a predicate that checks if the mapped string value starts with the specified value, ignoring case.
 
@@ -292,7 +291,6 @@ Creates a predicate that checks if the mapped string value starts with the speci
 |`NullPointerException`|if `value` is null|
 
 ###### Example
-
 ```apex
 IPredicate isNameStartingWithJohnIgnoreCase = new SObjectStringPredicateProvider()
     .is(Account.Name)
@@ -303,7 +301,7 @@ isNameStartingWithJohnIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
 
 ##### `public virtual Predicate endingWith(String value)`
 
-Creates a predicate that checks if the mapped string value ends with the specified value.
+Creates a predicate that checks if the mapped string value ends with the specified value, respecting case.
 
 ###### Parameters
 
@@ -332,7 +330,7 @@ isNameEndingWithDoe.test(new Account(Name = 'John Doe')); // true
 ```
 
 
-##### `public virtual Predicate endingWithIc(String value)`
+##### `public virtual Predicate iEndingWith(String value)`
 
 Creates a predicate that checks if the mapped string value ends with the specified value, ignoring case.
 
@@ -355,7 +353,6 @@ Creates a predicate that checks if the mapped string value ends with the specifi
 |`NullPointerException`|if `value` is null|
 
 ###### Example
-
 ```apex
 IPredicate isNameEndingWithDoeIgnoreCase = new SObjectStringPredicateProvider()
     .is(Account.Name)
@@ -364,15 +361,15 @@ isNameEndingWithDoeIgnoreCase.test(new Account(Name = 'JOHN DOE')); // true
 ```
 
 
-##### `public virtual Predicate likex(String likeString)`
+##### `public virtual Predicate likex(String pattern)`
 
-Creates a predicate that checks if the mapped string value matches a given pattern (`LIKE`).
+Creates a predicate that checks if the mapped string value matches a given pattern (`LIKE`), respecting case.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`likeString`|the pattern to match against|
+|`pattern`|the pattern to match against|
 
 ###### Returns
 
@@ -384,13 +381,44 @@ Creates a predicate that checks if the mapped string value matches a given patte
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `likeString` is null|
+|`NullPointerException`|if `pattern` is null|
 
 ###### Example
 ```apex
 IPredicate isNameLikePattern = new SObjectStringPredicateProvider()
     .is(Account.Name)
     .likex('%Doe');
+isNameLikePattern.test(new Account(Name = 'John Doe')); // true
+```
+
+
+##### `public virtual Predicate iLike(String pattern)`
+
+Creates a predicate that checks if the mapped string value matches a given pattern (`LIKE`), ignoring case.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`pattern`|the pattern to match against|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Predicate`|a predicate that returns true if the mapped string value matches the pattern|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `pattern` is null|
+
+###### Example
+```apex
+IPredicate isNameLikePattern = new SObjectStringPredicateProvider()
+    .is(Account.Name)
+    .iLike('%doe');
 isNameLikePattern.test(new Account(Name = 'John Doe')); // true
 ```
 

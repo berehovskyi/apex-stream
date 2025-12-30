@@ -1,6 +1,6 @@
 # virtual StringSupplierProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -13,7 +13,7 @@ This includes generating unique UUIDs and creating strings in a customizable aut
 ## Methods
 ### `public virtual Supplier uuid()`
 
-Returns a `Supplier` that returns the next uuid.
+Returns a `Supplier` that returns the next UUID.
 
 #### Returns
 

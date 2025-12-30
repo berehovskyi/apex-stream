@@ -1,6 +1,6 @@
 # abstract BiOperator
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -27,11 +27,27 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public Object apply(Object o1, Object o2)`
+
+Applies the function to the two input arguments.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`o1`|the first input argument of `T` type|
+|`o2`|the second input argument of `T` type|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Object`|the result of `T` type|
+
 ---
 ### Static Methods
 ##### `public static BiOperator left()`
 
-Returns a `BiOperator` that return the first input argument.
+Returns a `BiOperator` that returns the first input argument.
 
 ###### Returns
 
@@ -41,7 +57,7 @@ Returns a `BiOperator` that return the first input argument.
 
 ##### `public static BiOperator right()`
 
-Returns a `BiOperator` that return the second input argument.
+Returns a `BiOperator` that returns the second input argument.
 
 ###### Returns
 

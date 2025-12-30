@@ -1,8 +1,6 @@
 # virtual Collectors
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -160,7 +158,7 @@ Returns a `Collector` that accumulates input arguments into a new `Set<Id>`. <p>
 ###### Example
 ```apex
 // Accumulates input arguments into a Set
-Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet());
+Set<Id> ids = (Set<Id>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet());
 ```
 
 
@@ -183,7 +181,7 @@ Returns a `Collector` that accumulates elements returned by `mapper` function in
 ###### Example
 ```apex
 // Accumulates input arguments into a Set
-Set<Boolean> ids = (Set<Boolean>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet(mapper));
+Set<Id> ids = (Set<Id>) [ObjectEnumerable].of(ids).collect(Collectors.toIdSet(mapper));
 ```
 
 
@@ -767,7 +765,7 @@ Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose k
 Map<Id, Object> personByIdProperty = (Map<Id, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByIdMap(getIdProperty));
 Map<Id, Comparable> personByIdProperty = (Map<Id, Comparable>) [ObjectEnumerable].of(people)
-    .collect(Collectors.toByBoolMap(getIdProperty).cast(Map<Id, Comparable>.class));
+    .collect(Collectors.toByIdMap(getIdProperty).cast(Map<Id, Comparable>.class));
 ```
 
 
@@ -916,7 +914,7 @@ Returns a `Collector` that accumulates elements into a `Map<String, Object>` who
 Map<String, Object> personByStringProperty = (Map<String, Object>) [ObjectEnumerable].of(people)
     .collect(Collectors.toByStringMap(getStringProperty));
 Map<String, Comparable> personByStringProperty = (Map<String, Comparable>) [ObjectEnumerable].of(people)
-    .collect(Collectors.toByBoolMap(getStringProperty).cast(Map<String, Comparable>.class));
+    .collect(Collectors.toByStringMap(getStringProperty).cast(Map<String, Comparable>.class));
 ```
 
 

@@ -1,6 +1,6 @@
 # SFn
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -17,18 +17,18 @@ SFn
 **Group** Functional Built-In Class V2 Aliases
 
 ## Methods
-### `public virtual Function get(String fieldName)`
+### `public virtual Function get(String field)`
 
 *Inherited*
 
 
-Returns a `Function` that gets a value for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets a value for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get a value|
+|`field`|the field to get a value|
 
 #### Returns
 
@@ -40,10 +40,10 @@ Returns a `Function` that gets a value for the specified `fieldName`. Cross-refe
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.get](SObject.get)
@@ -98,18 +98,18 @@ nameFieldFunction.apply(new Account(Name = 'John Doe')); // John Doe
 ```
 
 
-### `public virtual Function getSObject(String fieldName)`
+### `public virtual Function getSObject(String field)`
 
 *Inherited*
 
 
-Returns a `Function` that gets a single related sObject for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets a single related SObject for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get the related sObject|
+|`field`|the field to get the related SObject|
 
 #### Returns
 
@@ -121,10 +121,10 @@ Returns a `Function` that gets a single related sObject for the specified `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross-reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.getSObject](SObject.getSObject)
@@ -141,13 +141,13 @@ accountFunction.apply(new Contact(Account = new Account(Name = 'John Doe'))); //
 *Inherited*
 
 
-Returns a `Function` that gets a single related sObject for the specified `field`.
+Returns a `Function` that gets a single related SObject for the specified `field`.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the `SObjectField` to get the related sObject|
+|`field`|the `SObjectField` to get the related SObject|
 
 #### Returns
 
@@ -171,18 +171,18 @@ accountFunction.apply(new Contact(Account = new Account(Name = 'John Doe'))); //
 ```
 
 
-### `public virtual Function getSObjects(String fieldName)`
+### `public virtual Function getSObjects(String field)`
 
 *Inherited*
 
 
-Returns a `Function` that gets children sobjects for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets children SObjects for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get a value|
+|`field`|the field to get a value|
 
 #### Returns
 
@@ -194,10 +194,10 @@ Returns a `Function` that gets children sobjects for the specified `fieldName`. 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.getSObjects](SObject.getSObjects)
@@ -234,7 +234,7 @@ safeParentContactsFunction.apply(new Account(Id = '001000000000001AAA')); // nul
 *Inherited*
 
 
-Returns a `Function` that gets children sobjects for the specified `field`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets children SObjects for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
@@ -272,7 +272,7 @@ contactsFunction.apply(
 *Inherited*
 
 
-Returns a `Function` that returns a map of populated field names and their corresponding values for an input argument.
+Returns a `Function` that returns a map of populated fields and their corresponding values for an input argument.
 
 #### Returns
 
@@ -364,7 +364,12 @@ Returns a `ChainableMapSObjectFunction` that allows mapping values from a suppli
 
 #### Example
 ```apex
-.com', OwnerId: '005000000000000AAA' }
+IFunction mapToLead = new SObjectFunctionProvider().mapTo(new SObjectSupplierProvider().of(Lead.SObjectType))
+   .val(Contact.LastName).to(Lead.LastName)
+   .val('Email').to('Email')
+   .var(someUserId).to('OwnerId');
+mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe.example.com'));
+// Lead { LastName: 'Doe', Email: 'john.doe.example.com', OwnerId: '005000000000000AAA' }
 ```
 
 
@@ -395,7 +400,12 @@ Returns a `ChainableMapSObjectFunction` that maps values to a specified SObject 
 
 #### Example
 ```apex
-.com', OwnerId: '005000000000000AAA' }
+IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType)
+   .val(Contact.LastName).to(Lead.LastName)
+   .val('Email').to('Email')
+   .var(someUserId).to('OwnerId');
+mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe.example.com'));
+// Lead { LastName: 'Doe', Email: 'john.doe.example.com', OwnerId: '005000000000000AAA' }
 ```
 
 

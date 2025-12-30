@@ -1,6 +1,6 @@
 # virtual SObjectCollectorProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -19,4 +19,7 @@ SObjectCollectorProvider
 
 ## Constructors
 ### `public SObjectCollectorProvider()`
+
+Initializes a new instance of the `SObjectCollectorProvider` class with the SObject value type.
+
 ---

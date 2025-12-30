@@ -1,8 +1,6 @@
 # virtual IntSequence
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -56,7 +54,7 @@ Returns a `IntEnumerable` created from `integers` list.
 
 |Param|Description|
 |---|---|
-|`integers`|the list of Longs|
+|`integers`|the list of Integers|
 
 ###### Returns
 
@@ -222,7 +220,7 @@ List<Integer> concat = IntSequence.concat(ints1, ints2)
 
 ##### `public static IntEnumerable concat(List<Iterable<Integer>> iterables)`
 
-Returns eagerly concatenates `List<Iterable<Integer>>`.
+Returns eagerly concatenated `List<Iterable<Integer>>`.
 
 ###### Parameters
 
@@ -381,8 +379,13 @@ Returns a `IntEnumerable` with elements that match `predicate`. <p>Stateless Int
 
 ###### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Integer> filtered = IntSequence.of(new List<Integer>{ 0, 5, 1, 1, 5 })
-    .filter(Predicates.isEqual(5))
+    .filter(new IsEqualPredicate(5))
     .toList(); // [5, 5]
 ```
 
@@ -411,8 +414,13 @@ Returns a `IntEnumerable` which takes elements while elements match `predicate`.
 
 ###### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Integer> firstFiltered = IntSequence.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .take(Predicates.isEqual(0))
+    .take(new IsEqualPredicate(0))
     .toList(); // [0, 0]
 ```
 
@@ -441,8 +449,13 @@ Returns a `IntEnumerable` which drops elements while elements match `predicate`,
 
 ###### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Integer> rest = IntSequence.of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .drop(Predicates.isEqual(0))
+    .drop(new IsEqualPredicate(0))
     .toList(); // [1, 1, 5]
 ```
 
@@ -706,7 +719,7 @@ Returns a `IntEnumerable` with distinct elements. <p>Stateful Intermediate Opera
 ```apex
 List<Integer> distinct = IntSequence.of(new List<Integer>{ 0, 5, 1, -10, 0, 5 })
     .distinct()
-    .toList(); // [0, 5, 1, -10];
+    .toList(); // [0, 5, 1, -10]
 ```
 
 
@@ -822,7 +835,7 @@ List<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
 
 ---
 ### Terminal Operations
-##### `public virtual override Integer reduce(Integer identity, IBiOperator accumulator)`
+##### `public virtual override Integer fold(Integer identity, IBiOperator accumulator)`
 
 Performs a reduction on `Integer` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
@@ -830,7 +843,7 @@ Performs a reduction on `Integer` elements, using `identity` value and an associ
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 ###### Returns
@@ -844,6 +857,45 @@ Performs a reduction on `Integer` elements, using `identity` value and an associ
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
+
+###### Example
+```apex
+public class SumBiOperator extends BiOperator {
+    public override Object apply(Object o1, Object o2) { return (Integer) o1 + (Integer) o2; }
+}
+public class ProductBiOperator extends BiOperator {
+    public override Object apply(Object o1, Object o2) { return (Integer) o1 * (Integer) o2; }
+}
+Integer sum = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 }).fold(0, new SumBiOperator()); // -4
+Integer factorialOfN = IntSequence.range(1, n).fold(1, new ProductBiOperator());
+```
+
+
+##### `public virtual override Integer reduce(Integer identity, IBiOperator accumulator)`
+
+Performs a reduction on `Integer` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`identity`|the initial value for `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Integer`|the `Integer` result of the reduction|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
 
 ###### Example
 ```apex
@@ -960,7 +1012,7 @@ Integer firstEvenInt = (Integer) IntSequence.of(new List<Integer>{ 0, 5, 1, -10 
 
 ##### `public virtual override Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `IntEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `IntEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
@@ -1136,7 +1188,7 @@ Set<Integer> restInts = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 })
 *Inherited*
 
 
-Returns a new `IntEnumerable` as a set union of the current and another iterables.
+Returns a new `IntEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1171,7 +1223,7 @@ List<Integer> union = [IntEnumerable].of(ints1)
 *Inherited*
 
 
-Returns a new `IntIterable` as a set intersection of the current and another iterables.
+Returns a new `IntEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1183,7 +1235,7 @@ Returns a new `IntIterable` as a set intersection of the current and another ite
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the new `IntIterable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 ###### Throws
 
@@ -1206,7 +1258,7 @@ List<Integer> intersection = [IntEnumerable].of(ints1)
 *Inherited*
 
 
-Returns a new `IntIterable` as a set difference of the current and another iterables.
+Returns a new `IntEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1218,7 +1270,7 @@ Returns a new `IntIterable` as a set difference of the current and another itera
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the new `IntIterable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 ###### Throws
 
@@ -1247,7 +1299,7 @@ Returns a new `IntEnumerable` without null elements. <p>Stateful Intermediate Op
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 ###### Example
 ```apex
@@ -1297,13 +1349,13 @@ Boolean isNoneIntEven = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 *Inherited*
 
 
-Returns an `Optional` Integer describing the maximum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element. <p>Terminal Operation.</p>
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Integer|
+|`Optional`|the `Optional` containing the result|
 
 ###### Example
 ```apex
@@ -1318,13 +1370,13 @@ Integer max = (Integer) [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 *Inherited*
 
 
-Returns an `Optional` Integer describing the minimum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element. <p>Terminal Operation.</p>
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Integer|
+|`Optional`|the `Optional` containing the result|
 
 ###### Example
 ```apex

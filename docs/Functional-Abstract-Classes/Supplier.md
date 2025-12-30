@@ -1,6 +1,6 @@
 # abstract Supplier
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -27,6 +27,15 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public Object get()`
+
+Return an instance of `Object` type. The returned object may or may not be a new instance, depending on the implementation.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Object`|the result of `Object` type|
+
 ---
 ### Static Methods
 ##### `public static Supplier of(Type t)`

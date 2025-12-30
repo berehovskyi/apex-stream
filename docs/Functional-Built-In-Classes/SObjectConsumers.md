@@ -1,6 +1,6 @@
 # virtual SObjectConsumers
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -18,15 +18,15 @@ and related utilities.
 
 ## Methods
 ### Built-Ins
-##### `public static Consumer addError(String fieldName, String message)`
+##### `public static Consumer addError(String field, String message)`
 
-Returns a `Consumer` that adds error to `fieldName`.
+Returns a `Consumer` that adds an error to `field`.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to add an error|
+|`field`|the field to add an error|
 |`message`|the error message|
 
 ###### Returns
@@ -39,10 +39,10 @@ Returns a `Consumer` that adds error to `fieldName`.
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `message` is null|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.addError](SObject.addError)
@@ -55,7 +55,7 @@ SObjectConsumers.addError('NumberOfEmployees', 'Error message');
 
 ##### `public static Consumer addError(SObjectField field, String message)`
 
-Returns a `Consumer` that adds error to `field`.
+Returns a `Consumer` that adds an error to `field`.
 
 ###### Parameters
 
@@ -87,7 +87,7 @@ SObjectConsumers.addError(Account.NumberOfEmployees, 'Error message');
 
 ##### `public static Consumer addError(String message)`
 
-Returns a `Consumer` that adds error to an input argument.
+Returns a `Consumer` that adds an error to an input argument.
 
 ###### Parameters
 
@@ -118,7 +118,7 @@ SObjectConsumers.addError('Error message');
 
 ##### `public static Consumer addError(Exception exc)`
 
-Returns a `Consumer` that adds error to an input argument.
+Returns a `Consumer` that adds an error to an input argument.
 
 ###### Parameters
 
@@ -147,15 +147,15 @@ SObjectConsumers.addError(new IllegalArgumentException('Error message'));
 ```
 
 
-##### `public static Consumer set(String fieldName, IFunction mapper)`
+##### `public static Consumer set(String field, IFunction mapper)`
 
-Returns a `Consumer` that sets the value returned by the `mapper` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Consumer` that sets the value returned by the `mapper` for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
 ###### Returns
@@ -168,11 +168,11 @@ Returns a `Consumer` that sets the value returned by the `mapper` for the specif
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.put](SObject.put)
@@ -207,26 +207,26 @@ Returns a `Consumer` that sets the value returned by the `mapper` for the specif
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `field` or `mapper` is null|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.put](SObject.put)
 
 ###### Example
 ```apex
-ObjectConsumers.set(Account.NumberOfEmployees, someFunction);
+SObjectConsumers.set(Account.NumberOfEmployees, someFunction);
 ```
 
 
-##### `public static Consumer set(String fieldName, Object value)`
+##### `public static Consumer set(String field, Object value)`
 
-Returns a `Consumer` that sets the `value` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Consumer` that sets the `value` for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`value`|the value to set|
 
 ###### Returns
@@ -239,10 +239,10 @@ Returns a `Consumer` that sets the `value` for the specified `fieldName`. Cross-
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.put](SObject.put)
@@ -276,9 +276,9 @@ Returns a `Consumer` that sets the `value` for the specified `field`.
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
-|`SObjectException`|if provided invalid `fieldName`|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.put](SObject.put)
@@ -290,15 +290,15 @@ SObjectConsumers.set(Account.NumberOfEmployees, (Object) null);
 ```
 
 
-##### `public static Consumer setSObject(String fieldName, IOperator operator)`
+##### `public static Consumer setSObject(String field, IOperator operator)`
 
-Returns a `Consumer` that sets SObject the value returned by the `operator` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Consumer` that sets the SObject value returned by the `operator` for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`operator`|applied to the input argument|
 
 ###### Returns
@@ -311,11 +311,11 @@ Returns a `Consumer` that sets SObject the value returned by the `operator` for 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `operator` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.putSObject](SObject.putSObject)
@@ -330,7 +330,7 @@ SObjectConsumers.setSObject('Parent?.Parent', someOperator);
 
 ##### `public static Consumer setSObject(SObjectField field, IOperator operator)`
 
-Returns a `Consumer` that sets SObject the value returned by the `operator` for the specified `field`.
+Returns a `Consumer` that sets the SObject value returned by the `operator` for the specified `field`.
 
 ###### Parameters
 
@@ -360,15 +360,15 @@ SObjectConsumers.setSObject(Account.ParentId, someOperator);
 ```
 
 
-##### `public static Consumer setSObject(String fieldName, SObject parent)`
+##### `public static Consumer setSObject(String field, SObject parent)`
 
-Returns a `Consumer` that sets SObject the `parent` for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Consumer` that sets the SObject `parent` for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`parent`|the value to set|
 
 ###### Returns
@@ -381,10 +381,10 @@ Returns a `Consumer` that sets SObject the `parent` for the specified `fieldName
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.putSObject](SObject.putSObject)
@@ -399,7 +399,7 @@ SObjectConsumers.setSObject('Parent?.Parent', (SObject) null);
 
 ##### `public static Consumer setSObject(SObjectField field, SObject parent)`
 
-Returns a `Consumer` that sets SObject the `parent` for the specified `field`.
+Returns a `Consumer` that sets the SObject `parent` for the specified `field`.
 
 ###### Parameters
 

@@ -1,6 +1,6 @@
 # virtual SObjectComparerPredicateProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -115,13 +115,13 @@ isRevenueLt1MPredicate.test(new Account(AnnualRevenue = 500000)); // true
 
 ### `public virtual ComparisonOperator is(String left)`
 
-Creates a `ComparisonOperator` for comparing SObjects using the provided field name, with support for currying to build complex comparisons.
+Creates a `ComparisonOperator` for comparing SObjects using the provided field, with support for currying to build complex comparisons.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`left`|the field name of the SObject to be used for mapping|
+|`left`|the field of the SObject to be used for mapping|
 
 #### Returns
 
@@ -133,14 +133,14 @@ Creates a `ComparisonOperator` for comparing SObjects using the provided field n
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross-reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 #### Example
 ```apex
-SObjectComparerPredicateProvider builder = new SObjectComparerPredicateProvider(Comparer.defaultOrder())
+SObjectComparerPredicateProvider builder = new SObjectComparerPredicateProvider(Comparer.defaultOrder());
 IPredicate isNameJohnPredicate = builder.is('Name').eq().var('John');
 isNameJohnPredicate.test(new Account(Name = 'John')); // true
 IPredicate isRevenueGt1MPredicate = builder.is('AnnualRevenue').gt().var(1000000);
@@ -186,7 +186,7 @@ isRevenueGt1MPredicate.test(new Account(AnnualRevenue = 2000000)); // true
 ## Classes
 ### ComparisonOperator
 
-Represents the operations available for comparing an SObjects with another value or field,
+Represents the operations available for comparing an SObject with another value or field,
 utilizing currying to support flexible and reusable comparisons.
 
 #### Methods
@@ -456,19 +456,19 @@ isRevenueGt1MPredicate.test(new Account(AnnualRevenue = 2000000)); // true
 
 ##### `public virtual Predicate val(String right)`
 
-Specifies a field name to compare the left value against, creating a predicate that evaluates the comparison.
+Specifies a field to compare the left value against, creating a predicate that evaluates the comparison.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`right`|the field name to compare against|
+|`right`|the field to compare against|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Predicate`|a predicate that returns true if the comparison holds for the specified field name|
+|`Predicate`|a predicate that returns true if the comparison holds for the specified field|
 
 ###### Throws
 

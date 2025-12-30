@@ -1,6 +1,6 @@
 # IOptional
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -98,7 +98,7 @@ Returns an `IOptional` describing the result of applying the `mapper` function t
 
 ### `public IOptional flatMapTo(IFunction mapper)`
 
-Returns an `IOptional` the result of applying the `mapper` function to the value if the value is present, otherwise returns an empty `IOptional`.
+Returns an `IOptional` describing the result of applying the `mapper` function to the value if the value is present, otherwise returns an empty `IOptional`.
 
 #### Parameters
 

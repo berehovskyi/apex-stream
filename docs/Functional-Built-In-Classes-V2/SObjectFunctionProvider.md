@@ -1,6 +1,6 @@
 # virtual SObjectFunctionProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -12,15 +12,15 @@ This class acts as a factory for different types of functions that can be applie
 **Group** Functional Built-In Classes V2
 
 ## Methods
-### `public virtual Function get(String fieldName)`
+### `public virtual Function get(String field)`
 
-Returns a `Function` that gets a value for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets a value for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get a value|
+|`field`|the field to get a value|
 
 #### Returns
 
@@ -32,10 +32,10 @@ Returns a `Function` that gets a value for the specified `fieldName`. Cross-refe
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.get](SObject.get)
@@ -87,15 +87,15 @@ nameFieldFunction.apply(new Account(Name = 'John Doe')); // John Doe
 ```
 
 
-### `public virtual Function getSObject(String fieldName)`
+### `public virtual Function getSObject(String field)`
 
-Returns a `Function` that gets a single related sObject for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets a single related SObject for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get the related sObject|
+|`field`|the field to get the related SObject|
 
 #### Returns
 
@@ -107,10 +107,10 @@ Returns a `Function` that gets a single related sObject for the specified `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross-reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.getSObject](SObject.getSObject)
@@ -124,13 +124,13 @@ accountFunction.apply(new Contact(Account = new Account(Name = 'John Doe'))); //
 
 ### `public virtual Function getSObject(SObjectField field)`
 
-Returns a `Function` that gets a single related sObject for the specified `field`.
+Returns a `Function` that gets a single related SObject for the specified `field`.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the `SObjectField` to get the related sObject|
+|`field`|the `SObjectField` to get the related SObject|
 
 #### Returns
 
@@ -154,15 +154,15 @@ accountFunction.apply(new Contact(Account = new Account(Name = 'John Doe'))); //
 ```
 
 
-### `public virtual Function getSObjects(String fieldName)`
+### `public virtual Function getSObjects(String field)`
 
-Returns a `Function` that gets children sobjects for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets children SObjects for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get a value|
+|`field`|the field to get a value|
 
 #### Returns
 
@@ -174,10 +174,10 @@ Returns a `Function` that gets children sobjects for the specified `fieldName`. 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.getSObjects](SObject.getSObjects)
@@ -211,7 +211,7 @@ safeParentContactsFunction.apply(new Account(Id = '001000000000001AAA')); // nul
 
 ### `public virtual Function getSObjects(SObjectField field)`
 
-Returns a `Function` that gets children sobjects for the specified `field`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets children SObjects for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
@@ -246,7 +246,7 @@ contactsFunction.apply(
 
 ### `public virtual Function getPopulatedFieldsAsMap()`
 
-Returns a `Function` that returns a map of populated field names and their corresponding values for an input argument.
+Returns a `Function` that returns a map of populated fields and their corresponding values for an input argument.
 
 #### Returns
 
@@ -329,7 +329,12 @@ Returns a `ChainableMapSObjectFunction` that allows mapping values from a suppli
 
 #### Example
 ```apex
-.com', OwnerId: '005000000000000AAA' }
+IFunction mapToLead = new SObjectFunctionProvider().mapTo(new SObjectSupplierProvider().of(Lead.SObjectType))
+   .val(Contact.LastName).to(Lead.LastName)
+   .val('Email').to('Email')
+   .var(someUserId).to('OwnerId');
+mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe.example.com'));
+// Lead { LastName: 'Doe', Email: 'john.doe.example.com', OwnerId: '005000000000000AAA' }
 ```
 
 
@@ -357,7 +362,12 @@ Returns a `ChainableMapSObjectFunction` that maps values to a specified SObject 
 
 #### Example
 ```apex
-.com', OwnerId: '005000000000000AAA' }
+IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType)
+   .val(Contact.LastName).to(Lead.LastName)
+   .val('Email').to('Email')
+   .var(someUserId).to('OwnerId');
+mapToLead.apply(new Contact(LastName = 'Doe', Email = 'john.doe.example.com'));
+// Lead { LastName: 'Doe', Email: 'john.doe.example.com', OwnerId: '005000000000000AAA' }
 ```
 
 
@@ -398,21 +408,21 @@ Creates a `MapSObjectValueMapper` to map a value obtained from the provided func
 
 ###### Example
 ```apex
-IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType);
+IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType)
     .val(new SObjectFunctionProvider().get(Contact.LastName)).to(Lead.LastName);
 mapToLead.apply(new Contact(LastName = 'Doe')); // Lead { LastName: 'Doe' }
 ```
 
 
-##### `public virtual MapSObjectValueMapper val(String fieldName)`
+##### `public virtual MapSObjectValueMapper val(String field)`
 
-Creates a `MapSObjectValueMapper` to map a value obtained from a field by specifying its `fieldName`, and mapping it to a field on the SObject. Cross-reference fields and safe navigation are supported.
+Creates a `MapSObjectValueMapper` to map a value obtained from a field by specifying its `field`, and mapping it to a field on the SObject. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the name of the field from which to retrieve the value|
+|`field`|the name of the field from which to retrieve the value|
 
 ###### Returns
 
@@ -486,15 +496,15 @@ This class is used in conjunction with `ChainableMapSObjectFunction` to map valu
 from one SObject to another in a flexible and chainable manner.
 
 #### Methods
-##### `public virtual ChainableMapSObjectFunction to(String fieldName)`
+##### `public virtual ChainableMapSObjectFunction to(String field)`
 
-Maps the value provided by the function to the specified field name on the SObject. Cross-reference fields and safe navigation are supported.
+Maps the value provided by the function to the specified field on the SObject. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the name of the field on the destination SObject where the value will be mapped|
+|`field`|the name of the field on the destination SObject where the value will be mapped|
 
 ###### Returns
 
@@ -505,7 +515,7 @@ Maps the value provided by the function to the specified field name on the SObje
 ###### Example
 ```apex
 IFunction mapToLead = new SObjectFunctionProvider().mapTo(Lead.SObjectType)
-    .val('LastName').to('LastName');
+    .val('LastName').to('LastName')
     .var(someUserId).to('OwnerId');
 mapToLead.apply(new Contact(LastName = 'Doe'));
 // Lead { LastName: 'Doe', OwnerId: '005000000000000AAA' }

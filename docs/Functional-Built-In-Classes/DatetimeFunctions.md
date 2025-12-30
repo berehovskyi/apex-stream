@@ -1,6 +1,6 @@
 # virtual DatetimeFunctions
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -284,6 +284,18 @@ Returns a `Function` that returns the datetime as a string using the supplied Ja
 **See** [Datetime.formatGmt](Datetime.formatGmt)
 
 ##### `public static Function formatLong()`
+
+Returns a `Function` that returns the datetime in long date format using the locale of the context user.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Function`|the `Function`|
+
+
+**See** [Datetime.formatLong](Datetime.formatLong)
+
 ##### `public static Function getTime()`
 
 Returns a `Function` that returns the time component of a datetime input argument in the local time zone of the context user.

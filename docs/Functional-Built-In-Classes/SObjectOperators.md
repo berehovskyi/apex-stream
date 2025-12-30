@@ -1,8 +1,6 @@
 # virtual SObjectOperators
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -20,15 +18,15 @@ and related utilities.
 
 ## Methods
 ### Built-Ins
-##### `public static Operator getSObject(String fieldName)`
+##### `public static Operator getSObject(String field)`
 
-Returns a `Operator` that gets sobject for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Operator` that gets the SObject for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get a value|
+|`field`|the field to get the value|
 
 ###### Returns
 
@@ -40,10 +38,10 @@ Returns a `Operator` that gets sobject for the specified `fieldName`. Cross-refe
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.getSObject](SObject.getSObject)
@@ -58,13 +56,13 @@ SObjectOperators.getSObject('Parent?.Parent');
 
 ##### `public static Operator getSObject(SObjectField field)`
 
-Returns a `Operator` that gets sobject for the specified `field`.
+Returns a `Operator` that gets the SObject for the specified `field`.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field to get a value|
+|`field`|the field to get the value|
 
 ###### Returns
 
@@ -87,15 +85,15 @@ SObjectOperators.getSObject(Account.ParentId);
 ```
 
 
-##### `public static Operator set(String fieldName, IFunction mapper)`
+##### `public static Operator set(String field, IFunction mapper)`
 
-Returns a `Operator` that sets the value returned by the `mapper` for the specified `fieldName` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
+Returns a `Operator` that sets the value returned by the `mapper` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
 ###### Returns
@@ -108,11 +106,11 @@ Returns a `Operator` that sets the value returned by the `mapper` for the specif
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -130,7 +128,7 @@ Returns a `Operator` that sets the value returned by the `mapper` for the specif
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
 ###### Returns
@@ -152,15 +150,15 @@ SObjectOperators.set(Account.NumberOfEmployees, Function.constant(100));
 ```
 
 
-##### `public static Operator set(String fieldName, Object value)`
+##### `public static Operator set(String field, Object value)`
 
-Returns a `Operator` that sets the `value` for the specified `fieldName` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
+Returns a `Operator` that sets the `value` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`value`|the value to set|
 
 ###### Returns
@@ -173,10 +171,10 @@ Returns a `Operator` that sets the `value` for the specified `fieldName` and ret
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -194,7 +192,7 @@ Returns a `Operator` that sets the `value` for the specified `field` and returns
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`value`|the value to set|
 
 ###### Returns
@@ -209,7 +207,7 @@ Returns a `Operator` that sets the `value` for the specified `field` and returns
 |---|---|
 |`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -218,15 +216,15 @@ SObjectOperators.set(Account.NumberOfEmployees, (Object) null);
 ```
 
 
-##### `public static Operator setSObject(String fieldName, IOperator valueMapper)`
+##### `public static Operator setSObject(String field, IOperator valueMapper)`
 
-Returns a `Operator` that sets SObject the value returned by the `valueMapper` for the specified `fieldName` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
+Returns a `Operator` that sets the SObject value returned by the `valueMapper` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`valueMapper`|applied to the input argument|
 
 ###### Returns
@@ -239,11 +237,11 @@ Returns a `Operator` that sets SObject the value returned by the `valueMapper` f
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `valueMapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObjectConsumers.setSObject](SObjectConsumers.setSObject)
@@ -258,13 +256,13 @@ SObjectOperators.setSObject('Parent?.Parent', someOperator);
 
 ##### `public static Operator setSObject(SObjectField field, IOperator valueMapper)`
 
-Returns a `Operator` that sets SObject the value returned by the `valueMapper` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
+Returns a `Operator` that sets the SObject value returned by the `valueMapper` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`valueMapper`|applied to the input argument|
 
 ###### Returns
@@ -288,15 +286,15 @@ SObjectOperators.setSObject(Account.ParentId, someOperator);
 ```
 
 
-##### `public static Operator setSObject(String fieldName, SObject parent)`
+##### `public static Operator setSObject(String field, SObject parent)`
 
-Returns a `Operator` that sets SObject the `parent` for the specified `fieldName` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
+Returns a `Operator` that sets the SObject `parent` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`parent`|the value to set|
 
 ###### Returns
@@ -309,10 +307,10 @@ Returns a `Operator` that sets SObject the `parent` for the specified `fieldName
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObjectConsumers.setSObject](SObjectConsumers.setSObject)
@@ -327,13 +325,13 @@ SObjectOperators.setSObject('Parent?.Parent', (SObject) null);
 
 ##### `public static Operator setSObject(SObjectField field, SObject parent)`
 
-Returns a `Operator` that sets SObject the `parent` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
+Returns a `Operator` that sets the SObject `parent` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`parent`|the value to set|
 
 ###### Returns
@@ -348,7 +346,7 @@ Returns a `Operator` that sets SObject the `parent` for the specified `field` an
 |---|---|
 |`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObjectConsumers.setSObject](SObjectConsumers.setSObject)
@@ -360,15 +358,15 @@ SObjectOperators.setSObject(Account.ParentId, (SObject) null);
 ```
 
 
-##### `public static Operator setSObjects(String fieldName, IFunction mapper)`
+##### `public static Operator setSObjects(String field, IFunction mapper)`
 
-Returns a `Operator` that sets sobjects the value returned by the `mapper` for the specified `fieldName` and returns a mutated argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
+Returns a `Operator` that sets the SObjects value returned by the `mapper` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
 ###### Returns
@@ -381,11 +379,11 @@ Returns a `Operator` that sets sobjects the value returned by the `mapper` for t
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -397,13 +395,13 @@ SObjectOperators.setSObjects('Parent?.Contacts', someFunction);
 
 ##### `public static Operator setSObjects(SObjectField field, IFunction mapper)`
 
-Returns a `Operator` that sets sobjects the value returned by the `mapper` for the specified `field` and returns a mutated argument. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
+Returns a `Operator` that sets the SObjects value returned by the `mapper` for the specified `field` and returns a mutated argument. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
 ###### Returns
@@ -424,15 +422,15 @@ SObjectOperators.setSObjects(Contact.AccountId, someFunction);
 ```
 
 
-##### `public static Operator setSObjects(String fieldName, List<SObject> children)`
+##### `public static Operator setSObjects(String field, List<SObject> children)`
 
-Returns a `Operator` that sets sobjects the `children` for the specified `fieldName` and returns a mutated argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
+Returns a `Operator` that sets the SObjects `children` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`children`|the value to set|
 
 ###### Returns
@@ -445,10 +443,10 @@ Returns a `Operator` that sets sobjects the `children` for the specified `fieldN
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -460,13 +458,13 @@ SObjectOperators.setSObjects('Parent?.Contacts', someFunction);
 
 ##### `public static Operator setSObjects(SObjectField field, List<SObject> children)`
 
-Returns a `Operator` that sets sobjects the `children` the for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
+Returns a `Operator` that sets the SObjects `children` for the specified `field` and returns a mutated argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>This valueMapper uses serialization / deserialization to set related children sobjects.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`children`|the value to set|
 
 ###### Returns
@@ -481,7 +479,7 @@ Returns a `Operator` that sets sobjects the `children` the for the specified `fi
 |---|---|
 |`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -544,7 +542,7 @@ Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperat
 |---|---|
 |`NullPointerException`|if `sObjectType` or `merger` is null|
 
-##### `public static Operator newSObject(SObjectType sObjectType, String fieldName, IFunction mapper)`
+##### `public static Operator newSObject(SObjectType sObjectType, String field, IFunction mapper)`
 
 Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperators.newSObject) and the [SObjectBiConsumers.set](SObjectBiConsumers.set). Is typically used to create a new SObject based on an input argument. Cross-reference fields and safe navigation are supported.
 
@@ -553,7 +551,7 @@ Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperat
 |Param|Description|
 |---|---|
 |`sObjectType`|the SObjectType of a new SObject to be returned|
-|`fieldName`|target field name of a first input argument|
+|`field`|target field of a first input argument|
 |`mapper`|the function applied to a second input argument|
 
 ###### Returns
@@ -566,9 +564,9 @@ Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperat
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `sObjectType` or `fieldName`, `mapper` is null|
+|`NullPointerException`|if `sObjectType` or `field`, `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -607,16 +605,16 @@ SObjectOperators.newSObject(Account.SObjectType, Account.Id, Functions.get('Acco
 ```
 
 
-##### `public static Operator newSObject(SObjectType sObjectType, String fieldName, Object value)`
+##### `public static Operator newSObject(SObjectType sObjectType, String field, Object value)`
 
-Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperators.newSObject) and the [SObjectBiConsumers.set](SObjectBiConsumers.set). Is typically used to create a new SObject and set the `value` for the `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperators.newSObject) and the [SObjectBiConsumers.set](SObjectBiConsumers.set). Is typically used to create a new SObject and set the `value` for the `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
 |`sObjectType`|the SObjectType of a new SObject to be returned|
-|`fieldName`|target field name of a first input argument|
+|`field`|target field of a first input argument|
 |`value`|the value to set|
 
 ###### Returns
@@ -629,9 +627,9 @@ Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperat
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `sObjectType` or `fieldName` is null|
+|`NullPointerException`|if `sObjectType` or `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -661,7 +659,7 @@ Returns a combined `Operator` of the [SObjectOperators.newSObject](SObjectOperat
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `sObjectType` or `fieldName` is null|
+|`NullPointerException`|if `sObjectType` or `field` is null|
 
 ###### Example
 ```apex

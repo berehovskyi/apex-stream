@@ -1,8 +1,6 @@
 # abstract ObjectEnumerable
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -98,7 +96,7 @@ List<String> prepend = (List<String>) [ObjectEnumerable].of(strs1)
 
 ### `public virtual ObjectEnumerable union(Iterable<Object> iterable)`
 
-Returns a new `ObjectEnumerable` as a set union of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -131,7 +129,7 @@ List<String> union = (List<String>) [ObjectEnumerable].of(strs1)
 
 ### `public virtual ObjectEnumerable union(Iterable<Object> iterable, IFunction classifier)`
 
-Returns a new `ObjectEnumerable` as a set union of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set union of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -168,7 +166,7 @@ List<String> union = (List<String>) [ObjectEnumerable].of(strs1)
 
 ### `public virtual ObjectEnumerable intersect(Iterable<Object> iterable)`
 
-Returns a new `ObjectEnumerable` as a set intersection of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -201,7 +199,7 @@ List<String> intersect = (List<String>) [ObjectEnumerable].of(strs1)
 
 ### `public virtual ObjectEnumerable intersect(Iterable<Object> iterable, IFunction classifier)`
 
-Returns a new `ObjectEnumerable` as a set intersection of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set intersection of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -238,7 +236,7 @@ List<String> intersect = (List<String>) [ObjectEnumerable].of(strs1)
 
 ### `public virtual ObjectEnumerable except(Iterable<Object> iterable)`
 
-Returns a new `ObjectEnumerable` as a set difference of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -275,7 +273,7 @@ List<String> except1 = (List<String>) [ObjectEnumerable].of(strs2)
 
 ### `public virtual ObjectEnumerable except(Iterable<Object> iterable, IFunction classifier)`
 
-Returns a new `ObjectEnumerable` as a set difference of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set difference of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -316,7 +314,7 @@ List<String> except1 = (List<String>) [ObjectEnumerable].of(strs2)
 
 ### `public ObjectEnumerable distinct()`
 
-Returns a `ObjectEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
+Returns an `ObjectEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
@@ -335,7 +333,7 @@ List<String> distinct = (List<String>)
 
 ### `public ObjectEnumerable distinct(IFunction classifier)`
 
-Returns a new `ObjectEnumerable` with distinct elements according to `classifier` function. <p>Stateful Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with distinct elements according to the `classifier` function. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -441,7 +439,7 @@ List<String> firstMatched = (List<String>)
 
 ### `public ObjectEnumerable drop(IPredicate predicate)`
 
-Returns a new `ObjectEnumerable` that drops elements while `predicate` returns `true`. <p>Stateful Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` that drops elements while `predicate` returns `true`, then takes the rest. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -496,13 +494,13 @@ List<String> withoutNulls = (List<String>)
 
 ### `public ObjectEnumerable mapTo(IOperator mapper)`
 
-Returns a `ObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns an `ObjectEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the the non-interfering, stateless function|
 
 #### Returns
 
@@ -530,19 +528,19 @@ List<String> normalizedStrings = (List<String>)
 
 ### `public IntEnumerable mapToInt(IFunction mapper)`
 
-Returns a `ObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns an `IntEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `ObjectEnumerable`|
+|`IntEnumerable`|the `IntEnumerable`|
 
 #### Throws
 
@@ -563,19 +561,19 @@ List<Integer> ints = [ObjectEnumerable].of(new List<String>{ 'f', 'ba', 'baz' })
 
 ### `public LongEnumerable mapToLong(IFunction mapper)`
 
-Returns a `ObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a `LongEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `ObjectEnumerable`|
+|`LongEnumerable`|the `LongEnumerable`|
 
 #### Throws
 
@@ -596,19 +594,19 @@ List<Long> longs = [ObjectEnumerable].of(new List<String>{ 'f', 'ba', 'baz' })
 
 ### `public DoubleEnumerable mapToDouble(IFunction mapper)`
 
-Returns a `ObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a `DoubleEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `ObjectEnumerable`|
+|`DoubleEnumerable`|the `DoubleEnumerable`|
 
 #### Throws
 
@@ -629,13 +627,13 @@ List<Double> doubles = [ObjectEnumerable].of(new List<String>{ 'f', 'ba', 'baz' 
 
 ### `public SObjectEnumerable mapToSObject(IFunction mapper)`
 
-Returns a `SObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns an `SObjectEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the the non-interfering, stateless function|
 
 #### Returns
 
@@ -667,7 +665,7 @@ List<Account> accounts = [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', '
 
 ### `public ObjectEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `ObjectEnumerable` with `Object` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -701,7 +699,7 @@ List<String> normalizedStrings = (List<String>)
 
 ### `public IntEnumerable flatMapToInt(IFunction mapper)`
 
-Returns a new `IntEnumerable` with `Integer` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `IntEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -734,7 +732,7 @@ List<Integer> ints = [ObjectEnumerable].of(new List<String>{ 'f', 'ba', 'baz' })
 
 ### `public LongEnumerable flatMapToLong(IFunction mapper)`
 
-Returns a new `LongEnumerable` with `Long` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `LongEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -767,7 +765,7 @@ List<Long> longs = [ObjectEnumerable].of(new List<String>{ 'f', 'ba', 'baz' })
 
 ### `public DoubleEnumerable flatMapToDouble(IFunction mapper)`
 
-Returns a new `DoubleEnumerable` with `Double` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -800,7 +798,7 @@ List<Double> doubles = [ObjectEnumerable].of(new List<String>{ 'f', 'ba', 'baz' 
 
 ### `public SObjectEnumerable flatMapToSObject(IFunction mapper)`
 
-Returns a new `SObjectEnumerable` with `SObject` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -838,7 +836,7 @@ List<Account> accounts = [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', '
 
 ### `public ObjectEnumerable forEach(IConsumer consumer)`
 
-Returns a `ObjectEnumerable` after performing `consumer` action on each element. <p>Intermediate Operation.</p>
+Returns an `ObjectEnumerable` after performing the `consumer` action on each element. <p>Intermediate Interfering Operation.</p>
 
 #### Parameters
 
@@ -850,7 +848,7 @@ Returns a `ObjectEnumerable` after performing `consumer` action on each element.
 
 |Type|Description|
 |---|---|
-|`ObjectEnumerable`|this `ObjectEnumerable`|
+|`ObjectEnumerable`|the `ObjectEnumerable`|
 
 #### Throws
 
@@ -871,7 +869,7 @@ List<String> strings = (List<String>) [ObjectEnumerable].of(new List<String>{ 'f
 
 ### `public ObjectEnumerable sort()`
 
-Returns a `ObjectEnumerable` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
+Returns an `ObjectEnumerable` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
@@ -919,7 +917,7 @@ List<String> sorted = (List<String>) [ObjectEnumerable].of(new List<String>{ 'fo
 
 ### `public ObjectEnumerable sort(IComparer comparer)`
 
-Returns a new `ObjectEnumerable` with sorted elements according to `comparer`. <p>Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with sorted elements according to `comparer`. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -960,7 +958,7 @@ List<String> sorted = (List<String>)
 
 ### `public ObjectEnumerable lim(Integer lim)`
 
-Returns a `ObjectEnumerable` with first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
+Returns an `ObjectEnumerable` with the first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -1020,15 +1018,15 @@ List<String> rest = (List<String>) [ObjectEnumerable].of(new List<String>{ 'foo'
 ```
 
 
-### `public Object reduce(Object identity, IBiOperator accumulator)`
+### `public Object fold(Object identity, IBiOperator accumulator)`
 
-Performs a reduction on `Object` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+Performs a reduction on elements, using the `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for the `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 #### Returns
@@ -1053,6 +1051,48 @@ public class ConcatenateBiOperator extends BiOperator {
     }
 }
 String concatenated = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
+    .fold('', new ConcatenateBiOperator('-')); // 'foo-bar-baz'
+String concatenated1 = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
+    .fold('seed', new ConcatenateBiOperator(';')); // 'seed;foo;bar;baz'
+```
+
+
+### `public Object reduce(Object identity, IBiOperator accumulator)`
+
+Performs a reduction on elements, using the `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`identity`|the initial value for the `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`Object`|the `Object` result of the reduction|
+
+#### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
+
+#### Example
+```apex
+public class ConcatenateBiOperator extends BiOperator {
+    private final String separator;
+    public ConcatenateBiOperator(String separator) { this.separator = separator; }
+    public override Object apply(Object o1, Object o2) {
+        return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+    }
+}
+String concatenated = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
     .reduce('', new ConcatenateBiOperator('-')); // 'foo-bar-baz'
 String concatenated1 = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
     .reduce('seed', new ConcatenateBiOperator(';')); // 'seed;foo;bar;baz'
@@ -1061,7 +1101,7 @@ String concatenated1 = (String) [ObjectEnumerable].of(new List<String>{ 'foo', '
 
 ### `public Optional reduce(IBiOperator accumulator)`
 
-Performs a reduction on `Object` elements, using `identity` value and associative `accumulator` function, and returns an `Optional` Object describing the reduced value. <p>Terminal Operation.</p>
+Performs a reduction on elements, using an associative `accumulator` function, and returns an `Optional` describing the reduced value. <p>Terminal Operation.</p>
 
 #### Parameters
 
@@ -1073,7 +1113,7 @@ Performs a reduction on `Object` elements, using `identity` value and associativ
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object result of the reduction|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -1178,7 +1218,7 @@ Map<Integer, Set<String>> stringsByLength1 = (Map<Integer, Set<String>>)
 
 ### `public Optional find(IPredicate predicate)`
 
-Returns an `Optional` Object describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
+Returns an `Optional` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -1190,7 +1230,7 @@ Returns an `Optional` Object describing the first element that matches `predicat
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -1213,7 +1253,7 @@ String firstFound = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar
 
 ### `public Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `ObjectEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `ObjectEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -1315,7 +1355,7 @@ Boolean doesNoneStringContainA = [ObjectEnumerable].of(new List<String>{ 'foo', 
 
 ### `public virtual Optional max(IComparer comparer)`
 
-Returns an `Optional` Object describing the maximum element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element according to `comparer`. <p>Terminal Operation.</p>
 
 #### Parameters
 
@@ -1327,7 +1367,7 @@ Returns an `Optional` Object describing the maximum element according to `compar
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -1352,19 +1392,19 @@ String maxLen = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', '
 
 ### `public virtual Optional min(IComparer comparer)`
 
-Returns an `Optional` Object describing the minimum element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element according to `comparer`. <p>Terminal Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`comparer`|comparer the comparer|
+|`comparer`|the comparer|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -1409,7 +1449,7 @@ Integer count = [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'baz' })
 
 ### `public Boolean isEmpty()`
 
-Returns whether the count of elements is 0. <p>Terminal Operation.</p>
+Returns whether the count of elements is `0`. <p>Terminal Operation.</p>
 
 #### Returns
 
@@ -1446,19 +1486,19 @@ List<Object> strings = [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', 'ba
 
 ### `public virtual List<Object> toList(Type elementType)`
 
-Accumulates `Object` elements into a `List<T>` so it can be cast. <p>Terminal Operation.</p>
+Accumulates elements into a `List<?>` according to `elementType`. <p>Terminal Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`elementType`|the element type argument of List|
+|`elementType`|the element type argument of a list|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`List<Object>`|the `List<Object>` containing the iterable elements that can be cast to `List<T>`|
+|`List<Object>`|the `List<Object>` containing the enumerable elements, which can be cast to `List<T>`|
 
 #### Throws
 
@@ -1477,7 +1517,7 @@ List<String> strings = (List<String>.class)
 
 ### `public Set<Object> toSet()`
 
-Accumulates elements into a `Set<Object>` cannot be cast. <p>Terminal Operation.</p>
+Accumulates elements into a `Set<Object>`. The result cannot be cast to `Set<T>`. <p>Terminal Operation.</p>
 
 #### Returns
 

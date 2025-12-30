@@ -1,6 +1,6 @@
 # virtual SObjectFunctions
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -18,15 +18,15 @@ and related utilities.
 
 ## Methods
 ### Built-Ins
-##### `public static Function get(String fieldName)`
+##### `public static Function get(String field)`
 
-Returns a `Function` that gets a value for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets the value for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get a value|
+|`field`|the field to get the value|
 
 ###### Returns
 
@@ -38,10 +38,10 @@ Returns a `Function` that gets a value for the specified `fieldName`. Cross-refe
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.get](SObject.get)
@@ -56,13 +56,13 @@ SObjectFunctions.get('Parent?.Name');
 
 ##### `public static Function get(SObjectField field)`
 
-Returns a `Function` that gets a value for the specified `field`.
+Returns a `Function` that gets the value for the specified `field`.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field to get a value|
+|`field`|the field to get the value|
 
 ###### Returns
 
@@ -85,15 +85,15 @@ SObjectFunctions.get(Account.Name);
 ```
 
 
-##### `public static Function getSObjects(String fieldName)`
+##### `public static Function getSObjects(String field)`
 
-Returns a `Function` that gets children sobjects for the specified `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets child SObjects for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to get a value|
+|`field`|the field to get the value|
 
 ###### Returns
 
@@ -105,10 +105,10 @@ Returns a `Function` that gets children sobjects for the specified `fieldName`. 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.getSObjects](SObject.getSObjects)
@@ -123,13 +123,13 @@ SObjectFunctions.getSObjects('Parent?.Contacts');
 
 ##### `public static Function getSObjects(SObjectField field)`
 
-Returns a `Function` that gets children sobjects for the specified `field`. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that gets child SObjects for the specified `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field to get a value|
+|`field`|the field to get the value|
 
 ###### Returns
 
@@ -155,7 +155,7 @@ SObjectFunctions.getSObjects(Contact.AccountId);
 
 ##### `public static Function getPopulatedFieldsAsMap()`
 
-Returns a `Function` that returns a map of populated field names and their corresponding values for an input argument.
+Returns a `Function` that returns a map of populated fields and their corresponding values for an input argument.
 
 ###### Returns
 
@@ -192,15 +192,15 @@ Returns a `Function` that returns the `SObjectType` of an input argument.
 
 **See** [SObject.getSObjectType](SObject.getSObjectType)
 
-##### `public static Function put(String fieldName, IFunction mapper)`
+##### `public static Function put(String field, IFunction mapper)`
 
-Returns a `Function` that sets the value returned by the `mapper` for the specified `fieldName` and returns the previous value for the field. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that sets the value returned by the `mapper` for the specified `field` and returns the previous value for the field. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
 ###### Returns
@@ -213,11 +213,11 @@ Returns a `Function` that sets the value returned by the `mapper` for the specif
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `mapper` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.put](SObject.put)
@@ -238,7 +238,7 @@ Returns a `Function` that sets the value returned by the `mapper` for the specif
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`mapper`|applied to the input argument|
 
 ###### Returns
@@ -263,15 +263,15 @@ SObjectFunctions.put(Account.NumberOfEmployees, Function.constant(100));
 ```
 
 
-##### `public static Function put(String fieldName, Object value)`
+##### `public static Function put(String field, Object value)`
 
-Returns a `Function` that sets the `value` for the specified `fieldName` and returns the previous value for the field. Cross-reference fields and safe navigation are supported.
+Returns a `Function` that sets the `value` for the specified `field` and returns the previous value for the field. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set a value|
+|`field`|the field to set a value|
 |`value`|the value to set|
 
 ###### Returns
@@ -284,10 +284,10 @@ Returns a `Function` that sets the `value` for the specified `fieldName` and ret
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.put](SObject.put)
@@ -308,7 +308,7 @@ Returns a `Function` that sets the `value` for the specified `field` and returns
 
 |Param|Description|
 |---|---|
-|`field`|the field name to set a value|
+|`field`|the field to set a value|
 |`value`|the value to set|
 
 ###### Returns
@@ -323,7 +323,7 @@ Returns a `Function` that sets the `value` for the specified `field` and returns
 |---|---|
 |`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [SObject.put](SObject.put)

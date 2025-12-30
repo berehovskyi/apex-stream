@@ -1,8 +1,6 @@
 # virtual LongSequence
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -72,7 +70,7 @@ Returns a `LongEnumerable` created from `longs` list.
 
 ###### Example
 ```apex
-LongEnumerable longSeq = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
@@ -100,7 +98,7 @@ Returns a `LongEnumerable` created from `longs` set.
 
 ###### Example
 ```apex
-LongEnumerable longSeq = LongSequence.of(new Set<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = LongSequence.of(new Set<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
@@ -122,7 +120,7 @@ Returns a `LongEnumerable` created from `longs` list if non-null, otherwise retu
 
 ###### Example
 ```apex
-LongEnumerable longSeq = LongSequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = LongSequence.ofNullable(new List<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
@@ -144,7 +142,7 @@ Returns a `LongEnumerable` created from `longs` set if non-null, otherwise retur
 
 ###### Example
 ```apex
-LongEnumerable longSeq = LongSequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = LongSequence.ofNullable(new Set<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
@@ -222,7 +220,7 @@ List<Long> concat = LongSequence.concat(longs1, longs2)
 
 ##### `public static LongEnumerable concat(List<Iterable<Long>> iterables)`
 
-Returns eagerly concatenates `List<Iterable<Long>>`.
+Returns eagerly concatenated `List<Iterable<Long>>`.
 
 ###### Parameters
 
@@ -381,8 +379,13 @@ Returns a `LongEnumerable` with elements that match `predicate`. <p>Stateless In
 
 ###### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Long> filtered = LongSequence.of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-    .filter(Predicates.isEqual(5L))
+    .filter(new IsEqualPredicate(5L))
     .toList(); // [5L, 5L]
 ```
 
@@ -411,8 +414,13 @@ Returns a `LongEnumerable` which takes elements while elements match `predicate`
 
 ###### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Long> firstFiltered = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .take(Predicates.isEqual(0L))
+    .take(new IsEqualPredicate(0L))
     .toList(); // [0L, 0L]
 ```
 
@@ -441,8 +449,13 @@ Returns a `LongEnumerable` which drops elements while elements match `predicate`
 
 ###### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Long> rest = LongSequence.of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .drop(Predicates.isEqual(0L))
+    .drop(new IsEqualPredicate(0L))
     .toList(); // [1L, 1L, 5L]
 ```
 
@@ -512,7 +525,7 @@ public class MultiplyIntFunction extends Function {
     public override Object apply(Object j) { return (Long) j * i; }
 }
 List<Integer> doubledInts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
-    .mapToLong(new MultiplyIntFunction(2))
+    .mapToInt(new MultiplyIntFunction(2))
     .toList(); // [0, 10, 2, -20]
 ```
 
@@ -586,7 +599,7 @@ List<Account> accounts = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
   { AnnualRevenue: 0 },
   { AnnualRevenue: 5 },
   { AnnualRevenue: 1 },
-  { AnnualRevenue: 10 }
+  { AnnualRevenue: -10 }
 ]
 ```
 
@@ -620,7 +633,7 @@ public class ToStringFunction extends Function {
 }
 List<String> strings = (List<String>) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
     .mapToObject(new ToStringFunction())
-    .toList(String.class); // ['0', '5', '1', '10']
+    .toList(String.class); // ['0', '5', '1', '-10']
 ```
 
 
@@ -687,7 +700,7 @@ public class DebugConsumer extends Consumer {
     public override void accept(Object o) { System.debug(o); }
 }
 List<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
-    .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
+    .forEach(new DebugConsumer()) // prints 0L, 5L, 1L, -10L
     .toList(); // [0L, 5L, 1L, -10L ]
 ```
 
@@ -822,7 +835,7 @@ List<Long> restLongs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ---
 ### Terminal Operations
-##### `public virtual override Long reduce(Long identity, IBiOperator accumulator)`
+##### `public virtual override Long fold(Long identity, IBiOperator accumulator)`
 
 Performs a reduction on `Long` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
@@ -830,7 +843,7 @@ Performs a reduction on `Long` elements, using `identity` value and an associati
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 ###### Returns
@@ -844,6 +857,45 @@ Performs a reduction on `Long` elements, using `identity` value and an associati
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
+
+###### Example
+```apex
+public class SumBiOperator extends BiOperator {
+    public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+}
+public class ProductBiOperator extends BiOperator {
+    public override Object apply(Object o1, Object o2) { return (Long) o1 * (Long) o2; }
+}
+Long sum = LongSequence.of(new List<Long>{ 0, 5L, 1L, -10 }).fold(0L, new SumBiOperator()); // -4L
+Long factorialOfN = LongSequence.range(1, n).fold(1, new ProductBiOperator());
+```
+
+
+##### `public virtual override Long reduce(Long identity, IBiOperator accumulator)`
+
+Performs a reduction on `Long` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`identity`|the initial value for `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Long`|the `Long` result of the reduction|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
 
 ###### Example
 ```apex
@@ -960,7 +1012,7 @@ Long firstEvenLong = (Long) LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ##### `public virtual override Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `LongEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `LongEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
@@ -1136,7 +1188,7 @@ Set<Long> longs = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L })
 *Inherited*
 
 
-Returns a new `LongEnumerable` as a set union of the current and another iterables.
+Returns a new `LongEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1171,7 +1223,7 @@ List<Long> union = [LongEnumerable].of(longs1)
 *Inherited*
 
 
-Returns a new `LongEnumerable` as a set intersection of the current and another iterables.
+Returns a new `LongEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1206,7 +1258,7 @@ List<Long> intersection = [LongEnumerable].of(longs1)
 *Inherited*
 
 
-Returns a new `LongEnumerable` as a set difference of the current and another iterables.
+Returns a new `LongEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1247,7 +1299,7 @@ Returns a new `LongEnumerable` without null elements. <p>Stateful Intermediate O
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 ###### Example
 ```apex
@@ -1297,13 +1349,13 @@ Boolean isNoneLongEven = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 *Inherited*
 
 
-Returns an `Optional` Long describing the maximum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element. <p>Terminal Operation.</p>
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Long|
+|`Optional`|the `Optional` containing the result|
 
 ###### Example
 ```apex
@@ -1318,13 +1370,13 @@ Long max = (Long) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 *Inherited*
 
 
-Returns an `Optional` Long describing the minimum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element. <p>Terminal Operation.</p>
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Long|
+|`Optional`|the `Optional` containing the result|
 
 ###### Example
 ```apex

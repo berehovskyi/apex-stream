@@ -1,6 +1,6 @@
 # abstract Predicate
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -24,11 +24,26 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public Boolean test(Object o)`
+
+Returns the result of applying this predicate to input.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`o`|the input argument of `Object` type|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Boolean`|`true` if the input satisfies the predicate, `false` otherwise|
+
 ---
 ### Default Methods
 ##### `public virtual Predicate orElse(IPredicate other)`
 
-Returns a composed `Predicate` that applies short-circuiting logical OR} operator to `this` `IPredicate` and `other` in that order.
+Returns a composed `Predicate` that applies short-circuiting logical OR operator to `this` `IPredicate` and `other` in that order.
 
 ###### Parameters
 
@@ -56,7 +71,7 @@ somePredicate1.orElse(somePredicate2);
 
 ##### `public virtual Predicate andAlso(IPredicate other)`
 
-Returns a composed `Predicate` that applies short-circuiting logical AND} operator to `this` `IPredicate` and `other` in that order.
+Returns a composed `Predicate` that applies short-circuiting logical AND operator to `this` `IPredicate` and `other` in that order.
 
 ###### Parameters
 
@@ -120,7 +135,7 @@ Returns a composed `Predicate` that applies sequentially short-circuiting logica
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `other` is null or some of the list element is null|
+|`NullPointerException`|if `predicates` is null or some of the list element is null|
 
 ###### Example
 ```apex
@@ -148,7 +163,7 @@ Returns a composed `Predicate` that applies sequentially short-circuiting logica
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `other` is null or some of the list element is null|
+|`NullPointerException`|if `predicates` is null or some of the list element is null|
 
 ###### Example
 ```apex
@@ -192,7 +207,7 @@ Returns a `Predicate` that always evaluates to the Boolean `value` (`true` or `f
 
 |Type|Description|
 |---|---|
-|`Predicate`|predicate the `Predicate`|
+|`Predicate`|the `Predicate`|
 
 ###### Throws
 
@@ -215,7 +230,7 @@ Returns a composed `Predicate` of the `IFunction` and the `IPredicate`.
 |Param|Description|
 |---|---|
 |`mapper`|the function applied to the input argument|
-|`predicate`|the predicate to the result returned by the `mapper`|
+|`predicate`|the predicate applied to the result returned by the `mapper`|
 
 ###### Returns
 

@@ -1,6 +1,6 @@
 # abstract Collector
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -24,8 +24,35 @@ Provides default and static methods of
 ## Methods
 ### Functions
 ##### `public ISupplier supplier()`
+
+Returns a `ISupplier` that creates and returns a new mutable result `container`.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`ISupplier`|the `ISupplier`|
+
 ##### `public IBiConsumer accumulator()`
+
+Returns a `IBiConsumer` that incorporates a new data element into a result `container`.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`IBiConsumer`|the `IBiConsumer`|
+
 ##### `public IFunction finisher()`
+
+Returns a `IFunction` that performs an optional final transform on the `container`.
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`IFunction`|the `IFunction`|
+
 ---
 ### Static Methods
 ##### `public static Collector of(ISupplier supplier, IBiConsumer accumulator)`
@@ -79,7 +106,7 @@ Returns a `Collector` by the given `supplier`, `accumulator`, and `finisher`.
 ### Default Methods
 ##### `public virtual Collector cast(Type t)`
 
-Returns a `Collector` that recursively reconstructs collector's suppliers and returns a new `Collector` according to a given container type. <p>Supports casting list type for methods:</p> <ul>     <li>[#toList()](#toList())</li>     <li>[#toList(IFunction)](#toList(IFunction))</li> </ul> <p>Supports casting map value type (but not map key type) for methods:</p> <ul>     <li>[#toBy<T>map(IFunction)](#toBy<T>map(IFunction))</li>     <li>[#groupingBy<T>(IFunction)](#groupingBy<T>(IFunction))</li>     <li>[#partitioningBy(IPredicate)](#partitioningBy(IPredicate))</li>     <li>[#partitioningBy(IPredicate, ICollector)](#partitioningBy(IPredicate, ICollector))</li> </ul>
+Returns a `Collector` that recursively reconstructs collector's suppliers and returns a new `Collector` according to a given container type. <p>Supports casting list type for methods:</p> <ul>     <li>toList()</li>     <li>toList(IFunction)</li> </ul> <p>Supports casting map value type (but not map key type) for methods:</p> <ul>     <li>toBy<T>map(IFunction)</li>     <li>groupingBy<T>(IFunction)</li>     <li>partitioningBy(IPredicate)</li>     <li>partitioningBy(IPredicate, ICollector)</li> </ul>
 
 ###### Parameters
 

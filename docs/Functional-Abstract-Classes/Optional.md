@@ -1,6 +1,6 @@
 # virtual Optional
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -175,7 +175,7 @@ Returns an `Optional` describing the result of applying the `mapper` function to
 
 ### `public virtual Optional flatMapTo(IFunction mapper)`
 
-Returns an `Optional` the result of applying the `mapper` function to the value if the value is present, otherwise returns an empty `Optional`.
+Returns an `Optional` describing the result of applying the `mapper` function to the value if the value is present, otherwise returns an empty `Optional`.
 
 #### Parameters
 
@@ -253,7 +253,7 @@ Returns a value if the value is present, otherwise returns the value provided by
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `mapper` is null|
+|`NullPointerException`|if `supplier` is null|
 
 ### `public virtual Object orElseThrow(ISupplier exceptionSupplier)`
 
@@ -279,5 +279,7 @@ Returns a value if the value is present, otherwise throws an Exception provided 
 |`NullPointerException`|if `exceptionSupplier` is null|
 
 ### `public virtual Boolean equals(Object obj)`
+
+`SUPPRESSWARNINGS`
 ### `public virtual override Integer hashCode()`
 ---

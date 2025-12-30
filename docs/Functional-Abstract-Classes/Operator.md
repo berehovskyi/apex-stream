@@ -1,6 +1,6 @@
 # abstract Operator
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -24,6 +24,21 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public Object apply(Object o)`
+
+Applies the function to the input argument.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`o`|the input argument of `Object` type|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Object`|the result|
+
 ---
 ### Default Methods
 ##### `public virtual Operator andThen(IOperator after)`
@@ -74,7 +89,7 @@ Returns a composed `Operator` that executes `before` operation first, then the `
 ### Static Methods
 ##### `public static Operator compose(List<IOperator> operators)`
 
-Returns a composed `Operator` that sequentially executes the operations in the same order as the order of the consumers input list.
+Returns a composed `Operator` that sequentially executes the operations in the same order as the order of the operators input list.
 
 ###### Parameters
 

@@ -1,6 +1,6 @@
 # SIterPred
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -73,18 +73,18 @@ isAccountInPredicate.test(new Account(Name = 'John')); // true
 ```
 
 
-### `public virtual SObjectIterableOperator is(String fieldName)`
+### `public virtual SObjectIterableOperator is(String field)`
 
 *Inherited*
 
 
-Creates an instance of `SObjectIterableOperator` using the provided field name.
+Creates an instance of `SObjectIterableOperator` using the provided field.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name of the SObject to be used for mapping|
+|`field`|the field of the SObject to be used for mapping|
 
 #### Returns
 
@@ -96,10 +96,10 @@ Creates an instance of `SObjectIterableOperator` using the provided field name.
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 #### Example
 ```apex

@@ -1,8 +1,6 @@
 # virtual SObjectPredicates
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -27,15 +25,15 @@ SObjectPredicates
 
 ## Methods
 ### Built-Ins
-##### `public static Predicate isGreater(String fieldName, IFunction function)`
+##### `public static Predicate isGreater(String field, IFunction function)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is greater than the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>` "greater than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests the input SObject if the value of the `field` is greater than the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>` "greater than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`function`|the function whose application result is considered as the right argument of comparison|
 
 ###### Returns
@@ -48,11 +46,11 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -106,15 +104,15 @@ SObjectPredicates.isGreater(
 ```
 
 
-##### `public static Predicate isGreater(String fieldName, Object value)`
+##### `public static Predicate isGreater(String field, Object value)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is greater than the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>` "greater than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests the input SObject if the value of the `field` is greater than the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>` "greater than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`value`|the right argument of comparison|
 
 ###### Returns
@@ -127,10 +125,10 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -174,15 +172,15 @@ SObjectPredicates.isGreater(Account.NumberOfEmployees, 100);
 ```
 
 
-##### `public static Predicate isGreaterOrEqual(String fieldName, IFunction function)`
+##### `public static Predicate isGreaterOrEqual(String field, IFunction function)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is greater than or equal to the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests the input SObject if the value of the `field` is greater than or equal to the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`function`|the function whose application result is considered as the right argument of comparison|
 
 ###### Returns
@@ -195,11 +193,11 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -219,7 +217,7 @@ SObjectPredicates.isGreaterOrEqual(
 
 ##### `public static Predicate isGreaterOrEqual(SObjectField field, IFunction function)`
 
-Returns a `Predicate` that tests the input SObject  if the value of the `field` is greater than or equal to the result returned by the `function`. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests the input SObject if the value of the `field` is greater than or equal to the result returned by the `function`. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
@@ -238,8 +236,8 @@ Returns a `Predicate` that tests the input SObject  if the value of the `field` 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
 
 
@@ -258,15 +256,15 @@ SObjectPredicates.isGreaterOrEqual(
 ```
 
 
-##### `public static Predicate isGreaterOrEqual(String fieldName, Object value)`
+##### `public static Predicate isGreaterOrEqual(String field, Object value)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is greater than or equal to the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests the input SObject if the value of the `field` is greater than or equal to the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`value`|the right argument of comparison|
 
 ###### Returns
@@ -279,10 +277,10 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -326,31 +324,31 @@ SObjectPredicates.isGreaterOrEqual(Account.NumberOfEmployees, 100);
 ```
 
 
-##### `public static Predicate isLess(String fieldName, IFunction function)`
+##### `public static Predicate isLess(String field, IFunction function)`
 
-Returns a `SObjectPredicate` that tests if the value of the `fieldName` is less than the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<` "less than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `SObjectPredicate` that tests if the value of the `field` is less than the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<` "less than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison.|
+|`field`|the value of which is considered the left argument of comparison.|
 |`function`|the function whose application result is considered as the right argument of comparison.|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Predicate`|the `SObjectPredicate`|
+|`Predicate`|the `Predicate`|
 
 ###### Throws
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -360,7 +358,7 @@ Returns a `SObjectPredicate` that tests if the value of the `fieldName` is less 
 SObjectPredicates.isLess('NumberOfEmployees', SObjectFunctions.get('OtherIntField__c'));
 SObjectPredicates.isLess(
     'Parent?.NumberOfEmployees',
-    SObjectFunction.constant(100)
+    Function.constant(100)
 );
 ```
 
@@ -380,14 +378,14 @@ Returns a `SObjectPredicate` that tests if the value of the `field` is less than
 
 |Type|Description|
 |---|---|
-|`Predicate`|the `SObjectPredicate`|
+|`Predicate`|the `Predicate`|
 
 ###### Throws
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
 
 
@@ -401,20 +399,20 @@ SObjectPredicates.isLess(
 );
 SObjectPredicates.isLess(
     Account.NumberOfEmployees,
-    SObjectFunction.constant(100)
+    Function.constant(100)
 );
 ```
 
 
-##### `public static Predicate isLess(String fieldName, Object value)`
+##### `public static Predicate isLess(String field, Object value)`
 
-Returns a `Predicate` that tests if the value of the `fieldName` is less than the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<` "less than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests if the value of the `field` is less than the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<` "less than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison.|
+|`field`|the value of which is considered the left argument of comparison.|
 |`value`|the right argument of comparison.|
 
 ###### Returns
@@ -427,10 +425,10 @@ Returns a `Predicate` that tests if the value of the `fieldName` is less than th
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -474,15 +472,15 @@ SObjectPredicates.isLess(Account.NumberOfEmployees, 100);
 ```
 
 
-##### `public static Predicate isLessOrEqual(String fieldName, IFunction function)`
+##### `public static Predicate isLessOrEqual(String field, IFunction function)`
 
-Returns a `Predicate` that tests if the value of the `fieldName` is less than or equal to the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests if the value of the `field` is less than or equal to the result returned by the `function`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison.|
+|`field`|the value of which is considered the left argument of comparison.|
 |`function`|the function whose application result is considered as the right argument of comparison.|
 
 ###### Returns
@@ -495,11 +493,11 @@ Returns a `Predicate` that tests if the value of the `fieldName` is less than or
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -556,15 +554,15 @@ SObjectPredicates.isLessOrEqual(
 ```
 
 
-##### `public static Predicate isLessOrEqual(String fieldName, Object value)`
+##### `public static Predicate isLessOrEqual(String field, Object value)`
 
-Returns a `Predicate` that tests if the value of the `fieldName` is less than or equal to the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `Predicate` that tests if the value of the `field` is less than or equal to the `value`. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison.|
+|`field`|the value of which is considered the left argument of comparison.|
 |`value`|the right argument of comparison.|
 
 ###### Returns
@@ -577,10 +575,10 @@ Returns a `Predicate` that tests if the value of the `fieldName` is less than or
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -624,15 +622,15 @@ SObjectPredicates.isLessOrEqual(Account.NumberOfEmployees, 100);
 ```
 
 
-##### `public static Predicate isEqual(String fieldName, IFunction function)`
+##### `public static Predicate isEqual(String field, IFunction function)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is equal to the result returned by the `function`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is equal to the result returned by the `function`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`function`|the function whose application result is considered as the right argument of comparison|
 
 ###### Returns
@@ -645,11 +643,11 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -706,15 +704,15 @@ SObjectPredicates.isEqual(
 ```
 
 
-##### `public static Predicate isEqual(String fieldName, Object value)`
+##### `public static Predicate isEqual(String field, Object value)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is equal to the `value`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is equal to the `value`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`value`|the right argument of comparison|
 
 ###### Returns
@@ -727,10 +725,10 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -774,15 +772,15 @@ SObjectPredicates.isEqual(Account.NumberOfEmployees, 100);
 ```
 
 
-##### `public static Predicate isNotEqual(String fieldName, IFunction function)`
+##### `public static Predicate isNotEqual(String field, IFunction function)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is not equal to the result returned by the `function`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is not equal to the result returned by the `function`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`function`|the function whose application result is considered as the right argument of comparison|
 
 ###### Returns
@@ -795,22 +793,22 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `function` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
 
 ###### Example
 ```apex
-SObjectPredicates.isEqual(
+SObjectPredicates.isNotEqual(
     'NumberOfEmployees',
      Functions.get('OtherIntField__c')
 );
-SObjectPredicates.isEqual(
+SObjectPredicates.isNotEqual(
     'Parent?.NumberOfEmployees',
     Function.constant(100)
 );
@@ -845,26 +843,26 @@ Returns a `Predicate` that tests the input SObject if the value of the `field` i
 
 ###### Example
 ```apex
-SObjectPredicates.isEqual(
+SObjectPredicates.isNotEqual(
     Account.NumberOfEmployees,
     Functions.get('OtherIntField__c')
 );
-SObjectPredicates.isEqual(
+SObjectPredicates.isNotEqual(
     Account.NumberOfEmployees,
     Function.constant(100)
 );
 ```
 
 
-##### `public static Predicate isNotEqual(String fieldName, Object value)`
+##### `public static Predicate isNotEqual(String field, Object value)`
 
-Returns a `Predicate` that tests the input SObject if the value of the `fieldName` is not equal to the `value`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is not equal to the `value`, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is considered the left argument of comparison|
+|`field`|the value of which is considered the left argument of comparison|
 |`value`|the right argument of comparison|
 
 ###### Returns
@@ -877,18 +875,18 @@ Returns a `Predicate` that tests the input SObject if the value of the `fieldNam
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
 
 ###### Example
 ```apex
-SObjectPredicates.isEqual('NumberOfEmployees', 100);
-SObjectPredicates.isEqual('Parent?.NumberOfEmployees', 100);
+SObjectPredicates.isNotEqual('NumberOfEmployees', 100);
+SObjectPredicates.isNotEqual('Parent?.NumberOfEmployees', 100);
 ```
 
 
@@ -920,20 +918,20 @@ Returns a `Predicate` that tests the input SObject if the value of the `field` i
 
 ###### Example
 ```apex
-SObjectPredicates.isEqual(Account.NumberOfEmployees, 100);
+SObjectPredicates.isNotEqual(Account.NumberOfEmployees, 100);
 ```
 
 
-##### `public static Predicate isLike(String fieldName, String likeString)`
+##### `public static Predicate isLike(String field, String likeString)`
 
-Returns a `Predicate` that tests the input SObject if the string value of the `fieldName` matches the `likeString` pattern. Supports the `%` and the `_` wildcards and is case-insensitive. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the string value of the `field` matches the `likeString` pattern. Supports the `%` and the `_` wildcards and is case-insensitive. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is tested|
-|`likeString`|the pattern that is tested to match the string value of the `fieldName`|
+|`field`|the value of which is tested|
+|`likeString`|the pattern that is tested to match the string value of the `field`|
 
 ###### Returns
 
@@ -945,11 +943,11 @@ Returns a `Predicate` that tests the input SObject if the string value of the `f
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `likeString` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [Comparer.defaultOrder](Comparer.defaultOrder)
@@ -993,15 +991,15 @@ SObjectPredicates.isLike(Account.Name, '%a_e');
 ```
 
 
-##### `public static Predicate isIn(String fieldName, Iterable<Object> container)`
+##### `public static Predicate isIn(String field, Iterable<Object> container)`
 
-Returns a `Predicate` that tests the input SObject if the the value of the `fieldName` is contained in the `container`. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is contained in the `container`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is tested|
+|`field`|the value of which is tested|
 |`container`|the iterable that checks for the presence of an element|
 
 ###### Returns
@@ -1014,11 +1012,11 @@ Returns a `Predicate` that tests the input SObject if the the value of the `fiel
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `container` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [List.contains](List.contains)
@@ -1033,7 +1031,7 @@ SObjectPredicates.isIn('Parent.Name', nameStream);
 
 ##### `public static Predicate isIn(SObjectField field, Iterable<Object> container)`
 
-Returns a `Predicate` that tests the input SObject if the the value of the `field` is contained in the `container`.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is contained in the `container`.
 
 ###### Parameters
 
@@ -1065,15 +1063,15 @@ SObjectPredicates.isIn(Account.Name, nameStream);
 ```
 
 
-##### `public static Predicate isNotIn(String fieldName, Iterable<Object> container)`
+##### `public static Predicate isNotIn(String field, Iterable<Object> container)`
 
-Returns a `Predicate` that tests the input SObject if the the value of the `fieldName` is not contained in the `container`. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is not contained in the `container`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is tested|
+|`field`|the value of which is tested|
 |`container`|the iterable that checks for the presence of an element|
 
 ###### Returns
@@ -1086,11 +1084,11 @@ Returns a `Predicate` that tests the input SObject if the the value of the `fiel
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `container` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 
 **See** [List.contains](List.contains)
@@ -1105,7 +1103,7 @@ SObjectPredicates.isNotIn('Parent.Name', nameStream);
 
 ##### `public static Predicate isNotIn(SObjectField field, Iterable<Object> container)`
 
-Returns a `Predicate` that tests the input SObject if the the value of the `field` is not contained in the `container`.
+Returns a `Predicate` that tests the input SObject if the value of the `field` is not contained in the `container`.
 
 ###### Parameters
 
@@ -1137,15 +1135,15 @@ SObjectPredicates.isNotIn(Account.Name, nameStream);
 ```
 
 
-##### `public static Predicate includes(String fieldName, Iterable<String> container)`
+##### `public static Predicate includes(String field, Iterable<String> container)`
 
-Returns a `Predicate` that tests the input SObject if the string value of the `fieldName` fully matches any element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the string value of the `field` fully matches any element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is tested|
+|`field`|the value of which is tested|
 |`container`|the iterable against which the value is tested|
 
 ###### Returns
@@ -1158,11 +1156,11 @@ Returns a `Predicate` that tests the input SObject if the string value of the `f
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `container` is null or `container` contains null element|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -1214,15 +1212,15 @@ SObjectPredicates.includes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test
 ```
 
 
-##### `public static Predicate excludes(String fieldName, Iterable<String> container)`
+##### `public static Predicate excludes(String field, Iterable<String> container)`
 
-Returns a `Predicate` that tests the input SObject if the string value of the `fieldName` does not match every element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`. Cross-reference fields and safe navigation are supported.
+Returns a `Predicate` that tests the input SObject if the string value of the `field` does not match every element of the `container`. Each element of the `container` should be represented as a subset and the subset elements should be separated by `;`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the value of which is tested|
+|`field`|the value of which is tested|
 |`container`|the iterable against which the value is tested|
 
 ###### Returns
@@ -1235,11 +1233,11 @@ Returns a `Predicate` that tests the input SObject if the string value of the `f
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `container` is null or `container` contains null element|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex

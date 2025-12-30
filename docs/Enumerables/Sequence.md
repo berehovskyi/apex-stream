@@ -1,8 +1,6 @@
 # Sequence
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -33,7 +31,7 @@ depending on the type of the parameter.
 ## Methods
 ### `public static ObjectEnumerable of(List<Object> objects)`
 
-Returns a `ObjectSequence` created from `List<Object>`.
+Returns a `ObjectEnumerable` created from `objects`.
 
 #### Parameters
 
@@ -51,7 +49,7 @@ Returns a `ObjectSequence` created from `List<Object>`.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterable` is null|
+|`NullPointerException`|if `objects` is null|
 
 #### Example
 ```apex
@@ -135,11 +133,11 @@ Returns a `LongEnumerable` created from `longs`.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null|
+|`NullPointerException`|if `longs` is null|
 
 #### Example
 ```apex
-LongEnumerable longSeq = Sequence.of(new List<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = Sequence.of(new List<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
@@ -173,7 +171,7 @@ DoubleEnumerable doubleSeq = Sequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI 
 
 ### `public static ObjectEnumerable of(Set<Object> objects)`
 
-Returns a `ObjectEnumerable` created from `Set<Object>`.
+Returns a `ObjectEnumerable` created from `objects`.
 
 #### Parameters
 
@@ -275,11 +273,11 @@ Returns a `LongEnumerable` created from `longs`.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null|
+|`NullPointerException`|if `longs` is null|
 
 #### Example
 ```apex
-LongEnumerable longSeq = Sequence.of(new Set<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = Sequence.of(new Set<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
@@ -347,7 +345,7 @@ Returns a `SObjectEnumerable` created from `sObjects` if non-null, otherwise ret
 
 |Type|Description|
 |---|---|
-|`SObjectEnumerable`|the new `SObjectEnumerable` if `iterable` is non-null, otherwise an empty `SObjectEnumerable`|
+|`SObjectEnumerable`|the new `SObjectEnumerable` if `sObjects` is non-null, otherwise an empty `SObjectEnumerable`|
 
 #### Example
 ```apex
@@ -395,7 +393,7 @@ Returns a `LongEnumerable` created from `longs` if non-null, otherwise returns a
 
 #### Example
 ```apex
-LongEnumerable longSeq = Sequence.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = Sequence.ofNullable(new List<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
@@ -495,7 +493,7 @@ Returns a `LongEnumerable` created from `longs` if non-null, otherwise returns a
 
 |Param|Description|
 |---|---|
-|`longs`|the list|
+|`longs`|the set|
 
 #### Returns
 
@@ -505,7 +503,7 @@ Returns a `LongEnumerable` created from `longs` if non-null, otherwise returns a
 
 #### Example
 ```apex
-LongEnumerable longSeq = Sequence.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longSeq = Sequence.ofNullable(new Set<Long>{ 0L, 5L, 1L, -10L });
 ```
 
 
