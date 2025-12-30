@@ -1,6 +1,6 @@
 # abstract DoubleEnumerable
 
-`APIVERSION: 64`
+`APIVERSION: 65`
 
 `STATUS: ACTIVE`
 

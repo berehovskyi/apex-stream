@@ -9,7 +9,6 @@
  *
  * @group Functional Built-In Classes
  */
-@SuppressWarnings('PMD.CognitiveComplexity')
 public virtual inherited sharing class MapObjectConsumers {
     @TestVisible
     protected MapObjectConsumers() {
