@@ -1,9 +1,8 @@
-name: 'Validate Push and Pull Request'
+name: 'Validate Pull Request'
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #  branches:
   #     - 'ci/**'
   pull_request:
     branches:

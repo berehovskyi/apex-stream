@@ -73,6 +73,8 @@ rules:
       tags: ['Design', 'Apex']
     CyclomaticComplexity:
       tags: ['Design', 'Apex']
+    NcssCount:
+      tags: ['Design', 'Apex']
 
   # ======================================================================
   # CPD ENGINE RULE OVERRIDES
