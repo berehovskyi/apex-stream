@@ -1,6 +1,6 @@
 # virtual CollectorSuppliers
 
-`APIVERSION: 64`
+`APIVERSION: 65`
 
 `STATUS: ACTIVE`
 

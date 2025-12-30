@@ -64,52 +64,52 @@ or install as an Unlocked Package using the CLI:
 
 Install dependencies first:
 
-```sh
-sf package install -p 04t1t000003f3UVAAY -o me@example.com -r -w 5
+```sh pkg::apex-validate
+sf package install -p 04tJ5000000D7clIAC -o me@example.com -r -w 5
 ```
 
 Install the Apex Stream. The framework consists of several Unlocked Packages:
 
 - Apex Functions (required):
 
-```sh
-sf package install -p 04tJ5000000D5u7IAC -o me@example.com -r -w 10
+```sh pkg::apex-functions
+sf package install -p 04tJ5000000D7dZIAS -o me@example.com -r -w 10
 ```
 
 - Apex Enumerables (required):
 
-```sh
-sf package install -p 04tJ5000000D5uCIAS -o me@example.com -r -w 10
+```sh pkg::apex-stream-enumerables
+sf package install -p 04tJ5000000D7deIAC -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
 
-```sh
-sf package install -p 04tJ5000000D5uHIAS -o me@example.com -r -w 10
+```sh pkg::apex-stream-streams
+sf package install -p 04tJ5000000D7djIAC -o me@example.com -r -w 10
 ```
 
 - Apex Sequences (recommended):
 
-```sh
-sf package install -p 04tJ5000000D5uMIAS -o me@example.com -r -w 10
+```sh pkg::apex-stream-sequences
+sf package install -p 04tJ5000000D7doIAC -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Core (recommended):
 
-```sh
-sf package install -p 04tJ5000000D5uRIAS -o me@example.com -r -w 10
+```sh pkg::apex-common-functions-core
+sf package install -p 04tJ5000000D7dtIAC -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Extension (optional):
 
-```sh
-sf package install -p 04tJ5000000D5uWIAS -o me@example.com -r -w 10
+```sh pkg::apex-common-functions-extension
+sf package install -p 04tJ5000000D7dyIAC -o me@example.com -r -w 10
 ```
 
 - 🚨 New: Apex Common Functions V2 (beta):
 
-```sh
-sf package install -p 04tJ5000000D7cbIAC -o me@example.com -r -w 10
+```sh pkg::apex-common-functions-v2
+sf package install -p 04tJ5000000D7eNIAS -o me@example.com -r -w 10
 ```
 
 ## Modules and Key Features
@@ -130,13 +130,19 @@ sf package install -p 04tJ5000000D7cbIAC -o me@example.com -r -w 10
     - Functional Built-in Classes with common Functional Abstract Classes implementations
     - Built-in Collectors (`SObjectCollectors`, `Collectors`)
 
-- Apex Common Functions V2 (Pilot): [Full details](releasenotes/v3.3.0.md)
+- Apex Common Functions V2 (Beta): [Full details](releasenotes/v3.3.0.md)
 
 ## Introduction
 
-**Apex Stream Framework** is built on custom `Iterables` (hereinafter - `Enumerables`) that allows processing
+**Apex Stream Framework** is built on custom `Iterables` (hereinafter - `Enumerables`) that allow processing
 a sequence of elements supporting sequential aggregate operations,
 providing a convenient declarative API.
+
+### Key Benefits
+
+- **Declarative**: Write _what_ you want, not _how_ to loop.
+- **Lazy Evaluation**: Streams optimized for performance.
+- **Built-in Null Safety**: No more `List index out of bounds` or `NullPointerException` chains.
 
 There are `2` implementations of `Enumerable` - `Stream` and `Sequence`.
 
@@ -147,7 +153,7 @@ and source elements are consumed only as needed. Also, a `Stream` can be operate
 `Sequence` is eager. Computation on the source data is performed every time an intermediate or terminal operation is invoked.
 Since `Sequence` is stateful, it can be reused multiple times.
 
-There are a reference and primitive specializations of `Streams` and `Sequences`
+There are reference and primitive specializations of `Streams` and `Sequences`
 
 - Reference: `ObjectStream`, `SObjectStream`, `ObjectSequence`, `SObjectSequence`
 - Primitive: `IntStream`, `LongStream`, `DoubleStream`, `IntStream`, `LongStream`, `DoubleStream`
@@ -527,11 +533,11 @@ Optional optionalWarmAccount = Stream.of(accounts)
 
 - ### Reduction
 
-A `reduce` operation performs a stream reduction,
+A `fold` operation performs a stream reduction,
 using the provided `identity` value and an associative `accumulation` function,
 and returns the reduced value.
 
-`reduce` is equivalent to:
+`fold` is equivalent to:
 
 ```apex
 T result = identity;
@@ -545,11 +551,15 @@ Calculate a factorial of `n` (up to 20):
 
 ```apex
 Long factorial(Long n) {
-    return LongStream.range(1, n).reduce(1, LongBiOperators.product());
+    return LongStream.range(1, n).fold(1, LongBiOperators.product());
 }
 
 factorial(20L); // 2432902008176640000
 ```
+
+A `reduce` operation performs a stream reduction,
+using an associative `accumulation` function,
+and returns the reduced value as [Optional](#optional).
 
 `min`, `max` operations on a primitive stream find a minimal or maximal element
 according to the default order as [Optional](#optional):
@@ -560,8 +570,8 @@ Integer maxInt = (Integer) Stream.of(integers)
     .get(); // returns a value if present or throws NoSuchElementException otherwise
 ```
 
-On a reference stream, search reduction is operated according to
-a comparer and returns a result as [Optional](#optional).
+On a reference stream, search reduction is performed using
+a Comparer and returns a result as [Optional](#optional).
 
 Find an optional account with a max `AnnualRevenue`:
 
@@ -621,7 +631,7 @@ Map<Object, List<Account>> accountsByRating = (Map<Object, List<Account>>) Strea
     .collect(SObjectCollectors.groupingByObject(Account.Rating));
 ```
 
-Type interference is "broken" in Apex for `Set` and `Map` keys:
+Type inference is "broken" in Apex for `Set` and `Map` keys:
 
 ```apex
 List<Object> o = new List<String>{ 'foo', 'bar' };
@@ -728,7 +738,7 @@ Map<String, Map<String, List<String>>> accountNamesByCityByCountry =
 ```
 
 Few `Collector` functions such as `reducing`, `maximizing`, `minimizing`,
-`summing`, `averaging`, and `counting` does **not** support type casting.
+`summing`, `averaging`, and `counting` do **not** support type casting.
 
 Classify accounts with max `AnnualRevenue` per `BillingCountry`:
 
@@ -747,7 +757,7 @@ Account acc = (Account) optionalAccount.get();
 
 - ### Fast Collecting
 
-`SObjectIterable` also supports simple fast collecting methods if you don't want to use `collect` operation:
+`SObjectEnumerable` also supports simple fast collecting methods if you don't want to use `collect` operation:
 
 - `toList`
 - `toSet`
@@ -859,7 +869,7 @@ List<Account> accounts = Stream.of(contacts)
     .toList();
 ```
 
-Create and relate `contacts` to parent `accounts` and set the `Descripton` field:
+Create and relate `contacts` to parent `accounts` and set the `Description` field:
 
 ```apex
 List<Contact> contacts = Stream.of(accounts)
