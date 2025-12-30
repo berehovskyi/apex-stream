@@ -1,13 +1,13 @@
 # virtual SObjectIterablePredicateProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
 Provides a fluent interface for building predicates
 that operate on iterable collections using currying.
 This builder allows you to create predicates for checking if an object is in or not in a given collection,
-as well as if a string is included in or excluded from a iterable of strings.
+as well as if a string is included in or excluded from an iterable of strings.
 
 
 **Group** Functional Built-In Classes V2
@@ -63,15 +63,15 @@ isAccountInPredicate.test(new Account(Name = 'John')); // true
 ```
 
 
-### `public virtual SObjectIterableOperator is(String fieldName)`
+### `public virtual SObjectIterableOperator is(String field)`
 
-Creates an instance of `SObjectIterableOperator` using the provided field name.
+Creates an instance of `SObjectIterableOperator` using the provided field.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name of the SObject to be used for mapping|
+|`field`|the field of the SObject to be used for mapping|
 
 #### Returns
 
@@ -83,10 +83,10 @@ Creates an instance of `SObjectIterableOperator` using the provided field name.
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 #### Example
 ```apex

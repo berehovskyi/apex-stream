@@ -1,35 +1,27 @@
 # virtual SObjectStream
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
 A sequence of `SObject` elements supporting aggregate operations.
 Stream operations are composed of stream chain. A stream chain consists of:
-<ul>
-    <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
-    <li>Zero or more Intermediate Operations (which transform a stream into another stream,
-    such as [SObjectStream.filter(IPredicate))](SObjectStream.filter(IPredicate))).</li>
-    <li>A Terminal Operation (which produces a result such as
-    [SObjectStream.count()](SObjectStream.count()) or [SObjectStream.collect(ICollector)](SObjectStream.collect(ICollector))).</li>
-</ul>
+- A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).
+- Zero or more Intermediate Operations (which transform a stream into another stream,
+such as [SObjectStream.filter(IPredicate)](SObjectStream.filter(IPredicate))).
+- A Terminal Operation (which produces a result such as
+[SObjectStream.count()](SObjectStream.count()) or [SObjectStream.collect(ICollector)](SObjectStream.collect(ICollector))).
 <p>Streams are <strong>lazy</strong>:</p>
-<ul>
-    <li>Intermediate operations describe how a stream is processed without performing any action.</li>
-    <li>Computation is only performed when the terminal operation is initiated,
-and source elements are consumed only as needed.</li>
-</ul>
+- Intermediate operations describe how a stream is processed without performing any action.
+- Computation is only performed when the terminal operation is initiated,
+and source elements are consumed only as needed.
 <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p>
 <p>A stream should be operated on (invoking an intermediate or terminal stream operation)
 only <strong>once</strong>.
 A stream throws [IllegalStateException](IllegalStateException) if it detects that the stream is being reused.</p>
 <p>Contract:</p>
-<ul>
-    <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>
-    <li>Should be stateless in most cases.</li>
-</ul>
+- Must be non-interfering (do not modify the stream source but may mutate its elements).
+- Should be stateless in most cases.
 <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>,
 i.e. do not support `spliterator()`.</p>
 <p>There are primitive specializations for [IntStream](/docs/Enumerables/IntStream.md), [LongStream](/docs/Enumerables/LongStream.md),
@@ -241,7 +233,7 @@ Returns an infinite `SObjectEnumerable` produced by iterative application of `op
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` is null|
+|`NullPointerException`|if `operator` is null|
 
 ##### `public static SObjectEnumerable iterate(SObject seed, IPredicate predicate, IOperator operator)`
 
@@ -265,7 +257,7 @@ Returns an infinite `SObjectEnumerable` produced by iterative application of `op
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` or `supplier` is null|
+|`NullPointerException`|if `predicate` or `operator` is null|
 
 ##### `public static SObjectEnumerable concat(Iterable<SObject> iterable1, Iterable<SObject> iterable2)`
 
@@ -317,7 +309,7 @@ List<Account> concat = SObjectStream.concat(accounts1, accounts2)
 
 ##### `public static SObjectEnumerable concat(List<Iterable<SObject>> iterables)`
 
-Returns lazily concatenated `List<Iterable<SObject>>`.
+Returns lazily concatenated `SObjectEnumerable` from `iterables`.
 
 ###### Parameters
 
@@ -388,6 +380,11 @@ Returns a combined `SObjectEnumerable` by applying `combiner` function to each e
 
 ###### Example
 ```apex
+public class GetFunction extends Function {
+    private final SObjectField field;
+    public GetFunction(SObjectField field) { this.field = field; }
+    public override Object apply(Object o) { return ((SObject) o).get(field); }
+}
 List<Account> triggerOld = new List<Account>{
     new Account(Name = 'foo', NumberOfEmployees = 100),
     new Account(Name = 'bar', NumberOfEmployees = 200),
@@ -401,7 +398,7 @@ List<Account> triggerNew = new List<Account>{
 SObjectStream.zip(
     triggerOld,
     triggerNew,
-    BiOperator.minBy(Comparator.comparing(SObjectFunctions.get(Account.AnnualRevenue)))
+    BiOperator.minBy(Comparator.comparing(new GetFunction(Account.AnnualRevenue)))
 ).toList(); //
 [
   { Name: 'foo', NumberOfEmployees: 100 },
@@ -412,8 +409,6 @@ SObjectStream.zip(
 
 
 ##### `public static SObjectEnumerable zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, IBiPredicate predicate, IBiOperator combiner)`
-
-`SUPPRESSWARNINGS`
 
 Returns a combined `SObjectEnumerable` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
@@ -441,17 +436,22 @@ Returns a combined `SObjectEnumerable` by applying `combiner` function to each e
 ###### Example
 ```apex
 public class ContainsAnyBiPredicate extends BiPredicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o1, Object o2) {
-        String value1 = (String) ((Account) o1).get(fieldName);
-        String value2 = (String) ((Account) o2).get(fieldName);
+        String value1 = (String) ((Account) o1).get(field);
+        String value2 = (String) ((Account) o2).get(field);
         return value1.contains(s) || value2.contains(s);
     }
+}
+public class GetFunction extends Function {
+    private final SObjectField field;
+    public GetFunction(SObjectField field) { this.field = field; }
+    public override Object apply(Object o) { return ((SObject) o).get(field); }
 }
 List<Account> triggerOld = new List<Account>{
     new Account(Name = 'foo', NumberOfEmployees = 100),
@@ -467,7 +467,7 @@ SObjectStream.zip(
     triggerOld,
     triggerNew,
     new ContainsAnyBiPredicate('Name', 'a'),
-    BiOperator.minBy(SObjectFunctions.get(Account.AnnualRevenue))
+    BiOperator.minBy(new GetFunction(Account.AnnualRevenue))
 ).toList(); //
 [
   { Name: 'bar', NumberOfEmployees: 100 },
@@ -599,14 +599,14 @@ Returns a `SObjectEnumerable` with elements that match `predicate`. <p>Stateless
 ###### Example
 ```apex
 public class ContainsPredicate extends Predicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
     }
 }
 List<Account> accounts = new List<Account>{
@@ -649,14 +649,14 @@ Returns a `SObjectEnumerable` which takes elements while elements match `predica
 ###### Example
 ```apex
 public class ContainsPredicate extends Predicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
     }
 }
 List<Account> accounts = new List<Account>{
@@ -699,14 +699,14 @@ Returns a `SObjectEnumerable` which drops elements while elements match `predica
 ###### Example
 ```apex
 public class ContainsPredicate extends Predicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
     }
 }
 List<Account> accounts = new List<Account>{
@@ -808,7 +808,7 @@ List<OpportunityLineItem> items = new List<OpportunityLineItem>{
 };
 List<Integer> totalPrices = SObjectStream.of(items)
     .mapToInt(new TotalPriceFunction())
-    .toList(); // [10000, 40000, 5000]
+    .toList(); // [10000, 40000, 50000]
 ```
 
 
@@ -938,10 +938,10 @@ Returns a `ObjectEnumerable` with elements returned by `mapper` function, applie
 ###### Example
 ```apex
 public class GetFieldValueToLowerCaseFunction extends Function {
-    private final String fieldName;
-    public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
+    private final String field;
+    public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
     public override Object apply(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.toLowerCase();
+        return ((String) ((SObject) o).get(field))?.toLowerCase();
     }
 }
 List<Account> accounts = new List<Account>{
@@ -1216,7 +1216,7 @@ Account parentAcc3 = new Account(Name = 'baz');
 List<Account> parentAccounts = new List<Account>{ parentAcc1, parentAcc2, parentAcc3 };
 List<String> names = (List<String>) SObjectStream.of(parentAccounts)
     .flatMapToObject(new MapToName())
-    .toList(String.class); // ['qux', fred', 'thud']
+    .toList(String.class); // ['qux', 'fred', 'thud']
 ```
 
 
@@ -1329,9 +1329,9 @@ Returns a `SObjectEnumerable` with distinct elements according to `classifier` f
 ###### Example
 ```apex
 public class GetFieldValueToLowerCaseFunction extends Function {
-    private final String fieldName;
-    public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-    public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+    private final String field;
+    public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+    public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
 }
 List<Account> accounts = new List<Account>{
     new Account(Name = 'foo'),
@@ -1517,7 +1517,7 @@ List<Account> rest = SObjectStream.of(accounts)
 
 ---
 ### Terminal Operations
-##### `public virtual override SObject reduce(SObject identity, IBiOperator accumulator)`
+##### `public virtual override SObject fold(SObject identity, IBiOperator accumulator)`
 
 Performs a reduction on `SObject` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
@@ -1525,7 +1525,7 @@ Performs a reduction on `SObject` elements, using `identity` value and an associ
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 ###### Returns
@@ -1539,6 +1539,52 @@ Performs a reduction on `SObject` elements, using `identity` value and an associ
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
+
+###### Example
+```apex
+public class AnnualRevenueAccumulator extends BiOperator {
+    public override Object apply (Object o1, Object o2) {
+        Account result = ((Account) o1);
+        Account acc = ((Account) o2);
+        result.AnnualRevenue += acc.AnnualRevenue;
+        return result;
+    }
+}
+Account acc1 = new Account(Name = 'foo', AnnualRevenue = 100);
+Account acc2 = new Account(Name = 'bar', AnnualRevenue = 200);
+Account acc3 = new Account(Name = 'baz', AnnualRevenue = 500);
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Account identity = new Account(Name = 'total', AnnualRevenue = 0);
+Account total = (Account) SObjectStream.of(accounts)
+    .fold(identity, new AnnualRevenueAccumulator()); // { Name: 'total', AnnualRevenue: 800 }
+```
+
+
+##### `public virtual override SObject reduce(SObject identity, IBiOperator accumulator)`
+
+Performs a reduction on `SObject` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`identity`|the initial value for `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`SObject`|the `SObject` result of the reduction|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
 
 ###### Example
 ```apex
@@ -1629,10 +1675,10 @@ Performs a mutable reduction operation on elements, collecting elements to a con
 ```apex
 // Simple collecting
 public class AddToStringSetBiConsumer extends BiConsumer {
-    private final String fieldName;
-    public AddToStringSetBiConsumer(String fieldName) { this.fieldName = fieldName; }
+    private final String field;
+    public AddToStringSetBiConsumer(String field) { this.field = field; }
     public override void accept(Object container, Object o) {
-        String value = (String) ((SObject) o).get(fieldName);
+        String value = (String) ((SObject) o).get(field);
         ((Set<String>) container).add(value);
     }
 }
@@ -1647,17 +1693,17 @@ Set<String> names = (Set<String>) SObjectStream.of(accounts)
 // ['foo', 'bar', 'baz', 'qux']
 // Cascaded operation
 public class GetIntFieldFunction extends Function {
-    private final String fieldName;
-    public GetIntFieldFunction(String fieldName) { this.fieldName = fieldName; }
+    private final String field;
+    public GetIntFieldFunction(String field) { this.field = field; }
     public override Object apply(Object o) {
-        return (Integer) ((SObject) o).get(fieldName);
+        return (Integer) ((SObject) o).get(field);
     }
 }
 public class AddToListBiConsumer extends BiConsumer {
-    private final String fieldName;
-    public AddToListBiConsumer(String fieldName) { this.fieldName = fieldName; }
+    private final String field;
+    public AddToListBiConsumer(String field) { this.field = field; }
     public override void accept(Object container, Object o) {
-        ((List<Object>) container).add(((SObject) o).get(fieldName));
+        ((List<Object>) container).add(((SObject) o).get(field));
     }
 }
 public class PutToObjectsByIntMap extends BiConsumer {
@@ -1729,14 +1775,14 @@ Returns an `Optional` SObject describing the first element that matches `predica
 ###### Example
 ```apex
 public class ContainsPredicate extends Predicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
     }
 }
 List<Account> accounts = new List<Account>{
@@ -1752,7 +1798,7 @@ Account firstFound = (Account) SObjectStream.of(accounts)
 
 ##### `public virtual override Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `SObjectEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `SObjectEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
@@ -1775,14 +1821,14 @@ Returns whether all elements match `predicate`. If `SObjectEnumerable` is empty 
 ###### Example
 ```apex
 public class ContainsPredicate extends Predicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
     }
 }
 List<Account> accounts = new List<Account>{
@@ -1820,14 +1866,14 @@ Returns whether some element matches `predicate`. If `SObjectEnumerable` is empt
 ###### Example
 ```apex
 public class ContainsPredicate extends Predicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
     }
 }
 List<Account> accounts = new List<Account>{
@@ -1905,7 +1951,7 @@ List<Account> accounts1 = SObjectStream.of(accounts)
     .toList(); //
 [
   { Name: 'bar', NumberOfEmployees: 200 },
-  { Name: 'baz', NumberOfEmployees: 200 }
+  { Name: 'baz', NumberOfEmployees: 300 }
 ]
 ```
 
@@ -1935,8 +1981,22 @@ Accumulates elements returned by `mapper` into a `List<?>` of specific `listType
 
 ###### Example
 ```apex
-List<String> accountNames = (List<String>) SObjectStream.of(accounts)
-    .toList(SObjectFunctions.get('Name'), String.class);
+public class GetFieldValueToLowerCaseFunction extends Function {
+    private final String field;
+    public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+    public override Object apply(Object o) {
+        return ((String) ((SObject) o).get(field))?.toLowerCase();
+    }
+}
+List<Account> accounts = new List<Account>{
+    new Account(Name = 'foo'),
+    new Account(Name = 'Bar'),
+    new Account(Name = 'baz'),
+    new Account(Name = 'Foo'),
+    new Account(Name = 'bar')
+};
+List<String> normalizedNames = (List<String>) SObjectStream.of(accounts)
+    .toList(new GetFieldValueToLowerCaseFunction('Name'), String.class); // ['foo', 'bar', 'baz', 'foo', 'bar']
 ```
 
 
@@ -1952,9 +2012,18 @@ Accumulates elements into a `Set<SObject>`. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-Set<SObject> accountsWithHotRating = SObjectStream.of(accounts)
-    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
-    .toSet();
+List<Account> accounts = new List<Account>{
+    new Account(Name = 'foo'),
+    new Account(Name = 'bar'),
+    new Account(Name = 'baz')
+};
+Set<SObject> sobjects = SObjectStream.of(accounts)
+    .skip(1)
+    .toSet(); //
+[
+  { Name: 'bar' },
+  { Name: 'baz' }
+]
 ```
 
 
@@ -1982,7 +2051,22 @@ Accumulates `Object` elements returned by `mapper` into a `Set<Object>`. <p>Term
 
 ###### Example
 ```apex
-Set<Object> createdDates = SObjectStream.of(accounts).toSet(SObjectFunctions.get('CreatedDate'));
+public class GetFieldValueToLowerCaseFunction extends Function {
+    private final String field;
+    public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+    public override Object apply(Object o) {
+        return ((String) ((SObject) o).get(field))?.toLowerCase();
+    }
+}
+List<Account> accounts = new List<Account>{
+    new Account(Name = 'foo'),
+    new Account(Name = 'Bar'),
+    new Account(Name = 'baz'),
+    new Account(Name = 'Foo'),
+    new Account(Name = 'bar')
+};
+Set<Object> normalizedNames = SObjectStream.of(accounts)
+    .toSet(new GetFieldValueToLowerCaseFunction('Name')); // ['foo', 'bar', 'baz']
 ```
 
 
@@ -2010,7 +2094,32 @@ Accumulates `Id` elements returned by `mapper` into a `Set<Id>`. <p>Terminal Ope
 
 ###### Example
 ```apex
-Set<Id> accountIds = SObjectStream.of(contacts).toIdSet(SObjectFunctions.get('AccountId'));
+public class GetChildrenIdOfTheLatestFunction extends Function {
+    private final String childRelField;
+    public GetChildrenIdOfTheLatestFunction(String childRelField) { this.childRelField = childRelField; }
+    public override Object apply(Object o) {
+        SObject sObj = (Account) o;
+        List<SObject> children = sObj.getSObjects(childRelField);
+        if (children?.isEmpty() != false) {
+            return null;
+        }
+        return SObjectStream.of(children)
+            .sort('CreatedDate')
+            .toList()
+            [0]
+            .Id;
+    }
+}
+Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+Account acc1 = new Account(Name = 'foo', Contacts = new List<Contact>{ con1, con2 }); // pseudo assignment
+Account acc2 = new Account(Name = 'bar', Contacts = new List<Contact>{ con3 });
+Account acc3 = new Account(Name = 'baz');
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Set<Id> contactIds = SObjectStream.of(accounts)
+    .toIdSet(new GetChildrenIdOfTheLatestFunction('Contacts')); //
+['003000000000002AAA', '003000000000003AAA', null]
 ```
 
 
@@ -2038,7 +2147,36 @@ Accumulates `String` elements returned by `mapper` into a `Set<String>`. <p>Term
 
 ###### Example
 ```apex
-Set<String> accountNames = SObjectStream.of(accounts).toStringSet(SObjectFunctions.get('Name'));
+public class GetChildrenFieldOfTheLatestFunction extends Function {
+    private final String childRelField;
+    private final String field;
+    public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
+        this.childRelField = childRelField;
+        this.field = field;
+    }
+    public override Object apply(Object o) {
+        SObject sObj = (Account) o;
+        List<SObject> children = sObj.getSObjects(childRelField);
+        if (children?.isEmpty() != false) {
+            return null;
+        }
+        return SObjectStream.of(children)
+            .sort('CreatedDate')
+            .toList()
+            [0]
+            .get(field);
+    }
+}
+Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+Account acc1 = new Account(Name = 'foo', Contacts = new List<Contact>{ con1, con2 }); // pseudo assignment
+Account acc2 = new Account(Name = 'bar', Contacts = new List<Contact>{ con3 });
+Account acc3 = new Account(Name = 'baz');
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Set<String> contactLastNames = SObjectStream.of(accounts)
+    .toStringSet(new GetChildrenFieldOfTheLatestFunction('Contacts', 'LastName')); //
+['fred', 'thud', null]
 ```
 
 
@@ -2054,9 +2192,19 @@ Accumulates elements into a `Map<Id, SObject>`. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-Map<Id, SObject> accountsWithHotRating = SObjectStream.of(accounts)
-    .filter(SObjectPredicates.isEqual(Account.Rating, 'Hot'))
-    .toMap();
+Account acc1 = new Account(Id = '001000000000001AAA', Name = 'foo');
+Account acc2 = new Account(Id = '001000000000002AAA', Name = 'bar');
+Account acc3 = new Account(Id = '001000000000003AAA', Name = 'baz');
+Account acc4 = new Account(Name = 'qux');
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3, acc4 };
+Map<Id, SObject> accountById = SObjectStream.of(accounts)
+    .toMap(); //
+{
+  '001000000000001AAA': { Id: '001000000000001AAA', Name: 'foo' },
+  '001000000000002AAA': { Id: '001000000000002AAA', Name: 'bar' },
+  '001000000000003AAA': { Id: '001000000000003AAA', Name: 'baz' },
+   null: { Name: 'qux' }
+}
 ```
 
 
@@ -2086,8 +2234,44 @@ Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `
 
 ###### Example
 ```apex
-Map<Id, Contact> contactByAccountId = (Map<Id, Contact>) SObjectStream.of(contacts)
-    .toByIdMap(SObjectFunctions.get('AccountId'), Map<Id, Contact>.class);
+public class GetChildrenIdOfTheLatestFunction extends Function {
+    private final String childRelField;
+    public GetChildrenIdOfTheLatestFunction(String childRelField) { this.childRelField = childRelField; }
+    public override Object apply(Object o) {
+        SObject sObj = (Account) o;
+        List<SObject> children = sObj.getSObjects(childRelField);
+        if (children?.isEmpty() != false) {
+            return null;
+        }
+        return SObjectStream.of(children)
+            .sort('CreatedDate')
+            .toList()
+            [0]
+            .Id;
+    }
+}
+Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+Account acc1 = new Account(
+    Id = '001000000000001AAA',
+    Name = 'foo',
+    Contacts = new List<Contact>{ con1, con2 }
+); // pseudo assignment
+Account acc2 = new Account(
+    Id = '001000000000002AAA',
+    Name = 'bar',
+    Contacts = new List<Contact>{ con3 }
+);
+Account acc3 = new Account(Id = '001000000000003AAA', Name = 'baz');
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Map<Id, Account> accountByLatestContactId = (Map<Id, Account>) SObjectStream.of(accounts)
+    .toByIdMap(new GetChildrenIdOfTheLatestFunction('Contacts'), Account.class); //
+{
+  '003000000000002AAA': { Id: '001000000000001AAA', Name: 'foo' },
+  '003000000000003AAA': { Id: '001000000000002AAA', Name: 'bar' },
+   null: { Id: '001000000000003AAA', Name: 'baz' }
+}
 ```
 
 
@@ -2117,8 +2301,46 @@ Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specif
 
 ###### Example
 ```apex
-Map<String, Account> accountByName = (Map<String, Account>) SObjectStream.of(accounts)
-    .toByStringMap(SObjectFunctions.get('Name'), Map<String, Account>.class);
+public class GetChildrenFieldOfTheLatestFunction extends Function {
+    private final String childRelField;
+    private final String field;
+    public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
+        this.childRelField = childRelField;
+        this.field = field;
+    }
+    public override Object apply(Object o) {
+        SObject sObj = (Account) o;
+        List<SObject> children = sObj.getSObjects(childRelField);
+        if (children?.isEmpty() != false) {
+            return null;
+        }
+        return SObjectStream.of(children)
+            .sort('CreatedDate')
+            .toList()
+            [0]
+            .get(field);
+    }
+}
+Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+Contact con2 = new Contact(LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+Contact con3 = new Contact(LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+Account acc1 = new Account(
+    Name = 'foo',
+    Contacts = new List<Contact>{ con1, con2 }
+); // pseudo assignment
+Account acc2 = new Account(
+    Name = 'bar',
+    Contacts = new List<Contact>{ con3 }
+);
+Account acc3 = new Account(Name = 'baz');
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Map<String, Account> accountByLatestContactLastName = (Map<String, Account>) SObjectStream.of(accounts)
+    .toByStringMap(new GetChildrenFieldOfTheLatestFunction('Contacts', 'LastName'), Account.class); //
+{
+  'fred': { Name: 'foo' },
+  'thud': { Name: 'bar' },
+   null: { Name: 'baz' }
+}
 ```
 
 
@@ -2142,12 +2364,54 @@ Groups `SObject` elements into a `Map<Id, List<SObject>>` whose keys are values 
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `field` is null|
+|`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
 ```apex
-Map<Id, List<Contact>> contactsByAccountId = SObjectStream.of(contacts)
-    .groupById(SObjectFunctions.get('AccountId'));
+public class GetChildrenIdOfTheLatestFunction extends Function {
+    private final String childRelField;
+    public GetChildrenIdOfTheLatestFunction(String childRelField) { this.childRelField = childRelField; }
+    public override Object apply(Object o) {
+        SObject sObj = (Account) o;
+        List<SObject> children = sObj.getSObjects(childRelField);
+        if (children?.isEmpty() != false) {
+            return null;
+        }
+        return SObjectStream.of(children)
+            .sort('CreatedDate')
+            .toList()
+            [0]
+            .Id;
+    }
+}
+Contact con1 = new Contact(Id = '003000000000001AAA', LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+Contact con2 = new Contact(Id = '003000000000002AAA', LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+Contact con3 = new Contact(Id = '003000000000003AAA', LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+Account acc1 = new Account(
+    Id = '001000000000001AAA',
+    Name = 'foo',
+    Contacts = new List<Contact>{ con1, con2 }
+); // pseudo assignment
+Account acc2 = new Account(
+    Id = '001000000000002AAA',
+    Name = 'bar',
+    Contacts = new List<Contact>{ con3 }
+);
+Account acc3 = new Account(
+    Id = '001000000000003AAA',
+    Name = 'baz',
+    Contacts = new List<Contact>{ con2, con3 }
+);
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Map<Id, List<Account>> accountsByLatestContactId = SObjectStream.of(accounts)
+    .groupById(new GetChildrenIdOfTheLatestFunction('Contacts')); //
+{
+  '003000000000002AAA': [{ Id: '001000000000001AAA', Name: 'foo' }],
+  '003000000000003AAA': [
+    { Id: '001000000000002AAA', Name: 'bar' },
+    { Id: '001000000000003AAA', Name: 'baz' }
+  ]
+}
 ```
 
 
@@ -2175,8 +2439,51 @@ Groups `SObject` elements into a `Map<String, List<SObject>>` whose keys are val
 
 ###### Example
 ```apex
-Map<String, List<Account>> accountsByRating = SObjectStream.of(accounts)
-    .groupByString(SObjectFunctions.get('Rating'));
+public class GetChildrenFieldOfTheLatestFunction extends Function {
+    private final String childRelField;
+    private final String field;
+    public GetChildrenFieldOfTheLatestFunction(String childRelField, String field) {
+        this.childRelField = childRelField;
+        this.field = field;
+    }
+    public override Object apply(Object o) {
+        SObject sObj = (Account) o;
+        List<SObject> children = sObj.getSObjects(childRelField);
+        if (children?.isEmpty() != false) {
+            return null;
+        }
+        return SObjectStream.of(children)
+            .sort('CreatedDate')
+            .toList()
+            [0]
+            .get(field);
+    }
+}
+Contact con1 = new Contact(LastName = 'qux', CreatedDate = '2025-10-10 20:00:00');
+Contact con2 = new Contact(LastName = 'fred', CreatedDate = '2025-10-11 21:00:00');
+Contact con3 = new Contact(LastName = 'thud', CreatedDate = '2025-10-12 22:00:00');
+Account acc1 = new Account(
+    Name = 'foo',
+    Contacts = new List<Contact>{ con1, con2 }
+); // pseudo assignment
+Account acc2 = new Account(
+    Name = 'bar',
+    Contacts = new List<Contact>{ con3 }
+);
+Account acc3 = new Account(
+    Name = 'baz',
+    Contacts = new List<Contact>{ con2, con3 }
+);
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Map<String, List<Account>> accountsByLatestContactLastName = SObjectStream.of(accounts)
+    .groupByString(new GetChildrenFieldOfTheLatestFunction('Contacts', 'LastName')); //
+{
+  'fred': [{ Name: 'foo' }],
+  'thud': [
+    { Name: 'bar' },
+    { Name: 'baz' }
+  ]
+}
 ```
 
 
@@ -2204,8 +2511,27 @@ Partition `SObject` elements by `predicate`. <p>Terminal Operation.</p>
 
 ###### Example
 ```apex
-Map<Boolean, List<Account>> accountsPartitionedByHavingHotRating
-    = SObjectStream.of(accounts).partition(SObjectPredicates.isEqual(Account.Rating, 'Hot'));
+public class ContainsPredicate extends Predicate {
+    private final String field;
+    private final String s;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
+        this.s = s;
+    }
+    public override Boolean test(Object o) {
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
+    }
+}
+Account acc1 = new Account(Name = 'foo', Rating = 'Hot');
+Account acc2 = new Account(Name = 'bar', Rating = 'Warm');
+Account acc3 = new Account(Name = 'baz', Rating = 'Cold');
+List<Account> accounts = new List<Account>{ acc1, acc2, acc3 };
+Map<Boolean, List<Account>> accountsPartitionedByContainingAInName = SObjectStream.of(accounts)
+    .partition(new ContainsPredicate('Name', 'a')); //
+{
+  true: [{ Name: 'bar', Rating: 'Warm' }, { Name: 'baz', Rating: 'Cold' }],
+  false: [{ Name: 'foo', Rating: 'Hot' }]
+}
 ```
 
 
@@ -2239,7 +2565,7 @@ accStream.run();
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set union of the current and another iterables.
+Returns a new `SObjectEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2289,7 +2615,7 @@ List<Account> union = [SObjectEnumerable].of(accounts1)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set union of the current and another iterables according to `classifier`.
+Returns a new `SObjectEnumerable` as a set union of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2313,9 +2639,9 @@ Returns a new `SObjectEnumerable` as a set union of the current and another iter
 ###### Example
 ```apex
 public class GetFieldValueToLowerCaseFunction extends Function {
-    private final String fieldName;
-    public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-    public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+    private final String field;
+    public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+    public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
 }
 List<Account> accounts1 = new List<Account>{
     new Account(Name = 'foo'),
@@ -2340,19 +2666,19 @@ List<Account> union = [SObjectEnumerable].of(accounts1)
 ```
 
 
-##### `public virtual SObjectEnumerable union(Iterable<SObject> iterable, String fieldName)`
+##### `public virtual SObjectEnumerable union(Iterable<SObject> iterable, String field)`
 
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set intersection of the current and another iterables according to `fieldName`.
+Returns a new `SObjectEnumerable` as a set union of the current and another `iterable` according to `field`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
 |`iterable`|the other iterable|
-|`fieldName`|the field|
+|`field`|the field|
 
 ###### Returns
 
@@ -2364,8 +2690,8 @@ Returns a new `SObjectEnumerable` as a set intersection of the current and anoth
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `iterable` or `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `iterable` or `field` is null|
 
 ###### Example
 ```apex
@@ -2397,7 +2723,7 @@ List<Account> union = [SObjectEnumerable].of(accounts1)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set intersection of the current and another iterables according to `field`.
+Returns a new `SObjectEnumerable` as a set union of the current and another `iterable` according to `field`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2448,7 +2774,7 @@ List<Account> union = [SObjectEnumerable].of(accounts1)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set intersection of the current and another iterables.
+Returns a new `SObjectEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2494,7 +2820,7 @@ List<Account> intersect = [SObjectEnumerable].of(accounts1)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set intersection of the current and another iterables according to `classifier`. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` as a set intersection of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2518,9 +2844,9 @@ Returns a new `SObjectEnumerable` as a set intersection of the current and anoth
 ###### Example
 ```apex
 public class GetFieldValueToLowerCaseFunction extends Function {
-    private final String fieldName;
-    public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-    public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+    private final String field;
+    public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+    public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
 }
 List<Account> accounts1 = new List<Account>{
     new Account(Name = 'foo'),
@@ -2533,7 +2859,7 @@ List<Account> accounts2 = new List<Account>{
     new Account(Name = 'Foo')
 };
 List<Account> union = [SObjectEnumerable].of(accounts1)
-    .intersect(accounts2, new GetFieldValueFunction('Name'))
+    .intersect(accounts2, new GetFieldValueToLowerCaseFunction('Name'))
     .toList(); //
 [
   { Name: 'foo' }
@@ -2541,19 +2867,19 @@ List<Account> union = [SObjectEnumerable].of(accounts1)
 ```
 
 
-##### `public virtual SObjectEnumerable intersect(Iterable<SObject> iterable, String fieldName)`
+##### `public virtual SObjectEnumerable intersect(Iterable<SObject> iterable, String field)`
 
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set intersection of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` as a set intersection of the current and another `iterable` according to `field`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
 |`iterable`|the other iterable|
-|`fieldName`|the field|
+|`field`|the field|
 
 ###### Returns
 
@@ -2565,8 +2891,8 @@ Returns a new `SObjectEnumerable` as a set intersection of the current and anoth
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `iterable` or `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `iterable` or `field` is null|
 
 ###### Example
 ```apex
@@ -2594,7 +2920,7 @@ List<Account> intersect = [SObjectEnumerable].of(accounts1)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set intersection of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` as a set intersection of the current and another `iterable` according to `field`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2641,7 +2967,7 @@ List<Account> intersect = [SObjectEnumerable].of(accounts1)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set difference of the current and another iterables. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2695,7 +3021,7 @@ List<Account> union1 = [SObjectEnumerable].of(accounts2)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set difference of the current and another iterables according to `classifier` function. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` as a set difference of the current and another `iterable` according to `classifier` function. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2719,9 +3045,9 @@ Returns a new `SObjectEnumerable` as a set difference of the current and another
 ###### Example
 ```apex
 public class GetFieldValueToLowerCaseFunction extends Function {
-    private final String fieldName;
-    public GetFieldValueToLowerCaseFunction(String fieldName) { this.fieldName = fieldName; }
-    public override Object apply(Object o) { return ((String) ((SObject) o).get(fieldName))?.toLowerCase(); }
+    private final String field;
+    public GetFieldValueToLowerCaseFunction(String field) { this.field = field; }
+    public override Object apply(Object o) { return ((String) ((SObject) o).get(field))?.toLowerCase(); }
 }
 List<Account> accounts1 = new List<Account>{
     new Account(Name = 'foo'),
@@ -2741,7 +3067,7 @@ List<Account> except = [SObjectEnumerable].of(accounts1)
   { Name: 'baz' }
 ]
 List<Account> except1 = [SObjectEnumerable].of(accounts2)
-    .except(accounts1)
+    .except(accounts1, new GetFieldValueToLowerCaseFunction('Name'))
     .toList(); //
 [
   { Name: 'qux' },
@@ -2750,19 +3076,19 @@ List<Account> except1 = [SObjectEnumerable].of(accounts2)
 ```
 
 
-##### `public virtual SObjectEnumerable except(Iterable<SObject> iterable, String fieldName)`
+##### `public virtual SObjectEnumerable except(Iterable<SObject> iterable, String field)`
 
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set difference of the current and another iterables according to `fieldName`. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` as a set difference of the current and another `iterable` according to `field`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
 |`iterable`|the other iterable|
-|`fieldName`|the field|
+|`field`|the field|
 
 ###### Returns
 
@@ -2774,8 +3100,8 @@ Returns a new `SObjectEnumerable` as a set difference of the current and another
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `iterable` or `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `iterable` or `field` is null|
 
 ###### Example
 ```apex
@@ -2811,7 +3137,7 @@ List<Account> except1 = [SObjectEnumerable].of(accounts2)
 *Inherited*
 
 
-Returns a new `SObjectEnumerable` as a set difference of the current and another iterables according to `field`. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` as a set difference of the current and another `iterable` according to `field`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -2896,7 +3222,7 @@ List<Account> withoutNulls = [SObjectEnumerable].of(accounts)
 *Inherited*
 
 
-Returns whether no `SObject` elements match `predicate`. If `SObjectEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether no elements of this enumerable match `predicate`. If the enumerable is empty then `true` is returned and the predicate is not evaluated. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
@@ -2908,7 +3234,7 @@ Returns whether no `SObject` elements match `predicate`. If `SObjectEnumerable` 
 
 |Type|Description|
 |---|---|
-|`Boolean`|`true` or `false`|
+|`Boolean`|`true` if no elements match the predicate, `false` otherwise|
 
 ###### Throws
 
@@ -2919,14 +3245,14 @@ Returns whether no `SObject` elements match `predicate`. If `SObjectEnumerable` 
 ###### Example
 ```apex
 public class ContainsPredicate extends Predicate {
-    private final String fieldName;
+    private final String field;
     private final String s;
-    public ContainsPredicate(String fieldName, String s) {
-        this.fieldName = fieldName;
+    public ContainsPredicate(String field, String s) {
+        this.field = field;
         this.s = s;
     }
     public override Boolean test(Object o) {
-        return ((String) ((SObject) o).get(fieldName))?.contains(s) == true;
+        return ((String) ((SObject) o).get(field))?.contains(s) == true;
     }
 }
 List<Account> accounts = new List<Account>{
@@ -2939,32 +3265,32 @@ Boolean doesNoneAccountNameContainA = [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public virtual Boolean none(String fieldName, Object value)`
+##### `public virtual Boolean none(String field, Object value)`
 
 *Inherited*
 
 
-Returns whether no `SObject` elements have `field` `value`. If `SObjectEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether no elements of this enumerable have `field` `value`. If the enumerable is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field|
-|`value`|the field value|
+|`field`|the field|
+|`value`|the satisfying value|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Boolean`|`true` or `false`|
+|`Boolean`|`true` if no elements match the predicate, `false` otherwise|
 
 ###### Throws
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -2992,20 +3318,20 @@ Boolean isNoneContactWithHotRatingAccount = [SObjectEnumerable].of(contacts)
 *Inherited*
 
 
-Returns whether no `SObject` elements have `field` `value`. If `SObjectEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether no elements of this enumerable have `field` `value`. If the enumerable is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
 |`field`|the field|
-|`value`|the field value|
+|`value`|the satisfying value|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Boolean`|`true` or `false`|
+|`Boolean`|`true` if no elements match the predicate, `false` otherwise|
 
 ###### Throws
 
@@ -3030,7 +3356,7 @@ Boolean isNoneAccountWithHotRating = [SObjectEnumerable].of(accounts)
 *Inherited*
 
 
-Returns an `Optional` describing the maximum `SObject` element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element according to `comparer`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
@@ -3079,18 +3405,18 @@ Account maxAccount = (Account) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public virtual Optional max(String fieldName)`
+##### `public virtual Optional max(String field)`
 
 *Inherited*
 
 
-Returns an `Optional` SObject describing the maximum `SObject` element according to `fieldName`. <p>Terminal Operation.</p>
+Returns an `Optional` SObject describing the maximum element according to `field`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field|
+|`field`|the field|
 
 ###### Returns
 
@@ -3102,8 +3428,8 @@ Returns an `Optional` SObject describing the maximum `SObject` element according
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3125,7 +3451,7 @@ Account accountsWithMaxAnnualRevenue = (Account) [SObjectEnumerable].of(accounts
 *Inherited*
 
 
-Returns an `Optional` describing the maximum `SObject` element according to `field`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element according to `field`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
@@ -3165,7 +3491,7 @@ Account accountsWithMaxAnnualRevenue = (Account) [SObjectEnumerable].of(accounts
 *Inherited*
 
 
-Returns an `Optional` describing the minimum `SObject` element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element according to `comparer`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
@@ -3214,18 +3540,18 @@ Account minAccount = (Account) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public virtual Optional min(String fieldName)`
+##### `public virtual Optional min(String field)`
 
 *Inherited*
 
 
-Returns an `Optional` describing the minimum `SObject` element according to `fieldName`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element according to `field`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field|
+|`field`|the field|
 
 ###### Returns
 
@@ -3237,8 +3563,8 @@ Returns an `Optional` describing the minimum `SObject` element according to `fie
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3260,7 +3586,7 @@ Account accountsWithMinAnnualRevenue = (Account) [SObjectEnumerable].of(accounts
 *Inherited*
 
 
-Returns an `Optional` describing the minimum `SObject` element according to `field`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element according to `field`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
@@ -3338,18 +3664,18 @@ Double totalSum = [SObjectEnumerable].of(items)
 ```
 
 
-##### `public virtual Double sum(String fieldName)`
+##### `public virtual Double sum(String field)`
 
 *Inherited*
 
 
-Returns the arithmetic sum of field values of `SObject` elements. <p>Terminal Operation.</p>
+Returns the arithmetic sum of field values of elements. <p>Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to sum values|
+|`field`|the field to sum values|
 
 ###### Returns
 
@@ -3361,8 +3687,8 @@ Returns the arithmetic sum of field values of `SObject` elements. <p>Terminal Op
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3385,7 +3711,7 @@ Double sumOfParentNumberOfEmployees = [SObjectEnumerable].of(accounts)
 *Inherited*
 
 
-Returns the arithmetic sum of field values of `SObject` elements. <p>Terminal Operation.</p>
+Returns the arithmetic sum of field values of elements. <p>Terminal Operation.</p>
 
 ###### Parameters
 
@@ -3460,31 +3786,31 @@ Double avgTotal = [SObjectEnumerable].of(items)
 ```
 
 
-##### `public virtual Optional avg(String fieldName)`
+##### `public virtual Optional avg(String field)`
 
 *Inherited*
 
 
-Returns the arithmetic mean of field values of `SObject` elements. <p>Terminal Operation.</p>
+Returns the arithmetic mean of the values of `field`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field to sum values|
+|`field`|the field to calculate the average|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the arithmetic mean of field values|
+|`Optional`|the `Optional` containing the result|
 
 ###### Throws
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3507,19 +3833,19 @@ Double avgOfParentNumberOfEmployees = [SObjectEnumerable].of(accounts)
 *Inherited*
 
 
-Returns the arithmetic mean of field values of `SObject` elements. <p>Terminal Operation.</p>
+Returns the arithmetic mean of the values of `field`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`field`|the field to sum values|
+|`field`|the field to calculate the average|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|field arithmetic mean of field values|
+|`Optional`|the `Optional` containing the result|
 
 ###### Throws
 

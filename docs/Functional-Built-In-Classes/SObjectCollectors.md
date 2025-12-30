@@ -1,8 +1,6 @@
 # virtual SObjectCollectors
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -27,15 +25,15 @@ SObjectCollectors
 
 ## Methods
 ### List<?> Collectors
-##### `public static Collector toList(String fieldName)`
+##### `public static Collector toList(String field)`
 
-Returns a `Collector` that accumulates the values of `fieldName` into a new `List<Object>`. Cross-reference fields and safe navigation are supported. <p>The result container can be cast to a specific type using [Collector.cast](Collector.cast).</p>
+Returns a `Collector` that accumulates the values of `field` into a new `List<Object>`. Cross-reference fields and safe navigation are supported. <p>The result container can be cast to a specific type using [Collector.cast](Collector.cast).</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -47,12 +45,12 @@ Returns a `Collector` that accumulates the values of `fieldName` into a new `Lis
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a List
+// Accumulates values of field into a List
 List<Object> accountNames = (List<Object>) [SObjectEnumerable].of(accounts)
     .collect(SObjectCollectors.toList('Name'));
 List<String> parentAccountNames = (List<String>) [SObjectEnumerable].of(accounts)
@@ -94,15 +92,15 @@ List<String> accountNames = (List<String>) [SObjectEnumerable].of(accounts)
 
 ---
 ### Set<?> Collectors
-##### `public static Collector toBoolSet(String fieldName)`
+##### `public static Collector toBoolSet(String field)`
 
-Returns a `Collector` that accumulates the Boolean values of `fieldName` into a new `Set<Boolean>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Boolean values of `field` into a new `Set<Boolean>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -114,12 +112,12 @@ Returns a `Collector` that accumulates the Boolean values of `fieldName` into a 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Boolean> doNotCalls = (Set<Boolean>) [SObjectEnumerable].of(contacts)
     .collect(SObjectCollectors.toBoolSet('DoNotCall'));
 Set<Boolean> parentDoNotCalls = (Set<Boolean>) [SObjectEnumerable].of(contacts)
@@ -157,15 +155,15 @@ List<Boolean> accountNames = (List<Boolean>) [SObjectEnumerable].of(contacts)
 ```
 
 
-##### `public static Collector toIdSet(String fieldName)`
+##### `public static Collector toIdSet(String field)`
 
-Returns a `Collector` that accumulates the Boolean values of `fieldName` into a new `Set<Boolean>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Boolean values of `field` into a new `Set<Boolean>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -177,12 +175,12 @@ Returns a `Collector` that accumulates the Boolean values of `fieldName` into a 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Id> ids = (Set<Id>) [SObjectEnumerable].of(accounts)
     .collect(SObjectCollectors.toIdSet('Id'));
 Set<Id> parentOwnerIds = (Set<Id>) [SObjectEnumerable].of(accounts)
@@ -220,15 +218,15 @@ Set<Id> ids = (Set<Id>) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector toStringSet(String fieldName)`
+##### `public static Collector toStringSet(String field)`
 
-Returns a `Collector` that accumulates the String values of `fieldName` into a new `Set<String>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the String values of `field` into a new `Set<String>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -240,12 +238,12 @@ Returns a `Collector` that accumulates the String values of `fieldName` into a n
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<String> names = (Set<String>) [SObjectEnumerable].of(accounts)
     .collect(SObjectCollectors.toStringSet('Name'));
 Set<String> parentNames = (Set<String>) [SObjectEnumerable].of(accounts)
@@ -283,15 +281,15 @@ Set<String> names = (Set<String>) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector toBlobSet(String fieldName)`
+##### `public static Collector toBlobSet(String field)`
 
-Returns a `Collector` that accumulates the Blob values of `fieldName` into a new `Set<Blob>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Blob values of `field` into a new `Set<Blob>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -303,12 +301,12 @@ Returns a `Collector` that accumulates the Blob values of `fieldName` into a new
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Blob> bodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
     .collect(SObjectCollectors.toBlobSet('Body'));
 Set<Blob> parentBodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
@@ -346,15 +344,15 @@ Set<Blob> bodies = (Set<Blob>) [SObjectEnumerable].of(attachments)
 ```
 
 
-##### `public static Collector toDateSet(String fieldName)`
+##### `public static Collector toDateSet(String field)`
 
-Returns a `Collector` that accumulates the Date values of `fieldName` into a new `Set<Date>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Date values of `field` into a new `Set<Date>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -366,12 +364,12 @@ Returns a `Collector` that accumulates the Date values of `fieldName` into a new
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Date> birthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
     .collect(SObjectCollectors.toDateSet('Birthdate'));
 Set<Date> parentBirthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
@@ -409,15 +407,15 @@ Set<Date> birthdates = (Set<Date>) [SObjectEnumerable].of(contacts)
 ```
 
 
-##### `public static Collector toDatetimeSet(String fieldName)`
+##### `public static Collector toDatetimeSet(String field)`
 
-Returns a `Collector` that accumulates the Datetime values of `fieldName` into a new `Set<Datetime>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Datetime values of `field` into a new `Set<Datetime>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -429,12 +427,12 @@ Returns a `Collector` that accumulates the Datetime values of `fieldName` into a
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Datetime> activityDateTimes = (Set<Datetime>) [SObjectEnumerable].of(events)
     .collect(SObjectCollectors.toDatetimeSet('ActivityDateTime'));
 Set<Datetime> activityDateTimes = (Set<Datetime>) [SObjectEnumerable].of(events)
@@ -502,15 +500,15 @@ Set<Time> startTimes = (Set<Time>) [SObjectEnumerable].of(slots)
 ```
 
 
-##### `public static Collector toTimeSet(String fieldName)`
+##### `public static Collector toTimeSet(String field)`
 
-Returns a `Collector` that accumulates the Time values of `fieldName` into a new `Set<Time>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Time values of `field` into a new `Set<Time>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -522,12 +520,12 @@ Returns a `Collector` that accumulates the Time values of `fieldName` into a new
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Time> startTimes = (Set<Time>) [SObjectEnumerable].of(slots)
     .collect(SObjectCollectors.toTimeSet('StartTime'));
 Set<Time> parentStartTimes = (Set<Time>) [SObjectEnumerable].of(slots)
@@ -565,15 +563,15 @@ Set<Time> startTimes = (Set<Time>) [SObjectEnumerable].of(slots)
 ```
 
 
-##### `public static Collector toIntSet(String fieldName)`
+##### `public static Collector toIntSet(String field)`
 
-Returns a `Collector` that accumulates the Integer values of `fieldName` into a new `Set<Integer>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Integer values of `field` into a new `Set<Integer>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -585,12 +583,12 @@ Returns a `Collector` that accumulates the Integer values of `fieldName` into a 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Integer> numberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
     .collect(SObjectCollectors.toIntSet('NumberOfEmployees'));
 Set<Integer> parentNumberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
@@ -628,15 +626,15 @@ Set<Integer> numberOfEmployees = (Set<Integer>) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector toLongSet(String fieldName)`
+##### `public static Collector toLongSet(String field)`
 
-Returns a `Collector` that accumulates the Long values of `fieldName` into a new `Set<Long>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Long values of `field` into a new `Set<Long>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -648,12 +646,12 @@ Returns a `Collector` that accumulates the Long values of `fieldName` into a new
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Long> numberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
     .collect(SObjectCollectors.toLongSet('NumberOfEmployees'));
 Set<Long> parentNumberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
@@ -691,15 +689,15 @@ Set<Long> numberOfEmployees = (Set<Long>) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector toDoubleSet(String fieldName)`
+##### `public static Collector toDoubleSet(String field)`
 
-Returns a `Collector` that accumulates the Double values of `fieldName` into a new `Set<Double>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that accumulates the Double values of `field` into a new `Set<Double>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -711,12 +709,12 @@ Returns a `Collector` that accumulates the Double values of `fieldName` into a n
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Double> billingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
     .collect(SObjectCollectors.toDoubleSet('BillingLatitude'));
 Set<Double> parentBillingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
@@ -754,15 +752,15 @@ Set<Double> billingLatitudes = (Set<Double>) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector toObjectSet(String fieldName)`
+##### `public static Collector toObjectSet(String field)`
 
-Returns a `Collector` that accumulates the Object values of `fieldName` into a new `Set<Double>`. Cross-reference fields and safe navigation are supported. <p>The result container <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as [SObjectCollectors.toIdSet](SObjectCollectors.toIdSet), [SObjectCollectors.toStringSet](SObjectCollectors.toStringSet), etc.</p>
+Returns a `Collector` that accumulates the Object values of `field` into a new `Set<Object>`. Cross-reference fields and safe navigation are supported. <p>The result container <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `to<T>Set()` collectors such as [SObjectCollectors.toIdSet](SObjectCollectors.toIdSet), [SObjectCollectors.toStringSet](SObjectCollectors.toStringSet), etc.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -774,12 +772,12 @@ Returns a `Collector` that accumulates the Object values of `fieldName` into a n
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
-// Accumulates values of fieldName into a Set
+// Accumulates values of field into a Set
 Set<Object> birthdates = (Set<Object>) [SObjectEnumerable].of(contacts)
     .collect(SObjectCollectors.toObjectSet('Birthdate'));
 Set<Object> parentBirthdates = (Set<Object>) [SObjectEnumerable].of(contacts)
@@ -884,7 +882,7 @@ Returns a `Collector` that accumulates the SObject values into a `Map<Id, SObjec
 Map<Id, SObject> sObjs = (Map<Id, SObject>) [SObjectEnumerable].of(sObjects)
     .collect(SObjectCollectors.toByIdMap());
 Map<Id, Account> accs = (Map<Id, Account>) [SObjectEnumerable].of(accounts)
-    .collect(SObjectCollectors.toByIdMap().cast(Map<Id, Account));
+    .collect(SObjectCollectors.toByIdMap().cast(Map<Id, Account>.class));
 ```
 
 
@@ -2495,15 +2493,15 @@ Map<Boolean, List<String>> lastNamesByDoNotCall = (Map<Boolean, List<String>>)
 ```
 
 
-##### `public static Collector groupingByBool(String fieldName)`
+##### `public static Collector groupingByBool(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -2515,8 +2513,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -2630,15 +2628,15 @@ Map<Id, List<String>> lastNamesByAccountId = (Map<Id, List<String>>)
 ```
 
 
-##### `public static Collector groupingById(String fieldName)`
+##### `public static Collector groupingById(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -2650,8 +2648,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -2765,15 +2763,15 @@ Map<String, List<String>> lastNamesByOtherCity = (Map<String, List<String>>)
 ```
 
 
-##### `public static Collector groupingByString(String fieldName)`
+##### `public static Collector groupingByString(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -2785,8 +2783,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -2900,15 +2898,15 @@ Map<Blob, List<String>> namesByBody = (Map<Blob, List<String>>)
 ```
 
 
-##### `public static Collector groupingByBlob(String fieldName)`
+##### `public static Collector groupingByBlob(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -2920,8 +2918,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3035,15 +3033,15 @@ Map<Date, List<String>> lastNamesByBirthdate = (Map<Date, List<String>>)
 ```
 
 
-##### `public static Collector groupingByDate(String fieldName)`
+##### `public static Collector groupingByDate(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -3055,8 +3053,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3170,15 +3168,15 @@ Map<Datetime, List<String>> descriptionsByActivityDateTime = (Map<Datetime, List
 ```
 
 
-##### `public static Collector groupingByDatetime(String fieldName)`
+##### `public static Collector groupingByDatetime(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -3190,8 +3188,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3305,15 +3303,15 @@ Map<Time, List<String>> descriptionsByActivityDateTime = (Map<Time, List<String>
 ```
 
 
-##### `public static Collector groupingByTime(String fieldName)`
+##### `public static Collector groupingByTime(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -3325,8 +3323,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3440,15 +3438,15 @@ Map<Integer, List<String>> namesByNumberOfEmployees = (Map<Integer, List<String>
 ```
 
 
-##### `public static Collector groupingByInt(String fieldName)`
+##### `public static Collector groupingByInt(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -3460,8 +3458,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3575,15 +3573,15 @@ Map<Long, List<String>> namesByNumberOfEmployees = (Map<Long, List<String>>)
 ```
 
 
-##### `public static Collector groupingByLong(String fieldName)`
+##### `public static Collector groupingByLong(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -3595,8 +3593,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3710,15 +3708,15 @@ Map<Double, List<String>> namesByBillingLatitude = (Map<Double, List<String>>)
 ```
 
 
-##### `public static Collector groupingByDouble(String fieldName)`
+##### `public static Collector groupingByDouble(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -3730,8 +3728,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3845,15 +3843,15 @@ Map<Object, List<String>> lastNamesByBirthdate = (Map<Object, List<String>>)
 ```
 
 
-##### `public static Collector groupingByObject(String fieldName)`
+##### `public static Collector groupingByObject(String field)`
 
-Returns a `Collector` that performs grouping of SObject input arguments according to `fieldName`. Cross-reference fields and safe navigation are supported. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as [SObjectCollectors.groupingById](SObjectCollectors.groupingById), [SObjectCollectors.groupingByString](SObjectCollectors.groupingByString), etc.</p>
+Returns a `Collector` that performs grouping of SObject input arguments according to `field`. Cross-reference fields and safe navigation are supported. <p>The result container keys however <strong>cannot</strong> be cast to a specific type.</p> <p>To get a result container of a specific type use `groupingBy<T>()` collectors such as [SObjectCollectors.groupingById](SObjectCollectors.groupingById), [SObjectCollectors.groupingByString](SObjectCollectors.groupingByString), etc.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate as key|
+|`field`|the field value to accumulate as key|
 
 ###### Returns
 
@@ -3865,8 +3863,8 @@ Returns a `Collector` that performs grouping of SObject input arguments accordin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3910,15 +3908,15 @@ Map<Object, List<Contact>> contactsByBody = (Map<Object, List<Contact>>)
 
 ---
 ### Partitioning By Collectors
-##### `public static Collector partitioningBy(String fieldName, Object value)`
+##### `public static Collector partitioningBy(String field, Object value)`
 
-Returns a `Collector` that partitions the SObject input arguments according to whether `fieldName` is equal to `value` and organizes them into a `Map<Boolean, List<SObject>>`. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that partitions the SObject input arguments according to whether `field` is equal to `value` and organizes them into a `Map<Boolean, List<SObject>>`. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to test|
+|`field`|the field value to test|
 |`value`|the expected value|
 
 ###### Returns
@@ -3931,8 +3929,8 @@ Returns a `Collector` that partitions the SObject input arguments according to w
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -3978,15 +3976,15 @@ Map<Boolean, List<Account>> accountNamesPartitionedByHavingMoreThan100Employees 
 
 ---
 ### Joining
-##### `public static Collector joining(String fieldName)`
+##### `public static Collector joining(String field)`
 
-Returns a `Collector` that concatenates `fieldName` String values of the SObject input arguments. Cross-reference fields and safe navigation are supported.
+Returns a `Collector` that concatenates `field` String values of the SObject input arguments. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to concatenate|
+|`field`|the field value to concatenate|
 
 ###### Returns
 
@@ -3998,8 +3996,8 @@ Returns a `Collector` that concatenates `fieldName` String values of the SObject
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4009,7 +4007,7 @@ String lastNames = (String) [SObjectEnumerable].of(contacts).collect(SObjectColl
 
 ##### `public static Collector joining(SObjectField field)`
 
-Returns a `Collector` that concatenates `fieldName` String values of the SObject input arguments.
+Returns a `Collector` that concatenates `field` String values of the SObject input arguments.
 
 ###### Parameters
 
@@ -4035,15 +4033,15 @@ String lastNames = (String) [SObjectEnumerable].of(contacts).collect(SObjectColl
 ```
 
 
-##### `public static Collector joining(String fieldName, String delimiter)`
+##### `public static Collector joining(String field, String delimiter)`
 
-Returns a `Collector` that concatenates `fieldName` String values of the SObject input arguments, separated by the `delimiter`.
+Returns a `Collector` that concatenates `field` String values of the SObject input arguments, separated by the `delimiter`.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to concatenate|
+|`field`|the field value to concatenate|
 |`delimiter`|the delimiter between each element|
 
 ###### Returns
@@ -4056,8 +4054,8 @@ Returns a `Collector` that concatenates `fieldName` String values of the SObject
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|`delimiter` is null|
 
 ###### Example
@@ -4097,15 +4095,15 @@ String lastNames = (String) [SObjectEnumerable].of(contacts)
 ```
 
 
-##### `public static Collector joining(String fieldName, String delimiter, String prefix, String suffix)`
+##### `public static Collector joining(String field, String delimiter, String prefix, String suffix)`
 
-Returns a `Collector` that concatenates `fieldName` String values of the SObject input arguments, separated by the `delimiter` with `prefix` and `suffix`.
+Returns a `Collector` that concatenates `field` String values of the SObject input arguments, separated by the `delimiter` with `prefix` and `suffix`.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to concatenate|
+|`field`|the field value to concatenate|
 |`delimiter`|the delimiter between each element|
 |`prefix`|the prefix|
 |`suffix`|the suffix|
@@ -4120,8 +4118,8 @@ Returns a `Collector` that concatenates `fieldName` String values of the SObject
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `delimiter`, `prefix` or `suffix` is null|
 
 ###### Example
@@ -4165,15 +4163,15 @@ String lastNames = (String) [SObjectEnumerable].of(contacts)
 
 ---
 ### Int Collectors
-##### `public static Collector averagingInt(String fieldName)`
+##### `public static Collector averagingInt(String field)`
 
-Returns a `Collector` that returns the arithmetic mean of `fieldName` values. If no elements are present, the result is 0.
+Returns a `Collector` that returns the arithmetic mean of `field` values. If no elements are present, the result is 0.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to average|
+|`field`|the field value to average|
 
 ###### Returns
 
@@ -4185,8 +4183,8 @@ Returns a `Collector` that returns the arithmetic mean of `fieldName` values. If
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4241,15 +4239,15 @@ Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector summingInt(String fieldName)`
+##### `public static Collector summingInt(String field)`
 
-Returns a `Collector` that returns the arithmetic sum of `fieldName` values. If no elements are present, the result is null.
+Returns a `Collector` that returns the arithmetic sum of `field` values. If no elements are present, the result is null.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to sum|
+|`field`|the field value to sum|
 
 ###### Returns
 
@@ -4261,8 +4259,8 @@ Returns a `Collector` that returns the arithmetic sum of `fieldName` values. If 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4302,15 +4300,15 @@ Integer sumOfNumberOfEmployees = (Integer) [SObjectEnumerable].of(accounts)
 
 ---
 ### Long Collectors
-##### `public static Collector averagingLong(String fieldName)`
+##### `public static Collector averagingLong(String field)`
 
-Returns a `Collector` that returns the arithmetic mean of `fieldName` values. If no elements are present, the result is null.
+Returns a `Collector` that returns the arithmetic mean of `field` values. If no elements are present, the result is null.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to average|
+|`field`|the field value to average|
 
 ###### Returns
 
@@ -4322,8 +4320,8 @@ Returns a `Collector` that returns the arithmetic mean of `fieldName` values. If
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4361,15 +4359,15 @@ Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector summingLong(String fieldName)`
+##### `public static Collector summingLong(String field)`
 
-Returns a `Collector` that returns the arithmetic sum of `fieldName` values. If no elements are present, the result is null.
+Returns a `Collector` that returns the arithmetic sum of `field` values. If no elements are present, the result is null.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to sum|
+|`field`|the field value to sum|
 
 ###### Returns
 
@@ -4381,8 +4379,8 @@ Returns a `Collector` that returns the arithmetic sum of `fieldName` values. If 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4422,15 +4420,15 @@ Long sumOfNumberOfEmployees = (Long) [SObjectEnumerable].of(accounts)
 
 ---
 ### Double Collectors
-##### `public static Collector averagingDouble(String fieldName)`
+##### `public static Collector averagingDouble(String field)`
 
-Returns a `Collector` that returns the arithmetic mean of `fieldName` values. If no elements are present, the result is null.
+Returns a `Collector` that returns the arithmetic mean of `field` values. If no elements are present, the result is null.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to average|
+|`field`|the field value to average|
 
 ###### Returns
 
@@ -4442,8 +4440,8 @@ Returns a `Collector` that returns the arithmetic mean of `fieldName` values. If
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4481,15 +4479,15 @@ Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
 ```
 
 
-##### `public static Collector summingDouble(String fieldName)`
+##### `public static Collector summingDouble(String field)`
 
-Returns a `Collector` that returns the arithmetic sum of `fieldName` values. If no elements are present, the result is null.
+Returns a `Collector` that returns the arithmetic sum of `field` values. If no elements are present, the result is null.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to sum|
+|`field`|the field value to sum|
 
 ###### Returns
 
@@ -4501,8 +4499,8 @@ Returns a `Collector` that returns the arithmetic sum of `fieldName` values. If 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4542,15 +4540,15 @@ Double sumOfBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
 
 ---
 ### Intermediate Collectors
-##### `public static Collector filtering(String fieldName, Object value)`
+##### `public static Collector filtering(String field, Object value)`
 
-Adapts a `Collector` to one accepting elements by testing of `fieldName` is equal to `value` to each input element and only accumulating if it is true.
+Adapts a `Collector` to one accepting elements by testing of `field` is equal to `value` to each input element and only accumulating if it is true.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to test input arguments|
+|`field`|the field value to test input arguments|
 |`value`|the expected value|
 
 ###### Returns
@@ -4563,8 +4561,8 @@ Adapts a `Collector` to one accepting elements by testing of `fieldName` is equa
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 
 **See** [SObjectPredicates.isEqual](SObjectPredicates.isEqual)
@@ -4624,15 +4622,15 @@ Map<String, List<Account>> accountNamesHavingMoreThan100EmployeesByType =
 ```
 
 
-##### `public static Collector mapping(String fieldName)`
+##### `public static Collector mapping(String field)`
 
-Adapts a `Collector` to one accepting `fieldName` values to each input element before accumulation.
+Adapts a `Collector` to one accepting `field` values to each input element before accumulation.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to accumulate|
+|`field`|the field value to accumulate|
 
 ###### Returns
 
@@ -4644,8 +4642,8 @@ Adapts a `Collector` to one accepting `fieldName` values to each input element b
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4685,15 +4683,15 @@ List<String> accountNames = (List<String>)
 ```
 
 
-##### `public static Collector flatMapping(String fieldName)`
+##### `public static Collector flatMapping(String field)`
 
-Adapts a `Collector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable according to child relationship `fieldName` before accumulation.
+Adapts a `Collector` to one accepting elements as a result of replacing each input element with the contents of a mapped iterable according to child relationship `field` before accumulation.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the child relationship field|
+|`field`|the child relationship field|
 
 ###### Returns
 
@@ -4705,8 +4703,8 @@ Adapts a `Collector` to one accepting elements as a result of replacing each inp
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4791,15 +4789,15 @@ Account accountWithSummedNumberOfEmployees = (Account) [SObjectEnumerable].of(ac
 
 ---
 ### Optional Collectors
-##### `public static Collector maximizing(String fieldName)`
+##### `public static Collector maximizing(String field)`
 
-Returns a `Collector` which produces the maximal element according to `fieldName`, described as an `Optional` SObject . <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
+Returns a `Collector` which produces the maximal element according to `field`, described as an `Optional` SObject . <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to compare|
+|`field`|the field value to compare|
 
 ###### Returns
 
@@ -4811,8 +4809,8 @@ Returns a `Collector` which produces the maximal element according to `fieldName
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex
@@ -4862,15 +4860,15 @@ Account customerWithMaxNumberOfEmployees = (Account)
 ```
 
 
-##### `public static Collector minimizing(String fieldName)`
+##### `public static Collector minimizing(String field)`
 
-Returns a `Collector` which produces the minimal element according to `fieldName`, described as an `Optional` SObject . <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
+Returns a `Collector` which produces the minimal element according to `field`, described as an `Optional` SObject . <p>The result container <strong>cannot</strong> be cast to a specific `Optional` SObject.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field value to compare|
+|`field`|the field value to compare|
 
 ###### Returns
 
@@ -4882,8 +4880,8 @@ Returns a `Collector` which produces the minimal element according to `fieldName
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 ###### Example
 ```apex

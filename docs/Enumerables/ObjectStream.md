@@ -1,36 +1,28 @@
 # virtual ObjectStream
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
 A sequence of `Object` elements supporting aggregate operations.
 Stream operations are composed of stream chain. A stream chain consists of:
-<ul>
-    <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
-    <li>Zero or more Intermediate Operations (which transform a stream into another stream,
-    such as [ObjectStream.filter(IPredicate))](ObjectStream.filter(IPredicate))).</li>
-    <li>A Terminal Operation (which produces a result such as
-    [ObjectStream.count()](ObjectStream.count()) or [ObjectStream.collect(ICollector)](ObjectStream.collect(ICollector))).</li>
-</ul>
+- A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).
+- Zero or more Intermediate Operations (which transform a stream into another stream,
+such as [ObjectStream.filter(IPredicate)](ObjectStream.filter(IPredicate))).
+- A Terminal Operation (which produces a result such as
+[ObjectStream.count()](ObjectStream.count()) or [ObjectStream.collect(ICollector)](ObjectStream.collect(ICollector))).
 <p>Streams are <strong>lazy</strong>:</p>
-<ul>
-    <li>Intermediate operations describe how a stream is processed without performing any action.</li>
-    <li>Computation is only performed when the terminal operation is initiated,
-and source elements are consumed only as needed.</li>
-</ul>
+- Intermediate operations describe how a stream is processed without performing any action.
+- Computation is only performed when the terminal operation is initiated,
+and source elements are consumed only as needed.
 <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p>
 <p>A stream should be operated on (invoking an intermediate or terminal stream operation)
 only <strong>once</strong>.
 A stream throws [IllegalStateException](IllegalStateException) if it detects that the stream is being reused.</p>
 <p>Intermediate operations describe how a stream is processed without performing any action.</p>
 <p>Contract:</p>
-<ul>
-    <li>Must be non-interfering (do not modify the stream source but may mutate its elements).</li>
-    <li>Should be stateless in most cases.</li>
-</ul>
+- Must be non-interfering (do not modify the stream source but may mutate its elements).
+- Should be stateless in most cases.
 <p>Unlike in Java, an Apex Streams may execute only <strong>sequentially</strong>,
 i.e. do not support `spliterator()`.</p>
 <p>There are primitive specializations for [IntStream](/docs/Enumerables/IntStream.md), [LongStream](/docs/Enumerables/LongStream.md),
@@ -146,7 +138,7 @@ Returns a `ObjectEnumerable` created from `Iterable<Object>`.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `objects` is null|
+|`NullPointerException`|if `iterable` is null|
 
 ###### Example
 ```apex
@@ -230,7 +222,7 @@ Returns an infinite `ObjectEnumerable` produced by iterative application of `ope
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` is null|
+|`NullPointerException`|if `operator` is null|
 
 ##### `public static ObjectEnumerable iterate(Object seed, IPredicate predicate, IOperator operator)`
 
@@ -254,7 +246,7 @@ Returns an infinite `ObjectEnumerable` produced by iterative application of `ope
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` or `supplier` is null|
+|`NullPointerException`|if `predicate` or `operator` is null|
 
 ##### `public static ObjectEnumerable concat(Iterable<Object> iterable1, Iterable<Object> iterable2)`
 
@@ -291,7 +283,7 @@ List<String> append = (List<String>) ObjectStream.concat(strs1, strs2)
 
 ##### `public static ObjectEnumerable concat(List<Iterable<Object>> iterables)`
 
-Returns lazily concatenated `List<Iterable<Object>>`.
+Returns lazily concatenated `ObjectEnumerable` from `iterables`.
 
 ###### Parameters
 
@@ -359,8 +351,6 @@ List<String> zip = ObjectStream.zip(strs1, strs2, new ConcatBiOperator())
 
 
 ##### `public static ObjectEnumerable zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBiOperator combiner)`
-
-`SUPPRESSWARNINGS`
 
 Returns a combined `ObjectEnumerable` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
@@ -469,10 +459,10 @@ Returns new `ObjectEnumerable` by prepending `iterable` to the current stream.
 ```apex
 List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
 List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
-List<String> union = (List<String>) ObjectStream.of(strs1)
-    .union(strs2)
+List<String> prepend = (List<String>) ObjectStream.of(strs1)
+    .prepend(strs2)
     .toList(String.class);
-// ['foo', 'bar', 'baz', 'qux', 'fred']
+// ['qux', 'fred', 'foo', 'foo', 'bar', 'baz']
 ```
 
 
@@ -581,7 +571,7 @@ public class ContainsPredicate extends Predicate {
 }
 List<String> rest = (List<String>)
     ObjectStream.of(new List<String>{ 'bar', 'baz', 'foo' })
-    .take(new ContainsPredicate('a'))
+    .drop(new ContainsPredicate('a'))
     .toList(String.class); // ['foo']
 ```
 
@@ -1038,7 +1028,7 @@ public class SecondLetterComparer extends Comparer {
 }
 List<String> sorted = (List<String>)
     ObjectStream.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
-    .sort(new SecondCharComparer())
+    .sort(new SecondLetterComparer())
     .toList(String.class); // ['Bar', 'baz', 'bar', 'foo', 'Foo']
 ```
 
@@ -1070,7 +1060,7 @@ Returns a `ObjectEnumerable` with first `lim` elements. <p>Short-circuiting Stat
 ```apex
 List<String> first2 = (List<String>) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
     .lim(2)
-    .toList(String.class); // ['foo', 'baz']
+    .toList(String.class); // ['foo', 'bar']
 ```
 
 
@@ -1107,7 +1097,7 @@ List<String> rest = (List<String>) ObjectStream.of(new List<String>{ 'foo', 'bar
 
 ---
 ### Terminal Operations
-##### `public virtual override Object reduce(Object identity, IBiOperator accumulator)`
+##### `public virtual override Object fold(Object identity, IBiOperator accumulator)`
 
 Performs a reduction on `Object` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
@@ -1115,7 +1105,7 @@ Performs a reduction on `Object` elements, using `identity` value and an associa
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 ###### Returns
@@ -1129,6 +1119,48 @@ Performs a reduction on `Object` elements, using `identity` value and an associa
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
+
+###### Example
+```apex
+public class ConcatenateBiOperator extends BiOperator {
+    private final String separator;
+    public ConcatenateBiOperator(String separator) { this.separator = separator; }
+    public override Object apply(Object o1, Object o2) {
+        return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+    }
+}
+String concatenated = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+    .fold('', new ConcatenateBiOperator('-')); // 'foo-bar-baz'
+String concatenated1 = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
+    .fold('seed', new ConcatenateBiOperator(';')); // 'seed;foo;bar;baz'
+```
+
+
+##### `public virtual override Object reduce(Object identity, IBiOperator accumulator)`
+
+Performs a reduction on `Object` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`identity`|the initial value for `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Object`|the `Object` result of the reduction|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
 
 ###### Example
 ```apex
@@ -1182,7 +1214,7 @@ String concatenated = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', '
     .get(); // 'foo-bar-baz'
 String concatenated1 = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' })
     .reduce(new ConcatenateBiOperator(';'))
-    .get(); // 'seed;foo;bar;baz'
+    .get(); // 'foo;bar;baz'
 ```
 
 
@@ -1300,7 +1332,7 @@ String firstFound = (String) ObjectStream.of(new List<String>{ 'foo', 'bar', 'ba
 
 ##### `public virtual override Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `ObjectEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `ObjectEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
@@ -1461,7 +1493,7 @@ strStream.run(); // prints 'foo', 'bar', 'baz'
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set union of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1497,7 +1529,7 @@ List<String> union = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set union of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set union of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1537,7 +1569,7 @@ List<String> union = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set intersection of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1573,7 +1605,7 @@ List<String> intersect = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set intersection of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set intersection of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1613,7 +1645,7 @@ List<String> intersect = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set difference of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1653,7 +1685,7 @@ List<String> except1 = (List<String>) [ObjectEnumerable].of(strs2)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set difference of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set difference of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1756,7 +1788,7 @@ Boolean doesNoneStringContainA = [ObjectEnumerable].of(new List<String>{ 'foo', 
 *Inherited*
 
 
-Returns an `Optional` Object describing the maximum element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element according to `comparer`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
@@ -1768,7 +1800,7 @@ Returns an `Optional` Object describing the maximum element according to `compar
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object|
+|`Optional`|the `Optional` containing the result|
 
 ###### Throws
 
@@ -1796,19 +1828,19 @@ String maxLen = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', '
 *Inherited*
 
 
-Returns an `Optional` Object describing the minimum element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element according to `comparer`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`comparer`|comparer the comparer|
+|`comparer`|the comparer|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object|
+|`Optional`|the `Optional` containing the result|
 
 ###### Throws
 

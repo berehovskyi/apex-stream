@@ -1,8 +1,6 @@
 # abstract DoubleEnumerable
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -92,78 +90,13 @@ List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0
 List<Double> prepend = [DoubleEnumerable].of(doubles1)
     .prepend(doubles2)
     .toList();
-// [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0]
+// [8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0, 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0]
 ```
 
 
 ### `public virtual DoubleEnumerable union(Iterable<Double> iterable)`
 
-Returns a new `DoubleIterable` as a set union of the current and another iterables.
-
-#### Parameters
-
-|Param|Description|
-|---|---|
-|`iterable`|the other iterable|
-
-#### Returns
-
-|Type|Description|
-|---|---|
-|`DoubleEnumerable`|the new `DoubleIterable`|
-
-#### Throws
-
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `iterable` is null|
-
-#### Example
-```apex
-List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
-List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-List<Double> union = [DoubleEnumerable].of(doubles1)
-    .union(doubles2)
-    .toList();
-// [5.0, 3.0, 9.0, 7.0, 8.0, 6.0, 4.0, 1.0, 0.0]
-```
-
-
-### `public virtual DoubleEnumerable intersect(Iterable<Double> iterable)`
-
-Returns a new `DoubleIterable` as a set intersection of the current and another iterables.
-
-#### Parameters
-
-|Param|Description|
-|---|---|
-|`iterable`|the other iterable|
-
-#### Returns
-
-|Type|Description|
-|---|---|
-|`DoubleEnumerable`|the new `DoubleIterable`|
-
-#### Throws
-
-|Exception|Description|
-|---|---|
-|`NullPointerException`|if `iterable` is null|
-
-#### Example
-```apex
-List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
-List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-List<Double> intersection = [DoubleEnumerable].of(doubles1)
-    .intersect(doubles2)
-    .toList(); // [3.0, 9.0]
-```
-
-
-### `public virtual DoubleEnumerable except(Iterable<Double> iterable)`
-
-Returns a new `DoubleEnumerable` as a set difference of the current and another iterables.
+Returns a new `DoubleEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -187,7 +120,71 @@ Returns a new `DoubleEnumerable` as a set difference of the current and another 
 ```apex
 List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
 List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
-// doublesIterable1 = instance from
+List<Double> union = [DoubleEnumerable].of(doubles1)
+    .union(doubles2)
+    .toList();
+// [5.0, 3.0, 9.0, 7.0, 8.0, 6.0, 4.0, 1.0, 0.0]
+```
+
+
+### `public virtual DoubleEnumerable intersect(Iterable<Double> iterable)`
+
+Returns a new `DoubleEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
+
+#### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterable` is null|
+
+#### Example
+```apex
+List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
+List<Double> intersection = [DoubleEnumerable].of(doubles1)
+    .intersect(doubles2)
+    .toList(); // [3.0, 9.0]
+```
+
+
+### `public virtual DoubleEnumerable except(Iterable<Double> iterable)`
+
+Returns a new `DoubleEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`iterable`|the other iterable|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
+
+#### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `iterable` is null|
+
+#### Example
+```apex
+List<Double> doubles1 = new List<Double>{ 5.0, 3.0, 9.0, 7.0, 5.0, 9.0, 3.0, 7.0 };
+List<Double> doubles2 = new List<Double>{ 8.0, 3.0, 6.0, 4.0, 4.0, 9.0, 1.0, 0.0 };
 List<Double> diff = [DoubleEnumerable].of(doubles1)
     .except(doubles2)
     .toList(); // [5.0, 7.0]
@@ -196,13 +193,13 @@ List<Double> diff = [DoubleEnumerable].of(doubles1)
 
 ### `public DoubleEnumerable distinct()`
 
-Returns a `DoubleEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Example
 ```apex
@@ -214,19 +211,19 @@ List<Double> distinct = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Mat
 
 ### `public DoubleEnumerable filter(IPredicate predicate)`
 
-Returns a `DoubleEnumerable` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`predicate`|the non-interfering, stateless predicate|
+|`predicate`|the predicate|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -236,27 +233,32 @@ Returns a `DoubleEnumerable` with elements that match `predicate`. <p>Stateless 
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Double> filtered = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI, 1.5, 5 })
-    .filter(Predicates.isEqual(5))
+    .filter(new IsEqualPredicate(5))
     .toList(); // [5, 5]
 ```
 
 
 ### `public DoubleEnumerable take(IPredicate predicate)`
 
-Returns a `DoubleEnumerable` which takes elements while elements match `predicate`. <p>Short-circuiting Stateful Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` that takes elements while `predicate` returns `true`. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`predicate`|the non-interfering, stateless predicate|
+|`predicate`|the predicate|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -266,27 +268,32 @@ Returns a `DoubleEnumerable` which takes elements while elements match `predicat
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Double> firstFiltered = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-    .filter(Predicates.isEqual(0.1))
+    .take(new IsEqualPredicate(0.1))
     .toList(); // [0.1, 0.1]
 ```
 
 
 ### `public DoubleEnumerable drop(IPredicate predicate)`
 
-Returns a `DoubleEnumerable` which drops elements while elements match `predicate`, then takes the rest. <p>Stateful Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` that drops elements while `predicate` returns `true`, then takes the rest. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`predicate`|the non-interfering, stateless predicate|
+|`predicate`|the predicate|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -296,21 +303,26 @@ Returns a `DoubleEnumerable` which drops elements while elements match `predicat
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Double> rest = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.1, 5, 1.5, Math.PI })
-    .drop(Predicates.isEqual(0.1))
+    .drop(new IsEqualPredicate(0.1))
     .toList(); // [5, 1.5, Math.PI]
 ```
 
 
 ### `public virtual DoubleEnumerable withoutNulls()`
 
-Returns a new DoubleEnumerable` without null elements. <p>Stateful Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` without null elements. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Example
 ```apex
@@ -322,19 +334,19 @@ List<Double> withoutNulls = [DoubleEnumerable].of(new List<Double>{ 0.1, null, 5
 
 ### `public DoubleEnumerable mapTo(IOperator mapper)`
 
-Returns a `DoubleEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the mapping function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -357,19 +369,19 @@ List<Double> doubledDoubles = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01,
 
 ### `public IntEnumerable mapToInt(IFunction mapper)`
 
-Returns a `IntEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `IIntEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the mapping function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IIntEnumerable`|
 
 #### Throws
 
@@ -390,19 +402,19 @@ List<Integer> ints = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, 
 
 ### `public LongEnumerable mapToLong(IFunction mapper)`
 
-Returns a `LongEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `ILongEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the mapping function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `ILongEnumerable`|
 
 #### Throws
 
@@ -423,19 +435,19 @@ List<Long> longs = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8
 
 ### `public SObjectEnumerable mapToSObject(IFunction mapper)`
 
-Returns a `SObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `ISObjectEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the mapping operator|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`SObjectEnumerable`|the `SObjectEnumerable`|
+|`SObjectEnumerable`|the new `ISObjectEnumerable`|
 
 #### Throws
 
@@ -462,19 +474,19 @@ List<Account> accounts = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0,
 
 ### `public ObjectEnumerable mapToObject(IFunction mapper)`
 
-Returns a `ObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `IObjectEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the mapping function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`ObjectEnumerable`|the `ObjectEnumerable`|
+|`ObjectEnumerable`|the new `IObjectEnumerable`|
 
 #### Throws
 
@@ -495,7 +507,7 @@ List<String> strings = (List<String>) [DoubleEnumerable].of(new List<Double>{ 5.
 
 ### `public DoubleEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `DoubleEnumerable` with `Double` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -530,19 +542,19 @@ List<Double> doubles = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3
 
 ### `public DoubleEnumerable forEach(IConsumer consumer)`
 
-Returns a `DoubleEnumerable` after performing `consumer` action on each element. <p>Intermediate Operation.</p>
+Returns a `DoubleEnumerable` after performing the `consumer` action on each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`consumer`|the non-interfering, stateless action to be performed on each element. Expected to operate via side effects.|
+|`consumer`|the action|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|this `DoubleEnumerable`|
+|`DoubleEnumerable`|the `DoubleEnumerable`|
 
 #### Throws
 
@@ -563,13 +575,13 @@ List<Double> doubles = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3
 
 ### `public DoubleEnumerable sort()`
 
-Returns a `DoubleEnumerable` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with sorted elements. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Example
 ```apex
@@ -611,7 +623,7 @@ List<Double> sorted = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3,
 
 ### `public DoubleEnumerable lim(Integer lim)`
 
-Returns a `DoubleEnumerable` with first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with the first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -623,7 +635,7 @@ Returns a `DoubleEnumerable` with first `lim` elements. <p>Short-circuiting Stat
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -642,7 +654,7 @@ List<Double> first3Doubles = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5
 
 ### `public DoubleEnumerable skip(Integer n)`
 
-Returns a new `DoubleEnumerable` that skips first `n` elements and returns remaining elements. <p>Stateful Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` that skips the first `n` elements and returns the remaining elements. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -654,7 +666,7 @@ Returns a new `DoubleEnumerable` that skips first `n` elements and returns remai
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -671,15 +683,15 @@ List<Double> restDoubles = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, 
 ```
 
 
-### `public Double reduce(Double identity, IBiOperator accumulator)`
+### `public Double fold(Double identity, IBiOperator accumulator)`
 
-Performs a reduction on `Double` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+Performs a reduction on elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 #### Returns
@@ -697,25 +709,58 @@ Performs a reduction on `Double` elements, using `identity` value and an associa
 #### Example
 ```apex
 Double max = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
-    .reduce((Double) 0.0, BiOperators.max()); // 5.5
+    .fold((Double) 0.0, BiOperators.max()); // 5.5
 ```
 
 
-### `public Optional reduce(IBiOperator operator)`
+### `public Double reduce(Double identity, IBiOperator accumulator)`
 
-Performs a reduction on `Double` elements, using `identity` value and associative `accumulator` function, and returns an `Optional` Double describing the reduced value. <p>Terminal Operation.</p>
+Performs a reduction on elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`operator`|the associative, non-interfering, stateless accumulation function|
+|`identity`|the initial value for `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Double result of the reduction|
+|`Double`|the `Double` result of the reduction|
+
+#### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
+
+#### Example
+```apex
+Double max = [DoubleEnumerable].of(new List<Double>{ 5.5, 0.01, 1.0, 3, -8.99, -6, 4.01, 4.01 })
+    .reduce((Double) 0.0, BiOperators.max()); // 5.5
+```
+
+
+### `public Optional reduce(IBiOperator accumulator)`
+
+Performs a reduction on elements, using an associative `accumulator` function, and returns an `Optional` describing the reduced value. <p>Terminal Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`Optional`|the `Optional` result of the reduction|
 
 #### Throws
 
@@ -739,7 +784,7 @@ Performs a mutable reduction operation on elements, collecting elements to a con
 
 |Param|Description|
 |---|---|
-|`collector`|the function that returns a mutable result container|
+|`collector`|the collector|
 
 #### Returns
 
@@ -767,7 +812,7 @@ Set<Double> doubles = (Set<Double>)
 
 ### `public Optional find(IPredicate predicate)`
 
-Returns an `Optional` Double describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
+Returns an `Optional` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -779,7 +824,7 @@ Returns an `Optional` Double describing the first element that matches `predicat
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Double|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -794,7 +839,7 @@ public class IsGreaterPredicate extends Predicate {
     public IsGreaterPredicate(Double d) { this.d = d; }
     public override Boolean test(Object o) { return (Double) o > d; }
 }
-Double firstGreaterThan4Double = [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+Double firstGreaterThan4Double = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5, -8.99, -6, 4.01 })
     .find(new IsGreaterPredicate(4))
     .get(); // 5.5
 ```
@@ -802,7 +847,7 @@ Double firstGreaterThan4Double = [DoubleEnumerable].of(new List<Double>{ 0.01, 1
 
 ### `public Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `DoubleEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `DoubleEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -898,23 +943,23 @@ public class IsGreaterPredicate extends Predicate {
     public override Boolean test(Object o) { return (Double) o > d; }
 }
 Boolean isNoneDoubleGreaterThan6 = [DoubleEnumerable].of(new List<Double>{ 0.1, 5, 1.5, Math.PI })
-    .none(new IsGreaterPredicate(6)); // false
+    .none(new IsGreaterPredicate(6)); // true
 ```
 
 
 ### `public virtual Optional max()`
 
-Returns an `Optional` Double describing the maximum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Double|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
-Double max = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+Double max = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5, -8.99, -6, 4.01 })
     .max()
     .get(); // 5.5
 ```
@@ -922,17 +967,17 @@ Double max = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 
 
 ### `public virtual Optional min()`
 
-Returns an `Optional` Double describing the minimum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Double|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
-Double min = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 -8.99, -6, 4.01 })
+Double min = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5, -8.99, -6, 4.01 })
     .min()
     .get(); // -8.99
 ```
@@ -940,13 +985,13 @@ Double min = (Double) [DoubleEnumerable].of(new List<Double>{ 0.01, 1.0, 3, 5.5 
 
 ### `public virtual Double sum()`
 
-Returns the arithmetic sum of elements. <p>Terminal Operation.</p>
+Returns the arithmetic sum of values. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Double`|the sum of elements|
+|`Double`|the sum of values|
 
 #### Example
 ```apex
@@ -957,13 +1002,13 @@ Double sum = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5, 0
 
 ### `public virtual Optional avg()`
 
-Returns the arithmetic mean of of elements. <p>Terminal Operation.</p>
+Returns the arithmetic mean of values. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Double describing the result|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
@@ -993,7 +1038,7 @@ Integer count = [DoubleEnumerable].of(new List<Double>{ 0.1, 0.2, 0.3, -0.4, 0.5
 
 ### `public Boolean isEmpty()`
 
-Returns whether the count of elements is 0. <p>Terminal Operation.</p>
+Returns whether the count of elements is `0`. <p>Terminal Operation.</p>
 
 #### Returns
 
@@ -1018,7 +1063,7 @@ Accumulates elements into a `List<Double>`. <p>Terminal Operation.</p>
 
 |Type|Description|
 |---|---|
-|`List<Double>`|the `List<Double>` containing the enumerable elements|
+|`List<Double>`|the `List<Double>` containing the iterable elements|
 
 #### Example
 ```apex
@@ -1036,7 +1081,7 @@ Accumulates elements into a `Set<Double>`. <p>Terminal Operation.</p>
 
 |Type|Description|
 |---|---|
-|`Set<Double>`|the `Set<Double>` containing the enumerable elements|
+|`Set<Double>`|the `Set<Double>` containing the iterable elements|
 
 #### Example
 ```apex

@@ -1,8 +1,6 @@
 # abstract IntEnumerable
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -98,7 +96,7 @@ List<Integer> prepend = [IntEnumerable].of(ints1)
 
 ### `public virtual IntEnumerable union(Iterable<Integer> iterable)`
 
-Returns a new `IntEnumerable` as a set union of the current and another iterables.
+Returns a new `IntEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -130,7 +128,7 @@ List<Integer> union = [IntEnumerable].of(ints1)
 
 ### `public virtual IntEnumerable intersect(Iterable<Integer> iterable)`
 
-Returns a new `IntIterable` as a set intersection of the current and another iterables.
+Returns a new `IntEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -142,7 +140,7 @@ Returns a new `IntIterable` as a set intersection of the current and another ite
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the new `IntIterable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -162,7 +160,7 @@ List<Integer> intersection = [IntEnumerable].of(ints1)
 
 ### `public virtual IntEnumerable except(Iterable<Integer> iterable)`
 
-Returns a new `IntIterable` as a set difference of the current and another iterables.
+Returns a new `IntEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -174,7 +172,7 @@ Returns a new `IntIterable` as a set difference of the current and another itera
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the new `IntIterable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -194,13 +192,13 @@ List<Integer> diff = [IntEnumerable].of(ints1)
 
 ### `public IntEnumerable distinct()`
 
-Returns a `IntEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
+Returns a new `IntEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Example
 ```apex
@@ -212,7 +210,7 @@ List<Integer> distinct = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10, 0, 
 
 ### `public IntEnumerable filter(IPredicate predicate)`
 
-Returns a `IntEnumerable` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
+Returns a new `IntEnumerable` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
 
 #### Parameters
 
@@ -224,7 +222,7 @@ Returns a `IntEnumerable` with elements that match `predicate`. <p>Stateless Int
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -234,15 +232,20 @@ Returns a `IntEnumerable` with elements that match `predicate`. <p>Stateless Int
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Integer> filtered = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, 1, 5 })
-    .filter(Predicates.isEqual(5))
+    .filter(new IsEqualPredicate(5))
     .toList(); // [5, 5]
 ```
 
 
 ### `public IntEnumerable take(IPredicate predicate)`
 
-Returns a `IntEnumerable` which takes elements while elements match `predicate`. <p>Short-circuiting Stateful Intermediate Operation.</p>
+Returns a new `IntEnumerable` that takes elements while `predicate` returns `true`. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -254,7 +257,7 @@ Returns a `IntEnumerable` which takes elements while elements match `predicate`.
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -264,15 +267,20 @@ Returns a `IntEnumerable` which takes elements while elements match `predicate`.
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Integer> firstFiltered = [IntEnumerable].of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .take(Predicates.isEqual(0))
+    .take(new IsEqualPredicate(0))
     .toList(); // [0, 0]
 ```
 
 
 ### `public IntEnumerable drop(IPredicate predicate)`
 
-Returns a `IntEnumerable` which drops elements while elements match `predicate`, then takes the rest. <p>Stateful Intermediate Operation.</p>
+Returns a new `IntEnumerable` that drops elements while `predicate` returns `true`, then takes the rest. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -284,7 +292,7 @@ Returns a `IntEnumerable` which drops elements while elements match `predicate`,
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -294,8 +302,13 @@ Returns a `IntEnumerable` which drops elements while elements match `predicate`,
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Integer> rest = [IntEnumerable].of(new List<Integer>{ 0, 0, 1, 1, 5 })
-    .drop(Predicates.isEqual(0))
+    .drop(new IsEqualPredicate(0))
     .toList(); // [1, 1, 5]
 ```
 
@@ -308,7 +321,7 @@ Returns a new `IntEnumerable` without null elements. <p>Stateful Intermediate Op
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Example
 ```apex
@@ -320,7 +333,7 @@ List<Integer> withoutNulls = [IntEnumerable].of(new List<Integer>{ 0, 0, null, 1
 
 ### `public IntEnumerable mapTo(IOperator mapper)`
 
-Returns a `IntEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `IntEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -332,7 +345,7 @@ Returns a `IntEnumerable` with elements returned by `mapper` function, applied t
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -355,19 +368,19 @@ List<Integer> doubledInts = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 }
 
 ### `public LongEnumerable mapToLong(IFunction mapper)`
 
-Returns a `LongEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `LongEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -390,19 +403,19 @@ List<Long> doubledLongs = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public DoubleEnumerable mapToDouble(IFunction mapper)`
 
-Returns a `DoubleEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -425,19 +438,19 @@ List<Double> doubledDoubles = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10
 
 ### `public SObjectEnumerable mapToSObject(IFunction mapper)`
 
-Returns a `SObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`SObjectEnumerable`|the `SObjectEnumerable`|
+|`SObjectEnumerable`|the new `SObjectEnumerable`|
 
 #### Throws
 
@@ -464,19 +477,19 @@ List<Account> accounts = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, 10 })
 
 ### `public ObjectEnumerable mapToObject(IFunction mapper)`
 
-Returns a `ObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with elements returned by the `mapper` function. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless mapping function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`ObjectEnumerable`|the `ObjectEnumerable`|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
 
 #### Throws
 
@@ -497,7 +510,7 @@ List<String> strings = (List<String>) [IntEnumerable].of(new List<Integer>{ 0, 5
 
 ### `public IntEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `IntEnumerable` with `Integer` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `IntEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -532,19 +545,19 @@ List<Integer> ints = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public IntEnumerable forEach(IConsumer consumer)`
 
-Returns a `IntEnumerable` after performing `consumer` action on each element. <p>Intermediate Operation.</p>
+Returns an `IntEnumerable` after performing the `consumer` action on each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`consumer`|the non-interfering, stateless action to be performed on each element. Expected to operate via side effects.|
+|`consumer`|the non-interfering, stateless action|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|this `IntEnumerable`|
+|`IntEnumerable`|the `IntEnumerable`|
 
 #### Throws
 
@@ -565,13 +578,13 @@ List<Integer> ints = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public IntEnumerable sort()`
 
-Returns a `IntEnumerable` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
+Returns a new `IntEnumerable` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Example
 ```apex
@@ -583,7 +596,7 @@ List<Integer> sorted = [IntEnumerable].of(new List<Integer>{ 0, 5, null, 1, -10 
 
 ### `public IntEnumerable sort(SortOrder order)`
 
-Returns a `IntEnumerable` with sorted elements considering `order`. <p>Stateful Intermediate Operation.</p>
+Returns a new `IntEnumerable` with sorted elements considering `order`. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -595,7 +608,7 @@ Returns a `IntEnumerable` with sorted elements considering `order`. <p>Stateful 
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -613,7 +626,7 @@ List<Integer> sorted = [IntEnumerable].of(new List<Integer>{ 0, 5, null, 1, -10 
 
 ### `public IntEnumerable lim(Integer lim)`
 
-Returns a `IntEnumerable` with first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
+Returns a new `IntEnumerable` with the first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -625,7 +638,7 @@ Returns a `IntEnumerable` with first `lim` elements. <p>Short-circuiting Statefu
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -644,7 +657,7 @@ List<Integer> first3Ints = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public IntEnumerable skip(Integer n)`
 
-Returns a new `IntEnumerable` that skips first `n` elements and returns remaining elements. <p>Stateful Intermediate Operation.</p>
+Returns a new `IntEnumerable` that skips the first `n` elements and returns the remaining elements. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -656,7 +669,7 @@ Returns a new `IntEnumerable` that skips first `n` elements and returns remainin
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -673,15 +686,15 @@ List<Integer> restInts = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 ```
 
 
-### `public Integer reduce(Integer identity, IBiOperator accumulator)`
+### `public Integer fold(Integer identity, IBiOperator accumulator)`
 
-Performs a reduction on `Integer` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+Performs a reduction on elements, using the `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for the `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 #### Returns
@@ -695,6 +708,42 @@ Performs a reduction on `Integer` elements, using `identity` value and an associ
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
+
+#### Example
+```apex
+public class SumBiOperator extends BiOperator {
+    public override Object apply(Object o1, Object o2) { return (Integer) o1 + (Integer) o2; }
+}
+Integer sum = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
+    .fold(0, new SumBiOperator()); // -4
+```
+
+
+### `public Integer reduce(Integer identity, IBiOperator accumulator)`
+
+Performs a reduction on elements, using the `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`identity`|the initial value for the `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`Integer`|the `Integer` result of the reduction|
+
+#### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
 
 #### Example
 ```apex
@@ -747,7 +796,7 @@ Performs a mutable reduction operation on elements, collecting elements to a con
 
 |Param|Description|
 |---|---|
-|`collector`|the function that returns a mutable result container|
+|`collector`|the collector|
 
 #### Returns
 
@@ -775,7 +824,7 @@ Set<Integer> ints = (Set<Integer>)
 
 ### `public Optional find(IPredicate predicate)`
 
-Returns an `Optional` Integer describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
+Returns an `Optional` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -787,7 +836,7 @@ Returns an `Optional` Integer describing the first element that matches `predica
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Integer|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -808,7 +857,7 @@ Integer firstEvenInt = (Integer) [IntEnumerable].of(new List<Integer>{ 0, 5, 1, 
 
 ### `public Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `IntEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `IntEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -904,13 +953,13 @@ Boolean isNoneIntEven = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public virtual Optional max()`
 
-Returns an `Optional` Integer describing the maximum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Integer|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
@@ -922,13 +971,13 @@ Integer max = (Integer) [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public virtual Optional min()`
 
-Returns an `Optional` Integer describing the minimum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Integer|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
@@ -940,13 +989,13 @@ Integer min = (Integer) [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public Integer sum()`
 
-Returns the arithmetic sum of elements. <p>Terminal Operation.</p>
+Returns the arithmetic sum of values. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Integer`|the sum of elements|
+|`Integer`|the sum of values|
 
 #### Example
 ```apex
@@ -957,13 +1006,13 @@ Integer sum = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public Optional avg()`
 
-Returns the arithmetic mean of of elements. <p>Terminal Operation.</p>
+Returns the arithmetic mean of values. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Double describing the result|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
@@ -992,7 +1041,7 @@ Integer count = [IntEnumerable].of(new List<Integer>{ 0, 5, 1, -10 })
 
 ### `public Boolean isEmpty()`
 
-Returns whether the count of elements is 0. <p>Terminal Operation.</p>
+Returns whether the count of elements is `0`. <p>Terminal Operation.</p>
 
 #### Returns
 
@@ -1017,7 +1066,7 @@ Accumulates elements into a `List<Integer>`. <p>Terminal Operation.</p>
 
 |Type|Description|
 |---|---|
-|`List<Integer>`|the `List<Integer>` containing the enumerable elements|
+|`List<Integer>`|the `List<Integer>` containing the collected elements|
 
 #### Example
 ```apex
@@ -1035,7 +1084,7 @@ Accumulates elements into a `Set<Integer>`. <p>Terminal Operation.</p>
 
 |Type|Description|
 |---|---|
-|`Set<Integer>`|the `Set<Integer>` containing the enumerable elements|
+|`Set<Integer>`|the `Set<Integer>` containing the collected elements|
 
 #### Example
 ```apex

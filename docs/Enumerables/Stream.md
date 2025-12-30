@@ -1,8 +1,6 @@
 # Stream
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -33,7 +31,7 @@ depending on the type of the parameter.
 ## Methods
 ### `public static ObjectEnumerable of(List<Object> objects)`
 
-Returns a `ObjectEnumerable` created from `List<Object>`.
+Returns a `ObjectEnumerable` created from `objects`.
 
 #### Parameters
 
@@ -51,7 +49,7 @@ Returns a `ObjectEnumerable` created from `List<Object>`.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterable` is null|
+|`NullPointerException`|if `objects` is null|
 
 #### Example
 ```apex
@@ -135,7 +133,7 @@ Returns a `LongEnumerable` created from `longs`.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null|
+|`NullPointerException`|if `longs` is null|
 
 #### Example
 ```apex
@@ -173,7 +171,7 @@ DoubleEnumerable doubleStream = Stream.of(new List<Double>{ 0.1, 5, 1.5, Math.PI
 
 ### `public static ObjectEnumerable of(Set<Object> objects)`
 
-Returns a `ObjectEnumerable` created from `Set<Object>`.
+Returns a `ObjectEnumerable` created from `objects`.
 
 #### Parameters
 
@@ -275,7 +273,7 @@ Returns a `LongEnumerable` created from `longs`.
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `iterator` is null|
+|`NullPointerException`|if `longs` is null|
 
 #### Example
 ```apex
@@ -347,7 +345,7 @@ Returns a `SObjectEnumerable` created from `sObjects` if non-null, otherwise ret
 
 |Type|Description|
 |---|---|
-|`SObjectEnumerable`|the new `SObjectEnumerable` if `iterable` is non-null, otherwise an empty `SObjectEnumerable`|
+|`SObjectEnumerable`|the new `SObjectEnumerable` if `sObjects` is non-null, otherwise an empty `SObjectEnumerable`|
 
 #### Example
 ```apex
@@ -395,7 +393,7 @@ Returns a `LongEnumerable` created from `longs` if non-null, otherwise returns a
 
 #### Example
 ```apex
-LongEnumerable longStream = LongStream.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longStream = Stream.ofNullable(new List<Long>{ 0, 5L, 1L, -10 });
 ```
 
 
@@ -457,7 +455,7 @@ Returns a `SObjectEnumerable` created from `sObjects` if non-null, otherwise ret
 
 |Type|Description|
 |---|---|
-|`SObjectEnumerable`|the new `SObjectEnumerable` if `iterable` is non-null, otherwise an empty `SObjectEnumerable`|
+|`SObjectEnumerable`|the new `SObjectEnumerable` if `sObjects` is non-null, otherwise an empty `SObjectEnumerable`|
 
 #### Example
 ```apex
@@ -505,7 +503,7 @@ Returns a `LongEnumerable` created from `longs` if non-null, otherwise returns a
 
 #### Example
 ```apex
-LongEnumerable longStream = LongStream.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
+LongEnumerable longStream = Stream.ofNullable(new Set<Long>{ 0, 5L, 1L, -10 });
 ```
 
 
@@ -552,7 +550,7 @@ Returns an infinite `ObjectEnumerable` produced by iterative application of `ope
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` is null|
+|`NullPointerException`|if `operator` is null|
 
 ### `public static SObjectEnumerable iterate(SObject seed, IOperator operator)`
 
@@ -575,7 +573,7 @@ Returns an infinite `SObjectEnumerable` produced by iterative application of `op
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` is null|
+|`NullPointerException`|if `operator` is null|
 
 ### `public static IntEnumerable iterate(Integer seed, IOperator operator)`
 
@@ -598,7 +596,7 @@ Returns an infinite `IntEnumerable` produced by iterative application of `operat
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` is null|
+|`NullPointerException`|if `operator` is null|
 
 #### Example
 ```apex
@@ -627,7 +625,7 @@ Returns an infinite `LongEnumerable` produced by iterative application of `opera
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` is null|
+|`NullPointerException`|if `operator` is null|
 
 #### Example
 ```apex
@@ -686,7 +684,7 @@ Returns an infinite `ObjectEnumerable` produced by iterative application of `ope
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` or `supplier` is null|
+|`NullPointerException`|if `predicate` or `operator` is null|
 
 ### `public static SObjectEnumerable iterate(SObject seed, IPredicate predicate, IOperator operator)`
 
@@ -710,7 +708,7 @@ Returns an infinite `SObjectEnumerable` produced by iterative application of `op
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` or `supplier` is null|
+|`NullPointerException`|if `predicate` or `operator` is null|
 
 ### `public static IntEnumerable iterate(Integer seed, IPredicate predicate, IOperator operator)`
 
@@ -734,7 +732,7 @@ Returns an infinite `IntEnumerable` produced by iterative application of `operat
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` or `supplier` is null|
+|`NullPointerException`|if `predicate` or `operator` is null|
 
 ### `public static LongEnumerable iterate(Long seed, IPredicate predicate, IOperator operator)`
 
@@ -758,7 +756,7 @@ Returns an infinite `LongEnumerable` produced by iterative application of `opera
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` or `supplier` is null|
+|`NullPointerException`|if `predicate` or `operator` is null|
 
 ### `public static DoubleEnumerable iterate(Double seed, IPredicate predicate, IOperator operator)`
 
@@ -782,6 +780,6 @@ Returns an infinite `DoubleEnumerable` produced by iterative application of `ope
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `supplier` or `supplier` is null|
+|`NullPointerException`|if `predicate` or `operator` is null|
 
 ---

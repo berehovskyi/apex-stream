@@ -1,8 +1,6 @@
 # abstract Comparer
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -32,6 +30,22 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public Integer compare(Object o1, Object o2)`
+
+Compares the two arguments.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`o1`|the first input argument of `Object` type|
+|`o2`|the second input argument of `Object` type|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Integer`|`-1` if `o1` is less than `o2`, `0` if they're equal, and `1` otherwise|
+
 ---
 ### Default Methods
 ##### `public virtual Comparer thenComparing(IComparer other)`
@@ -54,7 +68,7 @@ Returns a composed `Comparer` of `this` and the `other` comparer. If `this` cons
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `keyExtractor` or `keyComparer` is null|
+|`NullPointerException`|if `other` is null|
 
 ##### `public virtual Comparer thenComparing(IFunction keyExtractor, IComparer keyComparer)`
 
@@ -99,7 +113,7 @@ Returns a composed `Comparer` of `this` and then comparing on the key extracted 
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `keyExtractor` or `keyComparer` is null|
+|`NullPointerException`|if `keyExtractor` is null|
 
 ##### `public virtual Comparer order(SortOrder order)`
 
@@ -160,7 +174,7 @@ Returns a comparer that imposes the reverse ordering of `this` comparer.
 ### Static Methods
 ##### `public static Comparer comparing(IFunction keyExtractor, IComparer keyComparer)`
 
-Returns a `Comparer` that compares extracted by the `keyExtractor` keys using the `keyComparer`.
+Returns a `Comparer` that compares keys extracted by the `keyExtractor` using the `keyComparer`.
 
 ###### Parameters
 
@@ -183,7 +197,7 @@ Returns a `Comparer` that compares extracted by the `keyExtractor` keys using th
 
 ##### `public static Comparer comparing(IFunction keyExtractor)`
 
-Returns a `Comparer` that compares extracted by the `keyExtractor` keys.
+Returns a `Comparer` that compares keys extracted by the `keyExtractor`.
 
 ###### Parameters
 

@@ -1,11 +1,11 @@
 # virtual SObjectConsumerProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
 Provides a fluent interface for building consumers that operate on SObjects, allowing you
-to set fields, add errors, and perform other operations on SObjects.
+to mutate SObjects: set fields, add errors, and perform other operations.
 
 
 **Group** Functional Built-In Classes V2
@@ -13,7 +13,7 @@ to set fields, add errors, and perform other operations on SObjects.
 ## Methods
 ### `public virtual AddErrorMessageConsumer addError(String message)`
 
-Returns an `AddErrorMessageConsumer` that adds an error message to a field of a SObject.
+Returns an `AddErrorMessageConsumer` that adds an error message to a field of an SObject.
 
 #### Parameters
 
@@ -81,15 +81,15 @@ addExceptionErrorConsumer.accept(new Account());
 ```
 
 
-### `public virtual SetByName set(String fieldName)`
+### `public virtual SetByName set(String field)`
 
-Returns a `SetByName` builder that sets the value for the specified `fieldName` on the SObject. Cross-reference fields and safe navigation are supported.
+Returns a `SetByName` builder that sets the value for the specified `field` on the SObject. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set the value for|
+|`field`|the field to set the value for|
 
 #### Returns
 
@@ -101,8 +101,8 @@ Returns a `SetByName` builder that sets the value for the specified `fieldName` 
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 
 **See** [SObject.put](SObject.put)
@@ -156,15 +156,15 @@ setNameConsumer.accept(new Account()); // { Name: 'Jane Doe' }
 ```
 
 
-### `public virtual SetSObjectByName setSObject(String fieldName)`
+### `public virtual SetSObjectByName setSObject(String field)`
 
-Returns a `SetSObjectByName` builder that sets a related SObject using the field name. Cross-reference fields and safe navigation are supported.
+Returns a `SetSObjectByName` builder that sets a related SObject using the field. Cross-reference fields and safe navigation are supported.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the field name to set the value for|
+|`field`|the field to set the value for|
 
 #### Returns
 
@@ -176,8 +176,8 @@ Returns a `SetSObjectByName` builder that sets a related SObject using the field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 
 
 **See** [SObject.putSObject](SObject.putSObject)
@@ -319,7 +319,7 @@ addErrorConsumer.accept(new Account());
 ```
 
 
-##### `public virtual Consumer to(String fieldName)`
+##### `public virtual Consumer to(String field)`
 
 Returns a `Consumer` that adds the error message to the specified field on the SObject.
 
@@ -327,7 +327,7 @@ Returns a `Consumer` that adds the error message to the specified field on the S
 
 |Param|Description|
 |---|---|
-|`fieldName`|the name of the field to add the error message to|
+|`field`|the name of the field to add the error message to|
 
 ###### Returns
 
@@ -339,9 +339,9 @@ Returns a `Consumer` that adds the error message to the specified field on the S
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
-|`SObjectException`|if provided invalid `fieldName`|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -431,7 +431,7 @@ setFieldWithFunctionConsumer.accept(new Account()); // { Name: 'Jane Doe' }
 
 ### SetByName
 
-Sets a field value for a specific field name on the SObject.
+Sets a field value for a specific field on the SObject.
 You can use this instance to assign a value to a field using either a constant or a function, or another field.
 
 
@@ -474,16 +474,19 @@ setFieldWithFunctionConsumer.accept(new Account()); // { Name: 'Jane Doe' }
 ---
 
 ### SetFieldValueBase
-#### Methods
-##### `public virtual Consumer val(String fieldName)`
 
-Fetches a value from the provided field name and sets it to the target field defined in the previous step. Cross-reference fields and safe navigation are supported.
+An abstract class that provides a base implementation for setting a field value.
+
+#### Methods
+##### `public virtual Consumer val(String field)`
+
+Fetches a value from the provided field and sets it to the target field defined in the previous step. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|the name of the field to fetch the value from|
+|`field`|the name of the field to fetch the value from|
 
 ###### Returns
 
@@ -495,9 +498,9 @@ Fetches a value from the provided field name and sets it to the target field def
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
-|`SObjectException`|if the provided `fieldName` is invalid|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
+|`SObjectException`|if the provided `field` is invalid|
 
 ###### Example
 ```apex
@@ -614,7 +617,7 @@ setParentAccountConsumer.accept(new Account()); // { Parent: { Name: 'Parent Acc
 
 ### SetSObjectByName
 
-Sets a `SObject` for a specific field name on the SObject.
+Sets a `SObject` for a specific field on the SObject.
 You can use this instance to assign a value using either a constant or a function, or another field.
 
 
@@ -625,7 +628,7 @@ SetSObjectByName
 #### Methods
 ##### `public virtual override Consumer val(IFunction mapper)`
 
-Sets the `SObject` value by applying the provided function to the specified field name.
+Sets the `SObject` value by applying the provided function to the specified field.
 
 ###### Parameters
 

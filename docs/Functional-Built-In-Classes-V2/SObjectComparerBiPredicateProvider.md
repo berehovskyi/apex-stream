@@ -1,6 +1,6 @@
 # virtual SObjectComparerBiPredicateProvider
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -126,13 +126,13 @@ isRightRevenueLt1MBiPredicate.test(
 
 ### `public virtual ComparisonOperator isL(String left)`
 
-Creates a `ComparisonOperator` for comparing the left value of two SObjects using the provided field name, with support for currying to build complex comparisons.
+Creates a `ComparisonOperator` for comparing the left value of two SObjects using the provided field, with support for currying to build complex comparisons.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`left`|the field name of the SObject to be used for mapping|
+|`left`|the field of the SObject to be used for mapping|
 
 #### Returns
 
@@ -144,10 +144,10 @@ Creates a `ComparisonOperator` for comparing the left value of two SObjects usin
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross-reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 #### Example
 ```apex
@@ -188,11 +188,11 @@ Creates a `ComparisonOperator` for comparing the left value of two SObjects usin
 
 #### Example
 ```apex
-IBiPredicate areNamesEqPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
+IBiPredicate areNamesEqBiPredicate = new SObjectComparerBiPredicateProvider(Comparer.defaultOrder())
     .isL(Account.Name)
     .eq()
     .rVal(Account.Name);
-areNamesEqPredicate.test(new Account(Name = 'John'), new Account(Name = 'John')); // true
+areNamesEqBiPredicate.test(new Account(Name = 'John'), new Account(Name = 'John')); // true
 ```
 
 
@@ -242,7 +242,7 @@ areNeAccountsBiPredicate.test(
 ## Classes
 ### ComparisonOperator
 
-Represents the operations available for comparing an SObjects with another value or field,
+Represents the operations available for comparing an SObject with another SObject,
 utilizing currying to support flexible and reusable comparisons.
 
 #### Methods
@@ -483,28 +483,28 @@ isLeftRevenueGt1MBiPredicate.test(
 
 ##### `public virtual BiPredicate rVal(String right)`
 
-Specifies a field name to compare the left value against, creating a `BiPredicate` that evaluates the comparison.
+Specifies a field to compare the left value against, creating a `BiPredicate` that evaluates the comparison.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`right`|the field name to compare against|
+|`right`|the field to compare against|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`BiPredicate`|a `BiPredicate` that returns true if the comparison holds for the specified field name|
+|`BiPredicate`|a `BiPredicate` that returns true if the comparison holds for the specified field|
 
 ###### Throws
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross-reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex

@@ -1,6 +1,6 @@
 # virtual SObjectSuppliers
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -20,7 +20,7 @@ and related utilities.
 ### Built-Ins
 ##### `public static Supplier of(SObjectType sObjectType)`
 
-Returns a `SObjectSupplier` that returns a new `SObject` instance of the given `sObjectType`.
+Returns a `Supplier` that returns a new `SObject` instance of the given `sObjectType`.
 
 ###### Parameters
 
@@ -32,7 +32,7 @@ Returns a `SObjectSupplier` that returns a new `SObject` instance of the given `
 
 |Type|Description|
 |---|---|
-|`Supplier`|the `SObjectSupplier`|
+|`Supplier`|the `Supplier`|
 
 ###### Throws
 

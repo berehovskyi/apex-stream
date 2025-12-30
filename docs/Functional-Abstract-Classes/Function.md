@@ -1,6 +1,6 @@
 # abstract Function
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -24,6 +24,21 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public Object apply(Object o)`
+
+Applies the function to the input argument.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`o`|the input argument of `Object` type|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Object`|the result|
+
 ---
 ### Default Methods
 ##### `public virtual Function andThen(IFunction after)`
@@ -74,7 +89,7 @@ Returns a composed `Function` that executes `before` operation first, then the `
 ### Static Methods
 ##### `public static Function compose(List<IFunction> functions)`
 
-Returns a composed `Function` that sequentially executes the operations in the same order as the order of the consumers input list.
+Returns a composed `Function` that sequentially executes the operations in the same order as the order of the functions input list.
 
 ###### Parameters
 
@@ -92,7 +107,7 @@ Returns a composed `Function` that sequentially executes the operations in the s
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `operators` is null or some element is null|
+|`NullPointerException`|if `functions` is null or some element is null|
 
 ##### `public static Function identity()`
 
@@ -144,7 +159,7 @@ Returns a composed `Function` of the `predicate`.
 
 ##### `public static Function compose(ISupplier supplier)`
 
-Returns a composed `SObjectFunction` of the `supplier`.
+Returns a composed `Function` of the `supplier`.
 
 ###### Parameters
 
@@ -156,7 +171,7 @@ Returns a composed `SObjectFunction` of the `supplier`.
 
 |Type|Description|
 |---|---|
-|`Function`|the `SObjectFunction`|
+|`Function`|the `Function`|
 
 ###### Throws
 

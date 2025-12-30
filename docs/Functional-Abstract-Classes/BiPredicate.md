@@ -1,6 +1,6 @@
 # abstract BiPredicate
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -24,6 +24,22 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public Boolean test(Object o1, Object o2)`
+
+Returns the result of applying this predicate to input.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`o1`|the first input argument of `Object` type|
+|`o2`|the second input argument of `Object` type|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Boolean`|`true` if the input satisfies the predicate, `false` otherwise|
+
 ---
 ### Default Methods
 ##### `public virtual BiPredicate orElse(IBiPredicate other)`
@@ -56,7 +72,7 @@ someBiPredicate1.orElse(someBiPredicate2);
 
 ##### `public virtual BiPredicate andAlso(IBiPredicate other)`
 
-Returns a composed `BiPredicate` that applies short-circuiting logical `AND` operator to `this` `IPredicate` and `other` in that order.
+Returns a composed `BiPredicate` that applies short-circuiting logical `AND` operator to `this` `IBiPredicate` and `other` in that order.
 
 ###### Parameters
 
@@ -120,7 +136,7 @@ Returns a composed `BiPredicate` that applies sequentially short-circuiting logi
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `other` is null or some of the list element is null|
+|`NullPointerException`|if `predicates` is null or some of the list element is null|
 
 ###### Example
 ```apex
@@ -148,7 +164,7 @@ Returns a composed `BiPredicate` that applies sequentially short-circuiting logi
 
 |Exception|Description|
 |---|---|
-|`NullPointerException`|if `other` is null or some of the list element is null|
+|`NullPointerException`|if `predicates` is null or some of the list element is null|
 
 ###### Example
 ```apex
@@ -250,7 +266,7 @@ Returns a `BiPredicate` that always evaluates to the Boolean `value` (`true` or 
 
 |Type|Description|
 |---|---|
-|`BiPredicate`|predicate the `BiPredicate`|
+|`BiPredicate`|the `BiPredicate`|
 
 ###### Throws
 

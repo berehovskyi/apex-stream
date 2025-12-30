@@ -1,6 +1,6 @@
 # virtual SObjectBiPredicates
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -27,7 +27,7 @@ SObjectBiPredicates
 ### Built-Ins
 ##### `public static BiPredicate areEqual(SObjectField field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is equal to the `field` of the second input argument, comparing object value equality not reference equality.
+Returns a `BiPredicate` that tests the input SObjects if the value of the `field` of the first input argument is equal to the `field` of the second input argument, comparing object value equality not reference equality.
 
 ###### Parameters
 
@@ -53,15 +53,15 @@ SObjectBiPredicates.areEqual(Account.NumberOfEmployees);
 ```
 
 
-##### `public static BiPredicate areEqual(String fieldName)`
+##### `public static BiPredicate areEqual(String field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is equal to the `fieldName` of the second input argument, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
+Returns a `BiPredicate` that tests the input SObjects if the value of the `field` of the first input argument is equal to the `field` of the second input argument, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
+|`field`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
 ###### Returns
 
@@ -73,10 +73,10 @@ Returns a `BiPredicate` that tests the input sobjects if the value of the `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -87,7 +87,7 @@ SObjectBiPredicates.areEqual('Parent?.NumberOfEmployees');
 
 ##### `public static BiPredicate areNotEqual(SObjectField field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is not equal to the `field` of the second input argument, comparing object value equality not reference equality.
+Returns a `BiPredicate` that tests the input SObjects if the value of the `field` of the first input argument is not equal to the `field` of the second input argument, comparing object value equality not reference equality.
 
 ###### Parameters
 
@@ -113,15 +113,15 @@ SObjectBiPredicates.areNotEqual(Account.NumberOfEmployees);
 ```
 
 
-##### `public static BiPredicate areNotEqual(String fieldName)`
+##### `public static BiPredicate areNotEqual(String field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is not equal to the `fieldName` of the second input argument, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
+Returns a `BiPredicate` that tests the input SObjects if the value of the `field` of the first input argument is not equal to the `field` of the second input argument, comparing object value equality not reference equality. Cross-reference fields and safe navigation are supported.
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
+|`field`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
 ###### Returns
 
@@ -133,10 +133,10 @@ Returns a `BiPredicate` that tests the input sobjects if the value of the `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -173,15 +173,15 @@ SObjectBiPredicates.isGreater(Account.NumberOfEmployees);
 ```
 
 
-##### `public static BiPredicate isGreater(String fieldName)`
+##### `public static BiPredicate isGreater(String field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is greater than the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>` "greater than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `BiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is greater than the `field` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>` "greater than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
+|`field`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
 ###### Returns
 
@@ -193,10 +193,10 @@ Returns a `BiPredicate` that tests the input sobjects if the value of the `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -233,15 +233,15 @@ SObjectBiPredicates.isGreaterOrEqual(Account.NumberOfEmployees);
 ```
 
 
-##### `public static BiPredicate isGreaterOrEqual(String fieldName)`
+##### `public static BiPredicate isGreaterOrEqual(String field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is greater than or equal to the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `BiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is greater than or equal to the `field` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `>=` "greater than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
+|`field`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
 ###### Returns
 
@@ -253,10 +253,10 @@ Returns a `BiPredicate` that tests the input sobjects if the value of the `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -293,15 +293,15 @@ SObjectBiPredicates.isLess(Account.NumberOfEmployees);
 ```
 
 
-##### `public static BiPredicate isLess(String fieldName)`
+##### `public static BiPredicate isLess(String field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is less than the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<` "less than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `BiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is less than the `field` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<` "less than" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
+|`field`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
 ###### Returns
 
@@ -313,10 +313,10 @@ Returns a `BiPredicate` that tests the input sobjects if the value of the `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex
@@ -353,15 +353,15 @@ SObjectBiPredicates.isLessOrEqual(Account.NumberOfEmployees);
 ```
 
 
-##### `public static BiPredicate isLessOrEqual(String fieldName)`
+##### `public static BiPredicate isLessOrEqual(String field)`
 
-Returns a `BiPredicate` that tests the input sobjects if the value of the `fieldName` of the first input argument is less than or equal to the `fieldName` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
+Returns a `BiPredicate` that tests the input sobjects if the value of the `field` of the first input argument is less than or equal to the `field` of the second input argument. Cross-reference fields and safe navigation are supported. <p><strong>Note: </strong></p> <p>Unlike the standard `<=` "less than or equal to" operator, the predicate function supports comparison of all primitive types and considers a non-null value as always greater than a null value.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`fieldName`|of the first and the second input arguments the value of which are considered as arguments of comparison|
+|`field`|of the first and the second input arguments the value of which are considered as arguments of comparison|
 
 ###### Returns
 
@@ -373,10 +373,10 @@ Returns a `BiPredicate` that tests the input sobjects if the value of the `field
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross- reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 ###### Example
 ```apex

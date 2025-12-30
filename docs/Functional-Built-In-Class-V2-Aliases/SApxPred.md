@@ -1,6 +1,6 @@
 # SApxPred
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -110,13 +110,13 @@ isRevenueLt1MPredicate.test(new Account(AnnualRevenue = 500000)); // true
 *Inherited*
 
 
-Creates a `ComparisonOperator` for comparing SObjects using the provided field name, with support for currying to build complex comparisons.
+Creates a `ComparisonOperator` for comparing SObjects using the provided field, with support for currying to build complex comparisons.
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`left`|the field name of the SObject to be used for mapping|
+|`left`|the field of the SObject to be used for mapping|
 
 #### Returns
 
@@ -128,14 +128,14 @@ Creates a `ComparisonOperator` for comparing SObjects using the provided field n
 
 |Exception|Description|
 |---|---|
-|`IllegalArgumentException`|if `fieldName` is blank|
-|`NullPointerException`|if `fieldName` is null|
+|`IllegalArgumentException`|if `field` is blank|
+|`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `NullPointerException` occurs during unsafe cross-reference navigation|
-|`SObjectException`|if provided invalid `fieldName`|
+|`SObjectException`|if provided invalid `field`|
 
 #### Example
 ```apex
-SObjectComparerPredicateProvider builder = new SObjectComparerPredicateProvider(Comparer.defaultOrder())
+SObjectComparerPredicateProvider builder = new SObjectComparerPredicateProvider(Comparer.defaultOrder());
 IPredicate isNameJohnPredicate = builder.is('Name').eq().var('John');
 isNameJohnPredicate.test(new Account(Name = 'John')); // true
 IPredicate isRevenueGt1MPredicate = builder.is('AnnualRevenue').gt().var(1000000);

@@ -1,6 +1,6 @@
 # abstract Consumer
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -24,6 +24,15 @@ Provides default and static methods of
 ## Methods
 ### Function
 ##### `public void accept(Object o)`
+
+Performs the operation on the input argument. The method is expected to operate via side-effects.
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`o`|the input argument of `Object` type|
+
 ---
 ### Default Methods
 ##### `public virtual Consumer andThen(IConsumer after)`

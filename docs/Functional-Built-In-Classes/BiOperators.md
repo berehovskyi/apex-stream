@@ -1,6 +1,6 @@
 # virtual BiOperators
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -17,7 +17,7 @@ and related utilities that are used by [IEnumerable](IEnumerable).
 ### Built-Ins
 ##### `public static BiOperator min()`
 
-Returns a `BiOperator` that return a lesser input argument.
+Returns a `BiOperator` that returns the lesser input argument.
 
 ###### Returns
 
@@ -33,7 +33,7 @@ BiOperators.min().apply(2, 5); // 2
 
 ##### `public static BiOperator max()`
 
-Returns a `BiOperator` that return a greater input argument.
+Returns a `BiOperator` that returns the greater input argument.
 
 ###### Returns
 

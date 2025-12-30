@@ -11,7 +11,6 @@ Provides a skeletal implementation of [IDoubleEnumerable](/docs/Enumerables/IDou
 
 A sequence of `Double` elements supporting aggregate operations,
 a primitive specialization of [ObjectSequence](/docs/Enumerables/ObjectSequence.md).
-<p><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method</a></p>
 
 
 
@@ -102,20 +101,16 @@ Provides a skeletal implementation of [IObjectEnumerable](/docs/Enumerables/IObj
 
 A sequence of `Object` elements supporting aggregate operations.
 Sequence operations are composed of sequence chain. A sequence chain consists of:
-<ul>
-    <li>A Source (which might be an iterable (such as list or set)).</li>
-    <li>Zero or more Intermediate Operations (which transform a sequence...</li>
-</ul>
+- A Source (which might be an iterable (such as list or set)).
+- Zero or more Intermediate Operations (which transform a sequence into another sequence,&hellip;
 
 
 ### [ObjectStream](/docs/Enumerables/ObjectStream.md)
 
 A sequence of `Object` elements supporting aggregate operations.
 Stream operations are composed of stream chain. A stream chain consists of:
-<ul>
-    <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
-    <li>Zero or more Intermediate Opera...</li>
-</ul>
+- A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).
+- Zero or more Intermediate Operations (which transform&hellip;
 
 
 ### [SObjectEnumerable](/docs/Enumerables/SObjectEnumerable.md)
@@ -128,19 +123,16 @@ Provides a skeletal implementation of [ISObjectEnumerable](/docs/Enumerables/ISO
 
 A sequence of `SObject` elements supporting aggregate operations.
 Sequence operations are composed of sequence chain. A sequence chain consists of:
-<ul>
-    <li>A Source (which might be an iterable (such as list or set)).</li>
-    <li>Zero or more Intermediate Operations (which transform a sequence...</li>
-</ul>
+- A Source (which might be an iterable (such as list or set)).
+- Zero or more Intermediate Operations (which transform a sequence into another sequence&hellip;
+
 
 ### [SObjectStream](/docs/Enumerables/SObjectStream.md)
 
 A sequence of `SObject` elements supporting aggregate operations.
 Stream operations are composed of stream chain. A stream chain consists of:
-<ul>
-    <li>A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).</li>
-    <li>Zero or more Intermediate Oper...</li>
-</ul>
+- A Source (which might be an iterable (such as list or set), an iterator, a generator function, etc).
+- Zero or more Intermediate Operations (which transfor&hellip;
 
 
 ### [Sequence](/docs/Enumerables/Sequence.md)
@@ -174,7 +166,7 @@ value.
 ### [IBiOperator](/docs/Functional-Interfaces/IBiOperator.md)
 
 An entity that takes two arguments of `Object` type and returns an `Object`
-value. The types of the arguments and the of returned value <strong>must</strong> be the same.
+value. The types of the arguments and of the returned value <strong>must</strong> be the same.
 
 
 
@@ -375,7 +367,7 @@ inequality, and relational comparisons with the ability to use fields, constants
 ### [SObjectConsumerProvider](/docs/Functional-Built-In-Classes-V2/SObjectConsumerProvider.md)
 
 Provides a fluent interface for building consumers that operate on SObjects, allowing you
-to set fields, add errors, and perform other operations on SObjects.
+to mutate SObjects: set fields, add errors, and perform other operations.
 
 
 
@@ -410,7 +402,7 @@ This class acts as a factory for different types of functions that can be applie
 Provides a fluent interface for building predicates
 that operate on iterable collections using currying.
 This builder allows you to create predicates for checking if an object is in or not in a given collection,
-as well as if a string is included in or excluded from a iterable of strings.
+as well as if a string is included in or excluded from an iterable of strings.
 
 
 

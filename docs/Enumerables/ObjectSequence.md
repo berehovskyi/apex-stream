@@ -1,34 +1,26 @@
 # virtual ObjectSequence
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
 A sequence of `Object` elements supporting aggregate operations.
 Sequence operations are composed of sequence chain. A sequence chain consists of:
-<ul>
-    <li>A Source (which might be an iterable (such as list or set)).</li>
-    <li>Zero or more Intermediate Operations (which transform a sequence into another sequence,
-    such as [ObjectSequence.filter(IPredicate))](ObjectSequence.filter(IPredicate))).</li>
-    <li>A Terminal Operation (which produces a result such as
-    [ObjectSequence.count()](ObjectSequence.count()) or [ObjectSequence.collect(ICollector)](ObjectSequence.collect(ICollector))).</li>
-</ul>
+- A Source (which might be an iterable (such as list or set)).
+- Zero or more Intermediate Operations (which transform a sequence into another sequence,
+such as [ObjectSequence.filter(IPredicate)](ObjectSequence.filter(IPredicate))).
+- A Terminal Operation (which produces a result such as
+[ObjectSequence.count()](ObjectSequence.count()) or [ObjectSequence.collect(ICollector)](ObjectSequence.collect(ICollector))).
 <p>Sequences are <strong>eager</strong>:</p>
-<ul>
-    <li>Intermediate operations describe how a sequence is processed eagerly performing every action.</li>
-    <li>Computation is performed every time when the intermediate or the terminal operation is initiated.</li>
-</ul>
+- Intermediate operations describe how a sequence is processed eagerly performing every action.
+- Computation is performed every time when the intermediate or the terminal operation is initiated.
 <p>A sequence may not consume all elements. It may not be infinite.</p>
 <p>A sequence can be operated on (invoking an intermediate or terminal sequence operation)
 <strong>multiple times</strong>.
 <p>Contract:</p>
-<ul>
-    <li>Must be non-interfering (do not modify the sequence source but may mutate its elements).</li>
-</ul>
+- Must be non-interfering (do not modify the sequence source but may mutate its elements).
 <p>There are primitive specializations for [IntSequence](/docs/Enumerables/IntSequence.md), [LongSequence](/docs/Enumerables/LongSequence.md),
-and [DoubleSequence](/docs/Enumerables/DoubleSequence.md) and [SObjectSequence](/docs/Enumerables/SObjectSequence.md) for SObject references.</p>
+[DoubleSequence](/docs/Enumerables/DoubleSequence.md), and [SObjectSequence](/docs/Enumerables/SObjectSequence.md) for SObject references.</p>
 <p>Sequences and streams equally ensure the fulfillment of the set goals,
 but are implemented in different ways.</p>
 
@@ -218,7 +210,7 @@ List<String> append = (List<String>) ObjectSequence.concat(strs1, strs2)
 
 ##### `public static ObjectEnumerable concat(List<Iterable<Object>> iterables)`
 
-Returns eagerly concatenates `List<Iterable<Object>>`.
+Returns eagerly concatenated `List<Iterable<Object>>`.
 
 ###### Parameters
 
@@ -242,7 +234,7 @@ Returns eagerly concatenates `List<Iterable<Object>>`.
 ```apex
 List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
 List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
-List<String> concat = (List<String>) ObjectSequence.concat(new List<Iterable<Object>>{ strs1, strs2 })
+List<String> concat = (List<String>) ObjectSequence.concat(new List<Iterable<Object>> { strs1, strs2 })
     .toList(String.class);
 // ['foo', 'bar', 'baz', 'qux', 'fred', 'foo']
 ```
@@ -397,9 +389,9 @@ Returns new `ObjectEnumerable` by prepending `iterable` to the current sequence.
 List<Object> strs1 = new List<String>{ 'foo', 'bar', 'baz' };
 List<Object> strs2 = new List<String>{ 'qux', 'fred', 'foo' };
 List<String> union = (List<String>) ObjectSequence.of(strs1)
-    .union(strs2)
+    .prepend(strs2)
     .toList(String.class);
-// ['foo', 'bar', 'baz', 'qux', 'fred']
+// ['qux', 'fred', 'foo', 'foo', 'bar', 'baz']
 ```
 
 
@@ -508,7 +500,7 @@ public class ContainsPredicate extends Predicate {
 }
 List<String> rest = (List<String>)
     ObjectSequence.of(new List<String>{ 'bar', 'baz', 'foo' })
-    .take(new ContainsPredicate('a'))
+    .drop(new ContainsPredicate('a'))
     .toList(String.class); // ['foo']
 ```
 
@@ -827,7 +819,7 @@ List<Account> accounts = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz'
 
 ##### `public virtual override ObjectEnumerable forEach(IConsumer consumer)`
 
-Returns a `SObjectEnumerable` after performing `consumer` action on each element. <p>Stateful Intermediate Operation.</p>
+Returns a `ObjectEnumerable` after performing `consumer` action on each element. <p>Stateful Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -839,7 +831,7 @@ Returns a `SObjectEnumerable` after performing `consumer` action on each element
 
 |Type|Description|
 |---|---|
-|`ObjectEnumerable`|this `SObjectEnumerable`|
+|`ObjectEnumerable`|this `ObjectEnumerable`|
 
 ###### Throws
 
@@ -965,7 +957,7 @@ public class SecondLetterComparer extends Comparer {
 }
 List<String> sorted = (List<String>)
     ObjectSequence.of(new List<String>{ 'foo', 'Bar', 'baz', 'Foo', 'bar' })
-    .sort(new SecondCharComparer())
+    .sort(new SecondLetterComparer())
     .toList(String.class); // ['Bar', 'baz', 'bar', 'foo', 'Foo']
 ```
 
@@ -997,7 +989,7 @@ Returns a `ObjectEnumerable` with first `lim` elements. <p>Short-circuiting Stat
 ```apex
 List<String> first2 = (List<String>) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
     .lim(2)
-    .toList(String.class); // ['foo', 'baz']
+    .toList(String.class); // ['foo', 'bar']
 ```
 
 
@@ -1034,7 +1026,7 @@ List<String> rest = (List<String>) ObjectSequence.of(new List<String>{ 'foo', 'b
 
 ---
 ### Terminal Operations
-##### `public virtual override Object reduce(Object identity, IBiOperator accumulator)`
+##### `public virtual override Object fold(Object identity, IBiOperator accumulator)`
 
 Performs a reduction on `Object` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
@@ -1042,7 +1034,7 @@ Performs a reduction on `Object` elements, using `identity` value and an associa
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 ###### Returns
@@ -1056,6 +1048,48 @@ Performs a reduction on `Object` elements, using `identity` value and an associa
 |Exception|Description|
 |---|---|
 |`NullPointerException`|if `accumulator` is null|
+
+###### Example
+```apex
+public class ConcatenateBiOperator extends BiOperator {
+    private final String separator;
+    public ConcatenateBiOperator(String separator) { this.separator = separator; }
+    public override Object apply(Object o1, Object o2) {
+        return String.isEmpty((String) o1) ? (String) o2 : o1 + separator + o2;
+    }
+}
+String concatenated = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+    .fold('', new ConcatenateBiOperator('-')); // 'foo-bar-baz'
+String concatenated1 = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
+    .fold('seed', new ConcatenateBiOperator(';')); // 'seed;foo;bar;baz'
+```
+
+
+##### `public virtual override Object reduce(Object identity, IBiOperator accumulator)`
+
+Performs a reduction on `Object` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`identity`|the initial value for `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Object`|the `Object` result of the reduction|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
 
 ###### Example
 ```apex
@@ -1109,7 +1143,7 @@ String concatenated = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar',
     .get(); // 'foo-bar-baz'
 String concatenated1 = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
     .reduce(new ConcatenateBiOperator(';'))
-    .get(); // 'seed;foo;bar;baz'
+    .get(); // 'foo;bar;baz'
 ```
 
 
@@ -1169,7 +1203,7 @@ ISupplier mapSupplier = Supplier.of(Map<Integer, Set<String>>.class);
 // the Collector implementing the downstream reduction.
 ICollector downstreamCollector = Collector.of(Supplier.of(Set<String>.class), new AddToStringSetBiConsumer());
 // the function that folds an element into a result container.
-IBiConsumer accumulator = new PutToObjectsByIntMap(downstreamCollector, new LengthFunction());
+IBiConsumer accumulator = new PutToObjectsByIntMap(downstreamCollector, classificationFunction);
 // the Collector implementing the cascaded group-by operation.
 ICollector groupByLengthCollector = Collector.of(mapSupplier, accumulator);
 Map<Integer, Set<String>> stringsByLength = (Map<Integer, Set<String>>)
@@ -1227,7 +1261,7 @@ String firstFound = (String) ObjectSequence.of(new List<String>{ 'foo', 'bar', '
 
 ##### `public virtual override Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `ObjectEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `ObjectEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 ###### Parameters
 
@@ -1324,7 +1358,7 @@ Returns whether the count of elements is 0. <p>Terminal Operation.</p>
 ```apex
 ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz' })
     .isEmpty(); // false
-ObjectSequence.of(new List<String>()))
+ObjectSequence.of(new List<String>())
     .isEmpty(); // true
 ```
 
@@ -1372,7 +1406,7 @@ Set<Object> strings = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz', '
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set union of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1408,7 +1442,7 @@ List<String> union = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set union of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set union of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1448,7 +1482,7 @@ List<String> union = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set intersection of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1484,7 +1518,7 @@ List<String> intersect = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set intersection of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set intersection of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1524,7 +1558,7 @@ List<String> intersect = (List<String>) [ObjectEnumerable].of(strs1)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set difference of the current and another iterables.
+Returns a new `ObjectEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1564,7 +1598,7 @@ List<String> except1 = (List<String>) [ObjectEnumerable].of(strs2)
 *Inherited*
 
 
-Returns a new `ObjectEnumerable` as a set difference of the current and another iterables according to `classifier`.
+Returns a new `ObjectEnumerable` as a set difference of the current and another `iterable` according to `classifier`. <p>Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -1667,7 +1701,7 @@ Boolean doesNoneStringContainA = [ObjectEnumerable].of(new List<String>{ 'foo', 
 *Inherited*
 
 
-Returns an `Optional` Object describing the maximum element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element according to `comparer`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
@@ -1679,7 +1713,7 @@ Returns an `Optional` Object describing the maximum element according to `compar
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object|
+|`Optional`|the `Optional` containing the result|
 
 ###### Throws
 
@@ -1707,19 +1741,19 @@ String maxLen = (String) [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', '
 *Inherited*
 
 
-Returns an `Optional` Object describing the minimum element according to `comparer`. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element according to `comparer`. <p>Terminal Operation.</p>
 
 ###### Parameters
 
 |Param|Description|
 |---|---|
-|`comparer`|comparer the comparer|
+|`comparer`|the comparer|
 
 ###### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Object|
+|`Optional`|the `Optional` containing the result|
 
 ###### Throws
 

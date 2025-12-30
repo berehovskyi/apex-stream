@@ -1,8 +1,6 @@
 # abstract LongEnumerable
 
-`SUPPRESSWARNINGS`
-
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -98,7 +96,7 @@ List<Long> append = [LongEnumerable].of(longs1)
 
 ### `public virtual LongEnumerable union(Iterable<Long> iterable)`
 
-Returns a new `LongEnumerable` as a set union of the current and another iterables.
+Returns a new `LongEnumerable` as a set union of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -130,7 +128,7 @@ List<Long> union = [LongEnumerable].of(longs1)
 
 ### `public virtual LongEnumerable intersect(Iterable<Long> iterable)`
 
-Returns a new `LongEnumerable` as a set intersection of the current and another iterables.
+Returns a new `LongEnumerable` as a set intersection of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -162,7 +160,7 @@ List<Long> intersection = [LongEnumerable].of(longs1)
 
 ### `public virtual LongEnumerable except(Iterable<Long> iterable)`
 
-Returns a new `LongEnumerable` as a set difference of the current and another iterables.
+Returns a new `LongEnumerable` as a set difference of the current and another `iterable`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -194,13 +192,13 @@ List<Long> diff = [LongEnumerable].of(longs1)
 
 ### `public LongEnumerable distinct()`
 
-Returns a `LongEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
+Returns a new `LongEnumerable` with distinct elements. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Example
 ```apex
@@ -212,7 +210,7 @@ List<Long> distinct = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L, 0L, 
 
 ### `public LongEnumerable filter(IPredicate predicate)`
 
-Returns a `LongEnumerable` with elements that match `predicate`. <p>Stateless Intermediate Operation.</p>
+Returns a new `LongEnumerable` with elements that match `predicate`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -224,7 +222,7 @@ Returns a `LongEnumerable` with elements that match `predicate`. <p>Stateless In
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -234,15 +232,20 @@ Returns a `LongEnumerable` with elements that match `predicate`. <p>Stateless In
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Long> filtered = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, 1L, 5L })
-    .filter(Predicates.isEqual(5L))
+    .filter(new IsEqualPredicate(5L))
     .toList(); // [5L, 5L]
 ```
 
 
 ### `public LongEnumerable take(IPredicate predicate)`
 
-Returns a `LongEnumerable` which takes elements while elements match `predicate`. <p>Short-circuiting Stateful Intermediate Operation.</p>
+Returns a new `LongEnumerable` that takes elements while `predicate` returns `true`. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -254,7 +257,7 @@ Returns a `LongEnumerable` which takes elements while elements match `predicate`
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -264,15 +267,20 @@ Returns a `LongEnumerable` which takes elements while elements match `predicate`
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Long> firstFiltered = [LongEnumerable].of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .take(Predicates.isEqual(0L))
+    .take(new IsEqualPredicate(0L))
     .toList(); // [0L, 0L]
 ```
 
 
 ### `public LongEnumerable drop(IPredicate predicate)`
 
-Returns a `LongEnumerable` which drops elements while elements match `predicate`, then takes the rest. <p>Stateful Intermediate Operation.</p>
+Returns a new `LongEnumerable` that drops elements while `predicate` returns `true`, then takes the rest. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -284,7 +292,7 @@ Returns a `LongEnumerable` which drops elements while elements match `predicate`
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -294,8 +302,13 @@ Returns a `LongEnumerable` which drops elements while elements match `predicate`
 
 #### Example
 ```apex
+public class IsEqualPredicate extends Predicate {
+    private final Object value;
+    public IsEqualPredicate(Object value) { this.value = value; }
+    public override Boolean test(Object o) { return o == value; }
+}
 List<Long> rest = [LongEnumerable].of(new List<Long>{ 0L, 0L, 1L, 1L, 5L })
-    .drop(Predicates.isEqual(0L))
+    .drop(new IsEqualPredicate(0L))
     .toList(); // [1L, 1L, 5L]
 ```
 
@@ -308,7 +321,7 @@ Returns a new `LongEnumerable` without null elements. <p>Stateful Intermediate O
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Example
 ```apex
@@ -320,19 +333,19 @@ List<Long> withoutNulls = [LongEnumerable].of(new List<Long>{ 0L, 0L, null, 1L, 
 
 ### `public LongEnumerable mapTo(IOperator mapper)`
 
-Returns a `LongEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `LongEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -355,19 +368,19 @@ List<Long> doubledLongs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L }
 
 ### `public IntEnumerable mapToInt(IFunction mapper)`
 
-Returns a `IntEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `IntEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`IntEnumerable`|the `IntEnumerable`|
+|`IntEnumerable`|the new `IntEnumerable`|
 
 #### Throws
 
@@ -383,26 +396,26 @@ public class MultiplyIntFunction extends Function {
     public override Object apply(Object j) { return (Long) j * i; }
 }
 List<Integer> doubledInts = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
-    .mapToLong(new MultiplyIntFunction(2))
+    .mapToInt(new MultiplyIntFunction(2))
     .toList(); // [0, 10, 2, -20]
 ```
 
 
 ### `public DoubleEnumerable mapToDouble(IFunction mapper)`
 
-Returns a `DoubleEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `DoubleEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`DoubleEnumerable`|the `DoubleEnumerable`|
+|`DoubleEnumerable`|the new `DoubleEnumerable`|
 
 #### Throws
 
@@ -425,7 +438,7 @@ List<Double> doubledDoubles = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -1
 
 ### `public SObjectEnumerable mapToSObject(IFunction mapper)`
 
-Returns a `SObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `SObjectEnumerable` with elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -437,7 +450,7 @@ Returns a `SObjectEnumerable` with elements returned by `mapper` function, appli
 
 |Type|Description|
 |---|---|
-|`SObjectEnumerable`|the `SObjectEnumerable`|
+|`SObjectEnumerable`|the new `SObjectEnumerable`|
 
 #### Throws
 
@@ -450,7 +463,7 @@ Returns a `SObjectEnumerable` with elements returned by `mapper` function, appli
 public class CreateAccountFunction extends Function {
     public override Object apply(Object i) { return new Account(AnnualRevenue = (Long) i); }
 }
-List<Account> accounts = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<Account> accounts = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, 10L })
     .mapToSObject(new CreateAccountFunction())
     .toList(); //
 [
@@ -464,19 +477,19 @@ List<Account> accounts = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public ObjectEnumerable mapToObject(IFunction mapper)`
 
-Returns a `ObjectEnumerable` with elements returned by `mapper` function, applied to the elements of this enumerable. <p>Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with `Object` elements returned by `mapper`. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`mapper`|the non-interfering, stateless operator|
+|`mapper`|the non-interfering, stateless function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`ObjectEnumerable`|the `ObjectEnumerable`|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
 
 #### Throws
 
@@ -489,7 +502,7 @@ Returns a `ObjectEnumerable` with elements returned by `mapper` function, applie
 public class ToStringFunction extends Function {
     public override Object apply(Object i) { return String.valueOf(i); }
 }
-List<String> strings = (List<String>) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
+List<String> strings = (List<String>) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, 10L })
     .mapToObject(new ToStringFunction())
     .toList(String.class); // ['0', '5', '1', '10']
 ```
@@ -497,7 +510,7 @@ List<String> strings = (List<String>) [LongEnumerable].of(new List<Long>{ 0L, 5L
 
 ### `public LongEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `LongEnumerable` with `Long` elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `LongEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -532,19 +545,19 @@ List<Long> longs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public LongEnumerable forEach(IConsumer consumer)`
 
-Returns a `LongEnumerable` after performing `consumer` action on each element. <p>Intermediate Operation.</p>
+Returns an `LongEnumerable` after performing the `consumer` action on each element. <p>Intermediate Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`consumer`|the non-interfering, stateless action to be performed on each element. Expected to operate via side effects.|
+|`consumer`|the the non-interfering, stateless action|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|this `LongEnumerable`|
+|`LongEnumerable`|the `LongEnumerable`|
 
 #### Throws
 
@@ -559,19 +572,19 @@ public class DebugConsumer extends Consumer {
 }
 List<Long> longs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
     .forEach(new DebugConsumer()) // prints 0, 5, 1, -10
-    .toList(); // [0L, 5L, 1L, -10L ]
+    .toList(); // [0L, 5L, 1L, -10L]
 ```
 
 
 ### `public LongEnumerable sort()`
 
-Returns a `LongEnumerable` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
+Returns a new `LongEnumerable` with sorted elements in ascending order. <p>Stateful Intermediate Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Example
 ```apex
@@ -583,7 +596,7 @@ List<Long> sorted = [LongEnumerable].of(new List<Long>{ 0L, 5L, null, 1L, -10L }
 
 ### `public LongEnumerable sort(SortOrder order)`
 
-Returns a `LongEnumerable` with sorted elements considering `order`. <p>Stateful Intermediate Operation.</p>
+Returns a new `LongEnumerable` with sorted elements considering `order`. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -595,7 +608,7 @@ Returns a `LongEnumerable` with sorted elements considering `order`. <p>Stateful
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -613,7 +626,7 @@ List<Long> sorted = [LongEnumerable].of(new List<Long>{ 0L, 5L, null, 1L, -10L }
 
 ### `public LongEnumerable lim(Integer lim)`
 
-Returns a `LongEnumerable` with first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
+Returns a new `LongEnumerable` with the first `lim` elements. <p>Short-circuiting Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -625,7 +638,7 @@ Returns a `LongEnumerable` with first `lim` elements. <p>Short-circuiting Statef
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -644,7 +657,7 @@ List<Long> first3Longs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public LongEnumerable skip(Integer n)`
 
-Returns a new `LongEnumerable` that skips first `n` elements and returns remaining elements. <p>Stateful Intermediate Operation.</p>
+Returns a new `LongEnumerable` that skips the first `n` elements and returns the remaining elements. <p>Stateful Intermediate Operation.</p>
 
 #### Parameters
 
@@ -656,7 +669,7 @@ Returns a new `LongEnumerable` that skips first `n` elements and returns remaini
 
 |Type|Description|
 |---|---|
-|`LongEnumerable`|the `LongEnumerable`|
+|`LongEnumerable`|the new `LongEnumerable`|
 
 #### Throws
 
@@ -673,7 +686,7 @@ List<Long> restLongs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 ```
 
 
-### `public Long reduce(Long identity, IBiOperator accumulator)`
+### `public Long fold(Long identity, IBiOperator accumulator)`
 
 Performs a reduction on `Long` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
@@ -681,7 +694,7 @@ Performs a reduction on `Long` elements, using `identity` value and an associati
 
 |Param|Description|
 |---|---|
-|`identity`|the identity value for `accumulator`|
+|`identity`|the initial value for `accumulator`|
 |`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 #### Returns
@@ -702,25 +715,61 @@ public class SumBiOperator extends BiOperator {
     public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
 }
 Long sum = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
-    .reduce(0L, new SumBiOperator()); // -4L
+    .fold(0L, new SumBiOperator()); // -4L
 ```
 
 
-### `public Optional reduce(IBiOperator operator)`
+### `public Long reduce(Long identity, IBiOperator accumulator)`
 
-Performs a reduction on `Long` elements, using `identity` value and associative `accumulator` function, and returns an `Optional` Long describing the reduced value. <p>Terminal Operation.</p>
+Performs a reduction on `Long` elements, using `identity` value and an associative `accumulator` function, and returns the reduced value. <p>Terminal Operation.</p>
 
 #### Parameters
 
 |Param|Description|
 |---|---|
-|`operator`|the associative, non-interfering, stateless accumulation function|
+|`identity`|the initial value for `accumulator`|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Long` Long result of the reduction|
+|`Long`|the `Long` result of the reduction|
+
+#### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `accumulator` is null|
+
+
+**Deprecated** Use [#fold()](#fold()) instead
+
+#### Example
+```apex
+public class SumBiOperator extends BiOperator {
+    public override Object apply(Object o1, Object o2) { return (Long) o1 + (Long) o2; }
+}
+Long sum = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
+    .reduce(0L, new SumBiOperator()); // -4L
+```
+
+
+### `public Optional reduce(IBiOperator accumulator)`
+
+Performs a reduction on elements, using an associative `accumulator` function, and returns an `Optional` describing the reduced value. <p>Terminal Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`accumulator`|the associative, non-interfering, stateless accumulation function|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -747,7 +796,7 @@ Performs a mutable reduction operation on elements, collecting elements to a con
 
 |Param|Description|
 |---|---|
-|`collector`|the function that returns a mutable result container|
+|`collector`|the collector|
 
 #### Returns
 
@@ -775,7 +824,7 @@ Set<Long> longs = (Set<Long>)
 
 ### `public Optional find(IPredicate predicate)`
 
-Returns an `Optional` Long describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
+Returns an `Optional` describing the first element that matches `predicate`. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -787,7 +836,7 @@ Returns an `Optional` Long describing the first element that matches `predicate`
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Long|
+|`Optional`|the `Optional` containing the result|
 
 #### Throws
 
@@ -808,7 +857,7 @@ Long firstEvenLong = (Long) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L
 
 ### `public Boolean every(IPredicate predicate)`
 
-Returns whether all elements match `predicate`. If `LongEnumerable` is empty then `false` is returned. <p>Short-circuiting Terminal Operation.</p>
+Returns whether all elements match `predicate`. If `LongEnumerable` is empty then `true` is returned. <p>Short-circuiting Terminal Operation.</p>
 
 #### Parameters
 
@@ -904,13 +953,13 @@ Boolean isNoneLongEven = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public virtual Optional max()`
 
-Returns an `Optional` Long describing the maximum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the maximum element. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Long|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
@@ -922,13 +971,13 @@ Long max = (Long) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public virtual Optional min()`
 
-Returns an `Optional` Long describing the minimum element. <p>Terminal Operation.</p>
+Returns an `Optional` describing the minimum element. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Long|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
@@ -940,13 +989,13 @@ Long min = (Long) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public Long sum()`
 
-Returns the arithmetic sum of elements. <p>Terminal Operation.</p>
+Returns the arithmetic sum of values. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Long`|the sum of elements|
+|`Long`|the sum of values|
 
 #### Example
 ```apex
@@ -957,19 +1006,19 @@ Long sum = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public Optional avg()`
 
-Returns the arithmetic mean of of elements. <p>Terminal Operation.</p>
+Returns the arithmetic mean of values. <p>Terminal Operation.</p>
 
 #### Returns
 
 |Type|Description|
 |---|---|
-|`Optional`|the `Optional` Double describing the result|
+|`Optional`|the `Optional` containing the result|
 
 #### Example
 ```apex
 Double avg = (Double) [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
     .avg()
-    .get(); // 1.0
+    .get(); // -1.0
 ```
 
 
@@ -992,7 +1041,7 @@ Integer count = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
 
 ### `public Boolean isEmpty()`
 
-Returns whether the count of elements is 0. <p>Terminal Operation.</p>
+Returns whether the count of elements is `0`. <p>Terminal Operation.</p>
 
 #### Returns
 
@@ -1017,7 +1066,7 @@ Accumulates elements into a `List<Long>`. <p>Terminal Operation.</p>
 
 |Type|Description|
 |---|---|
-|`List<Long>`|the `List<Long>` containing the enumerable elements|
+|`List<Long>`|the `List<Long>` containing the collected elements|
 
 #### Example
 ```apex
@@ -1035,13 +1084,13 @@ Accumulates elements into a `Set<Long>`. <p>Terminal Operation.</p>
 
 |Type|Description|
 |---|---|
-|`Set<Long>`|the `Set<Long>` containing the enumerable elements|
+|`Set<Long>`|the `Set<Long>` containing the collected elements|
 
 #### Example
 ```apex
 Set<Long> longs = [LongEnumerable].of(new List<Long>{ 0L, 5L, 1L, -10L })
     .skip(1)
-    .toSet(); // [5L, 1L, -10L, 0L]
+    .toSet(); // [5L, 1L, -10L]
 ```
 
 

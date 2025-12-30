@@ -1,6 +1,6 @@
 # StrSup
 
-`APIVERSION: 61`
+`APIVERSION: 64`
 
 `STATUS: ACTIVE`
 
@@ -22,7 +22,7 @@ StrSup
 *Inherited*
 
 
-Returns a `Supplier` that returns the next uuid.
+Returns a `Supplier` that returns the next UUID.
 
 #### Returns
 
