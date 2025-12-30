@@ -12,6 +12,8 @@
         "prettier:diff": "prettier --list-different .",
         "prettier:fix": "prettier --write .",
         "sfca:check": "sf code-analyzer run --config-file ./code-analyzer.yml --workspace .",
-        "sfca:check:detail": "sf code-analyzer run --config-file ./code-analyzer.yml --workspace . --view detail"
+        "sfca:check:detail": "sf code-analyzer run --config-file ./code-analyzer.yml --workspace . --view detail",
+        "sf:push": "sf project deploy start",
+        "sf:run:test:all": "sf apex run test -l RunAllTestsInOrg --synchronous --code-coverage"
     }
 }
