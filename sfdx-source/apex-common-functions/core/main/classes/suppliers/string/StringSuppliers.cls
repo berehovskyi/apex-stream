@@ -70,7 +70,7 @@ public virtual inherited sharing class StringSuppliers {
             Validate.matches(
                 format,
                 pattern,
-                Label.AEF_ErrorMessage_StringPatternMismatch,
+                Label.ACF_ErrorMessage_StringPatternMismatch,
                 new List<Object>{ format, pattern }
             );
             this.format = format;
