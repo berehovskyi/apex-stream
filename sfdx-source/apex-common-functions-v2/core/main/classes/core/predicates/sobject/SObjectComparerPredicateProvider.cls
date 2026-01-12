@@ -443,7 +443,6 @@ public virtual inherited sharing class SObjectComparerPredicateProvider {
         private final IFunction right;
         private final IComparer comparer;
         private final Set<Integer> results;
-        @SuppressWarnings('PMD.ExcessiveParameterList')
         private ComparerPredicate(IFunction left, IFunction right, IComparer comparer, Set<Integer> results) {
             Validate.notNull(right);
             this.left = left;

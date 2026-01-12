@@ -14,7 +14,6 @@ private class IterableFunctionsTest {
      * @see  IterableFunctions.get
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void get() {
         // Given
         List<Object> iter = new List<String>{ '1', '2', '3' };

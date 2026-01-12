@@ -35,7 +35,6 @@ public inherited sharing class StreamPipeline {
         return new ZipIterator(iterable1, iterable2, combiner);
     }
 
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static Iterator<Object> zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,

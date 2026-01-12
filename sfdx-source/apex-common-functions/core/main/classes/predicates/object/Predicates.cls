@@ -42,7 +42,6 @@ public virtual inherited sharing class Predicates {
      *     1
      * );
      */
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static Predicate isCompared(
         final IFunction left,
         final IFunction right,
@@ -555,7 +554,6 @@ public virtual inherited sharing class Predicates {
         private final IFunction right;
         private final IComparer comparer;
         private final Integer comparisonResult;
-        @SuppressWarnings('PMD.ExcessiveParameterList')
         private ComparerPredicate(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
             Validate.notNull(left);
             Validate.notNull(right);

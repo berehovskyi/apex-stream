@@ -25,7 +25,6 @@ private class TimeFunctionsTest {
      * @see TimeFunctions.addSeconds
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void timeFunctions() {
         // Given
         Integer inc = 1;

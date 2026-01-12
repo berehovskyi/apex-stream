@@ -35,7 +35,6 @@ private class DatetimeFunctionsTest {
      * @see DatetimeFunctions.stringValueOfGmt
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void datetimeFunctions() {
         // Given
         Integer inc = 1;

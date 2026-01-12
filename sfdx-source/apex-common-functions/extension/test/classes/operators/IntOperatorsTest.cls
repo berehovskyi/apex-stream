@@ -25,7 +25,6 @@ private class IntOperatorsTest {
      * @see IntOperators.subtract
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void intUnaryOperators() {
         // Given
         Integer inc = 10;

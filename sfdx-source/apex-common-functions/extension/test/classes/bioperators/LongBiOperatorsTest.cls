@@ -19,7 +19,6 @@ private class LongBiOperatorsTest {
      * @see LongBiOperators.product
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void operators() {
         // When
         IBiOperator min = LongBiOperators.min();

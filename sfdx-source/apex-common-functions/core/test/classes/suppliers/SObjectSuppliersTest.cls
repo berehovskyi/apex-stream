@@ -14,7 +14,6 @@ private class SObjectSuppliersTest {
      * @see Supplier.of
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void default() {
         // Given
         ISupplier accSupplier = SObjectSuppliers.of(Account.SObjectType);
