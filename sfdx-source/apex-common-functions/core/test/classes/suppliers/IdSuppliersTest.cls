@@ -14,14 +14,16 @@ private class IdSuppliersTest {
      * @see IdSuppliers.of
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void default() {
         // Given
         SObjectType sObjectType = Account.SObjectType;
         ISupplier accIdSupplier = IdSuppliers.of(sObjectType);
+        ISupplier accIdSupplier1 = IdSuppliers.of(sObjectType.toString());
         // When
         Id actual = (Id) accIdSupplier.get();
+        Id actual1 = (Id) accIdSupplier1.get();
         // Then
         Assert.areEqual(sObjectType, actual.getSobjectType());
+        Assert.areEqual(sObjectType, actual1.getSobjectType());
     }
 }

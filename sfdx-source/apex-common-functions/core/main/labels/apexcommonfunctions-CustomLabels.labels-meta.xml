@@ -8,4 +8,12 @@
         <shortDescription>Error message.</shortDescription>
         <value>Duplicate key {0} (attempted merging values {1} and {2})</value>
     </labels>
+    <labels>
+        <fullName>ACF_ErrorMessage_StringPatternMismatch</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <categories>error</categories>
+        <shortDescription>Error message.</shortDescription>
+        <value>The string {0} does not match the pattern {1}</value>
+    </labels>
 </CustomLabels>

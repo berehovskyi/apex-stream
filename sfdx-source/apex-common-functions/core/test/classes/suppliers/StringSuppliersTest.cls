@@ -15,7 +15,6 @@ private class StringSuppliersTest {
      * @see StringSuppliers.autonumber
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void default() {
         // Given
         ISupplier uuidSupp = StringSuppliers.uuid();

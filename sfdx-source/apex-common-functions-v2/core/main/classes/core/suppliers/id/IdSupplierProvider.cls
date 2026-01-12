@@ -32,10 +32,41 @@ public virtual inherited sharing class IdSupplierProvider {
         return new IdOfTypeSupplier(sObjectType);
     }
 
+    /**
+     * @description Returns a `Supplier` that returns the next `Id` value
+     * for the given `sObjectType`.
+     * <p><strong>Note: </strong></p>
+     * <p>This is a stateful function.</p>
+     *
+     * @param sObjectType of the new id to create
+     *
+     * @return the `Supplier`
+     *
+     * @throws IllegalArgumentException if `sObjectType` is blank
+     * @throws NullPointerException if `sObjectType` is null
+     *
+     * @example
+     * ISupplier accIdSupplier = new IdSupplierProvider().of('Account');
+     * accIdSupplier.get(); // '001000000000000AAA'
+     * accIdSupplier.get(); // '001000000000001AAA'
+     */
+    public virtual Supplier of(final String sObjectType) {
+        return new IdOfTypeSupplier(sObjectType);
+    }
+
     private class IdOfTypeSupplier extends Supplier {
         private Integer i = 0;
         private final String keyPrefix;
         private final String placeholder = '000000000000';
+        private IdOfTypeSupplier(String sObjectType) {
+            Validate.notBlank(sObjectType);
+            List<DescribeSObjectResult> results = Schema.describeSObjects(
+                new List<String>{ sObjectType },
+                SObjectDescribeOptions.DEFERRED
+            );
+            Validate.isTrue(results.size() == 1);
+            keyPrefix = results[0].getSObjectType().getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix();
+        }
         private IdOfTypeSupplier(SObjectType sObjectType) {
             Validate.notNull(sObjectType);
             keyPrefix = sObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix();
