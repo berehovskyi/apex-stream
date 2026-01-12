@@ -253,7 +253,6 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *     .toList(String.class);
      * // ['bar-fred', 'baz-foo']
      */
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static ObjectEnumerable zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,

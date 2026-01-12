@@ -54,7 +54,6 @@ public inherited sharing class SequencePipeline {
         return result;
     }
 
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     public static List<Object> zip(
         final Iterable<Object> iterable1,
         final Iterable<Object> iterable2,

@@ -476,7 +476,6 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
         private final IFunction right;
         private final IComparer comparer;
         private final Set<Integer> results;
-        @SuppressWarnings('PMD.ExcessiveParameterList')
         private ComparerBiPredicate(IFunction left, IFunction right, IComparer comparer, Set<Integer> results) {
             Validate.notNull(left);
             Validate.notNull(right);

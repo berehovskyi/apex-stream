@@ -504,7 +504,6 @@ public virtual inherited sharing class MapObjectConsumers {
 
     //<editor-fold desc="Private Methods">
     // @start-group Private Methods
-    @SuppressWarnings('PMD.ExcessiveParameterList')
     private static Object mergeValue(
         final IBiOperator merger,
         final Object key,

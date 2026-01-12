@@ -19,7 +19,6 @@ private class IntBiOperatorsTest {
      * @see IntBiOperators.product
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void operators() {
         // When
         IBiOperator min = IntBiOperators.min();

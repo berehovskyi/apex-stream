@@ -25,7 +25,6 @@ private class TypePredicatesTest {
      * @see TypePredicates.isInstanceOfComparable
      */
     @IsTest
-    @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveRunAs')
     static void typePredicate() {
         // Given
         Boolean b = true;
