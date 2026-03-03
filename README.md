@@ -422,6 +422,9 @@ DoubleEnumerable revenueStream = Stream.of(accounts)
 A `flatMapTo` operation converts elements by applying a function that returns an `Iterable` to them
 and collects these new _inner_ elements into a new stream.
 
+`flatMapTo*` operations are strict: the mapper must return an `Iterable`,
+and mapped `null` values are skipped.
+
 Create a stream of related child contacts from the account stream:
 
 ```apex
@@ -443,6 +446,22 @@ List<List<Integer>> containedInts = new List<List<Integer>>{
 List<Integer> flattenedInts = Stream.of(containedInts)
     .flatMapToInt(Function.identity())
     .toList(); // [1, 0, 10, null]
+```
+
+If you want to flatten existing nested data while keeping non-iterable and `null` elements as values,
+use `flat([depth=1])`:
+
+```apex
+List<Object> input = new List<Object>{
+    1,
+    null,
+    new List<Object>{ 3, 4 },
+    'x'
+}; // [1, null, [3, 4], 'x']
+
+List<Object> flattened = Stream.of(input)
+    .flat()
+    .toList(); // [1, null, 3, 4, 'x']
 ```
 
 - ### Limit and Skip

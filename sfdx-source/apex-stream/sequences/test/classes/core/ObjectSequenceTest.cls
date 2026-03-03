@@ -380,8 +380,16 @@ private class ObjectSequenceTest {
             new List<String>{ 'foo' },
             new List<String>{ 'bar', 'baz' }
         };
+        List<Object> invalidInput = new List<Object>{ new List<String>{ 'foo' }, 'bar' };
+        List<Object> invalidClone = new List<Object>{ new List<String>{ 'foo' }, 'bar' };
         ObjectEnumerable objSeq = ObjectSequence.of(clone).flatMapTo(Function.identity());
         IObjectEnumerable objSeq1 = ObjectSequence.of(clone).flatMapTo(Function.identity());
+        Exception exc1;
+        try {
+            ObjectSequence.of(invalidClone).flatMapTo(Function.identity());
+        } catch (IllegalStateException exc) {
+            exc1 = exc;
+        }
         // When
         List<String> actual = (List<String>) objSeq.toList(String.class);
         List<String> actual1 = (List<String>) objSeq1.toList(String.class);
@@ -389,7 +397,10 @@ private class ObjectSequenceTest {
         List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
+        Assert.areEqual(IllegalStateException.class.getName(), exc1.getTypeName());
+        Assert.areEqual('Mapped value must implement Iterable<Object>', exc1.getMessage());
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(invalidInput, invalidClone, Label.AS_ErrorMessage_InputMutated);
     }
 
     /**
@@ -510,6 +521,58 @@ private class ObjectSequenceTest {
         List<Account> expected = new List<Account>{ accounts[1], accounts[0], accounts[2] };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+    }
+
+    /**
+     * @see ObjectSequence.flat
+     */
+    @IsTest
+    private static void flat() {
+        // Given
+        Account acc1 = new Account(Name = 'foo');
+        Account acc2 = new Account(Name = 'bar');
+        Account acc3 = new Account(Name = 'baz');
+        List<Object> input = new List<Object>{ acc1, null, acc2, new List<Account>{ acc3 } };
+        List<Object> clone = new List<Object>{ acc1, null, acc2, new List<Account>{ acc3 } };
+        ObjectEnumerable sObjSeq = ObjectSequence.of(clone).flat();
+        IObjectEnumerable sObjSeq1 = ObjectSequence.of(clone).flat();
+        // When
+        List<SObject> actual = (List<SObject>) sObjSeq.toList(SObject.class);
+        List<SObject> actual1 = (List<SObject>) sObjSeq1.toList(SObject.class);
+        // Then
+        List<SObject> expected = new List<SObject>{ acc1, null, acc2, acc3 };
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+    }
+
+    /**
+     * @see ObjectSequence.flat
+     */
+    @IsTest
+    private static void flatDepth() {
+        // Given
+        Account acc1 = new Account(Name = 'foo');
+        Account acc2 = new Account(Name = 'bar');
+        Account acc3 = new Account(Name = 'baz');
+        List<Object> input = new List<Object>{ new List<Object>{ new List<Account>{ acc1, acc2, null } }, acc3, null };
+        List<Object> clone = new List<Object>{ new List<Object>{ new List<Account>{ acc1, acc2, null } }, acc3, null };
+        ObjectEnumerable sObjSeq = ObjectSequence.of(clone).flat(2);
+        IObjectEnumerable sObjSeq1 = ObjectSequence.of(clone).flat(2);
+        ObjectEnumerable sObjSeq2 = ObjectSequence.of(clone).flat(3);
+        IObjectEnumerable sObjSeq3 = ObjectSequence.of(clone).flat(3);
+        // When
+        List<SObject> actual = (List<SObject>) sObjSeq.toList(SObject.class);
+        List<SObject> actual1 = (List<SObject>) sObjSeq1.toList(SObject.class);
+        List<SObject> actual2 = (List<SObject>) sObjSeq2.toList(SObject.class);
+        List<SObject> actual3 = (List<SObject>) sObjSeq3.toList(SObject.class);
+        // Then
+        List<SObject> expected = new List<SObject>{ acc1, acc2, null, acc3, null };
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
     }
 

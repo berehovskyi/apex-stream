@@ -134,14 +134,33 @@ public inherited sharing class SequencePipeline {
     }
 
     public static List<Object> flatMapTo(final List<Object> source, final IFunction mapper, final List<Object> result) {
+        return flatMapTo(source, mapper, result, 1);
+    }
+
+    public static List<Object> flatMapTo(
+        final List<Object> source,
+        final IFunction mapper,
+        final List<Object> result,
+        final Integer depth
+    ) {
+        return flat(source, mapper, result, depth, false);
+    }
+
+    public static List<Object> flat(
+        final List<Object> source,
+        final IFunction mapper,
+        final List<Object> result,
+        final Integer depth,
+        final Boolean wrapNonIterables
+    ) {
         Validate.notNull(source);
         Validate.notNull(mapper);
         Validate.notNull(result);
+        Validate.notNull(depth);
+        Validate.notNull(wrapNonIterables);
+        Validate.positive(depth, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ depth });
         for (Integer i = 0, size = source.size(); i < size; i++) {
-            final Iterable<Object> it = (Iterable<Object>) mapper.apply(source[i]);
-            if (it != null) {
-                result.addAll(EnumerablePipeline.toList(it));
-            }
+            addFlattened(result, mapper.apply(source[i]), depth, wrapNonIterables);
         }
         return result;
     }
@@ -457,5 +476,35 @@ public inherited sharing class SequencePipeline {
             result.get(predicate.test(o)).add(o);
         }
         return result;
+    }
+
+    private static void addFlattened(
+        final List<Object> result,
+        final Object value,
+        final Integer depth,
+        final Boolean wrapNonIterables
+    ) {
+        if (depth == 0) {
+            result.add(value);
+            return;
+        }
+        if (value == null) {
+            if (wrapNonIterables) {
+                result.add(null);
+            }
+            return;
+        }
+        if (value instanceof Iterable<Object>) {
+            final Iterable<Object> iterable = (Iterable<Object>) value;
+            for (Object o : iterable) {
+                addFlattened(result, o, depth - 1, wrapNonIterables);
+            }
+            return;
+        }
+        if (wrapNonIterables) {
+            result.add(value);
+            return;
+        }
+        throw new IllegalStateException('Mapped value must implement Iterable<Object>');
     }
 }

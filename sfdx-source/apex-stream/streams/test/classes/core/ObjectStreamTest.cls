@@ -464,6 +464,7 @@ private class ObjectStreamTest {
         Assert.isTrue(((SObjectStream) stm1).isOperated);
     }
 
+
     /**
      * @see ObjectStream.flatMapTo
      */
@@ -482,18 +483,31 @@ private class ObjectStreamTest {
             new List<String>{ 'foo' },
             new List<String>{ 'bar', 'baz' }
         };
+        List<Object> invalidInput = new List<Object>{ new List<String>{ 'foo' }, 'bar' };
+        List<Object> invalidClone = new List<Object>{ new List<String>{ 'foo' }, 'bar' };
         ObjectEnumerable stm = ObjectStream.of(clone).flatMapTo(Function.identity());
         IObjectEnumerable stm1 = ObjectStream.of(clone).flatMapTo(Function.identity());
+        ObjectEnumerable stm2 = ObjectStream.of(invalidClone).flatMapTo(Function.identity());
         // When
         List<String> actual = (List<String>) stm.toList(String.class);
         List<String> actual1 = (List<String>) stm1.toList(String.class);
+        Exception exc1;
+        try {
+            stm2.toList();
+        } catch (IllegalStateException exc) {
+            exc1 = exc;
+        }
         // Then
         List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
+        Assert.areEqual(IllegalStateException.class.getName(), exc1.getTypeName());
+        Assert.areEqual('Mapped value must implement Iterable<Object>', exc1.getMessage());
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.areEqual(invalidInput, invalidClone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((ObjectStream) stm).isOperated);
         Assert.isTrue(((ObjectStream) stm1).isOperated);
+        Assert.isTrue(((ObjectStream) stm2).isOperated);
     }
 
     /**
@@ -623,6 +637,64 @@ private class ObjectStreamTest {
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.isTrue(((SObjectStream) stm).isOperated);
         Assert.isTrue(((SObjectStream) stm1).isOperated);
+    }
+
+    /**
+     * @see ObjectStream.flat
+     */
+    @IsTest
+    private static void flat() {
+        // Given
+        Account acc1 = new Account(Name = 'foo');
+        Account acc2 = new Account(Name = 'bar');
+        Account acc3 = new Account(Name = 'baz');
+        List<Object> input = new List<Object>{ acc1, null, acc2, new List<Account>{ acc3 } };
+        List<Object> clone = new List<Object>{ acc1, null, acc2, new List<Account>{ acc3 } };
+        ObjectEnumerable stm = ObjectStream.of(clone).flat();
+        IObjectEnumerable stm1 = ObjectStream.of(clone).flat();
+        // When
+        List<SObject> actual = (List<SObject>) stm.toList(SObject.class);
+        List<SObject> actual1 = (List<SObject>) stm1.toList(SObject.class);
+        // Then
+        List<SObject> expected = new List<SObject>{ acc1, null, acc2, acc3 };
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((ObjectStream) stm).isOperated);
+        Assert.isTrue(((ObjectStream) stm1).isOperated);
+    }
+
+    /**
+     * @see ObjectStream.flat
+     */
+    @IsTest
+    private static void flatDepth() {
+        // Given
+        Account acc1 = new Account(Name = 'foo');
+        Account acc2 = new Account(Name = 'bar');
+        Account acc3 = new Account(Name = 'baz');
+        List<Object> input = new List<Object>{ new List<Object>{ new List<Account>{ acc1, acc2, null } }, acc3, null };
+        List<Object> clone = new List<Object>{ new List<Object>{ new List<Account>{ acc1, acc2, null } }, acc3, null };
+        ObjectEnumerable stm = ObjectStream.of(clone).flat(2);
+        IObjectEnumerable stm1 = ObjectStream.of(clone).flat(2);
+        ObjectEnumerable stm2 = ObjectStream.of(clone).flat(3);
+        IObjectEnumerable stm3 = ObjectStream.of(clone).flat(3);
+        // When
+        List<SObject> actual = (List<SObject>) stm.toList(SObject.class);
+        List<SObject> actual1 = (List<SObject>) stm1.toList(SObject.class);
+        List<SObject> actual2 = (List<SObject>) stm2.toList(SObject.class);
+        List<SObject> actual3 = (List<SObject>) stm3.toList(SObject.class);
+        // Then
+        List<SObject> expected = new List<SObject>{ acc1, acc2, null, acc3, null };
+        Assert.areEqual(expected, actual);
+        Assert.areEqual(expected, actual1);
+        Assert.areEqual(expected, actual2);
+        Assert.areEqual(expected, actual3);
+        Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
+        Assert.isTrue(((ObjectStream) stm).isOperated);
+        Assert.isTrue(((ObjectStream) stm1).isOperated);
+        Assert.isTrue(((ObjectStream) stm2).isOperated);
+        Assert.isTrue(((ObjectStream) stm3).isOperated);
     }
 
     /**

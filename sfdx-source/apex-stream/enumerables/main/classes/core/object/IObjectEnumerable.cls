@@ -234,6 +234,7 @@ public interface IObjectEnumerable extends Iterable<Object> {
      * @description Returns a new `IObjectEnumerable` with elements as a result of
      * replacing each element with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
+     * Mapped `null` values are skipped.
      * <p>Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Object>`
@@ -289,6 +290,29 @@ public interface IObjectEnumerable extends Iterable<Object> {
      * @return the new `ISObjectEnumerable`
      */
     ISObjectEnumerable flatMapToSObject(IFunction mapper);
+
+    /**
+     * @description Returns a new `IObjectEnumerable` with elements as a result of
+     * replacing each iterable element with the contents of the iterable.
+     * Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values.
+     * <p>Intermediate Operation.</p>
+     *
+     * @return the new `IObjectEnumerable`
+     */
+    IObjectEnumerable flat();
+
+    /**
+     * @description Returns a new `IObjectEnumerable` with elements as a result of
+     * replacing each iterable element with the contents of the iterable,
+     * up to `depth` levels.
+     * Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values.
+     * <p>Intermediate Operation.</p>
+     *
+     * @param depth the flattening depth
+     *
+     * @return the new `IObjectEnumerable`
+     */
+    IObjectEnumerable flat(Integer depth);
 
     /**
      * @description Returns an `IObjectEnumerable` after performing the `consumer` action

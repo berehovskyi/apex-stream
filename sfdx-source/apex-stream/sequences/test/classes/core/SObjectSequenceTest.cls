@@ -664,11 +664,11 @@ private class SObjectSequenceTest {
         List<Long> actual = longSeq.toList();
         List<Long> actual1 = (List<Long>) longSeq1.toList();
         // Then
-        List<Long> expected = new List<Integer>();
+        List<Long> expected = new List<Long>();
         for (Account acc : input) {
             List<SObject> children = acc.getSObjects(relationshipFieldName);
             if (children != null) {
-                List<Long> result = new List<Integer>();
+                List<Long> result = new List<Long>();
                 for (SObject child : children) {
                     result.add(((String) child.get(fieldName)).length());
                 }

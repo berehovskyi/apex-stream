@@ -511,11 +511,14 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @description Returns a new `ObjectEnumerable` with `Object` elements as a result of
      * replacing each element of this sequence with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
+     * Mapped `null` values are skipped.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Object>`
      *
      * @return the new `ObjectEnumerable`
+     *
+     * @throws NullPointerException if `mapper` is null
      *
      * @example
      * public class ToLowerCaseFunction extends Function {
@@ -540,6 +543,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *
      * @return the new `IntEnumerable`
      *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * public class LengthFunction extends Function {
      *     public override Object apply(Object o) { return new List<Integer>{ ((String) o).length() }; }
@@ -561,6 +566,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * @param mapper the mapping function which must produce `Iterable<Long>`
      *
      * @return the new `LongEnumerable`
+     *
+     * @throws NullPointerException if `mapper` is null
      *
      * @example
      * public class LengthFunction extends Function {
@@ -584,6 +591,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *
      * @return the new `DoubleEnumerable`
      *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * public class LengthFunction extends Function {
      *     public override Object apply(Object o) { return new List<Double>{ ((String) o).length() }; }
@@ -606,6 +615,8 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *
      * @return the new `SObjectEnumerable`
      *
+     * @throws NullPointerException if `mapper` is null
+     *
      * @example
      * public class CreateAccountFunction extends Function {
      *     public override Object apply(Object o) { return new List<Account>{ new Account(Name = (String) o) }; }
@@ -621,6 +632,64 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      */
     public virtual override SObjectEnumerable flatMapToSObject(final IFunction mapper) {
         return SObjectSequence.of((List<SObject>) SequencePipeline.flatMapTo(objects, mapper, new List<SObject>()));
+    }
+
+    /**
+     * @description Returns a new `ObjectEnumerable` with elements as a result of
+     * replacing each iterable element with the contents of the iterable.
+     * Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @return the new `ObjectEnumerable`
+     *
+     * @example
+     * Account acc1 = new Account(Name = 'foo');
+     * Account acc2 = new Account(Name = 'bar');
+     * List<Object> nested = new List<Object>{ new List<Account>{ acc1, acc2 } };
+     * List<Object> accounts = ObjectSequence.of(nested)
+     *     .flat()
+     *     .toList(); //
+     * [
+     *   { Name: 'foo' },
+     *   { Name: 'bar' }
+     * ]
+     */
+    public virtual override ObjectEnumerable flat() {
+        return flat(1);
+    }
+
+    /**
+     * @description Returns a new `ObjectEnumerable` with elements as a result of
+     * replacing each iterable element with the contents of the iterable,
+     * up to `depth` levels.
+     * Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values.
+     * <p>Stateful Intermediate Operation.</p>
+     *
+     * @param depth the flattening depth
+     *
+     * @return the new `ObjectEnumerable`
+     *
+     * @throws IllegalArgumentException if `depth` is less than 1
+     * @throws NullPointerException if `depth` is null
+     *
+     * @example
+     * Account acc1 = new Account(Name = 'foo');
+     * Account acc2 = new Account(Name = 'bar');
+     * List<Object> nested = new List<Object>{
+     *     new List<Object>{ new List<Account>{ acc1, acc2, null }, null }
+     * };
+     * List<Object> accounts = ObjectSequence.of(nested)
+     *     .flat(2)
+     *     .toList(); //
+     * [
+     *   { Name: 'foo' },
+     *   { Name: 'bar' },
+     *   null,
+     *   null
+     * ]
+     */
+    public virtual override ObjectEnumerable flat(final Integer depth) {
+        return new ObjectSequence(SequencePipeline.flat(objects, Function.identity(), new List<Object>(), depth, true));
     }
 
     /**
