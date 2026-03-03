@@ -5,38 +5,68 @@
 public inherited sharing class FlatMapIterator extends BaseIterator {
     private final Iterator<Object> iterator;
     private final IFunction mapper;
+    private final Integer depth;
+    private final Boolean wrapNonIterables;
     private Iterator<Object> innerIterator;
 
     public FlatMapIterator(final Iterator<Object> iterator, final IFunction mapper) {
+        this(iterator, mapper, 1, false);
+    }
+
+    public FlatMapIterator(final Iterator<Object> iterator, final IFunction mapper, final Integer depth) {
+        this(iterator, mapper, depth, true);
+    }
+
+    private FlatMapIterator(
+        final Iterator<Object> iterator,
+        final IFunction mapper,
+        final Integer depth,
+        final Boolean wrapNonIterables
+    ) {
         Validate.notNull(iterator);
         Validate.notNull(mapper);
+        Validate.notNull(depth);
+        Validate.positive(depth, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ depth });
+        Validate.notNull(wrapNonIterables);
         this.iterator = iterator;
         this.mapper = mapper;
+        this.depth = depth;
+        this.wrapNonIterables = wrapNonIterables;
     }
 
     protected override void computeNext() {
-        if (!hasInnerNext()) {
-            next = innerIterator.next();
-            hasNext = true;
-            return;
-        }
-        while (iterator.hasNext()) {
-            if (hasInnerNext()) {
-                final Object o = iterator.next();
-                final Iterable<Object> result = (Iterable<Object>) mapper.apply(o);
-                // prettier-ignore
-                if (result != null) { innerIterator = result.iterator(); }
-            }
-            if (!hasInnerNext()) {
+        while (true) {
+            if (innerIterator?.hasNext() ?? false) {
                 next = innerIterator.next();
                 hasNext = true;
                 return;
             }
+            innerIterator = null;
+            if (!iterator.hasNext()) {
+                hasNext = false;
+                return;
+            }
+            final Object mapped = mapper.apply(iterator.next());
+            final Iterable<Object> values = toIterable(mapped);
+            if (values == null) {
+                continue;
+            }
+            innerIterator = depth == 1
+                ? values.iterator()
+                : new FlatMapIterator(values.iterator(), Function.identity(), depth - 1, wrapNonIterables);
         }
-        hasNext = false;
     }
 
-    private Boolean hasInnerNext() {
-        return innerIterator == null || !innerIterator.hasNext();
+    private Iterable<Object> toIterable(final Object mapped) {
+        if (mapped == null) {
+            return wrapNonIterables ? new List<Object>{ null } : null;
+        }
+        if (mapped instanceof Iterable<Object>) {
+            return (Iterable<Object>) mapped;
+        }
+        if (wrapNonIterables) {
+            return new List<Object>{ mapped };
+        }
+        throw new IllegalStateException('Mapped value must implement Iterable<Object>');
     }
 }

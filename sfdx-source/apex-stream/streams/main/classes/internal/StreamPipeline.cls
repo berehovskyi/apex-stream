@@ -64,6 +64,14 @@ public inherited sharing class StreamPipeline {
         return new FlatMapIterator(source, mapper);
     }
 
+    public static Iterator<Object> flatMapTo(
+        final Iterator<Object> source,
+        final IFunction mapper,
+        final Integer depth
+    ) {
+        return new FlatMapIterator(source, mapper, depth);
+    }
+
     public static Iterator<Object> forEach(final Iterator<Object> source, final IConsumer consumer) {
         return new ForEachIterator(source, consumer);
     }

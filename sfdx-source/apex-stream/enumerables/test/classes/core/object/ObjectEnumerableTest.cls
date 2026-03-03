@@ -41,6 +41,8 @@ private class ObjectEnumerableTest {
         enumerable.flatMapToLong(null);
         enumerable.flatMapToDouble(null);
         enumerable.flatMapToSObject(null);
+        enumerable.flat();
+        enumerable.flat(1);
         enumerable.forEach(null);
         enumerable.sort();
         enumerable.sort(SortOrder.ASCENDING);
@@ -78,6 +80,7 @@ private class ObjectEnumerableTest {
         public override LongEnumerable flatMapToLong(IFunction mapper) { return null; }
         public override DoubleEnumerable flatMapToDouble(IFunction mapper) { return null; }
         public override SObjectEnumerable flatMapToSObject(IFunction mapper) { return null; }
+        public override ObjectEnumerable flat(Integer depth) { return null; }
         public override ObjectEnumerable forEach(IConsumer consumer) { return this; }
         public override ObjectEnumerable sort() { return this; }
         public override ObjectEnumerable sort(IComparer comparer) { return this; }

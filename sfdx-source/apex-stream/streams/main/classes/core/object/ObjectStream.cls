@@ -568,6 +568,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * @description Returns a new `ObjectEnumerable` with `Object` elements as a result of
      * replacing each element of this stream with the contents of a mapped iterable created by applying
      * the specified `mapper` function to each element.
+     * Mapped `null` values are skipped.
      * <p>Stateless Intermediate Operation.</p>
      *
      * @param mapper the mapping function which must produce `Iterable<Object>`
@@ -678,6 +679,36 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      */
     public virtual override SObjectEnumerable flatMapToSObject(final IFunction mapper) {
         return SObjectStream.of((Iterator<SObject>) StreamPipeline.flatMapTo(iterator(), mapper));
+    }
+
+    /**
+     * @description Returns a new `ObjectEnumerable` with elements as a result of
+     * replacing each iterable element with the contents of the iterable.
+     * Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @return the new `ObjectEnumerable`
+     */
+    public virtual override ObjectEnumerable flat() {
+        return flat(1);
+    }
+
+    /**
+     * @description Returns a new `ObjectEnumerable` with elements as a result of
+     * replacing each iterable element with the contents of the iterable,
+     * up to `depth` levels.
+     * Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values.
+     * <p>Stateless Intermediate Operation.</p>
+     *
+     * @param depth the flattening depth
+     *
+     * @return the new `ObjectEnumerable`
+     *
+     * @throws IllegalArgumentException if `depth` is less than 1
+     * @throws NullPointerException if `depth` is null
+     */
+    public virtual override ObjectEnumerable flat(final Integer depth) {
+        return new ObjectStream(StreamPipeline.flatMapTo(iterator(), Function.identity(), depth));
     }
 
     /**
