@@ -1,6 +1,6 @@
 # virtual SObjectSequence
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -323,8 +323,6 @@ SObjectSequence.zip(
 
 
 ##### `public static SObjectEnumerable zip(Iterable<SObject> iterable1, Iterable<SObject> iterable2, IBiPredicate predicate, IBiOperator combiner)`
-
-`SUPPRESSWARNINGS`
 
 Returns a combined `SObjectEnumerable` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 

@@ -1,6 +1,6 @@
 # IObjectEnumerable
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -336,7 +336,7 @@ Returns a new `ISObjectEnumerable` with elements returned by the `mapper` functi
 
 ### `public IObjectEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `IObjectEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `IObjectEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. Mapped `null` values are skipped. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -413,6 +413,32 @@ Returns a new `ISObjectEnumerable` with elements as a result of replacing each e
 |Type|Description|
 |---|---|
 |`ISObjectEnumerable`|the new `ISObjectEnumerable`|
+
+### `public IObjectEnumerable flat()`
+
+Returns a new `IObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Intermediate Operation.</p>
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`IObjectEnumerable`|the new `IObjectEnumerable`|
+
+### `public IObjectEnumerable flat(Integer depth)`
+
+Returns a new `IObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable, up to `depth` levels. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Intermediate Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`depth`|the flattening depth|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`IObjectEnumerable`|the new `IObjectEnumerable`|
 
 ### `public IObjectEnumerable forEach(IConsumer consumer)`
 

@@ -1,6 +1,6 @@
 # virtual BiPredicates
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -19,8 +19,6 @@ and related utilities.
 ## Methods
 ### Built-Ins
 ##### `public static BiPredicate isCompared(IFunction left, IFunction right, IComparer comparer, Integer result)`
-
-`SUPPRESSWARNINGS`
 
 Returns a `BiPredicate` that tests if the result of comparing the values returned by the applied `left` and `right` functions applied to the first and the second input arguments respectively by the `comparer` is equal to the expected `result`.
 
