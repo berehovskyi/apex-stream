@@ -1,6 +1,6 @@
 # virtual ObjectSequence
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -278,8 +278,6 @@ List<String> zip = ObjectSequence.zip(strs1, strs2, new ConcatBiOperator())
 
 
 ##### `public static ObjectEnumerable zip(Iterable<Object> iterable1, Iterable<Object> iterable2, IBiPredicate predicate, IBiOperator combiner)`
-
-`SUPPRESSWARNINGS`
 
 Returns a combined `ObjectEnumerable` by applying `combiner` function to each element at the same position, conditioned on satisfying `predicate`.
 
@@ -678,7 +676,7 @@ List<Account> accounts = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz'
 
 ##### `public virtual override ObjectEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `ObjectEnumerable` with `Object` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with `Object` elements as a result of replacing each element of this sequence with the contents of a mapped iterable created by applying the specified `mapper` function to each element. Mapped `null` values are skipped. <p>Stateless Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -691,6 +689,12 @@ Returns a new `ObjectEnumerable` with `Object` elements as a result of replacing
 |Type|Description|
 |---|---|
 |`ObjectEnumerable`|the new `ObjectEnumerable`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
@@ -720,6 +724,12 @@ Returns a new `IntEnumerable` with `Integer` elements as a result of replacing e
 |---|---|
 |`IntEnumerable`|the new `IntEnumerable`|
 
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
 ###### Example
 ```apex
 public class LengthFunction extends Function {
@@ -746,6 +756,12 @@ Returns a new `LongEnumerable` with `Long` elements as a result of replacing eac
 |Type|Description|
 |---|---|
 |`LongEnumerable`|the new `LongEnumerable`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
 
 ###### Example
 ```apex
@@ -774,6 +790,12 @@ Returns a new `DoubleEnumerable` with `Double` elements as a result of replacing
 |---|---|
 |`DoubleEnumerable`|the new `DoubleEnumerable`|
 
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
 ###### Example
 ```apex
 public class LengthFunction extends Function {
@@ -801,6 +823,12 @@ Returns a new `SObjectEnumerable` with `SObject` elements as a result of replaci
 |---|---|
 |`SObjectEnumerable`|the new `SObjectEnumerable`|
 
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`NullPointerException`|if `mapper` is null|
+
 ###### Example
 ```apex
 public class CreateAccountFunction extends Function {
@@ -813,6 +841,73 @@ List<Account> accounts = ObjectSequence.of(new List<String>{ 'foo', 'bar', 'baz'
   { Name: 'foo' },
   { Name: 'bar' },
   { Name: 'baz' }
+]
+```
+
+
+##### `public virtual override ObjectEnumerable flat()`
+
+Returns a new `ObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Stateful Intermediate Operation.</p>
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
+
+###### Example
+```apex
+Account acc1 = new Account(Name = 'foo');
+Account acc2 = new Account(Name = 'bar');
+List<Object> nested = new List<Object>{ new List<Account>{ acc1, acc2 } };
+List<Object> accounts = ObjectSequence.of(nested)
+    .flat()
+    .toList(); //
+[
+  { Name: 'foo' },
+  { Name: 'bar' }
+]
+```
+
+
+##### `public virtual override ObjectEnumerable flat(Integer depth)`
+
+Returns a new `ObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable, up to `depth` levels. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Stateful Intermediate Operation.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`depth`|the flattening depth|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `depth` is less than 1|
+|`NullPointerException`|if `depth` is null|
+
+###### Example
+```apex
+Account acc1 = new Account(Name = 'foo');
+Account acc2 = new Account(Name = 'bar');
+List<Object> nested = new List<Object>{
+    new List<Object>{ new List<Account>{ acc1, acc2, null }, null }
+};
+List<Object> accounts = ObjectSequence.of(nested)
+    .flat(2)
+    .toList(); //
+[
+  { Name: 'foo' },
+  { Name: 'bar' },
+  null,
+  null
 ]
 ```
 

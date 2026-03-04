@@ -1,6 +1,6 @@
 # abstract ObjectEnumerable
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -665,7 +665,7 @@ List<Account> accounts = [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', '
 
 ### `public ObjectEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `ObjectEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with elements as a result of replacing each element with the contents of a mapped iterable created by applying the specified `mapper` function to each element. Mapped `null` values are skipped. <p>Intermediate Operation.</p>
 
 #### Parameters
 
@@ -830,6 +830,73 @@ List<Account> accounts = [ObjectEnumerable].of(new List<String>{ 'foo', 'bar', '
   { Name: 'foo' },
   { Name: 'bar' },
   { Name: 'baz' }
+]
+```
+
+
+### `public virtual ObjectEnumerable flat()`
+
+Returns a new `ObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Intermediate Operation.</p>
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
+
+#### Example
+```apex
+Account acc1 = new Account(Name = 'foo');
+Account acc2 = new Account(Name = 'bar');
+List<Object> nested = new List<Object>{ new List<Account>{ acc1, acc2 } };
+List<Object> accounts = [ObjectEnumerable].of(nested)
+    .flat()
+    .toList(); //
+[
+  { Name: 'foo' },
+  { Name: 'bar' }
+]
+```
+
+
+### `public ObjectEnumerable flat(Integer depth)`
+
+Returns a new `ObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable, up to `depth` levels. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Intermediate Operation.</p>
+
+#### Parameters
+
+|Param|Description|
+|---|---|
+|`depth`|the flattening depth|
+
+#### Returns
+
+|Type|Description|
+|---|---|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
+
+#### Throws
+
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `depth` is less than 0|
+|`NullPointerException`|if `depth` is null|
+
+#### Example
+```apex
+Account acc1 = new Account(Name = 'foo');
+Account acc2 = new Account(Name = 'bar');
+List<Object> nested = new List<Object>{
+    new List<Object>{ new List<Account>{ acc1, acc2, null }, null }
+};
+List<Object> accounts = [ObjectEnumerable].of(nested)
+    .flat(2)
+    .toList(); //
+[
+  { Name: 'foo' },
+  { Name: 'bar' },
+  null,
+  null
 ]
 ```
 

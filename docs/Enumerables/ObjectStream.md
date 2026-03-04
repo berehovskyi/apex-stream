@@ -1,6 +1,6 @@
 # virtual ObjectStream
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -749,7 +749,7 @@ List<Account> accounts = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' }
 
 ##### `public virtual override ObjectEnumerable flatMapTo(IFunction mapper)`
 
-Returns a new `ObjectEnumerable` with `Object` elements as a result of replacing each element of this stream with the contents of a mapped iterable created by applying the specified `mapper` function to each element. <p>Stateless Intermediate Operation.</p>
+Returns a new `ObjectEnumerable` with `Object` elements as a result of replacing each element of this stream with the contents of a mapped iterable created by applying the specified `mapper` function to each element. Mapped `null` values are skipped. <p>Stateless Intermediate Operation.</p>
 
 ###### Parameters
 
@@ -887,6 +887,39 @@ List<Account> accounts = ObjectStream.of(new List<String>{ 'foo', 'bar', 'baz' }
 ]
 ```
 
+
+##### `public virtual override ObjectEnumerable flat()`
+
+Returns a new `ObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Stateless Intermediate Operation.</p>
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
+
+##### `public virtual override ObjectEnumerable flat(Integer depth)`
+
+Returns a new `ObjectEnumerable` with elements as a result of replacing each iterable element with the contents of the iterable, up to `depth` levels. Unlike `flatMapTo(IFunction)`, non-iterable and `null` elements are kept as values. <p>Stateless Intermediate Operation.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`depth`|the flattening depth|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`ObjectEnumerable`|the new `ObjectEnumerable`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `depth` is less than 1|
+|`NullPointerException`|if `depth` is null|
 
 ##### `public virtual override ObjectEnumerable forEach(IConsumer consumer)`
 

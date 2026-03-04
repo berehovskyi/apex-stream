@@ -1,6 +1,6 @@
 # virtual SObjectPredicates
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -1293,8 +1293,6 @@ SObjectPredicates.excludes(Account.Name, new List<String>{ 'AAA;BBB;CCC' }).test
 
 *Inherited*
 
-
-`SUPPRESSWARNINGS`
 
 Returns a `Predicate` that tests if the result of comparing the values returned by the applied `left` and `right` functions by the `comparer` is equal to the expected `result`.
 

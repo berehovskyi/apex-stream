@@ -1,6 +1,6 @@
 # IFunction
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 

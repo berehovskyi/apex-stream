@@ -1,6 +1,6 @@
 # virtual IdSuppliers
 
-`APIVERSION: 65`
+`APIVERSION: 66`
 
 `STATUS: ACTIVE`
 
@@ -43,6 +43,37 @@ Returns a `Supplier` that returns the next `Id` value for the given `sObjectType
 ###### Example
 ```apex
 ISupplier idSupp = IdSuppliers.of(Account.SObjectType);
+idSupp.get(); // '000000000000000AAA'
+idSupp.get(); // '000000000000001AAA'
+```
+
+
+##### `public static Supplier of(String sObjectType)`
+
+Returns a `Supplier` that returns the next `Id` value for the given `sObjectType`. <p><strong>Note: </strong></p> <p>This is a stateful function.</p>
+
+###### Parameters
+
+|Param|Description|
+|---|---|
+|`sObjectType`|of the new id to create|
+
+###### Returns
+
+|Type|Description|
+|---|---|
+|`Supplier`|the `Supplier`|
+
+###### Throws
+
+|Exception|Description|
+|---|---|
+|`IllegalArgumentException`|if `sObjectType` is blank|
+|`NullPointerException`|if `sObjectType` is null|
+
+###### Example
+```apex
+ISupplier idSupp = IdSuppliers.of('Account');
 idSupp.get(); // '000000000000000AAA'
 idSupp.get(); // '000000000000001AAA'
 ```
