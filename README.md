@@ -65,7 +65,7 @@ or install as an Unlocked Package using the CLI:
 Install dependencies first:
 
 ```sh pkg::apex-validate
-sf package install -p 04tJ5000000D7clIAC -o me@example.com -r -w 5
+sf package install -p 04tJ5000000D9vEIAS -o me@example.com -r -w 5
 ```
 
 Install the Apex Stream. The framework consists of several Unlocked Packages:
@@ -73,43 +73,43 @@ Install the Apex Stream. The framework consists of several Unlocked Packages:
 - Apex Functions (required):
 
 ```sh pkg::apex-functions
-sf package install -p 04tJ5000000D7dZIAS -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D9vOIAS -o me@example.com -r -w 10
 ```
 
 - Apex Enumerables (required):
 
 ```sh pkg::apex-stream-enumerables
-sf package install -p 04tJ5000000D7deIAC -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D9vTIAS -o me@example.com -r -w 10
 ```
 
 - Apex Streams (required):
 
 ```sh pkg::apex-stream-streams
-sf package install -p 04tJ5000000D7djIAC -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D9vYIAS -o me@example.com -r -w 10
 ```
 
 - Apex Sequences (recommended):
 
 ```sh pkg::apex-stream-sequences
-sf package install -p 04tJ5000000D7doIAC -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D9vdIAC -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Core (recommended):
 
 ```sh pkg::apex-common-functions-core
-sf package install -p 04tJ5000000D7dtIAC -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D9viIAC -o me@example.com -r -w 10
 ```
 
 - Apex Common Functions Extension (optional):
 
 ```sh pkg::apex-common-functions-extension
-sf package install -p 04tJ5000000D7dyIAC -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D9w7IAC -o me@example.com -r -w 10
 ```
 
 - 🚨 New: Apex Common Functions V2 (beta):
 
 ```sh pkg::apex-common-functions-v2
-sf package install -p 04tJ5000000D7eNIAS -o me@example.com -r -w 10
+sf package install -p 04tJ5000000D9wCIAS -o me@example.com -r -w 10
 ```
 
 ## Modules and Key Features
