@@ -22,10 +22,6 @@ public inherited sharing class LimitIterator implements Iterator<Object> {
     public Object next() {
         // prettier-ignore
         if (!hasNext()) { throw new NoSuchElementException(); }
-        return computeNext();
-    }
-
-    public Object computeNext() {
         i++;
         return iterator.next();
     }

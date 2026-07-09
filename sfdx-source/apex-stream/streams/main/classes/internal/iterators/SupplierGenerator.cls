@@ -15,12 +15,6 @@ public inherited sharing class SupplierGenerator implements Iterator<Object> {
     }
 
     public Object next() {
-        // prettier-ignore
-        if (!hasNext()) { throw new NoSuchElementException(); }
-        return computeNext();
-    }
-
-    public Object computeNext() {
         return supplier.get();
     }
 }

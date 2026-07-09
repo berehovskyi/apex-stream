@@ -80,7 +80,7 @@ public virtual inherited sharing class CollectorSuppliers {
     // @start-group Lambdas
     private class JoiningStringSupplier extends Supplier {
         // prettier-ignore
-        public override Object get() { return new List<String>{ '' }; }
+        public override Object get() { return new List<String>{ null }; }
     }
 
     private class AveragingIntSupplier extends Supplier {

@@ -424,7 +424,7 @@ public virtual inherited sharing class CollectorFunctions {
         // prettier-ignore
         private AppendFinisher(String suffix) { this.suffix = suffix; }
         // prettier-ignore
-        public override Object apply(Object o) { return ((List<String>) o)[0] + suffix; }
+        public override Object apply(Object o) { return (((List<String>) o)[0] ?? '') + suffix; }
     }
 
     private class AveragingIntFinisher extends Function {

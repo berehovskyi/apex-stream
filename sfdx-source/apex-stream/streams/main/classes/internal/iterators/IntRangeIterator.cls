@@ -20,6 +20,8 @@ public inherited sharing class IntRangeIterator implements Iterator<Integer> {
     }
 
     public Integer next() {
+        // prettier-ignore
+        if (!hasNext) { throw new NoSuchElementException(); }
         if (current >= endInclusive) {
             hasNext = false;
             return endInclusive;

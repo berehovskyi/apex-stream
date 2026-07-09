@@ -20,10 +20,6 @@ public inherited sharing class ForEachIterator implements Iterator<Object> {
     public Object next() {
         // prettier-ignore
         if (!hasNext()) { throw new NoSuchElementException(); }
-        return computeNext();
-    }
-
-    private Object computeNext() {
         final Object next = iterator.next();
         consumer.accept(next);
         return next;

@@ -17,12 +17,6 @@ public inherited sharing class ReduceGenerator implements Iterator<Object> {
     }
 
     public Object next() {
-        // prettier-ignore
-        if (!hasNext()) { throw new NoSuchElementException(); }
-        return computeNext();
-    }
-
-    public Object computeNext() {
         final Object prev = next;
         next = operator.apply(next);
         return prev;
