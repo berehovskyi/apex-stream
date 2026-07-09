@@ -28,10 +28,6 @@ public inherited sharing class SkipIterator implements Iterator<Object> {
     public Object next() {
         // prettier-ignore
         if (!hasNext()) { throw new NoSuchElementException(); }
-        return computeNext();
-    }
-
-    public Object computeNext() {
         return iterator.next();
     }
 }

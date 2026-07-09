@@ -3204,7 +3204,11 @@ public virtual inherited sharing class Collectors {
      * Integer numberOfPeople = (Integer) [ObjectEnumerable].of(people).collect(Collectors.counting());
      */
     public static Collector counting() {
-        return summingInt(Function.constant(1));
+        return Collector.of(
+            CollectorSuppliers.averagingInt(),
+            ListObjectConsumers.averagingInt(Function.constant(1)),
+            IterableFunctions.get(1)
+        );
     }
 
     /**
@@ -3297,7 +3301,7 @@ public virtual inherited sharing class Collectors {
      *
      * @example
      * Double averageBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
-     *     .collect(Collectors.averagingLong(Functions.get('BillingLatitude')));
+     *     .collect(Collectors.averagingDouble(Functions.get('BillingLatitude')));
      */
     public static Collector averagingDouble(final IFunction mapper) {
         return Collector.of(
@@ -3319,7 +3323,7 @@ public virtual inherited sharing class Collectors {
      * @throws NullPointerException if `mapper` is null
      *
      * @example
-     * Long sumOfBillingLatitude = (Long) [SObjectEnumerable].of(accounts)
+     * Double sumOfBillingLatitude = (Double) [SObjectEnumerable].of(accounts)
      *     .collect(Collectors.summingDouble(Functions.get('BillingLatitude')));
      */
     public static Collector summingDouble(final IFunction mapper) {

@@ -2,7 +2,7 @@
  * @author Oleh Berehovskyi
  */
 @SuppressWarnings('PMD.ApexDoc')
-public virtual inherited sharing class SortIterator extends BaseIterator {
+public inherited sharing class SortIterator extends BaseIterator {
     private final Iterator<Object> iterator;
     private final IComparer comparer;
     private Iterator<Object> sortIterator;

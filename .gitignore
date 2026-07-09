@@ -9,3 +9,12 @@ scripts/
 config/
 IlluminatedCloud/
 node_modules
+
+# Added by Illuminated Cloud
+.localdev/
+/out/
+target/
+/.illuminatedCloud/
+**/tsconfig*.json
+**/*.tsbuildinfo
+**/graphql.config.yml

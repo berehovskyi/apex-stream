@@ -253,7 +253,7 @@ public virtual inherited sharing class ListObjectConsumers {
         }
         public override void accept(Object container, Object o) {
             final List<String> strings = (List<String>) container;
-            strings[0] = strings[0] + (strings[0].length() > 0 ? delimiter : prefix) + (String) mapper.apply(o);
+            strings[0] = (strings[0] == null ? prefix : strings[0] + delimiter) + (String) mapper.apply(o);
         }
     }
 

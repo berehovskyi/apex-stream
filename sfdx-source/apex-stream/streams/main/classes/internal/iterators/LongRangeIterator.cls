@@ -20,6 +20,8 @@ public inherited sharing class LongRangeIterator implements Iterator<Long> {
     }
 
     public Long next() {
+        // prettier-ignore
+        if (!hasNext) { throw new NoSuchElementException(); }
         if (current >= endInclusive) {
             hasNext = false;
             return endInclusive;
