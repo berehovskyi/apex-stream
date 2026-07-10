@@ -98,7 +98,7 @@ public virtual inherited sharing class SObjectIterablePredicateProvider {
     public virtual class SObjectIterableOperator {
         protected final IFunction mapper;
         protected SObjectIterableOperator(final IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
 
@@ -199,7 +199,7 @@ public virtual inherited sharing class SObjectIterablePredicateProvider {
         protected final Iterable<Object> container;
         protected Set<Object> elements;
         protected IterablePredicate(IFunction mapper, Iterable<Object> container) {
-            Validate.notNull(container);
+            AfSupport.notNull(container);
             this.mapper = mapper;
             this.container = container;
         }
@@ -232,7 +232,7 @@ public virtual inherited sharing class SObjectIterablePredicateProvider {
             final Set<String> values = split(value.trim());
             if (elements == null) { elements = toSet(container); }
             for (Object element : elements) {
-                Validate.notNull(element);
+                AfSupport.notNull(element);
                 if (values.containsAll(split((String) element))) { return true; }
             }
             return false;

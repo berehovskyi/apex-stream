@@ -59,7 +59,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * LongEnumerable longSeq = LongSequence.of(new List<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable of(final List<Long> longs) {
-        Validate.notNull(longs);
+        AfSupport.notNull(longs);
         return new LongSequence(longs);
     }
 
@@ -76,7 +76,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      * LongEnumerable longSeq = LongSequence.of(new Set<Long>{ 0L, 5L, 1L, -10L });
      */
     public static LongEnumerable of(final Set<Long> longs) {
-        Validate.notNull(longs);
+        AfSupport.notNull(longs);
         return new LongSequence(new List<Long>(longs));
     }
 
@@ -571,7 +571,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *
      * @return the `LongEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -592,7 +592,7 @@ public virtual inherited sharing class LongSequence extends LongEnumerable {
      *
      * @return the `LongEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

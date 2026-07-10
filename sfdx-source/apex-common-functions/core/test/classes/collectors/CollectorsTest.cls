@@ -1194,4 +1194,62 @@ private class CollectorsTest {
         };
         Assert.areEqual(expected1, actual1);
     }
+
+    /**
+     * @see Collector.cast
+     */
+    @IsTest
+    static void cast() {
+        // When + Then
+        assertCastAliasing(
+            Collectors.groupingByString(Function.identity()),
+            new List<Object>{ STRINGS[0] },
+            Map<String, List<Object>>.class,
+            Map<String, List<Account>>.class
+        );
+        assertCastAliasing(
+            Collectors.partitioningBy(Predicate.always(true)),
+            new List<Object>{ STRINGS[0] },
+            Map<Boolean, List<Object>>.class,
+            Map<Boolean, List<Account>>.class
+        );
+        assertCastAliasing(
+            Collectors.groupingByString(
+                Function.identity(),
+                Collectors.groupingByString(Function.identity())
+            ),
+            new List<Object>{ STRINGS[0] },
+            Map<String, Map<String, List<Object>>>.class,
+            Map<String, Map<String, List<Account>>>.class
+        );
+        Collector base = Collectors.groupingByString(Function.identity());
+        ICollector firstCast = base.cast(Map<String, List<String>>.class);
+        Assert.isNotNull(AfTestCommons.collect(new List<Object>{ STRINGS[0] }, firstCast));
+        Assert.isNotNull(base.cast(Map<String, List<Account>>.class));
+        Exception actual;
+        try {
+            AfTestCommons.collect(new List<Object>{ STRINGS[0] }, firstCast);
+        } catch (Exception e) {
+            actual = e;
+        }
+        Assert.isNotNull(actual, 'The second cast rewired the first cast');
+    }
+
+    private static void assertCastAliasing(
+        Collector collector,
+        List<Object> source,
+        Type firstType,
+        Type secondType
+    ) {
+        ICollector firstCast = collector.cast(firstType);
+        Assert.isNotNull(AfTestCommons.collect(source, firstCast));
+        Assert.isNotNull(collector.cast(secondType));
+        Exception exc;
+        try {
+            AfTestCommons.collect(source, firstCast);
+        } catch (Exception e) {
+            exc = e;
+        }
+        Assert.isTrue(exc != null, 'The second cast did not rewire the first cast');
+    }
 }

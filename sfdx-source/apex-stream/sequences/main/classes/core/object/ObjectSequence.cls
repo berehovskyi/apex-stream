@@ -76,7 +76,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * ObjectEnumerable peopleSeq = ObjectSequence.of(new List<Person>(people));
      */
     public static ObjectEnumerable of(final List<Object> objects) {
-        Validate.notNull(objects);
+        AfSupport.notNull(objects);
         return new ObjectSequence(objects);
     }
 
@@ -93,7 +93,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      * ObjectEnumerable peopleSeq = ObjectSequence.of(new Set<Person>(people));
      */
     public static ObjectEnumerable of(final Set<Object> objects) {
-        Validate.notNull(objects);
+        AfSupport.notNull(objects);
         return new ObjectSequence(new List<Object>(objects));
     }
 
@@ -809,7 +809,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *
      * @return the `ObjectEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -830,7 +830,7 @@ public virtual inherited sharing class ObjectSequence extends ObjectEnumerable {
      *
      * @return the `ObjectEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

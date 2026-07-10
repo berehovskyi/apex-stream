@@ -54,7 +54,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public override Iterator<Integer> iterator() {
-        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
+        AfSupport.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -81,7 +81,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * IntEnumerable intStream = IntStream.of(otherStream.iterator());
      */
     public static IntEnumerable of(final Iterator<Integer> iterator) {
-        Validate.notNull(iterator);
+        AfSupport.notNull(iterator);
         return new IntStream(iterator);
     }
 
@@ -99,7 +99,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      * IntEnumerable intStream = IntStream.of(new Set<Integer>{ 0, 5, 1, -10 });
      */
     public static IntEnumerable of(final Iterable<Integer> integers) {
-        Validate.notNull(integers);
+        AfSupport.notNull(integers);
         return new IntStream(integers.iterator());
     }
 
@@ -671,7 +671,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *
      * @return the `IntEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -692,7 +692,7 @@ public virtual inherited sharing class IntStream extends IntEnumerable implement
      *
      * @return the `IntEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

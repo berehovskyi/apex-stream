@@ -8,13 +8,13 @@ public inherited sharing class DistinctIterator extends BaseIterator {
     private final Set<Object> results = new Set<Object>();
 
     public DistinctIterator(final Iterator<Object> iterator) {
-        Validate.notNull(iterator);
+        AfSupport.notNull(iterator);
         this.iterator = iterator;
     }
 
     public DistinctIterator(final Iterator<Object> iterator, final IFunction classifier) {
-        Validate.notNull(iterator);
-        Validate.notNull(classifier);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(classifier);
         this.iterator = iterator;
         this.classifier = classifier;
     }

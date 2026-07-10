@@ -14,8 +14,8 @@ private class AfTestCommons {
     }
     @SuppressWarnings('PMD.OneDeclarationPerLine')
     public static Object collect(final List<Object> source, final ICollector collector) {
-        Validate.notNull(source);
-        Validate.notNull(collector);
+        AfSupport.notNull(source);
+        AfSupport.notNull(collector);
         final Object container = collector.supplier().get();
         final IBiConsumer accumulator = collector.accumulator();
         final IFunction finisher = collector.finisher();
@@ -334,7 +334,7 @@ private class AfTestCommons {
         }
         private String findChildRelationshipName(final SObjectField field) {
             final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-            Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
+            AfSupport.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
             String result;
             for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
                 if (relationship.getField() == field) {

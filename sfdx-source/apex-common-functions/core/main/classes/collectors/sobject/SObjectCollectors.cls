@@ -602,7 +602,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -628,7 +628,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -661,7 +661,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -693,7 +693,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -731,7 +731,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -760,7 +760,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -793,7 +793,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -825,7 +825,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -864,7 +864,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -893,7 +893,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -926,7 +926,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -958,7 +958,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -996,7 +996,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1025,7 +1025,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1058,7 +1058,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -1090,7 +1090,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -1129,7 +1129,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1158,7 +1158,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1191,7 +1191,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -1223,7 +1223,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -1261,7 +1261,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1290,7 +1290,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1323,7 +1323,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -1355,7 +1355,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -1393,7 +1393,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1422,7 +1422,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1455,7 +1455,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -1487,7 +1487,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -1525,7 +1525,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1554,7 +1554,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1587,7 +1587,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -1619,7 +1619,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -1657,7 +1657,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1686,7 +1686,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1719,7 +1719,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -1751,7 +1751,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -1789,7 +1789,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1818,7 +1818,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1851,7 +1851,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -1883,7 +1883,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -1924,7 +1924,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` or `valueFieldName` is null
      *
      * @example
@@ -1956,7 +1956,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` or `valueField` is null
      *
      * @example
@@ -1992,7 +1992,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyFieldName` is null
      *
      * @example
@@ -2027,7 +2027,7 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyField` is null
      *
      * @example
@@ -3527,19 +3527,6 @@ public virtual inherited sharing class SObjectCollectors extends Collectors {
         return averagingInt(SObjectFunctions.get(field));
     }
 
-    /**
-     * @description Returns a `Collector` that counts the number of input elements.
-     * If no elements are present, the result is 0.
-     *
-     * @return the `Collector`
-     *
-     * @example
-     * Double averageNumberOfEmployees = (Double) [SObjectEnumerable].of(accounts)
-     *     .collect(SObjectCollectors.counting());
-     */
-    public static Collector counting() {
-        return summingInt(Function.constant(1));
-    }
     /**
      * @description Returns a `Collector` that returns the arithmetic sum
      * of `field` values.

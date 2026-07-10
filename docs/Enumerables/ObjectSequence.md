@@ -1077,7 +1077,7 @@ Returns a `ObjectEnumerable` with first `lim` elements. <p>Short-circuiting Stat
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `lim` is less than 0|
+|`InvalidStateException`|if `lim` is less than 0|
 |`NullPointerException`|if `lim` is null|
 
 ###### Example
@@ -1108,7 +1108,7 @@ Returns a new `ObjectEnumerable` that skips first `n` elements and returns remai
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `n` is less than 0|
+|`InvalidStateException`|if `n` is less than 0|
 |`NullPointerException`|if `n` is null|
 
 ###### Example

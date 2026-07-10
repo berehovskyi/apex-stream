@@ -76,7 +76,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public override Iterator<Double> iterator() {
-        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
+        AfSupport.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -103,7 +103,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * DoubleEnumerable doubleStream = DoubleStream.of(otherStream.iterator());
      */
     public static DoubleEnumerable of(final Iterator<Double> iterator) {
-        Validate.notNull(iterator);
+        AfSupport.notNull(iterator);
         return new DoubleStream(iterator);
     }
 
@@ -121,7 +121,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      * DoubleEnumerable doubleStream = DoubleStream.of(new Set<Double>{ 0.1, 5, 1.5, Math.PI });
      */
     public static DoubleEnumerable of(final Iterable<Double> doubles) {
-        Validate.notNull(doubles);
+        AfSupport.notNull(doubles);
         return new DoubleStream(doubles.iterator());
     }
 
@@ -662,7 +662,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @return the `DoubleEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -683,7 +683,7 @@ public virtual inherited sharing class DoubleStream extends DoubleEnumerable imp
      *
      * @return the `DoubleEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

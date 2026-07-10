@@ -189,7 +189,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
     private class Some extends BiPredicate {
         private final List<IBiPredicate> predicates;
         private Some(List<IBiPredicate> predicates) {
-            Validate.noNullElements(predicates);
+            AfSupport.noNullElements(predicates);
             this.predicates = predicates;
         }
         @SuppressWarnings('PMD.OneDeclarationPerLine')
@@ -206,8 +206,8 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
         private final IPredicate left;
         private final IPredicate right;
         private SomePredicate(IPredicate left, IPredicate right) {
-            Validate.notNull(left);
-            Validate.notNull(right);
+            AfSupport.notNull(left);
+            AfSupport.notNull(right);
             this.left = left;
             this.right = right;
         }
@@ -218,7 +218,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
     private class Every extends BiPredicate {
         private final List<IBiPredicate> predicates;
         private Every(List<IBiPredicate> predicates) {
-            Validate.noNullElements(predicates);
+            AfSupport.noNullElements(predicates);
             this.predicates = predicates;
         }
         @SuppressWarnings('PMD.OneDeclarationPerLine')
@@ -235,8 +235,8 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
         private final IPredicate left;
         private final IPredicate right;
         private EveryPredicate(IPredicate left, IPredicate right) {
-            Validate.notNull(left);
-            Validate.notNull(right);
+            AfSupport.notNull(left);
+            AfSupport.notNull(right);
             this.left = left;
             this.right = right;
         }
@@ -247,7 +247,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
     private class Negate extends BiPredicate {
         private final IBiPredicate predicate;
         private Negate(IBiPredicate predicate) {
-            Validate.notNull(predicate);
+            AfSupport.notNull(predicate);
             this.predicate = predicate;
         }
         // prettier-ignore
@@ -257,7 +257,7 @@ public abstract inherited sharing class BiPredicate implements IBiPredicate {
     private class Always extends BiPredicate {
         private final Boolean value;
         private Always(Boolean value) {
-            Validate.notNull(value);
+            AfSupport.notNull(value);
             this.value = value;
         }
         // prettier-ignore

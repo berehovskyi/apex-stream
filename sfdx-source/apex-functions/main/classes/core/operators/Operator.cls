@@ -144,7 +144,7 @@ public abstract inherited sharing class Operator implements IOperator {
     private class Compose extends Operator {
         private final List<IOperator> operators;
         private Compose(List<IOperator> operators) {
-            Validate.noNullElements(operators);
+            AfSupport.noNullElements(operators);
             this.operators = operators;
         }
         public override Object apply(Object o) {
@@ -167,7 +167,7 @@ public abstract inherited sharing class Operator implements IOperator {
     private class ForConsumer extends Operator {
         private final IConsumer consumer;
         private ForConsumer(IConsumer consumer) {
-            Validate.notNull(consumer);
+            AfSupport.notNull(consumer);
             this.consumer = consumer;
         }
         public override Object apply(Object o) {
@@ -179,7 +179,7 @@ public abstract inherited sharing class Operator implements IOperator {
     private class ForSupplier extends Operator {
         private final ISupplier supplier;
         private ForSupplier(ISupplier supplier) {
-            Validate.notNull(supplier);
+            AfSupport.notNull(supplier);
             this.supplier = supplier;
         }
         // prettier-ignore
@@ -190,8 +190,8 @@ public abstract inherited sharing class Operator implements IOperator {
         private final IOperator valueMapper;
         private final IBiOperator merger;
         private Combine(IOperator valueMapper, IBiOperator merger) {
-            Validate.notNull(valueMapper);
-            Validate.notNull(merger);
+            AfSupport.notNull(valueMapper);
+            AfSupport.notNull(merger);
             this.valueMapper = valueMapper;
             this.merger = merger;
         }

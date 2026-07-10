@@ -43,7 +43,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Boolean, Obje
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -72,7 +72,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Id, Object>` 
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -101,7 +101,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<String, Objec
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -130,7 +130,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Blob, Object>
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -159,7 +159,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Date, Object>
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -188,7 +188,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Datetime, Obj
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -217,7 +217,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Datetime, Obj
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -246,7 +246,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Integer, Obje
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -275,7 +275,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Long, Object>
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -304,7 +304,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Double, Objec
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 
@@ -333,7 +333,7 @@ Returns a `BiConsumer` that casts the first input argument to `Map<Object, Objec
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `merger` is null and mapped keys contain duplicates|
+|`InvalidStateException`|if `merger` is null and mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 |`NullPointerException`|if the first input argument is null|
 

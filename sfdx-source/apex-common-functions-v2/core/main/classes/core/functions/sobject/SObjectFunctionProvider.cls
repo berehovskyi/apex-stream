@@ -294,7 +294,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
         protected final List<IFunction> valueMappers = new List<IFunction>();
         protected final List<SObjectConsumerProvider.SetFieldValueBase> destConsumers = new List<SObjectConsumerProvider.SetFieldValueBase>();
         protected ChainableMapSObjectFunction(ISupplier identitySupplier) {
-            Validate.notNull(identitySupplier);
+            AfSupport.notNull(identitySupplier);
             this.identitySupplier = identitySupplier;
         }
 
@@ -397,7 +397,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
         protected final ChainableMapSObjectFunction chainableOperator;
         protected final IFunction mapper;
         protected MapSObjectValueMapper(ChainableMapSObjectFunction chainableOperator, IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
             this.chainableOperator = chainableOperator;
         }
@@ -476,7 +476,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
         private final IFunction function;
         // prettier-ignore
         private GetFunction(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             if (!AcfSupport.isXRefField(field)) { function = new GetByFieldName(field); }
             else if (AcfSupport.isSafePath(field)) { function = new GetByFieldPathSafe(field); }
             else { function = new GetByFieldPath(field); }
@@ -488,7 +488,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
     private class GetFieldFunction extends Function {
         private final SObjectField field;
         private GetFieldFunction(SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
         // prettier-ignore
@@ -499,7 +499,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
         private final IFunction function;
         // prettier-ignore
         private GetSObjectFunction(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             if (!field.containsAny('?.')) { function = new GetSObjectByFieldName(field); }
             else { function = new GetSObjectByFieldPathSafe(field); }
         }
@@ -510,7 +510,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
     private class GetSObjectFieldFunction extends Function {
         private final SObjectField field;
         private GetSObjectFieldFunction(SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
         // prettier-ignore
@@ -543,7 +543,7 @@ public virtual inherited sharing class SObjectFunctionProvider {
         private final IFunction function;
         // prettier-ignore
         private GetSObjectsFunction(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             if (!AcfSupport.isXRefField(field)) { function = new GetSObjectsByFieldName(field); }
             else if (AcfSupport.isSafePath(field)) { function = new GetSObjectsByFieldPathSafe(field); }
             else { function = new GetSObjectsByFieldPath(field); }

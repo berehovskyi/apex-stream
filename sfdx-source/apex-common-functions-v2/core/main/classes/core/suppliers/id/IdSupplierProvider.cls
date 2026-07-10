@@ -59,16 +59,16 @@ public virtual inherited sharing class IdSupplierProvider {
         private final String keyPrefix;
         private final String placeholder = '000000000000';
         private IdOfTypeSupplier(String sObjectType) {
-            Validate.notBlank(sObjectType);
+            AfSupport.notBlank(sObjectType);
             List<DescribeSObjectResult> results = Schema.describeSObjects(
                 new List<String>{ sObjectType },
                 SObjectDescribeOptions.DEFERRED
             );
-            Validate.isTrue(results.size() == 1);
+            AfSupport.isTrue(results.size() == 1);
             keyPrefix = results[0].getSObjectType().getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix();
         }
         private IdOfTypeSupplier(SObjectType sObjectType) {
-            Validate.notNull(sObjectType);
+            AfSupport.notNull(sObjectType);
             keyPrefix = sObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix();
         }
         public override Object get() {

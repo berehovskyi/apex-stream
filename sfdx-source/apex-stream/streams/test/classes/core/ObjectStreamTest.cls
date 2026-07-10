@@ -454,7 +454,7 @@ private class ObjectStreamTest {
         ISObjectEnumerable stm1 = ObjectStream.of(clone).mapToSObject(new AsTestCommons.ConvertToUser());
         // When
         List<SObject> actual = stm.toList();
-        List<SObject> actual1 = (List<SObject>) stm1.toList();
+        List<SObject> actual1 = stm1.toList();
         // Then
         List<User> expected = new List<User>{ new User(LastName = 'John', IsActive = true), new User(LastName = 'Jake', IsActive = true) };
         Assert.areEqual(expected, actual);
@@ -494,14 +494,14 @@ private class ObjectStreamTest {
         Exception exc1;
         try {
             stm2.toList();
-        } catch (IllegalStateException exc) {
+        } catch (Exception exc) {
             exc1 = exc;
         }
         // Then
         List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
-        Assert.areEqual(IllegalStateException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(InvalidStateException.class.getName(), exc1.getTypeName());
         Assert.areEqual('Mapped value must implement Iterable<Object>', exc1.getMessage());
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.areEqual(invalidInput, invalidClone, Label.AS_ErrorMessage_InputMutated);
@@ -629,7 +629,7 @@ private class ObjectStreamTest {
         ISObjectEnumerable stm1 = ObjectStream.of(clone).flatMapToSObject(Function.identity());
         // When
         List<Account> actual = stm.toList();
-        List<Account> actual1 = (List<Account>) stm1.toList();
+        List<Account> actual1 = stm1.toList();
         // Then
         List<Account> expected = new List<Account>{ accounts[1], accounts[0], accounts[2] };
         Assert.areEqual(expected, actual);
@@ -1200,7 +1200,7 @@ private class ObjectStreamTest {
         IObjectEnumerable stm1 = ObjectStream.of(clone);
         // When
         Set<Object> actual = stm.toSet();
-        Set<Object> actual1 = (Set<Object>) stm1.toSet();
+        Set<Object> actual1 = stm1.toSet();
         // Then
         Set<Object> expected = new Set<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
         Assert.areEqual(expected, actual);

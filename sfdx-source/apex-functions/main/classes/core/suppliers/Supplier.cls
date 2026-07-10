@@ -75,7 +75,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
      * repeat.get(); // 'a'
      */
     public static Supplier repeat(final Iterable<Object> iterable) {
-        Validate.notNull(iterable);
+        AfSupport.notNull(iterable);
         return new Repeat(iterable);
     }
     // @end-group
@@ -86,7 +86,7 @@ public abstract inherited sharing class Supplier implements ISupplier {
     private class OfType extends Supplier {
         private final Type t;
         private OfType(Type t) {
-            Validate.notNull(t);
+            AfSupport.notNull(t);
             this.t = t;
         }
         // prettier-ignore

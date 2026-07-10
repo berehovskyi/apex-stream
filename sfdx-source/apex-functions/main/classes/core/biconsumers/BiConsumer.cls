@@ -83,7 +83,7 @@ public abstract inherited sharing class BiConsumer implements IBiConsumer {
     private class Compose extends BiConsumer {
         private final List<IBiConsumer> consumers;
         private Compose(List<IBiConsumer> consumers) {
-            Validate.noNullElements(consumers);
+            AfSupport.noNullElements(consumers);
             this.consumers = consumers;
         }
         public override void accept(Object o1, Object o2) {

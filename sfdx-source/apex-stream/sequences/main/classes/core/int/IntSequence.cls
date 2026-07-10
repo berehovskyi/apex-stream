@@ -59,7 +59,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * IntEnumerable intSeq = IntSequence.of(new List<Integer>{ 0, 5, 1, -10 });
      */
     public static IntEnumerable of(final List<Integer> integers) {
-        Validate.notNull(integers);
+        AfSupport.notNull(integers);
         return new IntSequence(integers);
     }
 
@@ -76,7 +76,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      * IntEnumerable intSeq = IntSequence.of(new Set<Integer>{ 0, 5, 1, -10 });
      */
     public static IntEnumerable of(final Set<Integer> integers) {
-        Validate.notNull(integers);
+        AfSupport.notNull(integers);
         return new IntSequence(new List<Integer>(integers));
     }
 
@@ -573,7 +573,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      *
      * @return the `IntEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -594,7 +594,7 @@ public virtual inherited sharing class IntSequence extends IntEnumerable {
      *
      * @return the `IntEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

@@ -41,8 +41,8 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
      * @throws NullPointerException if `comparer` or `interpreter` is null
      */
     protected SObjectComparerBiPredicateProvider(final IComparer comparer, final ComparisonInterpreter interpreter) {
-        Validate.notNull(comparer);
-        Validate.notNull(interpreter);
+        AfSupport.notNull(comparer);
+        AfSupport.notNull(interpreter);
         com = comparer;
         interp = interpreter;
     }
@@ -206,7 +206,7 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
         protected final IComparer comparer;
         protected final ComparisonInterpreter interpreter;
         protected ComparisonOperator(IFunction left, IComparer comparer, ComparisonInterpreter interpreter) {
-            Validate.notNull(left);
+            AfSupport.notNull(left);
             this.left = left;
             this.comparer = comparer;
             this.interpreter = interpreter;
@@ -336,7 +336,7 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
         protected final IComparer comparer;
         protected final Set<Integer> results;
         protected RightComparand(IFunction left, IComparer comparer, Set<Integer> results) {
-            Validate.notNull(results);
+            AfSupport.notNull(results);
             this.left = left;
             this.comparer = comparer;
             this.results = results;
@@ -477,10 +477,10 @@ public virtual inherited sharing class SObjectComparerBiPredicateProvider {
         private final IComparer comparer;
         private final Set<Integer> results;
         private ComparerBiPredicate(IFunction left, IFunction right, IComparer comparer, Set<Integer> results) {
-            Validate.notNull(left);
-            Validate.notNull(right);
-            Validate.notNull(comparer);
-            Validate.notNull(results);
+            AfSupport.notNull(left);
+            AfSupport.notNull(right);
+            AfSupport.notNull(comparer);
+            AfSupport.notNull(results);
             this.left = left;
             this.right = right;
             this.comparer = comparer;

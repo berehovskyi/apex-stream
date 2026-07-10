@@ -18,7 +18,7 @@ public inherited sharing class CsfSupport {
      */
     public static String findRelationshipField(final SObjectField field) {
         final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-        Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
+        AfSupport.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
         String result;
         for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
             if (relationship.getField() == field) {
@@ -26,7 +26,7 @@ public inherited sharing class CsfSupport {
                 break;
             }
         }
-        Validate.isNotNull(result);
+        AfSupport.isNotNull(result);
         return result;
     }
 
@@ -41,7 +41,7 @@ public inherited sharing class CsfSupport {
      * @throws IllegalArgumentException if the provided field is blank.
      */
     public static Boolean isXRefField(String field) {
-        Validate.notBlank(field);
+        AfSupport.notBlank(field);
         return field.contains('.');
     }
 
@@ -57,7 +57,7 @@ public inherited sharing class CsfSupport {
      * @throws IllegalArgumentException if the provided field is blank.
      */
     public static Boolean isSafePath(String field) {
-        Validate.notBlank(field);
+        AfSupport.notBlank(field);
         return field.substringBeforeLast('.').endsWith('?');
     }
 }

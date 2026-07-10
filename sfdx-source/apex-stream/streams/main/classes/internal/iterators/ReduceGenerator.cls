@@ -7,7 +7,7 @@ public inherited sharing class ReduceGenerator implements Iterator<Object> {
     private Object next;
 
     public ReduceGenerator(final Object seed, final IOperator operator) {
-        Validate.notNull(operator);
+        AfSupport.notNull(operator);
         this.operator = operator;
         next = seed;
     }

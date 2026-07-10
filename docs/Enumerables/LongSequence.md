@@ -791,7 +791,7 @@ Returns a `LongEnumerable` with first `lim` elements. <p>Short-circuiting Statef
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `lim` is less than 0|
+|`InvalidStateException`|if `lim` is less than 0|
 |`NullPointerException`|if `lim` is null|
 
 ###### Example
@@ -822,7 +822,7 @@ Returns a new `LongEnumerable` that skips first `n` elements and returns remaini
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `n` is less than 0|
+|`InvalidStateException`|if `n` is less than 0|
 |`NullPointerException`|if `n` is null|
 
 ###### Example

@@ -60,14 +60,6 @@ or install as an Unlocked Package using the CLI:
 
 ### Dependencies
 
-- [Apex Validate](https://github.com/berehovskyi/apex-validate)
-
-Install dependencies first:
-
-```sh pkg::apex-validate
-sf package install -p 04tJ5000000D9vEIAS -o me@example.com -r -w 5
-```
-
 Install the Apex Stream. The framework consists of several Unlocked Packages:
 
 - Apex Functions (required):

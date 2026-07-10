@@ -215,7 +215,7 @@ public virtual inherited sharing class SetObjectConsumers {
     private abstract class AddToSet extends BiConsumer {
         private final IFunction mapper;
         protected AddToSet(IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
     }

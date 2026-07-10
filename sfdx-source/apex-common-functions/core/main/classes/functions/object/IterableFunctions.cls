@@ -38,12 +38,12 @@ public virtual inherited sharing class IterableFunctions {
     private class GetElement extends Function {
         private final Integer index;
         private GetElement(Integer index) {
-            Validate.notNull(index);
+            AfSupport.notNull(index);
             this.index = index;
         }
         public override Object apply(Object o) {
             Iterator<Object> iterator = ((Iterable<Object>) o)?.iterator();
-            Validate.notNull(iterator);
+            AfSupport.notNull(iterator);
             Integer i = 0;
             while (iterator.hasNext()) {
                 Object current = iterator.next();
@@ -51,7 +51,7 @@ public virtual inherited sharing class IterableFunctions {
                 if (i == index) { return current; }
                 i++;
             }
-            throw new IndexOutOfBoundsException(
+            throw new NoSuchElementException(
                 String.format(Label.AF_ErrorMessage_IndexOutOfBounds, new List<Integer>{ index })
             );
         }

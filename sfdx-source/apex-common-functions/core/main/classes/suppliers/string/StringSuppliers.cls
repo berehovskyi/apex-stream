@@ -67,7 +67,7 @@ public virtual inherited sharing class StringSuppliers {
         private final Integer displayLength;
         private Integer i;
         private AutoNumber(String format) {
-            Validate.matches(
+            AfSupport.matches(
                 format,
                 pattern,
                 Label.ACF_ErrorMessage_StringPatternMismatch,

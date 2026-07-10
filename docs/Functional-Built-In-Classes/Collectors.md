@@ -607,7 +607,7 @@ Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` wh
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -641,7 +641,7 @@ Returns a `Collector` that accumulates elements into a `Map<Boolean, Object>` wh
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -756,7 +756,7 @@ Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose k
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -790,7 +790,7 @@ Returns a `Collector` that accumulates elements into a `Map<Id, Object>` whose k
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -905,7 +905,7 @@ Returns a `Collector` that accumulates elements into a `Map<String, Object>` who
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1053,7 +1053,7 @@ Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1087,7 +1087,7 @@ Returns a `Collector` that accumulates elements into a `Map<Blob, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -1202,7 +1202,7 @@ Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1236,7 +1236,7 @@ Returns a `Collector` that accumulates elements into a `Map<Date, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -1351,7 +1351,7 @@ Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` w
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1385,7 +1385,7 @@ Returns a `Collector` that accumulates elements into a `Map<Datetime, Object>` w
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -1502,7 +1502,7 @@ Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1536,7 +1536,7 @@ Returns a `Collector` that accumulates elements into a `Map<Time, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -1651,7 +1651,7 @@ Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` wh
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1685,7 +1685,7 @@ Returns a `Collector` that accumulates elements into a `Map<Integer, Object>` wh
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -1800,7 +1800,7 @@ Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1834,7 +1834,7 @@ Returns a `Collector` that accumulates elements into a `Map<Long, Object>` whose
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -1949,7 +1949,7 @@ Returns a `Collector` that accumulates elements into a `Map<Double, Object>` who
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -1983,7 +1983,7 @@ Returns a `Collector` that accumulates elements into a `Map<Double, Object>` who
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example
@@ -2098,7 +2098,7 @@ Returns a `Collector` that accumulates elements into a `Map<Object, Object>` who
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` is null|
 
 ###### Example
@@ -2132,7 +2132,7 @@ Returns a `Collector` that accumulates elements into a `Map<Object, Object>` who
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueMapper` is null|
 
 ###### Example

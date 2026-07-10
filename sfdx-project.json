@@ -6,13 +6,7 @@
             "versionName": "ver 1.2",
             "versionNumber": "1.2.1.NEXT",
             "default": false,
-            "versionDescription": "",
-            "dependencies": [
-                {
-                    "package": "apex-validate",
-                    "versionNumber": "2.1.1.LATEST"
-                }
-            ]
+            "versionDescription": ""
         },
         {
             "path": "sfdx-source/apex-stream/enumerables",
@@ -22,10 +16,6 @@
             "default": true,
             "versionDescription": "",
             "dependencies": [
-                {
-                    "package": "apex-validate",
-                    "versionNumber": "2.1.1.LATEST"
-                },
                 {
                     "package": "apex-functions",
                     "versionNumber": "1.2.1.LATEST"
@@ -40,10 +30,6 @@
             "default": false,
             "versionDescription": "",
             "dependencies": [
-                {
-                    "package": "apex-validate",
-                    "versionNumber": "2.1.1.LATEST"
-                },
                 {
                     "package": "apex-functions",
                     "versionNumber": "1.2.1.LATEST"
@@ -63,10 +49,6 @@
             "versionDescription": "",
             "dependencies": [
                 {
-                    "package": "apex-validate",
-                    "versionNumber": "2.1.1.LATEST"
-                },
-                {
                     "package": "apex-functions",
                     "versionNumber": "1.2.1.LATEST"
                 },
@@ -85,10 +67,6 @@
             "versionDescription": "",
             "dependencies": [
                 {
-                    "package": "apex-validate",
-                    "versionNumber": "2.1.1.LATEST"
-                },
-                {
                     "package": "apex-functions",
                     "versionNumber": "1.2.1.LATEST"
                 }
@@ -102,10 +80,6 @@
             "default": false,
             "versionDescription": "",
             "dependencies": [
-                {
-                    "package": "apex-validate",
-                    "versionNumber": "2.1.1.LATEST"
-                },
                 {
                     "package": "apex-functions",
                     "versionNumber": "1.2.1.LATEST"
@@ -121,10 +95,6 @@
             "versionDescription": "",
             "dependencies": [
                 {
-                    "package": "apex-validate",
-                    "versionNumber": "2.1.1.LATEST"
-                },
-                {
                     "package": "apex-functions",
                     "versionNumber": "1.2.1.LATEST"
                 }
@@ -134,7 +104,6 @@
     "name": "apex-stream",
     "namespace": "",
     "packageAliases": {
-        "apex-validate": "0Ho1t000000CajuCAC",
         "apex-functions": "0Ho1t000000sXyCCAU",
         "apex-stream-enumerables": "0Ho1t000000sXybCAE",
         "apex-stream-sequences": "0Ho1t000000sXyRCAU",
@@ -142,7 +111,6 @@
         "apex-common-functions-core": "0Ho1t000000sXyHCAU",
         "apex-common-functions-extension": "0Ho1t000000sXyMCAU",
         "apex-common-functions-v2": "0HoJ5000000000BKAQ",
-        "apex-validate@latest": "04tJ5000000D9vEIAS",
         "apex-functions@latest": "04tJ5000000D9vOIAS",
         "apex-stream-enumerables@latest": "04tJ5000000D9vTIAS",
         "apex-stream-streams@latest": "04tJ5000000D9vYIAS",

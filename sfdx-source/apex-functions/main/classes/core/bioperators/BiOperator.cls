@@ -118,7 +118,7 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
     private class MinBy extends BiOperator {
         private final IComparer comparer;
         private MinBy(IComparer comparer) {
-            Validate.notNull(comparer);
+            AfSupport.notNull(comparer);
             this.comparer = comparer;
         }
         // prettier-ignore
@@ -128,7 +128,7 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
     private class MaxBy extends BiOperator {
         private final IComparer comparer;
         private MaxBy(IComparer comparer) {
-            Validate.notNull(comparer);
+            AfSupport.notNull(comparer);
             this.comparer = comparer;
         }
         // prettier-ignore
@@ -139,8 +139,8 @@ public abstract inherited sharing class BiOperator implements IBiOperator {
         private final IBiConsumer consumer;
         private final IBiOperator merger;
         private Combine(IBiConsumer consumer, IBiOperator merger) {
-            Validate.notNull(consumer);
-            Validate.notNull(merger);
+            AfSupport.notNull(consumer);
+            AfSupport.notNull(merger);
             this.consumer = consumer;
             this.merger = merger;
         }

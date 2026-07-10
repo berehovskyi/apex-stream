@@ -8,7 +8,7 @@
 @SuppressWarnings('PMD.ApexDoc')
 public inherited sharing class EnumerablePipeline {
     public static List<Object> sort(final List<Object> source, final IComparer comparer) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final List<Object> result = source.clone();
         result.sort(comparer);
         return result;
@@ -19,8 +19,8 @@ public inherited sharing class EnumerablePipeline {
     }
 
     public static List<Object> toList(final Iterable<Object> source, final Type elementType) {
-        Validate.notNull(source);
-        Validate.notNull(elementType);
+        AfSupport.notNull(source);
+        AfSupport.notNull(elementType);
         final List<Object> result = (List<Object>) Type.forName('List<' + elementType + '>').newInstance();
         for (Object o : source) {
             result.add(o);
@@ -29,8 +29,8 @@ public inherited sharing class EnumerablePipeline {
     }
 
     public static Set<Object> toObjectSet(final Iterable<Object> source, final IFunction mapper) {
-        Validate.notNull(source);
-        Validate.notNull(mapper);
+        AfSupport.notNull(source);
+        AfSupport.notNull(mapper);
         final Set<Object> result = new Set<Object>();
         for (Object o : source) {
             result.add(mapper.apply(o));

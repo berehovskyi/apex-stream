@@ -354,7 +354,7 @@ private class ObjectSequenceTest {
         ISObjectEnumerable sObjSeq1 = ObjectSequence.of(clone).mapToSObject(new AsTestCommons.ConvertToUser());
         // When
         List<SObject> actual = sObjSeq.toList();
-        List<SObject> actual1 = (List<SObject>) sObjSeq1.toList();
+        List<SObject> actual1 = sObjSeq1.toList();
         // Then
         List<User> expected = new List<User>{ new User(LastName = 'John', IsActive = true), new User(LastName = 'Jake', IsActive = true) };
         Assert.areEqual(expected, actual);
@@ -387,7 +387,7 @@ private class ObjectSequenceTest {
         Exception exc1;
         try {
             ObjectSequence.of(invalidClone).flatMapTo(Function.identity());
-        } catch (IllegalStateException exc) {
+        } catch (InvalidStateException exc) {
             exc1 = exc;
         }
         // When
@@ -397,7 +397,7 @@ private class ObjectSequenceTest {
         List<String> expected = new List<String>{ 'foo', 'bar', 'baz' };
         Assert.areEqual(expected, actual);
         Assert.areEqual(expected, actual1);
-        Assert.areEqual(IllegalStateException.class.getName(), exc1.getTypeName());
+        Assert.areEqual(InvalidStateException.class.getName(), exc1.getTypeName());
         Assert.areEqual('Mapped value must implement Iterable<Object>', exc1.getMessage());
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         Assert.areEqual(invalidInput, invalidClone, Label.AS_ErrorMessage_InputMutated);
@@ -516,7 +516,7 @@ private class ObjectSequenceTest {
         ISObjectEnumerable doubleSeq1 = ObjectSequence.of(clone).flatMapToSObject(Function.identity());
         // When
         List<Account> actual = doubleSeq.toList();
-        List<Account> actual1 = (List<Account>) doubleSeq1.toList();
+        List<Account> actual1 = doubleSeq1.toList();
         // Then
         List<Account> expected = new List<Account>{ accounts[1], accounts[0], accounts[2] };
         Assert.areEqual(expected, actual);
@@ -1037,7 +1037,7 @@ private class ObjectSequenceTest {
         IObjectEnumerable seq1 = ObjectSequence.of(clone);
         // When
         Set<Object> actual = seq.toSet();
-        Set<Object> actual1 = (Set<Object>) seq1.toSet();
+        Set<Object> actual1 = seq1.toSet();
         // Then
         Set<Object> expected = new Set<Object>{ -5.1, '0', 10L, 3, true, new Account(), null, john, Math.PI };
         Assert.areEqual(expected, actual);

@@ -10,7 +10,18 @@ private class SObjectCollectorProviderTest {
     private static final List<Attachment> ATTACHMENTS = DATA.get(Attachment.SObjectType);
     private static final List<Event> EVENTS = DATA.get(Event.SObjectType);
     private static final List<ContactPointEmail> SLOTS = DATA.get(ContactPointEmail.SObjectType);
+    private static final List<String> STRINGS = AfTestData.generateStrings();
     private static final CollectorProvider COL = new SObjectCollectorProvider();
+
+    @IsTest
+    static void alias() {
+        // Given
+        ICollector toListCollector = new Col(String.class).toList();
+        // When
+        List<String> actual = (List<String>) AfTestCommons.collect(STRINGS, toListCollector);
+        // Then
+        Assert.areEqual(STRINGS, actual);
+    }
 
     /**
      * @see CollectorProvider.toList
@@ -1166,6 +1177,13 @@ private class SObjectCollectorProviderTest {
             AfTestCommons.collect(CONTACTS, COL.groupingByString().key(keyMapper).val(COL.groupingByString().key(AfTestConsts.Contact.OtherCity).val(AfTestConsts.Contact.LastName)).cast(Map<String, Map<String, List<String>>>.class));
         Map<String, Object> actual12 = (Map<String, Object>) AfTestCommons.collect(CONTACTS, COL.groupingByString().key(keyMapper).val(COL.groupingByString().key(AfTestConsts.OTHER_CITY).val(AfTestConsts.LAST_NAME)));
         Map<String, Map<String, Set<String>>> actual13 = (Map<String, Map<String, Set<String>>>) AfTestCommons.collect(CONTACTS, COL.groupingByString().key(keyMapper).val(COL.groupingByString().key(AfTestConsts.OTHER_CITY).val(COL.toStringSet().val(AfTestConsts.Contact.LastName))).cast(Map<String, Map<String, Set<String>>>.class));
+        Map<String, List<String>> actual14 = (Map<String, List<String>>) AfTestCommons.collect(
+            CONTACTS,
+            COL.groupingByString()
+                .of(Supplier.of(Map<String, List<String>>.class))
+                .key(AfTestConsts.Contact.OtherCountry)
+                .val(COL.toList().of(String.class).val(AfTestConsts.Contact.LastName))
+        );
         // Then
         Map<String, List<Contact>> expected = new Map<String, List<Contact>>{
             AfTestConsts.FRANCE => new List<Contact>{ CONTACTS[0], CONTACTS[1] },
@@ -1211,6 +1229,7 @@ private class SObjectCollectorProviderTest {
             null => new Map<String, Set<String>>{ null => new Set<String>{ (String) CONTACTS[4].get(AfTestConsts.LAST_NAME) } }
         };
         Assert.areEqual(expected5, actual13);
+        Assert.areEqual(expected2, actual14);
     }
 
     /**
@@ -2271,7 +2290,7 @@ private class SObjectCollectorProviderTest {
         Exception exc;
         try {
             new CollectorProvider.GetElement(1).apply(new List<Object>{ 1 });
-        } catch (IndexOutOfBoundsException ie) {
+        } catch (NoSuchElementException ie) {
             exc = ie;
         }
         // Then

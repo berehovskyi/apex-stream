@@ -28,7 +28,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -54,7 +54,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -80,7 +80,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -106,7 +106,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -132,7 +132,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -158,7 +158,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -184,7 +184,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -210,7 +210,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -236,7 +236,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -262,7 +262,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -288,7 +288,7 @@ public virtual inherited sharing class MapObjectConsumers {
      *
      * @return the `BiConsumer`
      *
-     * @throws IllegalStateException if `merger` is null and mapped keys contain duplicates
+     * @throws InvalidStateException if `merger` is null and mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      * @throws NullPointerException if the first input argument is null
      *
@@ -510,7 +510,7 @@ public virtual inherited sharing class MapObjectConsumers {
         final Object oldValue,
         final Object newValue
     ) {
-        Validate.state(
+        AfSupport.state(
             merger != null,
             Label.ACF_ErrorMessage_DuplicateKey,
             new List<Object>{ key, oldValue, newValue }
@@ -527,8 +527,8 @@ public virtual inherited sharing class MapObjectConsumers {
         protected final IFunction valueMapper;
         protected final IBiOperator merger;
         protected PutToMap(IFunction keyMapper, IFunction valueMapper, IBiOperator merger) {
-            Validate.notNull(keyMapper);
-            Validate.notNull(valueMapper);
+            AfSupport.notNull(keyMapper);
+            AfSupport.notNull(valueMapper);
             this.keyMapper = keyMapper;
             this.valueMapper = valueMapper;
             this.merger = merger;
@@ -538,8 +538,8 @@ public virtual inherited sharing class MapObjectConsumers {
     private abstract class PutToDownstreamMap extends BiConsumer {
         protected final IFunction classifier;
         protected PutToDownstreamMap(ICollector downstream, IFunction classifier) {
-            Validate.notNull(downstream);
-            Validate.notNull(classifier);
+            AfSupport.notNull(downstream);
+            AfSupport.notNull(classifier);
             this.downstream = downstream;
             this.classifier = classifier;
         }

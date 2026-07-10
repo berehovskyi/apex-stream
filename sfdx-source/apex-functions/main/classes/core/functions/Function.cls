@@ -128,7 +128,7 @@ public abstract inherited sharing class Function implements IFunction {
     private class Compose extends Function {
         private final List<IFunction> functions;
         private Compose(List<IFunction> functions) {
-            Validate.noNullElements(functions);
+            AfSupport.noNullElements(functions);
             this.functions = functions;
         }
         public override Object apply(Object o) {
@@ -143,7 +143,7 @@ public abstract inherited sharing class Function implements IFunction {
     private class ForPredicate extends Function {
         private final IPredicate predicate;
         private ForPredicate(IPredicate predicate) {
-            Validate.notNull(predicate);
+            AfSupport.notNull(predicate);
             this.predicate = predicate;
         }
         // prettier-ignore
@@ -161,7 +161,7 @@ public abstract inherited sharing class Function implements IFunction {
     private class ForSupplier extends Function {
         private final ISupplier supplier;
         private ForSupplier(ISupplier supplier) {
-            Validate.notNull(supplier);
+            AfSupport.notNull(supplier);
             this.supplier = supplier;
         }
         // prettier-ignore

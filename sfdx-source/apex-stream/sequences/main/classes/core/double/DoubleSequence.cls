@@ -80,7 +80,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      * DoubleEnumerable doubleSeq = DoubleSequence.of(new List<Double>{ 0.1, 5, 1.5, Math.PI });
      */
     public static DoubleEnumerable of(final List<Double> doubles) {
-        Validate.notNull(doubles);
+        AfSupport.notNull(doubles);
         return new DoubleSequence(doubles);
     }
 
@@ -571,7 +571,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *
      * @return the `DoubleEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -592,7 +592,7 @@ public virtual inherited sharing class DoubleSequence extends DoubleEnumerable {
      *
      * @return the `DoubleEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

@@ -2785,7 +2785,7 @@ Returns a `SObjectEnumerable` with first `lim` elements. <p>Short-circuiting Sta
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `lim` is less than 0|
+|`InvalidStateException`|if `lim` is less than 0|
 |`NullPointerException`|if `lim` is null|
 
 #### Example
@@ -2824,7 +2824,7 @@ Returns a new `SObjectEnumerable` consisting of the remaining elements of this e
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `n` is less than 0|
+|`InvalidStateException`|if `n` is less than 0|
 |`NullPointerException`|if `n` is null|
 
 #### Example
@@ -4798,7 +4798,7 @@ Accumulates elements into a `Map<Id, SObject>`. <p>Terminal Operation.</p> <p><s
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 
 #### Example
 ```apex
@@ -4839,7 +4839,7 @@ Accumulates elements into a `Map<Id, ? extends SObject>` of specific `valueType`
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueType` is null|
 
 #### Example
@@ -4907,7 +4907,7 @@ Accumulates elements into a `Map<Id, SObject>` whose keys are `field` values and
 |Exception|Description|
 |---|---|
 |`IllegalArgumentException`|if `field` is blank|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `valueType` is null|
 
@@ -4957,7 +4957,7 @@ Accumulates elements into a `Map<Id, SObject>` whose keys are `field` values and
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `field` is null or `valueType` is null|
 
 #### Example
@@ -4997,7 +4997,7 @@ Accumulates elements into a `Map<String, ? extends SObject>` of specific `valueT
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `keyMapper` or `valueType` is null|
 
 #### Example
@@ -5067,7 +5067,7 @@ Accumulates elements into a `Map<String, SObject>` whose keys are `field` values
 |Exception|Description|
 |---|---|
 |`IllegalArgumentException`|if `field` is blank|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `field` is null|
 |`NullPointerException`|if `valueType` is null|
 
@@ -5117,7 +5117,7 @@ Accumulates elements into a `Map<String, SObject>` whose keys are `field` values
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates|
+|`InvalidStateException`|if mapped keys contain duplicates|
 |`NullPointerException`|if `field` or `valueType` is null|
 
 #### Example

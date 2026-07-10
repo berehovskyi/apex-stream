@@ -101,7 +101,7 @@ public virtual inherited sharing class DateFunctions {
     private class AddDays extends Function {
         private final Integer days;
         // prettier-ignore
-        private AddDays(Integer days) { Validate.notNull(days); this.days = days; }
+        private AddDays(Integer days) { AfSupport.notNull(days); this.days = days; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).addDays(days); }
     }
@@ -109,7 +109,7 @@ public virtual inherited sharing class DateFunctions {
     private class AddMonths extends Function {
         private final Integer months;
         // prettier-ignore
-        private AddMonths(Integer months) { Validate.notNull(months); this.months = months; }
+        private AddMonths(Integer months) { AfSupport.notNull(months); this.months = months; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).addMonths(months); }
     }
@@ -117,7 +117,7 @@ public virtual inherited sharing class DateFunctions {
     private class AddYears extends Function {
         private final Integer years;
         // prettier-ignore
-        private AddYears(Integer years) { Validate.notNull(years); this.years = years; }
+        private AddYears(Integer years) { AfSupport.notNull(years); this.years = years; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Date) o).addYears(years); }
     }

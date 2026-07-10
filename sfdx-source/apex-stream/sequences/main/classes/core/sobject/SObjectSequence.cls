@@ -76,7 +76,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * SObjectEnumerable accSeq = SObjectSequence.of(new List<Account>(accounts));
      */
     public static SObjectEnumerable of(final List<SObject> sObjects) {
-        Validate.notNull(sObjects);
+        AfSupport.notNull(sObjects);
         return new SObjectSequence(sObjects);
     }
 
@@ -93,7 +93,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      * SObjectEnumerable sObjSeq = SObjectSequence.of(new Set<SObject>(sObjects));
      */
     public static SObjectEnumerable of(final Set<SObject> sObjects) {
-        Validate.notNull(sObjects);
+        AfSupport.notNull(sObjects);
         return new SObjectSequence(new List<SObject>(sObjects));
     }
 
@@ -1117,7 +1117,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *
      * @return the `SObjectEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -1146,7 +1146,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *
      * @return the `SObjectEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example
@@ -1742,7 +1742,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *
      * @return the `Map<Id, SObject>` containing the sequence elements
      *
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `valueType`
+     * @throws InvalidStateException if mapped keys contain duplicates, which can be cast to `valueType`
      * @throws NullPointerException if `keyMapper` or `valueType` is null
      *
      * @example
@@ -1799,7 +1799,7 @@ public virtual inherited sharing class SObjectSequence extends SObjectEnumerable
      *
      * @return the `Map<String, SObject>` containing the sequence elements
      *
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `valueType`
+     * @throws InvalidStateException if mapped keys contain duplicates, which can be cast to `valueType`
      * @throws NullPointerException if `keyMapper` or `valueType` is null
      *
      * @example

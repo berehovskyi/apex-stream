@@ -85,7 +85,7 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Iterator<Object> sort(final Iterator<Object> source) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final List<Object> clone = toList(source);
         clone.sort();
         return clone.iterator();
@@ -108,8 +108,8 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Object fold(final Iterator<Object> source, final Object identity, final IBiOperator accumulator) {
-        Validate.notNull(source);
-        Validate.notNull(accumulator);
+        AfSupport.notNull(source);
+        AfSupport.notNull(accumulator);
         Object result = identity;
         while (source.hasNext()) {
             result = accumulator.apply(result, source.next());
@@ -118,8 +118,8 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Object reduce(final Iterator<Object> source, final IBiOperator accumulator) {
-        Validate.notNull(source);
-        Validate.notNull(accumulator);
+        AfSupport.notNull(source);
+        AfSupport.notNull(accumulator);
         Boolean found = false;
         Object result;
         while (source.hasNext()) {
@@ -135,8 +135,8 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Object collect(final Iterator<Object> source, final ICollector collector) {
-        Validate.notNull(source);
-        Validate.notNull(collector);
+        AfSupport.notNull(source);
+        AfSupport.notNull(collector);
         final Object container = collector.supplier().get();
         final IBiConsumer accumulator = collector.accumulator();
         final IFunction finisher = collector.finisher();
@@ -147,8 +147,8 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Object find(final Iterator<Object> source, final IPredicate predicate) {
-        Validate.notNull(source);
-        Validate.notNull(predicate);
+        AfSupport.notNull(source);
+        AfSupport.notNull(predicate);
         while (source.hasNext()) {
             final Object o = source.next();
             if (predicate.test(o)) {
@@ -159,10 +159,10 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Boolean match(final Iterator<Object> source, final IPredicate predicate, final Integer kind) {
-        Validate.notNull(source);
-        Validate.notNull(predicate);
-        Validate.notNull(kind);
-        Validate.isTrue(kind == 0 || kind == 1);
+        AfSupport.notNull(source);
+        AfSupport.notNull(predicate);
+        AfSupport.notNull(kind);
+        AfSupport.isTrue(kind == 0 || kind == 1);
         final Boolean isSome = (kind == 0); // some
         final Boolean isEvery = (kind == 1); // every
         while (source.hasNext()) {
@@ -218,8 +218,8 @@ public inherited sharing class StreamPipeline {
     }
 
     public static List<Object> toList(final Iterator<Object> source, final Type elementType) {
-        Validate.notNull(source);
-        Validate.notNull(elementType);
+        AfSupport.notNull(source);
+        AfSupport.notNull(elementType);
         final List<Object> result = (List<Object>) Type.forName('List<' + elementType + '>').newInstance();
         while (source.hasNext()) {
             result.add(source.next());
@@ -228,9 +228,9 @@ public inherited sharing class StreamPipeline {
     }
 
     public static List<Object> toList(final Iterator<Object> source, final IFunction mapper, final Type elementType) {
-        Validate.notNull(source);
-        Validate.notNull(mapper);
-        Validate.notNull(elementType);
+        AfSupport.notNull(source);
+        AfSupport.notNull(mapper);
+        AfSupport.notNull(elementType);
         final List<Object> result = (List<Object>) Type.forName('List<' + elementType + '>').newInstance();
         while (source.hasNext()) {
             result.add(mapper.apply(source.next()));
@@ -239,7 +239,7 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<Integer> toIntSet(final Iterator<Object> source) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final Set<Integer> result = new Set<Integer>();
         while (source.hasNext()) {
             result.add((Integer) source.next());
@@ -248,7 +248,7 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<Long> toLongSet(final Iterator<Object> source) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final Set<Long> result = new Set<Long>();
         while (source.hasNext()) {
             result.add((Long) source.next());
@@ -257,7 +257,7 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<Double> toDoubleSet(final Iterator<Object> source) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final Set<Double> result = new Set<Double>();
         while (source.hasNext()) {
             result.add((Double) source.next());
@@ -266,7 +266,7 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<SObject> toSObjectSet(final Iterator<Object> source) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final Set<SObject> result = new Set<SObject>();
         while (source.hasNext()) {
             result.add((SObject) source.next());
@@ -275,7 +275,7 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<Object> toObjectSet(final Iterator<Object> source) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final Set<Object> result = new Set<Object>();
         while (source.hasNext()) {
             result.add(source.next());
@@ -284,7 +284,7 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<Object> toObjectSet(final Iterator<Object> source, final IFunction mapper) {
-        Validate.notNull(source);
+        AfSupport.notNull(source);
         final Set<Object> result = new Set<Object>();
         while (source.hasNext()) {
             result.add(mapper.apply(source.next()));
@@ -293,8 +293,8 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<Id> toIdSet(final Iterator<Object> iterator, final IFunction mapper) {
-        Validate.notNull(iterator);
-        Validate.notNull(mapper);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(mapper);
         final Set<Id> result = new Set<Id>();
         while (iterator.hasNext()) {
             result.add((Id) mapper.apply(iterator.next()));
@@ -303,8 +303,8 @@ public inherited sharing class StreamPipeline {
     }
 
     public static Set<String> toStringSet(final Iterator<Object> iterator, final IFunction mapper) {
-        Validate.notNull(iterator);
-        Validate.notNull(mapper);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(mapper);
         final Set<String> result = new Set<String>();
         while (iterator.hasNext()) {
             result.add((String) mapper.apply(iterator.next()));
@@ -317,14 +317,14 @@ public inherited sharing class StreamPipeline {
         final IFunction keyMapper,
         final Type valueType
     ) {
-        Validate.notNull(iterator);
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueType);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(keyMapper);
+        AfSupport.notNull(valueType);
         final Map<Id, Object> result = (Map<Id, Object>) Type.forName('Map<Id, ' + valueType + '>').newInstance();
         while (iterator.hasNext()) {
             final Object v = iterator.next();
             final Id k = (Id) keyMapper.apply(v);
-            Validate.state(
+            AfSupport.state(
                 !result.containsKey(k),
                 Label.AS_ErrorMessage_DuplicateKey,
                 new List<Object>{ k, result.get(k), v }
@@ -339,15 +339,15 @@ public inherited sharing class StreamPipeline {
         final IFunction keyMapper,
         final Type valueType
     ) {
-        Validate.notNull(iterator);
-        Validate.notNull(keyMapper);
-        Validate.notNull(valueType);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(keyMapper);
+        AfSupport.notNull(valueType);
         final Map<String, Object> result = (Map<String, Object>) Type.forName('Map<String, ' + valueType + '>')
             .newInstance();
         while (iterator.hasNext()) {
             final Object v = iterator.next();
             final String k = (String) keyMapper.apply(v);
-            Validate.state(
+            AfSupport.state(
                 !result.containsKey(k),
                 Label.AS_ErrorMessage_DuplicateKey,
                 new List<Object>{ k, result.get(k), v }
@@ -362,8 +362,8 @@ public inherited sharing class StreamPipeline {
         final IFunction keyMapper,
         final Type listElementType
     ) {
-        Validate.notNull(iterator);
-        Validate.notNull(keyMapper);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(keyMapper);
         final Map<Id, List<Object>> result = (Map<Id, List<Object>>) Type.forName(
                 'Map<Id, List<' + listElementType + '>>'
             )
@@ -386,8 +386,8 @@ public inherited sharing class StreamPipeline {
         final IFunction keyMapper,
         final Type listElementType
     ) {
-        Validate.notNull(iterator);
-        Validate.notNull(keyMapper);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(keyMapper);
         final Map<String, List<Object>> result = (Map<String, List<Object>>) Type.forName(
                 'Map<String, List<' + listElementType + '>>'
             )
@@ -410,8 +410,8 @@ public inherited sharing class StreamPipeline {
         final IPredicate predicate,
         final Type listElementType
     ) {
-        Validate.notNull(iterator);
-        Validate.notNull(predicate);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(predicate);
         final Map<Boolean, List<Object>> result = (Map<Boolean, List<Object>>) Type.forName(
                 'Map<Boolean, List<' + listElementType + '>>'
             )

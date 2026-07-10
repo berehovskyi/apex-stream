@@ -35,7 +35,7 @@ public virtual inherited sharing class SObjectSupplierProvider {
     private class NewSObjectSupplier extends Supplier {
         private final SObjectType t;
         private NewSObjectSupplier(SObjectType t) {
-            Validate.notNull(t);
+            AfSupport.notNull(t);
             this.t = t;
         }
         // prettier-ignore

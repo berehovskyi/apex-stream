@@ -168,7 +168,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     private class AndPredicates extends Predicate {
         private final List<IPredicate> predicates;
         private AndPredicates(List<IPredicate> predicates) {
-            Validate.noNullElements(predicates);
+            AfSupport.noNullElements(predicates);
             this.predicates = predicates;
         }
         @SuppressWarnings('PMD.OneDeclarationPerLine')
@@ -184,7 +184,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     private class OrPredicates extends Predicate {
         private final List<IPredicate> predicates;
         private OrPredicates(List<IPredicate> predicates) {
-            Validate.noNullElements(predicates);
+            AfSupport.noNullElements(predicates);
             this.predicates = predicates;
         }
         @SuppressWarnings('PMD.OneDeclarationPerLine')
@@ -200,7 +200,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     private class NegatePredicate extends Predicate {
         private final IPredicate predicate;
         private NegatePredicate(IPredicate predicate) {
-            Validate.notNull(predicate);
+            AfSupport.notNull(predicate);
             this.predicate = predicate;
         }
         // prettier-ignore
@@ -210,7 +210,7 @@ public abstract inherited sharing class Predicate implements IPredicate {
     private class Always extends Predicate {
         private final Boolean value;
         private Always(Boolean value) {
-            Validate.notNull(value);
+            AfSupport.notNull(value);
             this.value = value;
         }
         // prettier-ignore
@@ -221,8 +221,8 @@ public abstract inherited sharing class Predicate implements IPredicate {
         private final IFunction function;
         private final IPredicate predicate;
         private ForFunctionPredicate(IFunction function, IPredicate predicate) {
-            Validate.notNull(function);
-            Validate.notNull(predicate);
+            AfSupport.notNull(function);
+            AfSupport.notNull(predicate);
             this.function = function;
             this.predicate = predicate;
         }

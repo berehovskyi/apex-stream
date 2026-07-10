@@ -421,7 +421,7 @@ private class IntStreamTest {
         ISObjectEnumerable stm1 = IntStream.of(clone).mapToSObject(new AsTestCommons.CreateAccountFromInts());
         // When
         List<Account> actual = stm.toList();
-        List<Account> actual1 = (List<Account>) stm1.toList();
+        List<Account> actual1 = stm1.toList();
         // Then
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         for (Integer i = 0, size = input.size(); i < size; i++) {

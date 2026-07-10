@@ -641,7 +641,7 @@ Returns a new `DoubleEnumerable` with the first `lim` elements. <p>Short-circuit
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `lim` is less than 0|
+|`InvalidStateException`|if `lim` is less than 0|
 |`NullPointerException`|if `lim` is null|
 
 #### Example
@@ -672,7 +672,7 @@ Returns a new `DoubleEnumerable` that skips the first `n` elements and returns t
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `n` is less than 0|
+|`InvalidStateException`|if `n` is less than 0|
 |`NullPointerException`|if `n` is null|
 
 #### Example

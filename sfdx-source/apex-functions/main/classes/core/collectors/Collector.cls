@@ -86,6 +86,10 @@ public abstract inherited sharing class Collector implements ICollector {
      *     <li>partitioningBy(IPredicate)</li>
      *     <li>partitioningBy(IPredicate, ICollector)</li>
      * </ul>
+     * <p><b>Warning:</b> For collectors composed with downstream collectors, this method
+     * modifies downstream configuration shared with the original collector. Call it only
+     * once on a collector chain and do not reuse the original collector afterward. Create
+     * a new collector for each target type.</p>
      *
      * @param t the Type to cast the result container to
      *
@@ -98,7 +102,7 @@ public abstract inherited sharing class Collector implements ICollector {
      * Collector.toList(getNameFunction).cast(List<String>.class);
      */
     public virtual Collector cast(final Type t) {
-        Validate.notNull(t);
+        AfSupport.notNull(t);
         BiConsumer accumulator = (BiConsumer) this.accumulator();
         String typeName = String.valueOf(t);
         while (accumulator?.downstream != null) {
@@ -124,8 +128,8 @@ public abstract inherited sharing class Collector implements ICollector {
         private final IBiConsumer accumulator;
         private final IFunction finisher;
         private CollectorOf(ISupplier supplier, IBiConsumer accumulator, IFunction finisher) {
-            Validate.notNull(supplier);
-            Validate.notNull(accumulator);
+            AfSupport.notNull(supplier);
+            AfSupport.notNull(accumulator);
             this.supplier = supplier;
             this.accumulator = accumulator;
             this.finisher = finisher;

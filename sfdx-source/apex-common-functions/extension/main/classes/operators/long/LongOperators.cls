@@ -165,7 +165,7 @@ public virtual inherited sharing class LongOperators {
     private class Add extends Operator {
         private final Long l;
         // prettier-ignore
-        private Add(Long l) { Validate.notNull(l); this.l = l; }
+        private Add(Long l) { AfSupport.notNull(l); this.l = l; }
         // prettier-ignore
         public override Object apply(Object j) { return (Long) j + l; }
     }
@@ -189,7 +189,7 @@ public virtual inherited sharing class LongOperators {
     private class Mod extends Operator {
         private final Long l;
         // prettier-ignore
-        private Mod(Long l) { Validate.notNull(l); Validate.isTrue(l != 0); this.l = l; }
+        private Mod(Long l) { AfSupport.notNull(l); AfSupport.isTrue(l != 0); this.l = l; }
         // prettier-ignore
         public override Object apply(Object j) { return Math.mod((Long) j, l); }
     }
@@ -197,7 +197,7 @@ public virtual inherited sharing class LongOperators {
     private class Multiply extends Operator {
         private final Long l;
         // prettier-ignore
-        private Multiply(Long l) { Validate.notNull(l); this.l = l; }
+        private Multiply(Long l) { AfSupport.notNull(l); this.l = l; }
         // prettier-ignore
         public override Object apply(Object j) { return (Long) j * l; }
     }
@@ -205,7 +205,7 @@ public virtual inherited sharing class LongOperators {
     private class Divide extends Operator {
         private final Long l;
         // prettier-ignore
-        private Divide(Long l) { Validate.notNull(l); Validate.isTrue(l != 0); this.l = l; }
+        private Divide(Long l) { AfSupport.notNull(l); AfSupport.isTrue(l != 0); this.l = l; }
         // prettier-ignore
         public override Object apply(Object j) { return (Long) j / l; }
     }
