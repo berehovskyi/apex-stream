@@ -67,7 +67,7 @@ public inherited sharing class EnumerableSupport {
      *     .collect(EnumerableSupport.toList().cast(List<String>.class));
      */
     public static Collector toList(final Type elementType) {
-        Validate.notNull(elementType);
+        AfSupport.notNull(elementType);
         return Collector.of(
             Supplier.of(Type.forName('List<' + elementType + '>')),
             new AddToListBiConsumer(Function.identity())
@@ -250,20 +250,19 @@ public inherited sharing class EnumerableSupport {
         return isNull().negate();
     }
 
-    private static Double kahanSum(final List<Double> intermediateSum, final Double d) {
+    private static void kahanSum(final List<Double> intermediateSum, final Double d) {
         final Double tmp = d - intermediateSum[1];
         final Double sum = intermediateSum[0];
         final Double e = sum + tmp;
         intermediateSum[1] = (e - sum) - tmp;
         intermediateSum[0] = e;
-        return d;
     }
 
     //<editor-fold desc="Lambdas">
     private class AddToListBiConsumer extends BiConsumer {
         private final IFunction mapper;
         private AddToListBiConsumer(IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
         // prettier-ignore
@@ -273,13 +272,13 @@ public inherited sharing class EnumerableSupport {
     private class AveragingDoubleBiConsumer extends BiConsumer {
         private final IFunction mapper;
         private AveragingDoubleBiConsumer(IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
         public override void accept(Object container, Object o) {
             final List<Double> avgContainer = ((List<Double>) container);
             avgContainer[2]++;
-            avgContainer[3] += kahanSum(avgContainer, (Double) mapper.apply(o));
+            kahanSum(avgContainer, (Double) mapper.apply(o));
         }
     }
 
@@ -321,10 +320,10 @@ public inherited sharing class EnumerableSupport {
         private final Integer comparisonResult;
         @TestVisible
         private ComparerPredicate(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
-            Validate.notNull(left);
-            Validate.notNull(right);
-            Validate.notNull(comparer);
-            Validate.notNull(comparisonResult);
+            AfSupport.notNull(left);
+            AfSupport.notNull(right);
+            AfSupport.notNull(comparer);
+            AfSupport.notNull(comparisonResult);
             this.left = left;
             this.right = right;
             this.comparer = comparer;
@@ -339,8 +338,8 @@ public inherited sharing class EnumerableSupport {
         private final IFunction function;
         private final Set<Object> container;
         private ContainsPredicate(IFunction function, Iterable<Object> container) {
-            Validate.notNull(function);
-            Validate.notNull(container);
+            AfSupport.notNull(function);
+            AfSupport.notNull(container);
             this.function = function;
             this.container = toSet(container);
         }
@@ -357,7 +356,7 @@ public inherited sharing class EnumerableSupport {
 
     private class AveragingDoubleSupplier extends Supplier {
         // prettier-ignore
-        public override Object get() { return new List<Double>{ 0, 0, 0, 0 }; }
+        public override Object get() { return new List<Double>{ 0, 0, 0 }; }
     }
     //</editor-fold>
 }

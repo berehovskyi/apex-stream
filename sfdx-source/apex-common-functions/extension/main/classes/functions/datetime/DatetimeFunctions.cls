@@ -154,7 +154,7 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.format
      */
     public static Function format(final String dateformat) {
-        Validate.notNull(dateformat);
+        AfSupport.notNull(dateformat);
         return new Format(dateformat);
     }
 
@@ -172,8 +172,8 @@ public virtual inherited sharing class DatetimeFunctions {
      * @see Datetime.format
      */
     public static Function format(final String dateformat, final String timezone) {
-        Validate.notNull(dateformat);
-        Validate.notNull(timezone);
+        AfSupport.notNull(dateformat);
+        AfSupport.notNull(timezone);
         return new Format(dateformat, timezone);
     }
 
@@ -248,7 +248,7 @@ public virtual inherited sharing class DatetimeFunctions {
     private class AddDays extends Function {
         private final Integer days;
         // prettier-ignore
-        private AddDays(Integer days) { Validate.notNull(days); this.days = days; }
+        private AddDays(Integer days) { AfSupport.notNull(days); this.days = days; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addDays(days); }
     }
@@ -256,7 +256,7 @@ public virtual inherited sharing class DatetimeFunctions {
     private class AddHours extends Function {
         private final Integer hours;
         // prettier-ignore
-        private AddHours(Integer hours) { Validate.notNull(hours); this.hours = hours; }
+        private AddHours(Integer hours) { AfSupport.notNull(hours); this.hours = hours; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addHours(hours); }
     }
@@ -264,7 +264,7 @@ public virtual inherited sharing class DatetimeFunctions {
     private class AddMinutes extends Function {
         private final Integer minutes;
         // prettier-ignore
-        private AddMinutes(Integer minutes) { Validate.notNull(minutes); this.minutes = minutes; }
+        private AddMinutes(Integer minutes) { AfSupport.notNull(minutes); this.minutes = minutes; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addMinutes(minutes); }
     }
@@ -272,7 +272,7 @@ public virtual inherited sharing class DatetimeFunctions {
     private class AddMonths extends Function {
         private final Integer months;
         // prettier-ignore
-        private AddMonths(Integer months) { Validate.notNull(months); this.months = months; }
+        private AddMonths(Integer months) { AfSupport.notNull(months); this.months = months; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addMonths(months); }
     }
@@ -280,7 +280,7 @@ public virtual inherited sharing class DatetimeFunctions {
     private class AddSeconds extends Function {
         private final Integer seconds;
         // prettier-ignore
-        private AddSeconds(Integer seconds) { Validate.notNull(seconds); this.seconds = seconds; }
+        private AddSeconds(Integer seconds) { AfSupport.notNull(seconds); this.seconds = seconds; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addSeconds(seconds); }
     }
@@ -288,7 +288,7 @@ public virtual inherited sharing class DatetimeFunctions {
     private class AddYears extends Function {
         private final Integer years;
         // prettier-ignore
-        private AddYears(Integer years) { Validate.notNull(years); this.years = years; }
+        private AddYears(Integer years) { AfSupport.notNull(years); this.years = years; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).addYears(years); }
     }
@@ -321,7 +321,7 @@ public virtual inherited sharing class DatetimeFunctions {
     private class FormatGmt extends Function {
         private final String dateformat;
         // prettier-ignore
-        private FormatGmt(String dateformat) { Validate.notNull(dateformat); this.dateformat = dateformat; }
+        private FormatGmt(String dateformat) { AfSupport.notNull(dateformat); this.dateformat = dateformat; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Datetime) o).formatGmt(dateformat); }
     }

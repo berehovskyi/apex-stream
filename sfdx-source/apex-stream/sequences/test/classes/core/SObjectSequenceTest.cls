@@ -29,11 +29,11 @@ private class SObjectSequenceTest {
         ISObjectEnumerable accSeq5 = SObjectSequence.ofNullable(input2);
         // When
         List<Account> actual = accSeq.toList();
-        List<Account> actual1 = (List<Account>) accSeq1.toList();
+        List<Account> actual1 = accSeq1.toList();
         List<Account> actual2 = accSeq2.toList();
         List<Account> actual3 = accSeq3.toList();
-        List<Account> actual4 = (List<Account>) accSeq4.toList();
-        List<Account> actual5 = (List<Account>) accSeq5.toList();
+        List<Account> actual4 = accSeq4.toList();
+        List<Account> actual5 = accSeq5.toList();
         // Then
         List<Account> expected = new List<SObject>(new Set<SObject>(input));
         List<Account> expected1 = new List<SObject>();
@@ -106,7 +106,7 @@ private class SObjectSequenceTest {
         ISObjectEnumerable accSeq1 = SObjectSequence.zip(oldAccsSteam, newAccsSteam, numOfEmployeesIsChanged, getNewAcc);
         // When
         List<Account> actual = accSeq.toList();
-        List<Account> actual1 = (List<Account>) accSeq1.toList();
+        List<Account> actual1 = accSeq1.toList();
         // Then
         List<Account> expected = new List<Account>{ oldAcc, oldAcc1, newAcc2, oldAcc3 };
         List<Account> expected1 = new List<Account>{ newAcc1, newAcc2 };
@@ -135,7 +135,7 @@ private class SObjectSequenceTest {
         ISObjectEnumerable accSeq3 = accSeq.prepend(accSeq1);
         // When
         List<Account> actual = accSeq2.toList();
-        List<Account> actual1 = (List<Account>) accSeq3.toList();
+        List<Account> actual1 = accSeq3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc5 };
         List<Account> expected1 = new List<Account>{ acc3, acc4, acc5, acc, acc1, acc2 };
@@ -173,8 +173,8 @@ private class SObjectSequenceTest {
         List<Account> actual = seq.toList();
         List<Account> actual1 = seq1.toList();
         List<Account> actual2 = seq2.toList();
-        List<Account> actual3 = (List<Account>) seq3.toList();
-        List<Account> actual4 = (List<Account>) seq4.toList();
+        List<Account> actual3 = seq3.toList();
+        List<Account> actual4 = seq4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc, acc2 };
         Assert.areEqual(expected, actual);
@@ -214,8 +214,8 @@ private class SObjectSequenceTest {
         List<Account> actual = seq.toList();
         List<Account> actual1 = seq1.toList();
         List<Account> actual2 = seq2.toList();
-        List<Account> actual3 = (List<Account>) seq3.toList();
-        List<Account> actual4 = (List<Account>) seq4.toList();
+        List<Account> actual3 = seq3.toList();
+        List<Account> actual4 = seq4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc3, acc9 };
         Assert.areEqual(expected, actual);
@@ -255,8 +255,8 @@ private class SObjectSequenceTest {
         List<Account> actual = seq.toList();
         List<Account> actual1 = seq1.toList();
         List<Account> actual2 = seq2.toList();
-        List<Account> actual3 = (List<Account>) seq3.toList();
-        List<Account> actual4 = (List<Account>) seq4.toList();
+        List<Account> actual3 = seq3.toList();
+        List<Account> actual4 = seq4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc7 };
         Assert.areEqual(expected, actual);
@@ -290,8 +290,8 @@ private class SObjectSequenceTest {
         // When
         List<Account> actual = accSeq.toList();
         List<Account> actual1 = accSeq1.toList();
-        List<Account> actual2 = (List<Account>) accSeq2.toList();
-        List<Account> actual3 = (List<Account>) accSeq3.toList();
+        List<Account> actual2 = accSeq2.toList();
+        List<Account> actual3 = accSeq3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc1, acc2 };
         Assert.areEqual(expected, actual);
@@ -324,8 +324,8 @@ private class SObjectSequenceTest {
         // When
         List<Account> actual = accSeq.toList();
         List<Account> actual1 = accSeq1.toList();
-        List<Account> actual2 = (List<Account>) accSeq2.toList();
-        List<Account> actual3 = (List<Account>) accSeq3.toList();
+        List<Account> actual2 = accSeq2.toList();
+        List<Account> actual3 = accSeq3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2 };
         Assert.areEqual(expected, actual);
@@ -358,8 +358,8 @@ private class SObjectSequenceTest {
         // When
         List<Account> actual = accSeq.toList();
         List<Account> actual1 = accSeq1.toList();
-        List<Account> actual2 = (List<Account>) accSeq2.toList();
-        List<Account> actual3 = (List<Account>) accSeq3.toList();
+        List<Account> actual2 = accSeq2.toList();
+        List<Account> actual3 = accSeq3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc3, acc4 };
         Assert.areEqual(expected, actual);
@@ -385,7 +385,7 @@ private class SObjectSequenceTest {
         ISObjectEnumerable seq1 = SObjectSequence.of(clone).withoutNulls();
         // When
         List<Account> actual = seq.toList();
-        List<Account> actual1 = (List<Account>) seq1.toList();
+        List<Account> actual1 = seq1.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc1 };
         Assert.areEqual(expected, actual);
@@ -440,8 +440,8 @@ private class SObjectSequenceTest {
         // When
         List<Contact> actual = conSeq.toList();
         List<Account> actual1 = conSeq1.toList();
-        List<Account> actual2 = (List<Account>) conSeq2.toList();
-        List<Contact> actual3 = (List<Contact>) conSeq3.toList();
+        List<Account> actual2 = conSeq2.toList();
+        List<Contact> actual3 = conSeq3.toList();
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             Assert.areEqual(input[i].Id, actual[i].AccountId);
@@ -599,7 +599,7 @@ private class SObjectSequenceTest {
         // When
         List<Contact> actual = conSeq.toList();
         List<Contact> actual1 = conSeq1.toList();
-        List<Contact> actual2 = (List<Contact>) conSeq2.toList();
+        List<Contact> actual2 = conSeq2.toList();
         // Then
         List<SObject> expected = new List<SObject>();
         for (Account acc : input) {
@@ -764,7 +764,7 @@ private class SObjectSequenceTest {
         // When
         List<Account> actual = accSeq.toList();
         List<Account> actual1 = accSeq1.toList();
-        List<Account> actual2 = (List<Account>) accSeq2.toList();
+        List<Account> actual2 = accSeq2.toList();
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             Assert.areEqual(value, actual[i].Name);
@@ -799,8 +799,8 @@ private class SObjectSequenceTest {
         // When
         List<Account> actual = accSeq.toList();
         List<Account> actual1 = accSeq1.toList();
-        List<Account> actual2 = (List<Account>) accSeq2.toList();
-        List<Account> actual3 = (List<Account>) accSeq3.toList();
+        List<Account> actual2 = accSeq2.toList();
+        List<Account> actual3 = accSeq3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, null, acc4 };
         List<Account> expected1 = new List<Account>{ acc, acc3, acc4 };
@@ -839,9 +839,9 @@ private class SObjectSequenceTest {
         List<Account> actual1 = accSeq1.toList();
         List<Account> actual2 = accSeq2.toList();
         List<Account> actual3 = accSeq3.toList();
-        List<Account> actual4 = (List<Account>) accSeq4.toList();
-        List<Account> actual5 = (List<Account>) accSeq5.toList();
-        List<Account> actual6 = (List<Account>) accSeq6.toList();
+        List<Account> actual4 = accSeq4.toList();
+        List<Account> actual5 = accSeq5.toList();
+        List<Account> actual6 = accSeq6.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc2, acc3, acc4 };
         List<Account> expected1 = new List<Account>{ acc4, acc2, acc2, acc1, acc, acc3 };
@@ -876,7 +876,7 @@ private class SObjectSequenceTest {
         // When
         List<Account> actual = accSeq.toList();
         List<Account> actual1 = accSeq1.toList();
-        List<Account> actual2 = (List<Account>) accSeq2.toList();
+        List<Account> actual2 = accSeq2.toList();
         Exception exc1;
         try {
             accSeq3.lim(-2);
@@ -912,7 +912,7 @@ private class SObjectSequenceTest {
         // When
         List<Account> actual = accSeq.toList();
         List<Account> actual1 = accSeq1.toList();
-        List<Account> actual2 = (List<Account>) accSeq2.toList();
+        List<Account> actual2 = accSeq2.toList();
         Exception exc1;
         try {
             SObjectSequence.of(clone).skip(-2);
@@ -1400,9 +1400,9 @@ private class SObjectSequenceTest {
         Set<String> actual5 = accSeq5.toStringSet(SObjectEnumerableSupport.get('Name'));
         Set<String> actual6 = accSeq6.toStringSet('Name');
         Set<String> actual7 = accSeq7.toStringSet(Account.Name);
-        Set<Object> actual8 = (Set<Object>) accSeq8.toSet(SObjectEnumerableSupport.get('Name'));
-        Set<Object> actual9 = (Set<Object>) accSeq9.toSet('Name');
-        Set<Object> actual10 = (Set<Object>) accSeq10.toSet(Account.Name);
+        Set<Object> actual8 = accSeq8.toSet(SObjectEnumerableSupport.get('Name'));
+        Set<Object> actual9 = accSeq9.toSet('Name');
+        Set<Object> actual10 = accSeq10.toSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectSequence.of(clone)

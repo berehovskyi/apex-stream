@@ -1371,7 +1371,7 @@ Returns a `SObjectEnumerable` with first `lim` elements. <p>Short-circuiting Sta
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `lim` is less than 0|
+|`InvalidStateException`|if `lim` is less than 0|
 |`NullPointerException`|if `lim` is null|
 
 ###### Example
@@ -1410,7 +1410,7 @@ Returns a new `SObjectEnumerable` that skips first `n` elements and returns rema
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if `n` is less than 0|
+|`InvalidStateException`|if `n` is less than 0|
 |`NullPointerException`|if `n` is null|
 
 ###### Example
@@ -2143,7 +2143,7 @@ Accumulates `SObject` elements into a `Map<Id, ? extends SObject>` of specific `
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `valueType`|
+|`InvalidStateException`|if mapped keys contain duplicates, which can be cast to `valueType`|
 |`NullPointerException`|if `keyMapper` or `valueType` is null|
 
 ###### Example
@@ -2210,7 +2210,7 @@ Accumulates `SObject` elements into a `Map<String, ? extends SObject>` of specif
 
 |Exception|Description|
 |---|---|
-|`IllegalStateException`|if mapped keys contain duplicates, which can be cast to `valueType`|
+|`InvalidStateException`|if mapped keys contain duplicates, which can be cast to `valueType`|
 |`NullPointerException`|if `keyMapper` or `valueType` is null|
 
 ###### Example

@@ -34,6 +34,6 @@ private class IterableFunctionsTest {
         // Then
         Assert.areEqual(iter[i], actual);
         Assert.areEqual(iter1.iterator().next(), actual1);
-        Assert.areEqual(IndexOutOfBoundsException.class.getName(), exc.getTypeName());
+        Assert.areEqual(NoSuchElementException.class.getName(), exc.getTypeName());
     }
 }

@@ -555,10 +555,10 @@ public virtual inherited sharing class Predicates {
         private final IComparer comparer;
         private final Integer comparisonResult;
         private ComparerPredicate(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
-            Validate.notNull(left);
-            Validate.notNull(right);
-            Validate.notNull(comparer);
-            Validate.notNull(comparisonResult);
+            AfSupport.notNull(left);
+            AfSupport.notNull(right);
+            AfSupport.notNull(comparer);
+            AfSupport.notNull(comparisonResult);
             this.left = left;
             this.right = right;
             this.comparer = comparer;
@@ -573,8 +573,8 @@ public virtual inherited sharing class Predicates {
         private final IFunction function;
         private final String regex;
         private LikePredicate(IFunction function, String likeString) {
-            Validate.notNull(function);
-            Validate.notNull(likeString);
+            AfSupport.notNull(function);
+            AfSupport.notNull(likeString);
             this.function = function;
             regex =
                 '(?i)^' +
@@ -590,8 +590,8 @@ public virtual inherited sharing class Predicates {
         private final Iterable<Object> container;
         private Set<Object> elements;
         protected IterablePredicate(IFunction function, Iterable<Object> container) {
-            Validate.notNull(function);
-            Validate.notNull(container);
+            AfSupport.notNull(function);
+            AfSupport.notNull(container);
             this.function = function;
             this.container = container;
         }
@@ -625,7 +625,7 @@ public virtual inherited sharing class Predicates {
             // prettier-ignore
             if (elements == null) { elements = toSet(container); }
             for (Object element : elements) {
-                Validate.notNull(element);
+                AfSupport.notNull(element);
                 // prettier-ignore
                 if (values.containsAll(split((String) element))) { return true; }
             }

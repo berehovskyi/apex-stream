@@ -9,9 +9,9 @@ public inherited sharing class ZipIterator extends BaseIterator {
     private final IBiOperator combiner;
 
     public ZipIterator(final Iterable<Object> iterable1, final Iterable<Object> iterable2, final IBiOperator combiner) {
-        Validate.notNull(iterable1);
-        Validate.notNull(iterable2);
-        Validate.notNull(combiner);
+        AfSupport.notNull(iterable1);
+        AfSupport.notNull(iterable2);
+        AfSupport.notNull(combiner);
         this.iterator1 = iterable1.iterator();
         this.iterator2 = iterable2.iterator();
         this.combiner = combiner;
@@ -23,10 +23,10 @@ public inherited sharing class ZipIterator extends BaseIterator {
         final IBiPredicate predicate,
         final IBiOperator combiner
     ) {
-        Validate.notNull(iterable1);
-        Validate.notNull(iterable2);
-        Validate.notNull(predicate);
-        Validate.notNull(combiner);
+        AfSupport.notNull(iterable1);
+        AfSupport.notNull(iterable2);
+        AfSupport.notNull(predicate);
+        AfSupport.notNull(combiner);
         this.iterator1 = iterable1.iterator();
         this.iterator2 = iterable2.iterator();
         this.predicate = predicate;

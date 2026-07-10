@@ -13,7 +13,7 @@
  * <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p>
  * <p>A stream should be operated on (invoking an intermediate or terminal stream operation)
  * only <strong>once</strong>.
- * A stream throws {@link IllegalStateException} if it detects that the stream is being reused.</p>
+ * A stream throws {@link InvalidStateException} if it detects that the stream is being reused.</p>
  * <p>Intermediate operations describe how a stream is processed without performing any action.</p>
  * <p>Contract:</p>
  * - Must be non-interfering (do not modify the stream source but may mutate its elements).
@@ -77,7 +77,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public override Iterator<Object> iterator() {
-        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
+        AfSupport.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -104,7 +104,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * ObjectEnumerable peopleStream = ObjectStream.of(otherStream.iterator());
      */
     public static ObjectEnumerable of(final Iterator<Object> iterator) {
-        Validate.notNull(iterator);
+        AfSupport.notNull(iterator);
         return new ObjectStream(iterator);
     }
 
@@ -121,7 +121,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      * ObjectEnumerable peopleStream = ObjectStream.of(new List<Person>(people));
      */
     public static ObjectEnumerable of(final Iterable<Object> iterable) {
-        Validate.notNull(iterable);
+        AfSupport.notNull(iterable);
         return new ObjectStream(iterable.iterator());
     }
 
@@ -827,7 +827,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *
      * @return the `ObjectEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -848,7 +848,7 @@ public virtual inherited sharing class ObjectStream extends ObjectEnumerable imp
      *
      * @return the `ObjectEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

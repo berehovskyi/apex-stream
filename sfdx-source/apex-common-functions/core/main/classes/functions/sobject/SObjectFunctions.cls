@@ -283,7 +283,7 @@ public virtual inherited sharing class SObjectFunctions {
     private class GetFunction extends Function {
         private final IFunction mapper;
         private GetFunction(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             // prettier-ignore
             if (!CsfSupport.isXRefField(field)) { mapper = new GetByFieldName(field); }
             // prettier-ignore
@@ -298,7 +298,7 @@ public virtual inherited sharing class SObjectFunctions {
     private class GetFieldFunction extends Function {
         private final SObjectField field;
         private GetFieldFunction(SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
         // prettier-ignore
@@ -330,7 +330,7 @@ public virtual inherited sharing class SObjectFunctions {
     private class GetSObjectsFunction extends Function {
         private final IFunction mapper;
         private GetSObjectsFunction(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             // prettier-ignore
             if (!CsfSupport.isXRefField(field)) { mapper = new GetSObjectsByFieldName(field); }
             // prettier-ignore
@@ -393,8 +393,8 @@ public virtual inherited sharing class SObjectFunctions {
     private class PutFunction extends Function {
         private final IFunction mapper;
         private PutFunction(String field, IFunction mapper) {
-            Validate.notBlank(field);
-            Validate.notNull(mapper);
+            AfSupport.notBlank(field);
+            AfSupport.notNull(mapper);
             // prettier-ignore
             if (!CsfSupport.isXRefField(field)) { this.mapper = new PutFieldName(field, mapper); }
             // prettier-ignore
@@ -410,8 +410,8 @@ public virtual inherited sharing class SObjectFunctions {
         private final SObjectField field;
         private final IFunction mapper;
         private PutFieldFunction(SObjectField field, IFunction mapper) {
-            Validate.notNull(field);
-            Validate.notNull(mapper);
+            AfSupport.notNull(field);
+            AfSupport.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }

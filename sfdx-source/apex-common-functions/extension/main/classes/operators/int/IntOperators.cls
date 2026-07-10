@@ -165,7 +165,7 @@ public virtual inherited sharing class IntOperators {
     private class Add extends Operator {
         private final Integer i;
         // prettier-ignore
-        private Add(Integer i) { Validate.notNull(i); this.i = i; }
+        private Add(Integer i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return (Integer) j + i; }
     }
@@ -173,7 +173,7 @@ public virtual inherited sharing class IntOperators {
     private class Min extends Operator {
         private final Integer i;
         // prettier-ignore
-        private Min(Integer i) { Validate.notNull(i); this.i = i; }
+        private Min(Integer i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return Math.min((Integer) j, i); }
     }
@@ -181,7 +181,7 @@ public virtual inherited sharing class IntOperators {
     private class Max extends Operator {
         private final Integer i;
         // prettier-ignore
-        private Max(Integer i) { Validate.notNull(i); this.i = i; }
+        private Max(Integer i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return Math.max((Integer) j, i); }
     }
@@ -189,7 +189,7 @@ public virtual inherited sharing class IntOperators {
     private class Mod extends Operator {
         private final Integer i;
         // prettier-ignore
-        private Mod(Integer i) { Validate.notNull(i); Validate.isTrue(i != 0); this.i = i; }
+        private Mod(Integer i) { AfSupport.notNull(i); AfSupport.isTrue(i != 0); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return Math.mod((Integer) j, i); }
     }
@@ -197,7 +197,7 @@ public virtual inherited sharing class IntOperators {
     private class Multiply extends Operator {
         private final Integer i;
         // prettier-ignore
-        private Multiply(Integer i) { Validate.notNull(i); this.i = i; }
+        private Multiply(Integer i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return (Integer) j * i; }
     }
@@ -205,7 +205,7 @@ public virtual inherited sharing class IntOperators {
     private class Divide extends Operator {
         private final Integer i;
         // prettier-ignore
-        private Divide(Integer i) { Validate.notNull(i); Validate.isTrue(i != 0); this.i = i; }
+        private Divide(Integer i) { AfSupport.notNull(i); AfSupport.isTrue(i != 0); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return (Integer) j / i; }
     }

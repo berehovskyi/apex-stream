@@ -295,7 +295,7 @@ private class DoubleSequenceTest {
         ISObjectEnumerable seq1 = DoubleSequence.of(clone).mapToSObject(new AsTestCommons.CreateAccountFromDoubles());
         // When
         List<Account> actual = seq.toList();
-        List<Account> actual1 = (List<Account>) seq1.toList();
+        List<Account> actual1 = seq1.toList();
         // Then
         Assert.areEqual(input, clone, Label.AS_ErrorMessage_InputMutated);
         for (Integer i = 0, size = input.size(); i < size; i++) {

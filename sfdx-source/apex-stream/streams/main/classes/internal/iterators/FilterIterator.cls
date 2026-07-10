@@ -7,8 +7,8 @@ public inherited sharing class FilterIterator extends BaseIterator {
     private final IPredicate predicate;
 
     public FilterIterator(final Iterator<Object> iterator, final IPredicate predicate) {
-        Validate.notNull(iterator);
-        Validate.notNull(predicate);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(predicate);
         this.iterator = iterator;
         this.predicate = predicate;
     }

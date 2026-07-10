@@ -347,7 +347,7 @@ public virtual inherited sharing class DoubleOperators {
     private class Add extends Operator {
         private final Double i;
         // prettier-ignore
-        private Add(Double i) { Validate.notNull(i); this.i = i; }
+        private Add(Double i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object x) { return (Double) x + i; }
     }
@@ -405,7 +405,7 @@ public virtual inherited sharing class DoubleOperators {
     private class Min extends Operator {
         private final Double i;
         // prettier-ignore
-        private Min(Double i) { Validate.notNull(i); this.i = i; }
+        private Min(Double i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return Math.min((Double) j, (Double) i); }
     }
@@ -413,7 +413,7 @@ public virtual inherited sharing class DoubleOperators {
     private class Max extends Operator {
         private final Double i;
         // prettier-ignore
-        private Max(Double i) { Validate.notNull(i); this.i = i; }
+        private Max(Double i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object j) { return Math.max((Double) j, (Double) i); }
     }
@@ -421,7 +421,7 @@ public virtual inherited sharing class DoubleOperators {
     private class Multiply extends Operator {
         private final Double i;
         // prettier-ignore
-        private Multiply(Double i) { Validate.notNull(i); this.i = i; }
+        private Multiply(Double i) { AfSupport.notNull(i); this.i = i; }
         // prettier-ignore
         public override Object apply(Object x) { return (Double) x * i; }
     }
@@ -429,7 +429,7 @@ public virtual inherited sharing class DoubleOperators {
     private class Pow extends Operator {
         private final Double exp;
         // prettier-ignore
-        private Pow(Double exp) { Validate.notNull(exp); this.exp = exp; }
+        private Pow(Double exp) { AfSupport.notNull(exp); this.exp = exp; }
         // prettier-ignore
         public override Object apply(Object x) { return Math.pow((Double) x, exp); }
     }
@@ -472,7 +472,7 @@ public virtual inherited sharing class DoubleOperators {
     private class Divide extends Operator {
         private final Double d;
         // prettier-ignore
-        private Divide(Double d) { Validate.notNull(d); this.d = d; }
+        private Divide(Double d) { AfSupport.notNull(d); this.d = d; }
         // prettier-ignore
         public override Object apply(Object x) { return (Double) x / d; }
     }

@@ -425,7 +425,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *
      * @return the new `LongEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -444,7 +444,7 @@ public abstract inherited sharing class LongEnumerable implements ILongEnumerabl
      *
      * @return the new `LongEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

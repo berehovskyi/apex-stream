@@ -224,7 +224,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
     public virtual class SetByName extends SetFieldValueBase {
         private final String field;
         private SetByName(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             this.field = field;
         }
 
@@ -255,7 +255,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
     public virtual class SetByField extends SetFieldValueBase {
         protected final SObjectField field;
         protected SetByField(final SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
 
@@ -353,7 +353,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
     public virtual class SetSObjectByName extends SetSObjectBase {
         protected final String field;
         protected SetSObjectByName(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             this.field = field;
         }
 
@@ -384,7 +384,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
     public virtual class SetSObjectByField extends SetSObjectBase {
         protected final SObjectField field;
         protected SetSObjectByField(final SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
 
@@ -415,7 +415,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
     public virtual class SetSObjects {
         protected final String field;
         protected SetSObjects(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             this.field = field;
         }
         protected SetSObjects(SObjectField field) {
@@ -526,7 +526,7 @@ public virtual inherited sharing class SObjectOperatorProvider {
         private final String field;
         private final IFunction mapper;
         private SetSObjectsByFieldNameOperator(String field, IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }

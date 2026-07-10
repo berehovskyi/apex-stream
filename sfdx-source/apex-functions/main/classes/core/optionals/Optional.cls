@@ -23,7 +23,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `value` is null
      */
     public static Optional of(final Object value) {
-        Validate.notNull(value);
+        AfSupport.notNull(value);
         return new Optional(value);
     }
 
@@ -86,7 +86,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @param consumer the consumer action to perform
      */
     public virtual void ifPresent(final IConsumer consumer) {
-        Validate.notNull(consumer);
+        AfSupport.notNull(consumer);
         if (isPresent()) {
             consumer.accept(value);
         }
@@ -102,8 +102,8 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `consumer` or `action` is null
      */
     public virtual void ifPresentOrElse(final IConsumer consumer, final IRunnable action) {
-        Validate.notNull(consumer);
-        Validate.notNull(action);
+        AfSupport.notNull(consumer);
+        AfSupport.notNull(action);
         if (isPresent()) {
             consumer.accept(value);
         } else {
@@ -122,7 +122,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `predicate` is null
      */
     public virtual Optional filter(final IPredicate predicate) {
-        Validate.notNull(predicate);
+        AfSupport.notNull(predicate);
         return isEmpty() ? this : predicate.test(value) ? this : empty();
     }
 
@@ -138,7 +138,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `mapper` is null
      */
     public virtual Optional mapTo(final IFunction mapper) {
-        Validate.notNull(mapper);
+        AfSupport.notNull(mapper);
         return isEmpty() ? empty() : Optional.ofNullable(mapper.apply(value));
     }
 
@@ -154,7 +154,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `mapper` is null
      */
     public virtual Optional flatMapTo(final IFunction mapper) {
-        Validate.notNull(mapper);
+        AfSupport.notNull(mapper);
         return isEmpty() ? empty() : (Optional) mapper.apply(value);
     }
 
@@ -169,7 +169,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `supplier` is null
      */
     public virtual Optional orGet(final ISupplier supplier) {
-        Validate.notNull(supplier);
+        AfSupport.notNull(supplier);
         return isPresent() ? this : Optional.ofNullable(supplier.get());
     }
 
@@ -196,7 +196,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `supplier` is null
      */
     public virtual Object orElseGet(final ISupplier supplier) {
-        Validate.notNull(supplier);
+        AfSupport.notNull(supplier);
         return isPresent() ? value : supplier.get();
     }
 
@@ -212,7 +212,7 @@ public virtual inherited sharing class Optional implements IOptional {
      * @throws NullPointerException if `exceptionSupplier` is null
      */
     public virtual Object orElseThrow(final ISupplier exceptionSupplier) {
-        Validate.notNull(exceptionSupplier);
+        AfSupport.notNull(exceptionSupplier);
         // prettier-ignore
         if (value != null) { return value; }
         throw (Exception) exceptionSupplier.get();

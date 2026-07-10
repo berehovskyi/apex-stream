@@ -23,8 +23,8 @@ private class AsTestCommons {
     }
     @SuppressWarnings('PMD.OneDeclarationPerLine')
     public static Object collect(final List<Object> source, final ICollector collector) {
-        Validate.notNull(source);
-        Validate.notNull(collector);
+        AfSupport.notNull(source);
+        AfSupport.notNull(collector);
         final Object container = collector.supplier().get();
         final IBiConsumer accumulator = collector.accumulator();
         final IFunction finisher = collector.finisher();
@@ -37,6 +37,19 @@ private class AsTestCommons {
     public class ToUpperCaseFunction extends Function {
         public override Object apply(Object o) { return ((String) o).toUpperCase(); }
     }
+    public class CountingFunction extends Function {
+        private final IFunction delegate;
+        public Integer calls = 0;
+        public CountingFunction() { this(Function.identity()); }
+        public CountingFunction(IFunction delegate) {
+            AfSupport.notNull(delegate);
+            this.delegate = delegate;
+        }
+        public override Object apply(Object o) {
+            calls++;
+            return delegate.apply(o);
+        }
+    }
     public class CreateAccountFromInts extends Function {
         public override Object apply(Object i) { return new Account(NumberOfEmployees = Math.abs((Integer) i)); }
     }
@@ -45,11 +58,6 @@ private class AsTestCommons {
     }
     public class CreateAccountFromDoubles extends Function {
         public override Object apply(Object d) { return new Account(AnnualRevenue = Math.abs((Double) d)); }
-    }
-    public class Abbreviate extends Function {
-        private final Integer maxWidth;
-        public Abbreviate(Integer maxWidth) { this.maxWidth = maxWidth; }
-        public override Object apply(Object o) { return ((String) o).abbreviate(maxWidth); }
     }
     public class IntToString extends Function {
         public override Object apply(Object i) { return String.valueOf(i); }
@@ -102,20 +110,8 @@ private class AsTestCommons {
     public class GetIdFunction extends Function {
         public override Object apply(Object o) { return ((AsPerson) o).getAutoId(); }
     }
-    public class GetNameFunction extends Function {
-        public override Object apply(Object o) { return ((AsPerson) o).getName(); }
-    }
-    public class GetAgeFunction extends Function {
-        public override Object apply(Object o) { return ((AsPerson) o).getAge(); }
-    }
     public class GetProbabilityFunction extends Function {
         public override Object apply(Object o) { return ((AsPerson) o).getProbability(); }
-    }
-    public class GetActiveFunction extends Function {
-        public override Object apply(Object o) { return ((AsPerson) o).isActive(); }
-    }
-    public class IsAdultFunction extends Function {
-        public override Object apply(Object o) { return ((AsPerson) o).getAge() >= 18; }
     }
     public class GetFieldsLength extends Function {
         private final IFunction iterableMapper;
@@ -189,10 +185,6 @@ private class AsTestCommons {
         private final String placeholder = '\'{\'"totalSize": {0}, "done": true, "records": {1}\'}\'';
         private final String fieldName;
         private final IFunction mapper;
-        public SetSObjectsByFieldNameOperator(String fieldName, IFunction mapper) {
-            this.fieldName = fieldName;
-            this.mapper = mapper;
-        }
         public SetSObjectsByFieldNameOperator(SObjectField field, IFunction mapper) {
             this.fieldName = findChildRelationshipName(field);
             this.mapper = mapper;
@@ -215,7 +207,7 @@ private class AsTestCommons {
         }
         private String findChildRelationshipName(final SObjectField field) {
             final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-            Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
+            AfSupport.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
             String result;
             for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
                 if (relationship.getField() == field) {
@@ -295,19 +287,42 @@ private class AsTestCommons {
     public class IsNotBlankPredicate extends Predicate {
         public override Boolean test(Object o) { return String.isNotBlank((String) o); }
     }
+    public class CountingPredicate extends Predicate {
+        private final IPredicate delegate;
+        public Integer calls = 0;
+        public CountingPredicate() { this(Predicate.always(true)); }
+        public CountingPredicate(IPredicate delegate) { this.delegate = delegate; }
+        public override Boolean test(Object o) {
+            calls++;
+            return delegate.test(o);
+        }
+    }
 
     public class DoNothingConsumer extends Consumer {
         public override void accept(Object o) {}
     }
-    public class SetNameConsumer extends Consumer {
-        private final String name;
-        public SetNameConsumer(String name) { this.name = name; }
-        public override void accept(Object o) { ((AsPerson) o).setName(name); }
+    public class RecordingConsumer extends Consumer {
+        public final List<Object> values = new List<Object>();
+        public override void accept(Object o) { values.add(o); }
     }
-    public class SetActiveConsumer extends Consumer {
-        private final Boolean isActive;
-        public SetActiveConsumer(Boolean isActive) { this.isActive = isActive; }
-        public override void accept(Object o) { ((AsPerson) o).setActive(isActive); }
+    public class CountingIterable implements Iterable<Object> {
+        private final List<Object> values;
+        public Integer nextCalls = 0;
+        public CountingIterable(List<Object> values) { this.values = values; }
+        public Iterator<Object> iterator() { return new CountingIterator(this, values.iterator()); }
+    }
+    private class CountingIterator implements Iterator<Object> {
+        private final CountingIterable owner;
+        private final Iterator<Object> delegate;
+        private CountingIterator(CountingIterable owner, Iterator<Object> delegate) {
+            this.owner = owner;
+            this.delegate = delegate;
+        }
+        public Boolean hasNext() { return delegate.hasNext(); }
+        public Object next() {
+            owner.nextCalls++;
+            return delegate.next();
+        }
     }
     public class SetAutoId extends Consumer {
         private final Long autoId;
@@ -361,6 +376,18 @@ private class AsTestCommons {
             return n1;
         }
     }
+    public class CountingSupplier extends Supplier {
+        private final ISupplier delegate;
+        public Integer calls = 0;
+        public CountingSupplier(ISupplier delegate) {
+            AfSupport.notNull(delegate);
+            this.delegate = delegate;
+        }
+        public override Object get() {
+            calls++;
+            return delegate.get();
+        }
+    }
     public class TestAccountSupplier extends Supplier {
         private Integer i = 0;
         public override Object get() {
@@ -380,18 +407,40 @@ private class AsTestCommons {
     public class SumDoubleBiOperator extends BiOperator {
         public override Object apply(Object o1, Object o2) { return (Double) o1 + (Double) o2; }
     }
+    public class CountingBiOperator extends BiOperator {
+        private final IBiOperator operator;
+        public Integer calls = 0;
+        public CountingBiOperator(IBiOperator operator) {
+            AfSupport.notNull(operator);
+            this.operator = operator;
+        }
+        public override Object apply(Object o1, Object o2) {
+            calls++;
+            return operator.apply(o1, o2);
+        }
+    }
+    public class CountingOperator extends Operator {
+        private final IOperator operator;
+        public Integer calls = 0;
+        public CountingOperator(IOperator operator) {
+            AfSupport.notNull(operator);
+            this.operator = operator;
+        }
+        public override Object apply(Object o) {
+            calls++;
+            return operator.apply(o);
+        }
+    }
     public class Concat extends BiOperator {
         public override Object apply(Object o1, Object o2) { return ((String) o1) + ((String) o2); }
     }
     public class AddToIdSet extends BiConsumer {
         private final IFunction mapper;
-        public AddToIdSet() { this(Function.identity()); }
         public AddToIdSet(IFunction mapper) { this.mapper = mapper; }
         public override void accept(Object container, Object o) { ((Set<Id>) container).add((Id) mapper.apply(o)); }
     }
     public class AddToStringSet extends BiConsumer {
         private final IFunction mapper;
-        public AddToStringSet() { this(Function.identity()); }
         public AddToStringSet(IFunction mapper) { this.mapper = mapper; }
         public override void accept(Object container, Object o) { ((Set<String>) container).add((String) mapper.apply(o)); }
     }
@@ -513,9 +562,6 @@ private class AsTestCommons {
             this.right = right;
             this.comparisonResult = comparisonResult;
         }
-        public ComparisonBiPredicate(IFunction function, Integer comparisonResult) {
-            this(function, function, comparisonResult);
-        }
         public override Boolean test(Object o1, Object o2) {
             return comp.compare(left.apply(o1), right.apply(o2)) == comparisonResult;
         }
@@ -541,7 +587,7 @@ private class AsTestCommons {
         final Object oldValue,
         final Object newValue
     ) {
-        Validate.state(
+        AfSupport.state(
             merger != null,
             Label.AS_ErrorMessage_DuplicateKey,
             new List<Object>{ key, oldValue, newValue }

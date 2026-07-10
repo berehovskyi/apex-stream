@@ -62,7 +62,7 @@ public abstract inherited sharing class Consumer implements IConsumer {
     private class Compose extends Consumer {
         private final List<IConsumer> consumers;
         private Compose(List<IConsumer> consumers) {
-            Validate.noNullElements(consumers);
+            AfSupport.noNullElements(consumers);
             this.consumers = consumers;
         }
         public override void accept(Object o) {

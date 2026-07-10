@@ -8,8 +8,8 @@ public inherited sharing class ConcatIterator extends BaseIterator {
     private Integer index = 0;
 
     public ConcatIterator(final List<Iterable<Object>> iterables, final Type elementType) {
-        Validate.noNullElements(iterables);
-        Validate.notNull(elementType);
+        AfSupport.noNullElements(iterables);
+        AfSupport.notNull(elementType);
         final List<Iterator<Object>> iterators = (List<Iterator<Object>>) Type.forName(
                 'List<Iterator<' + elementType + '>>'
             )

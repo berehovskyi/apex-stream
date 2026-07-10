@@ -514,7 +514,7 @@ public virtual inherited sharing class SObjectOperators {
     private class GetSObjectOperator extends Operator {
         private final IFunction mapper;
         private GetSObjectOperator(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             // prettier-ignore
             if (!field.containsAny('?.')) { mapper = new GetSObjectByFieldName(field); }
             // prettier-ignore
@@ -527,7 +527,7 @@ public virtual inherited sharing class SObjectOperators {
     private class GetSObjectFieldOperator extends Operator {
         private final SObjectField field;
         private GetSObjectFieldOperator(SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
         // prettier-ignore
@@ -539,14 +539,14 @@ public virtual inherited sharing class SObjectOperators {
         private final String field;
         private final IFunction mapper;
         private SetSObjectsByFieldNameOperator(String field, IFunction mapper) {
-            Validate.notBlank(field);
-            Validate.notNull(mapper);
+            AfSupport.notBlank(field);
+            AfSupport.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }
         private SetSObjectsByFieldNameOperator(SObjectField field, IFunction mapper) {
-            Validate.notNull(field);
-            Validate.notNull(mapper);
+            AfSupport.notNull(field);
+            AfSupport.notNull(mapper);
             this.field = findChildRelationshipName(field);
             this.mapper = mapper;
         }

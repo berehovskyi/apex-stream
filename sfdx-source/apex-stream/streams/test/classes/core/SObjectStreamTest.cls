@@ -30,12 +30,12 @@ private class SObjectStreamTest {
         ISObjectEnumerable accStm6 = SObjectStream.of(input.iterator());
         // When
         List<Account> actual = accStm.toList();
-        List<Account> actual1 = (List<Account>) accStm1.toList();
+        List<Account> actual1 = accStm1.toList();
         List<Account> actual2 = accStm2.toList();
         List<Account> actual3 = accStm3.toList();
-        List<Account> actual4 = (List<Account>) accStm4.toList();
-        List<Account> actual5 = (List<Account>) accStm5.toList();
-        List<Account> actual6 = (List<Account>) accStm6.toList();
+        List<Account> actual4 = accStm4.toList();
+        List<Account> actual5 = accStm5.toList();
+        List<Account> actual6 = accStm6.toList();
         // Then
         List<Account> expected = new List<SObject>(new Set<SObject>(input));
         List<Account> expected1 = new List<SObject>();
@@ -70,7 +70,7 @@ private class SObjectStreamTest {
         ISObjectEnumerable stm1 = SObjectStream.generate(accSupplier1).lim(lim);
         // When
         List<Account> actual = stm.toList();
-        List<Account> actual1 = (List<Account>) stm1.toList();
+        List<Account> actual1 = stm1.toList();
         // Then
         Assert.areEqual(lim, actual.size());
         Assert.areEqual(lim, actual1.size());
@@ -106,7 +106,7 @@ private class SObjectStreamTest {
         ISObjectEnumerable stm1 = SObjectStream.iterate(seed1, pred, accIterator1);
         // When
         List<Account> actual = stm.toList();
-        List<Account> actual1 = (List<Account>) stm1.toList();
+        List<Account> actual1 = stm1.toList();
         // Then
         Assert.areEqual(lim, actual.size());
         Assert.areEqual(lim, actual1.size());
@@ -190,7 +190,7 @@ private class SObjectStreamTest {
         ISObjectEnumerable accStm1 = SObjectStream.zip(oldAccsSteam1, newAccsSteam1, numOfEmployeesIsChanged, getNewAcc);
         // When
         List<Account> actual = accStm.toList();
-        List<Account> actual1 = (List<Account>) accStm1.toList();
+        List<Account> actual1 = accStm1.toList();
         // Then
         List<Account> expected = new List<Account>{ oldAcc, oldAcc1, newAcc2, oldAcc3 };
         List<Account> expected1 = new List<Account>{ newAcc1, newAcc2 };
@@ -223,7 +223,7 @@ private class SObjectStreamTest {
         ISObjectEnumerable accStm5 = accStm1.prepend(accStm3);
         // When
         List<Account> actual = accStm4.toList();
-        List<Account> actual1 = (List<Account>) accStm5.toList();
+        List<Account> actual1 = accStm5.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc5 };
         List<Account> expected1 = new List<Account>{ acc3, acc4, acc5, acc, acc1, acc2 };
@@ -266,8 +266,8 @@ private class SObjectStreamTest {
         List<Account> actual = stm.toList();
         List<Account> actual1 = stm1.toList();
         List<Account> actual2 = stm2.toList();
-        List<Account> actual3 = (List<Account>) stm3.toList();
-        List<Account> actual4 = (List<Account>) stm4.toList();
+        List<Account> actual3 = stm3.toList();
+        List<Account> actual4 = stm4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc3, acc9, acc7, acc8, acc6, acc4, acc1, acc, acc2 };
         Assert.areEqual(expected, actual);
@@ -312,8 +312,8 @@ private class SObjectStreamTest {
         List<Account> actual = stm.toList();
         List<Account> actual1 = stm1.toList();
         List<Account> actual2 = stm2.toList();
-        List<Account> actual3 = (List<Account>) stm3.toList();
-        List<Account> actual4 = (List<Account>) stm4.toList();
+        List<Account> actual3 = stm3.toList();
+        List<Account> actual4 = stm4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc3, acc9 };
         Assert.areEqual(expected, actual);
@@ -358,8 +358,8 @@ private class SObjectStreamTest {
         List<Account> actual = stm.toList();
         List<Account> actual1 = stm1.toList();
         List<Account> actual2 = stm2.toList();
-        List<Account> actual3 = (List<Account>) stm3.toList();
-        List<Account> actual4 = (List<Account>) stm4.toList();
+        List<Account> actual3 = stm3.toList();
+        List<Account> actual4 = stm4.toList();
         // Then
         List<Account> expected = new List<Account>{ acc5, acc7 };
         Assert.areEqual(expected, actual);
@@ -398,8 +398,8 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStm.toList();
         List<Account> actual1 = accStm1.toList();
-        List<Account> actual2 = (List<Account>) accStm2.toList();
-        List<Account> actual3 = (List<Account>) accStm3.toList();
+        List<Account> actual2 = accStm2.toList();
+        List<Account> actual3 = accStm3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc1, acc2 };
         Assert.areEqual(expected, actual);
@@ -436,8 +436,8 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStm.toList();
         List<Account> actual1 = accStm1.toList();
-        List<Account> actual2 = (List<Account>) accStm2.toList();
-        List<Account> actual3 = (List<Account>) accStm3.toList();
+        List<Account> actual2 = accStm2.toList();
+        List<Account> actual3 = accStm3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2 };
         Assert.areEqual(expected, actual);
@@ -474,8 +474,8 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStm.toList();
         List<Account> actual1 = accStm1.toList();
-        List<Account> actual2 = (List<Account>) accStm2.toList();
-        List<Account> actual3 = (List<Account>) accStm3.toList();
+        List<Account> actual2 = accStm2.toList();
+        List<Account> actual3 = accStm3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc3, acc4 };
         Assert.areEqual(expected, actual);
@@ -505,7 +505,7 @@ private class SObjectStreamTest {
         ISObjectEnumerable stm1 = SObjectStream.of(clone).withoutNulls();
         // When
         List<Account> actual = stm.toList();
-        List<Account> actual1 = (List<Account>) stm1.toList();
+        List<Account> actual1 = stm1.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, acc4, acc1 };
         Assert.areEqual(expected, actual);
@@ -562,8 +562,8 @@ private class SObjectStreamTest {
         // When
         List<Contact> actual = conStm.toList();
         List<Account> actual1 = conStm1.toList();
-        List<Account> actual2 = (List<Account>) conStm2.toList();
-        List<Contact> actual3 = (List<Contact>) conStm3.toList();
+        List<Account> actual2 = conStm2.toList();
+        List<Contact> actual3 = conStm3.toList();
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             Assert.areEqual(input[i].Id, actual[i].AccountId);
@@ -737,7 +737,7 @@ private class SObjectStreamTest {
         // When
         List<Contact> actual = conStm.toList();
         List<Contact> actual1 = conStm1.toList();
-        List<Contact> actual2 = (List<Contact>) conStm2.toList();
+        List<Contact> actual2 = conStm2.toList();
         // Then
         List<SObject> expected = new List<SObject>();
         for (Account acc : input) {
@@ -913,7 +913,7 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStm.toList();
         List<Account> actual1 = accStm1.toList();
-        List<Account> actual2 = (List<Account>) accStm2.toList();
+        List<Account> actual2 = accStm2.toList();
         // Then
         for (Integer i = 0, size = input.size(); i < size; i++) {
             Assert.areEqual(value, actual[i].Name);
@@ -951,8 +951,8 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStm.toList();
         List<Account> actual1 = accStm1.toList();
-        List<Account> actual2 = (List<Account>) accStm2.toList();
-        List<Account> actual3 = (List<Account>) accStm3.toList();
+        List<Account> actual2 = accStm2.toList();
+        List<Account> actual3 = accStm3.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc3, null, acc4 };
         List<Account> expected1 = new List<Account>{ acc, acc3, acc4 };
@@ -995,9 +995,9 @@ private class SObjectStreamTest {
         List<Account> actual1 = accStm1.toList();
         List<Account> actual2 = accStm2.toList();
         List<Account> actual3 = accStm3.toList();
-        List<Account> actual4 = (List<Account>) accStm4.toList();
-        List<Account> actual5 = (List<Account>) accStm5.toList();
-        List<Account> actual6 = (List<Account>) accStm6.toList();
+        List<Account> actual4 = accStm4.toList();
+        List<Account> actual5 = accStm5.toList();
+        List<Account> actual6 = accStm6.toList();
         // Then
         List<Account> expected = new List<Account>{ acc, acc1, acc2, acc2, acc3, acc4 };
         List<Account> expected1 = new List<Account>{ acc4, acc2, acc2, acc1, acc, acc3 };
@@ -1039,7 +1039,7 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStm.toList();
         List<Account> actual1 = accStm1.toList();
-        List<Account> actual2 = (List<Account>) accStm2.toList();
+        List<Account> actual2 = accStm2.toList();
         Exception exc1;
         try {
             accStm3.lim(-2);
@@ -1079,7 +1079,7 @@ private class SObjectStreamTest {
         // When
         List<Account> actual = accStm.toList();
         List<Account> actual1 = accStm1.toList();
-        List<Account> actual2 = (List<Account>) accStm2.toList();
+        List<Account> actual2 = accStm2.toList();
         Exception exc1;
         try {
             SObjectStream.of(clone).skip(-2);
@@ -1610,9 +1610,9 @@ private class SObjectStreamTest {
         Set<String> actual5 = accStm5.toStringSet(SObjectEnumerableSupport.get('Name'));
         Set<String> actual6 = accStm6.toStringSet('Name');
         Set<String> actual7 = accStm7.toStringSet(Account.Name);
-        Set<Object> actual8 = (Set<Object>) accStm8.toSet(SObjectEnumerableSupport.get('Name'));
-        Set<Object> actual9 = (Set<Object>) accStm9.toSet('Name');
-        Set<Object> actual10 = (Set<Object>) accStm10.toSet(Account.Name);
+        Set<Object> actual8 = accStm8.toSet(SObjectEnumerableSupport.get('Name'));
+        Set<Object> actual9 = accStm9.toSet('Name');
+        Set<Object> actual10 = accStm10.toSet(Account.Name);
         // Then
         Set<SObject> expected = new Set<SObject>{ acc1, acc, acc2, null, acc3, acc4 };
         Set<Id> expected1 = (Set<Id>) SObjectStream.of(clone)

@@ -295,8 +295,8 @@ public virtual inherited sharing class SObjectConsumers {
         private final String field;
         private final String message;
         private AddFieldNameError(String field, String message) {
-            Validate.notBlank(field);
-            Validate.notNull(message);
+            AfSupport.notBlank(field);
+            AfSupport.notNull(message);
             this.field = field;
             this.message = message;
         }
@@ -308,8 +308,8 @@ public virtual inherited sharing class SObjectConsumers {
         private final SObjectField field;
         private final String message;
         private AddFieldError(SObjectField field, String message) {
-            Validate.notNull(field);
-            Validate.notNull(message);
+            AfSupport.notNull(field);
+            AfSupport.notNull(message);
             this.field = field;
             this.message = message;
         }
@@ -320,7 +320,7 @@ public virtual inherited sharing class SObjectConsumers {
     private class AddErrorMessage extends Consumer {
         private final String message;
         private AddErrorMessage(String message) {
-            Validate.notBlank(message);
+            AfSupport.notBlank(message);
             this.message = message;
         }
         // prettier-ignore
@@ -330,7 +330,7 @@ public virtual inherited sharing class SObjectConsumers {
     private class AddErrorExc extends Consumer {
         private final Exception exc;
         private AddErrorExc(Exception exc) {
-            Validate.notNull(exc);
+            AfSupport.notNull(exc);
             this.exc = exc;
         }
         // prettier-ignore
@@ -382,8 +382,8 @@ public virtual inherited sharing class SObjectConsumers {
     private class SetConsumer extends Consumer {
         private final IConsumer consumer;
         private SetConsumer(String field, IFunction mapper) {
-            Validate.notBlank(field);
-            Validate.notNull(mapper);
+            AfSupport.notBlank(field);
+            AfSupport.notNull(mapper);
             // prettier-ignore
             if (!CsfSupport.isXRefField(field)) { consumer = new SetByFieldName(field, mapper); }
             // prettier-ignore
@@ -399,8 +399,8 @@ public virtual inherited sharing class SObjectConsumers {
         private final SObjectField field;
         private final IFunction mapper;
         private SetFieldConsumer(SObjectField field, IFunction mapper) {
-            Validate.notNull(field);
-            Validate.notNull(mapper);
+            AfSupport.notNull(field);
+            AfSupport.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }
@@ -444,8 +444,8 @@ public virtual inherited sharing class SObjectConsumers {
     private class SetSObjectConsumer extends Consumer {
         private final IConsumer consumer;
         private SetSObjectConsumer(String field, IOperator operator) {
-            Validate.notBlank(field);
-            Validate.notNull(operator);
+            AfSupport.notBlank(field);
+            AfSupport.notNull(operator);
             // prettier-ignore
             if (!CsfSupport.isXRefField(field)) { consumer = new SetSObjectByFieldName(field, operator); }
             else if (CsfSupport.isSafePath(field)) { consumer = new SetSObjectByFieldPathSafe(field, operator); }
@@ -460,8 +460,8 @@ public virtual inherited sharing class SObjectConsumers {
         private final SObjectField field;
         private final IOperator operator;
         private SetSObjectFieldConsumer(SObjectField field, IOperator operator) {
-            Validate.notNull(field);
-            Validate.notNull(operator);
+            AfSupport.notNull(field);
+            AfSupport.notNull(operator);
             this.field = field;
             this.operator = operator;
         }

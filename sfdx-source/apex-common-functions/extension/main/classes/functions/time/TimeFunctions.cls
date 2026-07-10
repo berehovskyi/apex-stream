@@ -82,7 +82,7 @@ public virtual inherited sharing class TimeFunctions {
     private class AddHours extends Function {
         private final Integer hours;
         // prettier-ignore
-        private AddHours(Integer hours) { Validate.notNull(hours); this.hours = hours; }
+        private AddHours(Integer hours) { AfSupport.notNull(hours); this.hours = hours; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Time) o).addHours(hours); }
     }
@@ -90,7 +90,7 @@ public virtual inherited sharing class TimeFunctions {
     private class AddMilliseconds extends Function {
         private final Integer milliseconds;
         private AddMilliseconds(Integer milliseconds) {
-            Validate.notNull(milliseconds);
+            AfSupport.notNull(milliseconds);
             this.milliseconds = milliseconds;
         }
         // prettier-ignore
@@ -100,7 +100,7 @@ public virtual inherited sharing class TimeFunctions {
     private class AddMinutes extends Function {
         private final Integer minutes;
         // prettier-ignore
-        private AddMinutes(Integer minutes) { Validate.notNull(minutes); this.minutes = minutes; }
+        private AddMinutes(Integer minutes) { AfSupport.notNull(minutes); this.minutes = minutes; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Time) o).addMinutes(minutes); }
     }
@@ -108,7 +108,7 @@ public virtual inherited sharing class TimeFunctions {
     private class AddSeconds extends Function {
         private final Integer seconds;
         // prettier-ignore
-        private AddSeconds(Integer seconds) { Validate.notNull(seconds); this.seconds = seconds; }
+        private AddSeconds(Integer seconds) { AfSupport.notNull(seconds); this.seconds = seconds; }
         // prettier-ignore
         public override Object apply(Object o) { return ((Time) o).addSeconds(seconds); }
     }

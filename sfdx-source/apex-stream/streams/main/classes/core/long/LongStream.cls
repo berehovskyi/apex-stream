@@ -54,7 +54,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public override Iterator<Long> iterator() {
-        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
+        AfSupport.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -81,7 +81,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * LongEnumerable longStream = LongStream.of(otherStream.iterator());
      */
     public static LongEnumerable of(final Iterator<Long> iterator) {
-        Validate.notNull(iterator);
+        AfSupport.notNull(iterator);
         return new LongStream(iterator);
     }
 
@@ -99,7 +99,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      * LongEnumerable longStream = LongStream.of(new Set<Long>{ 0, 5L, 1L, -10 });
      */
     public static LongEnumerable of(final Iterable<Long> longs) {
-        Validate.notNull(longs);
+        AfSupport.notNull(longs);
         return new LongStream(longs.iterator());
     }
 
@@ -671,7 +671,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *
      * @return the `LongEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -692,7 +692,7 @@ public virtual inherited sharing class LongStream extends LongEnumerable impleme
      *
      * @return the `LongEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

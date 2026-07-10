@@ -211,7 +211,7 @@ public virtual inherited sharing class ListObjectConsumers {
     private class AddToListBiConsumer extends BiConsumer {
         private final IFunction mapper;
         private AddToListBiConsumer(IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
         // prettier-ignore
@@ -221,7 +221,7 @@ public virtual inherited sharing class ListObjectConsumers {
     private class AveragingDouble extends BiConsumer {
         private final IFunction mapper;
         private AveragingDouble(IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
         public override void accept(Object container, Object o) {
@@ -234,7 +234,7 @@ public virtual inherited sharing class ListObjectConsumers {
     private abstract class Operating extends BiConsumer {
         protected final IFunction mapper;
         protected Operating(IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
     }
@@ -244,9 +244,9 @@ public virtual inherited sharing class ListObjectConsumers {
         private final String delimiter;
         private final String prefix;
         private JoiningString(IFunction mapper, String delimiter, String prefix) {
-            Validate.notNull(mapper);
-            Validate.notNull(delimiter);
-            Validate.notNull(prefix);
+            AfSupport.notNull(mapper);
+            AfSupport.notNull(delimiter);
+            AfSupport.notNull(prefix);
             this.mapper = mapper;
             this.delimiter = delimiter;
             this.prefix = prefix;
@@ -280,7 +280,7 @@ public virtual inherited sharing class ListObjectConsumers {
     private class Reducing extends BiConsumer {
         private final IBiOperator operator;
         private Reducing(IBiOperator operator) {
-            Validate.notNull(operator);
+            AfSupport.notNull(operator);
             this.operator = operator;
         }
         public override void accept(Object container, Object o) {
@@ -292,8 +292,8 @@ public virtual inherited sharing class ListObjectConsumers {
         private final IBiOperator operator;
         private final IFunction mapper;
         private ReducingByMapper(IBiOperator operator, IFunction mapper) {
-            Validate.notNull(operator);
-            Validate.notNull(mapper);
+            AfSupport.notNull(operator);
+            AfSupport.notNull(mapper);
             this.operator = operator;
             this.mapper = mapper;
         }
@@ -305,7 +305,7 @@ public virtual inherited sharing class ListObjectConsumers {
     private class ReducingOptional extends BiConsumer {
         private final IBiOperator operator;
         private ReducingOptional(IBiOperator operator) {
-            Validate.notNull(operator);
+            AfSupport.notNull(operator);
             this.operator = operator;
         }
         public override void accept(Object container, Object o) {

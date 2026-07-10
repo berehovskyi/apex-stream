@@ -68,8 +68,8 @@ public virtual inherited sharing class BiConsumers {
         protected final IFunction mapper;
         protected final IBiConsumer accumulator;
         protected Operating(IFunction mapper, IBiConsumer accumulator) {
-            Validate.notNull(mapper);
-            Validate.notNull(accumulator);
+            AfSupport.notNull(mapper);
+            AfSupport.notNull(accumulator);
             this.mapper = mapper;
             this.accumulator = accumulator;
         }
@@ -79,8 +79,8 @@ public virtual inherited sharing class BiConsumers {
         private final IPredicate predicate;
         private final IBiConsumer accumulator;
         private Filtering(IPredicate predicate, IBiConsumer accumulator) {
-            Validate.notNull(predicate);
-            Validate.notNull(accumulator);
+            AfSupport.notNull(predicate);
+            AfSupport.notNull(accumulator);
             this.predicate = predicate;
             this.accumulator = accumulator;
         }

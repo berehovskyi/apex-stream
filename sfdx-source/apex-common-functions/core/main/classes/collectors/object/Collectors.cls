@@ -57,7 +57,7 @@ public virtual inherited sharing class Collectors {
      *     .collect(Collectors.toList().cast(List<String>.class));
      */
     public static Collector toList(final Type elementType) {
-        Validate.notNull(elementType);
+        AfSupport.notNull(elementType);
         return Collector.of(
             Supplier.of(Type.forName('List<' + elementType + '>')),
             ListObjectConsumers.addToList(Function.identity())
@@ -83,7 +83,7 @@ public virtual inherited sharing class Collectors {
      *     .collect(Collectors.toList(getNameFunction).cast(List<String>.class));
      */
     public static Collector toList(final IFunction mapper) {
-        Validate.notNull(mapper);
+        AfSupport.notNull(mapper);
         return Collector.of(Supplier.of(List<Object>.class), ListObjectConsumers.addToList(mapper));
     }
     // @end-group
@@ -498,7 +498,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -526,7 +526,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -631,7 +631,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -659,7 +659,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -764,7 +764,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -896,7 +896,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -924,7 +924,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -1029,7 +1029,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -1057,7 +1057,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -1162,7 +1162,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -1190,7 +1190,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -1297,7 +1297,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -1325,7 +1325,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -1430,7 +1430,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -1458,7 +1458,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -1563,7 +1563,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -1591,7 +1591,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -1696,7 +1696,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -1724,7 +1724,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example
@@ -1832,7 +1832,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` is null
      *
      * @example
@@ -1861,7 +1861,7 @@ public virtual inherited sharing class Collectors {
      *
      * @return the `Collector`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueMapper` is null
      *
      * @example

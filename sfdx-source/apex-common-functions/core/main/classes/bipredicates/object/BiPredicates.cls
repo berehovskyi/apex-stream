@@ -296,10 +296,10 @@ public virtual inherited sharing class BiPredicates {
         private final IComparer comparer;
         private final Integer comparisonResult;
         private ComparerBiPredicate(IFunction left, IFunction right, IComparer comparer, Integer comparisonResult) {
-            Validate.notNull(left);
-            Validate.notNull(right);
-            Validate.notNull(comparer);
-            Validate.notNull(comparisonResult);
+            AfSupport.notNull(left);
+            AfSupport.notNull(right);
+            AfSupport.notNull(comparer);
+            AfSupport.notNull(comparisonResult);
             this.left = left;
             this.right = right;
             this.comparer = comparer;

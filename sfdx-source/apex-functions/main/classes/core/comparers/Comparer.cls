@@ -86,7 +86,7 @@ public abstract inherited sharing class Comparer implements IComparer {
      * @see SortOrder
      */
     public virtual Comparer order(final SortOrder order) {
-        Validate.notNull(order);
+        AfSupport.notNull(order);
         return order === SortOrder.ASCENDING ? this : this.reversed();
     }
 
@@ -498,8 +498,8 @@ public abstract inherited sharing class Comparer implements IComparer {
         private final IFunction keyExtractor;
         private final IComparer keyComparer;
         private Comparing(IFunction keyExtractor, IComparer keyComparer) {
-            Validate.notNull(keyExtractor);
-            Validate.notNull(keyComparer);
+            AfSupport.notNull(keyExtractor);
+            AfSupport.notNull(keyComparer);
             this.keyExtractor = keyExtractor;
             this.keyComparer = keyComparer;
         }
@@ -549,8 +549,8 @@ public abstract inherited sharing class Comparer implements IComparer {
         private final IComparer comparer;
         private final IComparer other;
         private ThenComparing(IComparer comparer, IComparer other) {
-            Validate.notNull(comparer);
-            Validate.notNull(other);
+            AfSupport.notNull(comparer);
+            AfSupport.notNull(other);
             this.comparer = comparer;
             this.other = other;
         }

@@ -422,7 +422,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *
      * @return the new `DoubleEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -441,7 +441,7 @@ public abstract inherited sharing class DoubleEnumerable implements IDoubleEnume
      *
      * @return the new `DoubleEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example

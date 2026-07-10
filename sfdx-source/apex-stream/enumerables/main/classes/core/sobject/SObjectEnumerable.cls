@@ -2154,7 +2154,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -2181,7 +2181,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @return the new `SObjectEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example
@@ -3669,7 +3669,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @return the `Map<Id, SObject>` containing the collected elements
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      *
      * @example
      * Account acc1 = new Account(Id = '001000000000001AAA', Name = 'foo');
@@ -3698,7 +3698,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `Map<Id, T>`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueType` is null
      *
      * @example
@@ -3754,7 +3754,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `Map<Id, T>`
      *
      * @throws IllegalArgumentException if `field` is blank
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `valueType` is null
      *
@@ -3794,7 +3794,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @return the `Map<Id, SObject>` containing the collected elements, which can be cast to `Map<Id, T>`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `field` is null or `valueType` is null
      *
      * @example
@@ -3824,7 +3824,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `Map<String, T>`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `keyMapper` or `valueType` is null
      *
      * @example
@@ -3882,7 +3882,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `Map<String, T>`
      *
      * @throws IllegalArgumentException if `field` is blank
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `field` is null
      * @throws NullPointerException if `valueType` is null
      *
@@ -3922,7 +3922,7 @@ public abstract inherited sharing class SObjectEnumerable implements ISObjectEnu
      *
      * @return the `Map<String, SObject>` containing the collected elements, which can be cast to `Map<String, T>`
      *
-     * @throws IllegalStateException if mapped keys contain duplicates
+     * @throws InvalidStateException if mapped keys contain duplicates
      * @throws NullPointerException if `field` or `valueType` is null
      *
      * @example

@@ -158,7 +158,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         protected final String message;
         protected Boolean escape = true;
         protected AddErrorMessageConsumer(String message) {
-            Validate.notNull(message);
+            AfSupport.notNull(message);
             this.message = message;
         }
 
@@ -181,7 +181,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
          * addErrorConsumer.accept(new Account());
          */
         public virtual AddErrorMessageConsumer escape(final Boolean escape) {
-            Validate.notNull(escape);
+            AfSupport.notNull(escape);
             this.escape = escape;
             return this;
         }
@@ -239,7 +239,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         protected final Exception exc;
         protected Boolean escape = true;
         protected AddErrorExceptionConsumer(Exception exc) {
-            Validate.notNull(exc);
+            AfSupport.notNull(exc);
             this.exc = exc;
         }
 
@@ -261,7 +261,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
          * addExceptionError.accept(new Account()); // Adds unescaped 'Invalid value' error to the Account.
          */
         public virtual AddErrorExceptionConsumer escape(final Boolean escape) {
-            Validate.notNull(escape);
+            AfSupport.notNull(escape);
             this.escape = escape;
             return this;
         }
@@ -343,7 +343,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
     public virtual class SetByName extends SetFieldValueBase {
         protected final String field;
         protected SetByName(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             this.field = field;
         }
 
@@ -374,7 +374,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
     public virtual class SetByField extends SetFieldValueBase {
         protected final SObjectField field;
         protected SetByField(final SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
 
@@ -472,7 +472,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
     public virtual class SetSObjectByName extends SetSObjectBase {
         protected final String field;
         protected SetSObjectByName(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             this.field = field;
         }
 
@@ -503,7 +503,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
     public virtual class SetSObjectByField extends SetSObjectBase {
         protected final SObjectField field;
         protected SetSObjectByField(final SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
 
@@ -532,7 +532,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         private final String message;
         private final Boolean escape;
         private AddFieldNameErrorConsumer(String field, String message, Boolean escape) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             this.field = field;
             this.message = message;
             this.escape = escape;
@@ -546,7 +546,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         private final String message;
         private final Boolean escape;
         private AddFieldErrorConsumer(SObjectField field, String message, Boolean escape) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
             this.message = message;
             this.escape = escape;
@@ -559,7 +559,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         private final IConsumer consumer;
         // prettier-ignore
         private SetConsumer(String field, IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             if (!AcfSupport.isXRefField(field)) { consumer = new SetByFieldName(field, mapper); }
             else if (AcfSupport.isSafePath(field)) { consumer = new SetByFieldPathSafe(field, mapper); }
             else { consumer = new SetByFieldPath(field, mapper); }
@@ -572,7 +572,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         private final SObjectField field;
         private final IFunction mapper;
         private SetFieldConsumer(SObjectField field, IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }
@@ -624,7 +624,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         private final IConsumer consumer;
         // prettier-ignore
         private SetSObjectConsumer(String field, IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             if (!AcfSupport.isXRefField(field)) { consumer = new SetSObjectByFieldName(field, mapper); }
             else if (AcfSupport.isSafePath(field)) { consumer = new SetSObjectByFieldPathSafe(field, mapper); }
             else { consumer = new SetSObjectByFieldPath(field, mapper); }
@@ -637,7 +637,7 @@ public virtual inherited sharing class SObjectConsumerProvider {
         private final SObjectField field;
         private final IFunction mapper;
         private SetSObjectFieldConsumer(SObjectField field, IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }

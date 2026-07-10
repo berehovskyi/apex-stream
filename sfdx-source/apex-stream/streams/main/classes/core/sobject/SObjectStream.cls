@@ -13,7 +13,7 @@
  * <p>A stream may not consume all elements. It may be infinite and complete in finite time.</p>
  * <p>A stream should be operated on (invoking an intermediate or terminal stream operation)
  * only <strong>once</strong>.
- * A stream throws {@link IllegalStateException} if it detects that the stream is being reused.</p>
+ * A stream throws {@link InvalidStateException} if it detects that the stream is being reused.</p>
  * <p>Contract:</p>
  * - Must be non-interfering (do not modify the stream source but may mutate its elements).
  * - Should be stateless in most cases.
@@ -76,7 +76,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * @throws IllegalArgumentException if this stream has been operated (linked or consumed)
      */
     public override Iterator<SObject> iterator() {
-        Validate.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
+        AfSupport.isTrue(!isOperated, Label.AS_ErrorMessage_StreamOperated);
         try {
             return iterator;
         } finally {
@@ -106,7 +106,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * SObjectEnumerable accStream = SObjectStream.of(otherStream.iterator());
      */
     public static SObjectEnumerable of(final Iterator<SObject> iterator) {
-        Validate.notNull(iterator);
+        AfSupport.notNull(iterator);
         return new SObjectStream(iterator);
     }
 
@@ -125,7 +125,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      * SObjectEnumerable accStream = SObjectStream.of(stream1);
      */
     public static SObjectEnumerable of(final Iterable<SObject> iterable) {
-        Validate.notNull(iterable);
+        AfSupport.notNull(iterable);
         return new SObjectStream(iterable.iterator());
     }
 
@@ -1177,7 +1177,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @return the `SObjectEnumerable`
      *
-     * @throws IllegalStateException if `lim` is less than 0
+     * @throws InvalidStateException if `lim` is less than 0
      * @throws NullPointerException if `lim` is null
      *
      * @example
@@ -1206,7 +1206,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @return the `SObjectEnumerable`
      *
-     * @throws IllegalStateException if `n` is less than 0
+     * @throws InvalidStateException if `n` is less than 0
      * @throws NullPointerException if `n` is null
      *
      * @example
@@ -1802,7 +1802,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @return the `Map<Id, SObject>` containing the stream elements
      *
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
+     * @throws InvalidStateException if mapped keys contain duplicates, which can be cast to `mapType`
      * @throws NullPointerException if `keyMapper` or `mapType` is null
      *
      * @example
@@ -1859,7 +1859,7 @@ public virtual inherited sharing class SObjectStream extends SObjectEnumerable i
      *
      * @return the `Map<String, SObject>` containing the stream elements
      *
-     * @throws IllegalStateException if mapped keys contain duplicates, which can be cast to `mapType`
+     * @throws InvalidStateException if mapped keys contain duplicates, which can be cast to `mapType`
      * @throws NullPointerException if `keyMapper` or `mapType` is null
      *
      * @example

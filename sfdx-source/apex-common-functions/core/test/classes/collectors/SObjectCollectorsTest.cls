@@ -1645,6 +1645,7 @@ private class SObjectCollectorsTest {
         Integer actual5 = (Integer) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.summingInt(AfTestConsts.Account.NumberOfEmployees));
         Integer actual6 = (Integer) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.summingInt(mapper));
         Map<String, Object> actual7 = (Map<String, Object>) AfTestCommons.collect(ACCOUNTS, SObjectCollectors.groupingByString(keyMapper, SObjectCollectors.summingInt(mapper)));
+        Integer actual8 = (Integer) AfTestCommons.collect(new List<Object>(), SObjectCollectors.counting());
         // Then
         Assert.areEqual(actual, ACCOUNTS.size());
         Integer sum = (
@@ -1673,6 +1674,7 @@ private class SObjectCollectorsTest {
             null => ACCOUNTS[8].NumberOfEmployees
         };
         Assert.areEqual(expected2, actual7);
+        Assert.areEqual(0, actual8);
     }
 
     /**

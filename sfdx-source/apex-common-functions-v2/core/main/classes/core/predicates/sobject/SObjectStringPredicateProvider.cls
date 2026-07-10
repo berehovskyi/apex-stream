@@ -81,7 +81,7 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
         protected final IFunction mapper;
         protected final Boolean negate;
         protected StringOperator(IFunction mapper, Boolean negate) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
             this.negate = negate;
         }
@@ -303,7 +303,7 @@ public virtual inherited sharing class SObjectStringPredicateProvider {
         protected final IFunction mapper;
         protected final String value;
         protected StringPredicate(IFunction mapper, String value) {
-            Validate.notNull(value);
+            AfSupport.notNull(value);
             this.mapper = mapper;
             this.value = value;
         }

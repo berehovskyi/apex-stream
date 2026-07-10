@@ -23,11 +23,11 @@ public inherited sharing class FlatMapIterator extends BaseIterator {
         final Integer depth,
         final Boolean wrapNonIterables
     ) {
-        Validate.notNull(iterator);
-        Validate.notNull(mapper);
-        Validate.notNull(depth);
-        Validate.positive(depth, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ depth });
-        Validate.notNull(wrapNonIterables);
+        AfSupport.notNull(iterator);
+        AfSupport.notNull(mapper);
+        AfSupport.notNull(depth);
+        AfSupport.positive(depth, Label.AS_ErrorMessage_ArgumentNotPositive, new List<Object>{ depth });
+        AfSupport.notNull(wrapNonIterables);
         this.iterator = iterator;
         this.mapper = mapper;
         this.depth = depth;
@@ -67,6 +67,6 @@ public inherited sharing class FlatMapIterator extends BaseIterator {
         if (wrapNonIterables) {
             return new List<Object>{ mapped };
         }
-        throw new IllegalStateException('Mapped value must implement Iterable<Object>');
+        throw new InvalidStateException('Mapped value must implement Iterable<Object>');
     }
 }

@@ -301,9 +301,9 @@ public inherited sharing class SObjectEnumerableSupport {
      * @throws NullPointerException if no relationship name is found for the provided field.
      */
     public static String findRelationshipField(final SObjectField field) {
-        Validate.isNotNull(field);
+        AfSupport.isNotNull(field);
         final List<SObjectType> referenceTo = field.getDescribe().getReferenceTo();
-        Validate.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
+        AfSupport.isTrue(!referenceTo.isEmpty(), Label.AF_ErrorMessage_NotReferenceField, new List<Object>{ field });
         String result;
         for (ChildRelationship relationship : referenceTo[0].getDescribe().getChildRelationships()) {
             if (relationship.getField() == field) {
@@ -311,7 +311,7 @@ public inherited sharing class SObjectEnumerableSupport {
                 break;
             }
         }
-        Validate.isNotNull(result);
+        AfSupport.isNotNull(result);
         return result;
     }
 
@@ -361,8 +361,8 @@ public inherited sharing class SObjectEnumerableSupport {
         private final SObjectField field;
         private final IFunction mapper;
         private SetField(SObjectField field, IFunction mapper) {
-            Validate.notNull(field);
-            Validate.notNull(mapper);
+            AfSupport.notNull(field);
+            AfSupport.notNull(mapper);
             this.field = field;
             this.mapper = mapper;
         }
@@ -374,8 +374,8 @@ public inherited sharing class SObjectEnumerableSupport {
         private final IConsumer consumer;
         // prettier-ignore
         private SetFieldConsumer(String field, IFunction mapper) {
-            Validate.notBlank(field);
-            Validate.notNull(mapper);
+            AfSupport.notBlank(field);
+            AfSupport.notNull(mapper);
             if (!field.contains('.')) { consumer = new SetFieldName(field, mapper); }
             else if (field.substringBeforeLast('.').endsWith('?')) {
                 consumer = new SetFieldPathSafe(field, mapper);
@@ -420,7 +420,7 @@ public inherited sharing class SObjectEnumerableSupport {
         private final IFunction mapper;
         // prettier-ignore
         private GetFunction(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             if (!field.contains('.')) { mapper = new GetFieldNameFunction(field); }
             else if (field.substringBeforeLast('.').endsWith('?')) {
                 mapper = new GetFieldPathSafeFunction(field);
@@ -433,7 +433,7 @@ public inherited sharing class SObjectEnumerableSupport {
     private class GetByFieldFunction extends Function {
         private final SObjectField field;
         private GetByFieldFunction(SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
         // prettier-ignore
@@ -466,7 +466,7 @@ public inherited sharing class SObjectEnumerableSupport {
         private final IFunction mapper;
         // prettier-ignore
         private GetSObjectsFunction(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             if (!field.contains('.')) { mapper = new GetSObjectsFieldNameFunction(field); }
             else if (field.substringBeforeLast('.').endsWith('?')) {
                 mapper = new GetSObjectsFieldPathSafeFunction(field);
@@ -506,7 +506,7 @@ public inherited sharing class SObjectEnumerableSupport {
         private final IFunction mapper;
         // prettier-ignore
         private GetSObjectOperator(String field) {
-            Validate.notBlank(field);
+            AfSupport.notBlank(field);
             if (!field.containsAny('?.')) { mapper = new GetSObjectFieldNameOperator(field); }
             else { mapper = new GetSObjectFieldPathSafeOperator(field); }
         }
@@ -517,7 +517,7 @@ public inherited sharing class SObjectEnumerableSupport {
     private class GetSObjectFieldOperator extends Operator {
         private final SObjectField field;
         private GetSObjectFieldOperator(SObjectField field) {
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
         // prettier-ignore

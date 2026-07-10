@@ -41,8 +41,8 @@ public virtual inherited sharing class SObjectBiConsumers {
      * SObjectBiConsumers.set('Parent?.NumberOfEmployees', someFunction);
      */
     public static BiConsumer set(final String field, final IFunction mapper) {
-        Validate.notNull(field);
-        Validate.notNull(mapper);
+        AfSupport.notNull(field);
+        AfSupport.notNull(mapper);
         // prettier-ignore
         if (!CsfSupport.isXRefField(field)) { return new SetFieldName(field, mapper); }
         // prettier-ignore
@@ -144,8 +144,8 @@ public virtual inherited sharing class SObjectBiConsumers {
      * SObjectBiConsumers.setSObject('Parent?.Parent', someOperator);
      */
     public static BiConsumer setSObject(final String field, final IOperator operator) {
-        Validate.notNull(field);
-        Validate.notNull(operator);
+        AfSupport.notNull(field);
+        AfSupport.notNull(operator);
         // prettier-ignore
         if (!CsfSupport.isXRefField(field)) { return new SetSObjectByFieldName(field, operator); }
         // prettier-ignore
@@ -237,7 +237,7 @@ public virtual inherited sharing class SObjectBiConsumers {
     private abstract class ComposedBiConsumer extends BiConsumer {
         protected final IFunction mapper;
         protected ComposedBiConsumer(IFunction mapper) {
-            Validate.notNull(mapper);
+            AfSupport.notNull(mapper);
             this.mapper = mapper;
         }
     }
@@ -246,7 +246,7 @@ public virtual inherited sharing class SObjectBiConsumers {
         protected final String field;
         protected FieldNameComposedBiConsumer(String field, IFunction mapper) {
             super(mapper);
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
     }
@@ -255,7 +255,7 @@ public virtual inherited sharing class SObjectBiConsumers {
         protected final SObjectField field;
         protected FieldComposedBiConsumer(SObjectField field, IFunction mapper) {
             super(mapper);
-            Validate.notNull(field);
+            AfSupport.notNull(field);
             this.field = field;
         }
     }
@@ -334,8 +334,8 @@ public virtual inherited sharing class SObjectBiConsumers {
         private final SObjectField field;
         private final IOperator operator;
         private SetSObjectByField(SObjectField field, IOperator operator) {
-            Validate.notNull(field);
-            Validate.notNull(operator);
+            AfSupport.notNull(field);
+            AfSupport.notNull(operator);
             this.field = field;
             this.operator = operator;
         }
