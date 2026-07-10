@@ -1,6 +1,6 @@
 # IBiOperator
 
-`APIVERSION: 66`
+`APIVERSION: 67`
 
 `STATUS: ACTIVE`
 
